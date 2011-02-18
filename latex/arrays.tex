@@ -4,7 +4,9 @@
 \newtheorem{thm}{Theorem}
 \setlength{\parskip}{1ex}
 
-\newcommand{\javaimport}[1]{\vspace{1ex}\noindent\frame{\begin{minipage}{\textwidth}#1\end{minipage}}\vspace{1ex}}
+\newlength{\pad}\setlength{\pad}{1pt}
+
+\newcommand{\javaimport}[1]{\noindent\frame{\begin{minipage}{\textwidth}\vspace{\pad}\hspace{\pad}\texttt{#1}\vspace{\pad}\end{minipage}}\vspace{1ex}}
 \newcommand{\javaimportwithclass}[1]{\javaimport{#1}}
 
 \begin{document}
@@ -30,7 +32,7 @@ Accessing and modifying the elements of an #ArrayStack# using #get(i)#
 and #set(i,x)# is trivial. After any doing any necessary bounds-checking
 we simply return or set, respectively, #a[i]#.
 
-\javaimport{ods/ArrayStack.get(i),set(i,x)}
+\javaimport{ods/ArrayStack.get(i).set(i,x)}
 
 To implement the #add(i,x)# operation, we first check if #a# is already
 full.  If so, we call the method #resize()# to increase the size of #a#;
@@ -139,11 +141,11 @@ cost of all work done by #resize()# during this sequence of operations
 is $O(m)$.  Thus, the amortized cost of resizing, when amortized over
 all #add(i,x)# and #remove(i)# operations is $O(1)$ per operation.
 
-The #ArrayStack# is efficient way to implement a \emph{Stack}: a
-sequence that allows us to insert (#push(x)#) or remove (#pop()#) elements
-at one end. In particular, if we always call #add(i,x)# with #i=n#
-and #remove(i)# with #i=n-1#, then all operations will run in $O(1)$
-amortized time.  
+The #ArrayStack# is efficient way to implement a #Stack#: a sequence
+that allows us to insert (#push(x)#) or remove (#pop()#) elements at
+one end. In particular, if we can implement #push(x)# as #add(n,x)#
+and #pop()# as #remove(n-1)#, in which case these operations will run
+in $O(1)$ amortized time.
 
 \section{FastArrayStack}
 
@@ -179,20 +181,76 @@ must work on the head of the list, which involves calling #add(i,x)#
 or #remove(i)# with a value of $#i#=0$.  This gives a running time
 of $\Theta(n)$.
 
-To obtain an efficient array-based implementation of a queue, we first
-notice that the problem would be easy if we had an infinite array #a#.
-We could maintain one index #i# that keeps track of where to add the
-next element and one index #j# that keeps track of where to remove the
-next element.  Initially, both #i# and #j# are set to 0.  To add an
-element, we place it in #a[i]# and increment #i#.  To remove an element,
-we remove it from #a[j]# and increment #j#.
+To obtain an efficient array-based implementation of a queue, we
+first notice that the problem would be easy if we had an infinite
+array #a#.  We could maintain one index #j# that keeps track of the
+next element to remove and an integer #n# that counts the number of
+elements in the queue.  In this way, the queue elements are always stored in
+\[ #a[j]#,#a[j+1]#,\ldots,#a[j+n-1]# \enspace . \]
+  Initially, both #i# and #n# are
+set to 0.  To add an element, we place it in #a[j+n]# and increment #n#.
+To remove an element, we remove it from #a[j]#, increment #j#, and
+decrement #n#.
 
 Of course, the problem with this solution is that it requires an infinite
 array #a#.  An #ArrayStack# simulates this by using a finite array #a#
-and \emph{modular} arithmetic.
+and \emph{modular arithmetic}.  This is the kind of arithmetic used when
+we are talking about time of day.  For example 10 o'clock plus 5
+hours gives 3 o'clock.  Formally, we say that
+\[
+    10 + 5 = 15 \equiv 3 \pmod{12} \enspace .
+\]
+We read the latter part of this equation as ``15 is congruent to 3 modulo
+12.'' We can also treat $\bmod$ as binary operator, so that
+\[
+   15 \bmod 12 = 3 \enspace .
+\]
 
+More generally, for an integer $a$ and positive integer $m$, $a \bmod m$
+is the unique integer $r\in\{0,\ldots,m-1\}$ such that $a = r + km$ for
+some integer $k$.  Less formally, the value $r$ is the remainder we get
+when we divide $a$ by $m$.  In many programming languages, including Java,
+the $\bmod$ operator is represented using the #%# symbol.\footnote{This
+is sometimes referred to as the \emph{brain-dead} mod operator since
+it does not correctly implement the mathematical mod operator when the
+first argument is negative.}
 
-  In particular, we can  
+Modular arithmetic is useful for simulating an infinite
+array, since $#i#\bmod #a.length#$ always gives a value
+in the range $0,\ldots,#a.length-1#$.  In this way,
+we can store our queue elements at array locations \[
+#a[j%a.length]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]# \]
+% TODO: figure
+
+The only remaining thing to worry about is taking care that the number
+of elements in the #ArrayQueue# does not exceed the size of #a#.
+
+\javaimportwithclass{ods/ArrayQueue.a,j,n}
+
+To implement #add(x)#, we first check if #a# is full and, if necessary,
+call #resize()# to increase the size of #a#.  Next, we store #x# in
+#a[(j+n)%a.length]# and increment #n#.
+
+\javaimport{ods/ArrayQueue.add(x)}
+
+To implement #remove()# we first store #a[j]# so that we can return
+it later.  Next, we decrement #n# and ``increment'' #j# by setting
+$#j#=(#j#+1)\bmod #a.length#$ and return the stored value of #a[j]#. If
+necessary, we may call #resize()# to decrease the size of #a#.
+
+\javaimport{ods/ArrayQueue.remove(x)}
+
+Finally, the #resize()# operation is very similar to the #resize()#
+operation of #ArrayQueue#.  It allocates a new array #b# of size $2#n#$
+and copies
+\[
+   #a[j]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]#
+\]
+onto
+\[
+   #b[0]#,#b[1]#,\ldots,#b[n-1]#
+\]
+and sets $#j#=0$.
 
 \end{document}
 
