@@ -1,0 +1,198 @@
+\documentclass{book}
+\usepackage{amsthm}
+
+\newtheorem{thm}{Theorem}
+\setlength{\parskip}{1ex}
+
+\newcommand{\javaimport}[1]{\vspace{1ex}\noindent\frame{\begin{minipage}{\textwidth}#1\end{minipage}}\vspace{1ex}}
+\newcommand{\javaimportwithclass}[1]{\javaimport{#1}}
+
+\begin{document}
+\chapter{Array-Based Lists and Queues}
+
+In this chapter, we study implementations of the #List# and #Queue# interfaces
+where the underlying data is stored in an array.
+
+\section{ArrayStack}
+
+An #ArrayStack# implements the list interface using an array #a#, called
+the \emph{backing array}.  The list element with index #i# is stored
+in #a[i]#.  At most times, #a# is larger than strictly necessary,
+so an integer #n# is used to keep track of the number of elements
+actually stored in #a#.  In this way, the list elements are stored in
+#a[0]#,\ldots,#a[n-1]# and, at all times, $#a.length# > #n#$.
+
+\subsection{The Basics}
+
+\javaimportwithclass{ods/ArrayStack.a,n,ArrayStack(),size()}
+
+Accessing and modifying the elements of an #ArrayStack# using #get(i)#
+and #set(i,x)# is trivial. After any doing any necessary bounds-checking
+we simply return or set, respectively, #a[i]#.
+
+\javaimport{ods/ArrayStack.get(i),set(i,x)}
+
+To implement the #add(i,x)# operation, we first check if #a# is already
+full.  If so, we call the method #resize()# to increase the size of #a#;
+how #resize()# is implemented will be discussed later.  For now, it is
+sufficient to know that, after a call to #resize()#, we can be sure that
+$#a.length# > #n#$.  With this out of the way, we now shift the elements
+$#a[i]#,\ldots,#a[n-1]#$ right by one position to make room for #x#,
+we set #a[i]# equal to #x# and increment #n#.
+
+\javaimport{ods/ArrayStack.add(i,x)}
+% TODO: Add shifting figure
+If we ignore the cost of the potential call to #resize()#, the cost of the
+#add(i,x)# operation is proportional to the number of elements we have
+to shift to make room for #x#.  Therefore the cost of this operation
+(ignoring the cost of resizing #a#) is $O(#n#-#i#+1)$.
+
+Implementing the #remove(i)# operation is similar.  We shift the elements
+$#a[i+1]#,\ldots,#a[n-1]#$ left by one position (overwriting #a[i]#) and
+decrease the value of #n#.  After doing this, we check if #n# is getting
+much smaller than #a.length# by checking if $#a.length# > 3#n#$. If so,
+we call #resize()# to reduce the size of #a#.
+
+\javaimport{ods/ArrayStack.remove(i)}
+% TODO: Add shifting figure
+If we ignore the cost of the #shrink()# method, the cost of a #remove(i)#
+operation is proportional to the number of the number elements we shift,
+which is $O(#n#-#i#)$. 
+
+\subsection{Growing and Shrinking}
+
+The #resize()# method is fairly straightforward; it allocates a new
+array #b# whose size is $2#n#$ and copies the #n# elements of #a# into
+the first #n# positions in #b#, and then sets #a# to #b#. Thus, after a call to #resize()#, $#a.length# = 2#n#$.
+
+\javaimport{ods/ArrayStack.resize()}
+
+Analyzing the cost of #resize()# operation is easy. It allocates an
+array #b# of size $2#n#$ and copies the #n# elements of #a# into #b#.
+This takes $O(#n#)$ time.
+
+The running time analysis from the previous section ignored the cost
+calls to #resize()#.  In this section we analyze this cost using a
+technique known as \emph{amortized analysis}.  This technique does not
+try and determine the cost of resizing during each individual #add(i,x)#
+and #remove# operation.  Instead, it considers the cost of all calls to
+#resize()# during a sequence of $m$ calls to #add(i,x)# or #remove(x)#.
+In particular, we will show:
+
+\begin{thm}
+  If an empty #ArrayList# is created and any sequence of $m\ge 1$ calls
+  to #add(i,x)# and #remove(i)# are performed, then the total cost of all work
+  done during all calls to #resize()# is $O(m)$.
+\end{thm}
+
+\begin{proof}
+  We will show that anytime #resize()# is called, the number of calls
+  to #add# or #remove# since the last call to #resize()# is at least
+  $#n#/2$.  Therefore, if $n_i$ denotes the value of #n# during the $i$th call to #resize()#, then the total number of calls to #add# or #remove# is at least
+  \[
+     \sum_{i=1}^{r} n_i/2 \le m  \enspace .
+  \]
+  On the other hand, the total work done during all calls to #resize()# is 
+  \[
+     \sum_{i=1}^{r} O(n_i) \le O(m)  \enspace ,
+  \]
+  which will prove the theorem.  All that remains is to show that the
+  number of calls to #add(i,x)# or #remove(i)# between the $(i-1)$th and
+  the $i$th call to #resize()# is at least $n_i/2$.
+  
+  There are two cases to consider. In the first case, #resize()# is
+  being called by #add(i,x)# because the backing array #a# is full, i.e.,
+  $#a.length()# = #n#=n_i$.  Consider the previous call to #resize()#:
+  After this previous call, the size of #a# was #a.length#, but the number
+  of elements stored in #a# was $#a.length#/2=n_i/2$.  But now the number
+  of elements stored in #a# is $n_i=#a.length#$, so there must have been at
+  least $n_i/2$ calls to #add(i,x)# since the previous call to #resize()#.
+  % TODO: Add figure
+  
+  The second case to consider is then #resize()# is being called by
+  #remove(i)# because $#a.length# \ge 3#n#=3n_i$.  Again, after the
+  previous call to #resize()# the number of elements stored in #a# was
+  exactly #a.length/2#.  Now there are $n_i\le#a.length#/3$ elements
+  stored in #a#.  Therefore, the number of #remove(i)# operations since
+  the last call to #resize()# is at least
+  \[
+      #a.length#/2 - #a.length#/3 = #a.length#/6 
+         = (#a.length#/3)/2 \ge n_i/2 \enspace .
+  \]
+  In either case, the number of calls to #add(i,x)# or #remove(i)# that
+  occur between the $(i-1)$th call to #resize()# and the $i$th call to
+  resize is at least $n_i/2$, as required to complete the proof.
+\end{proof}
+
+\subsection{Summary}
+
+We have presented the #ArrayStack#, a data structure that implements the #List# interface.  If we ignore the cost of calls to the #resize()# method, an #ArrayStack# has the following performance bounds:
+
+\begin{tabular}{cccc}
+#get(i)# & #set(i,x)# & #add(i,x)# & #remove(i)# \\
+$O(1)$ & $O(1)$ & $O(1+#n#-#i#)$ & $O(#n#-#i#)$
+\end{tabular}
+
+Furthermore, if we begin with an empty #ArrayStack# and perform any
+sequence of $m$ #add(i,x)# and #remove(i)# operations, then the total
+cost of all work done by #resize()# during this sequence of operations
+is $O(m)$.  Thus, the amortized cost of resizing, when amortized over
+all #add(i,x)# and #remove(i)# operations is $O(1)$ per operation.
+
+The #ArrayStack# is efficient way to implement a \emph{Stack}: a
+sequence that allows us to insert (#push(x)#) or remove (#pop()#) elements
+at one end. In particular, if we always call #add(i,x)# with #i=n#
+and #remove(i)# with #i=n-1#, then all operations will run in $O(1)$
+amortized time.  
+
+\section{FastArrayStack}
+
+Much of the work done by an #ArrayStack# involves shifting (by
+#add(i,x)# and #remove(i)#) and copying (by #resize()#) of data.  In the
+implementations shown above, this was done using #for# loops. It turns
+out that many programming environments have specific functions that are
+very efficient at copying and moving blocks of data.  In the C and C++
+programming languages there is the #memcpy(d,s,n)# function.  In Java
+there is the #System.arraycopy(s,i,d,j,n)# method.
+
+\javaimport{ods/FastArrayStack.add(i,x),remove(i),resize()}
+
+These functions are usually highly optimized and may even use special
+machine instructions that can do this copying much faster than we
+could do with #for# loop. In the Java implementations here, the use of
+#System.arraycopy(s,i,d,j,n)# resulted in speedups of a factor of 2-3
+depending on the types of operations performed.
+
+
+
+\section{ArrayQueue}
+
+In this section, we present the #ArrayQueue# data structure, which
+implements a FIFO (first-in-first-out) queue; elements are removed (using
+the #remove()# operation) from the queue in the same order they are added
+(using the #add(x)# operation).
+
+Notice that an #ArrayStack# is a poor choice for an implementation of a
+FIFO queue.  The reason is that we must choose one end of the list to
+add to and then remove from the other end.  One of the two operations
+must work on the head of the list, which involves calling #add(i,x)#
+or #remove(i)# with a value of $#i#=0$.  This gives a running time
+of $\Theta(n)$.
+
+To obtain an efficient array-based implementation of a queue, we first
+notice that the problem would be easy if we had an infinite array #a#.
+We could maintain one index #i# that keeps track of where to add the
+next element and one index #j# that keeps track of where to remove the
+next element.  Initially, both #i# and #j# are set to 0.  To add an
+element, we place it in #a[i]# and increment #i#.  To remove an element,
+we remove it from #a[j]# and increment #j#.
+
+Of course, the problem with this solution is that it requires an infinite
+array #a#.  An #ArrayStack# simulates this by using a finite array #a#
+and \emph{modular} arithmetic.
+
+
+  In particular, we can  
+
+\end{document}
+
