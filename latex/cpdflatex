@@ -1,0 +1,14 @@
+#!/bin/bash -ex
+
+fileroot="${1%.tex}"
+filename="$fileroot.tex"
+tempfile="$fileroot-tmp.tex"
+temppdf="$fileroot-tmp.pdf"
+filepdf="$fileroot.pdf"
+
+sed -r 's/#([^#]+)#/\\verb#\1#/g;s/(\\begin|\\end)\{code\}/\1{verbatim}/' \
+	< "$filename" > "$tempfile"
+
+pdflatex "$tempfile"
+mv "$temppdf" "$filepdf"
+
