@@ -41,7 +41,7 @@ actually stored in #a#.  In this way, the list elements are stored in
 
 \subsection{The Basics}
 
-\javaimportwithclass{ods/ArrayStack.a,n,ArrayStack(),size()}
+\javaimportwithclass{ods/ArrayStack.a.n.ArrayStack().size()}
 
 Accessing and modifying the elements of an #ArrayStack# using #get(i)#
 and #set(i,x)# is trivial. After any doing any necessary bounds-checking
@@ -172,7 +172,7 @@ very efficient at copying and moving blocks of data.  In the C and C++
 programming languages there is the #memcpy(d,s,n)# function.  In Java
 there is the #System.arraycopy(s,i,d,j,n)# method.
 
-\javaimport{ods/FastArrayStack.add(i,x),remove(i),resize()}
+\javaimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
 
 These functions are usually highly optimized and may even use special
 machine instructions that can do this copying much faster than we
@@ -240,20 +240,20 @@ we can store our queue elements at array locations \[
 The only remaining thing to worry about is taking care that the number
 of elements in the #ArrayQueue# does not exceed the size of #a#.
 
-\javaimportwithclass{ods/ArrayQueue.a,j,n}
+\javaimportwithclass{ods/ArrayQueue.a.j.n}
 
 To implement #add(x)#, we first check if #a# is full and, if necessary,
 call #resize()# to increase the size of #a#.  Next, we store #x# in
 #a[(j+n)%a.length]# and increment #n#.
 
-\javaimport{ods/ArrayQueue.add(x)}
+\javaimport{ods/ArrayQueue.offer(x)}
 
 To implement #remove()# we first store #a[j]# so that we can return
 it later.  Next, we decrement #n# and ``increment'' #j# by setting
 $#j#=(#j#+1)\bmod #a.length#$ and return the stored value of #a[j]#. If
 necessary, we may call #resize()# to decrease the size of #a#.
 
-\javaimport{ods/ArrayQueue.remove(x)}
+\javaimport{ods/ArrayQueue.poll()}
 
 Finally, the #resize()# operation is very similar to the #resize()#
 operation of #ArrayQueue#.  It allocates a new array #b# of size $2#n#$
