@@ -4,9 +4,8 @@ require 5.001;
 use strict;
 use warnings;
 
-MAIN: {
-  print("\\begin{verbatim}\n");
-  my $args = join("", @ARGV);
+sub snarfit($) {
+  my $args = shift(@_);
   my @params = split(/\./, $args);
   my $class=$params[0];
   my $basedir="../java/";
@@ -39,7 +38,20 @@ MAIN: {
       }
     }
   }
-  print("\\end{verbatim}\n");
 } 
 
-close(FP);
+MAIN: {
+  while (my $line = <STDIN>) {
+    if ($line =~ /\\javaimport\{([^}#]+)\}/) {
+      print("\\noindent\\begin{minipage}{\\textwidth}\n");
+      print("\\begin{lstlisting}\n");
+      snarfit($1);
+      print("\\end{lstlisting}\n");
+      print("\\end{minipage}\n");
+    } else {
+      print($line);
+    }
+  }
+}
+
+

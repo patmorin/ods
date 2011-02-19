@@ -7,7 +7,7 @@ temppdf="$fileroot-tmp.pdf"
 filepdf="$fileroot.pdf"
 
 sed -r 's/#([^#]+)#/\\verb#\1#/g;s/(\\begin|\\end)\{code\}/\1{verbatim}/' \
-	< "$filename" > "$tempfile"
+	< "$filename" | ./snarf.pl > "$tempfile"
 
 pdflatex "$tempfile"
 mv "$temppdf" "$filepdf"
