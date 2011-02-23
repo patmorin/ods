@@ -11,12 +11,19 @@ public class Utils {
 		}
 	}
 	
-	public static int max(int a, int b) {
+	public static final int max(int a, int b) {
 		return a > b ? a : b;
 	}
 
-	public static int min(int a, int b) {
+	public static final int min(int a, int b) {
 		return a < b ? a : b;
+	}
+	
+	public static final int intSqrt(int x) {
+		int z = (int)Math.sqrt(x);
+		while (z*z > x) z--;
+		while ((z+1)*(z+1) <= x) z++;
+		return z;
 	}
 
 	public static void main(String[] args) {

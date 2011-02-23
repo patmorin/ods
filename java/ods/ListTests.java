@@ -239,11 +239,11 @@ public class ListTests {
 		Collection<List<Integer>> cl = new ArrayList<List<Integer>>();
 		cl.add(new ArrayList<Integer>());
 		cl.add(new ArrayStack<Integer>(Integer.class));
-		cl.add(new FastArrayStack<Integer>(Integer.class));
-		cl.add(new DualArrayDeque<Integer>(Integer.class));
-		// cl.add(new FastArrayDeque<Integer>(Integer.class));
-		cl.add(new ArrayDeque<Integer>(Integer.class));
-		cl.add(new DualRootishArrayDeque<Integer>(Integer.class));
+//		cl.add(new FastArrayStack<Integer>(Integer.class));
+//		cl.add(new DualArrayDeque<Integer>(Integer.class));
+//		// cl.add(new FastArrayDeque<Integer>(Integer.class));
+//		cl.add(new ArrayDeque<Integer>(Integer.class));
+		cl.add(new RootishArrayStack<Integer>(Integer.class));
 
 		System.out.print("Running sanity tests...");
 		runTests(cl);

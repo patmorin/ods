@@ -37,19 +37,14 @@ public class RootishArrayStack<T> extends AbstractList<T> {
 
 	/**
 	 * Convert a list index i into a block number
-	 * TODO: This code is correct, but very slow!
 	 * @param i
 	 * @return the index of the block that contains list
 	 *         element i
 	 */
-	protected int i2b(int i) {
-		double db = 0.0; // TODO: Your code for computing b' goes here      
+	 protected static int i2b(int i) {
+		double db = (-3.0 + Math.sqrt(9 + 8*i)) / 2.0;
 		int b = (int)Math.ceil(db);
-		// this crutch can be used to ensure correctness
-		// even if k is off by a small value
-		while (b*(b+1)/2 >= i+1) b--;
-		while ((b+1)*(b+2)/2 < i+1) b++;
-		return b;
+		return b; 
 	}
 	
 	protected void grow() {
@@ -83,8 +78,7 @@ public class RootishArrayStack<T> extends AbstractList<T> {
 	public void add(int i, T x) {
 		if (i < 0 || i > n) throw new IndexOutOfBoundsException();
 		int r = blocks.size();
-		if (r*(r+1)/2 < n + 1) 
-			grow();
+		if (r*(r+1)/2 < n + 1) grow();
 		n++;
 		for (int j = n-1; j > i; j--)
 			set(j, get(j-1));
@@ -97,7 +91,8 @@ public class RootishArrayStack<T> extends AbstractList<T> {
 		for (int j = i; j < n-1; j++)
 			set(j, get(j+1));
 		n--;
-		shrink();
+		int r = blocks.size();
+		if ((r-2)*(r-1)/2 >= n)	shrink();
 		return x;
 	}
 
@@ -131,6 +126,13 @@ public class RootishArrayStack<T> extends AbstractList<T> {
 	}
 	
 	public static void main(String[] args) {
+		for (int i = 0; i < (1 << 31); i++) {
+			int b = i2b(i);
+			Utils.myassert((b+1)*(b+2) >= 2*i+2);
+			Utils.myassert((b)*(b+1) < 2*i+2);
+		}
+		System.out.println("i2b is correct for all i in 0.." + ((1<<31)-1));
+		System.exit(0);
 		List<Integer> l = new RootishArrayStack<Integer>(Integer.class);
 		List<Integer> l2 = new ArrayList<Integer>();
 		// easy test - sequential addition

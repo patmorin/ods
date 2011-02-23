@@ -14,7 +14,7 @@ public class FastArrayStack<T> extends ArrayStack<T> {
 	}
 
 	protected void resize() {
-		T[] b = f.newArray(max(2*n,1));
+		T[] b = f.newArray(Utils.max(2*n,1));
 		System.arraycopy(a, 0, b, 0, n);
 		a = b;
 	}
