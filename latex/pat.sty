@@ -1,0 +1,90 @@
+\usepackage{amsfonts}
+
+\newcommand{\centeripe}[1]{\begin{center}\Ipe{#1}\end{center}}
+\newcommand{\comment}[1]{}
+
+\newcommand{\centerpsfig}[1]{\centerline{\psfig{#1}}}
+
+\newcommand{\seclabel}[1]{\label{sec:#1}}
+\newcommand{\Secref}[1]{Section~\ref{sec:#1}}
+\newcommand{\secref}[1]{\mbox{Section~\ref{sec:#1}}}
+
+\newcommand{\alglabel}[1]{\label{alg:#1}}
+\newcommand{\Algref}[1]{Algorithm~\ref{alg:#1}}
+\newcommand{\algref}[1]{\mbox{Algorithm~\ref{alg:#1}}}
+
+\newcommand{\applabel}[1]{\label{app:#1}}
+\newcommand{\Appref}[1]{Appendix~\ref{app:#1}}
+\newcommand{\appref}[1]{\mbox{Appendix~\ref{app:#1}}}
+
+\newcommand{\tablabel}[1]{\label{tab:#1}}
+\newcommand{\Tabref}[1]{Table~\ref{tab:#1}}
+\newcommand{\tabref}[1]{Table~\ref{tab:#1}}
+
+\newcommand{\figlabel}[1]{\label{fig:#1}}
+\newcommand{\Figref}[1]{Figure~\ref{fig:#1}}
+\newcommand{\figref}[1]{\mbox{Figure~\ref{fig:#1}}}
+
+\newcommand{\eqlabel}[1]{\label{eq:#1}}
+\newcommand{\eqref}[1]{(\ref{eq:#1})}
+\newcommand{\myeqref}[1]{(\ref{eq:#1})}
+\newcommand{\Eqref}[1]{Equation~(\ref{eq:#1})}
+
+\newtheorem{thm}{Theorem}{\bfseries}{\itshape}
+\newcommand{\thmlabel}[1]{\label{thm:#1}}
+\newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
+
+\newtheorem{lem}{Lemma}{\bfseries}{\itshape}
+\newcommand{\lemlabel}[1]{\label{lem:#1}}
+\newcommand{\lemref}[1]{Lemma~\ref{lem:#1}}
+
+%\newtheorem{cor}{Corollary}{\bfseries}{\itshape}
+\newcommand{\corlabel}[1]{\label{cor:#1}}
+\newcommand{\corref}[1]{Corollary~\ref{cor:#1}}
+
+%\newtheorem{obs}{Observation}{\bfseries}{\itshape}
+\newcommand{\obslabel}[1]{\label{obs:#1}}
+\newcommand{\obsref}[1]{Observation~\ref{obs:#1}}
+
+\newtheorem{clm}{Claim}{\bfseries}{\itshape}
+\newcommand{\clmlabel}[1]{\label{clm:#1}}
+\newcommand{\clmref}[1]{Claim~\ref{clm:#1}}
+
+\newtheorem{assumption}{Assumption}{\bfseries}{\rm}
+\newenvironment{ass}{\begin{assumption}\rm}{\end{assumption}}
+\newcommand{\asslabel}[1]{\label{ass:#1}}
+\newcommand{\assref}[1]{Assumption~\ref{ass:#1}}
+
+\newcommand{\proclabel}[1]{\label{alg:#1}}
+\newcommand{\procref}[1]{Procedure~\ref{alg:#1}}
+
+\newtheorem{rem}{Remark}
+\newtheorem{op}{Open Problem}
+\newtheorem{prb}{Problem}{\bfseries}{\rm}
+
+\newcommand{\etal}{\emph{et al.}}
+
+\newcommand{\keywords}[1]{\noindent\textbf{Keywords:} #1}
+\newcommand{\voronoi}{Vorono\u\i}
+\newcommand{\ceil}[1]{{\lceil #1 \rceil}}
+\newcommand{\Ceil}[1]{{\left\lceil #1 \right\rceil}}
+\newcommand{\floor}[1]{{\lfloor #1 \rfloor}}
+\newcommand{\Floor}[1]{{\left\lfloor #1 \right\rfloor}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Sp}{\mathbb{S}}
+\newcommand{\E}{\mathrm{E}}
+
+\usepackage{marvosym}
+
+\newcommand{\notice}[1]
+{
+   {\Lightning}
+   \marginpar{
+      \begin{flushleft}\raggedright
+        \hspace{-1.5mm}\Lightning{\small #1}
+      \end{flushleft}
+   }
+}
+
