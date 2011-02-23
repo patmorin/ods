@@ -1,53 +1,5 @@
-\documentclass{book}
-%\usepackage{fullpage}
-\usepackage{amsthm}
-\usepackage{listings}
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{pat}
-
-% This allows the use of \verb inside footnotes
-\usepackage{fancyvrb}
-\VerbatimFootnotes
-
-
-\setlength{\textheight}{8.5in}
-\setlength{\textwidth}{6in}
-\setlength{\topmargin}{-0.375in}
-\setlength{\oddsidemargin}{.25in}
-\setlength{\evensidemargin}{.25in}
-\setlength{\headheight}{0.200in}
-\setlength{\headsep}{0.4in}
-\setlength{\footskip}{0.500in}
-\setlength{\parskip}{1ex}
-\setlength{\parindent}{1.25cm}
-\flushbottom
-
-\lstset{
-  language=java,
-  basicstyle=\small\ttfamily,
-  keywordstyle=\color{RoyalPurple},
-  identifierstyle=\color{Blue},
-  stringstyle=\color{Blue},
-  showstringspaces=false,
-  commentstyle=\color{ForestGreen},
-  tabsize=2,
-  frame=single
-}
-
-
-
-\newcommand{\javaimport}[1]{\noindent\frame{\begin{minipage}{\textwidth}\vspace{\pad}\hspace{\pad}\texttt{#1}\vspace{\pad}\end{minipage}}\vspace{1ex}}
-\newcommand{\javaimportwithclass}[1]{\javaimport{#1}}
-
-\title{Basic Data Structures (in Java)}
-\author{Pat Morin}
-
-\begin{document}
-\maketitle
-
-\tableofcontents
-
 \chapter{Array-Based Lists and Queues}
+\pagenumbering{arabic}
 
 In this chapter, we study implementations of the #List# and #Queue# interfaces
 where the underlying data is stored in an array.  
@@ -226,11 +178,11 @@ To obtain an efficient array-based implementation of a queue, we
 first notice that the problem would be easy if we had an infinite
 array #a#.  We could maintain one index #j# that keeps track of the
 next element to remove and an integer #n# that counts the number of
-elements in the queue.  In this way, the queue elements are always stored in
+elements in the queue.  The queue elements would always be stored in
 \[ #a[j]#,#a[j+1]#,\ldots,#a[j+n-1]# \enspace . \]
-  Initially, both #i# and #n# are
-set to 0.  To add an element, we place it in #a[j+n]# and increment #n#.
-To remove an element, we remove it from #a[j]#, increment #j#, and
+Initially, both #i# and #n# would be 
+set to 0.  To add an element, we would place it in #a[j+n]# and increment #n#.
+To remove an element, we would remove it from #a[j]#, increment #j#, and
 decrement #n#.
 
 Of course, the problem with this solution is that it requires an infinite
@@ -256,14 +208,15 @@ is sometimes referred to as the \emph{brain-dead} mod operator since
 it does not correctly implement the mathematical mod operator when the
 first argument is negative.}
 
-Modular arithmetic is useful for simulating an infinite
-array, since $#i#\bmod #a.length#$ always gives a
-value in the range $0,\ldots,#a.length-1#$.  In this
-way, we can store our queue elements at array locations \[
-#a[j%a.length]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]# \] In
-this way, #a# can be treated as a \emph{circular array} in which array
-indices exceeding than $#a.length#-1$ ``wrap around'' to the beginning
-of the array.
+Modular arithmetic is useful for simulating an infinite array,
+since $#i#\bmod #a.length#$ always gives a value in the range
+$0,\ldots,#a.length-1#$.  Using modular arithmetic we can store the
+queue elements at array locations
+\[ #a[j%a.length]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]#
+\enspace. \]
+This treats #a# like a \emph{circular array} in which array indices
+exceeding than $#a.length#-1$ ``wrap around'' to the beginning of
+the array.
 % TODO: figure
 
 The only remaining thing to worry about is taking care that the number
@@ -300,8 +253,15 @@ and sets $#j#=0$.
 
 \subsection{Summary}
 
-Ignoring the cost of the potential #resize()# operations,
-The #add(x)# and #remove()# operations on an #ArrayQueue# clearly take constant time.  The cost of calls to the #resize()# operation can be accounted for using the same argument used to analyze the #resize()# operation for #ArrayStack#s.
+Ignoring the cost of the potential #resize()# operations, The #add(x)#
+and #remove()# operations on an #ArrayQueue# clearly take constant time.
+The cost of calls to the #resize()# operation can be accounted for
+using the same argument used to analyze the #resize()# operation for
+#ArrayStack#s.
+
+\begin{thm}
+  TODO: Come up with a good statement for theorems
+\end{thm}
 
 \section{ArrayDeque}
 

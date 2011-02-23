@@ -6,7 +6,7 @@ tempfile="$fileroot-tmp.tex"
 temppdf="$fileroot-tmp.pdf"
 filepdf="$fileroot.pdf"
 
-sed -r 's/#([^#]+)#/\\verb#\1#/g;s/(\\begin|\\end)\{code\}/\1{verbatim}/' \
+sed -r 's/#([^#]+)#/{\\color{Blue}\\verb#\1#}/g;s/(\\begin|\\end)\{code\}/\1{verbatim}/' \
 	< "$filename" | ./snarf.pl > "$tempfile"
 
 pdflatex "$tempfile"

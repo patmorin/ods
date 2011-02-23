@@ -1,0 +1,54 @@
+\documentclass{book}
+
+\usepackage{amsthm,pat}
+
+% This allows the use of \verb inside footnotes
+\usepackage{fancyvrb}
+\VerbatimFootnotes
+
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{color}
+
+\setlength{\textheight}{8.5in}
+\setlength{\textwidth}{6in}
+\setlength{\topmargin}{-0.375in}
+\setlength{\oddsidemargin}{.25in}
+\setlength{\evensidemargin}{.25in}
+\setlength{\headheight}{0.200in}
+\setlength{\headsep}{0.4in}
+\setlength{\footskip}{0.500in}
+\setlength{\parskip}{1ex}
+\setlength{\parindent}{1.25cm}
+\flushbottom
+
+\lstset{
+  language=java,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{RoyalPurple},
+  identifierstyle=\color{Blue},
+  stringstyle=\color{Blue},
+  showstringspaces=false,
+  commentstyle=\color{ForestGreen},
+  tabsize=2,
+  frame=single
+}
+
+
+\title{Basic Data Structures (in Java)}
+\author{Pat Morin}
+
+\pagenumbering{roman}
+
+
+\begin{document}
+\begin{titlepage}
+\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+
+\tableofcontents
+
+\include{arrays-tmp}
+
+\end{document}
+
