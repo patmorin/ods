@@ -3,7 +3,24 @@
 \usepackage{amsthm}
 \usepackage{listings}
 \usepackage[usenames,dvipsnames]{color}
+\usepackage{pat}
 
+% This allows the use of \verb inside footnotes
+\usepackage{fancyvrb}
+\VerbatimFootnotes
+
+
+\setlength{\textheight}{8.5in}
+\setlength{\textwidth}{6in}
+\setlength{\topmargin}{-0.375in}
+\setlength{\oddsidemargin}{.25in}
+\setlength{\evensidemargin}{.25in}
+\setlength{\headheight}{0.200in}
+\setlength{\headsep}{0.4in}
+\setlength{\footskip}{0.500in}
+\setlength{\parskip}{1ex}
+\setlength{\parindent}{1.25cm}
+\flushbottom
 
 \lstset{
   language=java,
@@ -13,25 +30,32 @@
   stringstyle=\color{Blue},
   showstringspaces=false,
   commentstyle=\color{ForestGreen},
+  tabsize=2,
   frame=single
 }
 
-\newtheorem{thm}{Theorem}
-\setlength{\parskip}{1ex}
 
-\newlength{\pad}\setlength{\pad}{1pt}
 
 \newcommand{\javaimport}[1]{\noindent\frame{\begin{minipage}{\textwidth}\vspace{\pad}\hspace{\pad}\texttt{#1}\vspace{\pad}\end{minipage}}\vspace{1ex}}
 \newcommand{\javaimportwithclass}[1]{\javaimport{#1}}
 
+\title{Basic Data Structures (in Java)}
+\author{Pat Morin}
+
 \begin{document}
+\maketitle
+
+\tableofcontents
+
 \chapter{Array-Based Lists and Queues}
 
 In this chapter, we study implementations of the #List# and #Queue# interfaces
-where the underlying data is stored in an array.
+where the underlying data is stored in an array.  
+
+Most of the data structures described in this section use an variable #n# to store the number of elements currently in the structure.  For those that don't, we will still use #n# to denote the number of elements in the structure.
 
 \section{ArrayStack}
-
+% TODO: One big figure showing add(x), remove() and resize()
 An #ArrayStack# implements the list interface using an array #a#, called
 the \emph{backing array}.  The list element with index #i# is stored
 in #a[i]#.  At most times, #a# is larger than strictly necessary,
@@ -39,12 +63,12 @@ so an integer #n# is used to keep track of the number of elements
 actually stored in #a#.  In this way, the list elements are stored in
 #a[0]#,\ldots,#a[n-1]# and, at all times, $#a.length# > #n#$.
 
-\subsection{The Basics}
-
 \javaimportwithclass{ods/ArrayStack.a.n.ArrayStack().size()}
 
+\subsection{The Basics}
+
 Accessing and modifying the elements of an #ArrayStack# using #get(i)#
-and #set(i,x)# is trivial. After any doing any necessary bounds-checking
+and #set(i,x)# is trivial. After performing any necessary bounds-checking
 we simply return or set, respectively, #a[i]#.
 
 \javaimport{ods/ArrayStack.get(i).set(i,x)}
@@ -55,7 +79,7 @@ how #resize()# is implemented will be discussed later.  For now, it is
 sufficient to know that, after a call to #resize()#, we can be sure that
 $#a.length# > #n#$.  With this out of the way, we now shift the elements
 $#a[i]#,\ldots,#a[n-1]#$ right by one position to make room for #x#,
-we set #a[i]# equal to #x# and increment #n#.
+set #a[i]# equal to #x# and increment #n#.
 
 \javaimport{ods/ArrayStack.add(i,x)}
 % TODO: Add shifting figure
@@ -72,7 +96,7 @@ we call #resize()# to reduce the size of #a#.
 
 \javaimport{ods/ArrayStack.remove(i)}
 % TODO: Add shifting figure
-If we ignore the cost of the #shrink()# method, the cost of a #remove(i)#
+If we ignore the cost of the #resize()# method, the cost of a #remove(i)#
 operation is proportional to the number of the number elements we shift,
 which is $O(#n#-#i#)$. 
 
@@ -84,9 +108,9 @@ the first #n# positions in #b#, and then sets #a# to #b#. Thus, after a call to 
 
 \javaimport{ods/ArrayStack.resize()}
 
-Analyzing the cost of #resize()# operation is easy. It allocates an
-array #b# of size $2#n#$ and copies the #n# elements of #a# into #b#.
-This takes $O(#n#)$ time.
+Analyzing the actual cost of the #resize()# operation is easy. It
+allocates an array #b# of size $2#n#$ and copies the #n# elements of #a#
+into #b#.  This takes $O(#n#)$ time.
 
 The running time analysis from the previous section ignored the cost
 calls to #resize()#.  In this section we analyze this cost using a
@@ -143,7 +167,11 @@ In particular, we will show:
 
 \subsection{Summary}
 
-We have presented the #ArrayStack#, a data structure that implements the #List# interface.  If we ignore the cost of calls to the #resize()# method, an #ArrayStack# has the following performance bounds:
+In this section, we have seen the #ArrayStack#, a data structure that
+implements the #List# interface.\footnote{In the Java Collections
+Framework, the #ArrayList# class is essentially the #ArrayStack# data
+structure from this section.}  If we ignore the cost of calls to the
+#resize()# method, an #ArrayStack# has the following performance bounds:
 
 \begin{tabular}{cccc}
 #get(i)# & #set(i,x)# & #add(i,x)# & #remove(i)# \\
@@ -179,8 +207,6 @@ machine instructions that can do this copying much faster than we
 could do with #for# loop. In the Java implementations here, the use of
 #System.arraycopy(s,i,d,j,n)# resulted in speedups of a factor of 2-3
 depending on the types of operations performed.
-
-
 
 \section{ArrayQueue}
 
@@ -231,10 +257,13 @@ it does not correctly implement the mathematical mod operator when the
 first argument is negative.}
 
 Modular arithmetic is useful for simulating an infinite
-array, since $#i#\bmod #a.length#$ always gives a value
-in the range $0,\ldots,#a.length-1#$.  In this way,
-we can store our queue elements at array locations \[
-#a[j%a.length]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]# \]
+array, since $#i#\bmod #a.length#$ always gives a
+value in the range $0,\ldots,#a.length-1#$.  In this
+way, we can store our queue elements at array locations \[
+#a[j%a.length]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]# \] In
+this way, #a# can be treated as a \emph{circular array} in which array
+indices exceeding than $#a.length#-1$ ``wrap around'' to the beginning
+of the array.
 % TODO: figure
 
 The only remaining thing to worry about is taking care that the number
@@ -246,14 +275,14 @@ To implement #add(x)#, we first check if #a# is full and, if necessary,
 call #resize()# to increase the size of #a#.  Next, we store #x# in
 #a[(j+n)%a.length]# and increment #n#.
 
-\javaimport{ods/ArrayQueue.offer(x)}
+\javaimport{ods/ArrayQueue.add(x)}
 
 To implement #remove()# we first store #a[j]# so that we can return
 it later.  Next, we decrement #n# and ``increment'' #j# by setting
 $#j#=(#j#+1)\bmod #a.length#$ and return the stored value of #a[j]#. If
 necessary, we may call #resize()# to decrease the size of #a#.
 
-\javaimport{ods/ArrayQueue.poll()}
+\javaimport{ods/ArrayQueue.remove()}
 
 Finally, the #resize()# operation is very similar to the #resize()#
 operation of #ArrayQueue#.  It allocates a new array #b# of size $2#n#$
@@ -266,6 +295,189 @@ onto
    #b[0]#,#b[1]#,\ldots,#b[n-1]#
 \]
 and sets $#j#=0$.
+
+\javaimport{ods/ArrayQueue.resize()}
+
+\subsection{Summary}
+
+Ignoring the cost of the potential #resize()# operations,
+The #add(x)# and #remove()# operations on an #ArrayQueue# clearly take constant time.  The cost of calls to the #resize()# operation can be accounted for using the same argument used to analyze the #resize()# operation for #ArrayStack#s.
+
+\section{ArrayDeque}
+
+The #ArrayQueue# from the previous section gives data structure for
+representing a sequence that allows us to efficiently add to one end
+of the sequence and remove from the other end.  The #ArrayDeque# data
+structure uses the same technique, but allows for efficient addition or
+removal at both ends.  This structure implements the #List# interface using the same circular array technique used to represent an #ArrayQueue#.
+
+\javaimportwithclass{ods/ArrayDeque.a.j.n}
+
+The #get(i)# and #set(i,x)# operations in an #ArrayDeque# are fairly straightforward.  They get or set the array element $#a[#{#(j+i)#\bmod #a.length#}#]#$.
+
+\javaimport{ods/ArrayDeque.get(i).set(i,x)}
+
+The #add(i,x)# is a little more interesting.   As usual, we first check if #a#
+is full and, if necessary, call #resize()# to resize #a#.   Remember that we
+want this operation to fast when #i# is small (close to 0) or when #i# is large
+(close to #n#).  Therefore, we check if $#i#<#n#/2$.  If so, we shift the
+elements $#a[0]#,\ldots,#a[i]#$ left by one position.  Otherwise ($#i#\ge#n#/2$), we shift the elements $#a[i]#,\ldots,#a[n-1]#$ right by one position.
+
+\javaimport{ods/ArrayDeque.add(i,x)}
+
+By doing the shifting in this way, we guarantee that #add(i,x)# never
+has to shift more than $\min\{ i, n-i+1 \}$ elements.  Thus, the running
+time of the #add(i,x)# operation (ignoring the cost of the #resize()#
+operation) is $O(1+\min\{#i#,#n#-#i#\})$.
+
+The #remove(i)# operation is similar.  It either shifts elements
+$#a[0]#,\ldots,#a[i-1]#$ right by one position or shifts the elements
+$#a[i+1]#,\ldots,#a[n-1]#$ left by one position depending on whether
+$#i#<#n#/2$.  Again, this means that #remove(i)# never does more than 
+$O(1+\min\{#i#,#n#-#i#\})$ work to shift elements.
+
+\javaimport{ods/ArrayDeque.remove(i)}
+
+\subsection{Summary}
+
+The following table compares the running times of #ArrayDeque# operations
+with the same operations on #ArrayStacks#:
+
+\begin{tabular}{ccccc}
+ & #get(i)# & #set(i,x)# & #add(i,x)# & #remove(i)# \\
+#ArrayStack# & $O(1)$ & $O(1)$ & $O(1+#n#-#i#)$ & $O(#n#-#i#)$ \\
+#ArrayDeque# & $O(1)$ & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$ 
+             & $O(1+\min\{#i#,#n#-#i#\})$
+\end{tabular}
+
+Again, this table does not include the cost of calls to #resize()#.
+However, in both cases, if we start with an initially empty #ArrayDeque#
+or #ArrayStack#, then the total cost of all calls to #resize()# during
+a sequence of $m$ #add(i,x)# and #remove(i)# operations is $O(m)$.
+
+\section{DualArrayDeque}
+
+Next, we show an alternative data structure that achieves the same
+performance bounds as an #ArrayDeque# by using two #ArrayStack#s.
+A #DualArrayStack# represents a list using two #ArrayStack#s.  Recall that
+an #ArrayStack# is fast when the operations on it modify elements near
+the end.  A #DualArrayDeque# places two #ArrayStack#s, called #front#
+and #back#, back-to-back so that operations are fast at either end.
+
+\javaimportwithclass{ods/DualArrayDeque.front.back}
+
+A #DualArrayDeque# does not explicitly store the number, #n#, of elements
+it contains.  It doesn't need to, since it contains $#n#=#front.size()#
++ #back.size()#$ elements.
+
+%TODO: Add figure showing the reversal of front
+
+\javaimport{ods/DualArrayDeque.size()}
+
+The #front# #ArrayStack# contains list elements with indices
+$0,\ldots,#front.size()#-1$, but stores them in reverse order.
+The #back# #ArrayStack# contains list elements with indices
+$#front.size()#,\ldots,#size()#-1$ in the normal order.  In this way,
+#get(i)# and #set(i,x)# translate into appropriate calls to #get(i)#
+or #set(i,x)# on either #front# or #back#, which take $O(1)$ time per operation.
+
+\javaimport{ods/DualArrayDeque.get(i).set(i,x)}
+
+Note that, if a #i#<#front().size()#, then this translates to access
+the elementof #front# at position $#front().size()#-#i#-1$, since the
+elements of #front()# are stored in reverse order.
+
+Similarly, #add(i,x)# operates on either front or back, as appropriate:
+
+\javaimport{ods/DualArrayDeque.add(i,x)}
+
+
+The #add(i,x)# method performs rebalancing of the two #ArrayStacks#
+#front# and #back#, by calling the #balance()# method.  The implementation
+of #balance()# is described below, but for now it is sufficient to know
+that #balance()# ensures that, unless $#size()#<2$, #front.size()#
+and #back.size()# do not differ by more than a factor of 3.  In
+particular, $3#front.size()# \le #back.size()#$ and $3#back.size()#\le
+#front.size()#$.
+
+Next we analyze the cost of #add(i,x)#, ignoring the cost of the
+#balance()# operation.  If $#i#<#front.size()#$, then this translates into $#front.add(front.size()-i-1,x)#$.  Since #front# is an #ArrayStack#, the cost of this is 
+\begin{equation}
+  O(#front.size()#-(#front.size()#-#i#-1)+1) = O(#i#+1) \enspace .
+  \eqlabel{das-front}
+\end{equation}
+
+On the other hand, if $#i#\ge#front.size()#$, then this translates into
+$#back.add(i-front.size(),x)#$.  The cost of this is 
+\begin{equation}
+  O(#back.size()#-(#i#-#front.size()#)+1) = O(#size()#-#i#+1) O(#n#-#i#+1)\enspace .
+  \eqlabel{das-back}
+\end{equation}
+
+Notice that the first case \eqref{das-front} occurs when $#i#<#n#/3$.
+The second case \eqref{das-back} occurs when $#i#>#n#/3$.  When
+$#n#/3\le#i#\le2#n#/3$, we can't be sure whether the operation affects
+#front# or #back#, but in either case, the operation takes $O(#n#)=O(#i#)$
+time, since $#i#\ge #n#/3$.  Summarizing the situation, we have
+\[
+     \mbox{Running time of } #add(i,x)# \le 
+%          \left\{\begin{array}{ll}
+%            O(#i#+1) & \mbox{if $#i#< #n#/3$}
+%            O(#n#) & \mbox{if $#n#/3 \le #i# \le 2#n#/3$}
+%            O(#n-i+1#) & \mbox{if $#i# > 2#n#/3$}
+%          \end{array}\right.
+\]
+%TODO: fixme
+Thus, the running time of #add(i,x)# (ignoring the cost of the call to
+#balance()#) is $O(1+\min\{#i#, #n#-#i#\})$.
+
+The #remove(i)# operation, and its analysis, is similar to the #add(i,x)#
+operation.
+
+\javaimport{ods/DualArrayDeque.remove(i)}
+
+Finally, we study the #balance()# operation performed by #add(i,x)#
+and #remove(i)#.  This operation is used to ensure that neither #front#
+nor #back# gets too big (or too small).  It ensures that, unless there
+are fewer than 2 elements, each of #front# and #back# contain at least
+$#n#/3$ elements If this is not the case, then it moves elements between
+them so that #front# and #back# contain exactly $\lceil#n#/2\rceil$
+elements and $\lfloor#n#/2\rfloor$ elements, respectively.
+
+\javaimport{ods/DualArrayDeque.balance()}
+
+There is not much to analyze.  If the #balance()# operation does
+do rebalancing, then it moves $\Theta(#n#)$ elements and this takes
+$O(#n#)$ time. This is bad, since #balance()# is called with each call to
+#add(i,x)# and #remove(i)#.  However, the following theorem shows that,
+on average, #balance()# only does a constant amount of work per operation
+
+\begin{thm}
+  If an empty #DualArrayDeque# is created and any sequence of $m\ge 1$ calls
+  to #add(i,x)# and #remove(i)# are performed, then the total cost of all work
+  done during all calls to #balance()# is $O(m)$.
+\end{thm}
+
+\begin{proof}
+  We will show that, if #balance()# is forced to shift elements,
+  then the number of #add(i,x)# and #remove(i)# operations since the
+  last time #balance()# shifted any elements was at least $#n#/3$.
+  We will do this through the use of the \emph{potential method}.
+
+  Define the \emph{potential} of the #DualArrayDeque# as
+  \[  |#front.size()# - #back.size()#| \]
+  Observe that, immediately after a call to #balance()# that shifts elements,
+  the potential is at most 1.  Now, consider the situation, immediately before a call to #balance()# that shifts elements, and suppose, without loss of generality that $3#front.size()# < #back.size()#$. In this case, the potential is at least
+ \[  #back.size()# - #front.size()# > #back.size()# - #back.size()/3# = \frac{2}{3}#back.size()# > \frac{3}{4}\times\frac{2}{3}#n# = #n#/2
+\]
+%TODO: expand
+  Therefore, at least 
+\end{proof}
+
+
+
+
+
 
 \end{document}
 

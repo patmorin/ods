@@ -11,6 +11,14 @@ public class Utils {
 		}
 	}
 	
+	public static int max(int a, int b) {
+		return a > b ? a : b;
+	}
+
+	public static int min(int a, int b) {
+		return a < b ? a : b;
+	}
+
 	public static void main(String[] args) {
 		System.out.println(-1 >>> 1);
 		Random r = new Random();

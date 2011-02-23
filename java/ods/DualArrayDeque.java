@@ -17,17 +17,17 @@ public class DualArrayDeque<T> extends AbstractList<T> {
 	/**
 	 * The class of objects stored in this structure
 	 */
-	Factory<T> f;
+	protected Factory<T> f;
 	
 	/**
 	 * the front "half" of the deque 
 	 */
-	List<T> front;
+	protected List<T> front;
 	
 	/** 
 	 * the back "half" of the deque
 	 */
-	List<T> back;
+	protected List<T> back;
 	
 	/**
 	 * Create a new empty List data structure.

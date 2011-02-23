@@ -12,53 +12,40 @@ import java.util.AbstractList;
  * @author morin
  *
  * @param <T> the type of objects stored in this list
+ * TODO: Implement addAll() and removeAll() efficiently
  */
 public class ArrayDeque<T> extends AbstractList<T> {
 	/**
 	 * The class of elements stored in this queue
 	 */
-	Factory<T> f;
+	protected Factory<T> f;
 	
 	/**
 	 * Array used to store elements
 	 */
-	T[] a;
+	protected T[] a;
 	
 	/**
 	 * Index of next element to de-queue
 	 */
-	int j;
+	protected int j;
 	
 	/**
 	 * Number of elements in the queue
 	 */
-	int n;
-	
+	protected int n;
 	
 	/**
 	 * Grow the internal array
 	 */
-	protected void grow() {
-		T[] b = f.newArray(a.length * 2);
+	protected void resize() {
+		T[] b = f.newArray(Utils.max(2*n,1));
 		for (int k = 0; k < n; k++) 
 			b[k] = a[(j+k) % a.length];
 		a = b;
 		j = 0;
 	}
 	
-	/**
-	 * Shrink the internal array if too much space is being wasted
-	 */
-	protected void shrink() {
-		if (n > 0 && n < a.length / 4) {
-			T[] b = f.newArray(n * 2);
-			for (int k = 0; k < n; k++)
-				b[k] = a[(j+k) % a.length];
-			a = b;
-			j = 0;			
-		}
-	}
-
 	/**
 	 * Constructor
 	 */
@@ -74,24 +61,20 @@ public class ArrayDeque<T> extends AbstractList<T> {
 	}
 	
 	public T get(int i) {
-		if (i < 0 || i > n-1)
-			throw new IndexOutOfBoundsException();
+		if (i < 0 || i > n-1) throw new IndexOutOfBoundsException();
 		return a[(j+i)%a.length];
 	}
 	
 	public T set(int i, T x) {
-		if (i < 0 || i > n-1)
-			throw new IndexOutOfBoundsException();
+		if (i < 0 || i > n-1) throw new IndexOutOfBoundsException();
 		T y = a[(j+i)%a.length];
 		a[(j+i)%a.length] = x;
 		return y;
 	}
 	
 	public void add(int i, T x) {
-		if (i < 0 || i > n)
-			throw new IndexOutOfBoundsException();
-		if (n+1 > a.length)
-			grow();
+		if (i < 0 || i > n)	throw new IndexOutOfBoundsException();
+		if (n+1 > a.length) resize();
 		if (i < n/2) {
 			// shift elements 0,...,i-1 left in a
 			j = (j == 0) ? a.length - 1 : j - 1;
@@ -107,8 +90,7 @@ public class ArrayDeque<T> extends AbstractList<T> {
 	}
 	
 	public T remove(int i) {
-		if (i < 0 || i > n - 1)
-			throw new IndexOutOfBoundsException();
+		if (i < 0 || i > n - 1)	throw new IndexOutOfBoundsException();
 		T x = a[(j+i)%a.length];
 		if (i < n/2) {
 			for (int k = i; k > 0; k--)
@@ -119,13 +101,12 @@ public class ArrayDeque<T> extends AbstractList<T> {
 				a[(j+k)%a.length] = a[(j+k+1)%a.length];
 		}
 		n--;
-		shrink();
+		if (3*n < a.length) resize();
 		return x;
 	}
 	
 	public void clear() {
-		a = f.newArray(1);
 		n = 0;
-		j = 0;
+		resize();
 	}
 }

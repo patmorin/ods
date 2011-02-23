@@ -29,20 +29,10 @@ public class ArrayStack<T> extends AbstractList<T> {
 	int n;
 	
 	/**
-	 * A useful utility
-	 * @param a
-	 * @param b
-	 * @return the maximum of a and b
-	 */
-	protected static final int max(int a, int b) {
-		return a > b ? a : b;
-	}
-
-	/**
 	 * Resize the internal array
 	 */
 	protected void resize() {
-		T[] b = f.newArray(max(n*2,1));
+		T[] b = f.newArray(Utils.max(n*2,1));
 		for (int i = 0; i < n; i++) {
 			b[i] = a[i];
 		}

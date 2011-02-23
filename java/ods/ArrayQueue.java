@@ -17,39 +17,28 @@ public class ArrayQueue<T> extends AbstractQueue<T> {
 	/**
 	 * The class of elements stored in this queue
 	 */
-	Factory<T> f;
+	protected Factory<T> f;
 	
 	/**
 	 * Array used to store elements
 	 */
-	T[] a;
+	protected T[] a;
 	
 	/**
 	 * Index of next element to de-queue
 	 */
-	int j;
+	protected int j;
 	
 	/**
 	 * Number of elements in the queue
 	 */
-	int n;
-	
-	/**
-	 * A useful utility
-	 * @param a
-	 * @param b
-	 * @return the maximum of a and b
-	 */
-	protected static final int max(int a, int b) {
-		return a > b ? a : b;
-	}
-
+	protected int n;
 	
 	/**
 	 * Grow the internal array
 	 */
 	protected void resize() {
-		T[] b = f.newArray(max(1,n*2));
+		T[] b = f.newArray(Utils.max(1,n*2));
 		for (int k = 0; k < n; k++) 
 			b[k] = a[(j+k) % a.length];
 		a = b;
@@ -101,12 +90,16 @@ public class ArrayQueue<T> extends AbstractQueue<T> {
 	}
 
 	public boolean offer(T x) {
+		return add(x);
+	}
+
+	public boolean add(T x) {
 		if (n + 1 > a.length) resize();
 		a[(j+n) % a.length] = x;
 		n++;
 		return true;
 	}
-
+	
 	public T peek() {
 		T x = null;
 		if (n > 0) {
@@ -115,15 +108,17 @@ public class ArrayQueue<T> extends AbstractQueue<T> {
 		return x;
 	}
 
-	public T poll() {
-		T x = null;
-		if (n > 0) {
-			x = a[j];
-			j = (j + 1) % a.length;
-			n--;
-			if (a.length >= 3*n) resize();
-		}
+	public T remove() { 
+		if (n == 0) throw new NoSuchElementException();
+		T x = a[j];
+		j = (j + 1) % a.length;
+		n--;
+		if (a.length >= 3*n) resize();
 		return x;
+	}
+
+	public T poll() {
+		return n == 0 ? null : remove();
 	}
 	
 	public static void main(String args[]) {
