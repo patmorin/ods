@@ -726,6 +726,9 @@ data structure:
 
 
 \begin{enumerate}
+\item The #List# method #addAll(i,c)# inserts all elements of the
+#Collection# #c# into the list at position #i#.  (The #add(i,x)# method is a special case where $#c#=\{#x#\}$.)  Explain why, for the data structures in this chapter, it is not efficient to implement #addAll(i,c)# by repeated calls to #add(i,x)#.  Describe a more efficient implementation.
+
 \item Design and implement a #Treque# (triple-ended queue). This is a #List# implementation in which #get(i)# and #set(i,x)# run in constant time and #add(i,x)# and #remove(i)# run in time
 \[
    O(1+\min\{#i#, #n#-#i#, |#n#/2|-#i#\}) \enspace .
