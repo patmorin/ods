@@ -550,11 +550,12 @@ there are times when only $1/3$ of #a# contains data.
 In this section, we discuss a data structure, the #RootishArrayStack#,
 that addresses this problem of wasted space.  The #RootishArrayStack#
 stores #n# elements using $O(\sqrt{#n#})$ arrays.  In these arrays, at
-most $O(\sqrt{#n#})$ arrays locations are unused.  All remaining array
-locations are used to store data.  Therefore, these data structures was at most $O(\sqrt{#n#})$ space when storing #n# elements. 
+most $O(\sqrt{#n#})$ array locations are unused.  All remaining array
+locations are used to store data.  Therefore, these data structures waste
+at most $O(\sqrt{#n#})$ space when storing #n# elements.
 
 A #RootishArrayStack# stores its elements in a list of #r# arrays called
-\emph{blocks} that are numbered $0,1,\ldots,#r#$.  Block $b$ contains
+\emph{blocks} that are numbered $0,1,\ldots,#r#-1$.  Block $b$ contains
 $b+1$ elements. 
 Therefore, all #r# blocks contain a total of
 \[
@@ -584,7 +585,7 @@ Determining the index of #i# within its block turns out to be easy. If
 index #i# is in block #b#, then the number of elements in blocks
 $0,\ldots,#b#-1$ is $#b#(#b#+1)/2$.  Therefore, #i# is stored at location
 \[
-     #j# = i - #b#(#b#+1)/2
+     #j# = #i# - #b#(#b#+1)/2
 \]
 within block #b#.  Somewhat more challenging is the problem of determining
 the value of #b#.  The number of elements that have indices less than
@@ -592,14 +593,14 @@ or equal to #i# is $#i#+1$.  On the other hand, the number of elements
 in blocks 0,\ldots,b is $(#b#+1)(#b#+2)/2$.  Therefore, #b# is smallest
 integer such that
 \[
-    (#b#+1)(#b#+2)/2 \ge i+1 \enspace .
+    (#b#+1)(#b#+2)/2 \ge #i#+1 \enspace .
 \]
 We can rewrite this equation as
 \[
-    b^2 + 3b - 2i \ge  0 \enspace .
+    #b#^2 + 3#b# - 2#i# \ge  0 \enspace .
 \]
-The corresponding quadratic equation $b^2 + 3b - 2i =  0$ has two
-solutions: $b=(-3 + \sqrt{9+8i}) / 2$ and $b=(-3 - \sqrt{9+8i}) / 2$.
+The corresponding quadratic equation $#b#^2 + 3#b# - 2#i# =  0$ has two
+solutions: $#b#=(-3 + \sqrt{9+8#i#}) / 2$ and $#b#=(-3 - \sqrt{9+8#i#}) / 2$.
 The second solution makes no sense in our application since it always
 gives a negative value. Therefore, we obtain the solution $b = (-3 +
 \sqrt{9+8i}) / 2$.  In general, this solution is not an integer, but
