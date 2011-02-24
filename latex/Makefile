@@ -1,5 +1,5 @@
 
-sources = arrays.tex
+sources = intro.tex arrays.tex linkedlists.tex
 temps = $(sources:.tex=-tmp.tex)
 java = $(wildcard ../java/ods/*.java)
 

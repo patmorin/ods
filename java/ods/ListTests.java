@@ -20,14 +20,14 @@ public class ListTests {
 			l.clear();
 			for (int i = 0; i < n; i++)
 				l.add(new Integer(i));
-			assert(l.size() == n);
+			Utils.myassert(l.size() == n);
 			for (int i = 0; i < n; i++)
-				assert (i == l.get(i).intValue());
+				Utils.myassert (i == l.get(i).intValue());
 			for (int i = 0; i < n; i++) {
 				l.remove(l.size()-1);
-				assert(l.size()== n-i-1);
+				Utils.myassert(l.size()== n-i-1);
 				for (int j = 0; j < l.size(); j++)
-					assert (j == l.get(j).intValue());
+					Utils.myassert (j == l.get(j).intValue());
 			}
 			
 			// get/set
@@ -36,20 +36,20 @@ public class ListTests {
 			for (int i = 0; i < n; i++)
 				l.set(i, i*3231);
 			for (int i = 0; i < n; i++)
-				assert(i*3231 == l.get(i).intValue());
+				Utils.myassert(i*3231 == l.get(i).intValue());
 
 			// addition at front
 			l.clear();
 			for (int i = 0; i < n; i++)
 				l.add(0, new Integer(i));
-			assert(l.size() == n);
+			Utils.myassert(l.size() == n);
 			for (int i = 0; i < n; i++)
-				assert (n-i-1 == l.get(i).intValue());
+				Utils.myassert (n-i-1 == l.get(i).intValue());
 			for (int i = 0; i < n; i++) {
 				l.remove(0);
-				assert(l.size() == n-i-1);
+				Utils.myassert(l.size() == n-i-1);
 				for (int j = 0; j < l.size(); j++)
-					assert (n-i-2-j == l.get(j).intValue());
+					Utils.myassert (n-i-2-j == l.get(j).intValue());
 			}
 			
 			// removal from middle
@@ -58,9 +58,9 @@ public class ListTests {
 			for (int i = 0; i < n/2; i++) 
 				l.remove(n/4);
 			for (int i = 0; i < n/4; i++)
-				assert(i == l.get(i).intValue());
+				Utils.myassert(i == l.get(i).intValue());
 			for (int i = n/4; i < n/2; i++) 
-				assert(i+n/2 == l.get(i).intValue());
+				Utils.myassert(i+n/2 == l.get(i).intValue());
 			l.clear();
 		}
 
@@ -105,16 +105,16 @@ public class ListTests {
 		}
 		System.out.println();
 
-		for (List<Integer> l : cl) {
-			System.out.print("random gets (" + l.getClass() + ")...");
-			start = System.nanoTime();
-			Random r = new Random(1);
-			for (int i = 0; i < n; i++)
-				l.get(r.nextInt(n));
-			stop = System.nanoTime();
-			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
-		}
-		System.out.println();
+//		for (List<Integer> l : cl) {
+//			System.out.print("random gets (" + l.getClass() + ")...");
+//			start = System.nanoTime();
+//			Random r = new Random(1);
+//			for (int i = 0; i < n; i++)
+//				l.get(r.nextInt(n));
+//			stop = System.nanoTime();
+//			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
+//		}
+//		System.out.println();
 
 		for (List<Integer> l : cl) {
 			System.out.print("remove at back (" + l.getClass() + ")...");
@@ -148,7 +148,7 @@ public class ListTests {
 			System.out.print("forward queue operations (" + l.getClass() + ")...");
 			start = System.nanoTime();
 			Random r = new Random(2);
-			for (int i = 0; i < n/40; i++) {
+			for (int i = 0; i < n; i++) {
 				if (r.nextBoolean()) {
 					l.add(x);
 				} else {
@@ -164,7 +164,7 @@ public class ListTests {
 			System.out.print("backward queue operations (" + l.getClass() + ")...");
 			start = System.nanoTime();
 			Random r = new Random(2);
-			for (int i = 0; i < n/40; i++) {
+			for (int i = 0; i < n; i++) {
 				if (r.nextBoolean()) {
 					l.add(0,x);
 				} else {
@@ -180,7 +180,7 @@ public class ListTests {
 			System.out.print("deque operations (" + l.getClass() + ")...");
 			start = System.nanoTime();
 			Random r = new Random(3);
-			for (int i = 0; i < n/40; i++) {
+			for (int i = 0; i < n; i++) {
 				switch(r.nextInt(4)) {
 				case 0:
 					l.add(0,x);
@@ -234,16 +234,19 @@ public class ListTests {
 	}
 	
 	public static void main(String args[]) {
-		int n = 200000;
+		int n = 2000000;
 		
 		Collection<List<Integer>> cl = new ArrayList<List<Integer>>();
-		cl.add(new ArrayList<Integer>());
-		cl.add(new ArrayStack<Integer>(Integer.class));
+//		cl.add(new ArrayList<Integer>());
+//		cl.add(new ArrayStack<Integer>(Integer.class));
+//		cl.add(new java.util.LinkedList<Integer>());
+		cl.add(new SEList<Integer>(4,Integer.class));
+		cl.add(new DLList<Integer>());
 //		cl.add(new FastArrayStack<Integer>(Integer.class));
 //		cl.add(new DualArrayDeque<Integer>(Integer.class));
 //		// cl.add(new FastArrayDeque<Integer>(Integer.class));
 //		cl.add(new ArrayDeque<Integer>(Integer.class));
-		cl.add(new RootishArrayStack<Integer>(Integer.class));
+//		cl.add(new RootishArrayStack<Integer>(Integer.class));
 
 		System.out.print("Running sanity tests...");
 		runTests(cl);

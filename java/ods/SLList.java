@@ -13,20 +13,15 @@ import java.util.Queue;
  * @param <T> the class of objects stored in the queue
  */
 public class SLList<T> extends AbstractQueue<T> {
-	protected class Node {
-		Node next;
-		T x;
-	}
-	
 	/**
 	 * Front of the queue
 	 */
-	Node head;
+	SLLNode<T> head;
 	
 	/**
 	 * Tail of the queue
 	 */
-	Node tail;
+	SLLNode<T> tail;
 	
 	/**
 	 * The number of elements in the queue
@@ -35,7 +30,7 @@ public class SLList<T> extends AbstractQueue<T> {
 	
 	public Iterator<T> iterator() {
 		class SLIterator implements Iterator<T> {
-			protected Node p;
+			protected SLLNode<T> p;
 
 			public SLIterator() {
 				p = head;
@@ -61,20 +56,20 @@ public class SLList<T> extends AbstractQueue<T> {
 		return n;
 	}
 
-	@Override
-	public boolean offer(T x) {
-		// TODO Auto-generated method stub
-		Node u = new Node();
-		u.x = x;
+	public boolean add(T x) {
+		SLLNode<T> u = new SLLNode<T>(x, null);
 		if (n == 0) {
 			head = u;
-			tail = u;
 		} else {
 			tail.next = u;
-			tail = u;
 		}
+		tail = u;
 		n++;
 		return true;
+	}
+	
+	public boolean offer(T x) {
+		return add(x);
 	}
 
 	@Override
@@ -98,9 +93,7 @@ public class SLList<T> extends AbstractQueue<T> {
 	 * @return x
 	 */
 	public T push(T x) {
-		Node u = new Node();
-		u.x = x;
-		u.next = head;
+		SLLNode<T> u = new SLLNode<T>(x, head);
 		head = u;
 		if (n == 0)
 			tail = u;
@@ -108,21 +101,21 @@ public class SLList<T> extends AbstractQueue<T> {
 		return x;
 	}
 	
-	protected void deleteNext(Node u) {
+	protected void deleteNext(SLLNode<T> u) {
 		if (u.next == tail)
 			tail = u;
 		u.next = u.next.next;
 	}
 	
-	protected void addAfter(Node u, Node v) {
+	protected void addAfter(SLLNode<T> u, SLLNode<T> v) {
 		v = u.next.next;
 		u.next = v;
 		if (u == tail) 
 			tail = v;
 	}
 	
-	protected Node getNode(int i) {
-		Node u = head;
+	protected SLLNode<T> getNode(int i) {
+		SLLNode<T> u = head;
 		for (int j = 0; j < i; j++)
 			u = u.next;
 		return u;
@@ -132,10 +125,22 @@ public class SLList<T> extends AbstractQueue<T> {
 	 * Stack pop operation - pop off the head of the list
 	 * @return the element popped off 
 	 */
-	public T pop() {
-		return remove();
-	}
+	public T remove() {
+		if (n == 0)	return null;
+		T x = head.x;
+		head = head.next;
+		if (--n == 0) tail = null;
+		return x;
+	}	
 	
+	public T pop() {
+		if (n == 0)	return null;
+		T x = head.x;
+		head = head.next;
+		if (--n == 0) tail = null;
+		return x;
+	}	
+
 
 	public static void main(String[] args) {
 		Queue<Integer> q = new SLList<Integer>();
