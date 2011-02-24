@@ -78,12 +78,22 @@ public class SEList<T> extends AbstractSequentialList<T> {
 	}
 	
 	protected Location getLocation(int i) {
-		SELNode<T> u = dummy.next;
-		while (i >= u.s) {
-			i -= u.s;
-			u = u.next;
+		if (i < n/2) {
+			SELNode<T> u = dummy.next;
+			while (i >= u.s) {
+				i -= u.s;
+				u = u.next;
+			}
+			return new Location(u, i);
+		} else {
+			SELNode<T> u = dummy;
+			int idx = n;
+			while (i < idx) {
+				u = u.prev;
+				idx -= u.s;
+			}
+			return new Location(u, i-idx);
 		}
-		return new Location(u, i);
 	}
 	
 	public T get(int i) {
