@@ -43,10 +43,16 @@ sub snarfit($$) {
         if (wanted("$method$parms", @params)) {
           $print = 1;
         }    
+      } elsif ($line =~ /^\s*($k\s+)*class\s+([$w]+)/) {
+        # this is an internal class definition
+        $line =~ /class\s+([$w]+)/;
+        if (wanted("$1", @params)) {
+          $print = 1;
+        }    
       } elsif ($line =~ /^\s*($k\s+)*[$w]+\s+([$w]+)\s*;/) {
+        # this is an instance variable declaration
         $line =~ /([$w]+)\s*;/;
         my $var = $1;
-        # this is an instance variable declaration
         if (wanted($var, @params)) {
           $print = 1;
         }
@@ -55,7 +61,7 @@ sub snarfit($$) {
     if ($print) {
       $line =~ s/($k)\s+//g;
       $line =~ s/Utils\.//g;
-      $line =~ s/([^A-Za-z0-9])f\./\1/g;
+      $line =~ s/([^A-Za-z0-9])f\./$1/g;
       print($line);
     }
     while ($line =~ /\}/g) {

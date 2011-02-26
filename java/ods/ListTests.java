@@ -105,16 +105,17 @@ public class ListTests {
 		}
 		System.out.println();
 
-//		for (List<Integer> l : cl) {
-//			System.out.print("random gets (" + l.getClass() + ")...");
-//			start = System.nanoTime();
-//			Random r = new Random(1);
-//			for (int i = 0; i < n; i++)
-//				l.get(r.nextInt(n));
-//			stop = System.nanoTime();
-//			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
-//		}
-//		System.out.println();
+		for (List<Integer> l : cl) {
+			System.out.print("random gets (" + l.getClass() + ")...");
+			start = System.nanoTime();
+			Random r = new Random(1);
+			int m = (int)Math.sqrt(n);
+			for (int i = 0; i < m; i++)
+				l.get(r.nextInt(n));
+			stop = System.nanoTime();
+			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
+		}
+		System.out.println();
 
 		for (List<Integer> l : cl) {
 			System.out.print("remove at back (" + l.getClass() + ")...");
@@ -240,7 +241,12 @@ public class ListTests {
 //		cl.add(new ArrayList<Integer>());
 //		cl.add(new ArrayStack<Integer>(Integer.class));
 //		cl.add(new java.util.LinkedList<Integer>());
+		cl.add(new SEListRaw<Integer>(4,Integer.class));
 		cl.add(new SEList<Integer>(4,Integer.class));
+		cl.add(new SEListRaw<Integer>(20,Integer.class));
+		cl.add(new SEList<Integer>(20,Integer.class));
+		cl.add(new SEListRaw<Integer>(40,Integer.class));
+		cl.add(new SEList<Integer>(40,Integer.class));
 		cl.add(new DLList<Integer>());
 //		cl.add(new FastArrayStack<Integer>(Integer.class));
 //		cl.add(new DualArrayDeque<Integer>(Integer.class));

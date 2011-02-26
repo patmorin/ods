@@ -6,6 +6,16 @@
 \subsection{The Set and Map Interfaces}
 \subsection{The SortedSet and SortedMap Interfaces}
 \subsection{The DynamicString Interface}
+\section{The Model of Computation}
+\seclabel{model}
+\begin{itemize}
+\item Word-RAM, $c\log n$ bit words, can store values in $0,\ldots,n^{c}-1$.
+\item Constant-time arithmetic, boolean, and bitwise boolean operations.
+\item Constant time array accessing.  
+\item Allocating an array of size #n# takes $O(#n#)$ time.
+\item Space is measured in words; items of type #T#, #K#, and #V# take 1 word of memory each.
+\end{itemize}
+
 \section{Asymptotic Notation}
 \section{Code Samples}
 

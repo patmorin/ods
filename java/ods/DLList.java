@@ -13,7 +13,18 @@ import java.util.ListIterator;
  *            the type of elements stored in the list
  */
 public class DLList<T> extends AbstractSequentialList<T> {
-
+	class Node {
+		Node prev;
+		T x;
+		Node next;
+		public Node(Node prev, T x, Node next) {
+			this.prev = prev;
+			this.x = x;
+			this.next = next; 
+		}
+		public Node() {	}
+	}
+	
 	/**
 	 * Number of nodes in the list
 	 */
@@ -23,10 +34,10 @@ public class DLList<T> extends AbstractSequentialList<T> {
 	 * The dummy node. We use the convention that dummy.next = first and
 	 * dummy.prev = last
 	 */
-	protected DLLNode<T> dummy;
+	protected Node dummy;
 
 	public DLList() {
-		dummy = new DLLNode<T>();
+		dummy = new Node();
 		dummy.next = dummy;
 		dummy.prev = dummy;
 		n = 0;
@@ -41,8 +52,8 @@ public class DLList<T> extends AbstractSequentialList<T> {
 	 *            the value to store in the new node
 	 * @return the newly created and inserted node
 	 */
-	protected DLLNode<T> addBefore(DLLNode<T> w, T x) {
-		DLLNode<T> u = new DLLNode<T>(w.prev, x, w);
+	protected Node addBefore(Node w, T x) {
+		Node u = new Node(w.prev, x, w);
 		u.next.prev = u;
 		u.prev.next = u;
 		n++;
@@ -55,7 +66,7 @@ public class DLList<T> extends AbstractSequentialList<T> {
 	 * @param w
 	 *            the node to remove
 	 */
-	protected void remove(DLLNode<T> w) {
+	protected void remove(Node w) {
 		w.prev.next = w.next;
 		w.next.prev = w.prev;
 		n--;
@@ -68,8 +79,8 @@ public class DLList<T> extends AbstractSequentialList<T> {
 	 *            the index of the node to get
 	 * @return the node with index i
 	 */
-	protected DLLNode<T> getNode(int i) {
-		DLLNode<T> p = null;
+	protected Node getNode(int i) {
+		Node p = null;
 		if (i < n / 2) {
 			p = dummy.next;
 			for (int j = 0; j < i; j++)
@@ -98,7 +109,7 @@ public class DLList<T> extends AbstractSequentialList<T> {
 
 	public T remove(int i) {
 		if (i < 0 || i > n - 1) throw new IndexOutOfBoundsException();
-		DLLNode<T> w = getNode(i);
+		Node w = getNode(i);
 		remove(w);
 		return w.x;
 	}
@@ -115,7 +126,7 @@ public class DLList<T> extends AbstractSequentialList<T> {
 
 	public T set(int i, T x) {
 		if (i < 0 || i > n - 1) throw new IndexOutOfBoundsException();
-		DLLNode<T> u = getNode(i);
+		Node u = getNode(i);
 		T y = u.x;
 		u.x = x;
 		return y;
@@ -136,12 +147,12 @@ public class DLList<T> extends AbstractSequentialList<T> {
 		/**
 		 * The node whose value is returned by next()
 		 */
-		DLLNode<T> p;
+		Node p;
 
 		/**
 		 * The last node whose value was returned by next() or previous()
 		 */
-		DLLNode<T> last;
+		Node last;
 
 		/**
 		 * The index of p

@@ -46,6 +46,7 @@ therefore expensive, the amortized cost, when amortized over all $m$
 operations is only $O(1)$ per operation.
 
 \section{ArrayStack}
+\seclabel{arraystack}
 % TODO: One big figure showing add(x), remove() and resize()
 An #ArrayStack# implements the list interface using an array #a#, called
 the \emph{backing array}.  The list element with index #i# is stored
@@ -111,11 +112,11 @@ and #remove# operation.  Instead, it considers the cost of all calls to
 #resize()# during a sequence of $m$ calls to #add(i,x)# or #remove(x)#.
 In particular, we will show:
 
-\begin{thm}\thmlabel{arraystack-amortized}
+\begin{lem}\lemlabel{arraystack-amortized}
   If an empty #ArrayList# is created and any sequence of $m\ge 1$ calls
   to #add(i,x)# and #remove(i)# are performed, then the total cost of all work
   done during all calls to #resize()# is $O(m)$.
-\end{thm}
+\end{lem}
 
 \begin{proof}
   We will show that anytime #resize()# is called, the number of calls
@@ -182,7 +183,7 @@ and #pop()# as #remove(n-1)#, in which case these operations will run
 in $O(1)$ amortized time.
 
 \section{FastArrayStack}
-
+\seclabel{fastarraystack}
 Much of the work done by an #ArrayStack# involves shifting (by
 #add(i,x)# and #remove(i)#) and copying (by #resize()#) of data.  In the
 implementations shown above, this was done using #for# loops. It turns
@@ -202,6 +203,7 @@ resulted in speedups of a factor of 2-3 depending on the types of
 operations performed.
 
 \section{ArrayQueue}
+\seclabel{arrayqueue}
 
 In this section, we present the #ArrayQueue# data structure, which
 implements a FIFO (first-in-first-out) queue; elements are removed (using
@@ -309,6 +311,7 @@ work during all calls to #resize()#.
 %TODO: Discuss the use of bitwise-and as a replacement for the mod operator
 
 \section{ArrayDeque}
+\seclabel{arraydeque}
 
 The #ArrayQueue# from the previous section gives data structure for
 representing a sequence that allows us to efficiently add to one end
@@ -369,6 +372,7 @@ or #ArrayStack#, then the total cost of all calls to #resize()# during
 a sequence of $m$ #add(i,x)# and #remove(i)# operations is $O(m)$.
 
 \section{DualArrayDeque}
+\seclabel{dualarraydeque}
 
 Next, we show an alternative data structure that achieves the same
 performance bounds as an #ArrayDeque# by using two #ArrayStack#s.
@@ -474,17 +478,17 @@ $O(#n#)$ time. This is bad, since #balance()# is called with each call to
 #add(i,x)# and #remove(i)#.  However, the following theorem shows that,
 on average, #balance()# only does a constant amount of work per operation
 
-\begin{thm}\thmlabel{dualarraydeque-amortized}
+\begin{lem}\lemlabel{dualarraydeque-amortized}
   If an empty #DualArrayDeque# is created and any sequence of $m\ge 1$ calls
   to #add(i,x)# and #remove(i)# are performed, then the total cost of all work
   done during all calls to #balance()# is $O(m)$.
-\end{thm}
+\end{lem}
 
 \begin{proof}
   We will show that, if #balance()# is forced to shift elements,
   then the number of #add(i,x)# and #remove(i)# operations since the
   last time #balance()# shifted any elements was at least $#n#/2-1$.
-  As in the proof of \thmref{arraystack-amortized}, this is sufficient
+  As in the proof of \lemref{arraystack-amortized}, this is sufficient
   to prove that the total work done by #balance()# is $O(m)$.
 
   We will perform our analysis using the \emph{potential method}.
@@ -521,6 +525,7 @@ on average, #balance()# only does a constant amount of work per operation
 \end{proof}
 
 \section{Summary}
+\seclabel{arrays-summary}
 
 The following theorem summarizes the performance of a #DualArrayStack#
 
@@ -722,6 +727,10 @@ data structure:
   Furthermore, beginning with an empty #RootishArrayStack#, any sequence of $m$
   #add(i,x)# and #remove(i)# operations results in a total of $O(m)$
   work during all calls to #grow()# and #shrink()#.
+
+  The space (measured in words)\footnote{Recall \secref{model} for a
+  discussion of how memory is measured.} used by a #RootishArrayStack#
+  that stores #n# elements is $#n# +O(\sqrt{#n#})$.
 \end{thm}
 
 \section{Exercises}
@@ -744,7 +753,7 @@ data structure:
 
 \item Design and implement a version of a #RootishArrayStack# that has only $O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)# and #remove(i,x)# operations in $O(1+\min\{\sqrt{#n#},#n#-#i#\})$ time.
 
-\item Design and implement a version of a #RootishArrayStack# that has only $O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)# and #remove(i,x)# operations in $O(1+\min\{#i#,\sqrt{#n#},#n#-#i#\})$ time.
+\item Design and implement a version of a #RootishArrayStack# that has only $O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)# and #remove(i,x)# operations in $O(1+\min\{#i#,\sqrt{#n#},#n#-#i#\})$ time.  (See \secref{selist} for ideas on how to achieve this.)
 \end{enumerate}
 
 

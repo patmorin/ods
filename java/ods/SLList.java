@@ -13,15 +13,25 @@ import java.util.Queue;
  * @param <T> the class of objects stored in the queue
  */
 public class SLList<T> extends AbstractQueue<T> {
+	class Node {
+		T x;
+		Node next;
+		
+		public Node(T x, Node next) {
+			this.x = x;
+			this.next = next;
+		}
+	}
+	
 	/**
 	 * Front of the queue
 	 */
-	SLLNode<T> head;
+	Node head;
 	
 	/**
 	 * Tail of the queue
 	 */
-	SLLNode<T> tail;
+	Node tail;
 	
 	/**
 	 * The number of elements in the queue
@@ -30,7 +40,7 @@ public class SLList<T> extends AbstractQueue<T> {
 	
 	public Iterator<T> iterator() {
 		class SLIterator implements Iterator<T> {
-			protected SLLNode<T> p;
+			protected Node p;
 
 			public SLIterator() {
 				p = head;
@@ -57,7 +67,7 @@ public class SLList<T> extends AbstractQueue<T> {
 	}
 
 	public boolean add(T x) {
-		SLLNode<T> u = new SLLNode<T>(x, null);
+		Node u = new Node(x, null);
 		if (n == 0) {
 			head = u;
 		} else {
@@ -93,7 +103,7 @@ public class SLList<T> extends AbstractQueue<T> {
 	 * @return x
 	 */
 	public T push(T x) {
-		SLLNode<T> u = new SLLNode<T>(x, head);
+		Node u = new Node(x, head);
 		head = u;
 		if (n == 0)
 			tail = u;
@@ -101,21 +111,21 @@ public class SLList<T> extends AbstractQueue<T> {
 		return x;
 	}
 	
-	protected void deleteNext(SLLNode<T> u) {
+	protected void deleteNext(Node u) {
 		if (u.next == tail)
 			tail = u;
 		u.next = u.next.next;
 	}
 	
-	protected void addAfter(SLLNode<T> u, SLLNode<T> v) {
+	protected void addAfter(Node u, Node v) {
 		v = u.next.next;
 		u.next = v;
 		if (u == tail) 
 			tail = v;
 	}
 	
-	protected SLLNode<T> getNode(int i) {
-		SLLNode<T> u = head;
+	protected Node getNode(int i) {
+		Node u = head;
 		for (int j = 0; j < i; j++)
 			u = u.next;
 		return u;
