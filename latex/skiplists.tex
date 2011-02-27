@@ -1,0 +1,27 @@
+\chapter{Skiplists}
+\chaplabel{skiplists}
+
+\section{The Basic Structure}
+
+Conceptually, a skiplist is a sequence of singly-linked lists
+$L_0,\ldots,L_h$, where each $L_i$ contains a subset of the items in
+$L_{i-1}$.  We start with the input list $L_0$ and construct $L_1$ from
+$L_0$, $L_2$ from $L_1$, and so on.  The items in $L_i$ are obtained
+by tossing a coin for each element #x# in $L_{i-1}$ and including #x#
+in $L_i$ if the coin comes up heads.  This process ends when the first
+list becomes empty.
+
+At the head of every list is a non-input node, called the \emph{sentinel}
+that acts as dummy node for each list.  The key property of skiplists
+is that there is a short path, called the search path, from the sentinel
+in $L_h$ to every node in $L_0$.  To construct the search path for the node
+#u# in $L_0$, we search 
+
+
+
+
+\section{Skiplists as SortedSets}
+\section{Skiplists as Lists}
+\section{Skiplists as Ropes}
+
+
