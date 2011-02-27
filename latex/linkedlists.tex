@@ -1,5 +1,23 @@
 \chapter{Linked Lists}
 
+In this chapter, we continue to study implementations of the #List#
+interface, this time using pointer-based data structures rather than
+arrays.  The structures in this chapter are made up of nodes that
+contain the list items.  The nodes are linked together into a sequence
+using references (pointers).  We first study singly-linked lists, which
+can implement #Stack# and (FIFO) #Queue# operations in constant time
+per operation.
+
+Compared to array-based list implementations, linked lists have their
+advantages and disadvantages.  The primary disadvantage is that we
+lose the ability to access any element using #get(i)# or #set(i,x)# in
+constant time.  Instead, we have to walk through the list, one element
+at a time, until we reach the #i#th element.  The primary advantage is
+that they are more dynamic:  Given a reference to any list node #u#, we
+can delete #u# or insert a node adjacent to to #u# in constant time. This
+is true no matter where #u# is in the list.
+
+
 \section{SLList: A Singly-Linked List}
 \seclabel{sllist}
 
@@ -432,11 +450,14 @@ structure:
   that stores #n# elements is $#n# +O(#n#/b)$.
 \end{thm}
 
-The #SEList# is an interesting tradeoff between an #ArrayList# and a
-#DLList# where the relative mix of these two structures depends on the
-block size #b#.  At the extreme $#b#=2$, each #SEList# node stores at most 3 values, and is not really much different than a #DLList#. At the other extreme, $#b#>#n#$, in which case all the 
-
-a is just a #DLList#
+The #SEList# is a tradeoff between an #ArrayList# and a #DLList# where
+the relative mix of these two structures depends on the block size #b#.
+At the extreme $#b#=2$, each #SEList# node stores at most 3 values,
+and is not really much different than a #DLList#. At the other extreme,
+$#b#>#n#$, in which case all the elements are stored in a single array,
+just like an #ArrayList#.  In between these two extremes is a tradeoff
+between the time it takes to add or remove a list item and the time it
+takes to locate a particular list item.
 
 \section{Exercises}
 
@@ -444,6 +465,10 @@ a is just a #DLList#
 \item Why is it not possible, in a #SLList# to use a dummy node to avoid
   all the special cases that occur in the operations #push(x)#, #pop()#,
   #add(x)#, and #remove()#?
+
+\item Describe and implement the #List# operations #get(i)#, #set(i,x)#,
+  #add(i,x)# and #remove(i)# on an #SLList#.  Each of these operations
+  should run in $O(1+#i#)$ time.
 
 \item Describe and implement the #List# operations #get(i)#, #set(i,x)#,
   #add(i,x)# and #remove(i)# on an #SLList#.  Each of these operations

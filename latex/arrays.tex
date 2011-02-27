@@ -1,6 +1,5 @@
 \chapter{Array-Based Lists and Queues}
 \chaplabel{arrays}
-\pagenumbering{arabic}
 
 In this chapter, we study implementations of the #List# and #Queue#
 interfaces where the underlying data is stored in an array, called the
@@ -45,7 +44,7 @@ operations require growing or shrinking the backing array, and are
 therefore expensive, the amortized cost, when amortized over all $m$
 operations is only $O(1)$ per operation.
 
-\section{ArrayStack}
+\section{ArrayStack: Fast Stack Operations Using an Array}
 \seclabel{arraystack}
 % TODO: One big figure showing add(x), remove() and resize()
 An #ArrayStack# implements the list interface using an array #a#, called
@@ -53,7 +52,7 @@ the \emph{backing array}.  The list element with index #i# is stored
 in #a[i]#.  At most times, #a# is larger than strictly necessary,
 so an integer #n# is used to keep track of the number of elements
 actually stored in #a#.  In this way, the list elements are stored in
-#a[0]#,\ldots,#a[n-1]# and, at all times, $#a.length# > #n#$.
+#a[0]#,\ldots,#a[n-1]# and, at all times, $#a.length# \ge #n#$.
 
 \javaimportwithclass{ods/ArrayStack.a.n.size()}
 
@@ -66,8 +65,8 @@ we simply return or set, respectively, #a[i]#.
 \javaimport{ods/ArrayStack.get(i).set(i,x)}
 
 To implement the #add(i,x)# operation, we first check if #a# is already
-full.  If so, we call the method #resize()# to increase the size of #a#;
-how #resize()# is implemented will be discussed later.  For now, it is
+full.  If so, we call the method #resize()# to increase the size of #a#.
+How #resize()# is implemented will be discussed later.  For now, it is
 sufficient to know that, after a call to #resize()#, we can be sure that
 $#a.length# > #n#$.  With this out of the way, we now shift the elements
 $#a[i]#,\ldots,#a[n-1]#$ right by one position to make room for #x#,
@@ -83,7 +82,7 @@ to shift to make room for #x#.  Therefore the cost of this operation
 Implementing the #remove(i)# operation is similar.  We shift the elements
 $#a[i+1]#,\ldots,#a[n-1]#$ left by one position (overwriting #a[i]#) and
 decrease the value of #n#.  After doing this, we check if #n# is getting
-much smaller than #a.length# by checking if $#a.length# > 3#n#$. If so,
+much smaller than #a.length# by checking if $#a.length# \ge 3#n#$. If so,
 we call #resize()# to reduce the size of #a#.
 
 \javaimport{ods/ArrayStack.remove(i)}
@@ -105,10 +104,10 @@ allocates an array #b# of size $2#n#$ and copies the #n# elements of #a#
 into #b#.  This takes $O(#n#)$ time.
 
 The running time analysis from the previous section ignored the cost
-calls to #resize()#.  In this section we analyze this cost using a
+of calls to #resize()#.  In this section we analyze this cost using a
 technique known as \emph{amortized analysis}.  This technique does not
 try and determine the cost of resizing during each individual #add(i,x)#
-and #remove# operation.  Instead, it considers the cost of all calls to
+and #remove(i)# operation.  Instead, it considers the cost of all calls to
 #resize()# during a sequence of $m$ calls to #add(i,x)# or #remove(x)#.
 In particular, we will show:
 
@@ -121,7 +120,9 @@ In particular, we will show:
 \begin{proof}
   We will show that anytime #resize()# is called, the number of calls
   to #add# or #remove# since the last call to #resize()# is at least
-  $#n#/2-1$.  Therefore, if $n_i$ denotes the value of #n# during the $i$th call to #resize()#, then the total number of calls to #add# or #remove# is at least
+  $#n#/2-1$.  Therefore, if $n_i$ denotes the value of #n# during the $i$th
+call to #resize()#, then the total number of calls to #add(i,x)# or
+#remove(i)# is at least
   \[
      \sum_{i=1}^{r} (n_i/2-1) \le m  \enspace .
   \]
@@ -129,7 +130,8 @@ In particular, we will show:
   \[
      \sum_{i=1}^{r} O(n_i) \le O(m+r) = O(m)  \enspace ,
   \]
-  which will prove the theorem since $r$, the number of calls to resize
+  which will prove the theorem since $r$, the number of calls to
+#resize()#,
   is not more than $m$.  All that remains is to show that the number
   of calls to #add(i,x)# or #remove(i)# between the $(i-1)$th and the
   $i$th call to #resize()# is at least $n_i/2$.
@@ -182,7 +184,7 @@ one end. In particular, if we can implement #push(x)# as #add(n,x)#
 and #pop()# as #remove(n-1)#, in which case these operations will run
 in $O(1)$ amortized time.
 
-\section{FastArrayStack}
+\section{FastArrayStack: An Optimized ArrayStack}
 \seclabel{fastarraystack}
 Much of the work done by an #ArrayStack# involves shifting (by
 #add(i,x)# and #remove(i)#) and copying (by #resize()#) of data.  In the
@@ -202,7 +204,7 @@ In the Java implementations here, the use of #System.arraycopy(s,i,d,j,n)#
 resulted in speedups of a factor of 2-3 depending on the types of
 operations performed.
 
-\section{ArrayQueue}
+\section{ArrayQueue: An Array-Based Queue}
 \seclabel{arrayqueue}
 
 In this section, we present the #ArrayQueue# data structure, which
@@ -310,7 +312,7 @@ work during all calls to #resize()#.
 
 %TODO: Discuss the use of bitwise-and as a replacement for the mod operator
 
-\section{ArrayDeque}
+\section{ArrayDeque: Fast Deque Operations Using an Array}
 \seclabel{arraydeque}
 
 The #ArrayQueue# from the previous section gives data structure for
@@ -371,11 +373,19 @@ However, in both cases, if we start with an initially empty #ArrayDeque#
 or #ArrayStack#, then the total cost of all calls to #resize()# during
 a sequence of $m$ #add(i,x)# and #remove(i)# operations is $O(m)$.
 
-\section{DualArrayDeque}
+\section{DualArrayDeque: Buiding a Deque from Two Stacks}
 \seclabel{dualarraydeque}
 
 Next, we show an alternative data structure that achieves the same
 performance bounds as an #ArrayDeque# by using two #ArrayStack#s.
+In this chapter, we continue to study implementations of the #List#
+interface, this time using pointer-based data structures rather than
+arrays.  The structures in this chapter are made up of nodes that
+contain the list items.  The nodes are linked together into a sequence
+using references (pointers).  We first study singly-linked lists, which
+can implement #Stack# and (FIFO) #Queue# operations in constant time
+per operation.
+
 Although the asymptotic performance of this data structure is no better
 than that of the #ArrayDeque#, it is still worth studying since it offer
 a good example of how to make a sophisticated data structure by combining
@@ -524,8 +534,7 @@ on average, #balance()# only does a constant amount of work per operation
   \ge #n#/2-1$. This completes the proof.
 \end{proof}
 
-\section{Summary}
-\seclabel{arrays-summary}
+\subsection{Summary}
 
 The following theorem summarizes the performance of a #DualArrayStack#
 
@@ -544,7 +553,7 @@ The following theorem summarizes the performance of a #DualArrayStack#
 \end{thm}
 
 
-\section{RootishArrayStack}
+\section{RootishArrayStack: A Memory Efficient Array-Based List}
 
 One of the drawbacks of all previous data structures in this chapter
 is that, because they store their data in one or two arrays, and they
@@ -749,11 +758,20 @@ data structure:
 
 \item Modify the #ArrayDeque# implementation so that the shifting done by #add(i,x)#, #remove(i)#, and #resize()# is done using #System.arraycopy(s,i,d,j,n)#.
 
+\item Modify the #ArrayDeque# implementation so that it does not use the
+#%# operator (which is expensive on some systems).  Instead, it should make
+use of the fact that, if #a.length# is a power of 2, then
+$#k%a.length#=#k&(a.length-1)#$. (Here, #&# is the bitwise-and operator
+that takes the bitwise and of its two arguments.)
+
 \item Design and implement a version of a #RootishArrayStack# that has only $O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)# and #remove(i,x)# operations in $O(1+\min\{#i#,#n#-#i#\})$ time.
 
-\item Design and implement a version of a #RootishArrayStack# that has only $O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)# and #remove(i,x)# operations in $O(1+\min\{\sqrt{#n#},#n#-#i#\})$ time.
+\item Design and implement a version of a #RootishArrayStack# that has only
+$O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)# and
+#remove(i,x)# operations in $O(1+\min\{\sqrt{#n#},#n#-#i#\})$ time. (For an
+idea on how to do this, see \secref{selist}.)
 
-\item Design and implement a version of a #RootishArrayStack# that has only $O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)# and #remove(i,x)# operations in $O(1+\min\{#i#,\sqrt{#n#},#n#-#i#\})$ time.  (See \secref{selist} for ideas on how to achieve this.)
+\item Design and implement a version of a #RootishArrayStack# that has only $O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)# and #remove(i,x)# operations in $O(1+\min\{#i#,\sqrt {#n#},#n#-#i#\})$ time.  (See \secref{selist} for ideas on how to achieve this.)
 \end{enumerate}
 
 
