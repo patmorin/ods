@@ -11,12 +11,31 @@ by tossing a coin for each element #x# in $L_{i-1}$ and including #x#
 in $L_i$ if the coin comes up heads.  This process ends when the first
 list becomes empty.
 
-At the head of every list is a non-input node, called the \emph{sentinel}
-that acts as dummy node for each list.  The key property of skiplists
-is that there is a short path, called the search path, from the sentinel
-in $L_h$ to every node in $L_0$.  To construct the search path for the node
-#u# in $L_0$, we search 
+For an element #x# in a skiplist, we call the \emph{height} of #x# the
+largest value $i$ such that #x# appears in $L_i$.  Thus, for example,
+elements that only appear in $L_0$ have height $0$.  Notice that the
+height of #x# corresponds to the following experiment:  Toss a coin
+repeatedly until the first time it comes up tails.  How many times did
+it come up heads?  The answer, not surprisingly, is that the expected
+height of a node is 1.
 
+At the head of every list is a non-input node, called the \emph{sentinel}
+that acts as dummy node for each list.  The key property of skiplists is
+that there is a short path, called the search path, from the sentinel
+in $L_h$ to every node in $L_0$.  To construct the search path for
+the node #u# in $L_0$ we start at the sentinel #w# in $L_h$.  Next we
+examine #w.next#.  If #w.next# contains an item that appears before #u#
+in $L_0$, then we set #w=w.next#.  Otherwise, we move down and continue
+the search at the occurence of #w# in the list $h-1$.  We continue this
+way until we reach the predecessor of #u# in $L_0$.
+%TODO: figure
+
+The following result shows that the search path is efficient:
+
+\begin{lem}
+The expected length of the search path for any node #u# in $L_0$ is at
+most $2\log_2 #n# + 2 = O(\log #n#)$.
+\end{lem}
 
 
 
