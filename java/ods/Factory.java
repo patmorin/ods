@@ -40,11 +40,10 @@ public class Factory<T> {
 	 * 
 	 * @return
 	 */
-	//@SuppressWarnings({"unchecked"})
 	public T newInstance() {
 		T x;
 		try {
-			x = (T)t.newInstance();
+			x = t.newInstance();
 		} catch (Exception e) {
 			x = null;
 		}

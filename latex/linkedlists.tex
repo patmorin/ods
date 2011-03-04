@@ -18,30 +18,38 @@ can delete #u# or insert a node adjacent to to #u# in constant time. This
 is true no matter where #u# is in the list.
 
 
-\section{SLList: A Singly-Linked List}
+\section{#SLList#: A Singly-Linked List}
 \seclabel{sllist}
 
 An #SLList# (singly-linked list) is a sequence of #Node#s.  Each node
 #u# stores a data value #u.x# and a reference #u.next# to the next node in
 the sequence.  For the last node #w# in the sequence, $#w.next# = #null#$
 
+% TODO: Remove constructors from SLList.Node
 \javaimport{ods/SLList.Node}
 
 For efficiency, an #SLList# uses variables #head# and #tail# to keep
 track of the first and last node in the sequence, as well as an integer
-#n# to keep track of the length of the sequence.
-
+#n# to keep track of the length of the sequence:
 \javaimportwithclass{ods/SLList.head.tail.n}
-%TODO: figure \subsection{Stack Operations}
+A sequence of #Stack# and #Queue# operations is illustrated on an
+\figref{sllist} in \figref{sllist}.
 
-An #SLList# can efficiently implement the #Stack# operations #push()#
-and #pop()# by adding and removing elements at the head of the sequenc:
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/sllist}
+  \end{center}
+  \caption{A sequence of #Queue# (#add(x)# and #remove()#) and #Stack# (#push(x)# and #pop()#) operations in an #SLList#.}
+  \figlabel{sllist}
+\end{figure}
+
 
 An #SLList# can efficiently implement the #Stack# operations #push()#
 and #pop()# by adding and removing elements at the head of the sequence.
 The #push()# operation simply creates a new node #u# with data value #x#,
-sets #u.next# to the old head of the list and makes #u# the new head of
-the list. Finally, it increments #n# since the size of the #SLList# has increased by one:
+sets #u.next# to the old head of the list and makes #u# the new head
+of the list. Finally, it increments #n# since the size of the #SLList#
+has increased by one:
 
 \javaimport{ods/SLList.push(x)}
 
@@ -87,7 +95,7 @@ the node #w# that precedes #tail# in the #SLList#; this is the node #w#
 such that $#w.next#=#tail#$.  Unfortunately, the only way to get to #w#
 is by traversing the #SLList# starting at #head# and taking $#n#-2$ steps.
 
-\section{DLList: A Doubly-Linked List}
+\section{#DLList#: A Doubly-Linked List}
 \seclabel{dllist}
 
 A #DLList# (doubly-linked list) is very similar to an #SLList# except
@@ -107,16 +115,25 @@ but acts as a placeholder so that there are no special nodes; every node
 has both a #next# and a #prev#, with #dummy# acting as the node that
 follows the last node in the list and that precedes the first node in
 the list.  In this way, the nodes of the list are (doubly-)linked into
-a cycle.
+a cycle, as illustrated in \figref{dllist}.
 
-%TODO: figure of a list as a cycle
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/dllist}
+  \end{center}
+  \caption{A #DLList# containing a,b,c,d,e.}
+  \figlabel{dllist}
+\end{figure}
+
+
+%TODO: Remove constructors from class Node
 
 \javaimportwithclass{ods/DLList.n.dummy.DLList()}
 
 Finding the node with a particular index in a #DLList# is easy;  we can
 either start at the head of the list (#dummy.next#) and work forward,
 or start at the tail of the list (#dummy.prev#) and work backward.
-This allows us to reach the #i#th node in $O(1+\min\{#i#,#n-i#\})$ time:
+This allows us to reach the #i#th node in $O(1+\min\{#i#,#n#-#i#\})$ time:
 
 \javaimport{ods/DLList.getNode(i)}
 
@@ -125,7 +142,7 @@ The #get(i)# and #set(i,x)# operations are now easy.  We first find the #i#th no
 \javaimport{ods/DLList.get(i).set(i,x)}
 
 The running time of these operations is dominated by the time it takes
-to find the #i#th node, and is therefore $O(1+\min\{#i#,#n-i#\})$.
+to find the #i#th node, and is therefore $O(1+\min\{#i#,#n#-#i#\})$.
 
 \subsection{Adding and Removing}
 
@@ -165,7 +182,7 @@ time.
 The following theorem summarizes the performance of a #DLList#:
 
 \begin{thm}\thmlabel{dllist}
-  An #DLList# implements the #List# interface.  
+  A #DLList# implements the #List# interface.  
   The #get(i)#, #set(i,x)#, #add(i,x)# and #remove(i)# operations run
   in $O(1+\min\{#i#,#n#-#i#\})$ time per operation.
 \end{thm}
@@ -192,10 +209,10 @@ relevant list node in constant time and then the list node is deleted
 (also in constant time).
 
 
-\section{SEList: A Space-Efficient Linked List}
+\section{#SEList#: A Space-Efficient Linked List}
 \seclabel{selist}
 
-One of the drawbacks of linked-lists (besides the time it takes to
+One of the drawbacks of linked lists (besides the time it takes to
 access elements that are deep within the list) is their space usage.
 Each node in a #DLList# requires an additional 2 references to the next
 and previous node in the list.  Two thirds of the fields in a #Node#
@@ -213,7 +230,7 @@ be helpful if we can do #Deque# operations on each block.  The data
 structure we choose for this is an #BDeque# (bounded deque), derived
 from the #ArrayDeque# structure described in \secref{arraydeque}.
 The #BDeque# differs from the #ArrayDeque# in one small way: When a
-new create new #BDeque# is created, the size of the backing array #a#
+new #BDeque# is created, the size of the backing array #a#
 is fixed at #b+1# and it never grows or shrinks.
 The important property of a #BDeque# is that it allows for addition or
 removal of elements at either the front or back in constant time. This
@@ -281,8 +298,8 @@ so they also run in $O(1+\min\{#i#,#n#-#i#\}/#b#)$ time.
 \subsection{Adding an Element}
 
 Where things start to get complicated is when adding elements.
-Before consider the general case, we first consider the easier case
-#add(x)#, in #x# is being added to the end of the list.  In this case,
+Before considering the general case, we first consider the easier
+operation, #add(x)#, in which #x# is added to the end of the list.  In this case,
 #x# will go at the end of the last block.  If the last block is full
 (or does not exist because there are no blocks yet), then we allocate a
 new block and append it the list of blocks.  Now that we are sure that
@@ -313,13 +330,13 @@ free space in $#u#_0$.  We can then insert #x# into $#u#_0$'s block.
 of blocks.  In this case, we add a new empty block to the end of the
 list of blocks and proceed as in the first case.
 
-\item After #b# steps we do not find any block that is not full.  In this
-case, $#u#_0,\ldots,#u#_{#b#-1}$ is a sequence of #b# blocks that each
-contain $#b#+1$ elements.  We insert a new block $#u#_{#b#}$ at the end
-of this sequence and \emph{spread} the original #b(b+1)# elements so that
-each block of $#u#_0,\ldots,#u#_{#b#}$ contains exactly #b# elements.
-Now $#u#_0$'s block contains only #b# elements so it has room for us to
-insert #x#.
+\item After #b# steps we do not find any block that is not full.
+In this case, $#u#_0,\ldots,#u#_{#b#-1}$ is a sequence of #b# blocks
+that each contain $#b#+1$ elements.  We insert a new block $#u#_{#b#}$
+at the end of this sequence and \emph{spread} the original $#b#(#b#+1)$
+elements so that each block of $#u#_0,\ldots,#u#_{#b#}$ contains exactly
+#b# elements.  Now $#u#_0$'s block contains only #b# elements so it has
+room for us to insert #x#.
 \end{enumerate}
 
 \javaimport{ods/SEList.add(i,x)}
@@ -330,7 +347,7 @@ shifting elements through at most #b# blocks and take $O(#b#)$ time.
 Case~3 involves calling the #spread(u)# method, which  moves $#b#(#b#+1)$
 elements and takes $O(#b#^2)$ time.  If we ignore the cost of Case~3
 (which we will account for later using amortization) this means that
-the total running time to location #i# and perform the insertion of #x#
+the total running time to locate #i# and perform the insertion of #x#
 is $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$.
 
 \subsection{Removing an Element}
@@ -355,7 +372,7 @@ appropriate element from $#u#_0$'s block.
 
 \item We quickly (in $r<#b#$ steps) run off the end of the list of blocks.
 In this case, $#u#_r$ is the last block, and there is no requirement that
-$#u#_r$'s block contain at least #b#-1 elements.  Therefore, we proceed
+$#u#_r$'s block contain at least $#b#-1$ elements.  Therefore, we proceed
 as above, borrowing an element from $#u#_r$ to make an extra element in
 $#u#_0$.  If this causes $#u#_r$ block to become empty, then we remove it.
 

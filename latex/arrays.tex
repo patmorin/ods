@@ -44,7 +44,7 @@ operations require growing or shrinking the backing array, and are
 therefore expensive, the amortized cost, when amortized over all $m$
 operations is only $O(1)$ per operation.
 
-\section{ArrayStack: Fast Stack Operations Using an Array}
+\section{#ArrayStack#: Fast Stack Operations Using an Array}
 \seclabel{arraystack}
 % TODO: One big figure showing add(x), remove() and resize()
 An #ArrayStack# implements the list interface using an array #a#, called
@@ -64,13 +64,24 @@ we simply return or set, respectively, #a[i]#.
 
 \javaimport{ods/ArrayStack.get(i).set(i,x)}
 
-To implement the #add(i,x)# operation, we first check if #a# is already
-full.  If so, we call the method #resize()# to increase the size of #a#.
-How #resize()# is implemented will be discussed later.  For now, it is
-sufficient to know that, after a call to #resize()#, we can be sure that
-$#a.length# > #n#$.  With this out of the way, we now shift the elements
-$#a[i]#,\ldots,#a[n-1]#$ right by one position to make room for #x#,
-set #a[i]# equal to #x# and increment #n#.
+Adding and removing elements from an #ArrayStack# is illustrated
+in \figref{arraystack}.  To implement the #add(i,x)# operation, we first
+check if #a# is already full.  If so, we call the method #resize()#
+to increase the size of #a#.  How #resize()# is implemented will be
+discussed later.  For now, it is sufficient to know that, after a call
+to #resize()#, we can be sure that $#a.length# > #n#$.  With this out of
+the way, we now shift the elements $#a[i]#,\ldots,#a[n-1]#$ right by one
+position to make room for #x#, set #a[i]# equal to #x# and increment #n#.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/arraystack}
+  \end{center}
+  \caption{A sequence of #add(i,x)# and #remove(i)# operation in an
+  #ArrayStack#.  Arrows denote elements being copied.  Operations that
+  result in a call to #resize()# are marked with an asterisk.}
+  \figlabel{arraystack}
+\end{figure}
 
 \javaimport{ods/ArrayStack.add(i,x)}
 % TODO: Add shifting figure
@@ -178,13 +189,12 @@ The following theorem summarizes the performance of an #ArrayStack#:
   work during all calls to #resize()#.
 \end{thm}
 
-The #ArrayStack# is efficient way to implement a #Stack#: a sequence
-that allows us to insert (#push(x)#) or remove (#pop()#) elements at
-one end. In particular, if we can implement #push(x)# as #add(n,x)#
-and #pop()# as #remove(n-1)#, in which case these operations will run
-in $O(1)$ amortized time.
+The #ArrayStack# is an efficient way to implement a #Stack#.
+In particular, we can implement #push(x)# as #add(n,x)# and #pop()#
+as #remove(n-1)#, in which case these operations will run in $O(1)$
+amortized time.
 
-\section{FastArrayStack: An Optimized ArrayStack}
+\section{#FastArrayStack#: An Optimized ArrayStack}
 \seclabel{fastarraystack}
 Much of the work done by an #ArrayStack# involves shifting (by
 #add(i,x)# and #remove(i)#) and copying (by #resize()#) of data.  In the
@@ -204,7 +214,7 @@ In the Java implementations here, the use of #System.arraycopy(s,i,d,j,n)#
 resulted in speedups of a factor of 2-3 depending on the types of
 operations performed.
 
-\section{ArrayQueue: An Array-Based Queue}
+\section{#ArrayQueue#: An Array-Based Queue}
 \seclabel{arrayqueue}
 
 In this section, we present the #ArrayQueue# data structure, which
@@ -231,7 +241,7 @@ To remove an element, we would remove it from #a[j]#, increment #j#, and
 decrement #n#.
 
 Of course, the problem with this solution is that it requires an infinite
-array #a#.  An #ArrayStack# simulates this by using a finite array #a#
+array #a#.  An #ArrayQueue# simulates this by using a finite array #a#
 and \emph{modular arithmetic}.  This is the kind of arithmetic used when
 we are talking about time of day.  For example 10 o'clock plus 5
 hours gives 3 o'clock.  Formally, we say that
@@ -260,7 +270,7 @@ queue elements at array locations
 \[ #a[j%a.length]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]#
 \enspace. \]
 This treats #a# like a \emph{circular array} in which array indices
-exceeding than $#a.length#-1$ ``wrap around'' to the beginning of
+exceeding $#a.length#-1$ ``wrap around'' to the beginning of
 the array.
 % TODO: figure
 
@@ -269,9 +279,22 @@ of elements in the #ArrayQueue# does not exceed the size of #a#.
 
 \javaimportwithclass{ods/ArrayQueue.a.j.n}
 
+A sequence of #add(x)# and #remove()# operation on an #ArrayQueue# are illusted in \figref{arrayqueue}.
 To implement #add(x)#, we first check if #a# is full and, if necessary,
 call #resize()# to increase the size of #a#.  Next, we store #x# in
 #a[(j+n)%a.length]# and increment #n#.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/arrayqueue}
+  \end{center}
+  \caption{A sequence of #add(x)# and #remove(i)# operation on an
+  #ArrayQueue#.  Arrows denote elements being copied.  Operations that
+  result in a call to #resize()# are marked with an asterisk.}
+  \figlabel{arrayqueue}
+\end{figure}
+
+
 
 \javaimport{ods/ArrayQueue.add(x)}
 
@@ -303,7 +326,7 @@ data structure:
 
 \begin{thm}
 An #ArrayQueue# implements the (FIFO) #Queue# interface.  Ignoring the cost of
-calls to #resize()#, an #ArrayStack# supports the operations
+calls to #resize()#, an #ArrayQueue# supports the operations
 #add(x)# and #remove()# in $O(1)$ time per operation.
 Furthermore, beginning with an empty #ArrayQueue#, any sequence of $m$
 #add(i,x)# and #remove(i)# operations results in a total of $O(m)$
@@ -312,33 +335,48 @@ work during all calls to #resize()#.
 
 %TODO: Discuss the use of bitwise-and as a replacement for the mod operator
 
-\section{ArrayDeque: Fast Deque Operations Using an Array}
+\section{#ArrayDeque#: Fast Deque Operations Using an Array}
 \seclabel{arraydeque}
 
 The #ArrayQueue# from the previous section gives data structure for
 representing a sequence that allows us to efficiently add to one end
 of the sequence and remove from the other end.  The #ArrayDeque# data
 structure uses the same technique, but allows for efficient addition or
-removal at both ends.  This structure implements the #List# interface using the same circular array technique used to represent an #ArrayQueue#.
+removal at both ends.  This structure implements the #List# interface
+using the same circular array technique used to represent an #ArrayQueue#.
 
 \javaimportwithclass{ods/ArrayDeque.a.j.n}
 
-The #get(i)# and #set(i,x)# operations in an #ArrayDeque# are fairly straightforward.  They get or set the array element $#a[#{#(j+i)#\bmod #a.length#}#]#$.
+The #get(i)# and #set(i,x)# operations in an #ArrayDeque# are
+straightforward.  They get or set the array element $#a[#{#(j+i)#\bmod
+#a.length#}#]#$.
 
 \javaimport{ods/ArrayDeque.get(i).set(i,x)}
 
-The implementation of #add(i,x)# is a little more interesting.   As usual,
-we first check if #a# is full and, if necessary, call #resize()# to
-resize #a#.   Remember that we want this operation to fast when #i# is
-small (close to 0) or when #i# is large (close to #n#).  Therefore, we
-check if $#i#<#n#/2$.  If so, we shift the elements $#a[0]#,\ldots,#a[i]#$
-left by one position.  Otherwise ($#i#\ge#n#/2$), we shift the elements
-$#a[i]#,\ldots,#a[n-1]#$ right by one position.
+Adding and removing elements from an #ArrayDeque# is illustrated in
+\figref{arraydeque}.  The implementation of #add(i,x)# is a little
+more interesting.   As usual, we first check if #a# is full and,
+if necessary, call #resize()# to resize #a#.   Remember that we want
+this operation to be fast when #i# is small (close to 0) or when #i#
+is large (close to #n#).  Therefore, we check if $#i#<#n#/2$.  If so,
+we shift the elements $#a[0]#,\ldots,#a[i-1]#$ left by one position.
+Otherwise ($#i#\ge#n#/2$), we shift the elements $#a[i]#,\ldots,#a[n-1]#$
+right by one position.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/arraydeque}
+  \end{center}
+  \caption{A sequence of #add(i,x)# and #remove(i)# operation in an
+  #ArrayDeque#.  Arrows denote elements being copied.}
+  \figlabel{arraydeque}
+\end{figure}
+
 
 \javaimport{ods/ArrayDeque.add(i,x)}
 
 By doing the shifting in this way, we guarantee that #add(i,x)# never
-has to shift more than $\min\{ i, n-i+1 \}$ elements.  Thus, the running
+has to shift more than $\min\{ #i#, #n#-#i# \}$ elements.  Thus, the running
 time of the #add(i,x)# operation (ignoring the cost of the #resize()#
 operation) is $O(1+\min\{#i#,#n#-#i#\})$.
 
@@ -367,31 +405,17 @@ data structure:
   work during all calls to #resize()#.
 \end{thm}
 
-
-Again, this table does not include the cost of calls to #resize()#.
-However, in both cases, if we start with an initially empty #ArrayDeque#
-or #ArrayStack#, then the total cost of all calls to #resize()# during
-a sequence of $m$ #add(i,x)# and #remove(i)# operations is $O(m)$.
-
-\section{DualArrayDeque: Buiding a Deque from Two Stacks}
+\section{#DualArrayDeque#: Buiding a Deque from Two Stacks}
 \seclabel{dualarraydeque}
 
-Next, we show an alternative data structure that achieves the same
-performance bounds as an #ArrayDeque# by using two #ArrayStack#s.
-In this chapter, we continue to study implementations of the #List#
-interface, this time using pointer-based data structures rather than
-arrays.  The structures in this chapter are made up of nodes that
-contain the list items.  The nodes are linked together into a sequence
-using references (pointers).  We first study singly-linked lists, which
-can implement #Stack# and (FIFO) #Queue# operations in constant time
-per operation.
+Next, we present another data structure, the #DualArrayDeque# that
+achieves the same performance bounds as an #ArrayDeque# by using
+two #ArrayStack#s.  Although the asymptotic performance of the
+#DualArrayDeque# is no better than that of the #ArrayDeque#, it is
+still worth studying since it offer a good example of how to make a
+sophisticated data structure by combining two simpler data structures.
 
-Although the asymptotic performance of this data structure is no better
-than that of the #ArrayDeque#, it is still worth studying since it offer
-a good example of how to make a sophisticated data structure by combining
-two simpler data structures.
-
-A #DualArrayStack# represents a list using two #ArrayStack#s.  Recall that
+A #DualArrayDeque# represents a list using two #ArrayStack#s.  Recall that
 an #ArrayStack# is fast when the operations on it modify elements near
 the end.  A #DualArrayDeque# places two #ArrayStack#s, called #front#
 and #back#, back-to-back so that operations are fast at either end.
@@ -404,8 +428,6 @@ $#n#=#front.size()# + #back.size()#$ elements.  Nevertheless, when
 analyzing the #DualArrayDeque# we will still use #n# to denote the number
 of elements it contains.
 
-%TODO: Add figure showing the reversal of front
-
 \javaimport{ods/DualArrayDeque.size()}
 
 The #front# #ArrayStack# contains list elements with indices
@@ -417,14 +439,27 @@ or #set(i,x)# on either #front# or #back#, which take $O(1)$ time per operation.
 
 \javaimport{ods/DualArrayDeque.get(i).set(i,x)}
 
-Note that, if a #i#<#front().size()#, then this translates to access
-the elementof #front# at position $#front().size()#-#i#-1$, since the
-elements of #front()# are stored in reverse order.
+Note that, if a $#i#<#front.size()#$, then this translates to accessing
+the element of #front# at position $#front.size()#-#i#-1$, since the
+elements of #front# are stored in reverse order.
 
-Similarly, #add(i,x)# operates on either front or back, as appropriate:
+Adding and removing elements from an #ArrayDeque# is illustrated in
+\figref{arraydeque}.  The #add(i,x)# operation manipulates either #front#
+or #back#, as appropriate:
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/dualarraydeque}
+  \end{center}
+  \caption{A sequence of #add(i,x)# and #remove(i)# operation in a
+  #DualArrayDeque#.  Arrows denote elements being copied.
+  Operations that result in a rebalancing by #rebalance()# are marked with an asterisk.}
+  \figlabel{dualarraydeque}
+\end{figure}
+
+
 
 \javaimport{ods/DualArrayDeque.add(i,x)}
-
 
 The #add(i,x)# method performs rebalancing of the two #ArrayStacks#
 #front# and #back#, by calling the #balance()# method.  The implementation
@@ -444,7 +479,7 @@ Next we analyze the cost of #add(i,x)#, ignoring the cost of the
 On the other hand, if $#i#\ge#front.size()#$, then this translates into
 $#back.add(i-front.size(),x)#$.  The cost of this is 
 \begin{equation}
-  O(#back.size()#-(#i#-#front.size()#)+1) = O(#size()#-#i#+1) O(#n#-#i#+1)\enspace .
+  O(#back.size()#-(#i#-#front.size()#)+1) = O(#size()#-#i#+1)= O(#n#-#i#+1)\enspace .
   \eqlabel{das-back}
 \end{equation}
 
@@ -455,13 +490,12 @@ $#n#/3\le#i#\le2#n#/3$, we can't be sure whether the operation affects
 time, since $#i#\ge #n#/3$.  Summarizing the situation, we have
 \[
      \mbox{Running time of } #add(i,x)# \le 
-%          \left\{\begin{array}{ll}
-%            O(#i#+1) & \mbox{if $#i#< #n#/3$}
-%            O(#n#) & \mbox{if $#n#/3 \le #i# \le 2#n#/3$}
-%            O(#n-i+1#) & \mbox{if $#i# > 2#n#/3$}
-%          \end{array}\right.
+          \left\{\begin{array}{ll}
+            O(1+ #i#) & \mbox{if $#i#< #n#/3$} \\
+            O(#n#) & \mbox{if $#n#/3 \le #i# \le 2#n#/3$} \\
+            O(1+#n#-#i#) & \mbox{if $#i# > 2#n#/3$}
+          \end{array}\right.
 \]
-%TODO: fixme
 Thus, the running time of #add(i,x)# (ignoring the cost of the call to
 #balance()#) is $O(1+\min\{#i#, #n#-#i#\})$.
 
@@ -477,8 +511,8 @@ and #remove(i)#.  This operation is used to ensure that neither #front#
 nor #back# gets too big (or too small).  It ensures that, unless there
 are fewer than 2 elements, each of #front# and #back# contain at least
 $#n#/3$ elements. If this is not the case, then it moves elements between
-them so that #front# and #back# contain exactly $\lceil#n#/2\rceil$
-elements and $\lfloor#n#/2\rfloor$ elements, respectively.
+them so that #front# and #back# contain exactly $\lfloor#n#/2\rfloor$
+elements and $\lceil#n#/2\rceil$ elements, respectively.
 
 \javaimport{ods/DualArrayDeque.balance()}
 
@@ -510,7 +544,7 @@ on average, #balance()# only does a constant amount of work per operation
 
   Observe that, immediately after a call to #balance()# that shifts
   elements, the potential, $\Phi_0$, is at most 1, since
-  \[ \Phi_0 = \left|\lceil#n#/2\rceil-\lfloor#n#/2\rfloor\right|\le 1  \enspace .\]
+  \[ \Phi_0 = \left|\lfloor#n#/2\rfloor-\lceil#n#/2\rceil\right|\le 1  \enspace .\]
 
   Now, consider the situation immediately before a call to #balance()# that
   shifts elements, and suppose, without loss of generality that #balance()#
@@ -526,7 +560,7 @@ on average, #balance()# only does a constant amount of work per operation
   \Phi_1 & = & #back.size()# - #front.size()# \\
       &>& #back.size()# - #back.size()/3# \\
       &=& \frac{2}{3}#back.size()# \\
-      &>& \frac{3}{4}\times\frac{2}{3}#n# \\
+      &\ge& \frac{3}{4}\times\frac{2}{3}#n# \\
       &=& #n#/2
   \end{eqnarray*}
   Therefore, the number of calls to #add(i,x)# or #remove(i)# since
@@ -539,7 +573,7 @@ on average, #balance()# only does a constant amount of work per operation
 The following theorem summarizes the performance of a #DualArrayStack#
 
 \begin{thm}\thmlabel{dualarraydeque}
-  An #DualArrayDeque# implements the #List# interface.  Ignoring the
+  A #DualArrayDeque# implements the #List# interface.  Ignoring the
   cost of calls to #resize()# and #balance()#, an #DualArrayDeque#
   supports the operations
   \begin{itemize}
@@ -553,7 +587,7 @@ The following theorem summarizes the performance of a #DualArrayStack#
 \end{thm}
 
 
-\section{RootishArrayStack: A Memory Efficient Array-Based List}
+\section{#RootishArrayStack#: A Space-Efficient Array Stack}
 
 One of the drawbacks of all previous data structures in this chapter
 is that, because they store their data in one or two arrays, and they
@@ -569,9 +603,9 @@ most $O(\sqrt{#n#})$ array locations are unused.  All remaining array
 locations are used to store data.  Therefore, these data structures waste
 at most $O(\sqrt{#n#})$ space when storing #n# elements.
 
-A #RootishArrayStack# stores its elements in a list of #r# arrays called
-\emph{blocks} that are numbered $0,1,\ldots,#r#-1$.  Block $b$ contains
-$b+1$ elements. 
+A #RootishArrayStack# stores its elements in a list of #r#
+arrays called \emph{blocks} that are numbered $0,1,\ldots,#r#-1$.
+See \figref{rootisharraystack}.  Block $b$ contains $b+1$ elements.
 Therefore, all #r# blocks contain a total of
 \[
   1+ 2+ 3+\cdots +#r# = #r#(#r#+1)/2
@@ -579,13 +613,24 @@ Therefore, all #r# blocks contain a total of
 elements.  The above formula (allegedly discovered by the Gau\ss\ at
 the age of 9) can be obtained as shown in \figref{gauss}.
 
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/rootisharraystack}
+  \end{center}
+  \caption{A sequence of #add(i,x)# and #remove(i)# operation in a
+  #RootishArrayStack#.  Arrows denote elements being copied. }
+  \figlabel{rootisharraystack}
+\end{figure}
+
 \javaimportwithclass{ods/RootishArrayStack.blocks.n}
 
 \begin{figure}
-  \centering{Gau\ss}
-  \caption{The number of white squares is $1+2+3+\cdots+r$.  The number of
-  black squares is the same.  Together the white and black squares make a
-  rectangle consisting of $r(r+1)$ squares.}
+  \begin{center}
+    \includegraphics{figs/gauss}
+  \end{center}
+  \caption{The number of white squares is $1+2+3+\cdots+#r#$.  The number of
+  shaded squares is the same.  Together the white and shaded squares make a
+  rectangle consisting of $#r#(#r#+1)$ squares.}
   \figlabel{gauss}
 \end{figure}
 
@@ -717,9 +762,11 @@ memory blocks.  If $#r#\ge \sqrt{#n#}$, then the data structure must be
 using #r# pointers (or references) to keep track of these #r# blocks,
 and this is wasted space.  On the other hand, if $#r# < \sqrt{#n#}$
 then, by the pigeonhole principle, some block must have size at least
-$#n#/#r# \ge \sqrt{#n#}$.  Consider the moment at which this block was
+$#n#/#r# > \sqrt{#n#}$.  Consider the moment at which this block was
 first allocated.  Immediately after it was allocated, this block was
-empty, and was therefore wasting $\sqrt{#n#}$ space.
+empty, and was therefore wasting $\sqrt{#n#}$ space.  Therefore, at some
+point in time during the insertion of #n# elements, the data structure was
+wasting $O(\sqrt{#n#})$ space.
 
 \subsection{Summary}
 

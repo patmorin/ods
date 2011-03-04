@@ -22,8 +22,8 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	 * Create a new instance of this class
 	 * @param isampleNode
 	 */
-	BinaryTree(Node isampleNode) {
-		sampleNode = isampleNode;
+	BinaryTree(Node sampleNode) {
+		this.sampleNode = sampleNode;
 	}
 	
 	/**
@@ -130,7 +130,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		t.clear();
 		t.root = t.newNode();
 		q.add(t.root);
-		double p = ((double)0.5 - ((double)1)/(n+n));
+		double p = (0.5 - (1.0)/(n+n));
 		while (!q.isEmpty()) {
 			BinaryTreeNode<Node> u = q.remove();
 			if (r.nextDouble() < p) {

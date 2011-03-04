@@ -73,15 +73,13 @@ public class ArrayDeque<T> extends AbstractList<T> {
 	}
 	
 	public void add(int i, T x) {
-		if (i < 0 || i > n)	throw new IndexOutOfBoundsException();
+		if (i < 0 || i > n) throw new IndexOutOfBoundsException();
 		if (n+1 > a.length) resize();
-		if (i < n/2) {
-			// shift elements 0,...,i-1 left in a
+		if (i < n/2) {	// shift a[0],..,a[i-1] left one position
 			j = (j == 0) ? a.length - 1 : j - 1;
 			for (int k = 0; k <= i-1; k++)
 				a[(j+k)%a.length] = a[(j+k+1)%a.length];
-		} else {
-			// shift elements i,...,n-1 right in a
+		} else {	    // shift a[i],..,a[n-1] right one position
 			for (int k = n; k > i; k--)
 				a[(j+k)%a.length] = a[(j+k-1)%a.length];
 		}
@@ -92,11 +90,11 @@ public class ArrayDeque<T> extends AbstractList<T> {
 	public T remove(int i) {
 		if (i < 0 || i > n - 1)	throw new IndexOutOfBoundsException();
 		T x = a[(j+i)%a.length];
-		if (i < n/2) {
+		if (i < n/2) {  // shift a[0],..,[i-1] right one position
 			for (int k = i; k > 0; k--)
 				a[(j+k)%a.length] = a[(j+k-1)%a.length];
 			j = (j + 1) % a.length;
-		} else {
+		} else {        // shift a[i+1],..,a[n-1] left one position
 			for (int k = i; k < n-1; k++)
 				a[(j+k)%a.length] = a[(j+k+1)%a.length];
 		}

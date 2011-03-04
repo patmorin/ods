@@ -5,13 +5,39 @@ use strict;
 use warnings;
 
 sub wanted($@) {
-  my $sig = shift @_; 
+  my $sig = shift(@_); 
   while (my $param = shift @_) {
     if ("$sig" eq $param) {
       return 1;
     }
   }
   return 0;
+}
+
+sub color($) {
+  my $line = shift(@_);
+  $line =~ s/([{}])/\\$1/g;       # escape { and } until printVerbatim()
+  my $p = "CFXMDFJERKDFHBDFSUMK"; # treat method names like class names
+  $line =~ s/\b([a-z]\w*)(\s*\()/$p$1$2/g;
+  $line =~ s/\b([a-z]\w*)\b/{\\color{var}$1}/g; # color variables
+  $line =~ s/$p//g;
+  while ($line =~ s/(\/\/.*)\\color\{\w+\}/{$1}/) {} # remove color in comments
+  $line =~ s/(\/\/[^\n]*)$/{\\color{comment}$1}/;    # color comments
+  my @keywords = ("int", "double", "float", "char", "byte", "public", "protected", "private", "static", "if", "while", "else", "for", "do", "T", "K", "V", "extends", "implements", "throw", "new", "class");
+ foreach my $k (@keywords) {
+    $line =~ s/\{\\color\{\w+\}($k)\}/$1/g;
+    $line =~ s/($k)/{\\color{keyword}$1}/g;
+  }
+  return $line;
+}
+
+sub printVerbatim($) {
+  my $line = shift(@_);
+  $line = color($line);
+  while ($line =~ s/(^|[^\\])\{/$1\@/) {} # change { to @
+  while ($line =~ s/(^|[^\\])\}/$1\$/) {} # change } to $
+  $line =~ s/\\([{}])/$1/g;               # unescape \{
+  print($line);
 }
 
 sub snarfit($$) {
@@ -30,7 +56,7 @@ sub snarfit($$) {
     if ($wc && $d == 0 && $line =~ /^($k\s)*class\s/) {
         $line =~ s/($k\s+)//g;
         $line =~ s/extends\s+([$w]+\s*,\s*)*([$w]+)//g;
-  	print ($line); 
+  	printVerbatim($line); 
     } elsif ($d == 1) {
       if ($line =~ /^\s*($k\s+)*[$w]+\s+([$w]+)\(.*\)/) {
         # this is a method definition
@@ -59,10 +85,10 @@ sub snarfit($$) {
       }
     }
     if ($print) {
-      $line =~ s/($k)\s+//g;
-      $line =~ s/Utils\.//g;
-      $line =~ s/([^A-Za-z0-9])f\./$1/g;
-      print($line);
+      $line =~ s/($k)\s+//g;    # strip keywords
+      $line =~ s/Utils\.//g;    # get rid of Util.
+      $line =~ s/([^A-Za-z0-9])f\./$1/g; # hide factories
+      printVerbatim($line);
     }
     while ($line =~ /\}/g) {
       $d--;
@@ -78,15 +104,20 @@ sub snarfit($$) {
 
 MAIN: {
   while (my $line = <STDIN>) {
+    while ($line =~ /#([^#]*)#/) {
+      my $inside = $1;
+      $inside =~ s/([%&])/\\$1/g;
+      $inside = color($inside);
+      $inside = "\\mbox{\\texttt{$inside}}";
+      $line =~ s/#([^#])*#/$inside/;
+    } 
     if ($line =~ /\\javaimport(withclass)?\{([^}#]+)\}/) {
-      print("\\noindent\\begin{minipage}{\\textwidth}\n");
-      print("\\begin{lstlisting}\n");
+      print('\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\\\@\\$]'."\n");
       snarfit($2, $1);
       if ($1) {
-        print("  ...\n}\n");
+        printVerbatim("  ...\n}\n");
       }
-      print("\\end{lstlisting}\n");
-      print("\\end{minipage}\n");
+      print("\\end{Verbatim}\n");
     } else {
       print($line);
     }

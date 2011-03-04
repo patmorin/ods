@@ -3,13 +3,18 @@ sources = intro.tex arrays.tex linkedlists.tex skiplists.tex
 temps = $(sources:.tex=-tmp.tex)
 java = $(wildcard ../java/ods/*.java)
 
-ods.pdf : $(temps) ods.tex
-	pdflatex ods
-	pdflatex ods
+ods.pdf : $(temps) ods.tex figs
+	(cd figs ; make )
+	pdflatex -interaction=nonstopmode ods
+	pdflatex -interaction=nonstopmode ods
 
-%-tmp.tex : %.tex $(java) snarf.pl 
-	sed -r 's/#([^#]+)#/\\verb#\1#/g;s/(\\begin|\\end)\{code\}/\1{verbatim}/' \
-        $< | ./snarf.pl > $*-tmp.tex 
+ods.dvi : $(temps) ods.tex figs
+	(cd figs ; make )
+	latex ods
+	latex ods
+
+%-tmp.tex : %.tex $(java) snarf.pl Makefile
+	cat $< | ./snarf.pl > $*-tmp.tex 
 	
 clean:
 	rm -f *-tmp.tex *.log *.bbl ods.pdf

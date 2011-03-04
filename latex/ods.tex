@@ -1,14 +1,18 @@
 \documentclass{book}
 
-\usepackage{amsthm,pat}
+\usepackage{amsthm}
+\usepackage{graphicx}
+
+% Colors for syntax highlighting
+\usepackage[usenames,dvipsnames]{color}
+\definecolor{keyword}{named}{RoyalPurple}
+\definecolor{var}{named}{Blue}
+\definecolor{comment}{named}{ForestGreen}
 
 % This allows the use of \verb inside footnotes
 \usepackage{fancyvrb}
-\VerbatimFootnotes
 
-\usepackage{listings}
-\usepackage[usenames,dvipsnames]{color}
-
+% Page setup
 \setlength{\textheight}{8.5in}
 \setlength{\textwidth}{6in}
 \setlength{\topmargin}{-0.375in}
@@ -21,18 +25,21 @@
 \setlength{\parindent}{1.25cm}
 \flushbottom
 
-\lstset{
-  language=java,
-  basicstyle=\small\ttfamily,
-  keywordstyle=\color{RoyalPurple},
-  identifierstyle=\color{Blue},
-  stringstyle=\color{Blue},
-  showstringspaces=false,
-  commentstyle=\color{ForestGreen},
-  tabsize=2,
-  frame=single
-}
 
+%\lstset{
+%  language=java,
+%  basicstyle=\small\ttfamily,
+%  keywordstyle=\color{RoyalPurple},
+%  identifierstyle=\color{Blue},
+%  stringstyle=\color{Blue},
+%  showstringspaces=false,
+%  commentstyle=\color{ForestGreen},
+%  tabsize=2,
+%  frame=single
+%}
+
+
+\usepackage{pat}
 
 \title{Basic Data Structures\\(in Java)}
 \author{Pat Morin}
