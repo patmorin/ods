@@ -3,8 +3,8 @@ package ods;
 import java.lang.reflect.Array;
 
 public class ScapegoatTree2<T extends Comparable<T>> extends ScapegoatTree<T> {
-	public ScapegoatTree2(ScapegoatNode<T> ns) {
-		super(ns);
+	public ScapegoatTree2() {
+		super(new ScapegoatNode<T>());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -66,13 +66,13 @@ public class ScapegoatTree2<T extends Comparable<T>> extends ScapegoatTree<T> {
 		return a[i + m];
 	}
 
-	public static void main(String[] args) {
-		ScapegoatTree<Integer> t 
-		   = new ScapegoatTree2<Integer>(new ScapegoatNode<Integer>());
-		int n = 100000;
-		correctnessTests(t, n);
-		t.clear();
-		performanceTests(t);
-	}
+//	public static void main(String[] args) {
+//		ScapegoatTree<Integer> t 
+//		   = new ScapegoatTree2<Integer>(new ScapegoatNode<Integer>());
+//		int n = 100000;
+//		correctnessTests(t, n);
+//		t.clear();
+//		performanceTests(t);
+//	}
 
 }

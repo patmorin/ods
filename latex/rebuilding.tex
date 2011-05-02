@@ -1,0 +1,38 @@
+\chapter{Partial Rebuilding}
+
+
+In other chapters, we have seen structures that obtain their efficiency
+through the use of \emph{global rebuilding}: Occasionally, the entire
+structure is rebuilt in a ``balanced'' manner.  The best example of
+this are the array-based list implementations of \chapref{X}.  In these
+implementations, a new backing array is allocated (of appropriate size)
+and all the elements in the old backing array arec copied into the new
+backing array.
+
+In this chapter, we consider structures that maintain their efficiency
+through the use of \emph{partial rebuilding}.  In applications of this
+technique, only parts of the data structure are rebuilt.
+
+\chapter{ScapegoatTree: A binary tree with partial rebuilding}
+
+A #ScapegoatTree# is a binary search tree that, in addition to storing
+a reference #root# to the root node, store the number #n# of nodes in
+the tree and another number #q# that is an overestimate of the number
+of nodes in the tree.  At all times, two invariants are maintained.
+The first invariant ensures that #q# is a reasonable estimate of #n#:
+\[  #n# \le #q# \le 2#n# \enspace . \]
+The second invariant ensures that the height of the tree is small
+\[
+ \mbox{height} \le \log_{3/2} q
+\]
+
+
+
+\chaplabel{scapegoat}
+\chapter{Jumplist: Randomized Partial Rebuilding}
+\chapter{KDTree: Multidimensional search trees}
+
+
+\chaplabel{jumplists}
+
+

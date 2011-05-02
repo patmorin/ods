@@ -11,9 +11,9 @@ import java.util.Random;
  * Implements the List interface as a skiplist so that all the
  * standard operations take O(log n) time
  * 
- * TODO: remove(i) is not implemented
- * TODO: currently, iteration takes O(log n) time per step
- *       it should use a finger so that it takes O(1) time per step
+ * TODO: currently, listIterator() return an iterator that takes O(log n)
+ *       time per step
+ * TODO: height never decreases
  * @author morin
  *
  * @param <T>
@@ -56,27 +56,6 @@ public class SkiplistList<T> extends AbstractList<T> {
 		height = 0;
 		r = new Random(0);
 	}
-
-	
-	/**
-	 * Increase the height of the skiplist to h
-	 * @param h
-	 */
-	protected void grow(int h) {
-		for (int i = height; i < h; i++)
-			assert(sentinel.next[i] != null);
-		height = h;
-	}
-	
-	/**
-	 * Decrease the height of the skiplist to h
-	 * @param h
-	 */
-	protected void shrink(int h) {
-		for (int i = height-1; i >= h; i--)
-			assert(sentinel.next[i] == null);
-		height = h;
-	}
 	
 	/**
 	 * Find the node that precedes list index i in the skiplist.
@@ -88,14 +67,14 @@ public class SkiplistList<T> extends AbstractList<T> {
 	 */
 	protected Node findPred(int i) {
 		Node u = sentinel;
-		int l = height - 1;
-		int s = 0;   // number of nodes in list up to and including u
-		while (l >= 0) {
-			while (u.next[l] != null && s + u.length[l] < i+1) {
-				s += u.length[l];
-				u = u.next[l];
+		int r = height - 1;
+		int j = -1;   // the index of the current node in list 0
+		while (r >= 0) {
+			while (u.next[r] != null && j + u.length[r] < i) {
+				j += u.length[r];
+				u = u.next[r];
 			}
-			l--;
+			r--;
 		}
 		return u;
 	}
@@ -114,28 +93,28 @@ public class SkiplistList<T> extends AbstractList<T> {
 	/**
 	 * Insert a new node into the skiplist
 	 * @param i the index of the new node
-	 * @param v the node to insert
+	 * @param w the node to insert
 	 * @return the node u that precedes v in the skiplist
 	 */
-	protected Node insert(int i, Node v) {
-		if (v.next.length > height)
-			grow(v.next.length);
+	protected Node add(int i, Node w) {
+		if (i < 0 || i > n) throw new IndexOutOfBoundsException();
 		Node u = sentinel;
-		int l = height - 1;
-		int s = 0; // number of nodes in list up to and including u
-		while (l >= 0) {
-			while (u.next[l] != null && s+u.length[l] < i+1) {
-				s += u.length[l];
-				u = u.next[l];
+		int k = w.next.length - 1;
+		int r = height - 1;
+		int j = -1; // index of u
+		while (r >= 0) {
+			while (u.next[r] != null && j+u.length[r] < i) {
+				j += u.length[r];
+				u = u.next[r];
 			}
-			u.length[l]++;
-			if (l < v.next.length) {
-				v.next[l] = u.next[l];
-				u.next[l] = v;
-				v.length[l] = u.length[l] - i - 1 + s;
-				u.length[l] = i + 1 - s;
+			u.length[r]++;    // to account for new node in list 0
+			if (r <= k) {
+				w.next[r] = u.next[r];
+				u.next[r] = w;
+				w.length[r] = u.length[r] - (i - j);
+				u.length[r] = i - j;
 			}
-			l--;
+			r--;
 		}
 		n++;
 		return u;
@@ -155,15 +134,36 @@ public class SkiplistList<T> extends AbstractList<T> {
 		return i;
 	}
 	
-	public Node insert(int i, T x) {
-		Node v = new Node(x, pickHeight());
-		return insert(i, v);
-	}
-		
 	public void add(int i, T x) {
-		insert(i, x);
+		Node w = new Node(x, pickHeight());
+		if (w.next.length > height) 
+			height = w.next.length;
+		add(i, w);
 	}
 	
+	public T remove(int i) {
+		if (i < 0 || i > n-1) throw new IndexOutOfBoundsException();
+		T x = null;
+		Node u = sentinel;
+		int r = height - 1;
+		int j = -1; // index of node u
+		while (r >= 0) {
+			while (u.next[r] != null && j+u.length[r] < i) {
+				j += u.length[r];
+				u = u.next[r];
+			}
+			u.length[r]--;  // for the node we are removing
+			if (j + u.length[r] == i && u.next[r] != null) {
+				x = u.next[r].x;
+				u.length[r] += u.next[r].length[r];
+				u.next[r] = u.next[r].next[r];
+			}
+			r--;
+		}
+		n--;
+		return x;
+	}
+		
 	public Iterator<T> iterator() {
 		class SkiplistIterator implements Iterator<T> {
 			Node u, prev;

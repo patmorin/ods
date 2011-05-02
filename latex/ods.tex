@@ -12,6 +12,8 @@
 % This allows the use of \verb inside footnotes
 \usepackage{fancyvrb}
 
+\usepackage{array}
+
 % Page setup
 \setlength{\textheight}{8.5in}
 \setlength{\textwidth}{6in}
@@ -24,6 +26,21 @@
 \setlength{\parskip}{1ex}
 \setlength{\parindent}{1.25cm}
 \flushbottom
+
+% Sectioning commands
+%\font\tensfb = cmssbx11
+%\newcommand{\@titlestyle}{\normalsize\tensfb}
+%\renewcommand\section{\@startsection {section}{1}{\z@}{-3.5ex plus
+%    -1ex minus -.2ex}{2.3ex plus .2ex}{\@titlestyle}}
+%\renewcommand\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex
+%    plus -1ex minus -.2ex}{1.5ex plus .2ex}{\@titlestyle}}
+%\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex
+%    plus -1ex minus -.2ex}{1.5ex plus .2ex}{\@titlestyle}}
+%\renewcommand\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus
+%    1ex minus .2ex}{-1em}{\@titlestyle}}
+%\renewcommand\subparagraph{\@startsection
+%  {subparagraph}{4}{\parindent}{3.25ex plus 1ex minus
+%    .2ex}{-1em}{\@titlestyle}}
 
 
 %\lstset{
@@ -54,6 +71,12 @@
 
 \tableofcontents
 
+\section*{Why this Book}
+
+Books become free when they die.  Usually when the publisher and author no longer support them.  Very rarely does an author make (or even have) the source available.
+
+The goal of this project is to treat a book like an Open Source software project.
+
 \include{intro-tmp}
 \include{arrays-tmp}
 \include{linkedlists-tmp}
@@ -61,8 +84,10 @@
 
 \chapter{Hashing}
 \chaplabel{hashing}
-\section{Multiplicative Hashing}
+\section{Multiplicative Hashing with Chaining}
+%\section{Perfect Hashing} (how to cope with conflicting hash code)
 \section{Hash Codes}
+\section{Fingerprinting}
 
 \chapter{Binary Trees}
 \chaplabel{binarytrees}
@@ -74,12 +99,6 @@
 \section{Random Binary Search Trees}
 \section{Treaps}
 
-\chapter{Partial Rebuilding}
-\chapter{ScapegoatTree: A binary tree with partial rebuilding}
-\chaplabel{scapegoat}
-\chapter{Jumplist: Randomized Partial Rebuilding}
-\chaplabel{jumplists}
-
 \chapter{2-4 Trees and Red-Black Trees}
 \chaplabel{24redblack}
 \section{2-4 Trees}
@@ -89,6 +108,11 @@
 \chaplabel{heaps}
 \section{Implicit Heaps}
 \section{Randomized Meldable Heaps}
+
+\chapter{Data Structures for Integers}
+\chaplabel{bounded}
+\section{X-Fast Tries}
+\section{Y-Fast Tries}
 
 \end{document}
 

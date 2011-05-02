@@ -110,9 +110,11 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		while (--n > 0) {
 			Node u = q.remove();
 			u.left = t.newNode();
+			u.left.parent = u;
 			q.add(u.left);
 			if (--n > 0) {
 				u.right = t.newNode();
+				u.right.parent = u;
 				q.add(u.right);
 			}
 		}
@@ -132,11 +134,13 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		q.add(t.root);
 		double p = (0.5 - (1.0)/(n+n));
 		while (!q.isEmpty()) {
-			BinaryTreeNode<Node> u = q.remove();
+			Node u = q.remove();
 			if (r.nextDouble() < p) {
 				u.left = t.newNode();
+				u.left.parent = u;
 				q.add(u.left);
 				u.right = t.newNode();
+				u.right.parent = u;
 				q.add(u.right);
 			}
 		}
@@ -214,6 +218,46 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		w.left = copyTo(u.left, t);
 		w.right = copyTo(u.right, t);
 		return w;
+	}
+
+	/**
+	 * Find the node that follows u in an in-order traversal
+	 * @param u
+	 * @return
+	 */
+	protected Node nextNode(Node u) {
+		if (u.right != null) {
+			u = u.right;
+			while (u.left != null)
+				u = u.left;
+		} else {
+			Node prev;
+			do {
+				prev = u;
+				u = u.parent;
+			} while (u != null && u.left != prev);
+		}
+		return u;
+	}
+
+	/**
+	 * Find the node that precedes u in an in-order traversal
+	 * @param u
+	 * @return
+	 */
+	protected Node prevNode(Node u) {
+		if (u.left != null) {
+			u = u.left;
+			while (u.right != null)
+				u = u.right;
+		} else {
+			Node prev;
+			do {
+				prev = u;
+				u = u.parent;
+			} while (u != null && u.right != prev);
+		}
+		return u;
 	}
 
 	/**

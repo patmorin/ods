@@ -17,16 +17,19 @@ sub wanted($@) {
 sub color($) {
   my $line = shift(@_);
   $line =~ s/([{}])/\\$1/g;       # escape { and } until printVerbatim()
+  (my $comment) = $line =~ /(\/\/.*)$/; # save comment
+  $line =~ s/(\/\/.*)$//; # strip comment
   my $p = "CFXMDFJERKDFHBDFSUMK"; # treat method names like class names
   $line =~ s/\b([a-z]\w*)(\s*\()/$p$1$2/g;
   $line =~ s/\b([a-z]\w*)\b/{\\color{var}$1}/g; # color variables
   $line =~ s/$p//g;
-  while ($line =~ s/(\/\/.*)\\color\{\w+\}/{$1}/) {} # remove color in comments
-  $line =~ s/(\/\/[^\n]*)$/{\\color{comment}$1}/;    # color comments
   my @keywords = ("int", "double", "float", "char", "byte", "public", "protected", "private", "static", "if", "while", "else", "for", "do", "T", "K", "V", "extends", "implements", "throw", "new", "class");
  foreach my $k (@keywords) {
     $line =~ s/\{\\color\{\w+\}($k)\}/$1/g;
-    $line =~ s/($k)/{\\color{keyword}$1}/g;
+    $line =~ s/\b($k)\b/{\\color{keyword}$1}/g;
+  }
+  if ($comment) {  # put comment back
+    $line = $line."{\\color{comment}$comment}";
   }
   return $line;
 }
@@ -37,7 +40,7 @@ sub printVerbatim($) {
   while ($line =~ s/(^|[^\\])\{/$1\@/) {} # change { to @
   while ($line =~ s/(^|[^\\])\}/$1\$/) {} # change } to $
   $line =~ s/\\([{}])/$1/g;               # unescape \{
-  print($line);
+  print("$line\n");
 }
 
 sub snarfit($$) {
@@ -53,6 +56,7 @@ sub snarfit($$) {
   my $print = 0;
   open(FP, "<",$javafile) || die("Unable to open $javafile");
   while (my $line = <FP>) {
+    chomp($line);
     if ($wc && $d == 0 && $line =~ /^($k\s)*class\s/) {
         $line =~ s/($k\s+)//g;
         $line =~ s/extends\s+([$w]+\s*,\s*)*([$w]+)//g;
@@ -86,7 +90,8 @@ sub snarfit($$) {
     }
     if ($print) {
       $line =~ s/($k)\s+//g;    # strip keywords
-      $line =~ s/Utils\.//g;    # get rid of Util.
+      $line =~ s/\bUtils\.//g;    # get rid of Util.
+      $line =~ s/\bc\.compare/compare/g;    # get rid of Util.
       $line =~ s/([^A-Za-z0-9])f\./$1/g; # hide factories
       printVerbatim($line);
     }
@@ -112,10 +117,16 @@ MAIN: {
       $line =~ s/#([^#])*#/$inside/;
     } 
     if ($line =~ /\\javaimport(withclass)?\{([^}#]+)\}/) {
-      print('\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\\\@\\$]'."\n");
-      snarfit($2, $1);
-      if ($1) {
-        printVerbatim("  ...\n}\n");
+      my $withclass=0; #$1;
+      my $args=$2;
+      (my $class) = $line =~ /ods\/(\w+)\./;
+      print("\\begin{Verbatim}[tabsize=2,frame=single");
+      print(',commandchars=\\\\@\\$');
+      print(",label=\\texttt{$class},labelposition=topline");
+      print("]\n"); 
+      snarfit($args, 0);  #$withclass);
+      if ($withclass) {
+        printVerbatim("  ...\n}");
       }
       print("\\end{Verbatim}\n");
     } else {

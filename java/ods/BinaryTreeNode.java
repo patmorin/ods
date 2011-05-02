@@ -20,6 +20,11 @@ public class BinaryTreeNode<N extends BinaryTreeNode<N>> {
 	 * right child
 	 */
 	protected N right;
+
+	/**
+	 * Parent node
+	 */
+	protected N parent;
 	
 	public boolean isLeaf() {
 		return left == null && right == null;

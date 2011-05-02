@@ -35,17 +35,8 @@ public class SEList<T> extends AbstractSequentialList<T> {
 	}
 	
 	protected class Node {
-		Node prev;
 		BDeque d;
-		Node next;
-		public Node(Node prev, Node next) {
-			this.prev = prev;
-			this.d = new BDeque();
-			this.next = next;
-		}
-		public Node(BDeque d) {
-			this.d = d;
-		}
+		Node prev, next;
 	}
 	
 	protected Node dummy;
@@ -62,7 +53,7 @@ public class SEList<T> extends AbstractSequentialList<T> {
 	public SEList(int b, Class<T> c) {
 		this.b = b;
 		f = new Factory<T>(c);
-		dummy = new Node(null);
+		dummy = new Node();
 		dummy.next = dummy;
 		dummy.prev = dummy;
 		n = 0;
@@ -78,7 +69,10 @@ public class SEList<T> extends AbstractSequentialList<T> {
 	 * @return the newly created and inserted node
 	 */
 	protected Node addBefore(Node w) {
-		Node u = new Node(w.prev, w);
+		Node u = new Node();
+		u.d = new BDeque();
+		u.prev = w.prev;
+		u.next = w;
 		u.next.prev = u;
 		u.prev.next = u;
 		return u;

@@ -1,0 +1,17 @@
+Use GNU make to create the file ods.pdf
+
+During the make process, all of the tex files in this directory, except
+ods.tex, are preprocessed with the perl script snarf.pl.  This script
+allows for the insertion of source code into the tex files.  This script 
+does two things:
+
+1. It expands \javaimport{} and \javaimportwithclass{} commands into
+   Verbatim environments that contain highlighted versions of the relevant
+   source code.
+
+2. It treats anything sandwiched between # and # as inline source
+   code that is also highlighted and typeset with a fixed-width font.
+   This command is suitable for use inside of math environments so that
+   source code variables and functions can be used inside of equations.
+
+

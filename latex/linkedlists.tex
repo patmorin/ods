@@ -119,7 +119,7 @@ a cycle, as illustrated in \figref{dllist}.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/dllist}
+    \includegraphics{figs/dllist2}
   \end{center}
   \caption{A #DLList# containing a,b,c,d,e.}
   \figlabel{dllist}
@@ -241,7 +241,8 @@ will be useful as elements are shifted from one block to another.
 
 An #SEList# is then a doubly-linked list of blocks:
 
-\javaimportwithclass{ods/SEList.Node.n.dummy}
+\javaimport{ods/SEList.Node}
+\javaimportwithclass{ods/SEList.n.dummy}
 
 \subsection{Space Requirements}
 
@@ -297,9 +298,9 @@ so they also run in $O(1+\min\{#i#,#n#-#i#\}/#b#)$ time.
 
 \subsection{Adding an Element}
 
-Where things start to get complicated is when adding elements.
-Before considering the general case, we first consider the easier
-operation, #add(x)#, in which #x# is added to the end of the list.  In this case,
+Where things start to get complicated is when adding elements.  Before
+considering the general case, we first consider the easier operation,
+#add(x)#, in which #x# is added to the end of the list.  In this case,
 #x# will go at the end of the last block.  If the last block is full
 (or does not exist because there are no blocks yet), then we allocate a
 new block and append it the list of blocks.  Now that we are sure that
@@ -317,8 +318,21 @@ is no room for #x#.
 Let $#u#_0,#u#_1,#u#_2,\ldots$ denote #u#, #u.next#, #u.next.next#,
 and so on.  We explore in $#u#_0,#u#_1,#u#_2,\ldots$ looking for a node
 that can provide space for #x#.  Three cases can occur during our space
-exploration: 
-%TODO: figure
+exploration (see \figref{selist-add}): 
+
+\begin{figure}
+  \noindent
+  \begin{center}
+    \begin{tabular}{l}
+      \includegraphics{figs/selist-add-a}\\[4ex]
+      \includegraphics{figs/selist-add-b}\\[4ex]
+      \includegraphics{figs/selist-add-c}\\
+    \end{tabular}
+  \end{center}
+  \caption{The three cases that occur during the addition of an item #x# in the interior of an #SEList#.  (This #SEList# has block size $#b#=3$.)}
+  \figlabel{selist-add}
+\end{figure}
+
 
 \begin{enumerate}
 \item We quickly (in $r < #b#$ steps) find a node $#u#_r$ whose block
@@ -361,7 +375,22 @@ block to have size less than $#b#-1$, which is not allowed.
 Again, let $#u#_0,#u#_1,#u#_2,\ldots$ denote #u#, #u.next#, #u.next.next#,
 We examine $#u#_0,#u#_1,#u#_2,\ldots$ in order looking for a node from
 which we can borrow an element to make the size of $#u#_0$'s block larger
-than $#b#-1$.  There are three cases to consider:
+than $#b#-1$.  There are three cases to consider
+(see \figref{selist-remove}): 
+
+\begin{figure}
+  \noindent
+  \begin{center}
+    \begin{tabular}{l}
+      \includegraphics{figs/selist-remove-a}\\[4ex]
+      \includegraphics{figs/selist-remove-b}\\[4ex]
+      \includegraphics{figs/selist-remove-c}\\
+    \end{tabular}
+  \end{center}
+  \caption{The three cases that occur during the removeition of an item #x# in the interior of an #SEList#.  (This #SEList# has block size $#b#=3$.)}
+  \figlabel{selist-remove}
+\end{figure}
+
 
 \begin{enumerate}
 \item We quickly (in $r < #b#$ steps) find a node whose block contains

@@ -1,24 +1,19 @@
 package ods;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
+import java.util.SortedSet;
 
 public class Treap<T extends Comparable<T>> extends
-		BinarySearchTree<TreapNode<T>, T> {
+		BinarySearchTree<TreapNode<T>, T> implements SSet<T> {
 	/**
 	 * A random number source
 	 */
 	Random r;
 
-	/**
-	 * The number of nodes (elements) currently in the treap
-	 */
-	int n;
-
-	public Treap(TreapNode<T> sn) {
-		super(sn);
+	public Treap() {
+		super(new TreapNode<T>());
 		r = new Random();
+		c = new DefaultComparator<T>();
 	}
 
 	public boolean add(T x) {
@@ -26,7 +21,6 @@ public class Treap<T extends Comparable<T>> extends
 		u.x = x;
 		u.prio = r.nextInt();
 		if (super.add(u)) {
-			n++;
 			bubbleUp(u);
 			return true;
 		}
@@ -46,10 +40,9 @@ public class Treap<T extends Comparable<T>> extends
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public boolean remove(Object x) {
+	public boolean remove(T x) {
 		TreapNode<T> u = findNode((T) x);
-		if (u.x.compareTo((T) x) == 0) {
+		if (c.compare(u.x, (T)x) == 0) {
 			trickleDown(u);
 			if (u.parent == null) {
 				root = null;
@@ -83,81 +76,16 @@ public class Treap<T extends Comparable<T>> extends
 			}
 		}
 	}
-
-	public int size() {
-		return n;
-	}
-
-	public boolean isEmpty() {
-		return n == 0;
-	}
 	
-	public void clear() {
-		super.clear();
-		n = 0;
-	}
-
-	/**
-	 * Return the node at index i
-	 * @param i
-	 * @return
-	 */
-	public T get(int i) {
-		if (i < 0 || i > size())
-			throw new IndexOutOfBoundsException();
-		TreapNode<T> u = root;
-		while (1 < 2) {
-			int l = (u.left == null) ? 0 : u.left.size;
-			if (l == i) {
-				return u.x;
-			} else if (l > i) {
-				u = u.left;
-			} else {
-				u = u.right;
-				i = i - l - 1;
-			}
-		}
-	}
-	
-	/**
-	 * Compute all sizes of subtrees - for testing purposes only
-	 * this is not the basis for a fast implementation
-	 * @param u
-	 * @return
-	 */
-	protected int computeSizes(TreapNode<T> u) {
-		if (u == null) return 0;
-		u.size = computeSizes(u.left) + computeSizes(u.right) + 1;
-		return u.size;
-	}
-	
-
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Treap<Integer> t = new Treap<Integer>(new TreapNode<Integer>());
-		int n = 100000;
-		correctnessTests(t, n);
-		t.clear();
-		performanceTests(t);
-		t.clear();
-		n = 10000;
-		Integer[] a = new Integer[n];
-		Random r = new Random();
-		for (int i = 0; i < n; i++) {
-			a[i] = r.nextInt();
-			t.add(a[i]);
+		SortedSet<Integer> sl = new SortedSSet<Integer>(new Treap<Integer>());
+		for (int i = 0; i < 100; i++) {
+			sl.add(i);
 		}
-		t.computeSizes(t.root);   // this code should not be needed once you're done
-		Collections.sort(Arrays.asList(a));
-		for (int i = 0; i < n; i++) {
-			Integer x = t.get(i);
-			Integer y = a[i];
-			Utils.myassert(x.equals(y));
+		System.out.println(sl.size());
+		for (int i = 25; i < 75; i++) {
+			sl.remove(i);
 		}
-		// add some of your own testing for performance as well as interleaving
-		// add(x)/remove(x) and get(i) operations
+		System.out.println(sl.size());
 	}
 }

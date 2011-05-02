@@ -801,6 +801,15 @@ data structure:
    O(1+\min\{#i#, #n#-#i#, |#n#/2|-#i#\}) \enspace .
 \]
 
+\item Implement a method #rotate(r)# that ``rotates'' a #List# so
+that list item #i# becomes list item $(#i#+#r#)\bmod n$.  When run
+on an #ArrayDeque#, or a #DualArrayDeque#, #rotate(r)# should run in
+$O(1+\min\{r,n-r\})$.
+
+The #List# method #addAll(i,c)# inserts all elements of the
+#Collection# #c# into the list at position #i#.  (The #add(i,x)# method is a special case where $#c#=\{#x#\}$.)  Explain why, for the data structures in this chapter, it is not efficient to implement #addAll(i,c)# by repeated calls to #add(i,x)#.  Describe a more efficient implementation.
+
+
 \item Design and implement a #RandomQueue#.  This is an implementation of #Queue# in which the #remove()# operation removes an element chosen uniformly at random from all of the elements currently stored in the queue.  The #add(x)# and #remove()# operations should run in $O(1)$ time.
 
 \item Modify the #ArrayDeque# implementation so that the shifting done by #add(i,x)#, #remove(i)#, and #resize()# is done using #System.arraycopy(s,i,d,j,n)#.

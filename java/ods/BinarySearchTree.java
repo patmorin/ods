@@ -1,18 +1,28 @@
 package ods;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Random;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
-public class BinarySearchTree<Node extends BSTNode<Node,T>,T extends Comparable<T>> extends
-		BinaryTree<Node> implements Collection<T> {
+public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable<T>> extends
+		BinaryTree<Node> implements SSet<T> {
+
+	protected Comparator<T> c;
+	
+	/**
+	 * The number of nodes (elements) currently in the treap
+	 */
+	protected int n;
+
+	public BinarySearchTree(Node is, Comparator<T> c) {
+		super(is);
+		this.c = c; 
+	}
 
 	public BinarySearchTree(Node is) {
-		super(is);
+		this(is, new DefaultComparator<T>());
 	}
-	
+
 	/**
 	 * Search for a value in the tree
 	 * @return the last node on the search path for x
@@ -34,6 +44,70 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>,T extends Comparable<
 	}
 	
 	/**
+	 * Search for a value in the tree
+	 * @return the last node on the search path for x
+	 */
+	protected Node findGENode(T x) {
+		Node w = root, z = null;
+		while (w != null) {
+			int res = c.compare(x, w.x);
+			if (res < 0) {
+				z = w;
+				w = w.left;
+			} else if (res > 0) {
+				w = w.right;
+			} else {
+				return w;
+			}
+		}
+		return z;
+	}
+	
+	public T findGE(T x) {
+		if (x == null) { // find the minimum value
+			Node w = root;
+			if (w == null) return null;
+			while (w.left != null)
+				w = w.left;
+			return w.x;
+		}
+		Node w = findGENode(x);
+		return w == null ? null : w.x;
+	}
+
+	/**
+	 * Search for a value in the tree
+	 * @return the last node on the search path for x
+	 */
+	protected Node findLTNode(T x) {
+		Node w = root, z = null;
+		while (w != null) {
+			int res = c.compare(x, w.x);
+			if (res < 0) {
+				w = w.left;
+			} else if (res > 0) {
+				z = w;
+				w = w.right;
+			} else {
+				return w;
+			}
+		}
+		return z;
+	}
+
+	public T findLT(T x) {
+		if (x == null) { // find the maximum value
+			Node w = root;
+			if (w == null) return null;
+			while (w.right != null)
+				w = w.right;
+			return w.x;
+		}
+		Node w = findLTNode(x);
+		return w == null ? null : w.x;
+	}
+
+	/**
 	 * Add the node u as a child of node p -- ASSUMES p has no child
 	 * where u should be added
 	 * @param p
@@ -54,6 +128,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>,T extends Comparable<
 			}
 			u.parent = p;
 		}
+		n++;
 		return true;		
 	}
 
@@ -114,6 +189,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>,T extends Comparable<
 			u.x = w.x;
 			splice(w);
 		}
+		n--;
 	}
 	
 	/**
@@ -165,9 +241,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>,T extends Comparable<
 	 * @param x
 	 * @return
 	 */
-	@SuppressWarnings({"unchecked"})
-	public boolean remove(Object ox) {
-		T x = (T)ox;
+	public boolean remove(T x) {
 		Node u = findNode(x);
 		if (u != null && u.x.compareTo(x) == 0) {
 			remove(u);
@@ -199,19 +273,8 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>,T extends Comparable<
 		return true;
 	}
 	
-	public boolean isEmpty() {
-		return root == null;
-	}
-	
-	public Iterator<T> iterator() {
-		Node u = root;
-		if (u == null)
-			return iterator(u);
-		while (u.left != null)
-			u = u.left;
-		return iterator(u);
-	}
-	
+
+	// TODO: make iterators bidirectional?
 	public Iterator<T> iterator(Node u) {
 		class BTI implements Iterator<T> {
 			protected Node w, prev;
@@ -241,166 +304,34 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>,T extends Comparable<
 		}
 		return new BTI(u);
 	}
-	
-	public boolean retainAll(Collection<?> c) {
-		Iterator<T> it = iterator();
-		while (it.hasNext()) {
-			if (!c.contains(it.next())) {
-				it.remove();
-			}
-		}
-		return true;
-	}
-	
-	public boolean removeAll(Collection<?> c) {
-		Iterator<T> it = iterator();
-		while (it.hasNext()) {
-			if (c.contains(it.next())) {
-				it.remove();
-			}
-		}
-		return true;
+
+	public Iterator<T> iterator() {
+		Node u = root;
+		if (u == null)
+			return iterator(u);
+		while (u.left != null)
+			u = u.left;
+		return iterator(u);
 	}
 
-	@SuppressWarnings({"unchecked"})
-	public T[] toArray() {
-		Object[] a = new Object[size()];
-		return toArray((T[])a);
+	public Iterator<T> iterator(T x) {
+		return iterator(findGENode(x));
+	}
+	
+	public int size() {
+		return n;
 	}
 
-	@SuppressWarnings({"unchecked"})
-	public <U> U[] toArray(U[] a) {
-		Iterator<T> it = iterator();
-		int i = 0;
-		while (it.hasNext()) {
-			a[i++] = (U)it.next();
-		}
-		return a;
+	public boolean isEmpty() {
+		return n == 0;
 	}
-	
-	public boolean addAll(Collection<? extends T> c) {
-		for (T x : c)
-			add(x);
-		return true;
-	}
-	
-	protected static <T> boolean compareSortedSets(Collection<T> a, Collection<T> b) {
-		if (a.size() != b.size()) 
-			return false;
-		for (T x : a) {
-			if (!b.contains(x)) return false;
-		}
-		for (T x : b) {
-			if (!a.contains(x)) return false;
-		}
-		Iterator<T> ita = a.iterator();
-		Iterator<T> itb = b.iterator();
-		while (ita.hasNext()) {
-			if (!ita.next().equals(itb.next()))
-				return false;
-		}
-		return true;
-	}
-	
-	protected static <Node extends BSTNode<Node,Integer>> 
-		void correctnessTests(BinarySearchTree<Node,Integer> t, int n) {
-		SortedSet<Integer> ss = new TreeSet<Integer>();
-		Random r = new Random(0);
-		for (int i = 0; i < n; i++) {
-			Integer j = r.nextInt();
-			t.add(j);
-			ss.add(j);
-		}
-		Utils.myassert(compareSortedSets(t, ss));
-		r = new Random(0);
-		for (int i = 0; i < n/3; i++) {
-			Integer j = r.nextInt(); 
-			t.remove(j);
-			ss.remove(j);
-			j = r.nextInt(); 
-			t.remove(j);
-			ss.remove(j);
-			r.nextInt(2500);
-		}
-		Utils.myassert(compareSortedSets(t, ss));
-	}
-	
-	protected static <Node extends BSTNode<Node,Integer>> 
-		void performanceTests(BinarySearchTree<Node,Integer> t) {
-		int ns[] = { 100, 1000, 10000, 1000000 };
-		for (int n : ns) {
-			Random r = new Random(0);
-			t.clear();
-			long stop, start;
-			double elapsed;
-			start = System.nanoTime();
-			System.out.print(t.getClass() + ": performing " + n + " random insertions...");
-			for (int i = 0; i < n; i++) {
-				t.add(r.nextInt());
-			}
-			stop = System.nanoTime();
-			elapsed = 1e-9*(stop-start);
-			System.out.println(" (" + elapsed + "s [" 
-					+ (int)(((double)n)/elapsed) + "ops/sec])");
-			r = new Random(0);
-			start = System.nanoTime();
-			System.out.print(t.getClass() + ": performing " + n + " random searches...");
-			for (int i = 0; i < n; i++) {
-				t.contains(r.nextInt());
-			}
-			stop = System.nanoTime();
-			elapsed = 1e-9*(stop-start);
-			System.out.println(" (" + elapsed + "s [" 
-					+ (int)(((double)n)/elapsed) + "ops/sec])");
-			r = new Random(0);
-			start = System.nanoTime();
-			System.out.print(t.getClass() + ": performing " + n + " random deletions...");
-			for (int i = 0; i < n; i++) {
-				t.remove(r.nextInt());
-			}
-			stop = System.nanoTime();
-			elapsed = 1e-9*(stop-start);
-			System.out.println(" (" + elapsed + "s [" 
-					+ (int)(((double)n)/elapsed) + "ops/sec])");
-			t.clear();
 
-			start = System.nanoTime();
-			System.out.print(t.getClass() + ": performing " + n + " sequential insertions...");
-			for (int i = 0; i < n; i++) {
-				t.add(i);
-			}
-			stop = System.nanoTime();
-			elapsed = 1e-9*(stop-start);
-			System.out.println(" (" + elapsed + "s [" 
-					+ (int)(((double)n)/elapsed) + "ops/sec])");
-			r = new Random(0);
-			start = System.nanoTime();
-			System.out.print(t.getClass() + ": performing " + n + " sequential searches...");
-			for (int i = 0; i < n; i++) {
-				t.contains(i);
-			}
-			stop = System.nanoTime();
-			elapsed = 1e-9*(stop-start);
-			System.out.println(" (" + elapsed + "s [" 
-					+ (int)(((double)n)/elapsed) + "ops/sec])");
-			r = new Random(0);
-			start = System.nanoTime();
-			System.out.print(t.getClass() + ": performing " + n + " sequential deletions...");
-			for (int i = 0; i < n; i++) {
-				t.remove(i);
-			}
-			stop = System.nanoTime();
-			elapsed = 1e-9*(stop-start);
-			System.out.println(" (" + elapsed + "s [" 
-					+ (int)(((double)n)/elapsed) + "ops/sec])");
-
-		}
+	public void clear() {
+		super.clear();
+		n = 0;
 	}
-	
-	public static void main(String[] args) {
-		BinarySearchTree<SimpleBSTNode<Integer>,Integer> t
-		   = new BinarySearchTree<SimpleBSTNode<Integer>,Integer>(new SimpleBSTNode<Integer>());
-		int n = 100000;
-		correctnessTests(t, n);
+
+	public Comparator<? super T> comparator() {
+		return c;
 	}
 }

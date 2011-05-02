@@ -1,0 +1,535 @@
+\chapter{Skiplists}
+\chaplabel{skiplists}
+
+In this chapter we discuss a beautiful data structure, the skiplist,
+that has a variety of applications.  Using a skiplist we can implement
+a \mbox{\texttt{List}} that is fast for all the operations \mbox{\texttt{get({\color{var}i})}}, \mbox{\texttt{set({\color{var}i},{\color{var}x})}},
+\mbox{\texttt{add({\color{var}i},{\color{var}x})}}, and \mbox{\texttt{remove({\color{var}i})}}. We can also implement an \mbox{\texttt{SSet}} in which
+all operations run in $O(\log n)$ time.  Finally, a skiplist can be used
+to implement a \mbox{\texttt{Rope}} in which all operations run in $O(\log n)$ time.
+
+Skiplists rely on \emph{randomization} for their efficiency.  In
+particular, a skiplist uses coin tosses when an element is inserted\ldots
+
+\section{The Basic Structure}
+
+Conceptually, a skiplist is a sequence of singly-linked lists
+$L_0,\ldots,L_h$, where each $L_r$ contains a subset of the items
+in $L_{r-1}$.  We start with the input list $L_0$ that contains \mbox{\texttt{{\color{var}n}}}
+items and construct $L_1$ from $L_0$, $L_2$ from $L_1$, and so on.
+The items in $L_r$ are obtained by tossing a coin for each element \mbox{\texttt{{\color{var}x}}}
+in $L_{r-1}$ and including \mbox{\texttt{{\color{var}x}}} in $L_r$ if the coin comes up heads.
+This process ends when we create a list $L_r$ that is empty.  An example
+of a skiplist is shown in \figref{skiplist}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/skiplist}
+  \end{center}
+  \caption{A skiplist containing 6 elements.}
+  \figlabel{skiplist}
+\end{figure}
+
+For an element \mbox{\texttt{{\color{var}x}}} in a skiplist, we call the \emph{height} of \mbox{\texttt{{\color{var}x}}} the
+largest value $r$ such that \mbox{\texttt{{\color{var}x}}} appears in $L_r$.  Thus, for example,
+elements that only appear in $L_0$ have height $0$.  Notice that the
+height of \mbox{\texttt{{\color{var}x}}} corresponds to the following experiment:  Toss a coin
+repeatedly until the first time it comes up tails.  How many times did
+it come up heads?  The answer, not surprisingly, is that the expected
+height of a node is 1.  The \emph{height} of a skiplist is the maximum
+height of any of its nodes.
+
+At the head of every list is a special node, called the \emph{sentinel}
+that acts as dummy node for each list. The key property of skiplists
+is that there is a short path, called the \emph{search path}, from the
+sentinel in $L_h$ to every node in $L_0$.  Remembering how to construct
+a search path for a node \mbox{\texttt{{\color{var}u}}} is easy (see \figref{skiplist-searchpath})
+:  Start at the top left corner of your skiplist (the sentinel in $L_h$)
+and always go right unless that would overshoot \mbox{\texttt{{\color{var}u}}}, in which case you
+should take a step down into the list below.
+
+More precisely, to construct the search path for the node \mbox{\texttt{{\color{var}u}}} in $L_0$
+we start at the sentinel \mbox{\texttt{{\color{var}w}}} in $L_h$.  Next we examine \mbox{\texttt{{\color{var}w}.{\color{var}next}}}.
+If \mbox{\texttt{{\color{var}w}.{\color{var}next}}} contains an item that appears before \mbox{\texttt{{\color{var}u}}} in $L_0$, then
+we set $\mbox{\texttt{{\color{var}w}}}=\mbox{\texttt{{\color{var}w}.{\color{var}next}}}$.  Otherwise, we move down and continue the search
+at the occurence of \mbox{\texttt{{\color{var}w}}} in the list $L_{h-1}$.  We continue this way
+until we reach the predecessor of \mbox{\texttt{{\color{var}u}}} in $L_0$. 
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/skiplist-searchpath}
+  \end{center}
+  \caption{The search path for node $4$ in a skiplist.}
+  \figlabel{skiplist-searchpath}
+\end{figure}
+
+The following result, that we will prove in \secref{skiplist-analysis},  shows that the search path is quite short:
+
+\begin{lem}\lemlabel{skiplist-searchpath}
+The expected length of the search path for any node \mbox{\texttt{{\color{var}u}}} in $L_0$ is at
+most $2\log_2 \mbox{\texttt{{\color{var}n}}} + O(1) = O(\log \mbox{\texttt{{\color{var}n}}})$.
+\end{lem}
+
+A space-efficient way to implement a \mbox{\texttt{Skiplist}} is to define a \mbox{\texttt{Node}}
+\mbox{\texttt{{\color{var}u}}} as consisting of a data value \mbox{\texttt{{\color{var}x}}} and an array \mbox{\texttt{{\color{var}next}}} of pointers,
+where \mbox{\texttt{{\color{var}u}.{\color{var}next}[{\color{var}i}]}} points to \mbox{\texttt{{\color{var}u}}}'s successor in the list $L_{\mbox{\texttt{{\color{var}i}}}}$.
+In this way, the data, \mbox{\texttt{{\color{var}x}}}, in a node is stored only once even though \mbox{\texttt{{\color{var}x}}}
+many appear in several lists.
+
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistSet},labelposition=topline]
+	@\color@keyword$class$ Node {
+		@\color@keyword$T$ @\color@var$x$;
+		Node[] @\color@var$next$;
+		Node(@\color@keyword$T$ @\color@var$ix$, @\color@keyword$int$ @\color@var$h$) {
+			@\color@var$x$ = @\color@var$ix$;
+			@\color@var$next$ = (Node[])Array.newInstance(Node.@\color@keyword$class$, @\color@var$h$+1);
+		}
+	}
+\end{Verbatim}
+
+The next three sections of this chapter discuss three different
+applications of skiplists.  In each of these applications, $L_0$ stores the
+main structure (a list of elements, a sorted set of elements, or a sequence
+of strings).  The primary difference between these three structures is how
+the search path is navigated; In particular the three structures differ in
+how they decide if the search path should go down in $L_{r-1}$ or go right
+in $L_r$.
+
+\section{SkiplistSets as SortedSets}
+
+A \mbox{\texttt{SkiplistSet}} uses a skiplist structure to implement the \mbox{\texttt{SortedSet}}
+interface.   When used this way, the list $L_0$ stores the elements of
+the \mbox{\texttt{SortedSet}} in sorted order.  The \mbox{\texttt{find({\color{var}x})}} method works by following
+the search path for the smallest value \mbox{\texttt{{\color{var}y}}} such that $\mbox{\texttt{{\color{var}y}}}\ge\mbox{\texttt{{\color{var}x}}}$:
+
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistSet},labelposition=topline]
+	Node findPredNode(@\color@keyword$T$ @\color@var$x$) {
+		Node @\color@var$u$ = @\color@var$sentinel$;
+		@\color@keyword$int$ @\color@var$r$ = @\color@var$height$ - 1;
+		@\color@keyword$while$ (@\color@var$r$ >= 0) {
+			@\color@keyword$while$ (@\color@var$u$.@\color@var$next$[@\color@var$r$] != @\color@var$null$ && compare(@\color@var$u$.@\color@var$next$[@\color@var$r$].@\color@var$x$,@\color@var$x$) < 0)
+				@\color@var$u$ = @\color@var$u$.@\color@var$next$[@\color@var$r$];   @\color@comment$// go right in list r$
+			@\color@var$r$--;                 @\color@comment$// go down into list r-1$
+		}
+		@\color@var$return$ @\color@var$u$;
+	}
+	@\color@keyword$T$ find(@\color@keyword$T$ @\color@var$x$) {
+		Node @\color@var$u$ = findPredNode(@\color@var$x$);
+		@\color@var$return$ @\color@var$u$.@\color@var$next$[0] == @\color@var$null$ ? @\color@var$null$ : @\color@var$u$.@\color@var$next$[0].@\color@var$x$;
+	}
+\end{Verbatim}
+
+Following the search path for \mbox{\texttt{{\color{var}y}}} is easy:  When situated at some node \mbox{\texttt{{\color{var}u}}}
+in  $L_{\mbox{\texttt{{\color{var}r}}}}$, we look right to \mbox{\texttt{{\color{var}u}.{\color{var}next}[{\color{var}r}].{\color{var}x}}}.  If \mbox{\texttt{{\color{var}x}}} is smaller, we take
+a step to the right in $L_{\mbox{\texttt{{\color{var}r}}}}$, otherwise we move down into $L_{\mbox{\texttt{{\color{var}r}}}-1}$.
+Each step (right or down) in this search takes only constant time so,
+by \lemref{skiplist-searchpath}, the expected running time of \mbox{\texttt{find({\color{var}x})}}
+is $O(\mbox{\texttt{{\color{var}n}}})$.
+
+Adding an element \mbox{\texttt{{\color{var}x}}} to a skiplist using the \mbox{\texttt{add({\color{var}x})}} operation is
+just a slight variation on searching.  Before we begin, we toss coins
+to determine the height, \mbox{\texttt{{\color{var}k}}}, of \mbox{\texttt{{\color{var}x}}}, so that \mbox{\texttt{{\color{var}x}}} will appear in all
+lists $L_0,\ldots,L_{\mbox{\texttt{{\color{var}k}}}}$.  If necessary, we increase the height of
+skiplist, and then follow the search path for \mbox{\texttt{{\color{var}x}}}.  Any time the search
+path goes down from a list $L_{\mbox{\texttt{{\color{var}r}}}}$ into $L_{\mbox{\texttt{{\color{var}r}}}-1}$, with $\mbox{\texttt{{\color{var}r}}}\le \mbox{\texttt{{\color{var}k}}}$,
+we splice \mbox{\texttt{{\color{var}x}}} into the list $L_{\mbox{\texttt{{\color{var}r}}}}$ the same way we splice a node into
+an \mbox{\texttt{SLList}}:
+
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistSet},labelposition=topline]
+	@\color@var$boolean$ add(Node @\color@var$w$) {
+		@\color@keyword$int$ @\color@var$k$ = @\color@var$w$.@\color@var$next$.@\color@var$length$ - 1;
+		Node @\color@var$u$ = @\color@var$sentinel$;
+		@\color@keyword$int$ @\color@var$r$ = @\color@var$height$ - 1;
+		@\color@keyword$int$ @\color@var$comp$ = 0;
+		@\color@keyword$while$ (@\color@var$r$ >= 0) {
+			@\color@keyword$while$ (@\color@var$u$.@\color@var$next$[@\color@var$r$] != @\color@var$null$ && (@\color@var$comp$ = compare(@\color@var$u$.@\color@var$next$[@\color@var$r$].@\color@var$x$,@\color@var$w$.@\color@var$x$)) < 0)
+				@\color@var$u$ = @\color@var$u$.@\color@var$next$[@\color@var$r$];
+			@\color@keyword$if$ (@\color@var$u$.@\color@var$next$[@\color@var$r$] != @\color@var$null$ && @\color@var$comp$ == 0) @\color@var$return$ @\color@var$false$; @\color@comment$// already present$
+			@\color@keyword$if$ (@\color@var$r$ <= @\color@var$k$) {
+				@\color@var$w$.@\color@var$next$[@\color@var$r$] = @\color@var$u$.@\color@var$next$[@\color@var$r$];
+				@\color@var$u$.@\color@var$next$[@\color@var$r$] = @\color@var$w$;
+			}
+			@\color@var$r$--;
+		}
+		@\color@var$n$++;
+		@\color@var$return$ @\color@var$true$;
+	}
+\end{Verbatim}
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistSet},labelposition=topline]
+	@\color@var$boolean$ add(@\color@keyword$T$ @\color@var$x$) {
+		Node @\color@var$w$ = @\color@keyword$new$ Node(@\color@var$x$, pickHeight());
+		@\color@keyword$if$ (@\color@var$w$.@\color@var$next$.@\color@var$length$ > @\color@var$height$)
+			@\color@var$height$ = @\color@var$w$.@\color@var$next$.@\color@var$length$;
+		@\color@var$return$ add(@\color@var$w$);
+	}
+\end{Verbatim}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/skiplist-add}
+  \end{center}
+  \caption{Adding the node 3.5 to a skiplist.}
+  \figlabel{skiplist-add}
+\end{figure}
+
+Removing an element \mbox{\texttt{{\color{var}x}}} is done in a similar way.  We search for \mbox{\texttt{{\color{var}x}}} and each time the search moves downward from a node \mbox{\texttt{{\color{var}u}}}, we check if $\mbox{\texttt{{\color{var}u}.{\color{var}next}.{\color{var}x}}}=\mbox{\texttt{{\color{var}x}}}$ and if so, we splice \mbox{\texttt{{\color{var}u}}} out of the list:
+
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistSet},labelposition=topline]
+	@\color@var$boolean$ remove(@\color@keyword$T$ @\color@var$x$) {
+		@\color@var$boolean$ @\color@var$removed$ = @\color@var$false$;
+		Node @\color@var$u$ = @\color@var$sentinel$;
+		@\color@keyword$int$ @\color@var$r$ = @\color@var$height$ - 1;
+		@\color@keyword$int$ @\color@var$comp$ = 0;
+		@\color@keyword$while$ (@\color@var$r$ >= 0) {
+			@\color@keyword$while$ (@\color@var$u$.@\color@var$next$[@\color@var$r$] != @\color@var$null$ && (@\color@var$comp$ = compare(@\color@var$u$.@\color@var$next$[@\color@var$r$].@\color@var$x$, @\color@var$x$)) < 0) {
+				@\color@var$u$ = @\color@var$u$.@\color@var$next$[@\color@var$r$];
+			}
+			@\color@keyword$if$ (@\color@var$u$.@\color@var$next$[@\color@var$r$] != @\color@var$null$ && @\color@var$comp$ == 0) {
+				@\color@var$removed$ = @\color@var$true$;
+				@\color@var$u$.@\color@var$next$[@\color@var$r$] = @\color@var$u$.@\color@var$next$[@\color@var$r$].@\color@var$next$[@\color@var$r$];
+			}
+			@\color@var$r$--;
+		}
+		@\color@keyword$if$ (@\color@var$removed$) @\color@var$n$--;
+		@\color@var$return$ @\color@var$removed$;
+	}
+\end{Verbatim}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/skiplist-remove}
+  \end{center}
+  \caption{Removing the node 3 from a skiplist.}
+  \figlabel{skiplist-remove}
+\end{figure}
+
+\subsection{Summary}
+
+The following theorem summarizes the performance of skiplists when used to
+implement sorted sets:
+
+\begin{thm}\thmlabel{skiplist}
+A \mbox{\texttt{SkiplistSet}} implements the \mbox{\texttt{SortedSet}} interface. A \mbox{\texttt{SkiplistSet}} supports
+the operations \mbox{\texttt{add({\color{var}x})}}, \mbox{\texttt{remove({\color{var}x})}}, and \mbox{\texttt{find({\color{var}x})}} in $O(\log n)$
+expected time per operation.
+\end{thm}
+
+\section{Skiplists as Lists}
+
+A \mbox{\texttt{SkiplistList}} is a realization of the skiplist idea that implements
+the \mbox{\texttt{List}} interface.  In a \mbox{\texttt{SkiplistList}}, $L_0$ contains the elements of the
+list in the order they appear in the list.   Just like a \mbox{\texttt{SkiplistSet}}
+elements can be added, removed, and accessed in $O(\log \mbox{\texttt{{\color{var}n}}})$ time.
+
+For this idea to work, we need a way to follow the search path for
+the \mbox{\texttt{{\color{var}i}}}th element in $L_0$.  The easiest way to do this is to define
+the notion of the \emph{length} of an edge in some list $L_{\mbox{\texttt{{\color{var}r}}}}$.
+The length of every edge in $L_{0}$ is 1.  The length of an edge \mbox{\texttt{{\color{var}e}}}
+in $L_{\mbox{\texttt{{\color{var}r}}}}$, $\mbox{\texttt{{\color{var}r}}}>0$ is the sum of the lengths of the edges below \mbox{\texttt{{\color{var}e}}}
+in $L_{\mbox{\texttt{{\color{var}r}}}-1}$.  Equivalently, the length of an edge \mbox{\texttt{{\color{var}e}}} in $L_{\mbox{\texttt{{\color{var}r}}}}$ is
+the number of edges in $L_0$ below \mbox{\texttt{{\color{var}e}}}.  See \figref{skiplist-lengths} for
+an example of a skiplist with the lengths of its edges shown.  Since the
+edges of skiplists are stored in arrays, the lengths can be stored the same
+way:
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/skiplist-lengths}
+  \end{center}
+  \caption{The lengths of the edges in a skiplist.}
+  \figlabel{skiplist-lengths}
+\end{figure}
+
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistList},labelposition=topline]
+	@\color@keyword$class$ Node {
+		@\color@keyword$T$ @\color@var$x$;
+		Node[] @\color@var$next$;
+		@\color@keyword$int$[] @\color@var$length$;
+		Node(@\color@keyword$T$ @\color@var$ix$, @\color@keyword$int$ @\color@var$h$) {
+			@\color@var$x$ = @\color@var$ix$;
+			@\color@var$next$ = (Node[])Array.newInstance(Node.@\color@keyword$class$, @\color@var$h$+1);
+			@\color@var$length$ = @\color@keyword$new$ @\color@keyword$int$[@\color@var$h$+1];
+		}
+	}
+\end{Verbatim}
+
+The useful property of this definition of length is that, if we are
+currently at a node that is at position \mbox{\texttt{{\color{var}j}}} in $L_0$ and we follow an
+edge of length $\ell$, then we move to a node whose position, in $L_0$,
+is $\mbox{\texttt{{\color{var}j}}}+\ell$.  In this way, while following a search path, we can keep
+track of the position, \mbox{\texttt{{\color{var}j}}}, of the current node in $L_0$.  When at a
+node \mbox{\texttt{{\color{var}u}}} in $L_{\mbox{\texttt{{\color{var}r}}}}$ we go right if \mbox{\texttt{{\color{var}j}}}
+plus the length of the edge \mbox{\texttt{{\color{var}u}.{\color{var}next}}} is less than \mbox{\texttt{{\color{var}i}}}, otherwise we go
+down into $L_{\mbox{\texttt{{\color{var}r}}}-1}$.
+
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistList},labelposition=topline]
+	Node findPred(@\color@keyword$int$ @\color@var$i$) {
+		Node @\color@var$u$ = @\color@var$sentinel$;
+		@\color@keyword$int$ @\color@var$r$ = @\color@var$height$ - 1;
+		@\color@keyword$int$ @\color@var$j$ = -1;   @\color@comment$// the index of the current node in list 0$
+		@\color@keyword$while$ (@\color@var$r$ >= 0) {
+			@\color@keyword$while$ (@\color@var$u$.@\color@var$next$[@\color@var$r$] != @\color@var$null$ && @\color@var$j$ + @\color@var$u$.@\color@var$length$[@\color@var$r$] < @\color@var$i$) {
+				@\color@var$j$ += @\color@var$u$.@\color@var$length$[@\color@var$r$];
+				@\color@var$u$ = @\color@var$u$.@\color@var$next$[@\color@var$r$];
+			}
+			@\color@var$r$--;
+		}
+		@\color@var$return$ @\color@var$u$;
+	}
+\end{Verbatim}
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistList},labelposition=topline]
+	@\color@keyword$T$ get(@\color@keyword$int$ @\color@var$i$) {
+		@\color@var$return$ findPred(@\color@var$i$).@\color@var$next$[0].@\color@var$x$;
+	}
+\end{Verbatim}
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistList},labelposition=topline]
+	@\color@keyword$T$ set(@\color@keyword$int$ @\color@var$i$, @\color@keyword$T$ @\color@var$x$) {
+		Node @\color@var$u$ = findPred(@\color@var$i$).@\color@var$next$[0];
+		@\color@keyword$T$ @\color@var$y$ = @\color@var$u$.@\color@var$x$;
+		@\color@var$u$.@\color@var$x$ = @\color@var$x$;
+		@\color@var$return$ @\color@var$y$;
+	}
+\end{Verbatim}
+
+Since the hardest part of the operations \mbox{\texttt{get({\color{var}i})}} and \mbox{\texttt{set({\color{var}i},{\color{var}x})}} is
+finding the \mbox{\texttt{{\color{var}i}}}th node in $L_0$, these operations therefore run in
+$O(\log \mbox{\texttt{{\color{var}n}}})$ time.
+
+Adding an element to a \mbox{\texttt{SkiplistList}} is fairly straightforward.  We use
+the same method as before. We first pick the height \mbox{\texttt{{\color{var}k}}} of the newly
+inserted node and the follow the search path for \mbox{\texttt{{\color{var}i}}}.  Anytime the
+search path moves down from $L_{\mbox{\texttt{{\color{var}r}}}}$ with $\mbox{\texttt{{\color{var}r}}}\le \mbox{\texttt{{\color{var}k}}}$, we splice the new
+node into $L_{\mbox{\texttt{{\color{var}r}}}}$.  The only extra care needed is to ensure that the
+lengths of edges are updated properly. 
+See \figref{skiplist-addix}. 
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/skiplist-addix}
+  \end{center}
+  \caption{Adding an element to a \mbox{\texttt{SkiplistList}}.}
+  \figlabel{skiplist-addix}
+\end{figure}
+
+Note that, each time the search path goes down at a node \mbox{\texttt{{\color{var}u}}} in $L_{\mbox{\texttt{{\color{var}r}}}}$,
+the length of the edge \mbox{\texttt{{\color{var}u}.{\color{var}next}[{\color{var}r}]}} increases by one, since we are adding
+an element at position \mbox{\texttt{{\color{var}i}}}.  Splicing  the node \mbox{\texttt{{\color{var}w}}} between two nodes
+\mbox{\texttt{{\color{var}u}}} and \mbox{\texttt{{\color{var}z}}} works as shown in \figref{skiplist-lengths-splice}.  While
+following the search path we are already keeping track of the position,
+\mbox{\texttt{{\color{var}j}}}, of \mbox{\texttt{{\color{var}w}}} in $L_0$.  Therefore, we know that the length of the edge from
+\mbox{\texttt{{\color{var}u}}} to \mbox{\texttt{{\color{var}w}}} is $\mbox{\texttt{{\color{var}i}}}-\mbox{\texttt{{\color{var}j}}}$.  We can also deduce that the length of the edge
+from \mbox{\texttt{{\color{var}w}}}  to \mbox{\texttt{{\color{var}z}}} from the length, $\ell$, of the edge from \mbox{\texttt{{\color{var}u}}} to \mbox{\texttt{{\color{var}z}}}.
+Therefore, we can splice in \mbox{\texttt{{\color{var}w}}} and update the lengths of the edges in
+constant time.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/skiplist-lengths-splice}
+  \end{center}
+  \caption{Updating the lengths of edges while splicing a node 
+   \mbox{\texttt{{\color{var}w}}} into a skiplist.}
+  \figlabel{skiplist-lengths-splice}
+\end{figure}
+
+This sounds more complicated than it actually is, and the code is actually
+quite simple:
+
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistList},labelposition=topline]
+	@\color@var$void$ add(@\color@keyword$int$ @\color@var$i$, @\color@keyword$T$ @\color@var$x$) {
+		Node @\color@var$w$ = @\color@keyword$new$ Node(@\color@var$x$, pickHeight());
+		@\color@keyword$if$ (@\color@var$w$.@\color@var$next$.@\color@var$length$ > @\color@var$height$) 
+			@\color@var$height$ = @\color@var$w$.@\color@var$next$.@\color@var$length$;
+		add(@\color@var$i$, @\color@var$w$);
+	}
+\end{Verbatim}
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistList},labelposition=topline]
+	Node add(@\color@keyword$int$ @\color@var$i$, Node @\color@var$w$) {
+		@\color@keyword$if$ (@\color@var$i$ < 0 || @\color@var$i$ > @\color@var$n$) @\color@keyword$throw$ @\color@keyword$new$ IndexOutOfBoundsException();
+		Node @\color@var$u$ = @\color@var$sentinel$;
+		@\color@keyword$int$ @\color@var$k$ = @\color@var$w$.@\color@var$next$.@\color@var$length$ - 1;
+		@\color@keyword$int$ @\color@var$r$ = @\color@var$height$ - 1;
+		@\color@keyword$int$ @\color@var$j$ = -1; @\color@comment$// index of u$
+		@\color@keyword$while$ (@\color@var$r$ >= 0) {
+			@\color@keyword$while$ (@\color@var$u$.@\color@var$next$[@\color@var$r$] != @\color@var$null$ && @\color@var$j$+@\color@var$u$.@\color@var$length$[@\color@var$r$] < @\color@var$i$) {
+				@\color@var$j$ += @\color@var$u$.@\color@var$length$[@\color@var$r$];
+				@\color@var$u$ = @\color@var$u$.@\color@var$next$[@\color@var$r$];
+			}
+			@\color@var$u$.@\color@var$length$[@\color@var$r$]++;    @\color@comment$// to account for new node in list 0$
+			@\color@keyword$if$ (@\color@var$r$ <= @\color@var$k$) {
+				@\color@var$w$.@\color@var$next$[@\color@var$r$] = @\color@var$u$.@\color@var$next$[@\color@var$r$];
+				@\color@var$u$.@\color@var$next$[@\color@var$r$] = @\color@var$w$;
+				@\color@var$w$.@\color@var$length$[@\color@var$r$] = @\color@var$u$.@\color@var$length$[@\color@var$r$] - (@\color@var$i$ - @\color@var$j$);
+				@\color@var$u$.@\color@var$length$[@\color@var$r$] = @\color@var$i$ - @\color@var$j$;
+			}
+			@\color@var$r$--;
+		}
+		@\color@var$n$++;
+		@\color@var$return$ @\color@var$u$;
+	}
+\end{Verbatim}
+
+
+By now, the implementation of 
+the \mbox{\texttt{remove({\color{var}i})}} operation in a \mbox{\texttt{SkiplistList}} should be obvious.  We follow the search path for the node at position \mbox{\texttt{{\color{var}i}}}.  Each time the search path takes a step down from a node \mbox{\texttt{{\color{var}u}}} at level \mbox{\texttt{{\color{var}r}}} we decrement the length of the edge leaving \mbox{\texttt{{\color{var}u}}} at level \mbox{\texttt{{\color{var}r}}}.  We also check if \mbox{\texttt{{\color{var}u}.{\color{var}next}}} is the element of rank \mbox{\texttt{{\color{var}i}}} and, if so, splice it out the list at level \mbox{\texttt{{\color{var}i}}}.   An example is shown in \figref{skiplist-removei}.
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/skiplist-removei}
+  \end{center}
+  \caption{Removing an element from a \mbox{\texttt{SkiplistList}}.}
+  \figlabel{skiplist-removei}
+\end{figure}
+\begin{Verbatim}[tabsize=2,frame=single,commandchars=\\@\$,label=\texttt{SkiplistList},labelposition=topline]
+	@\color@keyword$T$ remove(@\color@keyword$int$ @\color@var$i$) {
+		@\color@keyword$if$ (@\color@var$i$ < 0 || @\color@var$i$ > @\color@var$n$-1) @\color@keyword$throw$ @\color@keyword$new$ IndexOutOfBoundsException();
+		@\color@keyword$T$ @\color@var$x$ = @\color@var$null$;
+		Node @\color@var$u$ = @\color@var$sentinel$;
+		@\color@keyword$int$ @\color@var$r$ = @\color@var$height$ - 1;
+		@\color@keyword$int$ @\color@var$j$ = -1; @\color@comment$// index of node u$
+		@\color@keyword$while$ (@\color@var$r$ >= 0) {
+			@\color@keyword$while$ (@\color@var$u$.@\color@var$next$[@\color@var$r$] != @\color@var$null$ && @\color@var$j$+@\color@var$u$.@\color@var$length$[@\color@var$r$] < @\color@var$i$) {
+				@\color@var$j$ += @\color@var$u$.@\color@var$length$[@\color@var$r$];
+				@\color@var$u$ = @\color@var$u$.@\color@var$next$[@\color@var$r$];
+			}
+			@\color@var$u$.@\color@var$length$[@\color@var$r$]--;  @\color@comment$// for the node we are removing$
+			@\color@keyword$if$ (@\color@var$j$ + @\color@var$u$.@\color@var$length$[@\color@var$r$] == @\color@var$i$ && @\color@var$u$.@\color@var$next$[@\color@var$r$] != @\color@var$null$) {
+				@\color@var$x$ = @\color@var$u$.@\color@var$next$[@\color@var$r$].@\color@var$x$;
+				@\color@var$u$.@\color@var$length$[@\color@var$r$] += @\color@var$u$.@\color@var$next$[@\color@var$r$].@\color@var$length$[@\color@var$r$];
+				@\color@var$u$.@\color@var$next$[@\color@var$r$] = @\color@var$u$.@\color@var$next$[@\color@var$r$].@\color@var$next$[@\color@var$r$];
+			}
+			@\color@var$r$--;
+		}
+		@\color@var$n$--;
+		@\color@var$return$ @\color@var$x$;
+	}
+\end{Verbatim}
+
+\subsection{Summary}
+
+
+\section{Skiplists as Ropes}
+
+\section{Analysis of Skiplists}
+\seclabel{skiplist-analysis}
+
+In this section, we analyze the expected height, size, and length of
+the search path in a skiplist.  This section requires a background in
+basic probability.
+
+\begin{lem}
+  The expected height of a skiplist containing $n$ elements is at most
+  $\log_2 n + 3$.
+\end{lem}
+
+\begin{proof}
+  Define the indicator random variable
+  \[ I_r = \left\{\begin{array}{ll}
+     0 & \mbox{if $L_r$ is empty} \\
+     1 & \mbox{if $L_r$ is non-empty}
+     \end{array}\right.
+  \]
+  The height $h$ of the skiplist is then given by
+  \[
+       h = \sum_{i=0}^\infty I_r \enspace .
+  \]
+  Note that $I_r \le |L_r|$, so 
+  \[
+     \E[I_r] \le \E[|L_r|] = n/2^r \enspace .
+  \]
+  Therefore, we have
+  \begin{eqnarray*}
+       \E[h] &=& \E\left[\sum_{r=0}^\infty I_r\right] \\
+        &=& \sum_{r=0}^{\infty} E[I_r] \\
+        &=& \sum_{r=0}^{\lfloor\log n\rfloor} E[I_r]
+                 + \sum_{r=\lfloor\log n\rfloor+1}^{\infty} E[I_r]  \\
+        &=& \sum_{r=0}^{\lfloor\log n\rfloor} 1
+                 + \sum_{r=\lfloor\log n\rfloor+1}^{\infty} n/2^r \\
+        &\le& \log n + 1
+                 + \sum_{r=0}^\infty 1/2^r \\
+        &=& \log n + 3
+  \end{eqnarray*}
+\end{proof}
+
+\begin{lem}
+  The expected number of nodes in a skiplist containing $n$ elements,
+  including all occurrences of the sentinel is $2n+O(\log n)$.
+\end{lem}
+
+\begin{proof}
+The expected number of nodes, not including the sentinel is 
+\[
+  \E\left[\sum_{i=0}^{\infty} |L_i|\right] = 
+  \sum_{i=0}^{\infty} n/2^i = 2n \enspace .
+\]
+The number of occurrences of the sentinel is equal to the height, $h$,
+of the skiplist, so the expected number of occurrences of the sentinel
+is at most $\log n+3 = O(\log n)$.
+\end{proof}
+
+\begin{lem}
+The expected length of a search path in a skiplist is $2\log n + O(1)$.
+\end{lem}
+
+\begin{proof}
+  The easiest way to see this is to consider the \emph{reverse search
+  path} for a node \mbox{\texttt{{\color{var}x}}}.  This path starts at the predecessor of \mbox{\texttt{{\color{var}x}}}
+  in $L_0$.  At any point in time, if the path can go up a level, then
+  it does.  If it can not go up a level then it goes left.  Observe that
+  the reverse search path for \mbox{\texttt{{\color{var}x}}} is identical to the search path for \mbox{\texttt{{\color{var}x}}},
+  except that it is reversed.
+  
+  The number of nodes that the reverse search path visits at a particular
+  level $r$ is related to the following experiment:  Toss a coin.
+  If the coin comes up heads then go up and stop, otherwise go left and
+  repeat the experiment.  The number of coin tosses before the heads then
+  represents the number of steps to the left that a reverse search path
+  takes at a particular level.  (Note that this overcounts the number of
+  steps to the left, since this experiment ends either at the first head
+  or when the search path reaches the sentinel, whichever comes first.)
+  
+  Let $R_r$ denote the number of steps the search path takes at level
+  $r$ that go to the right.   We have just argued that $\E[R_r]\le 1$.
+  Furthermore, $R_r\le |L_r|$, so
+  \[
+    \E[R_r] \le E[|L_r|] = n/2^r \enspace .
+  \]
+  We can now finish as in the proof of \lemref{skiplist-height}.
+  Let $\ell$ be  the length of the search path for some node \mbox{\texttt{{\color{var}u}}} in a
+  skiplist, and let $h$ be the height of the skiplist.  Then
+  \begin{eqnarray*}
+      \E[\ell] 
+         &=& \E\left[ h + \sum_{r=0}^\infty R_r \right] \\
+         &=& \E[h] + \sum_{r=0}^\infty \E[R_r]  \\
+         &=& \E[h] + \sum_{r=0}^{\lfloor\log n\rfloor} \E[R_r] 
+              + \sum_{r=\lfloor\log n\rfloor+1}^\infty \E[R_r] \\
+         &\le& \E[h] + \sum_{r=0}^{\lfloor\log n\rfloor} 1
+              + \sum_{r=\lfloor\log n\rfloor+1}^\infty n/2^r \\
+         &\le& \E[h] + \sum_{r=0}^{\lfloor\log n\rfloor} 1
+              + \sum_{r=0}^{\infty} 1/2^r \\
+         &\le& \E[h] + \sum_{r=0}^{\lfloor\log n\rfloor} 1
+              + \sum_{r=0}^{\infty} 1/2^r \\
+         &\le& \E[h] + \log n + 3 \\
+         &\le& 2\log n + 6
+  \end{eqnarray*}
+  as required.
+\end{proof}
+
+
+\section{Iteration and Finger Search}
+
+%TODO: Write this section
+
+\section{Summary and Exercises}
+
+\begin{enumerate}
+\item Suppose that, instead of promoting an element from $L_{i-1}$ into
+$L_i$, we promote it with some probability $p$, $0 < p < 1$.  Show that
+the expected length of the search path in this case is $(1/p)\log_{1/p}
+n + O(1)$.  What is the value of $p$ that minimizes this expression? What
+is the expected height of the skiplist? What is the expected number of
+nodes in the skiplist?
+
+\item Design and implement a version of a skiplist that implements the
+\mbox{\texttt{SortedSet}} interface, but also allows access to elements by rank.
+That is, it also supports the function \mbox{\texttt{get({\color{var}i})}}, which returns the element
+whose rank is \mbox{\texttt{{\color{var}i}}}. (The rank of an element \mbox{\texttt{{\color{var}x}}} in a \mbox{\texttt{SortedSet}} is the number of elements in the \mbox{\texttt{SortedSet}} that are less than \mbox{\texttt{{\color{var}x}}}.)
+\end{enumerate}
+

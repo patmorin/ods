@@ -14,15 +14,8 @@ import java.util.ListIterator;
  */
 public class DLList<T> extends AbstractSequentialList<T> {
 	class Node {
-		Node prev;
 		T x;
-		Node next;
-		public Node(Node prev, T x, Node next) {
-			this.prev = prev;
-			this.x = x;
-			this.next = next; 
-		}
-		public Node() {	}
+		Node prev, next;
 	}
 	
 	/**
@@ -53,7 +46,10 @@ public class DLList<T> extends AbstractSequentialList<T> {
 	 * @return the newly created and inserted node
 	 */
 	protected Node addBefore(Node w, T x) {
-		Node u = new Node(w.prev, x, w);
+		Node u = new Node();
+		u.x = x;
+		u.prev = w.prev;
+		u.next = w;
 		u.next.prev = u;
 		u.prev.next = u;
 		n++;

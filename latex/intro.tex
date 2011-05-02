@@ -5,7 +5,36 @@
 \subsection{The Queue, Stack, and Deque Interfaces}
 \subsection{The List Interface}
 \subsection{The Set and Map Interfaces}
+
+The #Set# and #Map# interfaces are easily implemented by the following
+interface:
+
+#add(x)#
+
+#remove(x)#: Remove, from the data structure the element that is equal to
+#x#, if one exists.
+
+#find(x)#: Find the element #x# in the data structure. If there is an
+element #e# in the data structure equal to #x#, then 
+return a reference #e#, otherwise return #null#.
+
+
 \subsection{The SortedSet and SortedMap Interfaces}
+
+The #SortedSet# and #SortedMap# interfaces are easily implemented by the following
+interface:
+
+#add(x)#
+
+#remove(x)#: Remove, from the data structure the element that is equal to
+#x#, if one exists.
+
+#find(x)#: 
+Return the minimum element #y# in the data structure such that
+$#y#\ge #x#$. If no such element exists, then return #null#.
+
+
+
 \subsection{The DynamicString Interface}
 \section{The Model of Computation}
 \seclabel{model}

@@ -16,11 +16,6 @@ public class SLList<T> extends AbstractQueue<T> {
 	class Node {
 		T x;
 		Node next;
-		
-		public Node(T x, Node next) {
-			this.x = x;
-			this.next = next;
-		}
 	}
 	
 	/**
@@ -67,7 +62,8 @@ public class SLList<T> extends AbstractQueue<T> {
 	}
 
 	public boolean add(T x) {
-		Node u = new Node(x, null);
+		Node u = new Node();
+		u.x = x;
 		if (n == 0) {
 			head = u;
 		} else {
@@ -103,7 +99,9 @@ public class SLList<T> extends AbstractQueue<T> {
 	 * @return x
 	 */
 	public T push(T x) {
-		Node u = new Node(x, head);
+		Node u = new Node();
+		u.x = x;
+		u.next = head;;
 		head = u;
 		if (n == 0)
 			tail = u;

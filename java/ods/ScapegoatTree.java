@@ -4,11 +4,6 @@ package ods;
 public class ScapegoatTree<T extends Comparable<T>> 
 		extends BinarySearchTree<ScapegoatNode<T>,T> {
 	/**
-	 * The number of elements (and nodes) in the tree
-	 */
-	int n;
-	
-	/**
 	 * An overestimate of the number of n
 	 */
 	int q;
@@ -21,9 +16,8 @@ public class ScapegoatTree<T extends Comparable<T>>
 		return n;
 	}
 	
-	public boolean remove(Object x) {
+	public boolean remove(T x) {
 		if (super.remove(x)) {
-			n--;
 			if (2*n < q) {
 				rebuild(root);
 				q = n;
@@ -103,13 +97,5 @@ public class ScapegoatTree<T extends Comparable<T>>
 		return true;
 	}
 
-	public static void main(String[] args) {
-		ScapegoatTree<Integer> t 
-		   = new ScapegoatTree<Integer>(new ScapegoatNode<Integer>());
-		int n = 100000;
-		correctnessTests(t, n);
-		t.clear();
-		performanceTests(t);
-	}
 
 }

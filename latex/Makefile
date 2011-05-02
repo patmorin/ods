@@ -17,5 +17,5 @@ ods.dvi : $(temps) ods.tex figs
 	cat $< | ./snarf.pl > $*-tmp.tex 
 	
 clean:
-	rm -f *-tmp.tex *.log *.bbl ods.pdf
+	rm -f $(temps) *.log *.bbl ods.pdf
 
