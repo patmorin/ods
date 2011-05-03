@@ -48,13 +48,13 @@ public class SkiplistList<T> extends AbstractList<T> {
 	/**
 	 * A source of random numbers
 	 */
-	Random r;
+	Random rand;
 	
 	public SkiplistList() {
 		n = 0;
 		sentinel = new Node(null, 33);
 		height = 0;
-		r = new Random(0);
+		rand = new Random(0);
 	}
 	
 	/**
@@ -125,13 +125,11 @@ public class SkiplistList<T> extends AbstractList<T> {
 	 * @return the number of coin tosses - 1
 	 */
 	protected int pickHeight() {
-		int j = r.nextInt();
-		int i = 0;
-		while (((j & 1) == 1)) {
-			j >>>= 1;
-			i++;
-		}
-		return i;
+		int z = rand.nextInt();
+		int k = 0;
+		while ((z & (1 << k)) != 0)
+			k++;
+		return k;
 	}
 	
 	public void add(int i, T x) {

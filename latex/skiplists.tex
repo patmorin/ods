@@ -1,7 +1,8 @@
 \chapter{Skiplists}
+
 \chaplabel{skiplists}
 
-In this chapter we discuss a beautiful data structure, the skiplist,
+In this chapter we discuss a beautiful data structure, the skip list,
 that has a variety of applications.  Using a skiplist we can implement
 a #List# that is fast for all the operations #get(i)#, #set(i,x)#,
 #add(i,x)#, and #remove(i)#. We can also implement an #SSet# in which
@@ -101,17 +102,25 @@ Each step (right or down) in this search takes only constant time so,
 by \lemref{skiplist-searchpath}, the expected running time of #find(x)#
 is $O(#n#)$.
 
-Adding an element #x# to a skiplist using the #add(x)# operation is
-just a slight variation on searching.  Before we begin, we toss coins
-to determine the height, #k#, of #x#, so that #x# will appear in all
-lists $L_0,\ldots,L_{#k#}$.  If necessary, we increase the height of
+Adding an element #x# to a skiplist using the #add(x)# operation is just
+a slight variation on searching.  Before we begin, we simulate tossing
+coins to determine the height, #k#, of #x#.  We do this by picking a
+random integer #z# and counting the number of trailing $1$s in the binary
+representation of #z#:\footnote{This method does not exactly replicate
+the coin-tossing experiment since the value of $k$ will always be less
+than the number of bits in an #int#.  This will have negligible impact unless the number of elements in the structure is much greater than $2^{32}=4294967296$.}
+
+\javaimport{ods/SkiplistSet.pickHeight()}
+
+After picking the height this way, we now know that #x# should appear in
+all lists $L_0,\ldots,L_{#k#}$.  If necessary, we increase the height of
 skiplist, and then follow the search path for #x#.  Any time the search
 path goes down from a list $L_{#r#}$ into $L_{#r#-1}$, with $#r#\le #k#$,
 we splice #x# into the list $L_{#r#}$ the same way we splice a node into
 an #SLList#:
 
-\javaimport{ods/SkiplistSet.add(w)}
 \javaimport{ods/SkiplistSet.add(x)}
+\javaimport{ods/SkiplistSet.add(w)}
 
 \begin{figure}
   \begin{center}
@@ -178,7 +187,7 @@ edge of length $\ell$, then we move to a node whose position, in $L_0$,
 is $#j#+\ell$.  In this way, while following a search path, we can keep
 track of the position, #j#, of the current node in $L_0$.  When at a
 node #u# in $L_{#r#}$ we go right if #j#
-plus the length of the edge #u.next# is less than #i#, otherwise we go
+plus the length of the edge #u.next[r]# is less than #i#, otherwise we go
 down into $L_{#r#-1}$.
 
 \javaimport{ods/SkiplistList.findPred(i)}
@@ -245,6 +254,14 @@ the #remove(i)# operation in a #SkiplistList# should be obvious.  We follow the 
 
 \subsection{Summary}
 
+The following theorem summarizes the performance of the #SkiplistList#
+data structure:
+
+\begin{thm}\thmlabel{skiplistlist}
+  A #SkiplistList# implements the #List# interface.  A #SkiplistList#
+  supports the operations #get(i)#, #set(i,x)#, #add(i,x)#, and
+  #remove(i)# in $O(\log #n#)$ expected time per operation.
+\end{thm}
 
 \section{Skiplists as Ropes}
 
@@ -253,60 +270,98 @@ the #remove(i)# operation in a #SkiplistList# should be obvious.  We follow the 
 
 In this section, we analyze the expected height, size, and length of
 the search path in a skiplist.  This section requires a background in
-basic probability.
+basic probability.  Several proofs are based on the following basic
+about coin tosses.
 
-\begin{lem}
-  The expected height of a skiplist containing $n$ elements is at most
-  $\log_2 n + 3$.
+\begin{lem}\lemlabel{coin-tosses}
+  Let $T$ be the number of times a fair coin is tossed until the first time it comes up heads.  Then $\E[T]=2$.
 \end{lem}
 
 \begin{proof}
-  Define the indicator random variable
-  \[ I_r = \left\{\begin{array}{ll}
-     0 & \mbox{if $L_r$ is empty} \\
-     1 & \mbox{if $L_r$ is non-empty}
+  Suppose we stop tossing the coin the first time it comes up
+  heads. Define the indicator variable
+  \[ I_{i} = \left\{\begin{array}{ll}
+     0 & \mbox{if the coin is tossed less than $i$ times} \\
+     1 & \mbox{if the coin is tossed $i$ or more times} 
      \end{array}\right.
   \]
-  The height $h$ of the skiplist is then given by
-  \[
-       h = \sum_{i=0}^\infty I_r \enspace .
+  Note that $I_i=1$ if and only if the first $i-1$ coin tosses are tails,
+  so $\E[I_i]=\Pr\{I_i=1\}=1/2^{i-1}$.  Observe that $T$, the total number of coin tosses, can be written as $T=\sum_{i=1}^{\infty} I_i$.  Therefore,
+\begin{eqnarray*}
+  \E[T] & = & \E\left[\sum_{i=1}^\infty I_i\right] \\
+   & = & \sum_{i=1}^\infty \E\left[I_i\right] \\
+   & = & \sum_{i=1}^\infty 1/2^{i-1} \\
+   & = & 1 + 1/2 + 1/4 + 1/8 + \cdots \\
+   & = & 2 \enspace ,
+\end{eqnarray*}
+as required.
+\end{proof}
+
+\begin{lem}\lemlabel{skiplist-size1}
+  The expected number of nodes in a skiplist containing $#n#$ elements,
+  not including occurrences of the sentinel, is $2#n#$.
+\end{lem}
+
+\begin{proof}
+  The probability that any particular element #x# is included in list
+  $L_{#r#}$ is $1/2^{#r#}$, so the expected number of nodes in $L_{#r#}$
+  is $#n#/2^{#r#}$.  Therefore, the total number of nodes in all lists is
+  \[ \sum_{#r#=0}^\infty #n#/2^{#r#} = 2#n# \enspace , \]
+  as required.
+\end{proof}
+
+\begin{lem}\lemlabel{skiplist-height}
+  The expected height of a skiplist containing #n# elements is at most
+  $\log_2 #n# + 3$.
+\end{lem}
+
+\begin{proof}
+  For each $#r#\in\{0,1,2,\ldots,\infty\}$, 
+  define the indicator random variable
+  \[ I_{#r#} = \left\{\begin{array}{ll}
+     0 & \mbox{if $L_{#r#}$ is empty} \\
+     1 & \mbox{if $L_{#r#}$ is non-empty}
+     \end{array}\right.
   \]
-  Note that $I_r \le |L_r|$, so 
+  The height #h# of the skiplist is then given by
   \[
-     \E[I_r] \le \E[|L_r|] = n/2^r \enspace .
+       #h# = \sum_{i=0}^\infty I_{#r#} \enspace .
+  \]
+  Note that $I_{#r#} \le |L_{#r#}|$, so 
+  \[
+     \E[I_{#r#}] \le \E[|L_{#r#}|] = #n#/2^{#r#} \enspace .
   \]
   Therefore, we have
   \begin{eqnarray*}
-       \E[h] &=& \E\left[\sum_{r=0}^\infty I_r\right] \\
-        &=& \sum_{r=0}^{\infty} E[I_r] \\
-        &=& \sum_{r=0}^{\lfloor\log n\rfloor} E[I_r]
-                 + \sum_{r=\lfloor\log n\rfloor+1}^{\infty} E[I_r]  \\
-        &=& \sum_{r=0}^{\lfloor\log n\rfloor} 1
-                 + \sum_{r=\lfloor\log n\rfloor+1}^{\infty} n/2^r \\
-        &\le& \log n + 1
-                 + \sum_{r=0}^\infty 1/2^r \\
-        &=& \log n + 3
+       \E[#h#] &=& \E\left[\sum_{r=0}^\infty I_{#r#}\right] \\
+        &=& \sum_{#r#=0}^{\infty} E[I_{#r#}] \\
+        &=& \sum_{#r#=0}^{\lfloor\log #n#\rfloor} E[I_{#r#}]
+                 + \sum_{r=\lfloor\log #n#\rfloor+1}^{\infty} E[I_{#r#}]  \\
+        &=& \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
+                 + \sum_{r=\lfloor\log #n#\rfloor+1}^{\infty} n/2^{#r#} \\
+        &\le& \log #n# + 1
+                 + \sum_{#r#=0}^\infty 1/2^{#r#} \\
+        &=& \log #n# + 3
   \end{eqnarray*}
 \end{proof}
 
-\begin{lem}
-  The expected number of nodes in a skiplist containing $n$ elements,
-  including all occurrences of the sentinel is $2n+O(\log n)$.
+\begin{lem}\lemlabel{skiplist-size2}
+  The expected number of nodes in a skiplist containing $#n#$ elements,
+  including all occurrences of the sentinel is $2#n#+O(\log #n#)$.
 \end{lem}
 
 \begin{proof}
-The expected number of nodes, not including the sentinel is 
-\[
-  \E\left[\sum_{i=0}^{\infty} |L_i|\right] = 
-  \sum_{i=0}^{\infty} n/2^i = 2n \enspace .
-\]
-The number of occurrences of the sentinel is equal to the height, $h$,
-of the skiplist, so the expected number of occurrences of the sentinel
-is at most $\log n+3 = O(\log n)$.
+  By \lemref{skiplist-size1}, the expected number of nodes, not
+  including the sentinel is $2#n#$.  The number of occurrences of
+  the sentinel is equal to the height, $#h#$, of the skiplist so, by
+  \lemref{skiplist-height} the expected number of occurrences of the
+  sentinel is at most $\log #n#+3 = O(\log #n#)$.
 \end{proof}
 
+
+
 \begin{lem}
-The expected length of a search path in a skiplist is $2\log n + O(1)$.
+The expected length of a search path in a skiplist is $2\log #n# + O(1)$.
 \end{lem}
 
 \begin{proof}
@@ -318,40 +373,47 @@ The expected length of a search path in a skiplist is $2\log n + O(1)$.
   except that it is reversed.
   
   The number of nodes that the reverse search path visits at a particular
-  level $r$ is related to the following experiment:  Toss a coin.
+  level #r# is related to the following experiment:  Toss a coin.
   If the coin comes up heads then go up and stop, otherwise go left and
   repeat the experiment.  The number of coin tosses before the heads then
   represents the number of steps to the left that a reverse search path
   takes at a particular level.  (Note that this overcounts the number of
   steps to the left, since this experiment ends either at the first head
   or when the search path reaches the sentinel, whichever comes first.)
-  
-  Let $R_r$ denote the number of steps the search path takes at level
-  $r$ that go to the right.   We have just argued that $\E[R_r]\le 1$.
-  Furthermore, $R_r\le |L_r|$, so
+
+  Let $S_{#r#}$ denote the number of steps the search path takes at level
+  $#r#$ that go to the right.   We have just argued that $\E[S_{#r#}]\le 1$.
+  Furthermore, $S_{#r#}\le |L_{#r#}|$, so
   \[
-    \E[R_r] \le E[|L_r|] = n/2^r \enspace .
+    \E[S_{#r#}] \le E[|L_{#r#}|] = #n#/2^{#r#} \enspace .
   \]
   We can now finish as in the proof of \lemref{skiplist-height}.
-  Let $\ell$ be  the length of the search path for some node #u# in a
-  skiplist, and let $h$ be the height of the skiplist.  Then
+  Let $S$ be  the length of the search path for some node #u# in a
+  skiplist, and let $#h#$ be the height of the skiplist.  Then
   \begin{eqnarray*}
-      \E[\ell] 
-         &=& \E\left[ h + \sum_{r=0}^\infty R_r \right] \\
-         &=& \E[h] + \sum_{r=0}^\infty \E[R_r]  \\
-         &=& \E[h] + \sum_{r=0}^{\lfloor\log n\rfloor} \E[R_r] 
-              + \sum_{r=\lfloor\log n\rfloor+1}^\infty \E[R_r] \\
-         &\le& \E[h] + \sum_{r=0}^{\lfloor\log n\rfloor} 1
-              + \sum_{r=\lfloor\log n\rfloor+1}^\infty n/2^r \\
-         &\le& \E[h] + \sum_{r=0}^{\lfloor\log n\rfloor} 1
-              + \sum_{r=0}^{\infty} 1/2^r \\
-         &\le& \E[h] + \sum_{r=0}^{\lfloor\log n\rfloor} 1
-              + \sum_{r=0}^{\infty} 1/2^r \\
-         &\le& \E[h] + \log n + 3 \\
-         &\le& 2\log n + 6
+      \E[S] 
+         &=& \E\left[ #h# + \sum_{#r#=0}^\infty S_{#r#} \right] \\
+         &=& \E[#h#] + \sum_{#r#=0}^\infty \E[S_{#r#}]  \\
+         &=& \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} \E[S_{#r#}] 
+              + \sum_{#r#=\lfloor\log #n#\rfloor+1}^\infty \E[S_{#r#}] \\
+         &\le& \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
+              + \sum_{r=\lfloor\log #n#\rfloor+1}^\infty #n#/2^{#r#} \\
+         &\le& \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
+              + \sum_{#r#=0}^{\infty} 1/2^{#r#} \\
+         &\le& \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
+              + \sum_{#r#=0}^{\infty} 1/2^{#r#} \\
+         &\le& \E[#h#] + \log #n# + 3 \\
+         &\le& 2\log #n# + 6
   \end{eqnarray*}
   as required.
 \end{proof}
+
+
+The following theorem summarizes the results in this section
+\begin{thm}
+A skiplist containing $#n#$ elements has expected size $O(#n#)$ and the expected length of the search path for any particular element is $2\log #n# + O(1)$.
+\end{thm}
+
 
 
 \section{Iteration and Finger Search}

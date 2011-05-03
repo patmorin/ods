@@ -1,0 +1,149 @@
+\chapter{Hash Tables}
+\chaplabel{hashtables}
+
+Hash tables are an efficient method of store a small number, #n#, of
+integers from a large range $U=\{0,\ldots,2^{#w#}-1\}$.   Sometimes
+hash tables store data that is not integers.  In this case, an integer
+\emph{hash code} is associated and this hash code is used in the hash
+table.
+
+
+\chaplabel{hashing}
+\section{Multiplicative Hashing with Chaining}
+
+In \emph{hashing with chaining} data is stored as an array of lists:
+
+\javaimport{ods/HashTable.table}
+
+To ensure that lists don't get too long, we maintain the invariant that
+\[
+    #n# \le #table.length#
+\]
+so that the average number of elements stored in one of these lists is 
+$#n#/#table.length# \le 1$.
+
+To add an element #x# to the hash table, first check if the length
+of #table# needs to be increased and, if so, we grow #table#.  With this
+out of the way we hash #x# to get an integer #i# in the range
+$\{0,\ldots,#table.size#-1\}$ and we append #x# to the list #table[i]#:
+\javaimport{ods/HashTable.add(x)}
+For any of the list implementations described in Chapters~\ref{chap:arrays} or
+\ref{chap:linkedlists}, this takes only constant time.
+
+To remove an element #x# from the hash table, we again hash it to get
+an integer #i# and we remove #x# from the list #table[i]#:
+\javaimport{ods/HashTable.remove(x)}
+\javaimport{ods/HashTable.removeOne(x)}
+The time this takes depends on the length of the list stored in
+#table[i]#.
+
+Searching for the element #x# in a hash table is similar.  We hash #x# to get an integer #i# and and then perform a linear search on the list #table[i]#:
+\javaimport{ods/HashTable.find(x)}
+Again, this takes time proportional to the length of the list 
+#table[i]#.
+
+The performance of a hash table depends critically on the choice of the
+hash function.  A good hash function will spread the elements evenly
+among the #table.length# lists, so that the expected size of the list
+#table[hash(x)]# is roughly $O(#n#/#table.size)# = O(1)$.  On the other
+hand, a bad hash function will hash all values (including #x#) to the
+same table location, in which case the size of the list #table[hash(x)]#
+will be #n#.  In the next section we describe a good hash function.
+
+\subsection{Multiplicative Hashing}
+
+Multiplicative hashing is an efficient form of hashing based on modular
+arithmetic (discussed in \secref{arrayqueue}) and integer division.
+It uses the $\ddiv$ operator, which does division without remainder.
+For any integers $a\ge 0$ and $b\ge 1$, $a\ddiv b = \lfloor a/b\rfloor$.
+
+In multiplicative hashing, we use a hash table of size $2^{#d#}$ for some
+integer #d# (called the \emph{dimension}).  The formula for hashing an
+integer $#x#\in\{0,\ldots,2^{#w#}-1\}$ is
+\[
+    #hash#(#x#) = ((#z#\cdot#x#) \bmod 2^{#w#}) \ddiv 2^{#w#-#d#} \enspace .
+\]
+Here #z# is a randomly chosen \emph{odd} integer in
+$\{1,\ldots,2^{#w#}-1\}$.  This hash function can be realized very
+efficiently by observing that, by default, operations on integers
+are already done modulo $2^{#w#}$ where $#w#$ is the number of bits in
+an integer.  (See \figref{multihashing}.) Furthermore, integer division
+by $2^{#w#-#d#}$ is equivalent to dropping the rightmost $#w#-#d#$ bits in
+a binary representation (which is implemented by shifting the bits
+right by $#w#-#d#$).  In this way, the code that
+implements the above formula is simpler than the formula itself:
+\javaimport{ods/HashTable.hash(x)}
+
+\begin{figure}
+  \begin{center}
+    \begin{tabular}{|lr@{}r|}\hline
+    $2^#w#$ (4294967296)&            #1#&#00000000000000000000000000000000# \\
+    #z# (4102541685)&                   &#11110100100001111101000101110101# \\
+    #x# (42) &                          &#00000000000000000000000000101010# \\
+    $#z#\cdot#x#$ &             #101000#&#00011110010010000101110100110010# \\
+    $(#z#\cdot#x#)\bmod 2^{#w#}$ &      &#00011110010010000101110100110010# \\
+    $((#z#\cdot#x#)\bmod 2^{#w#})\ddiv 2^{#w#-#d#}$ &&
+                      \multicolumn{1}{@{}l|}{#00011110#} \\\hline
+    \end{tabular}
+  \end{center}
+  \caption{The operation of the multiplicative hash function with $#w#=32$
+    and $#d#=8$.}
+  \figlabel{multihashing}
+\end{figure}
+
+
+The following theorem, whose proof requires some basic number theory,
+shows that multiplicative hashing does a good job of avoiding collisions:
+
+\begin{lem}\lemlabel{universal-hashing}
+  Let #x# and #y# be any two values in $\{0,\ldots,2^{#w#-1}\}$ with
+  $#x#\neq #y#$. Then $\Pr\{#hash(x)#=#hash(y)#\} \le 2/2^d$.
+\end{lem}
+
+With \lemref{universal-hashing}, the performance of #remove(x)#, and #find(x)# are easily to analyze:
+
+\begin{lem}
+  The expected length of the list #table[hash(x)]# is at most $#n#_{#x#}
+  + 2$, where $#n#_{#x#}$ is the number of occurrences of #x# in the hash table.
+\end{lem}
+
+\begin{proof}
+Let $S$ be the (multi-)set of elements stored in the hash table that are not equal to #x#.  For an element $#y#\in S$, define the indicator variable 
+  \[ I_{#y#} = \left\{\begin{array}{ll}
+     1 & \mbox{if $#hash(x)#=#hash(y)#$} \\
+     0 & \mbox{otherwise}
+     \end{array}\right.
+  \]
+and notice that, by \lemref{universal-hashing}, $\E[I_{#y#}] \le 2/#table.size#$.
+The expected length of the list #table[hash(x)]# is given by
+\begin{eqnarray*}
+ \E\left[|#table[hash(x)]#|\right] &=& \E\left[#n#_{#x#} + \sum_{#y#\in S} I_{#y#}\right] \\
+  &=& #n#_{#x#} + \sum_{#y#\in S} \E [I_{#y#} ] \\
+  &\le& #n#_{#x#} + \sum_{#y#\in S} 2/#table.size# \\
+  &\le& #n#_{#x#} + \sum_{#y#\in S} 2/#n# \\
+  &\le& #n#_{#x#} + (#n#-#n#_{#x#})2/#n# \\
+  &\le& #n#_{#x#} + 2 \enspace ,
+\end{eqnarray*}
+as required.
+\end{proof}
+
+
+\begin{proof}[Proof of \lemref{universal}]
+Remember that #z# is a randomly-chosen odd integer in the range
+$\{1,\ldots,2^{#w#}-1\}$, so there are $2^{#w#}/2$ possible choices of #z#.
+If we fix #x#,
+#y#, #w#, and #d#, then the proof boils down to showing that the number
+of solutions (in #z#) to the equation $#hash(x)#=#hash(y)#$ is at most
+$2^{#w#-#d#}$.  Therefore, the probability that we pick #z# to be one of these solutions is at most
+\[
+\frac{2^{#w#-#d#}}{2^{#w#}/2} = 2/2^{#d#}
+\]
+\end{proof}
+
+
+
+%\section{Perfect Hashing} (how to cope with conflicting hash code)
+\section{Hash Codes}
+\section{Fingerprinting}
+
+

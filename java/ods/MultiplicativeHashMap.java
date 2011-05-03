@@ -23,7 +23,7 @@ public class MultiplicativeHashMap<K,V> extends AbstractMap<K,V> {
 	/**
 	 * The underlying hash table
 	 */
-	MultiplicativeHashTable<Pair<V>> tab;
+	HashTable<Pair<V>> tab;
 
 	public V put(K key, V value) {
 		Pair<V> p = new Pair<V>(key, value);

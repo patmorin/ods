@@ -13,7 +13,7 @@ import java.util.AbstractCollection;
  *
  * @param <T>
  */
-public class MultiplicativeHashTable<T> extends AbstractCollection<T> {
+public class HashTable<T> extends AbstractCollection<T> {
 	/**
 	 * The hash table
 	 */
@@ -42,7 +42,7 @@ public class MultiplicativeHashTable<T> extends AbstractCollection<T> {
 	/**
 	 * Create a new empty hash table
 	 */
-	MultiplicativeHashTable() {
+	HashTable() {
 		d = 0;
 		table = allocTable(1<<d);
 		Random r = new Random();
@@ -104,7 +104,7 @@ public class MultiplicativeHashTable<T> extends AbstractCollection<T> {
 	 * @return ((x.hashCode() * z) mod 2^w) div 2^(w-d)
 	 */
 	protected final int hash(Object x) {
-		return (x.hashCode() * z) >>> (w-d);
+		return (z * x.hashCode()) >>> (w-d);
 	}
 	
 	/**
@@ -162,11 +162,9 @@ public class MultiplicativeHashTable<T> extends AbstractCollection<T> {
 	 * is true, or null if no such element y exists
 	 */
 	public T find(Object x) {
-		for (T y : table[hash(x)]) {
-			if (y.equals(x)) {
+		for (T y : table[hash(x)])
+			if (y.equals(x))
 				return y;
-			}
-		}
 		return null;
 	}
 	
@@ -215,7 +213,7 @@ public class MultiplicativeHashTable<T> extends AbstractCollection<T> {
 				return x;
 			}
 			public void remove() {
-				MultiplicativeHashTable.this.remove(table[ilast].get(jlast));
+				HashTable.this.remove(table[ilast].get(jlast));
 			}		
 		}
 		return new MapIterator();
@@ -226,7 +224,7 @@ public class MultiplicativeHashTable<T> extends AbstractCollection<T> {
 	 */
 	public static void main(String[] args) {
 		int n = 100000;
-		MultiplicativeHashTable<Integer> t = new MultiplicativeHashTable<Integer>();
+		HashTable<Integer> t = new HashTable<Integer>();
 		for (int i = 0; i < n; i++) {
 			t.add(i*2);
 		}

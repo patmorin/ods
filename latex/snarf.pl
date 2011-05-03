@@ -23,7 +23,7 @@ sub color($) {
   $line =~ s/\b([a-z]\w*)(\s*\()/$p$1$2/g;
   $line =~ s/\b([a-z]\w*)\b/{\\color{var}$1}/g; # color variables
   $line =~ s/$p//g;
-  my @keywords = ("int", "double", "float", "char", "byte", "public", "protected", "private", "static", "if", "while", "else", "for", "do", "T", "K", "V", "extends", "implements", "throw", "new", "class");
+  my @keywords = ("null", "int", "double", "float", "char", "byte", "public", "protected", "private", "static", "if", "while", "else", "for", "do", "T", "K", "V", "extends", "implements", "throw", "new", "class");
  foreach my $k (@keywords) {
     $line =~ s/\{\\color\{\w+\}($k)\}/$1/g;
     $line =~ s/\b($k)\b/{\\color{keyword}$1}/g;
@@ -45,7 +45,7 @@ sub printVerbatim($) {
 
 sub snarfit($$) {
   my $w = "A-Za-z0-9<>\\[\\]";   # things that occur in type names
-  my $k = "(static|public|protected|private)";  # boring keywords
+  my $k = "(static|public|protected|private|final)";  # boring keywords
   my $args = shift(@_);
   my @params = split(/\./, $args);
   my $wc = shift(@_);
@@ -113,7 +113,7 @@ MAIN: {
       my $inside = $1;
       $inside =~ s/([%&])/\\$1/g;
       $inside = color($inside);
-      $inside = "\\mbox{\\texttt{$inside}}";
+      $inside = "\\ensuremath{\\mathtt{$inside}}";
       $line =~ s/#([^#])*#/$inside/;
     } 
     if ($line =~ /\\javaimport(withclass)?\{([^}#]+)\}/) {

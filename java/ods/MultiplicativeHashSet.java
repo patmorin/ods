@@ -8,13 +8,13 @@ public class MultiplicativeHashSet<T> extends AbstractSet<T> {
 	/**
 	 * The underlying hash table
 	 */
-	MultiplicativeHashTable<T> tab;
+	HashTable<T> tab;
 
 	public MultiplicativeHashSet() {
-		tab = new MultiplicativeHashTable<T>();
+		tab = new HashTable<T>();
 	}
 
-	protected MultiplicativeHashSet(MultiplicativeHashTable<T> tab) {
+	protected MultiplicativeHashSet(HashTable<T> tab) {
 		this.tab = tab;
 	}
 

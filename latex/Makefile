@@ -1,14 +1,14 @@
 
-sources = intro.tex arrays.tex linkedlists.tex skiplists.tex
+sources = intro.tex arrays.tex linkedlists.tex skiplists.tex hashing.tex
 temps = $(sources:.tex=-tmp.tex)
 java = $(wildcard ../java/ods/*.java)
 
-ods.pdf : $(temps) ods.tex figs
+ods.pdf : $(temps) ods.tex figs ods.sty
 	(cd figs ; make )
 	pdflatex -interaction=nonstopmode ods
 	pdflatex -interaction=nonstopmode ods
 
-ods.dvi : $(temps) ods.tex figs
+ods.dvi : $(temps) ods.tex figs ods.sty
 	(cd figs ; make )
 	latex ods
 	latex ods

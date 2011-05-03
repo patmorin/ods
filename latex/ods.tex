@@ -1,7 +1,10 @@
 \documentclass{book}
 
-\usepackage{amsthm}
+\usepackage{amsthm,amsopn}
 \usepackage{graphicx}
+
+
+\DeclareMathOperator{\ddiv}{div}
 
 % Colors for syntax highlighting
 \usepackage[usenames,dvipsnames]{color}
@@ -56,7 +59,7 @@
 %}
 
 
-\usepackage{pat}
+\usepackage{ods}
 
 \title{Basic Data Structures\\(in Java)}
 \author{Pat Morin}
@@ -81,13 +84,7 @@ The goal of this project is to treat a book like an Open Source software project
 \include{arrays-tmp}
 \include{linkedlists-tmp}
 \include{skiplists-tmp}
-
-\chapter{Hashing}
-\chaplabel{hashing}
-\section{Multiplicative Hashing with Chaining}
-%\section{Perfect Hashing} (how to cope with conflicting hash code)
-\section{Hash Codes}
-\section{Fingerprinting}
+\include{hashing-tmp}
 
 \chapter{Binary Trees}
 \chaplabel{binarytrees}
