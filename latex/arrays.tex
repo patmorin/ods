@@ -77,7 +77,7 @@ position to make room for #x#, set #a[i]# equal to #x# and increment #n#.
   \begin{center}
     \includegraphics{figs/arraystack}
   \end{center}
-  \caption{A sequence of #add(i,x)# and #remove(i)# operation in an
+  \caption{A sequence of #add(i,x)# and #remove(i)# operations on an
   #ArrayStack#.  Arrows denote elements being copied.  Operations that
   result in a call to #resize()# are marked with an asterisk.}
   \figlabel{arraystack}
@@ -117,7 +117,7 @@ into #b#.  This takes $O(#n#)$ time.
 The running time analysis from the previous section ignored the cost
 of calls to #resize()#.  In this section we analyze this cost using a
 technique known as \emph{amortized analysis}.  This technique does not
-try and determine the cost of resizing during each individual #add(i,x)#
+try to determine the cost of resizing during each individual #add(i,x)#
 and #remove(i)# operation.  Instead, it considers the cost of all calls to
 #resize()# during a sequence of $m$ calls to #add(i,x)# or #remove(x)#.
 In particular, we will show:
@@ -131,25 +131,29 @@ In particular, we will show:
 \begin{proof}
   We will show that anytime #resize()# is called, the number of calls
   to #add# or #remove# since the last call to #resize()# is at least
-  $#n#/2-1$.  Therefore, if $n_i$ denotes the value of #n# during the $i$th
-call to #resize()#, then the total number of calls to #add(i,x)# or
-#remove(i)# is at least
+  $#n#/2-1$.  Therefore, if $n_i$ denotes the value of #n# during the
+  $i$th call to #resize()# and $r$ denotes the number of calls to
+  #resize()#, then the total number of calls to #add(i,x)# or
+  #remove(i)# is at least
   \[
-     \sum_{i=1}^{r} (n_i/2-1) \le m  \enspace .
+     \sum_{i=1}^{r} (n_i/2-1) \le m  \enspace ,
   \]
-  On the other hand, the total work done during all calls to #resize()# is 
+  which is equivalent to
+  \[
+    \sum_{i=1}^{r} n_i \le 2m + 2r  \enspace .
+  \]
+   On the other hand, the total work done during all calls to #resize()# is 
   \[
      \sum_{i=1}^{r} O(n_i) \le O(m+r) = O(m)  \enspace ,
   \]
-  which will prove the theorem since $r$, the number of calls to
-#resize()#,
-  is not more than $m$.  All that remains is to show that the number
-  of calls to #add(i,x)# or #remove(i)# between the $(i-1)$th and the
-  $i$th call to #resize()# is at least $n_i/2$.
+  which will prove the lemma since $r$ is not more than $m$.  All
+  that remains is to show that the number of calls to #add(i,x)# or
+  #remove(i)# between the $(i-1)$th and the $i$th call to #resize()#
+  is at least $n_i/2$.
 
   There are two cases to consider. In the first case, #resize()# is
   being called by #add(i,x)# because the backing array #a# is full, i.e.,
-  $#a.length()# = #n#=n_i$.  Consider the previous call to #resize()#:
+  $#a.length# = #n#=n_i$.  Consider the previous call to #resize()#:
   After this previous call, the size of #a# was #a.length#, but the
   number of elements stored in #a# was at most $#a.length#/2=n_i/2$.
   But now the number of elements stored in #a# is $n_i=#a.length#$,
@@ -160,8 +164,8 @@ call to #resize()#, then the total number of calls to #add(i,x)# or
   The second case to consider is when #resize()# is being called by
   #remove(i)# because $#a.length# \ge 3#n#=3n_i$.  Again, after the
   previous call to #resize()# the number of elements stored in #a# was
-  at least $#a.length/2#-1$. (The ${}-1$ in this formula accounts for
-  the special case that occurs when $#n#=0$ and #a.length=1#.) Now there
+  at least $#a.length/2#-1$.\footnote{The ${}-1$ in this formula accounts for
+  the special case that occurs when $#n#=0$ and $#a.length# = 1$.} Now there
   are $n_i\le#a.length#/3$ elements stored in #a#.  Therefore, the number
   of #remove(i)# operations since the last call to #resize()# is at least
   \[
@@ -170,7 +174,7 @@ call to #resize()#, then the total number of calls to #add(i,x)# or
   \]
   In either case, the number of calls to #add(i,x)# or #remove(i)# that
   occur between the $(i-1)$th call to #resize()# and the $i$th call to
-  resize is at least $n_i/2-1$, as required to complete the proof.
+  #resize()# is at least $n_i/2-1$, as required to complete the proof.
 \end{proof}
 
 \subsection{Summary}
@@ -241,15 +245,15 @@ To remove an element, we would remove it from #a[j]#, increment #j#, and
 decrement #n#.
 
 Of course, the problem with this solution is that it requires an infinite
-array #a#.  An #ArrayQueue# simulates this by using a finite array #a#
+array.  An #ArrayQueue# simulates this by using a finite array #a#
 and \emph{modular arithmetic}.  This is the kind of arithmetic used when
-we are talking about time of day.  For example 10 o'clock plus 5
+we are talking about the time of day.  For example 10 o'clock plus 5
 hours gives 3 o'clock.  Formally, we say that
 \[
     10 + 5 = 15 \equiv 3 \pmod{12} \enspace .
 \]
 We read the latter part of this equation as ``15 is congruent to 3 modulo
-12.'' We can also treat $\bmod$ as binary operator, so that
+12.'' We can also treat $\bmod$ as a binary operator, so that
 \[
    15 \bmod 12 = 3 \enspace .
 \]
@@ -279,16 +283,17 @@ of elements in the #ArrayQueue# does not exceed the size of #a#.
 
 \javaimportwithclass{ods/ArrayQueue.a.j.n}
 
-A sequence of #add(x)# and #remove()# operation on an #ArrayQueue# are illusted in \figref{arrayqueue}.
-To implement #add(x)#, we first check if #a# is full and, if necessary,
-call #resize()# to increase the size of #a#.  Next, we store #x# in
+A sequence of #add(x)# and #remove()# operations on an #ArrayQueue# is
+illustrated in \figref{arrayqueue}.  To implement #add(x)#, we first
+check if #a# is full and, if necessary, call #resize()# to increase
+the size of #a#.  Next, we store #x# in
 #a[(j+n)%a.length]# and increment #n#.
 
 \begin{figure}
   \begin{center}
     \includegraphics{figs/arrayqueue}
   \end{center}
-  \caption{A sequence of #add(x)# and #remove(i)# operation on an
+  \caption{A sequence of #add(x)# and #remove(i)# operations on an
   #ArrayQueue#.  Arrows denote elements being copied.  Operations that
   result in a call to #resize()# are marked with an asterisk.}
   \figlabel{arrayqueue}
@@ -338,36 +343,36 @@ work during all calls to #resize()#.
 \section{#ArrayDeque#: Fast Deque Operations Using an Array}
 \seclabel{arraydeque}
 
-The #ArrayQueue# from the previous section gives data structure for
-representing a sequence that allows us to efficiently add to one end
-of the sequence and remove from the other end.  The #ArrayDeque# data
-structure uses the same technique, but allows for efficient addition or
-removal at both ends.  This structure implements the #List# interface
-using the same circular array technique used to represent an #ArrayQueue#.
+The #ArrayQueue# from the previous section is a data structure
+for representing a sequence that allows us to efficiently add to one
+end of the sequence and remove from the other end.  The #ArrayDeque#
+data structure allows for efficient addition and removal at both ends.
+This structure implements the #List# interface using the same circular
+array technique used to represent an #ArrayQueue#.
 
 \javaimportwithclass{ods/ArrayDeque.a.j.n}
 
-The #get(i)# and #set(i,x)# operations in an #ArrayDeque# are
+The #get(i)# and #set(i,x)# operations on an #ArrayDeque# are
 straightforward.  They get or set the array element $#a[#{#(j+i)#\bmod
 #a.length#}#]#$.
 
 \javaimport{ods/ArrayDeque.get(i).set(i,x)}
 
-Adding and removing elements from an #ArrayDeque# is illustrated in
-\figref{arraydeque}.  The implementation of #add(i,x)# is a little
-more interesting.   As usual, we first check if #a# is full and,
-if necessary, call #resize()# to resize #a#.   Remember that we want
-this operation to be fast when #i# is small (close to 0) or when #i#
-is large (close to #n#).  Therefore, we check if $#i#<#n#/2$.  If so,
-we shift the elements $#a[0]#,\ldots,#a[i-1]#$ left by one position.
-Otherwise ($#i#\ge#n#/2$), we shift the elements $#a[i]#,\ldots,#a[n-1]#$
-right by one position.
+The implementation of #add(i,x)# is a little more interesting.  As
+usual, we first check if #a# is full and, if necessary, call
+#resize()# to resize #a#.  Remember that we want this operation to be
+fast when #i# is small (close to 0) or when #i# is large (close to
+#n#).  Therefore, we check if $#i#<#n#/2$.  If so, we shift the
+elements $#a[0]#,\ldots,#a[i-1]#$ left by one position.  Otherwise
+($#i#\ge#n#/2$), we shift the elements $#a[i]#,\ldots,#a[n-1]#$ right
+by one position.  See \figref{arraydeque} for an illustration of
+#add(i,x)# and #remove(x)# operations on an #ArrayDeque#.
 
 \begin{figure}
   \begin{center}
     \includegraphics{figs/arraydeque}
   \end{center}
-  \caption{A sequence of #add(i,x)# and #remove(i)# operation in an
+  \caption{A sequence of #add(i,x)# and #remove(i)# operations on an
   #ArrayDeque#.  Arrows denote elements being copied.}
   \figlabel{arraydeque}
 \end{figure}
@@ -377,7 +382,7 @@ right by one position.
 
 By doing the shifting in this way, we guarantee that #add(i,x)# never
 has to shift more than $\min\{ #i#, #n#-#i# \}$ elements.  Thus, the running
-time of the #add(i,x)# operation (ignoring the cost of the #resize()#
+time of the #add(i,x)# operation (ignoring the cost of a #resize()#
 operation) is $O(1+\min\{#i#,#n#-#i#\})$.
 
 The #remove(i)# operation is similar.  It either shifts elements
@@ -412,7 +417,7 @@ Next, we present another data structure, the #DualArrayDeque# that
 achieves the same performance bounds as an #ArrayDeque# by using
 two #ArrayStack#s.  Although the asymptotic performance of the
 #DualArrayDeque# is no better than that of the #ArrayDeque#, it is
-still worth studying since it offer a good example of how to make a
+still worth studying since it offers a good example of how to make a
 sophisticated data structure by combining two simpler data structures.
 
 A #DualArrayDeque# represents a list using two #ArrayStack#s.  Recall that
@@ -439,19 +444,19 @@ or #set(i,x)# on either #front# or #back#, which take $O(1)$ time per operation.
 
 \javaimport{ods/DualArrayDeque.get(i).set(i,x)}
 
-Note that, if a $#i#<#front.size()#$, then this translates to accessing
-the element of #front# at position $#front.size()#-#i#-1$, since the
+Note that, if an index $#i#<#front.size()#$, then it corresponds to the
+element of #front# at position $#front.size()#-#i#-1$, since the
 elements of #front# are stored in reverse order.
 
-Adding and removing elements from an #ArrayDeque# is illustrated in
-\figref{arraydeque}.  The #add(i,x)# operation manipulates either #front#
+Adding and removing elements from a #DualArrayDeque# is illustrated in
+\figref{dualarraydeque}.  The #add(i,x)# operation manipulates either #front#
 or #back#, as appropriate:
 
 \begin{figure}
   \begin{center}
     \includegraphics{figs/dualarraydeque}
   \end{center}
-  \caption{A sequence of #add(i,x)# and #remove(i)# operation in a
+  \caption{A sequence of #add(i,x)# and #remove(i)# operations on a
   #DualArrayDeque#.  Arrows denote elements being copied.
   Operations that result in a rebalancing by #rebalance()# are marked with an asterisk.}
   \figlabel{dualarraydeque}
@@ -461,13 +466,13 @@ or #back#, as appropriate:
 
 \javaimport{ods/DualArrayDeque.add(i,x)}
 
-The #add(i,x)# method performs rebalancing of the two #ArrayStacks#
-#front# and #back#, by calling the #balance()# method.  The implementation
-of #balance()# is described below, but for now it is sufficient to know
-that #balance()# ensures that, unless $#size()#<2$, #front.size()#
-and #back.size()# do not differ by more than a factor of 3.  In
-particular, $3#front.size()# \le #back.size()#$ and $3#back.size()#\le
-#front.size()#$.
+The #add(i,x)# method performs rebalancing of the two #ArrayStack#s
+#front# and #back#, by calling the #balance()# method.  The
+implementation of #balance()# is described below, but for now it is
+sufficient to know that #balance()# ensures that, unless $#size()#<2$,
+#front.size()# and #back.size()# do not differ by more than a factor
+of 3.  In particular, $3#front.size()# \ge #back.size()#$ and
+$3#back.size()# \ge #front.size()#$.
 
 Next we analyze the cost of #add(i,x)#, ignoring the cost of the
 #balance()# operation.  If $#i#<#front.size()#$, then this translates into $#front.add(front.size()-i-1,x)#$.  Since #front# is an #ArrayStack#, the cost of this is 
@@ -483,17 +488,18 @@ $#back.add(i-front.size(),x)#$.  The cost of this is
   \eqlabel{das-back}
 \end{equation}
 
-Notice that the first case \eqref{das-front} occurs when $#i#<#n#/3$.
-The second case \eqref{das-back} occurs when $#i#>#n#/3$.  When
-$#n#/3\le#i#\le2#n#/3$, we can't be sure whether the operation affects
-#front# or #back#, but in either case, the operation takes $O(#n#)=O(#i#)$
-time, since $#i#\ge #n#/3$.  Summarizing the situation, we have
+Notice that the first case \eqref{das-front} occurs when $#i#<#n#/4$.
+The second case \eqref{das-back} occurs when $#i#\ge 3#n#/4$.  When
+$#n#/4\le#i#<3#n#/4$, we can't be sure whether the operation affects
+#front# or #back#, but in either case, the operation takes
+$O(#n#)=O(#i#)=O(#n#-#i#)$ time, since $#i#\ge #n#/4$ and $#n#-#i#>
+#n#/4$.  Summarizing the situation, we have
 \[
      \mbox{Running time of } #add(i,x)# \le 
           \left\{\begin{array}{ll}
-            O(1+ #i#) & \mbox{if $#i#< #n#/3$} \\
-            O(#n#) & \mbox{if $#n#/3 \le #i# \le 2#n#/3$} \\
-            O(1+#n#-#i#) & \mbox{if $#i# > 2#n#/3$}
+            O(1+ #i#) & \mbox{if $#i#< #n#/4$} \\
+            O(#n#) & \mbox{if $#n#/4 \le #i# < 3#n#/4$} \\
+            O(1+#n#-#i#) & \mbox{if $#i# \ge 3#n#/4$}
           \end{array}\right.
 \]
 Thus, the running time of #add(i,x)# (ignoring the cost of the call to
@@ -510,7 +516,7 @@ Finally, we study the #balance()# operation performed by #add(i,x)#
 and #remove(i)#.  This operation is used to ensure that neither #front#
 nor #back# gets too big (or too small).  It ensures that, unless there
 are fewer than 2 elements, each of #front# and #back# contain at least
-$#n#/3$ elements. If this is not the case, then it moves elements between
+$#n#/4$ elements. If this is not the case, then it moves elements between
 them so that #front# and #back# contain exactly $\lfloor#n#/2\rfloor$
 elements and $\lceil#n#/2\rceil$ elements, respectively.
 
@@ -519,7 +525,7 @@ elements and $\lceil#n#/2\rceil$ elements, respectively.
 There is not much to analyze.  If the #balance()# operation does
 do rebalancing, then it moves $\Theta(#n#)$ elements and this takes
 $O(#n#)$ time. This is bad, since #balance()# is called with each call to
-#add(i,x)# and #remove(i)#.  However, the following theorem shows that,
+#add(i,x)# and #remove(i)#.  However, the following lemma shows that,
 on average, #balance()# only does a constant amount of work per operation
 
 \begin{lem}\lemlabel{dualarraydeque-amortized}
@@ -531,7 +537,7 @@ on average, #balance()# only does a constant amount of work per operation
 \begin{proof}
   We will show that, if #balance()# is forced to shift elements,
   then the number of #add(i,x)# and #remove(i)# operations since the
-  last time #balance()# shifted any elements was at least $#n#/2-1$.
+  last time #balance()# shifted any elements is at least $#n#/2-1$.
   As in the proof of \lemref{arraystack-amortized}, this is sufficient
   to prove that the total work done by #balance()# is $O(m)$.
 
@@ -552,20 +558,20 @@ on average, #balance()# only does a constant amount of work per operation
   Notice that, in this case,
   \begin{eqnarray*}
    #n# & = & #front.size()#+#back.size()# \\
-       & \le & #back.size()/3#+#back.size()# \\
+       & < & #back.size()#/3+#back.size()# \\
        & = & \frac{4}{3}#back.size()#
   \end{eqnarray*}
   Furthermore, the potential at this point in time is
   \begin{eqnarray*}
   \Phi_1 & = & #back.size()# - #front.size()# \\
-      &>& #back.size()# - #back.size()/3# \\
+      &>& #back.size()# - #back.size()#/3 \\
       &=& \frac{2}{3}#back.size()# \\
-      &\ge& \frac{3}{4}\times\frac{2}{3}#n# \\
+      &>& \frac{2}{3}\times\frac{3}{4}#n# \\
       &=& #n#/2
   \end{eqnarray*}
   Therefore, the number of calls to #add(i,x)# or #remove(i)# since
   the last time #balance()# shifted elements is at least $\Phi_1-\Phi_0
-  \ge #n#/2-1$. This completes the proof.
+  > #n#/2-1$. This completes the proof.
 \end{proof}
 
 \subsection{Summary}
@@ -574,7 +580,7 @@ The following theorem summarizes the performance of a #DualArrayStack#
 
 \begin{thm}\thmlabel{dualarraydeque}
   A #DualArrayDeque# implements the #List# interface.  Ignoring the
-  cost of calls to #resize()# and #balance()#, an #DualArrayDeque#
+  cost of calls to #resize()# and #balance()#, a #DualArrayDeque#
   supports the operations
   \begin{itemize}
     \item #get(i)# and #set(i,x)# in $O(1)$ time per operation; and
@@ -591,17 +597,18 @@ The following theorem summarizes the performance of a #DualArrayStack#
 
 One of the drawbacks of all previous data structures in this chapter
 is that, because they store their data in one or two arrays, and they
-don't want to resize these arrays too often, the arrays are frequently
-not very full.  For example, immediately after a #resize()# operation on
+avoid resizing these arrays too often, the arrays are frequently not
+very full.  For example, immediately after a #resize()# operation on
 an #ArrayStack#, the backing array #a# is only half full.  Even worse,
 there are times when only $1/3$ of #a# contains data.
 
 In this section, we discuss a data structure, the #RootishArrayStack#,
 that addresses this problem of wasted space.  The #RootishArrayStack#
 stores #n# elements using $O(\sqrt{#n#})$ arrays.  In these arrays, at
-most $O(\sqrt{#n#})$ array locations are unused.  All remaining array
-locations are used to store data.  Therefore, these data structures waste
-at most $O(\sqrt{#n#})$ space when storing #n# elements.
+most $O(\sqrt{#n#})$ array locations are unused at any time.  All
+remaining array locations are used to store data.  Therefore, these
+data structures waste at most $O(\sqrt{#n#})$ space when storing #n#
+elements.
 
 A #RootishArrayStack# stores its elements in a list of #r#
 arrays called \emph{blocks} that are numbered $0,1,\ldots,#r#-1$.
@@ -610,14 +617,15 @@ Therefore, all #r# blocks contain a total of
 \[
   1+ 2+ 3+\cdots +#r# = #r#(#r#+1)/2
 \]
-elements.  The above formula (allegedly discovered by the Gau\ss\ at
-the age of 9) can be obtained as shown in \figref{gauss}.
+elements.  The above formula (allegedly discovered by the
+mathematician Gau\ss\ at the age of 9) can be obtained as shown in
+\figref{gauss}.
 
 \begin{figure}
   \begin{center}
     \includegraphics{figs/rootisharraystack}
   \end{center}
-  \caption{A sequence of #add(i,x)# and #remove(i)# operation in a
+  \caption{A sequence of #add(i,x)# and #remove(i)# operations on a
   #RootishArrayStack#.  Arrows denote elements being copied. }
   \figlabel{rootisharraystack}
 \end{figure}
@@ -634,12 +642,13 @@ the age of 9) can be obtained as shown in \figref{gauss}.
   \figlabel{gauss}
 \end{figure}
 
-The elements of the list are layed out in the blocks as we might expect.
-The list element with index 0 is stored in block 0,  the elements with
-list indices 1 and 2 are stored in block 1, the elements with list
-indices 3, 4, and 5 are stored in block 2, and so on.  The main problem
-we have to address is that of determining, given an index $#i#$, which
-block contains #i# as well as the index of #i# within its block.
+The elements of the list are layed out in the blocks as we might
+expect.  The list element with index 0 is stored in block 0, the
+elements with list indices 1 and 2 are stored in block 1, the elements
+with list indices 3, 4, and 5 are stored in block 2, and so on.  The
+main problem we have to address is that of determining, given an index
+$#i#$, which block contains #i# as well as the index corresponding to
+#i# within that block.
 
 Determining the index of #i# within its block turns out to be easy. If
 index #i# is in block #b#, then the number of elements in blocks
@@ -650,7 +659,7 @@ $0,\ldots,#b#-1$ is $#b#(#b#+1)/2$.  Therefore, #i# is stored at location
 within block #b#.  Somewhat more challenging is the problem of determining
 the value of #b#.  The number of elements that have indices less than
 or equal to #i# is $#i#+1$.  On the other hand, the number of elements
-in blocks 0,\ldots,b is $(#b#+1)(#b#+2)/2$.  Therefore, #b# is smallest
+in blocks 0,\ldots,b is $(#b#+1)(#b#+2)/2$.  Therefore, #b# is the smallest
 integer such that
 \[
     (#b#+1)(#b#+2)/2 \ge #i#+1 \enspace .
@@ -680,7 +689,7 @@ If we use any of the data structures in this chapter for representing the #block
 
 The #add(i,x)# method will, by now, look familiar.  We first check if
 our data structure is full, by checking if the number of blocks #r#
-is such that that $#r#(#r#+1) = #n#$ and, if so, we call #grow()#
+is such that $#r#(#r#+1)/2 = #n#$ and, if so, we call #grow()#
 to add another block.  With this done, we shift elements with indices
 $#i#,\ldots,#n#-1$ to the right by one position to make room for the
 new element with index #i#:
@@ -709,12 +718,12 @@ therefore $O(#n#-#i#)$
 
 \subsection{Analysis of Growing and Shrinking}
 
-The analysis of #add(i,x)# and #remove(i)# does not account for the cost
-of #grow()# and #shrink()#.  Note that, unlike the #ArrayStack.resize()#
-operation, #grow()# and #shrink()# do not do any copying of data.
-They only allocate or free an array of size #r#.  In some
-environments, this takes only constant time, while in others, it may
-require $\Theta(#r#))$ time.
+The above analysis of #add(i,x)# and #remove(i)# does not account for
+the cost of #grow()# and #shrink()#.  Note that, unlike the
+#ArrayStack.resize()# operation, #grow()# and #shrink()# do not do any
+copying of data.  They only allocate or free an array of size #r#.  In
+some environments, this takes only constant time, while in others, it
+may require $\Theta(#r#))$ time.
 
 We note that, immediately after a call to #grow()# or #shrink()#, the
 situation is clear. The final block is completely empty and all other
@@ -742,18 +751,19 @@ Again, using the quadratic equation on this gives
    #r# \le (3+\sqrt{1+4#n#})/2 = O(\sqrt{#n#})
 \]
 The last two blocks have sizes #r# and #r-1#, so the space wasted by these
-two blocks is at most $2#r# = O(\sqrt{#n#})$.  If we store the blocks
+two blocks is at most $2#r#-1 = O(\sqrt{#n#})$.  If we store the blocks
 in (for example) an #ArrayList#, then the amount of space wasted by the
 #List# that stores those #r# blocks is also $O(#r#)=O(\sqrt{#n#})$.  The
-other space for storing #n# and other accounting information is $O(1)$.
+other space needed for storing #n# and other accounting information is $O(1)$.
 Therefore, the total amount of wasted space in a #RootishArrayStack#
 is $O(\sqrt{#n#})$.
 
-Next, we argue that this is optimal for any data structure that starts out
-empty and can support the addition of one item at a time. More precisely,
-we will show that, at some point during the addition of #n# items, the
-data structure has at least $\sqrt{#n#}$ wasted space (though it may be
-only for a moment).
+Next, we argue that this space usage is optimal for any data structure
+that starts out empty and can support the addition of one item at a
+time. More precisely, we will show that, at some point during the
+addition of #n# items, the data structure is wasting an amount of
+space at least in $\Omega(\sqrt{#n#})$ (though it may be only wasted for a
+moment).
 
 Suppose we start with an empty data structure and we add #n# items
 one at a time.  At the end of this process, all #n# items are stored
@@ -766,7 +776,7 @@ $#n#/#r# > \sqrt{#n#}$.  Consider the moment at which this block was
 first allocated.  Immediately after it was allocated, this block was
 empty, and was therefore wasting $\sqrt{#n#}$ space.  Therefore, at some
 point in time during the insertion of #n# elements, the data structure was
-wasting $O(\sqrt{#n#})$ space.
+wasting $\Omega(\sqrt{#n#})$ space.
 
 \subsection{Summary}
 
@@ -806,10 +816,6 @@ that list item #i# becomes list item $(#i#+#r#)\bmod n$.  When run
 on an #ArrayDeque#, or a #DualArrayDeque#, #rotate(r)# should run in
 $O(1+\min\{r,n-r\})$.
 
-The #List# method #addAll(i,c)# inserts all elements of the
-#Collection# #c# into the list at position #i#.  (The #add(i,x)# method is a special case where $#c#=\{#x#\}$.)  Explain why, for the data structures in this chapter, it is not efficient to implement #addAll(i,c)# by repeated calls to #add(i,x)#.  Describe a more efficient implementation.
-
-
 \item Design and implement a #RandomQueue#.  This is an implementation of #Queue# in which the #remove()# operation removes an element chosen uniformly at random from all of the elements currently stored in the queue.  The #add(x)# and #remove()# operations should run in $O(1)$ time.
 
 \item Modify the #ArrayDeque# implementation so that the shifting done by #add(i,x)#, #remove(i)#, and #resize()# is done using #System.arraycopy(s,i,d,j,n)#.
@@ -817,8 +823,7 @@ The #List# method #addAll(i,c)# inserts all elements of the
 \item Modify the #ArrayDeque# implementation so that it does not use the
 #%# operator (which is expensive on some systems).  Instead, it should make
 use of the fact that, if #a.length# is a power of 2, then
-$#k%a.length#=#k&(a.length-1)#$. (Here, #&# is the bitwise-and operator
-that takes the bitwise and of its two arguments.)
+$#k%a.length#=#k&(a.length-1)#$. (Here, #&# is the bitwise-and operator.)
 
 \item Design and implement a version of a #RootishArrayStack# that has only $O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)# and #remove(i,x)# operations in $O(1+\min\{#i#,#n#-#i#\})$ time.
 

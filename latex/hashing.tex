@@ -130,11 +130,11 @@ as required.
 
 \begin{proof}[Proof of \lemref{universal}]
 Remember that #z# is a randomly-chosen odd integer in the range
-$\{1,\ldots,2^{#w#}-1\}$, so there are $2^{#w#}/2$ possible choices of #z#.
-If we fix #x#,
-#y#, #w#, and #d#, then the proof boils down to showing that the number
-of solutions (in #z#) to the equation $#hash(x)#=#hash(y)#$ is at most
-$2^{#w#-#d#}$.  Therefore, the probability that we pick #z# to be one of these solutions is at most
+$\{1,\ldots,2^{#w#}-1\}$, so there are $2^{#w#}/2$ possible choices
+of #z#.  If we fix #x#, #y#, #w#, and #d#, then the proof boils down
+to showing that the number of solutions (in #z#) to the equation
+$#hash(x)#=#hash(y)#$ is at most $2^{#w#-#d#}$.  Therefore, the
+probability that we pick #z# to be one of these solutions is at most
 \[
 \frac{2^{#w#-#d#}}{2^{#w#}/2} = 2/2^{#d#}
 \]

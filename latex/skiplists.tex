@@ -35,10 +35,11 @@ For an element #x# in a skiplist, we call the \emph{height} of #x# the
 largest value $r$ such that #x# appears in $L_r$.  Thus, for example,
 elements that only appear in $L_0$ have height $0$.  Notice that the
 height of #x# corresponds to the following experiment:  Toss a coin
-repeatedly until the first time it comes up tails.  How many times did
-it come up heads?  The answer, not surprisingly, is that the expected
-height of a node is 1.  The \emph{height} of a skiplist is the maximum
-height of any of its nodes.
+repeatedly until the first time it comes up tails.  How many times did it
+come up heads?  The answer, not surprisingly, is that the expected height
+of a node is 1. (We expect to toss the coin twice before getting tails,
+but we don't count the last toss.) The \emph{height} of a skiplist is
+the maximum height of any of its nodes.
 
 At the head of every list is a special node, called the \emph{sentinel}
 that acts as dummy node for each list. The key property of skiplists
@@ -274,7 +275,8 @@ basic probability.  Several proofs are based on the following basic
 about coin tosses.
 
 \begin{lem}\lemlabel{coin-tosses}
-  Let $T$ be the number of times a fair coin is tossed until the first time it comes up heads.  Then $\E[T]=2$.
+  Let $T$ be the number of times a fair coin is tossed up to and including
+  the first time the coin comes up heads.  Then $\E[T]=2$.
 \end{lem}
 
 \begin{proof}
@@ -286,15 +288,17 @@ about coin tosses.
      \end{array}\right.
   \]
   Note that $I_i=1$ if and only if the first $i-1$ coin tosses are tails,
-  so $\E[I_i]=\Pr\{I_i=1\}=1/2^{i-1}$.  Observe that $T$, the total number of coin tosses, can be written as $T=\sum_{i=1}^{\infty} I_i$.  Therefore,
-\begin{eqnarray*}
-  \E[T] & = & \E\left[\sum_{i=1}^\infty I_i\right] \\
-   & = & \sum_{i=1}^\infty \E\left[I_i\right] \\
-   & = & \sum_{i=1}^\infty 1/2^{i-1} \\
-   & = & 1 + 1/2 + 1/4 + 1/8 + \cdots \\
-   & = & 2 \enspace ,
-\end{eqnarray*}
-as required.
+  so $\E[I_i]=\Pr\{I_i=1\}=1/2^{i-1}$.  Observe that $T$, the total
+  number of coin tosses, can be written as $T=\sum_{i=1}^{\infty} I_i$.
+  Therefore,
+  \begin{eqnarray*}
+    \E[T] & = & \E\left[\sum_{i=1}^\infty I_i\right] \\
+     & = & \sum_{i=1}^\infty \E\left[I_i\right] \\
+     & = & \sum_{i=1}^\infty 1/2^{i-1} \\
+     & = & 1 + 1/2 + 1/4 + 1/8 + \cdots \\
+     & = & 2 \enspace ,
+  \end{eqnarray*}
+  as required.
 \end{proof}
 
 \begin{lem}\lemlabel{skiplist-size1}
