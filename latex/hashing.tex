@@ -11,10 +11,10 @@ table.
 \chaplabel{hashing}
 \section{Multiplicative Hashing with Chaining}
 
-In \emph{hashing with chaining} data is stored as an array of lists:
-
-\javaimport{ods/HashTable.table}
-
+In \emph{hashing with chaining} data is stored as an array of lists,
+and we keep track of the number, #n#, of items stored in the table:
+\javaimport{ods/HashTable.table.n}
+The \emph{hash value} of a data item #x#, denoted #hash(x)# is a value in the range $\{0,\ldots,#table.length#\}$.  All items with hash value #i# are stored in the list at #table[i]#.
 To ensure that lists don't get too long, we maintain the invariant that
 \[
     #n# \le #table.length#
@@ -23,24 +23,26 @@ so that the average number of elements stored in one of these lists is
 $#n#/#table.length# \le 1$.
 
 To add an element #x# to the hash table, first check if the length
-of #table# needs to be increased and, if so, we grow #table#.  With this
-out of the way we hash #x# to get an integer #i# in the range
+of #table# needs to be increased and, if so, we grow #table#.  With
+this out of the way we hash #x# to get an integer #i# in the range
 $\{0,\ldots,#table.size#-1\}$ and we append #x# to the list #table[i]#:
 \javaimport{ods/HashTable.add(x)}
-For any of the list implementations described in Chapters~\ref{chap:arrays} or
-\ref{chap:linkedlists}, this takes only constant time.
+For any of the list implementations
+described in Chapters~\ref{chap:arrays} or \ref{chap:linkedlists},
+this takes only constant time.
 
 To remove an element #x# from the hash table, we again hash it to get
 an integer #i# and we remove #x# from the list #table[i]#:
 \javaimport{ods/HashTable.remove(x)}
 \javaimport{ods/HashTable.removeOne(x)}
-The time this takes depends on the length of the list stored in
-#table[i]#.
+This takes $O(#n#_#i#)$time, where $#n#_#i#$ is the the length of the
+list stored at #table[i]#.
 
-Searching for the element #x# in a hash table is similar.  We hash #x# to get an integer #i# and and then perform a linear search on the list #table[i]#:
+Searching for the element #x# in a hash table is similar.  We hash #x#
+to get an integer #i# and and then perform a linear search on the list
+#table[i]#:
 \javaimport{ods/HashTable.find(x)}
-Again, this takes time proportional to the length of the list 
-#table[i]#.
+Again, this takes time proportional to the length of the list #table[i]#.
 
 The performance of a hash table depends critically on the choice of the
 hash function.  A good hash function will spread the elements evenly
@@ -103,8 +105,9 @@ shows that multiplicative hashing does a good job of avoiding collisions:
 With \lemref{universal-hashing}, the performance of #remove(x)#, and #find(x)# are easily to analyze:
 
 \begin{lem}
-  The expected length of the list #table[hash(x)]# is at most $#n#_{#x#}
-  + 2$, where $#n#_{#x#}$ is the number of occurrences of #x# in the hash table.
+  For any data value #x#, the expected length of the list #table[hash(x)]#
+  is at most $#n#_{#x#} + 2$, where $#n#_{#x#}$ is the number of
+  occurrences of #x# in the hash table.
 \end{lem}
 
 \begin{proof}

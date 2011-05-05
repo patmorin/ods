@@ -56,7 +56,7 @@ public class HashTable<T> extends AbstractCollection<T> {
 	 */
 	@SuppressWarnings({"unchecked"})
 	protected List<T>[] allocTable(int s) {
-		List<T>[] tab = (List<T>[])new ArrayList[s];
+		List<T>[] tab = new ArrayList[s];
 		for (int i = 0; i < s; i++) {
 			tab[i] = new ArrayList<T>();
 		}
@@ -186,10 +186,10 @@ public class HashTable<T> extends AbstractCollection<T> {
 	}
 
 	public Iterator<T> iterator() {
-		class MapIterator implements Iterator<T> {
+		class IT implements Iterator<T> {
 			int i, j;
 			int ilast, jlast;
-			MapIterator() {
+			IT() {
 				i = 0;
 				j = 0;
 				while (i < table.length && table[i].isEmpty())
@@ -216,7 +216,7 @@ public class HashTable<T> extends AbstractCollection<T> {
 				HashTable.this.remove(table[ilast].get(jlast));
 			}		
 		}
-		return new MapIterator();
+		return new IT();
 	}
 	
 	/**
