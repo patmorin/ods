@@ -594,6 +594,7 @@ The following theorem summarizes the performance of a #DualArrayStack#
 
 
 \section{#RootishArrayStack#: A Space-Efficient Array Stack}
+\seclabel{rootisharraystack}
 
 One of the drawbacks of all previous data structures in this chapter
 is that, because they store their data in one or two arrays, and they
@@ -735,6 +736,7 @@ operations, so that the amortized cost of #grow()# and #shrink()# is
 $O(1)$ per operation.
 
 \subsection{Space Usage}
+\seclabel{rootishspaceusage}
 
 Next, we analyze the amount of extra space used by a #RootishArrayStack#.
 In particular, we want to count any space used by a #RootishArrayStack# that is not an array element currently used to hold a list element.  We call all such space \emph{wasted space}.

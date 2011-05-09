@@ -128,12 +128,12 @@ public class SEList<T> extends AbstractSequentialList<T> {
 	
 	/**
 	 * Call this function on a node u such that u and its b-1 successors
-	 * all contains b+1 items.  This adds a new node so that u and its
+	 * all contain b+1 items.  This adds a new node so that u and its
 	 * b successors each contain b items
 	 * @param u
 	 * @return
 	 */
-	public void spread(Node u) {
+	protected void spread(Node u) {
 		Node w = u;
 		for (int j = 0; j < b; j++) {
 			w = w.next;
@@ -148,12 +148,12 @@ public class SEList<T> extends AbstractSequentialList<T> {
 	
 	/**
 	 * Call this function on a node u such that u and its b-1 successors
-	 * all contains b-1 items.  This removes a node so that u and its
+	 * all contain b-1 items.  This removes a node so that u and its
 	 * b-2 successors each contain b items
 	 * @param u
 	 * @return
 	 */
-	public void gather(Node u) {
+	protected void gather(Node u) {
 		Node w = u;
 		for (int j = 0; j < b-1; j++) {
 			while (w.d.size() < b)
@@ -207,11 +207,11 @@ public class SEList<T> extends AbstractSequentialList<T> {
 		}
 		u = l.u;
 		u.d.remove(l.j);
-		while (u.d.size() < b-1 && u.next != dummy && !u.next.d.isEmpty()) {
+		while (u.d.size() < b-1 && u.next != dummy) {
 			u.d.add(u.next.d.remove(0));
-			u = u.next; // TODO: careful about end
+			u = u.next;
 		}
-		if (u.next != dummy && u.next.d.isEmpty()) remove(u.next);
+		if (u.d.isEmpty()) remove(u);
 		n--;
 		return y;
 	}

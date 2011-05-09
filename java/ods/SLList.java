@@ -101,7 +101,7 @@ public class SLList<T> extends AbstractQueue<T> {
 	public T push(T x) {
 		Node u = new Node();
 		u.x = x;
-		u.next = head;;
+		u.next = head;
 		head = u;
 		if (n == 0)
 			tail = u;

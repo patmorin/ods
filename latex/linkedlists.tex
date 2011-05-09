@@ -15,7 +15,7 @@ lose the ability to access any element using #get(i)# or #set(i,x)# in
 constant time.  Instead, we have to walk through the list, one element
 at a time, until we reach the #i#th element.  The primary advantage is
 that they are more dynamic:  Given a reference to any list node #u#, we
-can delete #u# or insert a node adjacent to to #u# in constant time. This
+can delete #u# or insert a node adjacent to #u# in constant time. This
 is true no matter where #u# is in the list.
 
 
@@ -33,14 +33,14 @@ For efficiency, an #SLList# uses variables #head# and #tail# to keep
 track of the first and last node in the sequence, as well as an integer
 #n# to keep track of the length of the sequence:
 \javaimportwithclass{ods/SLList.head.tail.n}
-A sequence of #Stack# and #Queue# operations is illustrated on an
-\figref{sllist} in \figref{sllist}.
+A sequence of #Stack# and #Queue# operations on an #SLList# is
+illustrated in \figref{sllist}.
 
 \begin{figure}
   \begin{center}
     \includegraphics{figs/sllist}
   \end{center}
-  \caption{A sequence of #Queue# (#add(x)# and #remove()#) and #Stack# (#push(x)# and #pop()#) operations in an #SLList#.}
+  \caption{A sequence of #Queue# (#add(x)# and #remove()#) and #Stack# (#push(x)# and #pop()#) operations on an #SLList#.}
   \figlabel{sllist}
 \end{figure}
 
@@ -106,7 +106,7 @@ that follows it and the node #u.prev# that precedes it.
 \javaimport{ods/DLList.Node}
 
 When implementing an #SLList#, we saw that there were always some special
-cases to worry about. For example, removing the last element from a
+cases to worry about. For example, removing the last element from an
 #SLList# or adding an element to an empty #SLList# requires special
 care so that #head# and #tail# are correctly updated.  In a #DLList#,
 the number of these special cases increases considerably.  Perhaps the
@@ -192,11 +192,11 @@ It is worth noting that, if we ignore the cost of the #getNode(i)#
 operation, then all operations on a #DLList# take constant time.
 Thus, the only expensive part of operations on a #DLList# is finding
 the relevant node.  Once we have the relevant node, adding, removing,
-or accessing the data at the node take only constant time.
+or accessing the data at that node take only constant time.
 
 This is in sharp contrast to the array-based #List# implementations of
-\chapref{arrays}. In those implementations, finding the relevant array
-item can be done in constant time. However, addition or removal requires
+\chapref{arrays}. In those implementations, the relevant array
+item can be found in constant time. However, addition or removal requires
 shifting elements in the array and, in general, takes non-constant time.
 
 For this reason, linked list structures are well-suited to applications
@@ -215,12 +215,12 @@ relevant list node in constant time and then the list node is deleted
 
 One of the drawbacks of linked lists (besides the time it takes to
 access elements that are deep within the list) is their space usage.
-Each node in a #DLList# requires an additional 2 references to the next
-and previous node in the list.  Two thirds of the fields in a #Node#
+Each node in a #DLList# requires an additional two references to the next
+and previous nodes in the list.  Two thirds of the fields in a #Node#
 are dedicated to maintaining the list and only one third of the fields
 are for storing data!
 
-A #SEList# (space-efficient list) reduces this wasted space using
+An #SEList# (space-efficient list) reduces this wasted space using
 a simple idea: Rather than store individual elements in a #DLList#,
 we store a block (array) containing several items. More precisely, an
 #SEList# is parameterized by a \emph{block size} #b#. Each individual
@@ -228,7 +228,7 @@ node in an #SEList# stores a block that can hold up to #b+1# elements.
 
 It will turn out, for reasons that become clear later, that it will
 be helpful if we can do #Deque# operations on each block.  The data
-structure we choose for this is an #BDeque# (bounded deque), derived
+structure we choose for this is a #BDeque# (bounded deque), derived
 from the #ArrayDeque# structure described in \secref{arraydeque}.
 The #BDeque# differs from the #ArrayDeque# in one small way: When a
 new #BDeque# is created, the size of the backing array #a#
@@ -249,17 +249,20 @@ An #SEList# is then a doubly-linked list of blocks:
 
 An #SEList# places very tight restrictions on the number of elements
 in a block: Unless a block is the last block, then that block contains
-at least $#b#-1$ and at most $#b#+1$ elements.  This means that, if a
+at least $#b#-1$ and at most $#b#+1$ elements.  This means that, if an
 #SEList# contains #n# elements, then it has at most
 \[
     #n#/(#b#-1) + 1 = O(#n#/#b#)
 \]
-blocks.  The #BDeque# for each block contains an array of length $#b#+1$,
-but otherwise, the amount of memory used by a block is constant.
-This means that the wasted space in an #SEList# is only $O(#n#/#b#)$.
-By choosing a large value of #b# we can make the space-overhead of an
-SEList negligible compared to the amount of memory required to store
-the #n# items in the #SEList#.
+blocks.  The #BDeque# for each block contains an array of length
+$#b#+1$ but, for all blocks except the last, at most a constant amount
+of space is wasted in this array.  The remaining memory used by a
+block is also constant.  This means that the wasted space in an
+#SEList# is only $O(#b#+#n#/#b#)$.  By choosing an appropriate value
+of #b# (ideally in $\Theta(\sqrt{#n#})$) we can make the
+space-overhead of an SEList approach the $\Omega(\sqrt{#n#})$ lower
+bound\footnote{See \secref{rootishspaceusage} for a proof of this lower
+bound.}.
 
 \subsection{Finding Elements}
 
@@ -299,27 +302,27 @@ so they also run in $O(1+\min\{#i#,#n#-#i#\}/#b#)$ time.
 
 \subsection{Adding an Element}
 
-Where things start to get complicated is when adding elements.  Before
+Where things start to get complicated is in adding elements.  Before
 considering the general case, we first consider the easier operation,
 #add(x)#, in which #x# is added to the end of the list.  In this case,
-#x# will go at the end of the last block.  If the last block is full
-(or does not exist because there are no blocks yet), then we allocate a
-new block and append it the list of blocks.  Now that we are sure that
-the last block exists and is not full, we append #x# to the last block.
+if the last block is full (or does not exist because there are no
+blocks yet), then we first allocate a new block and append it to the
+list of blocks.  Now that we are sure that the last block exists and
+is not full, we append #x# to the last block.
 
 \javaimport{ods/SEList.add(x)}
 
-Things get more complicated when we add in the interior of the list
+Things get more complicated when we add to the interior of the list
 using #add(i,x)#.  We first locate #i# to get the node #u# whose block
-contains the #i#th list item.  The problem is that we want to insert #x#
-into #u#'s block, but we have to be prepared for the case where #u#'s
-block already contains $#b#+1$ elements, so that it is full and there
-is no room for #x#.
+contains the #i#th list item.  The problem is that we want to insert
+#x# into #u#'s block, but we have to be prepared for the case where
+#u#'s block already contains $#b#+1$ elements, so that it is full and
+there is no room for #x#.
 
 Let $#u#_0,#u#_1,#u#_2,\ldots$ denote #u#, #u.next#, #u.next.next#,
-and so on.  We explore in $#u#_0,#u#_1,#u#_2,\ldots$ looking for a node
-that can provide space for #x#.  Three cases can occur during our space
-exploration (see \figref{selist-add}): 
+and so on.  We explore $#u#_0,#u#_1,#u#_2,\ldots$ looking for a node
+that can provide space for #x#.  Three cases can occur during our
+space exploration (see \figref{selist-add}):
 
 \begin{figure}
   \noindent
@@ -336,12 +339,12 @@ exploration (see \figref{selist-add}):
 
 
 \begin{enumerate}
-\item We quickly (in $r < #b#$ steps) find a node $#u#_r$ whose block
+\item We quickly (in $r+1\le #b#$ steps) find a node $#u#_r$ whose block
 is not full.  In this case, we perform $r$ shifts of an element from
 one block into the next, so that the free space in $#u#_r$ becomes a
 free space in $#u#_0$.  We can then insert #x# into $#u#_0$'s block.
 
-\item We quickly (in $r<#b#$ steps) run off the end of the list
+\item We quickly (in $r+1\le #b#$ steps) run off the end of the list
 of blocks.  In this case, we add a new empty block to the end of the
 list of blocks and proceed as in the first case.
 
@@ -361,7 +364,7 @@ the three cases above occurs.  Cases~1 and 2 involve examining and
 shifting elements through at most #b# blocks and take $O(#b#)$ time.
 Case~3 involves calling the #spread(u)# method, which  moves $#b#(#b#+1)$
 elements and takes $O(#b#^2)$ time.  If we ignore the cost of Case~3
-(which we will account for later using amortization) this means that
+(which we will account for later with amortization) this means that
 the total running time to locate #i# and perform the insertion of #x#
 is $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$.
 
@@ -370,7 +373,7 @@ is $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$.
 Removing an element, using the #remove(i)# method from an #SEList#
 is similar to adding an element.  We first locate the node #u# that
 contains the element with index #i#. Now, we have to be prepared for
-the case that we cannot remove an element from #u# without causing #u#'s
+the case where we cannot remove an element from #u# without causing #u#'s
 block to have size less than $#b#-1$, which is not allowed.
 
 Again, let $#u#_0,#u#_1,#u#_2,\ldots$ denote #u#, #u.next#, #u.next.next#,
@@ -388,23 +391,23 @@ than $#b#-1$.  There are three cases to consider
       \includegraphics{figs/selist-remove-c}\\
     \end{tabular}
   \end{center}
-  \caption{The three cases that occur during the removeition of an item #x# in the interior of an #SEList#.  (This #SEList# has block size $#b#=3$.)}
+  \caption{The three cases that occur during the removal of an item #x# in the interior of an #SEList#.  (This #SEList# has block size $#b#=3$.)}
   \figlabel{selist-remove}
 \end{figure}
 
 
 \begin{enumerate}
-\item We quickly (in $r < #b#$ steps) find a node whose block contains
+\item We quickly (in $r+1\le #b#$ steps) find a node whose block contains
 more than $#b#-1$ elements. In this case, we perform $r$ shifts of an
 element from one block into the previous, so that the extra element in
-$#u#_r$ becomes a an extra element in $#u#_0$.  We can then remove the
+$#u#_r$ becomes an extra element in $#u#_0$.  We can then remove the
 appropriate element from $#u#_0$'s block.
 
-\item We quickly (in $r<#b#$ steps) run off the end of the list of blocks.
+\item We quickly (in $r+1\le #b#$ steps) run off the end of the list of blocks.
 In this case, $#u#_r$ is the last block, and there is no requirement that
 $#u#_r$'s block contain at least $#b#-1$ elements.  Therefore, we proceed
 as above, borrowing an element from $#u#_r$ to make an extra element in
-$#u#_0$.  If this causes $#u#_r$ block to become empty, then we remove it.
+$#u#_0$.  If this causes $#u#_r$'s block to become empty, then we remove it.
 
 \item After #b# steps we do not find any block containing more than
 $#b#-1$ elements.  In this case, $#u#_0,\ldots,#u#_{#b#-1}$ is a sequence
@@ -432,7 +435,7 @@ The running time of each of these methods is dominated by the two
 nested loops.  Both the inner loop and outer loop execute at most
 $#b#+1$ times, so the total running time of each of these methods
 is $O((#b#+1)^2)=O(#b#^2)$. However, the following lemma shows that
-these methods only execute on one out of every #b# calls to #add(i,x)#
+these methods execute on at most one out of every #b# calls to #add(i,x)#
 or #remove(i)#.
 
 \begin{lem}\lemlabel{selist-amortized}
@@ -461,14 +464,14 @@ or #remove(i)#.
 
   Finally, if Case~3 occurs, it is because $#u#_0,\ldots,#u#_{#b#-1}$
   are all fragile nodes.  Then $#spread(#u_0#)#$ is called and these #b#
-  fragile nodes are replace with $#b#+1$ strong nodes.  Finally, #x#
+  fragile nodes are replaced with $#b#+1$ strong nodes.  Finally, #x#
   is added to $#u#_0$'s block, making $#u#_0$ fragile.  In total the
   potential decreases by $#b#-1$.
 
   In summary, the potential starts at 0 (there are no nodes in the list).
   Each time Case~1 or Case~2 occurs, the potential increases by at
   most 1.  Each time Case~3 occurs, the potential decreases by $#b#-1$.
-  The potential, which counts the number of fragile nodes) is never
+  The potential (which counts the number of fragile nodes) is never
   less than 0.  We conclude that, for every occurence of Case~3, there
   are at least $#b#-1$ occurences of Case~1 or Case~2.  Thus, for every
   call to #spread(u)# there are at least #b# calls to #add(i,x)#.  This
@@ -486,7 +489,7 @@ structure:
   supports the operations
   \begin{itemize}
     \item #get(i)# and #set(i,x)# in $O(1+\min\{#i#,#n#-#i#\}/#b#)$ time per operation; and
-    \item #add(i,x)# and #remove(i)# in $O(b+\min\{#i#,#n#-#i#\}/#b#)$ time per operation.
+    \item #add(i,x)# and #remove(i)# in $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$ time per operation.
   \end{itemize}
   Furthermore, beginning with an empty #SEList#, any sequence of $m$
   #add(i,x)# and #remove(i)# operations results in a total of $O(#b#m)$
@@ -494,17 +497,17 @@ structure:
 
   The space (measured in words)\footnote{Recall \secref{model} for a
   discussion of how memory is measured.} used by an #SEList#
-  that stores #n# elements is $#n# +O(#n#/b)$.
+  that stores #n# elements is $#n# +O(#b# + #n#/#b#)$.
 \end{thm}
 
 The #SEList# is a tradeoff between an #ArrayList# and a #DLList# where
-the relative mix of these two structures depends on the block size #b#.
-At the extreme $#b#=2$, each #SEList# node stores at most 3 values,
-and is not really much different than a #DLList#. At the other extreme,
-$#b#>#n#$, in which case all the elements are stored in a single array,
-just like an #ArrayList#.  In between these two extremes is a tradeoff
-between the time it takes to add or remove a list item and the time it
-takes to locate a particular list item.
+the relative mix of these two structures depends on the block size
+#b#.  At the extreme $#b#=2$, each #SEList# node stores at most 3
+values, which is really not much different than a #DLList#. At the other
+extreme, $#b#>#n#$, all the elements are stored in a single array,
+just like in an #ArrayList#.  In between these two extremes lies a
+tradeoff between the time it takes to add or remove a list item and
+the time it takes to locate a particular list item.
 
 \section{Exercises}
 
@@ -512,10 +515,6 @@ takes to locate a particular list item.
 \item Why is it not possible, in a #SLList# to use a dummy node to avoid
   all the special cases that occur in the operations #push(x)#, #pop()#,
   #add(x)#, and #remove()#?
-
-\item Describe and implement the #List# operations #get(i)#, #set(i,x)#,
-  #add(i,x)# and #remove(i)# on an #SLList#.  Each of these operations
-  should run in $O(1+#i#)$ time.
 
 \item Describe and implement the #List# operations #get(i)#, #set(i,x)#,
   #add(i,x)# and #remove(i)# on an #SLList#.  Each of these operations
