@@ -66,7 +66,8 @@ integer $#x#\in\{0,\ldots,2^{#w#}-1\}$ is
     #hash#(#x#) = ((#z#\cdot#x#) \bmod 2^{#w#}) \ddiv 2^{#w#-#d#} \enspace .
 \]
 Here #z# is a randomly chosen \emph{odd} integer in
-$\{1,\ldots,2^{#w#}-1\}$.  This hash function can be realized very
+$\{1,\ldots,2^{#w#}-1\}$.
+This hash function can be realized very
 efficiently by observing that, by default, operations on integers
 are already done modulo $2^{#w#}$ where $#w#$ is the number of bits in
 an integer.  (See \figref{multihashing}.) Furthermore, integer division
@@ -93,8 +94,7 @@ implements the above formula is simpler than the formula itself:
   \figlabel{multihashing}
 \end{figure}
 
-
-The following theorem, whose proof requires some basic number theory,
+The following lemma, whose proof requires some basic number theory,
 shows that multiplicative hashing does a good job of avoiding collisions:
 
 \begin{lem}\lemlabel{universal-hashing}
@@ -102,7 +102,8 @@ shows that multiplicative hashing does a good job of avoiding collisions:
   $#x#\neq #y#$. Then $\Pr\{#hash(x)#=#hash(y)#\} \le 2/2^d$.
 \end{lem}
 
-With \lemref{universal-hashing}, the performance of #remove(x)#, and #find(x)# are easily to analyze:
+With \lemref{universal-hashing}, the performance of #remove(x)#, and
+#find(x)# are easily to analyze:
 
 \begin{lem}
   For any data value #x#, the expected length of the list #table[hash(x)]#
@@ -111,36 +112,102 @@ With \lemref{universal-hashing}, the performance of #remove(x)#, and #find(x)# a
 \end{lem}
 
 \begin{proof}
-Let $S$ be the (multi-)set of elements stored in the hash table that are not equal to #x#.  For an element $#y#\in S$, define the indicator variable 
-  \[ I_{#y#} = \left\{\begin{array}{ll}
-     1 & \mbox{if $#hash(x)#=#hash(y)#$} \\
-     0 & \mbox{otherwise}
-     \end{array}\right.
-  \]
-and notice that, by \lemref{universal-hashing}, $\E[I_{#y#}] \le 2/#table.size#$.
-The expected length of the list #table[hash(x)]# is given by
-\begin{eqnarray*}
- \E\left[|#table[hash(x)]#|\right] &=& \E\left[#n#_{#x#} + \sum_{#y#\in S} I_{#y#}\right] \\
-  &=& #n#_{#x#} + \sum_{#y#\in S} \E [I_{#y#} ] \\
-  &\le& #n#_{#x#} + \sum_{#y#\in S} 2/#table.size# \\
-  &\le& #n#_{#x#} + \sum_{#y#\in S} 2/#n# \\
-  &\le& #n#_{#x#} + (#n#-#n#_{#x#})2/#n# \\
-  &\le& #n#_{#x#} + 2 \enspace ,
-\end{eqnarray*}
-as required.
+  Let $S$ be the (multi-)set of elements stored in the hash table that
+  are not equal to #x#.  For an element $#y#\in S$, define the indicator
+  variable
+    \[ I_{#y#} = \left\{\begin{array}{ll}
+       1 & \mbox{if $#hash(x)#=#hash(y)#$} \\
+       0 & \mbox{otherwise}
+       \end{array}\right.
+    \]
+  and notice that, by \lemref{universal-hashing}, $\E[I_{#y#}] \le
+  2/#table.size#$.  The expected length of the list #table[hash(x)]#
+  is given by
+  \begin{eqnarray*}
+   \E\left[|#table[hash(x)]#|\right] &=& \E\left[#n#_{#x#} + \sum_{#y#\in S} I_{#y#}\right] \\
+    &=& #n#_{#x#} + \sum_{#y#\in S} \E [I_{#y#} ] \\
+    &\le& #n#_{#x#} + \sum_{#y#\in S} 2/#table.size# \\
+    &\le& #n#_{#x#} + \sum_{#y#\in S} 2/#n# \\
+    &\le& #n#_{#x#} + (#n#-#n#_{#x#})2/#n# \\
+    &\le& #n#_{#x#} + 2 \enspace ,
+  \end{eqnarray*}
+  as required.
 \end{proof}
 
+Now, we want to prove \lemref{universal-hashing}, but we first give the
+number theoretic tool we need:
 
-\begin{proof}[Proof of \lemref{universal}]
-Remember that #z# is a randomly-chosen odd integer in the range
-$\{1,\ldots,2^{#w#}-1\}$, so there are $2^{#w#}/2$ possible choices
-of #z#.  If we fix #x#, #y#, #w#, and #d#, then the proof boils down
-to showing that the number of solutions (in #z#) to the equation
-$#hash(x)#=#hash(y)#$ is at most $2^{#w#-#d#}$.  Therefore, the
-probability that we pick #z# to be one of these solutions is at most
+\begin{lem}\lemlabel{hashing-mapping}
+Let $S$ be the set of odd integers in $\{1,\ldots,2^{#w#}-1\}$, Let $t$
+and $i$ be any two elements in $S$.  Then there is exactly one value $#z#\in
+S$ such that $zt\bmod 2^{#w#} = i$.
+\end{lem}
+
+\begin{proof}
+Since the number of choices for #z# and #i# are the same, it is sufficient
+to prove that there is at most one value $#z#\in S$ that satisifies
+$zt\bmod 2^{#w#} = i$.
+
+Suppose, for the sake of contradiction, that there are two such values
+#z# and #z'#.  Then
 \[
-\frac{2^{#w#-#d#}}{2^{#w#}/2} = 2/2^{#d#}
+   #z##t#\bmod 2^{#w#} = #z#'#t# \bmod 2^{#w#} = i
 \]
+So
+\[ (#z#-#z#')#t#\bmod 2^{#w#} = 0 \]
+But this means that 
+\[ (#z#-#z#')#t# = #k# 2^{#w#} \]
+for some integer $#k#$.  Furthermore $#k#\neq 0$ since $#t#\neq 0$ and $#z#-#z#'\neq 0$.
+But this is impossible since $#t#$ is odd (so its prime factorization contains no 2's) and $|#z#-#z#'| < 2^{#w#}$ (so the prime factorization of $#z#-#z#'$ has fewer than $#w#$ 2's).
+\end{proof}
+
+The utility of \lemref{hashing-mapping} comes from the following
+observation:  If #z# is chosen uniformly at random from $S$, then #zt#
+is uniformly distributed over $S$.  In the following proof, it helps
+to think of the binary representation of #z#, which consists of $#w#-1$
+random bits followed by a 1.
+
+\begin{proof}[Proof of \lemref{universal-hashing}]
+First we note that the condition #hash(x)=hash(y)# is equivalent to
+the statement ``the highest-order #d# bits of $#z##x#\bmod2^{#w#}$
+and the highest-order #d# bits of $#z##y#\bmod 2^{#w#}$ are the same.''
+Equivalently, the highest-order #d# bits in the binary representation
+of $#z#(#x#-#y#)\bmod 2^{#w#}$ are either all 0's or all 1's:
+\begin{equation}
+    \underbrace{0,\ldots 0}_{#d#},\underbrace{*,\ldots,*}_{#w#-#d#} 
+    \eqlabel{all-zeros}
+\end{equation}
+or:
+\begin{equation}
+    \underbrace{1,\ldots 1}_{#d#},\underbrace{*,\ldots,*}_{#w#-#d#} \enspace .
+    \eqlabel{all-ones}
+\end{equation}
+Therefore, we only have to bound the probability that 
+$#z#(#x#-#y#)\bmod 2^{#w#}$ looks like \eqref{all-zeros} or \eqref{all-ones}.
+
+Let $#t#$ be the unique odd integer such that $#x#-#y#=#t#2^r$ for some integer
+$r\ge 0$. By \lemref{hashing-mapping}, the binary representation of
+$#z##t#\bmod 2^{#w#}$ has $#w#-1$ random bits, followed by a 1:
+\[
+ #z##t#\bmod 2^{#w#}  = \underbrace{b_{#w#-1},\ldots b_{1}}_{#w#-1},1
+\]
+Therefore, the binary representation of $#z#(#x#-#y#)\bmod 2^{#w#}$ has
+$#w#-r-1$ random bits, followed by a 1, followed by $r$ 0's:
+\[
+#z#(#x#-#y#)\bmod 2^{#w#}  =
+#z##t#2^{r} =
+    \underbrace{b_{#w#-r-1},\ldots b_{1}}_{#w#-r-1},1,\underbrace{0,0,\ldots,0}_{r}
+\]
+We can now finish the proof:  If $r > #w#-#d#$, then higher order bits of
+$#z#(#x#-#y#)\bmod 2^{#w#}$  contain both 0's and 1's, so the probability that
+$#z#(#x#-#y#)\bmod 2^{#w#}$ looks like \eqref{all-zeros} or \eqref{all-ones}
+is 0.  If $#r#=#w#-#d#$, then the probability of looking like \eqref{all-zeros}
+is 0, but the probability of looking like \eqref{all-ones} is
+$1/2^{#d#-1}=2/2^{#d#}$ (since we must have $b_1,\ldots,b_{d-1}=0,\ldots,0$).
+If $r < #w#-#d#$ then we must have $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=0,\ldots,0$
+or $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=1,\ldots,1$.  The probability of each of
+these cases is $1/2^{#d#}$ and they are mutually exclusive, so the probability
+of either of these cases is $2/2^{#d#}$.  This completes the proof.
 \end{proof}
 
 
