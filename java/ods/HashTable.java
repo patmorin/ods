@@ -42,7 +42,7 @@ public class HashTable<T> extends AbstractCollection<T> {
 	/**
 	 * Create a new empty hash table
 	 */
-	HashTable() {
+	public HashTable() {
 		d = 0;
 		t = allocTable(1<<d);
 		Random r = new Random();
