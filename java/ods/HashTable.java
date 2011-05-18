@@ -17,7 +17,7 @@ public class HashTable<T> extends AbstractCollection<T> {
 	/**
 	 * The hash table
 	 */
-	List<T>[] table;
+	List<T>[] t;
 
 	/**
 	 * The "dimension" of the table (table.length = 2^d)
@@ -44,7 +44,7 @@ public class HashTable<T> extends AbstractCollection<T> {
 	 */
 	HashTable() {
 		d = 0;
-		table = allocTable(1<<d);
+		t = allocTable(1<<d);
 		Random r = new Random();
 		z = r.nextInt() | 1;     // is a random odd integer
 	}
@@ -68,8 +68,8 @@ public class HashTable<T> extends AbstractCollection<T> {
 	 */
 	protected void resize(int d) {
 		this.d = d;
-		List<T>[] oldTable = table;
-		table = allocTable(1<<d);
+		List<T>[] oldTable = t;
+		t = allocTable(1<<d);
 		for (int i = 0; i < oldTable.length; i++) {
 			for (T x : oldTable[i]) {
 				add(x);
@@ -112,9 +112,9 @@ public class HashTable<T> extends AbstractCollection<T> {
 	 * already present
 	 */
 	public boolean add(T x) {
-		if (n+1 > table.length)
+		if (n+1 > t.length)
 			grow();
-		table[hash(x)].add(x);
+		t[hash(x)].add(x);
 		n++;
 		return true;
 	}
@@ -126,7 +126,7 @@ public class HashTable<T> extends AbstractCollection<T> {
 	 */
 	public int removeAll(Object x) {
 		int r = 0;
-		Iterator<T> it = table[hash(x)].iterator();
+		Iterator<T> it = t[hash(x)].iterator();
 		while (it.hasNext()) {
 			T y = it.next();
 			if (y.equals(x)) {
@@ -139,7 +139,7 @@ public class HashTable<T> extends AbstractCollection<T> {
 	}
 
 	public T removeOne(Object x) {
-		Iterator<T> it = table[hash(x)].iterator();
+		Iterator<T> it = t[hash(x)].iterator();
 		while (it.hasNext()) {
 			T y = it.next();
 			if (y.equals(x)) {
@@ -162,7 +162,7 @@ public class HashTable<T> extends AbstractCollection<T> {
 	 * is true, or null if no such element y exists
 	 */
 	public T find(Object x) {
-		for (T y : table[hash(x)])
+		for (T y : t[hash(x)])
 			if (y.equals(x))
 				return y;
 		return null;
@@ -177,7 +177,7 @@ public class HashTable<T> extends AbstractCollection<T> {
 	public List<T> findAll(Object x) {
 		List<T> l = new LinkedList<T>();
 		int i = (x.hashCode() * z) >>> (w-d);
-		for (T y : table[i]) {
+		for (T y : t[i]) {
 			if (y.equals(x)) {
 				l.add(y);
 			}
@@ -192,28 +192,28 @@ public class HashTable<T> extends AbstractCollection<T> {
 			IT() {
 				i = 0;
 				j = 0;
-				while (i < table.length && table[i].isEmpty())
+				while (i < t.length && t[i].isEmpty())
 					i++;
 			}
 			protected void jumpToNext() {
-				while (i < table.length && j + 1 > table[i].size()) {
+				while (i < t.length && j + 1 > t[i].size()) {
 					j = 0;
 					i++;
 				}
 			}
 			public boolean hasNext() {
-				return i < table.length;
+				return i < t.length;
 			}
 			public T next() {
 				ilast = i;
-				jlast = j;
-				T x =  table[i].get(j);
+				jlast = j; 
+				T x =  t[i].get(j);
 				j++;
 				jumpToNext();
 				return x;
 			}
 			public void remove() {
-				HashTable.this.remove(table[ilast].get(jlast));
+				HashTable.this.remove(t[ilast].get(jlast));
 			}		
 		}
 		return new IT();
