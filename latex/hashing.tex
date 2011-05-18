@@ -1,63 +1,78 @@
 \chapter{Hash Tables}
 \chaplabel{hashtables}
 
-Hash tables are an efficient method of store a small number, #n#, of
-integers from a large range $U=\{0,\ldots,2^{#w#}-1\}$.   Sometimes
-hash tables store data that is not integers.  In this case, an integer
-\emph{hash code} is associated and this hash code is used in the hash
-table.
+Hash tables are an efficient method of storing a small number,
+#n#, of integers from a large range $U=\{0,\ldots,2^{#w#}-1\}$.
+The term \emph{hash table} includes a broad range of data structures.
+This chapter focuses on one of the most common implementations of hash
+tables, namely hashing with chaining.
+
+Very often hash tables store data that is not integers.  In this case,
+an integer \emph{hash code} is associated with each data item and this
+hash code is used in the hash table.  The second part of this chapter
+discusses how such hash codes are generated.
 
 
 \chaplabel{hashing}
-\section{Multiplicative Hashing with Chaining}
+\section{HashTable: Hashing with Chaining}
 
-In \emph{hashing with chaining} data is stored as an array of lists,
-and we keep track of the number, #n#, of items stored in the table:
-\javaimport{ods/HashTable.table.n}
-The \emph{hash value} of a data item #x#, denoted #hash(x)# is a value in the range $\{0,\ldots,#table.length#\}$.  All items with hash value #i# are stored in the list at #table[i]#.
+A #HashTable# data structure uses \emph{hashing with chaining} to store
+data as an array #t# of lists.  An integer, #n#, keeps track of the
+total number of items in all lists:
+\javaimport{ods/HashTable.t.n}
+The \emph{hash value} of a data item #x#, denoted #hash(x)# is a value in the range $\{0,\ldots,#t.length#-1\}$.  All items with hash value #i# are stored in the list at #t[i]#.
 To ensure that lists don't get too long, we maintain the invariant that
 \[
-    #n# \le #table.length#
+    #n# \le #t.length#
 \]
 so that the average number of elements stored in one of these lists is 
-$#n#/#table.length# \le 1$.
+$#n#/#t.length# \le 1$.
 
-To add an element #x# to the hash table, first check if the length
-of #table# needs to be increased and, if so, we grow #table#.  With
+To add an element #x# to the hash table, we first check if the length
+of #t# needs to be increased and, if so, we grow #t#.  With
 this out of the way we hash #x# to get an integer #i# in the range
-$\{0,\ldots,#table.size#-1\}$ and we append #x# to the list #table[i]#:
+$\{0,\ldots,#t.length#-1\}$ and we append #x# to the list #t[i]#:
 \javaimport{ods/HashTable.add(x)}
-For any of the list implementations
-described in Chapters~\ref{chap:arrays} or \ref{chap:linkedlists},
-this takes only constant time.
+Growing the table, if necessary, involves doubling the lenght of #t#
+and reinserting all elements into the new table.  This is exactly the
+same strategy used in the implementation of #ArrayStack# and the same
+result applies: The cost of growing is only constant when amortized
+over a sequence of insertions (See~\lemref{arraystack-amortized} on
+Page~\pageref{lem:arraystack-amortized}).
 
-To remove an element #x# from the hash table, we again hash it to get
-an integer #i# and we remove #x# from the list #table[i]#:
+Besides growing, the only other work done when adding #x# to a
+#HashTable# involves appending #x# to the list #t[hash(x)]#.  For any of
+the list implementations described in Chapters~\ref{chap:arrays} or
+\ref{chap:linkedlists}, this takes only constant time.
+
+To remove an element #x# from the hash table we iterate over the list
+#t[hash(x)]# until we find #x# so that we can remove it:
 \javaimport{ods/HashTable.remove(x)}
 \javaimport{ods/HashTable.removeOne(x)}
-This takes $O(#n#_#i#)$time, where $#n#_#i#$ is the the length of the
-list stored at #table[i]#.
+This takes $O(#n#_#hash(x)#)$time, where $#n#_#i#$ denotes the length
+of the list stored at #t[i]#.
 
-Searching for the element #x# in a hash table is similar.  We hash #x#
-to get an integer #i# and and then perform a linear search on the list
-#table[i]#:
+Searching for the element #x# in a hash table is similar.  We perform a linear search on the list
+#t[hash(x)]#:
 \javaimport{ods/HashTable.find(x)}
-Again, this takes time proportional to the length of the list #table[i]#.
+Again, this takes time proportional to the length of the list #t[hash(x)]#.
 
 The performance of a hash table depends critically on the choice of the
 hash function.  A good hash function will spread the elements evenly
-among the #table.length# lists, so that the expected size of the list
-#table[hash(x)]# is roughly $O(#n#/#table.size)# = O(1)$.  On the other
+among the #t.length# lists, so that the expected size of the list
+#t[hash(x)]# is $O(#n#/#t.length)# = O(1)$.  On the other
 hand, a bad hash function will hash all values (including #x#) to the
-same table location, in which case the size of the list #table[hash(x)]#
+same table location, in which case the size of the list #t[hash(x)]#
 will be #n#.  In the next section we describe a good hash function.
 
 \subsection{Multiplicative Hashing}
+\seclabel{multihash}
 
-Multiplicative hashing is an efficient form of hashing based on modular
-arithmetic (discussed in \secref{arrayqueue}) and integer division.
-It uses the $\ddiv$ operator, which does division without remainder.
-For any integers $a\ge 0$ and $b\ge 1$, $a\ddiv b = \lfloor a/b\rfloor$.
+Multiplicative hashing is an efficient method of getting hash values
+that is based on modular arithmetic (discussed in \secref{arrayqueue})
+and integer division.  It uses the $\ddiv$ operator, which does division
+without remainder.  For any integers $a\ge 0$ and $b\ge 1$, $a\ddiv b =
+\lfloor a/b\rfloor$.
 
 In multiplicative hashing, we use a hash table of size $2^{#d#}$ for some
 integer #d# (called the \emph{dimension}).  The formula for hashing an
@@ -94,19 +109,19 @@ implements the above formula is simpler than the formula itself:
   \figlabel{multihashing}
 \end{figure}
 
-The following lemma, whose proof requires some basic number theory,
+The following lemma, whose proof is deferred until later in this section,
 shows that multiplicative hashing does a good job of avoiding collisions:
 
 \begin{lem}\lemlabel{universal-hashing}
-  Let #x# and #y# be any two values in $\{0,\ldots,2^{#w#-1}\}$ with
-  $#x#\neq #y#$. Then $\Pr\{#hash(x)#=#hash(y)#\} \le 2/2^d$.
+  Let #x# and #y# be any two values in $\{0,\ldots,2^{#w#}-1\}$ with
+  $#x#\neq #y#$. Then $\Pr\{#hash(x)#=#hash(y)#\} \le 2/2^{#d#}$.
 \end{lem}
 
 With \lemref{universal-hashing}, the performance of #remove(x)#, and
 #find(x)# are easily to analyze:
 
 \begin{lem}
-  For any data value #x#, the expected length of the list #table[hash(x)]#
+  For any data value #x#, the expected length of the list #t[hash(x)]#
   is at most $#n#_{#x#} + 2$, where $#n#_{#x#}$ is the number of
   occurrences of #x# in the hash table.
 \end{lem}
@@ -121,12 +136,12 @@ With \lemref{universal-hashing}, the performance of #remove(x)#, and
        \end{array}\right.
     \]
   and notice that, by \lemref{universal-hashing}, $\E[I_{#y#}] \le
-  2/#table.size#$.  The expected length of the list #table[hash(x)]#
+  2/2^{#d#}=2/#t.length#$.  The expected length of the list #t[hash(x)]#
   is given by
   \begin{eqnarray*}
-   \E\left[|#table[hash(x)]#|\right] &=& \E\left[#n#_{#x#} + \sum_{#y#\in S} I_{#y#}\right] \\
+   \E\left[|#t[hash(x)]#|\right] &=& \E\left[#n#_{#x#} + \sum_{#y#\in S} I_{#y#}\right] \\
     &=& #n#_{#x#} + \sum_{#y#\in S} \E [I_{#y#} ] \\
-    &\le& #n#_{#x#} + \sum_{#y#\in S} 2/#table.size# \\
+    &\le& #n#_{#x#} + \sum_{#y#\in S} 2/#t.length# \\
     &\le& #n#_{#x#} + \sum_{#y#\in S} 2/#n# \\
     &\le& #n#_{#x#} + (#n#-#n#_{#x#})2/#n# \\
     &\le& #n#_{#x#} + 2 \enspace ,
@@ -134,31 +149,63 @@ With \lemref{universal-hashing}, the performance of #remove(x)#, and
   as required.
 \end{proof}
 
-Now, we want to prove \lemref{universal-hashing}, but we first give the
-number theoretic tool we need:
+Now, we want to prove \lemref{universal-hashing}, but we first need
+a number-theory result.  In the following proof, we use the notation
+$(b_r,\ldots,b_0)_2$ to denote $\sum_{i=0}^r b_i2^i$, i.e,. the integer
+whose binary representation is given by $b_r,\ldots,b_0$.  Each bit $b_i$
+is either a 0 or a 1.  We use $\star$ to denote a bit whose value we
+don't know.
 
 \begin{lem}\lemlabel{hashing-mapping}
-Let $S$ be the set of odd integers in $\{1,\ldots,2^{#w#}-1\}$, Let $t$
-and $i$ be any two elements in $S$.  Then there is exactly one value $#z#\in
-S$ such that $zt\bmod 2^{#w#} = i$.
+  Let $S$ be the set of odd integers in $\{1,\ldots,2^{#w#}-1\}$, Let $q$
+  and $i$ be any two elements in $S$.  Then there is exactly one value
+  $#z#\in S$ such that $#z#q\bmod 2^{#w#} = i$.
 \end{lem}
 
 \begin{proof}
-Since the number of choices for #z# and #i# are the same, it is sufficient
-to prove that there is at most one value $#z#\in S$ that satisifies
-$zt\bmod 2^{#w#} = i$.
+  Since the number of choices for $#z#$ and $i$ are the same, it is
+  sufficient to prove that there is at most one value $#z#\in S$ that
+  satisifies $#z#q\bmod 2^{#w#} = i$.
 
-Suppose, for the sake of contradiction, that there are two such values
-#z# and #z'#.  Then
-\[
-   #z##t#\bmod 2^{#w#} = #z#'#t# \bmod 2^{#w#} = i
-\]
-So
-\[ (#z#-#z#')#t#\bmod 2^{#w#} = 0 \]
-But this means that 
-\[ (#z#-#z#')#t# = #k# 2^{#w#} \]
-for some integer $#k#$.  Furthermore $#k#\neq 0$ since $#t#\neq 0$ and $#z#-#z#'\neq 0$.
-But this is impossible since $#t#$ is odd (so its prime factorization contains no 2's) and $|#z#-#z#'| < 2^{#w#}$ (so the prime factorization of $#z#-#z#'$ has fewer than $#w#$ 2's).
+  Suppose, for the sake of contradiction, that there are two such values
+  #z# and #z'#, with $#z#>#z#'$.  Then
+  \[
+     #z#q\bmod 2^{#w#} = #z#'q \bmod 2^{#w#} = i
+  \]
+  So
+  \[ 
+     (#z#-#z#')q\bmod 2^{#w#} = 0 
+  \]
+  But this means that 
+  \begin{equation}
+    (#z#-#z#')q = k 2^{#w#} \eqlabel{factors} 
+  \end{equation}
+  for some integer $k$.  Thinking in terms of binary numbers, we have 
+  \[
+    (#z#-#z#')q = k\cdot(1,\underbrace{0,\ldots,0}_{#w#})_2 \enspace ,
+  \]
+  so that the $w$ trailing bits in the binary representation of
+  $(#z#-#z#')q$ are all 0's.
+
+  Furthermore $k\neq 0$ since $q\neq 0$ and $#z#-#z#'\neq 0$.  Since $q$
+  is odd, it has no trailing 0's in its binary representation:
+  \[
+    q = (\star,\ldots,\star,1)_2 \enspace .
+  \]
+  Since $|#z#-#z#'| < 2^{#w#}$, $#z#-#z#'$ has fewer than #w# trailing
+  0's in its binary representation:
+  \[
+    #z#-#z#' = (\star,\ldots,\star,1,\underbrace{0,\ldots,0}_{<#w#})_2
+      \enspace .
+  \]
+  Therefore, the product $(#z#-#z#')q$ has fewer than #w# trailing 0's in
+  its binary representation:
+  \[
+   (#z#-#z#')q = (\star,\cdots,\star,1,\underbrace{0,\ldots,0}_{<#w#})_2 
+    \enspace .
+  \]
+  Therefore $(#z#-#z#')q$ cannot satisfy \eqref{factors}, yielding a
+  contradiction and completing the proof.
 \end{proof}
 
 The utility of \lemref{hashing-mapping} comes from the following
@@ -168,52 +215,298 @@ to think of the binary representation of #z#, which consists of $#w#-1$
 random bits followed by a 1.
 
 \begin{proof}[Proof of \lemref{universal-hashing}]
-First we note that the condition #hash(x)=hash(y)# is equivalent to
-the statement ``the highest-order #d# bits of $#z##x#\bmod2^{#w#}$
-and the highest-order #d# bits of $#z##y#\bmod 2^{#w#}$ are the same.''
-Equivalently, the highest-order #d# bits in the binary representation
-of $#z#(#x#-#y#)\bmod 2^{#w#}$ are either all 0's or all 1's:
-\begin{equation}
-    \underbrace{0,\ldots 0}_{#d#},\underbrace{*,\ldots,*}_{#w#-#d#} 
-    \eqlabel{all-zeros}
-\end{equation}
-or:
-\begin{equation}
-    \underbrace{1,\ldots 1}_{#d#},\underbrace{*,\ldots,*}_{#w#-#d#} \enspace .
-    \eqlabel{all-ones}
-\end{equation}
-Therefore, we only have to bound the probability that 
-$#z#(#x#-#y#)\bmod 2^{#w#}$ looks like \eqref{all-zeros} or \eqref{all-ones}.
+  First we note that the condition #hash(x)=hash(y)# is equivalent to
+  the statement ``the highest-order #d# bits of $#z##x#\bmod2^{#w#}$
+  and the highest-order #d# bits of $#z##y#\bmod 2^{#w#}$ are the same.''
+  Equivalently, the highest-order #d# bits in the binary representation
+  of $#z#(#x#-#y#)\bmod 2^{#w#}$ are either all 0's or all 1's.  That is,
+  \begin{equation}
+      #z#(#x#-#y#)\bmod 2^{#w#} = 
+      (\underbrace{0,\ldots 0}_{#d#},\underbrace{\star,\ldots,\star}_{#w#-#d#})_2 
+      \eqlabel{all-zeros}
+  \end{equation}
+  when $#zx#\bmod 2^{#w#} \ge #zy#\bmod 2^{#w#}$ or
+  \begin{equation}
+      #z#(#x#-#y#)\bmod 2^{#w#} = 
+      (\underbrace{1,\ldots 1}_{#d#},\underbrace{*,\ldots,*}_{#w#-#d#})_2 
+       \enspace .
+      \eqlabel{all-ones}
+  \end{equation}
+  when $#zx#\bmod 2^{#w#} < #zy#\bmod 2^{#w#}$.
+  Therefore, we only have to bound the probability that 
+  $#z#(#x#-#y#)\bmod 2^{#w#}$ looks like \eqref{all-zeros} or \eqref{all-ones}.
+  
+  Let $q$ be the unique odd integer such that $#x#-#y#=q2^r$ for some integer
+  $r\ge 0$. By \lemref{hashing-mapping}, the binary representation of
+  $#z#q\bmod 2^{#w#}$ has $#w#-1$ random bits, followed by a 1:
+  \[
+   #z#q\bmod 2^{#w#}  = (\underbrace{b_{#w#-1},\ldots b_{1}}_{#w#-1},1)_2
+  \]
+  Therefore, the binary representation of $#z#(#x#-#y#)\bmod 2^{#w#}=#z#q2^r\bmod 2^{#w#}$ has
+  $#w#-r-1$ random bits, followed by a 1, followed by $r$ 0's:
+  \[
+  #z#(#x#-#y#)\bmod 2^{#w#}  =
+  #z#q2^{r} =
+      (\underbrace{b_{#w#-r-1},\ldots b_{1}}_{#w#-r-1},1,\underbrace{0,0,\ldots,0}_{r})_2
+  \]
+  We can now finish the proof:  If $r > #w#-#d#$, then the #d#
+  higher order bits of $#z#(#x#-#y#)\bmod 2^{#w#}$  contain both 0's
+  and 1's, so the probability that $#z#(#x#-#y#)\bmod 2^{#w#}$ looks
+  like \eqref{all-zeros} or \eqref{all-ones} is 0.  If $#r#=#w#-#d#$,
+  then the probability of looking like \eqref{all-zeros} is 0, but the
+  probability of looking like \eqref{all-ones} is $1/2^{#d#-1}=2/2^{#d#}$
+  (since we must have $b_1,\ldots,b_{d-1}=0,\ldots,0$).  If $r < #w#-#d#$
+  then we must have $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=0,\ldots,0$ or
+  $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=1,\ldots,1$.  The probability of each
+  of these cases is $1/2^{#d#}$ and they are mutually exclusive, so the
+  probability of either of these cases is $2/2^{#d#}$.  This completes
+  the proof.
+\end{proof}
 
-Let $#t#$ be the unique odd integer such that $#x#-#y#=#t#2^r$ for some integer
-$r\ge 0$. By \lemref{hashing-mapping}, the binary representation of
-$#z##t#\bmod 2^{#w#}$ has $#w#-1$ random bits, followed by a 1:
+\subsection{Summary}
+
+The following theorem summarizes the performance of the #HashTable#
+data structure:
+
+\begin{thm}\thmlabel{hashtable}
+  A #HashTable# implements the #USet# interface.  Ignoring the cost of
+  calls to #grow()#, a #HashTable# supports the operations #add(x)#,
+  #remove(x)#, and #find(x)# in $O(1)$ expected time per operation.
+  Furthermore, beginning with an empty #HashTable#, any sequence of
+  $m$ #add(x)# and #remove(x)# operations results in a total of $O(m)$
+  work during all calls to #grow()#.
+\end{thm}
+
+\section{Hash Codes}
+
+The hash tables discussed in the previous section are used to associate
+data with integer keys consisting of $2^{#w#}$ bits.  In many cases, we
+have keys that are not integers.  They may be strings, objects, arrays,
+or other compound structures.  To use hash tables for these types of data,
+we must map these data types to hash codes.  Hash codes should have the
+following properties:
+
+\begin{enumerate}
+  \item If #x# and #y# are equal, then #x.hashCode()# and #y.hashCode()#
+  are equal.
+
+  \item If #x# and #y# are not equal, then the probability that
+  $#x.hashCode()=y.hashCode()#$ should be small (close to
+  $1/2^{#w#}$).
+\end{enumerate}
+
+The first property ensure that if we store #x# in a hash table and later
+lookup a value #y# equal to #x# then we will find #x#, as we should.
+The second requirement ensures that we don't lose anything by converting
+our objects to integers. Unequal objects usually have different hash
+codes and are likely to be at different locations in our hash table.
+
+\subsection{Hash Codes for Primitive Data Types}
+
+Small primitive data types like #char#, #byte#, #int#, and #float# are
+usually easy to find hash codes for.  These data types always have a
+binary representation and this binary representation usually consists
+of #w# or fewer bits. (For example, in Java, #byte# is an 8-bit type
+and #float# is a 32 bit type.) In these cases, we just treat these bits
+as the representation of an integer in the range $\{0,\ldots,2^#w#-1\}$.
+If two values are different, they get different hash codes.  If they
+are the same, they get the same hash code.
+
+A few primitive data types are made up of more than #w# bits, usually
+$c#w#$ bits for some constant integer $c$. (Java's #long# and #double#
+types are examples of this with $c=2$.)  These data types can be treated
+as compound objects made of $c$ parts, as described in the next section.
+
+\subsection{Hash Codes for Compound Objects}
+
+For a compound object, we want to create a hash code by combining the
+individual hash codes of the object's parts.  This is not as easy as
+it sounds.  Although one can find many hacks for this (for example,
+combining them with bitwise exclusive-or); many of these hacks turn out
+to be easy to foil.
+
+However, if one is willing to do arithmetic with $2#w#$ bits of
+precision, then things become easier.  Suppose we have an object #o#
+made up of several parts $P_0,\ldots,P_{r-1}$ whose hash codes are
+$#x#_0,\ldots,#x#_{r-1}$.  Then we can choose random #w#-bit integers
+$#z#_0,\ldots,#z#_{r-1}$ and a random $2#w#$-bit odd integer #z# and
+compute a hash code for our object as
 \[
- #z##t#\bmod 2^{#w#}  = \underbrace{b_{#w#-1},\ldots b_{1}}_{#w#-1},1
+   h(#x#_0,\ldots,#x#_{r-1}) =  
+   \left(#z#\left(\sum_{i=0}^{r-1} #z#_i #x#_i\right)\bmod 2^{2#w#}\right)
+   \ddiv 2^{#w#}
 \]
-Therefore, the binary representation of $#z#(#x#-#y#)\bmod 2^{#w#}$ has
-$#w#-r-1$ random bits, followed by a 1, followed by $r$ 0's:
+Note that this hash code has a final step (multiplying by #z# and
+dividing by $2^{#w#}$) that uses the multiplicative hash function
+from \secref{multihash} to take the $2#w#$-bit intermediate result and
+reduce it to a #w#-bit final result.  Here is an example of this method applied to a simple compound object with 3 parts #x0#, #x1#, and #x2#:
+\javaimport{junk/Point3D.x0.hashCode()}
+The following theorem shows that, in addition to being straightforward to implement, this method is provably good:
+
+\begin{thm}\thmlabel{multihash}
+Let $#x#_0,\ldots,#x#_{r-1}$ and $#y#_0,\ldots,#y#_{r-1}$ each be sequences of #w# bit integers in $\{0,\ldots,2^{#w#}-1\}$ and assume $#x#_i \neq #y#_i$ for at least one index $i\in\{0,\ldots,r-1\}$. Then 
 \[
-#z#(#x#-#y#)\bmod 2^{#w#}  =
-#z##t#2^{r} =
-    \underbrace{b_{#w#-r-1},\ldots b_{1}}_{#w#-r-1},1,\underbrace{0,0,\ldots,0}_{r}
-\]
-We can now finish the proof:  If $r > #w#-#d#$, then higher order bits of
-$#z#(#x#-#y#)\bmod 2^{#w#}$  contain both 0's and 1's, so the probability that
-$#z#(#x#-#y#)\bmod 2^{#w#}$ looks like \eqref{all-zeros} or \eqref{all-ones}
-is 0.  If $#r#=#w#-#d#$, then the probability of looking like \eqref{all-zeros}
-is 0, but the probability of looking like \eqref{all-ones} is
-$1/2^{#d#-1}=2/2^{#d#}$ (since we must have $b_1,\ldots,b_{d-1}=0,\ldots,0$).
-If $r < #w#-#d#$ then we must have $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=0,\ldots,0$
-or $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=1,\ldots,1$.  The probability of each of
-these cases is $1/2^{#d#}$ and they are mutually exclusive, so the probability
-of either of these cases is $2/2^{#d#}$.  This completes the proof.
+   \Pr\{ h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1}) \} 
+        \le 3/2^{#w#} \} \enspace .  
+\] 
+\end{thm}
+
+\begin{proof}
+  We will first ignore the final multiplicative hashing step and see how
+  that step contributes later.  Define:
+  \[
+    h'(#x#_0,\ldots,#x#_{r-1}) =  
+       \left(\sum_{i=0}^{r-1} #z#_i #x#_i\right)\bmod 2^{2#w#} \enspace .
+  \]
+  Suppose that $h'(#x#_0,\ldots,#x#_{r-1}) =  h'(#y#_0,\ldots,#y#_{r-1})$.
+  We can rewrite this as:
+  \begin{equation}  \eqlabel{bighash-x}
+      #z#_i(#x#_i-#y#_i) \bmod 2^{2#w#} = t
+  \end{equation}
+  where 
+  \[
+     t = \left(\sum_{j=0}^{i-1} #z#_j(#y_j#-#x#_j) + \sum_{j=i+1}^{r-1} #z#_j(#y_j#-#x#_j)\right) \bmod 2^{2#w#}
+  \]
+  If we assume, without loss of generality that $#x#_i> #y#_i$, then
+  \eqref{bighash-x} becomes
+  \begin{equation}
+      #z#_i(#x#_i-#y#_i) = t \eqlabel{bighash-xx}
+  \end{equation}
+  since each of $#z#_i$ and $(#x#_i-#y#_i)$ are at most $2^{#w#}-1$,
+  so their product is at most $2^{2#w#}-2^{#w#+1}+1 < 2^{2#w#}-1$.
+  By assumption, $#x#_i-#y#_i\neq 0$, so \eqref{bighash-xx} has only one
+  solution in #z_i#.  Therefore, the probability that we select $z_i$
+  so that $h'(#x#_0,\ldots,#x#_{r-1})=h'(#y#_0,\ldots,#y#_{r-1})$ is at most
+  $1/2^{#w#}$.
+
+  The final step of the hash function is to apply multiplicative hashing
+  to reduce our $2#w#$-bit intermediate result $h'(#x#_0,\ldots,#x#_{r-1})$ to
+  a #w# bit final result $h(#x#_0,\ldots,#x#_r)$.  By \thmref{multihash},
+  if $h'(#x#_0,\ldots,#x#_r)\neq h'(#y#_0,\ldots,#y#_r)$, then
+  $\Pr\{h(#x#_0,\ldots,#x#_r) = h(#y#_0,\ldots,#y#_r)\} \le 2/2^{#w#}$.
+
+  To summarize, 
+  \begin{eqnarray*}
+    \Pr\{h(#x#_0,\ldots,#x#_r) = h(#y#_0,\ldots,#y#_r)\}
+      &=& \Pr\left\{\begin{array}{ll}
+            \mbox{$h'(#x#_0,\ldots,#x#_r) = h'(#y#_0,\ldots,#y#_r)$ or} \\
+            \mbox{$h'(#x#_0,\ldots,#x#_r) \neq h'(#y#_0,\ldots,#y#_r)$} \\
+                  \mbox{\quad and
+$#z#h(#x#_0,\ldots,#x#_r)\ddiv2^{#w#} = #z# h'(#y#_0,\ldots,#y#_r)\ddiv 2^{#w#}$}
+          \end{array}\right\} \\
+      &\le& 1/2^{#w#} + 2/2^{#w#} = 3/2^{#w#}
+  \end{eqnarray*}
+  and this completes the proof.
 \end{proof}
 
 
+\subsection{Hash Codes for Arrays and Strings}
 
-%\section{Perfect Hashing} (how to cope with conflicting hash code)
-\section{Hash Codes}
-\section{Fingerprinting}
+The method from the previous section works well for objects that have a
+fixed, constant, number of components.  However, it breaks down when we
+want to use it with objects that have a variable number of components
+since it requires a random #w#-bit integer $#z#_i$ for each component.
+We could use a pseudorandom sequence to generate as many $#z#_i$'s as we
+need, but then the $#z#_i$'s are not mutually independent, and it becomes
+difficult to prove that the pseudorandom numbers don't interact badly
+with the hash function we are using.  In particular, the values of $t$
+and $#z#_i$ in the proof of \thmref{multihash} are no longer independent.
+
+A more rigorous approach is to base our hash codes on polynomials over
+prime fields.  This is based on the following Theorem, which says that
+polynomials over prime fields behave pretty-much like usual polynomials:
+
+\begin{thm}\thmlabel{prime-polynomial}
+ Let $#p#$ be a prime number, and let $f(#z#) = #x#_0#z#^0 + #x#_1#z#^1 +
+ \cdots #x#_{r-1}#z#^{r-1}$ be a non-trivial polynomial with coefficients
+ $#x#_i\in\{0,\ldots,#p#-1\}$. Then the equation $f(#z#)\bmod #p# = 0$
+ has at most $r-1$ solutions for $#z#\in\{0,\ldots,p-1\}$.
+\end{thm}
+
+To use \thmref{prime-polynomial}, we hash a sequence of integers
+$#x#_0,\ldots,#x#_{r-1}$ with each $#x#_i\in \{0,\ldots,#p#-2\}$ using
+a random integer $#z#\in\{0,\ldots,#p#-1\}$ via the formula
+\[
+   h(#x#_0,\ldots,#x#_{r-1}) 
+    = \left(#x#_0#z#^0+\cdots+#x#_{r-1}#z#^{r-1}+(#p#-1)#z#^r \right)\bmod #p# \enspace .
+\]
+
+Note the extra $(#p#-1)#z#^r$ term at the end of the formula.  It helps
+to think of $(#p#-1)$ as the last element, $#x#_r$, in the sequence
+$#x#_0,\ldots,#x#_{r}$.  Note that this element differs from every other
+element in the sequence (which are all in the set $\{0,\ldots,#p#-1\}$.
+We can think of $#p#-1$ as an end-of-sequence marker.
+
+The following theorem shows that this hash function gives a good return for the small amount of randomization needed to choose #z#:
+
+\begin{thm}\thmlabel{stringhash}
+Let $#p#>2^{#w#}+1$ be a prime,
+let $#x#_0,\ldots,#x#_{r-1}$ and $#y#_0,\ldots,#y#_{r-1}$ each be sequences of #w# bit integers in $\{0,\ldots,2^{#w#}-1\}$, and assume $#x#_i \neq #y#_i$ for at least one index $i\in\{0,\ldots,r-1\}$. Then 
+\[
+   \Pr\{ h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1}) \} 
+        \le r/#p# \} \enspace .  
+\] 
+\end{thm}
+
+\begin{proof}
+The equation $h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1})$
+can be rewritten as
+\[
+  \left(
+     (#x#_0-#y#_0)#z#^0+\cdots+(#x#_{#r#-1}-#x#_{#r#-1})#z#^{#r#-1} 
+       + (#p#-1)#z#^r 
+  \right)\bmod #p# = 0.
+\]
+Since $#x_i#\neq #y_i#$, this polynomial is non-trivial.  Therefore,
+by \thmref{prime-polynomial} it has at most $r$ solutions in #z#.
+The probability that we pick #z# to be one of these solutions is therefore
+at most $r/#p#$.
+\end{proof}
+
+Note that this hash function deals with the case in which two sequences
+have different lengths, even when one of the sequences is a prefix
+of the other. This is because this function effectively hashes the
+infinite sequence
+\[
+#x#_0,\ldots,#x#_{r-1}, #p#-1,0,0,\ldots \enspace .
+\]
+This guarantees that if we have two sequences of length #r# and #r'#
+with $r < r'$, then these two sequences differ at index #i=r#.  
+
+The following example code shows how this is done for an object that
+contains an array #x# of values:
+\javaimport{junk/GeomVector.hashCode()}
+
+The above code sacrifices some collision probability for implementation
+convenience.  In particular, the multiplier #z# was chosen randomly from
+$\{0,\ldots,2^{30}-1\}$ to avoid overflow with unsigned 63 bit arithmetic.
+This means that the probability of two different sequences, the longer
+of which has length $r$, having the same hash code is $r/2^{30}$ rather
+than the $r/(2^{32}+15)$ specified in \thmref{stringhash}.
+
+\section{Summary}
+
+Hash tables and hash codes are a enormous and active area of research
+that is just touched upon in this chapter.
+
+\section{Exercises}
+
+\begin{enumerate}
+\item Prove that the bound $2/2^{#d#}$ in \lemref{universal-hashing} is
+the best possible by showing that, if $x=2^{#w#-#d#-2}$ and $#y#=3#x#$,
+then $\Pr\{#hash(x)#=#hash(y)#\}=2/2^{#d#}$.  (Hint look at the binary
+representations of #zx# and #z#3#x# and use the fact that #z#3#x# =
+#z##x#+2#z##x#.)
+
+\item Suppose you have an object made up of two #w#-bit integers #x# and #y#.  Show why $#x#\oplus#y#$ does not make a good hash code for your object.  Give an example of a set of objects that all have hash code 0.
+
+\item Suppose you have an object made up of two #w#-bit integers #x# and #y#.  Show why $#x#+#y#$ does not make a good hash code for your object.
+Give an example of a large set of objects that all have the same hash code.
+
+\item Suppose you have an object made up of two #w#-bit integers #x#
+and #y#.  Suppose that the hash code for your object is defined by some
+deterministic function $h(x,y)$.  Prove that there exists a large set
+of objects that have the same hash code.
 
 
+\end{enumerate}
