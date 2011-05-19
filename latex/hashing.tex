@@ -1,5 +1,8 @@
+\renewcommand{\cite}[1]{}
+
 \chapter{Hash Tables}
 \chaplabel{hashtables}
+\chaplabel{hashing}
 
 Hash tables are an efficient method of storing a small number,
 #n#, of integers from a large range $U=\{0,\ldots,2^{#w#}-1\}$.
@@ -12,9 +15,14 @@ an integer \emph{hash code} is associated with each data item and this
 hash code is used in the hash table.  The second part of this chapter
 discusses how such hash codes are generated.
 
+Some of the methods used in this chapter require random choices of
+integers in some specific range.  In the code samples, some of these
+``random'' integers are hard-coded constants.  These constants were
+obtained using random bits generated from atmospheric noise.
 
-\chaplabel{hashing}
+
 \section{HashTable: Hashing with Chaining}
+\seclabel{hashtable}
 
 A #HashTable# data structure uses \emph{hashing with chaining} to store
 data as an array #t# of lists.  An integer, #n#, keeps track of the
@@ -318,6 +326,7 @@ types are examples of this with $c=2$.)  These data types can be treated
 as compound objects made of $c$ parts, as described in the next section.
 
 \subsection{Hash Codes for Compound Objects}
+\seclabel{stringhash}
 
 For a compound object, we want to create a hash code by combining the
 individual hash codes of the object's parts.  This is not as easy as
@@ -401,6 +410,7 @@ $#z#h(#x#_0,\ldots,#x#_r)\ddiv2^{#w#} = #z# h'(#y#_0,\ldots,#y#_r)\ddiv 2^{#w#}$
 
 
 \subsection{Hash Codes for Arrays and Strings}
+\seclabel{polyhash}
 
 The method from the previous section works well for objects that have a
 fixed, constant, number of components.  However, it breaks down when we
@@ -489,6 +499,68 @@ than the $r/(2^{32}+15)$ specified in \thmref{stringhash}.
 Hash tables and hash codes are a enormous and active area of research
 that is just touched upon in this chapter.
 
+A variety of different hash table implementations exist. The one described
+in \secref{hashtable} is known as \emph{hashing with chaining} (each
+array entry contains a chain (#List#) of elements).  Another alternative
+is that used by \emph{open addressing} schemes, where all data is stored
+directly in an array.  Open addressing schemes must deal with the problem
+of \emph{collision resolution}: the case where two values hash to the
+same array location.  Different strategies exist for collision resolution
+and these have different performance guarantees and require different .
+
+Yet another category of hash table implementations are so-called
+\emph{perfect hashing} methods.   These are methods in which #find(x)#
+operations take $O(1)$ time in the worst-case.  For static data sets,
+this can be accomplished by finding \emph{perfect hash functions} for
+the data; these are functions that map each piece of data to a unique
+array location.  For data that changes over time, perfect hashing methods
+include \emph{FKS two-level hash tables} \cite{fksXX} and \emph{cuckoo hashing} \cite{prXX}.
+
+The hash functions presented in this chapter are probably among the most
+practical currently known methods that can be proven to work well for any
+set of data.  Other provably good methods date back to the pioneering work
+of Carter and Wegman who introduced the notion of \emph{universal hashing}
+and described several hash functions for different scenarios \cite{cwXX}.
+
+The \emph{multiplicative hashing} method described in \secref{multihash}
+is one of the simplest, but it's collision probability of $2/2^{#d#}$
+is a factor of 2 larger than what one could expect with a random function
+from $2^{#w#}\mapsto 2^{#d#}$.   The \emph{multiply-add hashing} method
+uses the function
+\[
+   h(#x#) = ((#z##x# + b2^{#w#/2}) \bmod 2^{#w#}) \ddiv 2^{#w#-#d#}
+\]
+where #z# is a randomly-chosen odd integer in $\{1,\ldots,2^{#w#}-1\}$
+and $b$ is a randomly chosen integer in $\{0,\ldots,2^{#w#/2}\}$.
+Multiply-add hashing has a collision probability of only $1/2^{#d#}$.
+(The proof of this is considerably harder than the proof for multiplicative
+hashing.)
+
+There are a number of methods of obtaining hash codes from a fixed-length
+sequence of #w#-bit integers.  One particularly fast method \cite{umac}
+is the function
+\[
+  h(#x#_0,\ldots,#x#_{r-1}) = \left(\sum_{i=0}^{r/2-1} ((#x#_i+#a#_i)\bmod 2^{#w#})((#x#_{i+1}+#a#_{i+1})\bmod 2^{#w#})\right) \bmod 2^{2#w#}
+\]
+where $r$ is even and $#a#_0,\ldots,#a#_{r-1}$ are randomly chosen from
+$\{0,\ldots,2^{#w#}\}$. This yields a $2#w#$-bit hash code that has
+collision probability $1/2^{#w#}$.  This can be reduced to a #w# bit
+hash code using multiplicative (or multiply-add) hashing. This method
+is fast because it requires only $r/2$ $2#w#$-bit multiplications whereas
+the method described in \secref{stringhash} requires $r$ multiplications.
+(The $\bmod$ operations occur implicitly by using #w# and $2#w#$ bit arithmetic for the additions and multipliations, respectively.)
+
+The method of using polynomials over prime fields to hash variable-length
+arrays and strings from \secref{polyhash} is, unfortunately, not
+very fast.  This is due to its use of the $\bmod$ operator which has
+a slow hardware implementation.  Some variants of this method choose
+the prime #p# to be a prime of the form $2^{#w#}-1$, in which case the
+$\bmod$ operator can be replaced with addition (#+#) and bitwise-and
+(#&#) operations \cite{knuth}.  Another option is to apply one of the
+fast methods for fixed-length strings to blocks of length $c$ for some
+constant $c>1$ and then apply the prime field method to the resulting
+sequence $\lceil r/c\rceil$ hash codes.
+
 \section{Exercises}
 
 \begin{enumerate}
@@ -508,5 +580,13 @@ and #y#.  Suppose that the hash code for your object is defined by some
 deterministic function $h(x,y)$.  Prove that there exists a large set
 of objects that have the same hash code.
 
-
+\item Let $p=2^{#w#}-1$ for some positive integer #w#.  Explain why, for a positive integer $x$
+\[
+    (x\bmod 2^{#w#}) + (x\ddiv 2^{#w#}) \equiv x \bmod (2^{#w#}-1) \enspace .
+\]
+(This gives an algorithm for computing $x \bmod (2^{#w#}-1)$ by repeatedly setting
+\[
+   #x= x&((1<<w)-1) + x>>>w#
+\]
+until $#x# \le 2^{#w#}-1$.)
 \end{enumerate}
