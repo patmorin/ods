@@ -2,15 +2,10 @@
 sources=$(wildcard *.ipe)
 
 pdfs=$(sources:.ipe=.pdf)
-epss=$(sources:.ipe=.eps)
 
 
-all: $(pdfs) $(epss)
+all: $(pdfs)
 
 %.pdf : %.ipe
 	ipetoipe -pdf $<
-
-%.eps : %.ipe
-	ipetoipe -eps $<
-
 

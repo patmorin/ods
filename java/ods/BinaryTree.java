@@ -39,6 +39,15 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		}
 	}
 	
+	public int depth(Node u) {
+		int d = 0;
+		while (u != root) {
+			u = u.parent;
+			d++;
+		}
+		return d;
+	}
+	
 	/**
 	 * Compute the size (number of nodes) of this tree
 	 * @return the number of nodes in this tree
@@ -51,11 +60,24 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	 * @return the size of the subtree rooted at u
 	 */
 	protected int size(Node u) {
-		if (u == null) {
+		if (u == null)
 			return 0;
-		}
 		return 1 + size(u.left) + size(u.right);
 	}
+	
+	public int height() {
+		return height(root);
+	}
+	
+	/**
+	 * @return the size of the subtree rooted at u
+	 */
+	protected int height(Node u) {
+		if (u == null)
+			return -1;
+		return 1 + Utils.max(height(u.left), height(u.right));
+	}
+
 	
 	/**
 	 * @return
@@ -151,24 +173,28 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		traverse(u.left);
 		traverse(u.right);
 	}
-	
+
 	public void traverse2() {
-		List<Node> l = new ArrayList<Node>();
 		Node prev = null;
-		l.add(root);
-		while (!l.isEmpty()) {
-			Node u = l.get(l.size());
-			if (u.isLeaf() || prev == u.right) {
-				l.remove(l.size());  // return to parent
-			} else if (prev == u.left) { // returning from left child
-				l.add(u.right);   // visit right child
-			} else {              // arrived here from parent 
-				l.add(u.left);    // visit left child
-			}
-			prev = u;
+		Node u = root;
+		while (prev != root || u != null) {
+			if (u == null) {               // external node - return to prev
+				u = prev;
+				prev = null;
+			} else if (prev == u.right) {  // done here - return to parent 
+				prev = u;
+				u = u.parent;
+			} else if (prev == u.left) {   // done left - visit right
+				prev = u;
+				u = u.right;
+			} else if (prev == u.parent) { // first visit - visit left
+				prev = u;
+				u = u.left;
+			} 
 		}
 	}
 
+	
 	/**
 	 * Create a new full binary tree whose expected number of nodes is n
 	 * @param <Node>
@@ -183,12 +209,14 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		q.add(t.root);
 		double p = ((double)0.5 - ((double)1)/(n+n));
 		while (!q.isEmpty()) {
-			BinaryTreeNode<Node> u = q.remove();
+			Node u = q.remove();
 			if (r.nextDouble() < p) {
 				u.left = t.newNode();
+				u.left.parent = u;
 				q.add(u.left);
 			} if (r.nextDouble() < p) {
 				u.right = t.newNode();
+				u.right.parent = u;
 				q.add(u.right);
 			}
 		}
@@ -267,7 +295,13 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		BinaryTree<SimpleBinaryTreeNode> t = new BinaryTree<SimpleBinaryTreeNode>(new SimpleBinaryTreeNode());
 		completeBinaryTree(t, 16);
 		System.out.println(t.size());
-		System.out.println(t.toString());
+		// System.out.println(t.toString());
+		t.traverse(t.root);
+		System.out.println();
+		t.traverse2();
+		System.out.println();
+		t.traverse3();
+		System.out.println();
 	}
 
 }

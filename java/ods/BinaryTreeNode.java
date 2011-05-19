@@ -7,24 +7,24 @@ package ods;
  * 
  * @author morin
  * 
- * @param <N>
+ * @param <Node>
  *            the class of the children of this node
  */
-public class BinaryTreeNode<N extends BinaryTreeNode<N>> {
+public class BinaryTreeNode<Node extends BinaryTreeNode<Node>> {
 	/**
 	 * left child
 	 */
-	protected N left;
+	protected Node left;
 
 	/**
 	 * right child
 	 */
-	protected N right;
+	protected Node right;
 
 	/**
 	 * Parent node
 	 */
-	protected N parent;
+	protected Node parent;
 	
 	public boolean isLeaf() {
 		return left == null && right == null;
