@@ -80,6 +80,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 	}
 
 	public T set(int i, T x) {
+		if (i < 0 || i > n-1) throw new IndexOutOfBoundsException();
 		Node u = findPred(i).next[0];
 		T y = u.x;
 		u.x = x;
@@ -87,6 +88,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 	}
 
 	public T get(int i) {
+		if (i < 0 || i > n-1) throw new IndexOutOfBoundsException();
 		return findPred(i).next[0].x;
 	}
 
@@ -133,6 +135,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 	}
 	
 	public void add(int i, T x) {
+		if (i < 0 || i > n) throw new IndexOutOfBoundsException();
 		Node w = new Node(x, pickHeight());
 		if (w.next.length > height) 
 			height = w.next.length;
