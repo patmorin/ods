@@ -6,11 +6,18 @@ In this chapter we discuss a beautiful data structure, the skip list,
 that has a variety of applications.  Using a skiplist we can implement
 a #List# that is fast for all the operations #get(i)#, #set(i,x)#,
 #add(i,x)#, and #remove(i)#. We can also implement an #SSet# in which
-all operations run in $O(\log n)$ time.  Finally, a skiplist can be used
-to implement a #Rope# in which all operations run in $O(\log n)$ time.
+all operations run in $O(\log #n#)$ time.
+%Finally, a skiplist can be used to implement a #Rope# in which all
+%operations run in $O(\log #n#)$ time.
 
-Skiplists rely on \emph{randomization} for their efficiency.  In
-particular, a skiplist uses coin tosses when an element is inserted\ldots
+Skiplists rely on \emph{randomization} for their efficiency.
+In particular, a skiplist uses random coin tosses when an element is
+inserted to determine the height of that element.  The performance
+of skiplists is expressed in terms of \emph{expected} running times
+and lengths of paths. This expectation is taken over the random coin
+tosses used by the skiplist.  In the implementation, the random coin
+tosses used by a skiplist are simulated using a pseudo-random number
+(or bit) generator.
 
 \section{The Basic Structure}
 
@@ -64,7 +71,8 @@ until we reach the predecessor of #u# in $L_0$.
   \figlabel{skiplist-searchpath}
 \end{figure}
 
-The following result, that we will prove in \secref{skiplist-analysis},  shows that the search path is quite short:
+The following result, which we will prove in \secref{skiplist-analysis},
+shows that the search path is quite short:
 
 \begin{lem}\lemlabel{skiplist-searchpath}
 The expected length of the search path for any node #u# in $L_0$ is at
@@ -79,19 +87,19 @@ many appear in several lists.
 
 \javaimport{ods/SkiplistSet.Node}
 
-The next three sections of this chapter discuss three different
-applications of skiplists.  In each of these applications, $L_0$ stores the
-main structure (a list of elements, a sorted set of elements, or a sequence
-of strings).  The primary difference between these three structures is how
-the search path is navigated; In particular the three structures differ in
-how they decide if the search path should go down in $L_{r-1}$ or go right
+The next two sections of this chapter discuss two different applications
+of skiplists.  In each of these applications, $L_0$ stores the main
+structure (a list of elements, a sorted set of elements, or a sequence
+of strings).  The primary difference between these structures is in how
+the search path is navigated; In particular the structures differ in how
+they decide if the search path should go down in $L_{r-1}$ or go right
 in $L_r$.
 
-\section{SkiplistSets as SortedSets}
+\section{SkiplistSets as SSets}
 
-A #SkiplistSet# uses a skiplist structure to implement the #SortedSet#
+A #SkiplistSet# uses a skiplist structure to implement the #SSet#
 interface.   When used this way, the list $L_0$ stores the elements of
-the #SortedSet# in sorted order.  The #find(x)# method works by following
+the #SSet# in sorted order.  The #find(x)# method works by following
 the search path for the smallest value #y# such that $#y#\ge#x#$:
 
 \javaimport{ods/SkiplistSet.find(x).findPredNode(x)}
@@ -149,8 +157,8 @@ The following theorem summarizes the performance of skiplists when used to
 implement sorted sets:
 
 \begin{thm}\thmlabel{skiplist}
-A #SkiplistSet# implements the #SortedSet# interface. A #SkiplistSet# supports
-the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log n)$
+A #SkiplistSet# implements the #SSet# interface. A #SkiplistSet# supports
+the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log #n#)$
 expected time per operation.
 \end{thm}
 
@@ -243,7 +251,7 @@ quite simple:
 
 
 By now, the implementation of 
-the #remove(i)# operation in a #SkiplistList# should be obvious.  We follow the search path for the node at position #i#.  Each time the search path takes a step down from a node #u# at level #r# we decrement the length of the edge leaving #u# at level #r#.  We also check if #u.next# is the element of rank #i# and, if so, splice it out the list at level #i#.   An example is shown in \figref{skiplist-removei}.
+the #remove(i)# operation in a #SkiplistList# should be obvious.  We follow the search path for the node at position #i#.  Each time the search path takes a step down from a node #u# at level #r# we decrement the length of the edge leaving #u# at level #r#.  We also check if #u.next# is the element of rank #i# and, if so, splice it out of the list at level #r#.   An example is shown in \figref{skiplist-removei}.
 \begin{figure}
   \begin{center}
     \includegraphics{figs/skiplist-removei}
@@ -272,7 +280,7 @@ data structure:
 In this section, we analyze the expected height, size, and length of
 the search path in a skiplist.  This section requires a background in
 basic probability.  Several proofs are based on the following basic
-about coin tosses.
+observation about coin tosses.
 
 \begin{lem}\lemlabel{coin-tosses}
   Let $T$ be the number of times a fair coin is tossed up to and including
@@ -301,6 +309,8 @@ about coin tosses.
   as required.
 \end{proof}
 
+The next two lemmata tell us that skiplists have linear size:
+
 \begin{lem}\lemlabel{skiplist-size1}
   The expected number of nodes in a skiplist containing $#n#$ elements,
   not including occurrences of the sentinel, is $2#n#$.
@@ -310,7 +320,7 @@ about coin tosses.
   The probability that any particular element #x# is included in list
   $L_{#r#}$ is $1/2^{#r#}$, so the expected number of nodes in $L_{#r#}$
   is $#n#/2^{#r#}$.  Therefore, the total number of nodes in all lists is
-  \[ \sum_{#r#=0}^\infty #n#/2^{#r#} = 2#n# \enspace , \]
+  \[ \sum_{#r#=0}^\infty #n#/2^{#r#} = #n#(1+1/2+1/4+1/8+\cdots) = 2#n# \enspace , \]
   as required.
 \end{proof}
 
@@ -331,7 +341,7 @@ about coin tosses.
   \[
        #h# = \sum_{i=0}^\infty I_{#r#} \enspace .
   \]
-  Note that $I_{#r#} \le |L_{#r#}|$, so 
+  Note that $I_{#r#}$ is never more than the length of $|L_{#r#}|$, so 
   \[
      \E[I_{#r#}] \le \E[|L_{#r#}|] = #n#/2^{#r#} \enspace .
   \]
@@ -342,7 +352,7 @@ about coin tosses.
         &=& \sum_{#r#=0}^{\lfloor\log #n#\rfloor} E[I_{#r#}]
                  + \sum_{r=\lfloor\log #n#\rfloor+1}^{\infty} E[I_{#r#}]  \\
         &=& \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
-                 + \sum_{r=\lfloor\log #n#\rfloor+1}^{\infty} n/2^{#r#} \\
+                 + \sum_{r=\lfloor\log #n#\rfloor+1}^{\infty} #n#/2^{#r#} \\
         &\le& \log #n# + 1
                  + \sum_{#r#=0}^\infty 1/2^{#r#} \\
         &=& \log #n# + 3
@@ -365,7 +375,7 @@ about coin tosses.
 
 
 \begin{lem}
-The expected length of a search path in a skiplist is $2\log #n# + O(1)$.
+The expected length of a search path in a skiplist is at most $2\log #n# + O(1)$.
 \end{lem}
 
 \begin{proof}
@@ -375,19 +385,23 @@ The expected length of a search path in a skiplist is $2\log #n# + O(1)$.
   it does.  If it can not go up a level then it goes left.  Observe that
   the reverse search path for #x# is identical to the search path for #x#,
   except that it is reversed.
-  
+
   The number of nodes that the reverse search path visits at a particular
   level #r# is related to the following experiment:  Toss a coin.
   If the coin comes up heads then go up and stop, otherwise go left and
   repeat the experiment.  The number of coin tosses before the heads then
   represents the number of steps to the left that a reverse search path
-  takes at a particular level.  (Note that this overcounts the number of
-  steps to the left, since this experiment ends either at the first head
-  or when the search path reaches the sentinel, whichever comes first.)
+  takes at a particular level.\footnote{Note that this might overcount
+  the number of steps to the left, since this experiment ends either at
+  the first head or when the search path reaches the sentinel, whichever
+  comes first. This is not a problem since the lemma is only proving an
+  upper bound.} \lemref{coin-tosses} tells us that the expected number
+  of coin tosses before the first head is 1.
 
   Let $S_{#r#}$ denote the number of steps the search path takes at level
-  $#r#$ that go to the right.   We have just argued that $\E[S_{#r#}]\le 1$.
-  Furthermore, $S_{#r#}\le |L_{#r#}|$, so
+  $#r#$ that go to the right.   We have just argued that $\E[S_{#r#}]\le
+  1$.  Furthermore, $S_{#r#}\le |L_{#r#}|$, since we can't take more steps
+  in $L_{#r#}$ than the length of $L_{#r#}$, so
   \[
     \E[S_{#r#}] \le E[|L_{#r#}|] = #n#/2^{#r#} \enspace .
   \]
@@ -420,23 +434,34 @@ A skiplist containing $#n#$ elements has expected size $O(#n#)$ and the expected
 
 
 
-\section{Iteration and Finger Search}
+%\section{Iteration and Finger Search}
 
 %TODO: Write this section
 
 \section{Summary and Exercises}
 
+Skiplists were introduced in 1991 by Pugh \cite{p91} who also presented a
+number of applications of skiplists \cite{p92}.  Since then they have been
+studied extensively.  The exact expected length of the search path for
+the #i#th element in a skiplist has been studied carefully \cite{pXX}.
+Deterministic versions \cite{munroXX}, biased version \cite{cXX}, and
+self-adjusting versions \cite{bose-langerman} of skiplists have all
+been developed. 
+% At some point, a cache-optimized version of skiplists was used in part of the Linux kernel. !!I can't confirm this.
+
 \begin{enumerate}
-\item Suppose that, instead of promoting an element from $L_{i-1}$ into
-$L_i$, we promote it with some probability $p$, $0 < p < 1$.  Show that
-the expected length of the search path in this case is $(1/p)\log_{1/p}
-n + O(1)$.  What is the value of $p$ that minimizes this expression? What
-is the expected height of the skiplist? What is the expected number of
-nodes in the skiplist?
+\item Suppose that, instead of promoting an element from $L_{i-1}$
+into $L_i$, we promote it with some probability $p$, $0 < p < 1$.
+Show that the expected length of the search path in this case is
+$(1/p)\log_{1/p} #n# + O(1)$.  What is the value of $p$ that minimizes
+this expression? What is the expected height of the skiplist? What is
+the expected number of nodes in the skiplist?
 
 \item Design and implement a version of a skiplist that implements the
-#SortedSet# interface, but also allows access to elements by rank.
-That is, it also supports the function #get(i)#, which returns the element
-whose rank is #i#. (The rank of an element #x# in a #SortedSet# is the number of elements in the #SortedSet# that are less than #x#.)
+#SSet# interface, but also allows access to elements by rank.
+That is, it also supports the function #get(i)#, which returns the
+element whose rank is #i#. (The rank of an element #x# in a #SSet#
+is the number of elements in the #SSet# that are less than #x#.)
+
 \end{enumerate}
 
