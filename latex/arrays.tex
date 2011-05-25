@@ -124,8 +124,8 @@ In particular, we will show:
 
 \begin{lem}\lemlabel{arraystack-amortized}
   If an empty #ArrayList# is created and any sequence of $m\ge 1$ calls
-  to #add(i,x)# and #remove(i)# are performed, then the total cost of all work
-  done during all calls to #resize()# is $O(m)$.
+  to #add(i,x)# and #remove(i)# are performed, then the total time spent
+  during all calls to #resize()# is $O(m)$.
 \end{lem}
 
 \begin{proof}
@@ -142,7 +142,7 @@ In particular, we will show:
   \[
     \sum_{i=1}^{r} n_i \le 2m + 2r  \enspace .
   \]
-   On the other hand, the total work done during all calls to #resize()# is 
+   On the other hand, the total time spent during all calls to #resize()# is 
   \[
      \sum_{i=1}^{r} O(n_i) \le O(m+r) = O(m)  \enspace ,
   \]
@@ -190,7 +190,7 @@ The following theorem summarizes the performance of an #ArrayStack#:
   \end{itemize}
   Furthermore, beginning with an empty #ArrayStack#, any sequence of $m$
   #add(i,x)# and #remove(i)# operations results in a total of $O(m)$
-  work during all calls to #resize()#.
+  time spent during all calls to #resize()#.
 \end{thm}
 
 The #ArrayStack# is an efficient way to implement a #Stack#.
@@ -335,7 +335,7 @@ calls to #resize()#, an #ArrayQueue# supports the operations
 #add(x)# and #remove()# in $O(1)$ time per operation.
 Furthermore, beginning with an empty #ArrayQueue#, any sequence of $m$
 #add(i,x)# and #remove(i)# operations results in a total of $O(m)$
-work during all calls to #resize()#.
+time spent during all calls to #resize()#.
 \end{thm}
 
 %TODO: Discuss the use of bitwise-and as a replacement for the mod operator
@@ -388,8 +388,8 @@ operation) is $O(1+\min\{#i#,#n#-#i#\})$.
 The #remove(i)# operation is similar.  It either shifts elements
 $#a[0]#,\ldots,#a[i-1]#$ right by one position or shifts the elements
 $#a[i+1]#,\ldots,#a[n-1]#$ left by one position depending on whether
-$#i#<#n#/2$.  Again, this means that #remove(i)# never does more than 
-$O(1+\min\{#i#,#n#-#i#\})$ work to shift elements.
+$#i#<#n#/2$.  Again, this means that #remove(i)# never spends more than 
+$O(1+\min\{#i#,#n#-#i#\})$ time to shift elements.
 
 \javaimport{ods/ArrayDeque.remove(i)}
 
@@ -407,7 +407,7 @@ data structure:
   \end{itemize}
   Furthermore, beginning with an empty #ArrayDeque#, any sequence of $m$
   #add(i,x)# and #remove(i)# operations results in a total of $O(m)$
-  work during all calls to #resize()#.
+  time spent during all calls to #resize()#.
 \end{thm}
 
 \section{#DualArrayDeque#: Buiding a Deque from Two Stacks}
@@ -526,12 +526,12 @@ There is not much to analyze.  If the #balance()# operation does
 do rebalancing, then it moves $\Theta(#n#)$ elements and this takes
 $O(#n#)$ time. This is bad, since #balance()# is called with each call to
 #add(i,x)# and #remove(i)#.  However, the following lemma shows that,
-on average, #balance()# only does a constant amount of work per operation
+on average, #balance()# only spends a constant amount of time per operation
 
 \begin{lem}\lemlabel{dualarraydeque-amortized}
   If an empty #DualArrayDeque# is created and any sequence of $m\ge 1$ calls
-  to #add(i,x)# and #remove(i)# are performed, then the total cost of all work
-  done during all calls to #balance()# is $O(m)$.
+  to #add(i,x)# and #remove(i)# are performed, then the total time spent
+  during all calls to #balance()# is $O(m)$.
 \end{lem}
 
 \begin{proof}
@@ -539,7 +539,7 @@ on average, #balance()# only does a constant amount of work per operation
   then the number of #add(i,x)# and #remove(i)# operations since the
   last time #balance()# shifted any elements is at least $#n#/2-1$.
   As in the proof of \lemref{arraystack-amortized}, this is sufficient
-  to prove that the total work done by #balance()# is $O(m)$.
+  to prove that the total time spent by #balance()# is $O(m)$.
 
   We will perform our analysis using the \emph{potential method}.
   Define the \emph{potential} of the #DualArrayDeque# as
@@ -589,7 +589,7 @@ The following theorem summarizes the performance of a #DualArrayStack#
   \end{itemize}
   Furthermore, beginning with an empty #DualArrayDeque#, any sequence of $m$
   #add(i,x)# and #remove(i)# operations results in a total of $O(m)$
-  work during all calls to #resize()# and #balance()#.
+  time spent during all calls to #resize()# and #balance()#.
 \end{thm}
 
 
@@ -794,7 +794,7 @@ data structure:
   \end{itemize}
   Furthermore, beginning with an empty #RootishArrayStack#, any sequence of $m$
   #add(i,x)# and #remove(i)# operations results in a total of $O(m)$
-  work during all calls to #grow()# and #shrink()#.
+  time spent during all calls to #grow()# and #shrink()#.
 
   The space (measured in words)\footnote{Recall \secref{model} for a
   discussion of how memory is measured.} used by a #RootishArrayStack#

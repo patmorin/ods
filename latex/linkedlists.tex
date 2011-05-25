@@ -440,8 +440,8 @@ or #remove(i)#.
 
 \begin{lem}\lemlabel{selist-amortized}
   If an empty #SEList# is created and any sequence of $m\ge 1$ calls
-  to #add(i,x)# and #remove(i)# are performed, then the total cost of all work
-  done during all calls to #spread()# and #gather()# is $O(#b#m)$.
+  to #add(i,x)# and #remove(i)# are performed, then the total time
+  spent during all calls to #spread()# and #gather()# is $O(#b#m)$.
 \end{lem}
 
 \begin{proof}
@@ -493,7 +493,7 @@ structure:
   \end{itemize}
   Furthermore, beginning with an empty #SEList#, any sequence of $m$
   #add(i,x)# and #remove(i)# operations results in a total of $O(#b#m)$
-  work during all calls to #spread(u)# and #gather(u)#.
+  time spent during all calls to #spread(u)# and #gather(u)#.
 
   The space (measured in words)\footnote{Recall \secref{model} for a
   discussion of how memory is measured.} used by an #SEList#
