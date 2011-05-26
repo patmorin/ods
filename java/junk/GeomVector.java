@@ -1,6 +1,6 @@
 package junk;
 
-import sun.security.util.BigInt;
+import java.math.BigInteger;
 
 public class GeomVector {
 	
@@ -14,19 +14,21 @@ public class GeomVector {
 			if (gvo.x[i] != x[i]) return false;
 		return true;
 	}
+
 	
 	public int hashCode() {
-		long p = (1L<<32)+15;  // prime: 2^32 + 15
-		long z = 0x64b6055aL;  // 30 bits from random.org
+		long p = (1L<<32)-5;   // prime: 2^32 - 5
+		long z = 0x64b6055aL;  // 32 bits from random.org
+		int z2 = 0x5067d19d;   // random odd 32 bit number
 		long s = 0;
 		long zi = 1;
 		for (int i = 0; i < x.length; i++) {
-			long xi = x[i].hashCode() & ((1L<<32)-1); // unsigned int to long
+			long xi = (x[i].hashCode() * z2) >>> 1; // reduce to 31 bits
 			s = (s + zi * xi) % p;
 			zi = (zi * z) % p;	
 		}
 		s = (s + zi * (p-1)) % p;
-		return (int)(p & ((1<<32L)-1));
+		return (int)s;
 	}
 	
 	public static void main(String[] args) {
