@@ -61,21 +61,21 @@ IGNORETESTS= \
 	./TreeMap/NullAtEnd \
 	./TreeMap/NullPermissiveComparator \
 	./TreeMap/SubMapClear \
-	./TreeMap/SubMap \
-	\
-	./AbstractCollection/ToString \
-	./Collection/IteratorAtEnd \
-	./Collection/MOAT \
-	./Collections/AddAll \
-	./Collections/FindSubList \
-	./Collections/ReplaceAll \
-	./Collections/ReverseOrder2 \
-	./Collections/Rotate \
-	./Collections/T6433170 \
-	./HashMap/KeySetRemove \
-	./Hashtable/SelfRef \
-	./List/LockStep \
-	./Map/Get
+	./TreeMap/SubMap
+
+#	./AbstractCollection/ToString \
+#	./Collection/IteratorAtEnd \
+#	./Collection/MOAT \
+#	./Collections/AddAll \
+#	./Collections/FindSubList \
+#	./Collections/ReplaceAll \
+#	./Collections/ReverseOrder2 \
+#	./Collections/Rotate \
+#	./Collections/T6433170 \
+#	./HashMap/KeySetRemove \
+#	./Hashtable/SelfRef \
+#	./List/LockStep \
+#	./Map/Get
 
 CLEANFILES=${shell find . -name '*.class'}
 
