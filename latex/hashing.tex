@@ -28,8 +28,10 @@ A #HashTable# data structure uses \emph{hashing with chaining} to store
 data as an array, #t#, of lists.  An integer, #n#, keeps track of the
 total number of items in all lists:
 \javaimport{ods/HashTable.t.n}
-The \emph{hash value} of a data item #x#, denoted #hash(x)# is a value in the range $\{0,\ldots,#t.length#-1\}$.  All items with hash value #i# are stored in the list at #t[i]#.
-To ensure that lists don't get too long, we maintain the invariant
+The \emph{hash value} of a data item #x#, denoted #hash(x)# is a value
+in the range $\{0,\ldots,#t.length#-1\}$.  All items with hash value #i#
+are stored in the list at #t[i]#.  To ensure that lists don't get too
+long, we maintain the invariant
 \[
     #n# \le #t.length#
 \]
@@ -60,18 +62,18 @@ To remove an element #x# from the hash table we iterate over the list
 This takes $O(#n#_{#hash(x)#})$time, where $#n#_{#i#}$ denotes the length
 of the list stored at #t[i]#.
 
-Searching for the element #x# in a hash table is similar.  We perform a linear search on the list
-#t[hash(x)]#:
+Searching for the element #x# in a hash table is similar.  We perform
+a linear search on the list #t[hash(x)]#:
 \javaimport{ods/HashTable.find(x)}
 Again, this takes time proportional to the length of the list #t[hash(x)]#.
 
 The performance of a hash table depends critically on the choice of the
 hash function.  A good hash function will spread the elements evenly
 among the #t.length# lists, so that the expected size of the list
-#t[hash(x)]# is $O(#n#/#t.length)# = O(1)$.  On the other
-hand, a bad hash function will hash all values (including #x#) to the
-same table location, in which case the size of the list #t[hash(x)]#
-will be #n#.  In the next section we describe a good hash function.
+#t[hash(x)]# is $O(#n#/#t.length)# = O(1)$.  On the other hand, a bad
+hash function will hash all values (including #x#) to the same table
+location, in which case the size of the list #t[hash(x)]# will be #n#.
+In the next section we describe a good hash function.
 
 \subsection{Multiplicative Hashing}
 \seclabel{multihash}
@@ -90,15 +92,14 @@ integer $#x#\in\{0,\ldots,2^{#w#}-1\}$ is
     #hash#(#x#) = ((#z#\cdot#x#) \bmod 2^{#w#}) \ddiv 2^{#w#-#d#} \enspace .
 \]
 Here, #z# is a randomly chosen \emph{odd} integer in
-$\{1,\ldots,2^{#w#}-1\}$.
-This hash function can be realized very
-efficiently by observing that, by default, operations on integers
-are already done modulo $2^{#w#}$ where $#w#$ is the number of bits in
+$\{1,\ldots,2^{#w#}-1\}$.  This hash function can be realized very
+efficiently by observing that, by default, operations on integers are
+already done modulo $2^{#w#}$ where $#w#$ is the number of bits in
 an integer.  (See \figref{multihashing}.) Furthermore, integer division
-by $2^{#w#-#d#}$ is equivalent to dropping the rightmost $#w#-#d#$ bits in
-a binary representation (which is implemented by shifting the bits
-right by $#w#-#d#$).  In this way, the code that
-implements the above formula is simpler than the formula itself:
+by $2^{#w#-#d#}$ is equivalent to dropping the rightmost $#w#-#d#$ bits
+in a binary representation (which is implemented by shifting the bits
+right by $#w#-#d#$).  In this way, the code that implements the above
+formula is simpler than the formula itself:
 \javaimport{ods/HashTable.hash(x)}
 
 \begin{figure}
@@ -461,26 +462,28 @@ the same length, shows that this hash function gives a good return for
 the small amount of randomization needed to choose #z#:
 
 \begin{thm}\thmlabel{stringhash-eqlen}
-Let $#p#>2^{#w#}+1$ be a prime,
-let $#x#_0,\ldots,#x#_{r-1}$ and $#y#_0,\ldots,#y#_{r-1}$ each be sequences of #w#-bit integers in $\{0,\ldots,2^{#w#}-1\}$, and assume $#x#_i \neq #y#_i$ for at least one index $i\in\{0,\ldots,r-1\}$. Then 
-\[
-   \Pr\{ h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1}) \} 
-        \le (r-1)/#p# \} \enspace .  
-\] 
+  Let $#p#>2^{#w#}+1$ be a prime, let $#x#_0,\ldots,#x#_{r-1}$ and
+  $#y#_0,\ldots,#y#_{r-1}$ each be sequences of #w#-bit integers in
+  $\{0,\ldots,2^{#w#}-1\}$, and assume $#x#_i \neq #y#_i$ for at least
+  one index $i\in\{0,\ldots,r-1\}$. Then
+  \[
+     \Pr\{ h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1}) \} 
+          \le (r-1)/#p# \} \enspace .  
+  \] 
 \end{thm}
 
 \begin{proof}
-The equation $h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1})$
-can be rewritten as
-\begin{equation}  \eqlabel{strhash-eqlen}
-  \left(
-     (#x#_0-#y#_0)#z#^0+\cdots+(#x#_{r-1}-#y#_{r-1})#z#^{r-1} 
-  \right)\bmod #p# = 0.
-\end{equation}
-Since $#x_i#\neq #y_i#$, this polynomial is non-trivial.  Therefore,
-by \thmref{prime-polynomial}, it has at most $r-1$ solutions in #z#.
-The probability that we pick #z# to be one of these solutions is therefore
-at most $(r-1)/#p#$.
+  The equation $h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1})$
+  can be rewritten as
+  \begin{equation}  \eqlabel{strhash-eqlen}
+    \left(
+       (#x#_0-#y#_0)#z#^0+\cdots+(#x#_{r-1}-#y#_{r-1})#z#^{r-1} 
+    \right)\bmod #p# = 0.
+  \end{equation}
+  Since $#x_i#\neq #y_i#$, this polynomial is non-trivial.  Therefore,
+  by \thmref{prime-polynomial}, it has at most $r-1$ solutions in #z#.
+  The probability that we pick #z# to be one of these solutions is therefore
+  at most $(r-1)/#p#$.
 \end{proof}
 
 Note that this hash function also deals with the case in which two
@@ -488,7 +491,7 @@ sequences have different lengths, even when one of the sequences is a
 prefix of the other. This is because this function effectively hashes
 the infinite sequence
 \[
-#x#_0,\ldots,#x#_{r-1}, #p#-1,0,0,\ldots \enspace .
+  #x#_0,\ldots,#x#_{r-1}, #p#-1,0,0,\ldots \enspace .
 \]
 This guarantees that if we have two sequences of length $r$ and $r'$
 with $r > r'$, then these two sequences differ at index $i=r$.  In
@@ -500,16 +503,17 @@ this case, \eqref{strhash-eqlen} becomes
   \right)\bmod #p# = 0 \enspace ,
 \]
 which, by \thmref{prime-polynomial}, has at most $r$ solutions in $#z#$.
-This combined with \thmref{stringhash-eqlen} suffice to prove the following
-more general theorem:
+This combined with \thmref{stringhash-eqlen} suffice to prove the
+following more general theorem:
 
 \begin{thm}\thmlabel{stringhash}
-Let $#p#>2^{#w#}+1$ be a prime,
-let $#x#_0,\ldots,#x#_{r-1}$ and $#y#_0,\ldots,#y#_{r'-1}$ be distinct sequences of #w#-bit integers in $\{0,\ldots,2^{#w#}-1\}$. Then 
-\[
-   \Pr\{ h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1}) \} 
-        \le r/#p# \} \enspace .  
-\] 
+  Let $#p#>2^{#w#}+1$ be a prime, let $#x#_0,\ldots,#x#_{r-1}$ and
+  $#y#_0,\ldots,#y#_{r'-1}$ be distinct sequences of #w#-bit integers in
+  $\{0,\ldots,2^{#w#}-1\}$. Then
+  \[
+     \Pr\{ h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1}) \} 
+          \le r/#p# \} \enspace .  
+  \] 
 \end{thm}
 
 The following example code shows how this hash function is applied to
@@ -517,11 +521,18 @@ an object that contains an array, #x#, of values:
 \javaimport{junk/GeomVector.hashCode()}
 
 The above code sacrifices some collision probability for implementation
-convenience.  In particular, the multiplier #z# was chosen randomly from
-$\{0,\ldots,2^{30}-1\}$ to avoid overflow with unsigned 63-bit arithmetic.
-This means that the probability of two different sequences, the longer
-of which has length $r$, having the same hash code is at most $r/2^{30}$, rather
-than the $r/(2^{32}+15)$ specified in \thmref{stringhash}.
+convenience.  In particular, it applies the multiplicative hash function
+from \secref{multihash}, with $#d#=31$ to reduce #x[i].hashCode()# to a
+31-bit value.  This is so that the additions and multiplications that are
+done modulo the prime $#p#=2^{32}-5$ can be carried out using unsigned
+63-bit arithmetic.  This means that the probability of two different
+sequences, the longer of which has length $r$, having the same hash code
+is at most
+\[
+    2/2^{31} + r/(2^{32}-5)
+\]
+rather
+than the $r/(2^{32}-5)$ specified in \thmref{stringhash}.
 
 \section{Summary and Further Topics}
 
