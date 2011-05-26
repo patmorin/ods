@@ -192,7 +192,7 @@ don't know.
   \[
     (#z#-#z#')q = k\cdot(1,\underbrace{0,\ldots,0}_{#w#})_2 \enspace ,
   \]
-  so that the $w$ trailing bits in the binary representation of
+  so that the #w# trailing bits in the binary representation of
   $(#z#-#z#')q$ are all 0's.
 
   Furthermore $k\neq 0$ since $q\neq 0$ and $#z#-#z#'\neq 0$.  Since $q$
@@ -233,7 +233,7 @@ random bits followed by a 1.
       (\underbrace{0,\ldots 0}_{#d#},\underbrace{\star,\ldots,\star}_{#w#-#d#})_2 
       \eqlabel{all-zeros}
   \end{equation}
-  when $#zx#\bmod 2^{#w#} \ge #zy#\bmod 2^{#w#}$ or
+  when $#zx#\bmod 2^{#w#} > #zy#\bmod 2^{#w#}$ or
   \begin{equation}
       #z#(#x#-#y#)\bmod 2^{#w#} = 
       (\underbrace{1,\ldots 1}_{#d#},\underbrace{*,\ldots,*}_{#w#-#d#})_2 
@@ -263,7 +263,7 @@ random bits followed by a 1.
   like \eqref{all-zeros} or \eqref{all-ones} is 0.  If $#r#=#w#-#d#$,
   then the probability of looking like \eqref{all-zeros} is 0, but the
   probability of looking like \eqref{all-ones} is $1/2^{#d#-1}=2/2^{#d#}$
-  (since we must have $b_1,\ldots,b_{d-1}=0,\ldots,0$).  If $r < #w#-#d#$
+  (since we must have $b_1,\ldots,b_{d-1}=1,\ldots,1$).  If $r < #w#-#d#$
   then we must have $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=0,\ldots,0$ or
   $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=1,\ldots,1$.  The probability of each
   of these cases is $1/2^{#d#}$ and they are mutually exclusive, so the
@@ -379,29 +379,31 @@ Let $#x#_0,\ldots,#x#_{r-1}$ and $#y#_0,\ldots,#y#_{r-1}$ each be sequences of #
   If we assume, without loss of generality that $#x#_i> #y#_i$, then
   \eqref{bighash-x} becomes
   \begin{equation}
-      #z#_i(#x#_i-#y#_i) = t \eqlabel{bighash-xx}
+      #z#_i(#x#_i-#y#_i) = t \eqlabel{bighash-xx} \enspace ,
   \end{equation}
-  since each of $#z#_i$ and $(#x#_i-#y#_i)$ are at most $2^{#w#}-1$,
-  so their product is at most $2^{2#w#}-2^{#w#+1}+1 < 2^{2#w#}-1$.
+  since each of $#z#_i$ and $(#x#_i-#y#_i)$ is at most $2^{#w#}-1$, so
+  their product is at most $2^{2#w#}-2^{#w#+1}+1 < 2^{2#w#}-1$.
   By assumption, $#x#_i-#y#_i\neq 0$, so \eqref{bighash-xx} has only one
-  solution in #z_i#.  Therefore, the probability that we select $z_i$
+  solution in #z_i#.  Therefore, the probability that we select $#z#_i$
   so that $h'(#x#_0,\ldots,#x#_{r-1})=h'(#y#_0,\ldots,#y#_{r-1})$ is at most
   $1/2^{#w#}$.
 
   The final step of the hash function is to apply multiplicative hashing
   to reduce our $2#w#$-bit intermediate result $h'(#x#_0,\ldots,#x#_{r-1})$ to
-  a #w# bit final result $h(#x#_0,\ldots,#x#_r)$.  By \thmref{multihash},
-  if $h'(#x#_0,\ldots,#x#_r)\neq h'(#y#_0,\ldots,#y#_r)$, then
-  $\Pr\{h(#x#_0,\ldots,#x#_r) = h(#y#_0,\ldots,#y#_r)\} \le 2/2^{#w#}$.
+  a #w#-bit final result $h(#x#_0,\ldots,#x#_r)$.  By \thmref{multihash},
+  if $h'(#x#_0,\ldots,#x#_{r-1})\neq h'(#y#_0,\ldots,#y#_{r-1})$, then
+  $\Pr\{h(#x#_0,\ldots,#x#_{r-1}) = h(#y#_0,\ldots,#y#_{r-1})\} \le 2/2^{#w#}$.
 
   To summarize, 
   \begin{eqnarray*}
-    \Pr\{h(#x#_0,\ldots,#x#_r) = h(#y#_0,\ldots,#y#_r)\}
+    \Pr\left\{\begin{array}{l}
+         h(#x#_0,\ldots,#x#_{r-1}) \\
+          \quad = h(#y#_0,\ldots,#y#_{r-1})\end{array}\right\}
       &=& \Pr\left\{\begin{array}{ll}
-            \mbox{$h'(#x#_0,\ldots,#x#_r) = h'(#y#_0,\ldots,#y#_r)$ or} \\
-            \mbox{$h'(#x#_0,\ldots,#x#_r) \neq h'(#y#_0,\ldots,#y#_r)$} \\
+            \mbox{$h'(#x#_0,\ldots,#x#_{r-1}) = h'(#y#_0,\ldots,#y#_{r-1})$ or} \\
+            \mbox{$h'(#x#_0,\ldots,#x#_{r-1}) \neq h'(#y#_0,\ldots,#y#_{r-1})$} \\
                   \mbox{\quad and
-$#z#h(#x#_0,\ldots,#x#_r)\ddiv2^{#w#} = #z# h'(#y#_0,\ldots,#y#_r)\ddiv 2^{#w#}$}
+$#z#h'(#x#_0,\ldots,#x#_{r-1})\ddiv2^{#w#} = #z# h'(#y#_0,\ldots,#y#_{r-1})\ddiv 2^{#w#}$}
           \end{array}\right\} \\
       &\le& 1/2^{#w#} + 2/2^{#w#} = 3/2^{#w#}
   \end{eqnarray*}
@@ -444,7 +446,7 @@ a random integer $#z#\in\{0,\ldots,#p#-1\}$ via the formula
 Note the extra $(#p#-1)#z#^r$ term at the end of the formula.  It helps
 to think of $(#p#-1)$ as the last element, $#x#_r$, in the sequence
 $#x#_0,\ldots,#x#_{r}$.  Note that this element differs from every other
-element in the sequence (which are all in the set $\{0,\ldots,#p#-1\}$.
+element in the sequence (which are all in the set $\{0,\ldots,#p#-2\}$).
 We can think of $#p#-1$ as an end-of-sequence marker.
 
 The following theorem shows that this hash function gives a good return for the small amount of randomization needed to choose #z#:
@@ -480,8 +482,8 @@ infinite sequence
 \[
 #x#_0,\ldots,#x#_{r-1}, #p#-1,0,0,\ldots \enspace .
 \]
-This guarantees that if we have two sequences of length #r# and #r'#
-with $r < r'$, then these two sequences differ at index #i=r#.  
+This guarantees that if we have two sequences of length $r$ and $r'$
+with $r < r'$, then these two sequences differ at index $i=r$.  
 
 The following example code shows how this is done for an object that
 contains an array #x# of values:
@@ -500,13 +502,15 @@ Hash tables and hash codes are a enormous and active area of research
 that is just touched upon in this chapter.
 
 A variety of different hash table implementations exist. The one described
-in \secref{hashtable} is known as \emph{hashing with chaining} (each
-array entry contains a chain (#List#) of elements).  Another alternative
-is that used by \emph{open addressing} schemes, where all data is stored
-directly in an array.  Open addressing schemes must deal with the problem
-of \emph{collision resolution}: the case where two values hash to the
-same array location.  Different strategies exist for collision resolution
-and these have different performance guarantees and require different .
+in \secref{hashtable} is known as \emph{hashing with chaining} (each array
+entry contains a chain (#List#) of elements).  Another alternative is
+that used by \emph{open addressing} schemes, where all data is stored
+directly in an array.  Open addressing schemes must deal with the
+problem of \emph{collision resolution}: the case where two values hash
+to the same array location.  Different strategies exist for collision
+resolution and these have different performance guarantees and often
+require more sophisticated hash functions than the multiplicative hash
+function described here.
 
 Yet another category of hash table implementations are so-called
 \emph{perfect hashing} methods.   These are methods in which #find(x)#
@@ -548,7 +552,7 @@ collision probability $1/2^{#w#}$.  This can be reduced to a #w# bit
 hash code using multiplicative (or multiply-add) hashing. This method
 is fast because it requires only $r/2$ $2#w#$-bit multiplications whereas
 the method described in \secref{stringhash} requires $r$ multiplications.
-(The $\bmod$ operations occur implicitly by using #w# and $2#w#$ bit arithmetic for the additions and multipliations, respectively.)
+(The $\bmod$ operations occur implicitly by using #w# and $2#w#$ bit arithmetic for the additions and multiplications, respectively.)
 
 The method of using polynomials over prime fields to hash variable-length
 arrays and strings from \secref{polyhash} is, unfortunately, not
@@ -559,7 +563,7 @@ $\bmod$ operator can be replaced with addition (#+#) and bitwise-and
 (#&#) operations \cite{knuth}.  Another option is to apply one of the
 fast methods for fixed-length strings to blocks of length $c$ for some
 constant $c>1$ and then apply the prime field method to the resulting
-sequence $\lceil r/c\rceil$ hash codes.
+sequence of $\lceil r/c\rceil$ hash codes.
 
 \section{Exercises}
 

@@ -1,0 +1,114 @@
+\chapter{Binary Trees}
+\chaplabel{binarytrees}
+
+This chapter introduces one of the most fundmental structures in computer
+science: binary trees.  There are lots of ways of defining binary trees.
+Mathematically, a binary tree is a connected undirected graph with #n#
+vertices, $#n#-1$ edges and no vertex of degree greater than 3.
+
+For most computer science applications, binary trees are \emph{rooted}:
+A special node, #root#, is called the \emph{root} of the tree.
+For every node $#u#\neq #r#$, the second node on the path from #u#
+to #r# is called the \emph{parent} of #u#.  Each of the (at most 2)
+other nodes adjacent to #u# is called a \emph{child} of #u#. Most of
+binary trees we are interested in are \emph{ordered}, so we distinguish
+between the \emph{left child} and \emph{right child} of #u#.
+
+In illustrations, binary trees are usually drawn from the root downward,
+with the root at the top of the drawing and the left and right given by
+left and right in the drawing.  A binary tree with X nodes is drawn this
+way in \figref{binary-tree}.a.
+
+\begin{figure}
+  \begin{center}
+    \begin{tabular}{cc}
+      \includegraphics{figs/binary-tree-1} &
+      \includegraphics{figs/binary-tree-2} \\
+      (a) & (b) 
+    \end{tabular}
+  \end{center}
+  \caption{A binary tree with (a)~13 real nodes and (b)~14 external nodes.}
+  \figlabel{binary-tree}
+\end{figure}
+
+The \emph{depth} of a node #u# in a binary tree is the length of the
+path from #u# to the root of the tree.   If a node #w# is on the path
+from #u# to #root# then #w# is called an \emph{ancestor} of #u# and #u#
+is a \emph{descendant} of #w#.  The \emph{subtree} of a node #u# is the
+binary tree that is rooted at #u# and contains all of #u#'s descendants.
+The \emph{height} of a node #u# is the length of the longest path from
+#u# to one of its descendants.  The height of tree is height of its root.
+A node #u# is a \emph{leaf} if it has no children.
+
+We sometimes think of the tree as being augmented with \emph{external
+nodes}. Any node that does not have a left child has an external node
+as its left child and any node that does not have a right child has
+an external node as its right child (see \figref{binary-tree}.b).
+It is easy to verify, by induction, that a binary tree has $#n#\ge 1$
+real nodes then it has $#n#+1$ external nodes.
+
+
+\section{BinaryTree: A Basic Binary Tree}
+
+The simplest way to represent a node in a binary tree is
+to store the (at most 3) neighbours of the node explicitly:
+\javaimport{ods/BinaryTreeNode.left.right.parent}
+When one of these three neighbours is not present, we set it to #null#.
+In this way, external nodes in the tree as well as the parent of the
+root correspond to #null# values.
+
+The binary tree itself can then be represented by a pointer to its root node:
+\javaimport{ods/BinaryTree.root}
+
+We can compute the depth of a node #u# by counting the number of steps on the path from #u# to the root:
+\javaimport{ods/BinaryTree.depth(u)}
+
+
+\subsection{Recursive Algorithms}
+
+It is very easy to implement many operations using recursive algorithms on
+binary trees.  For example, to compute the size of (number of nodes in)
+a binary tree rooted at node #u#, we recursively compute the sizes of
+the two subtrees rooted at the children of #u#, sum these sizes, and add 1:
+
+\javaimport{ods/BinaryTree.size().size(u)}
+
+To compute the height of a node in a #BinaryTree# we can compute the
+height of its two subtrees, take the maximum, and add 1:
+
+\javaimport{ods/BinaryTree.height(u)}
+
+\subsection{Traversing Binary Trees}
+
+The two algorithms from the previous section use recursion to visit all
+the nodes in a binary tree.  Each of them visits the nodes of the binary tree in the same order as the following code:
+\javaimport{ods/BinaryTree.traverse(u)}
+
+Using recursion this way produces very short simple code, but can
+be problematic.  The maximum depth of the recursion is given by the
+maximum depth of a node in the binary tree (i.e., the tree's height).
+If the height of the tree is very large, then this could very-well use
+more stack space than is available, causing a crash.  
+
+Luckily, traversing a binary tree can be done without recursion. This is
+done using an algorithm that keeps track of where it came from to decide
+where it will go next.  If we are at an external node, then we return
+to the previous node.  If we arrive at a node #u# from #u.right# then
+we are done visiting #u#'s subtree, so we return to #u#.parent.  If we
+arrive at #u# from #u#.left then we visit #u#.right next.  Otherwise we
+arrived at #u# from #u.parent# so this is our first visit to #u# and we
+next visit #u.left#:
+\javaimport{ods/BinaryTree.traverse2()}
+
+In some implementations of binary trees, the #parent# field is not present
+in a node.  When this is the case, a non-recursive implementation is
+still possible, but the implementation has to use a #List# (or #Stack#)
+to keep track of the path from the current node to the root.
+
+
+
+
+
+\section{BinarySearchTree: An Unbalanced Binary Search Tree}
+
+
