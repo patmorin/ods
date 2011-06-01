@@ -1,8 +1,6 @@
 package ods;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
@@ -16,7 +14,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	/**
 	 * The root of this tree
 	 */
-	Node root;
+	Node r;
 
 	/**
 	 * Create a new instance of this class
@@ -41,7 +39,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	
 	public int depth(Node u) {
 		int d = 0;
-		while (u != root) {
+		while (u != r) {
 			u = u.parent;
 			d++;
 		}
@@ -53,7 +51,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	 * @return the number of nodes in this tree
 	 */
 	public int size() {
-		return size(root);
+		return size(r);
 	}
 	
 	/**
@@ -66,7 +64,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	}
 	
 	public int height() {
-		return height(root);
+		return height(r);
 	}
 	
 	/**
@@ -83,21 +81,21 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	 * @return
 	 */
 	public boolean isEmpty() {
-		return root == null;
+		return r == null;
 	}
 	
 	/**
 	 * Make this tree into the empty tree
 	 */
 	public void clear() {
-		root = null;
+		r = null;
 	}
 	
 	/**
 	 * Return a representation of this tree as a string
 	 */
 	public String toString() {
-		return toString(root, "  ");
+		return toString(r, "  ");
 	}
 	
 	/**
@@ -127,8 +125,8 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		t.clear();
 		if (n == 0)
 			return;		
-		t.root = t.newNode();
-		q.add(t.root);
+		t.r = t.newNode();
+		q.add(t.r);
 		while (--n > 0) {
 			Node u = q.remove();
 			u.left = t.newNode();
@@ -152,8 +150,8 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		Random r = new Random();
 		Queue<Node> q = new LinkedList<Node>();
 		t.clear();
-		t.root = t.newNode();
-		q.add(t.root);
+		t.r = t.newNode();
+		q.add(t.r);
 		double p = (0.5 - (1.0)/(n+n));
 		while (!q.isEmpty()) {
 			Node u = q.remove();
@@ -175,24 +173,45 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	}
 
 	public void traverse2() {
-		Node prev = null;
-		Node u = root;
-		while (prev != root || u != null) {
-			if (u == null) {               // external node - return to prev
-				u = prev;
-				prev = null;
-			} else if (prev == u.right) {  // done here - return to parent 
-				prev = u;
-				u = u.parent;
-			} else if (prev == u.left) {   // done left - visit right
-				prev = u;
-				u = u.right;
-			} else if (prev == u.parent) { // first visit - visit left
-				prev = u;
-				u = u.left;
-			} 
+		Node u = r, prev = null, next;
+		while (u != null) {
+			if (prev == u.parent) {
+				if (u.left != null) next = u.left;
+				else if (u.right != null) next = u.right;
+				else next = u.parent;
+			} else if (prev == u.left) {
+				if (u.right != null) next = u.right;
+				else next = u.parent;
+			} else {
+				next = u.parent;
+			}
+			prev = u;
+			u = next;
 		}
 	}
+
+	
+	public int size2() {
+		Node u = r, prev = null, next;
+		int n = 0;
+		while (u != null) {
+			if (prev == u.parent) {
+				n++;
+				if (u.left != null) next = u.left;
+				else if (u.right != null) next = u.right;
+				else next = u.parent;
+			} else if (prev == u.left) {
+				if (u.right != null) next = u.right;
+				else next = u.parent;
+			} else {
+				next = u.parent;
+			}
+			prev = u;
+			u = next;
+		}
+		return n;
+	}
+	
 
 	
 	/**
@@ -205,8 +224,8 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		Random r = new Random();
 		Queue<Node> q = new LinkedList<Node>();
 		t.clear();
-		t.root = t.newNode();
-		q.add(t.root);
+		t.r = t.newNode();
+		q.add(t.r);
 		double p = ((double)0.5 - ((double)1)/(n+n));
 		while (!q.isEmpty()) {
 			Node u = q.remove();
@@ -229,7 +248,17 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	 */
 	public <N2 extends BinaryTreeNode<N2>> void	copyTo(BinaryTree<N2> t) {
 		t.clear();
-		t.root = copyTo(root, t);
+		t.r = copyTo(r, t);
+	}
+	
+	public void bfTraverse() {
+		Queue<Node> q = new LinkedList<Node>();
+		q.add(r);
+		while (!q.isEmpty()) {
+			Node u = q.remove();
+			if (u.left != null) q.add(u.left);
+			if (u.right != null) q.add(u.left);
+		}
 	}
 
 	/**
@@ -293,15 +322,12 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	 */
 	public static void main(String[] args) {
 		BinaryTree<SimpleBinaryTreeNode> t = new BinaryTree<SimpleBinaryTreeNode>(new SimpleBinaryTreeNode());
-		completeBinaryTree(t, 16);
-		System.out.println(t.size());
+		completeBinaryTree(t, 3999);
+		System.out.println("size = (" + t.size() + "," + t.size2() + ")");
+		// System.out.println("height = (" + t.height() + "," + t.height2() + ")");
+		galtonWatsonTree(t, 4000);
+		System.out.println("size = (" + t.size() + "," + t.size2() + ")");
 		// System.out.println(t.toString());
-		t.traverse(t.root);
-		System.out.println();
-		t.traverse2();
-		System.out.println();
-		t.traverse3();
-		System.out.println();
 	}
 
 }

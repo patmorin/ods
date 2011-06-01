@@ -13,6 +13,12 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 	 * The number of nodes (elements) currently in the treap
 	 */
 	protected int n;
+	
+	protected Node newNode(T x) {
+		Node u = newNode();
+		u.x = x;
+		return u;
+	}
 
 	public BinarySearchTree(Node is, Comparator<T> c) {
 		super(is);
@@ -27,8 +33,8 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 	 * Search for a value in the tree
 	 * @return the last node on the search path for x
 	 */
-	protected Node findNode(T x) {
-		Node w = root, prev = null;
+	protected Node findLast(T x) {
+		Node w = r, prev = null;
 		while (w != null) {
 			prev = w;
 			int res = x.compareTo(w.x);
@@ -48,7 +54,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 	 * @return the last node on the search path for x
 	 */
 	protected Node findGENode(T x) {
-		Node w = root, z = null;
+		Node w = r, z = null;
 		while (w != null) {
 			int res = c.compare(x, w.x);
 			if (res < 0) {
@@ -62,16 +68,46 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 		}
 		return z;
 	}
-	
-	public T findGE(T x) {
-		if (x == null) { // find the minimum value
-			Node w = root;
+
+	protected T findEQ(T x) {
+		Node u = r;
+		while (u != null) {
+			int res = c.compare(x, u.x);
+			if (res < 0) 
+				u = u.left;
+			else if (res > 0)
+				u = u.right;
+			else
+				return u.x;
+		}
+		return null;
+	}
+
+	protected T find(T x) {
+		Node w = r, z = null;
+		while (w != null) {
+			int res = c.compare(x, w.x);
+			if (res < 0) {
+				z = w;
+				w = w.left;
+			} else if (res > 0) {
+				w = w.right;
+			} else {
+				return w.x;
+			}
+		}
+		return z == null ? null: z.x;
+	}
+
+	public T findGE(T u) {
+		if (u == null) { // find the minimum value
+			Node w = r;
 			if (w == null) return null;
 			while (w.left != null)
 				w = w.left;
 			return w.x;
 		}
-		Node w = findGENode(x);
+		Node w = findGENode(u);
 		return w == null ? null : w.x;
 	}
 
@@ -80,16 +116,16 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 	 * @return the last node on the search path for x
 	 */
 	protected Node findLTNode(T x) {
-		Node w = root, z = null;
-		while (w != null) {
-			int res = c.compare(x, w.x);
+		Node u = r, z = null;
+		while (u != null) {
+			int res = c.compare(x, u.x);
 			if (res < 0) {
-				w = w.left;
+				u = u.left;
 			} else if (res > 0) {
-				z = w;
-				w = w.right;
+				z = u;
+				u = u.right;
 			} else {
-				return w;
+				return u;
 			}
 		}
 		return z;
@@ -97,7 +133,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 
 	public T findLT(T x) {
 		if (x == null) { // find the maximum value
-			Node w = root;
+			Node w = r;
 			if (w == null) return null;
 			while (w.right != null)
 				w = w.right;
@@ -116,7 +152,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 	 */
 	protected boolean addChild(Node p, Node u) {
 		if (p == null) {
-			root = u;     // inserting into empty tree
+			r = u;              // inserting into empty tree
 		} else {
 			int res = u.x.compareTo(p.x);
 			if (res < 0) {
@@ -124,7 +160,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 			} else if (res > 0) {
 				p.right = u;
 			} else {
-				return false;
+				return false;   // u.x is already in the tree
 			}
 			u.parent = p;
 		}
@@ -138,16 +174,10 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 	 * @return
 	 */
 	public boolean add(T x) {
-		Node u = newNode();
-		u.x = x;
-		return add(u);
+		Node p = findLast(x);
+		return addChild(p, newNode(x));		
 	}
 	
-	protected boolean add(Node u) {
-		Node p = findNode(u.x);
-		return addChild(p, u);		
-	}
-
 	/**
 	 * Remove the node u --- ASSUMING u has at most one child
 	 * @param u
@@ -159,8 +189,8 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 		} else {
 			s = u.right;
 		}
-		if (u == root) {
-			root = s;
+		if (u == r) {
+			r = s;
 			p = null;
 		} else {
 			p = u.parent;
@@ -242,8 +272,8 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 	 * @return
 	 */
 	public boolean remove(T x) {
-		Node u = findNode(x);
-		if (u != null && u.x.compareTo(x) == 0) {
+		Node u = findLast(x);
+		if (u != null) {
 			remove(u);
 			return true;
 		}
@@ -262,7 +292,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 	
 	@SuppressWarnings({"unchecked"})
 	public boolean contains(Object x) {
-		Node u = findNode((T)x);
+		Node u = findLast((T)x);
 		return u != null && u.x.compareTo((T)x) == 0;
 	}
 	
@@ -306,7 +336,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 	}
 
 	public Iterator<T> iterator() {
-		Node u = root;
+		Node u = r;
 		if (u == null)
 			return iterator(u);
 		while (u.left != null)

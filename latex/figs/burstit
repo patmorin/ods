@@ -1,0 +1,13 @@
+#!/bin/bash -ex
+
+name="${1%.ipe}"
+filename="$name.ipe"
+pdfname="$name.pdf"
+
+if [[ -e "$filename" ]]; then
+  ipetoipe -pdf "$filename"
+  pdftk "$pdfname" burst output "$name-%d.pdf"
+else
+  echo "$filename does not exist!"
+fi
+

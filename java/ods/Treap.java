@@ -8,18 +8,18 @@ public class Treap<T extends Comparable<T>> extends
 	/**
 	 * A random number source
 	 */
-	Random r;
+	Random rand;
 
 	public Treap() {
 		super(new TreapNode<T>());
-		r = new Random();
+		rand = new Random();
 		c = new DefaultComparator<T>();
 	}
 
 	public boolean add(T x) {
 		TreapNode<T> u = new TreapNode<T>();
 		u.x = x;
-		u.prio = r.nextInt();
+		u.prio = rand.nextInt();
 		if (super.add(u)) {
 			bubbleUp(u);
 			return true;
@@ -36,16 +36,16 @@ public class Treap<T extends Comparable<T>> extends
 			}
 		}
 		if (u.parent == null) {
-			root = u;
+			r = u;
 		}
 	}
 
 	public boolean remove(T x) {
-		TreapNode<T> u = findNode((T) x);
+		TreapNode<T> u = findLast((T) x);
 		if (c.compare(u.x, (T)x) == 0) {
 			trickleDown(u);
 			if (u.parent == null) {
-				root = null;
+				r = null;
 			} else if (u.parent.left == u) {
 				u.parent.left = null;
 			} else {
@@ -71,8 +71,8 @@ public class Treap<T extends Comparable<T>> extends
 			} else {
 				leftRotate(n);
 			}
-			if (root == n) {
-				root = n.parent;
+			if (r == n) {
+				r = n.parent;
 			}
 		}
 	}

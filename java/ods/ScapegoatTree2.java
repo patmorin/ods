@@ -15,8 +15,8 @@ public class ScapegoatTree2<T extends Comparable<T>> extends ScapegoatTree<T> {
 				sampleNode.getClass(), ns);
 		packIntoArray(u, a, 0);
 		if (p == null) {
-			root = buildBalanced(a, 0, ns);
-			root.parent = null;
+			r = buildBalanced(a, 0, ns);
+			r.parent = null;
 		} else if (p.right == u) {
 			p.right = buildBalanced(a, 0, ns);
 			p.right.parent = p;
