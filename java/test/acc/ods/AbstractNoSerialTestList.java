@@ -7,8 +7,7 @@ public abstract class AbstractNoSerialTestList extends AbstractTestList {
 		super(testname);
 	}
 	
-	public void testEmptyListCompatibility() { }
-	public void testFullListCompatibility() { }
-	public void testCanonicalEmptyCollectionExists() { }
-	public void testCanonicalFullCollectionExists() { }
+	protected boolean skipSerializedCanonicalTests() {
+		return true;
+	}
 }
