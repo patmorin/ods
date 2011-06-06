@@ -1,7 +1,11 @@
 package ods;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.List;
+
 
 public class Treap<T extends Comparable<T>> extends
 		BinarySearchTree<TreapNode<T>, T> implements SSet<T> {
@@ -19,7 +23,7 @@ public class Treap<T extends Comparable<T>> extends
 	public boolean add(T x) {
 		TreapNode<T> u = new TreapNode<T>();
 		u.x = x;
-		u.prio = rand.nextInt();
+		u.p = rand.nextInt();
 		if (super.add(u)) {
 			bubbleUp(u);
 			return true;
@@ -28,7 +32,7 @@ public class Treap<T extends Comparable<T>> extends
 	}
 
 	protected void bubbleUp(TreapNode<T> u) {
-		while (u.parent != null && u.parent.prio > u.prio) {
+		while (u.parent != null && u.parent.p > u.p) {
 			if (u.parent.right == u) {
 				leftRotate(u.parent);
 			} else {
@@ -44,14 +48,7 @@ public class Treap<T extends Comparable<T>> extends
 		TreapNode<T> u = findLast((T) x);
 		if (c.compare(u.x, (T)x) == 0) {
 			trickleDown(u);
-			if (u.parent == null) {
-				r = null;
-			} else if (u.parent.left == u) {
-				u.parent.left = null;
-			} else {
-				u.parent.right = null;
-			}
-			n--;
+			splice(u);
 			return true;
 		}
 		return false;
@@ -60,32 +57,29 @@ public class Treap<T extends Comparable<T>> extends
 	/**
 	 * Do rotations to make u a leaf
 	 */
-	protected void trickleDown(TreapNode<T> n) {
-		while (!n.isLeaf()) {
-			if (n.left != null) {
-				if (n.right == null || n.left.prio < n.right.prio) {
-					rightRotate(n);
-				} else {
-					leftRotate(n);
-				}
+	protected void trickleDown(TreapNode<T> u) {
+		while (u.left != null || u.right != null) {
+			if (u.left == null) {
+				leftRotate(u);
+			} else if (u.right == null) {
+				rightRotate(u);
+			} else if (u.left.p < u.right.p) {
+				rightRotate(u);
 			} else {
-				leftRotate(n);
+				leftRotate(u);
 			}
-			if (r == n) {
-				r = n.parent;
+			if (r == u) {
+				r = u.parent;
 			}
 		}
 	}
 	
 	public static void main(String[] args) {
-		SortedSet<Integer> sl = new SortedSSet<Integer>(new Treap<Integer>());
-		for (int i = 0; i < 100; i++) {
-			sl.add(i);
-		}
-		System.out.println(sl.size());
-		for (int i = 25; i < 75; i++) {
-			sl.remove(i);
-		}
-		System.out.println(sl.size());
+		List<SortedSet<Integer>> c = new ArrayList<SortedSet<Integer>>();
+		c.add(new TreeSet<Integer>());
+		c.add(new SortedSSet<Integer>(new Treap<Integer>()));
+		c.add(new SortedSSet<Integer>(new SkiplistSet<Integer>()));
+		c.add(new TreeSet<Integer>());
+		Testum.sortedSetSpeedTests(c, 1000000);
 	}
 }
