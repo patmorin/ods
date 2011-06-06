@@ -4,7 +4,8 @@ SRCS=${shell for dir in `ls` ; do find $${dir} -name '*.java' ; done}
 OBJS=${SRCS:.java=.class}
 CLASSES=${SRCS:.java=}
 
-IGNORETESTS= \
+RUNTESTS ?= ${CLASSES}
+IGNORETESTS ?= \
 	AbstractList/CheckForComodification \
 	AbstractList/FailFastIterator \
 	AbstractList/HasNextAfterException \
@@ -95,7 +96,7 @@ all: test
 build: ${OBJS}
 
 test: build
-	for test in ${CLASSES} ; do \
+	for test in ${RUNTESTS} ; do \
 		for ignore in ${IGNORETESTS} ; do \
 			if [ "$${ignore}" = "$${test}" ] ; then \
 			continue 2 ; \
