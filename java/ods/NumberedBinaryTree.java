@@ -14,7 +14,7 @@ public class NumberedBinaryTree extends BinaryTree<NumberedBinaryTreeNode> {
 	 * @return
 	 */
 	public int preorderNumber() {
-		return preorderNumber(root, 0);
+		return preorderNumber(r, 0);
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class NumberedBinaryTree extends BinaryTree<NumberedBinaryTreeNode> {
 	 * @return
 	 */
 	public int inorderNumber() {
-		return inorderNumber(root, 0);
+		return inorderNumber(r, 0);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class NumberedBinaryTree extends BinaryTree<NumberedBinaryTreeNode> {
 	 * @return
 	 */
 	public int postorderNumber() {
-		return postorderNumber(root, 0);
+		return postorderNumber(r, 0);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class NumberedBinaryTree extends BinaryTree<NumberedBinaryTreeNode> {
 	protected int bfsNumber() {
 		int c = 0;
 		Queue<NumberedBinaryTreeNode> q = new LinkedList<NumberedBinaryTreeNode>();
-		q.add(root);
+		q.add(r);
 		while (!q.isEmpty()) {
 			NumberedBinaryTreeNode u = q.remove();
 			if (u != null) {

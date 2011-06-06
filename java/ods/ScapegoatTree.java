@@ -19,7 +19,7 @@ public class ScapegoatTree<T extends Comparable<T>>
 	public boolean remove(T x) {
 		if (super.remove(x)) {
 			if (2*n < q) {
-				rebuild(root);
+				rebuild(r);
 				q = n;
 			}
 			return true;
@@ -58,9 +58,9 @@ public class ScapegoatTree<T extends Comparable<T>>
 		ScapegoatNode<T> u = newNode();
 		u.x = x;
 		int d = 0;
-		ScapegoatNode<T> w = root;
+		ScapegoatNode<T> w = r;
 		if (w == null) {
-			root = u;
+			r = u;
 			n++; q++;
 			return true;
 		}

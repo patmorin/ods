@@ -5,32 +5,32 @@ import java.util.Random;
 public class MergeableHeap<T extends Comparable<T>> extends
 		BinaryTree<MHeapNode<T>> {
 	
-	Random r;
+	Random rand;
 	
 	public MergeableHeap() {
 		super(new MHeapNode<T>());
-		r = new Random();
+		rand = new Random();
 	}
 	
 	protected  MergeableHeap(MHeapNode<T> r) {
 		super(new MHeapNode<T>());
-		root = r;
+		this.r = r;
 	}
 	
 	public boolean add(T x) {
 		MHeapNode<T> p = new MHeapNode<T>();
 		p.x = x;
-		root = merge(p, root);
+		r = merge(p, r);
 		return true;
 	}
 	
 	public T findMin() {
-		return root.x;
+		return r.x;
 	}
 	
 	public T remove() {
-		T x = root.x;
-		root = merge(root.left, root.right);
+		T x = r.x;
+		r = merge(r.left, r.right);
 		return x;
 	}
 	
@@ -42,7 +42,7 @@ public class MergeableHeap<T extends Comparable<T>> extends
 			h1 = h2;
 			h2 = tmp;
 		}
-		if (r.nextBoolean()) {
+		if (rand.nextBoolean()) {
 			h1.left = merge(h1.left, h2);
 		} else {
 			h1.right = merge(h1.right, h2);
