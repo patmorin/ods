@@ -1,7 +1,5 @@
 package junk;
 
-import java.math.BigInteger;
-
 public class GeomVector {
 	
 	Double[] x;

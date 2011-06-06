@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 
-public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable<T>> extends
+public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 		BinaryTree<Node> implements SSet<T> {
 
 	protected Comparator<T> c;
@@ -37,7 +37,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 		Node w = r, prev = null;
 		while (w != null) {
 			prev = w;
-			int res = x.compareTo(w.x);
+			int res = c.compare(x, w.x);
 			if (res < 0) {
 				w = w.left;
 			} else if (res > 0) {
@@ -154,7 +154,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 		if (p == null) {
 			r = u;              // inserting into empty tree
 		} else {
-			int res = u.x.compareTo(p.x);
+			int res = c.compare(u.x, p.x);
 			if (res < 0) {
 				p.left = u;
 			} else if (res > 0) {
@@ -177,6 +177,20 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 		Node p = findLast(x);
 		return addChild(p, newNode(x));		
 	}
+
+	/**
+	 * Add a new value
+	 * @param x
+	 * @return
+	 */
+	public boolean add(Node u) {
+		Node p = findLast(u.x);
+		return addChild(p, u);		
+	}
+
+//	public static randomBST(T[] a, BinarySearchTree<BSTNode<BSTNode,T>,T> t) {
+//		BinarySearchTree<T> t = new BinarySearchTree<T>();
+//	}
 	
 	/**
 	 * Remove the node u --- ASSUMING u has at most one child
@@ -203,6 +217,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 		if (s != null) {
 			s.parent = p;
 		}
+		n--;
 	}
 	
 	/**
@@ -219,7 +234,6 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 			u.x = w.x;
 			splice(w);
 		}
-		n--;
 	}
 	
 	/**
@@ -293,7 +307,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T extends Comparable
 	@SuppressWarnings({"unchecked"})
 	public boolean contains(Object x) {
 		Node u = findLast((T)x);
-		return u != null && u.x.compareTo((T)x) == 0;
+		return u != null && c.compare(u.x, (T)x) == 0;
 	}
 	
 	public boolean containsAll(Collection<?> c) {

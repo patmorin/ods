@@ -24,9 +24,5 @@ public class BinaryTreeNode<Node extends BinaryTreeNode<Node>> {
 	/**
 	 * Parent node
 	 */
-	protected Node parent;
-	
-	public boolean isLeaf() {
-		return left == null && right == null;
-	}
+	protected Node parent;	
 }
