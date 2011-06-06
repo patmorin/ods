@@ -4,7 +4,8 @@ SRCS=${shell find ods -name '*.java'}
 OBJS=${SRCS:.java=.class}
 CLASSES=${SRCS:.java=}
 
-IGNORETESTS= ./ods/TestAll
+RUNTESTS ?= ${CLASSES}
+IGNORETESTS ?= ./ods/TestAll
 
 CLEANFILES=${shell find . -name '*.class'}
 
@@ -24,7 +25,7 @@ all: test
 build: ${OBJS}
 
 test: build
-	for test in ${CLASSES} ; do \
+	for test in ${RUNTESTS} ; do \
 		if basename $${test} | grep -q '^Abstract' ; then \
 			continue ; \
 		fi ; \
