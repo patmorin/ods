@@ -240,8 +240,8 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	 * Do a left rotation at u
 	 * @param u
 	 */
-	protected void leftRotate(TreapNode<T> u) {
-		TreapNode<T> w = u.right;
+	protected void rotateLeft(Node u) {
+		Node w = u.right;
 		w.parent = u.parent;
 		if (w.parent != null) {
 			if (w.parent.left == u) {
@@ -262,8 +262,8 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	 * Do a right rotation at u
 	 * @param u
 	 */
-	protected void rightRotate(TreapNode<T> u) {
-		TreapNode<T> w = u.left;
+	protected void rotateRight(Node u) {
+		Node w = u.left;
 		w.parent = u.parent;
 		if (w.parent != null) {
 			if (w.parent.left == u) {
