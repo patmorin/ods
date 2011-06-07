@@ -314,6 +314,8 @@ to integers.  It ensures that unequal objects usually have different
 hash codes and so are likely to be stored at different locations in
 our hash table.
 
+
+
 \subsection{Hash Codes for Primitive Data Types}
 
 Small primitive data types like #char#, #byte#, #int#, and #float# are
@@ -333,11 +335,14 @@ as compound objects made of $c$ parts, as described in the next section.
 \subsection{Hash Codes for Compound Objects}
 \seclabel{stringhash}
 
+
 For a compound object, we want to create a hash code by combining the
 individual hash codes of the object's constituent parts.  This is not
 as easy as it sounds.  Although one can find many hacks for this (for
 example, combining the hash codes with bitwise exclusive-or operations),
 many of these hacks turn out to be easy to foil.
+
+TODO: Discuss some methods that don't work.  Adding, XOR-ing, and so on.
 
 However, if one is willing to do arithmetic with $2#w#$ bits of
 precision, then there are simple and robust methods available.

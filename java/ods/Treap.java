@@ -34,9 +34,9 @@ public class Treap<T extends Comparable<T>> extends
 	protected void bubbleUp(TreapNode<T> u) {
 		while (u.parent != null && u.parent.p > u.p) {
 			if (u.parent.right == u) {
-				leftRotate(u.parent);
+				rotateLeft(u.parent);
 			} else {
-				rightRotate(u.parent);
+				rotateRight(u.parent);
 			}
 		}
 		if (u.parent == null) {
@@ -60,13 +60,13 @@ public class Treap<T extends Comparable<T>> extends
 	protected void trickleDown(TreapNode<T> u) {
 		while (u.left != null || u.right != null) {
 			if (u.left == null) {
-				leftRotate(u);
+				rotateLeft(u);
 			} else if (u.right == null) {
-				rightRotate(u);
+				rotateRight(u);
 			} else if (u.left.p < u.right.p) {
-				rightRotate(u);
+				rotateRight(u);
 			} else {
-				leftRotate(u);
+				rotateLeft(u);
 			}
 			if (r == u) {
 				r = u.parent;
