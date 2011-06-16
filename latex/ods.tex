@@ -1,8 +1,9 @@
-\documentclass{book}
-
+\documentclass[11pt]{book}
 \usepackage{amsthm,amsopn}
 \usepackage{graphicx}
+\usepackage[sf,bf,small,raggedright]{titlesec}
 
+\renewcommand{\cite}[1]{}
 
 \DeclareMathOperator{\ddiv}{div}
 
@@ -67,9 +68,10 @@
 \pagenumbering{roman}
 
 \begin{document}
+
 \begin{titlepage}
-\maketitle
-\thispagestyle{empty}
+  \maketitle
+  \thispagestyle{empty}
 \end{titlepage}
 
 \tableofcontents
@@ -90,11 +92,7 @@ project.
 \include{hashing-tmp}
 \include{binarytrees-tmp}
 \include{rbs-tmp}
-
-\chapter{Partial Rebuilding}
-\chaplabel{scapegoat}
-\section{Scapegoat Trees}
-\section{Jumplists}
+\include{scapegoat-tmp}
 
 
 \chapter{2-4 Trees and Red-Black Trees}

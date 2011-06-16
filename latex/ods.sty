@@ -1,9 +1,6 @@
 \usepackage{amsfonts}
 
-\newcommand{\centeripe}[1]{\begin{center}\Ipe{#1}\end{center}}
 \newcommand{\comment}[1]{}
-
-\newcommand{\centerpsfig}[1]{\centerline{\psfig{#1}}}
 
 \newcommand{\chaplabel}[1]{\label{chap:#1}}
 \newcommand{\Chapref}[1]{Chapter~\ref{chap:#1}}
@@ -34,37 +31,19 @@
 \newcommand{\myeqref}[1]{(\ref{eq:#1})}
 \newcommand{\Eqref}[1]{Equation~(\ref{eq:#1})}
 
-\newtheorem{thm}{Theorem}{\bfseries}{\itshape}
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter]
 \newcommand{\thmlabel}[1]{\label{thm:#1}}
 \newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
 
-\newtheorem{lem}{Lemma}{\bfseries}{\itshape}
+\newtheorem{lem}{Lemma}[chapter]
 \newcommand{\lemlabel}[1]{\label{lem:#1}}
 \newcommand{\lemref}[1]{Lemma~\ref{lem:#1}}
 
-%\newtheorem{cor}{Corollary}{\bfseries}{\itshape}
-\newcommand{\corlabel}[1]{\label{cor:#1}}
-\newcommand{\corref}[1]{Corollary~\ref{cor:#1}}
-
-%\newtheorem{obs}{Observation}{\bfseries}{\itshape}
-\newcommand{\obslabel}[1]{\label{obs:#1}}
-\newcommand{\obsref}[1]{Observation~\ref{obs:#1}}
-
-\newtheorem{clm}{Claim}{\bfseries}{\itshape}
-\newcommand{\clmlabel}[1]{\label{clm:#1}}
-\newcommand{\clmref}[1]{Claim~\ref{clm:#1}}
-
-\newtheorem{assumption}{Assumption}{\bfseries}{\rm}
-\newenvironment{ass}{\begin{assumption}\rm}{\end{assumption}}
-\newcommand{\asslabel}[1]{\label{ass:#1}}
-\newcommand{\assref}[1]{Assumption~\ref{ass:#1}}
-
-\newcommand{\proclabel}[1]{\label{alg:#1}}
-\newcommand{\procref}[1]{Procedure~\ref{alg:#1}}
-
-\newtheorem{rem}{Remark}
-\newtheorem{op}{Open Problem}
-\newtheorem{prb}{Problem}{\bfseries}{\rm}
+\theoremstyle{remark}
+\newtheorem{exc}{Exercise}[chapter]
+\newcommand{\exclabel}[1]{\label{exc:#1}}
+\newcommand{\excref}[1]{Exercise~\ref{exc:#1}}
 
 \newcommand{\etal}{\emph{et al.}}
 
@@ -80,15 +59,4 @@
 \newcommand{\Sp}{\mathbb{S}}
 \newcommand{\E}{\mathrm{E}}
 
-\usepackage{marvosym}
-
-\newcommand{\notice}[1]
-{
-   {\Lightning}
-   \marginpar{
-      \begin{flushleft}\raggedright
-        \hspace{-1.5mm}\Lightning{\small #1}
-      \end{flushleft}
-   }
-}
 

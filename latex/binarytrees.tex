@@ -159,6 +159,7 @@ level-by level, and left-to-right within each level.}
 
 
 \section{BinarySearchTree: An Unbalanced Binary Search Tree}
+\seclabel{binarysearchtree}
 
 A #BinarySearchTree# is a special kind of binary tree in which each node #u#
 also stores a data value #u.x# from some total order.  The data values in
@@ -302,7 +303,7 @@ per operation.
 #n#)$ time per operation.  The problem with the #BinarySearchTree#
 structure is that it can become \emph{unbalanced}.  Instead of looking
 like the tree in \figref{bst-example} it can look like a long path of
-#n# nodes.  We call such a tree \emph{unbalanced}.
+#n# nodes. 
 
 There are a number of ways of avoiding unbalanced binary search
 trees, all of which lead to data structures that have $O(\log
@@ -311,20 +312,24 @@ trees, all of which lead to data structures that have $O(\log
 In \chapref{scapegoat} we show how $O(\log #n#)$ \emph{amortized}
 time operations can be achieved with partial rebuilding operations.
 In \chapref{24redblack} we show $O(\log #n#)$ \emph{worst-case} time
-operations can be achieved by simulating a tree that is not binary: a tree in which nodes can have up to 4 children.
+operations can be achieved by simulating a tree that is not binary:
+a tree in which nodes can have up to 4 children.
 
 
 
-
-\begin{enumerate}
-\item Write a non-recursive variant of the #size2()# method, #size(u)#,
+\begin{exc}
+ Write a non-recursive variant of the #size2()# method, #size(u)#,
  that computes
  the size of the subtree rooted at node #u#.
+\end{exc}
 
- \item Write a non-recursive method #height2(u)# that computes the height
+\begin{exc}
+  Write a non-recursive method #height2(u)# that computes the height
  of a node #u# in binary search tree.
+\end{exc}
 
- \item Describe a sequence of #n# operations on an initially empty
+\begin{exc}
+  Describe a sequence of #n# operations on an initially empty
  #BinarySearchTree# that results in a tree of height $#n#-1$.
+\end{exc}
 
-\end{enumerate}

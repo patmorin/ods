@@ -1,5 +1,3 @@
-\renewcommand{\cite}[1]{}
-
 \chapter{Hash Tables}
 \chaplabel{hashtables}
 \chaplabel{hashing}
@@ -611,24 +609,32 @@ sequence of $\lceil r/c\rceil$ hash codes.
 
 \section{Exercises}
 
-\begin{enumerate}
-\item Prove that the bound $2/2^{#d#}$ in \lemref{universal-hashing} is
+\begin{exc}
+ Prove that the bound $2/2^{#d#}$ in \lemref{universal-hashing} is
 the best possible by showing that, if $x=2^{#w#-#d#-2}$ and $#y#=3#x#$,
 then $\Pr\{#hash(x)#=#hash(y)#\}=2/2^{#d#}$.  (Hint look at the binary
 representations of $#zx#$ and $#z#3#x#$ and use the fact that $#z#3#x# =
 #z##x#+2#z##x#$.)
+\end{exc}
 
-\item Suppose you have an object made up of two #w#-bit integers #x# and #y#.  Show why $#x#\oplus#y#$ does not make a good hash code for your object.  Give an example of a large set of objects that would all have hash code 0.
+\begin{exc}
+ Suppose you have an object made up of two #w#-bit integers #x# and #y#.  Show why $#x#\oplus#y#$ does not make a good hash code for your object.  Give an example of a large set of objects that would all have hash code 0.
+\end{exc}
 
-\item Suppose you have an object made up of two #w#-bit integers #x# and #y#.  Show why $#x#+#y#$ does not make a good hash code for your object.
+\begin{exc}
+ Suppose you have an object made up of two #w#-bit integers #x# and #y#.  Show why $#x#+#y#$ does not make a good hash code for your object.
 Give an example of a large set of objects that would all have the same hash code.
+\end{exc}
 
-\item Suppose you have an object made up of two #w#-bit integers #x#
+\begin{exc}
+ Suppose you have an object made up of two #w#-bit integers #x#
 and #y#.  Suppose that the hash code for your object is defined by some
 deterministic function $h(x,y)$.  Prove that there exists a large set
 of objects that have the same hash code.
+\end{exc}
 
-\item Let $p=2^{#w#}-1$ for some positive integer #w#.  Explain why, for a positive integer $x$
+\begin{exc}
+ Let $p=2^{#w#}-1$ for some positive integer #w#.  Explain why, for a positive integer $x$
 \[
     (x\bmod 2^{#w#}) + (x\ddiv 2^{#w#}) \equiv x \bmod (2^{#w#}-1) \enspace .
 \]
@@ -637,4 +643,4 @@ of objects that have the same hash code.
    #x= x&((1<<w)-1) + x>>>w#
 \]
 until $#x# \le 2^{#w#}-1$.)
-\end{enumerate}
+\end{exc}

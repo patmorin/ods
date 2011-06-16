@@ -432,9 +432,9 @@ In a treap, the expected length of a search path is
 Thus, the search paths in a #Treap# are considerably shorter and this
 translates into noticeably faster operations on #Treap#s than #Skiplist#s.
 Exercise~\ref{ex:skiplist-opt} in \chapref{skiplists} shows how the
-expected length of the search path in #Skiplist# can be reduced to
+expected length of the search path in a #Skiplist# can be reduced to
 \[
-     e\ln #n# + O(1) \approx 1.884\log_2 #n# 
+     e\ln #n# + O(1) \approx 1.884\log_2 #n# + O(1) 
 \]
 by using biased coin tosses.  Even with this optimization, the expected
 length of search paths in a #SkiplistSet# is noticeably longer than in
@@ -448,24 +448,31 @@ studied much earlier by Vuillemin \cite{v81} who called these Cartesian
 trees.
 
 
-
-\begin{enumerate}
-\item Prove the assertion that there are $21,964,800$ sequences that
+\begin{exc}
+ Prove the assertion that there are $21,964,800$ sequences that
 generate the tree on the right hand side of \figref{rbs-lvc}.  (Hint:
 Give a recursive formula for the number of sequences that generate a
 complete binary tree of height $h$ and evaluate this formula for $h=3$.)
+\end{exc}
 
-\item Use both parts of \lemref{rbs-treap} to prove that the expected number of rotations performed by an #add(x)# operation (and hence also a #remove(x)# operation) is $O(1)$.
+\begin{exc}
+ Use both parts of \lemref{rbs-treap} to prove that the expected number of rotations performed by an #add(x)# operation (and hence also a #remove(x)# operation) is $O(1)$.
+\end{exc}
 
-\item Design and implement a version of a #Treap# that includes a #get(i)# operation that returns the key with rank #i# in the #Treap#.  (Hint: Have each node $u$ keep track of the size of the subtree rooted at #u#.)
+\begin{exc}
+ Design and implement a version of a #Treap# that includes a #get(i)# operation that returns the key with rank #i# in the #Treap#.  (Hint: Have each node $u$ keep track of the size of the subtree rooted at #u#.)
+\end{exc}
 
-\item Design and implement a version of a #Treap# that supports the
+\begin{exc}
+ Design and implement a version of a #Treap# that supports the
 #split(x)# operation.  This operation removes all values from the #Treap#
 that are greater than #x# and returns a second #Treap# that contains all
 the removed values.  
+\end{exc}
 
+\begin{exc}
 For example, the code #t2 = t.split(x)# removes from #t# all values
 greater than #x# and returns a new #Treap# #t2# containing all these
 values.
-\end{enumerate}
+\end{exc}
 

@@ -449,19 +449,22 @@ self-adjusting versions \cite{bose-langerman} of skiplists have all
 been developed. 
 % At some point, a cache-optimized version of skiplists was used in part of the Linux kernel. !!I can't confirm this.
 
-\begin{enumerate}
-\item Suppose that, instead of promoting an element from $L_{i-1}$
+
+\begin{exc}
+ Suppose that, instead of promoting an element from $L_{i-1}$
 into $L_i$, we promote it with some probability $p$, $0 < p < 1$.
 Show that the expected length of the search path in this case is
 $(1/p)\log_{1/p} #n# + O(1)$.  What is the value of $p$ that minimizes
 this expression? What is the expected height of the skiplist? What is
 the expected number of nodes in the skiplist?
+\end{exc}
 
-\item Design and implement a version of a skiplist that implements the
+\begin{exc}
+ Design and implement a version of a skiplist that implements the
 #SSet# interface, but also allows access to elements by rank.
 That is, it also supports the function #get(i)#, which returns the
 element whose rank is #i#. (The rank of an element #x# in a #SSet#
 is the number of elements in the #SSet# that are less than #x#.)
+\end{exc}
 
-\end{enumerate}
 
