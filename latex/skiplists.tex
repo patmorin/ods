@@ -95,7 +95,7 @@ the search path is navigated; In particular the structures differ in how
 they decide if the search path should go down in $L_{r-1}$ or go right
 in $L_r$.
 
-\section{SkiplistSets as SSets}
+\section{#SkiplistSet#: An Efficient #SSet# Implementation}
 
 A #SkiplistSet# uses a skiplist structure to implement the #SSet#
 interface.   When used this way, the list $L_0$ stores the elements of
@@ -162,7 +162,7 @@ the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log #n#)$
 expected time per operation.
 \end{thm}
 
-\section{Skiplists as Lists}
+\section{#SkiplistList#: An Efficient Random-Access #List# Implementation}
 
 A #SkiplistList# is a realization of the skiplist idea that implements
 the #List# interface.  In a #SkiplistList#, $L_0$ contains the elements of the
@@ -272,7 +272,8 @@ data structure:
   #remove(i)# in $O(\log #n#)$ expected time per operation.
 \end{thm}
 
-\section{Skiplists as Ropes}
+%\section{Skiplists as Ropes}
+%TODO: A section on ropes
 
 \section{Analysis of Skiplists}
 \seclabel{skiplist-analysis}
@@ -450,7 +451,7 @@ been developed.
 % At some point, a cache-optimized version of skiplists was used in part of the Linux kernel. !!I can't confirm this.
 
 
-\begin{exc}
+\begin{exc}\exclabel{skiplist-opt}
  Suppose that, instead of promoting an element from $L_{i-1}$
 into $L_i$, we promote it with some probability $p$, $0 < p < 1$.
 Show that the expected length of the search path in this case is

@@ -232,7 +232,7 @@ In a random binary search tree, the #find(x)# operation takes $O(\log
 #n#)$ expected time.
 \end{thm}
 
-\section{Treaps}
+\section{#Treap#: A Randomized Binary Search Tree}
 
 The problem with random binary search trees is, of course, that they are
 not dynamic.  They don't support the #add(x)# or #remove(x)# operations
@@ -361,7 +361,7 @@ search path is at most $2\ln #n#+O(1)$.  Furthermore, each rotation
 decreases the depth of #u#.   This stops if #u# becomes the root, so
 the expected number of rotations can not exceed the expected length of
 the search path.  Therefore, the expected running-time of the #add(x)#
-operation in a #Treap# is $O(\log #n#)$.  (Exercise~\ref{ex:treap-rotates}
+operation in a #Treap# is $O(\log #n#)$.  (\excref{treap-rotates}
 asks you to show that the expected number of rotations performed during
 an insertion is actually only $O(1)$.)
 
@@ -418,7 +418,7 @@ It is worth comparing the #Treap# data structure to the #SkiplistSet#
 data structure.  Both implement the #SSet# operations in $O(\log #n#)$
 time per operation.  In both data structures, #add(x)# and #remove(x)#
 involve a search and then a constant number of pointer changes
-(see Exercise~\ref{ex:treap-rotations} below).  Thus, for both these
+(see \excref{treap-rotates} below).  Thus, for both these
 structures, the expected length of the search path is the critical value
 in assessing their performance.  In a #SkiplistSet#, the expected length
 of a search path is
@@ -431,7 +431,7 @@ In a treap, the expected length of a search path is
 \]
 Thus, the search paths in a #Treap# are considerably shorter and this
 translates into noticeably faster operations on #Treap#s than #Skiplist#s.
-Exercise~\ref{ex:skiplist-opt} in \chapref{skiplists} shows how the
+\excref{skiplist-opt} in \chapref{skiplists} shows how the
 expected length of the search path in a #Skiplist# can be reduced to
 \[
      e\ln #n# + O(1) \approx 1.884\log_2 #n# + O(1) 
@@ -455,7 +455,7 @@ Give a recursive formula for the number of sequences that generate a
 complete binary tree of height $h$ and evaluate this formula for $h=3$.)
 \end{exc}
 
-\begin{exc}
+\begin{exc}\exclabel{treap-rotates}
  Use both parts of \lemref{rbs-treap} to prove that the expected number of rotations performed by an #add(x)# operation (and hence also a #remove(x)# operation) is $O(1)$.
 \end{exc}
 

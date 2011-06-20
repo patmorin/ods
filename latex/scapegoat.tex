@@ -181,6 +181,9 @@ for all $i\in\{0,\ldots,k-2\}$.  Therefore, the cost of all calls to #size(u)# i
 where the last line follows from the fact that the sum is a geometrically decreasing series.
 \end{proof}
 
+All that remains is to prove an upper-bound on the cost of calls to
+#rebuild(u)#:
+
 \begin{lem}
   Starting with an empty #ScapegoatTree# any sequence of $m$ #add(x)#
   and #remove(x)# operations causes at most $O(m\log m)$ time to be used
@@ -242,7 +245,7 @@ where the last line follows from the fact that the sum is a geometrically decrea
 \subsection{Summary and Conclusions}
 The following theorem summarizes the performance of the #ScapegoatTree# data structure:
 
-\begin{thm}\thmlabel{skiplist}
+\begin{thm}\thmlabel{scapegoat}
 A #ScapegoatTree# implements the #SSet# interface. Ignoring the cost of #rebuild(u)# operations, a #ScapegoatTree# supports
 the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log #n#)$
 time per operation.
@@ -281,12 +284,12 @@ book that only make $O(#n#)$ structural changes during a sequence of
 the fact that a #ScapegoatTree# does all its restructuring by calls to
 #rebuild(u)# \cite{X}.
 
-There are applications in which a #ScapegoatTree# could be the right
-choice.  This would occur any time there is additional data associated
-with nodes that can not be updated in constant time when a rotation is
-performed, but that can be updated during a #rebuild(u)# operation.
-In such cases, the #ScapegoatTree# and related structures based on
-partial rebuilding may work.
+Despite their lack of performance, there are applications in which a
+#ScapegoatTree# could be the right choice.  This would occur any time
+there is additional data associated with nodes that can not be updated
+in constant time when a rotation is performed, but that can be updated
+during a #rebuild(u)# operation.  In such cases, the #ScapegoatTree#
+and related structures based on partial rebuilding may work.  An example of such an application is outlined in \excref{list-order-maintenance}.
 
 \begin{exc}\exclabel{scapegoat-nlogn}
   Show that, if we start with an empty #ScapegoatTree# and call #add(x)#
@@ -319,5 +322,27 @@ partial rebuilding may work.
   Your analysis should show that operations on a countdown tree run
   in $O(\log #n#)$ amortized time.  (Hint: First show that each node #u#
   satisifies some version of a balance invariant.)
+\end{exc}
+
+\begin{exc}\exclabel{list-order-maintenance}
+  Design and implement a #Sequence# data structure that maintains a
+  sequence (list) of elements.  It supports these operations:
+  \begin{itemize}
+    \item #addAfter(e)#: Add a new element after the element #e# in the
+    sequence.  Return the new newly added element.  (If #e# is null,
+    the new element is added at the beginning of the sequence.)
+    \item #remove(e)#: Remove #e# from the sequence.
+    \item #testBefore(e1,e2)#: return #true# if and only if #e1# comes
+    before #e2# in the sequence.
+  \end{itemize}
+  The first two operations should run in $O(\log #n#)$ amortized time.
+  The third operation should run in constant-time.
+
+  The #Sequence# data structure can be implemented by storing the elements
+  in something like a #ScapegoatTree#, in the same order that they occur
+  in the sequence.  To implement #testBefore(e1,e2)# in constant time,
+  each element #e# is labelled with an integer that encodes the path from
+  the root to #e#.  In this way, #testBefore(e1,e2)# can be implemented
+  just by comparing the labels of #e1# and #e2#.
 \end{exc}
 
