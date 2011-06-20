@@ -1,7 +1,8 @@
 package ods;
 
 /**
- * This class represents a string that can be efficiently split
+ * This class represents a string that can be efficiently split and for which substrings
+ * can be efficiently extracted
  * @author morin
  *
  */
@@ -34,11 +35,52 @@ public class SString {
 		this.m = j;
 		return s;
 	}
+
+	/**
+	 * Return a new string consisting of characters j,...,m-1.
+	 * @param j
+	 * @return
+	 */
+	public SString suffix(int j) {
+		if (j < 0 || j >= m) throw new IndexOutOfBoundsException();
+		return new SString(data, i+j, m-j);
+	}
+
+	/**
+	 * Return a new string consisting of characters 0,...,j-1
+	 * @param j
+	 * @return
+	 */
+	public SString prefix(int j) {
+		if (j < 0 || j >= m) throw new IndexOutOfBoundsException();
+		return new SString(data, 0, j);
+	}
+
+	/**
+	 * Return a new string consisting of characters j,...,j+n-1
+	 * @param j
+	 * @param n
+	 * @return
+	 */
+	public SString subString(int j, int n) {
+		if (j < 0 || j >= m) throw new IndexOutOfBoundsException();
+		if (n < 0 || j + n > m) throw new IndexOutOfBoundsException();
+		return new SString(data, i+j, n);
+	}
 	
+	/**
+	 * The length of this string
+	 * @return
+	 */
 	public int length() {
 		return m;
 	}
 	
+	/**
+	 * Return the character at index j
+	 * @param j
+	 * @return
+	 */
 	public char charAt(int j) {
 		return (char)data[i+j];
 	}
