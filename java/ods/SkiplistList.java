@@ -15,7 +15,6 @@ import java.util.Random;
  * 
  * TODO: currently, listIterator() return an iterator that takes O(log n)
  *       time per step
- * TODO: height never decreases
  * @author morin
  *
  * @param <T>
@@ -166,6 +165,8 @@ public class SkiplistList<T> extends AbstractList<T> {
 				x = u.next[r].x;
 				u.length[r] += u.next[r].length[r];
 				u.next[r] = u.next[r].next[r];
+				if (u == sentinel && u.next[r] == null)
+					height--;
 			}
 			r--;
 		}
