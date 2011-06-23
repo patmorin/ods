@@ -1,9 +1,11 @@
 package ods;
 import java.lang.reflect.Array;
+import java.lang.IllegalStateException;
 import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 
@@ -27,6 +29,9 @@ public class SkiplistList<T> extends AbstractList<T> {
 			x = ix;
 			next = (Node[])Array.newInstance(Node.class, h+1);
 			length = new int[h+1];
+		}
+		public int height() {
+			return next.length - 1;
 		}
 	}
 	
@@ -52,7 +57,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 	
 	public SkiplistList() {
 		n = 0;
-		sentinel = new Node(null, 33);
+		sentinel = new Node(null, 32);
 		height = 0;
 		rand = new Random(0);
 	}
@@ -61,13 +66,12 @@ public class SkiplistList<T> extends AbstractList<T> {
 	 * Find the node that precedes list index i in the skiplist.
 	 * 
 	 * @param x - the value to search for
-	 * @return a node u that maximizes u.x subject to
-	 * the constraint that u.x < x --- or sentinel if u.x >= x for
-	 * all nodes x
+	 * @return the predecessor of the node at index i or the final
+	 * node if i exceeds size() - 1.
 	 */
 	protected Node findPred(int i) {
 		Node u = sentinel;
-		int r = height - 1;
+		int r = height;
 		int j = -1;   // the index of the current node in list 0
 		while (r >= 0) {
 			while (u.next[r] != null && j + u.length[r] < i) {
@@ -101,8 +105,8 @@ public class SkiplistList<T> extends AbstractList<T> {
 	protected Node add(int i, Node w) {
 		if (i < 0 || i > n) throw new IndexOutOfBoundsException();
 		Node u = sentinel;
-		int k = w.next.length - 1;
-		int r = height - 1;
+		int k = w.height();
+		int r = height;
 		int j = -1; // index of u
 		while (r >= 0) {
 			while (u.next[r] != null && j+u.length[r] < i) {
@@ -123,22 +127,26 @@ public class SkiplistList<T> extends AbstractList<T> {
 	}
 
 	/**
-	 * Simulate repeatedly tossing a coin until it comes up tails
+	 * Simulate repeatedly tossing a coin until it comes up tails.
+	 * Note, this code will never generate a height greater than 32
 	 * @return the number of coin tosses - 1
 	 */
 	protected int pickHeight() {
 		int z = rand.nextInt();
 		int k = 0;
-		while ((z & (1 << k)) != 0)
+		int m = 1;
+		while ((z & m) != 0) {
 			k++;
+			m <<= 1;
+		}
 		return k;
 	}
 	
 	public void add(int i, T x) {
 		if (i < 0 || i > n) throw new IndexOutOfBoundsException();
 		Node w = new Node(x, pickHeight());
-		if (w.next.length > height) 
-			height = w.next.length;
+		if (w.height() > height) 
+			height = w.height();
 		add(i, w);
 	}
 	
@@ -146,7 +154,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 		if (i < 0 || i > n-1) throw new IndexOutOfBoundsException();
 		T x = null;
 		Node u = sentinel;
-		int r = height - 1;
+		int r = height;
 		int j = -1; // index of node u
 		while (r >= 0) {
 			while (u.next[r] != null && j+u.length[r] < i) {
@@ -154,7 +162,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 				u = u.next[r];
 			}
 			u.length[r]--;  // for the node we are removing
-			if (j + u.length[r] == i && u.next[r] != null) {
+			if (j + u.length[r] + 1 == i && u.next[r] != null) {
 				x = u.next[r].x;
 				u.length[r] += u.next[r].length[r];
 				u.next[r] = u.next[r].next[r];
@@ -164,24 +172,34 @@ public class SkiplistList<T> extends AbstractList<T> {
 		n--;
 		return x;
 	}
-		
+	
 	public Iterator<T> iterator() {
 		class SkiplistIterator implements Iterator<T> {
-			Node u, prev;
+			Node u;
+			int i;
+			boolean removable;
 			public SkiplistIterator() {
 				u = sentinel;
-				prev = null;
+				i = -1;
+				removable = false;
 			}
 			public boolean hasNext() {
 				return u.next[0] != null;
 			}
 			public T next() {
-				prev = u;
+				if (u.next[0] == null)
+					throw new NoSuchElementException();
 				u = u.next[0];
+				i++;
+				removable = true;
 				return u.x;
 			}
 			public void remove() {
-				SkiplistList.this.remove(prev.x);
+				if (!removable)
+					throw new IllegalStateException();
+				SkiplistList.this.remove(i);
+				i--;
+				removable = false;
 			}
 		}
 		return new SkiplistIterator();
@@ -189,6 +207,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 	
 	public void clear() {
 		n = 0;
+		height = 0;
 		Arrays.fill(sentinel.length, 0);
 		Arrays.fill(sentinel.next, null);
 	}
