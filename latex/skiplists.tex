@@ -104,12 +104,12 @@ the search path for the smallest value #y# such that $#y#\ge#x#$:
 
 \javaimport{ods/SkiplistSet.find(x).findPredNode(x)}
 
-Following the search path for #y# is easy:  when situated at some node, #u#,
-in  $L_{#r#}$, we look right to #u.next[r].x#.  If #x# is smaller, we take
-a step to the right in $L_{#r#}$, otherwise we move down into $L_{#r#-1}$.
-Each step (right or down) in this search takes only constant time so,
-by \lemref{skiplist-searchpath}, the expected running time of #find(x)#
-is $O(\log #n#)$.
+Following the search path for #y# is easy:  when situated at
+some node, #u#, in  $L_{#r#}$, we look right to #u.next[r].x#.
+If $#x#>#u.next[r].x#$, then we take a step to the right in $L_{#r#}$,
+otherwise we move down into $L_{#r#-1}$.  Each step (right or down) in
+this search takes only constant time so, by \lemref{skiplist-searchpath},
+the expected running time of #find(x)# is $O(\log #n#)$.
 
 Adding an element #x# to a skiplist using the #add(x)# operation is just
 a slight variation on searching.  Before we begin, we simulate tossing
@@ -228,7 +228,7 @@ the length of the edge #u.next[r]# increases by one, since we are adding
 an element at position #i#.  Splicing  the node #w# between two nodes
 #u# and #z# works as shown in \figref{skiplist-lengths-splice}.  While
 following the search path we are already keeping track of the position,
-#j#, of #w# in $L_0$.  Therefore, we know that the length of the edge from
+#j#, of #u# in $L_0$.  Therefore, we know that the length of the edge from
 #u# to #w# is $#i#-#j#$.  We can also deduce that the length of the edge
 from #w#  to #z# from the length, $\ell$, of the edge from #u# to #z#.
 Therefore, we can splice in #w# and update the lengths of the edges in
@@ -300,14 +300,13 @@ observation about coin tosses.
   so $\E[I_i]=\Pr\{I_i=1\}=1/2^{i-1}$.  Observe that $T$, the total
   number of coin tosses, can be written as $T=\sum_{i=1}^{\infty} I_i$.
   Therefore,
-  \begin{eqnarray*}
-    \E[T] & = & \E\left[\sum_{i=1}^\infty I_i\right] \\
-     & = & \sum_{i=1}^\infty \E\left[I_i\right] \\
-     & = & \sum_{i=1}^\infty 1/2^{i-1} \\
-     & = & 1 + 1/2 + 1/4 + 1/8 + \cdots \\
-     & = & 2 \enspace ,
-  \end{eqnarray*}
-  as required.
+  \begin{align*}
+    \E[T] & =  \E\left[\sum_{i=1}^\infty I_i\right] \\
+     & =  \sum_{i=1}^\infty \E\left[I_i\right] \\
+     & =  \sum_{i=1}^\infty 1/2^{i-1} \\
+     & =  1 + 1/2 + 1/4 + 1/8 + \cdots \\
+     & =  2 \enspace .   \qedhere
+  \end{align*} 
 \end{proof}
 
 The next two lemmata tell us that skiplists have linear size:
@@ -321,8 +320,7 @@ The next two lemmata tell us that skiplists have linear size:
   The probability that any particular element #x# is included in list
   $L_{#r#}$ is $1/2^{#r#}$, so the expected number of nodes in $L_{#r#}$
   is $#n#/2^{#r#}$.  Therefore, the total number of nodes in all lists is
-  \[ \sum_{#r#=0}^\infty #n#/2^{#r#} = #n#(1+1/2+1/4+1/8+\cdots) = 2#n# \enspace , \]
-  as required.
+  \[ \sum_{#r#=0}^\infty #n#/2^{#r#} = #n#(1+1/2+1/4+1/8+\cdots) = 2#n# \enspace . \qedhere \]
 \end{proof}
 
 \begin{lem}\lemlabel{skiplist-height}
@@ -342,22 +340,22 @@ The next two lemmata tell us that skiplists have linear size:
   \[
        #h# = \sum_{i=0}^\infty I_{#r#} \enspace .
   \]
-  Note that $I_{#r#}$ is never more than the length of $|L_{#r#}|$, so 
+  Note that $I_{#r#}$ is never more than the length, $|L_{#r#}|$, of $L_{#r#}$, so 
   \[
      \E[I_{#r#}] \le \E[|L_{#r#}|] = #n#/2^{#r#} \enspace .
   \]
   Therefore, we have
-  \begin{eqnarray*}
-       \E[#h#] &=& \E\left[\sum_{r=0}^\infty I_{#r#}\right] \\
-        &=& \sum_{#r#=0}^{\infty} E[I_{#r#}] \\
-        &=& \sum_{#r#=0}^{\lfloor\log #n#\rfloor} E[I_{#r#}]
+  \begin{align*}
+       \E[#h#] &= \E\left[\sum_{r=0}^\infty I_{#r#}\right] \\
+        &= \sum_{#r#=0}^{\infty} E[I_{#r#}] \\
+        &= \sum_{#r#=0}^{\lfloor\log #n#\rfloor} E[I_{#r#}]
                  + \sum_{r=\lfloor\log #n#\rfloor+1}^{\infty} E[I_{#r#}]  \\
-        &=& \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
+        &= \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
                  + \sum_{r=\lfloor\log #n#\rfloor+1}^{\infty} #n#/2^{#r#} \\
-        &\le& \log #n# + 1
+        &\le \log #n# + 1
                  + \sum_{#r#=0}^\infty 1/2^{#r#} \\
-        &=& \log #n# + 3
-  \end{eqnarray*}
+        &= \log #n# + 3 \enspace . \qedhere
+  \end{align*}
 \end{proof}
 
 \begin{lem}\lemlabel{skiplist-size2}
@@ -409,22 +407,21 @@ The expected length of a search path in a skiplist is at most $2\log #n# + O(1)$
   We can now finish as in the proof of \lemref{skiplist-height}.
   Let $S$ be  the length of the search path for some node #u# in a
   skiplist, and let $#h#$ be the height of the skiplist.  Then
-  \begin{eqnarray*}
+  \begin{align*}
       \E[S] 
-         &=& \E\left[ #h# + \sum_{#r#=0}^\infty S_{#r#} \right] \\
-         &=& \E[#h#] + \sum_{#r#=0}^\infty \E[S_{#r#}]  \\
-         &=& \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} \E[S_{#r#}] 
+         &= \E\left[ #h# + \sum_{#r#=0}^\infty S_{#r#} \right] \\
+         &= \E[#h#] + \sum_{#r#=0}^\infty \E[S_{#r#}]  \\
+         &= \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} \E[S_{#r#}] 
               + \sum_{#r#=\lfloor\log #n#\rfloor+1}^\infty \E[S_{#r#}] \\
-         &\le& \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
+         &\le \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
               + \sum_{r=\lfloor\log #n#\rfloor+1}^\infty #n#/2^{#r#} \\
-         &\le& \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
+         &\le \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
               + \sum_{#r#=0}^{\infty} 1/2^{#r#} \\
-         &\le& \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
+         &\le \E[#h#] + \sum_{#r#=0}^{\lfloor\log #n#\rfloor} 1
               + \sum_{#r#=0}^{\infty} 1/2^{#r#} \\
-         &\le& \E[#h#] + \log #n# + 3 \\
-         &\le& 2\log #n# + 6
-  \end{eqnarray*}
-  as required.
+         &\le \E[#h#] + \log #n# + 3 \\
+         &\le 2\log #n# + 6  \enspace . \qedhere
+  \end{align*}
 \end{proof}
 
 

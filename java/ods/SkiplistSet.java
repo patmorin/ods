@@ -105,7 +105,7 @@ public class SkiplistSet<T> implements SSet<T> {
 		while (r >= 0) {
 			while (u.next[r] != null && c.compare(u.next[r].x,x) < 0)
 				u = u.next[r];   // go right in list r
-			r--;                 // go down into list r-1
+			r--;               // go down into list r-1
 		}
 		return u;
 	}
@@ -152,9 +152,9 @@ public class SkiplistSet<T> implements SSet<T> {
 		while (r >= 0) {
 			while (u.next[r] != null && (comp = c.compare(u.next[r].x,w.x)) < 0)
 				u = u.next[r];
-			if (u.next[r] != null && comp == 0) // already present
-				dup = true;
-			if (r <= k) {
+			if (u.next[r] != null && comp == 0) 
+				dup = true;  // w.x is already present - delete w later
+			if (r <= k) {    // splice w into list r
 				w.next[r] = u.next[r];
 				u.next[r] = w;
 			}
@@ -191,8 +191,10 @@ public class SkiplistSet<T> implements SSet<T> {
 	
 	/**
 	 * Remove the first instance of w.x, if it is stored in the node w.
+	 * Warning: this may leave the list in an inconsistent state if there
+	 * is more than one occurence of x and the w is not the first node with w.x=x
 	 */
-	public boolean remove(Node w) {
+	protected boolean remove(Node w) {
 		boolean removed = false;
 		Node u = sentinel;
 		int r = h;
