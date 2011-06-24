@@ -25,7 +25,7 @@ Conceptually, a skiplist is a sequence of singly-linked lists
 $L_0,\ldots,L_h$, where each $L_r$ contains a subset of the items
 in $L_{r-1}$.  We start with the input list $L_0$ that contains #n#
 items and construct $L_1$ from $L_0$, $L_2$ from $L_1$, and so on.
-The items in $L_r$ are obtained by tossing a coin for each element #x#
+The items in $L_r$ are obtained by tossing a coin for each element, #x#,
 in $L_{r-1}$ and including #x# in $L_r$ if the coin comes up heads.
 This process ends when we create a list $L_r$ that is empty.  An example
 of a skiplist is shown in \figref{skiplist}.
@@ -34,11 +34,11 @@ of a skiplist is shown in \figref{skiplist}.
   \begin{center}
     \includegraphics{figs/skiplist}
   \end{center}
-  \caption{A skiplist containing 6 elements.}
+  \caption{A skiplist containing 7 elements.}
   \figlabel{skiplist}
 \end{figure}
 
-For an element #x# in a skiplist, we call the \emph{height} of #x# the
+For an element, #x#, in a skiplist, we call the \emph{height} of #x# the
 largest value $r$ such that #x# appears in $L_r$.  Thus, for example,
 elements that only appear in $L_0$ have height $0$.  Notice that the
 height of #x# corresponds to the following experiment:  Toss a coin
@@ -46,19 +46,19 @@ repeatedly until the first time it comes up tails.  How many times did it
 come up heads?  The answer, not surprisingly, is that the expected height
 of a node is 1. (We expect to toss the coin twice before getting tails,
 but we don't count the last toss.) The \emph{height} of a skiplist is
-the maximum height of any of its nodes.
+the height of its tallest node.
 
-At the head of every list is a special node, called the \emph{sentinel}
-that acts as dummy node for each list. The key property of skiplists
+At the head of every list is a special node called the \emph{sentinel}
+that acts as a dummy node for the list. The key property of skiplists
 is that there is a short path, called the \emph{search path}, from the
 sentinel in $L_h$ to every node in $L_0$.  Remembering how to construct
-a search path for a node #u# is easy (see \figref{skiplist-searchpath})
+a search path for a node, #u#, is easy (see \figref{skiplist-searchpath})
 :  Start at the top left corner of your skiplist (the sentinel in $L_h$)
 and always go right unless that would overshoot #u#, in which case you
 should take a step down into the list below.
 
 More precisely, to construct the search path for the node #u# in $L_0$
-we start at the sentinel #w# in $L_h$.  Next we examine #w.next#.
+we start at the sentinel, #w#, in $L_h$.  Next, we examine #w.next#.
 If #w.next# contains an item that appears before #u# in $L_0$, then
 we set $#w#=#w.next#$.  Otherwise, we move down and continue the search
 at the occurence of #w# in the list $L_{h-1}$.  We continue this way
@@ -67,7 +67,7 @@ until we reach the predecessor of #u# in $L_0$.
   \begin{center}
     \includegraphics{figs/skiplist-searchpath}
   \end{center}
-  \caption{The search path for node $4$ in a skiplist.}
+  \caption{The search path for the node containing $4$ in a skiplist.}
   \figlabel{skiplist-searchpath}
 \end{figure}
 
@@ -75,25 +75,25 @@ The following result, which we will prove in \secref{skiplist-analysis},
 shows that the search path is quite short:
 
 \begin{lem}\lemlabel{skiplist-searchpath}
-The expected length of the search path for any node #u# in $L_0$ is at
+The expected length of the search path for any node, #u#, in $L_0$ is at
 most $2\log_2 #n# + O(1) = O(\log #n#)$.
 \end{lem}
 
-A space-efficient way to implement a #Skiplist# is to define a #Node#
-#u# as consisting of a data value #x# and an array #next# of pointers,
+A space-efficient way to implement a #Skiplist# is to define a #Node#,
+#u#, as consisting of a data value, #x#, and an array, #next#, of pointers,
 where #u.next[i]# points to #u#'s successor in the list $L_{#i#}$.
-In this way, the data, #x#, in a node is stored only once even though #x#
-many appear in several lists.
+In this way, the data, #x#, in a node is referenced only once, even though #x#
+may appear in several lists.
 
 \javaimport{ods/SkiplistSet.Node}
 
 The next two sections of this chapter discuss two different applications
 of skiplists.  In each of these applications, $L_0$ stores the main
-structure (a list of elements, a sorted set of elements, or a sequence
-of strings).  The primary difference between these structures is in how
-the search path is navigated; In particular the structures differ in how
-they decide if the search path should go down in $L_{r-1}$ or go right
-in $L_r$.
+structure (a list of elements or a sorted set of elements).
+The primary difference between these structures is in how
+a search path is navigated; in particular, they differ in how
+they decide if a search path should go down into $L_{r-1}$ or go right
+within $L_r$.
 
 \section{#SkiplistSet#: An Efficient #SSet# Implementation}
 
@@ -104,12 +104,12 @@ the search path for the smallest value #y# such that $#y#\ge#x#$:
 
 \javaimport{ods/SkiplistSet.find(x).findPredNode(x)}
 
-Following the search path for #y# is easy:  When situated at some node #u#
+Following the search path for #y# is easy:  when situated at some node, #u#,
 in  $L_{#r#}$, we look right to #u.next[r].x#.  If #x# is smaller, we take
 a step to the right in $L_{#r#}$, otherwise we move down into $L_{#r#-1}$.
 Each step (right or down) in this search takes only constant time so,
 by \lemref{skiplist-searchpath}, the expected running time of #find(x)#
-is $O(#n#)$.
+is $O(\log #n#)$.
 
 Adding an element #x# to a skiplist using the #add(x)# operation is just
 a slight variation on searching.  Before we begin, we simulate tossing
@@ -121,11 +121,11 @@ than the number of bits in an #int#.  This will have negligible impact unless th
 
 \javaimport{ods/SkiplistSet.pickHeight()}
 
-After picking the height this way, we now know that #x# should appear in
-all lists $L_0,\ldots,L_{#k#}$.  If necessary, we increase the height of
-skiplist, and then follow the search path for #x#.  Any time the search
+After picking the height, #k#, this way, we know that #x# should appear in
+all the lists $L_0,\ldots,L_{#k#}$.  Next, we create a #Node#, #w#, for #x#, increase the height of
+the skiplist if necessary, and then follow the search path for #x#.  Any time the search
 path goes down from a list $L_{#r#}$ into $L_{#r#-1}$, with $#r#\le #k#$,
-we splice #x# into the list $L_{#r#}$ the same way we splice a node into
+we splice #w# into the list $L_{#r#}$ the same way we splice a node into
 an #SLList#:
 
 \javaimport{ods/SkiplistSet.add(x)}
