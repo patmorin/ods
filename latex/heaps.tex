@@ -1,0 +1,118 @@
+\chapter{Heaps}
+\chaplabel{heaps}
+
+In this chapter we discuss two implementations of the extremely useful
+priority #Queue# data structure.  The first is an implementation based
+on arrays.  It is very fast, and is the basis of one of the fastest
+known sorting algorithms, namely heapsort.  The second implementation is
+based on binary trees and is more flexible.  In particular, it support
+a #merge(h)# operation that allows the priority queue to absorb the
+elements of a second priority queue #h#.
+
+\section{#BinaryHeap#: An Implicit Binary Tree}
+
+Our first implementation of a (priority) #Queue# is based on a technique
+that is over 400 years old.  Eytzinger's method allows us to represent a
+complete binary tree as an array.  This is done by laying out the nodes
+of the tree in breadth-first order (see \secref{bintree:traversal}) in
+the array.  In this way, the root is stored at position 0, the root's
+left child is stored at position 1, the root's right child at position 2,
+the left child of the left child of the root is stored at position 3,
+and so on.  
+
+If we do this for a large enough tree, some patterns emerge.  The left
+child of the node at index #i# is at index $#left(i)#=2#i#+1$ and the
+right child of the node at index #i# is at index $#right(i)#=2#i#+2$.
+The parent of the node at index #i# is at index $#parent(i)#=(#i#-1)/2$.
+\javaimport{ods/BinaryHeap.left(i).right(i).parent(i)}
+
+A #BinaryHeap# uses this technique to implicitly represent a complete
+binary tree in which the elements are \emph{heap ordered}:  The value
+stored at any index #i# is not smaller than the value stored at index
+#parent(i)#, with the exception of the root value, $#i#=0$.  It follows
+that the smallest value in the priority #Queue# is therefore stored at
+position 0 (the root).
+
+In a #BinaryHeap#, the #n# elements are stored in an array #a#:
+\javaimport{ods/BinaryHeap.a.n}
+
+Implementing the #add(x)# operation is fairly straightforward.
+As with all array-based structures, we first check if #a# is full
+(because $#a.length#=#n#$) and, if so, we grow #a#.  Next, we place #x#
+at location #a[n]# and increment #n#.  At this point, all that remains is
+to ensure that we maintain the heap property.  We do this by repeatedly
+swapping #x# with its parent until #x# is no smaller than its parent.
+\javaimport{ods/BinaryHeap.add(x).bubbleUp(i)}
+
+Implementing the #remove()# operation, which removes the smallest value
+from the heap, is a little trickier.  We know where the smallest value is
+(at the root), but we need to replace it after we remove it and ensure
+that we maintain the heap property.
+
+The easiest way to do this is to replace the root with the value #a[n]#
+and decrement #n#.  Unfortunately, the new element now at the root is
+probably not the smallest element, so it needs to be moved downwards.
+We do this by repeatedly comparing this element to its two children.
+If it is the smallest of the three then we are done.  Otherwise, we swap
+this element with the smallest of its two children and continue.
+\javaimport{ods/BinaryHeap.remove().trickleDown(i)}
+
+As with other array-based structures we will ignore the time spent
+in calls to #resize()# since these can be accounted for
+with the amortization argument from \lemref{arraystack-amortized}.
+The running-time of both #add(x)# and #remove(x)# then depends on the
+height of the (implicit) binary tree.  However, this is a \emph{complete}
+binary tree;  every level except the last has the maximum possible number
+of nodes.  Therefore, if the height of this tree is $h$, then it has at
+least $2^h$ nodes.  Stated another way
+\[
+  #n# \ge 2^h \enspace .
+\]  
+Taking logarithms on both sides of this equation gives
+\[
+   h \le \log_2 #n# \enspace .
+\]
+Therefore, both the #add(x)# and #remove()# operation run in $O(\log #n#)$ time.
+
+\subsection{Summary}
+
+The following theorem summarizes the performance of a #BinaryHeap#:
+
+\begin{thm}\thmlabel{binaryheap}
+  An #BinaryHeap# implements the (priority) #Queue# interface.  Ignoring the cost of
+  calls to #resize()#, an #BinaryHeap# supports the operations #add(x)# and
+  #remove()# in $O(\log #n#)$ time per operation.
+
+  Furthermore, beginning with an empty #BinaryHeap#, any sequence of $m$
+  #add(x)# and #remove()# operations results in a total of $O(m)$
+  time spent during all calls to #resize()#.
+\end{thm}
+
+\section{#MergeableHeap#: A Randomized Meldable Heap}
+
+In this section, we describe the #MergeableHeap#, a priority #Queue#
+implementation in which the underlying structure is also a heap-ordered
+binary tree.  However, unlike a #BinaryHeap# in which the underlying
+binary tree is completely defined by the number of elements, there
+are no restrictions on the shape of the binary tree that underlies
+a #MergeableHeap#.  Anything goes.
+
+The #add(x)# and #remove()# operations in a #MergeableHeap# are
+implemented in terms of the #merge(h1,h2)# operation.  This operation
+takes two heap nodes #h1# and #h2# and merges them, returning a heap
+node that is the root of a heap that contains all elements in the subtree
+rooted at #h1# and all elements in the subtree rooted at #h2#.
+
+The nice thing about a #merge(h1,h2)# operation is that it can be defined
+recursively operation.  If either of #h1# or #h2# is #null#, then we
+are merging with an empty set, so we return #h2# or #h1#, respectively.
+Otherwise, assume $#h1.x# < #h2.x#$, since otherwise we can reverse the
+roles of #h1# and #h2#.  Then we know that the root of the merged heap
+will contain #h1.x# and we can recursively merge #h2# with #h1.left#
+or #h1.right#, as we wish.  This is where randomization comes in, and we
+toss a coin to decide whether to merge #h2# with #h1.left# or #h1.right#:
+\javaimport{ods/MergeableHeap.merge(h1,h2)}
+
+in which operations are implemented in terms of the M
+
+
