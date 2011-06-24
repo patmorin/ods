@@ -1,10 +1,22 @@
 CLASSPATH=.:${shell cd ../..; pwd}:/usr/share/java/junit.jar
 
-SRCS=${shell find ods -name '*.java'}
-OBJS=${SRCS:.java=.class}
-CLASSES=${SRCS:.java=}
+SRCS-ods=${shell find ods -name '*.java'}
+OBJS-ods=${SRCS-ods:.java=.class}
+CLASSES-ods=${SRCS-ods:.java=}
 
-RUNTESTS ?= ${CLASSES}
+SRCS-acc=org/apache/commons/collections/collection/AbstractTestCollection.java \
+	org/apache/commons/collections/BulkTest.java \
+	org/apache/commons/collections/set/AbstractTestSet.java \
+	org/apache/commons/collections/set/AbstractTestSortedSet.java \
+	org/apache/commons/collections/AbstractTestObject.java \
+	org/apache/commons/collections/iterators/AbstractTestListIterator.java \
+	org/apache/commons/collections/iterators/AbstractTestIterator.java \
+	org/apache/commons/collections/BulkTestSuiteMaker.java \
+	org/apache/commons/collections/list/AbstractTestList.java
+OBJS-acc=${SRCS-acc:.java=.class}
+CLASSES-acc=${SRCS-acc:.java=}
+
+RUNTESTS ?= ${CLASSES-ods}
 IGNORETESTS ?= ./ods/TestAll
 
 CLEANFILES=${shell find . -name '*.class'}
@@ -22,7 +34,7 @@ JFLAGS=-classpath ${CLASSPATH} -ea
 
 all: test
 
-build: ${OBJS}
+build: ${OBJS-acc} ${OBJS-ods}
 
 test: build
 	for test in ${RUNTESTS} ; do \
