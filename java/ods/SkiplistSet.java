@@ -22,6 +22,9 @@ public class SkiplistSet<T> implements SSet<T> {
 			x = ix;
 			next = (Node[])Array.newInstance(Node.class, h+1);
 		}
+		public int height() {
+			return next.length - 1;
+		}
 	}
 	
 	/**
@@ -48,7 +51,7 @@ public class SkiplistSet<T> implements SSet<T> {
 		protected Node[] s;
 		public Finger() {
 			s = (Node[])Array.newInstance(Node.class, h+1);
-			for (int r = 0; r < h+1; r++) 
+			for (int r = 0; r <= h; r++) 
 				s[r] = sentinel;
 		}
 	}
@@ -79,7 +82,7 @@ public class SkiplistSet<T> implements SSet<T> {
 	public SkiplistSet(Comparator<T> c) {
 		this.c = c;
 		n = 0;
-		sentinel = new Node(null, 33);
+		sentinel = new Node(null, 32);
 		h = 0;
 		rand = new Random();
 	}
@@ -98,7 +101,7 @@ public class SkiplistSet<T> implements SSet<T> {
 	 */
 	protected Node findPredNode(T x) {
 		Node u = sentinel;
-		int r = h - 1;
+		int r = h;
 		while (r >= 0) {
 			while (u.next[r] != null && c.compare(u.next[r].x,x) < 0)
 				u = u.next[r];   // go right in list r
@@ -116,14 +119,13 @@ public class SkiplistSet<T> implements SSet<T> {
 		if (x == null) {   // return first node
 			return sentinel.next[0] == null ? null : sentinel.next[0].x;
 		}
-		Node u = findPredNode(x);
-		return u.next[0] == null ? null : u.next[0].x;
+		return find(x);
 	}
 	
 	public T findLT(T x) {
 		if (x == null) {  // return last node
 			Node u = sentinel;
-			int r = h - 1;
+			int r = h;
 			while (r >= 0) {
 				while (u.next[r] != null)
 					u = u.next[r];
@@ -136,23 +138,22 @@ public class SkiplistSet<T> implements SSet<T> {
 
 	public boolean add(T x) {
 		Node w = new Node(x, pickHeight());
-		if (w.next.length > h)
-			h = w.next.length;
+		if (w.height() > h)
+			h = w.height();
 		return add(w);
 	}
 
-	/**
-	 * TODO: Does not check for duplicates
-	 */
 	protected boolean add(Node w) {
-		int k = w.next.length - 1;
+		int k = w.height();
 		Node u = sentinel;
-		int r = h - 1;
+		int r = h;
 		int comp = 0;
+		boolean dup = false;
 		while (r >= 0) {
 			while (u.next[r] != null && (comp = c.compare(u.next[r].x,w.x)) < 0)
 				u = u.next[r];
-			if (u.next[r] != null && comp == 0) return false; // already present
+			if (u.next[r] != null && comp == 0) // already present
+				dup = true;
 			if (r <= k) {
 				w.next[r] = u.next[r];
 				u.next[r] = w;
@@ -160,17 +161,17 @@ public class SkiplistSet<T> implements SSet<T> {
 			r--;
 		}
 		n++;
+		if (dup) {
+			remove(w);
+			return false;
+		}
 		return true;
 	}
-
-
-	/**
-	 * TODO: height never decreases
-	 */
+	
 	public boolean remove(T x) {
 		boolean removed = false;
 		Node u = sentinel;
-		int r = h - 1;
+		int r = h;
 		int comp = 0;
 		while (r >= 0) {
 			while (u.next[r] != null && (comp = c.compare(u.next[r].x, x)) < 0) {
@@ -179,6 +180,32 @@ public class SkiplistSet<T> implements SSet<T> {
 			if (u.next[r] != null && comp == 0) {
 				removed = true;
 				u.next[r] = u.next[r].next[r];
+				if (u == sentinel && u.next[r] == null)
+					h--;
+			}
+			r--;
+		}
+		if (removed) n--;
+		return removed;
+	}
+	
+	/**
+	 * Remove the first instance of w.x, if it is stored in the node w.
+	 */
+	public boolean remove(Node w) {
+		boolean removed = false;
+		Node u = sentinel;
+		int r = h;
+		int comp = 0;
+		while (r >= 0) {
+			while (u.next[r] != null && (comp = c.compare(u.next[r].x, w.x)) < 0) {
+				u = u.next[r];
+			}
+			if (u.next[r] == w && comp == 0) {
+				removed = true;
+				u.next[r] = u.next[r].next[r];
+				if (u == sentinel && u.next[r] == null)
+					h--;
 			}
 			r--;
 		}
@@ -188,14 +215,17 @@ public class SkiplistSet<T> implements SSet<T> {
 
 	/**
 	 * Simulate repeatedly tossing a coin until it comes up tails.
-	 * Note, this code will never generate a height greater than 31
+	 * Note, this code will never generate a height greater than 32
 	 * @return the number of coin tosses - 1
 	 */
 	protected int pickHeight() {
 		int z = rand.nextInt();
 		int k = 0;
-		while ((z & (1 << k)) != 0)
+		int m = 1;
+		while ((z & m) != 0) {
 			k++;
+			m <<= 1;
+		}
 		return k;
 	}
 	
