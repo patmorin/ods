@@ -27,26 +27,6 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> {
 	protected int n;
 
 	/**
-	 * Grow the backing array a
-	 */
-	protected void grow() {
-		T[] b = f.newArray(a.length*2);
-		System.arraycopy(a, 0, b, 0, n);
-		a = b;
-	}
-	
-	/**
-	 * Shrink the backing array a if necessary
-	 */
-	protected void shrink() {
-		if (n > 0 && 3*n < a.length) {
-			T[] b = f.newArray(n*2);
-			System.arraycopy(a, 0, b, 0, n);
-			a = b;
- 		}
-	}
-	
-	/**
 	 * Create a new empty binary heap
 	 * @param c
 	 */
@@ -55,7 +35,6 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> {
 		a = f.newArray(1);
 		n = 0;
 	}
-
 
 	/**
 	 * Create a new binary heap by heapifying a
@@ -67,6 +46,12 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> {
 		for (int i = n/2; i >= 0; i--) {
 			trickleDown(i);
 		}
+	}
+
+	protected void resize() {
+		T[] b = f.newArray(Utils.max(2*n,1));
+		System.arraycopy(a, 0, b, 0, n);
+		a = b;
 	}
 
 	/**
@@ -109,6 +94,19 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> {
 		a[j] = x;
 	}
 	
+	
+	
+	public boolean offer(T x) {
+		return add(x);
+	}
+
+	public boolean add(T x) {
+		if (n + 1 > a.length) resize();
+		a[n++] = x;
+		bubbleUp(n-1);
+		return true;
+	}
+
 	/**
 	 * Run the bubbleUp routine at position i
 	 * @param i
@@ -121,7 +119,23 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> {
 			p = parent(i);
 		}
 	}
+
+	public T peek() {
+		return a[0];
+	}
 	
+	public T poll() {
+		return remove();
+	}
+
+	public T remove() {
+		T x = a[0];
+		swap(0, --n);
+		trickleDown(0);
+		if (3*n < a.length) resize();
+		return x;
+	}
+
 	/**
 	 * Move element i down in the heap until the heap
 	 * property is restored
@@ -148,26 +162,7 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> {
 			i = j;
 		} while (i >= 0);
 	}
-	
-	public boolean offer(T x) {
-		if (n + 1 > a.length)
-			grow();
-		a[n++] = x;
-		bubbleUp(n-1);
-		return true;
-	}
-	
-	public T peek() {
-		return a[0];
-	}
-	
-	public T poll() {
-		T x = a[0];
-		swap(0, --n);
-		trickleDown(0);
-		return x;
-	}
-	
+
 	public Iterator<T> iterator() {
 		class PQI implements Iterator<T> {
 			int i;

@@ -37,7 +37,7 @@ public class MergeableHeap<T extends Comparable<T>> extends
 	public MHeapNode<T> merge(MHeapNode<T> h1, MHeapNode<T> h2) {
 		if (h1 == null) return h2;
 		if (h2 == null) return h1;
-		if (h2.x.compareTo(h1.x) < 0) {
+		if (h2.x.compareTo(h1.x) < 0) {  // ensure h1.x < h2.x
 			MHeapNode<T> tmp = h1;
 			h1 = h2;
 			h2 = tmp;

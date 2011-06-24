@@ -239,7 +239,7 @@ array #a#.  We could maintain one index #j# that keeps track of the
 next element to remove and an integer #n# that counts the number of
 elements in the queue.  The queue elements would always be stored in
 \[ #a[j]#,#a[j+1]#,\ldots,#a[j+n-1]# \enspace . \]
-Initially, both #i# and #n# would be 
+Initially, both #j# and #n# would be 
 set to 0.  To add an element, we would place it in #a[j+n]# and increment #n#.
 To remove an element, we would remove it from #a[j]#, increment #j#, and
 decrement #n#.
