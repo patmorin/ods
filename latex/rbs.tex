@@ -459,7 +459,7 @@ complete binary tree of height $h$ and evaluate this formula for $h=3$.)
 \end{exc}
 
 \begin{exc}
- Design and implement a version of a #Treap# that includes a #get(i)# operation that returns the key with rank #i# in the #Treap#.  (Hint: Have each node $u$ keep track of the size of the subtree rooted at #u#.)
+ Design and implement a version of a #Treap# that includes a #get(i)# operation that returns the key with rank #i# in the #Treap#.  (Hint: Have each node #u# keep track of the size of the subtree rooted at #u#.)
 \end{exc}
 
 \begin{exc}
@@ -467,11 +467,10 @@ complete binary tree of height $h$ and evaluate this formula for $h=3$.)
 #split(x)# operation.  This operation removes all values from the #Treap#
 that are greater than #x# and returns a second #Treap# that contains all
 the removed values.  
-\end{exc}
 
-\begin{exc}
 For example, the code #t2 = t.split(x)# removes from #t# all values
 greater than #x# and returns a new #Treap# #t2# containing all these
-values.
+values.  The #split(x)# operation should run in $O(\log #n#)$ expected
+time.
 \end{exc}
 

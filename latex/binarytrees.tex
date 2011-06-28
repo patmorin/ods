@@ -317,11 +317,9 @@ operations can be achieved by simulating a tree that is not binary:
 a tree in which nodes can have up to 4 children.
 
 
-
 \begin{exc}
  Write a non-recursive variant of the #size2()# method, #size(u)#,
- that computes
- the size of the subtree rooted at node #u#.
+ that computes the size of the subtree rooted at node #u#.
 \end{exc}
 
 \begin{exc}
@@ -332,5 +330,16 @@ a tree in which nodes can have up to 4 children.
 \begin{exc}
   Describe a sequence of #n# operations on an initially empty
  #BinarySearchTree# that results in a tree of height $#n#-1$.
+\end{exc}
+
+\begin{exc}
+  Design and implement a version of #BinarySearchTree# in which each node
+  #u# maintains values #u.size# (the size of the subtree rooted at #u#),
+  #u.depth# (the depth of #u#), and #u.height# (the height of the subtree
+  rooted at #u#).  
+
+  These values should be maintained, even during the #add(x)# and
+  #remove(x)# operations, but this should not increase the cost of these
+  operations by more than a constant factor.
 \end{exc}
 
