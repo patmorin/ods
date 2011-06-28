@@ -328,6 +328,19 @@ a tree in which nodes can have up to 4 children.
 \end{exc}
 
 \begin{exc}
+  A \emph{pre-order} traversal of a binary tree is a traversal that
+  visits each node #u# before any of its children.
+  An \emph{in-order} traversal visits #u# after visiting all the nodes
+  in #u#'s left subtree but before visiting any of the nodes in #u#'s
+  right subtree.  A \emph{post-order} traversal visits #u# only after
+  visiting all other nodes in #u#'s subtree.
+
+  Write functions #nextPreOrder(u)#, #nextInOrder(u)#, and
+  #nextPostOrder(u)# that return the node that follows #u# in a pre-order,
+  in-order, or post-order traversal, respectively.
+\end{exc}
+
+\begin{exc}
   Describe a sequence of #n# operations on an initially empty
  #BinarySearchTree# that results in a tree of height $#n#-1$.
 \end{exc}

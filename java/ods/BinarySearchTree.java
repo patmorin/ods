@@ -188,10 +188,6 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 		return addChild(p, u);		
 	}
 
-//	public static randomBST(T[] a, BinarySearchTree<BSTNode<BSTNode,T>,T> t) {
-//		BinarySearchTree<T> t = new BinarySearchTree<T>();
-//	}
-	
 	/**
 	 * Remove the node u --- ASSUMING u has at most one child
 	 * @param u
@@ -317,8 +313,6 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 		return true;
 	}
 	
-
-	// TODO: make iterators bidirectional?
 	public Iterator<T> iterator(Node u) {
 		class BTI implements Iterator<T> {
 			protected Node w, prev;
@@ -331,15 +325,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 			public T next() {
 				T x = w.x;
 				prev = w;
-				if (w.right != null) {
-					w = w.right;
-					while (w.left != null)
-						w = w.left;
-				} else {
-					while (w.parent != null && w.parent.left != w)
-						w = w.parent;
-					w = w.parent;
-				}
+				w = nextNode(w);
 				return x;
 			}
 			public void remove() {

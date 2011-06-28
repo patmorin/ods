@@ -79,9 +79,9 @@ Therefore, both the #add(x)# and #remove()# operation run in $O(\log #n#)$ time.
 The following theorem summarizes the performance of a #BinaryHeap#:
 
 \begin{thm}\thmlabel{binaryheap}
-  An #BinaryHeap# implements the (priority) #Queue# interface.  Ignoring the cost of
-  calls to #resize()#, an #BinaryHeap# supports the operations #add(x)# and
-  #remove()# in $O(\log #n#)$ time per operation.
+  A #BinaryHeap# implements the (priority) #Queue# interface.  Ignoring
+  the cost of calls to #resize()#, an #BinaryHeap# supports the operations
+  #add(x)# and #remove()# in $O(\log #n#)$ time per operation.
 
   Furthermore, beginning with an empty #BinaryHeap#, any sequence of $m$
   #add(x)# and #remove()# operations results in a total of $O(m)$
@@ -113,6 +113,105 @@ or #h1.right#, as we wish.  This is where randomization comes in, and we
 toss a coin to decide whether to merge #h2# with #h1.left# or #h1.right#:
 \javaimport{ods/MergeableHeap.merge(h1,h2)}
 
-in which operations are implemented in terms of the M
+In the next section, we show that #merge(h1,h2)# runs in $O(\log #n#)$
+expected time, where #n# is the total number of elements in #h1# and #h2#.
 
+With access to a #merge(h1,h2)# operation, the #add(x)# operation is easy.  We create a new node #u# containing #x# and then merge #u# with the root of our heap:
+\javaimport{ods/MergeableHeap.add(x)}
+This takes $O(\log (#n#+1)) = O(\log #n#)$ expected time.
+
+The #remove()# operation is similarly easy.  The node we want to remove
+is the root, so we just merge its two children and make the result the root:
+\javaimport{ods/MergeableHeap.remove()}
+Again, this takes $O(\log #n#)$ expected time.
+
+Additionally, a #MergeableHeap# can implement many other operations in
+$O(\log #n#)$ expected time, including:
+\begin{itemize}
+\item #remove(u)# remove the node #u# (and its key #u.x#) from the heap.
+\item #absorb(h)# add all the elements of the #MergeableHeap# #h# to this heap, emptying #h# in the process.
+\item 
+\end{itemize}
+Each of these operations can be implemented using a constant number of
+#merge(h1,h2)# operations that each take $O(\log #n#)$ time.
+
+\subsection{Analysis of #merge(h1,h2)#}
+
+The analysis of #merge(h1,h2)# is based on the analysis of a random walk
+in a binary tree.  A \emph{random walk} in a binary tree is a walk that
+starts at the root of the tree.  At each step in the walk, a coin is
+tossed and the walk proceeds to the left or right child of the current
+node depending on the result of this coin toss.  The walk ends when it
+falls off the tree (the current node becomes #null#).
+
+The following lemma is remarkeable because it does not depend at all on the shape of the binary tree:
+
+\begin{lem}
+The expected length of a random walk in a binary tree with #n# nodes is at most #\log_2 (n+1)#.
+\end{lem}
+
+\begin{proof}
+The proof is by induction on #n#. In the base case, $#n#=0$ and the walk
+has length $0=\log_2 (#n#+1)$.
+Suppose now that
+the result is true for all non-negative integers $#n#'< n$
+
+Let $#n#'$ denote the size of the root's left subtree, so that
+$#n#_2=#n#-#n#'-1$ is the size of the root's right subtree.  Starting at
+the root, the walk takes 1 step and then continues in a subtree of size
+$#n#_1$ or continues in a subtree of size $#n#_2$.  . Now, the expected
+length of the walk is then
+\[
+    \E[W] = 1 + \frac{1}{2}\log_2 (#n#_1+1) + \frac{1}{2}\log_2 (#n#_2+1)  
+\] 
+To maximize this, over the choice of $#n#_1\in[0,\ldots,#n#-1]$, we
+take the derivative and obtain
+\[
+     \frac{1}{2}(c/#n#_1 - c/(#n#-#n#_1-1)) \enspace , 
+\]
+which is equal to 0 when $#n#_1 = (#n#-1)/2$.  We can establish that
+this is a maximum fairly easily, so the expected number of steps taken by the random walk is 
+\begin{align*}
+    \E[W] 
+    & = 1 + \frac{1}{2}\log_2 (#n#_1+1) + \frac{1}{2}\log_2 (#n#_2+1) \\
+   & \le  1 + \log_2 ((#n#-1)/2+1) \\
+   & =  1 + \log_2 ((#n#+1)/2) \\
+   & =  \log_2 (#n#+1)  \enspace . \qedhere 
+\end{align*}
+\end{proof}
+
+With this result on random walks, we can now easily prove that the running time of the #merge(h1,h_2)# operation is $O(\log #n#)$.
+
+\begin{lem}
+If #h1# and #h2# are the roots of two heaps containing $#n#_1$ and $#n#_2$
+nodes, respectively, then the expected running time of #merge(h1,h2)#
+is at most $O(\log #n#)$, where $#n#=#n#_1+#n#_2$.
+\end{lem}
+
+\begin{proof}
+Each step of the merge algorithm takes a one step of a random walk,
+either in the heap rooted at #h1# or the heap rooted at #h2#, depending
+on whether $#h1.x# < #h2.x#$ or not.  The algorithm terminates when
+either of these two random walks falls out of its corresponding tree
+(when $#h1#=#null#$ or $#h2#=#null#$).  Therefore, the expected number of steps performed by the merge algorithm is at most
+\[
+   \log_2 (#n#_1+1) + \log_2 (#n#_2+1) \le 2\log_2 #n#
+\]
+\end{proof}
+
+\subsection{Summary}
+
+The following theorem summarizes the performance of a #MergeableHeap#:
+
+\begin{thm}\thmlabel{binaryheap}
+  A #MergeableHeap# implements the (priority) #Queue# interface.
+  A #MergeableHeap# supports the operations #add(x)# and #remove()#
+  in $O(\log #n#)$ expected time per operation.
+\end{thm}
+
+The randomized #MergeableHeap# data structure described here appears to
+have first been proposed by Gambin and Malinowski \cite{gmXX}.  Other
+mergeable heap implementations exist, including leftist heaps \cite{xxxx},
+binomial heaps, Fibonacci heaps, pairing heaps, and skew heaps, although
+none of these is as simple as the structure described here.
 

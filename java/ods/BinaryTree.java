@@ -279,42 +279,20 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 
 	/**
 	 * Find the node that follows u in an in-order traversal
-	 * @param u
+	 * @param w
 	 * @return
 	 */
-	protected Node nextNode(Node u) {
-		if (u.right != null) {
-			u = u.right;
-			while (u.left != null)
-				u = u.left;
+	protected Node nextNode(Node w) {
+		if (w.right != null) {
+			w = w.right;
+			while (w.left != null)
+				w = w.left;
 		} else {
-			Node prev;
-			do {
-				prev = u;
-				u = u.parent;
-			} while (u != null && u.left != prev);
+			while (w.parent != null && w.parent.left != w)
+				w = w.parent;
+			w = w.parent;
 		}
-		return u;
-	}
-
-	/**
-	 * Find the node that precedes u in an in-order traversal
-	 * @param u
-	 * @return
-	 */
-	protected Node prevNode(Node u) {
-		if (u.left != null) {
-			u = u.left;
-			while (u.right != null)
-				u = u.right;
-		} else {
-			Node prev;
-			do {
-				prev = u;
-				u = u.parent;
-			} while (u != null && u.right != prev);
-		}
-		return u;
+		return w;
 	}
 
 	/**
