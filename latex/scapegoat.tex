@@ -14,7 +14,7 @@ and then to recursively build a balanced subtree using #a#.  If we let
 $#m#=#a.length#/2$, then the element #a[m]# becomes the root of the new
 subtree, $#a#[0],\ldots,#a#[#m#-1]$ get stored recursively in the left
 subtree and $#a#[#m#+1],\ldots,#a#[#a.length#-1]$ get stored recursively
-in the right subtree. 
+in the right subtree.
 \javaimport{ods/ScapegoatTree.rebuild(u).packIntoArray(u,a,i).buildBalanced(a,i,ns)}
 A call to #rebuild(u)# takes $O(#size(u)#)$ time.  The subtree built by
 #rebuild(u)# has minimum height; there is no tree of smaller height that
@@ -246,12 +246,13 @@ All that remains is to prove an upper-bound on the cost of calls to
 The following theorem summarizes the performance of the #ScapegoatTree# data structure:
 
 \begin{thm}\thmlabel{scapegoat}
-A #ScapegoatTree# implements the #SSet# interface. Ignoring the cost of #rebuild(u)# operations, a #ScapegoatTree# supports
-the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log #n#)$
-time per operation.
-
-Furthermore, beginning with an empty #ScapegoatTree#, any sequence of $m$ #add(x)# and #remove(x)# operations results in a total of $O(m\log m)$ time spent during all calls to #rebuild(u)#.
-
+  A #ScapegoatTree# implements the #SSet# interface. Ignoring the cost
+  of #rebuild(u)# operations, a #ScapegoatTree# supports the operations
+  #add(x)#, #remove(x)#, and #find(x)# in $O(\log #n#)$ time per operation.
+  
+  Furthermore, beginning with an empty #ScapegoatTree#, any sequence of $m$
+  #add(x)# and #remove(x)# operations results in a total of $O(m\log m)$
+  time spent during all calls to #rebuild(u)#.
 \end{thm}
 
 The term \emph{scapegoat tree} is due to Rivest and Galperin \cite{rg93},
@@ -264,7 +265,7 @@ Experimenting with the #ScapegoatTree# implementation will reveal that
 it is often considerably slower than the other #SSet# implementations
 in this book. This may be somewhat surprising, since height bound of
 \[
-   \log_{3/2}#q# \approx 1.709\log #n# + O(1)
+   \log_{3/2}#q# \approx 1.709\log_2 #n# + O(1)
 \] 
 is better than the expected length of a search path in a #Skiplist# and
 not too far from that of a #Treap#.  The implementation could be optimized
