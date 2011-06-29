@@ -24,6 +24,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 		T x;
 		Node[] next;
 		int[] length;
+		@SuppressWarnings("unchecked")
 		public Node(T ix, int h) {
 			x = ix;
 			next = (Node[])Array.newInstance(Node.class, h+1);
@@ -42,7 +43,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 	/**
 	 * The maximum height of any element
 	 */
-	int height;
+	int h;
 	
 	/**
 	 * The number of elements stored in the skiplist
@@ -57,7 +58,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 	public SkiplistList() {
 		n = 0;
 		sentinel = new Node(null, 32);
-		height = 0;
+		h = 0;
 		rand = new Random(0);
 	}
 	
@@ -70,7 +71,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 	 */
 	protected Node findPred(int i) {
 		Node u = sentinel;
-		int r = height;
+		int r = h;
 		int j = -1;   // the index of the current node in list 0
 		while (r >= 0) {
 			while (u.next[r] != null && j + u.length[r] < i) {
@@ -105,7 +106,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 		if (i < 0 || i > n) throw new IndexOutOfBoundsException();
 		Node u = sentinel;
 		int k = w.height();
-		int r = height;
+		int r = h;
 		int j = -1; // index of u
 		while (r >= 0) {
 			while (u.next[r] != null && j+u.length[r] < i) {
@@ -144,8 +145,8 @@ public class SkiplistList<T> extends AbstractList<T> {
 	public void add(int i, T x) {
 		if (i < 0 || i > n) throw new IndexOutOfBoundsException();
 		Node w = new Node(x, pickHeight());
-		if (w.height() > height) 
-			height = w.height();
+		if (w.height() > h) 
+			h = w.height();
 		add(i, w);
 	}
 	
@@ -153,7 +154,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 		if (i < 0 || i > n-1) throw new IndexOutOfBoundsException();
 		T x = null;
 		Node u = sentinel;
-		int r = height;
+		int r = h;
 		int j = -1; // index of node u
 		while (r >= 0) {
 			while (u.next[r] != null && j+u.length[r] < i) {
@@ -166,7 +167,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 				u.length[r] += u.next[r].length[r];
 				u.next[r] = u.next[r].next[r];
 				if (u == sentinel && u.next[r] == null)
-					height--;
+					h--;
 			}
 			r--;
 		}
@@ -208,7 +209,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 	
 	public void clear() {
 		n = 0;
-		height = 0;
+		h = 0;
 		Arrays.fill(sentinel.length, 0);
 		Arrays.fill(sentinel.next, null);
 	}
