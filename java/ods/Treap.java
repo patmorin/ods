@@ -45,8 +45,8 @@ public class Treap<T extends Comparable<T>> extends
 	}
 
 	public boolean remove(T x) {
-		TreapNode<T> u = findLast((T) x);
-		if (c.compare(u.x, (T)x) == 0) {
+		TreapNode<T> u = findLast(x);
+		if (c.compare(u.x, x) == 0) {
 			trickleDown(u);
 			splice(u);
 			return true;

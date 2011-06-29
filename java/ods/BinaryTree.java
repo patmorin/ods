@@ -226,7 +226,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		t.clear();
 		t.r = t.newNode();
 		q.add(t.r);
-		double p = ((double)0.5 - ((double)1)/(n+n));
+		double p = 0.5 - 1.0/(n+n);
 		while (!q.isEmpty()) {
 			Node u = q.remove();
 			if (r.nextDouble() < p) {

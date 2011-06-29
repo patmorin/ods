@@ -85,7 +85,7 @@ public class SortedSSet<T> extends AbstractSet<T> implements SortedSet<T> {
 		css.add(new TreeSet<Integer>());
 		css.add(new SortedSSet<Integer>(new SkiplistSet<Integer>()));
 		css.add(new SortedSSet<Integer>(new Treap<Integer>()));
-		// css.add(new SortedSSet<Integer>(new ScapegoatTree2<Integer>()));
+		css.add(new SortedSSet<Integer>(new ScapegoatTree<Integer>()));
 		while (1 < 2) {
 			Testum.sortedSetSpeedTests(css, n);
 			r.gc();

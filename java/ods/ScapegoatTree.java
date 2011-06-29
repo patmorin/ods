@@ -10,6 +10,10 @@ public class ScapegoatTree<T extends Comparable<T>>
 	 */
 	int q;
 	
+	public ScapegoatTree() {
+		super(new ScapegoatNode<T>());
+	}
+	
 	public ScapegoatTree(ScapegoatNode<T> is) {
 		super(is);
 	}

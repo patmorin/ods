@@ -1,7 +1,9 @@
 package ods;
 
 import java.util.Random;
-
+/**
+ * TODO: unfinished
+ */
 public class SkiplistRope {
 	class Node {
 		SString s;
@@ -9,7 +11,7 @@ public class SkiplistRope {
 		int[] length;
 		public Node(SString s, int h) {
 			this.s = s;
-			next = (Node[])new Node[h+1];
+			next = new Node[h+1];
 			length = new int[h+1];
 		}
 	}

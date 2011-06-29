@@ -19,7 +19,6 @@ public class SkiplistSet<T> implements SSet<T> {
 	protected class Node {
 		T x;
 		Node[] next;
-		@SuppressWarnings("unchecked")
 		public Node(T ix, int h) {
 			x = ix;
 			next = (Node[])Array.newInstance(Node.class, h+1);
@@ -51,7 +50,6 @@ public class SkiplistSet<T> implements SSet<T> {
 	
 	public class Finger {
 		protected Node[] s;
-		@SuppressWarnings("unchecked")
 		public Finger() {
 			s = (Node[])Array.newInstance(Node.class, h+1);
 			for (int r = 0; r <= h; r++) 
