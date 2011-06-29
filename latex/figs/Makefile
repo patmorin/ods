@@ -3,7 +3,7 @@ sources=$(wildcard *.ipe)
 pdfs=$(sources:.ipe=.pdf)
 burstpdfs=$(sources:.ipe=-1.pdf)
 
-all: $(burstpdfs)
+all: $(pdfs) $(burstpdfs)
 
 %-1.pdf : %.pdf
 	pdftk $< burst output $(<:.pdf=-%d.pdf)
