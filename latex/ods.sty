@@ -58,6 +58,7 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Sp}{\mathbb{S}}
 \newcommand{\E}{\mathrm{E}}
+\DeclareMathOperator{\ddiv}{div}
 
 % Page setup
 \setlength{\textheight}{8.5in}
@@ -71,5 +72,26 @@
 \setlength{\parskip}{0.5ex}
 \setlength{\parindent}{1.25cm}
 \flushbottom
+
+% Title block
+\font\tensfb = cmssbx10
+\font\titlefont = cmssbx28
+\font\authorfont = cmssbx17
+
+\renewcommand\maketitle{%
+  \newlength{\lone}
+  \newlength{\ltwo}
+  \newlength{\lthree}
+  \setlength{\lone}{0.3\textheight}
+  \setlength{\ltwo}{0.618033988\lone}
+  \setlength{\lthree}{0.618033988\ltwo}
+  \ \vspace{\lone}
+  \begin{flushleft}
+    {\titlefont Basic Data Structures (in Java)} \\[1ex]
+    {\authorfont \@author} \\[\ltwo]
+    {\tensfb Version 0.0 pre $\alpha$ : \today} \\[\lthree]
+    \includegraphics[scale=0.5]{images/cc-by}
+  \end{flushleft}
+}
 
 
