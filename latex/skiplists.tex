@@ -445,9 +445,13 @@ studied extensively.  The exact expected length of the search path for
 the #i#th element in a skiplist has been studied carefully \cite{pXX}.
 Deterministic versions \cite{munroXX}, biased versions \cite{cXX}, and
 self-adjusting versions \cite{bose-langerman} of skiplists have all
-been developed. 
-% At some point, a cache-optimized version of skiplists was used in part of the Linux kernel. !!I can't confirm this.
-
+been developed.  Skiplist implementations have been written for
+various languages and frameworks and have seen use in open-source
+database systems
+\cite{https://secure.wikimedia.org/wikipedia/en/wiki/Skip_list}.  A
+variant of skiplists is even used in the HP-UX operating system
+kernel's process management structures
+\cite{http://h21007.www2.hp.com/portal/download/files/prot/files/STK/pdfs/proc_mgt.pdf}.
 
 \begin{exc}\exclabel{skiplist-opt}
  Suppose that, instead of promoting an element from $L_{i-1}$
