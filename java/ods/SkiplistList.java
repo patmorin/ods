@@ -82,17 +82,17 @@ public class SkiplistList<T> extends AbstractList<T> {
 		return u;
 	}
 
+	public T get(int i) {
+		if (i < 0 || i > n-1) throw new IndexOutOfBoundsException();
+		return findPred(i).next[0].x;
+	}
+
 	public T set(int i, T x) {
 		if (i < 0 || i > n-1) throw new IndexOutOfBoundsException();
 		Node u = findPred(i).next[0];
 		T y = u.x;
 		u.x = x;
 		return y;
-	}
-
-	public T get(int i) {
-		if (i < 0 || i > n-1) throw new IndexOutOfBoundsException();
-		return findPred(i).next[0].x;
 	}
 
 	/**
