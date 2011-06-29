@@ -1,6 +1,7 @@
 package ods;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Random;
@@ -18,6 +19,7 @@ public class SkiplistSet<T> implements SSet<T> {
 	protected class Node {
 		T x;
 		Node[] next;
+		@SuppressWarnings("unchecked")
 		public Node(T ix, int h) {
 			x = ix;
 			next = (Node[])Array.newInstance(Node.class, h+1);
@@ -49,6 +51,7 @@ public class SkiplistSet<T> implements SSet<T> {
 	
 	public class Finger {
 		protected Node[] s;
+		@SuppressWarnings("unchecked")
 		public Finger() {
 			s = (Node[])Array.newInstance(Node.class, h+1);
 			for (int r = 0; r <= h; r++) 
@@ -232,11 +235,9 @@ public class SkiplistSet<T> implements SSet<T> {
 	}
 	
 	public void clear() {
-		for (int i = 0; i < h; i++) {
-			sentinel.next[i] = null;
-		}
-		h = 0;
 		n = 0;
+		h = 0;
+		Arrays.fill(sentinel.next, null);
 	}
 	
 	public int size() {
