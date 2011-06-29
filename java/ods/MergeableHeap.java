@@ -1,5 +1,6 @@
 package ods;
 
+import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -15,7 +16,9 @@ import java.util.Random;
 public class MergeableHeap<T extends Comparable<T>> extends
 		BinaryTree<MHeapNode<T>> implements Queue<T> {
 	
-	Random rand;
+	protected Random rand;
+	
+	protected int n;
 	
 	public MergeableHeap() {
 		super(new MHeapNode<T>());
@@ -32,6 +35,7 @@ public class MergeableHeap<T extends Comparable<T>> extends
 		u.x = x;
 		r = merge(u, r);
 		r.parent = null;
+		n++;
 		return true;
 	}
 	
@@ -42,7 +46,8 @@ public class MergeableHeap<T extends Comparable<T>> extends
 	public T remove() {
 		T x = r.x;
 		r = merge(r.left, r.right);
-		r.parent = null;
+		if (r != null) r.parent = null;
+		n--;
 		return x;
 	}
 	
@@ -59,8 +64,8 @@ public class MergeableHeap<T extends Comparable<T>> extends
 			r = merge(r, u.left);
 			r = merge(r, u.right);
 			r.parent = null;
+			n--;
 		}
-		
 	}
 	
 	public MHeapNode<T> merge(MHeapNode<T> h1, MHeapNode<T> h2) {
@@ -88,13 +93,21 @@ public class MergeableHeap<T extends Comparable<T>> extends
 		for (int i = 0; i < n; i++) {
 			h.add(r.nextInt(2500));
 		}
+		for (Integer x : h) {
+			System.out.print(x + ",");
+		}
+		System.out.println();
+		for (Integer x : h) {
+			System.out.print(x + ",");
+		}
+		System.out.println();
 		while (!h.isEmpty()) {
 			System.out.print("" + h.remove() + ",");
 		}
 		System.out.println("");
 
 		h.clear();
-		n = 100000;
+		n = 1000000;
 		long start, stop;
 		double elapsed;
 		System.out.print("performing " + n + " adds...");
@@ -177,7 +190,9 @@ public class MergeableHeap<T extends Comparable<T>> extends
 				MergeableHeap.this.remove(prev);
 			}
 		}
-		return new MHI(r);
+		MHeapNode<T> w = r;
+		while (w.left != null) w = w.left;
+		return new MHI(w);
 	}
 
 	public boolean remove(Object x) {
@@ -211,13 +226,33 @@ public class MergeableHeap<T extends Comparable<T>> extends
 		return modified;
 	}
 
+	public int size() {
+		return n;
+	}
+	
+	public void clear() {
+		r = null;
+		n = 0;
+	}
+	
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Object[] a = new Object[n];
+		int i = 0;
+		for (T x : this) {
+			a[i++] = x;
+		}
+		return a;
 	}
 
-	public <T> T[] toArray(T[] arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public <T2> T2[] toArray(T2[] a) {
+		if (a.length < n) {
+			a = (T2[])Array.newInstance(a.getClass().getComponentType(), n);
+		}
+		int i = 0;
+		for (T x : this) {
+			a[i++] = (T2)x;
+		}
+		return a;
 	}
 }
