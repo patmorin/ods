@@ -21,9 +21,8 @@ public class SkiplistSet2<T> extends SkiplistSet<T> {
 			stack[r--] = u;
 		}
 		Node w = new Node(x, pickHeight());
-		if (w.height() > h)
-			while (h < w.height())
-				stack[++h] = sentinel;
+		while (h < w.height())
+			stack[++h] = sentinel;
 		for (int i = 0; i < w.next.length; i++) {
 			w.next[i] = stack[i].next[i];
 			stack[i].next[i] = w;
