@@ -15,7 +15,11 @@ ods.dvi : $(temps) ods.tex figs ods.sty
 
 %-tmp.tex : %.tex $(java) snarf.pl Makefile
 	cat $< | ./snarf.pl > $*-tmp.tex 
+
+install : ods.pdf
+	scp ods.pdf morin@cg.scs.carleton.ca:public_html/ods/
 	
 clean:
 	rm -f $(temps) *.log *.bbl ods.pdf
+	(cd figs; make clean)
 

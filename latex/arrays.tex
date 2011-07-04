@@ -813,12 +813,22 @@ data structure:
 \end{exc}
 
 \begin{exc}
+  Design and implement a #RandomQueue#.  This a is an implementation
+  of the #Queue# interface in which the #remove()# operation removes an
+  element that is chosen uniformly at random among all the elements in
+  the queue.  The #add(x)# and #remove()# operations in a #RandomQueue#
+  should take constant time.
+\end{exc}
+
+\begin{exc}
   Design and implement a #Treque# (triple-ended queue). This is a #List#
   implementation in which #get(i)# and #set(i,x)# run in constant time
   and #add(i,x)# and #remove(i)# run in time
   \[
-     O(1+\min\{#i#, #n#-#i#, |#n#/2|-#i#\}) \enspace .
+     O(1+\min\{#i#, #n#-#i#, |#n#/2-#i#|\}) \enspace .
   \]
+  With this running-time, modifications are fast if they are near either
+  end or near the middle of the list.
 \end{exc}
 
 \begin{exc}
@@ -826,14 +836,6 @@ data structure:
   list item #i# becomes list item $(#i#+#r#)\bmod n$.  When run on
   an #ArrayDeque#, or a #DualArrayDeque#, #rotate(r)# should run in
   $O(1+\min\{r,n-r\})$.
-\end{exc}
-
-\begin{exc}
-  Design and implement a #RandomQueue#.  This is an implementation of
-  #Queue# in which the #remove()# operation removes an element chosen
-  uniformly at random from all of the elements currently stored in
-  the queue.  The #add(x)# and #remove()# operations should run in
-  $O(1)$ time.
 \end{exc}
 
 \begin{exc}
@@ -848,6 +850,24 @@ data structure:
   should make use of the fact that, if #a.length# is a power of 2,
   then $#k%a.length#=#k&(a.length-1)#$. (Here, #&# is the bitwise-and
   operator.)
+\end{exc}
+
+\begin{exc}
+  Design and implement a variant of #ArrayDeque# that does not do any
+  modular arithmetic at all.  Instead, all the data sits in a consecutive
+  block, in order, inside an array.  When the data overruns the beginning
+  or the end of this array, a modified #rebuild()# operation is performed.
+  The amortized cost of all operations should be the same as in an
+  #ArrayDeque#.
+
+  Hint: Making this work is really all about how a #rebuild()# operation
+  is performed.  You would like #rebuild()# to put the data structure
+  into a state where the data can not run off either end until at least
+  $#n#/2$ operations have been performed.
+
+  Test the performance of your implementation against the #ArrayDeque#.
+  Optimize your implementation (by using #System.arraycopy(a,i,b,i,n)#)
+  and see if you can get it to outperform the #ArrayDeque# implementation.
 \end{exc}
 
 \begin{exc}

@@ -250,9 +250,8 @@ case, this is equal to the height of the #BinarySearchTree#.
 
 Deleting a value #x# stored in node #u# of a #BinarySearchTree# is a
 little more difficult.  If #u# is a leaf, then we can just detach #u#
-from its parent.  Even better: If #x# is stored in a node #u# with only
-one child, then we can splice #u# from the tree by having #u.parent#
-adopt #u#'s child:
+from its parent.  Even better: If #u# has only one child, then we can
+splice #u# from the tree by having #u.parent# adopt #u#'s child:
 \javaimport{ods/BinarySearchTree.splice(u)}
 
 \begin{figure}

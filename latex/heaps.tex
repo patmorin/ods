@@ -6,7 +6,7 @@ priority #Queue# data structure.  The first is an implementation based
 on arrays.  It is very fast, and is the basis of one of the fastest
 known sorting algorithms, namely heapsort.  The second implementation is
 based on binary trees and is more flexible.  In particular, it support
-a #merge(h)# operation that allows the priority queue to absorb the
+a #meld(h)# operation that allows the priority queue to absorb the
 elements of a second priority queue #h#.
 
 \section{#BinaryHeap#: An Implicit Binary Tree}
@@ -18,7 +18,15 @@ of the tree in breadth-first order (see \secref{bintree:traversal}) in
 the array.  In this way, the root is stored at position 0, the root's
 left child is stored at position 1, the root's right child at position 2,
 the left child of the left child of the root is stored at position 3,
-and so on.  
+and so on. See \figref{eytzinger}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/eytzinger}
+  \end{center}
+  \caption{Eytzinger's method represents a complete binary tree as an array.}
+  \figlabel{eytzinger}
+\end{figure}
 
 If we do this for a large enough tree, some patterns emerge.  The left
 child of the node at index #i# is at index $#left(i)#=2#i#+1$ and the
@@ -41,8 +49,19 @@ As with all array-based structures, we first check if #a# is full
 (because $#a.length#=#n#$) and, if so, we grow #a#.  Next, we place #x#
 at location #a[n]# and increment #n#.  At this point, all that remains is
 to ensure that we maintain the heap property.  We do this by repeatedly
-swapping #x# with its parent until #x# is no smaller than its parent.
+swapping #x# with its parent until #x# is no smaller than its parent.  See \figref{heap-insert}.
 \javaimport{ods/BinaryHeap.add(x).bubbleUp(i)}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/heap-insert-1} \\
+    \includegraphics{figs/heap-insert-2} \\
+    \includegraphics{figs/heap-insert-3} \\
+    \includegraphics{figs/heap-insert-4} \\
+  \end{center}
+  \caption{Inserting the value 6 into a #BinaryHeap#.}
+  \figlabel{heap-insert}
+\end{figure}
 
 Implementing the #remove()# operation, which removes the smallest value
 from the heap, is a little trickier.  We know where the smallest value is
@@ -57,10 +76,23 @@ If it is the smallest of the three then we are done.  Otherwise, we swap
 this element with the smallest of its two children and continue.
 \javaimport{ods/BinaryHeap.remove().trickleDown(i)}
 
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/heap-remove-1} \\
+    \includegraphics{figs/heap-remove-2} \\
+    \includegraphics{figs/heap-remove-3} \\
+    \includegraphics{figs/heap-remove-4} \\
+  \end{center}
+  \caption{Removing the minimum value, 4, from a #BinaryHeap#.}
+  \figlabel{heap-remove}
+\end{figure}
+
+
+
 As with other array-based structures we will ignore the time spent
 in calls to #resize()# since these can be accounted for
 with the amortization argument from \lemref{arraystack-amortized}.
-The running-time of both #add(x)# and #remove(x)# then depends on the
+The running-time of both #add(x)# and #remove()# then depends on the
 height of the (implicit) binary tree.  However, this is a \emph{complete}
 binary tree;  every level except the last has the maximum possible number
 of nodes.  Therefore, if the height of this tree is $h$, then it has at
@@ -70,7 +102,7 @@ least $2^h$ nodes.  Stated another way
 \]  
 Taking logarithms on both sides of this equation gives
 \[
-   h \le \log_2 #n# \enspace .
+   h \le \log #n# \enspace .
 \]
 Therefore, both the #add(x)# and #remove()# operation run in $O(\log #n#)$ time.
 
@@ -88,16 +120,16 @@ The following theorem summarizes the performance of a #BinaryHeap#:
   time spent during all calls to #resize()#.
 \end{thm}
 
-\section{#MergeableHeap#: A Randomized Meldable Heap}
+\section{#MeldableHeap#: A Randomized Meldable Heap}
 
-In this section, we describe the #MergeableHeap#, a priority #Queue#
+In this section, we describe the #MeldableHeap#, a priority #Queue#
 implementation in which the underlying structure is also a heap-ordered
 binary tree.  However, unlike a #BinaryHeap# in which the underlying
 binary tree is completely defined by the number of elements, there
 are no restrictions on the shape of the binary tree that underlies
-a #MergeableHeap#.  Anything goes.
+a #MeldableHeap#; anything goes.
 
-The #add(x)# and #remove()# operations in a #MergeableHeap# are
+The #add(x)# and #remove()# operations in a #MeldableHeap# are
 implemented in terms of the #merge(h1,h2)# operation.  This operation
 takes two heap nodes #h1# and #h2# and merges them, returning a heap
 node that is the root of a heap that contains all elements in the subtree
@@ -111,26 +143,25 @@ roles of #h1# and #h2#.  Then we know that the root of the merged heap
 will contain #h1.x# and we can recursively merge #h2# with #h1.left#
 or #h1.right#, as we wish.  This is where randomization comes in, and we
 toss a coin to decide whether to merge #h2# with #h1.left# or #h1.right#:
-\javaimport{ods/MergeableHeap.merge(h1,h2)}
+\javaimport{ods/MeldableHeap.merge(h1,h2)}
 
 In the next section, we show that #merge(h1,h2)# runs in $O(\log #n#)$
 expected time, where #n# is the total number of elements in #h1# and #h2#.
 
 With access to a #merge(h1,h2)# operation, the #add(x)# operation is easy.  We create a new node #u# containing #x# and then merge #u# with the root of our heap:
-\javaimport{ods/MergeableHeap.add(x)}
+\javaimport{ods/MeldableHeap.add(x)}
 This takes $O(\log (#n#+1)) = O(\log #n#)$ expected time.
 
 The #remove()# operation is similarly easy.  The node we want to remove
 is the root, so we just merge its two children and make the result the root:
-\javaimport{ods/MergeableHeap.remove()}
+\javaimport{ods/MeldableHeap.remove()}
 Again, this takes $O(\log #n#)$ expected time.
 
-Additionally, a #MergeableHeap# can implement many other operations in
+Additionally, a #MeldableHeap# can implement many other operations in
 $O(\log #n#)$ expected time, including:
 \begin{itemize}
 \item #remove(u)# remove the node #u# (and its key #u.x#) from the heap.
-\item #absorb(h)# add all the elements of the #MergeableHeap# #h# to this heap, emptying #h# in the process.
-\item 
+\item #absorb(h)# add all the elements of the #MeldableHeap# #h# to this heap, emptying #h# in the process.
 \end{itemize}
 Each of these operations can be implemented using a constant number of
 #merge(h1,h2)# operations that each take $O(\log #n#)$ time.
@@ -147,71 +178,73 @@ falls off the tree (the current node becomes #null#).
 The following lemma is remarkeable because it does not depend at all on the shape of the binary tree:
 
 \begin{lem}
-The expected length of a random walk in a binary tree with #n# nodes is at most #\log_2 (n+1)#.
+The expected length of a random walk in a binary tree with #n# nodes is at most #\log (n+1)#.
 \end{lem}
 
 \begin{proof}
 The proof is by induction on #n#. In the base case, $#n#=0$ and the walk
-has length $0=\log_2 (#n#+1)$.
-Suppose now that
-the result is true for all non-negative integers $#n#'< n$
+has length $0=\log (#n#+1)$.  Suppose now that the result is true for
+all non-negative integers $#n#'< #n#$
 
-Let $#n#'$ denote the size of the root's left subtree, so that
-$#n#_2=#n#-#n#'-1$ is the size of the root's right subtree.  Starting at
+Let $#n#_1$ denote the size of the root's left subtree, so that
+$#n#_2=#n#-#n#_1-1$ is the size of the root's right subtree.  Starting at
 the root, the walk takes 1 step and then continues in a subtree of size
-$#n#_1$ or continues in a subtree of size $#n#_2$.  . Now, the expected
-length of the walk is then
+$#n#_1$ or continues in a subtree of size $#n#_2$.  By our inductive
+hypothesis, the expected length of the walk is then
 \[
-    \E[W] = 1 + \frac{1}{2}\log_2 (#n#_1+1) + \frac{1}{2}\log_2 (#n#_2+1)  
+    \E[W] = 1 + \frac{1}{2}\log (#n#_1+1) + \frac{1}{2}\log (#n#_2+1)  \enspace , 
 \] 
-To maximize this, over the choice of $#n#_1\in[0,\ldots,#n#-1]$, we
+since each of $#n#_1$ and $#n#_2$ are less than $#n#$.
+To maximize this, over the choice of $#n#_1\in[0,#n#-1]$, we
 take the derivative and obtain
 \[
-     \frac{1}{2}(c/#n#_1 - c/(#n#-#n#_1-1)) \enspace , 
+    (\E[W])' = \frac{1}{2}(c/#n#_1 - c/(#n#-#n#_1-1)) \enspace , 
 \]
 which is equal to 0 when $#n#_1 = (#n#-1)/2$.  We can establish that
 this is a maximum fairly easily, so the expected number of steps taken by the random walk is 
 \begin{align*}
     \E[W] 
-    & = 1 + \frac{1}{2}\log_2 (#n#_1+1) + \frac{1}{2}\log_2 (#n#_2+1) \\
-   & \le  1 + \log_2 ((#n#-1)/2+1) \\
-   & =  1 + \log_2 ((#n#+1)/2) \\
-   & =  \log_2 (#n#+1)  \enspace . \qedhere 
+    & = 1 + \frac{1}{2}\log (#n#_1+1) + \frac{1}{2}\log (#n#_2+1) \\
+   & \le  1 + \log ((#n#-1)/2+1) \\
+   & =  1 + \log ((#n#+1)/2) \\
+   & =  \log (#n#+1)  \enspace . \qedhere 
 \end{align*}
 \end{proof}
 
-With this result on random walks, we can now easily prove that the running time of the #merge(h1,h_2)# operation is $O(\log #n#)$.
+With this result on random walks, we can now easily prove that the
+running time of the #merge(h1,h2)# operation is $O(\log #n#)$.
 
 \begin{lem}
-If #h1# and #h2# are the roots of two heaps containing $#n#_1$ and $#n#_2$
-nodes, respectively, then the expected running time of #merge(h1,h2)#
-is at most $O(\log #n#)$, where $#n#=#n#_1+#n#_2$.
+  If #h1# and #h2# are the roots of two heaps containing $#n#_1$
+  and $#n#_2$ nodes, respectively, then the expected running time of
+  #merge(h1,h2)# is at most $O(\log #n#)$, where $#n#=#n#_1+#n#_2$.
 \end{lem}
 
 \begin{proof}
-Each step of the merge algorithm takes a one step of a random walk,
-either in the heap rooted at #h1# or the heap rooted at #h2#, depending
-on whether $#h1.x# < #h2.x#$ or not.  The algorithm terminates when
-either of these two random walks falls out of its corresponding tree
-(when $#h1#=#null#$ or $#h2#=#null#$).  Therefore, the expected number of steps performed by the merge algorithm is at most
-\[
-   \log_2 (#n#_1+1) + \log_2 (#n#_2+1) \le 2\log_2 #n#
-\]
+  Each step of the merge algorithm takes a one step of a random walk,
+  either in the heap rooted at #h1# or the heap rooted at #h2#, depending
+  on whether $#h1.x# < #h2.x#$ or not.  The algorithm terminates when
+  either of these two random walks falls out of its corresponding tree
+  (when $#h1#=#null#$ or $#h2#=#null#$).  Therefore, the expected number
+  of steps performed by the merge algorithm is at most
+  \[
+     \log (#n#_1+1) + \log (#n#_2+1) \le 2\log #n# \enspace . \qedhere
+  \]
 \end{proof}
 
 \subsection{Summary}
 
-The following theorem summarizes the performance of a #MergeableHeap#:
+The following theorem summarizes the performance of a #MeldableHeap#:
 
-\begin{thm}\thmlabel{binaryheap}
-  A #MergeableHeap# implements the (priority) #Queue# interface.
-  A #MergeableHeap# supports the operations #add(x)# and #remove()#
+\begin{thm}\thmlabel{meldableheap}
+  A #MeldableHeap# implements the (priority) #Queue# interface.
+  A #MeldableHeap# supports the operations #add(x)# and #remove()#
   in $O(\log #n#)$ expected time per operation.
 \end{thm}
 
-The randomized #MergeableHeap# data structure described here appears to
+The randomized #MeldableHeap# data structure described here appears to
 have first been proposed by Gambin and Malinowski \cite{gmXX}.  Other
-mergeable heap implementations exist, including leftist heaps \cite{xxxx},
+meldable heap implementations exist, including leftist heaps \cite{xxxx},
 binomial heaps, Fibonacci heaps, pairing heaps, and skew heaps, although
 none of these is as simple as the structure described here.
 
