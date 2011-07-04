@@ -160,7 +160,7 @@ public class SkiplistSet<T> implements SSet<T> {
 				removed = true;
 				u.next[r] = u.next[r].next[r];
 				if (u == sentinel && u.next[r] == null)
-					h--;
+					h--;         // skiplist height has gone down
 			}
 			r--;
 		}
@@ -244,11 +244,11 @@ public class SkiplistSet<T> implements SSet<T> {
 			while (u.next[r] != null && (comp = c.compare(u.next[r].x,x)) < 0)
 				u = u.next[r];
 			if (u.next[r] != null && comp == 0) return false;
-			stack[r--] = u;
+			stack[r--] = u;          // going down, store u
 		}
 		Node<T> w = new Node<T>(x, pickHeight());
 		while (h < w.height())
-			stack[++h] = sentinel;
+			stack[++h] = sentinel;   // increasing height of skiplist
 		for (int i = 0; i < w.next.length; i++) {
 			w.next[i] = stack[i].next[i];
 			stack[i].next[i] = w;

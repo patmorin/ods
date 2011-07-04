@@ -102,7 +102,6 @@ public class SkiplistList<T> extends AbstractList<T> {
 	 * @return the node u that precedes v in the skiplist
 	 */
 	protected Node add(int i, Node w) {
-		if (i < 0 || i > n) throw new IndexOutOfBoundsException();
 		Node u = sentinel;
 		int k = w.height();
 		int r = h;

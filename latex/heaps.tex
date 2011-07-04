@@ -136,7 +136,7 @@ node that is the root of a heap that contains all elements in the subtree
 rooted at #h1# and all elements in the subtree rooted at #h2#.
 
 The nice thing about a #merge(h1,h2)# operation is that it can be defined
-recursively operation.  If either of #h1# or #h2# is #null#, then we
+recursively.  If either of #h1# or #h2# is #null#, then we
 are merging with an empty set, so we return #h2# or #h1#, respectively.
 Otherwise, assume $#h1.x# < #h2.x#$, since otherwise we can reverse the
 roles of #h1# and #h2#.  Then we know that the root of the merged heap

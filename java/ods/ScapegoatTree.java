@@ -10,7 +10,7 @@ public class ScapegoatTree<T extends Comparable<T>>
 	 */
 	int q;
 	
-	protected static class Node<T2> extends BSTNode<Node<T2>,T2> {	}
+	protected static class Node<T> extends BSTNode<Node<T>,T> {	}
 	
 	public ScapegoatTree() {
 		sampleNode = new Node<T>();

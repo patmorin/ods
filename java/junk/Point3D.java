@@ -9,14 +9,14 @@ public class Point3D {
 	}
 	
 	public int hashCode() {
-		long z0 = 0x2058cc50L, z1 = 0xcb19137eL, z2 = 0x2cb6b6fdL; // from random.org
-		long z = 0xbea0107e5067d19dL;                              // from random.org
+		long[] z = {0x2058cc50L, 0xcb19137eL, 0x2cb6b6fdL}; // random
+		long zz = 0xbea0107e5067d19dL;                      // random
 		
-		long h0 = x0.hashCode() & ((1L<<32)-1);    // unsigned int to long conversion
+		long h0 = x0.hashCode() & ((1L<<32)-1);    // unsigned int to long 
 		long h1 = x1.hashCode() & ((1L<<32)-1);
 		long h2 = x2.hashCode() & ((1L<<32)-1);
 		
-		return (int)(((z0*h0 + z1*h1 + z2*h2)*z) >>> 32);
+		return (int)(((z[0]*h0 + z[1]*h1 + z[2]*h2)*zz) >>> 32);
 	}
 	
 	public static void main(String[] args) {
