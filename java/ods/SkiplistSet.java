@@ -16,12 +16,13 @@ import java.util.Random;
 public class SkiplistSet<T> implements SSet<T> {
 	protected Comparator<T> c;
 	
-	protected class Node {
+	@SuppressWarnings("unchecked")
+	protected static class Node<T> {
 		T x;
-		Node[] next;
+		Node<T>[] next;
 		public Node(T ix, int h) {
 			x = ix;
-			next = (Node[])Array.newInstance(Node.class, h+1);
+			next = (Node<T>[])Array.newInstance(Node.class, h+1);
 		}
 		public int height() {
 			return next.length - 1;
@@ -29,9 +30,9 @@ public class SkiplistSet<T> implements SSet<T> {
 	}
 	
 	/**
-	 * This node sits on the left side of the skiplist
+	 * This node<T> sits on the left side of the skiplist
 	 */
-	protected Node sentinel;
+	protected Node<T> sentinel;
 	
 	/**
 	 * The maximum height of any element
@@ -47,11 +48,17 @@ public class SkiplistSet<T> implements SSet<T> {
 	 * A source of random numbers
 	 */
 	Random rand;
+
+	/**
+	 * Used by add(x) method
+	 */
+	protected Node<T>[] stack;
 	
+	@SuppressWarnings("unchecked")
 	public class Finger {
-		protected Node[] s;
+		protected Node<T>[] s;
 		public Finger() {
-			s = (Node[])Array.newInstance(Node.class, h+1);
+			s = (Node<T>[])Array.newInstance(Node.class, h+1);
 			for (int r = 0; r <= h; r++) 
 				s[r] = sentinel;
 		}
@@ -63,7 +70,7 @@ public class SkiplistSet<T> implements SSet<T> {
 	
 	public T find(Finger f, T x) {
 		int r = 0;
-		Node u = f.s[r];
+		Node<T> u = f.s[r];
 		// find an edge that passes over x
 		while (r < h
 				&& ((u != sentinel && c.compare(x, u.x) <= 0)
@@ -80,10 +87,12 @@ public class SkiplistSet<T> implements SSet<T> {
 		return (u.next[0] == null) ? null : u.next[0].x;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public SkiplistSet(Comparator<T> c) {
 		this.c = c;
 		n = 0;
-		sentinel = new Node(null, 32);
+		sentinel = new Node<T>(null, 32);
+		stack = (Node<T>[])Array.newInstance(Node.class, sentinel.next.length);
 		h = 0;
 		rand = new Random();
 	}
@@ -93,15 +102,15 @@ public class SkiplistSet<T> implements SSet<T> {
 	}
 	
 	/**
-	 * Find the node u that precedes the value x in the skiplist.
+	 * Find the node<T> u that precedes the value x in the skiplist.
 	 * 
 	 * @param x - the value to search for
-	 * @return a node u that maximizes u.x subject to
+	 * @return a node<T> u that maximizes u.x subject to
 	 * the constraint that u.x < x --- or sentinel if u.x >= x for
-	 * all nodes x
+	 * all node<T>s x
 	 */
-	protected Node findPredNode(T x) {
-		Node u = sentinel;
+	protected Node<T> findPredNode(T x) {
+		Node<T> u = sentinel;
 		int r = h;
 		while (r >= 0) {
 			while (u.next[r] != null && c.compare(u.next[r].x,x) < 0)
@@ -112,20 +121,20 @@ public class SkiplistSet<T> implements SSet<T> {
 	}
 	
 	public T find(T x) {
-		Node u = findPredNode(x);
+		Node<T> u = findPredNode(x);
 		return u.next[0] == null ? null : u.next[0].x;
 	}
 	
 	public T findGE(T x) {
-		if (x == null) {   // return first node
+		if (x == null) {   // return first node<T>
 			return sentinel.next[0] == null ? null : sentinel.next[0].x;
 		}
 		return find(x);
 	}
 	
 	public T findLT(T x) {
-		if (x == null) {  // return last node
-			Node u = sentinel;
+		if (x == null) {  // return last node<T>
+			Node<T> u = sentinel;
 			int r = h;
 			while (r >= 0) {
 				while (u.next[r] != null)
@@ -137,41 +146,10 @@ public class SkiplistSet<T> implements SSet<T> {
 		return findPredNode(x).x;
 	}
 
-	public boolean add(T x) {
-		Node w = new Node(x, pickHeight());
-		if (w.height() > h)
-			h = w.height();
-		return add(w);
-	}
-
-	protected boolean add(Node w) {
-		int k = w.height();
-		Node u = sentinel;
-		int r = h;
-		int comp = 0;
-		boolean dup = false;
-		while (r >= 0) {
-			while (u.next[r] != null && (comp = c.compare(u.next[r].x,w.x)) < 0)
-				u = u.next[r];
-			if (u.next[r] != null && comp == 0) 
-				dup = true;  // w.x is already present - delete w later
-			if (r <= k) {    // splice w into list r
-				w.next[r] = u.next[r];
-				u.next[r] = w;
-			}
-			r--;
-		}
-		n++;
-		if (dup) {
-			remove(w);
-			return false;
-		}
-		return true;
-	}
 	
 	public boolean remove(T x) {
 		boolean removed = false;
-		Node u = sentinel;
+		Node<T> u = sentinel;
 		int r = h;
 		int comp = 0;
 		while (r >= 0) {
@@ -190,31 +168,6 @@ public class SkiplistSet<T> implements SSet<T> {
 		return removed;
 	}
 	
-	/**
-	 * Remove the first instance of w.x, if it is stored in the node w.
-	 * Warning: this may leave the list in an inconsistent state if there
-	 * is more than one occurence of x and the w is not the first node with w.x=x
-	 */
-	protected boolean remove(Node w) {
-		boolean removed = false;
-		Node u = sentinel;
-		int r = h;
-		int comp = 0;
-		while (r >= 0) {
-			while (u.next[r] != null && (comp = c.compare(u.next[r].x, w.x)) < 0) {
-				u = u.next[r];
-			}
-			if (u.next[r] == w && comp == 0) {
-				removed = true;
-				u.next[r] = u.next[r].next[r];
-				if (u == sentinel && u.next[r] == null)
-					h--;
-			}
-			r--;
-		}
-		if (removed) n--;
-		return removed;
-	}
 
 	/**
 	 * Simulate repeatedly tossing a coin until it comes up tails.
@@ -252,10 +205,10 @@ public class SkiplistSet<T> implements SSet<T> {
 	 * @param u
 	 * @return
 	 */
-	protected Iterator<T> iterator(Node u) {
+	protected Iterator<T> iterator(Node<T> u) {
 		class SkiplistIterator implements Iterator<T> {
-			Node u, prev;
-			public SkiplistIterator(Node u) {
+			Node<T> u, prev;
+			public SkiplistIterator(Node<T> u) {
 				this.u = u;
 				prev = null;
 			}
@@ -281,6 +234,27 @@ public class SkiplistSet<T> implements SSet<T> {
 	
 	public Iterator<T> iterator(T x) {
 		return iterator(findPredNode(x));
+	}
+
+	public boolean add(T x) {
+		Node<T> u = sentinel;
+		int r = h;
+		int comp = 0;
+		while (r >= 0) {
+			while (u.next[r] != null && (comp = c.compare(u.next[r].x,x)) < 0)
+				u = u.next[r];
+			if (u.next[r] != null && comp == 0) return false;
+			stack[r--] = u;
+		}
+		Node<T> w = new Node<T>(x, pickHeight());
+		while (h < w.height())
+			stack[++h] = sentinel;
+		for (int i = 0; i < w.next.length; i++) {
+			w.next[i] = stack[i].next[i];
+			stack[i].next[i] = w;
+		}
+		n++;
+		return true;
 	}
 
 	public static void main(String[] args) {

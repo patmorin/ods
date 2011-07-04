@@ -20,9 +20,16 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	 * Create a new instance of this class
 	 * @param isampleNode
 	 */
-	BinaryTree(Node sampleNode) {
+	protected BinaryTree(Node sampleNode) {
 		this.sampleNode = sampleNode;
 	}
+	
+	/**
+	 * Create a new instance of this class
+	 * @warning child must set sampleNode before anything that 
+	 * might make calls to newNode()
+	 */
+	protected BinaryTree() { }
 	
 	/**
 	 * Allocate a new node for use in this tree

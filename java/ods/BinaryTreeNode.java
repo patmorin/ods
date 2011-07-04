@@ -11,18 +11,7 @@ package ods;
  *            the class of the children of this node
  */
 public class BinaryTreeNode<Node extends BinaryTreeNode<Node>> {
-	/**
-	 * left child
-	 */
 	protected Node left;
-
-	/**
-	 * right child
-	 */
 	protected Node right;
-
-	/**
-	 * Parent node
-	 */
 	protected Node parent;	
 }

@@ -30,6 +30,15 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	}
 
 	/**
+	 * Create a new instance of this class
+	 * @warning child must set sampleNode before anything that 
+	 * might make calls to newNode()
+	 */
+	public BinarySearchTree() {
+		this(null, new DefaultComparator<T>());
+	}
+
+	/**
 	 * Search for a value in the tree
 	 * @return the last node on the search path for x
 	 */

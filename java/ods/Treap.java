@@ -7,21 +7,25 @@ import java.util.TreeSet;
 import java.util.List;
 
 
-public class Treap<T extends Comparable<T>> extends
-		BinarySearchTree<TreapNode<T>, T> implements SSet<T> {
+public class Treap<T> extends
+		BinarySearchTree<Treap.Node<T>, T> implements SSet<T> {
 	/**
 	 * A random number source
 	 */
 	Random rand;
 
+	protected static class Node<T> extends BSTNode<Node<T>,T> {
+		int p;
+	}
+	
 	public Treap() {
-		super(new TreapNode<T>());
+		sampleNode = new Node<T>();
 		rand = new Random();
 		c = new DefaultComparator<T>();
 	}
 
 	public boolean add(T x) {
-		TreapNode<T> u = new TreapNode<T>();
+		Node<T> u = new Node<T>();
 		u.x = x;
 		u.p = rand.nextInt();
 		if (super.add(u)) {
@@ -31,7 +35,7 @@ public class Treap<T extends Comparable<T>> extends
 		return false;
 	}
 
-	protected void bubbleUp(TreapNode<T> u) {
+	protected void bubbleUp(Node<T> u) {
 		while (u.parent != null && u.parent.p > u.p) {
 			if (u.parent.right == u) {
 				rotateLeft(u.parent);
@@ -45,7 +49,7 @@ public class Treap<T extends Comparable<T>> extends
 	}
 
 	public boolean remove(T x) {
-		TreapNode<T> u = findLast(x);
+		Node<T> u = findLast(x);
 		if (c.compare(u.x, x) == 0) {
 			trickleDown(u);
 			splice(u);
@@ -57,7 +61,7 @@ public class Treap<T extends Comparable<T>> extends
 	/**
 	 * Do rotations to make u a leaf
 	 */
-	protected void trickleDown(TreapNode<T> u) {
+	protected void trickleDown(Node<T> u) {
 		while (u.left != null || u.right != null) {
 			if (u.left == null) {
 				rotateLeft(u);

@@ -4,17 +4,19 @@ import java.lang.reflect.Array;
 
 
 public class ScapegoatTree<T extends Comparable<T>> 
-		extends BinarySearchTree<ScapegoatNode<T>,T> {
+		extends BinarySearchTree<ScapegoatTree.Node<T>,T> {
 	/**
 	 * An overestimate of the number of n
 	 */
 	int q;
 	
+	protected static class Node<T2> extends BSTNode<Node<T2>,T2> {	}
+	
 	public ScapegoatTree() {
-		super(new ScapegoatNode<T>());
+		sampleNode = new Node<T>();
 	}
 	
-	public ScapegoatTree(ScapegoatNode<T> is) {
+	public ScapegoatTree(Node<T> is) {
 		super(is);
 	}
 	
@@ -45,10 +47,10 @@ public class ScapegoatTree<T extends Comparable<T>>
 		
 	public boolean add(T x) {
 		// first do basic insertion keeping track of depth
-		ScapegoatNode<T> u = newNode();
+		Node<T> u = newNode();
 		u.x = x;
 		int d = 0;
-		ScapegoatNode<T> w = r;
+		Node<T> w = r;
 		if (w == null) {
 			r = u;
 			n++; q++;
@@ -88,11 +90,10 @@ public class ScapegoatTree<T extends Comparable<T>>
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void rebuild(ScapegoatNode<T> u) {
+	protected void rebuild(Node<T> u) {
 		int ns = size(u);
-		ScapegoatNode<T> p = u.parent;
-		ScapegoatNode<T>[] a = (ScapegoatNode<T>[]) Array.newInstance(
-				sampleNode.getClass(), ns);
+		Node<T> p = u.parent;
+		Node<T>[] a = (Node<T>[]) Array.newInstance(Node.class, ns);
 		packIntoArray(u, a, 0);
 		if (p == null) {
 			r = buildBalanced(a, 0, ns);
@@ -115,7 +116,7 @@ public class ScapegoatTree<T extends Comparable<T>>
 	 * @param i
 	 * @return size(u)
 	 */
-	protected int packIntoArray(ScapegoatNode<T> u, ScapegoatNode<T>[] a, int i) {
+	protected int packIntoArray(Node<T> u, Node<T>[] a, int i) {
 		if (u == null) {
 			return i;
 		}
@@ -133,7 +134,7 @@ public class ScapegoatTree<T extends Comparable<T>>
 	 * @param ns
 	 * @return the rooted of the newly created subtree
 	 */
-	protected ScapegoatNode<T> buildBalanced(ScapegoatNode<T>[] a, int i, int ns) {
+	protected Node<T> buildBalanced(Node<T>[] a, int i, int ns) {
 		if (ns == 0)
 			return null;
 		int m = ns / 2;
