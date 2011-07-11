@@ -46,10 +46,10 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 		Node w = r, prev = null;
 		while (w != null) {
 			prev = w;
-			int res = c.compare(x, w.x);
-			if (res < 0) {
+			int comp = c.compare(x, w.x);
+			if (comp < 0) {
 				w = w.left;
-			} else if (res > 0) {
+			} else if (comp > 0) {
 				w = w.right;
 			} else {
 				return w;
@@ -65,11 +65,11 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	protected Node findGENode(T x) {
 		Node w = r, z = null;
 		while (w != null) {
-			int res = c.compare(x, w.x);
-			if (res < 0) {
+			int comp = c.compare(x, w.x);
+			if (comp < 0) {
 				z = w;
 				w = w.left;
-			} else if (res > 0) {
+			} else if (comp > 0) {
 				w = w.right;
 			} else {
 				return w;
@@ -81,10 +81,10 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	protected T findEQ(T x) {
 		Node u = r;
 		while (u != null) {
-			int res = c.compare(x, u.x);
-			if (res < 0) 
+			int comp = c.compare(x, u.x);
+			if (comp < 0) 
 				u = u.left;
-			else if (res > 0)
+			else if (comp > 0)
 				u = u.right;
 			else
 				return u.x;
@@ -95,17 +95,17 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	protected T find(T x) {
 		Node w = r, z = null;
 		while (w != null) {
-			int res = c.compare(x, w.x);
-			if (res < 0) {
+			int comp = c.compare(x, w.x);
+			if (comp < 0) {
 				z = w;
 				w = w.left;
-			} else if (res > 0) {
+			} else if (comp > 0) {
 				w = w.right;
 			} else {
 				return w.x;
 			}
 		}
-		return z == null ? null: z.x;
+		return z == null ? null : z.x;
 	}
 
 	public T findGE(T u) {
@@ -127,10 +127,10 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	protected Node findLTNode(T x) {
 		Node u = r, z = null;
 		while (u != null) {
-			int res = c.compare(x, u.x);
-			if (res < 0) {
+			int comp = c.compare(x, u.x);
+			if (comp < 0) {
 				u = u.left;
-			} else if (res > 0) {
+			} else if (comp > 0) {
 				z = u;
 				u = u.right;
 			} else {
@@ -163,10 +163,10 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 		if (p == null) {
 			r = u;              // inserting into empty tree
 		} else {
-			int res = c.compare(u.x, p.x);
-			if (res < 0) {
+			int comp = c.compare(u.x, p.x);
+			if (comp < 0) {
 				p.left = u;
-			} else if (res > 0) {
+			} else if (comp > 0) {
 				p.right = u;
 			} else {
 				return false;   // u.x is already in the tree
@@ -230,7 +230,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	 * @param u
 	 */
 	protected void remove(Node u) {
-		if (u.right == null) {
+		if (u.left == null || u.right == null) {
 			splice(u);
 		} else {
 			Node w = u.right;
