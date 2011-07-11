@@ -1,0 +1,49 @@
+\chapter{2-4 Trees and Red-Black Trees}
+\chaplabel{24redblack}
+\section{2-4 Trees}
+\section{Red-Black Trees}
+
+Property 1: (black-height) The same number of black nodes on every root to leaf path.
+
+Property 2: (max-degree) No two red nodes are adjacent
+
+Property 3: (left-leaning) If #u.left# is black, then #u.right# is black.
+
+\subsection{Insertion}
+
+Do a normal BST insertion and make a new red leaf.  The only thing we
+have to worry about is the max-degree property.  In the 2-4 view, represents
+either a node of degree 5 or a node of degree 4.
+
+For a node of degree 5, we apply the split transformation (color the
+node red and color its two red children black) and proceed up the tree.
+
+A node of degree 4 can be fixed with a single or double rotation depending
+on whether its a zig-zig or a zig-zag.  This is where the cases can be
+simplified if we use a left-leaning tree (since the zig-zag is converted
+to a zig-zig by the left-leaning transformation).
+
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/rb-addfix}
+  \end{center}
+  \caption{A single round in the process of fixing Property~2 after
+  an insertion.}
+  \figlabel{rb-addfix}
+\end{figure}
+
+\subsection{Deletion}
+
+Do a standard deletion.  If the deleted node is red then we are done.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/rb-removefix}
+  \end{center}
+  \caption{A single round in the process of eliminating a double-black node
+   after a removal.}
+  \figlabel{rb-removefix}
+\end{figure}
+
+
