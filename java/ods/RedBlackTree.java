@@ -1,5 +1,10 @@
 package ods;
 
+import java.util.Iterator;
+import java.util.Random;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 		implements SSet<T> {
 
@@ -8,7 +13,8 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	protected static class Node<T> extends BSTNode<Node<T>,T> {
 		int color;
 		public String toString() {
-			return "" + x + " (" + ((color==0) ? "red" : "black") + ")";
+			String[] colors = {"red", "black"};
+			return "" + x + " (" + colors[color] + ")";
 		}
 	}
 	static byte red = 0;
@@ -27,7 +33,7 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 		boolean added = add(u);
 		if (added)
 			addFixup(u);
-		verify();
+		// verify();
 		return added;
 	}
 	
@@ -39,13 +45,17 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	
 	protected int verify(Node<T> u) {
 		if (u == nil) return u.color;
+		if (u.color < red || u.color > black)
+			throw new AssertionError("Invalid color: " + u.color);
 		if (u.color == red) 
 			if (u.left.color == red || u.right.color == red)
-				throw new IllegalArgumentException("red-red edge found");
+				throw new AssertionError("red-red edge found");
+		if (u.right.color == red && u.left.color != red) 
+			throw new AssertionError("non-left-leaning node found");
 		int dl = verify(u.left);
 		int dr = verify(u.right);
 		if (dl != dr)
-			throw new IllegalArgumentException("black-height property violated");
+			throw new AssertionError("black-height property violated");
 		return dl + u.color;
 	}
 
@@ -91,10 +101,13 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 		u.color++;
 		u.left.color--;
 		u.right.color--;
+		Utils.myassert(u.left.color >= red);
+		Utils.myassert(u.right.color >= red);
 	}
 
 	protected void pushColor(Node<T> u, int d) {
 		u.color -= d;
+		Utils.myassert(u.color >= red);
 		u.left.color += d;
 		u.right.color += d;
 	}
@@ -122,23 +135,37 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 		} 
 		splice(w);
 		u.color += w.color;
-//		verify(); // this should fail if u == nil
+		u.parent = w.parent;   // we are setting nil's parent
 		if (u.color > black) {
-			u.parent = w.parent;   // we are setting nil's parent
 			removeFixup(u);
-			nil.color = black;
+			Utils.myassert(nil.color == black);
+		} else if (u != r && u.parent.right.color == red && u.parent.left.color == black) {
+			flipLeft(u.parent);  // restore left-leaning
 		}
-		verify();
+		// verify();
 		return true;
 	}
 
+	protected void checkLean(Node<T> u) {
+		checkLean(u, 3);
+	}
+	
+	protected void checkLean(Node<T> u, int d) {
+		if (d <= 0 || u == nil) return;
+		if (u.right.color == red && u.left.color != red)
+			throw new AssertionError("Node is not left-leaning");
+		checkLean(u.left, d-1);
+		checkLean(u.right, d-1);
+	}
+	
 	/**
 	 * Fixup node u after a removal of u's parent. u is a double-black node
 	 * @param u
 	 */
 	protected void removeFixup(Node<T> u) {
-		while (1 < 2) {
+		while (u.color > black) {
 			if (u == r) { 
+				u.color = black;
 				return;
 			}
 			Node<T> w = u.parent;
@@ -154,9 +181,13 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 					rotateLeft(w);
 					flipRight(v);
 					pushBlack(q);
-					return;
+					if (v.right.color == red) 
+						flipLeft(v);
+					checkLean(q);
+					u = q;
 				} else {
 					u = v;
+					checkLean(u);
 				}
 			} else {  // u == u.parent.right
 				Node<T> v = w.left;
@@ -167,16 +198,25 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 					rotateRight(w);
 					flipLeft(v);
 					pushBlack(q);
-					return;
+					checkLean(q);
+					u = q;
 				} else {                
 					if (v.left.color == red) {
 						pushBlack(v);   // both v's children are red
-						return;
+						checkLean(v);
+						u = v;
 					} else {            // ensure left-leaning
 						flipLeft(v);
 						u = w;
+						checkLean(u);
 					}
 				}				
+			}
+		}
+		if (u != r) {
+			Node<T> w = u.parent;
+			if (w.right.color == red && w.left.color == black) {
+				flipLeft(w);
 			}
 		}
 	}
@@ -239,7 +279,40 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 			System.out.print(x + " ");
 		}
 		System.out.println();
-
+		System.out.print("Comparing to TreeSet...");
+		System.out.flush();
+		SortedSet<Integer> ts = new TreeSet<Integer>();
+		s.clear();
+		Random rand = new Random();
+		int n = 1000000;
+		for (int i = 0; i < n; i++) {
+			Integer x = rand.nextInt();
+			ts.add(x);
+			s.add(x);
+		}
+		Utils.myassert(ts.size() == s.size());
+		Iterator<Integer> tsi = ts.iterator();
+		Iterator<Integer> si = s.iterator();
+		while (tsi.hasNext()) {
+			Utils.myassert(tsi.next().equals(si.next()));
+		}
+		Utils.myassert(s.size() == ts.size());
+		for (int i = 0; i < n/2; i++) {
+			Integer x = rand.nextInt();
+			Integer y = s.findGE(x);
+			if (y != null) {
+				s.remove(y);
+				ts.remove(y);
+			}
+		}
+		Utils.myassert(ts.size() == s.size());
+		tsi = ts.iterator();
+		si = s.iterator();
+		while (tsi.hasNext()) {
+			Utils.myassert(tsi.next().equals(si.next()));
+		}
+		System.out.println("done");
 	}
+	
 
 }
