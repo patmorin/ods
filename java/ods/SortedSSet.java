@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * This class is a wrapper that allows any class that implements SSet<T> to
@@ -81,8 +82,11 @@ public class SortedSSet<T> extends AbstractSet<T> implements SortedSet<T> {
 		Runtime r = Runtime.getRuntime();
 		int n = 500000;
 		Collection<SortedSet<Integer>> css = new ArrayList<SortedSet<Integer>>();
-		css.add(new SortedSSet<Integer>(new SkiplistSet<Integer>()));
-		css.add(new SortedSSet<Integer>(new SkiplistSet2<Integer>()));
+		//css.add(new SortedSSet<Integer>(new SkiplistSet<Integer>()));
+		css.add(new TreeSet<Integer>());
+		css.add(new SortedSSet<Integer>(new RedBlackTree<Integer>()));
+		css.add(new TreeSet<Integer>());
+		css.add(new SortedSSet<Integer>(new RedBlackTree<Integer>()));
 		// css.add(new SortedSSet<Integer>(new ScapegoatTree<Integer>()));
 		while (1 < 2) {
 			Testum.sortedSetSpeedTests(css, n);
