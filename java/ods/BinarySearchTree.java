@@ -10,16 +10,16 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	protected Comparator<T> c;
 	
 	/**
-	 * The number of nodes (elements) currently in the treap
+	 * The number of nodes (elements) currently in the tree
 	 */
 	protected int n;
 	
 	protected Node newNode(T x) {
-		Node u = newNode();
+		Node u = super.newNode();
 		u.x = x;
 		return u;
 	}
-
+	
 	public BinarySearchTree(Node is, Comparator<T> c) {
 		super(is);
 		this.c = c; 
@@ -43,8 +43,8 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	 * @return the last node on the search path for x
 	 */
 	protected Node findLast(T x) {
-		Node w = r, prev = null;
-		while (w != null) {
+		Node w = r, prev = nil;
+		while (w != nil) {
 			prev = w;
 			int comp = c.compare(x, w.x);
 			if (comp < 0) {
@@ -63,8 +63,8 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	 * @return the last node on the search path for x
 	 */
 	protected Node findGENode(T x) {
-		Node w = r, z = null;
-		while (w != null) {
+		Node w = r, z = nil;
+		while (w != nil) {
 			int comp = c.compare(x, w.x);
 			if (comp < 0) {
 				z = w;
@@ -80,7 +80,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 
 	protected T findEQ(T x) {
 		Node u = r;
-		while (u != null) {
+		while (u != nil) {
 			int comp = c.compare(x, u.x);
 			if (comp < 0) 
 				u = u.left;
@@ -93,8 +93,8 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	}
 
 	protected T find(T x) {
-		Node w = r, z = null;
-		while (w != null) {
+		Node w = r, z = nil;
+		while (w != nil) {
 			int comp = c.compare(x, w.x);
 			if (comp < 0) {
 				z = w;
@@ -105,19 +105,19 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 				return w.x;
 			}
 		}
-		return z == null ? null : z.x;
+		return z == nil ? null : z.x;
 	}
 
 	public T findGE(T u) {
 		if (u == null) { // find the minimum value
 			Node w = r;
-			if (w == null) return null;
-			while (w.left != null)
+			if (w == nil) return null;
+			while (w.left != nil)
 				w = w.left;
 			return w.x;
 		}
 		Node w = findGENode(u);
-		return w == null ? null : w.x;
+		return w == nil ? null : w.x;
 	}
 
 	/**
@@ -125,8 +125,8 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	 * @return the last node on the search path for x
 	 */
 	protected Node findLTNode(T x) {
-		Node u = r, z = null;
-		while (u != null) {
+		Node u = r, z = nil;
+		while (u != nil) {
 			int comp = c.compare(x, u.x);
 			if (comp < 0) {
 				u = u.left;
@@ -143,13 +143,13 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	public T findLT(T x) {
 		if (x == null) { // find the maximum value
 			Node w = r;
-			if (w == null) return null;
-			while (w.right != null)
+			if (w == nil) return null;
+			while (w.right != nil)
 				w = w.right;
 			return w.x;
 		}
 		Node w = findLTNode(x);
-		return w == null ? null : w.x;
+		return w == nil ? null : w.x;
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	 * @return true if the child was added, false otherwise
 	 */
 	protected boolean addChild(Node p, Node u) {
-		if (p == null) {
+		if (p == nil) {
 			r = u;              // inserting into empty tree
 		} else {
 			int comp = c.compare(u.x, p.x);
@@ -203,14 +203,14 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	 */
 	protected void splice(Node u) {
 		Node s, p;
-		if (u.left != null) {
+		if (u.left != nil) {
 			s = u.left;
 		} else {
 			s = u.right;
 		}
 		if (u == r) {
 			r = s;
-			p = null;
+			p = nil;
 		} else {
 			p = u.parent;
 			if (p.left == u) {
@@ -219,7 +219,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 				p.right = s; 
 			}
 		}
-		if (s != null) {
+		if (s != nil) {
 			s.parent = p;
 		}
 		n--;
@@ -230,11 +230,11 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	 * @param u
 	 */
 	protected void remove(Node u) {
-		if (u.left == null || u.right == null) {
+		if (u.left == nil || u.right == nil) {
 			splice(u);
 		} else {
 			Node w = u.right;
-			while (w.left != null) 
+			while (w.left != nil) 
 				w = w.left;
 			u.x = w.x;
 			splice(w);
@@ -248,7 +248,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	protected void rotateLeft(Node u) {
 		Node w = u.right;
 		w.parent = u.parent;
-		if (w.parent != null) {
+		if (w.parent != nil) {
 			if (w.parent.left == u) {
 				w.parent.left = w;
 			} else {
@@ -256,11 +256,12 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 			}
 		}
 		u.right = w.left;
-		if (u.right != null) {
+		if (u.right != nil) {
 			u.right.parent = u;
 		}
 		u.parent = w;
 		w.left = u;
+		if (u == r) r = w;
 	}	
 	
 	/**
@@ -270,7 +271,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	protected void rotateRight(Node u) {
 		Node w = u.left;
 		w.parent = u.parent;
-		if (w.parent != null) {
+		if (w.parent != nil) {
 			if (w.parent.left == u) {
 				w.parent.left = w;
 			} else {
@@ -278,11 +279,12 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 			}
 		}
 		u.left = w.right;
-		if (u.left != null) {
+		if (u.left != nil) {
 			u.left.parent = u;
 		}
 		u.parent = w;
 		w.right = u;
+		if (u == r) r = w;
 	}
 
 	/**
@@ -292,7 +294,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	 */
 	public boolean remove(T x) {
 		Node u = findLast(x);
-		if (u != null) {
+		if (u != nil) {
 			remove(u);
 			return true;
 		}
@@ -312,7 +314,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	@SuppressWarnings({"unchecked"})
 	public boolean contains(Object x) {
 		Node u = findLast((T)x);
-		return u != null && c.compare(u.x, (T)x) == 0;
+		return u != nil && c.compare(u.x, (T)x) == 0;
 	}
 	
 	public boolean containsAll(Collection<?> c) {
@@ -329,7 +331,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 				w = iw;
 			}
 			public boolean hasNext() {
-				return w != null;
+				return w != nil;
 			}
 			public T next() {
 				T x = w.x;
@@ -338,6 +340,8 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 				return x;
 			}
 			public void remove() {
+				// FIXME: This is a bug.  remove() methods have to be changed
+				
 				BinarySearchTree.this.remove(prev);
 			}
 		}
@@ -345,12 +349,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	}
 
 	public Iterator<T> iterator() {
-		Node u = r;
-		if (u == null)
-			return iterator(u);
-		while (u.left != null)
-			u = u.left;
-		return iterator(u);
+		return iterator(firstNode());
 	}
 
 	public Iterator<T> iterator(T x) {

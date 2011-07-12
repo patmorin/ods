@@ -2,7 +2,6 @@ package ods;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Random;
 
 
 public class BinaryTree<Node extends BinaryTreeNode<Node>> {
@@ -17,11 +16,16 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	Node r;
 
 	/**
+	 * This tree's null node
+	 */
+	protected Node nil;
+
+	/**
 	 * Create a new instance of this class
 	 * @param isampleNode
 	 */
-	protected BinaryTree(Node sampleNode) {
-		this.sampleNode = sampleNode;
+	protected BinaryTree(Node nil) {
+		sampleNode = this.nil = nil;
 	}
 	
 	/**
@@ -38,7 +42,9 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	@SuppressWarnings({"unchecked"})
 	protected Node newNode() {
 		try {
-			return (Node)sampleNode.getClass().newInstance();	
+			Node u = (Node)sampleNode.getClass().newInstance();
+			u.parent = u.left = u.right = nil;
+			return u;
 		} catch (Exception e) {
 			return null;
 		}
@@ -65,7 +71,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	 * @return the size of the subtree rooted at u
 	 */
 	protected int size(Node u) {
-		if (u == null)
+		if (u == nil)
 			return 0;
 		return 1 + size(u.left) + size(u.right);
 	}
@@ -78,7 +84,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	 * @return the size of the subtree rooted at u
 	 */
 	protected int height(Node u) {
-		if (u == null)
+		if (u == nil)
 			return -1;
 		return 1 + Utils.max(height(u.left), height(u.right));
 	}
@@ -88,106 +94,31 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	 * @return
 	 */
 	public boolean isEmpty() {
-		return r == null;
+		return r == nil;
 	}
 	
 	/**
 	 * Make this tree into the empty tree
 	 */
 	public void clear() {
-		r = null;
-	}
-	
-	/**
-	 * Return a representation of this tree as a string
-	 */
-	public String toString() {
-		return toString(r, "  ");
-	}
-	
-	/**
-	 * Return a string representation of the subtree rooted at u
-	 * @param u the root of the subtree
-	 * @param indent the amount to indent the string by
-	 * @return the string representation
-	 */
-	protected String toString(Node u, String prefix) {
-		String s = prefix.substring(0, prefix.length()-2);
-		if (u == null)
-			return s + "null";
-		s += "+-+" + u.toString() + "\n";
-		s += toString(u.left, prefix + "| ") + "\n";
-		s += toString(u.right, prefix + "  ");
-		return s;
-	}
-
-	/**
-	 * Create a complete binary tree with n nodes
-	 * @param <Node>
-	 * @param t the tree to create
-	 * @param n the number of nodes in the tree
-	 */
-	static <Node extends BinaryTreeNode<Node>> void completeBinaryTree(BinaryTree<Node> t, int n) {
-		Queue<Node> q = new LinkedList<Node>();
-		t.clear();
-		if (n == 0)
-			return;		
-		t.r = t.newNode();
-		q.add(t.r);
-		while (--n > 0) {
-			Node u = q.remove();
-			u.left = t.newNode();
-			u.left.parent = u;
-			q.add(u.left);
-			if (--n > 0) {
-				u.right = t.newNode();
-				u.right.parent = u;
-				q.add(u.right);
-			}
-		}
-	}
-	
-	/**
-	 * Create a new full binary tree whose expected number of nodes is n
-	 * @param <Node>
-	 * @param t
-	 * @param n
-	 */
-	static <Node extends BinaryTreeNode<Node>> void galtonWatsonFullTree(BinaryTree<Node> t, int n) {
-		Random r = new Random();
-		Queue<Node> q = new LinkedList<Node>();
-		t.clear();
-		t.r = t.newNode();
-		q.add(t.r);
-		double p = (0.5 - (1.0)/(n+n));
-		while (!q.isEmpty()) {
-			Node u = q.remove();
-			if (r.nextDouble() < p) {
-				u.left = t.newNode();
-				u.left.parent = u;
-				q.add(u.left);
-				u.right = t.newNode();
-				u.right.parent = u;
-				q.add(u.right);
-			}
-		}
+		r = nil;
 	}
 	
 	public void traverse(Node u) {
-		if (u == null) return;
+		if (u == nil) return;
 		traverse(u.left);
 		traverse(u.right);
 	}
 
 	public void traverse2() {
-		Node u = r, prev = null, next;
-		while (u != null) {
+		Node u = r, prev = nil, next;
+		while (u != nil) {
 			if (prev == u.parent) {
-				if (u.left != null) next = u.left;
-				else if (u.right != null) next = u.right;
+				if (u.left != nil) next = u.left;
+				else if (u.right != nil) next = u.right;
 				else next = u.parent;
 			} else if (prev == u.left) {
-				if (u.right != null) next = u.right;
+				if (u.right != nil) next = u.right;
 				else next = u.parent;
 			} else {
 				next = u.parent;
@@ -199,16 +130,16 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 
 	
 	public int size2() {
-		Node u = r, prev = null, next;
+		Node u = r, prev = nil, next;
 		int n = 0;
-		while (u != null) {
+		while (u != nil) {
 			if (prev == u.parent) {
 				n++;
-				if (u.left != null) next = u.left;
-				else if (u.right != null) next = u.right;
+				if (u.left != nil) next = u.left;
+				else if (u.right != nil) next = u.right;
 				else next = u.parent;
 			} else if (prev == u.left) {
-				if (u.right != null) next = u.right;
+				if (u.right != nil) next = u.right;
 				else next = u.parent;
 			} else {
 				next = u.parent;
@@ -221,98 +152,44 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	
 
 	
-	/**
-	 * Create a new full binary tree whose expected number of nodes is n
-	 * @param <Node>
-	 * @param t
-	 * @param n
-	 */
-	static <Node extends BinaryTreeNode<Node>> void galtonWatsonTree(BinaryTree<Node> t, int n) {
-		Random r = new Random();
-		Queue<Node> q = new LinkedList<Node>();
-		t.clear();
-		t.r = t.newNode();
-		q.add(t.r);
-		double p = 0.5 - 1.0/(n+n);
-		while (!q.isEmpty()) {
-			Node u = q.remove();
-			if (r.nextDouble() < p) {
-				u.left = t.newNode();
-				u.left.parent = u;
-				q.add(u.left);
-			} if (r.nextDouble() < p) {
-				u.right = t.newNode();
-				u.right.parent = u;
-				q.add(u.right);
-			}
-		}
-	}
-
-	/**
-	 * Copy the structure of this into the tree t
-	 * @param <N2>
-	 * @param t
-	 */
-	public <N2 extends BinaryTreeNode<N2>> void	copyTo(BinaryTree<N2> t) {
-		t.clear();
-		t.r = copyTo(r, t);
-	}
-	
 	public void bfTraverse() {
 		Queue<Node> q = new LinkedList<Node>();
 		q.add(r);
 		while (!q.isEmpty()) {
 			Node u = q.remove();
-			if (u.left != null) q.add(u.left);
-			if (u.right != null) q.add(u.left);
+			if (u.left != nil) q.add(u.left);
+			if (u.right != nil) q.add(u.left);
 		}
 	}
 
 	/**
-	 * A recursive helper for the copyTo method
-	 * @param <N2>
-	 * @param u
-	 * @param t
+	 * Find the first node in an in-order traversal
 	 * @return
 	 */
-	protected <N2 extends BinaryTreeNode<N2>> N2 copyTo(Node u, BinaryTree<N2> t) {
-		if (u == null) 
-			return null;
-		N2 w = t.newNode();
-		w.left = copyTo(u.left, t);
-		w.right = copyTo(u.right, t);
+	protected Node firstNode() {
+		Node w = r;
+		if (w == nil) return nil;
+		while (w.left != nil)
+			w = w.left;
 		return w;
 	}
-
+	
 	/**
 	 * Find the node that follows u in an in-order traversal
 	 * @param w
 	 * @return
 	 */
 	protected Node nextNode(Node w) {
-		if (w.right != null) {
+		if (w.right != nil) {
 			w = w.right;
-			while (w.left != null)
+			while (w.left != nil)
 				w = w.left;
 		} else {
-			while (w.parent != null && w.parent.left != w)
+			while (w.parent != nil && w.parent.left != w)
 				w = w.parent;
 			w = w.parent;
 		}
 		return w;
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		BinaryTree<SimpleBinaryTreeNode> t = new BinaryTree<SimpleBinaryTreeNode>(new SimpleBinaryTreeNode());
-		completeBinaryTree(t, 3999);
-		System.out.println("size = (" + t.size() + "," + t.size2() + ")");
-		// System.out.println("height = (" + t.height() + "," + t.height2() + ")");
-		galtonWatsonTree(t, 4000);
-		System.out.println("size = (" + t.size() + "," + t.size2() + ")");
-		// System.out.println(t.toString());
 	}
 
 }

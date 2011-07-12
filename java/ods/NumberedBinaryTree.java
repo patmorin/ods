@@ -96,7 +96,6 @@ public class NumberedBinaryTree extends BinaryTree<NumberedBinaryTreeNode> {
 
 	public static void main(String args[]) {
 		NumberedBinaryTree t = new NumberedBinaryTree();
-		completeBinaryTree(t, 12);
 		t.preorderNumber();
 		t.inorderNumber();
 		t.postorderNumber();
