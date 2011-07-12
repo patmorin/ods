@@ -302,8 +302,8 @@ per operation.
 #SkiplistSet# structure can implement the #SSet# interface with $O(\log
 #n#)$ expected time per operation.  The problem with the #BinarySearchTree#
 structure is that it can become \emph{unbalanced}.  Instead of looking
-like the tree in \figref{bst} it can look like a long chain of
-#n# nodes, each having exactly one child.
+like the tree in \figref{bst}, it can look like a long chain of
+#n# nodes, all but the last having exactly one child.
 
 There are a number of ways of avoiding unbalanced binary search
 trees, all of which lead to data structures that have $O(\log
