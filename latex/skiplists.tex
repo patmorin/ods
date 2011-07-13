@@ -459,21 +459,28 @@ variant of skiplists is even used in the HP-UX operating system
 kernel's process management structures
 \cite{http://h21007.www2.hp.com/portal/download/files/prot/files/STK/pdfs/proc_mgt.pdf}.
 
+\begin{exc}\exclabel{skiplist-changes}
+  Show that, during an #add(x)# or a #remove(x)# operation, the expected
+  number of pointers in the structure that get changed is constant.
+\end{exc}
+
+
 \begin{exc}\exclabel{skiplist-opt}
- Suppose that, instead of promoting an element from $L_{i-1}$
-into $L_i$ based on a coin toss, we promote it with some probability $p$, $0 < p < 1$.
-Show that the expected length of the search path in this case is at most
-$(1/p)\log_{1/p} #n# + O(1)$.  What is the value of $p$ that minimizes
-this expression? What is the expected height of the skiplist? What is
-the expected number of nodes in the skiplist?
+  Suppose that, instead of promoting an element from $L_{i-1}$ into $L_i$
+  based on a coin toss, we promote it with some probability $p$, $0 <
+  p < 1$.  Show that the expected length of the search path in this case
+  is at most $(1/p)\log_{1/p} #n# + O(1)$.  What is the value of $p$
+  that minimizes this expression? What is the expected height of the
+  skiplist? What is the expected number of nodes in the skiplist?
 \end{exc}
 
 \begin{exc}
- Design and implement a version of a skiplist that implements the
-#SSet# interface, but also allows fast access to elements by rank.
-That is, it also supports the function #get(i)#, which returns the
-element whose rank is #i# in $O(\log #n#)$ expected time. (The rank of an element #x# in a #SSet#
-is the number of elements in the #SSet# that are less than #x#.)
+  Design and implement a version of a skiplist that implements the
+  #SSet# interface, but also allows fast access to elements by rank.
+  That is, it also supports the function #get(i)#, which returns the
+  element whose rank is #i# in $O(\log #n#)$ expected time. (The rank
+  of an element #x# in a #SSet# is the number of elements in the #SSet#
+  that are less than #x#.)
 \end{exc}
 
 
