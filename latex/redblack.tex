@@ -1,0 +1,237 @@
+\chapter{Red-Black Trees}
+\chaplabel{24redblack}
+\section{2-4 Trees}
+\section{Red-Black Trees}
+
+A #RedBlackTree# is a #BinarySearchTree# in which each node, #u#,
+has a \emph{color} which is either \emph{red} or \emph{black}.  Red is
+represented by the value $0$ and black by the value $1$.
+\javaimport{ods/RedBlackTree.Node<T>.red.black}
+
+Before and after any operation on a #RedBlackTree#, the following two
+properties are satisfied. Each property is defined both in terms of the
+colors red and black, and in terms of the numeric values 0 and 1.
+\begin{prp}[black-height]\prplabel{black-height}\prplabel{redblack-first}
+  There are the same number of black nodes on every root to leaf path. (The sum of the colors on any root to leaf path is the same.)
+\end{prp}
+
+\begin{prp}[max-degree]\prplabel{max-degree}
+  No two red nodes are adjacent.  (For any node #u#, except the root, $#u.color# + #u.parent.color# \ge 1$.)
+\end{prp}
+
+Notice that we can always color the root #r# of a #RedBlackTree# black
+without violating either of these two properties, so we will assume
+that the root is black, and the algorithms for updating a #RedBlackTree#
+will maintain this.
+
+There is no single definition of a #RedBlackTree#.  Rather, there are
+a family of structures that manage to maintain the two properties above
+during #add(x)# and #remove(x)# operations. Different structures go about
+it in different ways.  However, all these structures have the following
+result in common:
+
+\begin{lem}
+The height of #RedBlackTree# with #n# nodes is at most $2\log #n#$.
+\end{lem}
+
+\begin{proof}
+TODO: Explain relationship between red-black and 2-4 trees.
+\end{proof}
+
+In this chapter, we consider a special kind of red-black tree that satisifies an additional property:
+\begin{prp}[left-leaning]\prplabel{left-leaning}\prplabel{redblack-last}
+  At any node #u#, if #u.left# is black, then #u.right# is black.
+\end{prp}
+The reason for maintaining the left-leaning property is that it reduces
+the number of cases we need to consider when updating the tree during
+#add(x)# and #remove(x)# operations.  In terms of 2-4 trees, it implies
+that every 2-4 tree has a unique representation:  A node of degree 2
+becomes a black node with 2 black children.  A node of degree 3 becomes
+a black node whose left child is red and whose right child is black.
+A node of degree 4 becomes a black node with two red children.
+
+\begin{itemize}
+\item Prove height theorem
+
+\item Discuss color pushes, pulls, and leans.
+\javaimport{ods/RedBlackTree.pushBlack(u).pullBlack(u)}
+\javaimport{ods/RedBlackTree.flipLeft(u).flipRight(u)}
+
+\end{itemize}
+
+\subsection{Addition}
+
+To implement #add(x)# in a 2-4 tree, we perform a standard
+#BinarySearchTree# insertion, which adds a new leaf, #u#, with $#u.x#=#x#$
+and set $#u.color#=#red#$.  Note that this does not change the black
+height of any node, so it does not violate the black-height property.
+It may, however violate the left-leaning property (if #u# is the
+right child of its parent) and it may violate the max-degree property
+(if #u#'s parent is #red#).  To restore these properties, we call the
+method #addFixup(u)#.
+\javaimport{ods/RedBlackTree.add(x)}
+
+The method #addFixup(u)# is illustrated in \figref{rb-addfix}.
+The following discussion is probably impossible to follow without
+referring to \figref{rb-addfix} or recreating it on a piece of paper
+while reading this discussion.  Indeed, many readers may prefer to study
+\figref{rb-addfix} before continuing.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.8]{figs/rb-addfix}
+  \end{center}
+  \caption{A single round in the process of fixing Property~2 after
+  an insertion.}
+  \figlabel{rb-addfix}
+\end{figure}
+
+The #addFixup(u)# method takes as input a node #u# whose color is red and
+which may be violating the max-degree property and/or the left-leaning
+property.  If #u# is the root of the tree, then we can color #u# black
+and this restores both properties.  If #u#'s sibling is also red, then
+#u#'s parent must be black, so both the left-leaning and max-degree
+properties already hold.
+
+Otherwise, we first determine if #u#'s parent, #w# violates the
+left-leaning property and, if so, perform a #flipLeft(w)# operation and
+set $#u#=#w#$.  This leaves us in a well-defined state:  #u# is the left
+child of its parent, #w#, so #w# now satisfies the left-leaning property.
+All that remains is to ensure the max-degree property at #u#.  Again,
+we only have to worry about the case where #w# is red, since otherwise
+#u# already satisfies max-degree property.
+
+Since we are not done yet, #u# is red and #w# is red.  The max-degree
+property (which is only violated by #u# and not by #w#) implies that
+#u#'s grandparent #g# exists and is black.  If #g#'s right child is red,
+then the left-leaning property ensures that both #g#'s children are red,
+and a call to #pushBlack(g)# makes #g# red and #w# black.  This restores
+the max-degree property at #u#, but may cause it to be violated at #g#,
+so the whole process starts over with $#u#=#g#$
+
+If #g#'s right child is black, then a call to #flipRight(g)# makes
+#w# the (black) parent of #g# and gives #w# two red children #u# and
+#g#. This ensures that #u# satisfies the max-degree property and #g#
+satisfies the left-leaning property.
+\javaimport{ods/RedBlackTree.addFixup(u)}
+
+
+\subsection{Removal}
+
+The #remove(x)# operation in a #RedBlackTree# tree is the most complicated
+operation to implement, and this is true of all known implementations.
+Like #remove(x)# in a #BinarySearchTree# the operation boils down to
+finding a node #w# with only one child, #u#, and splicing #w# out of
+the tree by having #w.parent# adopt #u#.
+
+The problem with this is that, if #w# is black, then the black-height
+property will now be violated at #w.parent#.  We get around this
+problem, temporarily, by adding #w.color# to #u.color#.  Of course, this
+introduces two other problems:  (1)~#u# and #w# both started out black,
+then $#u.color#+#w.color#=2$ (double black), which is in invalid color.
+If #w# was red, then it is replaceed by a black node #u#, which may
+violate the left-leaning property at $#u.parent#$.  Both of these problems
+are resolved with a call to the #removeFixup(u)# method.
+\javaimport{ods/RedBlackTree.remove(x)}
+
+The #removeFixup(u)# method takes as input a node #u# whose color is black
+(1) or double-black (2).  If #u# is double-black, then #removeFixup(u)#
+performs a series of rotations and recolorings that move the double-black
+node up the tree until it can be gotten rid of.  During this process,
+the node #u# changes until, at the end of this process, #u# refers to the
+root of the subtree that has been changed.  The root of this subtree may
+have changed color.  In particular, it may have gone from red to black,
+so the #removeFixup(u)# method finishes by checking if #u#'s parent
+violates the left-leaning property and, if so, fixes it.
+\javaimport{ods/RedBlackTree.removeFixup(u)}
+
+The #removeFixup(u)# method is illustrated in \figref{rb-removefix}.
+Again, the following text will be very difficult, if not impossible,
+to follow without referring constantly to \figref{rb-removefix}.
+Each iteration of the loop in #removeFixup(u)# processes the double-black node #u# based on one of four cases.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.8]{figs/rb-removefix}
+  \end{center}
+  \caption{A single round in the process of eliminating a double-black node
+   after a removal.}
+  \figlabel{rb-removefix}
+\end{figure}
+
+\noindent
+Case 0: #u# is the root.  This is the easiest case to treat.  We recolor #u# to be black and this does not violate any of the red-black tree properties.
+
+\noindent 
+Case 1: #u#'s sibling, #v#, is red.  In this case, #u#'s sibling is the
+left child of its parent, #w# (by the left-leaning property).  We perform
+a right-flip at #w# and then proceed to the next iteration.  Note that
+this causes #w#'s parent to violate the left-leaning property and it
+causes the depth of #u# to increase.  However, it also implies that the
+next iteration will be in Case~3 with #w# colored red.  When examining
+Case~3, below, we will see that this means the process will stop during
+the next iteration.
+\javaimport{ods/RedBlackTree.removeFixupCase1(u)}
+
+\noindent
+Case 2: #u#'s sibling, #v# is black and #u# is the left child of its
+parent, #w#.  In this case, we call #pullBlack(w)#, making #u# black,
+#v# red, and darkening the color of #w# to black or double-black.
+At this point, #w# does not satisfy the left-leaning property, so we
+call #flipLeft(w)# to fix this.
+
+At this point, #w# is red and #v# is the root of the subtree we started
+with.  We need to check if #w# causes max-degree property to be violated.
+We do this by inspecting #w#'s its right child, #q#.  If #q# is black,
+then #w# satisfies the max-degree property and we can continue to the
+next iteration with #u#=#v#.
+
+Otherwise (#q# is red), both the max-degree property and the left-leaning
+property are violated at #q# and #w#, respectively.  A call to
+#rotateLeft(w)# restores the left-leaning property, but the max-degree
+property is still violated.  At this point, #q# is the left child of
+#v# and #w# is the left child of #q#, #q# and #w# are both red and #v#
+is black or double-black.  A #flipRight(v)#  makes #q# the parent of
+both #v# and #w#.  Following this up by a #pushBlack(q)# makes both #v#
+and #w# black and sets the color of #q# back to the original color of #w#.
+
+At this point, there is no more double-black node and the max-degree and
+black-height properties are reestablished.  The only possible problem
+that remains is that the right child of #v# may be red, in which case
+the left-leaning property is violated.  We check this and perform a
+#flipLeft(v)# to correct it if necessary.
+\javaimport{ods/RedBlackTree.removeFixupCase2(u)}
+
+\noindent
+Case 3: #u#'s sibling is black and #u# is the right child of its parent,
+#w#.  This case is symmetric to Case~2 and is handled mostly the same way.
+The only differences come from the fact that the left-leaning property
+is asymmetric so requires different handling.
+
+As before, we being with a call to #pullBlack(w)#, which makes #v# red
+and #u# black.  A call to #flipRight(w)# promotes #v# to the root of
+the subtree.  At this point #w# is red, and the code branches two ways
+depending on the color of #w#'s left child, #q#.
+
+If #q# is red, then the code finishes up exactly the same way that
+Case~2 finishes up, but is even simpler since there is no danger of #v#
+not satisfying the left-leaning property.
+
+The more complicated case occurs when #q# is black.  In this case,
+we examine the color if #v#'s left child.  If it is red, then #v# has
+two red children and its extra black can be pushed down with a call
+to #pushBlack(v)#.  At this point, #v# now has #w#'s original color and we are done.
+
+If #v#'s left child is black then #v# violates the left-leaning property
+and we restore this with a call to #flipLeft(v)#.  The next iteration
+of #removeFixup(u)# then continues with $#u#=#v#$.
+\javaimport{ods/RedBlackTree.removeFixupCase3(u)}.
+
+Each iteration of #removeFixup(u)# takes constant time.  Cases~2 and 3
+either finish or move #u# closer to the root of the tree tree.  Case~0
+(where #u# is the root) always terminates and Case~1 leads immediately
+to Case~3 which also terminates.  Since the height of the tree is at most
+$2\log #n#$, we conclude that there are at most $O(\log #n#)$ iterations
+of #removeFixup(u)# so #removeFixup(u)# runs in $O(\log #n#)$ time.
+
+

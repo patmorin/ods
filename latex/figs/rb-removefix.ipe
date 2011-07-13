@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20110711115327" modified="D:20110711155555"/>
+<info created="D:20110711115327" modified="D:20110713110123"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -232,7 +232,15 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" matrix="1 0 0 1 12 16" stroke="darkgray" arrow="normal/small">
+<path layer="alpha" stroke="black">
+84 48 m
+80 32 l
+</path>
+<path stroke="black">
+72 64 m
+84 48 l
+</path>
+<path matrix="1 0 0 1 12 16" stroke="darkgray" arrow="normal/small">
 404 592 m
 368 576
 272 672
@@ -767,7 +775,7 @@ h
 </path>
 <use matrix="-1 0 0 1 560 -352" name="mark/fdisk(sfx)" pos="112 736" size="large" stroke="black" fill="black"/>
 <use matrix="-1 0 0 1 576 -336" name="mark/fdisk(sfx)" pos="144 736" size="large" stroke="black" fill="red"/>
-<use matrix="-1 0 0 1 544 -336" name="mark/fdisk(sfx)" pos="128 752" size="large" stroke="black" fill="black"/>
+<use matrix="-1 0 0 1 544 -336" name="mark/fdisk(sfx)" pos="128 752" size="large" stroke="black" fill="white"/>
 <path matrix="-0.35 0 0 0.35 460.8 175.2" stroke="black" pen="fat">
 16 0 0 16 128 688 e
 </path>
@@ -928,19 +936,132 @@ h
 </path>
 <use matrix="-1 0 0 1 560 -432" name="mark/fdisk(sfx)" pos="112 736" size="large" stroke="black" fill="black"/>
 <use matrix="-1 0 0 1 576 -416" name="mark/fdisk(sfx)" pos="144 736" size="large" stroke="black" fill="black"/>
-<use matrix="-1 0 0 1 544 -416" name="mark/fdisk(sfx)" pos="128 752" size="large" stroke="black" fill="black"/>
+<use matrix="-1 0 0 1 544 -416" name="mark/fdisk(sfx)" pos="128 752" size="large" stroke="black" fill="white"/>
 <use matrix="-1 0 0 1 592 -208" name="mark/fdisk(sfx)" pos="168 512" size="large" stroke="black" fill="black"/>
 <use matrix="1 0 0 1 112 -144" name="mark/fdisk(sfx)" pos="288 464" size="large" stroke="black" fill="black"/>
 <text matrix="1 0 0 1 376 -384" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{q}$</text>
 <text matrix="1 0 0 1 224 -368" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
 <text matrix="1 0 0 1 240 -384" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
 <text matrix="1 0 0 1 352 -304" transformations="translations" pos="64 672" stroke="black" type="label" width="60.052" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{pushBlack(v)}$</text>
-<text matrix="1 0 0 1 0 -496" transformations="translations" pos="64 672" stroke="black" type="label" width="31.382" height="5.515" depth="0" halign="center" valign="baseline">$\mathtt{return}$</text>
-<text matrix="1 0 0 1 176 -496" transformations="translations" pos="64 672" stroke="black" type="label" width="31.382" height="5.515" depth="0" halign="center" valign="baseline">$\mathtt{return}$</text>
-<text matrix="1 0 0 1 368 -384" transformations="translations" pos="64 672" stroke="black" type="label" width="31.382" height="5.515" depth="0" halign="center" valign="baseline">$\mathtt{return}$</text>
 <text matrix="1 0 0 1 -72 -192" transformations="translations" pos="224 688" stroke="black" type="label" width="42.009" height="7.473" depth="2.49" valign="baseline">$\mathtt{v}$ (new $\mathtt{u}$)</text>
 <text matrix="1 0 0 1 208 16" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
 <text matrix="1 0 0 1 208 -80" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 352 -16" transformations="translations" pos="64 672" stroke="black" type="label" halign="center" valign="baseline">$\mathtt{flipRight(w)}$</text>
+<text matrix="1 0 0 1 352 -16" transformations="translations" pos="64 672" stroke="black" type="label" width="60.052" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{flipRight(w)}$</text>
+<path matrix="1 0 0 1 -64 -160" stroke="black" arrow="normal/small">
+128 336 m
+128 320 l
+</path>
+<text matrix="1 0 0 1 0 -496" transformations="translations" pos="64 672" stroke="black" type="label" width="63.069" height="6.092" depth="2.21" halign="center" valign="baseline">$\mathtt{v.right.color}$</text>
+<path matrix="1 0 0 1 -64 -240" stroke="black">
+144 368 m
+140 352 l
+</path>
+<path matrix="1 0 0 1 -64 -240" stroke="black">
+144 368 m
+136 384 l
+</path>
+<path matrix="1 0 0 1 -64 -240" stroke="black">
+128 368 m
+136 384 l
+</path>
+<use matrix="1 0 0 1 -64 -624" name="mark/fdisk(sfx)" pos="112 736" size="large" stroke="black" fill="black"/>
+<use matrix="1 0 0 1 -48 -624" name="mark/fdisk(sfx)" pos="128 752" size="large" stroke="black" fill="black"/>
+<use matrix="1 0 0 1 0 -368" name="mark/fdisk(sfx)" pos="72 512" size="large" stroke="black" fill="white"/>
+<use matrix="0.5 0 0 1 4 -384" name="mark/fdisk(sfx)" pos="128 496" size="large" stroke="black" fill="black"/>
+<use matrix="0.5 0 0 1 4 -384" name="mark/fdisk(sfx)" pos="144 496" size="large" stroke="black" fill="black"/>
+<path matrix="1 0 0 1 -64 -240" stroke="black">
+128 368 m
+132 352 l
+</path>
+<path matrix="1 0 0 1 -64 -240" stroke="black">
+128 368 m
+112 352 l
+</path>
+<use matrix="1 0 0 1 -80 -608" name="mark/fdisk(sfx)" pos="144 736" size="large" stroke="black" fill="black"/>
+<text matrix="1 0 0 1 -128 -560" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
+<text matrix="1 0 0 1 0 -576" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
+<text matrix="1 0 0 1 16 -560" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
+<text matrix="1 0 0 1 -136 -544" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
+<path matrix="1 0 0 1 16 -240" stroke="black">
+144 368 m
+140 352 l
+</path>
+<path matrix="1 0 0 1 16 -240" stroke="black">
+144 368 m
+136 384 l
+</path>
+<path matrix="1 0 0 1 16 -240" stroke="black">
+128 368 m
+136 384 l
+</path>
+<use matrix="1 0 0 1 16 -624" name="mark/fdisk(sfx)" pos="112 736" size="large" stroke="black" fill="black"/>
+<use matrix="1 0 0 1 32 -624" name="mark/fdisk(sfx)" pos="128 752" size="large" stroke="black" fill="black"/>
+<use matrix="1 0 0 1 80 -368" name="mark/fdisk(sfx)" pos="72 512" size="large" stroke="black" fill="white"/>
+<use matrix="0.5 0 0 1 84 -384" name="mark/fdisk(sfx)" pos="128 496" size="large" stroke="black" fill="black"/>
+<use matrix="0.5 0 0 1 84 -384" name="mark/fdisk(sfx)" pos="144 496" size="large" stroke="black" fill="black"/>
+<path matrix="1 0 0 1 16 -240" stroke="black">
+128 368 m
+132 352 l
+</path>
+<path matrix="1 0 0 1 16 -240" stroke="black">
+128 368 m
+112 352 l
+</path>
+<use matrix="1 0 0 1 0 -608" name="mark/fdisk(sfx)" pos="144 736" size="large" stroke="black" fill="black"/>
+<text matrix="1 0 0 1 -48 -560" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
+<text matrix="1 0 0 1 80 -576" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
+<text matrix="1 0 0 1 96 -560" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
+<text matrix="1 0 0 1 -56 -544" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
+<path matrix="-1 0 0 1 224 -240" stroke="black">
+144 368 m
+140 352 l
+</path>
+<use matrix="-0.5 0 0 1 156 -384" name="mark/fdisk(sfx)" pos="144 496" size="large" stroke="black" fill="red"/>
+<path matrix="-1 0 0 1 304 -240" stroke="black">
+144 368 m
+140 352 l
+</path>
+<use matrix="-0.5 0 0 1 236 -384" name="mark/fdisk(sfx)" pos="144 496" size="large" stroke="black" fill="black"/>
+<path matrix="1 0 0 1 -64 -336" stroke="black">
+144 368 m
+140 352 l
+</path>
+<path matrix="1 0 0 1 -64 -320" stroke="black">
+128 368 m
+136 384 l
+</path>
+<use matrix="1 0 0 1 -64 -704" name="mark/fdisk(sfx)" pos="112 736" size="large" stroke="black" fill="black"/>
+<use matrix="1 0 0 1 -48 -720" name="mark/fdisk(sfx)" pos="128 752" size="large" stroke="black" fill="red"/>
+<use matrix="1 0 0 1 0 -448" name="mark/fdisk(sfx)" pos="72 512" size="large" stroke="black" fill="white"/>
+<use matrix="0.5 0 0 1 4 -464" name="mark/fdisk(sfx)" pos="128 496" size="large" stroke="black" fill="black"/>
+<use matrix="0.5 0 0 1 4 -480" name="mark/fdisk(sfx)" pos="144 496" size="large" stroke="black" fill="black"/>
+<path matrix="1 0 0 1 -64 -320" stroke="black">
+128 368 m
+132 352 l
+</path>
+<path matrix="1 0 0 1 -64 -320" stroke="black">
+128 368 m
+112 352 l
+</path>
+<use matrix="1 0 0 1 -80 -688" name="mark/fdisk(sfx)" pos="144 736" size="large" stroke="black" fill="black"/>
+<text matrix="1 0 0 1 -128 -656" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
+<text matrix="1 0 0 1 0 -656" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
+<text matrix="1 0 0 1 16 -640" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
+<text matrix="1 0 0 1 -136 -624" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
+<use matrix="-0.5 0 0 1 156 -448" name="mark/fdisk(sfx)" pos="144 496" size="large" stroke="black" fill="black"/>
+<path matrix="1 0 0 1 -64 -240" stroke="black" arrow="normal/small">
+128 336 m
+128 320 l
+</path>
+<text matrix="1 0 0 1 0 -576" transformations="translations" pos="64 672" stroke="black" type="label" width="54.822" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{flipLeft(v)}$</text>
+<path stroke="black" arrow="normal/small">
+64 176 m
+144 160 l
+</path>
+<text matrix="1 0 0 1 176 0" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{v}$</text>
+<text matrix="1 0 0 1 -128 0" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
+<text matrix="1 0 0 1 352 48" transformations="translations" pos="64 672" stroke="black" type="label" width="96.665" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{removeFixupCase1(u)}$</text>
+<text matrix="1 0 0 1 176 48" transformations="translations" pos="64 672" stroke="black" type="label" width="96.665" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{removeFixupCase3(u)}$</text>
+<text matrix="1 0 0 1 0 48" transformations="translations" pos="64 672" stroke="black" type="label" width="96.665" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{removeFixupCase2(u)}$</text>
 </page>
 </ipe>

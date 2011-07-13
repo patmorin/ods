@@ -10,10 +10,6 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	
 	protected static class Node<T> extends BSTNode<Node<T>,T> {
 		byte color;
-		public String toString() {
-			String[] colors = {"red", "black", "double black"};
-			return "" + x + " (" + colors[color] + ")";
-		}
 	}
 	static byte red = 0;
 	static byte black = 1;
@@ -44,14 +40,14 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 		u.right.color--;
 	}
 
-	protected void flipLeft(Node<T> w) {
-		rotateLeft(w);
-		swapColors(w, w.parent);
+	protected void flipLeft(Node<T> u) {
+		rotateLeft(u);
+		swapColors(u, u.parent);
 	}
 
-	protected void flipRight(Node<T> w) {
-		rotateRight(w);
-		swapColors(w, w.parent);
+	protected void flipRight(Node<T> u) {
+		rotateRight(u);
+		swapColors(u, u.parent);
 	}
 
 	/**
@@ -165,9 +161,8 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	 * @return the next node to fix up
 	 */
 	protected Node<T> removeFixupCase1(Node<T> u) {
-		Node<T> w = u.parent;
-		flipRight(w);
-		return w.right;
+		flipRight(u.parent);
+		return u;
 	}
 
 	/**

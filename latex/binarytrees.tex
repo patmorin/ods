@@ -17,7 +17,7 @@ and \emph{right child} of #u#.
 In illustrations, binary trees are usually drawn from the root downward,
 with the root at the top of the drawing and the left and right children respectively given by
 left and right positions in the drawing (\figref{bintree-orientation}).  A binary
-tree with thirteen nodes is drawn this way in \figref{binary-tree}a.
+tree with thirteen nodes is drawn this way in \figref{binary-tree}.a.
 
 \begin{figure}
   \begin{center}
@@ -53,7 +53,7 @@ A node, #u#, is a \emph{leaf} if it has no children.
 We sometimes think of the tree as being augmented with \emph{external
 nodes}. Any node that does not have a left child has an external node
 as its left child and any node that does not have a right child has an
-external node as its right child (see \figref{binary-tree}b).  It is
+external node as its right child (see \figref{binary-tree}.b).  It is
 easy to verify, by induction, that a binary tree having $#n#\ge 1$
 real nodes has $#n#+1$ external nodes.
 
@@ -298,12 +298,12 @@ the operations #add(x)#, #remove(x)#, and #find(x)# in $O(#n#)$ time
 per operation.
 \end{thm}
 
-\thmref{bst} compares poorly with \thmref{skiplist}, which shows that the
-#SkiplistSet# structure can implement the #SSet# interface with $O(\log
-#n#)$ expected time per operation.  The problem with the #BinarySearchTree#
-structure is that it can become \emph{unbalanced}.  Instead of looking
-like the tree in \figref{bst} it can look like a long chain of
-#n# nodes, each having exactly one child.
+\thmref{bst} compares poorly with \thmref{skiplist}, which shows
+that the #SkiplistSet# structure can implement the #SSet# interface
+with $O(\log #n#)$ expected time per operation.  The problem with the
+#BinarySearchTree# structure is that it can become \emph{unbalanced}.
+Instead of looking like the tree in \figref{bst} it can look like a long
+chain of #n# nodes, all but the last having exactly one child.
 
 There are a number of ways of avoiding unbalanced binary search
 trees, all of which lead to data structures that have $O(\log
@@ -311,8 +311,8 @@ trees, all of which lead to data structures that have $O(\log
 \emph{expected} time operations can be achieved with randomization.
 In \chapref{scapegoat} we show how $O(\log #n#)$ \emph{amortized}
 time operations can be achieved with partial rebuilding operations.
-In \chapref{24redblack} we show how $O(\log #n#)$ \emph{worst-case} time
-operations can be achieved by simulating a tree that is not binary:
+In \chapref{24redblack} we show how $O(\log #n#)$ \emph{worst-case}
+time operations can be achieved by simulating a tree that is not binary:
 a tree in which nodes can have up to four children.
 
 
