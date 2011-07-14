@@ -553,12 +553,19 @@ analysis and the correspondence between 2-4 trees and red-black trees.
 \section{Discussion and Exercises}
 
 Red-black trees were first introduced by Guibas and Sedgewick \cite{gs78}.
+These original red-black trees 
 Since then, a number of variants and simplifications have been proposed.
 
 Andersson describes a left-leaning version of balanced trees that are
 similar to red-black trees but have the additional constraint that any
 node has at most one black child.  This implies that these trees simulate
-2-3 trees rather than 2-4 trees.
+2-3 trees rather than 2-4 trees.  They are significantly simpler, though,
+than the #RedBlackTree# structure presented in this chapter.
+
+Sedgewick describes at least two versions of left-leaning red-black trees.
+These use recursion along with a simulation of top-down splitting and
+merging in 2-4 trees.  The combination of these two techniques makes
+for particularly short and elegant code.  
 
 
 
