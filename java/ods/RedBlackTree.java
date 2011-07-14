@@ -41,13 +41,13 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	}
 
 	protected void flipLeft(Node<T> u) {
+		swapColors(u, u.right);
 		rotateLeft(u);
-		swapColors(u, u.parent);
 	}
 
 	protected void flipRight(Node<T> u) {
+		swapColors(u, u.left);
 		rotateRight(u);
-		swapColors(u, u.parent);
 	}
 
 	/**
