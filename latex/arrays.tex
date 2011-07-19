@@ -131,50 +131,50 @@ In particular, we will show:
 \begin{proof}
   We will show that anytime #resize()# is called, the number of calls
   to #add# or #remove# since the last call to #resize()# is at least
-  $#n#/2-1$.  Therefore, if $n_i$ denotes the value of #n# during the
+  $#n#/2-1$.  Therefore, if $#n#_i$ denotes the value of #n# during the
   $i$th call to #resize()# and $r$ denotes the number of calls to
   #resize()#, then the total number of calls to #add(i,x)# or
   #remove(i)# is at least
   \[
-     \sum_{i=1}^{r} (n_i/2-1) \le m  \enspace ,
+     \sum_{i=1}^{r} (#n#_i/2-1) \le m  \enspace ,
   \]
   which is equivalent to
   \[
-    \sum_{i=1}^{r} n_i \le 2m + 2r  \enspace .
+    \sum_{i=1}^{r} #n#_i \le 2m + 2r  \enspace .
   \]
    On the other hand, the total time spent during all calls to #resize()# is 
   \[
-     \sum_{i=1}^{r} O(n_i) \le O(m+r) = O(m)  \enspace ,
+     \sum_{i=1}^{r} O(#n#_i) \le O(m+r) = O(m)  \enspace ,
   \]
   which will prove the lemma since $r$ is not more than $m$.  All
   that remains is to show that the number of calls to #add(i,x)# or
   #remove(i)# between the $(i-1)$th and the $i$th call to #resize()#
-  is at least $n_i/2$.
+  is at least $#n#_i/2$.
 
   There are two cases to consider. In the first case, #resize()# is
   being called by #add(i,x)# because the backing array #a# is full, i.e.,
-  $#a.length# = #n#=n_i$.  Consider the previous call to #resize()#:
+  $#a.length# = #n#=#n#_i$.  Consider the previous call to #resize()#:
   After this previous call, the size of #a# was #a.length#, but the
-  number of elements stored in #a# was at most $#a.length#/2=n_i/2$.
-  But now the number of elements stored in #a# is $n_i=#a.length#$,
-  so there must have been at least $n_i/2$ calls to #add(i,x)# since
+  number of elements stored in #a# was at most $#a.length#/2=#n#_i/2$.
+  But now the number of elements stored in #a# is $#n#_i=#a.length#$,
+  so there must have been at least $#n#_i/2$ calls to #add(i,x)# since
   the previous call to #resize()#.
   % TODO: Add figure
   
   The second case to consider is when #resize()# is being called by
-  #remove(i)# because $#a.length# \ge 3#n#=3n_i$.  Again, after the
+  #remove(i)# because $#a.length# \ge 3#n#=3#n#_i$.  Again, after the
   previous call to #resize()# the number of elements stored in #a# was
   at least $#a.length/2#-1$.\footnote{The ${}-1$ in this formula accounts for
   the special case that occurs when $#n#=0$ and $#a.length# = 1$.} Now there
-  are $n_i\le#a.length#/3$ elements stored in #a#.  Therefore, the number
+  are $#n#_i\le#a.length#/3$ elements stored in #a#.  Therefore, the number
   of #remove(i)# operations since the last call to #resize()# is at least
   \[
       #a.length#/2 - 1 - #a.length#/3 = #a.length#/6 - 1
-         = (#a.length#/3)/2 - 1\ge n_i/2 -1\enspace .
+         = (#a.length#/3)/2 - 1\ge #n#_i/2 -1\enspace .
   \]
   In either case, the number of calls to #add(i,x)# or #remove(i)# that
   occur between the $(i-1)$th call to #resize()# and the $i$th call to
-  #resize()# is at least $n_i/2-1$, as required to complete the proof.
+  #resize()# is at least $#n#_i/2-1$, as required to complete the proof.
 \end{proof}
 
 \subsection{Summary}
