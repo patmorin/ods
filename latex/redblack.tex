@@ -5,7 +5,7 @@ In this chapter we present red-black trees, a version of binary search
 trees that have logarithmic depth.  Red-black trees are one of the most
 widely-used data structures in practice.  They appear as the primary
 search structure in many library implementations, including the Java
-Collections Framework, and several implementations of the C++ Standard
+Collections Framework and several implementations of the C++ Standard
 Template Library. They are also used within the Linux operating system
 kernel.  There are several reasons for the popularity of red-black trees:
 \begin{enumerate}
@@ -26,7 +26,7 @@ dwarfed by the time it takes to find #x#.\footnote{Note that skiplists and
 treaps also have this property in the expected sense. See
 \excref{skiplist-changes} and \excref{treap-rotates}.}
 
-However, the nice properties of the red-black trees come with
+However, the nice properties of red-black trees come with
 a price: implementation complexity. Maintaining a bound of $2\log #n#$
 on the height is not easy. It requires a careful analysis of a number
 of cases and it requires that the implementation do exactly the right
@@ -57,7 +57,7 @@ An example of a 2-4 tree is shown in \figref{twofour-example}.
 \end{figure}
 The properties of 2-4 trees imply that their height is logarithmic in
 the number of leaves:
-\begin{lem}
+\begin{lem}\lemlabel{twofour-height}
   A 2-4 tree with #n# leaves has height at most $\log #n#$.
 \end{lem}
 
@@ -184,7 +184,7 @@ it seems unusual to even consider these as useful properties.  However,
 red-black trees were designed to be an efficient simulation of 2-4 trees
 as binary trees.
 
-Refer to \figref{twofour-redblack}
+Refer to \figref{twofour-redblack}.
 Consider any red-black tree, $T$, having #n# nodes and perform the
 following transformation: Remove each red node #u# and connect #u#'s two
 children directly to the (black) parent of #u#.  After this transformation
@@ -508,13 +508,13 @@ The following theorem summarizes the performance of the #RedBlackTree# data stru
 
 Not included in the above theorem is the extra bonus
 
-\begin{thm}\thmlabel{redblacktree-amortized}
+\begin{thm}\thmlabel{redblack-amortized}
   Beginning with an empty #RedBlackTree#, any sequence of $m$
   #add(x)# and #remove(x)# operations results in a total of $O(m)$
   time spent during all calls #addFixup(u)# and #removeFixup(u)#. 
 \end{thm}
 
-We will only sketch a proof of \thmlabel{redblack-amortized}. By comparing
+We will only sketch a proof of \thmref{redblack-amortized}. By comparing
 #addFixup(u)# and #removeFixup(u)# with the algorithms for adding
 or removing a leaf in a 2-4 tree, we can convince ourselves that this
 property is something that is inherited from a 2-4 tree.  In particular,
@@ -530,31 +530,32 @@ method.} Define the potential of an internal node #u# in a 2-4 tree as
     \begin{cases} 
       c & \text{if #u# has 2 children} \\ 
       0 & \text{if #u# has 3 children} \\ 
-      2c & \text{if #u# has 3 children}  
+      3c & \text{if #u# has 3 children}  
     \end{cases}
 \]
-and the potential of a 2-4 tree as the sum of the potentials of its
-nodes.  When a split occurs, it is because a node of degree 4 becomes
-two nodes, one of degree 2 and one of degree 3.  This means that the
-overall potential drops by $2c-c-0 = c$.  Thus, a split can be paid
-for by the drop in potential. When a merge occurs, two nodes that used
-to have degree 2 are replaced by one node of degree 3. The result is
-a drop in potential of $c-0=c$.  This drop in potential pays for the
-cost of the merge.  A borrow operation happens only once per deletion
-and except for merges and splits, the potential can only increase by a
-constant amount for each addition or removal of a leaf.  
+and the potential of a 2-4 tree as the sum of the potentials of its nodes.
+When a split occurs, it is because a node of degree 4 becomes two nodes,
+one of degree 2 and one of degree 3.  This means that the overall
+potential drops by $3c-c-0 = c$.  Thus, the time spent performing a
+split is accounted for by the drop in potential. When a merge occurs,
+two nodes that used to have degree 2 are replaced by one node of degree
+3. The result is a drop in potential of $2c-0=2c$.  This drop in potential
+accounts for the cost of the merge.  A borrow operation happens only
+once per deletion and, except for merges and splits, the potential can
+only increase by a constant amount for each addition or removal of a leaf.
 
 The above analysis implies that, beginning with an empty 2-4 tree,
 any sequence of $m$ additions and removals of leaves results in at most
 $O(m)$ time spent splitting nodes, merging nodes, and borrowing children
-from nodes.  \thmref{redblacktree-amortized} is a consequence of this
+from nodes.  \thmref{redblack-amortized} is a consequence of this
 analysis and the correspondence between 2-4 trees and red-black trees.
 
 \section{Discussion and Exercises}
 
 Red-black trees were first introduced by Guibas and Sedgewick \cite{gs78}.
-These original red-black trees 
-Since then, a number of variants and simplifications have been proposed.
+Despite their high implementation complexity they are found in some of
+the most commonly-used libraries and applications.  Most algorithms and
+data structures discuss some variant of red-black trees.
 
 Andersson describes a left-leaning version of balanced trees that are
 similar to red-black trees but have the additional constraint that any
@@ -564,14 +565,81 @@ than the #RedBlackTree# structure presented in this chapter.
 
 Sedgewick describes at least two versions of left-leaning red-black trees.
 These use recursion along with a simulation of top-down splitting and
-merging in 2-4 trees.  The combination of these two techniques makes
+merging in 2-4 trees. The combination of these two techniques makes
 for particularly short and elegant code.  
 
+A related, and older, data structure is the AVL tree \cite{avl69}.  AVL trees are \emph{height-balanced}: At each node $u$, the height
+of the subtree rooted at #u.left# and the subtree rooted at #u.right#
+differ by at most one.  It follows immediately that, if $F(h)$ is the
+minimum number of nodes in a tree of height $h$, then $F(h)$ obeys the
+Fibonacci recurrence
+\[
+   F(h) = F(h-1) + F(h-2)
+\]
+with base cases $F(0)=1$ and $F(1)=2$.  This means $F(h)$ is approximately
+$\varphi^h/\sqrt{5}$, where $\varphi=(1+\sqrt{5})/2\approx1.61803399$ is the
+\emph{golden ratio}.  (More precisely, $|\varphi^h/\sqrt{5} - F(h)|\le 1/2$.)
+Arguing as in the proof of \lemref{twofour-height}, this implies
+\[
+   h \le \log_\varphi #n# \approx 1.440420088\log #n# \enspace ,
+\]
+so AVL trees have smaller height than red-black trees.
+The height-balanced property can be maintained during #add(x)# and
+#remove(x)# operations by walking back up the path to the root and
+performing a rebalancing operation at each node #u# where the height of
+#u#'s left and right subtrees differ by 2.  See \figref{avl-rebalance}.
 
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/avl-rebalance}
+  \end{center}
+  \caption{Rebalancing in an AVL tree.  At most 2 rotations are required
+  to convert a node whose subtrees have height $h$ and $h+2$ into a node
+  whose subtrees each have height at most $h+1$.}
+  \figlabel{avl-rebalance}
+\end{figure}
 
+Andersson's variant of red-black trees, Sedgewick's variant of red-black
+trees, and AVL trees are all simpler to implement than the #RedBlackTree#
+structure defined here.  Unfortunately, none of them can guarantee that
+the amortized time spent rebalancing is $O(1)$ per update.  In particular,
+there is no analogue of \thmref{redblack-amortized} for those structures.
 
 \begin{exc}
-  Why does the method #remove(x)# perform the assignment
-  #u.parent=w.parent#?  Shouldn't this already be done by the call
-  to #splice(w)#?
+  Why does the method #remove(x)# in the #RedBlackTree# implementation
+  perform the assignment #u.parent=w.parent#?  Shouldn't this already
+  be done by the call to #splice(w)#?
+\end{exc}
+
+\begin{exc}
+  Suppose a 2-4 tree, $T$, has $#n#_\ell$ leaves and $#n#_i$ internal nodes.
+  \begin{enumerate}
+    \item What is the minimum value of $#n#_i$, as a function of $#n#_\ell$?
+    \item What is the maximum value of $#n#_i$, as a function of $#n#_\ell$?
+    \item If $T'$ is a red-black tree that represents $T$, then how many red
+     nodes does $T'$ have?
+  \end{enumerate}
+\end{exc}
+
+\begin{exc}
+  Prove that, during an #add(x)# operation, an AVL tree must perform
+  at most one relancing operation (that involves at most 2 rotations;
+  see \figref{avl-rebalance}.  Give an example of an AVL tree and a
+  #remove(x)# operation on that tree that requires on the order of $\log
+  #n#$ rebalancing operations.
+\end{exc}
+
+\begin{exc}
+  Implement an #AVLTree# class that implements AVL trees as described
+  above.  Compare its performance to that of the #RedBlackTree#
+  implementation.   Which implementation has a faster #find(x)# operation?
+\end{exc}
+
+\begin{exc}
+  Design and implement a series of experiments that compare the relative
+  performance of #find(x)#, #add(x)#, and #remove(x)# for #SkiplistSet#,
+  #ScapegoatTree#, #Treap#, and #RedBlackTree#.  Be sure to include
+  multiple test scenarios, including cases where the data is random,
+  already sorted, is removed in random order, is removed in sorted order,
+  and so on.
 \end{exc}

@@ -764,7 +764,7 @@ Next, we argue that this space usage is optimal for any data structure
 that starts out empty and can support the addition of one item at a
 time. More precisely, we will show that, at some point during the
 addition of #n# items, the data structure is wasting an amount of
-space at least in $\Omega(\sqrt{#n#})$ (though it may be only wasted for a
+space at least in $\sqrt{#n#}$ (though it may be only wasted for a
 moment).
 
 Suppose we start with an empty data structure and we add #n# items
@@ -778,7 +778,7 @@ $#n#/#r# > \sqrt{#n#}$.  Consider the moment at which this block was
 first allocated.  Immediately after it was allocated, this block was
 empty, and was therefore wasting $\sqrt{#n#}$ space.  Therefore, at some
 point in time during the insertion of #n# elements, the data structure was
-wasting $\Omega(\sqrt{#n#})$ space.
+wasting $\sqrt{#n#}$ space.
 
 \subsection{Summary}
 
@@ -803,6 +803,18 @@ data structure:
 
 \section{Discussion and Exercises}
 
+Most of the data structures described in this chapter are folklore. They
+can be found in implementations dating back over 30 years.
+
+Demaine \etal\ \cite{bcdms99} seem to have been the first to describe
+the #RootishArrayStack# and prove a $\sqrt{n}$ lower-bound like that
+in \secref{rootishspaceusage}.  They also present a different structure
+that uses a more sophisticated choice of block sizes in order to avoid
+computing square roots in the #i2b(i)# method.  With their scheme, the
+block containing #i# is block $\lfloor\log (#i#+1)\rfloor$, which is just
+the index of the leading 1 bit in the binary representation of $#i#+1$.
+Some computer architectures provide an instruction for computing the
+index of the leading 1-bit in an integer.
 
 \begin{exc}
   The #List# method #addAll(i,c)# inserts all elements of the #Collection#

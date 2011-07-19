@@ -1,11 +1,12 @@
 
-sources = intro.tex arrays.tex linkedlists.tex skiplists.tex hashing.tex binarytrees.tex rbs.tex scapegoat.tex redblack.tex heaps.tex
+sources = intro.tex arrays.tex linkedlists.tex skiplists.tex hashing.tex binarytrees.tex rbs.tex scapegoat.tex redblack.tex heaps.tex ods.bib
 temps = $(sources:.tex=-tmp.tex)
 java = $(wildcard ../java/ods/*.java)
 
 ods.pdf : $(temps) ods.tex figs ods.sty figs
 	(cd figs ; make )
 	pdflatex -interaction=nonstopmode ods
+	bibtex ods
 	pdflatex -interaction=nonstopmode ods
 
 %-tmp.tex : %.tex $(java) snarf.pl Makefile
