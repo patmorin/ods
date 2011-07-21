@@ -5,6 +5,10 @@
 \usepackage{url}
 \usepackage{graphicx}
 
+% for stupid arXiv in bibtex
+\renewcommand{\path}[1]{\url{#1}}
+\newcommand{\href}[1]{\url{#1}}
+
 \usepackage[sf,bf,small,raggedright,compact]{titlesec} % formatting titles
 \usepackage{fancyvrb}  % formatting pseudocode
 \usepackage{ods} % Personalization and commands
@@ -55,65 +59,65 @@
 %\section{X-Fast Tries}
 %\section{Y-Fast Tries}
 
-\chapter{Sorting Algorithms}
-\chaplabel{sorting}
-\section{Merge Sort}
-
-\begin{thm}
-  MergeSort runs in $O(n\log n)$ time and performs at most $n\log n$
-  comparisons.
-\end{thm}
-
-\begin{proof}
-The proof is by induction on $n$.  The base case $n=1$ is trivial.
-
-Merging two sorted lists of total length $n$ requires at most $n-1$
-comparisons. If $n$ is even, then we apply the inductive hypothesis to
-the two subproblems and obtain
-\begin{align}
-  C(n) 
-  &= n-1 + 2C(n/2) \\
-  &= n-1 + 2((n/2)\log(n/2) \\
-  &= n-1 + n\log(n/2) \\
-  &= n-1 + n\log n-n \\
-  &< n\log n \enspace .
-\end{align}
-The case where $n$ is odd is slightly more complicated.  For this case,
-we use the inequality (justified below) that shows $\log (x+1/2) <
-\log x + (\log e)/2x$.  So we have
-\begin{align}
-  C(n) 
-  &= n-1 + C(\lceil n/2 \rceil) + C(\lfloor n/2 \rfloor) \\
-  &= n-1 + \lceil n/2 \rceil\log \lceil n/2 \rceil 
-           + \lfloor n/2 \rfloor\log \lfloor n/2 \rfloor \\
-  &= n-1 + (n/2+1/2)\log (n/2+1/2) 
-           + \lfloor n/2 \rfloor\log \lfloor n/2 \rfloor \\
-  &< n-1 + \lceil n/2 \rceil(\log n/2 + (\log e)/n)
-           + \lfloor n/2 \rfloor\log (n/2) \\
-  &= n\log n - 1 + (n/2+1/2)(\log e/n) \\
-  &< n\log n 
-\end{align}
-since $(n/2+1/2)(\log e/n) < 1$ for all $n\ge 2$.
-
-All that remains is to justify the inequality
-$\log (x+1/2) <
-\log x + (\log e)/2x$.  This inequality comes from the identity $\ln x = \int_1^x (1/x),\mathrm{d}x$.  This identity yields:
-\[
-   \ln(x+1/2) = \int_1^{x+1/2} (1/x)\,\mathrm{d}x
-    = \int_1^{x} (1/x)\,\mathrm{d}x + \int_{x}^{x+1/2} (1/x)\,\mathrm{d}x
-    < \int_1^{x} (1/x)\,\mathrm{d}x + 1/2x \enspace .\footnote{The same derivation yields the famous inequality, seen in many calculus books, $1+x < e^x$.}
-\]
-Multiplying both sides of this inequality by $\log e$ yields
-$\log (x+1/2) < \log x + (\log e)/2x$.
-\end{proof}
-
-
-
-\section{Quicksort}
-\section{Heapsort}
+%\chapter{Sorting Algorithms}
+%\chaplabel{sorting}
+%\section{Merge Sort}
+%
+%\begin{thm}
+%  MergeSort runs in $O(n\log n)$ time and performs at most $n\log n$
+%  comparisons.
+%\end{thm}
+%
+%\begin{proof}
+%The proof is by induction on $n$.  The base case $n=1$ is trivial.
+%
+%Merging two sorted lists of total length $n$ requires at most $n-1$
+%comparisons. If $n$ is even, then we apply the inductive hypothesis to
+%the two subproblems and obtain
+%\begin{align}
+%  C(n) 
+%  &= n-1 + 2C(n/2) \\
+%  &= n-1 + 2((n/2)\log(n/2) \\
+%  &= n-1 + n\log(n/2) \\
+%  &= n-1 + n\log n-n \\
+%  &< n\log n \enspace .
+%\end{align}
+%The case where $n$ is odd is slightly more complicated.  For this case,
+%we use the inequality (justified below) that shows $\log (x+1/2) <
+%\log x + (\log e)/2x$.  So we have
+%\begin{align}
+%  C(n) 
+%  &= n-1 + C(\lceil n/2 \rceil) + C(\lfloor n/2 \rfloor) \\
+%  &= n-1 + \lceil n/2 \rceil\log \lceil n/2 \rceil 
+%           + \lfloor n/2 \rfloor\log \lfloor n/2 \rfloor \\
+%  &= n-1 + (n/2+1/2)\log (n/2+1/2) 
+%           + \lfloor n/2 \rfloor\log \lfloor n/2 \rfloor \\
+%  &< n-1 + \lceil n/2 \rceil(\log n/2 + (\log e)/n)
+%           + \lfloor n/2 \rfloor\log (n/2) \\
+%  &= n\log n - 1 + (n/2+1/2)(\log e/n) \\
+%  &< n\log n 
+%\end{align}
+%since $(n/2+1/2)(\log e/n) < 1$ for all $n\ge 2$.
+%
+%All that remains is to justify the inequality
+%$\log (x+1/2) <
+%\log x + (\log e)/2x$.  This inequality comes from the identity $\ln x = \int_1^x (1/x),\mathrm{d}x$.  This identity yields:
+%\[
+%   \ln(x+1/2) = \int_1^{x+1/2} (1/x)\,\mathrm{d}x
+%    = \int_1^{x} (1/x)\,\mathrm{d}x + \int_{x}^{x+1/2} (1/x)\,\mathrm{d}x
+%    < \int_1^{x} (1/x)\,\mathrm{d}x + 1/2x \enspace .\footnote{The same derivation yields the famous inequality, seen in many calculus books, $1+x < e^x$.}
+%\]
+%Multiplying both sides of this inequality by $\log e$ yields
+%$\log (x+1/2) < \log x + (\log e)/2x$.
+%\end{proof}
+%
+%
+%
+%\section{Quicksort}
+%\section{Heapsort}
 
 \bibliographystyle{plainurl}
-\bibliography{ods}
+\bibliography{ods,odsproc}
 
 \end{document}
 

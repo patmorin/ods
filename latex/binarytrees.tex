@@ -282,20 +282,21 @@ value in the subtree rooted at #u.right#.  This node can be easily removed becau
   \caption{Deleting a value ($11$) from a node, #u#, with two children is done by replacing #u#'s value with the smallest value in the right subtree of #u#.}
   \figlabel{bst-remove}
 \end{figure}
-\section{Summary and Exercises}
+
+\subsection{Summary}
 
 The #find(x)#, #add(x)#, and #remove(x)# operations in a
 #BinarySearchTree# each involve following a path from the root of the
-tree to some node in the tree. Without knowing more about the shape
-of the tree it is difficult to say much about the length of this path,
-except that it does not exceed #n#, the number of nodes in the tree.
+tree to some node in the tree. Without knowing more about the shape of
+the tree it is difficult to say much about the length of this path,
+except that it is less than #n#, the number of nodes in the tree.
 The following (unimpressive) theorem summarizes the performance of the
 #BinarySearchTree# data structure:
 
 \begin{thm}\thmlabel{bst}
-A #BinarySearchTree# implements the #SSet# interface. A #BinarySearchTree# supports
-the operations #add(x)#, #remove(x)#, and #find(x)# in $O(#n#)$ time
-per operation.
+  A #BinarySearchTree# implements the #SSet# interface. A
+  #BinarySearchTree# supports the operations #add(x)#, #remove(x)#,
+  and #find(x)# in $O(#n#)$ time per operation.
 \end{thm}
 
 \thmref{bst} compares poorly with \thmref{skiplist}, which shows
@@ -315,6 +316,22 @@ In \chapref{redblack} we show how $O(\log #n#)$ \emph{worst-case}
 time operations can be achieved by simulating a tree that is not binary:
 a tree in which nodes can have up to four children.
 
+\section{Discussion and Exercises}
+
+Binary trees have been used to model relationships for literally thousands
+of years.  One reason for this is that binary trees naturally model
+(pedigree) family trees.  These are the family trees in which the root is
+a person, the left and right children are the person's parents, and so
+on, recursively.  In more recent centuries binary trees have also been
+used to model species-trees in biology, where the leaves of the tree
+represent extant species and the internal nodes of the tree represent
+\emph{speciation events} in which two populations of a single species
+evolve into two separate species.
+
+Binary search trees appear to have been discovered independently by
+several groups in the 1950s \cite[Section~6.2.2]{k97v3}.  Further
+references to specific kinds of binary search trees are provided in
+subsequent chapters.
 
 \begin{exc}
  Write a non-recursive variant of the #size2()# method, #size(u)#,
@@ -334,7 +351,7 @@ a tree in which nodes can have up to four children.
   right subtree.  A \emph{post-order} traversal visits #u# only after
   visiting all other nodes in #u#'s subtree.
 
-  Write functions #nextPreOrder(u)#, #nextInOrder(u)#, and
+  Write non-recursive functions #nextPreOrder(u)#, #nextInOrder(u)#, and
   #nextPostOrder(u)# that return the node that follows #u# in a pre-order,
   in-order, or post-order traversal, respectively.
 \end{exc}

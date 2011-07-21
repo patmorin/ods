@@ -443,21 +443,20 @@ $2\log #n# + O(1)$.
 
 %TODO: Write this section
 
-\section{Summary and Exercises}
+\section{Discussion and Exercises}
 
-Skiplists were introduced in 1991 by Pugh \cite{p91} who also presented a
-number of applications of skiplists \cite{p92}.  Since then they have been
-studied extensively.  The exact expected length of the search path for
-the #i#th element in a skiplist has been studied carefully \cite{pXX}.
-Deterministic versions \cite{munroXX}, biased versions \cite{cXX}, and
-self-adjusting versions \cite{bose-langerman} of skiplists have all
-been developed.  Skiplist implementations have been written for
-various languages and frameworks and have seen use in open-source
-database systems
-\cite{https://secure.wikimedia.org/wikipedia/en/wiki/Skip_list}.  A
-variant of skiplists is even used in the HP-UX operating system
-kernel's process management structures
-\cite{http://h21007.www2.hp.com/portal/download/files/prot/files/STK/pdfs/proc_mgt.pdf}.
+Skiplists were introduced by Pugh \cite{p91} who also presented
+a number of applications of skiplists \cite{p89}.  Since then they
+have been studied extensively.  Several researchers have done very
+precise analysis of the expected length and variance in length of the
+search path for the #i#th element in a skiplist \cite{kp94,kmp95,pmp92}.
+Deterministic versions \cite{mps92}, biased versions \cite{bbg02,esss01},
+and self-adjusting versions \cite{bdl08} of skiplists have all been
+developed.  Skiplist implementations have been written for various
+languages and frameworks and have seen use in open-source database
+systems \cite{skipdb,redis} A variant of skiplists is used in the HP-UX
+operating system kernel's process management structures \cite{hpux}.
+Skiplists are even part of the Java 1.6 API \cite{oracle_jdk6}.
 
 \begin{exc}\exclabel{skiplist-changes}
   Show that, during an #add(x)# or a #remove(x)# operation, the expected
@@ -483,4 +482,11 @@ kernel's process management structures
   that are less than #x#.)
 \end{exc}
 
-
+\begin{exc}
+  Using the ideas from the space-efficient linked-list, #SEList#,
+  design and implement a space-efficient #SSet#, #SESSet#.  Do this by
+  storing the data, in order, in an #SEList# and then storing the blocks
+  of this #SEList# in an #SSet#. If the original #SSet# implementation
+  uses $O(#n#)$ space to store #n# elements, then the #SESSet# will use
+  enough space for #n# elements plus $O(#n#/#b#+#b#)$ wasted space.
+\end{exc}

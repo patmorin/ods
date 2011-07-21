@@ -338,10 +338,7 @@ For a compound object, we want to create a hash code by combining the
 individual hash codes of the object's constituent parts.  This is not
 as easy as it sounds.  Although one can find many hacks for this (for
 example, combining the hash codes with bitwise exclusive-or operations),
-many of these hacks turn out to be easy to foil.
-
-TODO: Discuss some methods that don't work.  Adding, XOR-ing, and so on.
-
+many of these hacks turn out to be easy to foil (see Exercises~\ref{exc:hash-hack-first}--\ref{exc:hash-hack-last}).
 However, if one is willing to do arithmetic with $2#w#$ bits of
 precision, then there are simple and robust methods available.
 Suppose we have an object made up of several parts
@@ -515,7 +512,7 @@ following more general theorem:
   $\{0,\ldots,2^{#w#}-1\}$. Then
   \[
      \Pr\{ h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1}) \} 
-          \le r/#p# \} \enspace .  
+          \le \max\{r,r'\}/#p# \} \enspace .  
   \] 
 \end{thm}
 
@@ -537,22 +534,27 @@ is at most
 rather
 than the $r/(2^{32}-5)$ specified in \thmref{stringhash}.
 
-\section{Summary and Further Topics}
+\section{Discussion and Exercises}
 
 Hash tables and hash codes are a enormous and active area of research
 that is just touched upon in this chapter.
-A variety of different hash table implementations exist. The one described
-in \secref{hashtable} is known as \emph{hashing with chaining} (each array
-entry contains a chain (#List#) of elements).
+The online Bibliography on Hashing \cite{hashing} contains nearly 2000 entries.
 
-Another alternative is
-that used by \emph{open addressing} schemes, where all data is stored
-directly in an array.  Open addressing schemes must deal with the
-problem of \emph{collision resolution}: the case where two values hash
-to the same array location.  Different strategies exist for collision
-resolution and these provide different performance guarantees and often
-require more sophisticated hash functions than the multiplicative hash
-function described here.
+
+  A variety of different hash
+table implementations exist. The one described in \secref{hashtable} is
+known as \emph{hashing with chaining} (each array entry contains a chain
+(#List#) of elements).  Hashing with chaining dates back to an internal
+IBM memorandum authored by H. P. Luhn and dated January 1953. This memorandum also seems to be one of the earliest references to linked lists.
+
+An alternative to hashing with chaining is that used by \emph{open
+addressing} schemes, where all data is stored directly in an array.  This
+idea was also proposed, independently, by a group at IBM in the 1950s.
+Open addressing schemes must deal with the problem of \emph{collision
+resolution}: the case where two values hash to the same array location.
+Different strategies exist for collision resolution and these provide
+different performance guarantees and often require more sophisticated
+hash functions than the multiplicative hash function described here.
 
 Yet another category of hash table implementations are the so-called
 \emph{perfect hashing} methods.   These are methods in which #find(x)#
@@ -560,64 +562,65 @@ operations take $O(1)$ time in the worst-case.  For static data sets,
 this can be accomplished by finding \emph{perfect hash functions} for
 the data; these are functions that map each piece of data to a unique
 array location.  For data that changes over time, perfect hashing methods
-include \emph{FKS two-level hash tables} \cite{fksXX} and \emph{cuckoo hashing} \cite{prXX}.
+include \emph{FKS two-level hash tables} \cite{fks84} and \emph{cuckoo hashing} \cite{pr04}.
 
 The hash functions presented in this chapter are probably among the most
 practical currently known methods that can be proven to work well for any
 set of data.  Other provably good methods date back to the pioneering work
 of Carter and Wegman who introduced the notion of \emph{universal hashing}
-and described several hash functions for different scenarios \cite{cwXX}.
+and described several hash functions for different scenarios \cite{cw79}.
 
-The \emph{multiplicative hashing} method described in \secref{multihash}
-is one of the simplest, but it's collision probability of $2/2^{#d#}$
-is a factor of 2 larger than what one could expect with a random function
-from $2^{#w#}\to 2^{#d#}$.   The \emph{multiply-add hashing} method
-uses the function
+The idea of \emph{multiplicative hashing} is very old and seems to be
+part of the hashing folklore \cite[Section~6.4]{k97v3}.  However, the
+idea of choosing the multiplier #z# to be a random \emph{odd} number,
+and the analysis in \secref{multihash} is due to Dietzfelbinger \etal\
+\cite{dhkp97}.  This version of multiplicative hashing is one of the
+simplest, but it's collision probability of $2/2^{#d#}$ is a factor of 2
+larger than what one could expect with a random function from $2^{#w#}\to
+2^{#d#}$.  The \emph{multiply-add hashing} method uses the function
 \[
-   h(#x#) = ((#z##x# + b2^{\lceil(#w#-#d#)/2\rceil}) \bmod 2^{#w#}) \ddiv 2^{#w#-#d#}
+   h(#x#) = ((#z##x# + b) \bmod 2^{#2w#}) \ddiv 2^{#2w#-#d#}
 \]
-where #z# is a randomly-chosen odd integer in $\{1,\ldots,2^{#w#}-1\}$
-and $b$ is a randomly chosen integer in $\{0,\ldots,2^{\lfloor(#w#-#d#)/2\rfloor}\}$.
-Multiply-add hashing has a collision probability of only $1/2^{#d#}$.
-(The proof of this is considerably harder than the proof for multiplicative
-hashing.)
+where #z# and #b# are each randomly chosen from $\{0,\ldots,2^{#2w#}-1\}$.
+Multiply-add hashing has a collision probability of only $1/2^{#d#}$
+\cite{d96}, but requires $2#w#$-bit precision arithmetic.
 
 There are a number of methods of obtaining hash codes from fixed-length
-sequences of #w#-bit integers.  One particularly fast method \cite{umac}
-is the function
+sequences of #w#-bit integers.  One particularly fast method
+\cite{bhkkr99} is the function
 \[
   h(#x#_0,\ldots,#x#_{r-1}) = \left(\sum_{i=0}^{r/2-1} ((#x#_{2i}+#a#_{2i})\bmod 2^{#w#})((#x#_{2i+1}+#a#_{2i+1})\bmod 2^{#w#})\right) \bmod 2^{2#w#}
 \]
 where $r$ is even and $#a#_0,\ldots,#a#_{r-1}$ are randomly chosen from
 $\{0,\ldots,2^{#w#}\}$. This yields a $2#w#$-bit hash code that has
-collision probability $1/2^{#w#}$.  This can be reduced to a #w#-bit
-hash code using multiplicative (or multiply-add) hashing. This method
-is fast because it requires only $r/2$ $2#w#$-bit multiplications whereas
-the method described in \secref{stringhash} requires $r$ multiplications.
-(The $\bmod$ operations occur implicitly by using #w# and $2#w#$-bit arithmetic for the additions and multiplications, respectively.)
+collision probability $1/2^{#w#}$.  This can be reduced to a #w#-bit hash
+code using multiplicative (or multiply-add) hashing. This method is fast
+because it requires only $r/2$ $2#w#$-bit multiplications whereas the
+method described in \secref{stringhash} requires $r$ multiplications.
+(The $\bmod$ operations occur implicitly by using #w# and $2#w#$-bit
+arithmetic for the additions and multiplications, respectively.)
 
-The method from \secref{polyhash} of using polynomials over prime
-fields to hash variable-length arrays and strings is, unfortunately, not
-very fast.  This is due to its use of the $\bmod$ operator which relies
-on a costly machine instruction.  Some variants of this method choose
-the prime #p# to be one of the form $2^{#w#}-1$, in which case the
-$\bmod$ operator can be replaced with addition (#+#) and bitwise-and
-(#&#) operations \cite{knuth}.  Another option is to apply one of the
-fast methods for fixed-length strings to blocks of length $c$ for some
-constant $c>1$ and then apply the prime field method to the resulting
-sequence of $\lceil r/c\rceil$ hash codes.
-
-\section{Exercises}
+The method from \secref{polyhash} of using polynomials over prime fields
+to hash variable-length arrays and strings is due to Dietzfelbinger \etal\
+\cite{dgmp92}.  It is, unfortunately, not very fast.  This is due to its
+use of the $\bmod$ operator which relies on a costly machine instruction.
+Some variants of this method choose the prime #p# to be one of the form
+$2^{#w#}-1$, in which case the $\bmod$ operator can be replaced with
+addition (#+#) and bitwise-and (#&#) operations \cite[Section~3.6]{k97v2}.
+Another option is to apply one of the fast methods for fixed-length
+strings to blocks of length $c$ for some constant $c>1$ and then apply
+the prime field method to the resulting sequence of $\lceil r/c\rceil$
+hash codes.
 
 \begin{exc}
- Prove that the bound $2/2^{#d#}$ in \lemref{universal-hashing} is
-the best possible by showing that, if $x=2^{#w#-#d#-2}$ and $#y#=3#x#$,
-then $\Pr\{#hash(x)#=#hash(y)#\}=2/2^{#d#}$.  (Hint look at the binary
-representations of $#zx#$ and $#z#3#x#$ and use the fact that $#z#3#x# =
-#z##x#+2#z##x#$.)
+  Prove that the bound $2/2^{#d#}$ in \lemref{universal-hashing} is the
+  best possible by showing that, if $x=2^{#w#-#d#-2}$ and $#y#=3#x#$,
+  then $\Pr\{#hash(x)#=#hash(y)#\}=2/2^{#d#}$.  (Hint look at the binary
+  representations of $#zx#$ and $#z#3#x#$ and use the fact that $#z#3#x#
+  = #z##x#+2#z##x#$.)
 \end{exc}
 
-\begin{exc}
+\begin{exc}\exclabel{hash-hack-first}
  Suppose you have an object made up of two #w#-bit integers #x# and #y#.  Show why $#x#\oplus#y#$ does not make a good hash code for your object.  Give an example of a large set of objects that would all have hash code 0.
 \end{exc}
 
@@ -626,7 +629,7 @@ representations of $#zx#$ and $#z#3#x#$ and use the fact that $#z#3#x# =
 Give an example of a large set of objects that would all have the same hash code.
 \end{exc}
 
-\begin{exc}
+\begin{exc}\exclabel{hash-hack-last}
  Suppose you have an object made up of two #w#-bit integers #x#
 and #y#.  Suppose that the hash code for your object is defined by some
 deterministic function $h(x,y)$.  Prove that there exists a large set
