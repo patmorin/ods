@@ -224,8 +224,8 @@ random bits followed by a 1.
 
 \begin{proof}[Proof of \lemref{universal-hashing}]
   First we note that the condition $#hash(x)#=#hash(y)#$ is equivalent to
-  the statement ``the highest-order #d# bits of $#z##x#\bmod2^{#w#}$
-  and the highest-order #d# bits of $#z##y#\bmod 2^{#w#}$ are the same.''
+  the statement ``the highest-order #d# bits of $#z# #x#\bmod2^{#w#}$
+  and the highest-order #d# bits of $#z# #y#\bmod 2^{#w#}$ are the same.''
   A necessary condition of that statement is that the highest-order
   #d# bits in the binary representation of $#z#(#x#-#y#)\bmod 2^{#w#}$
   are either all 0's or all 1's.  That is,
@@ -617,7 +617,7 @@ hash codes.
   best possible by showing that, if $x=2^{#w#-#d#-2}$ and $#y#=3#x#$,
   then $\Pr\{#hash(x)#=#hash(y)#\}=2/2^{#d#}$.  (Hint look at the binary
   representations of $#zx#$ and $#z#3#x#$ and use the fact that $#z#3#x#
-  = #z##x#+2#z##x#$.)
+  = #z#x#+2#z#x#$.)
 \end{exc}
 
 \begin{exc}\exclabel{hash-hack-first}
@@ -643,7 +643,7 @@ of objects that have the same hash code.
 \]
 (This gives an algorithm for computing $x \bmod (2^{#w#}-1)$ by repeatedly setting
 \[
-   #x= x&((1<<w)-1) + x>>>w#
+  #x = x&((1<<w)-1) + x>>>w#
 \]
 until $#x# \le 2^{#w#}-1$.)
 \end{exc}

@@ -11,6 +11,7 @@ tarball:
 	tar czvf ods.tgz java/ods/
 
 install: all tarball
-	scp ods.tgz latex/ods.pdf morin@cg.scs.carleton.ca:public_html/ods/
+	(cd latex ; make install)
+	scp ods.tgz morin@cg.scs.carleton.ca:public_html/ods/
 
 

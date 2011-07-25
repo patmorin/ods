@@ -4,10 +4,8 @@
 \usepackage{amsthm}
 \usepackage{url}
 \usepackage{graphicx}
-
-% for stupid arXiv in bibtex
-\renewcommand{\path}[1]{\url{#1}}
-\newcommand{\href}[1]{\url{#1}}
+\usepackage[mathlines]{lineno}
+\linenumbers
 
 \usepackage[sf,bf,small,raggedright,compact]{titlesec} % formatting titles
 \usepackage{fancyvrb}  % formatting pseudocode
@@ -18,7 +16,19 @@
 \definecolor{keyword}{named}{RoyalPurple}
 \definecolor{var}{named}{Blue}
 \definecolor{comment}{named}{ForestGreen}
-\definecolor{boxcolor}{named}{Gray}
+\definecolor{linkblue}{named}{Blue}
+
+
+%\usepackage{eso-pic}
+%\newcommand\BackgroundPic{
+%\put(0,0){
+%\parbox[b][\paperheight]{\paperwidth}{%
+%\vfill
+%\centering
+%\includegraphics[width=\paperwidth,height=\paperheight,
+%keepaspectratio]{images/background}%
+%\vfill
+%}}}
 
 % Title page content
 \title{Basic Data Structures\\(in Java)}
@@ -31,6 +41,7 @@
 \overfullrule=5pt
 
 \begin{document}
+%\AddToShipoutPicture*{\BackgroundPic}
 \begin{titlepage}
   \maketitle
 \end{titlepage}

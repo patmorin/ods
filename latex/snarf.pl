@@ -107,19 +107,22 @@ sub snarfit($$) {
   }
 } 
 
+
 MAIN: {
   while (my $line = <STDIN>) {
     while ($line =~ /#([^#]*)#/) {
       my $inside = $1;
-      $inside =~ s/([%&])/\\$1/g;
       $inside = color($inside);
+      $inside =~ s/([%&])/\\$1/g;
+      $inside =~ s/(\\\&|\\\%|<<|>>>?)/\\text{\\ttfamily $1}/g;
+      #$inside =~ s/([%&])/\\$/g;
       $inside = "\\ensuremath{\\mathtt{$inside}}";
       $line =~ s/#([^#])*#/$inside/;
     } 
     if ($line =~ /\\javaimport(withclass)?\{([^}#]+)\}/) {
       my $withclass=0; #$1;
       my $args=$2;
-      (my $class) = $line =~ /ods\/(\w+)\./;
+      (my $class) = $line =~ /\{\w+\/(\w+)\./;
       print("\\begin{Verbatim}[tabsize=2,frame=single");
       print(',commandchars=\\\\@\\$');
       print(",label=\\texttt{$class},labelposition=topline");

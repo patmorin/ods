@@ -1,14 +1,13 @@
 
 
 This release:
-- Fix issues with &, <<, and >>> in inline source code.
-- Do something smarter with inline source code to have less overfull hboxes
-- Get hyperref package working
-
 - Fix snarf.pl so that it picks up static variables that are initialized
+- Fix snarf.pl so that class names are typeset as \texttt{}.
+
 - SortedSMap wrapper
 
 - script for creating black and white version
+- index
 
 USet interface
 - USet -> Set wrapper
@@ -23,3 +22,4 @@ Sometime:
 
 Next release:
 - Chapter on data structures for integers (bounded universes)
+
