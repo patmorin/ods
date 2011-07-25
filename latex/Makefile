@@ -7,6 +7,7 @@ LFLAGS=-interaction=nonstopmode -halt-on-error
 
 ods.pdf : $(temps) ods.tex figs ods.sty ods.bbl figs
 	(cd figs ; make )
+	(cd images ; make )
 	pdflatex $(LFLAGS) ods
 	pdflatex $(LFLAGS) ods
 
@@ -23,4 +24,6 @@ install : ods.pdf
 clean:
 	rm -f $(temps) *.log *.bbl ods.pdf
 	(cd figs; make clean)
+	(cd images; make clean)
+
 
