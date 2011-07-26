@@ -201,13 +201,13 @@ is given by
    1 + \frac{1}{2} + \frac{1}{3} + & \cdots + \frac{1}{#n#-#x#} \\
     \end{array}\right) \\
   &=& \frac{1}{#n#-#x#+1}\left(\begin{array}{l@{\,}l}
-   \color{red}{1 + \frac{1}{2} + \frac{1}{3} +} & \color{red}{\cdots + \frac{1}{\nx}} \\
-   1 + \color{red}{\frac{1}{2} + \frac{1}{3} +} & \color{red}{\cdots +\frac{1}{\nx}} \\
-   1 + \frac{1}{2} + \color{red}{\frac{1}{3} +} & \color{red}{\cdots +\frac{1}{\nx}} \\
-   1 + \frac{1}{2} + \frac{1}{3} \color{red}{{} +} &\color{red}{\cdots +\frac{1}{\nx}} \\
-   \vdots & \ddots \quad\,\,\,\,  \color{red}{\vdots} \\
+   \color{fm}{1 + \frac{1}{2} + \frac{1}{3} +} & \color{fm}{\cdots + \frac{1}{\nx}} \\
+   1 + \color{fm}{\frac{1}{2} + \frac{1}{3} +} & \color{fm}{\cdots +\frac{1}{\nx}} \\
+   1 + \frac{1}{2} + \color{fm}{\frac{1}{3} +} & \color{fm}{\cdots +\frac{1}{\nx}} \\
+   1 + \frac{1}{2} + \frac{1}{3} \color{fm}{{} +} &\color{fm}{\cdots +\frac{1}{\nx}} \\
+   \vdots & \ddots \quad\,\,\,\,  \color{fm}{\vdots} \\
    1 + \frac{1}{2} + \frac{1}{3} + &\cdots + \frac{1}{\nx} \\
-    \end{array}\right) - \color{red}{(\nx)}\\
+    \end{array}\right) - \color{fm}{(\nx)}\\
    &=& \frac{1}{#n#-#x#+1}\left((#n#-#x#+1)H_{#n#-#x#} - (#n#-#x#)\right) \\
    &=& H_{#n#-#x#} - \frac{#n#-#x#}{#n#-#x#+1} \\
    &=& H_{#n#-#x#} - O(1)
@@ -441,11 +441,38 @@ a #Treap#.
 
 \section{Summary and Exercises}
 
-The name #Treap# was coined by Aragon and Seidel \cite{as91} who discussed
+Random binary search trees have been studied extensively.  Devroye
+\cite{d88} gives a proof of \lemref{rbs} and related results.  However,
+much stronger results than \lemref{rbs} are known.  The most impressive
+such result is due to Reed \cite{r03} who shows that the expected height
+of a random binary search tree is
+\[
+  \alpha\ln n - \beta\ln\ln n + O(1)
+\]
+where $\alpha\approx4.31107$ is the unique solution on $[2,\infty)$ of the
+equation $\alpha\ln((2e/\alpha))=1$ and $\beta=\frac{3}{2\ln(\alpha/2)}$ .
+Furthermore, the variance of the height is constant.
+
+The name #Treap# was coined by Aragon and Seidel \cite{as96} who discussed
 treaps and some of their variants.  However, the basic structure was
-studied much earlier by Vuillemin \cite{v81} who called these Cartesian
+studied much earlier by Vuillemin \cite{v80} who called these Cartesian
 trees.
 
+One space-optimization of the #Treap# data structure that is sometimes
+performed is to eliminate the explicit storage of the priority #p#
+in each node. Instead, one computes the priority of a node #u# by
+hashing #u#'s address in memory (in 32-bit Java, this is equivalent
+to hashing #u.hashCode()#).  Although a number of hash functions will
+probably work well for this in practice, for the important parts of the
+proof of \lemref{rbs} to work, the hash function should be randomized
+and have the \emph{min-wise independent property}:  For any distinct
+values $x_1,\ldots,x_k$, each of the hash values $h(x_1),\ldots,h(x_k)$
+should be distinct and, for each $i\in\{1,\ldots,k\}$,
+\[
+   \Pr\{h(x_i) = \min\{h(x_1),\ldots,h(x_k)\}\} \le c/k
+\]
+One such class of hash functions that is easy to implement and fairly
+fast is \emph{tabulation hashing} \cite{pt10}.
 
 \begin{exc}
  Prove the assertion that there are $21,964,800$ sequences that

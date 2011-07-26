@@ -13,3 +13,4 @@ all: $(pdfs) $(burstpdfs)
 
 clean :
 	rm -f ./*.pdf
+

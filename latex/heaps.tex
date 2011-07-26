@@ -242,9 +242,31 @@ The following theorem summarizes the performance of a #MeldableHeap#:
   in $O(\log #n#)$ expected time per operation.
 \end{thm}
 
-The randomized #MeldableHeap# data structure described here appears to
-have first been proposed by Gambin and Malinowski \cite{gmXX}.  Other
-meldable heap implementations exist, including leftist heaps \cite{xxxx},
-binomial heaps, Fibonacci heaps, pairing heaps, and skew heaps, although
-none of these is as simple as the structure described here.
+\section{Discussion and Exercises}
+
+The implicit representation of a complete binary tree as an array,
+or list, seems to have been first proposed by Eytzinger \cite{e1590},
+as a representation for pedigree family trees.  The #BinaryHeap# data
+structure described here was first introduced by Williams \cite{w64}.
+
+The randomized #MeldableHeap# data structure described here appears
+to have first been proposed by Gambin and Malinowski \cite{gm98}.
+Other meldable heap implementations exist, including leftist heaps
+\cite[Section~5.3.2]{c72,k97v3}, binomial heaps \cite{v78}, Fibonacci
+heaps \cite{ft87}, pairing heaps \cite{fsst86}, and skew heaps
+\cite{st83}, although none of these is as simple as the #MeldableHeap#
+structure described here.
+
+Some of the above structures also support a #decreaseKey(u,y)# operation
+in which the value stored at node #u# is decreased to #y#.  (It is a
+pre-condition that $#y#\le#u.x#$.)  This operation can be implemented
+in $O(\log #n#)$ time in most of the above structures by removing node
+#u# and adding  #y#.  However, some of these structures can implement
+#decreaseKey(u,y)# more efficiently.  In particular, #decreaseKey(u,y)#
+takes $O(1)$ amortized time in Fibonnaci heaps and $O(\log\log #n#)$
+amortized time in a special version of pairing heaps \cite{e09}.
+This more efficient #decreaseKey(u,y)# operation has applications in
+speeding up several graph algorithms including Dijkstra's shortest path
+algorithm \cite{ft87}.
+
 

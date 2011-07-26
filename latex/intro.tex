@@ -1,70 +1,391 @@
 \chapter{Introduction}
 \pagenumbering{arabic}
 
-\section{Common Interfaces}
+This chapter briefly reviews some of the main concepts used throughout
+the rest of the book.   \secref{interfaces} describes the interfaces
+implemented by all the data structures described in this book.
+It should be considered required reading.  The remaining sections discuss
+asymptotic (big-Oh) notation, probability and randomization, the model of
+computation, and the sample code and typesetting conventions.  A reader
+with or without background in these areas can easily skip them now and
+come back to them later if necessary.
+
+\section{Interfaces}
+\seclabel{interfaces}
+
+In discussing data structures, it is important to understand the
+difference between a data structure's interface and its implementation.
+An interface describes what a data structure does, while an implementation
+describes how it does it.
+
+An \emph{interface}, sometimes also called an \emph{abstract data type},
+defines the set of operations supported by a data structure and
+the semantics, or meaning, of those operations.  An interface tells us
+nothing about how the data structure implements these operations, it only
+provides the list of supported operations along with specifications
+about what types of arguments each operation accepts and the value
+returned by each operation.
+
+A data structure \emph{implementation} on the other hand, includes the
+internal representation of the data structure as well as the definitions
+of the algorithms that implement the operations supported by the data
+structure.  Thus, there can be many implementations of a single interface.
+For example, in \chapref{arrays}, we will see implementations of the
+#List# interface using arrays and in \chapref{linkedlists} we will
+see implementations of the #List# interface using pointer-based data
+structures.  Each implements the same interface, #List#,
+but in different ways.
+
 \subsection{The Queue, Stack, and Deque Interfaces}
-\subsection{The List Interface}
-\subsection{USet: Implementing Sets and Maps}
 
-The #Set# and #Map# interfaces are easily implemented by the #USet# 
-interface:
-
-#add(x)#
-
-#remove(x)#: Remove, from the data structure the element that is equal to
-#x#, if one exists.
-
-#find(x)#: Find the element #x# in the data structure. If there is an
-element #e# in the data structure equal to #x#, then 
-return a reference #e#, otherwise return #null#.
-
-
-\subsection{SSet: Implementing Sorted Sets and Sorted Maps}
-
-The #SortedSet# and #SortedMap# interfaces are easily implemented by the #SSet#
-interface:
-
-#add(x)#
-
-#remove(x)#: Remove, from the data structure the element that is equal to
-#x#, if one exists.
-
-#find(x)#: 
-Return the minimum element #y# in the data structure such that
-$#y#\ge #x#$. If no such element exists, then return #null#.
-
-
-
-\subsection{The DynamicString Interface}
-\section{The Model of Computation}
-\seclabel{model}
+The #Queue# interface represents a collection of elements to which we
+can add elements and remove the next element.  More precisely, the operations
+supported by the #Queue# interface in
 \begin{itemize}
-\item Word-RAM, $c\log n$ bit words, can store values in $0,\ldots,n^{c}-1$.
-\item Constant-time arithmetic, boolean, and bitwise boolean operations.
-\item Constant time array accessing.  
-\item Allocating an array of size #n# takes $O(#n#)$ time.
-\item Space is measured in words; items of type #T#, #K#, and #V# take 1 word of memory each.
+  \item #add(x)#: add the value #x# to the #Queue#
+  \item #remove()#: the next (previously added) value, #y#, from the #Queue# and return #y#
 \end{itemize}
+Notice that the #remove()# operation takes no argument.  The #Queue#'s
+\emph{queueing discipline} decides which element should be removed.
+There are many possible queueing disciplines, the most common of which
+include FIFO, priority, and LIFO.
+
+A \emph{FIFO (first-in-first-out) #Queue#} removes items in the same
+order they were added, much in the same way a queue (or line-up) works
+when checking out at a cash register in a grocery store.
+
+A \emph{priority #Queue#} always removes the smallest element from
+the #Queue#, breaking ties arbitrarily.  This is similar to the way
+many airlines manage upgrades to the business class on their flights.
+When a business-class seat becomes available it is given to the most
+important customer waiting on an upgrade.
+
+A very common queueing discipline is the LIFO (last-in-first-out)
+discipline.  In a \emph{LIFO Queue}, the most recently element added is the
+next one removed.  This is best visualized in terms of a stack of plates;
+plates are placed on the top of the stack and also removed from the top
+of the stack. This structure is so common that it gets its own name: #Stack#.
+Often, when discussing a #Stack# the names of #add(x)# and #remove()#
+are changed to #push(x)# and #pop()#, to avoid confusing the LIFO and
+FIFO queueing disciplines.
+
+A #Deque# is a generalization of both the FIFO #Queue# and LIFO #Queue#
+(#Stack#).   A #Deque# represents a sequence of elements, with a front
+and a back.  Elements can be added at the front of the sequence or
+the back of the sequence.  The names of the operations on a #Deque#
+are self-explanatory: #addFirst(x)#, #removeFirst()#, #addLast(x)#,
+and #removeLast()#.  Notice that a #Stack# can be implemented using only
+#addFirst(x)# and #removeFirst()# while a FIFO #Queue# can be implemented
+using only #addLast(x)# and #removeFirst()#.
+
+
+\subsection{The List Interface: Linear Sequences}
+
+This book will talk very little about the FIFO #Queue#, #Stack#, or
+#Deque# interfaces.  This is because these interfaces are subsumed by
+the #List# interface.  A #List# represents a sequence,
+$#x#_0,\ldots,#x#_{#n#-1}$, of values.  The #List# interface includes
+the following operations:
+
+\begin{enumerate}
+  \item #size()#: return #n#, the length of the list
+  \item #get(i)#: return the value $#x#_{#i#}$
+  \item #set(i)#: set the value of $#x#_{#i#}$ equal to #x#
+  \item #add(i,x)#: add #x# at position #i#, displacing
+    $#x#_{#i#},\ldots,#x#_{#n#-1}$; \\ 
+    Set $#x#_{j+1}=#x#_j$, for all
+    $j\in\{#n#-1,\ldots,#i#\}$, increment #n#, and set $#x#_i=#x#$
+  \item #remove(i)# remove the value $#x#_{#i#}$, displacing
+    $#x#_{#i+1#},\ldots,#x#_{#n#-1}$; \\ 
+    Set $#x#_{j}=#x#_{j+1}$, for all
+    $j\in\{#i#,\ldots,#n#-2\}$ and decrement #n#
+\end{enumerate}
+Notice that these operations are easily sufficient to implement the
+#Deque# interface:
+\begin{eqnarray*}
+  #addFirst(x)# &\Rightarrow& #add(0,x)# \\
+  #removeFirst(x)# &\Rightarrow& #remove(0)#  \\
+  #addLast(x)# &\Rightarrow& #add(size(),x)# \\
+  #removeLast(x)# &\Rightarrow& #remove(size()-1)#
+\end{eqnarray*}
+
+Although we will normally not discuss the #Stack#, #Deque# and FIFO
+#Queue# interfaces very often in subsequent chapters, the terms #Stack#
+and #Deque# are sometimes used in the names of data structures that
+implement the #List# interface.  When this happens, it is to highlight
+the face that these data structures can be used to implement the #Stack#
+or #Deque# interface very efficiently.  For example, the #ArrayDeque#
+class is an implementation of the #List# interface that can implement
+the #Deque# operations in constant (amortized) time per operation.
+
+
+\subsection{The USet Interface: Unordered Sets}
+
+The #Uset# interface represents an unordered set of elements. This
+is a \emph{set} in the mathematical sense.  A #USet# contains #n#
+\emph{distinct} elements; no element appears more than once; the elements
+are in no specific order.  A #USet# supports the following operations:
+
+\begin{enumerate}
+  \item #size()#: return the number, #n#, of elements in the set
+  \item #add(x)#: add the element #x# to the set if not already present; \\
+    Add #x# to the set provided that there
+    is no element #y# in the set such that #x# equals #y#.  Return #true#
+    if #x# was added to the set and #false# otherwise.
+  \item #remove(x)#: remove #x# from the set; \\
+    Find an element #y# in the set such that #x# equals
+    #y# and remove #y#.  Return #y#, or #null# if no such element exists.
+  \item #find(x)#: find #x# in the set if it exists; \\
+    Find an element #y# in the set such that #y# equals
+    #x#.  Return #y#, or #null# if no such element exists.
+\end{enumerate}
+
+These definitions are a bit fussy about distinguishing #x#, the element we
+are removing or finding from #y#, the element we remove or find.  This is
+because #x# and #y# may actually be distinct objects that are nevertheless
+treated as equal.\footnote{In Java, this is done by overriding the class'
+#equals(y)# and #hashCode()# methods.} This is a very useful distinction
+since it allows for the creation of \emph{dictionaries} or \emph{maps}
+that map keys onto values.  This is done by creating a compound object
+called a #Pair# that contains a \emph{key} and a \emph{value}. Two #Pair#s
+are treated as equal if their keys are equal.  By storing #Pair#s in a
+#USet#, we can find the value associated with any key #k# by creating
+a #Pair#, #x#, with key #k# and using the #find(x)# method.
+
+\subsection{The SSet Interface: Sorted Sets}
+
+The #SSet# interface represents a sorted set of elements.  An #SSet#
+stores elements from some total order, so that any two elements #x# and
+#y# can be compared.  In code examples, this will be done with a method called #compare(x,y)# in which
+\[
+    #compare(x,y)# 
+      \begin{cases}
+        {}<0 & \text{if $#x#<#y#$} \\
+        {}>0 & \text{if $#x#>#y#$} \\
+        {}=0 & \text{if $#x#=#y#$}
+      \end{cases}
+\]
+An #SSet# supports the #size()#, #add(x)#, and #remove(x)# methods with exactly the same semantics as in the #USet# interface.  The difference between a #USet# and a #SSet# is in the #find(x)# method:
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item #find(x)#: locate #x# in the sorted set; \\
+   Find the smallest element #y# in the set such that $#y# > #x#$.  Return #y# or #null# if no such element exists. 
+\end{enumerate}
+
+This version of the #find(x)# operation is sometimes referred to
+as \emph{successor search}.  It differs in a fundamental way from
+#USet.find(x)# since it returns a meaningful result even when there is
+no element in the set that is equal to #x#.
+
+The distinction between the #USet# and #SSet# #find(x)# operations
+is very important and is very often missed.  The extra functionality
+provided by an #SSet# usually comes with a price that includes both a
+larger running time and a higher implementation complexity.  For example,
+the #SSet# implementations discussed in this book all have #find(x)#
+operations with running times that are at least logarithmic in the size
+of the set.  On the other hand, the implementation of a #USet# as a
+#HashTable# in \chapref{hashing} has a #find(x)# operation that runs in
+constant expected time.  When choosing which of these structures to use,
+one should always use a #USet# unless the extra functionality offered
+by an #SSet# is really needed.
+
+% \subsection{The DynamicString Interface}
 
 \section{Asymptotic Notation}
 
-The usual stuff plus 
+When analyzing data structures in this book we will want to talk about
+the running times of various operations.  The exact running-times will,
+of course, vary from computer to computer and even from run to run on
+an individual computer.  Therefore, instead of analyzing running times
+exactly, we will use the so-called big-Oh notation: For a non-decreasing
+function $f(n)$, $O(f(n))$ denotes a set of functions:
+\[
+   O(f(n)) = \{g(n):\mbox{there exists $c>0$, and $n_0$ such that
+             $g(n) \le c\cdot f(n)$ for all $n\ge n_0$}   \} \enspace .
+\]
+Thinking graphically, this set consists of the functions $g(n)$ where
+where $c\cdot f(n)$ starts to dominate $g(n)$ when $n$ is sufficiently
+large.
 
-Multivariate stuff:
+We generally use asymptotic notation to simplify functions.  For example,
+in place of $5n\log_2 n + 8n - 200$ we can write, simply,  $O(n\log_2 n)$.
+This is proven as follows:
+\begin{align*} 
+       5n\log_2 n + 8n - 200
+        & \le 5n\log_2 n + 8n \\
+        & \le 5n\log_2 n + 8n\log_2 n & \mbox{ for $n\ge 2$ (so that $\log_2 n \ge 1$)}
+            \\
+        & \le 13n\log_2 n 
+\end{align*}
+which demonstrates that $5n\log_2 n + 8n - 200$ is in $O(\log_2 n)$ using the constants $c=13$ and $n_0 = 2$.
 
-$O(f(n_1,\ldots,n_3))$ means the set of all functions $g(n_1,\ldots,n_k)$ such that
-$g(n_1,\ldots,n_k) \le c\cdot f(n_1,\ldots,n_3)$
-for all $n_1,\ldots,n_k$ such that $f(n_1,\ldots,n_3)\ge n_0$.
+There are a number of useful shortcuts when using asymptotic notation.  First:
+\[ O(n^{c_1}) \subset O(n^{c_2}) \enspace ,\]
+ for any $c_1 < c_2$.  Second:
+For any constants $a,b,c > 0$,
+\[ O(a) \subset O(\log n) \subset O(n^{b}) \subset O({c}^n) \enspace . \]
+These inclusion relations can be multiplied by any positive value, and they still hold. For example, multiplying by $n$ yields:
+\[ O(n) \subset O(n\log n) \subset O(n^{1+b}) \subset O(n{c}^n) \enspace . \]
 
-Mixing asymptotic equations into regular equations.
+Continuing in a long and distinguished tradition,
+we will abuse this notation by writing things
+like $f_1(n) = O(f(n))$ when what we really mean is $f_1(n) \in O(f(n))$.
+We will also make statements like ``the running time of this operation
+is $O(f(n))$'' when this statement should be ``the running time of
+this operation is a member of $O(f(n))$.''  These shortcuts are mainly
+to avoid awkward language and to make it easier to use asymptotic
+notation within strings of equations.
+
+A particularly strange example of this comes when we write statements like
+\[
+     T(n) = 2\log n + O(1)  \enspace .
+\]
+Again, this would be more correctly written as
+\[
+     T(n) \le 2\log n + [\mbox{some member of $O(1)$]}  \enspace .
+\]
+
+The expression $O(1)$ also brings up another issue. Since there is
+no variable in this expression, it may not be clear what variable is
+getting arbitrarily large.  Without context, there is no way to tell.
+In the example above, since the only variable in the rest of the equation
+is $n$, we can assume that should be read as $T(n) = 2\log n + O(f(n))$,
+where $f(n) = 1$.
+
+In a few cases, we will use asymptotic notation on functions with more than one variable. There seems to be no standard for this, but for our purposes, the following definition is sufficient:
+\[
+   O(f(n_1,\ldots,n_k)) = 
+   \left\{\begin{array}{lll}
+             g(n_1,\ldots,n_k):\mbox{there exists $c>0$, and $z$ such that} \\
+             \quad \mbox{$g(n_1,\ldots,n_k) \le c\cdot f(n_1,\ldots,n_k)$} \\
+             \qquad \mbox{for all $n_1,\ldots,n_k$ such that $g(n_1,\ldots,n_k)\ge z$}   
+   \end{array}\right\} \enspace .
+\]
+This definition captures the situation we really care about:  When the
+arguments $n_1,\ldots,n_k$ make $g$ take on large values.  The reader
+should be warned that, although this works for our purposes, other texts
+may treat multivariate functions and asymptotic notation differently.
+
+\section{Randomization}
+
+Some of the data structures presented in this book are \emph{randomized}.
+They make random choices that are independent of the data being stored
+in them or the operations being performed on them.  For this reason,
+performing the same set of operations more than once using these
+structures could result in different running times.  When analyzing these
+data structures we are interested in their average or \emph{expected}
+running times.
+
+Formally, the running time of an operation on a randomized data structure
+is a random variable and we want to study its \emph{expected value}. For
+a discrete random variable $X$ taking on values in some finite universe
+$U$, the expected value of $X$, denoted by $\E[X]$ is given the by formula
+\[
+    \E[X] = \sum_{x\in U} x\cdot\Pr\{X=x\} \enspace .
+\]
+Here $\Pr\{\mathcal{E}\}$ denotes the probability that the event
+$\mathcal{E}$ occurs.  In all the examples in this book these
+probabilities are only with respect to whatever random choices are made by
+the randomized data structure;  there is no assumption that the data
+stored in the structure is random or that the sequence of operations
+performed on the data structure are random.
+
+One of the most important properties of expected values is \emph{linearity
+of expectation}:  For any two random variables $X$ and $Y$,
+\[
+   \E[X+Y] = \E[X] + \E[Y] \enspace .
+\]
+More generally, for any random variables $X_1,\ldots,X_k$,
+\[
+   \E\left[\sum_{i=1}^k X_k\right] = \sum_{i=1}^k \E[X_i] \enspace .
+\]
+Linearity of expectation allows us to break down complicated random variables (like the left hand sides of the above equations) into sums of simpler random variables (the right hand sides).
+
+A useful trick, that we will use repeatedly, is that of defining
+\emph{indicator random variables}.  These binary variables are useful
+when we want to count something and are best illustrated by an example.
+Suppose we toss a fair coin $k$ times and we want to know the expected
+number of times the coin came up heads.  Intuitively, we know the answer
+is $k/2$, but if we try and prove it using the definition of expected
+value, we get
+\begin{align*}
+   \E[X] & = \sum_{i=0}^k i\cdot\Pr\{X=i\} \\
+         & = \sum_{i=0}^k i\cdot\binom{k}{i}/2^k \\
+         & = k\cdot \sum_{i=0}^{k-1}\binom{k-1}{i}/2^k \\
+         & = k/2 \enspace .
+\end{align*}
+This requires that we know enough to calculate that $\Pr\{X=i\} =
+\binom{k}{i}/2^k$ and that we know the binomial identity $\sum_{i=0}^{k}
+\binom{k}{i} = 2^{k}$.
+
+Using indicator variables and linearity of independence makes things much easier:  For each $i\in\{1,\ldots,k\}$, define the indicator random variable
+\[
+    I_i = \begin{cases}
+           1 & \text{if the $i$th coin toss is heads} \\
+           0 & \text{otherwise}
+          \end{cases}
+\]
+Then 
+\[ \E[I_i] = (1/2)1 + (1/2)0 = 1/2 \enspace . \]
+Now, $X=\sum_{i=1}^k I_i$, so
+\begin{align*}
+   \E[X] & = \E\left[\sum_{i=1}^k I_i\right] \\
+         & = \sum_{i=1}^k \E[I_i] \\
+         & = \sum_{i=1}^k 1/2 \\
+         & = k/2 \enspace .
+\end{align*}
+This is a bit more long-winded, but doesn't require that we know any
+magical identities or compute any non-trivial probabilities. Even better:
+It agrees with the intuition that we expect half the coins to come
+up heads precisely because each coin has probability $1/2$ of coming
+up heads.
 
 
-\section{Amortization and Randomization}
+
+\section{The Model of Computation}
+\seclabel{model}
+
+In this book, we will analyze the theoretical running times of operations
+on the data structures we study.  To do this precisely, we need a
+mathematical model of computation.  For this, we use the \emph{#w#-bit
+word-RAM} model.  In this model, we have access to a random access memory
+consisting of \emph{cells}, each of which stores a #w#-bit \emph{word}.
+This implies a memory cell can represent, for example, any integer in the set
+$\{0,\ldots,2^{#w#}-1\}$.
+
+In the word-RAM model, basic operations on words take constant time.
+This includes arithmetic operations (#+#, #-#, #*#, #/#, #%#), comparisons
+($<$, $>$, $=$, $\le$, $\ge$) and bitwise boolean operations
+(bitwise-AND, OR, and exclusive-OR).
+
+Any cell can be read or written in constant time.  Our computer's memory
+is managed by a memory management system from which we can allocate or
+deallocate a block of memory of any size we like. Allocating a block of
+memory of size $k$ takes $O(k)$ time and returns a reference to memory
+block.  This reference is small enough to be represented by a single word.
+
+The word-size #w# is a very important parameter of this model.  The only
+assumption we will make on #w# is that it is at least $#w# \ge \log #n#$,
+where #n# is the number of elements stored in any of our data structures.
+This is a fairly modest assumption, since otherwise a word is not even
+big enough to count the number of elements stored in the data structure.
+
+Space is measured in words so that, when we talk about the amount of
+space used by a data structure, we are referring to the number of words
+of memory used by the structure.  All our data structures store values
+of a generic type #T# and we assume an element of type #T# occupies one
+word of memory.  (In reality, we are storing references to objects of
+type #T#, and these references occupy only one word of memory.)
+
+The #w#-bit word-RAM model is a fairly close match for the (32-bit) Java
+Virtual Machine (JVM) when $#w#=32$.  The data structures presented in
+this book don't use any special tricks that are not implementable on
+the JVM and most other architectures.
 
 \section{Code Samples}
 
 The code samples in this book are written in the Java programming
-language.  However to make the book accessible even to reader not
+language.  However to make the book accessible even to readers not
 familiar with all of Java's constructs and keywords, the code samples have
 been simplified.  For example, a reader won't find any of the keywords
 #public#, #protected#, #private#, or #static#.  A reader also won't
@@ -78,5 +399,32 @@ anyone with a background in any of the languages from the ALGOL tradition,
 including B, C, C++, C\# Java, JavaScript, and so on.  Readers who want
 the full details of all implementations are encouraged to look at the
 Java source code that accompanies this book.
+
+This book mixes mathematical analysis of running times with Java source
+code for the algorithms being analyzed.  This means that some equations
+contain variables also found in the source code.  These variables are
+typeset consistently, both withing the source code and within equations.
+The most common such variable is the variable #n# that, without exception,
+always refers the number of items currently stored in the data structure.
+
+\section{References}
+
+The #List#, #USet#, and #SSet# interfaces described in \secref{interfaces}
+are influenced by the Java Collections Framework
+\cite{oracle_collections}.  These are essentially simplified versions of
+the #List#, #Set#/#Map#, and #SortedSet#/#SortedMap# interfaces found in
+the Java Collections Framework.  Indeed, the accompanying source code
+includes wrapper classes for making #USet# and #SSet# implementations
+into #Set#, #Map#, #SortedSet#, and #SortedMap# implementations.
+
+For more information on basic probability, especially as it relates to
+computer science, see the textbook by Ross \cite{r01}.  Another good
+reference that covers both asymptotic notation and probability is the
+textbook by Graham, Knuth, and Patashnik \cite{gkp94}.
+
+Readers wanting to brush up on their Java programming can find many Java
+tutorial online \cite{oracle_tutorials}.
+
+
 
 

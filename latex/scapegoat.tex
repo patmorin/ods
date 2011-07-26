@@ -242,7 +242,7 @@ All that remains is to prove an upper-bound on the cost of calls to
   This completes the proof.
 \end{proof}
 
-\subsection{Summary and Conclusions}
+\subsection{Summary}
 The following theorem summarizes the performance of the #ScapegoatTree# data structure:
 
 \begin{thm}\thmlabel{scapegoat}
@@ -255,9 +255,11 @@ The following theorem summarizes the performance of the #ScapegoatTree# data str
   time spent during all calls to #rebuild(u)#.
 \end{thm}
 
-The term \emph{scapegoat tree} is due to Rivest and Galperin \cite{rg93},
+\section{Discussion and Exercises}
+
+The term \emph{scapegoat tree} is due to Galperin and Rivest \cite{gr93},
 who define and analyze these trees.  However, the same structure
-was discovered earlier by Andersson \cite{a89,a90}, who called them
+was discovered earlier by Andersson \cite{a89,a99}, who called them
 \emph{general balanced trees} since they can have any shape as long as
 their height is small.
 
@@ -283,7 +285,7 @@ This is in contrast to other #SSet# implementations discussed in this
 book that only make $O(#n#)$ structural changes during a sequence of
 #n# operations.  This is, unfortunately, a necessary consequence of
 the fact that a #ScapegoatTree# does all its restructuring by calls to
-#rebuild(u)# \cite{X}.
+#rebuild(u)# \cite{d90}.
 
 Despite their lack of performance, there are applications in which a
 #ScapegoatTree# could be the right choice.  This would occur any time
@@ -296,6 +298,17 @@ and related structures based on partial rebuilding may work.  An example of such
   Show that, if we start with an empty #ScapegoatTree# and call #add(x)#
   for $#x#=1,2,3,\ldots,#n#$, then the total time spent during calls to
   #rebuild(u)# is at least $c#n#\log #n#$ for some constant $c>0$.
+\end{exc}
+
+\begin{exc}
+  The #ScapegoatTree#, as described in this chapter guarantees that the
+  length of the search path does not exceed $\log_{3/2}#q#$.  Design,
+  analyze, and implement a modified version of #ScapegoatTree# where the
+  length of the search path does not exceed $\log_{#b#} #q#$, where #b#
+  is a parameter with $0<#b#<2$.
+
+  What does your analysis and/or experiments say about the amortized cost
+  of #find(x)#, #add(x)# and #remove(x)# as a function of #b#?
 \end{exc}
 
 \begin{exc}

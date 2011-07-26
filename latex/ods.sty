@@ -1,4 +1,9 @@
 \usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[letterpaper]{hyperref}
+\hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,%
+	citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,%
+	urlcolor=linkblue} 
 
 \newcommand{\comment}[1]{}
 
@@ -45,6 +50,10 @@
 \newcommand{\exclabel}[1]{\label{exc:#1}}
 \newcommand{\excref}[1]{Exercise~\ref{exc:#1}}
 
+\newtheorem{prp}{Property}[chapter]
+\newcommand{\prplabel}[1]{\label{prp:#1}}
+\newcommand{\prpref}[1]{Property~\ref{prp:#1}}
+
 \newcommand{\etal}{\emph{et al.}}
 
 \newcommand{\keywords}[1]{\noindent\textbf{Keywords:} #1}
@@ -85,8 +94,11 @@
   \setlength{\lone}{0.3\textheight}
   \setlength{\ltwo}{0.618033988\lone}
   \setlength{\lthree}{0.618033988\ltwo}
-  \ \vspace{\lone}
+  %\ \vspace{\lone}
   \begin{flushleft}
+    \ \vspace{.5in}
+    \hspace{-1ex}\includegraphics{images/tree3-thick}\\
+    \ \vspace{.5in}
     {\titlefont Basic Data Structures (in Java)} \\[1ex]
     {\authorfont \@author} \\[\ltwo]
     {\tensfb Version 0.0 pre $\alpha$ : \today} \\[\lthree]
