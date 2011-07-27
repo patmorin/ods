@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20110525141707" modified="D:20110607154337"/>
+<info created="D:20110525141707" modified="D:20110727132300"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -233,7 +233,7 @@ h
 <layer name="alpha"/>
 <layer name="beta"/>
 <view layers="alpha beta" active="beta"/>
-<path layer="beta" stroke="purple" pen="fat" arrow="normal/small">
+<path layer="beta" stroke="seagreen" pen="ultrafat" cap="1" arrow="normal/small">
 215.418 330.908 m
 215.055 312.194
 204.74 293.628
@@ -254,19 +254,8 @@ h
 289.733 135.608
 310.362 114.567 s
 </path>
-<use layer="alpha" matrix="0.85 0 0 0.85 0.18951 -154.365" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.85 0 0 0.85 0.18951 -140.765" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.425 0 0 0.425 108.99 124.435" stroke="black">
-16 0 0 16 256 256 e
-</path>
-<use layer="beta" matrix="0.85 0 0 0.85 12.5922 -183.047" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.85 0 0 0.85 12.5922 -169.447" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.425 0 0 0.425 121.392 95.7534" stroke="black">
-16 0 0 16 256 256 e
-</path>
-<text matrix="0.425 0 0 0.425 121.392 95.7534" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$j$</text>
-<text matrix="1 0 0 1 -51.5619 3.39223" transformations="translations" pos="203.206 145.692" stroke="black" type="label" valign="baseline">$i,\ldots,j-1$</text>
-<text matrix="1 0 0 1 -114.657 -122.799" transformations="translations" pos="370.104 269.848" stroke="black" type="label" valign="baseline">$j+1,\ldots,x$</text>
+<text matrix="1 0 0 1 -60.7827 3.39223" transformations="translations" pos="203.206 145.692" stroke="black" type="label" width="65.113" height="6.578" depth="1.93" valign="baseline">$\ldots,i,\ldots,j-1$</text>
+<text matrix="1 0 0 1 -121.243 -120.764" transformations="translations" pos="370.104 269.848" stroke="black" type="label" width="65.715" height="6.578" depth="1.93" valign="baseline">$j+1,\ldots,x,\ldots$</text>
 <path stroke="black">
 215.418 145.692
 220.845 193.184
@@ -307,8 +296,6 @@ h
 <path matrix="0.425 0 0 0.425 96.441 73.5131" stroke="black" fill="white">
 16 0 0 16 256 256 e
 </path>
-<use matrix="0.85 0 0 0.85 38.524 -205.287" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.85 0 0 0.85 38.524 -191.687" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <path matrix="0.425 0 0 0.425 147.325 73.5131" stroke="black" fill="white">
 16 0 0 16 256 256 e
 </path>
@@ -320,6 +307,13 @@ h
 230.192 197.753 m
 256.124 189.113 l
 </path>
-<text matrix="1 0 0 1 -3.30067 5.3636" transformations="translations" pos="301.698 98.0632" stroke="black" type="label" valign="baseline">$\mathtt{x}+1/2$</text>
+<text matrix="1 0 0 1 -3.30067 5.3636" transformations="translations" pos="301.698 98.0632" stroke="black" type="label" width="32.351" height="7.473" depth="2.49" valign="baseline">$\mathtt{x}+1/2$</text>
+<path matrix="0.425 0 0 0.425 121.392 95.7534" stroke="black" fill="white">
+16 0 0 16 256 256 e
+</path>
+<text matrix="0.425 0 0 0.425 121.392 95.7534" transformations="translations" pos="256 256" stroke="black" type="label" width="4.673" height="6.578" depth="1.93" halign="center" valign="center">$j$</text>
+<path layer="alpha" matrix="0.425 0 0 0.425 108.99 124.435" stroke="black" fill="white">
+16 0 0 16 256 256 e
+</path>
 </page>
 </ipe>

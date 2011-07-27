@@ -5,6 +5,8 @@ java = $(wildcard ../java/ods/*.java)
 
 LFLAGS=-interaction=nonstopmode -halt-on-error
 
+all: ods.pdf
+
 .PHONY: figs images install clean
 
 figs:

@@ -44,21 +44,25 @@ public class ScapegoatTree<T extends Comparable<T>>
 		final double log23 = 2.4663034623764317;
 		return (int)Math.ceil(log23*Math.log(q));
 	}
-		
-	public boolean add(T x) {
-		// first do basic insertion keeping track of depth
-		Node<T> u = newNode();
-		u.x = x;
-		int d = 0;
+
+	/***
+	 * Do a normal BinarySearchTree insertion, but return the depth
+	 * of the newly inserted node. 
+	 * @param u - the new node to insert
+	 * @return the depth of the newly inserted node, or -1 if the node
+	 * was not inserted
+	 */
+	int addWithDepth(Node<T> u) {
 		Node<T> w = r;
 		if (w == null) {
 			r = u;
 			n++; q++;
-			return true;
+			return 0;
 		}
 		boolean done = false;
-		while (!done) {
-			int res = x.compareTo(w.x);
+		int d = 0;
+		do {
+			int res = u.x.compareTo(w.x);
 			if (res < 0) {
 				if (w.left == null) {
 					w.left = u;
@@ -75,11 +79,19 @@ public class ScapegoatTree<T extends Comparable<T>>
 				}
 				w = w.right;
 			} else {
-				return false;
+				return -1;
 			}
 			d++;
-		}
+		} while (!done);
 		n++; q++;
+		return d;
+	}
+
+	public boolean add(T x) {
+		// first do basic insertion keeping track of depth
+		Node<T> u = newNode(x);
+		int d = addWithDepth(u);
+		Node<T> w = u.parent;
 		if (d > log32(q)) {
 			// depth exceeded, find scapegoat
 			while (3*size(w) <= 2*size(w.parent))

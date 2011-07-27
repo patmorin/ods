@@ -198,7 +198,7 @@ All that remains is to prove an upper-bound on the cost of calls to
 
   During an insertion or deletion, we give one credit to each node on the
   path to the inserted node, or deleted node, #u#.  In this way we hand
-  out at most $\log_{3/2}#q#\le \log_{3/2}m\le$ credits per operation.
+  out at most $\log_{3/2}#q#\le \log_{3/2}m$ credits per operation.
   During a deletion we also store an additional 1 credit ``on the side.''
   Thus, in total we give out at most $O(m\log m)$ credits.  All that
   remains is to show that these credits are sufficient to pay for all
@@ -305,7 +305,7 @@ and related structures based on partial rebuilding may work.  An example of such
   length of the search path does not exceed $\log_{3/2}#q#$.  Design,
   analyze, and implement a modified version of #ScapegoatTree# where the
   length of the search path does not exceed $\log_{#b#} #q#$, where #b#
-  is a parameter with $0<#b#<2$.
+  is a parameter with $1<#b#<2$.
 
   What does your analysis and/or experiments say about the amortized cost
   of #find(x)#, #add(x)# and #remove(x)# as a function of #b#?

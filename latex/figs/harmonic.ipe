@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20110607143602" modified="D:20110712154532"/>
+<info created="D:20110607143602" modified="D:20110727131809"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -196,7 +196,6 @@ h
 <color name="lightcyan" value="0.878 1 1"/>
 <color name="lightgray" value="0.827"/>
 <color name="lightgreen" value="0.565 0.933 0.565"/>
-<color name="lightyellow" value="1 1 0.878"/>
 <dashstyle name="dashed" value="[4] 0"/>
 <dashstyle name="dotted" value="[1 3] 0"/>
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
@@ -238,7 +237,7 @@ h
 <view layers="alpha beta delta" active="beta"/>
 <view layers="alpha gamma delta" active="delta"/>
 <view layers="alpha gamma delta" active="beta"/>
-<path layer="beta" stroke="black" fill="gold">
+<path layer="beta" stroke="black" fill="pink">
 198.644 211.781 m
 198.644 211.781 l
 305.9 121.4 m
@@ -344,7 +343,7 @@ h
 304.325 132.975 l
 305.9 132.875 l
 </path>
-<path layer="gamma" matrix="0.5 0 0 0.5 106.15 89.4001" stroke="black" fill="gold">
+<path layer="gamma" matrix="0.5 0 0 0.5 106.15 89.4001" stroke="black" fill="pink">
 150.139 244.761 m
 150.139 244.761 l
 364.65 64 m
@@ -541,14 +540,26 @@ h
 260.05 96.8 l
 h
 </path>
-<text layer="beta" transformations="translations" pos="182.637 183.428" stroke="purple" type="label" valign="baseline">$f(x)=1/x$</text>
 <text layer="delta" matrix="1 0 0 1 -0.477359 -0.666271" transformations="translations" pos="149.477 112.837" stroke="black" type="label" halign="center" valign="baseline">$1$</text>
 <text matrix="1 0 0 1 -1.26376 -2.2209" transformations="translations" pos="167.689 114.392" stroke="black" type="label" halign="center" valign="baseline">$2$</text>
 <text matrix="1 0 0 1 -0.914713 1.11045" transformations="translations" pos="184.79 111.06" stroke="black" type="label" halign="center" valign="baseline">$3$</text>
 <text layer="beta" matrix="1 0 0 1 1.4195 -1.33254" transformations="translations" pos="130.156 113.503" stroke="black" type="label" halign="center" valign="baseline">$0$</text>
 <text layer="delta" matrix="1 0 0 1 0.737557 0" transformations="translations" pos="305.163 112.171" stroke="black" type="label" halign="center" valign="baseline">$k$</text>
 <text matrix="1 0 0 1 8.3137 -1.11045" transformations="translations" pos="230.762 113.281" stroke="black" type="label" valign="baseline">$\ldots$</text>
-<path layer="beta" stroke="purple" pen="fat">
+<text layer="beta" transformations="translations" pos="182.637 183.428" stroke="seagreen" type="label" valign="baseline">$f(x)=1/x$</text>
+<path layer="alpha" matrix="0.5 0 0 0.5 106.15 89.4001" stroke="black">
+85.7 178.8 m
+120.55 178.8 l
+</path>
+<path matrix="0.5 0 0 0.5 106.15 89.4001" stroke="black">
+120.55 140.533 m
+155.45 140.55 l
+</path>
+<path matrix="0.5 0 0 0.5 245.625 43.4751" stroke="black">
+85.7 178.8 m
+120.55 178.8 l
+</path>
+<path layer="beta" stroke="seagreen" pen="ultrafat">
 198.645 211.781 m
 198.645 211.781 l
 149 236.2 m
@@ -651,18 +662,6 @@ h
 302.725 133.1 l
 304.325 132.975 l
 305.9 132.875 l
-</path>
-<path layer="alpha" matrix="0.5 0 0 0.5 106.15 89.4001" stroke="black">
-85.7 178.8 m
-120.55 178.8 l
-</path>
-<path matrix="0.5 0 0 0.5 106.15 89.4001" stroke="black">
-120.55 140.533 m
-155.45 140.55 l
-</path>
-<path matrix="0.5 0 0 0.5 245.625 43.4751" stroke="black">
-85.7 178.8 m
-120.55 178.8 l
 </path>
 </page>
 </ipe>
