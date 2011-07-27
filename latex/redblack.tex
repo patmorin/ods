@@ -139,7 +139,7 @@ maintains the height property.
 Again, since the height of the tree is never more than $\log #n#$,
 the process of removing a leaf finishes after at most $\log #n#$ steps.
 
-\section{Red-Black Trees}
+\section{#RedBlackTree#: A Simulated 2-4 Tree}
 
 A red-black tree is a binary search tree in which each node, #u#,
 has a \emph{color} which is either \emph{red} or \emph{black}.  Red is
@@ -381,7 +381,7 @@ in $O(\log #n#)$ time.
 
 The #remove(x)# operation in a #RedBlackTree# tree is the most complicated
 operation to implement, and this is true of all known implementations.
-Like #remove(x)# in a #BinarySearchTree# the operation boils down to
+Like #remove(x)# in a \texttt{BinarySearchTree} the operation boils down to
 finding a node #w# with only one child, #u#, and splicing #w# out of
 the tree by having #w.parent# adopt #u#.
 

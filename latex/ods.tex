@@ -7,6 +7,32 @@
 %\usepackage[mathlines]{lineno}
 %\linenumbers
 
+\hyphenation{Array-Stack}
+\hyphenation{Fast-Array-Stack}
+\hyphenation{Array-Queue}
+\hyphenation{Array-Deque}
+\hyphenation{Dual-Array-Deque}
+\hyphenation{Rootish-Array-Stack}
+\hyphenation{Skip-list-Set}
+\hyphenation{Skip-list-List}
+\hyphenation{Hash-Table}
+\hyphenation{Red-Black-Tree}
+\hyphenation{Binary-Tree}
+\hyphenation{Binary-Search-Tree}
+\hyphenation{Scape-goat-Tree}
+\hyphenation{Binary-Heap}
+\hyphenation{Melda-ble-Heap}
+
+
+\usepackage{everysel}
+\EverySelectfont{%
+%\fontdimen2\font=0.4em% interword space
+%\fontdimen3\font=0.2em% interword stretch
+%\fontdimen4\font=0.1em% interword shrink
+%\fontdimen7\font=0.1em% extra space
+\hyphenchar\font=`\-% to allow hyphenation
+}
+
 \usepackage[sf,bf,small,raggedright,compact]{titlesec} % formatting titles
 \usepackage{fancyvrb}  % formatting pseudocode
 \usepackage{ods} % Personalization and commands
@@ -19,18 +45,6 @@
 \definecolor{linkblue}{named}{Blue}
 \definecolor{fm}{named}{ForestGreen}
 
-
-%\usepackage{eso-pic}
-%\newcommand\BackgroundPic{
-%\put(0,0){
-%\parbox[b][\paperheight]{\paperwidth}{%
-%\vfill
-%\centering
-%\includegraphics[width=\paperwidth,height=\paperheight,
-%keepaspectratio]{images/background}%
-%\vfill
-%}}}
-
 % Title page content
 \title{Basic Data Structures\\(in Java)}
 \author{Pat Morin}
@@ -39,7 +53,7 @@
 \pagenumbering{roman}
 
 % Draft mode only - mark overfull hboxes
-\overfullrule=5pt
+% \overfullrule=5pt
 
 \begin{document}
 %\AddToShipoutPicture*{\BackgroundPic}

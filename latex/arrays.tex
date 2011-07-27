@@ -142,7 +142,7 @@ In particular, we will show:
   \[
     \sum_{i=1}^{r} #n#_i \le 2m + 2r  \enspace .
   \]
-   On the other hand, the total time spent during all calls to #resize()# is 
+  On the other hand, the total time spent during all calls to #resize()# is 
   \[
      \sum_{i=1}^{r} O(#n#_i) \le O(m+r) = O(m)  \enspace ,
   \]
@@ -475,14 +475,16 @@ of 3.  In particular, $3#front.size()# \ge #back.size()#$ and
 $3#back.size()# \ge #front.size()#$.
 
 Next we analyze the cost of #add(i,x)#, ignoring the cost of the
-#balance()# operation.  If $#i#<#front.size()#$, then this translates into $#front.add(front.size()-i-1,x)#$.  Since #front# is an #ArrayStack#, the cost of this is 
+#balance()# operation.  If $#i#<#front.size()#$, then #add(i,x)# becomes 
+$#front.add(front.size()-i-1,x)#$.
+Since #front# is an #ArrayStack#, the cost of this is 
 \begin{equation}
   O(#front.size()#-(#front.size()#-#i#-1)+1) = O(#i#+1) \enspace .
   \eqlabel{das-front}
 \end{equation}
-
-On the other hand, if $#i#\ge#front.size()#$, then this translates into
-$#back.add(i-front.size(),x)#$.  The cost of this is 
+On the other hand, if $#i#\ge#front.size()#$, then #add(i,x)# becomes
+$#back.add(i-front.size(),x)#$.
+The cost of this is 
 \begin{equation}
   O(#back.size()#-(#i#-#front.size()#)+1) = O(#size()#-#i#+1)= O(#n#-#i#+1)\enspace .
   \eqlabel{das-back}
