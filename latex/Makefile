@@ -18,7 +18,7 @@ ods.pdf : figs images $(temps) ods.tex ods.sty ods.bbl
 	pdflatex $(LFLAGS) ods
 
 
-ods.bbl : ods.bib
+ods.bbl : figs images ods.bib
 	pdflatex $(LFLAGS) ods
 	bibtex ods
 
