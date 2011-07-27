@@ -29,7 +29,7 @@ install : ods.pdf ods-grayscale.pdf
 	scp ods.pdf ods-grayscale.pdf morin@cg.scs.carleton.ca:public_html/ods/
 
 clean:
-	rm -f $(temps) *.log *.bbl *.out ods.pdf 
+	rm -f $(temps) *.log *.bbl *.out ods.toc ods.pdf 
 	cd figs; make clean
 	cd images; make clean
 
