@@ -6,6 +6,7 @@ java = $(wildcard ../java/ods/*.java)
 LFLAGS=-interaction=nonstopmode -halt-on-error
 
 ods.pdf : $(temps) ods.tex figs images ods.sty ods.bbl
+	echo "hello world"
 	(cd figs ; make )
 	(cd images ; make )
 	pdflatex $(LFLAGS) ods
