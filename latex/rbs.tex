@@ -8,7 +8,7 @@ In this chapter, we present a binary search tree structure that uses randomizati
 Consider the two binary search trees shown in
 \figref{rbs-lvc}.  The one on the left is a list and the
 other is a perfectly balanced binary search tree. The one on the left
-has height $#n#-1=14$ and the one on the right has height $3$.
+has height $#n#-1=14$ and the one on the right has height three.
 
 \begin{figure}
   \begin{center}
@@ -42,7 +42,7 @@ and
     \langle 7,3,1,11,5,0,2,4,6,9,13,8,10,12,14 \rangle \enspace .
 \]
 In fact, there are $21,964,800$ addition sequences that generate the
-tree on the right and only 1 that generates the tree on the left.
+tree on the right and only one that generates the tree on the left.
 
 The above example gives some anecdotal evidence that, if we choose a
 random permutation of $0,\ldots,14$, and add it into a binary search
@@ -51,13 +51,13 @@ hand of \figref{rbs-lvc}) than we are to get a very unbalanced tree
 (the left hand of \figref{rbs-lvc}).
 
 We can formalize this notion by studying random binary search trees.
-A \emph{random binary search tree} of size #n# is obtained the
+A \emph{random binary search tree} of size #n# is obtained in the
 following way:  Take a random permutation $#x#_0,\ldots,#x#_{#n#-1}$
-of $0,\ldots,#n#-1$ and add the elements, one by one, into a
+of $0,\ldots,#n#-1$ and add its elements, one by one, into a
 #BinarySearchTree#.  
 
 Before we can present our main result about random binary search trees,
-we take time for short digression to discuss a type of number that comes
+we must take some time for a short digression to discuss a type of number that comes
 up frequently when studying randomized structures. For a non-negative
 integer, $k$, the $k$-th \emph{harmonic number}, denoted $H_k$, is
 defined as
@@ -98,8 +98,8 @@ for an explanation.)
   \end{enumerate}
 \end{lem}
 
-We will prove \thmref{rbs} in the next section.  For now, we can consider
-what the two parts of \thmref{rbs} tell us.  The first part tells us
+We will prove \lemref{rbs} in the next section.  For now, we can consider
+what the two parts of \lemref{rbs} tell us.  The first part tells us
 that if we search for an element #x# that is in the tree, then expected
 length of the search path is at most $2\ln n + O(1)$.  The second part
 tells us the same thing for elements #x# that are not stored in the tree.
@@ -115,8 +115,7 @@ search path for $#x#+1/2$ in a random binary search tree $T$ contains
 the node with key $i \le #x#$ if and only if, in the random permutation
 used to create $T$, $i$ appears before any of $\{i+1,i+2,\ldots,#x#\}$.
 
-Refer to \figref{rbst-records}.
-To see this, notice that, until some value in $\{i,i+1,\ldots,#x#\}$
+To see this, refer to \figref{rbst-records} and notice that, until some value in $\{i,i+1,\ldots,#x#\}$
 is added, the search paths for each of $\{i,i+1,\ldots,#x#,#x#+1/2\}$
 are identical.
 Let $j$ be the first element in $\{i,i+1,\ldots,#x#\}$ to appear in the
