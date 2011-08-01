@@ -5,7 +5,15 @@ java = $(wildcard ../java/ods/*.java)
 
 LFLAGS=-interaction=nonstopmode -halt-on-error
 
+all: ods.pdf
+
 .PHONY: all figs images install clean
+
+figs:
+	cd figs ; make
+
+images:
+	cd images ; make
 
 ods.pdf : figs images $(temps) ods.tex ods.sty ods.bbl
 	pdflatex $(LFLAGS) ods
@@ -18,12 +26,6 @@ ods.bbl : figs images ods.bib
 
 %-tmp.tex : %.tex $(java) snarf.pl Makefile
 	cat $< | ./snarf.pl > $*-tmp.tex 
-
-figs:
-	cd figs ; make
-
-images:
-	cd images ; make
 
 install : ods.pdf ods-grayscale.pdf
 	scp ods.pdf ods-grayscale.pdf morin@cg.scs.carleton.ca:public_html/ods/
