@@ -215,10 +215,10 @@ $\log_e k$, where $e$ --- \emph{Euler's constant} --- is given by
    e = \lim_{k\rightarrow\infty} \left(1+\frac{1}{n}\right)^n
    \approx  2.71828 \enspace .
 \]
-The natural logarithm comes up frequently because it is the solution
-to a particularly common integral:
+The natural logarithm comes up frequently because it is the value
+of a particularly common integral:
 \[
-    \ln k = \int_{1}^{k} 1/x\,\mathrm{d}x \enspace .
+    \int_{1}^{k} 1/x\,\mathrm{d}x  = \ln k \enspace .
 \]
 Two of the most common manipulations we do with a logarithms are removing them from an exponent:
 \[
@@ -251,16 +251,16 @@ where $c\cdot f(n)$ starts to dominate $g(n)$ when $n$ is sufficiently
 large.
 
 We generally use asymptotic notation to simplify functions.  For example,
-in place of $5n\log_2 n + 8n - 200$ we can write, simply,  $O(n\log_2 n)$.
+in place of $5n\log n + 8n - 200$ we can write, simply,  $O(n\log n)$.
 This is proven as follows:
 \begin{align*} 
-       5n\log_2 n + 8n - 200
-        & \le 5n\log_2 n + 8n \\
-        & \le 5n\log_2 n + 8n\log_2 n & \mbox{ for $n\ge 2$ (so that $\log_2 n \ge 1$)}
+       5n\log n + 8n - 200
+        & \le 5n\log n + 8n \\
+        & \le 5n\log n + 8n\log n & \mbox{ for $n\ge 2$ (so that $\log n \ge 1$)}
             \\
-        & \le 13n\log_2 n 
+        & \le 13n\log n 
 \end{align*}
-which demonstrates that $5n\log_2 n + 8n - 200$ is in $O(\log_2 n)$ using the constants $c=13$ and $n_0 = 2$.
+which demonstrates that $5n\log n + 8n - 200$ is in $O(\log n)$ using the constants $c=13$ and $n_0 = 2$.
 
 There are a number of useful shortcuts when using asymptotic notation.  First:
 \[ O(n^{c_1}) \subset O(n^{c_2}) \enspace ,\]

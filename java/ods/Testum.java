@@ -92,7 +92,7 @@ public class Testum {
 			System.out.print("random contains (" + ss.getClass() + ")...");
 			start = System.nanoTime();
 			Random r = new Random();
-			for (int i = 0; i < n; i++)
+			for (int i = 0; i < 10*n; i++)
 				ss.contains(r.nextInt());
 			stop = System.nanoTime();
 			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");

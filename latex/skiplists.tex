@@ -473,6 +473,15 @@ Skiplists are even part of the Java 1.6 API \cite{oracle_jdk6}.
   skiplist? What is the expected number of nodes in the skiplist?
 \end{exc}
 
+
+\begin{exc}\exclabel{skiplist-opt}
+  Design an implement a #find(x)# method for #SkiplistSet# that avoids
+  \emph{locally-redundant comparisons}; these are comparisons that have already
+  been done and occur because $#u.next[r]# = #u.next[r-1]#$.
+  Analyze the expected number of comparisons done by your modified #find(x)#
+  method.
+\end{exc}
+
 \begin{exc}
   Design and implement a version of a skiplist that implements the
   #SSet# interface, but also allows fast access to elements by rank.

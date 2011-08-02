@@ -422,18 +422,18 @@ structures, the expected length of the search path is the critical value
 in assessing their performance.  In a #SkiplistSet#, the expected length
 of a search path is
 \[
-     2\log_2 #n# + O(1) \enspace ,
+     2\log #n# + O(1) \enspace ,
 \]
 In a treap, the expected length of a search path is 
 \[
-    2\ln #n# +O(1) \approx 1.386\log_2 #n#  + O(1) \enspace .
+    2\ln #n# +O(1) \approx 1.386\log #n#  + O(1) \enspace .
 \]
 Thus, the search paths in a #Treap# are considerably shorter and this
 translates into noticeably faster operations on #Treap#s than #Skiplist#s.
 \excref{skiplist-opt} in \chapref{skiplists} shows how the
 expected length of the search path in a #Skiplist# can be reduced to
 \[
-     e\ln #n# + O(1) \approx 1.884\log_2 #n# + O(1) 
+     e\ln #n# + O(1) \approx 1.884\log #n# + O(1) 
 \]
 by using biased coin tosses.  Even with this optimization, the expected
 length of search paths in a #SkiplistSet# is noticeably longer than in

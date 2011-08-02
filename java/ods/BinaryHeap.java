@@ -3,6 +3,7 @@ package ods;
 import java.util.AbstractQueue;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -13,8 +14,10 @@ import java.util.Random;
  *
  * @param <T>
  */
-public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> {
+public class BinaryHeap<T> extends AbstractQueue<T> {
 	Factory<T> f;
+	
+	Comparator<T> c;
 	
 	/**
 	 * Our backing array
@@ -30,23 +33,34 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> {
 	 * Create a new empty binary heap
 	 * @param c
 	 */
-	public BinaryHeap(Class<T> c) {
-		f = new Factory<T>(c);
+	public BinaryHeap(Class<T> clz) {
+		c = new DefaultComparator<T>();
+		f = new Factory<T>(clz);
 		a = f.newArray(1);
 		n = 0;
 	}
 
 	/**
 	 * Create a new binary heap by heapifying a
+	 * @param a
+	 */
+	public BinaryHeap(T[] a) {
+		this(a, new DefaultComparator<T>());
+	}
+
+	/**
+	 * Create a new binary heap by heapifying a
 	 * @param ia
 	 */
-	public BinaryHeap(T[] ia) {
-		a = ia;
+	public BinaryHeap(T[] a, Comparator<T> c) {
+		this.c = c;
+		this.a = a;
 		n = a.length;
 		for (int i = n/2; i >= 0; i--) {
 			trickleDown(i);
 		}
 	}
+
 
 	protected void resize() {
 		T[] b = f.newArray(Utils.max(2*n,1));
@@ -113,7 +127,7 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> {
 	 */
 	protected void bubbleUp(int i) {
 		int p = parent(i);
-		while (i > 0 && a[i].compareTo(a[p]) < 0) {
+		while (i > 0 && c.compare(a[i], a[p]) < 0) {
 			swap(i,p);
 			i = p;
 			p = parent(i);
@@ -145,16 +159,16 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> {
 		do {
 			int j = -1;
 			int r = right(i);
-			if (r < n && a[r].compareTo(a[i]) < 0) {
+			if (r < n && c.compare(a[r], a[i]) < 0) {
 				int l = left(i);
-				if (a[l].compareTo(a[r]) < 0) {
+				if (c.compare(a[l], a[r]) < 0) {
 					j = l;
 				} else {
 					j = r;
 				}
 			} else {
 				int l = left(i);
-				if (l < n && a[l].compareTo(a[i]) < 0) {
+				if (l < n && c.compare(a[l], a[i]) < 0) {
 					j = l;
 				}
 			}
@@ -187,13 +201,18 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> {
 	 * @param <T>
 	 * @param a
 	 */
-	public static <T extends Comparable<T>> void sort(T[] a) {
-		BinaryHeap<T> h = new BinaryHeap<T>(a);
+	
+	public static <T> void sort(T[] a, Comparator<T> c) {
+		BinaryHeap<T> h = new BinaryHeap<T>(a, c);
 		while (h.n > 1) {
 			h.swap(--h.n, 0);
 			h.trickleDown(0);
 		}
 		Collections.reverse(Arrays.asList(a));
+	}
+
+	public static <T extends Comparable<T>> void sort(T[] a) {
+		sort(a, new DefaultComparator<T>());
 	}
 	
 	/**
