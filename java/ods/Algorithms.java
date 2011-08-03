@@ -17,6 +17,10 @@ public class Algorithms {
 		T[] a1 = Arrays.copyOfRange(a, a.length/2, a.length);
 		mergeSort(a0, c);
 		mergeSort(a1, c);
+		merge(a0, a1, a, c);
+	}
+
+	protected static <T> void merge(T[] a0, T[] a1, T[] a, Comparator<T> c) {
 		int i0 = 0, i1 = 0;
 		for (int i = 0; i < a.length; i++) {
 			if (i0 == a0.length)
@@ -29,6 +33,7 @@ public class Algorithms {
 				a[i] = a1[i1++];
 		}
 	}
+
 	
 	
 

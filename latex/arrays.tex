@@ -54,7 +54,7 @@ so an integer #n# is used to keep track of the number of elements
 actually stored in #a#.  In this way, the list elements are stored in
 #a[0]#,\ldots,#a[n-1]# and, at all times, $#a.length# \ge #n#$.
 
-\javaimportwithclass{ods/ArrayStack.a.n.size()}
+\javaimport{ods/ArrayStack.a.n.size()}
 
 \subsection{The Basics}
 
@@ -281,7 +281,7 @@ the array.
 The only remaining thing to worry about is taking care that the number
 of elements in the #ArrayQueue# does not exceed the size of #a#.
 
-\javaimportwithclass{ods/ArrayQueue.a.j.n}
+\javaimport{ods/ArrayQueue.a.j.n}
 
 A sequence of #add(x)# and #remove()# operations on an #ArrayQueue# is
 illustrated in \figref{arrayqueue}.  To implement #add(x)#, we first
@@ -350,7 +350,7 @@ data structure allows for efficient addition and removal at both ends.
 This structure implements the #List# interface using the same circular
 array technique used to represent an #ArrayQueue#.
 
-\javaimportwithclass{ods/ArrayDeque.a.j.n}
+\javaimport{ods/ArrayDeque.a.j.n}
 
 The #get(i)# and #set(i,x)# operations on an #ArrayDeque# are
 straightforward.  They get or set the array element $#a[#{#(j+i)#\bmod
@@ -425,7 +425,7 @@ an #ArrayStack# is fast when the operations on it modify elements near
 the end.  A #DualArrayDeque# places two #ArrayStack#s, called #front#
 and #back#, back-to-back so that operations are fast at either end.
 
-\javaimportwithclass{ods/DualArrayDeque.front.back}
+\javaimport{ods/DualArrayDeque.front.back}
 
 A #DualArrayDeque# does not explicitly store the number, #n#,
 of elements it contains.  It doesn't need to, since it contains
@@ -633,7 +633,7 @@ mathematician Gau\ss\ at the age of 9) can be obtained as shown in
   \figlabel{rootisharraystack}
 \end{figure}
 
-\javaimportwithclass{ods/RootishArrayStack.blocks.n}
+\javaimport{ods/RootishArrayStack.blocks.n}
 
 \begin{figure}
   \begin{center}
