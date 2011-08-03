@@ -62,7 +62,7 @@ sub snarfit($$) {
         $line =~ s/extends\s+([$w]+\s*,\s*)*([$w]+)//g;
   	printVerbatim($line); 
     } elsif ($d == 1) {
-      if ($line =~ /^\s*($k\s+)*[$w]+\s+([$w]+)\(.*\)/) {
+      if ($line =~ /^\s*($k\s+)*(\<[^>]\>)?\s*[$w]+\s+([$w]+)\(.*\)/) {
         # this is a method definition
         $line =~ /([$w]+)\s*\(/;
         my $method = $1;
@@ -122,18 +122,14 @@ MAIN: {
       }
       $line =~ s/#([^#])*#/$inside/;
     } 
-    if ($line =~ /\\javaimport(withclass)?\{([^}#]+)\}/) {
-      my $withclass=0; #$1;
-      my $args=$2;
+    if ($line =~ /\\javaimport\{([^}]+)\}/) {
+      my $args=$1;
       (my $class) = $line =~ /\{\w+\/(\w+)\./;
       print("\\begin{Verbatim}[tabsize=2,frame=single");
       print(',commandchars=\\\\@\\$');
       print(",label=\\texttt{$class},labelposition=topline");
       print("]\n"); 
-      snarfit($args, 0);  #$withclass);
-      if ($withclass) {
-        printVerbatim("  ...\n}");
-      }
+      snarfit($args, 0); 
       print("\\end{Verbatim}\n");
     } else {
       print($line);
