@@ -27,9 +27,10 @@ The following theorem shows that #mergeSort(a,c)# is a very efficient algorithm:
 \begin{proof}
 The proof is by induction on $#n#$.  The base case $#n#=1$ is trivial.
 
-Merging two sorted lists of total length $#n#$ requires at most $#n#-1$
-comparisons. If $#n#$ is even, then we apply the inductive hypothesis to
-the two subproblems and obtain
+Note that all comparisons done in the algorithm are done by
+#merge(a0,a1,a)# during the merging phase of the algorithm.  The number of
+comparisons done by #merge(a0,a1,a)# is at most $#n#-1$. If $#n#$ is even,
+then we apply the inductive hypothesis to the two subproblems and obtain
 \begin{align*}
   C(#n#) 
   &= #n#-1 + 2C(#n#/2) \\
@@ -67,9 +68,36 @@ Multiplying both sides of this inequality by $\log e$ yields
 $\log (x+1/2) < \log x + (\log e)/2x$.
 \end{proof}
 
-
+The #mergeSort(a,c)# algorithm is a classic.  It uses very few comparisons
+and is quite fast.  The only drawback of this algorithm is that it uses
+two additional arrays #a0# and #a1# of total size #n#.  These arrays
+are allocated at run-time, which can be slow, and is a potential point
+of failure if the available memory is limited.  The next two sections
+discuss algorithms that are \emph{in-place}; they do all their work in
+the original array #a# and don't use any auxilliary arrays.
 
 \section{Quicksort}
+
+The \emph{quicksort} algorithm is another classic divide and conquer
+algorithm.  Unlike merge sort, which does merging after solving the two
+subproblems, quick sort does all its work upfront.
+
+The algorithm is simple to describe:  Pick a random element #x# from #a#;
+partition #a# into the the set of elements less than #x#, the set of
+elements equal to #x#, and the set of elements greater than #x#; and,
+finally, recursively sort the first and third sets in this partition.
+\javaimport{ods/Algorithms.quickSort(a,c).quickSort(a,i,n,c)}
+All of this is done in-place, so that instead of making copies of
+subarrays being sorted, the #quickSort(a,i,n,c)# method only sorts the
+subarray $#a[i]#,\ldots,#a[i+n-1]#$.  Initially, this method is called
+as #quickSort(a,0,a.length,c)#.
+
+Quicksort is very closely related to 
+
+
+
+
+
 \section{Heapsort}
 
 
