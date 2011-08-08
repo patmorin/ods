@@ -100,9 +100,9 @@ for an explanation.)
 
 We will prove \lemref{rbs} in the next section.  For now, we can consider
 what the two parts of \lemref{rbs} tell us.  The first part tells us
-that if we search for an element #x# that is in the tree, then expected
+that if we search for an element, #x#, that is in the tree, then the expected
 length of the search path is at most $2\ln n + O(1)$.  The second part
-tells us the same thing for elements #x# that are not stored in the tree.
+tells us the same thing for an element, $#x#+1/2$, that is not stored in the tree.
 When we compare the two parts, we see that it is only slightly faster
 to search for something that is in the tree compared to something that
 is not in the tree.
@@ -111,7 +111,7 @@ is not in the tree.
 \subsection{Proof of \lemref{rbs}}
 
 The key observation needed to prove \lemref{rbs} is the following: The
-search path for $#x#+1/2$ in a random binary search tree $T$ contains
+search path for $#x#+1/2$ in a random binary search tree, $T$, contains
 the node with key $i \le #x#$ if and only if, in the random permutation
 used to create $T$, $i$ appears before any of $\{i+1,i+2,\ldots,#x#\}$.
 
@@ -182,16 +182,16 @@ number of such nodes is
 All these nodes contain values in the set $X=\{#x#+1,\ldots,#n#-1\}$.
 The permutation that created $T$ induces a permutation
 $P=p_0,\ldots,p_{#n#-#x#}$ on the set $X\cup\{#x#\}$.  Suppose #x# occurs
-at position $i$ in $P$, so that $p_i=#x#$.  Then, the same reasoning used
+at position $j$ in $P$, so that $p_j=#x#$.  Then, the same reasoning used
 in the proof of the first part of the lemma shows that the expected number
-of elements of $P$ on the search path for #x# is  $H_{i}$.  Now, #x#
+of elements of $P$ on the search path for #x# is  $H_{j}$.  Now, #x#
 is equally likely to occur in the $#n#-#x#+1$ possible position in $P$,
 so the expected number of elements in $P$ on the search path for #x#
 is given by
 \newcommand{\nx}{\mathtt{n}-\mathtt{x}}
 \begin{eqnarray*}
- \sum_{i=0}^{#n#-#x#}\Pr\{p_i=#x#\}\cdot H_{i} 
- &= &\sum_{i=0}^{#n#-#x#}\frac{1}{#n#-#x#+1}\cdot H_{i}  \\
+ \sum_{j=0}^{#n#-#x#}\Pr\{p_j=#x#\}\cdot H_{j} 
+ &= &\sum_{j=0}^{#n#-#x#}\frac{1}{#n#-#x#+1}\cdot H_{j}  \\
   &=& \frac{1}{#n#-#x#+1}\left(\begin{array}{l@{\,}l}
          1 + {} \\
    1 + \frac{1}{2} + {} \\
