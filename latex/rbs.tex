@@ -54,7 +54,14 @@ We can formalize this notion by studying random binary search trees.
 A \emph{random binary search tree} of size #n# is obtained in the
 following way:  Take a random permutation $#x#_0,\ldots,#x#_{#n#-1}$
 of $0,\ldots,#n#-1$ and add its elements, one by one, into a
-#BinarySearchTree#.  
+#BinarySearchTree#.
+
+Note that the values $0,\ldots,#n#-1$ could be replaced by any ordered
+set of #n# elements without changing any of the properties of the
+random binary search tree.  The element $#x#\in\{0,\ldots,#n#-1\}$ is
+simply standing in for the element of rank #x# in an ordered set of
+size #n#, i.e. the element which is greater than #x# and less than
+$#n#-#x#-1$ elements in the set.
 
 Before we can present our main result about random binary search trees,
 we must take some time for a short digression to discuss a type of number that comes
@@ -92,18 +99,21 @@ for an explanation.)
   In a random binary search tree of size #n#, the following statements hold:
   \begin{enumerate}
     \item For any $#x#\in\{0,\ldots,#n#-1\}$, the expected length of
-    the search path for #x# is $H_{#x#+1} + H_{#n#-#x#} - O(1)$.
+    the search path for #x# is $H_{#x#+1} + H_{#n#-#x#-1} - O(1)$.\footnote{It may be useful to interpret the expressions $#x#+1$ and $#n#-#x#-1$ as the number of elements in the tree less than or equal to #x# and the number of elements in the tree greater than #x# respectively.}
     \item For any $#x#\in\{-1,\ldots,#n#-1\}$, the expected length of the
-    search path for $#x#+1/2$ is $H_{#x#+1} + H_{#n#-#x#}$.
+    search path for $#x#+1/2$ is $H_{#x#+1} + H_{#n#-#x#-1}$.
   \end{enumerate}
 \end{lem}
 
-We will prove \lemref{rbs} in the next section.  For now, we can consider
+We will prove \lemref{rbs} in the next section.  For now, we will consider
 what the two parts of \lemref{rbs} tell us.  The first part tells us
-that if we search for an element, #x#, that is in the tree, then the expected
+that if we search for the element of rank #x# in a tree of size #n#, then the expected
 length of the search path is at most $2\ln n + O(1)$.  The second part
-tells us the same thing for an element, $#x#+1/2$, that is not stored in the tree.
-When we compare the two parts, we see that it is only slightly faster
+tells us the same thing about searching for a value not stored in the
+tree; here, $#x#+1/2$ stands in for a value between the element of
+rank #x# and its successor in the tree or for a lower or upper bound
+on the elements in the tree (when #x# is $-1$ or $n-1$ respectively).
+When we compare the two parts of the lemma, we see that it is only slightly faster
 to search for something that is in the tree compared to something that
 is not in the tree.
 
