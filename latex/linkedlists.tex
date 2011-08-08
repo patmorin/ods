@@ -32,7 +32,7 @@ the sequence.  For the last node #w# in the sequence, $#w.next# = #null#$
 For efficiency, an #SLList# uses variables #head# and #tail# to keep
 track of the first and last node in the sequence, as well as an integer
 #n# to keep track of the length of the sequence:
-\javaimportwithclass{ods/SLList.head.tail.n}
+\javaimport{ods/SLList.head.tail.n}
 A sequence of #Stack# and #Queue# operations on an #SLList# is
 illustrated in \figref{sllist}.
 
@@ -129,7 +129,7 @@ a cycle, as illustrated in \figref{dllist}.
 
 %TODO: Remove constructors from class Node
 
-\javaimportwithclass{ods/DLList.n.dummy.DLList()}
+\javaimport{ods/DLList.n.dummy.DLList()}
 
 Finding the node with a particular index in a #DLList# is easy;  we can
 either start at the head of the list (#dummy.next#) and work forward,
@@ -243,7 +243,7 @@ will be useful as elements are shifted from one block to another.
 An #SEList# is then a doubly-linked list of blocks:
 
 \javaimport{ods/SEList.Node}
-\javaimportwithclass{ods/SEList.n.dummy}
+\javaimport{ods/SEList.n.dummy}
 
 \subsection{Space Requirements}
 
