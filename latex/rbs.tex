@@ -99,41 +99,39 @@ for an explanation.)
   In a random binary search tree of size #n#, the following statements hold:
   \begin{enumerate}
     \item For any $#x#\in\{0,\ldots,#n#-1\}$, the expected length of
-    the search path for #x# is $H_{#x#+1} + H_{#n#-#x#-1} - O(1)$.\footnote{It may be useful to interpret the expressions $#x#+1$ and $#n#-#x#-1$ as the number of elements in the tree less than or equal to #x# and the number of elements in the tree greater than #x# respectively.}
-    \item For any $#x#\in\{-1,\ldots,#n#-1\}$, the expected length of the
-    search path for $#x#+1/2$ is $H_{#x#+1} + H_{#n#-#x#-1}$.
+    the search path for #x# is $H_{#x#+1} + H_{#n#-#x#} - 2$.\footnote{The expressions $#x#+1$ and $#n#-#x#$ can be interprted respectively as the number of elements in the tree less than or equal to #x# and the number of elements in the tree greater than or equal to #x#.}
+    \item For any $#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$, the expected length of the
+    search path for #x# is $H_{\lfloor#x#\rfloor+1} + H_{#n#-\lceil#x#\rceil}$.
   \end{enumerate}
 \end{lem}
 
 We will prove \lemref{rbs} in the next section.  For now, we will consider
 what the two parts of \lemref{rbs} tell us.  The first part tells us
-that if we search for the element of rank #x# in a tree of size #n#, then the expected
+that if we search for an element in a tree of size #n#, then the expected
 length of the search path is at most $2\ln n + O(1)$.  The second part
 tells us the same thing about searching for a value not stored in the
-tree; here, $#x#+1/2$ stands in for a value between the element of
-rank #x# and its successor in the tree or for a lower or upper bound
-on the elements in the tree (when #x# is $-1$ or $n-1$ respectively).
+tree.
 When we compare the two parts of the lemma, we see that it is only slightly faster
-to search for something that is in the tree compared to something that
-is not in the tree.
+to search for something that is in a tree compared to something that
+is not in a tree.
 
 
 \subsection{Proof of \lemref{rbs}}
 
 The key observation needed to prove \lemref{rbs} is the following: The
-search path for $#x#+1/2$ in a random binary search tree, $T$, contains
-the node with key $i \le #x#$ if and only if, in the random permutation
-used to create $T$, $i$ appears before any of $\{i+1,i+2,\ldots,#x#\}$.
+search path for a value #x# in the open interval $(-1,#n#)$ in a random binary search tree, $T$, contains
+the node with key $i < #x#$ if and only if, in the random permutation
+used to create $T$, $i$ appears before any of $\{i+1,i+2,\ldots,\lfloor#x#\rfloor\}$.
 
-To see this, refer to \figref{rbst-records} and notice that, until some value in $\{i,i+1,\ldots,#x#\}$
-is added, the search paths for each of $\{i,i+1,\ldots,#x#,#x#+1/2\}$
-are identical.
-Let $j$ be the first element in $\{i,i+1,\ldots,#x#\}$ to appear in the
+To see this, refer to \figref{rbst-records} and notice that, until some value in $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$
+is added, the search paths for each value in the open interval $(i-1,\lfloor#x#\rfloor+1)$
+are identical.  (Remember that for two search values to have different search paths, there must be some element in the tree that compares differently with them.)
+Let $j$ be the first element in $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ to appear in the
 random permutation.  Notice that $j$ is now and will always be on the
-search path for $#x#+1/2$.  If $j\neq i$ then the node $#u#_j$ containing
+search path for #x#.  If $j\neq i$ then the node $#u#_j$ containing
 $j$ is created before the node $#u#_i$ that contains $i$.  Later, when
 $i$ is added, it will be added to the subtree rooted at $#u#_j#.left#$,
-since $i<j$.  On the other hand, the search path for $#x#+1/2$ will
+since $i<j$.  On the other hand, the search path for #x# will
 never visit this subtree because it will proceed to $#u#_j#.right#$
 after visiting $#u#_j$.
 
@@ -141,92 +139,52 @@ after visiting $#u#_j$.
   \begin{center}
     \includegraphics{figs/rbst-records}
   \end{center}
-  \caption{The value $i\le x$ is on the search path to $#x#+1/2$ if and only
-   if $i$ is the first element among $\{i,i+1,\ldots,#x#\}$ added to the tree.}
+  \caption{The value $i<#x#$ is on the search path for #x# if and only
+   if $i$ is the first element among $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ added to the tree.}
   \figlabel{rbst-records}
 \end{figure}
 
-Similarly, for $i>#x#$, $i$ appears in the search path for $#x#+1/2$ if
-and only if $i$ appears before any of $\{#x#+1,#x#+2,\ldots,i-1\}$ in the
-random permutation used to create $T$.  Since, in a random permutation,
-each element is equally likely to occur at any location, we have
+Similarly, for $i>#x#$, $i$ appears in the search path for #x# if
+and only if $i$ appears before any of $\{\lceil#x#\rceil, \lceil#x#\rceil+1,\ldots,i-1\}$ in the
+random permutation used to create $T$.
+
+From probability theory, the subsequence containing any independently
+chosen subset of a random permutation is a random permutation of the
+subset.  Each element, then, in the subsets $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ and
+$\{\lceil#x#\rceil, \lceil#x#\rceil+1,\ldots,i-1\}$ is equally likely to appear before any
+other in its subset in the random permutation used to create $T$.  So we have
+
 \[
-  \Pr\{\mbox{$i$ is on the search path for $#x#+1/2$}\}
+  \Pr\{\mbox{$i$ is on the search path for #x#}\}
   = \left\{ \begin{array}{ll}
-     1/(#x#-i+1) & \mbox{if $i \le #x#$} \\
-     1/(i-#x#) & \mbox{if $i > #x#$} 
-     \end{array}\right.
+     1/(\lfloor#x#\rfloor-i+1) & \mbox{if $i < #x#$} \\
+     1/(i-\lceil#x#\rceil+1) & \mbox{if $i > #x#$} 
+     \end{array}\right . \enspace .
 \]
 
-With this observation, the proof of the second part of \lemref{rbs}
+With this observation, the proof of \lemref{rbs}
 involves some simple calculations with harmonic numbers:
 
-\begin{proof}[Proof of \lemref{rbs} Part 2]
-Let $I_i$ be the indicator random variable that is equal to 1 when $i$ appears on the search path for $#x#+1/2$ and 0 otherwise.  Then the length of the search path is given by
+\begin{proof}[Proof of \lemref{rbs}]
+Let $I_i$ be the indicator random variable that is equal to 1 when $i$ appears on the search path for #x# and 0 otherwise.  Then the length of the search path is given by
 \[
-  \sum_{i=0}^{#n#-1} I_i
+  \sum_{i\in\{0,\ldots,#n#-1\}\setminus\{#x#\}} I_i
 \]
-so the expected length of the search path is given by
+so, if $#x#\in\{0,\ldots,#n#-1\}$, the expected length of the search path is given by
 \begin{align*}
-  \E\left[\sum_{i=0}^{#n#-1} I_i\right] 
-   & =  \sum_{i=0}^{#n#-1} \E\left[I_i\right] \\
-   & =  \sum_{i=0}^{#x#} \E\left[I_i\right]
+  \E\left[\sum_{i=0}^{#x#-1} I_i + \sum_{i=#x#+1}^{#n#-1} I_i\right]
+   & =  \sum_{i=0}^{#x#-1} \E\left[I_i\right]
          + \sum_{i=#x#+1}^{#n#-1} \E\left[I_i\right] \\
-   & =  \sum_{i=0}^{#x#} 1/(#x#-i+1)
-         + \sum_{i=#x#+1}^{#n#-1} 1/(i-#x#) \\
-   & =  1+\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{#x#+1}  \\
-   &     {} + 1 + \frac{1}{2}+\frac{1}{3}+\cdot+\frac{1}{#n#-#x#}  \\
-   & =  H_{#x#+1} + H_{#n#-#x#}  \enspace . \qedhere
+   & = \sum_{i=0}^{#x#-1} 1/(\lfloor#x#\rfloor-i+1)
+         + \sum_{i=#x#+1}^{#n#-1} 1/(i-\lceil#x#\rceil+1) \\
+   & = \sum_{i=0}^{#x#-1} 1/(#x#-i+1)
+         + \sum_{i=#x#+1}^{#n#-1} 1/(i-#x#+1) \\
+   & = \frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{#x#+1} \\
+   & {} + \frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{#n#-#x#} \\
+   & = H_{#x#+1} + H_{#n#-#x#} - 2  \enspace .
 \end{align*}
-\end{proof}
-
-Proving the first part of \lemref{rbs} is a slightly more complicated
-exercise in manipulating harmonic series:  
-\begin{proof}[Proof of \lemref{rbs} Part 1]
-We will study the number of nodes at which the search path for #x# goes
-from a node #u# to its left child #u.left# and show that the expected
-number of such nodes is
-\[
-   H_{#n#-#x#} - O(1) \enspace .
-\]
-All these nodes contain values in the set $X=\{#x#+1,\ldots,#n#-1\}$.
-The permutation that created $T$ induces a permutation
-$P=p_0,\ldots,p_{#n#-#x#}$ on the set $X\cup\{#x#\}$.  Suppose #x# occurs
-at position $j$ in $P$, so that $p_j=#x#$.  Then, the same reasoning used
-in the proof of the first part of the lemma shows that the expected number
-of elements of $P$ on the search path for #x# is  $H_{j}$.  Now, #x#
-is equally likely to occur in the $#n#-#x#+1$ possible position in $P$,
-so the expected number of elements in $P$ on the search path for #x#
-is given by
-\newcommand{\nx}{\mathtt{n}-\mathtt{x}}
-\begin{eqnarray*}
- \sum_{j=0}^{#n#-#x#}\Pr\{p_j=#x#\}\cdot H_{j} 
- &= &\sum_{j=0}^{#n#-#x#}\frac{1}{#n#-#x#+1}\cdot H_{j}  \\
-  &=& \frac{1}{#n#-#x#+1}\left(\begin{array}{l@{\,}l}
-         1 + {} \\
-   1 + \frac{1}{2} + {} \\
-   1 + \frac{1}{2} + \frac{1}{3} + \\
-   \vdots & \ddots \\
-   1 + \frac{1}{2} + \frac{1}{3} + & \cdots + \frac{1}{#n#-#x#} \\
-    \end{array}\right) \\
-  &=& \frac{1}{#n#-#x#+1}\left(\begin{array}{l@{\,}l}
-   \color{fm}{1 + \frac{1}{2} + \frac{1}{3} +} & \color{fm}{\cdots + \frac{1}{\nx}} \\
-   1 + \color{fm}{\frac{1}{2} + \frac{1}{3} +} & \color{fm}{\cdots +\frac{1}{\nx}} \\
-   1 + \frac{1}{2} + \color{fm}{\frac{1}{3} +} & \color{fm}{\cdots +\frac{1}{\nx}} \\
-   1 + \frac{1}{2} + \frac{1}{3} \color{fm}{{} +} &\color{fm}{\cdots +\frac{1}{\nx}} \\
-   \vdots & \ddots \quad\,\,\,\,  \color{fm}{\vdots} \\
-   1 + \frac{1}{2} + \frac{1}{3} + &\cdots + \frac{1}{\nx} \\
-    \end{array}\right) - \color{fm}{(\nx)}\\
-   &=& \frac{1}{#n#-#x#+1}\left((#n#-#x#+1)H_{#n#-#x#} - (#n#-#x#)\right) \\
-   &=& H_{#n#-#x#} - \frac{#n#-#x#}{#n#-#x#+1} \\
-   &=& H_{#n#-#x#} - O(1)
-\end{eqnarray*}
-
-A symmetric argument to the one above proves that the expected number of
-nodes at which the search path proceeds from a node to its right child is
-$H_{#x#+1} - O(1)$.
-Therefore, the expected length of the search
-path for #x# is $H_{#x#+1} + H_{#n#-#x#}-O(1)$, as required.
+The corresponding calculations for a search value not found in the
+tree are almost identical.
 \end{proof}
 
 \subsection{Summary}
