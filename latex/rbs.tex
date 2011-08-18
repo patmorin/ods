@@ -434,10 +434,11 @@ probably work well for this in practice, for the important parts of the
 proof of \lemref{rbs} to remain valid, the hash function should be randomized
 and have the \emph{min-wise independent property}:  For any distinct
 values $x_1,\ldots,x_k$, each of the hash values $h(x_1),\ldots,h(x_k)$
-should be distinct and, for each $i\in\{1,\ldots,k\}$,
+should be distinct with high probability and, for each $i\in\{1,\ldots,k\}$,
 \[
    \Pr\{h(x_i) = \min\{h(x_1),\ldots,h(x_k)\}\} \le c/k
 \]
+for some constant $c$.
 One such class of hash functions that is easy to implement and fairly
 fast is \emph{tabulation hashing} \cite{pt10}.
 
