@@ -233,10 +233,11 @@ h
 <layer name="beta"/>
 <layer name="gamma"/>
 <layer name="delta"/>
-<view layers="alpha delta" active="alpha"/>
-<view layers="alpha beta delta" active="beta"/>
+<layer name="epsilon"/>
+<view layers="alpha delta epsilon" active="alpha"/>
+<view layers="alpha beta delta epsilon" active="beta"/>
 <view layers="alpha gamma delta" active="delta"/>
-<view layers="alpha gamma delta" active="beta"/>
+<view layers="alpha gamma delta epsilon" active="beta"/>
 <path layer="beta" stroke="black" fill="pink">
 198.644 211.781 m
 198.644 211.781 l
@@ -540,12 +541,17 @@ h
 260.05 96.8 l
 h
 </path>
-<text layer="delta" matrix="1 0 0 1 -0.477359 -0.666271" transformations="translations" pos="149.477 112.837" stroke="black" type="label" halign="center" valign="baseline">$1$</text>
+<text layer="epsilon" matrix="1 0 0 1 -0.477359 -0.666271" transformations="translations" pos="149.477 112.837" stroke="black" type="label" halign="center" valign="baseline">$1$</text>
 <text matrix="1 0 0 1 -1.26376 -2.2209" transformations="translations" pos="167.689 114.392" stroke="black" type="label" halign="center" valign="baseline">$2$</text>
 <text matrix="1 0 0 1 -0.914713 1.11045" transformations="translations" pos="184.79 111.06" stroke="black" type="label" halign="center" valign="baseline">$3$</text>
+<text layer="gamma" matrix="1 0 0 1 1.4195 -1.33254" transformations="translations" pos="130.156 113.503" stroke="black" type="label" halign="center" valign="baseline">$1$</text>
+<text matrix="1 0 0 1 -0.477359 -0.666271" transformations="translations" pos="149.477 112.837" stroke="black" type="label" halign="center" valign="baseline">$2$</text>
+<text matrix="1 0 0 1 -1.26376 -2.2209" transformations="translations" pos="167.689 114.392" stroke="black" type="label" halign="center" valign="baseline">$3$</text>
 <text layer="beta" matrix="1 0 0 1 1.4195 -1.33254" transformations="translations" pos="130.156 113.503" stroke="black" type="label" halign="center" valign="baseline">$0$</text>
-<text layer="delta" matrix="1 0 0 1 0.737557 0" transformations="translations" pos="305.163 112.171" stroke="black" type="label" halign="center" valign="baseline">$k$</text>
+<text layer="epsilon" matrix="1 0 0 1 0.737557 0" transformations="translations" pos="305.163 112.171" stroke="black" type="label" halign="center" valign="baseline">$k$</text>
 <text matrix="1 0 0 1 8.3137 -1.11045" transformations="translations" pos="230.762 113.281" stroke="black" type="label" valign="baseline">$\ldots$</text>
+<text layer="gamma" matrix="1 0 0 1 0.737557 0" transformations="translations" pos="287.73 112.171" stroke="black" type="label" halign="center" valign="baseline">$k$</text>
+<text matrix="1 0 0 1 8.3137 -1.11045" transformations="translations" pos="213.33 113.281" stroke="black" type="label" valign="baseline">$\ldots$</text>
 <text layer="beta" transformations="translations" pos="182.637 183.428" stroke="seagreen" type="label" valign="baseline">$f(x)=1/x$</text>
 <path layer="alpha" matrix="0.5 0 0 0.5 106.15 89.4001" stroke="black">
 85.7 178.8 m

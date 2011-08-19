@@ -8,7 +8,7 @@ In this chapter, we present a binary search tree structure that uses randomizati
 Consider the two binary search trees shown in
 \figref{rbs-lvc}.  The one on the left is a list and the
 other is a perfectly balanced binary search tree. The one on the left
-has height $#n#-1=14$ and the one on the right has height $3$.
+has height $#n#-1=14$ and the one on the right has height three.
 
 \begin{figure}
   \begin{center}
@@ -42,7 +42,7 @@ and
     \langle 7,3,1,11,5,0,2,4,6,9,13,8,10,12,14 \rangle \enspace .
 \]
 In fact, there are $21,964,800$ addition sequences that generate the
-tree on the right and only 1 that generates the tree on the left.
+tree on the right and only one that generates the tree on the left.
 
 The above example gives some anecdotal evidence that, if we choose a
 random permutation of $0,\ldots,14$, and add it into a binary search
@@ -51,13 +51,19 @@ hand of \figref{rbs-lvc}) than we are to get a very unbalanced tree
 (the left hand of \figref{rbs-lvc}).
 
 We can formalize this notion by studying random binary search trees.
-A \emph{random binary search tree} of size #n# is obtained the
+A \emph{random binary search tree} of size #n# is obtained in the
 following way:  Take a random permutation $#x#_0,\ldots,#x#_{#n#-1}$
-of $0,\ldots,#n#-1$ and add the elements, one by one, into a
-#BinarySearchTree#.  
+of $0,\ldots,#n#-1$ and add its elements, one by one, into a
+#BinarySearchTree#.
+
+Note that the values $0,\ldots,#n#-1$ could be replaced by any ordered
+set of #n# elements without changing any of the properties of the
+random binary search tree.  The element $#x#\in\{0,\ldots,#n#-1\}$ is
+simply standing in for the element of rank #x# in an ordered set of
+size #n#.
 
 Before we can present our main result about random binary search trees,
-we take time for short digression to discuss a type of number that comes
+we must take some time for a short digression to discuss a type of number that comes
 up frequently when studying randomized structures. For a non-negative
 integer, $k$, the $k$-th \emph{harmonic number}, denoted $H_k$, is
 defined as
@@ -92,39 +98,39 @@ for an explanation.)
   In a random binary search tree of size #n#, the following statements hold:
   \begin{enumerate}
     \item For any $#x#\in\{0,\ldots,#n#-1\}$, the expected length of
-    the search path for #x# is $H_{#x#+1} + H_{#n#-#x#} - O(1)$.
-    \item For any $#x#\in\{-1,\ldots,#n#-1\}$, the expected length of the
-    search path for $#x#+1/2$ is $H_{#x#+1} + H_{#n#-#x#}$.
+    the search path for #x# is $H_{#x#+1} + H_{#n#-#x#} - O(1)$.\footnote{The expressions $#x#+1$ and $#n#-#x#$ can be interpreted respectively as the number of elements in the tree less than or equal to #x# and the number of elements in the tree greater than or equal to #x#.}
+    \item For any $#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$, the expected length of the
+    search path for #x# is $H_{\lceil#x#\rceil} + H_{#n#-\lceil#x#\rceil}$.
   \end{enumerate}
 \end{lem}
 
-We will prove \thmref{rbs} in the next section.  For now, we can consider
-what the two parts of \thmref{rbs} tell us.  The first part tells us
-that if we search for an element #x# that is in the tree, then expected
+We will prove \lemref{rbs} in the next section.  For now, we will consider
+what the two parts of \lemref{rbs} tell us.  The first part tells us
+that if we search for an element in a tree of size #n#, then the expected
 length of the search path is at most $2\ln n + O(1)$.  The second part
-tells us the same thing for elements #x# that are not stored in the tree.
-When we compare the two parts, we see that it is only slightly faster
-to search for something that is in the tree compared to something that
-is not in the tree.
+tells us the same thing about searching for a value not stored in the
+tree.
+When we compare the two parts of the lemma, we see that it is only slightly faster
+to search for something that is in a tree compared to something that
+is not in a tree.
 
 
 \subsection{Proof of \lemref{rbs}}
 
 The key observation needed to prove \lemref{rbs} is the following: The
-search path for $#x#+1/2$ in a random binary search tree $T$ contains
-the node with key $i \le #x#$ if and only if, in the random permutation
-used to create $T$, $i$ appears before any of $\{i+1,i+2,\ldots,#x#\}$.
+search path for a value #x# in the open interval $(-1,#n#)$ in a random binary search tree, $T$, contains
+the node with key $i < #x#$ if and only if, in the random permutation
+used to create $T$, $i$ appears before any of $\{i+1,i+2,\ldots,\lfloor#x#\rfloor\}$.
 
-Refer to \figref{rbst-records}.
-To see this, notice that, until some value in $\{i,i+1,\ldots,#x#\}$
-is added, the search paths for each of $\{i,i+1,\ldots,#x#,#x#+1/2\}$
-are identical.
-Let $j$ be the first element in $\{i,i+1,\ldots,#x#\}$ to appear in the
+To see this, refer to \figref{rbst-records} and notice that, until some value in $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$
+is added, the search paths for each value in the open interval $(i-1,\lfloor#x#\rfloor+1)$
+are identical.  (Remember that for two search values to have different search paths, there must be some element in the tree that compares differently with them.)
+Let $j$ be the first element in $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ to appear in the
 random permutation.  Notice that $j$ is now and will always be on the
-search path for $#x#+1/2$.  If $j\neq i$ then the node $#u#_j$ containing
+search path for #x#.  If $j\neq i$ then the node $#u#_j$ containing
 $j$ is created before the node $#u#_i$ that contains $i$.  Later, when
 $i$ is added, it will be added to the subtree rooted at $#u#_j#.left#$,
-since $i<j$.  On the other hand, the search path for $#x#+1/2$ will
+since $i<j$.  On the other hand, the search path for #x# will
 never visit this subtree because it will proceed to $#u#_j#.right#$
 after visiting $#u#_j$.
 
@@ -132,92 +138,52 @@ after visiting $#u#_j$.
   \begin{center}
     \includegraphics{figs/rbst-records}
   \end{center}
-  \caption{The value $i\le x$ is on the search path to $#x#+1/2$ if and only
-   if $i$ is the first element among $\{i,i+1,\ldots,#x#\}$ added to the tree.}
+  \caption{The value $i<#x#$ is on the search path for #x# if and only
+   if $i$ is the first element among $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ added to the tree.}
   \figlabel{rbst-records}
 \end{figure}
 
-Similarly, for $i>#x#$, $i$ appears in the search path for $#x#+1/2$ if
-and only if $i$ appears before any of $\{#x#+1,#x#+2,\ldots,i-1\}$ in the
-random permutation used to create $T$.  Since, in a random permutation,
-each element is equally likely to occur at any location, we have
+Similarly, for $i>#x#$, $i$ appears in the search path for #x# if
+and only if $i$ appears before any of $\{\lceil#x#\rceil, \lceil#x#\rceil+1,\ldots,i-1\}$ in the
+random permutation used to create $T$.
+
+From probability theory, the subsequence containing any independently
+chosen subset of a random permutation is a random permutation of the
+subset.  Each element, then, in the subsets $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ and
+$\{\lceil#x#\rceil, \lceil#x#\rceil+1,\ldots,i-1\}$ is equally likely to appear before any
+other in its subset in the random permutation used to create $T$.  So we have
+
 \[
-  \Pr\{\mbox{$i$ is on the search path for $#x#+1/2$}\}
+  \Pr\{\mbox{$i$ is on the search path for #x#}\}
   = \left\{ \begin{array}{ll}
-     1/(#x#-i+1) & \mbox{if $i \le #x#$} \\
-     1/(i-#x#) & \mbox{if $i > #x#$} 
-     \end{array}\right.
+     1/(\lfloor#x#\rfloor-i+1) & \mbox{if $i < #x#$} \\
+     1/(i-\lceil#x#\rceil+1) & \mbox{if $i > #x#$} 
+     \end{array}\right . \enspace .
 \]
 
-With this observation, the proof of the second part of \lemref{rbs}
+With this observation, the proof of \lemref{rbs}
 involves some simple calculations with harmonic numbers:
 
-\begin{proof}[Proof of \lemref{rbs} Part 2]
-Let $I_i$ be the indicator random variable that is equal to 1 when $i$ appears on the search path for $#x#+1/2$ and 0 otherwise.  Then the length of the search path is given by
+\begin{proof}[Proof of \lemref{rbs}]
+Let $I_i$ be the indicator random variable that is equal to one when $i$ appears on the search path for #x# and zero otherwise.  Then the length of the search path is given by
 \[
-  \sum_{i=0}^{#n#-1} I_i
+  \sum_{i\in\{0,\ldots,#n#-1\}\setminus\{#x#\}} I_i
 \]
-so the expected length of the search path is given by
+so, if $#x#\in\{0,\ldots,#n#-1\}$, the expected length of the search path is given by
 \begin{align*}
-  \E\left[\sum_{i=0}^{#n#-1} I_i\right] 
-   & =  \sum_{i=0}^{#n#-1} \E\left[I_i\right] \\
-   & =  \sum_{i=0}^{#x#} \E\left[I_i\right]
+  \E\left[\sum_{i=0}^{#x#-1} I_i + \sum_{i=#x#+1}^{#n#-1} I_i\right]
+   & =  \sum_{i=0}^{#x#-1} \E\left[I_i\right]
          + \sum_{i=#x#+1}^{#n#-1} \E\left[I_i\right] \\
-   & =  \sum_{i=0}^{#x#} 1/(#x#-i+1)
-         + \sum_{i=#x#+1}^{#n#-1} 1/(i-#x#) \\
-   & =  1+\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{#x#+1}  \\
-   &     {} + 1 + \frac{1}{2}+\frac{1}{3}+\cdot+\frac{1}{#n#-#x#}  \\
-   & =  H_{#x#+1} + H_{#n#-#x#}  \enspace . \qedhere
+   & = \sum_{i=0}^{#x#-1} 1/(\lfloor#x#\rfloor-i+1)
+         + \sum_{i=#x#+1}^{#n#-1} 1/(i-\lceil#x#\rceil+1) \\
+   & = \sum_{i=0}^{#x#-1} 1/(#x#-i+1)
+         + \sum_{i=#x#+1}^{#n#-1} 1/(i-#x#+1) \\
+   & = \frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{#x#+1} \\
+   & {} + \frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{#n#-#x#} \\
+   & = H_{#x#+1} + H_{#n#-#x#} - 2  \enspace .
 \end{align*}
-\end{proof}
-
-Proving the first part of \lemref{rbs} is a slightly more complicated
-exercise in manipulating harmonic series:  
-\begin{proof}[Proof of \lemref{rbs} Part 1]
-We will study the number of nodes at which the search path for #x# goes
-from a node #u# to its left child #u.left# and show that the expected
-number of such nodes is
-\[
-   H_{#n#-#x#} - O(1) \enspace .
-\]
-All these nodes contain values in the set $X=\{#x#+1,\ldots,#n#-1\}$.
-The permutation that created $T$ induces a permutation
-$P=p_0,\ldots,p_{#n#-#x#}$ on the set $X\cup\{#x#\}$.  Suppose #x# occurs
-at position $i$ in $P$, so that $p_i=#x#$.  Then, the same reasoning used
-in the proof of the first part of the lemma shows that the expected number
-of elements of $P$ on the search path for #x# is  $H_{i}$.  Now, #x#
-is equally likely to occur in the $#n#-#x#+1$ possible position in $P$,
-so the expected number of elements in $P$ on the search path for #x#
-is given by
-\newcommand{\nx}{\mathtt{n}-\mathtt{x}}
-\begin{eqnarray*}
- \sum_{i=0}^{#n#-#x#}\Pr\{p_i=#x#\}\cdot H_{i} 
- &= &\sum_{i=0}^{#n#-#x#}\frac{1}{#n#-#x#+1}\cdot H_{i}  \\
-  &=& \frac{1}{#n#-#x#+1}\left(\begin{array}{l@{\,}l}
-         1 + {} \\
-   1 + \frac{1}{2} + {} \\
-   1 + \frac{1}{2} + \frac{1}{3} + \\
-   \vdots & \ddots \\
-   1 + \frac{1}{2} + \frac{1}{3} + & \cdots + \frac{1}{#n#-#x#} \\
-    \end{array}\right) \\
-  &=& \frac{1}{#n#-#x#+1}\left(\begin{array}{l@{\,}l}
-   \color{fm}{1 + \frac{1}{2} + \frac{1}{3} +} & \color{fm}{\cdots + \frac{1}{\nx}} \\
-   1 + \color{fm}{\frac{1}{2} + \frac{1}{3} +} & \color{fm}{\cdots +\frac{1}{\nx}} \\
-   1 + \frac{1}{2} + \color{fm}{\frac{1}{3} +} & \color{fm}{\cdots +\frac{1}{\nx}} \\
-   1 + \frac{1}{2} + \frac{1}{3} \color{fm}{{} +} &\color{fm}{\cdots +\frac{1}{\nx}} \\
-   \vdots & \ddots \quad\,\,\,\,  \color{fm}{\vdots} \\
-   1 + \frac{1}{2} + \frac{1}{3} + &\cdots + \frac{1}{\nx} \\
-    \end{array}\right) - \color{fm}{(\nx)}\\
-   &=& \frac{1}{#n#-#x#+1}\left((#n#-#x#+1)H_{#n#-#x#} - (#n#-#x#)\right) \\
-   &=& H_{#n#-#x#} - \frac{#n#-#x#}{#n#-#x#+1} \\
-   &=& H_{#n#-#x#} - O(1)
-\end{eqnarray*}
-
-A symmetric argument to the one above proves that the expected number of
-nodes at which the search path proceeds from a node to its right child is
-$H_{#x#+1} - O(1)$.
-Therefore, the expected length of the search
-path for #x# is $H_{#x#+1} + H_{#n#-#x#}-O(1)$, as required.
+The corresponding calculations for a search value
+$#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$ are almost identical.
 \end{proof}
 
 \subsection{Summary}
@@ -235,25 +201,25 @@ In a random binary search tree, the #find(x)# operation takes $O(\log
 
 The problem with random binary search trees is, of course, that they are
 not dynamic.  They don't support the #add(x)# or #remove(x)# operations
-needed to implement the #SSet# interface.  In this section we described
-a data structure, called a #Treap#, that uses \lemref{rbs} to implement
+needed to implement the #SSet# interface.  In this section we describe
+a data structure called a #Treap# that uses \lemref{rbs} to implement
 the #SSet# interface.
 
 A node in a #Treap# is like a node in a #BinarySearchTree# in that it has
-a data value #x#, but it also contains a unique numerical \emph{priority}
-#p# that is assigned at random:
+a data value, #x#, but it also contains a unique numerical \emph{priority},
+#p#, that is assigned at random:
 \javaimport{ods/Treap.Node<T>}
 In addition to being a binary search tree, the nodes in a #Treap#
 also obey the \emph{heap property}:  At every node #u# except the root,
 $#u.parent.p# < #u.p#$.  That is, each node has a priority smaller than
-that of its two children.  An example is shown in \figref{treap}
+that of its two children.  An example is shown in \figref{treap}.
 
 \begin{figure}
   \begin{center}
     \includegraphics{figs/treap}
   \end{center}
-  \caption{An example of a #Treap# containing the integer
-  $0,\ldots,9$. Each nodes #u# is illustrated with $#u.x#,#u.p#$}
+  \caption{An example of a #Treap# containing the integers
+  $0,\ldots,9$. Each node, #u#, is illustrated with $#u.x#,#u.p#$.}
   \figlabel{treap}
 \end{figure}
 
@@ -266,11 +232,11 @@ than #r.x# are stored in the subtree rooted at #r.left# and all nodes
 with keys larger than #r.x# are stored in the subtree rooted at #r.right#.
 
 The important point about the priority values in a #Treap# is that they
-are unique and they are assigned at random.  Because of this, there are
+are unique and assigned at random.  Because of this, there are
 two equivalent ways we can think about a #Treap#.  As defined above, a
-treap obeys the heap and binary search tree properties.  Alternatively,
-we can think of first sorting the nodes, by increasing order of priority
-and then adding these into a #BinarySearchTree#.  For example, the #Treap#
+#Treap# obeys the heap and binary search tree properties.  Alternatively,
+we can think of a #Treap# as a #BinarySearchTree# whose nodes
+were added in increasing order of priority.  For example, the #Treap#
 in \figref{treap} can be obtained by adding the sequence of $(#x#,#p#)$
 values 
 \[
@@ -280,7 +246,7 @@ values
 \]
 into a #BinarySearchTree#.
 
-Since the priorities are chosen randomly, this is equivalent to take a
+Since the priorities are chosen randomly, this is equivalent to taking a
 random permutation of the keys --- in this case the permutation is
 \[
   \langle 3, 1, 0, 5, 9, 4, 7, 6, 8, 2 \rangle
@@ -303,9 +269,9 @@ Restating \lemref{rbs} in terms of #Treap#s, we have:
 \end{lem}
 
 \lemref{rbs-treap} tells us that #Treap#s can implement the #find(x)#
-operation efficiently.  However, the real benefit of a #Treap# is that
-it can support the #add(x)# and #delete(x)# operations.  However, to
-do this, it needs to perform rotations.  Refer to \figref{rotations}.
+operation efficiently. However, the real benefit of a #Treap# is that
+it can support the #add(x)# and #delete(x)# operations.  To
+do this, it needs to perform rotations in order to maintain the heap property.  Refer to \figref{rotations}.
 A \emph{rotation} in a binary
 search tree is a local modification that takes a parent #u# of a node #w#
 and makes #w# the parent of #u#, while preserving the binary search tree
@@ -320,27 +286,27 @@ depending on whether #w# is a right or left child of #u#, respectively.
   \figlabel{rotations}
 \end{figure}
 
-The code that implements this has to handle two cases (whether #u#
-is a left or right child of its parent) and be careful of a boundary
+The code that implements this has to handle these two possibilities
+and be careful of a boundary
 case (when #u# is the root) so the actual code is a little longer than
 \figref{rotations} would lead a reader to believe:
 \javaimport{ods/BinarySearchTree.rotateLeft(u).rotateRight(u)}
 In terms of the #Treap# data structure, the most important property of a
-rotation is that the depth of #w# decreases by 1 while the depth of #u#
-increases by 1.
+rotation is that the depth of #w# decreases by one while the depth of #u#
+increases by one.
 
 Using rotations, we can implement the #add(x)# operation as follows:
-We create a new node #u# and assign #u.x=x# and pick a random value
+We create a new node, #u#, and assign #u.x=x# and pick a random value
 for #u.p#.  Next we add #u# using the usual #add(x)# algorithm
 for a #BinarySearchTree#, so that #u# is now a leaf of the #Treap#.
 At this point, our #Treap# satisfies the binary search tree property,
 but not necessarily the heap property.  In particular, it may be the
 case that #u.parent.p > u.p#.  If this is the case, then we perform a
 rotation at node #w#=#u.parent# so that #u# becomes the parent of #w#.
-We may have to repeat this several times until #u#'s depth decreases
-enough so that #u# becomes the root or $#u.parent.p# < #u.p#$.
+If #u# continues to violate the heap property, we will have to repeat this, decreasing #u#'s depth by one every time, until
+#u# either becomes the root or $#u.parent.p# < #u.p#$.
 \javaimport{ods/Treap.add(x).bubbleUp(u)}
-An example of the operation of an #add(x)# operation is shown in \figref{treap-add}.
+An example of an #add(x)# operation is shown in \figref{treap-add}.
 
 \begin{figure}
   \begin{center}
@@ -348,13 +314,13 @@ An example of the operation of an #add(x)# operation is shown in \figref{treap-a
   \includegraphics{figs/treap-insert-b} \\
   \includegraphics{figs/treap-insert-c} \\
   \end{center}
-  \caption{Adding the value 1.5 into the treap from \figref{treap}.}
+  \caption{Adding the value 1.5 into the #Treap# from \figref{treap}.}
   \figlabel{treap-add}
 \end{figure}
 
 The running-time of the #add(x)# operation is given by the time it
 takes to follow the search path for #x# plus the number of rotations
-performed to move the newly-added node #u# up to its correct location
+performed to move the newly-added node, #u#, up to its correct location
 in the #Treap#.  By \lemref{rbs-treap}, the expected length of the
 search path is at most $2\ln #n#+O(1)$.  Furthermore, each rotation
 decreases the depth of #u#.   This stops if #u# becomes the root, so
@@ -365,15 +331,16 @@ asks you to show that the expected number of rotations performed during
 an insertion is actually only $O(1)$.)
 
 The #remove(x)# operation in a #Treap# is the opposite of the #add(x)#
-operation.  We search for the node #u# containing #x# and then perform
+operation.  We search for the node, #u#, containing #x# and then perform
 rotations to move #u# downwards until it becomes a leaf and then we
 splice #u# from the #Treap#.  Notice that, to move #u# downwards, we can
 perform either a left or right rotation at #u#, which will replace #u#
-with #u.right# or #u.left#, respectively.  Deciding whether to make a left or right rotation is done as follows:
+with #u.right# or #u.left#, respectively.
+The choice is made by the first of the following that apply:
 \begin{enumerate}
 \item If #u.left# and #u.right# are both #null#, then #u# is a leaf and no rotation is performed.
-\item If #u.left# (or #u.right#) is #null# then perform a right (or left, respectively) rotation at #u#
-\item If $#u.left.p# < #u.right.p#$ (or $#u.left.p# > #u.right.p#)$ then perform a right rotation at #u# (or left rotation, respectively, at #u#).
+\item If #u.left# (or #u.right#) is #null#, then perform a right (or left, respectively) rotation at #u#.
+\item If $#u.left.p# < #u.right.p#$ (or $#u.left.p# > #u.right.p#)$, then perform a right rotation (or left rotation, respectively) at #u#.
 \end{enumerate}
 These three rules ensure that the #Treap# doesn't become disconnected and that the heap property is maintained once #u# is removed.
 \javaimport{ods/Treap.remove(x).trickleDown(u)}
@@ -385,7 +352,7 @@ An example of the #remove(x)# operation is shown in \figref{treap-remove}.
   \includegraphics{figs/treap-delete-c} \\
   \includegraphics{figs/treap-delete-d} 
   \end{center}
-  \caption{Removing the value 9 from the treap in \figref{treap}.}
+  \caption{Removing the value 9 from the #Treap# in \figref{treap}.}
   \figlabel{treap-remove}
 \end{figure}
 
@@ -394,13 +361,13 @@ The trick to analyzing the running time of the #remove(x)# operation is
 to notice that this operation is the reverse of the #add(x)# operation.
 In particular, if we were to reinsert #x#, using the same priority #u.p#,
 then the #add(x)# operation would do exactly the same number of rotations
-and would restore the #Treap# to exactly same state it was in before
+and would restore the #Treap# to exactly the same state it was in before
 the #remove(x)# operation took place.  (Reading from bottom-to-top,
 \figref{treap-remove} illustrates the insertion of the value 9 into a
 #Treap#.) This means that the expected running time of the #remove(x)#
 on a #Treap# of size #n# is proportional to the expected running time
 of the #add(x)# operation on a #Treap# of size $#n#-1$.  We conclude
-that the running time of #remove(x)# is $O(\log #n#)$.
+that the expected running time of #remove(x)# is $O(\log #n#)$.
 
 \subsection{Summary}
 
@@ -415,7 +382,7 @@ expected time per operation.
 
 It is worth comparing the #Treap# data structure to the #SkiplistSet#
 data structure.  Both implement the #SSet# operations in $O(\log #n#)$
-time per operation.  In both data structures, #add(x)# and #remove(x)#
+expected time per operation.  In both data structures, #add(x)# and #remove(x)#
 involve a search and then a constant number of pointer changes
 (see \excref{treap-rotates} below).  Thus, for both these
 structures, the expected length of the search path is the critical value
@@ -442,9 +409,9 @@ a #Treap#.
 \section{Summary and Exercises}
 
 Random binary search trees have been studied extensively.  Devroye
-\cite{d88} gives a proof of \lemref{rbs} and related results.  However,
-much stronger results than \lemref{rbs} are known.  The most impressive
-such result is due to Reed \cite{r03} who shows that the expected height
+\cite{d88} gives a proof of \lemref{rbs} and related results. There are
+much stronger results in the literature as well.  The most impressive
+of which is due to Reed \cite{r03}, who shows that the expected height
 of a random binary search tree is
 \[
   \alpha\ln n - \beta\ln\ln n + O(1)
@@ -454,23 +421,24 @@ equation $\alpha\ln((2e/\alpha))=1$ and $\beta=\frac{3}{2\ln(\alpha/2)}$ .
 Furthermore, the variance of the height is constant.
 
 The name #Treap# was coined by Aragon and Seidel \cite{as96} who discussed
-treaps and some of their variants.  However, the basic structure was
-studied much earlier by Vuillemin \cite{v80} who called these Cartesian
+#Treap#s and some of their variants.  However, their basic structure was
+studied much earlier by Vuillemin \cite{v80} who called them Cartesian
 trees.
 
 One space-optimization of the #Treap# data structure that is sometimes
-performed is to eliminate the explicit storage of the priority #p#
-in each node. Instead, one computes the priority of a node #u# by
+performed is the elimination of the explicit storage of the priority #p#
+in each node. Instead, the priority of a node, #u#, is computed by
 hashing #u#'s address in memory (in 32-bit Java, this is equivalent
 to hashing #u.hashCode()#).  Although a number of hash functions will
 probably work well for this in practice, for the important parts of the
-proof of \lemref{rbs} to work, the hash function should be randomized
+proof of \lemref{rbs} to remain valid, the hash function should be randomized
 and have the \emph{min-wise independent property}:  For any distinct
 values $x_1,\ldots,x_k$, each of the hash values $h(x_1),\ldots,h(x_k)$
-should be distinct and, for each $i\in\{1,\ldots,k\}$,
+should be distinct with high probability and, for each $i\in\{1,\ldots,k\}$,
 \[
    \Pr\{h(x_i) = \min\{h(x_1),\ldots,h(x_k)\}\} \le c/k
 \]
+for some constant $c$.
 One such class of hash functions that is easy to implement and fairly
 fast is \emph{tabulation hashing} \cite{pt10}.
 
@@ -486,7 +454,7 @@ complete binary tree of height $h$ and evaluate this formula for $h=3$.)
 \end{exc}
 
 \begin{exc}
- Design and implement a version of a #Treap# that includes a #get(i)# operation that returns the key with rank #i# in the #Treap#.  (Hint: Have each node #u# keep track of the size of the subtree rooted at #u#.)
+ Design and implement a version of a #Treap# that includes a #get(i)# operation that returns the key with rank #i# in the #Treap#.  (Hint: Have each node, #u#, keep track of the size of the subtree rooted at #u#.)
 \end{exc}
 
 \begin{exc}

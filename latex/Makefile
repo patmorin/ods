@@ -7,7 +7,7 @@ LFLAGS=-interaction=nonstopmode -halt-on-error
 
 all: ods.pdf
 
-.PHONY: figs images install clean
+.PHONY: all figs images install clean
 
 figs:
 	cd figs ; make
