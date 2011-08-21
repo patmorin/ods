@@ -1,0 +1,301 @@
+\chapter{Sorting Algorithms}
+\chaplabel{sorting}
+
+\section{Comparison-Based Sorting}
+
+In this section, we present three sorting algorithms: merge-sort,
+Quicksort, and heap-sort.  All these algorithms take an input array #a#
+and sort the elements of #a# into non-decreasing order in $O(#n#\log #n#)$
+(expected) time.  These algorithms are all \emph{comparison-based}.
+They don't care what type of data is being sorted, the only 
+
+\subsection{Merge-Sort}
+
+The #mergeSort(a)# algorithm is a classic example of recursive divide and
+conquer: If the length of #a# is at most 1, then #a# is already
+sorted, so we do nothing.  Otherwise, we split #a# into two halves
+$#a0#=#a[0]#,\ldots,#a[n/2-1]#$ and $#a1#=#a[n/2]#,\ldots,#a[n-1]#$.
+We recursively sort #a0# and #a1#, and then we merge (the now sorted)
+#a0# and #a1# to get our fully sorted array #a#:
+\javaimport{ods/Algorithms.mergeSort(a,c)}
+Compared to sorting, merging the two sorted arrays #a0# and #a1# fairly
+easy.  We add elements to #a# one at a time.  If #a0# or #a1# is empty
+we add the next element from the other (non-empty) array. Otherwise,
+we take the minimum of the next element in #a0# and the next element in
+#a1# and add it to #a#:
+\javaimport{ods/Algorithms.merge(a0,a1,a,c)}
+Notice that the #merge(a0,a1,a,c)# algorithm performs at most $#n#-1$
+comparisons before running out of elements in one of #a0# or #a1#.
+
+The following theorem shows that #mergeSort(a,c)# is a very efficient algorithm:
+\begin{thm}
+  The #mergeSort(a,c)# algorithm runs in $O(#n#\log #n#)$ time and
+  performs at most $#n#\log #n#$ comparisons.
+\end{thm}
+
+\begin{proof}
+The proof is by induction on $#n#$.  The base case, in which $#n#=1$,
+is trivial.
+
+Merging two sorted lists of total length $#n#$ requires at most $#n#-1$
+comparisons. Let $C(#n#)$ denote the maximum number of comparisons performed by
+#mergeSort(a,c)# on an array #a# of length #n#.  If $#n#$ is even, then we apply the inductive hypothesis to
+the two subproblems and obtain
+\begin{align*}
+  C(#n#) 
+  &\le #n#-1 + 2C(#n#/2) \\
+  &= #n#-1 + 2((#n#/2)\log(#n#/2) \\
+  &= #n#-1 + #n#\log(#n#/2) \\
+  &= #n#-1 + #n#\log #n#-#n# \\
+  &< #n#\log #n# \enspace .
+\end{align*}
+The case where $#n#$ is odd is slightly more complicated.  For this case,
+we use the inequality (justified below) that shows $\log (x+1/2) <
+\log x + (\log e)/2x$.  So we have
+\begin{align*}
+  C(#n#) 
+  &= #n#-1 + C(\lceil #n#/2 \rceil) + C(\lfloor #n#/2 \rfloor) \\
+  &= #n#-1 + \lceil #n#/2 \rceil\log \lceil #n#/2 \rceil 
+           + \lfloor #n#/2 \rfloor\log \lfloor #n#/2 \rfloor \\
+  &= #n#-1 + (#n#/2+1/2)\log (#n#/2+1/2) 
+           + \lfloor #n#/2 \rfloor\log \lfloor #n#/2 \rfloor \\
+  &< #n#-1 + \lceil #n#/2 \rceil(\log #n#/2 + (\log e)/#n#)
+           + \lfloor #n#/2 \rfloor\log (#n#/2) \\
+  &= #n#\log #n# - 1 + (#n#/2+1/2)(\log e/#n#) \\
+  &< #n#\log #n# 
+\end{align*}
+since $(#n#/2+1/2)(\log e/#n#) < 1$ for all $#n#\ge 2$.
+
+All that remains is to justify the inequality
+$\log (x+1/2) <
+\log x + (\log e)/2x$.  This inequality comes from the identity $\ln x = \int_1^x (1/x),\mathrm{d}x$.  This identity yields:
+\[
+   \ln(x+1/2) = \int_1^{x+1/2} (1/x)\,\mathrm{d}x
+    = \int_1^{x} (1/x)\,\mathrm{d}x + \int_{x}^{x+1/2} (1/x)\,\mathrm{d}x
+    < \int_1^{x} (1/x)\,\mathrm{d}x + 1/2x \enspace .\footnote{The same derivation yields the famous inequality, seen in many calculus books, $1+x < e^x$.}
+\]
+Multiplying both sides of this inequality by $\log e$ yields
+$\log (x+1/2) < \log x + (\log e)/2x$.
+\end{proof}
+
+\subsection{Quicksort}
+
+The \emph{quicksort} algorithm is another classic divide and conquer
+algorithm.  Unlike mergesort, which does merging after solving the two
+subproblems, quicksort does all its work upfront.
+
+The algorithm is simple to describe:  Pick a random element #x# from #a#;
+partition #a# into the set of elements less than #x#, the set of
+elements equal to #x#, and the set of elements greater than #x#; and,
+finally, recursively sort the first and third sets in this partition.
+\javaimport{ods/Algorithms.quickSort(a,c).quickSort(a,i,n,c)}
+All of this is done in-place, so that instead of making copies of
+subarrays being sorted, the #quickSort(a,i,n,c)# method only sorts the
+subarray $#a[i]#,\ldots,#a[i+n-1]#$.  Initially, this method is called
+as #quickSort(a,0,a.length,c)#.
+
+At the heart of the quicksort algorithm is the in-place partitioning done that, without any extra space swaps elements in #a# and computes indices #p# and #q# so that
+\[
+   #a[i]# \begin{cases} 
+         {}< #x# & \text{if $0\le #i#\le #p#$} \\
+         {}= #x# & \text{if $#p#< #i# < #q#$} \\
+         {}> #x# & \text{if $#q#\le #i# \le #n#-1$}
+     \end{cases}
+\]
+This partitioning, which is done by the #while# loop in the code, works
+by iteratively increasing #p# and decreasing #q# while maintaining the
+first and last of these conditions.  At each step, element at position
+#j# is either moved to the front, left where it is, added to the back.
+In the first two cases, #j# is incremented, while in the last case, #j#
+is not incremented since the new element at position #j# has not been
+processed yet.
+
+The quicksort algorithms is very closely related to the random binary
+search trees from \secref{rbst}.  In fact, if the input to quicksort
+consists of #n# distinct elements, then the quicksort recursion tree is
+a random binary search tree.
+
+To see this, recall that when constructing a random binary search
+tree the first thing we do is pick a random element #x# and make it
+the root of the tree.  After this, every element will eventually be
+compared to #x#, with smaller elements going into the left subtree and
+larger elements going into the right subtree.  In quicksort, we select
+a random element #x# and immediately compare everything to #x#, putting
+the smaller elements at the beginning of the array and larger elements
+at the end of the array.  Quicksort then recursively sorts the beginning
+of the array and the end of the array, while the random binary search
+tree recursively inserts smaller elements in the left subtree of the
+root and larger elements in the right subtree of the root.
+
+The above correspondence between random binary search trees and quicksort
+means that we can translate \lemref{rbs} to a statement about quicksort:
+
+\begin{lem}\lemlabel{quicksort}
+  When quicksort is called to sort an array containing the integers
+  $0,\ldots,#n#-1$, the expected number of times element #i# is compared to
+  a pivot element is at most $H_{#i#+1} + H_{#n#-#i#}$.
+\end{lem}
+
+A little summing of harmonic numbers gives us the following theorem
+about the running-time of quicksort:
+
+\begin{thm}\thmlabel{quicksort-i}
+  When quicksort is called to sort an array containing #n# distinct elements,
+  the expected number of comparisons performed is $2#n#\ln #n# + O(#n#)$.
+\end{thm}
+
+\begin{proof}
+Let #T# be the number of comparisons performed by quicksort when sorting #n# distsinct elements.  Using \lemref{quicksort}, we have:
+\begin{align*}
+  \E[T] &= \sum_{i=0}^{#n#-1}(H_{#i#+1}+H_{#n#-#i#}) \\ 
+        &= 2\sum_{i=1}^{#n#}H_i \\ 
+        &\le 2\sum_{i=1}^{#n#}H_{#n#} \\ 
+        &\le 2#n#\ln#n# + 2#n# = 2#n#\ln #n# + O(#n#) \qedhere
+\end{align*}
+\end{proof}
+
+\thmref{quicksort} describes the case where the elements being sorted are
+all distinct.  When the input array, #a#, contains duplicate elements,
+the expected running time of quicksort is no worse, and can be even
+better; any time a duplicate element #x# is chosen as a pivot, all
+occurrences of #x# get grouped together and don't take part in either
+of the two subproblems.
+
+\begin{thm}\thmlabel{quicksort}
+  The #quickSort(a,c)# algorithm runs in $O(#n#\log #n#)$ expected time
+  and does the expected number of comparisons it performs is at most
+  $2#n#\ln #n# +O(#n#)$ comparisons.
+\end{thm}
+
+\subsection{Heap-sort}
+
+The heap-sort algorithm is another in-place sorting algorithm.
+Heap-sort uses the binary heaps discussed in \secref{binaryheap}.
+Recall that the #BinaryHeap# data structure represents a heap using
+a single array.  The heap-sort algorithm converts the input array #a#
+into a heap and then repeatedly extracts the minimum value.
+
+More specifically, a heap stores #n# elements at array locations
+$#a[0]#,\ldots,#a[n-1]#$ with the smallest value stored at the root,
+#a[0]#.  After transforming #a# into a #BinaryHeap#, the heap-sort
+algorithm repeatedly swaps #a[0]# and #a[n-1]#, decrements #n#, and
+calls #trickleDown(0)# so that $#a[0]#,\ldots,#a[n-2]#$ once again are
+a valid heap representation. When this process ends (because $#n#=0$)
+the elements of #a# are stored in decreasing order, so #a# is reversed
+to obtain the final sorted order.\footnote{The algorithm
+could alternatively redefine the #compare(x,y)# function so that the
+heap sort algorithm stores the elements directly in ascending order.}
+
+\javaimport{ods/BinaryHeap.sort(a,c)}
+
+A key subroutine in heap sort is the constructor for turning an unsorted
+array #a# into a heap.  It would be easy to do this in $O(#n#\log#n#)$
+time by repeatedly calling the #BinaryHeap# #add(x)# method, but
+we can do better by using a bottom-up algorithm.  Recall that,
+in a binary heap, the children of #a[i]# are stored at positions
+#a[2i+1]# and #a[2i+2]#.  This implies that the elements 
+$#a#[\lfloor #n#/2\rfloor],\ldots,#a[n-1]#$ have no children. In other
+words, each of
+$#a#[\lfloor #n#/2\rfloor],\ldots,#a[n-1]#$ is a sub-heap of size 1.  Now,
+working backwards, we can call #trickleDown(i)# for each 
+$#i#\in\{\lfloor #n#/2\rfloor,\ldots,0\}$. This works, because by the time
+we call
+#trickleDown(i)#, each of the two children of #a[i]# are the root of a
+sub-heap so calling #trickleDown(i)# makes #a[i]# into the root of its
+own subheap.
+\javaimport{ods/BinaryHeap.BinaryHeap(a,c)}
+
+The interesting thing about this bottom-up strategy is that it is more
+efficient than calling #add(x)# #n# times.  To see this, notice that,
+for $#n#/2$ elements, we do no work at all, for $#n#/4$ elements, we call
+#trickleDown(i)# on a subheap rooted at #a[i]# and whose height is 1, for
+$#n#/8$ elements, we call #trickleDown(i)# on a subheap whose height is 2,
+and so on.  Since the work done by #trickleDown(i)# is proportional to
+the height of the sub-heap rooted at #a[i]#, this means that the total
+work done is at most
+\[
+    \sum_{i=1}^{\log#n#} (i-1)#n#/2^{i}
+    \le \sum_{i=1}^{\infty} i#n#/2^{i}
+    = #n#\sum_{i=1}^{\infty} i/2^{i}
+    =  2#n# \enspace .
+\]
+This last equality follows by recognizing that the sum
+$\sum_{i=1}^{\infty} i/2^{i}$ is equal, by definition, to the expected
+number times we toss a coin up to and including the first time the coin
+comes up as heads and applying \lemref{coin-tosses}.
+
+The following theorem describes the performance of #heapSort(a,c)#.
+\begin{thm}
+  The #heapSort(a,c)# algorithm runs in $O(#n#\log #n#)$ time and performs at
+  most $2#n#\log #n# + O(#n#)$ comparisons.
+\end{thm}
+
+\begin{proof}
+The algorithm runs in 3 steps:  (1)~Transforming #a# into a heap,
+(2)~repeatedly extracting the minimum element from #a#, and (3)~reversing
+the elements in #a#.  We have just argued that step~1 takes $O(#n#)$
+time and performs $O(#n#)$ comparisons.  Step~3 takes $O(#n#)$ time and
+performs no comparisons.  Step~2 performs #n# calls to #trickDown(0)#.
+The $i$th such call operates on a heap of size $#n#-i$ and performs
+at most $2\log(#n#-i)$ comparisons.  Summing this over $i$ gives
+\[
+   \sum_{i=0}^{#n#-i} 2\log(#n#-i) 
+   \le \sum_{i=0}^{#n#-i} 2\log #n#
+   =  2#n#\log #n#
+\]
+Adding the number of comparisons performed in each of the three steps
+completes the proof.
+\end{proof}
+
+\subsection{A Lower-Bound for Comparison-Based Sorting}
+
+We have now seen three comparison-based sorting algorithms that run
+in $O(#n#\log #n#)$ time.  By now, we should be wondering if faster
+algorithms can exist.  The short answer to this question is no.  If the
+only operations allowed on the elements of #a# are comparisons then no
+algorithm can avoid doing roughly $#n#\log #n#$ comparisons.  This is
+not difficult to prove, but requires a little imagination.  Ultimately,
+it follows from the fact that
+\begin{equation}
+   \log #n#! = \log #n# + \log (#n#-1) + \dots + \log(1) = n\log n - O(n)
+    \eqlabel{log-factorial}
+\end{equation}
+(Proving \eqref{log-factorial} is left as \excref{log-factorial}.)
+
+\subsection{Summary}
+
+This section discusses 3 comparison-based sorting algorithms that each
+run in $O(#n#\log#n#)$ time.  All these algorithms are asymptotically
+optimal since any comparison-based sorting algorithm must perform at
+least $#n#\log #n#-O(#n#)$ comparisons in the worst-case.  The following
+table summarizes the performance of these algorithms:
+
+\begin{tabular}{|l|r@{ }l|l|} \hline
+  & \multicolumn{2}{c}{comparisons} & in-place  \\ \hline
+Merge-sort & $#n#\log #n#$ &  worst-case & No  \\
+Quicksort & $1.38#n#\log #n#$ & expected & Yes \\
+Heap-sort & $2#n#\log #n#$ & worst-case & Yes \\ \hline
+\end{tabular}
+
+Each algorithm has advantages and disadvantages.  Merge-sort does the
+fewest comparisons and does not rely on randomization.  Unfortunately,
+it uses an auxilliary array during its merge phase.  Allocating this
+array can be expensive and is a potential point of failure if memory
+is limited.  Quicksort is an in-place algorithm and is a close second in
+terms of the number of comparisons, but is randomized so this running
+time is not always guaranteed.  Heap-sort does the most comparisons,
+but it is in-place and deterministic.
+
+There is one setting in which merge-sort is a clear-winner;  this occurs
+when sorting a linked-list.  In this case, the auxiliary array is not
+needed;  two sorted linked lists are very easily merged into a single
+sorted linked-list by pointer manipulations.
+
+\begin{exc}
+  Implement a version of the merge-sort algorithm that sorts a #DLList#
+  without using an auxiliary array. 
+\end{exc}
+
+\begin{exc}\exclabel{log-factorial}
+  Prove that $\log #n#! = #n#\log #n#-O(#n#)$.
+\end{exc}
