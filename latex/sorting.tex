@@ -5,15 +5,19 @@
 
 In this section, we present three sorting algorithms: merge-sort,
 Quicksort, and heap-sort.  All these algorithms take an input array #a#
-and sort the elements of #a# into non-decreasing order in $O(#n#\log #n#)$
-(expected) time.  These algorithms are all \emph{comparison-based}.
-They don't care what type of data is being sorted, the only 
+and sort the elements of #a# into non-decreasing order in $O(#n#\log
+#n#)$ (expected) time.  These algorithms are all \emph{comparison-based}.
+Their second second argument, #c#, is a #Comparator# that implements the
+#compare(a,b)# method.  These algorithms don't care what type of data is
+being sorted, the only operation they do on the data is comparisons using
+the #compare(a,b)# method. Recall, from \secref{sset}, that #compare(a,b)# returns a negative
+value if $#a#<#b#$, a positive value if $#a#>#b#$, and zero if $#a#=#b#$.
 
 \subsection{Merge-Sort}
 
 The #mergeSort(a)# algorithm is a classic example of recursive divide and
 conquer: If the length of #a# is at most 1, then #a# is already
-sorted, so we do nothing.  Otherwise, we split #a# into two halves
+sorted, so we do nothing.  Otherwise, we split #a# into two halves,
 $#a0#=#a[0]#,\ldots,#a[n/2-1]#$ and $#a1#=#a[n/2]#,\ldots,#a[n-1]#$.
 We recursively sort #a0# and #a1#, and then we merge (the now sorted)
 #a0# and #a1# to get our fully sorted array #a#:
@@ -50,32 +54,29 @@ the two subproblems and obtain
   &< #n#\log #n# \enspace .
 \end{align*}
 The case where $#n#$ is odd is slightly more complicated.  For this case,
-we use the inequality (justified below) that shows $\log (x+1/2) <
-\log x + (\log e)/2x$.  So we have
+we use two inequalities, that are easy to verify
+\begin{equation}
+  \log(x+1) \le \log(x) + 1 \enspace , \eqlabel{log-ineq-a}
+\end{equation}
+for all $x\ge 1$ and
+\begin{equation}
+  \log(x+1/2) + \log(x-1/2) \le 2\log(x) \enspace , \eqlabel{log-ineq-b}
+\end{equation}
+for all $x\ge 1/2$.  Inequality~\eqref{log-ineq-a} comes from the fact that $\log(x)+1 = \log(2x)$ while \eqref{log-ineq-b} follows from the fact that $\log$ is a concave function.  With these tools in hand we have, for odd #n#,
 \begin{align*}
   C(#n#) 
-  &= #n#-1 + C(\lceil #n#/2 \rceil) + C(\lfloor #n#/2 \rfloor) \\
+  &\le #n#-1 + C(\lceil #n#/2 \rceil) + C(\lfloor #n#/2 \rfloor) \\
   &= #n#-1 + \lceil #n#/2 \rceil\log \lceil #n#/2 \rceil 
            + \lfloor #n#/2 \rfloor\log \lfloor #n#/2 \rfloor \\
-  &= #n#-1 + (#n#/2+1/2)\log (#n#/2+1/2) 
-           + \lfloor #n#/2 \rfloor\log \lfloor #n#/2 \rfloor \\
-  &< #n#-1 + \lceil #n#/2 \rceil(\log #n#/2 + (\log e)/#n#)
-           + \lfloor #n#/2 \rfloor\log (#n#/2) \\
-  &= #n#\log #n# - 1 + (#n#/2+1/2)(\log e/#n#) \\
-  &< #n#\log #n# 
-\end{align*}
-since $(#n#/2+1/2)(\log e/#n#) < 1$ for all $#n#\ge 2$.
-
-All that remains is to justify the inequality
-$\log (x+1/2) <
-\log x + (\log e)/2x$.  This inequality comes from the identity $\ln x = \int_1^x (1/x),\mathrm{d}x$.  This identity yields:
-\[
-   \ln(x+1/2) = \int_1^{x+1/2} (1/x)\,\mathrm{d}x
-    = \int_1^{x} (1/x)\,\mathrm{d}x + \int_{x}^{x+1/2} (1/x)\,\mathrm{d}x
-    < \int_1^{x} (1/x)\,\mathrm{d}x + 1/2x \enspace .\footnote{The same derivation yields the famous inequality, seen in many calculus books, $1+x < e^x$.}
-\]
-Multiplying both sides of this inequality by $\log e$ yields
-$\log (x+1/2) < \log x + (\log e)/2x$.
+  &= #n#-1 + (#n#/2 + 1/2)\log (#n#/2+1/2) 
+           + (#n#/2 - 1/2) \log (#n#/2-1/2) \\
+  &\le #n#-1 + #n#\log(#n#/2) + (1/2)(\log (#n#/2+1/2) 
+           - \log (#n#/2-1/2)) \\
+  &\le #n#-1 + #n#\log(#n#/2) + 1/2 \\
+  &< #n# + #n#\log(#n#/2) \\
+  &= #n# + #n#(\log#n#-1) \\
+  &= #n#\log#n#
+\end{align*} \qedhere
 \end{proof}
 
 \subsection{Quicksort}
