@@ -34,8 +34,48 @@ public class Algorithms {
 		}
 	}
 
-	
-	
+	/**
+	 * Sort an array a whose entries contain integers in {0,...,k-1}
+	 * @param a the array to sort
+	 * @param k 
+	 * @return an array b that contains a sorted version of a
+	 */
+	public static int[] countingSort(int[] a, int k) {
+		int c[] = new int[k];
+		for (int i = 0; i < a.length; i++)
+			c[a[i]]++;
+		for (int i = 1; i < k; i++)
+			c[i] += c[i-1];
+		int b[] = new int[a.length];
+		for (int i = a.length-1; i >= 0; i--)
+			b[--c[a[i]]] = a[i];
+		return b;
+	}
+
+	/**
+	 * Sort an array a of non-negative integers
+	 * @param a
+	 * @param k
+	 * @return
+	 */
+	protected static int d = 8;
+	protected static int w = 32;
+	public static int[] radixSort(int[] a) {
+		int[] b = null;
+		for (int p = 0; p < w/d; p++) {
+			int c[] = new int[1<<d];
+			b = new int[a.length];
+			for (int i = 0; i < a.length; i++)
+				c[(a[i] >> d*p)&((1<<d)-1)]++;
+			for (int i = 1; i < 1<<d; i++)
+				c[i] += c[i-1];
+			for (int i = a.length-1; i >= 0; i--)
+				b[--c[(a[i] >> d*p)&((1<<d)-1)]] = a[i];
+			a = b;
+		}
+		return b;
+	}
+
 
 	public static <T extends Comparable<T>> void quickSort(T[] a) {
 		quickSort(a, new DefaultComparator<T>());
@@ -91,20 +131,32 @@ public class Algorithms {
 
 	public static void main(String[] args) {
 		int n = 100;
-		Integer[] a = new Integer[n];
+		int a[] = new int[n];
 		for (int i = 0; i < n; i++)
-			a[i] = rand.nextInt(10*n);
-		Integer[] b = Arrays.copyOfRange(a, 0, n);
-		Integer[] c = Arrays.copyOfRange(b, 0, n);
-		heapSort(a);
-		mergeSort(b);
-		quickSort(c);
-		for (int i = 0; i < n; i++)
-			Utils.myassert(a[i].equals(b[i]) && b[i].equals(c[i]));
-		if (n <= 100) {
-			System.out.println(Arrays.asList(a));
-			System.out.println(Arrays.asList(b));
-			System.out.println(Arrays.asList(c));
+			a[i] = rand.nextInt(1<<30);
+		int[] b = radixSort(a);
+		for (int x : b) {
+			System.out.print(x + ",");
 		}
+		System.out.println();
+		Arrays.sort(a);
+		for (int x : a) {
+			System.out.print(x + ",");
+		}
+//		Integer[] a = new Integer[n];
+//		for (int i = 0; i < n; i++)
+//			a[i] = rand.nextInt(10*n);
+//		Integer[] b = Arrays.copyOfRange(a, 0, n);
+//		Integer[] c = Arrays.copyOfRange(b, 0, n);
+//		heapSort(a);
+//		mergeSort(b);
+//		quickSort(c);
+//		for (int i = 0; i < n; i++)
+//			Utils.myassert(a[i].equals(b[i]) && b[i].equals(c[i]));
+//		if (n <= 100) {
+//			System.out.println(Arrays.asList(a));
+//			System.out.println(Arrays.asList(b));
+//			System.out.println(Arrays.asList(c));
+//		}
 	}
 }

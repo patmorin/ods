@@ -125,6 +125,7 @@ MAIN: {
     if ($line =~ /\\javaimport\{([^}]+)\}/) {
       my $args=$1;
       (my $class) = $line =~ /\{\w+\/(\w+)\./;
+      print("%$line");
       print("\\begin{Verbatim}[tabsize=2,frame=single");
       print(',commandchars=\\\\@\\$');
       print(",label=\\texttt{$class},labelposition=topline");
