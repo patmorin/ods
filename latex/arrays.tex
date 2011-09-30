@@ -806,7 +806,10 @@ data structure:
 \section{Discussion and Exercises}
 
 Most of the data structures described in this chapter are folklore. They
-can be found in implementations dating back over 30 years.  For example, implementations of stacks, queues, and deques which generalize easily to the #ArrayStack#, #ArrayQueue# and #ArrayDeque# structures described here are discussed by Knuth \cite[Section~2.2.2]{k97v1}.
+can be found in implementations dating back over 30 years.  For example,
+implementations of stacks, queues, and deques which generalize easily
+to the #ArrayStack#, #ArrayQueue# and #ArrayDeque# structures described
+here are discussed by Knuth \cite[Section~2.2.2]{k97v1}.
 
 Brodnik \etal\ \cite{bcdms99} seem to have been the first to describe
 the #RootishArrayStack# and prove a $\sqrt{n}$ lower-bound like that
@@ -820,8 +823,8 @@ index of the leading 1-bit in an integer.
 
 A structure related to the #RootishArrayStack# is the $2$-level
 \emph{tiered-vector} of Goodrich and Kloss \cite{gk99}.  This structure
-supports #get(i,x)# and #set(i,x)# in constant time and #add(x)# and
-#remove(x)# in $O(\sqrt{#n#})$ time.  These running times are similar
+supports #get(i,x)# and #set(i,x)# in constant time and #add(i,x)# and
+#remove(i)# in $O(\sqrt{#n#})$ time.  These running times are similar
 to what can be achieved with the more careful implementation of a
 #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
 
