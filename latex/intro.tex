@@ -242,7 +242,7 @@ When analyzing data structures in this book we will want to talk about
 the running times of various operations.  The exact running-times will,
 of course, vary from computer to computer and even from run to run on
 an individual computer.  Therefore, instead of analyzing running times
-exactly, we will use the so-called big-Oh notation: For a non-decreasing
+exactly, we will use the so-called big-Oh notation: For a 
 function $f(n)$, $O(f(n))$ denotes a set of functions:
 \[
    O(f(n)) = \{g(n):\mbox{there exists $c>0$, and $n_0$ such that
@@ -262,7 +262,7 @@ This is proven as follows:
             \\
         & \le 13n\log n 
 \end{align*}
-which demonstrates that $5n\log n + 8n - 200$ is in $O(\log n)$ using the constants $c=13$ and $n_0 = 2$.
+which demonstrates that the fundtion $f(n)=5n\log n + 8n - 200$ is in the set $O(\log n)$ using the constants $c=13$ and $n_0 = 2$.
 
 There are a number of useful shortcuts when using asymptotic notation.  First:
 \[ O(n^{c_1}) \subset O(n^{c_2}) \enspace ,\]
@@ -294,7 +294,7 @@ The expression $O(1)$ also brings up another issue. Since there is
 no variable in this expression, it may not be clear what variable is
 getting arbitrarily large.  Without context, there is no way to tell.
 In the example above, since the only variable in the rest of the equation
-is $n$, we can assume that should be read as $T(n) = 2\log n + O(f(n))$,
+is $n$, we can assume that this should be read as $T(n) = 2\log n + O(f(n))$,
 where $f(n) = 1$.
 
 In a few cases, we will use asymptotic notation on functions with more than one variable. There seems to be no standard for this, but for our purposes, the following definition is sufficient:
@@ -307,9 +307,11 @@ In a few cases, we will use asymptotic notation on functions with more than one 
    \end{array}\right\} \enspace .
 \]
 This definition captures the situation we really care about:  When the
-arguments $n_1,\ldots,n_k$ make $g$ take on large values.  The reader
-should be warned that, although this works for our purposes, other texts
-may treat multivariate functions and asymptotic notation differently.
+arguments $n_1,\ldots,n_k$ make $g$ take on large values.  This agrees
+with the univariate definition of $O(f(n))$ when $f(n)$ is an increasing
+function of $n$.  The reader should be warned that, although this works
+for our purposes, other texts may treat multivariate functions and
+asymptotic notation differently.
 
 \subsection{Randomization and Probability}
 
@@ -405,7 +407,7 @@ This includes arithmetic operations (#+#, #-#, #*#, #/#, #%#), comparisons
 Any cell can be read or written in constant time.  Our computer's memory
 is managed by a memory management system from which we can allocate or
 deallocate a block of memory of any size we like. Allocating a block of
-memory of size $k$ takes $O(k)$ time and returns a reference to memory
+memory of size $k$ takes $O(k)$ time and returns a reference to a memory
 block.  This reference is small enough to be represented by a single word.
 
 The word-size #w# is a very important parameter of this model.  The only
@@ -447,7 +449,7 @@ Java source code that accompanies this book.
 This book mixes mathematical analysis of running times with Java source
 code for the algorithms being analyzed.  This means that some equations
 contain variables also found in the source code.  These variables are
-typeset consistently, both withing the source code and within equations.
+typeset consistently, both within the source code and within equations.
 The most common such variable is the variable #n# that, without exception,
 always refers the number of items currently stored in the data structure.
 
