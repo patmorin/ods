@@ -1,14 +1,14 @@
 \chapter{Sorting Algorithms}
 \chaplabel{sorting}
 
-This chapter discusses algorithms for sorting a set of #n# integers.
+This chapter discusses algorithms for sorting a set of #n# items.
 This might seem like a strange topic for a book on data structures, but
 there are several good reasons for including it here.  The most obvious
 reason is that two of these sorting algorithms (quicksort and heap-sort)
 are intimately related to two of the data structures we have already
 studied (random binary search trees and heaps, respectively).
 
-The first part of this chapter discusses algorithm that sort using only
+The first part of this chapter discusses algorithms that sort using only
 comparisons and presents three algorithms that run in $O(#n#\log #n#)$
 time.  As it turns out, all three algorithms are asymptotically optimal;
 no algorithm that uses only comparisons can avoid doing roughly $#n#\log
@@ -77,7 +77,7 @@ the two subproblems and obtain
 \begin{align*}
   C(#n#) 
   &\le #n#-1 + 2C(#n#/2) \\
-  &\le #n#-1 + 2((#n#/2)\log(#n#/2) \\
+  &\le #n#-1 + 2((#n#/2)\log(#n#/2)) \\
   &= #n#-1 + #n#\log(#n#/2) \\
   &= #n#-1 + #n#\log #n#-#n# \\
   &< #n#\log #n# \enspace .
@@ -104,14 +104,14 @@ for all $x\ge 1/2$.  Inequality~\eqref{log-ineq-a} comes from the fact that $\lo
   &\le #n#-1 + #n#\log(#n#/2) + 1/2 \\
   &< #n# + #n#\log(#n#/2) \\
   &= #n# + #n#(\log#n#-1) \\
-  &= #n#\log#n#
-\end{align*} \qedhere
+  &= #n#\log#n# \enspace . \qedhere
+\end{align*} 
 \end{proof}
 
 \subsection{Quicksort}
 
 The \emph{quicksort} algorithm is another classic divide and conquer
-algorithm.  Unlike mergesort, which does merging after solving the two
+algorithm.  Unlike merge-sort, which does merging after solving the two
 subproblems, quicksort does all its work upfront.
 
 The algorithm is simple to describe:  Pick a random \emph{pivot} element,
@@ -120,7 +120,6 @@ set of elements equal to #x#, and the set of elements greater than #x#;
 and, finally, recursively sort the first and third sets in this partition.
 An example is shown in \figref{quicksort}.
 \javaimport{ods/Algorithms.quickSort(a,c).quickSort(a,i,n,c)}
-
 \begin{figure}
   \begin{center}
     \includegraphics{figs/quicksort}
@@ -128,7 +127,6 @@ An example is shown in \figref{quicksort}.
     \figlabel{quicksort}
   \end{center}
 \end{figure}
-
 All of this is done in-place, so that instead of making copies of
 subarrays being sorted, the #quickSort(a,i,n,c)# method only sorts the
 subarray $#a[i]#,\ldots,#a[i+n-1]#$.  Initially, this method is called
@@ -146,7 +144,7 @@ indices #p# and #q# so that
 \]
 This partitioning, which is done by the #while# loop in the code, works
 by iteratively increasing #p# and decreasing #q# while maintaining the
-first and last of these conditions.  At each step, element at position
+first and last of these conditions.  At each step, the element at position
 #j# is either moved to the front, left where it is, or moved to the back.
 In the first two cases, #j# is incremented, while in the last case, #j#
 is not incremented since the new element at position #j# has not been
@@ -187,7 +185,7 @@ about the running-time of quicksort:
 \end{thm}
 
 \begin{proof}
-Let #T# be the number of comparisons performed by quicksort when sorting #n# distsinct elements.  Using \lemref{quicksort}, we have:
+Let $T$ be the number of comparisons performed by quicksort when sorting #n# distsinct elements.  Using \lemref{quicksort}, we have:
 \begin{align*}
   \E[T] &= \sum_{i=0}^{#n#-1}(H_{#i#+1}+H_{#n#-#i#}) \\ 
         &= 2\sum_{i=1}^{#n#}H_i \\ 
@@ -302,7 +300,7 @@ completes the proof.
 
 \subsection{A Lower-Bound for Comparison-Based Sorting}
 
-We have now seen three comparison-based sorting algorithms that run
+We have now seen three comparison-based sorting algorithms that each run
 in $O(#n#\log #n#)$ time.  By now, we should be wondering if faster
 algorithms exist.  The short answer to this question is no.  If the
 only operations allowed on the elements of #a# are comparisons then no
@@ -319,7 +317,7 @@ it follows from the fact that
 
 We will first focus our attention on deterministic algorithms like
 merge-sort and heap-sort and on a particular fixed value of #n#.  Imagine
-such an algorithm is being used to sort #n# distinct elements.  They key
+such an algorithm is being used to sort #n# distinct elements.  The key
 to proving the lower-bound is to observe that, for a deterministic
 algorithm with a fixed value of #n#, the first pair of elements that are
 compared is always the same.  For example, in #heapSort(a,c)#, when #n#
@@ -370,7 +368,7 @@ algorithms.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/comparison-tree-2}
+    \includegraphics{figs/comparison-tree-b}
   \end{center}
   \caption{A comparison tree that does not correctly sort every input
   permutation.}
