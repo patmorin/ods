@@ -475,7 +475,7 @@ Skiplists are even part of the Java 1.6 API \cite{oracle_jdk6}.
 
 
 \begin{exc}\exclabel{skiplist-opt-2}
-  Design an implement a #find(x)# method for #SkiplistSet# that avoids
+  Design and implement a #find(x)# method for #SkiplistSet# that avoids
   \emph{locally-redundant comparisons}; these are comparisons that have already
   been done and occur because $#u.next[r]# = #u.next[r-1]#$.
   Analyze the expected number of comparisons done by your modified #find(x)#
@@ -498,4 +498,19 @@ Skiplists are even part of the Java 1.6 API \cite{oracle_jdk6}.
   of this #SEList# in an #SSet#. If the original #SSet# implementation
   uses $O(#n#)$ space to store #n# elements, then the #SESSet# will use
   enough space for #n# elements plus $O(#n#/#b#+#b#)$ wasted space.
+\end{exc}
+
+\begin{exc}
+  Using an #SSet# as your underlying structure, design and implement an
+  application that reads a (large) text file and allow you to search,
+  interactively, for any substring contained in the text.
+
+  \noindent  Hint 1: Every substring is a prefix of some suffix, so it
+  suffices to store all suffixes of the text file.
+
+  \noindent Hint 2:  Any suffix can be represented compactly as a single
+  integer indicating where the suffix begins in the text.
+
+  \noindent Test your application on some large texts like some of the books
+  available at Project Gutenberg \cite{gutenberg}.
 \end{exc}
