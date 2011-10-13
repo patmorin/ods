@@ -201,12 +201,12 @@ probability theory.
 
 \subsection{Logarithms}
 
-In this book, the expression $\log_b k$ denotes the base-$b$ logarithm
-of $k$.  That is, the unique value $x$ that satisifies
+In this book, the expression $\log_b k$ denotes the \emph{base-$b$ logarithm}
+of $k$.  That is, the unique value $x$ that satisfies
 \[
     b^{x} = k  \enspace .
 \]
-Most of the logarithms in this book are base 2 (binary logarithms),
+Most of the logarithms in this book are base 2 (\emph{binary logarithms}),
 in which case we drop the base, so that $\log k$ is a shorthand for
 $\log_2 k$.
 
@@ -222,7 +222,8 @@ of a particularly common integral:
 \[
     \int_{1}^{k} 1/x\,\mathrm{d}x  = \ln k \enspace .
 \]
-Two of the most common manipulations we do with a logarithms are removing them from an exponent:
+Two of the most common manipulations we do with logarithms are removing
+them from an exponent:
 \[
     b^{\log_b k} = k
 \]
@@ -235,6 +236,16 @@ For example, we can use these two manipulations to compare the natural and binar
    \ln k = \frac{\log k}{\log e} = \frac{\log k}{(\ln e)/(\ln 2)} = 
     (\ln 2)(\log k) \approx 0.693147\log k \enspace .
 \]
+
+\subsection{Factorials}
+
+In one or two places in this book, the \emph{factorial} function is used.
+For a non-negative integer #n#, the notation $#n#!$ denotes
+\[
+   #n#! = 1\cdot2\cdot3\cdot\cdots\cdot #n# \enspace .
+\]
+Factorials appear because $#n#!$ counts the number of distinct
+permutations, i.e., orderings, of #n# distinct elements.  
 
 \subsection{Asymptotic Notation}
 
