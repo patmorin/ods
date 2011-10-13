@@ -463,7 +463,7 @@ algorithms in this section are able to sort faster than the $O(#n#\log
 \subsection{Counting Sort}
 
 Suppose we have an input array #a# consisting of #n# integers, each
-in the range $0,\ldots,#k#-1$.  The counting-sort algorithm sorts #a#
+in the range $0,\ldots,#k#-1$.  The \emph{counting-sort} algorithm sorts #a#
 using an auxiliary array #c# of counters.  It outputs a sorted version
 of #a# as an auxiliary array #b#.
 
@@ -477,21 +477,23 @@ The code that does this is very slick:
 
 The first #for# loop in this code sets each counter #c[i]# so that it
 counts the number of occurrences of #i# in #a#.  By using the values
-of #a# as indices, these counters can all be computed in $O(#n#)$ by
-scanning #a# once using a for loop.  At this point, we could use #c# to
+of #a# as indices, these counters can all be computed in $O(#n#)$ time
+with a single for loop.  At this point, we could use #c# to
 fill in the output array #b# directly. However, this would not work if
 the elements of #a# have associated data.  Therefore we spend a little
 extra effort to copy the elements of #a# into #b#.
 
-The next #for# loop computes a running-sum of the counters so that #c[i]#
-becomes the number of elements in #a# that are less than or equal to #i#.
-Computing this running sum takes $O(#k#)$ time.
-
-In particular, for every $#i#\in\{0,\ldots,#k#-1\}$,
-$#b[c[i-1]]#=\cdots=#b[c[i]-1]#=#i#$.  Finally, the algorithm scans
-#a# backwards to put its elements in order into an output array #b#.
-When scanning, the element #a[i]=j# is placed at location #b[c[j]-1]#
-and the value #c[j]# is decremented.
+The next #for# loop, which takes $O(#k#)$ time, computes a running-sum
+of the counters so that #c[i]# becomes the number of elements in
+#a# that are less than or equal to #i#.  In particular, for every
+$#i#\in\{0,\ldots,#k#-1\}$, the output array, #b#, will have
+\[
+   #b[c[i-1]]#=#b[c[i-1]+1]=#\cdots=#b[c[i]-1]#=#i# \enspace .
+\]
+Finally, the
+algorithm scans #a# backwards to put its elements in order into an output
+array #b#.  When scanning, the element #a[i]=j# is placed at location
+#b[c[j]-1]# and the value #c[j]# is decremented.
 
 \begin{thm}
   The #countingSort(a,k)# method can sort an array #a# containing #n#
@@ -507,7 +509,7 @@ the next section.
 
 Counting-sort is very efficient for sorting an array of integers when the
 length, #n#, of the array is greater than the maximum value, $#k#-1$,
-that appears in the array.  The radix-sort uses several passes of
+that appears in the array.  The \emph{radix-sort} algorithm uses several passes of
 counting-sort to allow for a much greater range of maximum values.
 
 Radix-sort sorts #w#-bit integers by using $#w/d#$ passes of counting-sort
@@ -559,6 +561,7 @@ optimal since any comparison-based sorting algorithm must perform at
 least $#n#\log #n#-O(#n#)$ comparisons in the worst-case.  The following
 table summarizes the performance of these algorithms:
 
+\noindent
 \begin{tabular}{|l|r@{}l@{ }l|l|} \hline
   & \multicolumn{3}{c|}{comparisons} & in-place  \\ \hline
 Merge-sort & $#n#\log #n#$ & &  worst-case & No  \\
@@ -566,7 +569,7 @@ Quicksort & $1.38#n#\log #n#$ & ${}+ O(#n#)$ & expected & Yes \\
 Heap-sort & $2#n#\log #n#$ & ${}+ O(#n#)$ & worst-case & Yes \\ \hline
 \end{tabular}
 
-Each algorithm has advantages and disadvantages.  Merge-sort does the
+Each of these comparison-based algorithms has advantages and disadvantages.  Merge-sort does the
 fewest comparisons and does not rely on randomization.  Unfortunately,
 it uses an auxilliary array during its merge phase.  Allocating this
 array can be expensive and is a potential point of failure if memory
