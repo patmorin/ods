@@ -803,6 +803,118 @@ data structure:
   that stores #n# elements is $#n# +O(\sqrt{#n#})$.
 \end{thm}
 
+\subsection{Computing Square Roots}
+
+A reader who has had some exposure to models of computation may notice
+that the #RootishArrayStack#, as described above, does not fit into
+the usual word-RAM model of computation (\secref{model}) because it
+requires taking square roots.  The square root operation is generally
+not considered a basic operation and is therefore not usually part of
+the word-RAM model.
+
+In this section, we take time to show that the square root operation can
+be implemented efficiently.  In particular, we show that for any integer
+$#x#\in\{0,\ldots,#n#\}$,  $\lfloor\sqrt{#x#}\rfloor$ can be computed
+in constant-time, after $O(\sqrt{#n#})$ preprocessing that creates two
+arrays of length $O(\sqrt{#n#})$. 
+The following lemma shows that we can reduce the problem of computing the square root of #x# to the square root of a related value #x'#.
+
+\begin{lem}\lemlabel{root}
+Let $#x#\ge 1$ and let $#x'#=#x#-a$, where $0\le a\le\sqrt{#x#}$.  Then
+   $\sqrt{x'} \ge \sqrt{#x#}-1$.
+\end{lem}
+
+\begin{proof}
+It suffices to show that
+\[
+\sqrt{#x#-\sqrt{#x#}} \ge \sqrt{#x#}-1 \enspace .
+\]
+Square both sides of this inequality to get
+\[
+ #x#-\sqrt{#x#} \ge #x#-2\sqrt{#x#}+1
+\]
+and gather terms to get 
+\[
+ \sqrt{#x#} \ge 1
+\]
+which is clearly true for any $#x#\ge 1$.
+\end{proof}
+
+Start by restricting the problem a little, and assume that $2^{#r#} \le
+#x# < 2^{#r#+1}$, so that $\lfloor\log #x#\rfloor=#r#$, i.e., #x# is an
+integer having $#r#+1$ bits in its binary representation.  We can take
+$#x'#=#x# - (#x#\bmod 2^{\lfloor r/2\rfloor})$.  Now, #x'# satisfies
+the conditions of \lemref{root}, so $\sqrt{#x#}-\sqrt{#x'#} \le 1$.
+Furthermore, #x'# has all of its lower-order $\lfloor #r#/2\rfloor$ bits
+equal to 0, so there are only
+\[
+  2^{#r#+1-\lfloor #r#/2\rfloor} \le 4\cdot2^{#r#/2} \le 4\sqrt{#x#}
+\]
+possible values of #x'#.  This means that we can use an array, #sqrttab#,
+that stores the value of $\lfloor\sqrt{#x'#}\rfloor$ for each possible
+value of #x'#.  A little more precisely, we have
+\[
+   #sqrttab#[i] 
+    = \left\lfloor
+       \sqrt{i 2^{\lfloor #r#/2\rfloor}}
+      \right\rfloor \enspace .
+\]
+In this way, $#sqrttab#[i]$ is within 2 of $\sqrt{#x#}$ for all
+$#x#\in\{i2^{\lfloor r/2\rfloor},\ldots,(i+1)2^{\lfloor r/2\rfloor}-1\}$.
+Stated another way, the array entry 
+$#s#=#sqrttab#[#x##>>#\lfloor #r#/2\rfloor]$ is either equal to
+$\lfloor\sqrt{#x#}\rfloor$,
+$\lfloor\sqrt{#x#}\rfloor-1$, or
+$\lfloor\sqrt{#x#}\rfloor-2$.  From #s# we can determine the value
+of $\lfloor\sqrt{#x#}\rfloor$ by
+incrementing #s# until 
+$(#s#+1)^2 > #x#$.
+\javaimport{ods/FastSqrt.sqrt(x,r)}
+
+Now, this only works for $#x#\in\{2^{#r#},\ldots,2^{#r#+1}-1\}$ and
+#sqrttab# is a special table that only works for a particular value
+of $#r#=\lfloor\log #x#\rfloor$.  To overcome this, we could compute
+$\lfloor\log #n#\rfloor$ different #sqrttab# arrays, one for each possible
+value of $\lfloor\log #x#\rfloor$. The sizes of these tables form an exponential sequence whose largest value is at most $4\sqrt{#n#}$, so the total size of all tables is $O(\sqrt{#n#})$.
+
+However, it turns out that more than one #sqrttab# array is unnecessary;
+we only need one #sqrttab# array for the value $#r#=\lfloor\log
+#n#\rfloor$.  Any value #x# with $\log#x#=#r'#<#r#$ can be \emph{upgraded}
+by multiplying #x# by $2^{#r#-#r'#}$ and using the equation
+\[
+    \sqrt{2^{#r#-#r'#}x} = 2^{(#r#-#r#')/2}\sqrt{#x#} \enspace .
+\]
+The quantity $2^{#r#-#r#'}x$ is in the range
+$\{2^{#r#},\ldots,2^{#r#+1}-1\}$ so we can look up its square root
+in #sqrttab#.  The following code implements this idea to compute
+$\lfloor\sqrt{#x#}\rfloor$ for all non-negative integers #x# in the
+range $\{0,\ldots,2^{30}-1\}$ using an array #sqrttab# of size $2^{16}$.
+\javaimport{ods/FastSqrt.sqrt(x)}
+
+Something we have taken for granted thus far is the question of how
+to compute
+$#r#'=\lfloor\log#x#\rfloor$.  Again, this is a problem that can be solved
+with an array #logtab# of size $2^{#r#/2}$.  In this case, the
+code is particularly simple, since $\lfloor\log #x#\rfloor$ is just the
+index of the most significant 1 bit in the binary representation of #x#.
+This means that, for $#x#>2^{#r#/2}$, we can right-shift the bits of
+#x# by $#r#/2$ positions before using it as an index into #logtab#.
+The following code does this using an array #logtab# of size $2^{16}$ to compute
+$\lfloor\log #x#\rfloor$ for all #x# in the range $\{1,\ldots,2^{32}-1\}$
+\javaimport{ods/FastSqrt.log(x)}
+
+Finally, for completeness, we include the following code that initializes #logtab# and #sqrttab#:
+\javaimport{ods/FastSqrt.inittabs()}
+
+To summarize, the computations done by the #i2b(i)# method can be
+implemented in constant time on the word-RAM using $O(\sqrt{n})$ extra
+memory to store the #sqrttab# and #logtab# arrays.  These arrays can be
+rebuilt when #n# increases or decreases by a factor of 2, and the cost
+of this rebuilding can be amortized over the number of #add(i,x)# and
+#remove(i)# operations that caused the change in #n# in the same way that
+the cost of #resize()# is analyzed in the #ArrayStack# implementation.
+
+
 \section{Discussion and Exercises}
 
 Most of the data structures described in this chapter are folklore. They
