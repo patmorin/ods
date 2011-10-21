@@ -579,22 +579,23 @@ Lower-bounds for comparison-based sorting appear to be folklore.
 The following table summarizes
 the performance of these comparison-based algorithms:
 
-\noindent
-\begin{tabular}{|l|r@{}l@{ }l|l|} \hline
-  & \multicolumn{3}{c|}{comparisons} & in-place  \\ \hline
-Merge-sort & $#n#\log #n#$ & &  worst-case & No  \\
-Quicksort & $1.38#n#\log #n#$ & ${}+ O(#n#)$ & expected & Yes \\
-Heap-sort & $2#n#\log #n#$ & ${}+ O(#n#)$ & worst-case & Yes \\ \hline
-\end{tabular}
+\begin{center}
+  \begin{tabular}{|l|r@{}l@{ }l|l|} \hline
+      & \multicolumn{3}{c|}{comparisons} & in-place  \\ \hline
+    Merge-sort & $#n#\log #n#$ & &  worst-case & No  \\
+    Quicksort & $1.38#n#\log #n#$ & ${}+ O(#n#)$ & expected & Yes \\
+    Heap-sort & $2#n#\log #n#$ & ${}+ O(#n#)$ & worst-case & Yes \\ \hline
+  \end{tabular}
+\end{center}
 
-Each of these comparison-based algorithms has advantages and disadvantages.  Merge-sort does the
-fewest comparisons and does not rely on randomization.  Unfortunately,
-it uses an auxilliary array during its merge phase.  Allocating this
-array can be expensive and is a potential point of failure if memory
-is limited.  Quicksort is an in-place algorithm and is a close second in
-terms of the number of comparisons, but is randomized so this running
-time is not always guaranteed.  Heap-sort does the most comparisons,
-but it is in-place and deterministic.
+Each of these comparison-based algorithms has advantages and
+disadvantages.  Merge-sort does the fewest comparisons and does not
+rely on randomization.  Unfortunately, it uses an auxilliary array
+during its merge phase.  Allocating this array can be expensive and is a
+potential point of failure if memory is limited.  Quicksort is an in-place
+algorithm and is a close second in terms of the number of comparisons,
+but is randomized so this running time is not always guaranteed.
+Heap-sort does the most comparisons, but it is in-place and deterministic.
 
 There is one setting in which merge-sort is a clear-winner;  this occurs
 when sorting a linked-list.  In this case, the auxiliary array is not

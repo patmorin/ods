@@ -64,6 +64,7 @@ public class Algorithms {
 		int[] b = null;
 		for (int p = 0; p < w/d; p++) {
 			int c[] = new int[1<<d];
+			// the next three for loops implement counting-sort
 			b = new int[a.length];
 			for (int i = 0; i < a.length; i++)
 				c[(a[i] >> d*p)&((1<<d)-1)]++;
