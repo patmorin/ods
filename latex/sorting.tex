@@ -444,12 +444,12 @@ notice that this is true for every choice of $\hat{b}$, therefore it holds even 
 \section{Counting Sort and Radix Sort}
 
 In this section we consider two sorting algorithms that are not
-comparison-based. These are algorithms that are specialized for sorting
+comparison-based. These algorithms are specialized for sorting
 small integers.
-
 These algorithms get around the lower-bounds of
-\thmref{deterministic-sorting-lower-bound} by using (parts of) the elements of
-#a# as indices into an array.  Consider a statement of the form
+\thmref{deterministic-sorting-lower-bound} by using (parts of) the
+elements of #a# as indices into an array.  Consider a statement of
+the form
 \[
   #c[a[i]]# = 1 \enspace .
 \]
@@ -457,13 +457,13 @@ This statement executes in constant time, but has #c.length# possible
 different outcomes, depending on the value of #a[i]#.  This means that
 the execution of an algorithm that makes such a statement can not be
 modelled as a binary tree.  Ultimately, this is the reason that the
-algorithms in this section are able to sort faster than the $O(#n#\log
-#n#)$ time comparison-based algorithms.
+algorithms in this section are able to sort faster than 
+comparison-based algorithms.
 
 \subsection{Counting Sort}
 
-Suppose we have an input array #a# consisting of #n# integers, each
-in the range $0,\ldots,#k#-1$.  The \emph{counting-sort} algorithm sorts #a#
+Suppose we have an input array #a# consisting of #n# integers, each in
+the range $0,\ldots,#k#-1$.  The \emph{counting-sort} algorithm sorts #a#
 using an auxiliary array #c# of counters.  It outputs a sorted version
 of #a# as an auxiliary array #b#.
 
@@ -472,8 +472,17 @@ $#i#\in\{0,\ldots,#k#-1\}$, count the number of occurrences of #i# in #a#
 and store this in #c[i]#.  Now, after sorting, the output will look like
 #c[0]# occurrences of 0, followed by #c[1]# occurrences of 1, followed by
 #c[2]# occurences of 2,\ldots, followed by #c[k-1]# occurrences of #k-1#.
-The code that does this is very slick:
+The code that does this is very slick, and its execution is illustrated in
+\figref{countingsort}:
 \javaimport{ods/Algorithms.countingSort(a,k)}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/countingsort}
+  \end{center}
+  \caption{The operation of counting sort on an array of length $#n#=20$ that stores integers $0,\ldots,#k#-1=9$.}
+  \figlabel{countingsort}
+\end{figure}
 
 The first #for# loop in this code sets each counter #c[i]# so that it
 counts the number of occurrences of #i# in #a#.  By using the values
@@ -500,19 +509,21 @@ array #b#.  When scanning, the element #a[i]=j# is placed at location
   integers in the set $\{0,\ldots,#k#-1\}$ in $O(#n#+#k#)$ time.
 \end{thm}
 
-The counting-sort algorithm has the nice property of being \emph{stable}.
-If two elements #a[i]# and #a[j]# have the same value, and $#i#<#j#$
-then #a[i]# will appear before #a[j]# in #b#.  This will be useful in
-the next section.
+The counting-sort algorithm has the nice property of being \emph{stable};
+it preserves the relative order of elements that are equal.  If two
+elements #a[i]# and #a[j]# have the same value, and $#i#<#j#$ then
+#a[i]# will appear before #a[j]# in #b#.  This will be useful in the
+next section.
 
 \subsection{Radix-Sort}
 
 Counting-sort is very efficient for sorting an array of integers when the
-length, #n#, of the array is greater than the maximum value, $#k#-1$,
-that appears in the array.  The \emph{radix-sort} algorithm uses several passes of
-counting-sort to allow for a much greater range of maximum values.
+length, #n#, of the array is not much smaller than the maximum value,
+$#k#-1$, that appears in the array.  The \emph{radix-sort} algorithm,
+which we now describe, uses several passes of counting-sort to allow
+for a much greater range of maximum values.
 
-Radix-sort sorts #w#-bit integers by using $#w/d#$ passes of counting-sort
+Radix-sort sorts #w#-bit integers by using $#w#/#d#$ passes of counting-sort
 to sort these integers #d# bits at a time.\footnote{We assume that
 #d# divides #w#, otherwise we can always increase #w# to $#d#\lceil
 #w#/#d#\rceil$.}  More precisely, radix sort first sorts the integers by
@@ -523,6 +534,16 @@ significant #d# bits.
 (In this code, the expression #(a[i] >> d*p)&((1<<d)-1)# extracts the integer
 whose binary representation is given by bits
 $(#p#+1)#d#-1,\ldots,#p##d#$ of #a[i]#.)
+An example of the steps of this algorithm is shown in \figref{radixsort}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/radixsort}
+  \end{center}
+  \caption{Using radixsort to sort $#w#=8$-bit integers by using 4 passes
+   of counting sort on $#d#=2$-bit integers.}
+  \figlabel{radixsort}
+\end{figure}
 
 This remarkable algorithm sorts correctly because counting-sort is
 a stable sorting algorithm.  If $#x# < #y#$ are two elements of #a#
@@ -555,11 +576,8 @@ Hoare \cite{h61}.  The original heap-sort algorithm is due to Williams
 \cite{w64}, but the version presented here (in which the heap is
 constructed bottom-up in $O(#n#)$ time) is due to Floyd \cite{f64}.
 Lower-bounds for comparison-based sorting appear to be folklore.
-
-All these algorithms comparison-based algorithms are asymptotically
-optimal since any comparison-based sorting algorithm must perform at
-least $#n#\log #n#-O(#n#)$ comparisons in the worst-case.  The following
-table summarizes the performance of these algorithms:
+The following table summarizes
+the performance of these comparison-based algorithms:
 
 \noindent
 \begin{tabular}{|l|r@{}l@{ }l|l|} \hline
