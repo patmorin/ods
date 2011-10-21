@@ -6,16 +6,15 @@ interfaces where the underlying data is stored in an array, called the
 \emph{backing array}.  The following table summarizes the running times
 of operations for the data structures presented in this chapter:
 
-\noindent
-\begin{tabular}{lcccc}
- & #get(i)# & #set(i,x)# & #add(i,x)# & #remove(i)# \\
-#ArrayStack# & $O(1)$ & $O(1)$ & $O(1+#n#-#i#)$ & $O(#n#-#i#)$ \\
-#ArrayDeque# & $O(1)$ & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$ 
-             & $O(1+\min\{#i#,#n#-#i#\})$ \\
-#DualArrayDeque# & $O(1)$ & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$ 
-             & $O(1+\min\{#i#,#n#-#i#\})$ \\
-#RootishArrayStack# & $O(1)$ & $O(1)$ & $O(1+#n#-#i#)$ & $O(#n#-#i#)$ \\
+\begin{center}
+\begin{tabular}{lll}
+ & #get(i)#/#set(i,x)# & #add(i,x)#/#remove(i)# \\
+#ArrayStack# & $O(1)$ & $O(#n#-#i#)$ \\
+#ArrayDeque# & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$ \\
+#DualArrayDeque# & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$ \\
+#RootishArrayStack# & $O(1)$ & $O(#n#-#i#)$ \\
 \end{tabular}
+\end{center}
 
 Data structures that work by storing data in a single array have many
 advantages and limitations in common:

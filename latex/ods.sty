@@ -14,6 +14,7 @@
 \newcommand{\seclabel}[1]{\label{sec:#1}}
 \newcommand{\Secref}[1]{Section~\ref{sec:#1}}
 \newcommand{\secref}[1]{\mbox{Section~\ref{sec:#1}}}
+\newcommand{\sref}[1]{\mbox{\textsection~\ref{sec:#1}}}
 
 \newcommand{\alglabel}[1]{\label{alg:#1}}
 \newcommand{\Algref}[1]{Algorithm~\ref{alg:#1}}
@@ -111,4 +112,6 @@
   \end{flushleft}
 }
 
+\long\def\symbolfootnote[#1]#2{\begingroup%
+\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
 

@@ -152,6 +152,7 @@ are treated as equal if their keys are equal.  By storing #Pair#s in a
 #USet#, we can find the value associated with any key #k# by creating
 a #Pair#, #x#, with key #k# and using the #find(x)# method.
 
+
 \subsection{The SSet Interface: Sorted Sets}
 \seclabel{sset}
 
@@ -190,6 +191,8 @@ of the set.  On the other hand, the implementation of a #USet# as a
 constant expected time.  When choosing which of these structures to use,
 one should always use a #USet# unless the extra functionality offered
 by an #SSet# is really needed.
+
+
 
 % \subsection{The DynamicString Interface}
 
@@ -325,6 +328,7 @@ for our purposes, other texts may treat multivariate functions and
 asymptotic notation differently.
 
 \subsection{Randomization and Probability}
+\seclabel{randomization}
 
 Some of the data structures presented in this book are \emph{randomized}.
 They make random choices that are independent of the data being stored
@@ -463,6 +467,47 @@ contain variables also found in the source code.  These variables are
 typeset consistently, both within the source code and within equations.
 The most common such variable is the variable #n# that, without exception,
 always refers the number of items currently stored in the data structure.
+
+\section{List of Data Structures}
+
+The following table
+summarize the performance of data structures
+described in this book that implement each of the interfaces, #List#,
+#USet#, and #SSet#, described in \secref{interfaces}.
+
+\begin{center}
+\renewcommand{\thefootnote}{\Alph{footnote}}
+\begin{tabular}{|l|l|l|l|} \hline
+\multicolumn{4}{|c|}{#List# implementations} \\ \hline
+ & #get(i)#/#set(i,x)# & #add(i,x)#/#remove(i)# & \\ \hline
+#ArrayStack# & $O(1)$ & $O(1+#n#-#i#)$\footnotemark[1] & \sref{arraystack} \\
+#ArrayDeque# & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$\footnotemark[1] & \sref{arraydeque} \\
+#DualArrayDeque# & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$\footnotemark[1] & \sref{dualarraydeque}\\
+#RootishArrayStack# & $O(1)$ & $O(1+#n#-#i#)$\footnotemark[1]  & \sref{rootisharraystack} \\
+#DLList# & $O(1+\min\{#i#,#n#-#i#\})$ & $O(1+\min\{#i#,#n#-#i#\})$  & \sref{dllist} \\
+#SEList# & $O(1+\min\{#i#,#n#-#i#\}/#b#)$ & $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$\footnotemark[1]  & \sref{selist} \\
+#SkiplistList# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5]  & \sref{skiplistlist} \\ \hline
+\multicolumn{4}{c}{} \\[2ex] \hline
+\multicolumn{4}{|c|}{#USet# implementations} \\ \hline
+ & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
+#HashTable# & $O(1)$\footnotemark[5] & $O(1)$\footnotemark[1]\footnotemark[5] & \sref{hashtable} \\ \hline
+\multicolumn{4}{c}{} \\[2ex] \hline
+\multicolumn{4}{|c|}{#SSet# implementations} \\ \hline
+ & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
+#SkiplistSet# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5] & \sref{skiplistset} \\ \hline
+#Treap# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5] & \sref{treap} \\ \hline
+#ScapegoatTree# & $O(\log #n#)$ & $O(\log #n#)$\footnotemark[1] & \sref{scapegoattree} \\ \hline
+#RedBlackTree# & $O(\log #n#)$ & $O(\log #n#)$ & \sref{redblacktree} \\ \hline
+\multicolumn{4}{c}{} \\[2ex] \hline
+\multicolumn{4}{|c|}{(Priority) #Queue# implementations} \\ \hline
+ & #findMin()# & #add(x)#/#remove()# & \\ \hline
+#BinaryHeap# & $O(1)$ & $O(\log #n#)$\footnotemark[1] & \sref{binaryheap} \\ \hline
+#MeldableHeap# & $O(1)$ & $O(\log #n#)$\footnotemark[5] & \sref{mergeableheap} \\ \hline
+\end{tabular}
+\footnotetext[1]{Denotes an \emph{amortized} running time. See \chapref{arrays}.}
+\footnotetext[5]{Denotes an \emph{expected} running time.  See \secref{randomization}.}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\end{center}
 
 \section{References}
 

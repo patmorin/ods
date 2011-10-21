@@ -96,6 +96,7 @@ they decide if a search path should go down into $L_{r-1}$ or go right
 within $L_r$.
 
 \section{#SkiplistSet#: An Efficient #SSet# Implementation}
+\seclabel{skiplistset}
 
 A #SkiplistSet# uses a skiplist structure to implement the #SSet#
 interface.   When used this way, the list $L_0$ stores the elements of
@@ -168,6 +169,7 @@ expected time per operation.
 \end{thm}
 
 \section{#SkiplistList#: An Efficient Random-Access #List# Implementation}
+\seclabel{skiplistlist}
 
 A #SkiplistList# implements the #List# interface on top of a skiplist structure.
 In a #SkiplistList#, $L_0$ contains the elements of the
