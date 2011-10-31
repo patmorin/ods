@@ -241,14 +241,43 @@ For example, we can use these two manipulations to compare the natural and binar
 \]
 
 \subsection{Factorials}
+\seclabel{factorials}
 
 In one or two places in this book, the \emph{factorial} function is used.
-For a non-negative integer #n#, the notation $#n#!$ denotes
+For a non-negative integer $n$, the notation $n!$ (pronounced ``$n$ factorial'') denotes
 \[
-   #n#! = 1\cdot2\cdot3\cdot\cdots\cdot #n# \enspace .
+   n! = 1\cdot2\cdot3\cdot\cdots\cdot n \enspace .
 \]
-Factorials appear because $#n#!$ counts the number of distinct
-permutations, i.e., orderings, of #n# distinct elements.  
+Factorials appear because $n!$ counts the number of distinct
+permutations, i.e., orderings, of n distinct elements.  For the special case $n=0$, $0!$ is defined as 1. 
+
+The quantity $n!$ can be approximated using \emph{Stirling's Approximation}:
+\[
+	n! 
+   = \sqrt{2\pi n}\left(\frac{n}{e}\right)^{n}e^{\alpha(n)} \enspace ,
+\]
+where
+\[  
+   \frac{1}{12n+1} <  \alpha(n) < \frac{1}{12n}  \enspace .
+\]
+Stirling's Approximation also approximates $\ln(n!)$:
+\[
+   \ln(n!) = n\ln n - n + \frac{1}{2}\ln(2\pi n) + \alpha(n)
+\]
+(In fact, Stirling's Approximation is most easily proven by approximating
+$\ln(n!)=\ln 1 + \ln 2  + \cdots + \ln n$ by the integral
+$\int_1^n \ln n\,\mathrm{d}n = n\ln n - n +1$.)
+
+Related to the factorial function are the \emph{binomial coefficients}.
+For a non-negative integer $n$ and an integer $k\in\{0,\ldots,n\}$,
+the notation $\binom{n}{k}$ denotes:
+\[
+   \binom{n}{k} = \frac{n!}{k!(n-k)!} \enspace .
+\]
+The binomial coefficient $\binom{n}{k}$ (pronounced ``$n$ choose $k$'')
+counts the number of subsets of an $n$ element set that have size $k$,
+i.e., the number of ways of choosing $k$ distinct integers from the
+set $\{1,\ldots,n\}$.
 
 \subsection{Asymptotic Notation}
 
@@ -327,6 +356,7 @@ function of $n$.  The reader should be warned that, although this works
 for our purposes, other texts may treat multivariate functions and
 asymptotic notation differently.
 
+
 \subsection{Randomization and Probability}
 \seclabel{randomization}
 
@@ -381,7 +411,7 @@ This requires that we know enough to calculate that $\Pr\{X=i\}
 $i\binom{k}{i}=k\binom{k-1}{i}$, and that we know the binomial identity
 $\sum_{i=0}^{k} \binom{k}{i} = 2^{k}$.
 
-Using indicator variables and linearity of independence makes things much easier:  For each $i\in\{1,\ldots,k\}$, define the indicator random variable
+Using indicator variables and linearity of expectation makes things much easier:  For each $i\in\{1,\ldots,k\}$, define the indicator random variable
 \[
     I_i = \begin{cases}
            1 & \text{if the $i$th coin toss is heads} \\
@@ -457,7 +487,7 @@ from the accompanying text.
 
 These conventions should make most of the code samples understandable by
 anyone with a background in any of the languages from the ALGOL tradition,
-including B, C, C++, C\# Java, JavaScript, and so on.  Readers who want
+including B, C, C++, C\#, D, Java, JavaScript, and so on.  Readers who want
 the full details of all implementations are encouraged to look at the
 Java source code that accompanies this book.
 
@@ -525,7 +555,7 @@ reference that covers both asymptotic notation and probability is the
 textbook by Graham, Knuth, and Patashnik \cite{gkp94}.
 
 Readers wanting to brush up on their Java programming can find many Java
-tutorial online \cite{oracle_tutorials}.
+tutorials online \cite{oracle_tutorials}.
 
 
 
