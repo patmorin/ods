@@ -1,7 +1,6 @@
 package ods;
 
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * Implement square roots without relying on Math.sqrt(x)
