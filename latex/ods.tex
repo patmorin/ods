@@ -7,6 +7,8 @@
 %\usepackage[mathlines]{lineno}
 %\linenumbers
 
+\allowdisplaybreaks[1]  % for ams math align environments
+
 \hyphenation{Array-Stack}
 \hyphenation{Fast-Array-Stack}
 \hyphenation{Array-Queue}
@@ -16,6 +18,8 @@
 \hyphenation{Skip-list-Set}
 \hyphenation{Skip-list-List}
 \hyphenation{Hash-Table}
+\hyphenation{Chained-Hash-Table}
+\hyphenation{Linear-Hash-Table}
 \hyphenation{Red-Black-Tree}
 \hyphenation{Binary-Tree}
 \hyphenation{Binary-Search-Tree}
@@ -54,6 +58,16 @@
 
 % Draft mode only - mark overfull hboxes
 % \overfullrule=5pt
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\renewcommand{\chaptermark}[1]{% 
+  \markboth{\thechapter.\ #1}{}} 
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\lhead{\itshape\nouppercase{\leftmark}}
+\rhead{\itshape\nouppercase{\rightmark}}
 
 \begin{document}
 %\AddToShipoutPicture*{\BackgroundPic}
