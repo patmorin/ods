@@ -367,12 +367,12 @@ The next two lemmata tell us that skiplists have linear size:
 
 \begin{lem}\lemlabel{skiplist-size2}
   The expected number of nodes in a skiplist containing $#n#$ elements,
-  including all occurrences of the sentinel is $2#n#+O(\log #n#)$.
+  including all occurrences of the sentinel, is $2#n#+O(\log #n#)$.
 \end{lem}
 
 \begin{proof}
   By \lemref{skiplist-size1}, the expected number of nodes, not
-  including the sentinel is $2#n#$.  The number of occurrences of
+  including the sentinel, is $2#n#$.  The number of occurrences of
   the sentinel is equal to the height, $#h#$, of the skiplist so, by
   \lemref{skiplist-height} the expected number of occurrences of the
   sentinel is at most $\log #n#+2 = O(\log #n#)$.
