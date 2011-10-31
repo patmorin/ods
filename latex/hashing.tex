@@ -19,13 +19,13 @@ integers in some specific range.  In the code samples, some of these
 obtained using random bits generated from atmospheric noise.
 
 
-\section{#HashTable#: Hashing with Chaining}
+\section{#ChainedHashTable#: Hashing with Chaining}
 \seclabel{hashtable}
 
-A #HashTable# data structure uses \emph{hashing with chaining} to store
+A #ChainedHashTable# data structure uses \emph{hashing with chaining} to store
 data as an array, #t#, of lists.  An integer, #n#, keeps track of the
 total number of items in all lists:
-\javaimport{ods/HashTable.t.n}
+\javaimport{ods/ChainedHashTable.t.n}
 The \emph{hash value} of a data item #x#, denoted #hash(x)# is a value
 in the range $\{0,\ldots,#t.length#-1\}$.  All items with hash value #i#
 are stored in the list at #t[i]#.  To ensure that lists don't get too
@@ -40,7 +40,7 @@ To add an element #x# to the hash table, we first check if the length
 of #t# needs to be increased and, if so, we grow #t#.  With
 this out of the way we hash #x# to get an integer #i# in the range
 $\{0,\ldots,#t.length#-1\}$ and we append #x# to the list #t[i]#:
-\javaimport{ods/HashTable.add(x)}
+\javaimport{ods/ChainedHashTable.add(x)}
 Growing the table, if necessary, involves doubling the length of #t#
 and reinserting all elements into the new table.  This is exactly the
 same strategy used in the implementation of #ArrayStack# and the same
@@ -49,20 +49,19 @@ over a sequence of insertions (see~\lemref{arraystack-amortized} on
 page~\pageref{lem:arraystack-amortized}).
 
 Besides growing, the only other work done when adding #x# to a
-#HashTable# involves appending #x# to the list #t[hash(x)]#.  For any of
+#ChainedHashTable# involves appending #x# to the list #t[hash(x)]#.  For any of
 the list implementations described in Chapters~\ref{chap:arrays} or
 \ref{chap:linkedlists}, this takes only constant time.
 
 To remove an element #x# from the hash table we iterate over the list
 #t[hash(x)]# until we find #x# so that we can remove it:
-\javaimport{ods/HashTable.remove(x)}
-\javaimport{ods/HashTable.removeOne(x)}
+\javaimport{ods/ChainedHashTable.remove(x)}
 This takes $O(#n#_{#hash(x)#})$time, where $#n#_{#i#}$ denotes the length
 of the list stored at #t[i]#.
 
 Searching for the element #x# in a hash table is similar.  We perform
 a linear search on the list #t[hash(x)]#:
-\javaimport{ods/HashTable.find(x)}
+\javaimport{ods/ChainedHashTable.find(x)}
 Again, this takes time proportional to the length of the list #t[hash(x)]#.
 
 The performance of a hash table depends critically on the choice of the
@@ -98,7 +97,7 @@ by $2^{#w#-#d#}$ is equivalent to dropping the rightmost $#w#-#d#$ bits
 in a binary representation (which is implemented by shifting the bits
 right by $#w#-#d#$).  In this way, the code that implements the above
 formula is simpler than the formula itself:
-\javaimport{ods/HashTable.hash(x)}
+\javaimport{ods/ChainedHashTable.hash(x)}
 
 \begin{figure}
   \begin{center}
@@ -275,17 +274,270 @@ random bits followed by a 1.
 
 \subsection{Summary}
 
-The following theorem summarizes the performance of the #HashTable#
+The following theorem summarizes the performance of the #ChainedHashTable#
 data structure:
 
 \begin{thm}\thmlabel{hashtable}
-  A #HashTable# implements the #USet# interface.  Ignoring the cost of
-  calls to #grow()#, a #HashTable# supports the operations #add(x)#,
+  A #ChainedHashTable# implements the #USet# interface.  Ignoring the cost of
+  calls to #grow()#, a #ChainedHashTable# supports the operations #add(x)#,
   #remove(x)#, and #find(x)# in $O(1)$ expected time per operation.
-  Furthermore, beginning with an empty #HashTable#, any sequence of
+
+  Furthermore, beginning with an empty #ChainedHashTable#, any sequence of
   $m$ #add(x)# and #remove(x)# operations results in a total of $O(m)$
   time spent during all calls to #grow()#.
 \end{thm}
+
+\section{#LinearHashTable#: Linear Probing}
+\seclabel{linearhashtable}
+
+The #ChainedHashTable# data structure uses an array of lists, where the #i#th
+list stores all elements #x# such that $#hash(x)#=#i#$.  An alternative,
+called \emph{open addressing} is to store the elements directly in an
+array, #t#, with each array location in #t# storing at most one value.
+This is the approach taken by the #LinearHashTable# described in this
+section.  In some places, this data structure is described as \emph{open
+addressing with linear probing}.
+
+The main idea behind a #LinearHashTable# is that we would, ideally, like
+to store the element #x# with hash value #i=hash(x)# in the table location
+#t[i]#.  If we can't do this (because some element is already stored
+there) then we try to store it at location $#t#[(#i#+1)\bmod#t.length#]$;
+if that's not possible, then we try $#t#[(#i#+2)\bmod#t.length#]$, and
+so on, until we find a place for #x#.
+
+There are three types of entries stored in #t#: 
+\begin{enumerate}
+  \item data values: actual values in the #USet# that we are representing;
+  \item #null# values: at array locations where no data has ever been
+  stored; and
+  \item #del# values: at array locations where data was once stored but that
+   has since been deleted.
+\end{enumerate}
+In addition to the counter, #n#, that keeps track of the number of elements
+in the #LinearHashTable#, a counter, #q#, keeps track of the number of
+elements of Types~1 and 3.  That is, #q# is equal to #n# plus the number
+of #del# values in #t#.  To make this work efficiently, we need
+#t# to be considerably larger than #q#, so that there are lots of #null#
+values in #t#.  The operations on a #LinearHashTable# therefore maintain
+the invariant that $#t.length#\ge 2#q#$.
+
+To summarize, a #LinearHashTable# contains an array, #t#, that stores
+data elements, and integers #n# and #q# that keep track of the number of
+data elements and non-#null# values of #t#, respectively.  Because many
+hash functions only work for table sizes that are a power of 2, we also
+keep an integer #d# and maintain the invariant that #t.length=2^d#.
+\javaimport{ods/LinearHashTable.t.n.q.d}
+
+The #find(x)# operation in a #LinearHashTable# is simple.  We start
+at array entry #t[i]# where $#i#=#hash(x)#$ and search entries #t[i]#,
+$#t#[(#i#+1)\bmod #t.length#]$, $#t#[(#i#+2)\bmod #t.length#]$, and so on,
+until we find an index #i'# such that, either, #t[i']=x#, or #t[i']=null#.
+In the former case we return #t[i']#. In the latter case, we conclude
+that #x# is not contained in the hash table and return #null#.
+\javaimport{ods/LinearHashTable.find(x)}
+
+The #add(x)# operation is also fairly easy to implement. After checking
+that #x# is not already stored in the table (using #find(x)#), we search
+#t[i]#, $#t#[(#i#+1)\bmod #t.length#]$, $#t#[(#i#+2)\bmod #t.length#]$,
+and so on, until we find a #null# or #del# and store #x# at that location, increment #n#, and #q#, if appropriate.:
+\javaimport{ods/LinearHashTable.add(x)}
+
+By now, the implementation of the #remove(x)# operation should be obvious.
+we search #t[i]#, $#t#[(#i#+1)\bmod #t.length#]$, $#t#[(#i#+2)\bmod
+#t.length#]$, and so on until we find an index #i'# such that #t[i']=x#
+or #t[i']=null#.  In the former case, we set #t[i']=del# and return
+#true#.  In the latter case we conclude that #x# was not stored in the
+table (and therefore cannot be deleted) and return #false#.
+\javaimport{ods/LinearHashTable.remove(x)}
+
+The correctness of the #find(x)#, #add(x)#, and #remove(x)# methods is
+easy to verify, though it relies on the use of #del# values.  Notice
+that none of these operations ever sets a non-#null# entry to #null#.
+Therefore, when we reach an index #i'# such that #t[i']=null#, this is
+a proof that the element, #x#, that we are searching for is not stored
+in the table; #t[i']# has always been #null#, so there is no reason that
+a previous #add(x)# operation would have proceeded beyond index #i'#.
+
+The #resize()# method is called by #add(x)# when the number of non-#null#
+entries exceeds #n/2# or by #remove(x)# when the number of data entries is
+less than #t.length/8#.  The #resize()# method works like the #resize()#
+methods in other array-based data structures.  We find the smallest
+non-negative integer #d# such that $2^{#d#} \ge 3#n#$.  We reallocate
+the array #t# so that it has size $2^{#d#}$ and then we insert all the
+elements in the old version of #t# into the newly-resized copy of #t#.
+While doing this we reset #q# equal to #n# since the newly-allocated #t#
+has no #del# values.
+\javaimport{ods/LinearHashTable.resize()}
+
+\subsection{Analysis of Linear Probing}
+
+Notice that each operation, #add(x)#, #remove(x)#, or #find(x)#, finishes
+as soon as (or before) it discovers the first #null# entry in #t#.
+The intuition behind the analysis of linear probing is that, since at
+least half the elements in #t# are equal to #null#, an operation should
+not take long to complete because it will very quickly come across a
+#null# entry.  We shouldn't rely too heavily on this intuition though,
+because it would lead us to (the incorrect) conclusion that the expected
+number of locations in #t# examined by an operation is at most 2.
+
+For the rest of this section, we will assume that all hash values are
+independently and uniformly distributed in $\{0,\ldots,#t.length#-1\}$.
+This is not a realistic assumption, but it will make it possible for
+us to analyze linear probing.  Later in this section we will describe a
+method, called tabulation hashing, that produces a hash function that is
+``good enough'' for linear probing.  We will also assume that all indices
+into the positions of #t# are taken modulo #t.length#, so that #t[i]#
+is really a shorthand for $#t#[#i#\bmod#t.length#]$.
+
+A \emph{run of length $k$ that starts at #i#} occurs when $#t[i]#,
+#t[i+1]#,\ldots,#t#[#i#+k-1]$ are all non-#null# and $#t#[#i#-1]=#t#[#i#+k]=#null#$.
+The number of non-#null# elements of #t# is exactly #q# and the #add(x)#
+method ensures that, at all times, $#q#\le#t.length#/2$.  There are #q#
+elements $#x#_1,\ldots,#x#_{#q#}$ that have been inserted into #t# since
+the last #rebuild()# operation.  By our assumption, each of these has a
+hash value, $#hash#(#x#_j)$, that is uniform and independent of the rest.
+With this setup, we can prove the main lemma required to analyze linear
+probing.
+
+\begin{lem}\lemlabel{linear-probing}
+For any $#i#\in\{0,\ldots,#t.length#-1\}$, the probability that a run
+of length $k$ starts at #i# is $O(c^k)$ for some constant $0<c<1$.
+\end{lem}
+
+\begin{proof}
+If a run of length $k$ starts at #i#, then there are exactly $k$
+elements $#x#_j$ such that $#hash#(#x#_j)\in\{#i#,\ldots,#i#+k-1\}$.
+The probability that this occurs is exactly
+\[
+  p_k  = \binom{#q#}{k}\left(\frac{k}{#t.length#}\right)^k\left(\frac{#t.length#-k}{#t.length#}\right)^{#q#-k} \enspace ,
+\]
+since, for each choice of $k$ elements, these $k$ elements must hash to
+one of the $k$ locations and the remaining $#q#-k$ elements must hash to
+the other $#t.length#-k$ table locations.\footnote{Note that $p_k$ is greater
+than the probability that a run of length $k$ starts at #i#, since the definition of $p_k$ does not include the requirement $#t#[#i#-1]=#t#[#i#+k]=#null#$.}
+
+In the following derivation we will cheat a little and replace $r!$ with
+$(r/e)^r$. Stirling's Approximation (\secref{factorials}) shows that this
+is only a factor of $O(\sqrt{r})$ from the truth.  This is just done to
+make the derivation simpler; \excref{linear-probing} asks the reader to
+redo the calculation more rigorously using Stirling's Approximation in
+its entirety.
+
+The value of $p_k$ is maximized when #t.length# is minimum, and the data
+structure maintains the invariant that $#t.length# \ge 2#q#$, so
+\begin{align*}
+   p_k & \le \binom{#q#}{k}\left(\frac{k}{2#q#}\right)^k\left(\frac{2#q#-k}{2#q#}\right)^{#q#-k} \\
+  & = \left(\frac{#q#!}{(#q#-k)!k!}\right)\left(\frac{k}{2#q#}\right)^k\left(\frac{2#q#-k}{2#q#}\right)^{#q#-k} \\
+  & \approx \left(\frac{#q#^{#q#}}{(#q#-k)^{#q#-k}k^k}\right)\left(\frac{k}{2#q#}\right)^k\left(\frac{2#q#-k}{2#q#}\right)^{#q#-k} && \text{[Stirling's approximation]} \\
+  & = \left(\frac{#q#^{k}#q#^{#q#-k}}{(#q#-k)^{#q#-k}k^k}\right)\left(\frac{k}{2#q#}\right)^k\left(\frac{2#q#-k}{2#q#}\right)^{#q#-k} \\
+ & = \left(\frac{#q#k}{2#q#k}\right)^k
+     \left(\frac{#q#(2#q#-k)}{2#q#(#q#-k)}\right)^{#q#-k} \\
+ & = \left(\frac{1}{2}\right)^k
+     \left(\frac{(2#q#-k)}{2(#q#-k)}\right)^{#q#-k} \\
+ & = \left(\frac{1}{2}\right)^k
+     \left(1+\frac{k}{2(#q#-k)}\right)^{#q#-k} \\
+ & = \left(\frac{\sqrt{e}}{2}\right)^k \enspace .
+\end{align*}
+(In the last step, we use the inequality $(1+1/x)^x \le e$, which holds
+for all $x>0$.)  Since $\sqrt{e}/{2}< 0.824360636 < 1$, this completes
+the proof.
+\end{proof}
+
+Using \lemref{linear-probing} to prove upper-bounds on the expected
+running-time of #find(x)#, #add(x)#, and #remove(x)# is now fairly
+straight-forward.  Consider the simplest case, where we execute
+#find(x)# for some value #x# that has never been stored in the
+#LinearHashTable#.  In this case, $#i#=#hash(x)#$ is a random value in
+$\{0,\ldots,#t.length#-1\}$ independent of the contents of #t#.  If #i#
+is part of a run of length $k$ then the time it takes to execute the
+#find(x)# operation is at most $O(1+k)$.  Thus, the expected running-time
+can be upper-bounded by
+\[
+  O\left(1 + \left(\frac{1}{#t.length#}\right)\sum_{i=1}^{#t.length#}\sum_{k=0}^{\infty} k\Pr\{\text{#i# is part of a run of length $k$}\}\right) \enspace .
+\]
+Note that each run of length $k$ contributes to the inner sum $k$ times for a total contribution of $k^2$,  so the above sum can be rewritten as
+\begin{align*}
+  & { } O\left(1 + \left(\frac{1}{#t.length#}\right)\sum_{i=1}^{#t.length#}\sum_{k=0}^{\infty} k^2\Pr\{\mbox{#i# starts a run of length $k$}\}\right) \\
+  & \le O\left(1 + \left(\frac{1}{#t.length#}\right)\sum_{i=1}^{#t.length#}\sum_{k=0}^{\infty} k^2p_k\right) \\
+  & = O\left(1 + \sum_{k=0}^{\infty} k^2p_k\right) \\
+  & = O\left(1 + \sum_{k=0}^{\infty} k^2\cdot O(c^k)\right) \\
+  & = O(1) \enspace .
+\end{align*}
+The last step in this derivation comes from the fact that
+$\sum_{k=0}^{\infty} k^2\cdot O(c^k)$ is an exponentially decreasing
+series.\footnote{In the terminology of many calculus texts, this sum
+passes the ratio test:  There exists a positive integer $k_0$ such
+that, for all $k\ge k_0$, $\frac{(k+1)^2c^{k+1}}{k^2c^k} < 1$.}
+Therefore, we conclude that the expected running time of the #find(x)# operation
+for a value #x# that is not contained in a #LinearHashTable# is $O(1)$.
+
+If we ignore the cost of the #resize()# operation, the above
+analysis gives us all we need to analyze the cost of operations on a
+#LinearHashTable#.
+
+First of all, the analysis of #find(x)# given above applies to the
+#add(x)# operation when #x# is not contained in the table.  To analyze
+the #find(x)# operation when #x# is contained in the table, we need only
+note that this is the same as the cost of the #add(x)# operation that
+previously added #x# to the table.  Finally, the cost of a #remove(x)#
+operation is the same as the cost of a #find(x)# operation.
+
+In summary, if we ignore the cost of calls to #resize()#, all operations
+on a #LinearHashTable# run in $O(1)$ expected time.  Accounting for the
+cost of resize can be done using the same type of amortized analysis
+performed for the #ArrayStack# data structure in \secref{arraystack}.
+
+\subsection{Summary}
+
+The following theorem summarizes the performance of the #LinearHashTable#
+data structure:
+
+\begin{thm}\thmlabel{linear-probing}
+  A #LinearHashTable# implements the #USet# interface.  Ignoring the
+  cost of calls to #resize()#, a #LinearHashTable# supports the operations
+  #add(x)#, #remove(x)#, and #find(x)# in $O(1)$ expected time per
+  operation.  
+
+  Furthermore, beginning with an empty #LinearHashTable#, any
+  sequence of $m$ #add(x)# and #remove(x)# operations results in a total
+  of $O(m)$ time spent during all calls to #resize()#.
+\end{thm}
+
+\subsection{Tabulation Hashing}
+\seclabel{tabulation}
+
+While analyzing the #LinearHashTable# structure, we made a very strong
+assumption:  That for any set of elements, $\{#x_1#,\ldots,#x_n#\}$,
+the hash values $#hash(x_1)#,\ldots,#hash(x_n)#$ are independently and
+uniformly distributed over $\{0,\ldots,#t.length#-1\}$.  One way to
+imagine getting this is to have a giant array, called #tab# of length
+$2^{#w#}$, where each entry is a random #w#-bit integer, independent of
+all the other entries.  In this way, we could implement #hash(x)# by extracting
+a #d#-bit integer from #tab[x.hashCode()]#:
+\javaimport{ods/LinearHashTable.idealHash(x)}
+
+Unfortunately, storing an array of size $2^{#w#}$ is prohibitive in
+terms of memory usage.  The approach used by \emph{tabulation hashing} is to,
+instead, store $#w#/#r#$ arrays each of length $2^{#r#}$.  All the
+entries in these arrays are indepent #w#-bit integers.  To obtain the
+value of #hash(x)# we split #x.hashCode()# up into $#w#/#r#$ #r#-bit
+integers and use these as indices into these arrays.  We then combine all
+these values with the bitwise exclusive-or operator to obtain #hash(x)#.
+The following code shows how this works when $#w#=32$ and $#r#=4$:
+\javaimport{ods/LinearHashTable.hash(x)}
+In this case, #tab# is a 2-dimensional array with 4 columns and
+$2^{32/4}=256$ rows.
+
+One can easily verify that, for any #x#, #hash(x)# is uniformly
+distributed over $\{0,\ldots,2^{#d#}-1\}$.  With a little work, one
+can even verify that any pair of values have independent hash values.
+This implies tabulation hashing could be used in place of multiplicative
+hashing for the #ChainedHashTable# implementation.
+
+However, it is not true that any set of #n# distinct values gives a set
+of #n# independent hash values.  Nevertheless, when tabulation hashing is
+used, the bound of \thmref{linear-probing} still holds.  References for
+this are provided at the end of this chapter.
 
 \section{Hash Codes}
 
@@ -311,8 +563,6 @@ The second property minimizes the loss from converting our objects
 to integers.  It ensures that unequal objects usually have different
 hash codes and so are likely to be stored at different locations in
 our hash table.
-
-
 
 \subsection{Hash Codes for Primitive Data Types}
 
@@ -403,19 +653,18 @@ Let $#x#_0,\ldots,#x#_{r-1}$ and $#y#_0,\ldots,#y#_{r-1}$ each be sequences of #
   $\Pr\{h(#x#_0,\ldots,#x#_{r-1}) = h(#y#_0,\ldots,#y#_{r-1})\} \le 2/2^{#w#}$.
 
   To summarize, 
-  \begin{eqnarray*}
-    \Pr\left\{\begin{array}{l}
-         h(#x#_0,\ldots,#x#_{r-1}) \\
-          \quad = h(#y#_0,\ldots,#y#_{r-1})\end{array}\right\}
-      &=& \Pr\left\{\begin{array}{ll}
+  \begin{align*}
+    & \Pr\left\{\begin{array}{l}
+          h(#x#_0,\ldots,#x#_{r-1}) \\
+          \quad = h(#y#_0,\ldots,#y#_{r-1})\end{array}\right\} \\
+      &= \Pr\left\{\begin{array}{ll}
             \mbox{$h'(#x#_0,\ldots,#x#_{r-1}) = h'(#y#_0,\ldots,#y#_{r-1})$ or} \\
             \mbox{$h'(#x#_0,\ldots,#x#_{r-1}) \neq h'(#y#_0,\ldots,#y#_{r-1})$} \\
                   \mbox{\quad and
 $#z#h'(#x#_0,\ldots,#x#_{r-1})\ddiv2^{#w#} = #z# h'(#y#_0,\ldots,#y#_{r-1})\ddiv 2^{#w#}$}
           \end{array}\right\} \\
-      &\le& 1/2^{#w#} + 2/2^{#w#} = 3/2^{#w#}
-  \end{eqnarray*}
-  and this completes the proof.
+      &\le 1/2^{#w#} + 2/2^{#w#} = 3/2^{#w#} \enspace . \qedhere
+  \end{align*}
 \end{proof}
 
 
@@ -540,21 +789,21 @@ Hash tables and hash codes are a enormous and active area of research
 that is just touched upon in this chapter.
 The online Bibliography on Hashing \cite{hashing} contains nearly 2000 entries.
 
-
-  A variety of different hash
+A variety of different hash
 table implementations exist. The one described in \secref{hashtable} is
 known as \emph{hashing with chaining} (each array entry contains a chain
 (#List#) of elements).  Hashing with chaining dates back to an internal
 IBM memorandum authored by H. P. Luhn and dated January 1953. This memorandum also seems to be one of the earliest references to linked lists.
 
 An alternative to hashing with chaining is that used by \emph{open
-addressing} schemes, where all data is stored directly in an array.  This
-idea was also proposed, independently, by a group at IBM in the 1950s.
-Open addressing schemes must deal with the problem of \emph{collision
-resolution}: the case where two values hash to the same array location.
-Different strategies exist for collision resolution and these provide
-different performance guarantees and often require more sophisticated
-hash functions than the multiplicative hash function described here.
+addressing} schemes, where all data is stored directly in an
+array.  These schemes include the #LinearHashTable# structure of
+\secref{linearhashtable}. This idea was also proposed, independently, by
+a group at IBM in the 1950s.  Open addressing schemes must deal with the
+problem of \emph{collision resolution}: the case where two values hash
+to the same array location.  Different strategies exist for collision
+resolution and these provide different performance guarantees and often
+require more sophisticated hash functions than the ones described here.
 
 Yet another category of hash table implementations are the so-called
 \emph{perfect hashing} methods.   These are methods in which #find(x)#
@@ -562,13 +811,18 @@ operations take $O(1)$ time in the worst-case.  For static data sets,
 this can be accomplished by finding \emph{perfect hash functions} for
 the data; these are functions that map each piece of data to a unique
 array location.  For data that changes over time, perfect hashing methods
-include \emph{FKS two-level hash tables} \cite{fks84} and \emph{cuckoo hashing} \cite{pr04}.
+include \emph{FKS two-level hash tables} \cite{fks84,dkkmrt94}
+and \emph{cuckoo hashing} \cite{pr04}.
 
 The hash functions presented in this chapter are probably among the most
 practical currently known methods that can be proven to work well for any
 set of data.  Other provably good methods date back to the pioneering work
 of Carter and Wegman who introduced the notion of \emph{universal hashing}
 and described several hash functions for different scenarios \cite{cw79}.
+Tabulation hashing, described in \secref{tabulation}, is due to Carter
+and Wegman \cite{cw79}, but its analysis, when applied to linear probing
+(and several other hash table schemes) is due to P\v{a}tra\c{s}cu and Thorup
+\cite{pt10}.
 
 The idea of \emph{multiplicative hashing} is very old and seems to be
 part of the hashing folklore \cite[Section~6.4]{k97v3}.  However, the
@@ -618,6 +872,21 @@ hash codes.
   then $\Pr\{#hash(x)#=#hash(y)#\}=2/2^{#d#}$.  (Hint look at the binary
   representations of $#zx#$ and $#z#3#x#$ and use the fact that $#z#3#x#
   = #z#x#+2#z#x#$.)
+\end{exc}
+
+\begin{exc}\exclabel{linear-probing}
+  Reprove \lemref{linear-probing} using the full version of Stirling's
+  Approximation given in \secref{factorials}.
+\end{exc}
+
+\begin{exc}
+  Consider the following the simplified version of the code for adding
+  an element #x# to a #LinearHashTable#.  This code simply stores #x#
+  in the first #null# array entry it finds.  Explain why this could be
+  very slow by giving an example of a sequence of $O(#n#)$ #add(x)#,
+  #remove(x)#, and #find(x)# operations that would take on the order of
+  $#n#^2$ time to execute.
+\javaimport{ods/LinearHashTable.addSlow(x)}
 \end{exc}
 
 \begin{exc}\exclabel{hash-hack-first}
