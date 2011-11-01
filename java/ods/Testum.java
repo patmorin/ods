@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.SortedSet;
 
 /**
@@ -65,6 +66,47 @@ public class Testum {
 				Utils.myassert(i+n/2 == l.get(i).intValue());
 			l.clear();
 		}
+
+	}
+	
+	public static void speedTests(Collection<Set<Integer>> cs, int n) {
+		long start, stop;
+
+		for (Set<Integer> s : cs) {
+			s.clear();
+			Utils.myassert(s.size() == 0);
+		}
+		Random r = new Random();		
+		for (Set<Integer> s : cs) {
+			System.out.print("random insertions (" + s.getClass() + ")...");
+			start = System.nanoTime();
+			for (int i = 0; i < n; i++)
+				s.add(r.nextInt(n*5));
+			stop = System.nanoTime();
+			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
+			Utils.myassert(s.size() >= n/2);
+		}
+		System.out.println();
+
+		for (Set<Integer> s : cs) {
+			System.out.print("random contains (" + s.getClass() + ")...");
+			start = System.nanoTime();
+			for (int i = 0; i < n; i++)
+				s.contains(r.nextInt(n*5));
+			stop = System.nanoTime();
+			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
+		}
+		System.out.println();
+		
+		for (Set<Integer> s : cs) {
+			System.out.print("sequential removals (" + s.getClass() + ")...");
+			start = System.nanoTime();
+			for (int i = 0; i < 5*n; i++)
+				s.remove(i);
+			stop = System.nanoTime();
+			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
+		}
+		System.out.println();
 
 	}
 	

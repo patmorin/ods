@@ -82,7 +82,7 @@ public class Treap<T> extends
 		List<SortedSet<Integer>> c = new ArrayList<SortedSet<Integer>>();
 		c.add(new TreeSet<Integer>());
 		c.add(new SortedSSet<Integer>(new Treap<Integer>()));
-		c.add(new SortedSSet<Integer>(new SkiplistSet<Integer>()));
+		c.add(new SortedSSet<Integer>(new SkiplistSSet<Integer>()));
 		c.add(new TreeSet<Integer>());
 		Testum.sortedSetSpeedTests(c, 1000000);
 	}

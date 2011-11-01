@@ -81,14 +81,11 @@ public class SortedSSet<T> extends AbstractSet<T> implements SortedSet<T> {
 		Runtime r = Runtime.getRuntime();
 		int n = 500000;
 		Collection<SortedSet<Integer>> css = new ArrayList<SortedSet<Integer>>();
-		//css.add(new SortedSSet<Integer>(new SkiplistSet<Integer>()));
 		css.add(new SortedSSet<Integer>(new Treap<Integer>()));
 		css.add(new SortedSSet<Integer>(new RedBlackTree<Integer>()));
 		css.add(new SortedSSet<Integer>(new ScapegoatTree<Integer>()));
-		css.add(new SortedSSet<Integer>(new SkiplistSet<Integer>()));
-		css.add(new SortedSSet<Integer>(new SkiplistSet2<Integer>()));
-		css.add(new SortedSSet<Integer>(new SkiplistSet3<Integer>()));
-		// css.add(new SortedSSet<Integer>(new ScapegoatTree<Integer>()));
+		css.add(new SortedSSet<Integer>(new SkiplistSSet<Integer>()));
+		css.add(new java.util.TreeSet<Integer>());
 		while (1 < 2) {
 			Testum.sortedSetSpeedTests(css, n);
 			r.gc();

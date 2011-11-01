@@ -1,6 +1,6 @@
 package ods;
 
-public class SkiplistSet3<T> extends SkiplistSet<T> {
+public class SkiplistSet3<T> extends SkiplistSSet<T> {
 	protected Node<T> findPredNode(T x) {
 		Node<T> u = sentinel;
 		int r = h;
