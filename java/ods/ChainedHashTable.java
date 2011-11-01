@@ -47,6 +47,12 @@ public class ChainedHashTable<T> implements USet<T> {
 		z = r.nextInt() | 1;     // is a random odd integer
 	}
 	
+	public void clear() {
+		d = 1;
+		t = allocTable(1<<d);
+		n = 0;
+	}
+	
 	/**
 	 * Allocate and initialize a new empty table
 	 * @param s
