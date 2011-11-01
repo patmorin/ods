@@ -85,7 +85,7 @@ where #u.next[i]# points to #u#'s successor in the list $L_{#i#}$.
 In this way, the data, #x#, in a node is referenced only once, even though #x#
 may appear in several lists.
 
-\javaimport{ods/SkiplistSet.Node<T>}
+\javaimport{ods/SkiplistSSet.Node<T>}
 
 The next two sections of this chapter discuss two different applications
 of skiplists.  In each of these applications, $L_0$ stores the main
@@ -95,15 +95,15 @@ a search path is navigated; in particular, they differ in how
 they decide if a search path should go down into $L_{r-1}$ or go right
 within $L_r$.
 
-\section{#SkiplistSet#: An Efficient #SSet# Implementation}
+\section{#SkiplistSSet#: An Efficient #SSet# Implementation}
 \seclabel{skiplistset}
 
-A #SkiplistSet# uses a skiplist structure to implement the #SSet#
+A #SkiplistSSet# uses a skiplist structure to implement the #SSet#
 interface.   When used this way, the list $L_0$ stores the elements of
 the #SSet# in sorted order.  The #find(x)# method works by following
 the search path for the smallest value #y# such that $#y#\ge#x#$:
 
-\javaimport{ods/SkiplistSet.find(x).findPredNode(x)}
+\javaimport{ods/SkiplistSSet.find(x).findPredNode(x)}
 
 Following the search path for #y# is easy:  when situated at
 some node, #u#, in  $L_{#r#}$, we look right to #u.next[r].x#.
@@ -120,9 +120,9 @@ does not exactly replicate the coin-tossing experiment since the value of
 #k# will always be less than the number of bits in an #int#.  However,
 this will have negligible impact unless the number of elements in the
 structure is much greater than $2^{32}=4294967296$.}
-\javaimport{ods/SkiplistSet.pickHeight()}
+\javaimport{ods/SkiplistSSet.pickHeight()}
 
-To implement the #add(x)# method in a #SkiplistSet# we search for #x#
+To implement the #add(x)# method in a #SkiplistSSet# we search for #x#
 and then splice #x# into a few lists $L_0$,\ldots,$L_{#k#}$, where #k#
 is selected using the #pickHeight()# method. The easiest way to do this
 is to use an array, #stack#, that keeps track of the nodes at which
@@ -131,7 +131,7 @@ More precisely, #stack[r]# is the node in $L_{#r#}$ where the search path
 proceeded down into $L_{#r#-1}$.  The nodes that we modify to insert #x#
 are precisely the nodes $#stack[0]#,\ldots,#stack[k]#$.  The following
 code implements this algorithm for #add(x)#:
-\javaimport{ods/SkiplistSet.add(x)}
+\javaimport{ods/SkiplistSSet.add(x)}
 
 \begin{figure}
   \begin{center}
@@ -147,7 +147,7 @@ is no need for #stack# to keep track of the search path.  The removal
 can be done as we are following the search path.  We search for #x#
 and each time the search moves downward from a node #u#, we check if
 $#u.next.x#=#x#$ and if so, we splice #u# out of the list:
-\javaimport{ods/SkiplistSet.remove(x)}
+\javaimport{ods/SkiplistSSet.remove(x)}
 
 \begin{figure}
   \begin{center}
@@ -163,7 +163,7 @@ The following theorem summarizes the performance of skiplists when used to
 implement sorted sets:
 
 \begin{thm}\thmlabel{skiplist}
-A #SkiplistSet# implements the #SSet# interface. A #SkiplistSet# supports
+A #SkiplistSSet# implements the #SSet# interface. A #SkiplistSSet# supports
 the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log #n#)$
 expected time per operation.
 \end{thm}
@@ -173,7 +173,7 @@ expected time per operation.
 
 A #SkiplistList# implements the #List# interface on top of a skiplist structure.
 In a #SkiplistList#, $L_0$ contains the elements of the
-list in the order they appear in the list.   Just like with a #SkiplistSet#,
+list in the order they appear in the list.   Just like with a #SkiplistSSet#,
 elements can be added, removed, and accessed in $O(\log #n#)$ time.
 
 For this to be possible, we need a way to follow the search path for
@@ -214,7 +214,7 @@ finding the #i#th node in $L_0$, these operations run in
 $O(\log #n#)$ time.
 
 Adding an element to a #SkiplistList# at a position, #i#, is fairly
-straightforward.  Unlike, in a #SkiplistSet#, we are sure that a new
+straightforward.  Unlike, in a #SkiplistSSet#, we are sure that a new
 node will actually be added, so we can do the addition at the same time
 as we search for the new node's location. We first pick the height, #k#,
 of the newly inserted node, #w#, and then follow the search path for #i#.
@@ -477,7 +477,7 @@ Skiplists are even part of the Java 1.6 API \cite{oracle_jdk6}.
 
 
 \begin{exc}\exclabel{skiplist-opt-2}
-  Design and implement a #find(x)# method for #SkiplistSet# that avoids
+  Design and implement a #find(x)# method for #SkiplistSSet# that avoids
   \emph{locally-redundant comparisons}; these are comparisons that have already
   been done and occur because $#u.next[r]# = #u.next[r-1]#$.
   Analyze the expected number of comparisons done by your modified #find(x)#
