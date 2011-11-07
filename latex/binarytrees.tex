@@ -14,10 +14,11 @@ is called a \emph{child} of #u#. Most of the binary trees we are interested
 in are \emph{ordered}, so we distinguish between the \emph{left child}
 and \emph{right child} of #u#.
 
-In illustrations, binary trees are usually drawn from the root downward,
-with the root at the top of the drawing and the left and right children respectively given by
-left and right positions in the drawing (\figref{bintree-orientation}).  A binary
-tree with thirteen nodes is drawn this way in \figref{binary-tree}.a.
+In illustrations, binary trees are usually drawn from the root
+downward, with the root at the top of the drawing and the left and right
+children respectively given by left and right positions in the drawing
+(\figref{bintree-orientation}).  A binary tree with nine nodes is drawn
+this way in \figref{binary-tree}.a.
 
 \begin{figure}
   \begin{center}
@@ -98,7 +99,7 @@ tree in the same order as the following code:
 Using recursion this way produces very short, simple code, but can
 be problematic.  The maximum depth of the recursion is given by the
 maximum depth of a node in the binary tree, i.e., the tree's height.
-If the height of the tree is very large, then this could very-well use
+If the height of the tree is very large, then this could very well use
 more stack space than is available, causing a crash.  
 
 Luckily, traversing a binary tree can be done without recursion. This
@@ -198,10 +199,10 @@ is not in the binary search tree.
 Two examples of searches in a binary search tree are shown in
 \figref{bst-search}.  As the second example shows, even if we don't find #x#
 in the tree, we still gain some valuable information.  If we look at
-the last node, #u#, at which Case~1 occured, we see that #u.x# is the smallest
+the last node, #u#, at which Case~1 occurred, we see that #u.x# is the smallest
 value in the tree that is greater than #x#.  Similarly, the last node
 at which Case~2 occured contains the largest value in the tree that is
-less than than #x#.  Therefore, by keeping track of the last node, #z#,
+less than #x#.  Therefore, by keeping track of the last node, #z#,
 at which Case~1 occurs, a #BinarySearchTree# can implement the #find(x)#
 operation that returns the smallest value stored in the tree that is
 greater than or equal to #x#:

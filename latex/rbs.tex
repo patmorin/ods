@@ -36,7 +36,7 @@ created by the sequence
 \]
 Other sequences work as well, including
 \[
-    \langle 7,3,1,5,0,2,4,6,11,9,13,8,10,12,14 \rangle 
+    \langle 7,3,1,5,0,2,4,6,11,9,13,8,10,12,14 \rangle  \enspace ,
 \]
 and
 \[
@@ -64,10 +64,10 @@ simply standing in for the element of rank #x# in an ordered set of
 size #n#.
 
 Before we can present our main result about random binary search trees,
-we must take some time for a short digression to discuss a type of number that comes
-up frequently when studying randomized structures. For a non-negative
-integer, $k$, the $k$-th \emph{harmonic number}, denoted $H_k$, is
-defined as
+we must take some time for a short digression to discuss a type of number
+that comes up frequently when studying randomized structures. For a
+non-negative integer, $k$, the $k$-th \emph{harmonic number}, denoted
+$H_k$, is defined as
 \[
   H_k = 1 + 1/2 + 1/3 + \cdots + 1/k \enspace .
 \] 
@@ -77,12 +77,11 @@ closely related to the natural logarithm of $k$.  In particular,
   \ln k \le H_k \le \ln k + 1  \enspace .
 \]
 \newcommand{\hint}{\int_1^k\! (1/x)\, \mathrm{d}x}%
-Readers who have studied calculus might notice that this is because the
-integral $\hint = \ln k$.  Keeping in mind that an integral can
-be interpreted as the area between a curve and the $x$-axis, the value
-of $H_k$ can be lower-bounded by the integral $\hint$ and
-upper-bounded by $1+ \hint$.  (See \figref{harmonic-integral}
-for an explanation.)
+Readers who have studied calculus might notice that this is because
+the integral $\hint = \ln k$.  Keeping in mind that an integral can be
+interpreted as the area between a curve and the $x$-axis, the value of
+$H_k$ can be lower-bounded by the integral $\hint$ and upper-bounded by
+$1+ \hint$.  (See \figref{harmonic-integral} for a graphical explanation.)
 
 \begin{figure}
   \begin{center}
@@ -255,7 +254,7 @@ random permutation of the keys --- in this case the permutation is
 \]
 --- and adding these to a #BinarySearchTree#.  But this means that the
 shape of a treap is identical to that of a random binary search tree.
-In particular, if we replace each key #x# by it's rank,\footnote{The
+In particular, if we replace each key #x# by its rank,\footnote{The
 rank of an element #x# in a set $S$ of elements is the number of
 elements in $S$ that are less than #x#.} then \lemref{rbs} applies.
 Restating \lemref{rbs} in terms of #Treap#s, we have:

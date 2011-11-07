@@ -36,14 +36,14 @@ see implementations of the #List# interface using pointer-based data
 structures.  Each implements the same interface, #List#,
 but in different ways.
 
-\subsection{The Queue, Stack, and Deque Interfaces}
+\subsection{The #Queue#, #Stack#, and #Deque# Interfaces}
 
 The #Queue# interface represents a collection of elements to which we
 can add elements and remove the next element.  More precisely, the operations
-supported by the #Queue# interface in
+supported by the #Queue# interface are
 \begin{itemize}
   \item #add(x)#: add the value #x# to the #Queue#
-  \item #remove()#: the next (previously added) value, #y#, from the #Queue# and return #y#
+  \item #remove()#: remove the next (previously added) value, #y#, from the #Queue# and return #y#
 \end{itemize}
 Notice that the #remove()# operation takes no argument.  The #Queue#'s
 \emph{queueing discipline} decides which element should be removed.
@@ -61,7 +61,7 @@ When a business-class seat becomes available it is given to the most
 important customer waiting on an upgrade.
 
 A very common queueing discipline is the LIFO (last-in-first-out)
-discipline.  In a \emph{LIFO Queue}, the most recently element added is the
+discipline.  In a \emph{LIFO Queue}, the most recently added element is the
 next one removed.  This is best visualized in terms of a stack of plates;
 plates are placed on the top of the stack and also removed from the top
 of the stack. This structure is so common that it gets its own name: #Stack#.
@@ -79,7 +79,7 @@ and #removeLast()#.  Notice that a #Stack# can be implemented using only
 using only #addLast(x)# and #removeFirst()#.
 
 
-\subsection{The List Interface: Linear Sequences}
+\subsection{The #List# Interface: Linear Sequences}
 
 This book will talk very little about the FIFO #Queue#, #Stack#, or
 #Deque# interfaces.  This is because these interfaces are subsumed by
@@ -90,7 +90,7 @@ the following operations:
 \begin{enumerate}
   \item #size()#: return #n#, the length of the list
   \item #get(i)#: return the value $#x#_{#i#}$
-  \item #set(i)#: set the value of $#x#_{#i#}$ equal to #x#
+  \item #set(i,x)#: set the value of $#x#_{#i#}$ equal to #x#
   \item #add(i,x)#: add #x# at position #i#, displacing
     $#x#_{#i#},\ldots,#x#_{#n#-1}$; \\ 
     Set $#x#_{j+1}=#x#_j$, for all
@@ -113,15 +113,15 @@ Although we will normally not discuss the #Stack#, #Deque# and FIFO
 #Queue# interfaces very often in subsequent chapters, the terms #Stack#
 and #Deque# are sometimes used in the names of data structures that
 implement the #List# interface.  When this happens, it is to highlight
-the face that these data structures can be used to implement the #Stack#
+the fact that these data structures can be used to implement the #Stack#
 or #Deque# interface very efficiently.  For example, the #ArrayDeque#
 class is an implementation of the #List# interface that can implement
 the #Deque# operations in constant (amortized) time per operation.
 
 
-\subsection{The USet Interface: Unordered Sets}
+\subsection{The #USet# Interface: Unordered Sets}
 
-The #Uset# interface represents an unordered set of elements. This
+The #USet# interface represents an unordered set of elements. This
 is a \emph{set} in the mathematical sense.  A #USet# contains #n#
 \emph{distinct} elements; no element appears more than once; the elements
 are in no specific order.  A #USet# supports the following operations:
@@ -141,7 +141,7 @@ are in no specific order.  A #USet# supports the following operations:
 \end{enumerate}
 
 These definitions are a bit fussy about distinguishing #x#, the element we
-are removing or finding from #y#, the element we remove or find.  This is
+are removing or finding, from #y#, the element we remove or find.  This is
 because #x# and #y# may actually be distinct objects that are nevertheless
 treated as equal.\footnote{In Java, this is done by overriding the class'
 #equals(y)# and #hashCode()# methods.} This is a very useful distinction
@@ -153,7 +153,7 @@ are treated as equal if their keys are equal.  By storing #Pair#s in a
 a #Pair#, #x#, with key #k# and using the #find(x)# method.
 
 
-\subsection{The SSet Interface: Sorted Sets}
+\subsection{The #SSet# Interface: Sorted Sets}
 \seclabel{sset}
 
 The #SSet# interface represents a sorted set of elements.  An #SSet#
@@ -176,7 +176,7 @@ An #SSet# supports the #size()#, #add(x)#, and #remove(x)# methods with exactly 
 \end{enumerate}
 
 This version of the #find(x)# operation is sometimes referred to
-as \emph{successor search}.  It differs in a fundamental way from
+as a \emph{successor search}.  It differs in a fundamental way from
 #USet.find(x)# since it returns a meaningful result even when there is
 no element in the set that is equal to #x#.
 
@@ -210,7 +210,7 @@ of $k$.  That is, the unique value $x$ that satisfies
     b^{x} = k  \enspace .
 \]
 Most of the logarithms in this book are base 2 (\emph{binary logarithms}),
-in which case we drop the base, so that $\log k$ is a shorthand for
+in which case we drop the base, so that $\log k$ is shorthand for
 $\log_2 k$.
 
 Another logarithm that comes up several times in this book is the
@@ -281,8 +281,8 @@ set $\{1,\ldots,n\}$.
 
 \subsection{Asymptotic Notation}
 
-When analyzing data structures in this book we will want to talk about
-the running times of various operations.  The exact running-times will,
+When analyzing data structures in this book, we will want to talk about
+the running times of various operations.  The exact runningtimes will,
 of course, vary from computer to computer and even from run to run on
 an individual computer.  Therefore, instead of analyzing running times
 exactly, we will use the so-called big-Oh notation: For a 
@@ -292,8 +292,7 @@ function $f(n)$, $O(f(n))$ denotes a set of functions:
              $g(n) \le c\cdot f(n)$ for all $n\ge n_0$}   \} \enspace .
 \]
 Thinking graphically, this set consists of the functions $g(n)$ where
-where $c\cdot f(n)$ starts to dominate $g(n)$ when $n$ is sufficiently
-large.
+$c\cdot f(n)$ starts to dominate $g(n)$ when $n$ is sufficiently large.
 
 We generally use asymptotic notation to simplify functions.  For example,
 in place of $5n\log n + 8n - 200$ we can write, simply,  $O(n\log n)$.
@@ -360,8 +359,8 @@ asymptotic notation differently.
 \subsection{Randomization and Probability}
 \seclabel{randomization}
 
-Some of the data structures presented in this book are \emph{randomized}.
-They make random choices that are independent of the data being stored
+Some of the data structures presented in this book are \emph{randomized};
+they make random choices that are independent of the data being stored
 in them or the operations being performed on them.  For this reason,
 performing the same set of operations more than once using these
 structures could result in different running times.  When analyzing these
@@ -376,11 +375,11 @@ $U$, the expected value of $X$, denoted by $\E[X]$ is given the by formula
     \E[X] = \sum_{x\in U} x\cdot\Pr\{X=x\} \enspace .
 \]
 Here $\Pr\{\mathcal{E}\}$ denotes the probability that the event
-$\mathcal{E}$ occurs.  In all the examples in this book these
-probabilities are only with respect to whatever random choices are made by
-the randomized data structure;  there is no assumption that the data
+$\mathcal{E}$ occurs.  In all the examples in this book, these
+probabilities are only with respect to whatever random choices are made
+by the randomized data structure;  there is no assumption that the data
 stored in the structure is random or that the sequence of operations
-performed on the data structure are random.
+performed on the data structure is random.
 
 One of the most important properties of expected values is \emph{linearity
 of expectation}:  For any two random variables $X$ and $Y$,
@@ -441,21 +440,22 @@ on the data structures we study.  To do this precisely, we need a
 mathematical model of computation.  For this, we use the \emph{#w#-bit
 word-RAM} model.  In this model, we have access to a random access memory
 consisting of \emph{cells}, each of which stores a #w#-bit \emph{word}.
-This implies a memory cell can represent, for example, any integer in the set
-$\{0,\ldots,2^{#w#}-1\}$.
+This implies a memory cell can represent, for example, any integer in
+the set $\{0,\ldots,2^{#w#}-1\}$.
 
 In the word-RAM model, basic operations on words take constant time.
 This includes arithmetic operations (#+#, #-#, #*#, #/#, #%#), comparisons
-($<$, $>$, $=$, $\le$, $\ge$) and bitwise boolean operations
-(bitwise-AND, OR, and exclusive-OR).
+($<$, $>$, $=$, $\le$, $\ge$) and bitwise boolean operations (bitwise-AND,
+OR, and exclusive-OR).
 
 Any cell can be read or written in constant time.  Our computer's memory
 is managed by a memory management system from which we can allocate or
-deallocate a block of memory of any size we like. Allocating a block of
-memory of size $k$ takes $O(k)$ time and returns a reference to a memory
-block.  This reference is small enough to be represented by a single word.
+deallocate a block of memory of any size we like. Allocating a block
+of memory of size $k$ takes $O(k)$ time and returns a reference to the
+newly-allocated memory block.  This reference is small enough to be
+represented by a single word.
 
-The word-size #w# is a very important parameter of this model.  The only
+The word-size, #w#, is a very important parameter of this model.  The only
 assumption we will make on #w# is that it is at least $#w# \ge \log #n#$,
 where #n# is the number of elements stored in any of our data structures.
 This is a fairly modest assumption, since otherwise a word is not even

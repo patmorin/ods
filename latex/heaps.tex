@@ -5,7 +5,7 @@ In this chapter we discuss two implementations of the extremely useful
 priority #Queue# data structure.  The first is an implementation based
 on arrays.  It is very fast, and is the basis of one of the fastest
 known sorting algorithms, namely heapsort.  The second implementation is
-based on binary trees and is more flexible.  In particular, it support
+based on binary trees and is more flexible.  In particular, it supports
 a #meld(h)# operation that allows the priority queue to absorb the
 elements of a second priority queue #h#.
 
@@ -36,7 +36,7 @@ The parent of the node at index #i# is at index $#parent(i)#=(#i#-1)/2$.
 \javaimport{ods/BinaryHeap.left(i).right(i).parent(i)}
 
 A #BinaryHeap# uses this technique to implicitly represent a complete
-binary tree in which the elements are \emph{heap ordered}:  The value
+binary tree in which the elements are \emph{heap-ordered}:  The value
 stored at any index #i# is not smaller than the value stored at index
 #parent(i)#, with the exception of the root value, $#i#=0$.  It follows
 that the smallest value in the priority #Queue# is therefore stored at
@@ -90,14 +90,14 @@ this element with the smallest of its two children and continue.
 
 
 
-As with other array-based structures we will ignore the time spent
-in calls to #resize()# since these can be accounted for
-with the amortization argument from \lemref{arraystack-amortized}.
-The running-time of both #add(x)# and #remove()# then depends on the
-height of the (implicit) binary tree.  However, this is a \emph{complete}
-binary tree;  every level except the last has the maximum possible number
-of nodes.  Therefore, if the height of this tree is $h$, then it has at
-least $2^h$ nodes.  Stated another way
+As with other array-based structures we will ignore the time spent in
+calls to #resize()# since these can be accounted for with the amortization
+argument from \lemref{arraystack-amortized}.  The running-times of
+both #add(x)# and #remove()# then depend on the height of the (implicit)
+binary tree.  However, this is a \emph{complete} binary tree;  every level
+except the last has the maximum possible number of nodes.  Therefore,
+if the height of this tree is $h$, then it has at least $2^h$ nodes.
+Stated another way
 \[
   #n# \ge 2^h \enspace .
 \]  
@@ -113,7 +113,7 @@ The following theorem summarizes the performance of a #BinaryHeap#:
 
 \begin{thm}\thmlabel{binaryheap}
   A #BinaryHeap# implements the (priority) #Queue# interface.  Ignoring
-  the cost of calls to #resize()#, an #BinaryHeap# supports the operations
+  the cost of calls to #resize()#, a #BinaryHeap# supports the operations
   #add(x)# and #remove()# in $O(\log #n#)$ time per operation.
 
   Furthermore, beginning with an empty #BinaryHeap#, any sequence of $m$
@@ -177,7 +177,8 @@ tossed and the walk proceeds to the left or right child of the current
 node depending on the result of this coin toss.  The walk ends when it
 falls off the tree (the current node becomes #null#).
 
-The following lemma is remarkeable because it does not depend at all on the shape of the binary tree:
+The following lemma is somewhat remarkable because it does not depend
+at all on the shape of the binary tree:
 
 \begin{lem}
 The expected length of a random walk in a binary tree with #n# nodes is at most #\log (n+1)#.
@@ -190,7 +191,7 @@ all non-negative integers $#n#'< #n#$
 
 Let $#n#_1$ denote the size of the root's left subtree, so that
 $#n#_2=#n#-#n#_1-1$ is the size of the root's right subtree.  Starting at
-the root, the walk takes 1 step and then continues in a subtree of size
+the root, the walk takes one step and then continues in a subtree of size
 $#n#_1$ or continues in a subtree of size $#n#_2$.  By our inductive
 hypothesis, the expected length of the walk is then
 \[
@@ -223,7 +224,7 @@ running time of the #merge(h1,h2)# operation is $O(\log #n#)$.
 \end{lem}
 
 \begin{proof}
-  Each step of the merge algorithm takes a one step of a random walk,
+  Each step of the merge algorithm takes one step of a random walk,
   either in the heap rooted at #h1# or the heap rooted at #h2#, depending
   on whether $#h1.x# < #h2.x#$ or not.  The algorithm terminates when
   either of these two random walks falls out of its corresponding tree
@@ -256,7 +257,7 @@ to have first been proposed by Gambin and Malinowski \cite{gm98}.
 Other meldable heap implementations exist, including leftist heaps
 \cite[Section~5.3.2]{c72,k97v3}, binomial heaps \cite{v78}, Fibonacci
 heaps \cite{ft87}, pairing heaps \cite{fsst86}, and skew heaps
-\cite{st83}, although none of these is as simple as the #MeldableHeap#
+\cite{st83}, although none of these are as simple as the #MeldableHeap#
 structure described here.
 
 Some of the above structures also support a #decreaseKey(u,y)# operation
@@ -265,7 +266,7 @@ pre-condition that $#y#\le#u.x#$.)  This operation can be implemented
 in $O(\log #n#)$ time in most of the above structures by removing node
 #u# and adding  #y#.  However, some of these structures can implement
 #decreaseKey(u,y)# more efficiently.  In particular, #decreaseKey(u,y)#
-takes $O(1)$ amortized time in Fibonnaci heaps and $O(\log\log #n#)$
+takes $O(1)$ amortized time in Fibonacci heaps and $O(\log\log #n#)$
 amortized time in a special version of pairing heaps \cite{e09}.
 This more efficient #decreaseKey(u,y)# operation has applications in
 speeding up several graph algorithms including Dijkstra's shortest path

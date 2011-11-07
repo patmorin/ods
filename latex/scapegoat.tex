@@ -3,18 +3,17 @@
 
 In this chapter we study a binary search tree data structure, the
 #ScapegoatTree#, that keeps itself balanced by \emph{partial rebuilding
-operations}.  During one of these operation, an entire subtree is
-deconstructed and rebuilt into a perfectly balanced subtree.
+operations}.  During a partial rebuilding operation, an entire subtree
+is deconstructed and rebuilt into a perfectly balanced subtree.
 
-
-There are many ways of rebuilding a subtree the subtree rooted at
-node #u# into a perfectly balanced tree.  One of the simplest is
-to traverse #u#'s subtree, gatering all its nodes into an array #a#
-and then to recursively build a balanced subtree using #a#.  If we let
-$#m#=#a.length#/2$, then the element #a[m]# becomes the root of the new
-subtree, $#a#[0],\ldots,#a#[#m#-1]$ get stored recursively in the left
-subtree and $#a#[#m#+1],\ldots,#a#[#a.length#-1]$ get stored recursively
-in the right subtree.
+There are many ways of rebuilding a subtree rooted at node #u# into
+a perfectly balanced tree.  One of the simplest is to traverse #u#'s
+subtree, gathering all its nodes into an array #a# and then to recursively
+build a balanced subtree using #a#.  If we let $#m#=#a.length#/2$,
+then the element #a[m]# becomes the root of the new subtree,
+$#a#[0],\ldots,#a#[#m#-1]$ get stored recursively in the left subtree
+and $#a#[#m#+1],\ldots,#a#[#a.length#-1]$ get stored recursively in the
+right subtree.
 \javaimport{ods/ScapegoatTree.rebuild(u).packIntoArray(u,a,i).buildBalanced(a,i,ns)}
 A call to #rebuild(u)# takes $O(#size(u)#)$ time.  The subtree built by
 #rebuild(u)# has minimum height; there is no tree of smaller height that
@@ -336,7 +335,7 @@ and related structures based on partial rebuilding may work.  An example of such
 
   Your analysis should show that operations on a countdown tree run
   in $O(\log #n#)$ amortized time.  (Hint: First show that each node #u#
-  satisifies some version of a balance invariant.)
+  satisfies some version of a balance invariant.)
 \end{exc}
 
 \begin{exc}\exclabel{list-order-maintenance}
@@ -344,7 +343,7 @@ and related structures based on partial rebuilding may work.  An example of such
   sequence (list) of elements.  It supports these operations:
   \begin{itemize}
     \item #addAfter(e)#: Add a new element after the element #e# in the
-    sequence.  Return the new newly added element.  (If #e# is null,
+    sequence.  Return the newly added element.  (If #e# is null,
     the new element is added at the beginning of the sequence.)
     \item #remove(e)#: Remove #e# from the sequence.
     \item #testBefore(e1,e2)#: return #true# if and only if #e1# comes

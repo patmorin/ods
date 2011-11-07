@@ -77,7 +77,7 @@ want to add a leaf #u# as the child of some node #w# on the second-last
 level, we simply make #u# a child of #w#.  This certainly maintains
 the height property, but could violate the degree property;  if #w# had
 4 children prior to adding #u#, then #w# now has 5 children.  In this
-case, we split #w# into two nodes #w# and #w#' having 2 and 3 children,
+case, we split #w# into two nodes, #w# and #w#', having 2 and 3 children,
 respectively.  But now #w#' has no parent, so we recursively make #w#'
 a child of #w#'s parent.  Again, this may cause #w#'s parent to have too
 many children in which case we split it.  This process goes on until we
@@ -272,7 +272,7 @@ there are a family of structures that manage to maintain the
 black-height and no-red-edge properties during #add(x)# and #remove(x)#
 operations. Different structures go about it in different ways.  Here, we
 implement a data structure that we call a #RedBlackTree#.  This structure
-implements a particular variant of red-black trees that satisifies an
+implements a particular variant of red-black trees that satisfies an
 additional property:
 \begin{prp}[left-leaning]\prplabel{left-leaning}\prplabel{redblack-last}
   At any node #u#, if #u.left# is black, then #u.right# is black.
@@ -309,12 +309,13 @@ The #pullBlack(u)# method reverse this operation:
 The #flipLeft(u)# method swaps the colors of #u# and #u.right# and
 then performs a left rotation at #u#.  This reverses the colors
 of these two nodes as well as their parent-child relationship:
-\javaimport{ods/RedBlackTree.flipLeft(u)} The #flipLeft(u)# operation
-is especially useful in restoring the left-leaning property at a node
-$u$ that violates it (because #u.left# is black and #u.right# is red).
-In this special case, we can be assured this operation preserves both the
-black-height and no-red-edge properties.  The #flipRight(u)# operation
-is symmetric to #flipLeft(u)# with the roles of left and right reversed.
+\javaimport{ods/RedBlackTree.flipLeft(u)} 
+The #flipLeft(u)# operation is especially useful in restoring the
+left-leaning property at a node $u$ that violates it (because #u.left#
+is black and #u.right# is red).  In this special case, we can be assured
+this operation preserves both the black-height and no-red-edge properties.
+The #flipRight(u)# operation is symmetric to #flipLeft(u)# with the
+roles of left and right reversed.
 \javaimport{ods/RedBlackTree.flipRight(u)}
 
 \subsection{Addition}
@@ -391,7 +392,7 @@ property will now be violated at #w.parent#.  We get around this
 problem, temporarily, by adding #w.color# to #u.color#.  Of course, this
 introduces two other problems:  (1)~#u# and #w# both started out black,
 then $#u.color#+#w.color#=2$ (double black), which is in invalid color.
-If #w# was red, then it is replaceed by a black node #u#, which may
+If #w# was red, then it is replaced by a black node #u#, which may
 violate the left-leaning property at $#u.parent#$.  Both of these problems
 are resolved with a call to the #removeFixup(u)# method.
 \javaimport{ods/RedBlackTree.remove(x)}
@@ -444,7 +445,7 @@ call #flipLeft(w)# to fix this.
 
 At this point, #w# is red and #v# is the root of the subtree we started
 with.  We need to check if #w# causes no-red-edge property to be violated.
-We do this by inspecting #w#'s its right child, #q#.  If #q# is black,
+We do this by inspecting #w#'s right child, #q#.  If #q# is black,
 then #w# satisfies the no-red-edge property and we can continue to the
 next iteration with #u#=#v#.
 
@@ -468,9 +469,9 @@ the left-leaning property is violated.  We check this and perform a
 Case 3: #u#'s sibling is black and #u# is the right child of its parent,
 #w#.  This case is symmetric to Case~2 and is handled mostly the same way.
 The only differences come from the fact that the left-leaning property
-is asymmetric so requires different handling.
+is asymmetric, so it requires different handling.
 
-As before, we being with a call to #pullBlack(w)#, which makes #v# red
+As before, we begin with a call to #pullBlack(w)#, which makes #v# red
 and #u# black.  A call to #flipRight(w)# promotes #v# to the root of
 the subtree.  At this point #w# is red, and the code branches two ways
 depending on the color of #w#'s left child, #q#.
@@ -481,8 +482,9 @@ not satisfying the left-leaning property.
 
 The more complicated case occurs when #q# is black.  In this case,
 we examine the color if #v#'s left child.  If it is red, then #v# has
-two red children and its extra black can be pushed down with a call
-to #pushBlack(v)#.  At this point, #v# now has #w#'s original color and we are done.
+two red children and its extra black can be pushed down with a call to
+#pushBlack(v)#.  At this point, #v# now has #w#'s original color and we
+are done.
 
 If #v#'s left child is black then #v# violates the left-leaning property
 and we restore this with a call to #flipLeft(v)#.  The next iteration
@@ -490,11 +492,11 @@ of #removeFixup(u)# then continues with $#u#=#v#$.
 \javaimport{ods/RedBlackTree.removeFixupCase3(u)}.
 
 Each iteration of #removeFixup(u)# takes constant time.  Cases~2 and 3
-either finish or move #u# closer to the root of the tree tree.  Case~0
-(where #u# is the root) always terminates and Case~1 leads immediately
-to Case~3 which also terminates.  Since the height of the tree is at most
-$2\log #n#$, we conclude that there are at most $O(\log #n#)$ iterations
-of #removeFixup(u)# so #removeFixup(u)# runs in $O(\log #n#)$ time.
+either finish or move #u# closer to the root of the tree.  Case~0 (where
+#u# is the root) always terminates and Case~1 leads immediately to Case~3,
+which also terminates.  Since the height of the tree is at most $2\log
+#n#$, we conclude that there are at most $O(\log #n#)$ iterations of
+#removeFixup(u)# so #removeFixup(u)# runs in $O(\log #n#)$ time.
 
 
 \section{Summary}

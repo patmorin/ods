@@ -39,9 +39,8 @@ operation.  More precisely, if we start with an empty data structure,
 and perform any sequence of $m$ #add(i,x)# or #remove(i)# operations,
 then the total cost of growing and shrinking the backing array, over the
 entire sequence of $m$ operations is $O(m)$.  Although some individual
-operations require growing or shrinking the backing array, and are
-therefore expensive, the amortized cost, when amortized over all $m$
-operations is only $O(1)$ per operation.
+operations are more expensive, the amortized cost, when amortized over
+all $m$ operations, is only $O(1)$ per operation.
 
 \section{#ArrayStack#: Fast Stack Operations Using an Array}
 \seclabel{arraystack}
@@ -98,8 +97,8 @@ we call #resize()# to reduce the size of #a#.
 \javaimport{ods/ArrayStack.remove(i)}
 % TODO: Add shifting figure
 If we ignore the cost of the #resize()# method, the cost of a #remove(i)#
-operation is proportional to the number of the number elements we shift,
-which is $O(#n#-#i#)$. 
+operation is proportional to the number of elements we shift, which
+is $O(#n#-#i#)$.
 
 \subsection{Growing and Shrinking}
 
@@ -211,7 +210,7 @@ there is the #System.arraycopy(s,i,d,j,n)# method.
 
 These functions are usually highly optimized and may even use special
 machine instructions that can do this copying much faster than we could do
-with #for# loop.  Although using these functions does not asymptotically
+using a #for# loop.  Although using these functions does not asymptotically
 decrease the running times, it can still be a worthwhile optimization.
 In the Java implementations here, the use of #System.arraycopy(s,i,d,j,n)#
 resulted in speedups of a factor of 2-3 depending on the types of
@@ -303,9 +302,10 @@ the size of #a#.  Next, we store #x# in
 \javaimport{ods/ArrayQueue.add(x)}
 
 To implement #remove()# we first store #a[j]# so that we can return
-it later.  Next, we decrement #n# and ``increment'' #j# by setting
-$#j#=(#j#+1)\bmod #a.length#$ and return the stored value of #a[j]#. If
-necessary, we may call #resize()# to decrease the size of #a#.
+it later.  Next, we decrement #n# and increment #j# (modulo #a.length#)
+by setting $#j#=(#j#+1)\bmod #a.length#$.  Finally, we return the stored
+value of #a[j]#. If necessary, we may call #resize()# to decrease the
+size of #a#.
 
 \javaimport{ods/ArrayQueue.remove()}
 
@@ -409,7 +409,7 @@ data structure:
   time spent during all calls to #resize()#.
 \end{thm}
 
-\section{#DualArrayDeque#: Buiding a Deque from Two Stacks}
+\section{#DualArrayDeque#: Building a Deque from Two Stacks}
 \seclabel{dualarraydeque}
 
 Next, we present another data structure, the #DualArrayDeque# that
@@ -716,7 +716,7 @@ to remove all but one of the unused blocks:
 
 Once again, ignoring the cost of the #shrink()# operation, the cost of
 a #remove(i)# operation is dominated by the cost of shifting  and is
-therefore $O(#n#-#i#)$
+therefore $O(#n#-#i#)$.
 
 \subsection{Analysis of Growing and Shrinking}
 
