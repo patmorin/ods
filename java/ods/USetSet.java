@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.SortedSet;
 
 public class USetSet<T> extends AbstractSet<T> {
 	USet<T> s;
