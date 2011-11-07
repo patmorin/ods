@@ -177,7 +177,7 @@ means that we can translate \lemref{rbs} to a statement about quicksort:
 \end{lem}
 
 A little summing of harmonic numbers gives us the following theorem
-about the running-time of quicksort:
+about the running time of quicksort:
 
 \begin{thm}\thmlabel{quicksort-i}
   When quicksort is called to sort an array containing #n# distinct elements,
@@ -471,7 +471,7 @@ The idea behind counting-sort is simple:  For each
 $#i#\in\{0,\ldots,#k#-1\}$, count the number of occurrences of #i# in #a#
 and store this in #c[i]#.  Now, after sorting, the output will look like
 #c[0]# occurrences of 0, followed by #c[1]# occurrences of 1, followed by
-#c[2]# occurences of 2,\ldots, followed by #c[k-1]# occurrences of #k-1#.
+#c[2]# occurrences of 2,\ldots, followed by #c[k-1]# occurrences of #k-1#.
 The code that does this is very slick, and its execution is illustrated in
 \figref{countingsort}:
 \javaimport{ods/Algorithms.countingSort(a,k)}

@@ -242,7 +242,7 @@ in \figref{treap} can be obtained by adding the sequence of $(#x#,#p#)$
 values 
 \[
   \langle
-   (3,1), (1,6), (0,9), (5,11), (9,12), (4,14), (7,22), (6,42), (8,49), (2,99)
+   (3,1), (1,6), (0,9), (5,11), (4,14), (9,17), (7,22), (6,42), (8,49), (2,99)
   \rangle
 \]
 into a #BinarySearchTree#.
@@ -319,14 +319,14 @@ An example of an #add(x)# operation is shown in \figref{treap-add}.
   \figlabel{treap-add}
 \end{figure}
 
-The running-time of the #add(x)# operation is given by the time it
+The running time of the #add(x)# operation is given by the time it
 takes to follow the search path for #x# plus the number of rotations
 performed to move the newly-added node, #u#, up to its correct location
 in the #Treap#.  By \lemref{rbs-treap}, the expected length of the
 search path is at most $2\ln #n#+O(1)$.  Furthermore, each rotation
 decreases the depth of #u#.   This stops if #u# becomes the root, so
-the expected number of rotations can not exceed the expected length of
-the search path.  Therefore, the expected running-time of the #add(x)#
+the expected number of rotations cannot exceed the expected length of
+the search path.  Therefore, the expected running time of the #add(x)#
 operation in a #Treap# is $O(\log #n#)$.  (\excref{treap-rotates}
 asks you to show that the expected number of rotations performed during
 an insertion is actually only $O(1)$.)
@@ -357,8 +357,7 @@ An example of the #remove(x)# operation is shown in \figref{treap-remove}.
   \figlabel{treap-remove}
 \end{figure}
 
-
-The trick to analyzing the running time of the #remove(x)# operation is
+The trick to analyze the running time of the #remove(x)# operation is
 to notice that this operation is the reverse of the #add(x)# operation.
 In particular, if we were to reinsert #x#, using the same priority #u.p#,
 then the #add(x)# operation would do exactly the same number of rotations
@@ -381,18 +380,18 @@ the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log #n#)$
 expected time per operation.
 \end{thm}
 
-It is worth comparing the #Treap# data structure to the #SkiplistSet#
+It is worth comparing the #Treap# data structure to the #SkiplistSSet#
 data structure.  Both implement the #SSet# operations in $O(\log #n#)$
 expected time per operation.  In both data structures, #add(x)# and #remove(x)#
 involve a search and then a constant number of pointer changes
 (see \excref{treap-rotates} below).  Thus, for both these
 structures, the expected length of the search path is the critical value
-in assessing their performance.  In a #SkiplistSet#, the expected length
+in assessing their performance.  In a #SkiplistSSet#, the expected length
 of a search path is
 \[
      2\log #n# + O(1) \enspace ,
 \]
-In a treap, the expected length of a search path is 
+In a #Treap#, the expected length of a search path is 
 \[
     2\ln #n# +O(1) \approx 1.386\log #n#  + O(1) \enspace .
 \]
@@ -404,7 +403,7 @@ expected length of the search path in a #Skiplist# can be reduced to
      e\ln #n# + O(1) \approx 1.884\log #n# + O(1) 
 \]
 by using biased coin tosses.  Even with this optimization, the expected
-length of search paths in a #SkiplistSet# is noticeably longer than in
+length of search paths in a #SkiplistSSet# is noticeably longer than in
 a #Treap#.
 
 \section{Summary and Exercises}

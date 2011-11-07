@@ -16,7 +16,7 @@ come back to them later if necessary.
 In discussing data structures, it is important to understand the
 difference between a data structure's interface and its implementation.
 An interface describes what a data structure does, while an implementation
-describes how it does it.
+describes how the data structure does it.
 
 An \emph{interface}, sometimes also called an \emph{abstract data type},
 defines the set of operations supported by a data structure and
@@ -140,17 +140,18 @@ are in no specific order.  A #USet# supports the following operations:
     #x#.  Return #y#, or #null# if no such element exists.
 \end{enumerate}
 
-These definitions are a bit fussy about distinguishing #x#, the element we
-are removing or finding, from #y#, the element we remove or find.  This is
-because #x# and #y# may actually be distinct objects that are nevertheless
-treated as equal.\footnote{In Java, this is done by overriding the class'
-#equals(y)# and #hashCode()# methods.} This is a very useful distinction
-since it allows for the creation of \emph{dictionaries} or \emph{maps}
-that map keys onto values.  This is done by creating a compound object
-called a #Pair# that contains a \emph{key} and a \emph{value}. Two #Pair#s
-are treated as equal if their keys are equal.  By storing #Pair#s in a
-#USet#, we can find the value associated with any key #k# by creating
-a #Pair#, #x#, with key #k# and using the #find(x)# method.
+These definitions are a bit fussy about distinguishing #x#, the element
+we are removing or finding, from #y#, the element we remove or find.
+This is because #x# and #y# might actually be distinct objects
+that are nevertheless treated as equal.\footnote{In Java, this is
+done by overriding the class' #equals(y)# and #hashCode()# methods.}
+This is a very useful distinction since it allows for the creation of
+\emph{dictionaries} or \emph{maps} that map keys onto values.  This is
+done by creating a compound object called a #Pair# that contains a
+\emph{key} and a \emph{value}. Two #Pair#s are treated as equal if their
+keys are equal.  By storing #Pair#s in a #USet#, we can find the value
+associated with any key #k# by creating a #Pair#, #x#, with key #k#
+and using the #find(x)# method.
 
 
 \subsection{The #SSet# Interface: Sorted Sets}
@@ -168,11 +169,14 @@ method called #compare(x,y)# in which
         {}=0 & \text{if $#x#=#y#$}
       \end{cases}
 \]
-An #SSet# supports the #size()#, #add(x)#, and #remove(x)# methods with exactly the same semantics as in the #USet# interface.  The difference between a #USet# and a #SSet# is in the #find(x)# method:
+An #SSet# supports the #size()#, #add(x)#, and #remove(x)# methods with
+exactly the same semantics as in the #USet# interface.  The difference
+between a #USet# and an #SSet# is in the #find(x)# method:
 \begin{enumerate}
 \setcounter{enumi}{3}
 \item #find(x)#: locate #x# in the sorted set; \\
-   Find the smallest element #y# in the set such that $#y# > #x#$.  Return #y# or #null# if no such element exists. 
+   Find the smallest element #y# in the set such that $#y# > #x#$.
+   Return #y# or #null# if no such element exists.
 \end{enumerate}
 
 This version of the #find(x)# operation is sometimes referred to
@@ -285,8 +289,8 @@ When analyzing data structures in this book, we will want to talk about
 the running times of various operations.  The exact runningtimes will,
 of course, vary from computer to computer and even from run to run on
 an individual computer.  Therefore, instead of analyzing running times
-exactly, we will use the so-called big-Oh notation: For a 
-function $f(n)$, $O(f(n))$ denotes a set of functions:
+exactly, we will use the so-called \emph{big-Oh notation}: For a 
+function $f(n)$, $O(f(n))$ denotes a set of functions,
 \[
    O(f(n)) = \{g(n):\mbox{there exists $c>0$, and $n_0$ such that
              $g(n) \le c\cdot f(n)$ for all $n\ge n_0$}   \} \enspace .
@@ -348,7 +352,7 @@ In a few cases, we will use asymptotic notation on functions with more than one 
              \qquad \mbox{for all $n_1,\ldots,n_k$ such that $g(n_1,\ldots,n_k)\ge z$}   
    \end{array}\right\} \enspace .
 \]
-This definition captures the situation we really care about:  When the
+This definition captures the situation we really care about:  when the
 arguments $n_1,\ldots,n_k$ make $g$ take on large values.  This agrees
 with the univariate definition of $O(f(n))$ when $f(n)$ is an increasing
 function of $n$.  The reader should be warned that, although this works
@@ -370,7 +374,7 @@ running times.
 Formally, the running time of an operation on a randomized data structure
 is a random variable and we want to study its \emph{expected value}. For
 a discrete random variable $X$ taking on values in some finite universe
-$U$, the expected value of $X$, denoted by $\E[X]$ is given the by formula
+$U$, the expected value of $X$, denoted by $\E[X]$ is given the by the formula
 \[
     \E[X] = \sum_{x\in U} x\cdot\Pr\{X=x\} \enspace .
 \]
@@ -397,7 +401,7 @@ A useful trick, that we will use repeatedly, is that of defining
 when we want to count something and are best illustrated by an example.
 Suppose we toss a fair coin $k$ times and we want to know the expected
 number of times the coin came up heads.  Intuitively, we know the answer
-is $k/2$, but if we try and prove it using the definition of expected
+is $k/2$, but if we try to prove it using the definition of expected
 value, we get
 \begin{align*}
    \E[X] & = \sum_{i=0}^k i\cdot\Pr\{X=i\} \\
@@ -414,7 +418,7 @@ Using indicator variables and linearity of expectation makes things much easier:
 \[
     I_i = \begin{cases}
            1 & \text{if the $i$th coin toss is heads} \\
-           0 & \text{otherwise}
+           0 & \text{otherwise.}
           \end{cases}
 \]
 Then 
@@ -445,7 +449,7 @@ the set $\{0,\ldots,2^{#w#}-1\}$.
 
 In the word-RAM model, basic operations on words take constant time.
 This includes arithmetic operations (#+#, #-#, #*#, #/#, #%#), comparisons
-($<$, $>$, $=$, $\le$, $\ge$) and bitwise boolean operations (bitwise-AND,
+($<$, $>$, $=$, $\le$, $\ge$), and bitwise boolean operations (bitwise-AND,
 OR, and exclusive-OR).
 
 Any cell can be read or written in constant time.  Our computer's memory
@@ -495,8 +499,9 @@ This book mixes mathematical analysis of running times with Java source
 code for the algorithms being analyzed.  This means that some equations
 contain variables also found in the source code.  These variables are
 typeset consistently, both within the source code and within equations.
-The most common such variable is the variable #n# that, without exception,
-always refers the number of items currently stored in the data structure.
+The most common such variable is the variable #n# that, without
+exception, always refers to the number of items currently stored in the
+data structure.
 
 \section{List of Data Structures}
 
@@ -524,7 +529,7 @@ described in this book that implement each of the interfaces, #List#,
 \multicolumn{4}{c}{} \\[2ex] \hline
 \multicolumn{4}{|c|}{#SSet# implementations} \\ \hline
  & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
-#SkiplistSet# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5] & \sref{skiplistset} \\ \hline
+#SkiplistSSet# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5] & \sref{skiplistset} \\ \hline
 #Treap# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5] & \sref{treap} \\ \hline
 #ScapegoatTree# & $O(\log #n#)$ & $O(\log #n#)$\footnotemark[1] & \sref{scapegoattree} \\ \hline
 #RedBlackTree# & $O(\log #n#)$ & $O(\log #n#)$ & \sref{redblacktree} \\ \hline

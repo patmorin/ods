@@ -2,8 +2,8 @@
 
 \chaplabel{skiplists}
 
-In this chapter we discuss a beautiful data structure, the skiplist,
-that has a variety of applications.  Using a skiplist we can implement
+In this chapter, we discuss a beautiful data structure: the skiplist,
+which has a variety of applications.  Using a skiplist we can implement
 a #List# that is fast for all the operations #get(i)#, #set(i,x)#,
 #add(i,x)#, and #remove(i)#. We can also implement an #SSet# in which
 all operations run in $O(\log #n#)$ expected time.
@@ -48,7 +48,7 @@ of a node is 1. (We expect to toss the coin twice before getting tails,
 but we don't count the last toss.) The \emph{height} of a skiplist is
 the height of its tallest node.
 
-At the head of every list is a special node called the \emph{sentinel}
+At the head of every list is a special node, called the \emph{sentinel},
 that acts as a dummy node for the list. The key property of skiplists
 is that there is a short path, called the \emph{search path}, from the
 sentinel in $L_h$ to every node in $L_0$.  Remembering how to construct
@@ -61,7 +61,7 @@ More precisely, to construct the search path for the node #u# in $L_0$
 we start at the sentinel, #w#, in $L_h$.  Next, we examine #w.next#.
 If #w.next# contains an item that appears before #u# in $L_0$, then
 we set $#w#=#w.next#$.  Otherwise, we move down and continue the search
-at the occurence of #w# in the list $L_{h-1}$.  We continue this way
+at the occurrence of #w# in the list $L_{h-1}$.  We continue this way
 until we reach the predecessor of #u# in $L_0$. 
 \begin{figure}
   \begin{center}
@@ -388,7 +388,7 @@ The expected length of a search path in a skiplist is at most $2\log #n# + O(1)$
   The easiest way to see this is to consider the \emph{reverse search
   path} for a node, #x#.  This path starts at the predecessor of #x#
   in $L_0$.  At any point in time, if the path can go up a level, then
-  it does.  If it can not go up a level then it goes left.  Observe that
+  it does.  If it cannot go up a level then it goes left.  Observe that
   the reverse search path for #x# is identical to the search path for #x#,
   except that it is reversed.
 
@@ -489,7 +489,7 @@ Skiplists are even part of the Java 1.6 API \cite{oracle_jdk6}.
   #SSet# interface, but also allows fast access to elements by rank.
   That is, it also supports the function #get(i)#, which returns the
   element whose rank is #i# in $O(\log #n#)$ expected time. (The rank
-  of an element #x# in a #SSet# is the number of elements in the #SSet#
+  of an element #x# in an #SSet# is the number of elements in the #SSet#
   that are less than #x#.)
 \end{exc}
 

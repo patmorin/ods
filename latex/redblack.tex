@@ -1,7 +1,7 @@
 \chapter{Red-Black Trees}
 \chaplabel{redblack}
 
-In this chapter we present red-black trees, a version of binary search
+In this chapter, we present red-black trees, a version of binary search
 trees that have logarithmic depth.  Red-black trees are one of the most
 widely-used data structures in practice.  They appear as the primary
 search structure in many library implementations, including the Java
@@ -26,14 +26,14 @@ dwarfed by the time it takes to find #x#.\footnote{Note that skiplists and
 treaps also have this property in the expected sense. See
 \excref{skiplist-changes} and \excref{treap-rotates}.}
 
-However, the nice properties of red-black trees come with
-a price: implementation complexity. Maintaining a bound of $2\log #n#$
-on the height is not easy. It requires a careful analysis of a number
-of cases and it requires that the implementation do exactly the right
-thing in each case.  One misplaced rotation or change of color produces
-a bug that can be very difficult to understand and track down.
+However, the nice properties of red-black trees come with a price:
+implementation complexity. Maintaining a bound of $2\log #n#$ on the
+height is not easy. It requires a careful analysis of a number of cases
+and it requires that the implementation does exactly the right thing
+in each case.  One misplaced rotation or change of color produces a bug
+that can be very difficult to understand and track down.
 
-Rather than jump directly into the implementation of red-black trees, we
+Rather than jumping directly into the implementation of red-black trees, we
 will first provide some background on a related data structure: 2-4 trees.
 This will give some insight into how red-black trees were discovered
 and why efficiently maintaining red-black trees is even possible.
@@ -166,7 +166,7 @@ maintain this.  Another trick that simplifies red-black trees is to treat
 the external nodes (represented by #nil#) as black nodes.  This way,
 every real node, #u#, of a red-black tree has exactly two children,
 each with a well-defined color.
-An example of a red-black tree is shown in \figref{redblack-example}
+An example of a red-black tree is shown in \figref{redblack-example}.
 
 \begin{figure}
   \begin{center}
@@ -366,7 +366,7 @@ property (which is only violated by #u# and not by #w#) implies that
 then the left-leaning property ensures that both #g#'s children are red,
 and a call to #pushBlack(g)# makes #g# red and #w# black.  This restores
 the no-red-edge property at #u#, but may cause it to be violated at #g#,
-so the whole process starts over with $#u#=#g#$
+so the whole process starts over with $#u#=#g#$.
 
 If #g#'s right child is black, then a call to #flipRight(g)# makes
 #w# the (black) parent of #g# and gives #w# two red children #u# and
@@ -399,13 +399,13 @@ are resolved with a call to the #removeFixup(u)# method.
 
 The #removeFixup(u)# method takes as input a node #u# whose color is black
 (1) or double-black (2).  If #u# is double-black, then #removeFixup(u)#
-performs a series of rotations and recolorings that move the double-black
-node up the tree until it can be gotten rid of.  During this process,
-the node #u# changes until, at the end of this process, #u# refers to the
-root of the subtree that has been changed.  The root of this subtree may
-have changed color.  In particular, it may have gone from red to black,
-so the #removeFixup(u)# method finishes by checking if #u#'s parent
-violates the left-leaning property and, if so, fixes it.
+performs a series of rotations and recoloring operations that move the
+double-black node up the tree until it can be gotten rid of.  During this
+process, the node #u# changes until, at the end of this process, #u#
+refers to the root of the subtree that has been changed.  The root of
+this subtree may have changed color.  In particular, it may have gone
+from red to black, so the #removeFixup(u)# method finishes by checking
+if #u#'s parent violates the left-leaning property and, if so, fixes it.
 \javaimport{ods/RedBlackTree.removeFixup(u)}
 
 The #removeFixup(u)# method is illustrated in \figref{rb-removefix}.
@@ -437,7 +437,7 @@ the next iteration.
 \javaimport{ods/RedBlackTree.removeFixupCase1(u)}
 
 \noindent
-Case 2: #u#'s sibling, #v# is black and #u# is the left child of its
+Case 2: #u#'s sibling, #v#, is black and #u# is the left child of its
 parent, #w#.  In this case, we call #pullBlack(w)#, making #u# black,
 #v# red, and darkening the color of #w# to black or double-black.
 At this point, #w# does not satisfy the left-leaning property, so we
@@ -627,7 +627,7 @@ there is no analogue of \thmref{redblack-amortized} for those structures.
 
 \begin{exc}
   Prove that, during an #add(x)# operation, an AVL tree must perform
-  at most one relancing operation (that involves at most 2 rotations;
+  at most one rebalancing operation (that involves at most 2 rotations;
   see \figref{avl-rebalance}).  Give an example of an AVL tree and a
   #remove(x)# operation on that tree that requires on the order of $\log
   #n#$ rebalancing operations.
@@ -641,7 +641,7 @@ there is no analogue of \thmref{redblack-amortized} for those structures.
 
 \begin{exc}
   Design and implement a series of experiments that compare the relative
-  performance of #find(x)#, #add(x)#, and #remove(x)# for #SkiplistSet#,
+  performance of #find(x)#, #add(x)#, and #remove(x)# for #SkiplistSSet#,
   #ScapegoatTree#, #Treap#, and #RedBlackTree#.  Be sure to include
   multiple test scenarios, including cases where the data is random,
   already sorted, is removed in random order, is removed in sorted order,

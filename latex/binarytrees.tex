@@ -201,7 +201,7 @@ Two examples of searches in a binary search tree are shown in
 in the tree, we still gain some valuable information.  If we look at
 the last node, #u#, at which Case~1 occurred, we see that #u.x# is the smallest
 value in the tree that is greater than #x#.  Similarly, the last node
-at which Case~2 occured contains the largest value in the tree that is
+at which Case~2 occurred contains the largest value in the tree that is
 less than #x#.  Therefore, by keeping track of the last node, #z#,
 at which Case~1 occurs, a #BinarySearchTree# can implement the #find(x)#
 operation that returns the smallest value stored in the tree that is
@@ -264,13 +264,13 @@ splice #u# from the tree by having #u.parent# adopt #u#'s child:
 \end{figure}
 
 Things get tricky, though, when #u# has two children.  In this case,
-the simplest thing to do is to find a node, #w#, that has less than two
-children such that we can replace #u.x# with #w.x#.
-To maintain the
-binary search tree property, the value #w.x# should be close to the value
-of #u.x#.  For example, picking #w# such that #w.x# is the smallest value greater
-than #u.x# will do.  Finding the node #w# is easy, it is the smallest
-value in the subtree rooted at #u.right#.  This node can be easily removed because it has no left child.  (See \figref{bst-remove})
+the simplest thing to do is to find a node, #w#, that has less than
+two children such that we can replace #u.x# with #w.x#.  To maintain
+the binary search tree property, the value #w.x# should be close to the
+value of #u.x#.  For example, picking #w# such that #w.x# is the smallest
+value greater than #u.x# will do.  Finding the node #w# is easy; it is
+the smallest value in the subtree rooted at #u.right#.  This node can
+be easily removed because it has no left child.  (See \figref{bst-remove})
 \javaimport{ods/BinarySearchTree.remove(u)}
 
 \begin{figure}
@@ -301,7 +301,7 @@ The following (unimpressive) theorem summarizes the performance of the
 \end{thm}
 
 \thmref{bst} compares poorly with \thmref{skiplist}, which shows
-that the #SkiplistSet# structure can implement the #SSet# interface
+that the #SkiplistSSet# structure can implement the #SSet# interface
 with $O(\log #n#)$ expected time per operation.  The problem with the
 #BinarySearchTree# structure is that it can become \emph{unbalanced}.
 Instead of looking like the tree in \figref{bst} it can look like a long

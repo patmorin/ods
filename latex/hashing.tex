@@ -444,13 +444,13 @@ the proof.
 \end{proof}
 
 Using \lemref{linear-probing} to prove upper-bounds on the expected
-running-time of #find(x)#, #add(x)#, and #remove(x)# is now fairly
+running time of #find(x)#, #add(x)#, and #remove(x)# is now fairly
 straight-forward.  Consider the simplest case, where we execute
 #find(x)# for some value #x# that has never been stored in the
 #LinearHashTable#.  In this case, $#i#=#hash(x)#$ is a random value in
 $\{0,\ldots,#t.length#-1\}$ independent of the contents of #t#.  If #i#
 is part of a run of length $k$ then the time it takes to execute the
-#find(x)# operation is at most $O(1+k)$.  Thus, the expected running-time
+#find(x)# operation is at most $O(1+k)$.  Thus, the expected running time
 can be upper-bounded by
 \[
   O\left(1 + \left(\frac{1}{#t.length#}\right)\sum_{i=1}^{#t.length#}\sum_{k=0}^{\infty} k\Pr\{\text{#i# is part of a run of length $k$}\}\right) \enspace .
@@ -785,15 +785,16 @@ than the $r/(2^{32}-5)$ specified in \thmref{stringhash}.
 
 \section{Discussion and Exercises}
 
-Hash tables and hash codes are a enormous and active area of research
-that is just touched upon in this chapter.
-The online Bibliography on Hashing \cite{hashing} contains nearly 2000 entries.
+Hash tables and hash codes are an enormous and active area of research
+that is just touched upon in this chapter.  The online Bibliography on
+Hashing \cite{hashing} contains nearly 2000 entries.
 
-A variety of different hash
-table implementations exist. The one described in \secref{hashtable} is
-known as \emph{hashing with chaining} (each array entry contains a chain
-(#List#) of elements).  Hashing with chaining dates back to an internal
-IBM memorandum authored by H. P. Luhn and dated January 1953. This memorandum also seems to be one of the earliest references to linked lists.
+A variety of different hash table implementations exist. The one
+described in \secref{hashtable} is known as \emph{hashing with chaining}
+(each array entry contains a chain (#List#) of elements).  Hashing with
+chaining dates back to an internal IBM memorandum authored by H. P. Luhn
+and dated January 1953. This memorandum also seems to be one of the
+earliest references to linked lists.
 
 An alternative to hashing with chaining is that used by \emph{open
 addressing} schemes, where all data is stored directly in an
@@ -810,8 +811,8 @@ Yet another category of hash table implementations are the so-called
 operations take $O(1)$ time in the worst-case.  For static data sets,
 this can be accomplished by finding \emph{perfect hash functions} for
 the data; these are functions that map each piece of data to a unique
-array location.  For data that changes over time, perfect hashing methods
-include \emph{FKS two-level hash tables} \cite{fks84,dkkmrt94}
+array location.  For data that changes over time, perfect hashing
+methods include \emph{FKS two-level hash tables} \cite{fks84,dkkmrt94}
 and \emph{cuckoo hashing} \cite{pr04}.
 
 The hash functions presented in this chapter are probably among the most
@@ -821,8 +822,8 @@ of Carter and Wegman who introduced the notion of \emph{universal hashing}
 and described several hash functions for different scenarios \cite{cw79}.
 Tabulation hashing, described in \secref{tabulation}, is due to Carter
 and Wegman \cite{cw79}, but its analysis, when applied to linear probing
-(and several other hash table schemes) is due to P\v{a}tra\c{s}cu and Thorup
-\cite{pt10}.
+(and several other hash table schemes) is due to P\v{a}tra\c{s}cu and
+Thorup \cite{pt10}.
 
 The idea of \emph{multiplicative hashing} is very old and seems to be
 part of the hashing folklore \cite[Section~6.4]{k97v3}.  However, the

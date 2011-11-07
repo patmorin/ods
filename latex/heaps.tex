@@ -1,13 +1,13 @@
 \chapter{Heaps}
 \chaplabel{heaps}
 
-In this chapter we discuss two implementations of the extremely useful
+In this chapter, we discuss two implementations of the extremely useful
 priority #Queue# data structure.  The first is an implementation based
-on arrays.  It is very fast, and is the basis of one of the fastest
-known sorting algorithms, namely heapsort.  The second implementation is
-based on binary trees and is more flexible.  In particular, it supports
-a #meld(h)# operation that allows the priority queue to absorb the
-elements of a second priority queue #h#.
+on arrays.  It is very fast and is the basis of one of the fastest
+known sorting algorithms, namely heapsort (see \secref{heapsort}).
+The second implementation is based on binary trees and is more flexible.
+In particular, it supports a #meld(h)# operation that allows the priority
+queue to absorb the elements of a second priority queue #h#.
 
 \section{#BinaryHeap#: An Implicit Binary Tree}
 \seclabel{binaryheap}
@@ -92,7 +92,7 @@ this element with the smallest of its two children and continue.
 
 As with other array-based structures we will ignore the time spent in
 calls to #resize()# since these can be accounted for with the amortization
-argument from \lemref{arraystack-amortized}.  The running-times of
+argument from \lemref{arraystack-amortized}.  The running times of
 both #add(x)# and #remove()# then depend on the height of the (implicit)
 binary tree.  However, this is a \emph{complete} binary tree;  every level
 except the last has the maximum possible number of nodes.  Therefore,
@@ -138,13 +138,14 @@ node that is the root of a heap that contains all elements in the subtree
 rooted at #h1# and all elements in the subtree rooted at #h2#.
 
 The nice thing about a #merge(h1,h2)# operation is that it can be defined
-recursively.  If either of #h1# or #h2# is #null#, then we
-are merging with an empty set, so we return #h2# or #h1#, respectively.
-Otherwise, assume $#h1.x# < #h2.x#$, since otherwise we can reverse the
-roles of #h1# and #h2#.  Then we know that the root of the merged heap
-will contain #h1.x# and we can recursively merge #h2# with #h1.left#
-or #h1.right#, as we wish.  This is where randomization comes in, and we
-toss a coin to decide whether to merge #h2# with #h1.left# or #h1.right#:
+recursively.  If either of #h1# or #h2# is #null#, then we are merging
+with an empty set, so we return #h2# or #h1#, respectively.  Otherwise,
+assume $#h1.x# \le #h2.x#$ since, if $#h1.x# > #h2.x#$, then we can
+reverse the roles of #h1# and #h2#.  Then we know that the root of the
+merged heap will contain #h1.x# and we can recursively merge #h2# with
+#h1.left# or #h1.right#, as we wish.  This is where randomization comes
+in, and we toss a coin to decide whether to merge #h2# with #h1.left#
+or #h1.right#:
 \javaimport{ods/MeldableHeap.merge(h1,h2)}
 
 In the next section, we show that #merge(h1,h2)# runs in $O(\log #n#)$
@@ -187,7 +188,7 @@ The expected length of a random walk in a binary tree with #n# nodes is at most 
 \begin{proof}
 The proof is by induction on #n#. In the base case, $#n#=0$ and the walk
 has length $0=\log (#n#+1)$.  Suppose now that the result is true for
-all non-negative integers $#n#'< #n#$
+all non-negative integers $#n#'< #n#$.
 
 Let $#n#_1$ denote the size of the root's left subtree, so that
 $#n#_2=#n#-#n#_1-1$ is the size of the root's right subtree.  Starting at
@@ -227,7 +228,7 @@ running time of the #merge(h1,h2)# operation is $O(\log #n#)$.
   Each step of the merge algorithm takes one step of a random walk,
   either in the heap rooted at #h1# or the heap rooted at #h2#, depending
   on whether $#h1.x# < #h2.x#$ or not.  The algorithm terminates when
-  either of these two random walks falls out of its corresponding tree
+  either of these two random walks fall out of its corresponding tree
   (when $#h1#=#null#$ or $#h2#=#null#$).  Therefore, the expected number
   of steps performed by the merge algorithm is at most
   \[

@@ -7,12 +7,12 @@ interfaces where the underlying data is stored in an array, called the
 of operations for the data structures presented in this chapter:
 
 \begin{center}
-\begin{tabular}{lll}
- & #get(i)#/#set(i,x)# & #add(i,x)#/#remove(i)# \\
+\begin{tabular}{|l|l|l|} \hline
+ & #get(i)#/#set(i,x)# & #add(i,x)#/#remove(i)# \\ \hline
 #ArrayStack# & $O(1)$ & $O(#n#-#i#)$ \\
-#ArrayDeque# & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$ \\
-#DualArrayDeque# & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$ \\
-#RootishArrayStack# & $O(1)$ & $O(#n#-#i#)$ \\
+#ArrayDeque# & $O(1)$ & $O(\min\{#i#,#n#-#i#\})$ \\
+#DualArrayDeque# & $O(1)$ & $O(\min\{#i#,#n#-#i#\})$ \\
+#RootishArrayStack# & $O(1)$ & $O(#n#-#i#)$ \\ \hline
 \end{tabular}
 \end{center}
 
@@ -21,12 +21,15 @@ advantages and limitations in common:
 \begin{itemize}
   \item Arrays offer constant time access to any value in the array.
   This is what allows #get(i)# and #set(i,x)# to run in constant time.
+
   \item Arrays are not very dynamic.  Adding or removing an element
   near the middle of a list means that a large number of elements in the
   array need to be shifted to make room for the newly added element or
-  to fill in the gap created by the deleted element.  This is why the operations
-  #add(i,x)# and #remove(i)# have running times that depend on #n# and #i#.
-  \item Arrays can not expand or shrink.  When the number of elements in
+  to fill in the gap created by the deleted element.  This is why the
+  operations #add(i,x)# and #remove(i)# have running times that depend
+  on #n# and #i#.
+
+  \item Arrays cannot expand or shrink.  When the number of elements in
   the data structure exceeds the size of the backing array, a new array needs
   to be allocated and the data from the old array needs to be copied
   into the new array.  This is an expensive operation.
@@ -62,14 +65,15 @@ we simply return or set, respectively, #a[i]#.
 
 \javaimport{ods/ArrayStack.get(i).set(i,x)}
 
-Adding and removing elements from an #ArrayStack# is illustrated
-in \figref{arraystack}.  To implement the #add(i,x)# operation, we first
-check if #a# is already full.  If so, we call the method #resize()#
-to increase the size of #a#.  How #resize()# is implemented will be
-discussed later.  For now, it is sufficient to know that, after a call
-to #resize()#, we can be sure that $#a.length# > #n#$.  With this out of
-the way, we now shift the elements $#a[i]#,\ldots,#a[n-1]#$ right by one
-position to make room for #x#, set #a[i]# equal to #x# and increment #n#.
+The operations of adding and removing elements from an #ArrayStack#
+are illustrated in \figref{arraystack}.  To implement the #add(i,x)#
+operation, we first check if #a# is already full.  If so, we call
+the method #resize()# to increase the size of #a#.  How #resize()#
+is implemented will be discussed later.  For now, it is sufficient to
+know that, after a call to #resize()#, we can be sure that $#a.length#
+> #n#$.  With this out of the way, we now shift the elements
+$#a[i]#,\ldots,#a[n-1]#$ right by one position to make room for #x#,
+set #a[i]# equal to #x#, and increment #n#.
 
 \begin{figure}
   \begin{center}
@@ -117,7 +121,7 @@ of calls to #resize()#.  In this section we analyze this cost using a
 technique known as \emph{amortized analysis}.  This technique does not
 try to determine the cost of resizing during each individual #add(i,x)#
 and #remove(i)# operation.  Instead, it considers the cost of all calls to
-#resize()# during a sequence of $m$ calls to #add(i,x)# or #remove(x)#.
+#resize()# during a sequence of $m$ calls to #add(i,x)# or #remove(i)#.
 In particular, we will show:
 
 \begin{lem}\lemlabel{arraystack-amortized}
@@ -310,7 +314,7 @@ size of #a#.
 \javaimport{ods/ArrayQueue.remove()}
 
 Finally, the #resize()# operation is very similar to the #resize()#
-operation of #ArrayQueue#.  It allocates a new array #b# of size $2#n#$
+operation of #ArrayStack#.  It allocates a new array #b# of size $2#n#$
 and copies
 \[
    #a[j]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]#
@@ -456,8 +460,8 @@ or #back#, as appropriate:
     \includegraphics{figs/dualarraydeque}
   \end{center}
   \caption{A sequence of #add(i,x)# and #remove(i)# operations on a
-  #DualArrayDeque#.  Arrows denote elements being copied.
-  Operations that result in a rebalancing by #rebalance()# are marked with an asterisk.}
+  #DualArrayDeque#.  Arrows denote elements being copied.  Operations that
+  result in a rebalancing by #balance()# are marked with an asterisk.}
   \figlabel{dualarraydeque}
 \end{figure}
 
@@ -470,8 +474,8 @@ The #add(i,x)# method performs rebalancing of the two #ArrayStack#s
 implementation of #balance()# is described below, but for now it is
 sufficient to know that #balance()# ensures that, unless $#size()#<2$,
 #front.size()# and #back.size()# do not differ by more than a factor
-of 3.  In particular, $3#front.size()# \ge #back.size()#$ and
-$3#back.size()# \ge #front.size()#$.
+of 3.  In particular, $3\cdot#front.size()# \ge #back.size()#$ and
+$3\cdot#back.size()# \ge #front.size()#$.
 
 Next we analyze the cost of #add(i,x)#, ignoring the cost of the
 #balance()# operation.  If $#i#<#front.size()#$, then #add(i,x)# becomes 
@@ -524,10 +528,10 @@ elements and $\lceil#n#/2\rceil$ elements, respectively.
 \javaimport{ods/DualArrayDeque.balance()}
 
 There is not much to analyze.  If the #balance()# operation does
-do rebalancing, then it moves $\Theta(#n#)$ elements and this takes
+rebalancing, then it moves $\Theta(#n#)$ elements and this takes
 $O(#n#)$ time. This is bad, since #balance()# is called with each call to
-#add(i,x)# and #remove(i)#.  However, the following lemma shows that,
-on average, #balance()# only spends a constant amount of time per operation
+#add(i,x)# and #remove(i)#.  However, the following lemma shows that, on
+average, #balance()# only spends a constant amount of time per operation.
 
 \begin{lem}\lemlabel{dualarraydeque-amortized}
   If an empty #DualArrayDeque# is created and any sequence of $m\ge 1$ calls
@@ -605,7 +609,7 @@ an #ArrayStack#, the backing array #a# is only half full.  Even worse,
 there are times when only $1/3$ of #a# contains data.
 
 In this section, we discuss a data structure, the #RootishArrayStack#,
-that addresses this problem of wasted space.  The #RootishArrayStack#
+that addresses the problem of wasted space.  The #RootishArrayStack#
 stores #n# elements using $O(\sqrt{#n#})$ arrays.  In these arrays, at
 most $O(\sqrt{#n#})$ array locations are unused at any time.  All
 remaining array locations are used to store data.  Therefore, these
@@ -644,7 +648,7 @@ mathematician Gau\ss\ at the age of 9) can be obtained as shown in
   \figlabel{gauss}
 \end{figure}
 
-The elements of the list are layed out in the blocks as we might
+The elements of the list are laid out in the blocks as we might
 expect.  The list element with index 0 is stored in block 0, the
 elements with list indices 1 and 2 are stored in block 1, the elements
 with list indices 3, 4, and 5 are stored in block 2, and so on.  The
@@ -944,11 +948,12 @@ to what can be achieved with the more careful implementation of a
   #c# into the list at position #i#.  (The #add(i,x)# method is a special
   case where $#c#=\{#x#\}$.)  Explain why, for the data structures
   in this chapter, it is not efficient to implement #addAll(i,c)# by
-  repeated calls to #add(i,x)#.  Describe a more efficient implementation.
+  repeated calls to #add(i,x)#.  Design and implement a more efficient
+  implementation.
 \end{exc}
 
 \begin{exc}
-  Design and implement a #RandomQueue#.  This a is an implementation
+  Design and implement a #RandomQueue#.  This is an implementation
   of the #Queue# interface in which the #remove()# operation removes an
   element that is chosen uniformly at random among all the elements in
   the queue.  The #add(x)# and #remove()# operations in a #RandomQueue#
@@ -962,7 +967,7 @@ to what can be achieved with the more careful implementation of a
   \[
      O(1+\min\{#i#, #n#-#i#, |#n#/2-#i#|\}) \enspace .
   \]
-  With this running-time, modifications are fast if they are near either
+  With this running time, modifications are fast if they are near either
   end or near the middle of the list.
 \end{exc}
 
@@ -997,7 +1002,7 @@ to what can be achieved with the more careful implementation of a
 
   Hint: Making this work is really all about how a #rebuild()# operation
   is performed.  You would like #rebuild()# to put the data structure
-  into a state where the data can not run off either end until at least
+  into a state where the data cannot run off either end until at least
   $#n#/2$ operations have been performed.
 
   Test the performance of your implementation against the #ArrayDeque#.

@@ -60,7 +60,7 @@ A special case occurs when the last element is being removed, in which case #tai
 
 \javaimport{ods/SLList.pop()}
 
-Clearly both the #push(x)# and #pop()# operations run in $O(1)$ time.
+Clearly, both the #push(x)# and #pop()# operations run in $O(1)$ time.
 
 \subsection{Queue Operations}
 
@@ -192,7 +192,7 @@ It is worth noting that, if we ignore the cost of the #getNode(i)#
 operation, then all operations on a #DLList# take constant time.
 Thus, the only expensive part of operations on a #DLList# is finding
 the relevant node.  Once we have the relevant node, adding, removing,
-or accessing the data at that node take only constant time.
+or accessing the data at that node takes only constant time.
 
 This is in sharp contrast to the array-based #List# implementations of
 \chapref{arrays}. In those implementations, the relevant array
@@ -233,7 +233,7 @@ from the #ArrayDeque# structure described in \secref{arraydeque}.
 The #BDeque# differs from the #ArrayDeque# in one small way: When a
 new #BDeque# is created, the size of the backing array #a#
 is fixed at #b+1# and it never grows or shrinks.
-The important property of a #BDeque# is that it allows for addition or
+The important property of a #BDeque# is that it allows for the addition or
 removal of elements at either the front or back in constant time. This
 will be useful as elements are shifted from one block to another.
 

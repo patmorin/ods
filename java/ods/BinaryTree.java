@@ -158,7 +158,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		while (!q.isEmpty()) {
 			Node u = q.remove();
 			if (u.left != nil) q.add(u.left);
-			if (u.right != nil) q.add(u.left);
+			if (u.right != nil) q.add(u.right);
 		}
 	}
 
