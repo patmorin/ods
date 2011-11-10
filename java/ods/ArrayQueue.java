@@ -38,7 +38,7 @@ public class ArrayQueue<T> extends AbstractQueue<T> {
 	 * Grow the internal array
 	 */
 	protected void resize() {
-		T[] b = f.newArray(Utils.max(1,n*2));
+		T[] b = f.newArray(Math.max(1,n*2));
 		for (int k = 0; k < n; k++) 
 			b[k] = a[(j+k) % a.length];
 		a = b;

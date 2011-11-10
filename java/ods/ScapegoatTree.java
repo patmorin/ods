@@ -91,14 +91,14 @@ public class ScapegoatTree<T extends Comparable<T>>
 		// first do basic insertion keeping track of depth
 		Node<T> u = newNode(x);
 		int d = addWithDepth(u);
-		Node<T> w = u.parent;
 		if (d > log32(q)) {
 			// depth exceeded, find scapegoat
+			Node<T> w = u.parent;
 			while (3*size(w) <= 2*size(w.parent))
 				w = w.parent;
 			rebuild(w.parent);
 		}
-		return true;
+		return d >= 0;
 	}
 
 	@SuppressWarnings("unchecked")

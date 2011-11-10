@@ -261,7 +261,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 		}
 		u.parent = w;
 		w.left = u;
-		if (u == r) r = w;
+		if (u == r) { r = w; r.parent = nil; }
 	}	
 	
 	/**
@@ -284,7 +284,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 		}
 		u.parent = w;
 		w.right = u;
-		if (u == r) r = w;
+		if (u == r) { r = w; r.parent = nil; }
 	}
 
 	/**
@@ -294,7 +294,7 @@ public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
 	 */
 	public boolean remove(T x) {
 		Node u = findLast(x);
-		if (u != nil) {
+		if (u != nil && c.compare(x,u.x) == 0) {
 			remove(u);
 			return true;
 		}

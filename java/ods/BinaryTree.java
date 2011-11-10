@@ -86,7 +86,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	protected int height(Node u) {
 		if (u == nil)
 			return -1;
-		return 1 + Utils.max(height(u.left), height(u.right));
+		return 1 + Math.max(height(u.left), height(u.right));
 	}
 
 	

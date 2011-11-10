@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * A utility class with some static methods for testing List implementations
@@ -68,6 +69,31 @@ public class Testum {
 		}
 
 	}
+	
+	public static void sortedSetSanityTests(SortedSet<Integer> ss, int n) {
+		SortedSet<Integer> ts = new TreeSet<Integer>();
+		ss.clear();
+		Random r = new Random();
+		for (int i = 0; i < n; i++) {
+			Integer x = r.nextInt(2*n);
+			if (ts.add(x) != ss.add(x))
+				throw new RuntimeException("add(x) returned wrong value");
+			if (!compareSortedSets(ts,ss))
+				throw new RuntimeException("sorted sets differ!");
+		}
+		for (int i = 0; i < n; i++) {
+			Integer x = r.nextInt(2*n);
+			if (ts.remove(x) != ss.remove(x))
+				throw new RuntimeException("remove(x) returned wrong value");
+			if (!compareSortedSets(ts,ss))
+				throw new RuntimeException("sorted sets differ!");
+		}
+		ss.clear();
+		ts.clear();
+		compareSortedSets(ts,ss);
+	}
+	
+	
 	
 	public static void speedTests(Collection<Set<Integer>> cs, int n) {
 		long start, stop;

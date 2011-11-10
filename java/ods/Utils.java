@@ -11,14 +11,6 @@ public class Utils {
 		}
 	}
 	
-	public static final int max(int a, int b) {
-		return a > b ? a : b;
-	}
-
-	public static final int min(int a, int b) {
-		return a < b ? a : b;
-	}
-	
 	public static final int intSqrt(int x) {
 		int z = (int)Math.sqrt(x);
 		while (z*z > x) z--;

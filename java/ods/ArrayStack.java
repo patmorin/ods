@@ -32,7 +32,7 @@ public class ArrayStack<T> extends AbstractList<T> {
 	 * Resize the internal array
 	 */
 	protected void resize() {
-		T[] b = f.newArray(Utils.max(n*2,1));
+		T[] b = f.newArray(Math.max(n*2,1));
 		for (int i = 0; i < n; i++) {
 			b[i] = a[i];
 		}

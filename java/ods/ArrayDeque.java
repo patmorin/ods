@@ -39,7 +39,7 @@ public class ArrayDeque<T> extends AbstractList<T> {
 	 * Grow the internal array
 	 */
 	protected void resize() {
-		T[] b = f.newArray(Utils.max(2*n,1));
+		T[] b = f.newArray(Math.max(2*n,1));
 		for (int k = 0; k < n; k++) 
 			b[k] = a[(j+k) % a.length];
 		a = b;
