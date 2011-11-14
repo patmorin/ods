@@ -8,7 +8,7 @@ import java.util.TreeSet;
 public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 		implements SSet<T> {
 	
-	protected static class Node<T> extends BSTNode<Node<T>,T> {
+	protected static class Node<T> extends BinarySearchTree.BSTNode<Node<T>,T> {
 		byte color;
 	}
 	static byte red = 0;
