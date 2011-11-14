@@ -4,11 +4,16 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 
-public class BinarySearchTree<Node extends BSTNode<Node,T>, T> extends
+public class BinarySearchTree<Node extends BinarySearchTree.BSTNode<Node,T>, T> extends
 		BinaryTree<Node> implements SSet<T> {
 
 	protected Comparator<T> c;
 	
+	public static class BSTNode<Node extends BSTNode<Node,T>,T>
+		extends BinaryTree.BTNode<Node> {
+		T x;
+	}
+
 	/**
 	 * The number of nodes (elements) currently in the tree
 	 */

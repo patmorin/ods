@@ -20,7 +20,7 @@ public class MeldableHeap<T extends Comparable<T>> extends
 	
 	protected int n;
 	
-	protected class Node extends BinaryTreeNode<Node> {
+	protected class Node extends BinaryTree.BTNode<Node> {
 		T x;
 	}
 	

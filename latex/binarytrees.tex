@@ -24,7 +24,8 @@ this way in \figref{binary-tree}.a.
   \begin{center}
     \includegraphics{figs/bintree-traverse-1} 
   \end{center}
-  \caption{The parent, left child, and right child of the node #u# in a #BinaryTree#.}
+  \caption{The parent, left child, and right child of the node #u#
+    in a #BinaryTree#.}
   \figlabel{bintree-orientation}
 \end{figure}
 
@@ -63,7 +64,7 @@ real nodes has $#n#+1$ external nodes.
 
 The simplest way to represent a node, #u#, in a binary tree is
 to store the (at most three) neighbours of #u# explicitly:
-\javaimport{ods/BinaryTreeNode.left.right.parent}
+\javaimport{ods/BinaryTree.BTNode<Node}
 When one of these three neighbours is not present, we set it to #nil#.
 In this way, external nodes in the tree as well as the parent of the
 root correspond to the value #nil#.

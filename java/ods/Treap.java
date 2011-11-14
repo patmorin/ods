@@ -14,7 +14,7 @@ public class Treap<T> extends
 	 */
 	Random rand;
 
-	protected static class Node<T> extends BSTNode<Node<T>,T> {
+	protected static class Node<T> extends BinarySearchTree.BSTNode<Node<T>,T> {
 		int p;
 	}
 	
@@ -50,7 +50,7 @@ public class Treap<T> extends
 
 	public boolean remove(T x) {
 		Node<T> u = findLast(x);
-		if (c.compare(u.x, x) == 0) {
+		if (u != nil && c.compare(u.x, x) == 0) {
 			trickleDown(u);
 			splice(u);
 			return true;

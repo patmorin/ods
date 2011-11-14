@@ -3,8 +3,20 @@ package ods;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * An implementation of binary trees
+ * @author morin
+ *
+ * @param <Node>
+ */
+public class BinaryTree<Node extends BinaryTree.BTNode<Node>> {
+	
+	public static class BTNode<Node extends BTNode<Node>> {
+		public Node left;
+		public Node right;
+		public Node parent;	
+	}
 
-public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	/**
 	 * Used to make a mini-factory
 	 */
@@ -13,10 +25,10 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	/**
 	 * The root of this tree
 	 */
-	Node r;
+	protected Node r;
 
 	/**
-	 * This tree's null node
+	 * This tree's "null" node
 	 */
 	protected Node nil;
 
@@ -24,7 +36,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	 * Create a new instance of this class
 	 * @param isampleNode
 	 */
-	protected BinaryTree(Node nil) {
+	public BinaryTree(Node nil) {
 		sampleNode = this.nil = nil;
 	}
 	
@@ -50,6 +62,11 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		}
 	}
 	
+	/**
+	 * Compute the depth (distance to the root) of u
+	 * @param u
+	 * @return the distanct between u and the root, r
+	 */
 	public int depth(Node u) {
 		int d = 0;
 		while (u != r) {
@@ -61,6 +78,7 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	
 	/**
 	 * Compute the size (number of nodes) of this tree
+	 * @warning uses recursion so could cause a stack overflow
 	 * @return the number of nodes in this tree
 	 */
 	public int size() {
@@ -76,6 +94,35 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		return 1 + size(u.left) + size(u.right);
 	}
 	
+	/**
+	 * Compute the number of nodes in this tree without recursion
+	 * @return
+	 */
+	public int size2() {
+		Node u = r, prev = nil, next;
+		int n = 0;
+		while (u != nil) {
+			if (prev == u.parent) {
+				n++;
+				if (u.left != nil) next = u.left;
+				else if (u.right != nil) next = u.right;
+				else next = u.parent;
+			} else if (prev == u.left) {
+				if (u.right != nil) next = u.right;
+				else next = u.parent;
+			} else {
+				next = u.parent;
+			}
+			prev = u;
+			u = next;
+		}
+		return n;
+	}
+
+	/**
+	 * Compute the maximum depth of any node in this tree
+	 * @return the maximum depth of any node in this tree
+	 */
 	public int height() {
 		return height(r);
 	}
@@ -104,12 +151,19 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		r = nil;
 	}
 	
+	/**
+	 * Demonstration of a recursive traversal
+	 * @param u
+	 */
 	public void traverse(Node u) {
 		if (u == nil) return;
 		traverse(u.left);
 		traverse(u.right);
 	}
 
+	/**
+	 * Demonstration of a non-recursive traversal
+	 */
 	public void traverse2() {
 		Node u = r, prev = nil, next;
 		while (u != nil) {
@@ -128,30 +182,9 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 		}
 	}
 
-	
-	public int size2() {
-		Node u = r, prev = nil, next;
-		int n = 0;
-		while (u != nil) {
-			if (prev == u.parent) {
-				n++;
-				if (u.left != nil) next = u.left;
-				else if (u.right != nil) next = u.right;
-				else next = u.parent;
-			} else if (prev == u.left) {
-				if (u.right != nil) next = u.right;
-				else next = u.parent;
-			} else {
-				next = u.parent;
-			}
-			prev = u;
-			u = next;
-		}
-		return n;
-	}
-	
-
-	
+	/**
+	 * Demonstration of a breadth-first traversal
+	 */
 	public void bfTraverse() {
 		Queue<Node> q = new LinkedList<Node>();
 		q.add(r);
@@ -164,9 +197,9 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 
 	/**
 	 * Find the first node in an in-order traversal
-	 * @return
+	 * @return the first node reported in an in-order traversal
 	 */
-	protected Node firstNode() {
+	public Node firstNode() {
 		Node w = r;
 		if (w == nil) return nil;
 		while (w.left != nil)
@@ -175,11 +208,11 @@ public class BinaryTree<Node extends BinaryTreeNode<Node>> {
 	}
 	
 	/**
-	 * Find the node that follows u in an in-order traversal
+	 * Find the node that follows w in an in-order traversal
 	 * @param w
-	 * @return
+	 * @return the node that follows w in an in-order traversal
 	 */
-	protected Node nextNode(Node w) {
+	public Node nextNode(Node w) {
 		if (w.right != nil) {
 			w = w.right;
 			while (w.left != nil)
