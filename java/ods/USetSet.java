@@ -41,16 +41,12 @@ public class USetSet<T> extends AbstractSet<T> {
 	}
 	
 	public static void main(String[] args) {
-		Runtime r = Runtime.getRuntime();
 		int n = 1000000;
 		Collection<Set<Integer>> cs = new ArrayList<Set<Integer>>();
 		cs.add(new HashSet<Integer>());
 		cs.add(new USetSet<Integer>(new LinearHashTable<Integer>(-1)));
 		cs.add(new USetSet<Integer>(new ChainedHashTable<Integer>()));
-		while (1 < 2) {
-			Testum.setSpeedTests(cs, n);
-			r.gc();
-		}
+		Testum.setSpeedTests(cs, n);
 	}
 
 }
