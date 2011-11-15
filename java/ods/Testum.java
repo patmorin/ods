@@ -1,7 +1,6 @@
 package ods;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -16,7 +15,18 @@ import java.util.TreeSet;
  */
 public class Testum {
 
-	public static void runTests(Collection<List<Integer>> cl) {
+	protected static String s(Object c) {
+		String s = c.getClass().getName();
+		if (c instanceof SortedSSet<?>) {
+			s += " - " + ((SortedSSet<?>)c).s.getClass().getName();
+		}
+		if (c instanceof USetSet<?>) {
+			s += " - " + ((USetSet<?>)c).s.getClass().getName();
+		}
+		return s;
+	}
+	
+	public static void listSanityTests(Collection<List<Integer>> cl) {
 		int n = 800;
 		
 		// addition/removal at end and reading
@@ -95,7 +105,7 @@ public class Testum {
 	
 	
 	
-	public static void speedTests(Collection<Set<Integer>> cs, int n) {
+	public static void setSpeedTests(Collection<Set<Integer>> cs, int n) {
 		long start, stop;
 
 		for (Set<Integer> s : cs) {
@@ -104,7 +114,7 @@ public class Testum {
 		}
 		Random r = new Random();		
 		for (Set<Integer> s : cs) {
-			System.out.print("random insertions (" + s.getClass() + ")...");
+			System.out.print("random insertions (" + s(s) + ")...");
 			start = System.nanoTime();
 			for (int i = 0; i < n; i++)
 				s.add(r.nextInt(n*5));
@@ -115,7 +125,7 @@ public class Testum {
 		System.out.println();
 
 		for (Set<Integer> s : cs) {
-			System.out.print("random contains (" + s.getClass() + ")...");
+			System.out.print("random contains (" + s(s) + ")...");
 			start = System.nanoTime();
 			for (int i = 0; i < n; i++)
 				s.contains(r.nextInt(n*5));
@@ -125,7 +135,7 @@ public class Testum {
 		System.out.println();
 		
 		for (Set<Integer> s : cs) {
-			System.out.print("sequential removals (" + s.getClass() + ")...");
+			System.out.print("sequential removals (" + s(s) + ")...");
 			start = System.nanoTime();
 			for (int i = 0; i < 5*n; i++)
 				s.remove(i);
@@ -145,7 +155,7 @@ public class Testum {
 		}
 		
 		for (SortedSet<Integer> ss : css) {
-			System.out.print("random insertions (" + ss.getClass() + ")...");
+			System.out.print("random insertions (" + s(ss) + ")...");
 			start = System.nanoTime();
 			Random r = new Random();
 			for (int i = 0; i < n; i++)
@@ -157,7 +167,7 @@ public class Testum {
 		System.out.println();
 		
 		for (SortedSet<Integer> ss : css) {
-			System.out.print("random contains (" + ss.getClass() + ")...");
+			System.out.print("random contains (" + s(ss) + ")...");
 			start = System.nanoTime();
 			Random r = new Random();
 			for (int i = 0; i < 10*n; i++)
@@ -168,7 +178,7 @@ public class Testum {
 		System.out.println();
 
 		for (SortedSet<Integer> ss : css) {
-			System.out.print("random headSets (" + ss.getClass() + ")...");
+			System.out.print("random headSets (" + s(ss) + ")...");
 			start = System.nanoTime();
 			Random r = new Random();
 			for (int i = 0; i < n; i++)
@@ -179,7 +189,7 @@ public class Testum {
 		System.out.println();
 
 		for (SortedSet<Integer> ss : css) {
-			System.out.print("iteration (" + ss.getClass() + ")...");
+			System.out.print("iteration (" + s(ss) + ")...");
 			start = System.nanoTime();
 			for (Integer i : ss) { i = i + 1; }
 			stop = System.nanoTime();
@@ -188,7 +198,7 @@ public class Testum {
 		System.out.println();
 
 		for (SortedSet<Integer> ss : css) {
-			System.out.print("clear (" + ss.getClass() + ")...");
+			System.out.print("clear (" + s(ss) + ")...");
 			start = System.nanoTime();
 			ss.clear();
 			stop = System.nanoTime();
@@ -197,7 +207,7 @@ public class Testum {
 		System.out.println();
 
 		for (SortedSet<Integer> ss : css) {
-			System.out.print("sequential insertions (" + ss.getClass() + ")...");
+			System.out.print("sequential insertions (" + s(ss) + ")...");
 			start = System.nanoTime();
 			for (int i = 0; i < n; i++)
 				ss.add(i*2);
@@ -208,7 +218,7 @@ public class Testum {
 		System.out.println();
 
 		for (SortedSet<Integer> ss : css) {
-			System.out.print("sequential contains (" + ss.getClass() + ")...");
+			System.out.print("sequential contains (" + s(ss) + ")...");
 			start = System.nanoTime();
 			for (int i = 0; i < 2*n; i++)
 				ss.contains(i);
@@ -218,7 +228,7 @@ public class Testum {
 		System.out.println();
 
 		for (SortedSet<Integer> ss : css) {
-			System.out.print("sequential headSets (" + ss.getClass() + ")...");
+			System.out.print("sequential headSets (" + s(ss) + ")...");
 			start = System.nanoTime();
 			for (int i = 0; i < 2*n; i++)
 				ss.headSet(i);
@@ -228,7 +238,7 @@ public class Testum {
 		System.out.println();
 		
 		for (SortedSet<Integer> ss : css) {
-			System.out.print("iteration over subSets (" + ss.getClass() + ")...");
+			System.out.print("iteration over subSets (" + s(ss) + ")...");
 			start = System.nanoTime();
 			for (Integer i : ss.subSet(n/2, 3*n/4)) { i = i + 1; }
 			stop = System.nanoTime();
@@ -256,101 +266,6 @@ public class Testum {
 		return true;
 	}
 	
-//	protected static <Node extends BinaryTreeNode<Node>> 
-//		void correctnessTests(BinarySearchTree<Node,Integer> t, int n) {
-//		SortedSet<Integer> ss = new TreeSet<Integer>();
-//		Random r = new Random(0);
-//		for (int i = 0; i < n; i++) {
-//			Integer j = r.nextInt();
-//			t.add(j);
-//			ss.add(j);
-//		}
-//		// Utils.myassert(compareSortedSets(t, ss));
-//		r = new Random(0);
-//		for (int i = 0; i < n/3; i++) {
-//			Integer j = r.nextInt(); 
-//			t.remove(j);
-//			ss.remove(j);
-//			j = r.nextInt(); 
-//			t.remove(j);
-//			ss.remove(j);
-//			r.nextInt(2500);
-//		}
-//		// Utils.myassert(compareSortedSets(t, ss));
-//	}
-	
-//	protected static <Node extends BinaryTreeNode<Node>> 
-//		void performanceTests(BinarySearchTree<Node,Integer> t) {
-//		int ns[] = { 100, 1000, 10000, 1000000 };
-//		for (int n : ns) {
-//			Random r = new Random(0);
-//			t.clear();
-//			long stop, start;
-//			double elapsed;
-//			start = System.nanoTime();
-//			System.out.print(t.getClass() + ": performing " + n + " random insertions...");
-//			for (int i = 0; i < n; i++) {
-//				t.add(r.nextInt());
-//			}
-//			stop = System.nanoTime();
-//			elapsed = 1e-9*(stop-start);
-//			System.out.println(" (" + elapsed + "s [" 
-//					+ (int)(((double)n)/elapsed) + "ops/sec])");
-//			r = new Random(0);
-//			start = System.nanoTime();
-//			System.out.print(t.getClass() + ": performing " + n + " random searches...");
-//			for (int i = 0; i < n; i++) {
-//				t.contains(r.nextInt());
-//			}
-//			stop = System.nanoTime();
-//			elapsed = 1e-9*(stop-start);
-//			System.out.println(" (" + elapsed + "s [" 
-//					+ (int)(((double)n)/elapsed) + "ops/sec])");
-//			r = new Random(0);
-//			start = System.nanoTime();
-//			System.out.print(t.getClass() + ": performing " + n + " random deletions...");
-//			for (int i = 0; i < n; i++) {
-//				t.remove(r.nextInt());
-//			}
-//			stop = System.nanoTime();
-//			elapsed = 1e-9*(stop-start);
-//			System.out.println(" (" + elapsed + "s [" 
-//					+ (int)(((double)n)/elapsed) + "ops/sec])");
-//			t.clear();
-//
-//			start = System.nanoTime();
-//			System.out.print(t.getClass() + ": performing " + n + " sequential insertions...");
-//			for (int i = 0; i < n; i++) {
-//				t.add(i);
-//			}
-//			stop = System.nanoTime();
-//			elapsed = 1e-9*(stop-start);
-//			System.out.println(" (" + elapsed + "s [" 
-//					+ (int)(((double)n)/elapsed) + "ops/sec])");
-//			r = new Random(0);
-//			start = System.nanoTime();
-//			System.out.print(t.getClass() + ": performing " + n + " sequential searches...");
-//			for (int i = 0; i < n; i++) {
-//				t.contains(i);
-//			}
-//			stop = System.nanoTime();
-//			elapsed = 1e-9*(stop-start);
-//			System.out.println(" (" + elapsed + "s [" 
-//					+ (int)(((double)n)/elapsed) + "ops/sec])");
-//			r = new Random(0);
-//			start = System.nanoTime();
-//			System.out.print(t.getClass() + ": performing " + n + " sequential deletions...");
-//			for (int i = 0; i < n; i++) {
-//				t.remove(i);
-//			}
-//			stop = System.nanoTime();
-//			elapsed = 1e-9*(stop-start);
-//			System.out.println(" (" + elapsed + "s [" 
-//					+ (int)(((double)n)/elapsed) + "ops/sec])");
-//
-//		}
-//	}
-
 	
 	/**
 	 * Run a sequence of performance tests on a List implementations
@@ -360,9 +275,10 @@ public class Testum {
 	public static void listSpeedTests(Collection<List<Integer>> cl, int n) {
 		long start, stop;
 
+		int sn = (int)Math.sqrt(n);
 		Integer x = new Integer(0);
 		for (List<Integer> l : cl) {
-			System.out.print("insert at back (" + l.getClass() + ")...");
+			System.out.print("insert at back (" + s(l) + ")...");
 			start = System.nanoTime();
 			for (int i = 0; i < n; i++)
 				l.add(x);
@@ -372,7 +288,7 @@ public class Testum {
 		System.out.println();
 
 		for (List<Integer> l : cl) {
-			System.out.print("front gets (" + l.getClass() + ")...");
+			System.out.print("front gets (" + s(l) + ")...");
 			start = System.nanoTime();
 			for (int i = 0; i < n; i++)
 				l.get(0);
@@ -382,7 +298,7 @@ public class Testum {
 		System.out.println();
 
 		for (List<Integer> l : cl) {
-			System.out.print("back gets (" + l.getClass() + ")...");
+			System.out.print("back gets (" + s(l) + ")...");
 			start = System.nanoTime();
 			for (int i = 0; i < n; i++)
 				l.get(l.size()-1);
@@ -392,11 +308,10 @@ public class Testum {
 		System.out.println();
 
 		for (List<Integer> l : cl) {
-			System.out.print("random gets (" + l.getClass() + ")...");
+			System.out.print("random gets (" + s(l) + ")...");
 			start = System.nanoTime();
 			Random r = new Random(1);
-			int m = (int)Math.sqrt(n);
-			for (int i = 0; i < m; i++)
+			for (int i = 0; i < sn; i++)
 				l.get(r.nextInt(n));
 			stop = System.nanoTime();
 			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
@@ -404,7 +319,7 @@ public class Testum {
 		System.out.println();
 
 		for (List<Integer> l : cl) {
-			System.out.print("remove at back (" + l.getClass() + ")...");
+			System.out.print("remove at back (" + s(l) + ")...");
 			start = System.nanoTime();
 			while(!l.isEmpty()) 
 				l.remove(l.size()-1);
@@ -416,7 +331,7 @@ public class Testum {
 		for (List<Integer> l : cl) {
 			for (int i = 0; i < n; i++)
 				l.add(x);
-			System.out.print("stack operations (" + l.getClass() + ")...");
+			System.out.print("stack operations (" + s(l) + ")...");
 			start = System.nanoTime();
 			Random r = new Random(0);
 			for (int i = 0; i < n; i++) {
@@ -432,10 +347,10 @@ public class Testum {
 		System.out.println();
 
 		for (List<Integer> l : cl) {
-			System.out.print("forward queue operations (" + l.getClass() + ")...");
+			System.out.print("forward queue operations (" + s(l) + ")...");
 			start = System.nanoTime();
 			Random r = new Random(2);
-			for (int i = 0; i < n; i++) {
+			for (int i = 0; i < sn; i++) {
 				if (r.nextBoolean()) {
 					l.add(x);
 				} else {
@@ -448,10 +363,10 @@ public class Testum {
 		System.out.println();
 
 		for (List<Integer> l : cl) {
-			System.out.print("backward queue operations (" + l.getClass() + ")...");
+			System.out.print("backward queue operations (" + s(l) + ")...");
 			start = System.nanoTime();
 			Random r = new Random(2);
-			for (int i = 0; i < n; i++) {
+			for (int i = 0; i < sn; i++) {
 				if (r.nextBoolean()) {
 					l.add(0,x);
 				} else {
@@ -464,10 +379,10 @@ public class Testum {
 		System.out.println();
 		
 		for (List<Integer> l : cl) {
-			System.out.print("deque operations (" + l.getClass() + ")...");
+			System.out.print("deque operations (" + s(l) + ")...");
 			start = System.nanoTime();
 			Random r = new Random(3);
-			for (int i = 0; i < n; i++) {
+			for (int i = 0; i < sn; i++) {
 				switch(r.nextInt(4)) {
 				case 0:
 					l.add(0,x);
@@ -489,29 +404,17 @@ public class Testum {
 		System.out.println();
 
 		for (List<Integer> l : cl) {
-			System.out.print("add in middle (" + l.getClass() + ")...");
+			System.out.print("add in middle (" + s(l) + ")...");
 			start = System.nanoTime();
-			for (int i = 0; i < n/20; i++)
+			for (int i = 0; i < sn; i++)
 				l.add(l.size()/2+i, x);
 			stop = System.nanoTime();
 			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
 		}
 		System.out.println();
-		
-		for (List<Integer> l : cl) {
-			Integer[] a = new Integer[n/20];
-			Arrays.fill(a, x);
-			System.out.print("addAll in middle (" + l.getClass() + ")...");
-			start = System.nanoTime();
-			l.addAll(l.size()/2, Arrays.asList(a));
-			stop = System.nanoTime();
-			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
-		}
-		System.out.println();
-
 
 		for (List<Integer> l : cl) {
-			System.out.print("clear (" + l.getClass() + ")...");
+			System.out.print("clear (" + s(l) + ")...");
 			start = System.nanoTime();
 			l.clear();
 			stop = System.nanoTime();
@@ -521,26 +424,21 @@ public class Testum {
 	}
 	
 	public static void main(String args[]) {
-		int n = 2000000;
+		int n = 1000000;
 		
 		Collection<List<Integer>> cl = new ArrayList<List<Integer>>();
-//		cl.add(new ArrayList<Integer>());
-//		cl.add(new ArrayStack<Integer>(Integer.class));
-//		cl.add(new java.util.LinkedList<Integer>());
-		cl.add(new DLList<Integer>());
-		cl.add(new DLList<Integer>());
-		cl.add(new SkiplistList<Integer>());
-		cl.add(new java.util.LinkedList<Integer>());
+		cl.add(new ArrayList<Integer>());
+		cl.add(new ArrayStack<Integer>(Integer.class));
+		cl.add(new FastArrayStack<Integer>(Integer.class));
 		cl.add(new ArrayDeque<Integer>(Integer.class));
 		cl.add(new DualArrayDeque<Integer>(Integer.class));
-//		cl.add(new FastArrayStack<Integer>(Integer.class));
-//		cl.add(new DualArrayDeque<Integer>(Integer.class));
-//		// cl.add(new FastArrayDeque<Integer>(Integer.class));
-//		cl.add(new ArrayDeque<Integer>(Integer.class));
-//		cl.add(new RootishArrayStack<Integer>(Integer.class));
+		cl.add(new RootishArrayStack<Integer>(Integer.class));
+		cl.add(new java.util.LinkedList<Integer>());
+		cl.add(new DLList<Integer>());
+		cl.add(new SkiplistList<Integer>());
 
 		System.out.print("Running sanity tests...");
-		runTests(cl);
+		listSanityTests(cl);
 		System.out.println("done.");
 		listSpeedTests(cl, n);
 	}
