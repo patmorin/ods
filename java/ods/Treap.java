@@ -1,10 +1,6 @@
 package ods;
 
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.List;
 
 
 public class Treap<T> extends
@@ -19,13 +15,13 @@ public class Treap<T> extends
 	}
 	
 	public Treap() {
-		sampleNode = new Node<T>();
+		super(new Node<T>());	
 		rand = new Random();
 		c = new DefaultComparator<T>();
 	}
 
 	public boolean add(T x) {
-		Node<T> u = new Node<T>();
+		Node<T> u = newNode();
 		u.x = x;
 		u.p = rand.nextInt();
 		if (super.add(u)) {
@@ -36,14 +32,14 @@ public class Treap<T> extends
 	}
 
 	protected void bubbleUp(Node<T> u) {
-		while (u.parent != null && u.parent.p > u.p) {
+		while (u.parent != nil && u.parent.p > u.p) {
 			if (u.parent.right == u) {
 				rotateLeft(u.parent);
 			} else {
 				rotateRight(u.parent);
 			}
 		}
-		if (u.parent == null) {
+		if (u.parent == nil) {
 			r = u;
 		}
 	}
@@ -62,10 +58,10 @@ public class Treap<T> extends
 	 * Do rotations to make u a leaf
 	 */
 	protected void trickleDown(Node<T> u) {
-		while (u.left != null || u.right != null) {
-			if (u.left == null) {
+		while (u.left != nil || u.right != nil) {
+			if (u.left == nil) {
 				rotateLeft(u);
-			} else if (u.right == null) {
+			} else if (u.right == nil) {
 				rotateRight(u);
 			} else if (u.left.p < u.right.p) {
 				rotateRight(u);
@@ -76,14 +72,5 @@ public class Treap<T> extends
 				r = u.parent;
 			}
 		}
-	}
-	
-	public static void main(String[] args) {
-		List<SortedSet<Integer>> c = new ArrayList<SortedSet<Integer>>();
-		c.add(new TreeSet<Integer>());
-		c.add(new SortedSSet<Integer>(new Treap<Integer>()));
-		c.add(new SortedSSet<Integer>(new SkiplistSSet<Integer>()));
-		c.add(new TreeSet<Integer>());
-		Testum.sortedSetSpeedTests(c, 1000000);
 	}
 }
