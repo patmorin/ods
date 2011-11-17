@@ -85,34 +85,16 @@ public class MeldableHeap<T extends Comparable<T>> extends
 		return h1;
 	}
 	
-	public static void main(String[] args) {
-		MeldableHeap<Integer> h = new MeldableHeap<Integer>();
+	protected static void speedTests(Queue<Integer> q) {
 		Random r = new Random();
-		int n = 20;
-		for (int i = 0; i < n; i++) {
-			h.add(r.nextInt(2500));
-		}
-		for (Integer x : h) {
-			System.out.print(x + ",");
-		}
-		System.out.println();
-		for (Integer x : h) {
-			System.out.print(x + ",");
-		}
-		System.out.println();
-		while (!h.isEmpty()) {
-			System.out.print("" + h.remove() + ",");
-		}
-		System.out.println("");
-
-		h.clear();
-		n = 1000000;
+		q.clear();
+		int n = 1000000;
 		long start, stop;
 		double elapsed;
 		System.out.print("performing " + n + " adds...");
 		start = System.nanoTime();
 		for (int i = 0; i < n; i++) {
-			h.add(r.nextInt());
+			q.add(r.nextInt());
 		}
 		stop = System.nanoTime();
 		elapsed = 1e-9*(stop-start);
@@ -123,15 +105,24 @@ public class MeldableHeap<T extends Comparable<T>> extends
 		start = System.nanoTime();
 		for (int i = 0; i < n; i++) {
 			if (r.nextBoolean()) {
-				h.add(r.nextInt());
+				q.add(r.nextInt());
 			} else {
-				h.remove();
+				q.remove();
 			}
 		}
 		stop = System.nanoTime();
 		elapsed = 1e-9*(stop-start);
 		System.out.println("(" + elapsed + "s [" 
 				+ (int)(((double)n)/elapsed) + "ops/sec])");
+		
+	}
+	
+	public static void main(String[] args) {
+		MeldableHeap<Integer> h = new MeldableHeap<Integer>();
+		System.out.println("\n==== BinaryHeap ====");
+		speedTests(new BinaryHeap<Integer>(Integer.class));
+		System.out.println("==== MeldableHeap ====");
+		speedTests(new MeldableHeap<Integer>());
 	}
 
 	public T element() {

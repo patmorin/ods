@@ -39,6 +39,11 @@ public class BinaryHeap<T> extends AbstractQueue<T> {
 		a = f.newArray(1);
 		n = 0;
 	}
+	
+	public void clear() {
+		a = f.newArray(1);
+		n = 0;		
+	}
 
 	/**
 	 * Create a new binary heap by heapifying a
