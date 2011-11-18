@@ -449,14 +449,14 @@ or #remove(i)#.
   a node #u# is \emph{fragile} if #u#'s block does not contain #b#
   elements (so that #u# is either the last node, or contains $#b#-1$
   or $#b#+1$ elements).  Any node whose block contains #b# elements is
-  \emph{strong}. Define the \emph{potential} of an #SEList# as the number
+  \emph{rugged}. Define the \emph{potential} of an #SEList# as the number
   of fragile nodes it contains.  We will consider only the #add(i,x)#
   operation and its relation to the number of calls to #spread(u)#.
   The analysis of #remove(i)# and #gather(u)# is identical.
 
   Notice that, if Case~1 occurs during the #add(i,x)# method, then
   only one node, $#u#_r$ has the size of its block changed. Therefore,
-  at most one node, namely $#u#_r$, goes from being strong to being
+  at most one node, namely $#u#_r$, goes from being rugged to being
   fragile.  If Case~2 occurs, then a new node is created, and this node
   is fragile, but no other node changes sizes, so the number of fragile
   nodes increases by one.  Thus, in either Case~1 or Case~2 the potential
@@ -464,7 +464,7 @@ or #remove(i)#.
 
   Finally, if Case~3 occurs, it is because $#u#_0,\ldots,#u#_{#b#-1}$
   are all fragile nodes.  Then $#spread(#u_0#)#$ is called and these #b#
-  fragile nodes are replaced with $#b#+1$ strong nodes.  Finally, #x#
+  fragile nodes are replaced with $#b#+1$ rugged nodes.  Finally, #x#
   is added to $#u#_0$'s block, making $#u#_0$ fragile.  In total the
   potential decreases by $#b#-1$.
 
