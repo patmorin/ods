@@ -3,6 +3,7 @@ package ods;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -427,15 +428,20 @@ public class Testum {
 		int n = 1000000;
 		
 		Collection<List<Integer>> cl = new ArrayList<List<Integer>>();
-		cl.add(new ArrayList<Integer>());
-		cl.add(new ArrayStack<Integer>(Integer.class));
-		cl.add(new FastArrayStack<Integer>(Integer.class));
-		cl.add(new ArrayDeque<Integer>(Integer.class));
-		cl.add(new DualArrayDeque<Integer>(Integer.class));
-		cl.add(new RootishArrayStack<Integer>(Integer.class));
-		cl.add(new java.util.LinkedList<Integer>());
+		cl.add(new LinkedList<Integer>());
 		cl.add(new DLList<Integer>());
-		cl.add(new SkiplistList<Integer>());
+		cl.add(new SEList<Integer>(20, Integer.class));
+		cl.add(new SEList<Integer>(40, Integer.class));
+		cl.add(new SEList<Integer>(60, Integer.class));
+		cl.add(new SEList<Integer>(80, Integer.class));
+		cl.add(new SEList<Integer>(100, Integer.class));
+//		cl.add(new FastArrayStack<Integer>(Integer.class));
+//		cl.add(new ArrayDeque<Integer>(Integer.class));
+//		cl.add(new DualArrayDeque<Integer>(Integer.class));
+//		cl.add(new RootishArrayStack<Integer>(Integer.class));
+//		cl.add(new java.util.LinkedList<Integer>());
+//		cl.add(new DLList<Integer>());
+//		cl.add(new SkiplistList<Integer>());
 
 		System.out.print("Running sanity tests...");
 		listSanityTests(cl);

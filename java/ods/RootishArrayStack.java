@@ -2,9 +2,7 @@ package ods;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 /**
  * This class implements the List interface using a collection of arrays of
@@ -110,85 +108,7 @@ public class RootishArrayStack<T> extends AbstractList<T> {
 		blocks.clear();
 		n = 0;
 	}
-	
-	protected static <T> boolean listEquals(List<T> l1, List<T> l2) {
-		if (l1.size() != l2.size()) {
-			return false;
-		}
-		Iterator<T> i1 = l1.iterator();
-		Iterator<T> i2 = l2.iterator();
-		while (i1.hasNext()) {
-			if (! i1.next().equals(i2.next())) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	public static void main(String[] args) {
-		for (int i = 0; i < (1 << 31); i++) {
-			int b = i2b(i);
-			Utils.myassert((b+1)*(b+2) >= 2*i+2);
-			Utils.myassert((b)*(b+1) < 2*i+2);
-		}
-		System.out.println("i2b is correct for all i in 0.." + ((1<<31)-1));
-		System.exit(0);
-		List<Integer> l = new RootishArrayStack<Integer>(Integer.class);
-		List<Integer> l2 = new ArrayList<Integer>();
-		// easy test - sequential addition
-		int n = 100;
-		for (int i = 0; i < n; i++) {
-			l.add(i+1);
-			l2.add(i);
-		}
-		Utils.myassert(listEquals(l, l2));
-		
-		// harder test - random addition and removal
-		for (int k = 0; k < 10; k++) {
-			l.clear();
-			l2.clear();
-			Random r = new Random();
-			for (int i = 0; i < n; i++) {
-				int j = r.nextInt(i+1);
-				l.add(j, i);
-				l2.add(j, i);
-			}
-			Utils.myassert(listEquals(l, l2));
-			for (int i = 0; i < n/4; i++) {
-				int j = r.nextInt(n-i);
-				l.remove(j);
-				l2.remove(j);
-			}
-			Utils.myassert(listEquals(l, l2));
-		}
-		l.clear();
-		l2.clear();
-		
-		// performance tests
-		n = 10000;
-		Random r = new Random();
-		System.out.print("Adding " + n + " elements...");
-		long start = System.nanoTime();		
-		for (int i = 0; i < n; i++) {
-			int j = r.nextInt(i+1);
-			l.add(j, i);
-			l2.add(j, i);
-		}
-		long stop = System.nanoTime();
-		double elapsed = 1e-9*(stop-start);
-		System.out.println("done (" + elapsed + "s) [ " 
-				+ (int)(((double)n)/elapsed) + " ops/sec ]");
+}	
 
-		System.out.print("Removing " + n/4 + " elements...");
-		start = System.nanoTime();		
-		for (int i = 0; i < n/4; i++) {
-			int j = r.nextInt(n-i);
-			l.remove(j);
-			l2.remove(j);
-		}
-		stop = System.nanoTime();
-		elapsed = 1e-9*(stop-start);
-		System.out.println("done (" + elapsed + "s) [ " 
-				+ (int)(((double)n)/elapsed) + " ops/sec ]");
-	}	
-}
+
+
