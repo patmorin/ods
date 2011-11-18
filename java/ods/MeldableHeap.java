@@ -14,23 +14,24 @@ import java.util.Random;
  * @param <T>
  */
 public class MeldableHeap<T extends Comparable<T>> extends
-		BinaryTree<MeldableHeap<T>.Node> implements Queue<T> {
+		BinaryTree<MeldableHeap.Node<T>> implements Queue<T> {
 	
 	protected Random rand;
 	
 	protected int n;
 	
-	protected class Node extends BinaryTree.BTNode<Node> {
+	protected static class Node<T> extends BinaryTree.BTNode<Node<T>> {
 		T x;
 	}
 	
 	public MeldableHeap() {
+		super(new Node<T>());
 		rand = new Random();
-		sampleNode = new Node();
+		sampleNode = newNode();
 	}
 		
 	public boolean add(T x) {
-		Node u = new Node();
+		Node<T> u = newNode();
 		u.x = x;
 		r = merge(u, r);
 		r.parent = null;
@@ -50,7 +51,7 @@ public class MeldableHeap<T extends Comparable<T>> extends
 		return x;
 	}
 	
-	protected void remove(Node u) {
+	protected void remove(Node<T> u) {
 		if (u == r) {
 			remove();
 		} else {
@@ -67,11 +68,11 @@ public class MeldableHeap<T extends Comparable<T>> extends
 		}
 	}
 	
-	public Node merge(Node h1, Node h2) {
+	public Node<T> merge(Node<T> h1, Node<T> h2) {
 		if (h1 == null) return h2;
 		if (h2 == null) return h1;
 		if (h2.x.compareTo(h1.x) < 0) {  // ensure h1.x < h2.x
-			Node tmp = h1;
+			Node<T> tmp = h1;
 			h1 = h2;
 			h2 = tmp;
 		}
@@ -85,46 +86,6 @@ public class MeldableHeap<T extends Comparable<T>> extends
 		return h1;
 	}
 	
-	protected static void speedTests(Queue<Integer> q) {
-		Random r = new Random();
-		q.clear();
-		int n = 1000000;
-		long start, stop;
-		double elapsed;
-		System.out.print("performing " + n + " adds...");
-		start = System.nanoTime();
-		for (int i = 0; i < n; i++) {
-			q.add(r.nextInt());
-		}
-		stop = System.nanoTime();
-		elapsed = 1e-9*(stop-start);
-		System.out.println("(" + elapsed + "s [" 
-				+ (int)(((double)n)/elapsed) + "ops/sec])");
-		n *= 10;
-		System.out.print("performing " + n + " add/removes...");
-		start = System.nanoTime();
-		for (int i = 0; i < n; i++) {
-			if (r.nextBoolean()) {
-				q.add(r.nextInt());
-			} else {
-				q.remove();
-			}
-		}
-		stop = System.nanoTime();
-		elapsed = 1e-9*(stop-start);
-		System.out.println("(" + elapsed + "s [" 
-				+ (int)(((double)n)/elapsed) + "ops/sec])");
-		
-	}
-	
-	public static void main(String[] args) {
-		MeldableHeap<Integer> h = new MeldableHeap<Integer>();
-		System.out.println("\n==== BinaryHeap ====");
-		speedTests(new BinaryHeap<Integer>(Integer.class));
-		System.out.println("==== MeldableHeap ====");
-		speedTests(new MeldableHeap<Integer>());
-	}
-
 	public T element() {
 		if (r == null) throw new NoSuchElementException();
 		return r.x;
@@ -163,8 +124,8 @@ public class MeldableHeap<T extends Comparable<T>> extends
 
 	public Iterator<T> iterator() {
 		class MHI implements Iterator<T> {
-			protected Node w, prev;
-			public MHI(Node iw) {
+			protected Node<T> w, prev;
+			public MHI(Node<T> iw) {
 				w = iw;
 			}
 			public boolean hasNext() {
@@ -180,7 +141,7 @@ public class MeldableHeap<T extends Comparable<T>> extends
 				MeldableHeap.this.remove(prev);
 			}
 		}
-		Node w = r;
+		Node<T> w = r;
 		while (w.left != null) w = w.left;
 		return new MHI(w);
 	}
@@ -232,6 +193,45 @@ public class MeldableHeap<T extends Comparable<T>> extends
 			a[i++] = x;
 		}
 		return a;
+	}
+
+	public static void main(String[] args) {
+		System.out.println("\n==== BinaryHeap ====");
+		speedTests(new BinaryHeap<Integer>(Integer.class));
+		System.out.println("==== MeldableHeap ====");
+		speedTests(new MeldableHeap<Integer>());
+	}
+
+	protected static void speedTests(Queue<Integer> q) {
+		Random r = new Random();
+		q.clear();
+		int n = 1000000;
+		long start, stop;
+		double elapsed;
+		System.out.print("performing " + n + " adds...");
+		start = System.nanoTime();
+		for (int i = 0; i < n; i++) {
+			q.add(r.nextInt());
+		}
+		stop = System.nanoTime();
+		elapsed = 1e-9*(stop-start);
+		System.out.println("(" + elapsed + "s [" 
+				+ (int)(((double)n)/elapsed) + "ops/sec])");
+		n *= 10;
+		System.out.print("performing " + n + " add/removes...");
+		start = System.nanoTime();
+		for (int i = 0; i < n; i++) {
+			if (r.nextBoolean()) {
+				q.add(r.nextInt());
+			} else {
+				q.remove();
+			}
+		}
+		stop = System.nanoTime();
+		elapsed = 1e-9*(stop-start);
+		System.out.println("(" + elapsed + "s [" 
+				+ (int)(((double)n)/elapsed) + "ops/sec])");
+		
 	}
 
 	@SuppressWarnings("unchecked")

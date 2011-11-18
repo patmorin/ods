@@ -24,23 +24,19 @@ public class BinarySearchTree<Node extends BinarySearchTree.BSTNode<Node,T>, T> 
 		u.x = x;
 		return u;
 	}
-	
-	public BinarySearchTree(Node is, Comparator<T> c) {
-		super(is);
+
+	public BinarySearchTree(Node sampleNode, Node nil, Comparator<T> c) {
+		super(sampleNode, nil);
 		this.c = c; 
 	}
 
-	public BinarySearchTree(Node is) {
-		this(is, new DefaultComparator<T>());
+	public BinarySearchTree(Node sampleNode, Comparator<T> c) {
+		super(sampleNode);
+		this.c = c; 
 	}
 
-	/**
-	 * Create a new instance of this class
-	 * @warning child must set sampleNode before anything that 
-	 * might make calls to newNode()
-	 */
-	public BinarySearchTree() {
-		this(null, new DefaultComparator<T>());
+	public BinarySearchTree(Node sampleNode) {
+		this(sampleNode, new DefaultComparator<T>());
 	}
 
 	/**

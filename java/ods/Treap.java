@@ -1,5 +1,6 @@
 package ods;
 
+import java.util.Comparator;
 import java.util.Random;
 
 
@@ -14,12 +15,15 @@ public class Treap<T> extends
 		int p;
 	}
 	
-	public Treap() {
-		super(new Node<T>());	
+	public Treap(Comparator<T> c) {
+		super(new Node<T>(), c);
 		rand = new Random();
-		c = new DefaultComparator<T>();
 	}
 
+	public Treap() {
+		this(new DefaultComparator<T>());	
+	}
+	
 	public boolean add(T x) {
 		Node<T> u = newNode();
 		u.x = x;

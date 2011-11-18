@@ -34,18 +34,23 @@ public class BinaryTree<Node extends BinaryTree.BTNode<Node>> {
 
 	/**
 	 * Create a new instance of this class
-	 * @param isampleNode
+	 * @param sampleNode - a sample of a node that can be used
+	 * to create a new node in newNode()
+	 * @param nil - a node that will be used in place of null
 	 */
-	public BinaryTree(Node nil) {
-		sampleNode = this.nil = nil;
+	public BinaryTree(Node sampleNode, Node nil) {
+		this.sampleNode = sampleNode;
+		this.nil = nil;
 	}
-	
+
 	/**
 	 * Create a new instance of this class
-	 * @warning child must set sampleNode before anything that 
-	 * might make calls to newNode()
+	 * @param sampleNode - a sample of a node that can be used
+	 * to create a new node in newNode()
 	 */
-	protected BinaryTree() { }
+	public BinaryTree(Node sampleNode) {
+		this.sampleNode = sampleNode;
+	}
 	
 	/**
 	 * Allocate a new node for use in this tree

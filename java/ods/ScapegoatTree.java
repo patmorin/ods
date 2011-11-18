@@ -1,6 +1,7 @@
 package ods;
 
 import java.lang.reflect.Array;
+import java.util.Comparator;
 
 
 public class ScapegoatTree<T extends Comparable<T>> 
@@ -12,12 +13,12 @@ public class ScapegoatTree<T extends Comparable<T>>
 	
 	protected static class Node<T> extends BinarySearchTree.BSTNode<Node<T>,T> {	}
 	
-	public ScapegoatTree() {
-		sampleNode = new Node<T>();
+	public ScapegoatTree(Comparator<T> c) {
+		super(new Node<T>(), c);
 	}
 	
-	public ScapegoatTree(Node<T> is) {
-		super(is);
+	public ScapegoatTree() {
+		this(new DefaultComparator<T>());
 	}
 	
 	public int size() {

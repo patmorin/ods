@@ -1,5 +1,6 @@
 package ods;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.SortedSet;
@@ -14,12 +15,15 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	static byte red = 0;
 	static byte black = 1;
 	
-	public RedBlackTree() {
-		r = sampleNode = nil = new Node<T>();
+	public RedBlackTree(Comparator<T> c) {
+		super(new Node<T>(), new Node<T>(), c);
 		nil.color = black;
-		n = 0;
 	}
-	
+
+	public RedBlackTree() {
+		this(new DefaultComparator<T>());
+	}
+
 	/**
 	 * Make u lighter and its children darker
 	 * @param u
