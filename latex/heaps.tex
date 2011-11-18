@@ -181,7 +181,7 @@ falls off the tree (the current node becomes #null#).
 The following lemma is somewhat remarkable because it does not depend
 at all on the shape of the binary tree:
 
-\begin{lem}
+\begin{lem}\lemlabel{tree-random-walk}
 The expected length of a random walk in a binary tree with #n# nodes is at most #\log (n+1)#.
 \end{lem}
 
@@ -198,9 +198,8 @@ hypothesis, the expected length of the walk is then
 \[
     \E[W] = 1 + \frac{1}{2}\log (#n#_1+1) + \frac{1}{2}\log (#n#_2+1)  \enspace , 
 \] 
-since each of $#n#_1$ and $#n#_2$ are less than $#n#$.
-To maximize this, over the choice of $#n#_1\in[0,#n#-1]$, we
-take the derivative and obtain
+since each of $#n#_1$ and $#n#_2$ are less than $#n#$.  To maximize this,
+over all choices of $#n#_1\in[0,#n#-1]$, we take the derivative and obtain
 \[
     (\E[W])' = \frac{1}{2}(c/#n#_1 - c/(#n#-#n#_1-1)) \enspace , 
 \]
@@ -213,6 +212,24 @@ this is a maximum fairly easily, so the expected number of steps taken by the ra
    & =  1 + \log ((#n#+1)/2) \\
    & =  \log (#n#+1)  \enspace . \qedhere 
 \end{align*}
+\end{proof}
+
+We make a quick digression to note that, for readers who know a little
+about information theory, the proof of \lemref{tree-random-walk} can
+be stated in terms of entropy.  
+\begin{proof}[Information Theoretic Proof of \lemref{tree-random-walk}]
+Let $d_i$ denote the depth of the $i$th external node and recall that a
+binary tree with #n# nodes has #n+1# external nodes.  The probability
+of the random walk reaching the $i$th external node is exactly
+$p_i=1/2^{d_i}$, so the expected length of the random walk is given by
+\[
+   H=\sum_{i=0}^{#n#} p_id_i
+   = \sum_{i=0}^{#n#}p_i\log({1/p_i})
+\]
+The right hand side of this equation is easily recognizable as the
+entropy of a probability distribution over $#n#+1$ elements.  A basic
+fact about the entropy of a distribution over $#n#+1$ elements is that
+it does not exceed $\log(#n#+1)$, which proves the lemma.
 \end{proof}
 
 With this result on random walks, we can now easily prove that the
