@@ -1,15 +1,16 @@
 \chapter{Random Binary Search Trees}
 \chaplabel{rbs}
 
-In this chapter, we present a binary search tree structure that uses randomization to achieve $O(\log #n#)$ expected time for all operations.
+In this chapter, we present a binary search tree structure that uses
+randomization to achieve $O(\log #n#)$ expected time for all operations.
 
 \section{Random Binary Search Trees}
 \seclabel{rbst}
 
-Consider the two binary search trees shown in
-\figref{rbs-lvc}.  The one on the left is a list and the
-other is a perfectly balanced binary search tree. The one on the left
-has height $#n#-1=14$ and the one on the right has height three.
+Consider the two binary search trees shown in \figref{rbs-lvc}.  The one
+on the left is a list and the other is a perfectly balanced binary search
+tree. The one on the left has height $#n#-1=14$ and the one on the right
+has height three.
 
 \begin{figure}
   \begin{center}
@@ -122,17 +123,19 @@ search path for a value #x# in the open interval $(-1,#n#)$ in a random binary s
 the node with key $i < #x#$ if and only if, in the random permutation
 used to create $T$, $i$ appears before any of $\{i+1,i+2,\ldots,\lfloor#x#\rfloor\}$.
 
-To see this, refer to \figref{rbst-records} and notice that, until some value in $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$
-is added, the search paths for each value in the open interval $(i-1,\lfloor#x#\rfloor+1)$
-are identical.  (Remember that for two search values to have different search paths, there must be some element in the tree that compares differently with them.)
-Let $j$ be the first element in $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ to appear in the
-random permutation.  Notice that $j$ is now and will always be on the
-search path for #x#.  If $j\neq i$ then the node $#u#_j$ containing
-$j$ is created before the node $#u#_i$ that contains $i$.  Later, when
-$i$ is added, it will be added to the subtree rooted at $#u#_j#.left#$,
-since $i<j$.  On the other hand, the search path for #x# will
-never visit this subtree because it will proceed to $#u#_j#.right#$
-after visiting $#u#_j$.
+To see this, refer to \figref{rbst-records} and notice that, until
+some value in $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ is added, the search
+paths for each value in the open interval $(i-1,\lfloor#x#\rfloor+1)$
+are identical.  (Remember that for two search values to have
+different search paths, there must be some element in the tree that
+compares differently with them.)  Let $j$ be the first element in
+$\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ to appear in the random permutation.
+Notice that $j$ is now and will always be on the search path for #x#.
+If $j\neq i$ then the node $#u#_j$ containing $j$ is created before the
+node $#u#_i$ that contains $i$.  Later, when $i$ is added, it will be
+added to the subtree rooted at $#u#_j#.left#$, since $i<j$.  On the other
+hand, the search path for #x# will never visit this subtree because it
+will proceed to $#u#_j#.right#$ after visiting $#u#_j$.
 
 \begin{figure}
   \begin{center}
@@ -143,16 +146,19 @@ after visiting $#u#_j$.
   \figlabel{rbst-records}
 \end{figure}
 
-Similarly, for $i>#x#$, $i$ appears in the search path for #x# if
-and only if $i$ appears before any of $\{\lceil#x#\rceil, \lceil#x#\rceil+1,\ldots,i-1\}$ in the
-random permutation used to create $T$.
+Similarly, for $i>#x#$, $i$ appears in the search path for #x#
+if and only if $i$ appears before any of $\{\lceil#x#\rceil,
+\lceil#x#\rceil+1,\ldots,i-1\}$ in the random permutation used to
+create $T$.
 
-From probability theory, the subsequence containing any independently
-chosen subset of a random permutation is a random permutation of the
-subset.  Each element, then, in the subsets $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ and
-$\{\lceil#x#\rceil, \lceil#x#\rceil+1,\ldots,i-1\}$ is equally likely to appear before any
-other in its subset in the random permutation used to create $T$.  So we have
-
+Notice that, if we start with a random permutation of $\{0,\ldots,#n#\}$,
+then the subsequences containing only $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$
+and $\{\lceil#x#\rceil, \lceil#x#\rceil+1,\ldots,i-1\}$ are also random
+permutations of their respective elements.  Each element, then, in the
+subsets $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ and $\{\lceil#x#\rceil,
+\lceil#x#\rceil+1,\ldots,i-1\}$ is equally likely to appear before
+any other in its subset in the random permutation used to create $T$.
+So we have
 \[
   \Pr\{\mbox{$i$ is on the search path for #x#}\}
   = \left\{ \begin{array}{ll}
@@ -443,29 +449,41 @@ One such class of hash functions that is easy to implement and fairly
 fast is \emph{tabulation hashing} \cite{pt10}.
 
 \begin{exc}
- Prove the assertion that there are $21,964,800$ sequences that
-generate the tree on the right hand side of \figref{rbs-lvc}.  (Hint:
-Give a recursive formula for the number of sequences that generate a
-complete binary tree of height $h$ and evaluate this formula for $h=3$.)
+  Prove the assertion that there are $21,964,800$ sequences that generate
+  the tree on the right hand side of \figref{rbs-lvc}.  (Hint: Give a
+  recursive formula for the number of sequences that generate a complete
+  binary tree of height $h$ and evaluate this formula for $h=3$.)
+\end{exc}
+
+\begin{exc}
+  Design and implement the #permute(a)# method that takes as input an
+  array, #a#, containing #n# distinct values and randomly permutes #a#.
+  The method should run in $O(#n#)$ time and you should prove that each
+  of the $#n#!$ possible permutations of #a# is equally probable. 
 \end{exc}
 
 \begin{exc}\exclabel{treap-rotates}
- Use both parts of \lemref{rbs-treap} to prove that the expected number of rotations performed by an #add(x)# operation (and hence also a #remove(x)# operation) is $O(1)$.
+  Use both parts of \lemref{rbs-treap} to prove that the expected number
+  of rotations performed by an #add(x)# operation (and hence also a
+  #remove(x)# operation) is $O(1)$.
 \end{exc}
 
 \begin{exc}
- Design and implement a version of a #Treap# that includes a #get(i)# operation that returns the key with rank #i# in the #Treap#.  (Hint: Have each node, #u#, keep track of the size of the subtree rooted at #u#.)
+  Design and implement a version of a #Treap# that includes a #get(i)#
+  operation that returns the key with rank #i# in the #Treap#.  (Hint:
+  Have each node, #u#, keep track of the size of the subtree rooted
+  at #u#.)
 \end{exc}
 
 \begin{exc}
- Design and implement a version of a #Treap# that supports the
-#split(x)# operation.  This operation removes all values from the #Treap#
-that are greater than #x# and returns a second #Treap# that contains all
-the removed values.  
+  Design and implement a version of a #Treap# that supports the #split(x)#
+  operation.  This operation removes all values from the #Treap# that
+  are greater than #x# and returns a second #Treap# that contains all
+  the removed values.
 
-For example, the code #t2 = t.split(x)# removes from #t# all values
-greater than #x# and returns a new #Treap# #t2# containing all these
-values.  The #split(x)# operation should run in $O(\log #n#)$ expected
-time.
+  For example, the code #t2 = t.split(x)# removes from #t# all values
+  greater than #x# and returns a new #Treap# #t2# containing all
+  these values.  The #split(x)# operation should run in $O(\log #n#)$
+  expected time.
 \end{exc}
 
