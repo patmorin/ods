@@ -131,19 +131,57 @@ public class Algorithms {
 	}
 
 	public static void main(String[] args) {
-		int n = 100;
-		int a[] = new int[n];
-		for (int i = 0; i < n; i++)
-			a[i] = rand.nextInt(1<<30);
-		int[] b = radixSort(a);
-		for (int x : b) {
-			System.out.print(x + ",");
-		}
-		System.out.println();
-		Arrays.sort(a);
-		for (int x : a) {
-			System.out.print(x + ",");
-		}
+		long start, stop;
+		int n = 1000000;
+		Random rand = new Random();
+		Integer[] a = new Integer[1000000];
+		for (int i = 0; i < a.length; i++) 
+			a[i] = rand.nextInt();
+		System.out.print("Sorting " + n + " integers using quickSort...");
+		start = System.nanoTime();
+		quickSort(a);
+		stop = System.nanoTime();
+		System.out.println("done (" + (stop-start)*1e-9 + "s)");
+
+		for (int i = 0; i < a.length; i++) 
+			a[i] = rand.nextInt();
+		System.out.print("Sorting " + n + " integers using mergeSort...");
+		start = System.nanoTime();
+		mergeSort(a);
+		stop = System.nanoTime();
+		System.out.println("done (" + (stop-start)*1e-9 + "s)");
+
+		for (int i = 0; i < a.length; i++) 
+			a[i] = rand.nextInt();
+		System.out.print("Sorting " + n + " integers using heapSort...");
+		start = System.nanoTime();
+		heapSort(a);
+		stop = System.nanoTime();
+		System.out.println("done (" + (stop-start)*1e-9 + "s)");
+
+		a = null;
+		int[] b = new int[n];
+		for (int i = 0; i < b.length; i++) 
+			b[i] = rand.nextInt(1<<30);
+		System.out.print("Sorting " + n + " integers using radixSort...");
+		start = System.nanoTime();
+		radixSort(b);
+		stop = System.nanoTime();
+		System.out.println("done (" + (stop-start)*1e-9 + "s)");
+
+//		int n = 100;
+//		int a[] = new int[n];
+//		for (int i = 0; i < n; i++)
+//			a[i] = rand.nextInt(1<<30);
+//		int[] b = radixSort(a);
+//		for (int x : b) {
+//			System.out.print(x + ",");
+//		}
+//		System.out.println();
+//		Arrays.sort(a);
+//		for (int x : a) {
+//			System.out.print(x + ",");
+//		}
 //		Integer[] a = new Integer[n];
 //		for (int i = 0; i < n; i++)
 //			a[i] = rand.nextInt(10*n);
