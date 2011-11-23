@@ -24,6 +24,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 		T x;
 		Node[] next;
 		int[] length;
+		@SuppressWarnings("unchecked")
 		public Node(T ix, int h) {
 			x = ix;
 			next = (Node[])Array.newInstance(Node.class, h+1);

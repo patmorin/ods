@@ -3,6 +3,10 @@ sources=$(wildcard ods/*.java)
 
 classes=$(sources:.java=.class)
 
+all: 
+	javac ods/*.java
+	jar cvf ods.jar ods/*.class
+
 ods.jar:  $(classes)
 	jar cvf ods.jar ods/*.class
 

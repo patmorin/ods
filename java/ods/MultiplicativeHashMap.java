@@ -12,7 +12,7 @@ class Pair<V> {
 	}
 	@SuppressWarnings("unchecked")
 	public boolean equals(Object o) {
-		return ((o instanceof Pair) && key.equals(((Pair)o).key)); 
+		return ((o instanceof Pair) && key.equals(((Pair<V>)o).key)); 
 	}
 	public int hashCode() {
 		return key.hashCode();
