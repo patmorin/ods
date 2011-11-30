@@ -149,7 +149,7 @@ public class BinaryHeap<T> extends AbstractQueue<T> {
 
 	public T remove() {
 		T x = a[0];
-		swap(0, --n);
+		a[0] = a[--n];
 		trickleDown(0);
 		if (3*n < a.length) resize();
 		return x;

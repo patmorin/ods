@@ -74,8 +74,6 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 		return added;
 	}
 	
-
-
 	/**
 	 * Fixup the newly added node u. u is a red node. Each iteration ensures
 	 * that (1) u is red, (2) the only red-red edge [if any] is between u and

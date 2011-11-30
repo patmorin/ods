@@ -30,8 +30,7 @@ public class SEList<T> extends AbstractSequentialList<T> {
 			super(SEList.this.f.type());
 			a = f.newArray(b+1);
 		}
-		protected void grow() { }
-		protected void shrink() { }
+		protected void resize() { }
 	}
 	
 	protected class Node {
@@ -390,6 +389,14 @@ public class SEList<T> extends AbstractSequentialList<T> {
 		for (int i = 0; i < n; i++) {
 			l.add(i*10);
 		}
+		System.out.println(l);
+		for (int i = 0; i < n; i++) {
+			l.remove(l.size()-1);
+			System.out.println(l);
+		}
+		System.out.println(l);
+		System.exit(-1);
+		
 		System.out.println(l);
 		for (int i = 0; i < n; i++) {
 			l.set(i, i+1);

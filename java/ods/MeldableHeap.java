@@ -34,7 +34,7 @@ public class MeldableHeap<T extends Comparable<T>> extends
 		Node<T> u = newNode();
 		u.x = x;
 		r = merge(u, r);
-		r.parent = null;
+		r.parent = nil;
 		n++;
 		return true;
 	}
@@ -46,7 +46,7 @@ public class MeldableHeap<T extends Comparable<T>> extends
 	public T remove() {
 		T x = r.x;
 		r = merge(r.left, r.right);
-		if (r != null) r.parent = null;
+		if (r != nil) r.parent = nil;
 		n--;
 		return x;
 	}
@@ -56,21 +56,21 @@ public class MeldableHeap<T extends Comparable<T>> extends
 			remove();
 		} else {
 			if (u == u.parent.left) {
-				u.parent.left = null;
+				u.parent.left = nil;
 			} else {
-				u.parent.right = null;
+				u.parent.right = nil;
 			}
-			u.parent = null;
+			u.parent = nil;
 			r = merge(r, u.left);
 			r = merge(r, u.right);
-			r.parent = null;
+			r.parent = nil;
 			n--;
 		}
 	}
 	
 	public Node<T> merge(Node<T> h1, Node<T> h2) {
-		if (h1 == null) return h2;
-		if (h2 == null) return h1;
+		if (h1 == nil) return h2;
+		if (h2 == nil) return h1;
 		if (h2.x.compareTo(h1.x) < 0) {  // ensure h1.x < h2.x
 			Node<T> tmp = h1;
 			h1 = h2;
@@ -78,16 +78,16 @@ public class MeldableHeap<T extends Comparable<T>> extends
 		}
 		if (rand.nextBoolean()) {
 			h1.left = merge(h1.left, h2);
-			if (h1.left != null) h1.left.parent = h1;
+			if (h1.left != nil) h1.left.parent = h1;
 		} else {
 			h1.right = merge(h1.right, h2);
-			if (h1.right != null) h1.right.parent = h1;
+			if (h1.right != nil) h1.right.parent = h1;
 		}
 		return h1;
 	}
 	
 	public T element() {
-		if (r == null) throw new NoSuchElementException();
+		if (r == nil) throw new NoSuchElementException();
 		return r.x;
 	}
 
@@ -96,11 +96,11 @@ public class MeldableHeap<T extends Comparable<T>> extends
 	}
 
 	public T peek() {
-		return r == null ? null : r.x;
+		return r == nil ? null : r.x;
 	}
 
 	public T poll() {
-		return r == null ? null : remove();
+		return r == nil ? null : remove();
 	}
 
 	public boolean addAll(Collection<? extends T> c) {
@@ -129,7 +129,7 @@ public class MeldableHeap<T extends Comparable<T>> extends
 				w = iw;
 			}
 			public boolean hasNext() {
-				return w != null;
+				return w != nil;
 			}
 			public T next() {
 				T x = w.x;
@@ -142,7 +142,7 @@ public class MeldableHeap<T extends Comparable<T>> extends
 			}
 		}
 		Node<T> w = r;
-		while (w.left != null) w = w.left;
+		while (w.left != nil) w = w.left;
 		return new MHI(w);
 	}
 
@@ -182,7 +182,7 @@ public class MeldableHeap<T extends Comparable<T>> extends
 	}
 	
 	public void clear() {
-		r = null;
+		r = nil;
 		n = 0;
 	}
 	

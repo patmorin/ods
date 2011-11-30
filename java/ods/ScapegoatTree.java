@@ -7,7 +7,7 @@ import java.util.Comparator;
 public class ScapegoatTree<T extends Comparable<T>> 
 		extends BinarySearchTree<ScapegoatTree.Node<T>,T> {
 	/**
-	 * An overestimate of the number of n
+	 * An overestimate of n
 	 */
 	int q;
 	
@@ -19,10 +19,6 @@ public class ScapegoatTree<T extends Comparable<T>>
 	
 	public ScapegoatTree() {
 		this(new DefaultComparator<T>());
-	}
-	
-	public int size() {
-		return n;
 	}
 	
 	public boolean remove(T x) {
@@ -55,7 +51,7 @@ public class ScapegoatTree<T extends Comparable<T>>
 	 */
 	int addWithDepth(Node<T> u) {
 		Node<T> w = r;
-		if (w == null) {
+		if (w == nil) {
 			r = u;
 			n++; q++;
 			return 0;
@@ -63,9 +59,9 @@ public class ScapegoatTree<T extends Comparable<T>>
 		boolean done = false;
 		int d = 0;
 		do {
-			int res = u.x.compareTo(w.x);
+			int res = c.compare(u.x, w.x);
 			if (res < 0) {
-				if (w.left == null) {
+				if (w.left == nil) {
 					w.left = u;
 					u.parent = w;
 					done = true;
@@ -73,7 +69,7 @@ public class ScapegoatTree<T extends Comparable<T>>
 					w = w.left;
 				}
 			} else if (res > 0) {
-				if (w.right == null) {
+				if (w.right == nil) {
 					w.right = u;
 					u.parent = w;
 					done = true;
@@ -108,9 +104,9 @@ public class ScapegoatTree<T extends Comparable<T>>
 		Node<T> p = u.parent;
 		Node<T>[] a = (Node<T>[]) Array.newInstance(Node.class, ns);
 		packIntoArray(u, a, 0);
-		if (p == null) {
+		if (p == nil) {
 			r = buildBalanced(a, 0, ns);
-			r.parent = null;
+			r.parent = nil;
 		} else if (p.right == u) {
 			p.right = buildBalanced(a, 0, ns);
 			p.right.parent = p;
@@ -130,7 +126,7 @@ public class ScapegoatTree<T extends Comparable<T>>
 	 * @return size(u)
 	 */
 	protected int packIntoArray(Node<T> u, Node<T>[] a, int i) {
-		if (u == null) {
+		if (u == nil) {
 			return i;
 		}
 		i = packIntoArray(u.left, a, i);
@@ -149,13 +145,13 @@ public class ScapegoatTree<T extends Comparable<T>>
 	 */
 	protected Node<T> buildBalanced(Node<T>[] a, int i, int ns) {
 		if (ns == 0)
-			return null;
+			return nil;
 		int m = ns / 2;
 		a[i + m].left = buildBalanced(a, i, m);
-		if (a[i + m].left != null)
+		if (a[i + m].left != nil)
 			a[i + m].left.parent = a[i + m];
 		a[i + m].right = buildBalanced(a, i + m + 1, ns - m - 1);
-		if (a[i + m].right != null)
+		if (a[i + m].right != nil)
 			a[i + m].right.parent = a[i + m];
 		return a[i + m];
 	}

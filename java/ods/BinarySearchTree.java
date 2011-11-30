@@ -1,6 +1,5 @@
 package ods;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 
@@ -312,19 +311,6 @@ public class BinarySearchTree<Node extends BinarySearchTree.BSTNode<Node,T>, T> 
 		return s;
 	}
 	
-	@SuppressWarnings({"unchecked"})
-	public boolean contains(Object x) {
-		Node u = findLast((T)x);
-		return u != nil && c.compare(u.x, (T)x) == 0;
-	}
-	
-	public boolean containsAll(Collection<?> c) {
-		for (Object x : c)
-			if (!contains(x))
-				return false;
-		return true;
-	}
-	
 	public Iterator<T> iterator(Node u) {
 		class BTI implements Iterator<T> {
 			protected Node w, prev;
@@ -359,10 +345,6 @@ public class BinarySearchTree<Node extends BinarySearchTree.BSTNode<Node,T>, T> 
 	
 	public int size() {
 		return n;
-	}
-
-	public boolean isEmpty() {
-		return n == 0;
 	}
 
 	public void clear() {

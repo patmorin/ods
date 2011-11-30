@@ -41,6 +41,7 @@ public class BinaryTree<Node extends BinaryTree.BTNode<Node>> {
 	public BinaryTree(Node sampleNode, Node nil) {
 		this.sampleNode = sampleNode;
 		this.nil = nil;
+		r = nil;
 	}
 
 	/**
@@ -94,8 +95,7 @@ public class BinaryTree<Node extends BinaryTree.BTNode<Node>> {
 	 * @return the size of the subtree rooted at u
 	 */
 	protected int size(Node u) {
-		if (u == nil)
-			return 0;
+		if (u == nil) return 0;
 		return 1 + size(u.left) + size(u.right);
 	}
 	
@@ -192,7 +192,7 @@ public class BinaryTree<Node extends BinaryTree.BTNode<Node>> {
 	 */
 	public void bfTraverse() {
 		Queue<Node> q = new LinkedList<Node>();
-		q.add(r);
+		if (r != nil) q.add(r);
 		while (!q.isEmpty()) {
 			Node u = q.remove();
 			if (u.left != nil) q.add(u.left);
