@@ -25,6 +25,7 @@ public:
 	T set(int i, T x);
 	virtual void add(int i, T x);
 	virtual T remove(int i);
+	virtual void clear();
 };
 
 template<class T> inline

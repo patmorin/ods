@@ -52,6 +52,14 @@ template<class T>  void RootishArrayStack<T>::shrink()
     }
 }
 
+template<class T>
+void RootishArrayStack<T>::clear() {
+	while (blocks.size() > 0) {
+		T* b = blocks.remove(blocks.size()-1);
+		delete b;
+	}
+}
+
 template RootishArrayStack<int>::RootishArrayStack();
 template RootishArrayStack<int>::~RootishArrayStack();
 template void RootishArrayStack<int>::add(int,int);

@@ -12,20 +12,16 @@ namespace ods {
 
 template<class T>
 DualArrayDeque<T>::DualArrayDeque() {
-	// TODO Auto-generated constructor stub
-
 }
 
 template<class T>
 DualArrayDeque<T>::~DualArrayDeque() {
-	// TODO Auto-generated destructor stub
 }
 
 template<class T>
 int DualArrayDeque<T>::size() {
 	return front.size() + back.size();
 }
-
 
 template<class T>
 void DualArrayDeque<T>::add(int i, T x) {
@@ -55,26 +51,26 @@ void DualArrayDeque<T>::balance() {
 			|| 3*back.size() < front.size()) {
 		int n = front.size() + back.size();
 		int nf = n/2;
-		int lengthf = max(1, 2*nf);
-		T *af = new T[lengthf];
+		array<T> af(max(2*nf, 1));
 		for (int i = 0; i < nf; i++) {
 			af[nf-i-1] = get(i);
 		}
 		int nb = n - nf;
-		int lengthb = max(1, 2*nb);
-		T *ab = new T[lengthb];
+		array<T> ab(max(2*nb, 1));
 		for (int i = 0; i < nb; i++) {
 			ab[i] = get(nf+i);
 		}
-		delete front.a;
 		front.a = af;
 		front.n = nf;
-		front.length = lengthf;
-		delete back.a;
 		back.a = ab;
 		back.n = nb;
-		back.length = lengthb;
 	}
+}
+
+template<class T>
+void DualArrayDeque<T>::clear() {
+	front.clear();
+	back.clear();
 }
 
 template DualArrayDeque<int>::DualArrayDeque();
