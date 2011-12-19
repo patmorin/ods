@@ -34,6 +34,9 @@ using namespace std;
 
 #include "BinaryTree.h"
 
+#include "ChainedHashTable.h"
+#include "LinearHashTable.h"
+
 #include "Algorithms.h"
 
 using namespace ods;
@@ -132,8 +135,8 @@ void heapTests(Heap &h, int n) {
 	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 }
 
-template <class SortedSet>
-void ssetTests(SortedSet &ss, int n, unsigned flags) {
+template <class SSet>
+void ssetTests(SSet &ss, int n, unsigned flags) {
 	clock_t start, stop;
 	cout << "Adding " << n << " elements...";
 	cout.flush();
@@ -182,6 +185,53 @@ void ssetTests(SortedSet &ss, int n, unsigned flags) {
 	stop = clock();
 	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 }
+
+template <class USet>
+void usetTests(USet &us, int n) {
+	clock_t start, stop;
+	cout << "Adding " << n << " elements...";
+	cout.flush();
+	start = clock();
+	for (int i = 0; i < n; i++) {
+		us.add(rand() % (2*n));
+	}
+	stop = clock();
+	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
+
+	cout << "Finding " << n << " elements...";
+	cout.flush();
+	start = clock();
+	int success = 0;
+	for (int i = 0; i < n; i++) {
+		int z = rand() % (2*n);
+		int y = us.find(z);
+		if (y == z) success++;
+		if (i % 300000 == 0) {
+			cout << "[" << z << "=>" << y << "]";
+		}
+	}
+	stop = clock();
+	cout << "done [" << success << "/" << n << " (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
+
+	cout << "Removing " << n << " elements...";
+	cout.flush();
+	start = clock();
+	for (int i = 0; i < n; i++) {
+		us.remove(rand() % (2*n));
+	}
+	stop = clock();
+	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
+
+	cout << "Final size is " << us.size() << endl;
+
+	cout << "Clearing " << us.size() << " elements...";
+	cout.flush();
+	start = clock();
+	us.clear();
+	stop = clock();
+	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
+}
+
 
 template <class List>
 void listTests(List &ell, int n, unsigned flags)
@@ -326,7 +376,22 @@ int main(int argc, char **argv)
 {
 	int n = 1000000;
 
-	sortTests(n);
+	// sortTests(n);
+
+
+	srand(0);
+
+	{
+		cout << endl << "ChainedHashTable<int>:" << endl;
+		ChainedHashTable<int> t;
+		usetTests(t, n);
+	}
+
+	{
+		cout << endl << "LinearHashTable<int>:" << endl;
+		LinearHashTable<int> t;
+		usetTests(t, n);
+	}
 
 	{
 		cout << endl << "BinaryTree:" << endl;

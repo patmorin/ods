@@ -9,4 +9,7 @@
 
 namespace ods {
 
+
+template class ChainedHashTable<int>;
+
 } /* namespace ods */

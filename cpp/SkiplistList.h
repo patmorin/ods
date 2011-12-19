@@ -36,8 +36,8 @@ protected:
 		return u;
 	}
 	void deleteNode(Node *u) {
-		delete u->length;
-		delete u->next;
+		delete[] u->length;
+		delete[] u->next;
 		delete u;
 	}
 
@@ -55,7 +55,7 @@ protected:
 		return u;
 	}
 
-	Node *add(int i, Node *w) {
+	Node* add(int i, Node *w) {
 		Node *u = sentinel;
 		int k = w->height;
 		int r = h;

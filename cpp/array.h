@@ -27,11 +27,17 @@ public:
 		length = len;
 		a = new T[length];
 	}
+	array(int len, T init) {
+		length = len;
+		a = new T[length];
+		for (int i = 0; i < length; i++)
+			a[i] = init;
+	}
 	virtual ~array() {
-		if (a != NULL) delete a;
+		if (a != NULL) delete[] a;
 	}
 	array<T>& operator=(array<T> &b) {
-		if (a != NULL) delete a;
+		if (a != NULL) delete[] a;
 		a = b.a;
 		b.a = NULL;
 		length = b.length;

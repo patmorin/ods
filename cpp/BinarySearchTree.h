@@ -7,6 +7,8 @@
 
 #ifndef BINARYSEARCHTREE_H_
 #define BINARYSEARCHTREE_H_
+#include <climits>
+#include <cmath>
 #include "BinaryTree.h"
 #include "utils.h"
 
@@ -28,6 +30,7 @@ protected:
 	using BinaryTree<Node>::r;
 	using BinaryTree<Node>::nil;
 	int n;
+	T null;
 	virtual Node *findLast(T x);
 	virtual bool addChild(Node *p, Node *u);
 	virtual void splice(Node *u);
@@ -37,11 +40,12 @@ protected:
 	virtual bool add(Node *u);
 public:
 	BinarySearchTree();
-	BinarySearchTree(Node *nil);
+	BinarySearchTree(T null);
 	virtual ~BinarySearchTree();
 	virtual bool add(T x);
 	virtual bool remove(T x);
 	virtual T find(T x);
+	virtual T findEQ(T x);
 	virtual int size();
 	virtual void clear();
 };
@@ -50,16 +54,31 @@ template<class T>
 class BSTNode1 : public BSTNode<BSTNode1<T>, T> { };
 
 template<class T>
-class BinarySearchTree1 : public BinarySearchTree<BSTNode1<T>, T> { };
+class BinarySearchTree1 : public BinarySearchTree<BSTNode1<T>, T> {
+public:
+	BinarySearchTree1();
+};
 
+
+/*
+ * FIXME: Why doesn't this work?
+template<class Node>
+BinarySearchTree<Node,int>::BinarySearchTree()  {
+	this->null = INT_MIN;
+	n = 0;
+}
+*/
 
 template<class Node, class T>
 BinarySearchTree<Node,T>::BinarySearchTree() {
+	this->null = NULL;  // won't work for non-primitive types
 	n = 0;
 }
 
+
 template<class Node, class T>
-BinarySearchTree<Node,T>::BinarySearchTree(Node *nil) : BinaryTree<Node>(nil) {
+BinarySearchTree<Node,T>::BinarySearchTree(T null) {
+	this->null = null;
 	n = 0;
 }
 
@@ -81,6 +100,22 @@ Node* BinarySearchTree<Node,T>::findLast(T x) {
 }
 
 template<class Node, class T>
+T BinarySearchTree<Node,T>::findEQ(T x) {
+	Node *w = r;
+	while (w != nil) {
+		int comp = compare(x, w->x);
+		if (comp < 0) {
+			w = w->left;
+		} else if (comp > 0) {
+			w = w->right;
+		} else {
+			return w->x;
+		}
+	}
+	return null;
+}
+
+template<class Node, class T>
 T BinarySearchTree<Node,T>::find(T x) {
 	Node *w = r, *z = nil;
 	while (w != nil) {
@@ -94,7 +129,7 @@ T BinarySearchTree<Node,T>::find(T x) {
 			return w->x;
 		}
 	}
-	return z == nil ? NULL : z->x;
+	return z == nil ? null : z->x;
 }
 
 template<class Node, class T>
@@ -236,6 +271,17 @@ void BinarySearchTree<Node, T>::rotateRight(Node *u) {
 	if (u == r) { r = w; r->parent = nil; }
 }
 
+
+
+/*
+template<class T>
+BinarySearchTree1<T*>::BinarySearchTree1() : BinarySearchTree<BSTNode1<T*>, T*>(NULL) {
+}
+*/
+
+template<class T>
+BinarySearchTree1<T>::BinarySearchTree1()  {
+}
 
 
 } /* namespace ods */

@@ -31,19 +31,19 @@ public:
 };
 
 template<class T> inline
-T ods::ArrayDeque<T>::get(int i) {
+T ArrayDeque<T>::get(int i) {
 	return a[(j + i) % a.length];
 }
 
 template<class T> inline
-T ods::ArrayDeque<T>::set(int i, T x) {
+T ArrayDeque<T>::set(int i, T x) {
 	T y = a[(j + i) % a.length];
 	a[(j + i) % a.length] = x;
 	return y;
 }
 
 template<class T>
-void ods::ArrayDeque<T>::clear() {
+void ArrayDeque<T>::clear() {
 	n = 0;
 	j = 0;
 	array<T> b(1);
@@ -69,8 +69,7 @@ void ArrayDeque<T>::resize() {
 }
 
 template<class T>
-int ArrayDeque<T>::size()
-{
+int ArrayDeque<T>::size() {
 	return n;
 }
 
@@ -90,8 +89,7 @@ void ArrayDeque<T>::add(int i, T x) {
 }
 
 template<class T>
-T ArrayDeque<T>::remove(int i)
-{
+T ArrayDeque<T>::remove(int i) {
     T x = a[(j+i)%a.length];
     if (i < n/2) {  // shift a[0],..,[i-1] right one position
     	for (int k = i; k > 0; k--)

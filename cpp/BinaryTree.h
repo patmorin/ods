@@ -24,7 +24,6 @@ public:
 	BTNode(N *nil) {
 		left = right = parent = nil;
 	}
-
 };
 
 

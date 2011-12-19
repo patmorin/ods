@@ -23,9 +23,26 @@ T max(T a, T b) {
 template<class T> inline
 int compare(T &x, T &y) {
 	if (x < y) return -1;
-	if (x > y) return 1;
+	if (y < x) return 1;
 	return 0;
 }
+
+template<class T> inline
+bool equals(T &x, T &y) {
+	return x == y;
+}
+
+template<class T> inline
+int hashCode(T &x) {
+	return x;
+}
+
+class dodo {
+public:
+	bool operator < (dodo &d) {
+		return this < &d;
+	}
+};
 
 } /* namespace ods */
 

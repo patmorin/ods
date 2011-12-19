@@ -67,6 +67,7 @@ public:
 	virtual void add(int i, T x) {
         addBefore(getNode(i), x);
 	}
+	virtual void add(T x) { add(size(), x); }
 	virtual T remove(int i) {
 		Node *w = getNode(i);
 		T x = w->x;
@@ -75,6 +76,29 @@ public:
 	}
 	virtual void clear();
 };
+
+template<class T>
+DLList<T>::DLList() {
+	dummy.next = &dummy;
+	dummy.prev = &dummy;
+	n = 0;
+}
+
+template<class T>
+DLList<T>::~DLList() {
+	clear();
+}
+
+template<class T>
+void DLList<T>::clear() {
+	Node *u = dummy.next;
+	while (u != &dummy) {
+		Node *w = u->next;
+		delete u;
+		u = w;
+	}
+	n = 0;
+}
 
 }
 

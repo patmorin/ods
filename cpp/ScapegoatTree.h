@@ -104,7 +104,7 @@ inline void ScapegoatTree<Node,T>::rebuild(Node *u)
 		p->left = buildBalanced(a, 0, ns);
 		p->left->parent = p;
 	}
-	delete a;
+	delete[] a;
 }
 
 

@@ -33,12 +33,15 @@ protected:
 		u->height = h;
 		return u;
 	}
+
 	void deleteNode(Node *u) {
 		free(u);
 	}
 public:
 	SkiplistSSet();
+
 	virtual ~SkiplistSSet();
+
 	Node* findPredNode(T x) {
 		Node *u = sentinel;
 		int r = h;
