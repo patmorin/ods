@@ -45,6 +45,23 @@ entire sequence of $m$ operations is $O(m)$.  Although some individual
 operations are more expensive, the amortized cost, when amortized over
 all $m$ operations, is only $O(1)$ per operation.
 
+\cpponly{
+In this chapter, and throughout this book, it will be convenient to
+have arrays that keep track of their size.  The usual C++ arrays do
+not do this, so we have defined a class,  #array#, that keeps track
+of its length.  The implementation of this class is straightforward.
+It is implemented as a standard C++ array, #a#, and an integer, #length#:}
+\cppimport{ods/array.a.length}
+\cpponly{
+The size of an #array# is specified at the time of creation:
+}
+\cppimport{ods/array.array(len)}
+\cpponly{The elements of an array can be indexed:}
+\cppimport{ods/array.operator[]}
+\cpponly{Finally, when one array is assigned to another, this is just
+a pointer manipulation that takes constant time:}
+\cppimport{ods/array.operator=}
+
 \section{#ArrayStack#: Fast Stack Operations Using an Array}
 \seclabel{arraystack}
 
@@ -55,7 +72,7 @@ so an integer #n# is used to keep track of the number of elements
 actually stored in #a#.  In this way, the list elements are stored in
 #a[0]#,\ldots,#a[n-1]# and, at all times, $#a.length# \ge #n#$.
 
-\javaimport{ods/ArrayStack.a.n.size()}
+\codeimport{ods/ArrayStack.a.n.size()}
 
 \subsection{The Basics}
 
@@ -63,7 +80,7 @@ Accessing and modifying the elements of an #ArrayStack# using #get(i)#
 and #set(i,x)# is trivial. After performing any necessary bounds-checking
 we simply return or set, respectively, #a[i]#.
 
-\javaimport{ods/ArrayStack.get(i).set(i,x)}
+\codeimport{ods/ArrayStack.get(i).set(i,x)}
 
 The operations of adding and removing elements from an #ArrayStack#
 are illustrated in \figref{arraystack}.  To implement the #add(i,x)#
@@ -85,7 +102,7 @@ set #a[i]# equal to #x#, and increment #n#.
   \figlabel{arraystack}
 \end{figure}
 
-\javaimport{ods/ArrayStack.add(i,x)}
+\codeimport{ods/ArrayStack.add(i,x)}
 % TODO: Add shifting figure
 If we ignore the cost of the potential call to #resize()#, the cost of the
 #add(i,x)# operation is proportional to the number of elements we have
@@ -98,7 +115,7 @@ decrease the value of #n#.  After doing this, we check if #n# is getting
 much smaller than #a.length# by checking if $#a.length# \ge 3#n#$. If so,
 we call #resize()# to reduce the size of #a#.
 
-\javaimport{ods/ArrayStack.remove(i)}
+\codeimport{ods/ArrayStack.remove(i)}
 % TODO: Add shifting figure
 If we ignore the cost of the #resize()# method, the cost of a #remove(i)#
 operation is proportional to the number of elements we shift, which
@@ -110,7 +127,7 @@ The #resize()# method is fairly straightforward; it allocates a new
 array #b# whose size is $2#n#$ and copies the #n# elements of #a# into
 the first #n# positions in #b#, and then sets #a# to #b#. Thus, after a call to #resize()#, $#a.length# = 2#n#$.
 
-\javaimport{ods/ArrayStack.resize()}
+\codeimport{ods/ArrayStack.resize()}
 
 Analyzing the actual cost of the #resize()# operation is easy. It
 allocates an array #b# of size $2#n#$ and copies the #n# elements of #a#
@@ -210,7 +227,7 @@ very efficient at copying and moving blocks of data.  In the C and C++
 programming languages there is the #memcpy(d,s,n)# function.  In Java
 there is the #System.arraycopy(s,i,d,j,n)# method.
 
-\javaimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
+\codeimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
 
 These functions are usually highly optimized and may even use special
 machine instructions that can do this copying much faster than we could do
@@ -263,11 +280,11 @@ We read the latter part of this equation as ``15 is congruent to 3 modulo
 More generally, for an integer $a$ and positive integer $m$, $a \bmod m$
 is the unique integer $r\in\{0,\ldots,m-1\}$ such that $a = r + km$ for
 some integer $k$.  Less formally, the value $r$ is the remainder we get
-when we divide $a$ by $m$.  In many programming languages, including Java,
-the $\bmod$ operator is represented using the #%# symbol.\footnote{This
-is sometimes referred to as the \emph{brain-dead} mod operator since
-it does not correctly implement the mathematical mod operator when the
-first argument is negative.}
+when we divide $a$ by $m$.  In many programming languages, including
+\javaonly{Java}\cpponly{C++}, the $\bmod$ operator is represented
+using the #%# symbol.\footnote{This is sometimes referred to as the
+\emph{brain-dead} mod operator since it does not correctly implement
+the mathematical mod operator when the first argument is negative.}
 
 Modular arithmetic is useful for simulating an infinite array,
 since $#i#\bmod #a.length#$ always gives a value in the range
@@ -283,7 +300,7 @@ the array.
 The only remaining thing to worry about is taking care that the number
 of elements in the #ArrayQueue# does not exceed the size of #a#.
 
-\javaimport{ods/ArrayQueue.a.j.n}
+\codeimport{ods/ArrayQueue.a.j.n}
 
 A sequence of #add(x)# and #remove()# operations on an #ArrayQueue# is
 illustrated in \figref{arrayqueue}.  To implement #add(x)#, we first
@@ -303,7 +320,7 @@ the size of #a#.  Next, we store #x# in
 
 
 
-\javaimport{ods/ArrayQueue.add(x)}
+\codeimport{ods/ArrayQueue.add(x)}
 
 To implement #remove()# we first store #a[j]# so that we can return
 it later.  Next, we decrement #n# and increment #j# (modulo #a.length#)
@@ -311,7 +328,7 @@ by setting $#j#=(#j#+1)\bmod #a.length#$.  Finally, we return the stored
 value of #a[j]#. If necessary, we may call #resize()# to decrease the
 size of #a#.
 
-\javaimport{ods/ArrayQueue.remove()}
+\codeimport{ods/ArrayQueue.remove()}
 
 Finally, the #resize()# operation is very similar to the #resize()#
 operation of #ArrayStack#.  It allocates a new array #b# of size $2#n#$
@@ -325,7 +342,7 @@ onto
 \]
 and sets $#j#=0$.
 
-\javaimport{ods/ArrayQueue.resize()}
+\codeimport{ods/ArrayQueue.resize()}
 
 \subsection{Summary}
 
@@ -353,13 +370,13 @@ data structure allows for efficient addition and removal at both ends.
 This structure implements the #List# interface using the same circular
 array technique used to represent an #ArrayQueue#.
 
-\javaimport{ods/ArrayDeque.a.j.n}
+\codeimport{ods/ArrayDeque.a.j.n}
 
 The #get(i)# and #set(i,x)# operations on an #ArrayDeque# are
 straightforward.  They get or set the array element $#a[#{#(j+i)#\bmod
 #a.length#}#]#$.
 
-\javaimport{ods/ArrayDeque.get(i).set(i,x)}
+\codeimport{ods/ArrayDeque.get(i).set(i,x)}
 
 The implementation of #add(i,x)# is a little more interesting.  As
 usual, we first check if #a# is full and, if necessary, call
@@ -381,7 +398,7 @@ by one position.  See \figref{arraydeque} for an illustration of
 \end{figure}
 
 
-\javaimport{ods/ArrayDeque.add(i,x)}
+\codeimport{ods/ArrayDeque.add(i,x)}
 
 By doing the shifting in this way, we guarantee that #add(i,x)# never
 has to shift more than $\min\{ #i#, #n#-#i# \}$ elements.  Thus, the running
@@ -394,7 +411,7 @@ $#a[i+1]#,\ldots,#a[n-1]#$ left by one position depending on whether
 $#i#<#n#/2$.  Again, this means that #remove(i)# never spends more than 
 $O(1+\min\{#i#,#n#-#i#\})$ time to shift elements.
 
-\javaimport{ods/ArrayDeque.remove(i)}
+\codeimport{ods/ArrayDeque.remove(i)}
 
 \subsection{Summary}
 
@@ -428,7 +445,7 @@ an #ArrayStack# is fast when the operations on it modify elements near
 the end.  A #DualArrayDeque# places two #ArrayStack#s, called #front#
 and #back#, back-to-back so that operations are fast at either end.
 
-\javaimport{ods/DualArrayDeque.front.back}
+\codeimport{ods/DualArrayDeque.front.back}
 
 A #DualArrayDeque# does not explicitly store the number, #n#,
 of elements it contains.  It doesn't need to, since it contains
@@ -436,7 +453,7 @@ $#n#=#front.size()# + #back.size()#$ elements.  Nevertheless, when
 analyzing the #DualArrayDeque# we will still use #n# to denote the number
 of elements it contains.
 
-\javaimport{ods/DualArrayDeque.size()}
+\codeimport{ods/DualArrayDeque.size()}
 
 The #front# #ArrayStack# contains list elements with indices
 $0,\ldots,#front.size()#-1$, but stores them in reverse order.
@@ -445,7 +462,7 @@ $#front.size()#,\ldots,#size()#-1$ in the normal order.  In this way,
 #get(i)# and #set(i,x)# translate into appropriate calls to #get(i)#
 or #set(i,x)# on either #front# or #back#, which take $O(1)$ time per operation.
 
-\javaimport{ods/DualArrayDeque.get(i).set(i,x)}
+\codeimport{ods/DualArrayDeque.get(i).set(i,x)}
 
 Note that, if an index $#i#<#front.size()#$, then it corresponds to the
 element of #front# at position $#front.size()#-#i#-1$, since the
@@ -467,7 +484,7 @@ or #back#, as appropriate:
 
 
 
-\javaimport{ods/DualArrayDeque.add(i,x)}
+\codeimport{ods/DualArrayDeque.add(i,x)}
 
 The #add(i,x)# method performs rebalancing of the two #ArrayStack#s
 #front# and #back#, by calling the #balance()# method.  The
@@ -489,7 +506,7 @@ On the other hand, if $#i#\ge#front.size()#$, then #add(i,x)# becomes
 $#back.add(i-front.size(),x)#$.
 The cost of this is 
 \begin{equation}
-  O(#back.size()#-(#i#-#front.size()#)+1) = O(#size()#-#i#+1)= O(#n#-#i#+1)\enspace .
+  O(#back.size()#-(#i#-#front.size()#)+1) = O(#n#-#i#+1) \enspace .
   \eqlabel{das-back}
 \end{equation}
 
@@ -513,7 +530,7 @@ Thus, the running time of #add(i,x)# (ignoring the cost of the call to
 The #remove(i)# operation, and its analysis, is similar to the #add(i,x)#
 operation.
 
-\javaimport{ods/DualArrayDeque.remove(i)}
+\codeimport{ods/DualArrayDeque.remove(i)}
 
 \subsection{Balancing}
 
@@ -525,7 +542,7 @@ $#n#/4$ elements. If this is not the case, then it moves elements between
 them so that #front# and #back# contain exactly $\lfloor#n#/2\rfloor$
 elements and $\lceil#n#/2\rceil$ elements, respectively.
 
-\javaimport{ods/DualArrayDeque.balance()}
+\codeimport{ods/DualArrayDeque.balance()}
 
 There is not much to analyze.  If the #balance()# operation does
 rebalancing, then it moves $\Theta(#n#)$ elements and this takes
@@ -558,7 +575,7 @@ average, #balance()# only spends a constant amount of time per operation.
   \[ \Phi_0 = \left|\lfloor#n#/2\rfloor-\lceil#n#/2\rceil\right|\le 1  \enspace .\]
 
   Now, consider the situation immediately before a call to #balance()# that
-  shifts elements, and suppose, without loss of generality that #balance()#
+  shifts elements, and suppose, without loss of generality, that #balance()#
   is shifting elements because $3#front.size()# < #back.size()#$.
   Notice that, in this case,
   \begin{eqnarray*}
@@ -636,7 +653,7 @@ mathematician Gau\ss\ at the age of 9) can be obtained as shown in
   \figlabel{rootisharraystack}
 \end{figure}
 
-\javaimport{ods/RootishArrayStack.blocks.n}
+\codeimport{ods/RootishArrayStack.blocks.n}
 
 \begin{figure}
   \begin{center}
@@ -677,19 +694,19 @@ We can rewrite this equation as
 The corresponding quadratic equation $#b#^2 + 3#b# - 2#i# =  0$ has two
 solutions: $#b#=(-3 + \sqrt{9+8#i#}) / 2$ and $#b#=(-3 - \sqrt{9+8#i#}) / 2$.
 The second solution makes no sense in our application since it always
-gives a negative value. Therefore, we obtain the solution $b = (-3 +
+gives a negative value. Therefore, we obtain the solution $#b# = (-3 +
 \sqrt{9+8i}) / 2$.  In general, this solution is not an integer, but
-going back to our inequality, we want the smallest integer $b$ such that 
-$b \ge (-3 + \sqrt{9+8i}) / 2$.  This is simply
+going back to our inequality, we want the smallest integer $#b#$ such that 
+$#b# \ge (-3 + \sqrt{9+8i}) / 2$.  This is simply
 \[
-   b = \left\lceil(-3 + \sqrt{9+8i}) / 2\right\rceil \enspace .
+   #b# = \left\lceil(-3 + \sqrt{9+8i}) / 2\right\rceil \enspace .
 \]
 
-\javaimport{ods/RootishArrayStack.i2b(i)}
+\codeimport{ods/RootishArrayStack.i2b(i)}
 
 With this out of the way, the #get(i)# and #set(i,x)# methods are straightforward.  We first compute the appropriate block #b# and the appropriate index #j# within the block and then perform the appropriate operation:
 
-\javaimport{ods/RootishArrayStack.get(i).set(i,x)}
+\codeimport{ods/RootishArrayStack.get(i).set(i,x)}
 
 If we use any of the data structures in this chapter for representing the #blocks# list, then #get(i)# and #set(i,x)# will each run in constant time.
 
@@ -700,11 +717,11 @@ to add another block.  With this done, we shift elements with indices
 $#i#,\ldots,#n#-1$ to the right by one position to make room for the
 new element with index #i#:
 
-\javaimport{ods/RootishArrayStack.add(i,x)}
+\codeimport{ods/RootishArrayStack.add(i,x)}
 
 The #grow()# method does what we expect. It adds a new block:
 
-\javaimport{ods/RootishArrayStack.grow()}
+\codeimport{ods/RootishArrayStack.grow()}
 
 Ignoring the cost of the #grow()# operation, the cost of an #add(i,x)#
 operation is dominated by the cost of shifting and is therefore
@@ -715,8 +732,8 @@ elements with indices $#i#+1,\ldots,#n#$ left by one position and then,
 if there is more than one empty block, it calls the #shrink()# method
 to remove all but one of the unused blocks:
 
-\javaimport{ods/RootishArrayStack.remove(i)}
-\javaimport{ods/RootishArrayStack.shrink()}
+\codeimport{ods/RootishArrayStack.remove(i)}
+\codeimport{ods/RootishArrayStack.shrink()}
 
 Once again, ignoring the cost of the #shrink()# operation, the cost of
 a #remove(i)# operation is dominated by the cost of shifting  and is
@@ -872,7 +889,7 @@ $\lfloor\sqrt{#x#}\rfloor-2$.  From #s# we can determine the value
 of $\lfloor\sqrt{#x#}\rfloor$ by
 incrementing #s# until 
 $(#s#+1)^2 > #x#$.
-\javaimport{ods/FastSqrt.sqrt(x,r)}
+\codeimport{ods/FastSqrt.sqrt(x,r)}
 
 Now, this only works for $#x#\in\{2^{#r#},\ldots,2^{#r#+1}-1\}$ and
 #sqrttab# is a special table that only works for a particular value
@@ -892,7 +909,7 @@ $\{2^{#r#},\ldots,2^{#r#+1}-1\}$ so we can look up its square root
 in #sqrttab#.  The following code implements this idea to compute
 $\lfloor\sqrt{#x#}\rfloor$ for all non-negative integers #x# in the
 range $\{0,\ldots,2^{30}-1\}$ using an array #sqrttab# of size $2^{16}$.
-\javaimport{ods/FastSqrt.sqrt(x)}
+\codeimport{ods/FastSqrt.sqrt(x)}
 
 Something we have taken for granted thus far is the question of how
 to compute
@@ -904,10 +921,10 @@ This means that, for $#x#>2^{#r#/2}$, we can right-shift the bits of
 #x# by $#r#/2$ positions before using it as an index into #logtab#.
 The following code does this using an array #logtab# of size $2^{16}$ to compute
 $\lfloor\log #x#\rfloor$ for all #x# in the range $\{1,\ldots,2^{32}-1\}$
-\javaimport{ods/FastSqrt.log(x)}
+\codeimport{ods/FastSqrt.log(x)}
 
 Finally, for completeness, we include the following code that initializes #logtab# and #sqrttab#:
-\javaimport{ods/FastSqrt.inittabs()}
+\codeimport{ods/FastSqrt.inittabs()}
 
 To summarize, the computations done by the #i2b(i)# method can be
 implemented in constant time on the word-RAM using $O(\sqrt{n})$ extra

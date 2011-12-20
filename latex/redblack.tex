@@ -145,7 +145,8 @@ the process of removing a leaf finishes after at most $\log #n#$ steps.
 A red-black tree is a binary search tree in which each node, #u#,
 has a \emph{color} which is either \emph{red} or \emph{black}.  Red is
 represented by the value $0$ and black by the value $1$.
-\javaimport{ods/RedBlackTree.Node<T>.red.black}
+\javaimport{ods/RedBlackTree.red.black.Node<T>}
+\cppimport{ods/RedBlackTree.RedBlackNode.red.black}
 
 Before and after any operation on a red-black tree, the following two
 properties are satisfied. Each property is defined both in terms of the
@@ -296,7 +297,7 @@ subroutines are for manipulating colors while preserving the black-height
 property. The #pushBlack(u)# method takes as input a black node #u#
 that has two red children and colors #u# red and its two children black.
 The #pullBlack(u)# method reverse this operation:
-\javaimport{ods/RedBlackTree.pushBlack(u).pullBlack(u)}
+\codeimport{ods/RedBlackTree.pushBlack(u).pullBlack(u)}
 
 \begin{figure}
   \begin{center}
@@ -309,14 +310,14 @@ The #pullBlack(u)# method reverse this operation:
 The #flipLeft(u)# method swaps the colors of #u# and #u.right# and
 then performs a left rotation at #u#.  This reverses the colors
 of these two nodes as well as their parent-child relationship:
-\javaimport{ods/RedBlackTree.flipLeft(u)} 
+\codeimport{ods/RedBlackTree.flipLeft(u)} 
 The #flipLeft(u)# operation is especially useful in restoring the
 left-leaning property at a node $u$ that violates it (because #u.left#
 is black and #u.right# is red).  In this special case, we can be assured
 this operation preserves both the black-height and no-red-edge properties.
 The #flipRight(u)# operation is symmetric to #flipLeft(u)# with the
 roles of left and right reversed.
-\javaimport{ods/RedBlackTree.flipRight(u)}
+\codeimport{ods/RedBlackTree.flipRight(u)}
 
 \subsection{Addition}
 
@@ -328,7 +329,7 @@ It may, however violate the left-leaning property (if #u# is the
 right child of its parent) and it may violate the no-red-edge property
 (if #u#'s parent is #red#).  To restore these properties, we call the
 method #addFixup(u)#.
-\javaimport{ods/RedBlackTree.add(x)}
+\codeimport{ods/RedBlackTree.add(x)}
 
 The #addFixup(u)# method, illustrated in \figref{rb-addfix}, takes
 as input a node #u# whose color is red and which may be violating the
@@ -372,7 +373,7 @@ If #g#'s right child is black, then a call to #flipRight(g)# makes
 #w# the (black) parent of #g# and gives #w# two red children #u# and
 #g#. This ensures that #u# satisfies the no-red-edge property and #g#
 satisfies the left-leaning property.  In this case we can stop.
-\javaimport{ods/RedBlackTree.addFixup(u)}
+\codeimport{ods/RedBlackTree.addFixup(u)}
 
 The #insertFixup(u)# method takes constant time per iteration and each
 iteration either finishes or moves #u# closer to the root.  This implies
@@ -395,7 +396,7 @@ then $#u.color#+#w.color#=2$ (double black), which is in invalid color.
 If #w# was red, then it is replaced by a black node #u#, which may
 violate the left-leaning property at $#u.parent#$.  Both of these problems
 are resolved with a call to the #removeFixup(u)# method.
-\javaimport{ods/RedBlackTree.remove(x)}
+\codeimport{ods/RedBlackTree.remove(x)}
 
 The #removeFixup(u)# method takes as input a node #u# whose color is black
 (1) or double-black (2).  If #u# is double-black, then #removeFixup(u)#
@@ -406,7 +407,7 @@ refers to the root of the subtree that has been changed.  The root of
 this subtree may have changed color.  In particular, it may have gone
 from red to black, so the #removeFixup(u)# method finishes by checking
 if #u#'s parent violates the left-leaning property and, if so, fixes it.
-\javaimport{ods/RedBlackTree.removeFixup(u)}
+\codeimport{ods/RedBlackTree.removeFixup(u)}
 
 The #removeFixup(u)# method is illustrated in \figref{rb-removefix}.
 Again, the following text will be very difficult, if not impossible,
@@ -434,7 +435,7 @@ causes the depth of #u# to increase.  However, it also implies that the
 next iteration will be in Case~3 with #w# colored red.  When examining
 Case~3, below, we will see that this means the process will stop during
 the next iteration.
-\javaimport{ods/RedBlackTree.removeFixupCase1(u)}
+\codeimport{ods/RedBlackTree.removeFixupCase1(u)}
 
 \noindent
 Case 2: #u#'s sibling, #v#, is black and #u# is the left child of its
@@ -463,7 +464,7 @@ black-height properties are reestablished.  The only possible problem
 that remains is that the right child of #v# may be red, in which case
 the left-leaning property is violated.  We check this and perform a
 #flipLeft(v)# to correct it if necessary.
-\javaimport{ods/RedBlackTree.removeFixupCase2(u)}
+\codeimport{ods/RedBlackTree.removeFixupCase2(u)}
 
 \noindent
 Case 3: #u#'s sibling is black and #u# is the right child of its parent,
@@ -489,7 +490,7 @@ are done.
 If #v#'s left child is black then #v# violates the left-leaning property
 and we restore this with a call to #flipLeft(v)#.  The next iteration
 of #removeFixup(u)# then continues with $#u#=#v#$.
-\javaimport{ods/RedBlackTree.removeFixupCase3(u)}.
+\codeimport{ods/RedBlackTree.removeFixupCase3(u)}.
 
 Each iteration of #removeFixup(u)# takes constant time.  Cases~2 and 3
 either finish or move #u# closer to the root of the tree.  Case~0 (where
@@ -562,7 +563,7 @@ data structures discuss some variant of red-black trees.
 
 Andersson \cite{a93} describes a left-leaning version of balanced trees
 that are similar to red-black trees but have the additional constraint
-that any node has at most one black child.  This implies that these trees
+that any node has at most one red child.  This implies that these trees
 simulate 2-3 trees rather than 2-4 trees.  They are significantly simpler,
 though, than the #RedBlackTree# structure presented in this chapter.
 
@@ -575,12 +576,12 @@ A related, and older, data structure is the AVL tree \cite{avl62}.
 AVL trees are \emph{height-balanced}: At each node $u$, the height
 of the subtree rooted at #u.left# and the subtree rooted at #u.right#
 differ by at most one.  It follows immediately that, if $F(h)$ is the
-minimum number of nodes in a tree of height $h$, then $F(h)$ obeys the
+minimum number of leaves in a tree of height $h$, then $F(h)$ obeys the
 Fibonacci recurrence
 \[
    F(h) = F(h-1) + F(h-2)
 \]
-with base cases $F(0)=1$ and $F(1)=2$.  This means $F(h)$ is approximately
+with base cases $F(0)=1$ and $F(1)=1$.  This means $F(h)$ is approximately
 $\varphi^h/\sqrt{5}$, where $\varphi=(1+\sqrt{5})/2\approx1.61803399$ is the
 \emph{golden ratio}.  (More precisely, $|\varphi^h/\sqrt{5} - F(h)|\le 1/2$.)
 Arguing as in the proof of \lemref{twofour-height}, this implies

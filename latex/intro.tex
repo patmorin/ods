@@ -143,8 +143,8 @@ are in no specific order.  A #USet# supports the following operations:
 These definitions are a bit fussy about distinguishing #x#, the element
 we are removing or finding, from #y#, the element we remove or find.
 This is because #x# and #y# might actually be distinct objects
-that are nevertheless treated as equal.\footnote{In Java, this is
-done by overriding the class' #equals(y)# and #hashCode()# methods.}
+that are nevertheless treated as equal.\javaonly{\footnote{In Java, this is
+done by overriding the class' #equals(y)# and #hashCode()# methods.}}
 This is a very useful distinction since it allows for the creation of
 \emph{dictionaries} or \emph{maps} that map keys onto values.  This is
 done by creating a compound object called a #Pair# that contains a
@@ -184,17 +184,17 @@ as a \emph{successor search}.  It differs in a fundamental way from
 #USet.find(x)# since it returns a meaningful result even when there is
 no element in the set that is equal to #x#.
 
-The distinction between the #USet# and #SSet# #find(x)# operations
-is very important and is very often missed.  The extra functionality
-provided by an #SSet# usually comes with a price that includes both a
-larger running time and a higher implementation complexity.  For example,
-the #SSet# implementations discussed in this book all have #find(x)#
-operations with running times that are at least logarithmic in the size
-of the set.  On the other hand, the implementation of a #USet# as a
-#HashTable# in \chapref{hashing} has a #find(x)# operation that runs in
-constant expected time.  When choosing which of these structures to use,
-one should always use a #USet# unless the extra functionality offered
-by an #SSet# is really needed.
+The distinction between the #USet# and #SSet# #find(x)# operations is very
+important and is very often missed.  The extra functionality provided by
+an #SSet# usually comes with a price that includes both a larger running
+time and a higher implementation complexity.  For example, the #SSet#
+implementations discussed in this book all have #find(x)# operations
+with running times that are at least logarithmic in the size of the set.
+On the other hand, the implementation of a #USet# as a #ChainedHashTable#
+in \chapref{hashing} has a #find(x)# operation that runs in constant
+expected time.  When choosing which of these structures to use, one should
+always use a #USet# unless the extra functionality offered by an #SSet#
+is really needed.
 
 
 
@@ -472,8 +472,11 @@ of a generic type #T# and we assume an element of type #T# occupies one
 word of memory.  (In reality, we are storing references to objects of
 type #T#, and these references occupy only one word of memory.)
 
-The #w#-bit word-RAM model is a fairly close match for the (32-bit) Java
-Virtual Machine (JVM) when $#w#=32$.  The data structures presented in
+\javaonly{The #w#-bit word-RAM model is a fairly close match for the (32-bit) Java
+Virtual Machine (JVM) when $#w#=32$.}
+\cpponly{The #w#-bit word-RAM model is a fairly close match for modern desktop computers
+when $#w#=32$ or $#w#=64$.}
+The data structures presented in
 this book don't use any special tricks that are not implementable on
 the JVM and most other architectures.
 
@@ -525,7 +528,8 @@ described in this book that implement each of the interfaces, #List#,
 \multicolumn{4}{c}{} \\[2ex] \hline
 \multicolumn{4}{|c|}{#USet# implementations} \\ \hline
  & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
-#HashTable# & $O(1)$\footnotemark[5] & $O(1)$\footnotemark[1]\footnotemark[5] & \sref{hashtable} \\ \hline
+#ChainedHashTable# & $O(1)$\footnotemark[5] & $O(1)$\footnotemark[1]\footnotemark[5] & \sref{hashtable} \\ \hline
+#LinearHashTable# & $O(1)$\footnotemark[5] & $O(1)$\footnotemark[1]\footnotemark[5] & \sref{linearhashtable} \\ \hline
 \multicolumn{4}{c}{} \\[2ex] \hline
 \multicolumn{4}{|c|}{#SSet# implementations} \\ \hline
  & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
@@ -556,7 +560,7 @@ into #Set#, #Map#, #SortedSet#, and #SortedMap# implementations.
 
 For more information on basic probability, especially as it relates to
 computer science, see the textbook by Ross \cite{r01}.  Another good
-reference that covers both asymptotic notation and probability is the
+reference, that covers both asymptotic notation and probability, is the
 textbook by Graham, Knuth, and Patashnik \cite{gkp94}.
 
 Readers wanting to brush up on their Java programming can find many Java

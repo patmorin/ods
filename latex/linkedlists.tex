@@ -27,12 +27,12 @@ An #SLList# (singly-linked list) is a sequence of #Node#s.  Each node
 the sequence.  For the last node #w# in the sequence, $#w.next# = #null#$
 
 % TODO: Remove constructors from SLList.Node
-\javaimport{ods/SLList.Node}
+\codeimport{ods/SLList.Node}
 
 For efficiency, an #SLList# uses variables #head# and #tail# to keep
 track of the first and last node in the sequence, as well as an integer
 #n# to keep track of the length of the sequence:
-\javaimport{ods/SLList.head.tail.n}
+\codeimport{ods/SLList.head.tail.n}
 A sequence of #Stack# and #Queue# operations on an #SLList# is
 illustrated in \figref{sllist}.
 
@@ -52,13 +52,13 @@ sets #u.next# to the old head of the list and makes #u# the new head
 of the list. Finally, it increments #n# since the size of the #SLList#
 has increased by one:
 
-\javaimport{ods/SLList.push(x)}
+\codeimport{ods/SLList.push(x)}
 
 The #pop()# operation, after checking that the #SLList# is not empty,
 removes the head by setting $#head#=#head.next#$ and decrementing #n#.
 A special case occurs when the last element is being removed, in which case #tail# is set to #null#:
 
-\javaimport{ods/SLList.pop()}
+\codeimport{ods/SLList.pop()}
 
 Clearly, both the #push(x)# and #pop()# operations run in $O(1)$ time.
 
@@ -66,7 +66,7 @@ Clearly, both the #push(x)# and #pop()# operations run in $O(1)$ time.
 
 An #SLList# can also efficiently implement the FIFO queue operations #add(x)# and #remove()#.  Removals are done from the head of the list, and are identical to the #pop()# operation:
 
-\javaimport{ods/SLList.remove()}
+\codeimport{ods/SLList.remove()}
 
 Additions, on the other hand, are done at the tail of the list.  In most
 cases, this is done by setting $#tail.next#=#u#$, where #u# is the newly
@@ -74,7 +74,7 @@ created node that contains #x#.  However, a special case occurs when
 $#n#=0$, in which case $#tail#=#head#=#null#$.  In this case, both #tail#
 and #head# are set to #u#.
 
-\javaimport{ods/SLList.add(x)}
+\codeimport{ods/SLList.add(x)}
 
 Clearly, both #add(x)# and #remove()# take constant time.
 
@@ -103,7 +103,7 @@ A #DLList# (doubly-linked list) is very similar to an #SLList# except
 that each node #u# in a #DLList# has references to both the node #u.next#
 that follows it and the node #u.prev# that precedes it.
 
-\javaimport{ods/DLList.Node}
+\codeimport{ods/DLList.Node}
 
 When implementing an #SLList#, we saw that there were always some special
 cases to worry about. For example, removing the last element from an
@@ -129,18 +129,18 @@ a cycle, as illustrated in \figref{dllist}.
 
 %TODO: Remove constructors from class Node
 
-\javaimport{ods/DLList.n.dummy.DLList()}
+\codeimport{ods/DLList.n.dummy.DLList()}
 
 Finding the node with a particular index in a #DLList# is easy;  we can
 either start at the head of the list (#dummy.next#) and work forward,
 or start at the tail of the list (#dummy.prev#) and work backward.
 This allows us to reach the #i#th node in $O(1+\min\{#i#,#n#-#i#\})$ time:
 
-\javaimport{ods/DLList.getNode(i)}
+\codeimport{ods/DLList.getNode(i)}
 
 The #get(i)# and #set(i,x)# operations are now also easy.  We first find the #i#th node and then get or set its #x# value:
 
-\javaimport{ods/DLList.get(i).set(i,x)}
+\codeimport{ods/DLList.get(i).set(i,x)}
 
 The running time of these operations is dominated by the time it takes
 to find the #i#th node, and is therefore $O(1+\min\{#i#,#n#-#i#\})$.
@@ -153,13 +153,13 @@ $#u.prev#=#w.prev#$, and then adjusting #u.prev.next# and #u.next.prev#.
 Thanks to the dummy node, there is no need to worry about #w.prev#
 or #w.next# not existing.
 
-\javaimport{ods/DLList.addBefore(w,x)}
+\codeimport{ods/DLList.addBefore(w,x)}
 
 Now, the list operation #add(i,x)# is trivial to implement.  We find the
 #i#th node in the #DLList# and insert a new node #u# that contains #x#
 just before it.
 
-\javaimport{ods/DLList.add(i,x)}
+\codeimport{ods/DLList.add(i,x)}
 
 The only non-constant part of the running time of #add(i,x)# is the time
 it takes to find the #i#th node (using #getNode(i)#).  Thus, #add(i,x)#
@@ -168,11 +168,11 @@ runs in $O(1+\min\{#i#, #n#-#i#\})$ time.
 Removing a node #w# from a #DLList# is easy.  We need only adjust pointers
 at #w.next# and #w.prev# so that they skip over #w#.  Again, the use of the dummy node eliminates the need to consider any special cases:
 
-\javaimport{ods/DLList.remove(w)}
+\codeimport{ods/DLList.remove(w)}
 
 Now the #remove(i)# operation is trivial. We find the node with index #i# and remove it:
 
-\javaimport{ods/DLList.remove(i)}
+\codeimport{ods/DLList.remove(i)}
 
 Again, the only expensive part of this operation is finding the #i#th node
 using #getNode(i)#, so #remove(i)# runs in $O(1+\min\{#i#, #n#-#i#\})$
@@ -238,12 +238,12 @@ removal of elements at either the front or back in constant time. This
 will be useful as elements are shifted from one block to another.
 
 
-\javaimport{ods/SEList.BDeque}
+\codeimport{ods/SEList.BDeque}
 
 An #SEList# is then a doubly-linked list of blocks:
 
-\javaimport{ods/SEList.Node}
-\javaimport{ods/SEList.n.dummy}
+\codeimport{ods/SEList.Node}
+\codeimport{ods/SEList.n.dummy}
 
 \subsection{Space Requirements}
 
@@ -271,7 +271,7 @@ with a given index #i#.  Note that the location of an element consists
 of two parts: The node #u# that contains the block that contains the
 element as well as the index #j# of the element within its block:
 
-\javaimport{ods/SEList.Location}
+\codeimport{ods/SEList.Location}
 
 To find the block that contains a particular element, we proceed in the
 same way as in a #DLList#.  We either start at the front of the list and
@@ -281,6 +281,7 @@ each time we move from one node to the next, we skip over a whole block
 of elements.
 
 \javaimport{ods/SEList.getLocation(i)}
+\cppimport{ods/SEList.getLocation(i,ell)}
 
 Remember that, with the exception of at most one block, each block
 contains at least $#b#-1$ elements, so each step in our search gets
@@ -295,7 +296,7 @@ Once we know how to locate the item with index #i#, the #get(i)# and
 #set(i,x)# operations translate into getting or setting a particular
 index in the correct block:
 
-\javaimport{ods/SEList.get(i).set(i,x)}
+\codeimport{ods/SEList.get(i).set(i,x)}
 
 These operations are dominated by the time it takes to locate the item,
 so they also run in $O(1+\min\{#i#,#n#-#i#\}/#b#)$ time.
@@ -310,7 +311,7 @@ blocks yet), then we first allocate a new block and append it to the
 list of blocks.  Now that we are sure that the last block exists and
 is not full, we append #x# to the last block.
 
-\javaimport{ods/SEList.add(x)}
+\codeimport{ods/SEList.add(x)}
 
 Things get more complicated when we add to the interior of the list
 using #add(i,x)#.  We first locate #i# to get the node #u# whose block
@@ -357,7 +358,7 @@ elements so that each block of $#u#_0,\ldots,#u#_{#b#}$ contains exactly
 room for us to insert #x#.
 \end{enumerate}
 
-\javaimport{ods/SEList.add(i,x)}
+\codeimport{ods/SEList.add(i,x)}
 
 The running time of the #add(i,x)# operation depends on which of
 the three cases above occurs.  Cases~1 and 2 involve examining and
@@ -418,7 +419,7 @@ $#u#_{#b#-1}$, which is now empty.  Now $#u#_0$'s block contains #b#
 elements so we can remove the appropriate element from it.
 \end{enumerate}
 
-\javaimport{ods/SEList.remove(i)}
+\codeimport{ods/SEList.remove(i)}
 
 Like the #add(i,x)# operation, the running time of the #remove(i)#
 operation is $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$ if we ignore the cost of
@@ -428,8 +429,8 @@ the #gather(u)# method that occurs in Case~3.
 
 Next, we consider the cost of the #gather(u)# and #spread(u)# methods that may be executed by the #add(i,x)# and #remove(i)# methods.  For completeness, here they are:
 
-\javaimport{ods/SEList.spread(u)}
-\javaimport{ods/SEList.gather(u)}
+\codeimport{ods/SEList.spread(u)}
+\codeimport{ods/SEList.gather(u)}
 
 The running time of each of these methods is dominated by the two
 nested loops.  Both the inner loop and outer loop execute at most

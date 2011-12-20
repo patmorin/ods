@@ -80,12 +80,14 @@ most $2\log #n# + O(1) = O(\log #n#)$.
 \end{lem}
 
 A space-efficient way to implement a #Skiplist# is to define a #Node#,
-#u#, as consisting of a data value, #x#, and an array, #next#, of pointers,
-where #u.next[i]# points to #u#'s successor in the list $L_{#i#}$.
-In this way, the data, #x#, in a node is referenced only once, even though #x#
-may appear in several lists.
+#u#, as consisting of a data value, #x#, and an array, #next#, of
+pointers, where #u.next[i]# points to #u#'s successor in the list
+$L_{#i#}$.  In this way, the data, #x#, in a node is
+\javaonly{referenced}\cpponly{stored} 
+only once, even though #x# may appear in several lists.
 
 \javaimport{ods/SkiplistSSet.Node<T>}
+\cppimport{ods/SkiplistSSet.Node}
 
 The next two sections of this chapter discuss two different applications
 of skiplists.  In each of these applications, $L_0$ stores the main
@@ -103,7 +105,7 @@ interface.   When used this way, the list $L_0$ stores the elements of
 the #SSet# in sorted order.  The #find(x)# method works by following
 the search path for the smallest value #y# such that $#y#\ge#x#$:
 
-\javaimport{ods/SkiplistSSet.find(x).findPredNode(x)}
+\codeimport{ods/SkiplistSSet.find(x).findPredNode(x)}
 
 Following the search path for #y# is easy:  when situated at
 some node, #u#, in  $L_{#r#}$, we look right to #u.next[r].x#.
@@ -120,7 +122,7 @@ does not exactly replicate the coin-tossing experiment since the value of
 #k# will always be less than the number of bits in an #int#.  However,
 this will have negligible impact unless the number of elements in the
 structure is much greater than $2^{32}=4294967296$.}
-\javaimport{ods/SkiplistSSet.pickHeight()}
+\codeimport{ods/SkiplistSSet.pickHeight()}
 
 To implement the #add(x)# method in a #SkiplistSSet# we search for #x#
 and then splice #x# into a few lists $L_0$,\ldots,$L_{#k#}$, where #k#
@@ -131,7 +133,7 @@ More precisely, #stack[r]# is the node in $L_{#r#}$ where the search path
 proceeded down into $L_{#r#-1}$.  The nodes that we modify to insert #x#
 are precisely the nodes $#stack[0]#,\ldots,#stack[k]#$.  The following
 code implements this algorithm for #add(x)#:
-\javaimport{ods/SkiplistSSet.add(x)}
+\codeimport{ods/SkiplistSSet.add(x)}
 
 \begin{figure}
   \begin{center}
@@ -147,7 +149,7 @@ is no need for #stack# to keep track of the search path.  The removal
 can be done as we are following the search path.  We search for #x#
 and each time the search moves downward from a node #u#, we check if
 $#u.next.x#=#x#$ and if so, we splice #u# out of the list:
-\javaimport{ods/SkiplistSSet.remove(x)}
+\codeimport{ods/SkiplistSSet.remove(x)}
 
 \begin{figure}
   \begin{center}
@@ -195,7 +197,7 @@ way:
   \figlabel{skiplist-lengths}
 \end{figure}
 
-\javaimport{ods/SkiplistList.Node}
+\codeimport{ods/SkiplistList.Node}
 
 The useful property of this definition of length is that, if we are
 currently at a node that is at position #j# in $L_0$ and we follow an
@@ -206,8 +208,8 @@ node, #u#, in $L_{#r#}$, we go right if #j#
 plus the length of the edge #u.next[r]# is less than #i#, otherwise we go
 down into $L_{#r#-1}$.
 
-\javaimport{ods/SkiplistList.findPred(i)}
-\javaimport{ods/SkiplistList.get(i).set(i,x)}
+\codeimport{ods/SkiplistList.findPred(i)}
+\codeimport{ods/SkiplistList.get(i).set(i,x)}
 
 Since the hardest part of the operations #get(i)# and #set(i,x)# is
 finding the #i#th node in $L_0$, these operations run in
@@ -253,8 +255,8 @@ constant time.
 This sounds more complicated than it actually is and the code is actually
 quite simple:
 
-\javaimport{ods/SkiplistList.add(i,x)}
-\javaimport{ods/SkiplistList.add(i,w)}
+\codeimport{ods/SkiplistList.add(i,x)}
+\codeimport{ods/SkiplistList.add(i,w)}
 
 
 By now, the implementation of 
@@ -266,7 +268,7 @@ the #remove(i)# operation in a #SkiplistList# should be obvious.  We follow the 
   \caption{Removing an element from a #SkiplistList#.}
   \figlabel{skiplist-removei}
 \end{figure}
-\javaimport{ods/SkiplistList.remove(i)}
+\codeimport{ods/SkiplistList.remove(i)}
 
 \subsection{Summary}
 

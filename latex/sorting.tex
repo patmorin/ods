@@ -42,6 +42,7 @@ $#a0#=#a[0]#,\ldots,#a[n/2-1]#$ and $#a1#=#a[n/2]#,\ldots,#a[n-1]#$.
 We recursively sort #a0# and #a1#, and then we merge (the now sorted)
 #a0# and #a1# to get our fully sorted array #a#:
 \javaimport{ods/Algorithms.mergeSort(a,c)}
+\cppimport{ods/Algorithms.mergeSort(a)}
 An example is shown in \figref{merge-sort}.
 \begin{figure}
   \begin{center}
@@ -57,6 +58,7 @@ we add the next element from the other (non-empty) array. Otherwise,
 we take the minimum of the next element in #a0# and the next element in
 #a1# and add it to #a#:
 \javaimport{ods/Algorithms.merge(a0,a1,a,c)}
+\cppimport{ods/Algorithms.merge(a0,a1,a)}
 Notice that the #merge(a0,a1,a,c)# algorithm performs at most $#n#-1$
 comparisons before running out of elements in one of #a0# or #a1#.
 
@@ -120,10 +122,11 @@ set of elements equal to #x#, and the set of elements greater than #x#;
 and, finally, recursively sort the first and third sets in this partition.
 An example is shown in \figref{quicksort}.
 \javaimport{ods/Algorithms.quickSort(a,c).quickSort(a,i,n,c)}
+\cppimport{ods/Algorithms.quickSort(a).quickSort(a,i,n)}
 \begin{figure}
   \begin{center}
     \includegraphics{figs/quicksort}
-    \caption{An example execution of #quickSort(a,0,14,c)#}
+    \caption{An example execution of \javaonly{#quickSort(a,0,14,c)#} \cpponly{#quickSort(a,0,14)#}}
     \figlabel{quicksort}
   \end{center}
 \end{figure}
@@ -241,6 +244,7 @@ heap sort algorithm stores the elements directly in ascending order.}
 \end{figure}
 
 \javaimport{ods/BinaryHeap.sort(a,c)}
+\cppimport{ods/BinaryHeap.sort(b)}
 
 A key subroutine in heap sort is the constructor for turning
 an unsorted array #a# into a heap.  It would be easy to do this
@@ -256,6 +260,7 @@ the time we call #trickleDown(i)#, each of the two children of #a[i]#
 are the root of a sub-heap so calling #trickleDown(i)# makes #a[i]#
 into the root of its own subheap.
 \javaimport{ods/BinaryHeap.BinaryHeap(a,c)}
+\cppimport{ods/BinaryHeap.BinaryHeap(b)}
 
 The interesting thing about this bottom-up strategy is that it is more
 efficient than calling #add(x)# #n# times.  To see this, notice that,
@@ -475,7 +480,7 @@ and store this in #c[i]#.  Now, after sorting, the output will look like
 #c[2]# occurrences of 2,\ldots, followed by #c[k-1]# occurrences of #k-1#.
 The code that does this is very slick, and its execution is illustrated in
 \figref{countingsort}:
-\javaimport{ods/Algorithms.countingSort(a,k)}
+\codeimport{ods/Algorithms.countingSort(a,k)}
 
 \begin{figure}
   \begin{center}
@@ -531,7 +536,7 @@ to sort these integers #d# bits at a time.\footnote{We assume that
 their least significant #d# bits, then their next significant #d# bits,
 and so on until, in the last pass, the integers are sorted by their most
 significant #d# bits.
-\javaimport{ods/Algorithms.radixSort(a)}
+\codeimport{ods/Algorithms.radixSort(a)}
 (In this code, the expression #(a[i] >> d*p)&((1<<d)-1)# extracts the integer
 whose binary representation is given by bits
 $(#p#+1)#d#-1,\ldots,#p##d#$ of #a[i]#.)

@@ -65,15 +65,18 @@ real nodes has $#n#+1$ external nodes.
 The simplest way to represent a node, #u#, in a binary tree is
 to store the (at most three) neighbours of #u# explicitly:
 \javaimport{ods/BinaryTree.BTNode<Node}
+\cppimport{ods/BinaryTree.BTNode}
 When one of these three neighbours is not present, we set it to #nil#.
 In this way, external nodes in the tree as well as the parent of the
 root correspond to the value #nil#.
 
-The binary tree itself can then be represented by a pointer to its root node, #r#:
-\javaimport{ods/BinaryTree.r}
+The binary tree itself can then be represented by a
+\javaonly{reference}\cpponly{pointer} to its root node, #r#:
+\codeimport{ods/BinaryTree.r}
 
-We can compute the depth of a node, #u#, by counting the number of steps on the path from #u# to the root:
-\javaimport{ods/BinaryTree.depth(u)}
+We can compute the depth of a node, #u#, in a binary tree by counting
+the number of steps on the path from #u# to the root:
+\codeimport{ods/BinaryTree.depth(u)}
 
 
 \subsection{Recursive Algorithms}
@@ -82,12 +85,12 @@ It is very easy to compute facts about binary trees using recursive algorithms. 
 a binary tree rooted at node #u#, we recursively compute the sizes of
 the two subtrees rooted at the children of #u#, sum these sizes, and add one:
 
-\javaimport{ods/BinaryTree.size(u)}
+\codeimport{ods/BinaryTree.size(u)}
 
 To compute the height of a node #u# we can compute the height of #u#'s
 two subtrees, take the maximum, and add one:
 
-\javaimport{ods/BinaryTree.height(u)}
+\codeimport{ods/BinaryTree.height(u)}
 
 \subsection{Traversing Binary Trees}
 \seclabel{bintree:traversal}
@@ -95,7 +98,7 @@ two subtrees, take the maximum, and add one:
 The two algorithms from the previous section use recursion to visit all
 the nodes in a binary tree.  Each of them visits the nodes of the binary
 tree in the same order as the following code:
-\javaimport{ods/BinaryTree.traverse(u)}
+\codeimport{ods/BinaryTree.traverse(u)}
 
 Using recursion this way produces very short, simple code, but can
 be problematic.  The maximum depth of the recursion is given by the
@@ -112,7 +115,7 @@ thing to do is to visit #u.right#.  If we arrive at #u# from #u.right#,
 then we are done visiting #u#'s subtree, so we return to #u.parent#.
 The following code implements this idea, with code included for handling
 the cases where any of #u.left#, #u.right#, or #u.parent# is #nil#:
-\javaimport{ods/BinaryTree.traverse2()}
+\codeimport{ods/BinaryTree.traverse2()}
 
 \begin{figure}
   \begin{center}
@@ -129,7 +132,7 @@ The same things that can be computed with recursive algorithms can
 also be done this way. For example, to compute the size of the tree we
 keep a counter, #n#, and increment #n# whenever visiting a node for the
 first time:
-\javaimport{ods/BinaryTree.size2()}
+\codeimport{ods/BinaryTree.size2()}
 
 In some implementations of binary trees, the #parent# field is not used.
 When this is the case, a non-recursive implementation is still possible,
@@ -145,7 +148,7 @@ text. (See \figref{bintree-bfs}.)  This is implemented using a queue, #q#,
 that initially contains only the root, #r#.  At each step, we extract
 the next node, #u#, from #q#, process #u# and add #u.left# and #u.right#
 (if they are non-#nil#) to #q#:
-\javaimport{ods/BinaryTree.bfTraverse()}
+\codeimport{ods/BinaryTree.bfTraverse()}
 
 \begin{figure}
   \begin{center}
@@ -195,7 +198,7 @@ are three cases:
 The search terminates when Case~3 occurs or when #u=nil#.  In the
 former case, we found #x#.  In the latter case, we conclude that #x#
 is not in the binary search tree.
-\javaimport{ods/BinarySearchTree.findEQ(x)}
+\codeimport{ods/BinarySearchTree.findEQ(x)}
 
 Two examples of searches in a binary search tree are shown in
 \figref{bst-search}.  As the second example shows, even if we don't find #x#
@@ -207,7 +210,7 @@ less than #x#.  Therefore, by keeping track of the last node, #z#,
 at which Case~1 occurs, a #BinarySearchTree# can implement the #find(x)#
 operation that returns the smallest value stored in the tree that is
 greater than or equal to #x#:
-\javaimport{ods/BinarySearchTree.find(x)}
+\codeimport{ods/BinarySearchTree.find(x)}
 
 \begin{figure}
   \begin{center}
@@ -228,9 +231,9 @@ To add a new value, #x#, to a #BinarySearchTree#, we first search for
 #x#. If we find it, then there is no need to insert it.  Otherwise,
 we store #x# at a leaf child of the last node, #p#, encountered during the
 search for #x#. Whether the new node is the left or right child of #p# depends on the result of comparing #x# and #p.x#.
-\javaimport{ods/BinarySearchTree.add(x)}
-\javaimport{ods/BinarySearchTree.findLast(x)}
-\javaimport{ods/BinarySearchTree.addChild(p,u)}
+\codeimport{ods/BinarySearchTree.add(x)}
+\codeimport{ods/BinarySearchTree.findLast(x)}
+\codeimport{ods/BinarySearchTree.addChild(p,u)}
 An example is shown in \figref{bst-insert}. The most time-consuming
 part of this process is the initial search for #x#, which takes time
 proportional to the height of the newly added node #u#.  In the worst
@@ -254,7 +257,7 @@ Deleting a value stored in a node, #u#, of a #BinarySearchTree# is a
 little more difficult.  If #u# is a leaf, then we can just detach #u#
 from its parent.  Even better: If #u# has only one child, then we can
 splice #u# from the tree by having #u.parent# adopt #u#'s child:
-\javaimport{ods/BinarySearchTree.splice(u)}
+\codeimport{ods/BinarySearchTree.splice(u)}
 
 \begin{figure}
   \begin{center}
@@ -272,7 +275,7 @@ value of #u.x#.  For example, picking #w# such that #w.x# is the smallest
 value greater than #u.x# will do.  Finding the node #w# is easy; it is
 the smallest value in the subtree rooted at #u.right#.  This node can
 be easily removed because it has no left child.  (See \figref{bst-remove})
-\javaimport{ods/BinarySearchTree.remove(u)}
+\codeimport{ods/BinarySearchTree.remove(u)}
 
 \begin{figure}
   \begin{center}

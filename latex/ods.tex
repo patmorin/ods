@@ -1,4 +1,5 @@
 \documentclass[11pt]{book}
+\renewcommand{\baselinestretch}{1.3}
 \usepackage{amsopn}
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -6,6 +7,8 @@
 \usepackage{graphicx}
 %\usepackage[mathlines]{lineno}
 %\linenumbers
+
+%HEADCOMMAND
 
 \allowdisplaybreaks[1]  % for ams math align environments
 
@@ -50,7 +53,7 @@
 \definecolor{fm}{named}{ForestGreen}
 
 % Title page content
-\title{Open Data Structures (in Java)}
+\title{Open Data Structures (in \javaonly{Java}\cpponly{C++})}
 \author{Pat Morin}
 \date{Version 0.0 pre $\alpha$: \today}
 
@@ -86,23 +89,23 @@
 
 \tableofcontents
 
-\include{intro-tmp}
-\include{arrays-tmp}
-\include{linkedlists-tmp}
-\include{skiplists-tmp}
-\include{hashing-tmp}
-\include{binarytrees-tmp}
-\include{rbs-tmp}
-\include{scapegoat-tmp}
-\include{redblack-tmp}
-\include{heaps-tmp}
+\include{intro-lang}
+\include{arrays-lang}
+\include{linkedlists-lang}
+\include{skiplists-lang}
+\include{hashing-lang}
+\include{binarytrees-lang}
+\include{rbs-lang}
+\include{scapegoat-lang}
+\include{redblack-lang}
+\include{heaps-lang}
 
 %\chapter{Data Structures for Integers}
 %\chaplabel{bounded}
 %\section{X-Fast Tries}
 %\section{Y-Fast Tries}
 
-\include{sorting-tmp}
+\include{sorting-lang}
 
 \bibliographystyle{plainurl}
 \bibliography{ods,odsproc}

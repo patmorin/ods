@@ -216,6 +216,7 @@ A node in a #Treap# is like a node in a #BinarySearchTree# in that it has
 a data value, #x#, but it also contains a unique numerical \emph{priority},
 #p#, that is assigned at random:
 \javaimport{ods/Treap.Node<T>}
+\cppimport{ods/Treap.TreapNode}
 In addition to being a binary search tree, the nodes in a #Treap#
 also obey the \emph{heap property}:  At every node #u# except the root,
 $#u.parent.p# < #u.p#$.  That is, each node has a priority smaller than
@@ -297,7 +298,7 @@ The code that implements this has to handle these two possibilities
 and be careful of a boundary
 case (when #u# is the root) so the actual code is a little longer than
 \figref{rotations} would lead a reader to believe:
-\javaimport{ods/BinarySearchTree.rotateLeft(u).rotateRight(u)}
+\codeimport{ods/BinarySearchTree.rotateLeft(u).rotateRight(u)}
 In terms of the #Treap# data structure, the most important property of a
 rotation is that the depth of #w# decreases by one while the depth of #u#
 increases by one.
@@ -312,7 +313,7 @@ case that #u.parent.p > u.p#.  If this is the case, then we perform a
 rotation at node #w#=#u.parent# so that #u# becomes the parent of #w#.
 If #u# continues to violate the heap property, we will have to repeat this, decreasing #u#'s depth by one every time, until
 #u# either becomes the root or $#u.parent.p# < #u.p#$.
-\javaimport{ods/Treap.add(x).bubbleUp(u)}
+\codeimport{ods/Treap.add(x).bubbleUp(u)}
 An example of an #add(x)# operation is shown in \figref{treap-add}.
 
 \begin{figure}
@@ -350,7 +351,7 @@ The choice is made by the first of the following that apply:
 \item If $#u.left.p# < #u.right.p#$ (or $#u.left.p# > #u.right.p#)$, then perform a right rotation (or left rotation, respectively) at #u#.
 \end{enumerate}
 These three rules ensure that the #Treap# doesn't become disconnected and that the heap property is maintained once #u# is removed.
-\javaimport{ods/Treap.remove(x).trickleDown(u)}
+\codeimport{ods/Treap.remove(x).trickleDown(u)}
 An example of the #remove(x)# operation is shown in \figref{treap-remove}.
 \begin{figure}
   \begin{center}
