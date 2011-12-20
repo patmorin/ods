@@ -53,7 +53,7 @@
 \definecolor{fm}{named}{ForestGreen}
 
 % Title page content
-\title{Open Data Structures (in \javaonly{Java}\cpponly{C++})}
+\title{Open Data Structures (in \lang)}
 \author{Pat Morin}
 \date{Version 0.0 pre $\alpha$: \today}
 
@@ -84,10 +84,13 @@
 \setcounter{page}{1}
 \include{ack}
 \ \thispagestyle{empty}\newpage
-\include{why}
+\cpponly{\include{cpp-preface}
 \ \thispagestyle{empty}\newpage
+}
+\include{why}
 
 \tableofcontents
+
 
 \include{intro-lang}
 \include{arrays-lang}

@@ -142,8 +142,8 @@ are in no specific order.  A #USet# supports the following operations:
 
 These definitions are a bit fussy about distinguishing #x#, the element
 we are removing or finding, from #y#, the element we remove or find.
-This is because #x# and #y# might actually be distinct objects
-that are nevertheless treated as equal.\javaonly{\footnote{In Java, this is
+This is because #x# and #y# might actually be distinct objects that
+are nevertheless treated as equal.\javaonly{\footnote{In Java, this is
 done by overriding the class' #equals(y)# and #hashCode()# methods.}}
 This is a very useful distinction since it allows for the creation of
 \emph{dictionaries} or \emph{maps} that map keys onto values.  This is
@@ -472,44 +472,41 @@ of a generic type #T# and we assume an element of type #T# occupies one
 word of memory.  (In reality, we are storing references to objects of
 type #T#, and these references occupy only one word of memory.)
 
-\javaonly{The #w#-bit word-RAM model is a fairly close match for the (32-bit) Java
-Virtual Machine (JVM) when $#w#=32$.}
-\cpponly{The #w#-bit word-RAM model is a fairly close match for modern desktop computers
-when $#w#=32$ or $#w#=64$.}
-The data structures presented in
-this book don't use any special tricks that are not implementable on
-the JVM and most other architectures.
+\javaonly{The #w#-bit word-RAM model is a fairly close match for the
+(32-bit) Java Virtual Machine (JVM) when $#w#=32$.}\cpponly{The #w#-bit
+word-RAM model is a fairly close match for modern desktop computers when
+$#w#=32$ or $#w#=64$.} The data structures presented in this book don't
+use any special tricks that are not implementable on the JVM and most
+other architectures.
 
 \section{Code Samples}
 
-The code samples in this book are written in the Java programming
+The code samples in this book are written in the \lang\ programming
 language.  However to make the book accessible even to readers not
-familiar with all of Java's constructs and keywords, the code samples have
-been simplified.  For example, a reader won't find any of the keywords
-#public#, #protected#, #private#, or #static#.  A reader also won't
-find the #extends# or #implements# keywords, so any notion of class
-hierarchy is missing.  Which interface a particular class implements
-or which class it extends, if relevant to the discussion, will be clear
-from the accompanying text.
+familiar with all of \lang's constructs and keywords, the code samples
+have been simplified.  For example, a reader won't find any of the
+keywords #public#, #protected#, #private#, or #static#.  A reader also
+won't find much discussion about class hierarchies.  Which interfaces
+a particular class implements or which class it extends, if relevant to
+the discussion, will be clear from the accompanying text.
 
 These conventions should make most of the code samples understandable by
 anyone with a background in any of the languages from the ALGOL tradition,
 including B, C, C++, C\#, D, Java, JavaScript, and so on.  Readers who want
 the full details of all implementations are encouraged to look at the
-Java source code that accompanies this book.
+\lang\ source code that accompanies this book.
 
-This book mixes mathematical analysis of running times with Java source
-code for the algorithms being analyzed.  This means that some equations
-contain variables also found in the source code.  These variables are
-typeset consistently, both within the source code and within equations.
-The most common such variable is the variable #n# that, without
-exception, always refers to the number of items currently stored in the
-data structure.
+This book mixes mathematical analysis of running times with \lang\
+source code for the algorithms being analyzed.  This means that
+some equations contain variables also found in the source code.
+These variables are typeset consistently, both within the source code
+and within equations.  The most common such variable is the variable #n#
+that, without exception, always refers to the number of items currently
+stored in the data structure.
 
 \section{List of Data Structures}
 
-The following table
-summarize the performance of data structures
+The following table summarize the performance of data structures
 described in this book that implement each of the interfaces, #List#,
 #USet#, and #SSet#, described in \secref{interfaces}.
 
@@ -550,21 +547,21 @@ described in this book that implement each of the interfaces, #List#,
 
 \section{References}
 
-The #List#, #USet#, and #SSet# interfaces described in \secref{interfaces}
-are influenced by the Java Collections Framework
+The #List#, #USet#, and #SSet# interfaces described in
+\secref{interfaces} are influenced by the Java Collections Framework
 \cite{oracle_collections}.  These are essentially simplified versions of
 the #List#, #Set#/#Map#, and #SortedSet#/#SortedMap# interfaces found in
-the Java Collections Framework.  Indeed, the accompanying source code
-includes wrapper classes for making #USet# and #SSet# implementations
-into #Set#, #Map#, #SortedSet#, and #SortedMap# implementations.
+the Java Collections Framework.  \javaonly{Indeed, the accompanying source
+code includes wrapper classes for making #USet# and #SSet# implementations
+into #Set#, #Map#, #SortedSet#, and #SortedMap# implementations.}
 
 For more information on basic probability, especially as it relates to
 computer science, see the textbook by Ross \cite{r01}.  Another good
 reference, that covers both asymptotic notation and probability, is the
 textbook by Graham, Knuth, and Patashnik \cite{gkp94}.
 
-Readers wanting to brush up on their Java programming can find many Java
-tutorials online \cite{oracle_tutorials}.
+\javaonly{Readers wanting to brush up on their Java programming can find
+many Java tutorials online \cite{oracle_tutorials}.}
 
 
 

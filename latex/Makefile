@@ -26,7 +26,7 @@ ods-java.pdf : ods-java.tex $(javs) ods.sty images figs ods-java.bbl
 
 ods-java.tex : ods.tex Makefile
 	sed 's/-lang/-java/' ods.tex > ods-java.tex
-	sed -i 's/%HEADCOMMAND/\\newcommand{\\cpponly}[1]{}\\newcommand{\\javaonly}[1]{#1}/' ods-java.tex
+	sed -i 's/%HEADCOMMAND/\\newcommand{\\cpponly}[1]{}\\newcommand{\\javaonly}[1]{#1}\\newcommand{\\lang}{Java}/' ods-java.tex
 
 ods-java.bbl : ods.bib odsproc.bib
 	pdflatex $(LFLAGS) ods-java
@@ -38,7 +38,7 @@ ods-cpp.pdf : ods-cpp.tex $(cpps) ods.sty images figs ods-cpp.bbl
 
 ods-cpp.tex : ods.tex Makefile
 	sed 's/-lang/-cpp/' ods.tex > ods-cpp.tex
-	sed -i 's/%HEADCOMMAND/\\newcommand{\\javaonly}[1]{}\\newcommand{\\cpponly}[1]{#1}/' ods-cpp.tex
+	sed -i 's/%HEADCOMMAND/\\newcommand{\\javaonly}[1]{}\\newcommand{\\cpponly}[1]{#1}\\newcommand{\\lang}{C++}/' ods-cpp.tex
 
 ods-cpp.bbl : ods.bib odsproc.bib 
 	pdflatex $(LFLAGS) ods-cpp

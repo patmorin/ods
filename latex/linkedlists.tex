@@ -9,10 +9,10 @@ using references (pointers).  We first study singly-linked lists, which
 can implement #Stack# and (FIFO) #Queue# operations in constant time
 per operation.
 
-Compared to array-based list implementations, linked lists have their
-advantages and disadvantages.  The primary disadvantage is that we
-lose the ability to access any element using #get(i)# or #set(i,x)# in
-constant time.  Instead, we have to walk through the list, one element
+Linked lists have advantages and disadvantages relative to array-based
+implementations of the #List# interface.  The primary disadvantage is that
+we lose the ability to access any element using #get(i)# or #set(i,x)#
+in constant time.  Instead, we have to walk through the list, one element
 at a time, until we reach the #i#th element.  The primary advantage is
 that they are more dynamic:  Given a reference to any list node #u#, we
 can delete #u# or insert a node adjacent to #u# in constant time. This
@@ -195,20 +195,23 @@ the relevant node.  Once we have the relevant node, adding, removing,
 or accessing the data at that node takes only constant time.
 
 This is in sharp contrast to the array-based #List# implementations of
-\chapref{arrays}. In those implementations, the relevant array
+\chapref{arrays}; in those implementations, the relevant array
 item can be found in constant time. However, addition or removal requires
 shifting elements in the array and, in general, takes non-constant time.
 
 For this reason, linked list structures are well-suited to applications
 where references to list nodes can be obtained through external means.
-An example of this is the #LinkedHashSet# data structure found in the
+\javaonly{An example of this is the #LinkedHashSet# data structure found in the
 Java Collections Framework, in which a set of items is stored in a
 doubly-linked list and the nodes of the doubly-linked list are stored
 in a hash table (discussed in \chapref{hashing}).  When elements
 are removed from a #LinkedHashSet#, the hash table is used to find the
 relevant list node in constant time and then the list node is deleted
-(also in constant time).
-
+(also in constant time).}
+\cpponly{For example, pointers to the nodes of a linked list could be
+stored in a #USet#.  Then, to remove an item #x# from the linked list,
+the node that contains #x# can be found quickly using the #Uset# and
+the node can be removed from the list in constant time.}
 
 \section{#SEList#: A Space-Efficient Linked List}
 \seclabel{selist}
@@ -269,7 +272,7 @@ bound.}
 The first challenge we face with an #SEList# is finding the list item
 with a given index #i#.  Note that the location of an element consists
 of two parts: The node #u# that contains the block that contains the
-element as well as the index #j# of the element within its block:
+element as well as the index #j# of the element within its block.
 
 \codeimport{ods/SEList.Location}
 
@@ -303,13 +306,13 @@ so they also run in $O(1+\min\{#i#,#n#-#i#\}/#b#)$ time.
 
 \subsection{Adding an Element}
 
-Where things start to get complicated is in adding elements.  Before
-considering the general case, we first consider the easier operation,
-#add(x)#, in which #x# is added to the end of the list.  In this case,
-if the last block is full (or does not exist because there are no
-blocks yet), then we first allocate a new block and append it to the
-list of blocks.  Now that we are sure that the last block exists and
-is not full, we append #x# to the last block.
+Things start to get complicated when adding elements to an #SEList#.
+Before considering the general case, we consider the easier operation,
+#add(x)#, in which #x# is added to the end of the list.  If the last
+block is full (or does not exist because there are no blocks yet),
+then we first allocate a new block and append it to the list of blocks.
+Now that we are sure that the last block exists and is not full, we
+append #x# to the last block.
 
 \codeimport{ods/SEList.add(x)}
 
@@ -518,7 +521,7 @@ by Knuth \cite[Sections~2.2.3--2.2.5]{k97v1}.  Even the #SEList# data
 structure seems to be a well-known data structures exercise.
 
 \begin{exc}
-  Why is it not possible, in a #SLList# to use a dummy node to avoid
+  Why is it not possible, in an #SLList# to use a dummy node to avoid
   all the special cases that occur in the operations #push(x)#, #pop()#,
   #add(x)#, and #remove()#?
 \end{exc}
