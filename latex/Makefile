@@ -20,7 +20,7 @@ figs:
 images:
 	cd images ; make
 
-ods-java.pdf : ods-java.tex $(javs) ods.sty ods-java.bbl
+ods-java.pdf : ods-java.tex $(javs) ods.sty images figs ods-java.bbl
 	pdflatex $(LFLAGS) ods-java
 	pdflatex $(LFLAGS) ods-java
 
@@ -32,7 +32,7 @@ ods-java.bbl : ods.bib odsproc.bib
 	pdflatex $(LFLAGS) ods-java
 	bibtex ods-java
 
-ods-cpp.pdf : ods-cpp.tex $(cpps) ods.sty ods-cpp.bbl
+ods-cpp.pdf : ods-cpp.tex $(cpps) ods.sty images figs ods-cpp.bbl
 	pdflatex $(LFLAGS) ods-cpp
 	pdflatex $(LFLAGS) ods-cpp
 
@@ -40,7 +40,7 @@ ods-cpp.tex : ods.tex Makefile
 	sed 's/-lang/-cpp/' ods.tex > ods-cpp.tex
 	sed -i 's/%HEADCOMMAND/\\newcommand{\\javaonly}[1]{}\\newcommand{\\cpponly}[1]{#1}/' ods-cpp.tex
 
-ods-cpp.bbl : ods.bib odsproc.bib
+ods-cpp.bbl : ods.bib odsproc.bib 
 	pdflatex $(LFLAGS) ods-cpp
 	bibtex ods-cpp
 
