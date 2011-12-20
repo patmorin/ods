@@ -34,8 +34,7 @@ FastArrayStack<T>::~FastArrayStack() {
 }
 
 template<class T>
-void FastArrayStack<T>::resize()
-{
+void FastArrayStack<T>::resize() {
 	array<T> b(max(1, 2*n));
 	memcpy(b+0, a+0, n*sizeof(T));
 	a = b;

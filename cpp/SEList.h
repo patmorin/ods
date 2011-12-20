@@ -30,7 +30,7 @@ protected:
 			a = z;
 		}
 		virtual ~BDeque() { }
-		// FIXME: Why do I need to do this?
+		// C++ Question: Why is this necessary?
 		virtual void add(int i, T x) {
 			ArrayDeque<T>::add(i, x);
 		}

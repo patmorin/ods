@@ -71,6 +71,34 @@ void heapSort(array<T> &a) {
 	BinaryHeap<T>::sort(a);
 }
 
+void countingSort(array<int> &a, int k) {
+	array<int> c(k, 0);
+	for (int i = 0; i < a.length; i++)
+		c[a[i]]++;
+	for (int i = 1; i < k; i++)
+		c[i] += c[i-1];
+	array<int> b(a.length);
+	for (int i = a.length-1; i >= 0; i--)
+		b[--c[a[i]]] = a[i];
+	a = b;
+}
+
+void radixSort(array<int> &a) {
+	const int d = 8, w = 32;
+	for (int p = 0; p < w/d; p++) {
+		array<int> c(1<<d, 0);
+		// the next three for loops implement counting-sort
+		array<int> b(a.length);
+		for (int i = 0; i < a.length; i++)
+			c[(a[i] >> d*p)&((1<<d)-1)]++;
+		for (int i = 1; i < 1<<d; i++)
+			c[i] += c[i-1];
+		for (int i = a.length-1; i >= 0; i--)
+			b[--c[(a[i] >> d*p)&((1<<d)-1)]] = a[i];
+		a = b;
+	}
+}
+
 
 } /* namespace ods */
 

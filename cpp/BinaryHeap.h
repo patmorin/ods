@@ -33,7 +33,7 @@ protected:
 	}
 public:
 	BinaryHeap();
-	BinaryHeap(array<T> &b);
+	BinaryHeap(array<T>& b);
 	virtual ~BinaryHeap();
 	bool add(T x);
 	T findMin() {
@@ -49,16 +49,14 @@ public:
 
 
 template<class T>
-void BinaryHeap<T>::resize()
-{
+void BinaryHeap<T>::resize() {
 	array<T> b(max(2*n, 1));
 	memcpy(b+0, a+0, n*sizeof(T));
 	a = b;
 }
 
 template<class T>
-void BinaryHeap<T>::sort(array<T> &b)
-{
+void BinaryHeap<T>::sort(array<T> &b) {
 	BinaryHeap<T> h(b);
 	while (h.n > 1) {
 		h.a.swap(--h.n, 0);
@@ -70,8 +68,17 @@ void BinaryHeap<T>::sort(array<T> &b)
 
 
 template<class T>
-void BinaryHeap<T>::bubbleUp(int i)
-{
+bool BinaryHeap<T>::add(T x) {
+	if (n + 1 > a.length) resize();
+	a[n++] = x;
+	bubbleUp(n-1);
+	return true;
+}
+
+
+
+template<class T>
+void BinaryHeap<T>::bubbleUp(int i) {
 	int p = parent(i);
 	while (i > 0 && compare(a[i], a[p]) < 0) {
 		a.swap(i,p);
@@ -83,8 +90,18 @@ void BinaryHeap<T>::bubbleUp(int i)
 
 
 template<class T>
-void BinaryHeap<T>::trickleDown(int i)
-{
+T BinaryHeap<T>::remove() {
+	T x = a[0];
+	a[0] = a[--n];
+	trickleDown(0);
+	if (3*n < a.length) resize();
+	return x;
+}
+
+
+
+template<class T>
+void BinaryHeap<T>::trickleDown(int i) {
 	do {
 		int j = -1;
 		int r = right(i);
@@ -109,16 +126,14 @@ void BinaryHeap<T>::trickleDown(int i)
 
 
 template<class T>
-BinaryHeap<T>::BinaryHeap() : a(1)
-{
+BinaryHeap<T>::BinaryHeap() : a(1) {
 	n = 0;
 }
 
 
 
 template<class T>
-BinaryHeap<T>::BinaryHeap(array<T> &b) : a(0)
-{
+BinaryHeap<T>::BinaryHeap(array<T> &b) : a(0) {
 	a = b;
 	n = a.length;
 	for (int i = n/2-1; i >= 0; i--) {
@@ -129,39 +144,14 @@ BinaryHeap<T>::BinaryHeap(array<T> &b) : a(0)
 
 
 template<class T>
-BinaryHeap<T>::~BinaryHeap()
-{
+BinaryHeap<T>::~BinaryHeap() {
 	// nothing to do
 }
 
 
 
 template<class T>
-bool BinaryHeap<T>::add(T x)
-{
-	if (n + 1 > a.length) resize();
-	a[n++] = x;
-	bubbleUp(n-1);
-	return true;
-}
-
-
-
-template<class T>
-T BinaryHeap<T>::remove()
-{
-	T x = a[0];
-	a[0] = a[--n];
-	trickleDown(0);
-	if (3*n < a.length) resize();
-	return x;
-}
-
-
-
-template<class T>
-void BinaryHeap<T>::clear()
-{
+void BinaryHeap<T>::clear() {
 }
 
 } /* namespace ods */

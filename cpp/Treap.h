@@ -45,6 +45,18 @@ Treap<Node, T>::Treap() {
 }
 
 template<class Node, class T>
+bool Treap<Node, T>::add(T x) {
+	Node *u = new Node;
+	u->x = x;
+	u->p = rand();
+	if (BinarySearchTree<Node,T>::add(u)) {
+		bubbleUp(u);
+		return true;
+	}
+	return false;
+}
+
+template<class Node, class T>
 Treap<Node, T>::~Treap() {
 	// nothing to do
 }
@@ -61,18 +73,6 @@ void Treap<Node, T>::bubbleUp(Node *u) {
 	if (u->parent == nil) {
 		r = u;
 	}
-}
-
-template<class Node, class T>
-bool Treap<Node, T>::add(T x) {
-	Node *u = new Node;
-	u->x = x;
-	u->p = rand();
-	if (BinarySearchTree<Node,T>::add(u)) {
-		bubbleUp(u);
-		return true;
-	}
-	return false;
 }
 
 template<class Node, class T>

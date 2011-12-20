@@ -73,7 +73,9 @@ public:
 	T remove() {
 		if (n == 0)	return NULL;
 		T x = head->x;
+		Node *u = head;
 		head = head->next;
+		delete u;
 		if (--n == 0) tail = NULL;
 		return x;
 	}
@@ -81,7 +83,9 @@ public:
 	T pop() {
 		if (n == 0)	return NULL;
 		T x = head->x;
+		Node *u = head;
 		head = head->next;
+		delete u;
 		if (--n == 0) tail = NULL;
 		return x;
 	}

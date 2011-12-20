@@ -40,8 +40,7 @@ class ScapegoatTree1 : public ScapegoatTree<BSTNode1<T>, T> { };
 
 
 template<class Node, class T>
-inline int ScapegoatTree<Node,T>::log32(int q)
-{
+inline int ScapegoatTree<Node,T>::log32(int q) {
 	static double log23 = 2.4663034623764317;
 	return (int)ceil(log23*log(q));
 }
@@ -49,8 +48,7 @@ inline int ScapegoatTree<Node,T>::log32(int q)
 
 
 template<class Node, class T>
-inline int ScapegoatTree<Node,T>::addWithDepth(Node *u)
-{
+inline int ScapegoatTree<Node,T>::addWithDepth(Node *u) {
 	Node *w = r;
 	if (w == nil) {
 		r = u;
@@ -87,9 +85,8 @@ inline int ScapegoatTree<Node,T>::addWithDepth(Node *u)
 
 
 
-template<class Node, class T>
-inline void ScapegoatTree<Node,T>::rebuild(Node *u)
-{
+template<class Node, class T> inline
+void ScapegoatTree<Node,T>::rebuild(Node *u) {
 	int ns = BinaryTree<Node>::size(u);
 	Node *p = u->parent;
 	Node **a = new Node*[ns];
@@ -109,9 +106,8 @@ inline void ScapegoatTree<Node,T>::rebuild(Node *u)
 
 
 
-template<class Node, class T>
-inline int ScapegoatTree<Node,T>::packIntoArray(Node *u, Node **a, int i)
-{
+template<class Node, class T> inline
+int ScapegoatTree<Node,T>::packIntoArray(Node *u, Node **a, int i) {
 	if (u == nil) {
 		return i;
 	}
@@ -122,9 +118,8 @@ inline int ScapegoatTree<Node,T>::packIntoArray(Node *u, Node **a, int i)
 
 
 
-template<class Node, class T>
-inline Node *ScapegoatTree<Node,T>::buildBalanced(Node **a, int i, int ns)
-{
+template<class Node, class T> inline
+Node *ScapegoatTree<Node,T>::buildBalanced(Node **a, int i, int ns) {
 	if (ns == 0)
 		return nil;
 	int m = ns / 2;
@@ -139,25 +134,22 @@ inline Node *ScapegoatTree<Node,T>::buildBalanced(Node **a, int i, int ns)
 
 
 
-template<class Node, class T>
-inline ScapegoatTree<Node,T>::ScapegoatTree()
-{
+template<class Node, class T> inline
+ScapegoatTree<Node,T>::ScapegoatTree() {
 	// nothing to do
 }
 
 
 
-template<class Node, class T>
-inline ScapegoatTree<Node,T>::~ScapegoatTree()
-{
+template<class Node, class T> inline
+ScapegoatTree<Node,T>::~ScapegoatTree() {
 	// nothing to do
 }
 
 
 
-template<class Node, class T>
-inline bool ScapegoatTree<Node,T>::add(T x)
-{
+template<class Node, class T> inline
+bool ScapegoatTree<Node,T>::add(T x) {
 	// first do basic insertion keeping track of depth
 	Node *u = new Node;
 	u->x = x;
@@ -178,9 +170,8 @@ inline bool ScapegoatTree<Node,T>::add(T x)
 	return d >= 0;
 }
 
-template<class Node, class T>
-inline bool ScapegoatTree<Node,T>::remove(T x)
-{
+template<class Node, class T> inline
+bool ScapegoatTree<Node,T>::remove(T x) {
 	if (BinarySearchTree<Node,T>::remove(x)) {
 		if (2*n < q) {
 			rebuild(r);

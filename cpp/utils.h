@@ -32,9 +32,12 @@ bool equals(T &x, T &y) {
 	return x == y;
 }
 
+/**
+ * This is terrible - don't use it
+ */
 template<class T> inline
-int hashCode(T &x) {
-	return x;
+int hashCode(T x) {
+	return (int)x;
 }
 
 class dodo {

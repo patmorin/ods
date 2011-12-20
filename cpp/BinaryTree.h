@@ -8,6 +8,7 @@
 #ifndef BINARYTREE_H_
 #define BINARYTREE_H_
 #include <cstdlib>
+
 #include "ArrayDeque.h"
 
 namespace ods {
@@ -21,9 +22,6 @@ public:
 	BTNode() {
 		left = right = parent = NULL;
 	}
-	BTNode(N *nil) {
-		left = right = parent = nil;
-	}
 };
 
 
@@ -31,7 +29,7 @@ template<class Node>
 class BinaryTree {
 protected:
 	Node *r;    // root node
-	Node *nil; // null-like node
+	Node *nil;  // null-like node
 	virtual int size(Node *u);
 	virtual int height(Node *u);
 	virtual void traverse(Node *u);

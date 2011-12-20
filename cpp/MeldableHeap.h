@@ -48,8 +48,7 @@ class MeldableHeap1 : public MeldableHeap<MHeapNode1<T>, T> { };
 
 
 template<class Node, class T>
-Node *MeldableHeap<Node,T>::merge(Node *h1, Node *h2)
-{
+Node* MeldableHeap<Node,T>::merge(Node *h1, Node *h2) {
 	if (h1 == nil) return h2;
 	if (h2 == nil) return h1;
 	if (compare(h1->x, h2->x) > 0) {  // ensure h1->x < h2->x
@@ -68,20 +67,17 @@ Node *MeldableHeap<Node,T>::merge(Node *h1, Node *h2)
 }
 
 template<class Node, class T>
-MeldableHeap<Node,T>::MeldableHeap()
-{
+MeldableHeap<Node,T>::MeldableHeap() {
 	n = 0;
 }
 
 template<class Node, class T>
-MeldableHeap<Node,T>::~MeldableHeap()
-{
+MeldableHeap<Node,T>::~MeldableHeap() {
 	// nothing to do
 }
 
 template<class Node, class T>
-bool MeldableHeap<Node,T>::add(T x)
-{
+bool MeldableHeap<Node,T>::add(T x) {
 	Node *u = new Node();
 	u->left = u->right = u->parent = nil;
 	u->x = x;
@@ -94,16 +90,14 @@ bool MeldableHeap<Node,T>::add(T x)
 
 
 template<class Node, class T>
-T MeldableHeap<Node,T>::findMin()
-{
+T MeldableHeap<Node,T>::findMin() {
 	return r->x;
 }
 
 
 
 template<class Node, class T>
-T MeldableHeap<Node,T>::remove()
-{
+T MeldableHeap<Node,T>::remove() {
 	T x = r->x;
 	Node *tmp = r;
 	r = merge(r->left, r->right);
@@ -116,8 +110,7 @@ T MeldableHeap<Node,T>::remove()
 
 
 template<class Node, class T>
-void MeldableHeap<Node,T>::remove(Node *u)
-{
+void MeldableHeap<Node,T>::remove(Node *u) {
 	if (u == r) {
 		remove();
 	} else {

@@ -23,19 +23,10 @@ protected:
 	T *a;
 public:
 	int length;
-	array(int len) {
-		length = len;
-		a = new T[length];
-	}
-	array(int len, T init) {
-		length = len;
-		a = new T[length];
-		for (int i = 0; i < length; i++)
-			a[i] = init;
-	}
-	virtual ~array() {
-		if (a != NULL) delete[] a;
-	}
+	array(int len);
+	array(int len, T init);
+	virtual ~array();
+
 	array<T>& operator=(array<T> &b) {
 		if (a != NULL) delete[] a;
 		a = b.a;
@@ -43,21 +34,44 @@ public:
 		length = b.length;
 		return *this;
 	}
+
 	T& operator[](int i) {
 		assert(i >= 0 && i < length);
 		return a[i];
 	}
+
 	T* operator+(int i) {
 		return &a[i];
 	}
+
 	void swap(int i, int j) {
 		T x = a[i];
 		a[i] = a[j];
 		a[j] = x;
 	}
+
 	static void copyOfRange(array<T> &a0, array<T> &a, int i, int j);
 	virtual void reverse();
 };
+
+template<class T>
+array<T>::array(int len) {
+	length = len;
+	a = new T[length];
+}
+
+template<class T>
+array<T>::array(int len, T init) {
+	length = len;
+	a = new T[length];
+	for (int i = 0; i < length; i++)
+		a[i] = init;
+}
+
+template<class T>
+array<T>::~array() {
+	if (a != NULL) delete[] a;
+}
 
 template<class T>
 void array<T>::reverse() {

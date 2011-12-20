@@ -369,6 +369,17 @@ void sortTests(int n) {
 	for (int i = 1; i < n; i++)
 		assert(a[i-1] <= a[i]);
 
+	for (int i = 0; i < n; i++)
+		a[i] = rand();
+	cout << "Sorting " << n << " elements using radixSort...";
+	cout.flush();
+	start = clock();
+	radixSort(a);
+	stop = clock();
+	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
+	for (int i = 1; i < n; i++)
+		assert(a[i-1] <= a[i]);
+
 }
 
 
@@ -376,7 +387,7 @@ int main(int argc, char **argv)
 {
 	int n = 1000000;
 
-	// sortTests(n);
+	sortTests(n);
 
 
 	srand(0);

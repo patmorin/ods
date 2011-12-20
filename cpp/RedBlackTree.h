@@ -28,7 +28,8 @@ protected:
 	using BinaryTree<Node>::r;
 	using BinaryTree<Node>::nil;
 	using BinarySearchTree<Node,T>::n;
-	enum { red = 0, black };
+	static const int red = 0;
+	static const int black = 1;
 	void pushBlack(Node *u);
 	void pullBlack(Node *u);
 	void flipLeft(Node *u);
@@ -57,8 +58,7 @@ class RedBlackTree1 : public RedBlackTree<RedBlackNode1<T>, T> { };
 
 
 template<class Node, class T>
-void RedBlackTree<Node,T>::pushBlack(Node *u)
-{
+void RedBlackTree<Node,T>::pushBlack(Node *u) {
 	u->color--;
 	u->left->color++;
 	u->right->color++;
@@ -67,36 +67,29 @@ void RedBlackTree<Node,T>::pushBlack(Node *u)
 
 
 template<class Node, class T>
-void RedBlackTree<Node,T>::pullBlack(Node *u)
-{
+void RedBlackTree<Node,T>::pullBlack(Node *u) {
 	u->color++;
 	u->left->color--;
 	u->right->color--;
 }
 
 
-
 template<class Node, class T>
-void RedBlackTree<Node,T>::flipLeft(Node *u)
-{
+void RedBlackTree<Node,T>::flipLeft(Node *u) {
 	swapColors(u, u->right);
 	rotateLeft(u);
 }
 
 
-
 template<class Node, class T>
- void RedBlackTree<Node,T>::flipRight(Node *u)
-{
+void RedBlackTree<Node,T>::flipRight(Node *u) {
 	swapColors(u, u->left);
 	rotateRight(u);
 }
 
 
-
 template<class Node, class T>
- void RedBlackTree<Node,T>::swapColors(Node *u, Node *w)
-{
+void RedBlackTree<Node,T>::swapColors(Node *u, Node *w) {
 	char tmp = u->color;
 	u->color = w->color;
 	w->color = tmp;
@@ -105,8 +98,7 @@ template<class Node, class T>
 
 
 template<class Node, class T>
- void RedBlackTree<Node,T>::addFixup(Node *u)
-{
+void RedBlackTree<Node,T>::addFixup(Node *u) {
 	while (u->color == red) {
 		if (u == r) { // u is the root - done
 			u->color = black;
@@ -134,8 +126,7 @@ template<class Node, class T>
 
 
 template<class Node, class T>
-void RedBlackTree<Node,T>::removeFixup(Node *u)
-{
+void RedBlackTree<Node,T>::removeFixup(Node *u) {
 	while (u->color > black) {
 		if (u == r) {
 			u->color = black;
@@ -158,8 +149,7 @@ void RedBlackTree<Node,T>::removeFixup(Node *u)
 
 
 template<class Node, class T>
- Node *RedBlackTree<Node,T>::removeFixupCase1(Node *u)
-{
+Node* RedBlackTree<Node,T>::removeFixupCase1(Node *u) {
 	flipRight(u->parent);
 	return u;
 }
@@ -167,8 +157,7 @@ template<class Node, class T>
 
 
 template<class Node, class T>
-Node *RedBlackTree<Node,T>::removeFixupCase2(Node *u)
-{
+Node* RedBlackTree<Node,T>::removeFixupCase2(Node *u) {
 	Node *w = u->parent;
 	Node *v = w->right;
 	pullBlack(w); // w->left
@@ -189,8 +178,7 @@ Node *RedBlackTree<Node,T>::removeFixupCase2(Node *u)
 
 
 template<class Node, class T>
- Node *RedBlackTree<Node,T>::removeFixupCase3(Node *u)
-{
+Node* RedBlackTree<Node,T>::removeFixupCase3(Node *u) {
 	Node *w = u->parent;
 	Node *v = w->left;
 	pullBlack(w);
@@ -213,8 +201,7 @@ template<class Node, class T>
 }
 
 template<class Node, class T>
-void RedBlackTree<Node,T>::verify()
-{
+void RedBlackTree<Node,T>::verify() {
 	assert (size(r) == n);
 	verify(r);
 }
@@ -222,8 +209,7 @@ void RedBlackTree<Node,T>::verify()
 
 
 template<class Node, class T>
-int RedBlackTree<Node,T>::verify(Node *u)
-{
+int RedBlackTree<Node,T>::verify(Node *u) {
 	if (u == nil)
 		return u->color;
 	assert(u->color == red || u->color == black);
@@ -238,8 +224,7 @@ int RedBlackTree<Node,T>::verify(Node *u)
 
 
 template<class Node, class T>
-RedBlackTree<Node,T>::RedBlackTree()
-{
+RedBlackTree<Node,T>::RedBlackTree() {
 	nil = new Node;
 	nil->color = black;
 	r = nil;
@@ -248,16 +233,14 @@ RedBlackTree<Node,T>::RedBlackTree()
 
 
 template<class Node, class T>
-RedBlackTree<Node,T>::~RedBlackTree()
-{
+RedBlackTree<Node,T>::~RedBlackTree() {
 	delete nil;
 }
 
 
 
 template<class Node, class T>
-bool RedBlackTree<Node,T>::add(T x)
-{
+bool RedBlackTree<Node,T>::add(T x) {
 	Node *u = new Node();
 	u->left = u->right = u->parent = nil;
 	u->x = x;
@@ -271,8 +254,7 @@ bool RedBlackTree<Node,T>::add(T x)
 
 
 template<class Node, class T>
-bool RedBlackTree<Node,T>::remove(T x)
-{
+bool RedBlackTree<Node,T>::remove(T x) {
 	Node *u = findLast(x);
 	if (u == nil || compare(u->x, x) != 0)
 		return false;

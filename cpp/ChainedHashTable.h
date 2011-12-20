@@ -19,10 +19,10 @@ class ChainedHashTable {
 protected:
 	typedef ArrayStack<T> List;
 	T null;
+	array<List> t;
 	int n;
 	int d;
 	int z;
-	array<List> t;
 	static const int w = 32; //sizeof(int)*8;
 	void allocTable(int m);
 	void resize();
@@ -46,8 +46,7 @@ public:
  * FIXME:  A copy-constructor for arrays would be useful here
  */
 template<class T>
-void ChainedHashTable<T>::resize()
-{
+void ChainedHashTable<T>::resize() {
 	d = 1;
 	while (1<<d <= n) d++;
 	array<List> newTable(1<<d);
@@ -73,8 +72,7 @@ ChainedHashTable<int>::ChainedHashTable() : t(2)
 
 
 template<class T>
-ChainedHashTable<T>::ChainedHashTable() : t(2)
-{
+ChainedHashTable<T>::ChainedHashTable() : t(2) {
 	n = 0;
 	d = 1;
 	null = INT_MIN;
@@ -84,14 +82,12 @@ ChainedHashTable<T>::ChainedHashTable() : t(2)
 
 
 template<class T>
-ChainedHashTable<T>::~ChainedHashTable()
-{
+ChainedHashTable<T>::~ChainedHashTable() {
 }
 
 
 template<class T>
-bool ChainedHashTable<T>::add(T x)
-{
+bool ChainedHashTable<T>::add(T x) {
 	if (find(x) != null) return false;
 	if (n+1 > t.length) resize();
 	t[hash(x)].add(x);
@@ -101,8 +97,7 @@ bool ChainedHashTable<T>::add(T x)
 
 
 template<class T>
-T ChainedHashTable<T>::remove(T x)
-{
+T ChainedHashTable<T>::remove(T x) {
 	int j = hash(x);
 	for (int i = 0; i < t[j].size(); i++) {
 		T y = t[j].get(i);
@@ -117,8 +112,7 @@ T ChainedHashTable<T>::remove(T x)
 
 
 template<class T>
-T ChainedHashTable<T>::find(T x)
-{
+T ChainedHashTable<T>::find(T x) {
 	int j = hash(x);
 	for (int i = 0; i < t[j].size(); i++)
 		if (x == t[j].get(i))
@@ -128,8 +122,7 @@ T ChainedHashTable<T>::find(T x)
 
 
 template<class T>
-void ChainedHashTable<T>::clear()
-{
+void ChainedHashTable<T>::clear() {
 	n = 0;
 	d = 1;
 	array<List> b(2);

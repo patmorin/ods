@@ -21,7 +21,7 @@ protected:
 	/**
 	 * Initialize the logarithm and square root tables
 	 */
-	static void inittabs() {
+	static void inittabs(int dummy) {
 		sqrtab = new int[halfint];
 		logtab = new int[halfint];
 		for (int d = 0; d < 16; d++)
@@ -48,7 +48,7 @@ protected:
 	}
 	*/
 public:
-	static void init() { inittabs(); };
+	static void init() { inittabs(0); };
 	static int log(int x) {
 		if (x >= halfint)
 			return 16 + logtab[x>>16];

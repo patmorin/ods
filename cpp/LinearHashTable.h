@@ -20,11 +20,11 @@ class LinearHashTable {
 
 	static const int w = 32;
 	static const int r = 8;
+	array<T> t;
 	int n;   // number of values in T
 	int q;   // number of non-null entries in T
 	int d;   // t.length = 2^d
 	T null, del;
-	array<T> t;
 	void resize();
 	int hash(T x) {
 		unsigned h = hashCode(x);
@@ -34,11 +34,17 @@ class LinearHashTable {
 				 ^ tab[3][(h>>24)&0xff])
 				>> (w-d);
 	}
+	// Sample code only -- never use this
+	int idealHash(T x) {
+		return tab[hashCode(x) >> w-d];
+	}
+
 
 public:
 	LinearHashTable();
 	virtual ~LinearHashTable();
 	bool add(T x);
+	bool addSlow(T x);
 	T remove(T x);
 	T find(T x);
 	int size() { return n; }
@@ -122,6 +128,19 @@ T LinearHashTable<T>::remove(T x) {
 		i = (i == t.length-1) ? 0 : i + 1;  // increment i (mod t.length)
 	}
 	return null;
+}
+
+template<class T>
+bool LinearHashTable<T>::addSlow(T x) {
+	if (2*(q+1) > t.length) resize();   // max 50% occupancy
+	int i = hash(x);
+	while (t[i] != null) {
+			if (t[i] != del && x.equals(t[i])) return false;
+			i = (i == t.length-1) ? 0 : i + 1; // increment i (mod t.length)
+	}
+	t[i] = x;
+	n++; q++;
+	return true;
 }
 
 
