@@ -216,7 +216,7 @@ finding the #i#th node in $L_0$, these operations run in
 $O(\log #n#)$ time.
 
 Adding an element to a #SkiplistList# at a position, #i#, is fairly
-straightforward.  Unlike, in a #SkiplistSSet#, we are sure that a new
+straightforward.  Unlike in a #SkiplistSSet#, we are sure that a new
 node will actually be added, so we can do the addition at the same time
 as we search for the new node's location. We first pick the height, #k#,
 of the newly inserted node, #w#, and then follow the search path for #i#.
@@ -326,7 +326,7 @@ The next two lemmata tell us that skiplists have linear size:
 \end{lem}
 
 \begin{proof}
-  The probability that any particular element #x# is included in list
+  The probability that any particular element, #x#, is included in list
   $L_{#r#}$ is $1/2^{#r#}$, so the expected number of nodes in $L_{#r#}$
   is $#n#/2^{#r#}$.  Therefore, the total number of nodes in all lists is
   \[ \sum_{#r#=0}^\infty #n#/2^{#r#} = #n#(1+1/2+1/4+1/8+\cdots) = 2#n# \enspace . \qedhere \]
@@ -395,7 +395,7 @@ The expected length of a search path in a skiplist is at most $2\log #n# + O(1)$
   except that it is reversed.
 
   The number of nodes that the reverse search path visits at a particular
-  level #r# is related to the following experiment:  Toss a coin.
+  level, #r#, is related to the following experiment:  Toss a coin.
   If the coin comes up heads then go up and stop, otherwise go left and
   repeat the experiment.  The number of coin tosses before the heads then
   represents the number of steps to the left that a reverse search path
@@ -434,7 +434,7 @@ The expected length of a search path in a skiplist is at most $2\log #n# + O(1)$
 \end{proof}
 
 
-The following theorem summarizes the results in this section
+The following theorem summarizes the results in this section:
 \begin{thm}
 A skiplist containing $#n#$ elements has expected size $O(#n#)$ and the
 expected length of the search path for any particular element is at most
@@ -458,7 +458,7 @@ Deterministic versions \cite{mps92}, biased versions \cite{bbg02,esss01},
 and self-adjusting versions \cite{bdl08} of skiplists have all been
 developed.  Skiplist implementations have been written for various
 languages and frameworks and have seen use in open-source database
-systems \cite{skipdb,redis} A variant of skiplists is used in the HP-UX
+systems \cite{skipdb,redis}. A variant of skiplists is used in the HP-UX
 operating system kernel's process management structures \cite{hpux}.
 \javaonly{Skiplists are even part of the Java 1.6 API \cite{oracle_jdk6}.}
 

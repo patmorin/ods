@@ -45,12 +45,13 @@ position 0 (the root).
 In a #BinaryHeap#, the #n# elements are stored in an array #a#:
 \codeimport{ods/BinaryHeap.a.n}
 
-Implementing the #add(x)# operation is fairly straightforward.
-As with all array-based structures, we first check if #a# is full
-(because $#a.length#=#n#$) and, if so, we grow #a#.  Next, we place #x#
-at location #a[n]# and increment #n#.  At this point, all that remains is
-to ensure that we maintain the heap property.  We do this by repeatedly
-swapping #x# with its parent until #x# is no smaller than its parent.  See \figref{heap-insert}.
+Implementing the #add(x)# operation is fairly straightforward.  As with
+all array-based structures, we first check if #a# is full (because
+$#a.length#=#n#$) and, if so, we grow #a#.  Next, we place #x# at location
+#a[n]# and increment #n#.  At this point, all that remains is to ensure
+that we maintain the heap property.  We do this by repeatedly swapping
+#x# with its parent until #x# is no longer smaller than its parent.
+See \figref{heap-insert}.
 \codeimport{ods/BinaryHeap.add(x).bubbleUp(i)}
 
 \begin{figure}
@@ -90,8 +91,8 @@ this element with the smallest of its two children and continue.
 
 
 
-As with other array-based structures we will ignore the time spent in
-calls to #resize()# since these can be accounted for with the amortization
+As with other array-based structures, we will ignore the time spent in
+calls to #resize()#, since these can be accounted for with the amortization
 argument from \lemref{arraystack-amortized}.  The running times of
 both #add(x)# and #remove()# then depend on the height of the (implicit)
 binary tree.  However, this is a \emph{complete} binary tree;  every level
@@ -163,8 +164,8 @@ Again, this takes $O(\log #n#)$ expected time.
 Additionally, a #MeldableHeap# can implement many other operations in
 $O(\log #n#)$ expected time, including:
 \begin{itemize}
-\item #remove(u)# remove the node #u# (and its key #u.x#) from the heap.
-\item #absorb(h)# add all the elements of the #MeldableHeap# #h# to this heap, emptying #h# in the process.
+\item #remove(u)#: remove the node #u# (and its key #u.x#) from the heap.
+\item #absorb(h)#: add all the elements of the #MeldableHeap# #h# to this heap, emptying #h# in the process.
 \end{itemize}
 Each of these operations can be implemented using a constant number of
 #merge(h1,h2)# operations that each take $O(\log #n#)$ time.

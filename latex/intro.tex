@@ -7,7 +7,7 @@ implemented by all the data structures described in this book.
 It should be considered required reading.  The remaining sections discuss
 asymptotic (big-Oh) notation, probability and randomization, the model of
 computation, and the sample code and typesetting conventions.  A reader
-with or without background in these areas can easily skip them now and
+with or without a background in these areas can easily skip them now and
 come back to them later if necessary.
 
 \section{Interfaces}
@@ -61,13 +61,13 @@ When a business-class seat becomes available it is given to the most
 important customer waiting on an upgrade.
 
 A very common queueing discipline is the LIFO (last-in-first-out)
-discipline.  In a \emph{LIFO Queue}, the most recently added element is the
-next one removed.  This is best visualized in terms of a stack of plates;
-plates are placed on the top of the stack and also removed from the top
-of the stack. This structure is so common that it gets its own name: #Stack#.
-Often, when discussing a #Stack# the names of #add(x)# and #remove()#
-are changed to #push(x)# and #pop()#, to avoid confusing the LIFO and
-FIFO queueing disciplines.
+discipline.  In a \emph{LIFO Queue}, the most recently added element is
+the next one removed.  This is best visualized in terms of a stack of
+plates; plates are placed on the top of the stack and also removed from
+the top of the stack. This structure is so common that it gets its own
+name: #Stack#.  Often, when discussing a #Stack#, the names of #add(x)#
+and #remove()# are changed to #push(x)# and #pop()#; this is to avoid
+confusing the LIFO and FIFO queueing disciplines.
 
 A #Deque# is a generalization of both the FIFO #Queue# and LIFO #Queue#
 (#Stack#).   A #Deque# represents a sequence of elements, with a front
@@ -221,7 +221,7 @@ Another logarithm that comes up several times in this book is the
 \emph{natural logarithm}.  Here we use the notation $\ln k$ to denote
 $\log_e k$, where $e$ --- \emph{Euler's constant} --- is given by
 \[
-   e = \lim_{k\rightarrow\infty} \left(1+\frac{1}{n}\right)^n
+   e = \lim_{n\rightarrow\infty} \left(1+\frac{1}{n}\right)^n
    \approx  2.71828 \enspace .
 \]
 The natural logarithm comes up frequently because it is the value

@@ -55,7 +55,7 @@ To implement the #add(x)# operation, we first increment #n# and #q#
 and then use the usual algorithm for adding #x# to a binary search
 tree; we search for #x# and then add a new leaf #u# with $#u.x#=#x#$.
 At this point, we may get lucky and the depth of #u# might not exceed
-$\log_{3/2}#q#$ If so, then we leave well enough alone and don't do
+$\log_{3/2}#q#$. If so, then we leave well enough alone and don't do
 anything else.
 
 Unfortunately, it will sometimes happen that $#depth(u)# > \log_{3/2}
@@ -101,7 +101,7 @@ Finally, we check if $#q# > 2#n#$ and, if so, we \emph{rebuild the entire
 tree} into a perfectly balanced binary search tree and set $#q#=#n#$.
 \codeimport{ods/ScapegoatTree.remove(x)}
 Again, if we ignore the cost of rebuilding, the running time of the
-#remove(x)# operation is proportional to the height of the tree is
+#remove(x)# operation is proportional to the height of the tree, and is
 therefore $O(\log #n#)$.
 
 \subsection{Analysis of Correctness and Running-Time}

@@ -36,9 +36,9 @@ long, we maintain the invariant
 so that the average number of elements stored in one of these lists is 
 $#n#/#t.length# \le 1$.
 
-To add an element #x# to the hash table, we first check if the length
+To add an element, #x#, to the hash table, we first check if the length
 of #t# needs to be increased and, if so, we grow #t#.  With
-this out of the way we hash #x# to get an integer #i# in the range
+this out of the way we hash #x# to get an integer, #i#, in the range
 $\{0,\ldots,#t.length#-1\}$ and we append #x# to the list #t[i]#:
 \codeimport{ods/ChainedHashTable.add(x)}
 Growing the table, if necessary, involves doubling the length of #t#

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20110711095304" modified="D:20110714104538"/>
+<info created="D:20110711095304" modified="D:20111220162002"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -292,55 +292,52 @@ h
 </group>
 </group>
 </group>
-<group matrix="1 0 0 1 6.20517 0">
-<path stroke="black">
+<path matrix="1 0 0 1 6.20517 0" stroke="black">
 448 656 m
 456 640 l
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 6.20517 0" stroke="black">
 448 656 m
 432 640 l
 </path>
-<path matrix="0.5 0 0 1 400 416" stroke="black">
+<path matrix="0.5 0 0 1 406.205 416" stroke="black">
 128 320 m
 112 304 l
 </path>
-<path matrix="0.5 0 0 1 400 416" stroke="black">
+<path matrix="0.5 0 0 1 406.205 416" stroke="black">
 128 320 m
 144 304 l
 </path>
-<path matrix="1 0 0 1 272 416" stroke="black">
+<path matrix="1 0 0 1 278.205 416" stroke="black">
 192 320 m
 176 336 l
 </path>
-<path matrix="1 0 0 1 272 416" stroke="black">
+<path matrix="1 0 0 1 278.205 416" stroke="black">
 176 336 m
 160 320 l
 </path>
-<use matrix="1 0 0 1 272 416" name="mark/fdisk(sfx)" pos="160 320" size="large" stroke="black" fill="black"/>
-<use matrix="1 0 0 1 256 416" name="mark/fdisk(sfx)" pos="192 336" size="large" stroke="black" fill="black"/>
-<use matrix="1 0 0 1 336 416" name="mark/fdisk(sfx)" pos="128 320" size="large" stroke="black" fill="pink"/>
-<use matrix="1 0 0 1 336 416" name="mark/fdisk(sfx)" pos="120 304" size="large" stroke="black" fill="black"/>
-<use matrix="1 0 0 1 336 416" name="mark/fdisk(sfx)" pos="136 304" size="large" stroke="black" fill="black"/>
-<text matrix="1 0 0 1 304 56" transformations="translations" pos="144 640" stroke="black" type="label" width="64.784" height="14.44" depth="9.47" halign="center" valign="center">$\begin{array}{cc}\mathtt{flipLeft(w)} \\ \Downarrow \end{array}$</text>
-<text matrix="1 0 0 1 272 400" transformations="translations" pos="192 352" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
-<path matrix="1 0 0 1 288 336" stroke="black">
+<use matrix="1 0 0 1 278.205 416" name="mark/fdisk(sfx)" pos="160 320" size="large" stroke="black" fill="black"/>
+<use matrix="1 0 0 1 262.205 416" name="mark/fdisk(sfx)" pos="192 336" size="large" stroke="black" fill="black"/>
+<use matrix="1 0 0 1 342.205 416" name="mark/fdisk(sfx)" pos="128 320" size="large" stroke="black" fill="pink"/>
+<use matrix="1 0 0 1 342.205 416" name="mark/fdisk(sfx)" pos="120 304" size="large" stroke="black" fill="black"/>
+<use matrix="1 0 0 1 342.205 416" name="mark/fdisk(sfx)" pos="136 304" size="large" stroke="black" fill="black"/>
+<text matrix="1 0 0 1 310.205 56" transformations="translations" pos="144 640" stroke="black" type="label" halign="center" valign="center">$\begin{array}{cc}\mathtt{flipLeft(u)} \\ \Downarrow \end{array}$</text>
+<text matrix="1 0 0 1 278.205 400" transformations="translations" pos="192 352" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
+<path matrix="1 0 0 1 294.205 336" stroke="black">
 176 336 m
 160 320 l
 </path>
-<use matrix="1 0 0 1 288 336" name="mark/fdisk(sfx)" pos="160 320" size="large" stroke="black" fill="pink"/>
-<use matrix="1 0 0 1 272 336" name="mark/fdisk(sfx)" pos="192 336" size="large" stroke="black" fill="black"/>
-<text matrix="1 0 0 1 192 336" transformations="translations" pos="240 320" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
-<path matrix="0.5 0 0 1 400 352" stroke="black">
+<use matrix="1 0 0 1 294.205 336" name="mark/fdisk(sfx)" pos="160 320" size="large" stroke="black" fill="pink"/>
+<use matrix="1 0 0 1 278.205 336" name="mark/fdisk(sfx)" pos="192 336" size="large" stroke="black" fill="black"/>
+<text matrix="1 0 0 1 198.205 336" transformations="translations" pos="240 320" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
+<path matrix="0.5 0 0 1 406.205 352" stroke="black">
 128 320 m
 144 304 l
 </path>
-<use matrix="1 0 0 1 336 352" name="mark/fdisk(sfx)" pos="136 304" size="large" stroke="black" fill="black"/>
-<use matrix="1 0 0 1 336 336" name="mark/fdisk(sfx)" pos="120 304" size="large" stroke="black" fill="black"/>
-<use matrix="1 0 0 1 272 320" name="mark/fdisk(sfx)" pos="160 320" size="large" stroke="black" fill="black"/>
-</group>
-<group>
-<text matrix="1 0 0 1 400 56" transformations="translations" pos="144 640" stroke="black" type="label" width="70.015" height="14.44" depth="9.47" halign="center" valign="center">$\begin{array}{cc}\mathtt{flipRight(w)} \\ \Downarrow \end{array}$</text>
+<use matrix="1 0 0 1 342.205 352" name="mark/fdisk(sfx)" pos="136 304" size="large" stroke="black" fill="black"/>
+<use matrix="1 0 0 1 342.205 336" name="mark/fdisk(sfx)" pos="120 304" size="large" stroke="black" fill="black"/>
+<use matrix="1 0 0 1 278.205 320" name="mark/fdisk(sfx)" pos="160 320" size="large" stroke="black" fill="black"/>
+<text matrix="1 0 0 1 400 56" transformations="translations" pos="144 640" stroke="black" type="label" halign="center" valign="center">$\begin{array}{cc}\mathtt{flipRight(u)} \\ \Downarrow \end{array}$</text>
 <group>
 <path matrix="0.5 0 0 1 496 432" stroke="black">
 128 320 m
@@ -386,7 +383,6 @@ h
 <use matrix="1 0 0 1 432 432" name="mark/fdisk(sfx)" pos="136 304" size="large" stroke="black" fill="white"/>
 <use matrix="1 0 0 1 432 416" name="mark/fdisk(sfx)" pos="120 304" size="large" stroke="black" fill="black"/>
 <use matrix="1 0 0 1 368 400" name="mark/fdisk(sfx)" pos="160 320" size="large" stroke="black" fill="black"/>
-</group>
 </group>
 </page>
 </ipe>

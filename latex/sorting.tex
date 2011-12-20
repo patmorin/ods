@@ -188,7 +188,8 @@ about the running time of quicksort:
 \end{thm}
 
 \begin{proof}
-Let $T$ be the number of comparisons performed by quicksort when sorting #n# distsinct elements.  Using \lemref{quicksort}, we have:
+Let $T$ be the number of comparisons performed by quicksort when sorting
+#n# distinct elements.  Using \lemref{quicksort}, we have:
 \begin{align*}
   \E[T] &= \sum_{i=0}^{#n#-1}(H_{#i#+1}+H_{#n#-#i#}) \\ 
         &= 2\sum_{i=1}^{#n#}H_i \\ 
@@ -618,7 +619,7 @@ an implementation of radix-sort.
 
 \begin{exc}
   Find another pair of permutations of $1,2,3$ that are not correctly
-  eorted by the comparison-tree in \figref{comparison-tree-2}.
+  sorted by the comparison-tree in \figref{comparison-tree-2}.
 \end{exc}
 
 \begin{exc}

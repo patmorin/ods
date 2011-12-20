@@ -279,8 +279,8 @@ additional property:
   At any node #u#, if #u.left# is black, then #u.right# is black.
 \end{prp}
 Note that the red-black tree shown in \figref{redblack-example}  does
-not satisfy the left-leaning property.  It is violated by the parent of
-red node in the rightmost path.
+not satisfy the left-leaning property;  it is violated by the parent of
+the red node in the rightmost path.
 
 The reason for maintaining the left-leaning property is that it reduces
 the number of cases encountered when updating the tree during #add(x)#
@@ -296,7 +296,7 @@ that are illustrated in \figref{redblack-flippullpush}.  The first two
 subroutines are for manipulating colors while preserving the black-height
 property. The #pushBlack(u)# method takes as input a black node #u#
 that has two red children and colors #u# red and its two children black.
-The #pullBlack(u)# method reverse this operation:
+The #pullBlack(u)# method reverses this operation:
 \codeimport{ods/RedBlackTree.pushBlack(u).pullBlack(u)}
 
 \begin{figure}
@@ -325,7 +325,7 @@ To implement #add(x)# in a #RedBlackTree#, we perform a standard
 #BinarySearchTree# insertion, which adds a new leaf, #u#, with $#u.x#=#x#$
 and set $#u.color#=#red#$.  Note that this does not change the black
 height of any node, so it does not violate the black-height property.
-It may, however violate the left-leaning property (if #u# is the
+It may, however, violate the left-leaning property (if #u# is the
 right child of its parent) and it may violate the no-red-edge property
 (if #u#'s parent is #red#).  To restore these properties, we call the
 method #addFixup(u)#.
@@ -335,9 +335,8 @@ The #addFixup(u)# method, illustrated in \figref{rb-addfix}, takes
 as input a node #u# whose color is red and which may be violating the
 no-red-edge property and/or the left-leaning property.  The following
 discussion is probably impossible to follow without referring to
-\figref{rb-addfix} or recreating it on a piece of paper while reading
-this discussion.  Indeed, the reader may wish to study this figure
-before continuing.
+\figref{rb-addfix} or recreating it on a piece of paper.  Indeed, the
+reader may wish to study this figure before continuing.
 
 \begin{figure}
   \begin{center}
@@ -353,7 +352,7 @@ restores both properties.  If #u#'s sibling is also red, then #u#'s
 parent must be black, so both the left-leaning and no-red-edge properties
 already hold.
 
-Otherwise, we first determine if #u#'s parent, #w# violates the
+Otherwise, we first determine if #u#'s parent, #w#, violates the
 left-leaning property and, if so, perform a #flipLeft(w)# operation and
 set $#u#=#w#$.  This leaves us in a well-defined state:  #u# is the left
 child of its parent, #w#, so #w# now satisfies the left-leaning property.
@@ -370,7 +369,7 @@ the no-red-edge property at #u#, but may cause it to be violated at #g#,
 so the whole process starts over with $#u#=#g#$.
 
 If #g#'s right child is black, then a call to #flipRight(g)# makes
-#w# the (black) parent of #g# and gives #w# two red children #u# and
+#w# the (black) parent of #g# and gives #w# two red children, #u# and
 #g#. This ensures that #u# satisfies the no-red-edge property and #g#
 satisfies the left-leaning property.  In this case we can stop.
 \codeimport{ods/RedBlackTree.addFixup(u)}
@@ -384,15 +383,15 @@ in $O(\log #n#)$ time.
 
 The #remove(x)# operation in a #RedBlackTree# tree is the most complicated
 operation to implement, and this is true of all known implementations.
-Like #remove(x)# in a \texttt{BinarySearchTree} the operation boils down to
-finding a node #w# with only one child, #u#, and splicing #w# out of
-the tree by having #w.parent# adopt #u#.
+Like #remove(x)# in a \texttt{BinarySearchTree}, this operation boils
+down to finding a node #w# with only one child, #u#, and splicing #w#
+out of the tree by having #w.parent# adopt #u#.
 
 The problem with this is that, if #w# is black, then the black-height
 property will now be violated at #w.parent#.  We get around this
 problem, temporarily, by adding #w.color# to #u.color#.  Of course, this
 introduces two other problems:  (1)~#u# and #w# both started out black,
-then $#u.color#+#w.color#=2$ (double black), which is in invalid color.
+then $#u.color#+#w.color#=2$ (double black), which is an invalid color.
 If #w# was red, then it is replaced by a black node #u#, which may
 violate the left-leaning property at $#u.parent#$.  Both of these problems
 are resolved with a call to the #removeFixup(u)# method.
@@ -540,7 +539,7 @@ method.} Define the potential of an internal node #u# in a 2-4 tree as
 and the potential of a 2-4 tree as the sum of the potentials of its nodes.
 When a split occurs, it is because a node of degree 4 becomes two nodes,
 one of degree 2 and one of degree 3.  This means that the overall
-potential drops by $3c-c-0 = c$.  Thus, the time spent performing a
+potential drops by $3c-c-0 = 2c$.  Thus, the time spent performing a
 split is accounted for by the drop in potential. When a merge occurs,
 two nodes that used to have degree 2 are replaced by one node of degree
 3. The result is a drop in potential of $2c-0=2c$.  This drop in potential
@@ -558,7 +557,7 @@ analysis and the correspondence between 2-4 trees and red-black trees.
 
 Red-black trees were first introduced by Guibas and Sedgewick \cite{gs78}.
 Despite their high implementation complexity they are found in some of
-the most commonly-used libraries and applications.  Most algorithms and
+the most commonly used libraries and applications.  Most algorithms and
 data structures discuss some variant of red-black trees.
 
 Andersson \cite{a93} describes a left-leaning version of balanced trees
