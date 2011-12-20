@@ -136,8 +136,7 @@ public class BinaryTree<Node extends BinaryTree.BTNode<Node>> {
 	 * @return the size of the subtree rooted at u
 	 */
 	protected int height(Node u) {
-		if (u == nil)
-			return -1;
+		if (u == nil) return -1;
 		return 1 + Math.max(height(u.left), height(u.right));
 	}
 

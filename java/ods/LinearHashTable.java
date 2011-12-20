@@ -27,19 +27,8 @@ public class LinearHashTable<T> implements USet<T> {
 	 */
 	T del;
 	
-	/**
-	 * Number of elements stored in the table
-	 */
 	int n;   // the size
-	
-	/**
-	 * Table size is 2^d
-	 */
 	int d;   // t.length = 2^d
-	
-	/**
-	 * Number of occurrences of nil
-	 */
 	int q;   // number of non-null entries in t
 	
 	/**
@@ -97,7 +86,7 @@ public class LinearHashTable<T> implements USet<T> {
 		if (2*(q+1) > t.length) resize();   // max 50% occupancy
 		int i = hash(x);
 		while (t[i] != null) {
-			if (t[i] != nil && x.equals(t[i])) return false;
+			if (t[i] != del && x.equals(t[i])) return false;
 			i = (i == t.length-1) ? 0 : i + 1; // increment i (mod t.length)
 		}
 		t[i] = x;
