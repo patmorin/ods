@@ -135,9 +135,9 @@ subarrays being sorted, the #quickSort(a,i,n,c)# method only sorts the
 subarray $#a[i]#,\ldots,#a[i+n-1]#$.  Initially, this method is called
 as #quickSort(a,0,a.length,c)#.
 
-At the heart of the quicksort algorithm is the in-place partitioning
-done that, without any extra space swaps elements in #a# and computes
-indices #p# and #q# so that
+At the heart of the quicksort algorithm is the in-place partitioning that,
+without any extra space, swaps elements in #a# and computes indices #p#
+and #q# so that
 \[
    #a[i]# \begin{cases} 
          {}< #x# & \text{if $0\le #i#\le #p#$} \\
