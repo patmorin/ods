@@ -286,7 +286,7 @@ set $\{1,\ldots,n\}$.
 \subsection{Asymptotic Notation}
 
 When analyzing data structures in this book, we will want to talk about
-the running times of various operations.  The exact runningtimes will,
+the running times of various operations.  The exact running times will,
 of course, vary from computer to computer and even from run to run on
 an individual computer.  Therefore, instead of analyzing running times
 exactly, we will use the so-called \emph{big-Oh notation}: For a 
@@ -373,7 +373,7 @@ running times.
 
 Formally, the running time of an operation on a randomized data structure
 is a random variable and we want to study its \emph{expected value}. For
-a discrete random variable $X$ taking on values in some finite universe
+a discrete random variable $X$ taking on values in some countable universe
 $U$, the expected value of $X$, denoted by $\E[X]$ is given the by the formula
 \[
     \E[X] = \sum_{x\in U} x\cdot\Pr\{X=x\} \enspace .
@@ -400,7 +400,7 @@ A useful trick, that we will use repeatedly, is that of defining
 \emph{indicator random variables}.  These binary variables are useful
 when we want to count something and are best illustrated by an example.
 Suppose we toss a fair coin $k$ times and we want to know the expected
-number of times the coin came up heads.  Intuitively, we know the answer
+number of times the coin comes up heads.  Intuitively, we know the answer
 is $k/2$, but if we try to prove it using the definition of expected
 value, we get
 \begin{align*}
