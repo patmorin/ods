@@ -7,11 +7,12 @@ clean:
 	(cd java ; make clean)
 	(cd latex ; make clean)
 
-tarball:
-	tar czvf ods.tgz java/ods/
+tarballs:
+	tar czvf ods-java.tgz java/ods/
+	tar czvf ods-cpp.tgz cpp/
 
-install: all tarball
+install: all tarballs
 	(cd latex ; make install)
-	scp ods.tgz morin@cg.scs.carleton.ca:public_html/ods/
+	scp ods-java.tgz ods-cpp.tgz morin@cg.scs.carleton.ca:public_html/ods/
 
 
