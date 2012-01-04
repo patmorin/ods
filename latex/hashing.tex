@@ -508,12 +508,12 @@ data structure:
 
 While analyzing the #LinearHashTable# structure, we made a very strong
 assumption:  That for any set of elements, $\{#x_1#,\ldots,#x_n#\}$,
-the hash values $#hash(x_1)#,\ldots,#hash(x_n)#$ are independently and
-uniformly distributed over $\{0,\ldots,#t.length#-1\}$.  One way to
-imagine getting this is to have a giant array, called #tab# of length
-$2^{#w#}$, where each entry is a random #w#-bit integer, independent of
-all the other entries.  In this way, we could implement #hash(x)# by extracting
-a #d#-bit integer from #tab[x.hashCode()]#:
+the hash values $#hash(x_1)#,\ldots,#hash(x_n)#$ are independently
+and uniformly distributed over $\{0,\ldots,#t.length#-1\}$.  One way
+to imagine getting this is to have a giant array, #tab#, of length
+$2^{#w#}$, where each entry is a random #w#-bit integer, independent
+of all the other entries.  In this way, we could implement #hash(x)#
+by extracting a #d#-bit integer from #tab[x.hashCode()]#:
 \codeimport{ods/LinearHashTable.idealHash(x)}
 
 Unfortunately, storing an array of size $2^{#w#}$ is prohibitive in
