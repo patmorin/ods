@@ -223,9 +223,10 @@ Much of the work done by an #ArrayStack# involves shifting (by
 #add(i,x)# and #remove(i)#) and copying (by #resize()#) of data.  In the
 implementations shown above, this was done using #for# loops. It turns
 out that many programming environments have specific functions that are
-very efficient at copying and moving blocks of data.  In the C and C++
-programming languages there is the #memcpy(d,s,n)# function.  In Java
-there is the #System.arraycopy(s,i,d,j,n)# method.
+very efficient at copying and moving blocks of data.  In the C there is
+the #memcpy(d,s,n)# function. In C++ there is the #std::copy(a0,a1,b)#
+and algorithm.  In Java there is the
+#System.arraycopy(s,i,d,j,n)# method.  
 
 \codeimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
 
@@ -233,9 +234,9 @@ These functions are usually highly optimized and may even use special
 machine instructions that can do this copying much faster than we could do
 using a #for# loop.  Although using these functions does not asymptotically
 decrease the running times, it can still be a worthwhile optimization.
-In the Java implementations here, the use of #System.arraycopy(s,i,d,j,n)#
+In the \javaonly{Java}\cpponly{C++} implementations here, the use of \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}
 resulted in speedups of a factor of 2-3 depending on the types of
-operations performed.
+operations performed.  Your mileage may vary.
 
 \section{#ArrayQueue#: An Array-Based Queue}
 \seclabel{arrayqueue}
