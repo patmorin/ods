@@ -5,8 +5,8 @@
 
 
 \title{Sorting and Sorting Lower Bounds}
-\author{Pat Morin \\ COMP2402/2002}
-\date{Carleton University}
+\author{}
+\date{}
 
 
 \begin{document}
@@ -23,13 +23,13 @@
 
   \begin{tabular}{p{2.5in}p{1in}}
   \begin{itemize}
-    \item<1->Used in J. W. Bryce's Sorting maching in 1938 (U.S. Patent 2189024)
-    \item<2->``Invented'' by John von Neumann in 1945
-    \item<3->To sort $#a[0]#,\ldots,#a[n-1]#$:
+    \item<+->Used in J. W. Bryce's Sorting maching in 1938 (U.S. Patent 2189024)
+    \item<+->``Invented'' by John von Neumann in 1945
+    \item<+->To sort $#a[0]#,\ldots,#a[n-1]#$:
     \begin{enumerate}
-      \item<4-> sort $#a[0]#,\ldots,#a[n/2]#$
-      \item<5-> sort $#a[n/2+1]#,\ldots,#a[n-1]#$
-      \item<6-> merge the two sorted sequences
+      \item<+-> sort $#a[0]#,\ldots,#a[n/2]#$
+      \item<+-> sort $#a[n/2+1]#,\ldots,#a[n-1]#$
+      \item<+-> merge the two sorted sequences
     \end{enumerate}
   \end{itemize}
   &
@@ -44,18 +44,18 @@
 
   \frametitle{Mergesort}
   \begin{itemize}
-    \item<1->To sort $#a[0]#,\ldots,#a[n-1]#$:
+    \item<+->To sort $#a[0]#,\ldots,#a[n-1]#$:
     \begin{enumerate}
-      \item<2-> sort $#a0=a[0]#,\ldots,#a[n/2]#$  (recursively)
-      \item<3-> sort $#a1=a[n/2+1]#,\ldots,#a[n-1]#$ (recursively)
-      \item<4-> merge the two sorted sequences
+      \item<+-> sort $#a0=a[0]#,\ldots,#a[n/2]#$  (recursively)
+      \item<+-> sort $#a1=a[n/2+1]#,\ldots,#a[n-1]#$ (recursively)
+      \item<+-> merge the two sorted sequences
     \end{enumerate}
-    \item<1-> $\langle 9, 3, 5, 2, 1, 8, 7, 0, 6, 4 \rangle$
-    \item<1->
+    \item<+-> $\langle 9, 3, 5, 2, 1, 8, 7, 0, 6, 4 \rangle$
+    \item<+->
      \only<1>{$\langle 9, 3, 5, 2, 1\rangle \langle 8, 7, 0, 6, 4 \rangle$}%
      \only<2>{$\langle 1, 2, 3, 5, 9\rangle \langle 8, 7, 0, 6, 4 \rangle$}
-     \only<3->{$\langle 1, 2, 3, 5, 9\rangle \langle 0, 4, 6, 7, 8 \rangle$}
-    \item<4->$\langle 0, 1, 2, 3, 4, 5, 6, 7, 8, 9\rangle$
+     \only<+->{$\langle 1, 2, 3, 5, 9\rangle \langle 0, 4, 6, 7, 8 \rangle$}
+    \item<+->$\langle 0, 1, 2, 3, 4, 5, 6, 7, 8, 9\rangle$
   \end{itemize}
 \end{frame}
 
@@ -79,17 +79,17 @@
   \frametitle{Analysis of Mergesort}
 
   \begin{itemize}
-    \item<1->Mergesort $#a[0]#,\ldots,#a[n-1]#$:
+    \item<+->Mergesort $#a[0]#,\ldots,#a[n-1]#$:
     \begin{enumerate}
-      \item<2-> sort $#a[0]#,\ldots,#a[n/2]#$  (recursively)
-      \item<3-> sort $#a[n/2+1]#,\ldots,#a[n-1]#$ (recursively)
-      \item<4-> merge the two sorted sequences
+      \item<+-> sort $#a[0]#,\ldots,#a[n/2]#$  (recursively)
+      \item<+-> sort $#a[n/2+1]#,\ldots,#a[n-1]#$ (recursively)
+      \item<+-> merge the two sorted sequences
    \end{enumerate}
-   \item<1-> Let $T(#n#)$ be the time to run merge sort on an array of length $n$
-   \item<2-> Step 1 Takes $T(#n#/2)$ time
-   \item<3-> Step 2 Takes $T(#n#/2)$ time
-   \item<4-> Step 3 Takes $O(#n#)$ time
-   \item<5-> $T(#n#) = O(#n#) + 2T(#n#/2)$\footnote{Cheating a bit here, assuming $n$ is a power of 2.}
+   \item<+-> Let $T(#n#)$ be the time to run merge sort on an array of length $n$
+   \item<+-> Step 1 Takes $T(#n#/2)$ time
+   \item<+-> Step 2 Takes $T(#n#/2)$ time
+   \item<+-> Step 3 Takes $O(#n#)$ time
+   \item<+-> $T(#n#) = O(#n#) + 2T(#n#/2)$\footnote{Cheating a bit here, assuming $n$ is a power of 2.}
   \end{itemize}
 \end{frame}
 
@@ -97,15 +97,15 @@
   \frametitle{The Mergesort recurrence}
 
   \begin{itemize}
-    \item<1-> $T(#n#) = O(#n#) + 2T(#n#/2)$
-    \item<2->\only<2>{$T(#n#) = O(#n#) + 2O(#n#/2) + 4T(#n#/4)$}%
-             \only<3->{$T(#n#) = O(#n#) + O(#n#) + 4T(#n#/4)$}%
-    \item<4->\only<4>{$T(#n#) = O(#n#) + O(#n#) + 4O(#n#/4) + 8T(#n#/8)$}%
-             \only<5->{$T(#n#) = O(#n#) + O(#n#) + O(#n#) + 8T(#n#/8)$}%
-    \item<6->\only<6>{$T(#n#) = O(#n#) + O(#n#) + O(#n#) + \cdots + #n#O(1)$}%
-             \only<7->{$T(#n#) = O(#n#) + O(#n#) + O(#n#) + \cdots + O(#n#)$}
-    \item<8->$T(#n#) = O(#n#\log #n#)$
-    \item<9->\textbf{Theorem:} The Mergesort algorithm can sort an array of $#n#$ items in $O(#n#\log #n#)$ time
+    \item<+-> $T(#n#) = O(#n#) + 2T(#n#/2)$
+    \item<+->\only<2>{$T(#n#) = O(#n#) + 2O(#n#/2) + 4T(#n#/4)$}%
+             \only<+->{$T(#n#) = O(#n#) + O(#n#) + 4T(#n#/4)$}%
+    \item<+->\only<4>{$T(#n#) = O(#n#) + O(#n#) + 4O(#n#/4) + 8T(#n#/8)$}%
+             \only<+->{$T(#n#) = O(#n#) + O(#n#) + O(#n#) + 8T(#n#/8)$}%
+    \item<+->\only<6>{$T(#n#) = O(#n#) + O(#n#) + O(#n#) + \cdots + #n#O(1)$}%
+             \only<+->{$T(#n#) = O(#n#) + O(#n#) + O(#n#) + \cdots + O(#n#)$}
+    \item<+->$T(#n#) = O(#n#\log #n#)$
+    \item<+->\textbf{Theorem:} The Mergesort algorithm can sort an array of $#n#$ items in $O(#n#\log #n#)$ time
   \end{itemize}
 \end{frame}
 
@@ -144,15 +144,15 @@
   \frametitle{Comparison-based sorting algorithms}
 
   \begin{itemize}
-    \item<1-> So far, we have seen 3 sorting algorithms:
+    \item<+-> So far, we have seen 3 sorting algorithms:
     \begin{itemize}
-      \item<2-> Quicksort: $O(#n#\log #n#)$ expected time
-      \item<3-> Heapsort: $O(#n#\log #n#)$ time
-      \item<4-> Mergesort: $O(#n#\log #n#)$ time
+      \item<+-> Quicksort: $O(#n#\log #n#)$ expected time
+      \item<+-> Heapsort: $O(#n#\log #n#)$ time
+      \item<+-> Mergesort: $O(#n#\log #n#)$ time
     \end{itemize}
-    \item<5-> Is there a faster (maybe $O(#n#)$ time) sorting algorithm?
+    \item<+-> Is there a faster (maybe $O(#n#)$ time) sorting algorithm?
     \begin{itemize}
-      \item<6-> Answer: No and yes
+      \item<+-> Answer: No and yes
     \end{itemize}
   \end{itemize}
 
@@ -162,15 +162,15 @@
   \frametitle{Comparison-based sorting algorithms}
 
   \begin{itemize}
-    \item<1-> Quicksort, Heapsort, and Mergesort are comparison-based
+    \item<+-> Quicksort, Heapsort, and Mergesort are comparison-based
     \begin{itemize}
-      \item<2-> All branching in the algorithm is based on the results
+      \item<+-> All branching in the algorithm is based on the results
         of comparisons of the form $#a[i] < b[i]#$
-      \item<3-> These algorithms can be used to sort any array of
+      \item<+-> These algorithms can be used to sort any array of
         #Comparable# items
-      \item<4-> But this comes at a price
+      \item<+-> But this comes at a price
       \begin{itemize}
-        \item<5-> Every comparison-based sorting algorithm takes $\Omega(#n#\log #n#)$ time for some input
+        \item<+-> Every comparison-based sorting algorithm takes $\Omega(#n#\log #n#)$ time for some input
       \end{itemize}
     \end{itemize}
   \end{itemize}
@@ -181,20 +181,20 @@
   \frametitle{Comparison trees}
 
   \begin{itemize}
-    \item<1-> A \emph{comparison tree} is a full binary tree:
+    \item<+-> A \emph{comparison tree} is a full binary tree:
     \begin{itemize}
-      \item<2-> each internal node #u# is labelled with a pair #u.i# and #u.j# 
-      \item<3-> each leaf is labelled with a permutation of $\{0,\ldots,n-1\}$ 
+      \item<+-> each internal node #u# is labelled with a pair #u.i# and #u.j# 
+      \item<+-> each leaf is labelled with a permutation of $\{0,\ldots,n-1\}$ 
     \end{itemize}
-    \item<4-> For an array #a# we can \emph{run} the comparison tree   
+    \item<+-> For an array #a# we can \emph{run} the comparison tree   
     \begin{itemize}
-      \item<5-> #u# is the root
-      \item<6-> while #u# is not a leaf
+      \item<+-> #u# is the root
+      \item<+-> while #u# is not a leaf
       \begin{itemize}
-        \item<7-> if $a[u.i] < a[u.j]$ then #u = u.left# else #u = u.right#
+        \item<+-> if $a[u.i] < a[u.j]$ then #u = u.left# else #u = u.right#
       \end{itemize}
     \end{itemize}
-    \item<5-> The comparison tree \emph{sorts} if, for every input array #a#, the permutation at the leaf for #a# correctly sorts #a#
+    \item<+-> The comparison tree \emph{sorts} if, for every input array #a#, the permutation at the leaf for #a# correctly sorts #a#
   \end{itemize}
 \end{frame}
 
@@ -248,10 +248,10 @@
   \frametitle{Comparison-based sorting and comparison trees}
 
   \begin{itemize}
-    \item<1->Every deterministic comparison-based sorting algorithm $\mathcal{A}$ that can sort every array of $n$ elements defines a comparison tree $T_\mathcal{A}$ that sorts
-    \item<2->The height of $T_\mathcal{A}$ is equal to the (worst-case) number of comparisons that $\mathcal{A}$ performs
-    \item<3->\textbf{Theorem:} For every deterministic comparison-based sorting algorithm $\mathcal{A}$, there exists an input such that $\mathcal{A}$ requires $\Omega(#n#\log #n#)$ comparisons
-    \item<3->\textbf{Theorem:} For every comparison-based sorting algorithm $\mathcal{A}$, the expectedd number of comparisons performed by $\mathcal{A}$ while sorting a random permutation is $\Omega(#n#\log#n#)$
+    \item<+->Every deterministic comparison-based sorting algorithm $\mathcal{A}$ that can sort every array of $n$ elements defines a comparison tree $T_\mathcal{A}$ that sorts
+    \item<+->The height of $T_\mathcal{A}$ is equal to the (worst-case) number of comparisons that $\mathcal{A}$ performs
+    \item<+->\textbf{Theorem:} For every deterministic comparison-based sorting algorithm $\mathcal{A}$, there exists an input such that $\mathcal{A}$ requires $\Omega(#n#\log #n#)$ comparisons
+    \item<+->\textbf{Theorem:} For every comparison-based sorting algorithm $\mathcal{A}$, the expectedd number of comparisons performed by $\mathcal{A}$ while sorting a random permutation is $\Omega(#n#\log#n#)$
   \end{itemize}
 \end{frame}
 
@@ -260,12 +260,12 @@
   \frametitle{Summary}
 
   \begin{itemize}
-    \item<1-> Mergesort: runs in $O(#n#\log #n#)$ time
-    \item<2-> Any comparison-based sorting algorithm requires $\Omega(#n#\log #n#)$ time
-    \item<3-> Mergesort, Quicksort, and Heapsort are optimal comparison-based sorting algorithms
-    \item<4-> In-class problem:
+    \item<+-> Mergesort: runs in $O(#n#\log #n#)$ time
+    \item<+-> Any comparison-based sorting algorithm requires $\Omega(#n#\log #n#)$ time
+    \item<+-> Mergesort, Quicksort, and Heapsort are optimal comparison-based sorting algorithms
+    \item<+-> In-class problem:
     \begin{itemize}
-      \item<5-> Design an algorithm that takes an array #a# of #n# integers in the range $\{0,\ldots,#k#-1\}$ and sorts them in $O(#n#+#k#)$ time
+      \item<+-> Design an algorithm that takes an array #a# of #n# integers in the range $\{0,\ldots,#k#-1\}$ and sorts them in $O(#n#+#k#)$ time
     \end{itemize}
   \end{itemize}
 \end{frame}
