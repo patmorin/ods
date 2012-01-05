@@ -7,6 +7,9 @@
 
 #ifndef ARRAY_H_
 #define ARRAY_H_
+#include <iostream>
+#include <algorithm>
+
 #include <stdlib.h>
 #include <assert.h>
 
@@ -83,7 +86,8 @@ void array<T>::reverse() {
 template<class T>
 void array<T>::copyOfRange(array<T> &a0, array<T> &a, int i, int j) {
 	array<T> b(j-i);
-	memcpy(b.a, a.a, (j-i)*sizeof(T));
+	std::copy(a.a, a.a+j-i, b.a);
+	// memcpy(b.a, a.a, (j-i)*sizeof(T));
 	a0 = b;
 }
 

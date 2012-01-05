@@ -51,7 +51,7 @@ public:
 template<class T>
 void BinaryHeap<T>::resize() {
 	array<T> b(max(2*n, 1));
-	memcpy(b+0, a+0, n*sizeof(T));
+	std::copy(a+0, a+n, b+0);
 	a = b;
 }
 
