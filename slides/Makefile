@@ -3,7 +3,7 @@ java = $(wildcard ../java/ods/*.java)
 
 LFLAGS=-interaction=nonstopmode -halt-on-error
 
-all: sorting.pdf
+all: sorting.pdf bigoh.pdf heaps.pdf
 
 %.pdf : %-tmp.tex $(java) snarf.pl Makefile
 	pdflatex $(LFLAGS) $<
