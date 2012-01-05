@@ -114,7 +114,7 @@ otherwise we move down into $L_{#r#-1}$.  Each step (right or down) in
 this search takes only constant time so, by \lemref{skiplist-searchpath},
 the expected running time of #find(x)# is $O(\log #n#)$.
 
-Before we can add an element to a #SkipListSet#, we need a method to
+Before we can add an element to a #SkipListSSet#, we need a method to
 simulate tossing coins to determine the height, #k#, of a new node.
 We do this by picking a random integer, #z#, and counting the number of
 trailing $1$s in the binary representation of #z#:\footnote{This method
