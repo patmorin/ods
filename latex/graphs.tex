@@ -1,0 +1,26 @@
+\chapter{Graphs}
+\chaplabel{graphs}
+
+In this chapter, we study two representations of graphs and basic
+algorithms on these representations.  Mathematically, a \emph{(directed)
+graph} is a pair $G=(V,E)$ where $V$ is a set (called vertices) and $E$
+is a set of ordered pairs of vertices called \emph{edges}.  For our
+purposes, we will assume that $V=\{0,\ldots,#n#-1\}$.
+
+The typical operations we would like to perform on graphs are:
+\begin{itemize}
+  \item #addEdge(i,j)#: Add the edge $(#i#,#j#)$ to $E$.
+  \item #removeEdge(i,j)#: Remove the edge $(#i#,#j#)$ from $E$.
+  \item #hasEdge(i,j)#: Check if the edge $(#i#,#j#)\in E$ 
+  \item #outEdges(i)#: Return a #List# of all integers $#j#$ such that
+  $(#i#,#j#)\in E$
+  \item #inEdges(i)#: Return a #List# of all integers $#j#$ such that
+  $(#j#,#i#)\in E$
+\end{itemize}
+
+Note that these operations are not terribly difficult to implement
+efficiently.  For example, the first three operations can be implemented
+directly by using a #USet#, so they can be implemented in constant
+expected time using the hash tables discussed in \chapref{hashing}.
+The last two operations can be implemented in 
+
