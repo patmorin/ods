@@ -2,7 +2,6 @@ package ods;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Stack;
@@ -28,17 +27,17 @@ public class Algorithms {
 	 * @param g
 	 * @param i
 	 */
-	public static void bfs(Graph g, int i) {
-		boolean[] states = new boolean[g.nVertices()];
-		Queue<Integer> q = new LinkedList<Integer>();
-		q.add(i);
+	public static void bfs(Graph g, int r) {
+		boolean[] seen = new boolean[g.nVertices()];
+		Queue<Integer> q = new SLList<Integer>();
+		q.add(r);
+		seen[r] = true;
 		while (!q.isEmpty()) {
-			i = q.remove();
-			// do any processing for vertex i now
+			int i = q.remove();
 			for (Integer j : g.outEdges(i)) {
-				if (!states[j]) {
+				if (!seen[j]) {
 					q.add(j);
-					states[j] = true;
+					seen[j] = true;
 				}
 			}
 		}
@@ -51,42 +50,42 @@ public class Algorithms {
 	 * @param g
 	 * @param i
 	 */
-	public static void dfs(Graph g, int i) {
-		byte[] states = new byte[g.nVertices()];
-		dfs(g, i, states);
+	public static void dfs(Graph g, int r) {
+		byte[] c = new byte[g.nVertices()];
+		dfs(g, r, c);
 	}
 
-	public static void dfs(Graph g, int i, byte[] states) {
-		states[i] = grey;  // visiting i
+	public static void dfs(Graph g, int i, byte[] c) {
+		c[i] = grey;  // currently visiting i
 		for (Integer j : g.outEdges(i)) {
-			if (states[j] == white) {
-				// edge (i,j) is part of dfs tree - visit j next
-				states[j] = grey;
-				dfs(g, j, states);
+			if (c[j] == white) {
+				c[j] = grey;
+				dfs(g, j, c);
 			} 
 		}
-		states[i] = black; // done visiting i
+		c[i] = black; // done visiting i
 	}
-	
-	public static void depthFirstSearch(Graph g, int i) {
-		byte[] states = new byte[g.nVertices()];
-		int[] next = new int[g.nVertices()];
+
+	/**
+	 * A non-recursive implementation of dfs
+	 * Note, this doesn't give exactly the same traversal as dfs(g,r)
+	 * @param g
+	 * @param r
+	 */
+	public static void dfs2(Graph g, int r) {
+		byte[] c = new byte[g.nVertices()];
 		Stack<Integer> s = new Stack<Integer>();
-		s.push(i);
+		s.push(r);
 		while (!s.isEmpty()) {
-			i = s.peek();
-			if (next[i] < g.outDegree(i)) {
-				int j = g.outEdges(i).get(next[i]++);
-				if (states[j] == white) {
+			int i = s.pop();
+			if (c[i] == white) {
+				c[i] = grey;
+				for (int j : g.outEdges(i))
 					s.push(j);
-					states[j] = grey;
-				}
-			} else {
-				states[i] = black;
-				s.pop();
 			}
 		}
 	}
+
 
 
 	protected static <T> void merge(T[] a0, T[] a1, T[] a, Comparator<T> c) {
