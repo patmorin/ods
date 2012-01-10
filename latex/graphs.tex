@@ -103,10 +103,11 @@ An #AdjacencyMatrix# supports the operations
 The space used by an #AdjacencyMatrix# is  $O(#n#^2)$.
 \end{thm}
 
-Despite the high memory usage and poor performance of #inEdges(i)# the
-#outEdges(i)# operations, an #AdjacencyMatrix# can still be useful for
-some applications.  When the graph $G$ is \emph{dense}, i.e., it has
-close to $#n#^2$ edges, then a memory usage of $#n#^2$ may be acceptable.
+Despite the high memory usage and poor performance of the #inEdges(i)#
+and #outEdges(i)# operations, an #AdjacencyMatrix# can still be useful for
+some applications.  In particular, when the graph $G$ is \emph{dense},
+i.e., it has close to $#n#^2$ edges, then a memory usage of $#n#^2$
+may be acceptable.
 
 The #AdjacencyMatrix# data structure is also commonly used because
 algebraic operations the matrix #a# can be used to efficiently compute
@@ -150,7 +151,7 @@ This takes constant time.
 The #removeEdge(i,j)# operation searches through the list #adj[i]#
 until it finds #j# and then removes it:
 \codeimport{ods/AdjacencyLists.removeEdge(i,j)}
-This takes $O(\deg(#i#)$ time, where $\deg(#i#)$ (the \emph{degre} of
+This takes $O(\deg(#i#))$ time, where $\deg(#i#)$ (the \emph{degre} of
 $#i#$) counts the number of edges in $E$ that have $#i#$ as their source.
 
 The #hasEdge(i,j)# operation is similar;  it searches through the list
@@ -194,10 +195,10 @@ up include:
   of #adj#?  One could use an array-based list,  a linked-list, or even
   a hashtable.
   \item Should there be a second adjacency list, #inadj#, that stores,
-  for each #i#, this list of vertices, #j#, such that $#(j,i)#\in E$?  
-  This can reduce the running-time of the #inEdges(i)# operation, but
-  requires slightly more work in the #addEdge(i,j)# and #removeEdge(i,j)#
-  operations.
+  for each #i#, this list of vertices, #j#, such that $#(j,i)#\in E$?
+  This can greatly reduce the running-time of the #inEdges(i)#
+  operation, but requires slightly more work in the #addEdge(i,j)#
+  and #removeEdge(i,j)# operations.
   \item Should the entry for the edge #(i,j)# in #adj[i]# be linked by
   a reference to the corresponding entry in #inadj[j]#.
   \item Should edges be first-class objects with their own associated data?
@@ -208,9 +209,12 @@ implementation and performance features of the implementation.
 \section{Graph Traversal}
 
 In this section we present two algorithms for exploring a graph, starting
-at one of its vertices, #i#, and finding all vertices that can be reached
-from #i# by traversing edges in the source to target direction.
-Both of these algorithms are best suited to graphs represented by the adjacency list representation from \secref{adjacency-list}.
+at one of its vertices, #i#, and finding all vertices that can be
+reached from #i# by traversing edges in the source to target direction.
+Both of these algorithms are best suited to graphs represented by the
+adjacency list representation from \secref{adjacency-list}.  Therefore,
+when analyzing these algorithms we will assume that the underlying
+representation is as an #AdjacencyLists#.
 
 \subsection{Breadth-First Search}
 
