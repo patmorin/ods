@@ -1,19 +1,34 @@
 \chapter{Graphs}
 \chaplabel{graphs}
 
-In this chapter, we study two representations of graphs and basic
-algorithms on these representations.  Mathematically, a \emph{(directed)
-graph} is a pair $G=(V,E)$ where $V$ is a set of \emph{vertices}
-and $E$ is a set of ordered pairs of vertices called \emph{edges}.
+\textbf{Warning to the Reader:} This chapter is still being actively
+developed, meaning that the code has not been thoroughly tested and/or
+the text has not be carefully proofread.
 
-An edge #(i,j)# is \emph{directed} from #i# to #j#;  #i# is called
-the \emph{source} of the edge and #j# is called the \emph{target}.
-A \emph{path} in $G$ is a sequence of vertices $v_0,\ldots,v_k$ such that,
-for every $i\in\{1,\ldots,k\}$, the edge $(v_{i-1},v_{i})$ is in $E$.
-A path $v_0,\ldots,v_k$ is a cycle if, additionally, the edge $(v_k,v_0)$
-is in $E$.  A path (or cycle) is \emph{simple} if all of its vertices
-are unique.  If there is a path from some vertex $v_i$ to some vertex
-$v_j$ then we say that $v_j$ is \emph{reachable} from $v_i$.
+In this chapter, we study two representations of graphs and basic
+algorithms on these representations.  
+
+Mathematically, a \emph{(directed) graph} is a pair $G=(V,E)$ where
+$V$ is a set of \emph{vertices} and $E$ is a set of ordered pairs
+of vertices called \emph{edges}.  An edge #(i,j)# is \emph{directed}
+from #i# to #j#;  #i# is called the \emph{source} of the edge and #j#
+is called the \emph{target}.  A \emph{path} in $G$ is a sequence of
+vertices $v_0,\ldots,v_k$ such that, for every $i\in\{1,\ldots,k\}$,
+the edge $(v_{i-1},v_{i})$ is in $E$.  A path $v_0,\ldots,v_k$ is a
+cycle if, additionally, the edge $(v_k,v_0)$ is in $E$.  A path (or
+cycle) is \emph{simple} if all of its vertices are unique.  If there is
+a path from some vertex $v_i$ to some vertex $v_j$ then we say that $v_j$
+is \emph{reachable} from $v_i$.
+An example of a graph is shown in \figref{graph}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/graph}
+  \end{center}
+  \caption{A graph with 12 vertices.  Vertices are drawn as numbered circles and edges are drawn as pointed curves pointing from source to target.}
+  \figlabel{graph}
+\end{figure}
+
 
 Graphs have an enormous number of applications, due to their ability
 to model so many phenomenon. There are many obvious examples. Computer
@@ -74,9 +89,37 @@ The matrix entry #a[i][j]# is defined as
       #false# & \text{otherwise}
     \end{cases}
 \]
-With this representation, the #addEdge(i,j)#, #removeEdge(i,j)#, and #hasEdge(i,j)# operations just involve setting or reading the matrix entry #a[i][j]#:
+The adjacency matrix for the graph in \figref{graph} is
+shown in \figref{graph-adj}.
+
+With this representation, the #addEdge(i,j)#,
+#removeEdge(i,j)#, and #hasEdge(i,j)# operations just
+involve setting or reading the matrix entry #a[i][j]#:
 \codeimport{ods/AdjacencyMatrix.addEdge(i,j).removeEdge(i,j).hasEdge(i,j)}
 These operations clearly take constant time per operation.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/graph} \\[3ex]
+    \begin{tabular}{c|cccccccccccc}
+        &0&1&2&3&4&5&6&7&8&9&10&11 \\\hline
+       0&0&1&0&0&1&0&0&0&0&0&0 &0\\
+       1&1&0&1&0&0&1&1&0&0&0&0 &0\\
+       2&1&0&0&1&0&0&1&0&0&0&0 &0\\
+       3&0&0&1&0&0&0&0&1&0&0&0 &0\\
+       4&1&0&0&0&0&1&0&0&1&0&0 &0\\
+       5&0&1&1&0&1&0&1&0&0&1&0 &0\\
+       6&0&0&1&0&0&1&0&1&0&0&1 &0\\
+       7&0&0&0&1&0&0&1&0&0&0&0 &1\\
+       8&0&0&0&0&1&0&0&0&0&1&0 &0\\
+       9&0&0&0&0&0&1&0&0&1&0&1 &0\\
+      10&0&0&0&0&0&0&1&0&0&1&0 &1\\
+      11&0&0&0&0&0&0&0&1&0&0&1 &0\\
+    \end{tabular} 
+  \end{center}
+  \caption{A graph and its adjacency matrix.}
+  \figlabel{graph-adj}
+\end{figure}
 
 Where the adjacency matrix performs poorly is with the #outEdges(i)# and
 #inEdges(i)# operations.  To implement these, we must scan all #n#
@@ -141,10 +184,30 @@ In this section, the graph $G=(V,E)$ is represented as an array,
 adjacent to vertex #i#.  That is, it contains every index #j# such that
 $#(i,j)#\in E$.
 \codeimport{ods/AdjacencyLists.adj.n.AdjacencyLists(n0)}
+(An example is shown in \figref{graph-adjlist}.)
 In this particular implementation, we represent each list in #adj#
 as an #ArrayStack#, because we would like constant time access by
 position. Other options are also possible.  Specifically, we could have
 implemented #adj# as a #DLList#.
+
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/graph} \\[3ex]
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
+        0&1&2&3&4&5&6 &7 &8&9 &10&11 \\\hline
+        1&0&1&2&0&1&5 &6 &4&8 &9 &10 \\
+        4&2&3&7&5&2&2 &3 &9&5 &6 &7 \\
+         &6&6& &8&6&7 &11& &10&11& \\
+         &5& & & &9&10&  & &  &  & \\
+         & & & & &4&  &  & &  &  & \\
+    \end{tabular} 
+  \end{center}
+  \caption{A graph and its adjacency lists}
+  \figlabel{graph-adjlist}
+\end{figure}
+
+
 
 The #addEdge(i,j)# operation just appends the value #j# to the list #adj[i]#:
 \codeimport{ods/AdjacencyLists.addEdge(i,j)}
@@ -234,6 +297,21 @@ add the same vertex to #q# more than once.  It does this by using an
 auxiliary boolean array, #seen#, that keeps track of which vertices have
 already been discovered.
 \codeimport{ods/Algorithms.bfs(g,r)}
+An example of running #bfs(g,0)# on the graph from \figref{graph}
+is shown in \figref{graph-bfs}.  Different executions are possible,
+depending on the ordering of the adjacency lists; \figref{graph-bfs}
+uses the adjacency lists in \figref{graph-adjlist}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/graph-bfs}
+  \end{center}
+  \caption{An example of bread-first-search starting at node 0. Nodes are
+  labelled with the order in which they are added to #q#.  Edges that
+  result in nodes being added to #q# are drawn in black, other edges
+  are drawn in grey.}
+  \figlabel{graph-bfs}
+\end{figure}
 
 Analyzing the running-time of the #bfs(g,i)# routine is fairly
 straightforward.  The use of the #seen# array ensures that no vertex is
@@ -290,6 +368,20 @@ vertex #i#, we first mark #i# as grey.  Next, we scan #i#'s adjacency list
 and recursively visit any white vertex we find in this list.  Finally,
 we are done processing #i#, so we color #i# black and return.
 \codeimport{ods/Algorithms.dfs(g,r).dfs(g,i,c)}
+An example of the execution of this algorithm is shown in \figref{graph-dfs}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/graph-dfs}
+  \end{center}
+  \caption{An example of depth-first-search starting at node 0. Nodes are
+  labelled with the order in which they are processed.  Edges that
+  result in a recursive call are drawn in black, other edges
+  are drawn in grey.}
+  \figlabel{graph-dfs}
+\end{figure}
+
+
 
 Although depth-first-search may best be thought of as a recursive
 algorithm, recursion is not the best way to implement it. Indeed, the code
