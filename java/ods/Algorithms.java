@@ -42,7 +42,24 @@ public class Algorithms {
 			}
 		}
 	}
-	
+
+	public static void bfsZ(Graph g, int r) {
+		boolean[] seen = new boolean[g.nVertices()];
+		Queue<Integer> q = new SLList<Integer>();
+		q.add(r);
+		seen[r] = true;
+		while (!q.isEmpty()) {
+			int i = q.remove();
+			for (Integer j : g.outEdges(i)) {
+				if (!seen[j]) {
+					System.out.println(i + " => " + j);
+					q.add(j);
+					seen[j] = true;
+				}
+			}
+		}
+	}
+
 	protected static byte white = 0, grey = 1, black = 2;
 
 	/** 
@@ -66,6 +83,23 @@ public class Algorithms {
 		c[i] = black; // done visiting i
 	}
 
+	public static void dfsZ(Graph g, int r) {
+		byte[] c = new byte[g.nVertices()];
+		dfsZ(g, r, c);
+	}
+
+	public static void dfsZ(Graph g, int i, byte[] c) {
+		c[i] = grey;  // currently visiting i
+		for (Integer j : g.outEdges(i)) {
+			if (c[j] == white) {
+				System.out.println(i + " => " + j);
+				c[j] = grey;
+				dfsZ(g, j, c);
+			} 
+		}
+		c[i] = black; // done visiting i
+	}
+
 	/**
 	 * A non-recursive implementation of dfs
 	 * Note, this doesn't give exactly the same traversal as dfs(g,r)
@@ -80,6 +114,21 @@ public class Algorithms {
 			int i = s.pop();
 			if (c[i] == white) {
 				c[i] = grey;
+				for (int j : g.outEdges(i))
+					s.push(j);
+			}
+		}
+	}
+
+	public static void dfs2Z(Graph g, int r) {
+		byte[] c = new byte[g.nVertices()];
+		Stack<Integer> s = new Stack<Integer>();
+		s.push(r);
+		while (!s.isEmpty()) {
+			int i = s.pop();
+			if (c[i] == white) {
+				c[i] = grey;
+				System.out.println(i);
 				for (int j : g.outEdges(i))
 					s.push(j);
 			}

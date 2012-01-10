@@ -59,4 +59,29 @@ public class AdjacencyLists implements Graph {
 			}
 		}	
 	}
+	
+	public static Graph mesh(int n) {
+		Graph g = new AdjacencyLists(n*n);
+		for (int k = 0; k < n*n; k++) {
+			if (k % n > 0) 
+				g.addEdge(k, k-1);
+			if (k >= n)
+				g.addEdge(k, k-n);
+			if (k % n != n-1)
+				g.addEdge(k, k+1);
+			if (k < n*(n-1))
+				g.addEdge(k, k+n);
+		}
+		return g;
+	}
+	
+	public static void main(String[] args) {
+		Graph g = mesh(4);
+		Algorithms.bfsZ(g,0);
+		Algorithms.dfsZ(g,0);
+		Algorithms.dfs2Z(g,0);
+		
+		AdjacencyMatrix.main(args);
+	}
+
 }
