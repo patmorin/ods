@@ -16,6 +16,49 @@ import java.util.TreeSet;
  */
 public class Testum {
 
+	public static void graphCmp(Graph g1, Graph g2) {
+		int n = g1.nVertices();
+		Utils.myassert(n == g2.nVertices());
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				Utils.myassert(g1.hasEdge(i,j) == g2.hasEdge(i,j));
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			List<Integer> l1 = g1.outEdges(i);
+			List<Integer> l2 = g2.outEdges(i);
+			for (Integer x: l1) Utils.myassert(l2.contains(x));
+			for (Integer x: l2) Utils.myassert(l1.contains(x));
+		}		
+		for (int i = 0; i < n; i++) {
+			List<Integer> l1 = g1.inEdges(i);
+			List<Integer> l2 = g2.inEdges(i);
+			for (Integer x: l1) Utils.myassert(l2.contains(x));
+			for (Integer x: l2) Utils.myassert(l1.contains(x));
+		}		
+	}
+	
+	
+	public static void graphTests(Graph g1, Graph g2) {
+		int n = g1.nVertices();
+		Random rand = new Random();
+		for (int k = 0; k < 50*n*n; k++) {
+			int i = rand.nextInt(n);
+			int j = rand.nextInt(n);
+			if (i != j) {
+				if (g1.hasEdge(i,j)) {
+					g1.removeEdge(i,j);
+					g2.removeEdge(i,j);
+				} else {
+					g1.addEdge(i,j);
+					g2.addEdge(i,j);					
+				}
+			}
+			graphCmp(g1, g2);
+		}
+	}
+	
+	
 	protected static String s(Object c) {
 		String s = c.getClass().getName();
 		if (c instanceof SortedSSet<?>) {

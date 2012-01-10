@@ -36,14 +36,14 @@ public class AdjacencyMatrix implements Graph {
 
 	public List<Integer> outEdges(int i) {
 		List<Integer> edges = new ArrayList<Integer>();
-		for (int j = 0; i < n; i++) 
+		for (int j = 0; j < n; j++) 
 			if (a[i][j]) edges.add(j);
 		return edges;
 	}
 
 	public List<Integer> inEdges(int i) {
 		List<Integer> edges = new ArrayList<Integer>();
-		for (int j = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
 			if (a[j][i]) edges.add(j);
 		return edges;
 	}
@@ -64,5 +64,16 @@ public class AdjacencyMatrix implements Graph {
 	
 	public int nVertices() {
 		return n;
+	}
+	
+	public static void main(String[] args) {
+		for (int n = 10; n < 500; n *= 2) {			
+			Graph am = new AdjacencyMatrix(n);
+			Graph al = new AdjacencyLists(n);
+			System.out.print("Running tests on graphs of size " + n + "...");
+			System.out.flush();
+			Testum.graphTests(am, al);
+			System.out.println("done");
+		}
 	}
 }
