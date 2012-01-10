@@ -8,10 +8,12 @@ and $E$ is a set of ordered pairs of vertices called \emph{edges}.
 
 An edge #(i,j)# is \emph{directed} from #i# to #j#;  #i# is called
 the \emph{source} of the edge and #j# is called the \emph{target}.
-A \emph{path} in $G$ is a sequence of vertices $v_0,\ldots,v_k$
-such that, for every $i\in\{1,\ldots,k\}$, the edge $(v_i,v_{i+1})$
-is in $E$.  A path $v_0,\ldots,v_k$ forms a cycle if, additionally,
-the edge $(v_k,v_0)$ is in $E$.
+A \emph{path} in $G$ is a sequence of vertices $v_0,\ldots,v_k$ such that,
+for every $i\in\{1,\ldots,k\}$, the edge $(v_{i-1},v_{i})$ is in $E$.
+A path $v_0,\ldots,v_k$ is a cycle if, additionally, the edge $(v_k,v_0)$
+is in $E$.  A path (or cycle) is \emph{simple} if all of its vertices
+are unique.  If there is a path from some vertex $v_i$ to some vertex
+$v_j$ then we say that $v_j$ is \emph{reachable} from $v_i$.
 
 Graphs have an enormous number of applications, due to their ability
 to model so many phenomenon. There are many obvious examples. Computer
@@ -209,12 +211,11 @@ implementation and performance features of the implementation.
 \section{Graph Traversal}
 
 In this section we present two algorithms for exploring a graph, starting
-at one of its vertices, #i#, and finding all vertices that can be
-reached from #i# by traversing edges in the source to target direction.
-Both of these algorithms are best suited to graphs represented by the
-adjacency list representation from \secref{adjacency-list}.  Therefore,
-when analyzing these algorithms we will assume that the underlying
-representation is as an #AdjacencyLists#.
+at one of its vertices, #i#, and finding all vertices that are reachable
+from #i#.  Both of these algorithms are best suited to graphs represented
+using an adjacency list representation.  Therefore, when analyzing these
+algorithms we will assume that the underlying representation is as an
+#AdjacencyLists#.
 
 \subsection{Breadth-First Search}
 
@@ -226,12 +227,12 @@ This algorithm is a generalization of the breadth-first-search algorithm
 for binary trees (\secref{bintree:traversal}), and is very similar; it
 uses a queue, #q#, that initially contains only #i#.  It then repeatedly
 extracts an element from #q# and adds its neighbours to #q#, provided
-that they have not already been added to #q#.  The only major difference
+that these neighbours have not been in #q#.  The only major difference
 between the breadth-first-search algorithm for graphs and for trees
 is that the algorithm for graphs has to ensure that it does not visit
-the same vertex more than once.  It does this by using an auxiliary
-boolean array, #seen#, that keeps track of which vertices have already
-been discovered.
+add the same vertex to #q# more than once.  It does this by using an
+auxiliary boolean array, #seen#, that keeps track of which vertices have
+already been discovered.
 \codeimport{ods/Algorithms.bfs(g,r)}
 
 Analyzing the running-time of the #bfs(g,i)# routine is fairly
