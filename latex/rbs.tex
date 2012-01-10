@@ -170,11 +170,14 @@ With this observation, the proof of \lemref{rbs}
 involves some simple calculations with harmonic numbers:
 
 \begin{proof}[Proof of \lemref{rbs}]
-Let $I_i$ be the indicator random variable that is equal to one when $i$ appears on the search path for #x# and zero otherwise.  Then the length of the search path is given by
+Let $I_i$ be the indicator random variable that is equal to one when $i$
+appears on the search path for #x# and zero otherwise.  Then the length
+of the search path is given by
 \[
   \sum_{i\in\{0,\ldots,#n#-1\}\setminus\{#x#\}} I_i
 \]
-so, if $#x#\in\{0,\ldots,#n#-1\}$, the expected length of the search path is given by
+so, if $#x#\in\{0,\ldots,#n#-1\}$, the expected length of the search
+path is given by (see \figref{rbst-probs}.a)
 \begin{align*}
   \E\left[\sum_{i=0}^{#x#-1} I_i + \sum_{i=#x#+1}^{#n#-1} I_i\right]
    & =  \sum_{i=0}^{#x#-1} \E\left[I_i\right]
@@ -188,8 +191,21 @@ so, if $#x#\in\{0,\ldots,#n#-1\}$, the expected length of the search path is giv
    & = H_{#x#+1} + H_{#n#-#x#} - 2  \enspace .
 \end{align*}
 The corresponding calculations for a search value
-$#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$ are almost identical.
+$#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$ are almost identical (see
+\figref{rbst-probs}.b).
 \end{proof}
+
+\begin{figure}
+  \begin{center}
+    \begin{tabular}{c}
+      \includegraphics{figs/rbst-probs-a} \\ (a) \\[2ex]
+      \includegraphics{figs/rbst-probs-b} \\ (b) \\[2ex]
+    \end{tabular}
+  \end{center}
+  \caption{The probabilities of an element being on the search path for #x#
+   when (a)~#x# is an integer and (b)~when #x# is not an integer.}
+  \figlabel{rbst-probs}
+\end{figure}
 
 \subsection{Summary}
 
