@@ -381,17 +381,15 @@ An example of the execution of this algorithm is shown in \figref{graph-dfs}
   \figlabel{graph-dfs}
 \end{figure}
 
-
-
 Although depth-first-search may best be thought of as a recursive
-algorithm, recursion is not the best way to implement it. Indeed, the code
-given above will fail for many large graphs by causing a stack overflow.
-An alternative implementation is to replace the recursion stack with an
-explicit stack.  The following implementation does just that:
-\codeimport{ods/Algorithms.dfs2(g,r)}
-In the above code, when next vertex #i# is processed, it is colored grey
-and then replaced, on the stack, with its adjacent vertices.  During the
-next round, one of these vertices will be visited.
+algorithm, recursion is not the best way to implement it. Indeed, the
+code given above will fail for many large graphs by causing a stack
+overflow.  An alternative implementation is to replace the recursion
+stack with an explicit stack.  The following implementation does just
+that: \codeimport{ods/Algorithms.dfs2(g,r)} In the above code, when
+next vertex, #i#, is processed, #i# is colored grey and then replaced,
+on the stack, with its adjacent vertices.  During the next round, one
+of these vertices will be visited.
 
 Not surprisingly, the running time of #dfs(g,r)# and #dfs2(g,r)# is the
 same as that of #bfs(g,r)#:
@@ -409,16 +407,33 @@ of #dfs2(g,r)# algorithm, #i# is one of the nodes that replaced #i'#
 on the stack.)  If we think of #i'# as the parent of #i#, then we obtain
 a tree rooted at #r#.
 
-An important property of the depth-first-search algorithm is that, once
-the algorithm starts colors the node #i# grey, #i# will not become black
-until every node #j# for which there is a path from #i# to #j# that uses
-only white nodes is also black.  One application of this property is the
-detection of cycles.  Any time the #dfs(g,i,c)# algorithm chooses not
-to recurse on a node #j# because #j# is grey, this implies that there
-is a cycle in $G$ since there is a path from #j# to #i# on the recursive
-stack and there is an edge from #i# to #j#.  On the other hand, if there
-is a cycle $C$ in $G$, and there is a path from #r# to any vertex in $C$,
-then $dfs(g,i,c)$ will eventually discover $C$ or some other cycle.
+An important property of the depth-first-search algorithm is the
+following: Suppose that when node #i# is colored grey, there exists a path
+from #i# to some other node #j# that uses only white vertices.  Then #j#
+will be colored (first grey then) black before #i# is colored black.
+(This can be proven by contradiction, by consider any path $P$ from #i#
+to #j#.)
+
+One application of this property is the detection of cycles. Refer
+to \figref{dfs-cycle}.  Consider some cycle, $C$, that can be reached
+from #r#.  Let #i# be the first node of $C$ that is colored grey,
+and let #j# be the node that precedes #i# on the cycle $C$.  Then,
+by the above property, #j# will be colored grey and the edge #(j,i)#
+will be considered by the algorithm while #i# is still grey.  Thus,
+the algorithm can conclude that there is a path, $P$, from #i# to #j#
+in the depth-first-search tree and the edge #(j,i)# exists.  Therefore,
+$P$ is also a cycle.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/dfs-cycle}
+  \end{center}
+  \caption{The depth-first-search algorithm can be used to detect cycles
+  in $G$.The node #j# is colored grey while #i# is still grey.  This
+  implies there is a path, $P$, from #i# to #j# in the depth-first-search
+  tree, and the edge #(i,j)# implies that $P$ is also a cycle.}
+  \figlabel{dfs-cycle}
+\end{figure}
 
 \section{Discussion and Exercises}
 
