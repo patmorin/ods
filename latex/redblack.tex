@@ -531,27 +531,35 @@ method.} Define the potential of an internal node #u# in a 2-4 tree as
 \[
   \Phi(#u#) = 
     \begin{cases} 
-      c & \text{if #u# has 2 children} \\ 
+      1 & \text{if #u# has 2 children} \\ 
       0 & \text{if #u# has 3 children} \\ 
-      3c & \text{if #u# has 3 children}  
+      3 & \text{if #u# has 4 children}  
     \end{cases}
 \]
 and the potential of a 2-4 tree as the sum of the potentials of its nodes.
 When a split occurs, it is because a node of degree 4 becomes two nodes,
 one of degree 2 and one of degree 3.  This means that the overall
-potential drops by $3c-c-0 = 2c$.  Thus, the time spent performing a
-split is accounted for by the drop in potential. When a merge occurs,
-two nodes that used to have degree 2 are replaced by one node of degree
-3. The result is a drop in potential of $2c-0=2c$.  This drop in potential
-accounts for the cost of the merge.  A borrow operation happens only
-once per deletion and, except for merges and splits, the potential can
-only increase by a constant amount for each addition or removal of a leaf.
+potential drops by $3-1-0 = 2$. When a merge occurs, two nodes that
+used to have degree 2 are replaced by one node of degree 3. The result is
+a drop in potential of $2-0=2$.  Therefore, for every split or merge,
+the potential decreases by $2$.
 
-The above analysis implies that, beginning with an empty 2-4 tree,
-any sequence of $m$ additions and removals of leaves results in at most
-$O(m)$ time spent splitting nodes, merging nodes, and borrowing children
-from nodes.  \thmref{redblack-amortized} is a consequence of this
-analysis and the correspondence between 2-4 trees and red-black trees.
+Next notice that, if we ignore splitting and merging of nodes, there
+are only a constant number of nodes whose number of children is changed
+by the addition or removal of a leaf.  When adding a node, one node
+has its number of children increase by 1, increasing the potential by
+at most $3$.  During the removal of a leaf, one node has its number of
+children decrease by 1, increasing the potential by at most $1$, and two
+nodes may be involved in a borrowing operation, increasing their total
+potential by at most $1$.
+
+To summarize, each merge and split causes the potential to drop by
+at least 2.  Ignoring merging and splitting, each addition or removal
+causes the potential to rise by at most 3, and the potential is always
+non-negative.  Therefore, the number of splits and merges caused by $m$
+additions or removals on an initially empty tree is at most $3m/2$.
+\thmref{redblack-amortized} is a consequence of this analysis and the
+correspondence between 2-4 trees and red-black trees.
 
 \section{Discussion and Exercises}
 
