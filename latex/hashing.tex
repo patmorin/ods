@@ -157,11 +157,11 @@ With \lemref{universal-hashing}, the performance of #remove(x)#, and
 \end{proof}
 
 Now, we want to prove \lemref{universal-hashing}, but first we need a
-result from number theory.  In the following proof, we use the
-notation $(b_r,\ldots,b_0)_2$ to denote $\sum_{i=0}^r b_i2^i$, where
-each $b_i$ is a bit either 0 or 1, i.e., the integer whose binary
-representation is given by $b_r,\ldots,b_0$.  We use $\star$ to denote
-a bit of unknown value.
+result from number theory.  In the following proof, we use the notation
+$(b_r,\ldots,b_0)_2$ to denote $\sum_{i=0}^r b_i2^i$, where each $b_i$
+is a bit, either 0 or 1.  In other words, $(b_r,\ldots,b_0)_2$ is
+the integer whose binary representation is given by $b_r,\ldots,b_0$.
+We use $\star$ to denote a bit of unknown value.
 
 \begin{lem}\lemlabel{hashing-mapping}
   Let $S$ be the set of odd integers in $\{1,\ldots,2^{#w#}-1\}$, Let $q$
@@ -236,7 +236,7 @@ random bits followed by a 1.
   when $#zx#\bmod 2^{#w#} > #zy#\bmod 2^{#w#}$ or
   \begin{equation}
       #z#(#x#-#y#)\bmod 2^{#w#} = 
-      (\underbrace{1,\ldots,1}_{#d#},\underbrace{*,\ldots,*}_{#w#-#d#})_2 
+      (\underbrace{1,\ldots,1}_{#d#},\underbrace{\star,\ldots,\star}_{#w#-#d#})_2 
        \enspace .
       \eqlabel{all-ones}
   \end{equation}

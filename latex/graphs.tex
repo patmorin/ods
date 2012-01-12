@@ -309,7 +309,7 @@ uses the adjacency lists in \figref{graph-adjlist}.
   \caption{An example of bread-first-search starting at node 0. Nodes are
   labelled with the order in which they are added to #q#.  Edges that
   result in nodes being added to #q# are drawn in black, other edges
-  are drawn in grey.}
+  are drawn in #grey#.}
   \figlabel{graph-bfs}
 \end{figure}
 
@@ -359,14 +359,15 @@ other subtree.  Another way to think of depth-first-search is by saying
 that it is similar to breadth-first search except that it uses a stack
 instead of a queue.
 
-During the execution of the depth-first-search algorithm, each vertex
-is assigned a color: #white# if we have never seen the vertex before,
-#grey# if we are currently visiting that vertex, and #black# if we are
-done visiting that vertex.  The easiest way to think of depth-first-search
-is as a recursive algorithm.  It starts by visiting #r#.  When visiting a
-vertex #i#, we first mark #i# as grey.  Next, we scan #i#'s adjacency list
-and recursively visit any white vertex we find in this list.  Finally,
-we are done processing #i#, so we color #i# black and return.
+During the execution of the depth-first-search algorithm, each vertex,
+#i#, is assigned a color, #c[i]#: #white# if we have never seen
+the vertex before, #grey# if we are currently visiting that vertex,
+and #black# if we are done visiting that vertex.  The easiest way to
+think of depth-first-search is as a recursive algorithm.  It starts by
+visiting #r#.  When visiting a vertex #i#, we first mark #i# as #grey#.
+Next, we scan #i#'s adjacency list and recursively visit any white vertex
+we find in this list.  Finally, we are done processing #i#, so we color
+#i# black and return.
 \codeimport{ods/Algorithms.dfs(g,r).dfs(g,i,c)}
 An example of the execution of this algorithm is shown in \figref{graph-dfs}
 
@@ -377,21 +378,21 @@ An example of the execution of this algorithm is shown in \figref{graph-dfs}
   \caption{An example of depth-first-search starting at node 0. Nodes are
   labelled with the order in which they are processed.  Edges that
   result in a recursive call are drawn in black, other edges
-  are drawn in grey.}
+  are drawn in #grey#.}
   \figlabel{graph-dfs}
 \end{figure}
 
 Although depth-first-search may best be thought of as a recursive
-algorithm, recursion is not the best way to implement it. Indeed, the
-code given above will fail for many large graphs by causing a stack
-overflow.  An alternative implementation is to replace the recursion
-stack with an explicit stack.  The following implementation does just
-that: \codeimport{ods/Algorithms.dfs2(g,r)} In the above code, when
-next vertex, #i#, is processed, #i# is colored grey and then replaced,
-on the stack, with its adjacent vertices.  During the next round, one
-of these vertices will be visited.
+algorithm, recursion is not the best way to implement it. Indeed, the code
+given above will fail for many large graphs by causing a stack overflow.
+An alternative implementation is to replace the recursion stack with an
+explicit stack.  The following implementation does just that:
+\codeimport{ods/Algorithms.dfs2(g,r)} 
+In the above code, when next vertex, #i#, is processed, #i# is colored
+#grey# and then replaced, on the stack, with its adjacent vertices.
+During the next round, one of these vertices will be visited.
 
-Not surprisingly, the running time of #dfs(g,r)# and #dfs2(g,r)# is the
+Not surprisingly, the running times of #dfs(g,r)# and #dfs2(g,r)# are the
 same as that of #bfs(g,r)#:
 \begin{thm}\thmlabel{dfs-graph}
   When given as input a #Graph#, #g#, that is implemented using the
@@ -408,18 +409,18 @@ on the stack.)  If we think of #i'# as the parent of #i#, then we obtain
 a tree rooted at #r#.
 
 An important property of the depth-first-search algorithm is the
-following: Suppose that when node #i# is colored grey, there exists a path
+following: Suppose that when node #i# is colored #grey#, there exists a path
 from #i# to some other node #j# that uses only white vertices.  Then #j#
-will be colored (first grey then) black before #i# is colored black.
+will be colored (first #grey# then) #black# before #i# is colored #black#.
 (This can be proven by contradiction, by consider any path $P$ from #i#
 to #j#.)
 
 One application of this property is the detection of cycles. Refer
 to \figref{dfs-cycle}.  Consider some cycle, $C$, that can be reached
-from #r#.  Let #i# be the first node of $C$ that is colored grey,
+from #r#.  Let #i# be the first node of $C$ that is colored #grey#,
 and let #j# be the node that precedes #i# on the cycle $C$.  Then,
-by the above property, #j# will be colored grey and the edge #(j,i)#
-will be considered by the algorithm while #i# is still grey.  Thus,
+by the above property, #j# will be colored #grey# and the edge #(j,i)#
+will be considered by the algorithm while #i# is still #grey#.  Thus,
 the algorithm can conclude that there is a path, $P$, from #i# to #j#
 in the depth-first-search tree and the edge #(j,i)# exists.  Therefore,
 $P$ is also a cycle.
@@ -429,7 +430,7 @@ $P$ is also a cycle.
     \includegraphics{figs/dfs-cycle}
   \end{center}
   \caption{The depth-first-search algorithm can be used to detect cycles
-  in $G$.The node #j# is colored grey while #i# is still grey.  This
+  in $G$.The node #j# is colored #grey# while #i# is still #grey#.  This
   implies there is a path, $P$, from #i# to #j# in the depth-first-search
   tree, and the edge #(i,j)# implies that $P$ is also a cycle.}
   \figlabel{dfs-cycle}
@@ -479,13 +480,11 @@ edge $(#j#,#i#)$ is present.
   to $#j#$. Show how to test if $G$ is connected in $O(#n#+#m#)$ time.
 \end{exc}
 
-
-
 \begin{exc}
-  Let $G$ be an undirected graph.  A \emph{connected-component labelling} of
-  $G$ partitions to the vertices of $G$ into maximal sets, each of which
-  forms a connected subgraph.  Show how to compute a connected component
-  labelling of $G$ in $O(#n#+#m#)$ time.
+  Let $G$ be an undirected graph.  A \emph{connected-component labelling}
+  of $G$ partitions to the vertices of $G$ into maximal sets, each of
+  which forms a connected subgraph.  Show how to compute a connected
+  component labelling of $G$ in $O(#n#+#m#)$ time.
 \end{exc}
 
 \begin{exc}
@@ -499,6 +498,15 @@ edge $(#j#,#i#)$ is present.
   Given a graph $G=(V,E)$ and some special vertex $#r#\in V$, show how
   to compute the length of the shortest path from $#r#$ to #i# for every
   vertex $#i#\in V$.
+\end{exc}
+
+\begin{exc}
+  Give a (simple) example where the #dfs(g,r)# code visits the nodes of a
+  graph in an order that is different from that of the #dfs2(g,r)# code.
+  Write a version of #dfs2(g,r)# that always visits nodes in exactly
+  the same order as #dfs(g,r)#.  (Hint: Just start tracing the execution
+  of each algorithm on some graph where #r# is the source of more than
+  1 edge.)
 \end{exc}
 
 
