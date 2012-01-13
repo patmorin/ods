@@ -8,10 +8,77 @@
 #ifndef ALGORITHMS_H_
 #define ALGORITHMS_H_
 
+#include "SLList.h"
+
 #include "utils.h"
 #include "array.h"
 
 namespace ods {
+
+
+template<class Graph>
+void bfs(Graph &g, int r) {
+	bool *seen = new bool[g.nVertices()];
+	SLList<int> q;
+	q.add(r);
+	seen[r] = true;
+	while (q.size() > 0) {
+		int i = q.remove();
+		ArrayStack<int> edges;
+		g.outEdges(i, edges);
+		for (int k = 0; k < edges.size(); k++) {
+			int j = edges.get(k);
+			if (!seen[j]) {
+				q.add(j);
+				seen[j] = true;
+			}
+		}
+	}
+	delete[] seen;
+}
+
+enum { white, grey, black };
+
+template<class Graph>
+void dfs(Graph &g, int i, char *c) {
+	c[i] = grey;  // currently visiting i
+	ArrayStack<int> edges;
+	g.outEdges(i, edges);
+	for (int k = 0; k < edges.size(); k++) {
+		int j = edges.get(k);
+		if (c[j] == white) {
+			c[j] = grey;
+			dfs(g, j, c);
+		}
+	}
+	c[i] = black; // done visiting i
+}
+
+template<class Graph>
+void dfs(Graph &g, int r) {
+	char *c = new char[g.nVertices()];
+	dfs(g, r, c);
+	delete[] c;
+}
+
+template<class Graph>
+void dfs2(Graph &g, int r) {
+	char *c = new char[g.nVertices()];
+	SLList<int> s;
+	s.push(r);
+	while (s.size() > 0) {
+		int i = s.pop();
+		if (c[i] == white) {
+			c[i] = grey;
+			ArrayStack<int> edges;
+			g.outEdges(i, edges);
+			for (int k = 0; k < edges.size(); k++)
+				s.push(edges.get(k));
+		}
+	}
+	delete[] c;
+}
+
 
 template<class T>
 void merge(array<T> &a0, array<T> &a1, array<T> &a) {

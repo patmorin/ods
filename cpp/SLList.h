@@ -15,9 +15,14 @@ namespace ods {
 template<class T>
 class SLList {
 protected:
-	struct Node {
+	class Node {
+	public:
 		T x;
 		Node *next;
+		Node(T x0) {
+			x = 0;
+			next = NULL;
+		}
 	};
 	Node *head;
 	Node *tail;
@@ -26,6 +31,7 @@ protected:
 public:
 
 	SLList() {
+		n = 0;
 		head = tail = NULL;
 	}
 
@@ -47,8 +53,7 @@ public:
 	}
 
 	bool add(T x) {
-		Node *u = new Node;
-		u->x = x;
+		Node *u = new Node(x);
 		if (n == 0) {
 			head = u;
 		} else {
@@ -60,8 +65,7 @@ public:
 	}
 
 	T push(T x) {
-		Node *u = new Node;
-		u->x = x;
+		Node *u = new Node(x);
 		u->next = head;
 		head = u;
 		if (n == 0)
