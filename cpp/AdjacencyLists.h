@@ -49,8 +49,8 @@ public:
 
 	template<class LisT>
 	void outEdges(int i, LisT &edges) {
-		for (int j = 0; j < adj[i].size(); j++)
-			edges.add(adj[i].get(j));
+		for (int k = 0; k < adj[i].size(); k++)
+			edges.add(adj[i].get(k));
 	}
 
 	void removeEdge(int i, int j) {
