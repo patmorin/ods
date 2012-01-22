@@ -207,6 +207,23 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 		} while (u != dummy);
 	}
 	
+	public int size() {
+		Node u = dummy;
+		int n = 0;
+		while (u.right != dummy) {
+			n++;
+			u = u.right;
+		}
+		int n1 = 0;
+		u = dummy;
+		while (u.left != dummy) {
+			n1++;
+			u = u.left;
+		}
+		Utils.myassert(n == n1);
+		return n;
+	}
+	
 	public static void main(String[] args) {
 		class N<T> extends Nodez<N<T>, T> {};
 		N<Integer> n = new N<Integer>();
@@ -233,8 +250,10 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 			Integer x = t.find(rand.nextInt(2000));
 			if (x != null) {
 				System.out.print(x + ",");
+				System.out.flush();
 				t.remove(x);
 			}
+			System.out.println(t.size() + ":");
 			t.checkList();
 		}
 		System.out.println();
