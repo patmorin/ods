@@ -39,11 +39,14 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 	protected void fixJumps(Node u, int ix) {
 		Node w = u;
 		while (w != null) {
+			// FIXME: this is a mess
 			if (w.jump == nil
 			|| (w.left == nil && it.intValue(w.jump.x) > ix)
 			|| (w.right == nil && it.intValue(w.jump.x) < ix)) {
 				w.jump = u;
-			}	
+			}
+			if (w.left != nil && w.right != nil)
+				w.jump = nil;
 			w = w.parent;
 		}
 	}
@@ -61,6 +64,7 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 			}
 		}
 		if (i == w) return false;
+		u.jump = nil;  // this node has 2 children now
 		// now it's time to start adding nodes
 		Node a = u.jump;
 		for (; i < w; i++) {
@@ -88,6 +92,22 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 		// finally, fix jump pointers
 		fixJumps(u, ix);
 		return true;
+	}
+	
+	protected void checkIt(Node u, int d) {
+		if (d == w) {
+			Utils.myassert(u.x != null);
+		} else {
+			Utils.myassert(u == r || u.left != nil || u.right != nil);
+			if ((u.left == nil && u.right != nil)
+				|| (u.right == nil && u.left != nil)) {
+				Utils.myassert(u.jump.x != nil);
+			}
+			if (u.left != nil) 
+				checkIt(u.left, d+1);
+			if (u.right != nil)
+				checkIt(u.right, d+1);
+		}
 	}
 
 	public T find(T x) {
@@ -128,9 +148,8 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 		Node b = u;
 		u.left.right = u.right;
 		u.right.left = u.left;
-		u.right = nil;
 		// remove path to u
-		while (u != r && u.left == nil && u.right == nil) {
+		while (u == b || (u != r && u.left == nil && u.right == nil)) {
 			if (u == u.parent.left)
 				u.parent.left = nil;
 			else // u == u.parent.right 
@@ -142,8 +161,10 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 			if (u.jump == b) {   // Note - this decision could be moved outside of loop
 				if (u.right == nil) {
 					u.jump = b.left;
+					Utils.myassert(b.left.x != null);
 				} else {
 					u.jump = b.right;
+					Utils.myassert(b.right.x != null);
 				}
 			}
 			u = u.parent;
@@ -230,12 +251,13 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 		class I implements Integerizer<Integer> { public int intValue(Integer i) { return i; } };
 		Integerizer<Integer> it = new I(); 
 		BinaryTrie<N<Integer>,Integer> t = new BinaryTrie<N<Integer>,Integer>(n, it);
-		Random rand = new Random();
+		Random rand = new Random(0);
 		for (int i = 0; i < 20; i++) {
 			int x = rand.nextInt(2000);
 			System.out.print(x + ",");
 			t.add(x);
 		}
+		t.checkIt(t.r, 0);
 		System.out.println();
 		for (Integer x : t)
 			System.out.print(x + ",");
@@ -246,6 +268,7 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 		}
 		System.out.println();
 		System.out.print("Removing: ");
+		t.remove(t.dummy.left.x);
 		for (int i = 0; i < 10; i++) {
 			Integer x = t.find(rand.nextInt(2000));
 			if (x != null) {
@@ -254,6 +277,7 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 				t.remove(x);
 			}
 			System.out.println(t.size() + ":");
+			t.checkIt(t.r, 0);
 			t.checkList();
 		}
 		System.out.println();
