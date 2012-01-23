@@ -1,28 +1,79 @@
 package ods;
 
+import java.lang.reflect.Array;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Random;
 
-public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
-	BinaryTree<Node> implements SSet<T> {
+public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSet<T> {
 	
-	public static class Nodez<Node extends Nodez<Node, T>, T> 
-	extends	BinaryTree.BTNode<Node> {
+	public static class Nöde<Node extends Nöde<Node, T>, T>  {
 		T x;
+		Node parent;
+		Node[] child;
 		Node jump;
+		@SuppressWarnings("unchecked")
+		Nöde() {
+			child = (Node[])Array.newInstance(getClass(), 2);
+		}
+	}
+	
+	protected static final int prev = 0;
+	protected static final int next = 1;
+	protected static final int left = 0;
+	protected static final int right = 1;
+
+	
+	protected static int w = 32;
+	
+	/**
+	 * The root node
+	 */
+	protected Node r;
+	
+	/**
+	 * The dummy node in the doubly-linked list
+	 */
+	protected Node dummy;
+	
+	/**
+	 * For converting elements of type T into integers
+	 */
+	protected Integerizer<T> it;
+
+	/**
+	 * The number of elements stored in the trie
+	 */
+	int n;
+
+	/**
+	 * To make a node factory
+	 */
+	protected Node sampleNode;
+	
+	/**
+	 * Allocate a new node
+	 * @return
+	 */
+	@SuppressWarnings({"unchecked"})
+	protected Node newNode() {
+		try {
+			Node u = (Node)sampleNode.getClass().newInstance();
+			u.parent = u.child[0] = u.child[1] = null;
+			return u;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
-	protected static int w = 32;
-	Node dummy;
-	Integerizer<T> it;
-	
 	public BinaryTrie(Node sampleNode, Integerizer<T> it) {
-		super(sampleNode);
-		r = newNode();
+		this.sampleNode = sampleNode;
 		dummy = newNode();
-		dummy.right = dummy.left = dummy;
+		dummy.child[prev] = dummy.child[next] = dummy;
+		r = newNode();
+		r.jump = dummy;
 		this.it = it;
+		n = 0;
 	}
 	
 	protected class Location {
@@ -30,145 +81,139 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 		Node u;
 	}
 	
-	
-	/**
-	 * Fix all the jump pointers from u up to the root
-	 * @param u
-	 * @param ix
-	 */
-	protected void fixJumps(Node u, int ix) {
-		Node w = u;
-		while (w != null) {
-			// FIXME: this is a mess
-			if (w.jump == nil
-			|| (w.left == nil && it.intValue(w.jump.x) > ix)
-			|| (w.right == nil && it.intValue(w.jump.x) < ix)) {
-				w.jump = u;
-			}
-			if (w.left != nil && w.right != nil)
-				w.jump = nil;
-			w = w.parent;
-		}
+	public String toString() {
+		return Utils.collectionToString(this);
 	}
-
+	
 	public boolean add(T x) {
-		int i, ix = it.intValue(x);
+		int i, c = 0, ix = it.intValue(x);
 		Node u = r;
+		// 1 - search for ix until falling out of the trie
 		for (i = 0; i < w; i++) {
-			if (((ix >>> w-i-1) & 1) == 0) {
-				if (u.left == nil) break;
-				u = u.left;
-			} else {
-				if (u.right == nil) break;
-				u = u.right;
-			}
-		}
-		if (i == w) return false;
-		u.jump = nil;  // this node has 2 children now
-		// now it's time to start adding nodes
-		Node a = u.jump;
+			c = (ix >>> w-i-1) & 1;
+			if (u.child[c] == null) break;
+			u = u.child[c];
+		}		
+		if (i == w) return false; // trie already contains ix
+		Node pred = (c == right) ? u.jump : u.jump.child[0]; // save this 
+		u.jump = null;  // u will have two children shortly
+		// 2 - add path to ix
 		for (; i < w; i++) {
-			if (((ix >>> w-i-1) & 1) == 0) {
-				u.left = newNode();
-				u.left.parent = u;
-				u = u.left;
-			} else {
-				u.right = newNode();
-				u.right.parent = u;
-				u = u.right;
-			}			
+			c = (ix >>> w-i-1) & 1;
+			u.child[c] = newNode();
+			u.child[c].parent = u;
+			u = u.child[c];
 		}
 		u.x = x;
-		// now insert new node into linked list
-		if (a == nil) 
-			a = dummy;
-		else if (it.intValue(a.x) > ix)
-			a = a.left;
-		u.right = a.right;
-		u.left = a.right.left;
-		u.left.right = u;
-		u.right.left = u;
-		
-		// finally, fix jump pointers
-		fixJumps(u, ix);
+		// 3 - add u to linked list
+		u.child[prev] = pred;
+		u.child[next] = pred.child[next];
+		u.child[prev].child[next] = u;
+		u.child[next].child[prev] = u;
+		// 4 - walk back up, updating jump pointers
+		Node v = u;
+		while (v != null) {
+			if ((v.child[0] == null && (v.jump == null || it.intValue(v.jump.x) > ix))
+			|| (v.child[1] == null && (v.jump == null || it.intValue(v.jump.x) < ix)))
+				v.jump = u;
+			v = v.parent;
+		}
+		n++;
 		return true;
 	}
+	
+	protected void checkIt() {
+		checkList();
+		checkIt(r, 0);
+	}
+	
 	
 	protected void checkIt(Node u, int d) {
 		if (d == w) {
 			Utils.myassert(u.x != null);
 		} else {
-			Utils.myassert(u == r || u.left != nil || u.right != nil);
-			if ((u.left == nil && u.right != nil)
-				|| (u.right == nil && u.left != nil)) {
-				Utils.myassert(u.jump.x != nil);
+			Utils.myassert(u == r || u.child[left] != null || u.child[right] != null);
+			if ((u.child[left] == null && u.child[right] != null)
+				|| (u.child[right] == null && u.child[left] != null)) {
+				Utils.myassert(u.jump.x != null);
 			}
-			if (u.left != nil) 
-				checkIt(u.left, d+1);
-			if (u.right != nil)
-				checkIt(u.right, d+1);
+			if (u.child[left] != null && u.child[right] != null)
+				Utils.myassert(u.jump == null);
+			if (u.child[left] != null) 
+				checkIt(u.child[left], d+1);
+			if (u.child[right] != null)
+				checkIt(u.child[right], d+1);
 		}
 	}
 
+	protected void checkList() {
+		Node u = dummy.child[right];
+		do {
+			if (u.child[right] != dummy) 
+				Utils.myassert(it.intValue(u.x) < it.intValue(u.child[right].x));
+			Utils.myassert(u.child[left].child[right] == u);
+			Utils.myassert(u.child[right].child[left] == u);
+			u = u.child[right];
+		} while (u != dummy);
+	}
+
 	public T find(T x) {
-		int i = 0, ix = it.intValue(x);
+		int i, c = 0, ix = it.intValue(x);
 		Node u = r;
-		// following code is duplicated in add(x)
-		for (i = 0; i < w; i++) {  
-			if (((ix >>> w-i-1) & 1) == 0) {
-				if (u.left == nil) break;
-				u = u.left;
-			} else {
-				if (u.right == nil) break;
-				u = u.right;
-			}
+		for (i = 0; i < w; i++) {
+			c = (ix >>> w-i-1) & 1;
+			if (u.child[c] == null) break;
+			u = u.child[c];
 		}
-		// end dup
-		Node a = u.jump;
-		if (a == nil || a == dummy) 
-			a = dummy;
-		else if (it.intValue(a.x) > ix)
-			a = a.left;
-		return (a.right == dummy) ? null : a.right.x;
+		if (i == w) return u.x;
+		Node pred = (c == 1) ? u.jump : u.jump.child[0]; 
+		return (pred.child[next] == dummy) ? null : pred.child[next].x;
+	}
+
+	protected Node findLeaf(int ix) {
+		int i = 0, c;
+		Node u = r;
+		for (i = 0; i < w; i++) {
+			c = (ix >>> w-i-1) & 1;
+			if (u.child[c] == null) return null;
+			u = u.child[c];
+		}
+		return u;
 	}
 	
 	public boolean remove(T x) {
-		int i = 0, ix = it.intValue(x);
+		// 1 - find leaf, u, containing x
+		int i = 0, c, ix = it.intValue(x);
 		Node u = r;
-		for (i = 0; i < w; i++) {  
-			if (((ix >>> w-i-1) & 1) == 0) {
-				if (u.left == nil) return false;
-				u = u.left;
-			} else {
-				if (u.right == nil) return false;
-				u = u.right;
-			}
+		for (i = 0; i < w; i++) {
+			c = (ix >>> w-i-1) & 1;
+			if (u.child[c] == null) return false;
+			u = u.child[c];
 		}
-		// remove u from linked list
-		Node b = u;
-		u.left.right = u.right;
-		u.right.left = u.left;
-		// remove path to u
-		while (u == b || (u != r && u.left == nil && u.right == nil)) {
-			if (u == u.parent.left)
-				u.parent.left = nil;
-			else // u == u.parent.right 
-				u.parent.right = nil;
-			u = u.parent;
+		// 2 - remove u from linked list
+		Node pred = u.child[prev];   // predecessor
+		Node succ = u.child[next];  // successor
+		pred.child[next] = succ;
+		succ.child[prev] = pred;
+		u.child[next] = u.child[prev] = null;
+		Node w = u;
+		// 3 - delete nodes on path to u
+		while (w != r && w.child[left] == null && w.child[right] == null) {
+			if (w == w.parent.child[left])
+				w.parent.child[left] = null;
+			else // u == u.parent.child[right] 
+				w.parent.child[right] = null;
+			w = w.parent;
 		}
-		// fix jump pointers
-		while (u != null) {
-			if (u.jump == b) {   // Note - this decision could be moved outside of loop
-				if (u.right == nil) {
-					u.jump = b.left;
-					Utils.myassert(b.left.x != null);
-				} else {
-					u.jump = b.right;
-					Utils.myassert(b.right.x != null);
-				}
-			}
-			u = u.parent;
+		// 4 - update jump pointers
+		w.jump = (w.child[left] == null) ? succ : pred;
+		w = w.parent;
+		while (w != null) {
+			if (w.jump == u)
+				w.jump = (w.child[left] == null) ? succ : pred;
+			w = w.parent;
 		}
+		n--;
 		return true;
 	}
 
@@ -181,110 +226,131 @@ public class BinaryTrie<Node extends BinaryTrie.Nodez<Node,T>, T> extends
 		return null;
 	}
 
-	@Override
 	public T findGE(T x) {
-		// TODO Auto-generated method stub
-		return null;
+		return find(x);
 	}
 
-	@Override
+	/**
+	 * Find the node in the doubly-linked list that comes before
+	 * the node that contains (the successor of) x
+	 * @param x
+	 * @return The node before the node that contains x in the linked list
+	 */
+	protected Node findPredNode(T x) {
+		int i, c = 0, ix = it.intValue(x);
+		Node u = r;
+		for (i = 0; i < w; i++) {
+			c = (ix >>> w-i-1) & 1;
+			if (u.child[c] == null) break;
+			u = u.child[c];
+		}
+		Node pred;
+		if (i == w) pred = u.child[prev];
+		else pred = (c == 1) ? u.jump : u.jump.child[0]; 
+		return pred;
+	}
+	
 	public T findLT(T x) {
-		// TODO Auto-generated method stub
-		return null;
+		Node pred = findPredNode(x);
+		return (pred == dummy) ? null : pred.child[next].x;
 	}
 
-	@Override
+	/**
+	 * This is just a simple linked-list iterator
+	 * @author morin
+	 *
+	 */
+	protected class TrieIterator implements Iterator<T> {
+		protected Node p;
+		
+		public TrieIterator(Node p) {
+			this.p = p;
+		}
+		
+		public boolean hasNext() {
+			return p != dummy;
+		}
+
+		public T next() {
+			T x = p.x;
+			p = p.child[1];
+			return x;
+		}
+		
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+	}
+
 	public Iterator<T> iterator(T x) {
-		throw new UnsupportedOperationException();
+		Node pred = findPredNode(x);
+		return new TrieIterator(pred.child[next]);
 	}
 
-	@Override
 	public Iterator<T> iterator() {
-		return new Iterator<T>() {
-			protected Node p = dummy.right;
-			
-			public boolean hasNext() {
-				return p != dummy;
-			}
-	
-			public T next() {
-				T x = p.x;
-				p = p.right;
-				return x;
-			}
-			
-			public void remove() {
-				throw new UnsupportedOperationException();
-			}
-		};
-	}
-	
-	protected void checkList() {
-		Node u = dummy.right;
-		do {
-			Utils.myassert(u.left.right == u);
-			Utils.myassert(u.right.left == u);
-			u = u.right;
-		} while (u != dummy);
+		return new TrieIterator(dummy.child[next]);
 	}
 	
 	public int size() {
-		Node u = dummy;
-		int n = 0;
-		while (u.right != dummy) {
-			n++;
-			u = u.right;
-		}
-		int n1 = 0;
-		u = dummy;
-		while (u.left != dummy) {
-			n1++;
-			u = u.left;
-		}
-		Utils.myassert(n == n1);
 		return n;
 	}
 	
-	public static void main(String[] args) {
-		class N<T> extends Nodez<N<T>, T> {};
-		N<Integer> n = new N<Integer>();
-		class I implements Integerizer<Integer> { public int intValue(Integer i) { return i; } };
-		Integerizer<Integer> it = new I(); 
-		BinaryTrie<N<Integer>,Integer> t = new BinaryTrie<N<Integer>,Integer>(n, it);
+	public void clear() {
+		n = 0;
+		r.child[0] = r.child[1] = null;
+		r.jump = dummy;
+		dummy.child[0] = dummy.child[1] = dummy;
+	}
+	
+	public static <N extends BinaryTrie.Nöde<N,Integer> > 
+	void easyTests(BinaryTrie<N,Integer> t, int n) {
+		System.out.println(t.getClass());
 		Random rand = new Random(0);
-		for (int i = 0; i < 20; i++) {
-			int x = rand.nextInt(2000);
-			System.out.print(x + ",");
+		System.out.println("Adding: ");
+		for (int i = 0; i < n; i++) {
+			int x = rand.nextInt(100*n);
+			System.out.print(x + ((i < n - 1) ? "," : ""));
 			t.add(x);
+			t.checkIt();
 		}
-		t.checkIt(t.r, 0);
 		System.out.println();
-		for (Integer x : t)
-			System.out.print(x + ",");
-		System.out.println();
-		for (int i = 0; i < 20; i++) {
-			int x = rand.nextInt(2000);
+		System.out.println(t);
+		System.out.print("Searching: ");
+		for (int i = 0; i < n; i++) {
+			int x = rand.nextInt(100*n);
 			System.out.print(x + "=>" + t.find(x) + ",");
 		}
 		System.out.println();
+		System.out.println(t);
 		System.out.print("Removing: ");
-		t.remove(t.dummy.left.x);
-		for (int i = 0; i < 10; i++) {
-			Integer x = t.find(rand.nextInt(2000));
+		for (int i = 0; i < n/2; i++) {
+			Integer x = t.find(rand.nextInt(100*n));
 			if (x != null) {
-				System.out.print(x + ",");
+				System.out.print(x + ((i < n/2-1) ? "," : ""));
 				System.out.flush();
 				t.remove(x);
 			}
-			System.out.println(t.size() + ":");
-			t.checkIt(t.r, 0);
-			t.checkList();
+			t.checkIt();
 		}
 		System.out.println();
-		for (Integer x : t) {
-			System.out.print(x + ",");
+		System.out.println("Size = " + t.size());
+		System.out.println(t);
+		System.out.print("Searching: ");
+		for (int i = 0; i < n; i++) {
+			int x = rand.nextInt(100*n);
+			System.out.print(x + "=>" + t.find(x) + ",");
 		}
+		System.out.println();
+		System.out.println("done");
 	}
 	
-	
+	public static void main(String[] args) {
+		int n = 1000;
+		class N<T> extends Nöde<N<T>, T> {};
+		N<Integer> node = new N<Integer>();
+		class I implements Integerizer<Integer> { public int intValue(Integer i) { return i; } };
+		Integerizer<Integer> it = new I(); 
+		BinaryTrie<N<Integer>,Integer> t = new BinaryTrie<N<Integer>,Integer>(node, it);
+		easyTests(t, n);
+	}
 }

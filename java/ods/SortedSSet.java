@@ -78,16 +78,30 @@ public class SortedSSet<T> extends AbstractSet<T> implements SortedSet<T> {
 	}
 
 	public static void main(String[] args) {
-		int n = 500000;
+		int n = 100000;
 		Collection<SortedSet<Integer>> css = new ArrayList<SortedSet<Integer>>();
 		css.add(new java.util.TreeSet<Integer>());
 		css.add(new SortedSSet<Integer>(new Treap<Integer>()));
 		css.add(new SortedSSet<Integer>(new RedBlackTree<Integer>()));
 		css.add(new SortedSSet<Integer>(new ScapegoatTree<Integer>()));
 		css.add(new SortedSSet<Integer>(new SkiplistSSet<Integer>()));
+		{ 
+			class N<T> extends XFastTrie.Nöde<N<T>,T> {};
+			class I implements Integerizer<Integer> { 
+				public int intValue(Integer i) { return i; }
+			}
+			class BT<T> extends BinaryTrie<N<T>,T> { 
+				public BT(Integerizer<T> it) { super(new N<T>(), it); }
+			};
+			class XFT<T> extends XFastTrie<N<T>,T> { 
+				public XFT(Integerizer<T> it) { super(new N<T>(), it); }
+			};
+			css.add(new SortedSSet<Integer>(new BT<Integer>(new I())));
+			css.add(new SortedSSet<Integer>(new XFT<Integer>(new I())));
+		}
 		css.add(new java.util.TreeSet<Integer>());
 		for (SortedSet<Integer> ss : css) {
-			System.out.println("Testing sanity of " + ss.getClass());
+			System.out.println("Testing sanity of " + Testum.s(ss));
 			Testum.sortedSetSanityTests(ss, 100);
 		}
 		Testum.sortedSetSpeedTests(css, n);

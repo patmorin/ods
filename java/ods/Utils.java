@@ -1,6 +1,7 @@
 package ods;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Utils {
@@ -10,7 +11,19 @@ public class Utils {
 			throw new AssertionError();
 		}
 	}
-	
+
+	public static <T> String collectionToString(Iterable<T> c) {
+		StringBuilder b = new StringBuilder();
+		b.append("[");
+		Iterator<T> it = c.iterator(); 
+		while (it.hasNext()) {
+			b.append(it.next());
+			if (it.hasNext()) b.append(",");
+		}
+		b.append("]");
+		return b.toString();
+	}
+
 	public static final int intSqrt(int x) {
 		int z = (int)Math.sqrt(x);
 		while (z*z > x) z--;
