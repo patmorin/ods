@@ -33,12 +33,18 @@ public class YFastTrie<T> implements SSet<T> {
 			if (ret.r != null) ret.r.parent = nil;
 			return ret;
 		}
+		/**
+		 * Absorb the elements of treap t, which should all be smaller than
+		 * all the elements in this
+		 * @param t
+		 * @return
+		 */
 		public void absorb(STreap<T> t) {
 			Node<T> s = newNode();
-			s.left = this.r;
-			this.r.parent = s;
-			s.right = t.r;
-			t.r.parent = s;
+			s.right = this.r;
+			if (this.r != null) this.r.parent = s;
+			s.left = t.r;
+			if (t.r != null) t.r.parent = s;
 			this.r = s;
 			t.r = null;
 			trickleDown(s);
@@ -66,7 +72,7 @@ public class YFastTrie<T> implements SSet<T> {
 			}
 		};
 		xft = new XFastTrie<N<T>,Pair<T>>(new N<T>(), it2);
-		rand = new Random();
+		rand = new Random(0);   // FIXME - for debugging only
 		overflow = new STreap<T>();
 		n = 0;
 	}
@@ -82,12 +88,13 @@ public class YFastTrie<T> implements SSet<T> {
 				xft.add(new Pair<T>(x, t2));
 			}
 			return true;
-		}
+		} 
 		return false;
 	}
 
 	public void clear() {
 		xft.clear();
+		overflow.clear();
 		n = 0;
 	}
 
@@ -111,26 +118,50 @@ public class YFastTrie<T> implements SSet<T> {
 		return t.find(x);
 	}
 
-	@Override
+
+	/**
+	 * This method is a mess
+	 */
 	public T findLT(T x) {
-		// TODO Auto-generated method stub
-		return null;
+		int ix = it.intValue(x);
+		N<T> u = xft.findNode(ix);
+		STreap<T> t = (u == null) ? overflow : u.x.t;
+		T y = t.findLT(x);
+		if (y == null) {
+			if (u != null) {
+				if (u.child[0] != xft.dummy) {
+					y = u.child[0].x.t.findLT(x);
+				}
+			} else {
+				Pair<T> p = xft.findLT(new Pair<T>(x));
+				if (p != null)
+					y = p.t.findLT(x);
+			}
+		}
+		return y;
 	}
 
 	@Override
 	public Iterator<T> iterator(T x) {
-		// TODO Auto-generated method stub
-		return null;
+		Iterator<Pair<T>> it1 = xft.iterator(new Pair<T>(x));
+		if (it1.hasNext()) {
+			Pair<T> p = it1.next();
+			return new MIterator(it1, p.t.iterator(x));
+		} else {
+			return new MIterator(it1, overflow.iterator(x));			
+		}
 	}
 
-	@Override
 	public boolean remove(T x) {
-		Pair<T> p = xft.find(new Pair<T>(x));
-		STreap<T> t = (p == null) ? overflow : p.t;
+		int ix = it.intValue(x);
+		N<T> u = xft.findNode(ix);
+		STreap<T> t = (u == null) ? overflow : u.x.t;
 		boolean ret = t.remove(x);
 		if (ret) n--;
-		if (p != null && it.intValue(p.x) == it.intValue(x)) {
-			// remove from x fast trie
+		if (u != null && it.intValue(u.x.x) == ix) {
+			STreap<T> t2 = u.child[1] == xft.dummy ? overflow : u.child[1].x.t;
+			t2.absorb(u.x.t);
+			xft.remove(u.x);
 		}
 		return ret;
 	}
@@ -144,6 +175,10 @@ public class YFastTrie<T> implements SSet<T> {
 		boolean over;
 		Iterator<Pair<T>> it1;
 		Iterator<T> it2;
+		public MIterator(Iterator<Pair<T>> it1, Iterator<T> it2) {
+			this.it1 = it1;
+			this.it2 = it2;
+		}
 		public MIterator() {
 			it1 = xft.iterator();
 			if (it1.hasNext()) {
@@ -174,7 +209,6 @@ public class YFastTrie<T> implements SSet<T> {
 		}
 	}
 
-	@Override
 	public Iterator<T> iterator() {
 		return new MIterator();
 	}

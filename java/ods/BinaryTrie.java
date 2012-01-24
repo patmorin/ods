@@ -16,6 +16,9 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 		Nöde() {
 			child = (Node[])Array.newInstance(getClass(), 2);
 		}
+		public String toString() {
+			return "{" + String.valueOf(x) + "}";
+		}
 	}
 	
 	

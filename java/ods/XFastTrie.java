@@ -90,6 +90,31 @@ public class XFastTrie<Node extends XFastTrie.Nöde<Node,T>, T>
 		return true;
 	}
 	
+	protected Node findNode(int ix) {
+		// find lowest node that is an ancestor of ix
+		int l = 0, h = w+1;
+		Node v, u = r, q = newNode();
+		while (h-l > 1) {
+			int i = (l+h)/2;
+			q.prefix = ix >>> w-i;
+			if ((v = t[i].find(q)) == null) {
+				h = i;
+			} else {
+				u = v;
+				l = i;
+			}
+		}
+		if (l == w) return u;
+		Node pred = (((ix >>> w-l-1) & 1) == 1) ? u.jump : u.jump.child[0];
+		return (pred.child[next] == dummy) ? null : pred.child[next];
+	}
+	
+	public void clear() {
+		super.clear();
+		for (USet<Node> s : t) 
+			s.clear();
+	}
+	
 	public T find(T x) {
 		// find lowest node that is an ancestor of ix
 		int l = 0, h = w+1, ix = it.intValue(x);

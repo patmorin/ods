@@ -264,8 +264,10 @@ public class Testum {
 		for (SortedSet<Integer> ss : css) {
 			System.out.print("sequential insertions (" + s(ss) + ")...");
 			start = System.nanoTime();
-			for (int i = 0; i < n; i++)
+			for (int i = 0; i < n; i++) {
+				Utils.myassert(ss.size() == i);
 				ss.add(i*2);
+			}
 			stop = System.nanoTime();
 			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
 			Utils.myassert(ss.size() == n);
