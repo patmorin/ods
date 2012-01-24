@@ -203,7 +203,7 @@ public class Testum {
 			start = System.nanoTime();
 			Random r = new Random();
 			for (int i = 0; i < n; i++)
-				ss.add(r.nextInt());
+				ss.add(r.nextInt(2*n));
 			stop = System.nanoTime();
 			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
 			Utils.myassert(ss.size() >= n/2);
@@ -214,8 +214,19 @@ public class Testum {
 			System.out.print("random contains (" + s(ss) + ")...");
 			start = System.nanoTime();
 			Random r = new Random();
-			for (int i = 0; i < 10*n; i++)
-				ss.contains(r.nextInt());
+			for (int i = 0; i < 2*n; i++)
+				ss.contains(r.nextInt(2*n));
+			stop = System.nanoTime();
+			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
+		}
+		System.out.println();
+
+		for (SortedSet<Integer> ss : css) {
+			System.out.print("random removals (" + s(ss) + ")...");
+			start = System.nanoTime();
+			Random r = new Random();
+			for (int i = 0; i < 2*n; i++)
+				ss.remove(r.nextInt(2*n));
 			stop = System.nanoTime();
 			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
 		}
@@ -226,7 +237,7 @@ public class Testum {
 			start = System.nanoTime();
 			Random r = new Random();
 			for (int i = 0; i < n; i++)
-				ss.headSet(r.nextInt());
+				ss.headSet(r.nextInt(2*n));
 			stop = System.nanoTime();
 			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
 		}

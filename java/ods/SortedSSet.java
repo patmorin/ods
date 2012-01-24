@@ -78,7 +78,7 @@ public class SortedSSet<T> extends AbstractSet<T> implements SortedSet<T> {
 	}
 
 	public static void main(String[] args) {
-		int n = 100000;
+		int n = 500000;
 		Collection<SortedSet<Integer>> css = new ArrayList<SortedSet<Integer>>();
 		css.add(new java.util.TreeSet<Integer>());
 		css.add(new SortedSSet<Integer>(new Treap<Integer>()));

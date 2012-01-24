@@ -18,6 +18,7 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 		}
 	}
 	
+	
 	protected static final int prev = 0;
 	protected static final int next = 1;
 	protected static final int left = 0;
@@ -191,27 +192,23 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 			u = u.child[c];
 		}
 		// 2 - remove u from linked list
-		Node pred = u.child[prev];   // predecessor
-		Node succ = u.child[next];  // successor
-		pred.child[next] = succ;
-		succ.child[prev] = pred;
-		u.child[next] = u.child[prev] = null;
-		Node w = u;
+		u.child[prev].child[next] = u.child[next];
+		u.child[next].child[prev] = u.child[prev];
+		Node v = u;
 		// 3 - delete nodes on path to u
-		while (w != r && w.child[left] == null && w.child[right] == null) {
-			if (w == w.parent.child[left])
-				w.parent.child[left] = null;
-			else // u == u.parent.child[right] 
-				w.parent.child[right] = null;
-			w = w.parent;
+		for (i = w-1; i >= 0; i--) {
+			c = (ix >>> w-i-1) & 1;
+			v = v.parent;
+			v.child[c] = null;
+			if (v.child[1-c] != null) break;
 		}
 		// 4 - update jump pointers
-		w.jump = (w.child[left] == null) ? succ : pred;
-		w = w.parent;
-		while (w != null) {
-			if (w.jump == u)
-				w.jump = (w.child[left] == null) ? succ : pred;
-			w = w.parent;
+		v.jump = u;
+		for (; i >= 0; i--) {
+			c = (ix >>> w-i-1) & 1;
+			if (v.jump == u) 
+				v.jump = u.child[1-c];
+			v = v.parent;
 		}
 		n--;
 		return true;
@@ -223,7 +220,11 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 	 * TODO: We can still implement this
 	 */
 	public Comparator<? super T> comparator() {
-		return null;
+		return new Comparator<T>() {
+			public int compare(T a, T b) {
+				return it.intValue(a) - it.intValue(b);
+			}
+		};
 	}
 
 	public T findGE(T x) {
@@ -345,12 +346,15 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 	}
 	
 	public static void main(String[] args) {
-		int n = 1000;
+		int n = 20;
 		class N<T> extends Nöde<N<T>, T> {};
 		N<Integer> node = new N<Integer>();
-		class I implements Integerizer<Integer> { public int intValue(Integer i) { return i; } };
+		class I implements Integerizer<Integer> { 
+			public int intValue(Integer i) { return i; } 
+		};
 		Integerizer<Integer> it = new I(); 
-		BinaryTrie<N<Integer>,Integer> t = new BinaryTrie<N<Integer>,Integer>(node, it);
+		BinaryTrie<N<Integer>,Integer> t 
+			= new BinaryTrie<N<Integer>,Integer>(node, it);
 		easyTests(t, n);
 	}
 }
