@@ -98,6 +98,7 @@ public class SortedSSet<T> extends AbstractSet<T> implements SortedSet<T> {
 			};
 			css.add(new SortedSSet<Integer>(new BT<Integer>(new I())));
 			css.add(new SortedSSet<Integer>(new XFT<Integer>(new I())));
+			css.add(new SortedSSet<Integer>(new YFastTrie<Integer>(new I())));
 		}
 		css.add(new java.util.TreeSet<Integer>());
 		for (SortedSet<Integer> ss : css) {
