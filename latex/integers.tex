@@ -274,30 +274,129 @@ all values in the range $#x#_{i-1}+1,\ldots,#x#_i$.  This is illustrated
 in \figref{yfast-ex}.
 
 The #find(x)# operation in a #YFastTrie# is fairly easy.  We search
-for #x# in #xft# and find some value $#x#_i$ associated with the treap
-$#t#_i$.  When then use the treap #find(x)# method on $#t#_i$ to answer
-the query.  \javaonly{The entire method is a one-liner:}
-\javaimport{ods/YFastTrie.find(x)}
+for #x# in #xft# and find some value $#x#_i$ associated with the
+treap $#t#_i$.  When then use the treap #find(x)# method on $#t#_i$
+to answer the query.  \javaonly{The entire method is a one-liner:}
+\javaimport{ods/YFastTrie.find(x)} 
 The first #find(x)# operation (on #xft#) takes $O(\log#w#)$ time.
-The second #find(x)# operation (on a treap) takes $O(\log r)$ time,
-where $r$ is the size of the treap.  Later in this section, we will show
-that the expected size of the treap is $O(#w#)$ so that this operation
-takes $O(\log #w#)$ time.\footnote{In general, if $\E[r]=z$, then
-$\E[\log r] \le \log z$.  This is an application of \emph{Jensen's Inequality}.}
+The second #find(x)# operation (on a treap) takes $O(\log r)$ time, where
+$r$ is the size of the treap.  Later in this section, we will show that
+the expected size of the treap is $O(#w#)$ so that this operation takes
+$O(\log #w#)$ time.\footnote{In general, if $\E[r]=z$, then $\E[\log r]
+\le \log z$.  This is an application of \emph{Jensen's Inequality}.}
+
+Adding an element to a #YFastTrie# is also fairly simple---most of the
+time.  The #add(x)# method calls #xft.find(x)# to locate the treap, #t#,
+into which #x# should be inserted.  It then calls #t.add(x)# to add #x# to
+#t#.  At this point, it tosses a biased coin, that comes up heads with
+probability $1/#w#$.  If this coin comes up heads, #x# will be added to
+#xft#.
+
+This is where things get slightly complicated.  When #x# is added to
+#xft#, the treap #t# needs to be split into two treaps #t1# and #t'#.
+The treap #t1# contains all the values less than or equal to #x#;  #t'#
+is the original treap, #t#, with the elements of #t1# removed.  In this
+way, we can add the pair #(x,t1)# to #t#.  \figref{yfasttrie-add} shows an
+example.
+\javaimport{ods/YFastTrie.add(x)}
+Adding #x# to #t# takes $O(\log #w#)$ time.  \excref{treap-split}
+shows that splitting #t# into #t1# and #t'# can also be done in $O(\log
+#w#)$ expected time.  Adding the pair (#x#,#t1#) to #xft# takes $O(#w#)$ time,
+but only happens with probability $1/#w#$.  Therefore, the expected running
+time of the #add(x)# operation is
+\[
+    O(\log#w#) + \frac{1}{#w#}O(#w#) = O(\log #w#)
+\]
+
+The #remove(x)# method just undoes the work performed by #add(x)#.
+We use #xft# to find the leaf, #u#, in #xft# that contains the answer
+to #xft.find(x)#.  From #u#, we get the treap, #t#, containing #x#
+and remove #x# from #t#.  If #x# was also stored in #xft# (and #x#
+is not equal to $2^{#w#}-1$) then we remove #x# from #xft# and add the
+elements from #x#'s treap to the treap, #t2#, that is stored by #u#'s
+successor in the linked list.   This is illustrated in
+\figref{yfast-remove}.
+\javaimport{ods/YFastTrie.remove(x)}
+Finding the node #u# in #xft# takes $O(\log#w#)$ expected time.
+Removing #x# from #t# takes $O(\log#w#)$ expected time.  Again,
+\excref{treap-split} shows that merging all the elements of #t# into
+#t2# can be done in $O(\log#w#)$ time.  If necessary, removing #x#
+from #xft# takes $O(#w#)$ time, but #x# is only contained in #xft# with
+probability $1/#w#$.  Therefore, the expected time to remove an element
+from a #YFastTrie# is $O(\log #w#)$.
+
+Earlier in the discussion, we put off arguing about the sizes of treaps in
+this structure until later.  Before finishing we prove the result we need.
+\begin{lem}\lemlabel{yfast-subtreesize}
+Let #x# be an integer stored in a #YFastTrie# and let $#n#_#x#$ denote the
+number of elements in the treap, #t#, that contains #x#.  Then $\E[#n#_#x#] \le
+2w-1$.
+\end{lem}
+
+\begin{proof}
+Let $#x#_1<#x#_2<\cdots<#x#_i=#x#<\cdots<#x#_#n#$ denote the elements
+stored in the #YFastTrie#.  The treap #t# contains some elements greater
+than or equal to #x#.  These are $#x#_i,#x#_{i+1},\ldots,#x#_{i+j-1}$, where
+$#x#_{i+j-1}$ is the only one of these elements in which the biased coin
+toss performed in the #add(x)# method came up heads.  In other words,
+$\E[j]$ is equal to the expected number of biased coin tosses required
+to obtain the first heads.  Each coin toss comes up heads independently
+with probability $1/#w#$, so $\E[j]\le#w#$.  (See \lemref{skiplist-cointoss}
+for an analysis of this for the case $#w#=2$.)
+
+Similarly, the elements of #t# smaller than #x# are
+$#x#_{i-1},\ldots,#x#_{i-k}$ where all these $k$ coin tosses came up
+tails and the coin toss for $#x#_{i-k-1}$ came up heads.  Therefore,
+$\E[k]\le#w#-1$, since this is the same coin tossing experiment considered
+previously, but in which the last toss doesn't count.  In summary,
+$#n#_#x#=j+k$, so
+\[  \E[#n#_#x#] = \E[j+k] = \E[j] + \E[k] \le 2#w#-1 \enspace .  \qedhere \]
+\end{proof}
+
+%Surprisingly, the bound in \lemref{yfast-subtreesize} is tight.  (If this
+%isn't surprising to the reader, they can stop reading this paragraph now.)
+%This is counterintuitive because #xft# contains any particular element
+%with probability $1/#w#$ so it contains about $n/#w#$ elements.  In other
+%words, the average number of elements assigned to one treap is #w#.
+%\lemref{yfast-subtreesize} says that the expected size of the treap that
+%contains #x# is about twice as large as the average.  This seeming
+%discrepancy comes from the fact that larger subtrees contain more elements
+%and therefore #x# is more likely to be in a larger subtree than a smaller
+%one.
+
+The following theorem summarizes the performance of the #YFastTrie#:
 
 \begin{thm}
-A #BinaryTrie# implements the #SSet# interface for #w#-bit integers. A
-#BinaryTrie# supports the operations #add(x)#, #remove(x)#, and #find(x)#
-in $O(\log #w#)$ time per operation.  The space used by a #BinaryTrie# that
+A #YFastTrie# implements the #SSet# interface for #w#-bit integers. A
+#YFastTrie# supports the operations #add(x)#, #remove(x)#, and #find(x)#
+in $O(\log #w#)$ time per operation.  The space used by a #YFastTrie# that
 stores #n# values is $O(#n#+#w#)$.
 \end{thm}
 
+The #w# term in the space requirement comes from the fact that #xft# always
+stores the value $2^#w#-1$.  The implementation could be modified (at the
+expense of adding some extra cases to the code) so that it is unnecessary
+to store this value.  In this case, the space requirement in the theorem
+becomes $O(#n#)$.
+
 \section{Discussion and Exercises}
+
+The first data structure to provide $O(\log#w#)$ time #add(x)#,
+#remove(x)#, and #find(x)# operations was proposed by van~Emde~Boas
+and has since become known as the van~Emde~Boas tree.  The original
+van~Emde~Boas structure had size $2^{#w#}$, so was impractical for
+large integers.
+
+The #XFastTrie# and #YFastTrie# data structures were discovered by
+Willard \cite{wXX}.  They are best thought of as a space-efficient
+realization of van~Emde~Boas trees.  
 
 Exercise: Get O(log d) search time in an XFastTrie.
 
 
 Exercise: Do a simplified version of BinaryTrie that doesn't have a linked list or jump pointers, but can still do find(x) in O(w) time.
 
-Exercise: 
+Exercise: Do a simplified implementation of an x-fast trie that doesn't use
+a binary trie at all. Instead, everything is stored in a doubly-linked list
+and hash tables.
 

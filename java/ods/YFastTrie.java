@@ -69,6 +69,7 @@ public class YFastTrie<T> implements SSet<T> {
 		}
 	}
 	protected static class Node<T> extends XFastTrie.Nöde<Node<T>,Pair<T>> {};
+	protected static final int w = XFastTrie.w;
 	protected XFastTrie<Node<T>,Pair<T>> xft;
 	protected Integerizer<T> it;
 	Random rand;
@@ -87,14 +88,13 @@ public class YFastTrie<T> implements SSet<T> {
 		n = 0;
 	}
 	
-	@SuppressWarnings("static-access")
 	public boolean add(T x) {
 		STreap<T> t = xft.find(new Pair<T>(it.intValue(x))).t;
 		if (t.add(x)) {
 			n++;
-			if (rand.nextInt(xft.w) == 1) {
-				STreap<T> t2 = t.split(x);
-				xft.add(new Pair<T>(it.intValue(x), t2));
+			if (rand.nextInt(w) == 0) {
+				STreap<T> t1 = t.split(x);
+				xft.add(new Pair<T>(it.intValue(x), t1));
 			}
 			return true;
 		} 
@@ -141,7 +141,6 @@ public class YFastTrie<T> implements SSet<T> {
 	public boolean remove(T x) {
 		int ix = it.intValue(x);
 		Node<T> u = xft.findNode(ix);
-		// STreap<T> t = (u == null) ? overflow : u.x.t;
 		boolean ret = u.x.t.remove(x);
 		if (ret) n--;
 		if (u != null && u.x.x == ix && ix != 0xffffffff) {
