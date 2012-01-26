@@ -1,7 +1,7 @@
 
 sources = intro.tex arrays.tex linkedlists.tex skiplists.tex \
 	hashing.tex binarytrees.tex rbs.tex scapegoat.tex redblack.tex \
-	heaps.tex sorting.tex graphs.tex
+	heaps.tex sorting.tex graphs.tex integers.tex
 javs = $(sources:.tex=-java.tex)
 cpps = $(sources:.tex=-cpp.tex)
 java = $(wildcard ../java/ods/*.java)

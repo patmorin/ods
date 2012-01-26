@@ -116,7 +116,6 @@ public class XFastTrie<Node extends XFastTrie.Nöde<Node,T>, T>
 	}
 	
 	public T find(T x) {
-		// find lowest node that is an ancestor of ix
 		int l = 0, h = w+1, ix = it.intValue(x);
 		Node v, u = r, q = newNode();
 		while (h-l > 1) {

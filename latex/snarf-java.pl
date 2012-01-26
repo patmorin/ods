@@ -57,6 +57,7 @@ sub snarfit($$) {
   open(FP, "<",$javafile) || die("Unable to open $javafile");
   while (my $line = <FP>) {
     chomp($line);
+    $line =~ s/ö/o/g;
     if ($wc && $d == 0 && $line =~ /^($k\s)*class\s/) {
         $line =~ s/($k\s+)//g;
         $line =~ s/extends\s+([$w]+\s*,\s*)*([$w]+)//g;

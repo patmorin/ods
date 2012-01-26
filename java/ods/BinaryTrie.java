@@ -98,8 +98,8 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 			if (u.child[c] == null) break;
 			u = u.child[c];
 		}		
-		if (i == w) return false; // trie already contains ix
-		Node pred = (c == right) ? u.jump : u.jump.child[0]; // save this 
+		if (i == w) return false; // trie already contains x - abort
+		Node pred = (c == right) ? u.jump : u.jump.child[0]; // save for step 3 
 		u.jump = null;  // u will have two children shortly
 		// 2 - add path to ix
 		for (; i < w; i++) {
@@ -115,10 +115,12 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 		u.child[prev].child[next] = u;
 		u.child[next].child[prev] = u;
 		// 4 - walk back up, updating jump pointers
-		Node v = u;
+		Node v = u.parent;
 		while (v != null) {
-			if ((v.child[0] == null && (v.jump == null || it.intValue(v.jump.x) > ix))
-			|| (v.child[1] == null && (v.jump == null || it.intValue(v.jump.x) < ix)))
+			if ((v.child[left] == null 
+					&& (v.jump == null || it.intValue(v.jump.x) > ix))
+			|| (v.child[right] == null 
+					&& (v.jump == null || it.intValue(v.jump.x) < ix)))
 				v.jump = u;
 			v = v.parent;
 		}
@@ -169,9 +171,9 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 			if (u.child[c] == null) break;
 			u = u.child[c];
 		}
-		if (i == w) return u.x;
-		Node pred = (c == 1) ? u.jump : u.jump.child[0]; 
-		return (pred.child[next] == dummy) ? null : pred.child[next].x;
+		if (i == w) return u.x;  // found it
+		u = (c == 0) ? u.jump : u.jump.child[next]; 
+		return u == dummy ? null : u.x;
 	}
 
 	protected Node findLeaf(int ix) {
