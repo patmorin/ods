@@ -1,0 +1,303 @@
+\chapter{Data Structures for Integers}
+
+In this chapter, we return to the problem of implementing an #SSet#.
+The difference now is that we assume the elements stored in the #SSet# are
+#w#-bit integers.  That is, we want to implement #add(x)#, #remove(x)#,
+and #find(x)# where $#x#\in\{0,\ldots,2^{#w#}-1\}$.
+
+We will discuss three data structures, each building on the ideas of
+the previous.  The first structure, the #BinaryTrie# performs all three
+#SSet# operations in $O(#w#)$ time. This is not very impressive, since
+any subset of $\{0,\ldots,2^{#w#}-1\}$ has size $#n#\le 2^{#w#}$, so that
+$\log #n# \le #w#$.  All the other #SSet# implementations discussed in
+this book perform all operations in $O(\log #n#)$ time so they are all
+at least as fast as a #BinaryTrie#.
+
+The second structure, the #XFastTrie# speeds up the search in a
+#BinaryTrie# by using hashing.  With this speedup, the #find(x)#
+operation runs in $O(\log #w#)$ time.  However, #add(x)# and #remove(x)#
+operations in an #XFastTrie# still take $O(#w#)$ time and the space used
+by an #XFastTrie# is $O(#n#\cdot#w#)$.
+
+The third data structure, the #YFastTrie# uses an #XFastTrie# to store
+only a sampling of roughly $1/#w#$ elements and stores the remaining
+elements a standard #SSet# structure.  This trick reduces the running
+time of #add(x)# and #remove(x)# to $O(\log #w#)$ and decreases the
+space to $O(#n#)$.
+
+\section{#BinaryTrie#: A digital search tree}
+
+A #BinaryTrie# encode a set of #w# bit integers in a binary tree.
+All leaves in the tree have depth #w# and each integer is encoded as a
+root-to-leaf path.  The path for the integer #x# turns left at level #i#
+if the #i#th most significant bit of #x# is a 0 and turns right if it
+is a 1.  \figref{binarytrie-ex} shows an example for the case $#w#=4$,
+in which The trie stores the integers 3(0011), 9(1001), 12(1100),
+and 13(1101).
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/binarytrie-ex-1}
+  \end{center}
+  \caption{The integers stored in a binary trie are encoded as
+    root-to-leaf paths.}
+  \figlabel{binarytrie-ex}
+\end{figure}
+
+Because the search path for a value #x# depends on the bits of #x# it will
+be helpful to name the children of a node, #u#, #u.child[0]# (#left#)
+and #u.child[1]# (#right#).  These child pointers will actually serve
+double-duty.  Since the leaves in a binary trie have no children, the
+pointers are used to string the leaves together into a doubly-linked list.
+For a leaf in the binary trie #u.child[0]# (#prev#) is the node that
+comes before #u# in the list and #u.child[1]# (#next#) is the node that
+follows #u# in the list.  A special node, #dummy#, is used both before
+the first node and after the last node in the list (see \secref{dllist}).
+
+Each node, #u#, also contains an additional pointer #u.jump#.  If #u#'s
+left child is missing, then #u.jump# points to the smallest leaf in
+#u#'s subtree.  If #u#'s right child is missing, then #u.jump# points
+to the largest leaf in #u#'s subtree.  An example of a #BinaryTrie#, showing #jump# pointers and the doubly-linked list at the leaves is shown in \figref{binarytrie-ex2}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/binarytrie-ex-2}
+  \end{center}
+  \caption{A #BinaryTrie# with #jump# pointers shown as curved dashed
+  edges.}
+  \figlabel{binarytrie-ex2}
+\end{figure}
+
+
+\cppimport{ods/BinaryTrie.Node<Node}
+
+The #find(x)# operation in a #BinaryTrie# is fairly straightforward.
+We try to follow the search path for #x# in the trie.  If we reach a leaf,
+then we have found #x#.  If, we reach a node #u# where we cannot proceed
+(because #u# is missing a child) then we follow #u.jump#, which takes
+us either to smallest leaf larger than #x# or the largest leaf smaller
+than #x#. Which of these two cases occurs depends on whether #u# is
+missing its left or right child, respectively.  In the former case (#u#
+is missing its left child), we have found the value we are looking for.
+In the latter case (#u# is missing its right child), we can use the
+linked list to reach the value we are looking for. Each of these cases
+is illustrated in \figref{binarytrie-find}.
+\javaimport{ods/BinaryTrie.find(x)}
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/binarytrie-ex-3}
+  \end{center}
+  \caption{The paths followed by #find(5)# and #find(8)#.}
+  \figlabel{binarytrie-find}
+\end{figure}
+The running-time of the #find(x)# method is dominated by the time it
+takes to follow a root-to-leaf path, so it runs in $O(#w#)$ time.
+
+The #add(x)# operation in a doubly-linked list is fairly straightforward,
+but does a lot of things:
+\begin{enumerate}
+  \item It follows the search path for #x# until reaching a node #u#
+  where it can no longer proceed.
+  \item It creates the remainder of the search path from #u# to a leaf
+  that contains #x#.
+  \item It adds the node, #u'#, containing #x# to the linked list of
+  leaves (it has has access to #u'#'s location in the linked list from
+  the #jump# pointer of the last node, #u#, encountered during step~1.)
+  \item It walks back up the search path for #x# adjusting #jump# at
+  the nodes that should now point to #x#.
+\end{enumerate}
+An addition is illustrated in \figref{binarytrie-add}.
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/binarytrie-add}
+  \end{center}
+  \caption{Adding the values 2 and 15 to the #BinaryTrie# in
+  \figref{binarytrie-ex2}.}
+  \figlabel{binarytrie-add}
+\end{figure}
+\javaimport{ods/BinaryTrie.add(x)}
+This method performs one walk down the search path for #x# and one walk
+back up, so it runs in $O(#w#)$ time.
+
+
+The #remove(x)# operation undoes the work of #add(x)#.
+\begin{enumerate}
+  \item It follows the search path for #x# until reaching the leaf, #u#,
+  containing #x#.
+  \item It removes #u# from the doubly-linked list 
+  \item It deletes #u# and then walks back up the search path for #x#
+  deleting nodes until reaching a node #v# that has a child that is not
+  on the search path for #x#
+  \item It walks upwards from #v# to the root updating any #jump# pointers
+  that point to #u#.
+\end{enumerate}
+A removal is illustrated in \figref{binarytrie-remove}.
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/binarytrie-remove}
+  \end{center}
+  \caption{Removing the value 9 from the #BinaryTrie# in
+  \figref{binarytrie-ex2}.}
+  \figlabel{binarytrie-remove}
+\end{figure}
+\javaimport{ods/BinaryTrie.remove(x)}
+
+\begin{thm}
+A #BinaryTrie# implements the #SSet# interface for #w#-bit integers. A
+#BinaryTrie# supports the operations #add(x)#, #remove(x)#, and #find(x)#
+in $O(#w#)$ time per operation.  The space used by a #BinaryTrie# that
+stores #n# values is $O(#n#\cdot#w#)$.
+\end{thm}
+
+\section{#XFastTrie#: Searching in Doubly-Logarithmic Time}
+
+The performance of the #BinaryTrie# structure is not that impressive.
+The number of elements, #n#, stored in the structure is at most $2^{#w#}$,
+so $\log #n#\le #w#$.  In other words, any of the comparison-based #SSet#
+structures described in other parts of this book are at least as efficient
+as a #BinaryTrie#, and don't have the restriction of only being able to
+store integers.
+
+Next we describe the #XFastTrie#, which is just a #BinaryTrie# with a
+#w# hash tables added that speeds up the #find(x)# operation to $O(\log
+#w#)$ time.  Recall that the #find(x)# operation in a #BinaryTrie# is
+almost complete once we reach a node, #u#, where the search path for #x#
+would like to proceed to #u.right# (or #u.left#) but #u# has no right
+(respectively, left) child.  At this point, the search uses #u.jump#
+to jump to a leaf, #v#, of the #BinaryTrie# and either return #v# or
+its successor in the linked list of leaves.  An #XFastTrie# speeds up
+the search process by using binary search on the levels of the trie to
+locate the node #u#.
+
+To use binary search, we need a way to determine if the node #u# we are
+looking for is above a particular level, #i#, of if #u# is at or below
+level #i#.  This information is given by the highest-order #i# bits
+in the binary representation of #x#; these bits determine the search
+path that #x# takes from the root to level #i#.   For an example,
+refer to \figref{xfast-path}; in this figure the last node, #u#, on
+search path for 14 (whose binary representation is 1110) is the node
+labelled $11{\star\star}$ at level 2 because there is no node labelled
+$111{\star}$ at level 3.  Thus, we can label each node at level #i#
+with an #i#-bit integer.  Then the node #u# we are searching for is at
+or below level #i# if and only if there is a node at level #i# whose
+label matches the first highest-order #i# bits of #x#. 
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/xfast-path}
+  \end{center}
+  \caption{The search path for 14 (1110) ends at the node labelled $11{\star\star}$ since there is no node labelled $111\star$.}
+  \figlabel{xfast-path}
+\end{figure}
+
+In an #XFastTrie#, we store, for each $#i#\in\{0,\ldots,#w#\}$, all
+the nodes at level #i# in a #USet#, #t[i]#, that is implemented as a
+hash table (\chapref{hashing}).  Using this #USet# allows us to check
+in constant expected time if there is a node at level #i# whose label
+matches the highest-order #i# bits of #x#.  In fact, we can even find
+this node using #t[i].find(x>>(w-i))#.
+
+Using the hash tables $#t[0]#,\ldots,#t[w]#$ we can use binary search
+to find #u#.  Initially, we know that #u# is at some level #i# with
+$0\le #i#< #w#+1$. We therefore initialize $#l#=0$ and $#h#=#w#+1$
+and repeatedly look at the hash table #t[i]#, where $#i#=\lfloor
+(#l+h#)/2\rfloor$.  If $#t[i]#$ contains a node whose label matches
+#x#'s highest-order #i# bits then we set #l=i# (#u# is at or below level
+#i#), otherwise we set #h=i# (#u# is above level #i#).  This process
+terminates when $#h-l#\le 1$, in which case we determine that #u# is
+at level #l#.  We then complete the #find(x)# operation using #u.jump#
+and the doubly-linked list of leaves.
+\javaimport{ods/XFastTrie.find(x)}
+Each iteration of the #while# loop in the above method decreases #h-l#
+by roughly a factor of 2, so this loop finds #u# after $O(\log #w#)$
+iterations.  Each iteration performs a constant amount of work and one
+#find(x)# operation in a #USet#, which takes constant expected time.
+The remaining work takes only constant time, so the #find(x)# method in
+an #XFastTrie# takes only $O(\log#w#)$ expected time.
+
+The #add(x)# and #remove(x)# methods for an #XFastTrie# are almost
+identical to the same methods in a #BinaryTrie#.  The only modifications
+are for managing the hash tables #t[0]#,\ldots,#t[w]#.  During the
+#add(x)# operation, when a new node is created at level #i#, this node
+is added to #t[i]#.  During a #remove(x)# operation, when a node is
+removed form level #i#, this node is removed from #t[i]#.  Since adding
+and removing from a hash table take constant expected time, this does
+not increase the running times of #add(x)# and #remove(x)# by more than
+a constant factor.
+
+The following theorem summarizes the performance of an #XFastTrie#:
+
+\begin{thm}
+An #XFastTrie# implements the #SSet# interface for #w#-bit integers. An
+#XFastTrie# supports the operations
+\begin{itemize}
+\item #add(x)# and #remove(x)# in $O(#w#)$ time per operation and 
+\item #find(x)# in $O(\log #w#)$ time per operation.
+\end{itemize}
+The space used by an #XFastTrie# that
+stores #n# values is $O(#n#\cdot#w#)$.
+\end{thm}
+
+\section{#YFastTrie#: A Doubly-Logarithmic Time #SSet#}
+
+The #XFastTrie# is a big improvement over the #BinaryTrie# in terms of
+query time---some would even call it an exponential improvement---but
+the #add(x)# and #remove(x)# operations are still not terribly fast.
+Furthermore, the space usage, $O(#n#\cdot#w#)$, is higher than the
+other #SSet# implementation in this book, which all use $O(#n#)$ space.
+These two problems are related; if #n# #add(x)# operations build a
+structure of size $#n#\cdot#w#$ then the #add(x)# operation requires on
+the order of #w# time (and space) per operation.
+
+The #YFastTrie# data structure simultaneously addresses both the space
+and speed issues of #XFastTrie#s.  A #YFastTrie# uses an #XFastTrie#,
+#xft#, but only stores $O(#n#/#w#)$ values in #xft#.  In this way,
+the total space used by #xft# is only $O(#n#)$.  Furthermore, only one
+out of every #w# #add(x)# or #remove(x)# operations in the #YFastTrie#
+results in an #add(x)# or #remove(x)# operation in #xft#.  By doing this,
+the average cost incurred by calls to #xft#'s #add(x)# and #remove(x)#
+operations is only constant.
+
+The obvious question becomes:  If #xft# only stores #n#/#w# elements,
+where do the remaining $#n#(1-1/#w#)$ elements go?  These elements go into
+\emph{secondary structures}, in this case an extended version of treaps
+(\secref{treap}).  There are roughly #n#/#w# of these secondary structures
+so, on average, each of them stores $O(#w#)$ items.  Treaps support
+logarithmic time #SSet# operations, so the operations on these treaps
+will run in $O(\log #w#)$ time, as required.
+
+More concretely, a #YFastTrie# contains an #XFastTrie#, #xft#,
+that contains a random sample of the data, where each element
+appears in the sample independently with probability $1/#w#$.
+For convenience, the value $2^{#w#}-1$, is always contained in #xft#.
+Let $#x#_0<#x#_1<\cdots<#x#_{k-1}$ denote the elements stored in #xft#.
+Associated with each element, $#x#_i$, is a treap, $#t#_i$, that stores
+all values in the range $#x#_{i-1}+1,\ldots,#x#_i$.  This is illustrated
+in \figref{yfast-ex}.
+
+The #find(x)# operation in a #YFastTrie# is fairly easy.  We search
+for #x# in #xft# and find some value $#x#_i$ associated with the treap
+$#t#_i$.  When then use the treap #find(x)# method on $#t#_i$ to answer
+the query.  \javaonly{The entire method is a one-liner:}
+\javaimport{ods/YFastTrie.find(x)}
+The first #find(x)# operation (on #xft#) takes $O(\log#w#)$ time.
+The second #find(x)# operation (on a treap) takes $O(\log r)$ time,
+where $r$ is the size of the treap.  Later in this section, we will show
+that the expected size of the treap is $O(#w#)$ so that this operation
+takes $O(\log #w#)$ time.\footnote{In general, if $\E[r]=z$, then
+$\E[\log r] \le \log z$.  This is an application of \emph{Jensen's Inequality}.}
+
+\begin{thm}
+A #BinaryTrie# implements the #SSet# interface for #w#-bit integers. A
+#BinaryTrie# supports the operations #add(x)#, #remove(x)#, and #find(x)#
+in $O(\log #w#)$ time per operation.  The space used by a #BinaryTrie# that
+stores #n# values is $O(#n#+#w#)$.
+\end{thm}
+
+\section{Discussion and Exercises}
+
+Exercise: Get O(log d) search time in an XFastTrie.
+
+
+Exercise: Do a simplified version of BinaryTrie that doesn't have a linked list or jump pointers, but can still do find(x) in O(w) time.
+
+Exercise: 
+
