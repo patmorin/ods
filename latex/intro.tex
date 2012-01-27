@@ -525,15 +525,18 @@ described in this book that implement each of the interfaces, #List#,
 \multicolumn{4}{c}{} \\[2ex] \hline
 \multicolumn{4}{|c|}{#USet# implementations} \\ \hline
  & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
-#ChainedHashTable# & $O(1)$\footnotemark[5] & $O(1)$\footnotemark[1]\footnotemark[5] & \sref{hashtable} \\ \hline
+#ChainedHashTable# & $O(1)$\footnotemark[5] & $O(1)$\footnotemark[1]\footnotemark[5] & \sref{hashtable} \\ 
 #LinearHashTable# & $O(1)$\footnotemark[5] & $O(1)$\footnotemark[1]\footnotemark[5] & \sref{linearhashtable} \\ \hline
 \multicolumn{4}{c}{} \\[2ex] \hline
 \multicolumn{4}{|c|}{#SSet# implementations} \\ \hline
  & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
-#SkiplistSSet# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5] & \sref{skiplistset} \\ \hline
-#Treap# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5] & \sref{treap} \\ \hline
-#ScapegoatTree# & $O(\log #n#)$ & $O(\log #n#)$\footnotemark[1] & \sref{scapegoattree} \\ \hline
-#RedBlackTree# & $O(\log #n#)$ & $O(\log #n#)$ & \sref{redblacktree} \\ \hline
+#SkiplistSSet# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5] & \sref{skiplistset} \\ 
+#Treap# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5] & \sref{treap} \\ 
+#ScapegoatTree# & $O(\log #n#)$ & $O(\log #n#)$\footnotemark[1] & \sref{scapegoattree} \\
+#RedBlackTree# & $O(\log #n#)$ & $O(\log #n#)$ & \sref{redblacktree} \\ 
+#BinaryTrie#\footnotemark[9] & $O(#w#)$ & $O(#w#)$ & \sref{binarytrie} \\ 
+#XFastTrie#\footnotemark[9] & $O(\log #w#)$\footnotemark[1]\footnotemark[5] & $O(#w#)$\footnotemark[1]\footnotemark[5] & \sref{xfast} \\ 
+#YFastTrie#\footnotemark[9] & $O(\log #w#)$\footnotemark[1]\footnotemark[5] & $O(\log #w#)$\footnotemark[1]\footnotemark[5] & \sref{yfast} \\ \hline
 \multicolumn{4}{c}{} \\[2ex] \hline
 \multicolumn{4}{|c|}{(Priority) #Queue# implementations} \\ \hline
  & #findMin()# & #add(x)#/#remove()# & \\ \hline
@@ -542,6 +545,7 @@ described in this book that implement each of the interfaces, #List#,
 \end{tabular}
 \footnotetext[1]{Denotes an \emph{amortized} running time. See \chapref{arrays}.}
 \footnotetext[5]{Denotes an \emph{expected} running time.  See \secref{randomization}.}
+\footnotetext[6]{This structure can only store #w#-bit integer data.}
 \renewcommand{\thefootnote}{\arabic{footnote}}
 \end{center}
 
