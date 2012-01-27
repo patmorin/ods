@@ -29,6 +29,10 @@ using namespace std;
 #include "ScapegoatTree.h"
 #include "RedBlackTree.h"
 
+#include "BinaryTrie.h"
+#include "XFastTrie.h"
+#include "YFastTrie.h"
+
 #include "BinaryHeap.h"
 #include "MeldableHeap.h"
 
@@ -213,7 +217,7 @@ void ssetTests(SSet &ss, int n, unsigned flags) {
 	cout << "Running binary tree tests...";
 	cout.flush();
 	start = clock();
-	btTests(ss);
+	// btTests(ss);
 	stop = clock();
 	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
@@ -440,6 +444,33 @@ int main(int argc, char **argv)
 	srand(0);
 
 	{
+		cout << endl << "Treap<int>:" << endl;
+		Treap1<int> t;
+		btTests(t);
+		ssetTests(t, n, 0x0);
+	}
+
+	{
+		cout << endl << "YFastTrie<int>:" << endl;
+		YFastTrie<int> t;
+		ssetTests(t, n, 0x0);
+	}
+
+	{
+		cout << endl << "XFastTrie<int>:" << endl;
+		XFastTrie1<int> t;
+		ssetTests(t, n, 0x0);
+	}
+
+	{
+		cout << endl << "BinaryTrie<int>:" << endl;
+		BinaryTrie1<int> t;
+		ssetTests(t, n, 0x0);
+	}
+
+
+
+	{
 		int n = 20;
 		cout << endl << "Graph Tests" << endl;
 		AdjacencyMatrix am(n);
@@ -460,7 +491,7 @@ int main(int argc, char **argv)
 
 	{
 		cout << endl << "LinearHashTable<int>:" << endl;
-		LinearHashTable<int> t;
+		LinearHashTable<int> t(INT_MIN, INT_MIN+1);
 		usetTests(t, n);
 	}
 

@@ -28,6 +28,7 @@ public:
 	int length;
 	array(int len);
 	array(int len, T init);
+	void fill(T x);
 	virtual ~array();
 
 	array<T>& operator=(array<T> &b) {
@@ -87,9 +88,14 @@ template<class T>
 void array<T>::copyOfRange(array<T> &a0, array<T> &a, int i, int j) {
 	array<T> b(j-i);
 	std::copy(a.a, a.a+j-i, b.a);
-	// memcpy(b.a, a.a, (j-i)*sizeof(T));
 	a0 = b;
 }
+
+template<class T>
+void array<T>::fill(T x) {
+	std::fill(a, a+length, x);
+}
+
 
 } /* namespace ods */
 #endif /* ARRAY_H_ */

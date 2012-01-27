@@ -41,7 +41,9 @@ class LinearHashTable {
 
 
 public:
+	// FIXME: get rid of default constructor
 	LinearHashTable();
+	LinearHashTable(T null, T del);
 	virtual ~LinearHashTable();
 	bool add(T x);
 	bool addSlow(T x);
@@ -49,12 +51,41 @@ public:
 	T find(T x);
 	int size() { return n; }
 	void clear();
+	// FIXME: yuck
+	void setNull(T null) { this->null = null; t.fill(null); }
+	void setDel(T del) { this->del = del; }
 };
 
-template<class T>
-LinearHashTable<T>::LinearHashTable() : t(2, INT_MIN) {
+/*
+template<>
+LinearHashTable<int>::LinearHashTable() : t(2, INT_MIN) {
 	null = INT_MIN;
 	del = INT_MIN + 1;
+	n = 0;
+	q = 0;
+	d = 1;
+}
+*/
+
+/**
+ * FIXME: Dangerous - leaves null and del uninitialized
+ */
+template<class T>
+LinearHashTable<T>::LinearHashTable() : t(2) {
+/*
+	this->null = null;
+	this->del = del;
+*/
+	n = 0;
+	q = 0;
+	d = 1;
+}
+
+
+template<class T>
+LinearHashTable<T>::LinearHashTable(T null, T del) : t(2, null) {
+	this->null = null;
+	this->del = del;
 	n = 0;
 	q = 0;
 	d = 1;

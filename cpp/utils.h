@@ -32,13 +32,24 @@ bool equals(T &x, T &y) {
 	return x == y;
 }
 
+inline
+unsigned intValue(int x) {
+	return (unsigned)x;
+}
+
 /**
  * This is terrible - don't use it
  */
-template<class T> inline
-int hashCode(T x) {
-	return (int)x;
+int hashCode(int x);
+
+template<class T> class XFastTrieNode1;
+
+
+template<class T>
+unsigned hashCode(const XFastTrieNode1<T> *u) {
+	return u->prefix;
 }
+
 
 class dodo {
 public:
