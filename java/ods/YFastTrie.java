@@ -89,12 +89,13 @@ public class YFastTrie<T> implements SSet<T> {
 	}
 	
 	public boolean add(T x) {
-		STreap<T> t = xft.find(new Pair<T>(it.intValue(x))).t;
+		int ix = it.intValue(x);
+		STreap<T> t = xft.find(new Pair<T>(ix)).t;
 		if (t.add(x)) {
 			n++;
 			if (rand.nextInt(w) == 0) {
 				STreap<T> t1 = t.split(x);
-				xft.add(new Pair<T>(it.intValue(x), t1));
+				xft.add(new Pair<T>(ix, t1));
 			}
 			return true;
 		} 
@@ -143,7 +144,7 @@ public class YFastTrie<T> implements SSet<T> {
 		Node<T> u = xft.findNode(ix);
 		boolean ret = u.x.t.remove(x);
 		if (ret) n--;
-		if (u != null && u.x.x == ix && ix != 0xffffffff) {
+		if (u.x.x == ix && ix != 0xffffffff) {
 			STreap<T> t2 = u.child[1].x.t;
 			t2.absorb(u.x.t);
 			xft.remove(u.x);

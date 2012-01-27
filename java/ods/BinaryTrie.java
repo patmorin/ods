@@ -80,11 +80,6 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 		n = 0;
 	}
 	
-	protected class Location {
-		int i;
-		Node u;
-	}
-	
 	public String toString() {
 		return Utils.collectionToString(this);
 	}
@@ -176,17 +171,6 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 		return u == dummy ? null : u.x;
 	}
 
-	protected Node findLeaf(int ix) {
-		int i = 0, c;
-		Node u = r;
-		for (i = 0; i < w; i++) {
-			c = (ix >>> w-i-1) & 1;
-			if (u.child[c] == null) return null;
-			u = u.child[c];
-		}
-		return u;
-	}
-	
 	public boolean remove(T x) {
 		// 1 - find leaf, u, containing x
 		int i = 0, c, ix = it.intValue(x);
