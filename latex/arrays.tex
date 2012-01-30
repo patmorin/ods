@@ -909,13 +909,13 @@ The quantity $2^{#r#-#r#'}x$ is in the range
 $\{2^{#r#},\ldots,2^{#r#+1}-1\}$ so we can look up its square root
 in #sqrttab#.  The following code implements this idea to compute
 $\lfloor\sqrt{#x#}\rfloor$ for all non-negative integers #x# in the
-range $\{0,\ldots,2^{30}-1\}$ using an array #sqrttab# of size $2^{16}$.
+range $\{0,\ldots,2^{30}-1\}$ using an array, #sqrttab#, of size $2^{16}$.
 \codeimport{ods/FastSqrt.sqrt(x)}
 
 Something we have taken for granted thus far is the question of how
 to compute
 $#r#'=\lfloor\log#x#\rfloor$.  Again, this is a problem that can be solved
-with an array #logtab# of size $2^{#r#/2}$.  In this case, the
+with an array, #logtab#, of size $2^{#r#/2}$.  In this case, the
 code is particularly simple, since $\lfloor\log #x#\rfloor$ is just the
 index of the most significant 1 bit in the binary representation of #x#.
 This means that, for $#x#>2^{#r#/2}$, we can right-shift the bits of
