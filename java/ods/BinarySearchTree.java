@@ -92,7 +92,7 @@ public class BinarySearchTree<Node extends BinarySearchTree.BSTNode<Node,T>, T> 
 		return null;
 	}
 
-	protected T find(T x) {
+	public T find(T x) {
 		Node w = r, z = nil;
 		while (w != nil) {
 			int comp = c.compare(x, w.x);
