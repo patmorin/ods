@@ -961,6 +961,15 @@ supports #get(i,x)# and #set(i,x)# in constant time and #add(i,x)# and
 to what can be achieved with the more careful implementation of a
 #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
 
+%\javaonly{
+%\begin{exc}
+%  In the #ArrayStack# implementation, after the first call to #remove(i)#,
+%  the backing array, #a#, contains #n# non-#null# values even though
+%  the #ArrayStack# only contains #n# elements.  Where is the extra
+%  non-#null# value.  Discuss any consequences this has on the Java Runtime Environment's memory manager.
+%\end{exc}
+%}
+
 \begin{exc}
   The #List# method #addAll(i,c)# inserts all elements of the #Collection#
   #c# into the list at position #i#.  (The #add(i,x)# method is a special
