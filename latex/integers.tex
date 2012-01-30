@@ -378,25 +378,35 @@ Then $\E[#n#_#x#] \le 2#w#-1$.
 \end{lem}
 
 \begin{proof}
-Let $#x#_1<#x#_2<\cdots<#x#_i=#x#<\cdots<#x#_#n#$ denote the elements
-stored in the #YFastTrie#.  The treap #t# contains some elements greater
-than or equal to #x#.  These are $#x#_i,#x#_{i+1},\ldots,#x#_{i+j-1}$, where
+Refer to \figref{yfast-sample}. Let
+$#x#_1<#x#_2<\cdots<#x#_i=#x#<\cdots<#x#_#n#$ denote the elements stored
+in the #YFastTrie#.  The treap #t# contains some elements greater than
+or equal to #x#.  These are $#x#_i,#x#_{i+1},\ldots,#x#_{i+j-1}$, where
 $#x#_{i+j-1}$ is the only one of these elements in which the biased coin
 toss performed in the #add(x)# method came up heads.  In other words,
 $\E[j]$ is equal to the expected number of biased coin tosses required
-to obtain the first heads.  Each coin toss comes up heads independently
+to obtain the first heads.\footnote{This analysis ignores the fact that
+$j$ never exceeds $#n#-i+1$.  However, this only decreases $\E[j]$, so the
+upper bound still holds}  Each coin toss is independent and comes up heads
 with probability $1/#w#$, so $\E[j]\le#w#$.  (See \lemref{coin-tosses}
 for an analysis of this for the case $#w#=2$.)
 
 Similarly, the elements of #t# smaller than #x# are
-$#x#_{i-1},\ldots,#x#_{i-k}$ where all these $k$ coin tosses came up
-tails and the coin toss for $#x#_{i-k-1}$ came up heads.  Therefore,
+$#x#_{i-1},\ldots,#x#_{i-k}$ where all these $k$ coin tosses come up
+tails and the coin toss for $#x#_{i-k-1}$ comes up heads.  Therefore,
 $\E[k]\le#w#-1$, since this is the same coin tossing experiment considered
 previously, but in which the last toss doesn't count.  In summary,
 $#n#_#x#=j+k$, so
 \[  \E[#n#_#x#] = \E[j+k] = \E[j] + \E[k] \le 2#w#-1 \enspace .  \qedhere \]
 \end{proof}
-
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/yfast-sample}
+  \end{center}
+  \caption{The number of elements in the treap, #t#, containing #x#
+  is determined by two coin tossing experiments.}
+  \figlabel{yfast-sample}
+\end{figure}
 %Surprisingly, the bound in \lemref{yfast-subtreesize} is tight.  (If this
 %isn't surprising to the reader, they can stop reading this paragraph now.)
 %This is counterintuitive because #xft# contains any particular element
