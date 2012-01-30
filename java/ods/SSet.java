@@ -27,11 +27,21 @@ public interface SSet<T> extends Iterable<T> {
 
 	/**
 	 * Find the smallest element in the SSet that is greater than or equal to x.
+	 * 
+	 * @param x
+	 * @return the smallest element in the SSet that is greater than or equal to
+	 *         x or null if no such element exists
+	 */
+	public T find(T x);
+
+	/**
+	 * Find the smallest element in the SSet that is greater than or equal to x.
 	 * If x is null, return the smallest element in the SSet
 	 * 
 	 * @param x
 	 * @return the smallest element in the SSet that is greater than or equal to
-	 *         x. If x is null then the smallest element in the SSet
+	 *         x or null if no such element exists. If x is null then the
+	 *         smallest element in the SSet
 	 */
 	public T findGE(T x);
 
