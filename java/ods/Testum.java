@@ -236,8 +236,11 @@ public class Testum {
 			System.out.print("random headSets (" + s(ss) + ")...");
 			start = System.nanoTime();
 			Random r = new Random();
-			for (int i = 0; i < n; i++)
+			for (int i = 0; i < n; i++) {
 				ss.headSet(r.nextInt(2*n));
+				Iterator<Integer> it = ss.iterator();
+				if (it.hasNext()) it.next();
+			}
 			stop = System.nanoTime();
 			System.out.println(" " + (1e-9 * (stop - start)) + " seconds");
 		}

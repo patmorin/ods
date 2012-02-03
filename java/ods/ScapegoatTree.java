@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Comparator;
 
 
-public class ScapegoatTree<T extends Comparable<T>> 
+public class ScapegoatTree<T> 
 		extends BinarySearchTree<ScapegoatTree.Node<T>,T> {
 	/**
 	 * An overestimate of n
