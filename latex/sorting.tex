@@ -63,7 +63,38 @@ we take the minimum of the next element in #a0# and the next element in
 Notice that the #merge(a0,a1,a,c)# algorithm performs at most $#n#-1$
 comparisons before running out of elements in one of #a0# or #a1#.
 
-The following theorem shows that #mergeSort(a,c)# is a very efficient algorithm:
+To understand the running-time of merge-sort, it is easiest to think
+of it in terms of its recursion tree.  Suppose for now that #n# is a
+power of 2, so that $#n#=2^{\log #n#}$, and $\log #n#$ is an integer.
+Refer to \figref{mergesort-recursion}. Merge-sort turns the problem of
+sorting #n# elements into 2 problems, each of sorting $#n#/2$ elements.
+These two subproblem are then turned into 2 problems each, for a total
+of 4 subproblems, each of size $#n#/4$. These 4 subproblems become 8
+subproblems of size $#n#/8$, and so on.  At the bottom of this process,
+$#n#/2$ subproblems, each of size 2, are converted into #n# problems,
+each of size $#1#$.  For each subproblem of size $#n#/2^{i}$, the time
+spent merging and copying data is $O(#n#/2^i)$.  Since there are $2^i$
+subproblems of size $#n#/2^i$, the total time spent working on problems
+of size $2^i$, not counting recursive calls, is
+\[
+       2^i\times O(#n#/2^i) = O(#n#) \enspace .
+\]
+Therefore, the total amount of time taken by merge-sort is
+\[
+   \sum_{i=0}^{\log #n#} O(#n#) = O(#n#\log #n#) \enspace .
+\]
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/mergesort-recursion}
+    \caption{The merge-sort recursion tree.}
+    \figlabel{mergesort-recursion}
+  \end{center}
+\end{figure}
+
+The proof of the following theorem is based on the same analysis as above,
+but has to be a little more careful to deal with the cases where #n#
+is not a power of 2.
 \begin{thm}
   The #mergeSort(a,c)# algorithm runs in $O(#n#\log #n#)$ time and
   performs at most $#n#\log #n#$ comparisons.
@@ -619,13 +650,19 @@ on the card.  Repeating this process for different hole locations gives
 an implementation of radix-sort.
 
 \begin{exc}
-  Find another pair of permutations of $1,2,3$ that are not correctly
-  sorted by the comparison-tree in \figref{comparison-tree-2}.
+  Implement a version of the merge-sort algorithm that sorts a #DLList#
+  without using an auxiliary array. 
 \end{exc}
 
 \begin{exc}
-  Implement a version of the merge-sort algorithm that sorts a #DLList#
-  without using an auxiliary array. 
+  Analyze the expected number of comparisons done by Quicksort a little
+  more carefully than the proof of \thmref{quicksort}.  In particular, show
+  that the expected number of comparisons is $2#n#H_#n# -#n# + H_#n#$.
+\end{exc}
+
+\begin{exc}
+  Find another pair of permutations of $1,2,3$ that are not correctly
+  sorted by the comparison-tree in \figref{comparison-tree-2}.
 \end{exc}
 
 \begin{exc}\exclabel{log-factorial}
