@@ -34,12 +34,16 @@ public class BinaryHeap<T> extends AbstractQueue<T> {
 	 * @param c
 	 */
 	public BinaryHeap(Class<T> clz) {
-		c = new DefaultComparator<T>();
+		this(clz, new DefaultComparator<T>());
+	}
+
+	public BinaryHeap(Class<T> clz, Comparator<T> c0) {
+		c = c0;
 		f = new Factory<T>(clz);
 		a = f.newArray(1);
 		n = 0;
 	}
-	
+
 	public void clear() {
 		a = f.newArray(1);
 		n = 0;		
