@@ -78,8 +78,9 @@ For this reason, we discuss two broad categories of graph representations.
 \section{#AdjacencyMatrix#: Representing a Graph by a Matrix}
 \seclabel{adjacency-matrix}
 
-An \emph{adjacency matrix} is a way of representing a graph $G=(V,E)$ by
-an $#n#\times#n#$ matrix, #a#, whose entries are boolean values.
+An \emph{adjacency matrix} is a way of representing an #n# vertex graph
+$G=(V,E)$ by an $#n#\times#n#$ matrix, #a#, whose entries are boolean
+values.
 \codeimport{ods/AdjacencyMatrix.a.n.AdjacencyMatrix(n0)}
 
 The matrix entry #a[i][j]# is defined as
@@ -175,14 +176,14 @@ shortest paths between all pairs of vertices in $G$ using only $O(\log
 \section{#AdjacencyLists#: A Graph as a Collection of Lists}
 \seclabel{adjacency-list}
 
-An \emph{adjacency list} representation of a graph takes a
-more vertex-centric approach.  There are many different possible
-implementations of adjacency lists.  In this section, we present a simple
-one.  At the end of the section, we discuss different possibilities.
-In an adjacency list representation, the graph $G=(V,E)$ is represented
-as an array, #adj#, of lists.  The list #adj[i]# contains a list of all
-the vertices adjacent to vertex #i#.  That is, it contains every index
-#j# such that $#(i,j)#\in E$.
+\emph{Adjacency list} representations takes a more vertex-centric
+approach.  There are many different possible implementations of
+adjacency lists.  In this section, we present a simple one.  At the end
+of the section, we discuss different possibilities.  In an adjacency
+list representation, the graph $G=(V,E)$ is represented as an array,
+#adj#, of lists.  The list #adj[i]# contains a list of all the vertices
+adjacent to vertex #i#.  That is, it contains every index #j# such that
+$#(i,j)#\in E$.
 \codeimport{ods/AdjacencyLists.adj.n.AdjacencyLists(n0)}
 (An example is shown in \figref{graph-adjlist}.)  In this particular
 implementation, we represent each list in #adj# as \javaonly{an}\cpponly{a
@@ -216,7 +217,7 @@ This takes constant time.
 The #removeEdge(i,j)# operation searches through the list #adj[i]#
 until it finds #j# and then removes it:
 \codeimport{ods/AdjacencyLists.removeEdge(i,j)}
-This takes $O(\deg(#i#))$ time, where $\deg(#i#)$ (the \emph{degre} of
+This takes $O(\deg(#i#))$ time, where $\deg(#i#)$ (the \emph{degree} of
 $#i#$) counts the number of edges in $E$ that have $#i#$ as their source.
 
 The #hasEdge(i,j)# operation is similar;  it searches through the list
@@ -233,7 +234,7 @@ into the output list}:
 \javaonly{This clearly takes constant time.}\cpponly{This clearly takes $O(\deg(#i#))$ time.}
 
 The #inEdges(i)# operation is much more work.  It scans over every
-vertex $j$ checking if the edge #(i,j)# exists and, if so adding #j#
+vertex $j$ checking if the edge #(i,j)# exists and, if so, adding #j#
 to the output list:
 \javaimport{ods/AdjacencyLists.inEdges(i)}
 \cppimport{ods/AdjacencyLists.inEdges(i,edges)}
@@ -244,7 +245,7 @@ The following theorem summarizes the performance of the above data structure:
 
 \begin{thm}
 The #AdjacencyLists# data structure implements the #Graph# interface.
-A #AdjacencyLists# supports the operations
+An #AdjacencyLists# supports the operations
 \begin{itemize}
   \item #addEdge(i,j)# in constant time per operation;
   \item #removeEdge(i,j)# and #hasEdge(i,j)# in $O(\deg(#i#))$ time
@@ -296,8 +297,8 @@ for binary trees (\secref{bintree:traversal}), and is very similar; it
 uses a queue, #q#, that initially contains only #i#.  It then repeatedly
 extracts an element from #q# and adds its neighbours to #q#, provided
 that these neighbours have never been in #q# before.  The only major difference
-between the breadth-first-search algorithm for graphs and for trees
-is that the algorithm for graphs has to ensure that it does not visit
+between breadth-first-search for graphs and for trees
+is that the algorithm for graphs has to ensure that it does not
 add the same vertex to #q# more than once.  It does this by using an
 auxiliary boolean array, #seen#, that keeps track of which vertices have
 already been discovered.
@@ -340,7 +341,7 @@ A breadth-first traversal has some very special properties.  Calling
 #j# such that there is a directed path from #r# to #j#.  Moreover,
 the vertices at distance 0 from #r# (#r# itself) will enter #q# before
 the vertices at distance 1, which will enter #q# before the vertices at
-distance 2, and so on.  Thus, the #bfs(g,r)# method outputs vertices
+distance 2, and so on.  Thus, the #bfs(g,r)# method visits vertices
 in increasing order of distance from #r# and vertices that can not be
 reached from #r# are never output at all.
 
@@ -358,7 +359,7 @@ by taking #p[p[j]#, #p[p[p[j]]]#, and so on we can reconstruct the
 \subsection{Depth-First Search}
 
 The \emph{depth-first-search} algorithm is similar to the standard
-algorithm for traversing binary trees.  It first fully explores one
+algorithm for traversing binary trees;  it first fully explores one
 subtree before returning to the current node and then exploring the
 other subtree.  Another way to think of depth-first-search is by saying
 that it is similar to breadth-first search except that it uses a stack
@@ -395,7 +396,7 @@ explicit stack, #s#.  The following implementation does just that:
 \codeimport{ods/Algorithms.dfs2(g,r)} 
 In the above code, when next vertex, #i#, is processed, #i# is colored
 #grey# and then replaced, on the stack, with its adjacent vertices.
-During the next round, one of these vertices will be visited.
+During the next iteration, one of these vertices will be visited.
 
 Not surprisingly, the running times of #dfs(g,r)# and #dfs2(g,r)# are the
 same as that of #bfs(g,r)#:
