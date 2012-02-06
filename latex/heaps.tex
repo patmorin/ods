@@ -12,14 +12,14 @@ queue to absorb the elements of a second priority queue #h#.
 \section{#BinaryHeap#: An Implicit Binary Tree}
 \seclabel{binaryheap}
 
-Our first implementation of a (priority) #Queue# is based on a technique
-that is over 400 years old.  Eytzinger's method allows us to represent a
-complete binary tree as an array.  This is done by laying out the nodes
-of the tree in breadth-first order (see \secref{bintree:traversal}) in
-the array.  In this way, the root is stored at position 0, the root's
-left child is stored at position 1, the root's right child at position 2,
-the left child of the left child of the root is stored at position 3,
-and so on. See \figref{eytzinger}.
+Our first implementation of a (priority) #Queue# is based on a
+technique that is over 400 years old.  \emph{Eytzinger's method}
+allows us to represent a complete binary tree as an array.  This is
+done by laying out the nodes of the tree in breadth-first order (see
+\secref{bintree:traversal}) in the array.  In this way, the root is
+stored at position 0, the root's left child is stored at position 1,
+the root's right child at position 2, the left child of the left child
+of the root is stored at position 3, and so on. See \figref{eytzinger}.
 
 \begin{figure}
   \begin{center}
@@ -139,7 +139,7 @@ node that is the root of a heap that contains all elements in the subtree
 rooted at #h1# and all elements in the subtree rooted at #h2#.
 
 The nice thing about a #merge(h1,h2)# operation is that it can be defined
-recursively.  If either of #h1# or #h2# is #null#, then we are merging
+recursively.  If either of #h1# or #h2# is #nil#, then we are merging
 with an empty set, so we return #h2# or #h1#, respectively.  Otherwise,
 assume $#h1.x# \le #h2.x#$ since, if $#h1.x# > #h2.x#$, then we can
 reverse the roles of #h1# and #h2#.  Then we know that the root of the
@@ -177,7 +177,7 @@ in a binary tree.  A \emph{random walk} in a binary tree is a walk that
 starts at the root of the tree.  At each step in the walk, a coin is
 tossed and the walk proceeds to the left or right child of the current
 node depending on the result of this coin toss.  The walk ends when it
-falls off the tree (the current node becomes #null#).
+falls off the tree (the current node becomes #nil#).
 
 The following lemma is somewhat remarkable because it does not depend
 at all on the shape of the binary tree:
@@ -199,13 +199,17 @@ hypothesis, the expected length of the walk is then
 \[
     \E[W] = 1 + \frac{1}{2}\log (#n#_1+1) + \frac{1}{2}\log (#n#_2+1)  \enspace , 
 \] 
-since each of $#n#_1$ and $#n#_2$ are less than $#n#$.  To maximize this,
-over all choices of $#n#_1\in[0,#n#-1]$, we take the derivative and obtain
-\[
-    (\E[W])' = \frac{1}{2}(c/#n#_1 - c/(#n#-#n#_1-1)) \enspace , 
-\]
-which is equal to 0 when $#n#_1 = (#n#-1)/2$.  We can establish that
-this is a maximum fairly easily, so the expected number of steps taken by the random walk is 
+since each of $#n#_1$ and $#n#_2$ are less than $#n#$.  Since $\log$
+is a concave function, $\E[W]$ is maximized when $#n#_1=#n#_2=(#n#-1)/2$.
+%To maximize this,
+%over all choices of $#n#_1\in[0,#n#-1]$, we take the derivative and obtain
+%\[
+%    (\E[W])' = \frac{1}{2}(c/#n#_1 - c/(#n#-#n#_1-1)) \enspace , 
+%\]
+%which is equal to 0 when $#n#_1 = (#n#-1)/2$.  We can establish that
+%this is a maximum fairly easily, so
+Therefore,
+ the expected number of steps taken by the random walk is 
 \begin{align*}
     \E[W] 
     & = 1 + \frac{1}{2}\log (#n#_1+1) + \frac{1}{2}\log (#n#_2+1) \\
@@ -225,7 +229,8 @@ of the random walk reaching the $i$th external node is exactly
 $p_i=1/2^{d_i}$, so the expected length of the random walk is given by
 \[
    H=\sum_{i=0}^{#n#} p_id_i
-   = \sum_{i=0}^{#n#}p_i\log({1/p_i})
+    =\sum_{i=0}^{#n#} p_i\log\left(2^{d_i}\right)
+    = \sum_{i=0}^{#n#}p_i\log({1/p_i})
 \]
 The right hand side of this equation is easily recognizable as the
 entropy of a probability distribution over $#n#+1$ elements.  A basic
@@ -244,11 +249,12 @@ running time of the #merge(h1,h2)# operation is $O(\log #n#)$.
 
 \begin{proof}
   Each step of the merge algorithm takes one step of a random walk,
-  either in the heap rooted at #h1# or the heap rooted at #h2#, depending
-  on whether $#h1.x# < #h2.x#$ or not.  The algorithm terminates when
-  either of these two random walks fall out of its corresponding tree
-  (when $#h1#=#null#$ or $#h2#=#null#$).  Therefore, the expected number
-  of steps performed by the merge algorithm is at most
+  either in the heap rooted at #h1# or the heap rooted at #h2#
+  %, depending on whether $#h1.x# < #h2.x#$ or not.
+  The algorithm terminates when either of these two random walks fall
+  out of its corresponding tree (when $#h1#=#null#$ or $#h2#=#null#$).
+  Therefore, the expected number of steps performed by the merge algorithm
+  is at most
   \[
      \log (#n#_1+1) + \log (#n#_2+1) \le 2\log #n# \enspace . \qedhere
   \]
@@ -277,7 +283,7 @@ Other meldable heap implementations exist, including leftist heaps
 \cite[Section~5.3.2]{c72,k97v3}, binomial heaps \cite{v78}, Fibonacci
 heaps \cite{ft87}, pairing heaps \cite{fsst86}, and skew heaps
 \cite{st83}, although none of these are as simple as the #MeldableHeap#
-structure described here.
+structure.
 
 Some of the above structures also support a #decreaseKey(u,y)# operation
 in which the value stored at node #u# is decreased to #y#.  (It is a

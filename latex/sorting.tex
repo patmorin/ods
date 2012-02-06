@@ -24,14 +24,15 @@ $\{0,\ldots,#n#^c-1\}$ in $O(c#n#)$ time.
 \section{Comparison-Based Sorting}
 
 In this section, we present three sorting algorithms: merge-sort,
-Quicksort, and heap-sort.  All these algorithms take an input array #a#
-and sort the elements of #a# into non-decreasing order in $O(#n#\log
-#n#)$ (expected) time.  These algorithms are all \emph{comparison-based}.
-Their second second argument, #c#, is a #Comparator# that implements the
-#compare(a,b)# method.  These algorithms don't care what type of data is
-being sorted, the only operation they do on the data is comparisons using
-the #compare(a,b)# method. Recall, from \secref{sset}, that #compare(a,b)# returns a negative
-value if $#a#<#b#$, a positive value if $#a#>#b#$, and zero if $#a#=#b#$.
+quicksort, and heap-sort.  All these algorithms take an input array #a#
+and sort the elements of #a# into non-decreasing order in $O(#n#\log #n#)$
+(expected) time.  These algorithms are all \emph{comparison-based}.
+\javaonly{Their second argument, #c#, is a #Comparator# that implements
+the #compare(a,b)# method.}  These algorithms don't care what type
+of data is being sorted, the only operation they do on the data is
+comparisons using the #compare(a,b)# method. Recall, from \secref{sset},
+that #compare(a,b)# returns a negative value if $#a#<#b#$, a positive
+value if $#a#>#b#$, and zero if $#a#=#b#$.
 
 \subsection{Merge-Sort}
 
