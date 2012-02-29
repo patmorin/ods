@@ -1,0 +1,12 @@
+#!/bin/bash
+
+for f in *.pdf ; do
+	echo "$f => ${f%.pdf}.eps"
+	pdftops -eps "$f"
+done
+for f in *-1.eps ; do
+        r="${f%-1.eps}".eps
+	echo cp "$f" "$r"
+	cp "$f" "$r"
+done
+
