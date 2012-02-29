@@ -4,6 +4,7 @@ sources = intro.tex arrays.tex linkedlists.tex skiplists.tex \
 	heaps.tex sorting.tex graphs.tex integers.tex
 javs = $(sources:.tex=-java.tex)
 cpps = $(sources:.tex=-cpp.tex)
+htms = $(sources:.tex=-html.tex)
 java = $(wildcard ../java/ods/*.java)
 cppsource = $(wildcard ../cpp/*.h)
 pdfs = ods-java.pdf ods-cpp.pdf
@@ -17,10 +18,15 @@ all: $(pdfs)
 figs:
 	cd figs ; make
 
+epsfigs:
+	cd figs ; make epss
+
 images:
 	cd images ; make
 
 ods-java.pdf : ods-java.tex $(javs) ods.sty images figs ods-java.bbl
+	pdflatex $(LFLAGS) ods-java
+	bibtex ods-java
 	pdflatex $(LFLAGS) ods-java
 	pdflatex $(LFLAGS) ods-java
 
@@ -28,11 +34,9 @@ ods-java.tex : ods.tex Makefile
 	sed 's/-lang/-java/' ods.tex > ods-java.tex
 	sed -i 's/%HEADCOMMAND/\\newcommand{\\cpponly}[1]{}\\newcommand{\\javaonly}[1]{#1}\\newcommand{\\lang}{Java}/' ods-java.tex
 
-ods-java.bbl : ods.bib odsproc.bib
-	pdflatex $(LFLAGS) ods-java
-	bibtex ods-java
-
 ods-cpp.pdf : ods-cpp.tex $(cpps) ods.sty images figs ods-cpp.bbl
+	pdflatex $(LFLAGS) ods-cpp
+	bibtex ods-cpp
 	pdflatex $(LFLAGS) ods-cpp
 	pdflatex $(LFLAGS) ods-cpp
 
@@ -50,8 +54,8 @@ ods-cpp.bbl : ods.bib odsproc.bib
 %-cpp.tex : %.tex $(cppsource) snarf-cpp.pl Makefile
 	cat $< | ./snarf-cpp.pl > $*-cpp.tex 
 
-install : ods-java.pdf ods-cpp.pdf ods-java-grayscale.pdf ods-cpp-grayscale.pdf
-	scp ods-java.pdf ods-java-grayscale.pdf ods-cpp.pdf ods-cpp-grayscale.pdf morin@cg.scs.carleton.ca:public_html/ods/
+install : ods-java.pdf ods-cpp.pdf ods-java-grayscale.pdf ods-cpp-grayscale.pdf html
+	scp -r ods-java.pdf ods-java-grayscale.pdf ods-cpp.pdf ods-cpp-grayscale.pdf ods-book.css ods-html/ morin@cg.scs.carleton.ca:public_html/ods/
 
 clean:
 	rm -f $(javs) $(cpps) *.log *.bbl *.out ods.toc $(pdfs) 
@@ -63,4 +67,18 @@ clean:
 	gs -sOutputFile=$@ -sDEVICE=pdfwrite \
 	-sColorConversionStrategy=Gray -dProcessColorModel=/DeviceGray \
 	-dCompatibilityLevel=1.4 $< < /dev/null
+
+# Lots of hackery for generating html using latex2html
+html : $(htms) ods-html.tex
+	pdflatex ods-html
+	bibtex ods-html
+	latex2html -init_file latex2html-init ods-html
+	
+ods-html.tex : ods.tex Makefile
+	sed 's/-lang/-html/' ods.tex > ods-html.tex
+	sed -i 's/%HEADCOMMAND/\\newcommand{\\cpponly}[1]{}\\newcommand{\\javaonly}[1]{#1}\\newcommand{\\lang}{Java}/' ods-html.tex
+
+%-html.tex : %.tex $(java) snarf-html.pl Makefile
+	cat $< | ./snarf-html.pl > $*-html.tex 
+
 

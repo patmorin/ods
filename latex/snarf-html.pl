@@ -36,6 +36,7 @@ sub color($) {
 
 sub printVerbatim($) {
   my $line = shift(@_);
+  $line =~ s/\t/    /g;
   #$line = color($line);
   #while ($line =~ s/(^|[^\\])\{/$1\@/) {} # change { to @
   #while ($line =~ s/(^|[^\\])\}/$1\$/) {} # change } to $
@@ -129,9 +130,11 @@ MAIN: {
       my $args=$2;
       (my $class) = $line =~ /\{\w+\/(\w+)\./;
       print("%$line");
+#      print('\htmlrule');
       print('\begin{verbatim}'."\n");
       snarfit($args, 0); 
       print('\end{verbatim}'."\n");
+#      print('\htmlrule');
     } else {
       print($line);
     }
