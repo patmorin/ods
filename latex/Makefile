@@ -80,5 +80,6 @@ ods-html.tex : ods.tex Makefile
 
 %-html.tex : %.tex $(java) snarf-html.pl Makefile
 	cat $< | ./snarf-html.pl > $*-html.tex 
+	sed -i 's/\\figref{/Figure~\\ref{fig:/g' $*-html.tex 
 
 

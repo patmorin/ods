@@ -85,7 +85,7 @@ Therefore, when we rebuild #w#, the height decreases by at least 1 so that heigh
       \includegraphics{figs/scapegoat-insert-4} 
     \end{tabular}
   \end{center}
-  \caption{Inserting 3.5 into a #ScapegoatTree# increases its depth to 6, which violates \eqref{scapegoat-height} since $6 > \log_{3/2} 11 \approx 5.914$.  A scapegoat is found at the node containing 5.}
+  \caption[Adding to a scapegoat tree]{Inserting 3.5 into a #ScapegoatTree# increases its depth to 6, which violates \eqref{scapegoat-height} since $6 > \log_{3/2} 11 \approx 5.914$.  A scapegoat is found at the node containing 5.}
 \end{figure}
 If we ignore the cost of finding the scapegoat #w# and rebuilding the
 subtree rooted at #w#, then the running time of #add(x)# is dominated

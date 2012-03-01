@@ -312,7 +312,7 @@ uses the adjacency lists in \figref{graph-adjlist}.
   \begin{center}
     \includegraphics{figs/graph-bfs}
   \end{center}
-  \caption{An example of bread-first-search starting at node 0. Nodes are
+  \caption[Breadth-first-search]{An example of bread-first-search starting at node 0. Nodes are
   labelled with the order in which they are added to #q#.  Edges that
   result in nodes being added to #q# are drawn in black, other edges
   are drawn in #grey#.}
@@ -381,7 +381,7 @@ An example of the execution of this algorithm is shown in \figref{graph-dfs}
   \begin{center}
     \includegraphics{figs/graph-dfs}
   \end{center}
-  \caption{An example of depth-first-search starting at node 0. Nodes are
+  \caption[Depth-first-search]{An example of depth-first-search starting at node 0. Nodes are
   labelled with the order in which they are processed.  Edges that
   result in a recursive call are drawn in black, other edges
   are drawn in #grey#.}
@@ -436,7 +436,7 @@ $P$ is also a cycle.
   \begin{center}
     \includegraphics{figs/dfs-cycle}
   \end{center}
-  \caption{The depth-first-search algorithm can be used to detect cycles
+  \caption[Cycle detection]{The depth-first-search algorithm can be used to detect cycles
   in $G$.The node #j# is colored #grey# while #i# is still #grey#.  This
   implies there is a path, $P$, from #i# to #j# in the depth-first-search
   tree, and the edge #(i,j)# implies that $P$ is also a cycle.}
