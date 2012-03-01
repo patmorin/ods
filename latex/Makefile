@@ -70,6 +70,8 @@ clean:
 	-dCompatibilityLevel=1.4 $< < /dev/null
 
 # Lots of hackery for generating html using latex2html
+html: java-html cpp-html
+
 java-html : $(javh) ods-java-html.tex
 	mkdir -p ods-java
 	pdflatex ods-java-html
