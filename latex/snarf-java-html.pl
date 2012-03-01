@@ -117,7 +117,7 @@ MAIN: {
       if ($inside =~ /^[A-Z]\w+$/) {
         $inside = "\\texttt{$inside}";  # just a class name
       } else {
-        $inside = color($inside);
+        #$inside = color($inside);
         $inside =~ s/([%&])/\\$1/g;
         $inside =~ s/(\\\&|\\\%|<<|>>>?)/\\text{\\ttfamily $1}/g;
         $inside = "\\ensuremath{\\mathtt{$inside}}";
