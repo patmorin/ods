@@ -3,8 +3,9 @@ sources = intro.tex arrays.tex linkedlists.tex skiplists.tex \
 	hashing.tex binarytrees.tex rbs.tex scapegoat.tex redblack.tex \
 	heaps.tex sorting.tex graphs.tex integers.tex
 javs = $(sources:.tex=-java.tex)
+javh = $(sources:.tex=-java-html.tex)
 cpps = $(sources:.tex=-cpp.tex)
-htms = $(sources:.tex=-html.tex)
+cpph = $(sources:.tex=-cpp-html.tex)
 java = $(wildcard ../java/ods/*.java)
 cppsource = $(wildcard ../cpp/*.h)
 pdfs = ods-java.pdf ods-cpp.pdf
@@ -54,8 +55,8 @@ ods-cpp.bbl : ods.bib odsproc.bib
 %-cpp.tex : %.tex $(cppsource) snarf-cpp.pl Makefile
 	cat $< | ./snarf-cpp.pl > $*-cpp.tex 
 
-install : ods-java.pdf ods-cpp.pdf ods-java-grayscale.pdf ods-cpp-grayscale.pdf html
-	scp -r ods-java.pdf ods-java-grayscale.pdf ods-cpp.pdf ods-cpp-grayscale.pdf ods-book.css ods-html/ morin@cg.scs.carleton.ca:public_html/ods/
+install : ods-java.pdf ods-cpp.pdf ods-java-grayscale.pdf ods-cpp-grayscale.pdf java-html cpp-html
+	scp -r  ods-java/ ods-java.pdf ods-java-grayscale.pdf ods-cpp/ ods-cpp.pdf ods-cpp-grayscale.pdf ods-book.css morin@cg.scs.carleton.ca:public_html/ods/
 
 clean:
 	rm -f $(javs) $(cpps) *.log *.bbl *.out ods.toc $(pdfs) 
@@ -69,17 +70,33 @@ clean:
 	-dCompatibilityLevel=1.4 $< < /dev/null
 
 # Lots of hackery for generating html using latex2html
-html : $(htms) ods-html.tex
-	pdflatex ods-html
-	bibtex ods-html
-	latex2html -init_file latex2html-init ods-html
+java-html : $(javh) ods-java-html.tex
+	mkdir -p ods-java
+	pdflatex ods-java-html
+	bibtex ods-java-html
+	latex2html -init_file latex2html-init -dir ods-java ods-java-html
 	
-ods-html.tex : ods.tex Makefile
-	sed 's/-lang/-html/' ods.tex > ods-html.tex
-	sed -i 's/%HEADCOMMAND/\\newcommand{\\cpponly}[1]{}\\newcommand{\\javaonly}[1]{#1}\\newcommand{\\lang}{Java}/' ods-html.tex
+ods-java-html.tex : ods.tex Makefile
+	sed 's/-lang/-java-html/' ods.tex > ods-java-html.tex
+	sed -i 's/%HEADCOMMAND/\\newcommand{\\cpponly}[1]{}\\newcommand{\\javaonly}[1]{#1}\\newcommand{\\lang}{Java}/' ods-java-html.tex
+	sed -i 's/\\include{cpp-preface}//' ods-java-html.tex
 
-%-html.tex : %.tex $(java) snarf-html.pl Makefile
-	cat $< | ./snarf-html.pl > $*-html.tex 
-	sed -i 's/\\figref{/Figure~\\ref{fig:/g' $*-html.tex 
+%-java-html.tex : %.tex $(java) snarf-java-html.pl Makefile
+	cat $< | ./snarf-java-html.pl > $*-java-html.tex 
+	sed -i 's/\\figref{/Figure~\\ref{fig:/g' $*-java-html.tex 
+
+cpp-html : $(cpph) ods-cpp-html.tex
+	mkdir -p ods-cpp
+	pdflatex ods-cpp-html
+	bibtex ods-cpp-html
+	latex2html -init_file latex2html-init -dir ods-cpp ods-cpp-html
+	
+ods-cpp-html.tex : ods.tex Makefile
+	sed 's/-lang/-cpp-html/' ods.tex > ods-cpp-html.tex
+	sed -i 's/%HEADCOMMAND/\\newcommand{\\javaonly}[1]{}\\newcommand{\\cpponly}[1]{#1}\\newcommand{\\lang}{C++}/' ods-cpp-html.tex
+
+%-cpp-html.tex : %.tex $(cpp) snarf-cpp-html.pl Makefile
+	cat $< | ./snarf-cpp-html.pl > $*-cpp-html.tex 
+	sed -i 's/\\figref{/Figure~\\ref{fig:/g' $*-cpp-html.tex 
 
 
