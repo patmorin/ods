@@ -51,6 +51,7 @@ sub printVerbatim($) {
   #while ($line =~ s/(^|[^\\])\{/$1\@/) {} # change { to @
   #while ($line =~ s/(^|[^\\])\}/$1\$/) {} # change } to $
   #$line =~ s/\\([{}])/$1/g;               # unescape \{
+  $line =~ s/\t/  /g;
   print("$line\n");
   $output = 1;
 }
@@ -146,7 +147,7 @@ MAIN: {
     while ($line =~ /#([^#]*)#/) {
       my $inside = $1;
       $inside =~ s/([%&])/\\$1/g;
-      $inside = color($inside);
+      #$inside = color($inside);
       $inside = "\\ensuremath{\\mathtt{$inside}}";
       $line =~ s/#([^#])*#/$inside/;
     } 
