@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20120202112417" modified="D:20120202131021"/>
+<info created="D:20120202112417" modified="D:20120202131420"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -202,13 +202,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
-<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
-<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -482,7 +482,6 @@ h
 200 288 m
 216 272 l
 </path>
-<text matrix="1 0 0 1 -72 96" transformations="translations" pos="368 272" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="baseline">$\cdots$</text>
 <text matrix="1 0 0 1 24 200" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{2}$</text>
 <group matrix="1 0 0 1 16 192">
 <path stroke="white">
@@ -780,5 +779,12 @@ h
 <text matrix="1 0 0 1 328 168" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{blue}n}$</text>
 <text matrix="1 0 0 1 328 200" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{blue}n}$</text>
 <text matrix="1 0 0 1 328 232" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{blue}n}$</text>
+<text matrix="1 0 0 1 -56 -122.491" transformations="translations" pos="208 480" stroke="black" type="label" width="7.749" height="5.812" depth="0.83" halign="center" valign="baseline">$+$</text>
+<text matrix="1 0 0 1 8 -122.491" transformations="translations" pos="208 480" stroke="black" type="label" width="7.749" height="5.812" depth="0.83" halign="center" valign="baseline">$+$</text>
+<text matrix="1 0 0 1 168 -122.491" transformations="translations" pos="208 480" stroke="black" type="label" width="7.749" height="5.812" depth="0.83" halign="center" valign="baseline">$+$</text>
+<text matrix="1 0 0 1 232 -122.491" transformations="translations" pos="208 480" stroke="black" type="label" width="7.749" height="5.812" depth="0.83" halign="center" valign="baseline">$+$</text>
+<text matrix="1 0 0 1 72 -122.491" transformations="translations" pos="208 480" stroke="black" type="label" width="7.749" height="5.812" depth="0.83" halign="center" valign="baseline">$+$</text>
+<text matrix="1 0 0 1 104 -122.491" transformations="translations" pos="208 480" stroke="black" type="label" width="7.749" height="5.812" depth="0.83" halign="center" valign="baseline">$+$</text>
+<text matrix="1 0 0 1 -72 85.786" transformations="translations" pos="368 272" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="baseline">$\cdots$</text>
 </page>
 </ipe>

@@ -24,14 +24,15 @@ $\{0,\ldots,#n#^c-1\}$ in $O(c#n#)$ time.
 \section{Comparison-Based Sorting}
 
 In this section, we present three sorting algorithms: merge-sort,
-Quicksort, and heap-sort.  All these algorithms take an input array #a#
-and sort the elements of #a# into non-decreasing order in $O(#n#\log
-#n#)$ (expected) time.  These algorithms are all \emph{comparison-based}.
-Their second second argument, #c#, is a #Comparator# that implements the
-#compare(a,b)# method.  These algorithms don't care what type of data is
-being sorted, the only operation they do on the data is comparisons using
-the #compare(a,b)# method. Recall, from \secref{sset}, that #compare(a,b)# returns a negative
-value if $#a#<#b#$, a positive value if $#a#>#b#$, and zero if $#a#=#b#$.
+quicksort, and heap-sort.  All these algorithms take an input array #a#
+and sort the elements of #a# into non-decreasing order in $O(#n#\log #n#)$
+(expected) time.  These algorithms are all \emph{comparison-based}.
+\javaonly{Their second argument, #c#, is a #Comparator# that implements
+the #compare(a,b)# method.}  These algorithms don't care what type
+of data is being sorted, the only operation they do on the data is
+comparisons using the #compare(a,b)# method. Recall, from \secref{sset},
+that #compare(a,b)# returns a negative value if $#a#<#b#$, a positive
+value if $#a#>#b#$, and zero if $#a#=#b#$.
 
 \subsection{Merge-Sort}
 
@@ -48,7 +49,7 @@ An example is shown in \figref{merge-sort}.
   \begin{center}
     \includegraphics{figs/mergesort}
   \end{center}
-  \caption{The execution of #mergeSort(a,c)#}
+  \caption[Merge sort]{The execution of #mergeSort(a,c)#}
   \figlabel{merge-sort}
 \end{figure}
 
@@ -62,7 +63,38 @@ we take the minimum of the next element in #a0# and the next element in
 Notice that the #merge(a0,a1,a,c)# algorithm performs at most $#n#-1$
 comparisons before running out of elements in one of #a0# or #a1#.
 
-The following theorem shows that #mergeSort(a,c)# is a very efficient algorithm:
+To understand the running-time of merge-sort, it is easiest to think
+of it in terms of its recursion tree.  Suppose for now that #n# is a
+power of 2, so that $#n#=2^{\log #n#}$, and $\log #n#$ is an integer.
+Refer to \figref{mergesort-recursion}. Merge-sort turns the problem of
+sorting #n# elements into 2 problems, each of sorting $#n#/2$ elements.
+These two subproblem are then turned into 2 problems each, for a total
+of 4 subproblems, each of size $#n#/4$. These 4 subproblems become 8
+subproblems of size $#n#/8$, and so on.  At the bottom of this process,
+$#n#/2$ subproblems, each of size 2, are converted into #n# problems,
+each of size $#1#$.  For each subproblem of size $#n#/2^{i}$, the time
+spent merging and copying data is $O(#n#/2^i)$.  Since there are $2^i$
+subproblems of size $#n#/2^i$, the total time spent working on problems
+of size $2^i$, not counting recursive calls, is
+\[
+       2^i\times O(#n#/2^i) = O(#n#) \enspace .
+\]
+Therefore, the total amount of time taken by merge-sort is
+\[
+   \sum_{i=0}^{\log #n#} O(#n#) = O(#n#\log #n#) \enspace .
+\]
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/mergesort-recursion}
+    \caption{The merge-sort recursion tree.}
+    \figlabel{mergesort-recursion}
+  \end{center}
+\end{figure}
+
+The proof of the following theorem is based on the same analysis as above,
+but has to be a little more careful to deal with the cases where #n#
+is not a power of 2.
 \begin{thm}
   The #mergeSort(a,c)# algorithm runs in $O(#n#\log #n#)$ time and
   performs at most $#n#\log #n#$ comparisons.
@@ -85,7 +117,7 @@ the two subproblems and obtain
   &< #n#\log #n# \enspace .
 \end{align*}
 The case where $#n#$ is odd is slightly more complicated.  For this case,
-we use two inequalities, that are easy to verify
+we use two inequalities, that are easy to verify:
 \begin{equation}
   \log(x+1) \le \log(x) + 1 \enspace , \eqlabel{log-ineq-a}
 \end{equation}
@@ -93,7 +125,7 @@ for all $x\ge 1$ and
 \begin{equation}
   \log(x+1/2) + \log(x-1/2) \le 2\log(x) \enspace , \eqlabel{log-ineq-b}
 \end{equation}
-for all $x\ge 1/2$.  Inequality~\eqref{log-ineq-a} comes from the fact that $\log(x)+1 = \log(2x)$ while \eqref{log-ineq-b} follows from the fact that $\log$ is a concave function.  With these tools in hand we have, for odd #n#,
+for all $x\ge 1/2$.  Inequality~\myeqref{log-ineq-a} comes from the fact that $\log(x)+1 = \log(2x)$ while \myeqref{log-ineq-b} follows from the fact that $\log$ is a concave function.  With these tools in hand we have, for odd #n#,
 \begin{align*}
   C(#n#) 
   &\le #n#-1 + C(\lceil #n#/2 \rceil) + C(\lfloor #n#/2 \rfloor) \\
@@ -126,7 +158,7 @@ An example is shown in \figref{quicksort}.
 \begin{figure}
   \begin{center}
     \includegraphics{figs/quicksort}
-    \caption{An example execution of \javaonly{#quickSort(a,0,14,c)#} \cpponly{#quickSort(a,0,14)#}}
+    \caption[Quicksort]{An example execution of \javaonly{#quickSort(a,0,14,c)#} \cpponly{#quickSort(a,0,14)#}}
     \figlabel{quicksort}
   \end{center}
 \end{figure}
@@ -235,7 +267,7 @@ heap sort algorithm stores the elements directly in ascending order.}
 \begin{figure}
   \begin{center}
     \includegraphics{figs/heapsort}
-    \caption{A snapshot of the execution of #heapSort(a,c)#.
+    \caption[Heap sort]{A snapshot of the execution of #heapSort(a,c)#.
       The shaded part of the
       array is already sorted.  The unshaded part is a #BinaryHeap#.
       During the next iteration, element $5$ will be placed into array
@@ -352,7 +384,7 @@ An example of a comparison tree for an array of size #n=3# is shown in
   \begin{center}
     \includegraphics{figs/comparison-tree}
   \end{center}
-  \caption{A comparison tree for sorting an array $#a[0]#,#a[1]#,#a[2]#$ of length #n=3#.}
+  \caption[A comparison tree]{A comparison tree for sorting an array $#a[0]#,#a[1]#,#a[2]#$ of length #n=3#.}
   \figlabel{comparison-tree}
 \end{figure}
 
@@ -618,13 +650,19 @@ on the card.  Repeating this process for different hole locations gives
 an implementation of radix-sort.
 
 \begin{exc}
-  Find another pair of permutations of $1,2,3$ that are not correctly
-  sorted by the comparison-tree in \figref{comparison-tree-2}.
+  Implement a version of the merge-sort algorithm that sorts a #DLList#
+  without using an auxiliary array. 
 \end{exc}
 
 \begin{exc}
-  Implement a version of the merge-sort algorithm that sorts a #DLList#
-  without using an auxiliary array. 
+  Analyze the expected number of comparisons done by Quicksort a little
+  more carefully than the proof of \thmref{quicksort}.  In particular, show
+  that the expected number of comparisons is $2#n#H_#n# -#n# + H_#n#$.
+\end{exc}
+
+\begin{exc}
+  Find another pair of permutations of $1,2,3$ that are not correctly
+  sorted by the comparison-tree in \figref{comparison-tree-2}.
 \end{exc}
 
 \begin{exc}\exclabel{log-factorial}

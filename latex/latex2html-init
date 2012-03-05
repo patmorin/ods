@@ -1,0 +1,64 @@
+$HTML_VERSION = 4.0;
+$LOCAL_ICONS = 1;
+
+$DVIPSOPT = ' -E'; # remove -Ppdf flag
+# Force white background and black text
+$BODYTEXT = "text=\"\#000000\" bgcolor=\"\#FFFFFF\"";
+
+# This ensures that some figures do not end up with a grey background
+$WHITE_BACKGROUND = 1;
+# Tell LATEX:
+$LATEX_COLOR = "\\pagecolor{white}";
+$STYLESHEET = '../ods-book.css';
+
+$ACCENT_IMAGES = 1;
+
+$CONTENTS_IN_NAVIGATION = 1;
+$SHOW_SECTION_NUMBERS = 1;
+$TOC_DEPTH = 2;
+
+$MAX_SPLIT_DEPTH = -2;
+
+$NO_FOOTNODE = 1;
+$NUMBERED_FOOTNOTES  = 1;
+
+$ADDRESS = <<'.END';
+<a href="http://opendatastructures.org/">opendatastructures.org</a>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-5860680-3']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript';ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+.END
+
+$EXTERNAL_UP_LINK = "http://opendatastructures.org/";
+$EXTERNAL_UP_TITLE = "Open Data Structures";
+
+# No mini tables of contents
+$MAX_LINK_DEPTH = 1;
+
+$INFO = <<'.END';
+<p>
+This document is released under a Creative
+Commons Attribution License (CC-BY).  Visit <a
+href="http://opendatastructures.org/">opendatastructures.org</a> for
+more information.
+</p>
+<p>
+This document was generated using latex2html and this process may
+have produced partially erroneous output, including missing figures,
+missing formulas, unnumbered figures, and broken links.  The PDF files
+at <a href="http://opendatastructures.org/">opendatastructures.org</a>
+are a more reliable source.
+</p>
+.END
+
+$LONG_TITLES=10;
+

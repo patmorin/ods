@@ -2,6 +2,7 @@ package ods;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Queue;
@@ -13,23 +14,30 @@ import java.util.Random;
  *
  * @param <T>
  */
-public class MeldableHeap<T extends Comparable<T>> extends
+public class MeldableHeap<T> extends
 		BinaryTree<MeldableHeap.Node<T>> implements Queue<T> {
 	
 	protected Random rand;
 	
 	protected int n;
 	
+	Comparator<T> c;
+	
 	protected static class Node<T> extends BinaryTree.BTNode<Node<T>> {
 		T x;
 	}
 	
 	public MeldableHeap() {
+		this(new DefaultComparator<T>());
+	}
+
+	public MeldableHeap(Comparator<T> c0) {
 		super(new Node<T>());
+		c = c0;
 		rand = new Random();
 		sampleNode = newNode();
 	}
-		
+
 	public boolean add(T x) {
 		Node<T> u = newNode();
 		u.x = x;
@@ -71,17 +79,14 @@ public class MeldableHeap<T extends Comparable<T>> extends
 	public Node<T> merge(Node<T> h1, Node<T> h2) {
 		if (h1 == nil) return h2;
 		if (h2 == nil) return h1;
-		if (h2.x.compareTo(h1.x) < 0) {  // ensure h1.x < h2.x
-			Node<T> tmp = h1;
-			h1 = h2;
-			h2 = tmp;
-		}
+		if (c.compare(h2.x, h1.x) < 0) return merge(h2, h1);
+		// now we know h1.x <= h2.x
 		if (rand.nextBoolean()) {
 			h1.left = merge(h1.left, h2);
-			if (h1.left != nil) h1.left.parent = h1;
+			h1.left.parent = h1;
 		} else {
 			h1.right = merge(h1.right, h2);
-			if (h1.right != nil) h1.right.parent = h1;
+			h1.right.parent = h1;
 		}
 		return h1;
 	}

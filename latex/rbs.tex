@@ -140,7 +140,7 @@ will proceed to $#u#_j#.right#$ after visiting $#u#_j$.
   \begin{center}
     \includegraphics{figs/rbst-records}
   \end{center}
-  \caption{The value $i<#x#$ is on the search path for #x# if and only
+  \caption[The search path in a random binary search tree]{The value $i<#x#$ is on the search path for #x# if and only
    if $i$ is the first element among $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ added to the tree.}
   \figlabel{rbst-records}
 \end{figure}
@@ -202,7 +202,7 @@ $#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$ are almost identical (see
       \includegraphics{figs/rbst-probs-b} \\ (b) \\[2ex]
     \end{tabular}
   \end{center}
-  \caption{The probabilities of an element being on the search path for #x#
+  \caption[The probabilities of an element being on a search path]{The probabilities of an element being on the search path for #x#
    when (a)~#x# is an integer and (b)~when #x# is not an integer.}
   \figlabel{rbst-probs}
 \end{figure}
@@ -241,7 +241,7 @@ that of its two children.  An example is shown in \figref{treap}.
   \begin{center}
     \includegraphics{figs/treap}
   \end{center}
-  \caption{An example of a #Treap# containing the integers
+  \caption[A Treap]{An example of a #Treap# containing the integers
   $0,\ldots,9$. Each node, #u#, is illustrated with $#u.x#,#u.p#$.}
   \figlabel{treap}
 \end{figure}
@@ -337,7 +337,7 @@ An example of an #add(x)# operation is shown in \figref{treap-add}.
   \includegraphics{figs/treap-insert-b} \\
   \includegraphics{figs/treap-insert-c} \\
   \end{center}
-  \caption{Adding the value 1.5 into the #Treap# from \figref{treap}.}
+  \caption[Adding to a Treap]{Adding the value 1.5 into the #Treap# from \figref{treap}.}
   \figlabel{treap-add}
 \end{figure}
 
@@ -375,7 +375,7 @@ An example of the #remove(x)# operation is shown in \figref{treap-remove}.
   \includegraphics{figs/treap-delete-c} \\
   \includegraphics{figs/treap-delete-d} 
   \end{center}
-  \caption{Removing the value 9 from the #Treap# in \figref{treap}.}
+  \caption[Removing from a treap]{Removing the value 9 from the #Treap# in \figref{treap}.}
   \figlabel{treap-remove}
 \end{figure}
 

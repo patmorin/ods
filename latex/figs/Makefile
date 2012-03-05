@@ -3,7 +3,10 @@ sources=$(wildcard *.ipe)
 pdfs=$(sources:.ipe=.pdf)
 burstpdfs=$(sources:.ipe=-1.pdf)
 
-all: $(pdfs) $(burstpdfs)
+all: $(pdfs) $(burstpdfs) $(burstpdfs) 
+
+epss: $(pdfs)
+	./makeepss
 
 %-1.pdf : %.pdf
 	pdftk $< burst output $(<:.pdf=-%d.pdf)
@@ -12,5 +15,5 @@ all: $(pdfs) $(burstpdfs)
 	ipetoipe -pdf $<
 
 clean :
-	rm -f ./*.pdf
+	rm -f ./*.pdf ./*.eps
 

@@ -51,11 +51,8 @@ template<class Node, class T>
 Node* MeldableHeap<Node,T>::merge(Node *h1, Node *h2) {
 	if (h1 == nil) return h2;
 	if (h2 == nil) return h1;
-	if (compare(h1->x, h2->x) > 0) {  // ensure h1->x < h2->x
-		Node *tmp = h1;
-		h1 = h2;
-		h2 = tmp;
-	}
+	if (compare(h1->x, h2->x) > 0) return merge(h2, h1);
+        // now we know h1->x <= h2->x
 	if (rand() % 2) {
 		h1->left = merge(h1->left, h2);
 		if (h1->left != nil) h1->left->parent = h1;

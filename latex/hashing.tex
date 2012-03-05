@@ -211,7 +211,7 @@ We use $\star$ to denote a bit of unknown value.
    (#z#-#z#')q = (\star,\cdots,\star,1,\underbrace{0,\ldots,0}_{<#w#})_2 
     \enspace .
   \]
-  Therefore $(#z#-#z#')q$ cannot satisfy \eqref{factors}, yielding a
+  Therefore $(#z#-#z#')q$ cannot satisfy \myeqref{factors}, yielding a
   contradiction and completing the proof.
 \end{proof}
 
@@ -242,7 +242,7 @@ random bits followed by a 1.
   \end{equation}
   when $#zx#\bmod 2^{#w#} < #zy#\bmod 2^{#w#}$.
   Therefore, we only have to bound the probability that 
-  $#z#(#x#-#y#)\bmod 2^{#w#}$ looks like \eqref{all-zeros} or \eqref{all-ones}.
+  $#z#(#x#-#y#)\bmod 2^{#w#}$ looks like \myeqref{all-zeros} or \myeqref{all-ones}.
   
   Let $q$ be the unique odd integer such that $(#x#-#y#)\bmod
   2^{#w#}=q2^r$ for some integer $r\ge 0$. By
@@ -261,9 +261,9 @@ random bits followed by a 1.
   We can now finish the proof:  If $r > #w#-#d#$, then the #d#
   higher order bits of $#z#(#x#-#y#)\bmod 2^{#w#}$  contain both 0's
   and 1's, so the probability that $#z#(#x#-#y#)\bmod 2^{#w#}$ looks
-  like \eqref{all-zeros} or \eqref{all-ones} is 0.  If $#r#=#w#-#d#$,
-  then the probability of looking like \eqref{all-zeros} is 0, but the
-  probability of looking like \eqref{all-ones} is $1/2^{#d#-1}=2/2^{#d#}$
+  like \myeqref{all-zeros} or \myeqref{all-ones} is 0.  If $#r#=#w#-#d#$,
+  then the probability of looking like \myeqref{all-zeros} is 0, but the
+  probability of looking like \myeqref{all-ones} is $1/2^{#d#-1}=2/2^{#d#}$
   (since we must have $b_1,\ldots,b_{d-1}=1,\ldots,1$).  If $r < #w#-#d#$
   then we must have $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=0,\ldots,0$ or
   $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=1,\ldots,1$.  The probability of each
@@ -635,13 +635,13 @@ Let $#x#_0,\ldots,#x#_{r-1}$ and $#y#_0,\ldots,#y#_{r-1}$ each be sequences of #
      t = \left(\sum_{j=0}^{i-1} #z#_j(#y#_j-#x#_j) + \sum_{j=i+1}^{r-1} #z#_j(#y#_j-#x#_j)\right) \bmod 2^{2#w#}
   \]
   If we assume, without loss of generality that $#x#_i> #y#_i$, then
-  \eqref{bighash-x} becomes
+  \myeqref{bighash-x} becomes
   \begin{equation}
       #z#_i(#x#_i-#y#_i) = t \eqlabel{bighash-xx} \enspace ,
   \end{equation}
   since each of $#z#_i$ and $(#x#_i-#y#_i)$ is at most $2^{#w#}-1$, so
   their product is at most $2^{2#w#}-2^{#w#+1}+1 < 2^{2#w#}-1$.
-  By assumption, $#x#_i-#y#_i\neq 0$, so \eqref{bighash-xx} has at most one
+  By assumption, $#x#_i-#y#_i\neq 0$, so \myeqref{bighash-xx} has at most one
   solution in $#z#_i$.  Therefore, since $#z#_i$ and $t$ are
   independent ($#z#_0,\ldots,#z#_{r-1}$ are mutually independent), the
   probability that we select $#z#_i$
@@ -746,7 +746,7 @@ the infinite sequence
 \]
 This guarantees that if we have two sequences of length $r$ and $r'$
 with $r > r'$, then these two sequences differ at index $i=r$.  In
-this case, \eqref{strhash-eqlen} becomes
+this case, \myeqref{strhash-eqlen} becomes
 \[
   \left(
      \sum_{i=0}^{i=r'-1}(#x#_i-#y#_i)#z#^i + (#x#_{r'} - #p# + 1)#z#^{r'}

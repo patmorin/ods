@@ -96,7 +96,7 @@ set #a[i]# equal to #x#, and increment #n#.
   \begin{center}
     \includegraphics{figs/arraystack}
   \end{center}
-  \caption{A sequence of #add(i,x)# and #remove(i)# operations on an
+  \caption[Adding to an ArrayStack]{A sequence of #add(i,x)# and #remove(i)# operations on an
   #ArrayStack#.  Arrows denote elements being copied.  Operations that
   result in a call to #resize()# are marked with an asterisk.}
   \figlabel{arraystack}
@@ -313,7 +313,7 @@ the size of #a#.  Next, we store #x# in
   \begin{center}
     \includegraphics{figs/arrayqueue}
   \end{center}
-  \caption{A sequence of #add(x)# and #remove(i)# operations on an
+  \caption[Adding and removing from an ArrayQueue]{A sequence of #add(x)# and #remove(i)# operations on an
   #ArrayQueue#.  Arrows denote elements being copied.  Operations that
   result in a call to #resize()# are marked with an asterisk.}
   \figlabel{arrayqueue}
@@ -393,7 +393,7 @@ by one position.  See \figref{arraydeque} for an illustration of
   \begin{center}
     \includegraphics{figs/arraydeque}
   \end{center}
-  \caption{A sequence of #add(i,x)# and #remove(i)# operations on an
+  \caption[Adding and removing from an ArrayDeque]{A sequence of #add(i,x)# and #remove(i)# operations on an
   #ArrayDeque#.  Arrows denote elements being copied.}
   \figlabel{arraydeque}
 \end{figure}
@@ -477,7 +477,7 @@ or #back#, as appropriate:
   \begin{center}
     \includegraphics{figs/dualarraydeque}
   \end{center}
-  \caption{A sequence of #add(i,x)# and #remove(i)# operations on a
+  \caption[Adding and removing in a DualArrayDeque]{A sequence of #add(i,x)# and #remove(i)# operations on a
   #DualArrayDeque#.  Arrows denote elements being copied.  Operations that
   result in a rebalancing by #balance()# are marked with an asterisk.}
   \figlabel{dualarraydeque}
@@ -511,8 +511,8 @@ The cost of this is
   \eqlabel{das-back}
 \end{equation}
 
-Notice that the first case \eqref{das-front} occurs when $#i#<#n#/4$.
-The second case \eqref{das-back} occurs when $#i#\ge 3#n#/4$.  When
+Notice that the first case \myeqref{das-front} occurs when $#i#<#n#/4$.
+The second case \myeqref{das-back} occurs when $#i#\ge 3#n#/4$.  When
 $#n#/4\le#i#<3#n#/4$, we can't be sure whether the operation affects
 #front# or #back#, but in either case, the operation takes
 $O(#n#)=O(#i#)=O(#n#-#i#)$ time, since $#i#\ge #n#/4$ and $#n#-#i#>
@@ -649,7 +649,7 @@ mathematician Gau\ss\ at the age of 9) can be obtained as shown in
   \begin{center}
     \includegraphics{figs/rootisharraystack}
   \end{center}
-  \caption{A sequence of #add(i,x)# and #remove(i)# operations on a
+  \caption[Adding and removing in a RootishArrayStack]{A sequence of #add(i,x)# and #remove(i)# operations on a
   #RootishArrayStack#.  Arrows denote elements being copied. }
   \figlabel{rootisharraystack}
 \end{figure}

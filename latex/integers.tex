@@ -73,7 +73,7 @@ shown in \figref{binarytrie-ex2}
   \begin{center}
     \includegraphics{figs/binarytrie-ex-2}
   \end{center}
-  \caption{A #BinaryTrie# with #jump# pointers shown as curved dashed
+  \caption[A BinaryTrie]{A #BinaryTrie# with #jump# pointers shown as curved dashed
   edges.}
   \figlabel{binarytrie-ex2}
 \end{figure}
@@ -98,7 +98,7 @@ is illustrated in \figref{binarytrie-find}.
   \begin{center}
     \includegraphics{figs/binarytrie-ex-3}
   \end{center}
-  \caption{The paths followed by #find(5)# and #find(8)#.}
+  \caption[Search paths in a BinaryTrie]{The paths followed by #find(5)# and #find(8)#.}
   \figlabel{binarytrie-find}
 \end{figure}
 The running-time of the #find(x)# method is dominated by the time it
@@ -122,7 +122,7 @@ An addition is illustrated in \figref{binarytrie-add}.
   \begin{center}
     \includegraphics{figs/binarytrie-add}
   \end{center}
-  \caption{Adding the values 2 and 15 to the #BinaryTrie# in
+  \caption[Adding to a BinaryTrie]{Adding the values 2 and 15 to the #BinaryTrie# in
   \figref{binarytrie-ex2}.}
   \figlabel{binarytrie-add}
 \end{figure}
@@ -149,7 +149,7 @@ A removal is illustrated in \figref{binarytrie-remove}.
   \begin{center}
     \includegraphics{figs/binarytrie-remove}
   \end{center}
-  \caption{Removing the value 9 from the #BinaryTrie# in
+  \caption[Removing from a BinaryTrie]{Removing the value 9 from the #BinaryTrie# in
   \figref{binarytrie-ex2}.}
   \figlabel{binarytrie-remove}
 \end{figure}
@@ -246,8 +246,8 @@ The following theorem summarizes the performance of an #XFastTrie#:
 An #XFastTrie# implements the #SSet# interface for #w#-bit integers. An
 #XFastTrie# supports the operations
 \begin{itemize}
-\item #add(x)# and #remove(x)# in $O(#w#)$ time per operation and 
-\item #find(x)# in $O(\log #w#)$ time per operation.
+\item #add(x)# and #remove(x)# in $O(#w#)$ expected time per operation and 
+\item #find(x)# in $O(\log #w#)$ expected time per operation.
 \end{itemize}
 The space used by an #XFastTrie# that
 stores #n# values is $O(#n#\cdot#w#)$.
@@ -295,8 +295,8 @@ in \figref{yfast}.
   \begin{center}
     \includegraphics{figs/yfast}
   \end{center}
-  \caption{A #YFastTrie# containing the values 0, 1, 3, 4, 6, 8, 9, 10,
-  11, and 13.}
+  \caption[A YFastTrie]{A #YFastTrie# containing the values 0, 1, 3, 4,
+  6, 8, 9, 10, 11, and 13.}
   \figlabel{yfast}
 \end{figure}
 
@@ -330,7 +330,7 @@ shows an example.
   \begin{center}
     \includegraphics{figs/yfast-add}
   \end{center}
-  \caption{Adding the values 2 and 6 to a #YFastTrie#. The coin toss
+  \caption[Adding to a YFastTrie]{Adding the values 2 and 6 to a #YFastTrie#. The coin toss
     for 6 came up heads, so 6 was added to #xft# and the treap containing
     $4,5,6,8,9$ was split.}
   \figlabel{yfast-add}
@@ -357,7 +357,7 @@ successor in the linked list.   This is illustrated in
   \begin{center}
     \includegraphics{figs/yfast-remove}
   \end{center}
-  \caption{Removing the values 1 and 9 from a #YFastTrie# in \figref{yfast-add}.}
+  \caption[Removing from a YFastTrie]{Removing the values 1 and 9 from a #YFastTrie# in \figref{yfast-add}.}
   \figlabel{yfast-remove}
 \end{figure}
 Finding the node #u# in #xft# takes $O(\log#w#)$ expected time.
@@ -403,7 +403,7 @@ $#n#_#x#=j+k$, so
   \begin{center}
     \includegraphics{figs/yfast-sample}
   \end{center}
-  \caption{The number of elements in the treap, #t#, containing #x#
+  \caption[The query time in a YFastTrie]{The number of elements in the treap, #t#, containing #x#
   is determined by two coin tossing experiments.}
   \figlabel{yfast-sample}
 \end{figure}
@@ -424,8 +424,8 @@ following theorem, which summarizes the performance of the #YFastTrie#:
 \begin{thm}
 A #YFastTrie# implements the #SSet# interface for #w#-bit integers. A
 #YFastTrie# supports the operations #add(x)#, #remove(x)#, and #find(x)#
-in $O(\log #w#)$ time per operation.  The space used by a #YFastTrie# that
-stores #n# values is $O(#n#+#w#)$.
+in $O(\log #w#)$ expected time per operation.  The space used by a
+#YFastTrie# that stores #n# values is $O(#n#+#w#)$.
 \end{thm}
 
 The #w# term in the space requirement comes from the fact that #xft# always
