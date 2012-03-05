@@ -85,7 +85,6 @@ ods-java-html.tex : ods.tex Makefile
 
 %-java-html.tex : %.tex $(java) snarf-java-html.pl Makefile
 	cat $< | ./snarf-java-html.pl > $*-java-html.tex 
-	sed -i 's/\\figref{/Figure~\\ref{fig:/g' $*-java-html.tex 
 
 cpp-html : $(cpph) ods-cpp-html.tex
 	mkdir -p ods-cpp
@@ -99,6 +98,5 @@ ods-cpp-html.tex : ods.tex Makefile
 
 %-cpp-html.tex : %.tex $(cpp) snarf-cpp-html.pl Makefile
 	cat $< | ./snarf-cpp-html.pl > $*-cpp-html.tex 
-	sed -i 's/\\figref{/Figure~\\ref{fig:/g' $*-cpp-html.tex 
 
 
