@@ -246,8 +246,8 @@ The following theorem summarizes the performance of an #XFastTrie#:
 An #XFastTrie# implements the #SSet# interface for #w#-bit integers. An
 #XFastTrie# supports the operations
 \begin{itemize}
-\item #add(x)# and #remove(x)# in $O(#w#)$ time per operation and 
-\item #find(x)# in $O(\log #w#)$ time per operation.
+\item #add(x)# and #remove(x)# in $O(#w#)$ expected time per operation and 
+\item #find(x)# in $O(\log #w#)$ expected time per operation.
 \end{itemize}
 The space used by an #XFastTrie# that
 stores #n# values is $O(#n#\cdot#w#)$.
@@ -424,8 +424,8 @@ following theorem, which summarizes the performance of the #YFastTrie#:
 \begin{thm}
 A #YFastTrie# implements the #SSet# interface for #w#-bit integers. A
 #YFastTrie# supports the operations #add(x)#, #remove(x)#, and #find(x)#
-in $O(\log #w#)$ time per operation.  The space used by a #YFastTrie# that
-stores #n# values is $O(#n#+#w#)$.
+in $O(\log #w#)$ expected time per operation.  The space used by a
+#YFastTrie# that stores #n# values is $O(#n#+#w#)$.
 \end{thm}
 
 The #w# term in the space requirement comes from the fact that #xft# always
