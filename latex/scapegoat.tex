@@ -49,7 +49,7 @@ Even with this constraint, a #ScapegoatTree# can look surprisingly unbalanced.  
 Implementing the #find(x)# operation in a #ScapegoatTree# is done
 using the standard algorithm for searching in a #BinarySearchTree#
 (see \secref{binarysearchtree}).  This takes time proportional to the
-height of the tree which, by \eqref{scapegoat-height} is $O(\log #n#)$.
+height of the tree which, by \myeqref{scapegoat-height} is $O(\log #n#)$.
 
 To implement the #add(x)# operation, we first increment #n# and #q#
 and then use the usual algorithm for adding #x# to a binary search
@@ -72,7 +72,7 @@ where #w.child# is the child of #w# on the path from the root to #u#.
 We'll very shortly prove that a scapegoat exists.  For now, we can
 take it for granted.  Once we've found the scapegoat #w#, we completely
 destroy the subtree rooted at #w# and rebuild it into a perfectly balanced
-binary search tree.  We know, from \eqref{scapegoat}, that, even before
+binary search tree.  We know, from \myeqref{scapegoat}, that, even before
 the addition of #u#, #w#'s subtree was not a complete binary tree.
 Therefore, when we rebuild #w#, the height decreases by at least 1 so that height of the #ScapegoatTree# is once again at most $\log_{3/2}#q#$.
 
@@ -85,7 +85,7 @@ Therefore, when we rebuild #w#, the height decreases by at least 1 so that heigh
       \includegraphics{figs/scapegoat-insert-4} 
     \end{tabular}
   \end{center}
-  \caption[Adding to a scapegoat tree]{Inserting 3.5 into a #ScapegoatTree# increases its depth to 6, which violates \eqref{scapegoat-height} since $6 > \log_{3/2} 11 \approx 5.914$.  A scapegoat is found at the node containing 5.}
+  \caption[Adding to a scapegoat tree]{Inserting 3.5 into a #ScapegoatTree# increases its depth to 6, which violates \myeqref{scapegoat-height} since $6 > \log_{3/2} 11 \approx 5.914$.  A scapegoat is found at the node containing 5.}
 \end{figure}
 If we ignore the cost of finding the scapegoat #w# and rebuilding the
 subtree rooted at #w#, then the running time of #add(x)# is dominated
@@ -109,7 +109,7 @@ therefore $O(\log #n#)$.
 In this section we analyze the correctness and amortized running time
 of operations on a #ScapegoatTree#.  We first prove the correctness by
 showing that, when the #add(x)# operation results in a node that violates
-Condition \eqref{scapegoat-height}, then we can always find a scapegoat:
+Condition \myeqref{scapegoat-height}, then we can always find a scapegoat:
 
 \begin{lem}
   Let #u# be a node of depth $h>\log_{3/2} #q#$ in a #ScapegoatTree#.
