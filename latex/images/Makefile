@@ -3,7 +3,7 @@ pdfs=$(svgs:.svg=.pdf)
 epss=$(svgs:.svg=.eps)
 
 
-all: $(pdfs)
+all: $(pdfs) $(epss)
 
 
 %.pdf : %.svg
