@@ -1,3 +1,5 @@
+\usepackage{kpfonts}
+
 % Page setup
 \setlength{\textheight}{8.5in}
 \setlength{\textwidth}{6in}
@@ -12,9 +14,15 @@
 \flushbottom
 
 % Title block
+%\font\tensfb = cmssbx11
+%\font\titlefont = 
+%\font\authorfont = cmssbx17
+
+
 \font\tensfb = cmssbx11
 \font\titlefont = cmssbx28
 \font\authorfont = cmssbx17
+
 
 \renewcommand\maketitle{%
   \newlength{\lone}
@@ -28,9 +36,10 @@
     \ \\[.5in]
     \includegraphics{images/tree3-thick}\\
     \ \\[.5in]
-    {\hspace{-1mm}\titlefont\@title} \\[1ex]
-    {\authorfont\@author} \\[\ltwo]
-    {\tensfb\@date} \\[\lthree]
+    {\hspace{-1mm}\fontsize{28}{1}\usefont{OT1}{jkpss}{b}{n}\@title} \\[1ex]
+    %{\hspace{-1mm}\titlefont\@title} \\[1ex]
+    {\fontsize{17}{1}\usefont{OT1}{jkpss}{b}{n}\@author} \\[\ltwo]
+    {\fontsize{11}{1}\usefont{OT1}{jkpss}{b}{n}\@date} \\[\lthree]
     \includegraphics[scale=0.5]{images/cc-by}
   \end{flushleft}
 }
