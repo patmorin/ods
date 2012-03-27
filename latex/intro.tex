@@ -185,11 +185,11 @@ as a \emph{successor search}.  It differs in a fundamental way from
 no element in the set that is equal to #x#.
 
 The distinction between the #USet# and #SSet# #find(x)# operations is very
-important and is very often missed.  The extra functionality provided by
-an #SSet# usually comes with a price that includes both a larger running
-time and a higher implementation complexity.  For example, the #SSet#
-implementations discussed in this book all have #find(x)# operations
-with running times that are at least logarithmic in the size of the set.
+important and is very often missed.  The extra functionality provided
+by an #SSet# usually comes with a price that includes both a larger
+running time and a higher implementation complexity.  For example, most
+of the #SSet# implementations discussed in this book all have #find(x)#
+operations with running times that are logarithmic in the size of the set.
 On the other hand, the implementation of a #USet# as a #ChainedHashTable#
 in \chapref{hashing} has a #find(x)# operation that runs in constant
 expected time.  When choosing which of these structures to use, one should
