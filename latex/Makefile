@@ -51,6 +51,9 @@ ods-cpp.tex : ods.tex Makefile
 %-cpp.tex : %.tex $(cppsource) snarf-cpp.pl Makefile
 	cat $< | ./snarf-cpp.pl > $*-cpp.tex 
 
+install-pdf : ods-java.pdf ods-cpp.pdf ods-java-grayscale.pdf ods-cpp-grayscale.pdf 
+	scp -r ods-java.pdf ods-java-grayscale.pdf ods-cpp.pdf ods-cpp-grayscale.pdf ods-book.css morin@cg.scs.carleton.ca:public_html/ods/
+
 install : ods-java.pdf ods-cpp.pdf ods-java-grayscale.pdf ods-cpp-grayscale.pdf java-html cpp-html
 	scp -r  ods-java/ ods-java.pdf ods-java-grayscale.pdf ods-cpp/ ods-cpp.pdf ods-cpp-grayscale.pdf ods-book.css morin@cg.scs.carleton.ca:public_html/ods/
 
