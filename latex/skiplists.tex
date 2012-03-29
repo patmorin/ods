@@ -3,7 +3,7 @@
 \chaplabel{skiplists}
 
 In this chapter, we discuss a beautiful data structure: the skiplist,
-which has a variety of applications.  Using a skiplist we can implement
+that has a variety of applications.  Using a skiplist we can implement
 a #List# that is fast for all the operations #get(i)#, #set(i,x)#,
 #add(i,x)#, and #remove(i)#. We can also implement an #SSet# in which
 all operations run in $O(\log #n#)$ expected time.
@@ -328,7 +328,9 @@ The next two lemmata tell us that skiplists have linear size:
 \begin{proof}
   The probability that any particular element, #x#, is included in list
   $L_{#r#}$ is $1/2^{#r#}$, so the expected number of nodes in $L_{#r#}$
-  is $#n#/2^{#r#}$.  Therefore, the total number of nodes in all lists is
+  is $#n#/2^{#r#}$.\footnote{See \secref{randomization} to see how this
+  is derived using indicator variables and linearity of expectation.}
+  Therefore, the total expected number of nodes in all lists is
   \[ \sum_{#r#=0}^\infty #n#/2^{#r#} = #n#(1+1/2+1/4+1/8+\cdots) = 2#n# \enspace . \qedhere \]
 \end{proof}
 
@@ -411,7 +413,7 @@ The expected length of a search path in a skiplist is at most $2\log #n# + O(1)$
   1$.  Furthermore, $S_{#r#}\le |L_{#r#}|$, since we can't take more steps
   in $L_{#r#}$ than the length of $L_{#r#}$, so
   \[
-    \E[S_{#r#}] \le E[|L_{#r#}|] = #n#/2^{#r#} \enspace .
+    \E[S_{#r#}] \le \E[|L_{#r#}|] = #n#/2^{#r#} \enspace .
   \]
   We can now finish as in the proof of \lemref{skiplist-height}.
   Let $S$ be  the length of the search path for some node, #u#, in a
