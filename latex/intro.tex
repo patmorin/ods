@@ -110,13 +110,13 @@ Notice that these operations are easily sufficient to implement the
 \end{eqnarray*}
 
 Although we will normally not discuss the #Stack#, #Deque# and FIFO
-#Queue# interfaces very often in subsequent chapters, the terms #Stack#
-and #Deque# are sometimes used in the names of data structures that
-implement the #List# interface.  When this happens, it is to highlight
-the fact that these data structures can be used to implement the #Stack#
-or #Deque# interface very efficiently.  For example, the #ArrayDeque#
-class is an implementation of the #List# interface that can implement
-the #Deque# operations in constant (amortized) time per operation.
+#Queue# interfaces in subsequent chapters, the terms #Stack# and #Deque#
+are sometimes used in the names of data structures that implement the
+#List# interface.  When this happens, it is to highlight the fact that
+these data structures can be used to implement the #Stack# or #Deque#
+interface very efficiently.  For example, the #ArrayDeque# class is an
+implementation of the #List# interface that can implement the #Deque#
+operations in constant (amortized) time per operation.
 
 
 \subsection{The #USet# Interface: Unordered Sets}
@@ -308,7 +308,7 @@ This is proven as follows:
             \\
         & \le 13n\log n 
 \end{align*}
-which demonstrates that the fundtion $f(n)=5n\log n + 8n - 200$ is in the set $O(\log n)$ using the constants $c=13$ and $n_0 = 2$.
+which demonstrates that the function $f(n)=5n\log n + 8n - 200$ is in the set $O(\log n)$ using the constants $c=13$ and $n_0 = 2$.
 
 There are a number of useful shortcuts when using asymptotic notation.  First:
 \[ O(n^{c_1}) \subset O(n^{c_2}) \enspace ,\]
