@@ -351,7 +351,7 @@ the expected number of rotations cannot exceed the expected length of
 the search path.  Therefore, the expected running time of the #add(x)#
 operation in a #Treap# is $O(\log #n#)$.  (\excref{treap-rotates}
 asks you to show that the expected number of rotations performed during
-an insertion is actually only $O(1)$.)
+an addition is actually only $O(1)$.)
 
 The #remove(x)# operation in a #Treap# is the opposite of the #add(x)#
 operation.  We search for the node, #u#, containing #x# and then perform
@@ -385,7 +385,7 @@ In particular, if we were to reinsert #x#, using the same priority #u.p#,
 then the #add(x)# operation would do exactly the same number of rotations
 and would restore the #Treap# to exactly the same state it was in before
 the #remove(x)# operation took place.  (Reading from bottom-to-top,
-\figref{treap-remove} illustrates the insertion of the value 9 into a
+\figref{treap-remove} illustrates the addition of the value 9 into a
 #Treap#.) This means that the expected running time of the #remove(x)#
 on a #Treap# of size #n# is proportional to the expected running time
 of the #add(x)# operation on a #Treap# of size $#n#-1$.  We conclude
@@ -464,6 +464,50 @@ for some constant $c$.
 One such class of hash functions that is easy to implement and fairly
 fast is \emph{tabulation hashing} \cite{pt10}.
 
+Another #Treap# variant that doesn't store priorities at each node is
+the randomized binarysearch tree of Mart\'\inez and Roura \cite{mr98}.
+In this variant, every node, #u#, stores the size, #u.size#, of the
+subtree rooted at #u#.  Both the #add(x)# and #remove(x)# algorithms are
+randomized. The algorithm for adding #x# to the subtree rooted at #u#
+does the following:
+\begin{enumerate}
+   \item With probability $1/(#size(u)#+1)$, #x# is added the usual way,
+   as a leaf, and rotations are then done to bring #x# up to the root
+   of this subtree.
+   \item Otherwise, #x# is recursively added into one of the two
+   subtrees rooted at #u.left# or #u.right#, as appropriate.
+\end{enumerate}
+The first case corresponds to an #add(x)# operation in a #Treap# where
+#x#'s node receives a random priority that is smaller than any of the
+#size(u)# priorities in #u#'s subtree, and this case occurs with exactly
+the same probability.
+
+Removing a value #x# from a randomized binary search tree is similar
+to the process of removing from a #Treap#.  We find the node, #u#,
+that contains #x# and then perform rotations that repeatedly increase
+the depth of #u# until it becomes a leaf, at which point we can splice
+it from the tree.  The choice of whether to perform a left or right
+rotation at each step is randomized.
+\begin{enumerate}
+  \item With probability #u.left.size/(u.size-1)#, we perform a right
+  rotation at #u#, making #u.left# the root of the subtree that was
+  formerly rooted at #u#.
+  \item  With probability #u.right.size/(u.size-1)#, we perform a left
+  rotation at #u#, making #u.right# the root of the subtree that was
+  formerly rooted at #u#.
+\end{enumerate}
+Again, we can easily verify that these are exactly the same probabilities
+that the removal algorithm in a #Treap# will perform a left or right
+rotation of #u#.
+
+Randomized binary search trees have the disadvantage, compared to treaps,
+that, when adding and removing elements they make many random choices and
+they must maintain the sizes of subtrees.  One advantage of randomized
+binary search trees over treaps is that subtree sizes can serve another
+useful purpose, namely to provide access by rank in $O(\log #n#)$ expected
+time (see \excref{treap-get}).  In comparison, the random priorities
+stored in treap nodes have no use other than keeping the treap balanced.
+
 \begin{exc}
   Prove the assertion that there are $21,964,800$ sequences that generate
   the tree on the right hand side of \figref{rbs-lvc}.  (Hint: Give a
@@ -484,7 +528,7 @@ fast is \emph{tabulation hashing} \cite{pt10}.
   #remove(x)# operation) is $O(1)$.
 \end{exc}
 
-\begin{exc}
+\begin{exc}\exclabel{treap-get}
   Design and implement a version of a #Treap# that includes a #get(i)#
   operation that returns the key with rank #i# in the #Treap#.  (Hint:
   Have each node, #u#, keep track of the size of the subtree rooted
@@ -501,5 +545,11 @@ fast is \emph{tabulation hashing} \cite{pt10}.
   greater than #x# and returns a new #Treap# #t2# containing all
   these values.  The #split(x)# operation should run in $O(\log #n#)$
   expected time.
+\end{exc}
+
+\begin{exc}
+  Implement Martinez's randomized binary search trees, as discussed in
+  this section.  Compare the performance of your implementation with
+  that of the #Treap# implementation.
 \end{exc}
 
