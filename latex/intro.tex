@@ -121,10 +121,10 @@ operations in constant (amortized) time per operation.
 
 \subsection{The #USet# Interface: Unordered Sets}
 
-The #USet# interface represents an unordered set of unique elements, mimicking a
-mathematical \emp{set}. A #USet# contains #n#
-\emph{distinct} elements; no element appears more than once; the elements
-are in no specific order.  A #USet# supports the following operations:
+The #USet# interface represents an unordered set of unique elements,
+mimicking a mathematical \emph{set}. A #USet# contains #n# \emph{distinct}
+elements; no element appears more than once; the elements are in no
+specific order.  A #USet# supports the following operations:
 
 \begin{enumerate}
   \item #size()#: return the number, #n#, of elements in the set
@@ -548,6 +548,18 @@ described in this book that implement each of the interfaces, #List#,
 \footnotetext[9]{This structure can only store #w#-bit integer data.}
 \renewcommand{\thefootnote}{\arabic{footnote}}
 \end{center}
+
+\Figref{dependencies} shows the dependencies between various chapters
+in this book.  A dashed arrow indicates only a weak-dependency, in which
+only a small part of the chapter is depends on a previous chapter.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/dependencies}
+  \end{center}
+  \caption{The dependencies between chapters in this book.}
+  \figlabel{dependencies}
+\end{figure}
 
 \section{References}
 
