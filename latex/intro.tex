@@ -196,6 +196,78 @@ expected time.  When choosing which of these structures to use, one should
 always use a #USet# unless the extra functionality offered by an #SSet#
 is really needed.
 
+\section{Why the Fuss?}
+
+The interfaces described in \secref{interfaces} are all fairly simple.
+It does not take much effort to implement the #List# interface using
+an array or linked list, as described in \secref{arraystack} and
+\secref{dllist}, respectively.
+
+Once we have a #List# implementation, the #USet# and #SSet# interfaces are
+also easy to implement using a #List#, #s#.  To implement the #find(x)#
+method, we just scan through #s#, one element at a time, until we find the
+value we are looking for or conclude that it's not there.  The #add(x)#
+method is just as simple; after checking that #x# is not already in #s#
+(using #find(x)#) we append it to #s# by calling #s.add(s.size(),x)#.
+The #remove(x)# method is also easy; scan #s# until we find #x# at some
+position, #i#, and then call #s.remove(i)#.
+
+Although it is easy to implement the #USet# and #SSet# implementations
+using a #List#, this is not very efficient.  The #find(x)#, #add(x)#, and
+#remove(x)# operations all work by looking at (potentially) every element
+in #s#.  If #s# contains a lot of elements, this can make things slow.
+Imagine that we have a moderately-sized data set, say of one million
+($10^6$), items that we want to store.  It is reasonable to think
+that an application will want to search for each item at least once.
+This means we can expect to do one million ($10^6$) #find(x)# operations.
+
+If each of these $10^6$ #find(x)# operations inspects  each of the $10^6$
+items stored in $s$, this gives a total of $10^6\times 10^6=10^{12}$
+(one thousand billion) inspections.  At the time of writing, even a
+very fast desktop computer can not do more than one billion ($10^9$)
+operations per second.  This means that this application will take at
+least $10^{12}/10^9 = 1000$ seconds, or roughly 16 minutes and 40 seconds.
+16 minutes is an eon in computer time, but a person might be willing to
+put up with it (if they were headed out for a coffee break).
+
+Consider, now an application like the human genome project.  The human
+genome consists of 3.5 billion ($3.5\times 10^6$) base pairs. By our
+rough calculations, doing even a single search on this data would take 3.5
+seconds.  Doing a million searches would take $3.5$ million seconds, or
+roughly 1 year and one month.  This is starting to get beyond reasonable.
+
+Finally, consider a company like Google, that indexes 8.5 billion web
+pages.  By our calculations, doing any kind of query over this data
+would take at least 8.5 seconds.  We already know that this isn't the
+case; web searches complete in much less than 8.5 seconds, and they do
+much more complicated queries than just asking if a particular page is
+in their list of indexed pages.  Google receives approximately $4 500$
+queries per second, meaning that they would require at least $4500\times
+8.5=38,250$ very fast servers just to keep up.
+
+These examples suggest that operations on data structures that require
+looking at everything in the data structure do not scale well when the
+number of items, #n#, in the data structure and the number of operations,
+$m$, are both large.  In these cases, the time (measured in, say, machine
+instructions) is roughly $#n#\times m$.  
+
+The solution, of course, is to carefully organize the data so that
+operations like #find(x)# don't need to inspect every item in the
+data structure.  It may seem counterintuitive, but we will see #USet#
+implementations that can implement the #find(x)# operation by looking
+at only 2 items on average, independent of the number of items stored
+in the #USet#.  In our billion instruction per second computer, these
+operations take $0.000000002$ seconds to do search an #SSet# containing
+a billion items.
+
+We will see #SSet# implementations that can execute a #find(x)# operation
+on an #SSet# with a billion items
+
+
+
+
+
+
 
 
 % \subsection{The DynamicString Interface}
@@ -204,7 +276,11 @@ is really needed.
 
 In this section, we review some mathematical notations and tools
 used throughout this book, including logarithms, big-Oh notation, and
-probability theory.
+probability theory.  This is intended to be a review of these topics, not
+an introduction.  Any reader who feels they are missing this background
+is encouraged to read, and do exercises from, the appropriate section
+of the very good (and free) textbook on mathematics for computer science
+\cite{llm11}.
 
 \subsection{Logarithms}
 
