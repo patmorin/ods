@@ -86,15 +86,15 @@ say, machine instructions) is roughly $#n#\times m$.
 
 The solution, of course, is to carefully organize data within the data
 structure so that not every operation requires inspecting every item.
-It may seem counterintuitive, but we will see data structures where
-a search requires looking at only 2 items on average, independent
-of the number of items stored in the data structure.  In our billion
-instruction per second computer, these operations take $0.000000002$
-seconds to do search an #SSet# containing a billion items (or a trillion,
-or a quadrillion, or even a quintillion items).
+It may seem counterintuitive, but we will see data structures where a
+search requires looking at only 2 items on average, independent of the
+number of items stored in the data structure.  In our billion instruction
+per second computer, these operations take $0.000000002$ seconds to
+execute a search in a data structure containing a billion items (or a
+trillion, or a quadrillion, or even a quintillion items).
 
-We will see implementations of data structures that keep the items
-in sorted order, where the number of items inspected during an
+We will also see implementations of data structures that keep the
+items in sorted order, where the number of items inspected during an
 operation grows very slowly as a function of the number of items in
 the data structure.  For example, we can maintain a sorted set of one
 billion items while inspecting at most 60 items during any operation.
@@ -585,6 +585,91 @@ word-RAM model is a fairly close match for modern desktop computers when
 $#w#=32$ or $#w#=64$.} The data structures presented in this book don't
 use any special tricks that are not implementable on the JVM and most
 other architectures.
+
+\section{Correctness, Time Complexity, and Space Complexity}
+
+When studying the performance of a data structure, there are three things
+that matter most:
+
+\begin{itemize}
+  \item Correctness: The data structure should correctly implement its interface.
+  \item Time complexity: The running times of operations on the data
+    structure should be as small as possible.
+  \item Space complexity: The data structure should use as little memory
+    as possible.
+\end{itemize}
+
+%Sometimes these three requirements are in conflict with each other. For
+%example, it may be possible to have a faster data structure by using
+%more space.  It may be possible to have a data structure that is faster,
+%or uses less space, if the data structure is allowed to make (hopefully
+%occasional) mistakes.
+
+In this introductory text, we will take correctness as a given;  we
+won't consider data structures that give incorrect answers to queries
+or that don't properly perform updates.  We will, however, see data
+structures that make an extra effort to keep space usage to a minimum.
+This won't usually affect the (asymptotic) running times of operations,
+but can make the data structures a little slower in practice.
+
+\subsection{Running Time Guarantees}
+
+In this book, we will see three different kinds of running time guarantees:
+
+\begin{itemize}
+\item  Worst-case running times:  These are the strongest kind of running
+  time guarantees.  If a data structure operation has a worst-case
+  running-time of $f(#n#)$, then one of these operations \emph{never}
+  takes longer than $f(#n#)$ time.
+
+\item Amortized running times:  If we say that the amortized running
+  time of an operation in a data structure is $f(#n#)$, this means that
+  the cost of a typical operation is at most $f(#n#)$.  More precisely,
+  if a data structure has an amortized running time of $f(#n#)$,
+  then a sequence of $m$ operations takes at most $mf(#n#)$ time.
+  Some individual operations may take more than $f(#n#)$ time but the
+  average, over the entire sequence of operations is at most $f(#n#)$.
+
+\item Expected running times: If we say that the expected running time
+  of an operation on a data structure is $f(#n#)$, this means that the
+  actual running time is a random variable (see \secref{randomization})
+  and the expected value of this random variable is at most $f(#n#)$.
+  The randomization here is with respect to random choices made by the
+  data structure.
+\end{itemize}
+
+To understand the difference between worst-case, amortized, and expected
+running times, it helps to some financial examples.   The amount of income
+tax someone pays is proportional to their income.  Someone who must pay
+\$36,000 of income taxes per year may choose to pay their taxes all at
+once, at the end of the fiscal year.  Alternatively, they may choose to
+have \$3,000 of taxes deducted directly from their monthly paycheques.
+The latter person has a worst-case income tax cost of \$3,000 per month,
+while the former person has an amortized monthly cost (over a 12 month
+period) of \$3,000 per month.
+
+An example of an expected cost is the cost of automobile repair.  Over a
+period of 12 months, an automobile may work fine, or it may break down.
+If we have enough information about automobiles, we may learn that
+the expected (or average) yearly repair cost for a particular make of
+automobile is \$2,000.  It may be more, or it may be less.  There is
+not hard and fast guarantee about what repairs will cost over a year,
+two years, or even a decade.
+
+One may wonder why we would ever settle for an amortized or
+expected running-time over a worst-case running time.  The reason
+this happens is that it is often possible to get a lower expected or
+amortized running-time than worst-case running-time.  
+
+The same scenario occurs in many financial settings as well.  Mortgage
+companies allow homeowners to amortized enormous one-time costs
+(the cost of purchasing a house) over long periods of regular costs
+(mortgage payments).  Home insurance companies protect against unlikely
+but very expensive events (floods, fires, and so on) by replacing them
+with predictable worst-case costs (insurance premiums).   In these cases,
+if one could afford the risk of a fire or flood, or the cost of buying
+house outright, it would be cheaper to forgo the mortgage and/or insurance.
+
 
 \section{Code Samples}
 

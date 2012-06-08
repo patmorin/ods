@@ -37,7 +37,7 @@ ods-java.tex : ods.tex Makefile
 	sed -i 's/%HEADCOMMAND/\\newcommand{\\cpponly}[1]{}\\newcommand{\\javaonly}[1]{#1}\\newcommand{\\lang}{Java}/' ods-java.tex
 
 ods-cpp.pdf : ods-cpp.tex $(cpps) ods.sty images figs
-        latexmk -pdf ods-cpp
+	latexmk -pdf ods-cpp
 #	pdflatex $(LFLAGS) ods-cpp
 #	bibtex ods-cpp
 #	pdflatex $(LFLAGS) ods-cpp
@@ -53,8 +53,8 @@ ods-cpp.tex : ods.tex Makefile
 %-cpp.tex : %.tex $(cppsource) snarf-cpp.pl Makefile
 	cat $< | ./snarf-cpp.pl > $*-cpp.tex 
 
-install-pdf : ods-java.pdf ods-cpp.pdf ods-java-grayscale.pdf ods-cpp-grayscale.pdf 
-	scp -r ods-java.pdf ods-java-grayscale.pdf ods-cpp.pdf ods-cpp-grayscale.pdf ods-book.css morin@cg.scs.carleton.ca:public_html/ods/
+install-pdf : ods-java.pdf ods-cpp.pdf ods-java-grayscale.pdf ods-cpp-grayscale.pdf ods-java-screen.pdf ods-cpp-screen.pdf
+	scp -r ods-java.pdf ods-java-grayscale.pdf ods-cpp.pdf ods-cpp-grayscale.pdf ods-java-screen.pdf ods-cpp-screen.pdf ods-book.css morin@cg.scs.carleton.ca:public_html/ods/
 
 install : ods-java.pdf ods-cpp.pdf ods-java-grayscale.pdf ods-cpp-grayscale.pdf java-html cpp-html
 	scp -r  ods-java/ ods-java.pdf ods-java-grayscale.pdf ods-cpp/ ods-cpp.pdf ods-cpp-grayscale.pdf ods-book.css morin@cg.scs.carleton.ca:public_html/ods/
@@ -99,5 +99,11 @@ ods-cpp-html.tex : ods.tex Makefile
 
 %-cpp-html.tex : %.tex $(cpp) snarf-cpp-html.pl Makefile
 	cat $< | ./snarf-cpp-html.pl > $*-cpp-html.tex 
+
+ods-java-screen.pdf : ods-java.pdf
+	gs -o ods-java-screen.pdf -sDEVICE=pdfwrite -c "[/CropBox [72 72 540 720] /PAGES pdfmark" -f ods-java.pdf
+
+ods-cpp-screen.pdf : ods-cpp.pdf
+	gs -o ods-cpp-screen.pdf -sDEVICE=pdfwrite -c "[/CropBox [72 72 540 720] /PAGES pdfmark" -f ods-cpp.pdf
 
 
