@@ -1,6 +1,97 @@
 \chapter{Introduction}
 \pagenumbering{arabic}
 
+Every computer science curriculum in the world includes a course on data
+structures and algorithms.  Why?  Simply put: data structures are that
+important; many multi-million and several multi-billion dollar companies
+have been built around data structures.
+
+How can this be?  If we think about it for even a few minutes, we'll
+realize that we interact with data structures constantly.  Open a file:
+File system data structures are used to locate the parts of that file on
+disk so they can be retrieved.  Look up a contact on your phone:  A data
+structure is used to lookup a phone number based on a (partial) name.
+Write an email:  Your email client completes the partial recipient name
+into a properly formatted email address using a data structure.  Login
+to your favourite social network:  The network servers use your login
+information to look up your account within giant data structure containing
+the account information of the millions of users in that network.  Do a
+web search: The search engine uses an enormous data structure to search
+the contents of the over 8.5 billion web pages on the Internet.
+
+The interfaces described in \secref{interfaces} are all fairly simple.
+It does not take much effort to implement the #List# interface using
+an array or linked list, as described in \secref{arraystack} and
+\secref{dllist}, respectively.
+
+Once we have a #List# implementation, the #USet# and #SSet# interfaces are
+also easy to implement using a #List#, #s#.  To implement the #find(x)#
+method, we just scan through #s#, one element at a time, until we find the
+value we are looking for or conclude that it's not there.  The #add(x)#
+method is just as simple; after checking that #x# is not already in #s#
+(using #find(x)#) we append it to #s# by calling #s.add(s.size(),x)#.
+The #remove(x)# method is also easy; scan #s# until we find #x# at some
+position, #i#, and then call #s.remove(i)#.
+
+Although it is easy to implement the #USet# and #SSet# implementations
+using a #List#, this is not very efficient.  The #find(x)#, #add(x)#, and
+#remove(x)# operations all work by looking at (potentially) every element
+in #s#.  If #s# contains a lot of elements, this can make things slow.
+Imagine that we have a moderately-sized data set, say of one million
+($10^6$), items that we want to store.  It is reasonable to think
+that an application will want to search for each item at least once.
+This means we can expect to do one million ($10^6$) #find(x)# operations.
+
+If each of these $10^6$ #find(x)# operations inspects  each of the $10^6$
+items stored in $s$, this gives a total of $10^6\times 10^6=10^{12}$
+(one thousand billion) inspections.  At the time of writing, even a
+very fast desktop computer can not do more than one billion ($10^9$)
+operations per second.  This means that this application will take at
+least $10^{12}/10^9 = 1000$ seconds, or roughly 16 minutes and 40 seconds.
+16 minutes is an eon in computer time, but a person might be willing to
+put up with it (if they were headed out for a coffee break).
+
+Consider, now an application like the human genome project.  The human
+genome consists of 3.5 billion ($3.5\times 10^6$) base pairs. By our
+rough calculations, doing even a single search on this data would take 3.5
+seconds.  Doing a million searches would take $3.5$ million seconds, or
+roughly 1 year and one month.  This is starting to get beyond reasonable.
+
+Finally, consider a company like Google, that indexes 8.5 billion web
+pages.  By our calculations, doing any kind of query over this data
+would take at least 8.5 seconds.  We already know that this isn't the
+case; web searches complete in much less than 8.5 seconds, and they do
+much more complicated queries than just asking if a particular page is
+in their list of indexed pages.  Google receives approximately $4 500$
+queries per second, meaning that they would require at least $4500\times
+8.5=38,250$ very fast servers just to keep up.
+
+These examples suggest that operations on data structures that require
+looking at everything in the data structure do not scale well when the
+number of items, #n#, in the data structure and the number of operations,
+$m$, are both large.  In these cases, the time (measured in, say, machine
+instructions) is roughly $#n#\times m$.  
+
+The solution, of course, is to carefully organize the data so that
+operations like #find(x)# don't need to inspect every item in the
+data structure.  It may seem counterintuitive, but we will see #USet#
+implementations that can implement the #find(x)# operation by looking
+at only 2 items on average, independent of the number of items stored
+in the #USet#.  In our billion instruction per second computer, these
+operations take $0.000000002$ seconds to do search an #SSet# containing
+a billion items.
+
+We will see #SSet# implementations that can execute a #find(x)# operation
+on an #SSet# with a billion items
+
+
+
+
+
+
+
+
+
 This chapter briefly reviews some of the main concepts used throughout
 the rest of the book.   \secref{interfaces} describes the interfaces
 implemented by all the data structures described in this book.
@@ -9,6 +100,7 @@ asymptotic (big-Oh) notation, probability and randomization, the model of
 computation, and the sample code and typesetting conventions.  A reader
 with or without a background in these areas can easily skip them now and
 come back to them later if necessary.
+
 
 \section{Interfaces}
 \seclabel{interfaces}
@@ -195,77 +287,6 @@ in \chapref{hashing} has a #find(x)# operation that runs in constant
 expected time.  When choosing which of these structures to use, one should
 always use a #USet# unless the extra functionality offered by an #SSet#
 is really needed.
-
-\section{Why the Fuss?}
-
-The interfaces described in \secref{interfaces} are all fairly simple.
-It does not take much effort to implement the #List# interface using
-an array or linked list, as described in \secref{arraystack} and
-\secref{dllist}, respectively.
-
-Once we have a #List# implementation, the #USet# and #SSet# interfaces are
-also easy to implement using a #List#, #s#.  To implement the #find(x)#
-method, we just scan through #s#, one element at a time, until we find the
-value we are looking for or conclude that it's not there.  The #add(x)#
-method is just as simple; after checking that #x# is not already in #s#
-(using #find(x)#) we append it to #s# by calling #s.add(s.size(),x)#.
-The #remove(x)# method is also easy; scan #s# until we find #x# at some
-position, #i#, and then call #s.remove(i)#.
-
-Although it is easy to implement the #USet# and #SSet# implementations
-using a #List#, this is not very efficient.  The #find(x)#, #add(x)#, and
-#remove(x)# operations all work by looking at (potentially) every element
-in #s#.  If #s# contains a lot of elements, this can make things slow.
-Imagine that we have a moderately-sized data set, say of one million
-($10^6$), items that we want to store.  It is reasonable to think
-that an application will want to search for each item at least once.
-This means we can expect to do one million ($10^6$) #find(x)# operations.
-
-If each of these $10^6$ #find(x)# operations inspects  each of the $10^6$
-items stored in $s$, this gives a total of $10^6\times 10^6=10^{12}$
-(one thousand billion) inspections.  At the time of writing, even a
-very fast desktop computer can not do more than one billion ($10^9$)
-operations per second.  This means that this application will take at
-least $10^{12}/10^9 = 1000$ seconds, or roughly 16 minutes and 40 seconds.
-16 minutes is an eon in computer time, but a person might be willing to
-put up with it (if they were headed out for a coffee break).
-
-Consider, now an application like the human genome project.  The human
-genome consists of 3.5 billion ($3.5\times 10^6$) base pairs. By our
-rough calculations, doing even a single search on this data would take 3.5
-seconds.  Doing a million searches would take $3.5$ million seconds, or
-roughly 1 year and one month.  This is starting to get beyond reasonable.
-
-Finally, consider a company like Google, that indexes 8.5 billion web
-pages.  By our calculations, doing any kind of query over this data
-would take at least 8.5 seconds.  We already know that this isn't the
-case; web searches complete in much less than 8.5 seconds, and they do
-much more complicated queries than just asking if a particular page is
-in their list of indexed pages.  Google receives approximately $4 500$
-queries per second, meaning that they would require at least $4500\times
-8.5=38,250$ very fast servers just to keep up.
-
-These examples suggest that operations on data structures that require
-looking at everything in the data structure do not scale well when the
-number of items, #n#, in the data structure and the number of operations,
-$m$, are both large.  In these cases, the time (measured in, say, machine
-instructions) is roughly $#n#\times m$.  
-
-The solution, of course, is to carefully organize the data so that
-operations like #find(x)# don't need to inspect every item in the
-data structure.  It may seem counterintuitive, but we will see #USet#
-implementations that can implement the #find(x)# operation by looking
-at only 2 items on average, independent of the number of items stored
-in the #USet#.  In our billion instruction per second computer, these
-operations take $0.000000002$ seconds to do search an #SSet# containing
-a billion items.
-
-We will see #SSet# implementations that can execute a #find(x)# operation
-on an #SSet# with a billion items
-
-
-
-
 
 
 
