@@ -2,104 +2,114 @@
 \pagenumbering{arabic}
 
 Every computer science curriculum in the world includes a course on data
-structures and algorithms.  Why?  Simply put: data structures are that
-important; many multi-million and several multi-billion dollar companies
-have been built around data structures.
+structures and algorithms.  Data structures are \emph{that} important.
+Data structures improve our quality of life and even save lives on a
+regular basis.  Many multi-million and several multi-billion dollar
+companies have been built around data structures.
 
-How can this be?  If we think about it for even a few minutes, we'll
-realize that we interact with data structures constantly.  Open a file:
-File system data structures are used to locate the parts of that file on
-disk so they can be retrieved.  Look up a contact on your phone:  A data
-structure is used to lookup a phone number based on a (partial) name.
-Write an email:  Your email client completes the partial recipient name
-into a properly formatted email address using a data structure.  Login
-to your favourite social network:  The network servers use your login
-information to look up your account within giant data structure containing
-the account information of the millions of users in that network.  Do a
-web search: The search engine uses an enormous data structure to search
-the contents of the over 8.5 billion web pages on the Internet.
+How can this be?  If we think about it for even a few minutes, we
+realize that we interact with data structures constantly.
+\begin{itemize}
+  \item  Open a file: File system data structures are used to locate
+    the parts of that file on disk so they can be retrieved.  This isn't
+    easy; disks contain hundreds of millions of blocks.  Your file could
+    be stored on any one of them.
+  \item Look up a contact on your phone:  A data
+    structure is used to lookup a phone number based on partial
+    information even before you finish dialing/typing.  This isn't easy;
+    this information may be looked up in a data structure containing
+    information about everyone you have ever had phone or email contact
+    with, and your phone doesn't have a very fast processor or a lot
+    of memory.
+  \item Login to your favourite social network:  The network servers
+    use your login information look up your account information.
+    This isn't easy; popular social networks have nearly a billion
+    active users.
+  \item Do a web search: The search engine uses data structures to find
+    the web pages containing your search terms.  This isn't easy; there
+    are over 8.5 billion web pages on the Internet and each page contains
+    a lot of potential search terms.
+  \item Phone emergency services (9-1-1):  The emergency services network
+    looks up your phone number in a data structure that maps phone numbers
+    to addresses so that police cars, ambulances, or fire trucks can be
+    sent there without delay. This is important;  the person making the
+    call may not be able to provide the exact address they are calling
+    from and a delay can mean the difference between life or death.
+\end{itemize}
 
-The interfaces described in \secref{interfaces} are all fairly simple.
-It does not take much effort to implement the #List# interface using
-an array or linked list, as described in \secref{arraystack} and
-\secref{dllist}, respectively.
+In the next section, we look at the operations supported by the
+most commonly used data structures.  Anyone with even a little bit of
+programming experience will see that these operations are not hard to
+implement.  We can store the data in an array or a linked list and any
+operation can be implemented by iterating over all the elements of the
+array or list and possibly adding or removing an element.
 
-Once we have a #List# implementation, the #USet# and #SSet# interfaces are
-also easy to implement using a #List#, #s#.  To implement the #find(x)#
-method, we just scan through #s#, one element at a time, until we find the
-value we are looking for or conclude that it's not there.  The #add(x)#
-method is just as simple; after checking that #x# is not already in #s#
-(using #find(x)#) we append it to #s# by calling #s.add(s.size(),x)#.
-The #remove(x)# method is also easy; scan #s# until we find #x# at some
-position, #i#, and then call #s.remove(i)#.
-
-Although it is easy to implement the #USet# and #SSet# implementations
-using a #List#, this is not very efficient.  The #find(x)#, #add(x)#, and
-#remove(x)# operations all work by looking at (potentially) every element
-in #s#.  If #s# contains a lot of elements, this can make things slow.
-Imagine that we have a moderately-sized data set, say of one million
-($10^6$), items that we want to store.  It is reasonable to think
-that an application will want to search for each item at least once.
-This means we can expect to do one million ($10^6$) #find(x)# operations.
-
-If each of these $10^6$ #find(x)# operations inspects  each of the $10^6$
+Although this kind of implementation is easy, it is not very efficient.
+Imagine an application with a moderately-sized data set, say of one
+million ($10^6$), items.  It is reasonable, in most applications, to
+assume that the application will want to look up each item at least once.
+This means we can expect to do at least one million ($10^6$) lookups in
+this data.  If each of these $10^6$ lookups inspects  each of the $10^6$
 items stored in $s$, this gives a total of $10^6\times 10^6=10^{12}$
-(one thousand billion) inspections.  At the time of writing, even a
-very fast desktop computer can not do more than one billion ($10^9$)
-operations per second.  This means that this application will take at
-least $10^{12}/10^9 = 1000$ seconds, or roughly 16 minutes and 40 seconds.
-16 minutes is an eon in computer time, but a person might be willing to
-put up with it (if they were headed out for a coffee break).
+(one thousand billion) inspections.
 
-Consider, now an application like the human genome project.  The human
-genome consists of 3.5 billion ($3.5\times 10^6$) base pairs. By our
-rough calculations, doing even a single search on this data would take 3.5
-seconds.  Doing a million searches would take $3.5$ million seconds, or
-roughly 1 year and one month.  This is starting to get beyond reasonable.
+At the time of writing, even a very fast desktop computer can not do more
+than one billion ($10^9$) operations per second.\footnote{Computer speeds
+are at most a few gigahertz (billions of cycles per second) and each
+operation typically takes a few cycles.} This means that this application
+will take at least $10^{12}/10^9 = 1000$ seconds, or roughly 16 minutes
+and 40 seconds.  16 minutes is an eon in computer time, but a person might
+be willing to put up with it (if they were headed out for a coffee break).
 
-Finally, consider a company like Google, that indexes 8.5 billion web
-pages.  By our calculations, doing any kind of query over this data
+%Consider, now an application like the human genome project.  Completed in
+%2003 (when computers were quite a bit slower than they are now), this
+%was considered an extraordinary scientific accomplishment.  The human
+%genome consists of 3 billion ($3\times 10^6$) base pairs. By our
+%rough calculations, doing even a single search on this data would take
+%3 seconds.  Doing a million searches would take $3$ million seconds,
+%or roughly 34 days.  This is starting to get beyond reasonable.
+
+Now consider a company like Google, that indexes over 8.5 billion
+web pages.  By our calculations, doing any kind of query over this data
 would take at least 8.5 seconds.  We already know that this isn't the
 case; web searches complete in much less than 8.5 seconds, and they do
 much more complicated queries than just asking if a particular page is
-in their list of indexed pages.  Google receives approximately $4 500$
-queries per second, meaning that they would require at least $4500\times
+in their list of indexed pages.  Google receives approximately $4,500$
+queries per second, meaning that they would require at least $4,500\times
 8.5=38,250$ very fast servers just to keep up.
 
-These examples suggest that operations on data structures that require
-looking at everything in the data structure do not scale well when the
-number of items, #n#, in the data structure and the number of operations,
-$m$, are both large.  In these cases, the time (measured in, say, machine
-instructions) is roughly $#n#\times m$.  
+These examples suggest that operations which require looking at everything
+in the data structure do not scale well when the number of items, #n#,
+in the data structure and the number of operations, $m$, performed on the
+data structure are both large.  In these cases, the time (measured in,
+say, machine instructions) is roughly $#n#\times m$.
 
-The solution, of course, is to carefully organize the data so that
-operations like #find(x)# don't need to inspect every item in the
-data structure.  It may seem counterintuitive, but we will see #USet#
-implementations that can implement the #find(x)# operation by looking
-at only 2 items on average, independent of the number of items stored
-in the #USet#.  In our billion instruction per second computer, these
-operations take $0.000000002$ seconds to do search an #SSet# containing
-a billion items.
+The solution, of course, is to carefully organize data within the data
+structure so that not every operation requires inspecting every item.
+It may seem counterintuitive, but we will see data structures where
+a search requires looking at only 2 items on average, independent
+of the number of items stored in the data structure.  In our billion
+instruction per second computer, these operations take $0.000000002$
+seconds to do search an #SSet# containing a billion items (or a trillion,
+or a quadrillion, or even a quintillion items).
 
-We will see #SSet# implementations that can execute a #find(x)# operation
-on an #SSet# with a billion items
+We will see implementations of data structures that keep the items
+in sorted order, where the number of items inspected during an
+operation grows very slowly as a function of the number of items in
+the data structure.  For example, we can maintain a sorted set of one
+billion items while inspecting at most 60 items during any operation.
+In our billion instruction per second computer, these operations take
+$0.00000006$ seconds each.
 
-
-
-
-
-
-
-
-
-This chapter briefly reviews some of the main concepts used throughout
-the rest of the book.   \secref{interfaces} describes the interfaces
-implemented by all the data structures described in this book.
-It should be considered required reading.  The remaining sections discuss
-asymptotic (big-Oh) notation, probability and randomization, the model of
-computation, and the sample code and typesetting conventions.  A reader
-with or without a background in these areas can easily skip them now and
-come back to them later if necessary.
+The remainder of this chapter briefly reviews some of the main concepts
+used throughout the rest of the book.   \secref{interfaces} describes
+the interfaces implemented by all the data structures described in this
+book.  It should be considered required reading.  The remaining sections
+discuss asymptotic (big-Oh) notation, probability and randomization,
+the model of computation, an overview of the rest of the chapters, and
+the sample code and typesetting conventions.  A reader with or without
+a background in these areas can easily skip them now and come back to
+them later if necessary.
 
 
 \section{Interfaces}
@@ -299,7 +309,7 @@ In this section, we review some mathematical notations and tools
 used throughout this book, including logarithms, big-Oh notation, and
 probability theory.  This is intended to be a review of these topics, not
 an introduction.  Any reader who feels they are missing this background
-is encouraged to read, and do exercises from, the appropriate section
+is encouraged to read, and do exercises from, the appropriate sections
 of the very good (and free) textbook on mathematics for computer science
 \cite{llm11}.
 
