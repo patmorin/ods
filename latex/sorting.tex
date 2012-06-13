@@ -14,6 +14,19 @@ time.  As it turns out, all three algorithms are asymptotically optimal;
 no algorithm that uses only comparisons can avoid doing roughly $#n#\log
 #n#$ comparisons in the worst-case and even the average-case.
 
+Before continuing, we should note that any of the #SSet# or priority
+#Queue# implementations presented in previous chapters can also
+be used to obtain an $O(#n#\log #n#)$ time sorting algorithm.
+For example, we can sort #n# items by performing #n# #add(x)#
+operations followed by #n# #remove()# operations on a #BinaryHeap#
+or #MeldableHeap#. Alternatively, we can use #n# #add(x)# operations
+on any of the binary search tree data structures and then perform an
+in-order traversal (\excref{tree-traversal}) to extract the elements in
+sorted order.  However, in both cases we go through a lot of overhead to
+build a structure that is never fully used.  Sorting is such an important
+problem that it is worthwhile developing direct methods that are as fast,
+simple, and space-efficient as possible.
+
 The second part of this chapter shows that, if we allow other
 operations besides comparisons, then all bets are off.  Indeed, by using
 array-indexing, it is possible to sort a set of #n# integers in the range
