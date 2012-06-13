@@ -2,10 +2,15 @@
 \chaplabel{scapegoat}
 
 In this chapter, we study a binary search tree data structure, the
-#ScapegoatTree#, that keeps itself balanced by \emph{partial rebuilding
+#ScapegoatTree#.
+This structure is based on the common wisdom that, when something goes
+wrong, the first thing we should do is find someone to blame it on (the
+\emph{scapegoat}).  Once blame is firmly established, we can leave the
+scapegoat to fix the problem.
+
+A #ScapegoatTree# that keeps itself balanced by \emph{partial rebuilding
 operations}.  During a partial rebuilding operation, an entire subtree
 is deconstructed and rebuilt into a perfectly balanced subtree.
-
 There are many ways of rebuilding a subtree rooted at node #u# into
 a perfectly balanced tree.  One of the simplest is to traverse #u#'s
 subtree, gathering all its nodes into an array #a# and then to recursively
@@ -22,6 +27,7 @@ has #size(u)# nodes.
 
 \section{#ScapegoatTree#: A Binary Search Tree with Partial Rebuilding}
 \seclabel{scapegoattree}
+
 
 A #ScapegoatTree# is a #BinarySearchTree# that, in addition to keeping
 track of the number, #n#, of  nodes in the tree also keeps a counter, #q#,

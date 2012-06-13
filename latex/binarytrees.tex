@@ -2,17 +2,19 @@
 \chaplabel{binarytrees}
 
 This chapter introduces one of the most fundamental structures in computer
-science: binary trees.  There are lots of ways of defining binary trees.
-Mathematically, a binary tree is a connected undirected finite graph with
-no cycles, and no vertex of degree greater than three.
+science: binary trees.  The use of the word \emph{tree} here comes from
+the fact that, when we draw them, the resulting drawing often resembles
+the trees we find in a forest.  There are lots of ways of defining
+binary trees.  Mathematically, a \emph{binary tree} is a connected undirected
+finite graph with no cycles, and no vertex of degree greater than three.
 
-For most computer science applications, binary trees are \emph{rooted}: A
-special node, #r#, of degree at most two is called the \emph{root} of the tree.  For every node,
-$#u#\neq #r#$, the second node on the path from #u# to #r# is called the
-\emph{parent} of #u#.  Each of the other nodes adjacent to #u#
-is called a \emph{child} of #u#. Most of the binary trees we are interested
-in are \emph{ordered}, so we distinguish between the \emph{left child}
-and \emph{right child} of #u#.
+For most computer science applications, binary trees are \emph{rooted}:
+A special node, #r#, of degree at most two is called the \emph{root}
+of the tree.  For every node, $#u#\neq #r#$, the second node on the
+path from #u# to #r# is called the \emph{parent} of #u#.  Each of the
+other nodes adjacent to #u# is called a \emph{child} of #u#. Most of the
+binary trees we are interested in are \emph{ordered}, so we distinguish
+between the \emph{left child} and \emph{right child} of #u#.
 
 In illustrations, binary trees are usually drawn from the root
 downward, with the root at the top of the drawing and the left and right

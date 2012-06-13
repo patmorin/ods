@@ -23,7 +23,7 @@ sub color($) {
   $line =~ s/\b([a-z]\w*)(\s*\()/$p$1$2/g;
   $line =~ s/\b([a-z]\w*)\b/{\\color{var}$1}/g; # color variables
   $line =~ s/$p//g;
-  my @keywords = ("null", "int", "long", "double", "float", "char", "byte", "public", "protected", "private", "static", "if", "while", "else", "for", "do", "T", "K", "V", "extends", "implements", "throw", "new", "class");
+  my @keywords = ("void", "null", "int", "long", "double", "float", "char", "byte", "public", "protected", "private", "static", "if", "while", "else", "for", "do", "T", "K", "V", "extends", "implements", "throw", "new", "class");
  foreach my $k (@keywords) {
     $line =~ s/\{\\color\{\w+\}($k)\}/$1/g;
     $line =~ s/\b($k)\b/{\\color{keyword}$1}/g;

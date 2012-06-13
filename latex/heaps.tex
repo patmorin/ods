@@ -2,12 +2,17 @@
 \chaplabel{heaps}
 
 In this chapter, we discuss two implementations of the extremely useful
-priority #Queue# data structure.  The first is an implementation based
-on arrays.  It is very fast and is the basis of one of the fastest
+priority #Queue# data structure.  Both of these structures are a special
+kind of binary tree called a \emph{heap}, which means ``a disorganized
+pile.''  This is in contrast to binary search trees that can thought of
+as a highly organized pile.
+
+The first heap implementation uses an array to simulate a complete
+binary tree.  It is very fast and is the basis of one of the fastest
 known sorting algorithms, namely heapsort (see \secref{heapsort}).
-The second implementation is based on binary trees and is more flexible.
-In particular, it supports a #meld(h)# operation that allows the priority
-queue to absorb the elements of a second priority queue #h#.
+The second implementation is based on more flexible binary trees.
+It supports a #meld(h)# operation that allows the priority queue to
+absorb the elements of a second priority queue #h#.
 
 \section{#BinaryHeap#: An Implicit Binary Tree}
 \seclabel{binaryheap}
