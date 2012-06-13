@@ -3,8 +3,10 @@ pdfs=$(svgs:.svg=.pdf)
 epss=$(svgs:.svg=.eps)
 
 
-all: $(pdfs) $(epss)
+all: $(pdfs) $(epss) bigoh.tex
 
+bigoh.tex : bigoh.gp
+	gnuplot $<
 
 %.pdf : %.svg
 	inkscape --export-pdf=$@ $<	

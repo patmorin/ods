@@ -450,7 +450,70 @@ In the example above, since the only variable in the rest of the equation
 is $n$, we can assume that this should be read as $T(n) = 2\log n + O(f(n))$,
 where $f(n) = 1$.
 
-In a few cases, we will use asymptotic notation on functions with more than one variable. There seems to be no standard for this, but for our purposes, the following definition is sufficient:
+The $O(\cdot)$ notation is not new or unique to computer science.
+It was used by number theorist Paul Bachmann as early as 1894, but it is
+immensely useful in describing the running times of computer algorithms.
+Consider a piece of code like the following:
+\javaimport{junk/Simple.snippet()}
+One execution of this method involves
+\begin{itemize}
+      \item $1$ assignment (#int i = 0#),
+      \item $#n#+1$ comparisons (#i < n#),
+      \item #n# increments (#i++#),
+      \item #n# array offset calculations (#a[i]#), and
+      \item #n# indirect assignments (#a[i] = i#).
+\end{itemize}
+So we could write this running time as
+\[
+    T(#n#)=a + b(#n#+1) + c#n# + d#n# + e#n# \enspace , 
+\]
+where $a$, $b$, $c$, $d$, and $e$ are constants that depend on the
+characteristics of the machine running the code.  If this is the
+expression for the running time of two lines of code, then clearly this
+kind of analysis will not be tractable to complicated code or algorithms.
+Using big-Oh notation, the running time simplifies down to
+\[
+    T(#n#)= O(#n#) \enspace .
+\]
+Not only is this more compact, it also gives nearly as much information.
+The fact that the running time depends on the constants $a$, $b$, $c$,
+$d$, and $e$ in the above example means that, in general, it will not be
+possible to compare two running times to know which is faster without
+knowing the values of these constants.  Even if we go through the
+effort of determining these constants (say, through timing tests) then
+our conclusion will only be valid for the machine we run our tests on.
+
+Big-Oh notation allows us to reason at a much higher level, which make it
+possible to analyze much more complicated functions.  If two algorithms
+have the same big-Oh running time, then we won't know which is faster,
+and there may not be a clear winner.  One may be faster on one machine
+and the other may be faster on a different machine.  However, if the
+two algorithms have a demonstrably different big-Oh running time, then
+we can be certain that the one with the smaller running time will be
+faster \emph{for large enough values of #n#}.
+
+An example of how big-Oh notation allows us to compare two different
+functions is shown in \figref{intro-asymptotics}, which compares
+the rate of grown of $f_1(#n#)=15#n#$ versus $f_2(n)=2#n#\log#n#$.
+It might be that $f_1(n)$  is the running time of a complicated linear
+time algorithm while $f_2(n)$ is the running time of a considerably
+simpler divide and conquer algorithm.  This illustrates that, although
+$f_1(#n#)$ is greater than $f_2(n)$ for small values of #n#, the opposite
+is true for large values of #n#.  Eventually $f_1(#n#)$ wins out, by an
+increasingly margin.  Analysis using big-Oh notation told us that this
+would happen, since $O(#n#)\subset O(#n#\log #n#)$.
+
+\begin{figure}
+  \begin{center}
+    \input{images/bigoh.tex}
+  \end{center}
+  \caption{Plots of $15#n#$ versus $2#n#\log#n#$.}
+  \figlabel{intro-asymptotics}
+\end{figure}
+
+In a few cases, we will use asymptotic notation on functions with more
+than one variable. There seems to be no standard for this, but for our
+purposes, the following definition is sufficient:
 \[
    O(f(n_1,\ldots,n_k)) = 
    \left\{\begin{array}{lll}
@@ -549,10 +612,10 @@ up heads.
 In this book, we will analyze the theoretical running times of operations
 on the data structures we study.  To do this precisely, we need a
 mathematical model of computation.  For this, we use the \emph{#w#-bit
-word-RAM} model.  In this model, we have access to a random access memory
-consisting of \emph{cells}, each of which stores a #w#-bit \emph{word}.
-This implies a memory cell can represent, for example, any integer in
-the set $\{0,\ldots,2^{#w#}-1\}$.
+word-RAM} model.  RAM stands for Random Access Machine. In this model,
+we have access to a random access memory consisting of \emph{cells}, each
+of which stores a #w#-bit \emph{word}.  This implies a memory cell can
+represent, for example, any integer in the set $\{0,\ldots,2^{#w#}-1\}$.
 
 In the word-RAM model, basic operations on words take constant time.
 This includes arithmetic operations (#+#, #-#, #*#, #/#, #%#), comparisons
@@ -656,10 +719,12 @@ automobile is \$2,000.  It may be more, or it may be less.  There is
 not hard and fast guarantee about what repairs will cost over a year,
 two years, or even a decade.
 
-One may wonder why we would ever settle for an amortized or
-expected running-time over a worst-case running time.  The reason
-this happens is that it is often possible to get a lower expected or
-amortized running-time than worst-case running-time.  
+One may wonder why we would ever settle for an amortized or expected
+running-time over a worst-case running time.  The reason this happens
+is that it is often possible to get a lower expected or amortized
+running-time than worst-case running-time.  At the very least, it is very
+often possible to get much simpler data structure if one is willing to
+settle for amortized or expected running times.
 
 The same scenario occurs in many financial settings as well.  Mortgage
 companies allow homeowners to amortized enormous one-time costs

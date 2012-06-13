@@ -10,10 +10,7 @@
 \usepackage{datetime}
 \usepackage{amsfonts}
 \usepackage{graphicx}
-\usepackage[letterpaper]{hyperref}
-\hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,%
-	citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,%
-	urlcolor=linkblue} 
+
 %\usepackage[mathlines]{lineno}
 %\linenumbers
 %\DeclareGraphicsExtensions{.pdf,.eps}
@@ -120,12 +117,22 @@
 \DeclareMathOperator{\ddiv}{div}
 
 % Colors for syntax highlighting
-\usepackage[usenames,dvipsnames]{color}
+\usepackage[usenames,dvipsnames]{xcolor}
 \definecolor{keyword}{named}{RoyalPurple}
 \definecolor{var}{named}{Blue}
 \definecolor{comment}{named}{ForestGreen}
 \definecolor{linkblue}{named}{Blue}
 \definecolor{fm}{named}{ForestGreen}
+
+\usepackage{tikz,gnuplot-lua-tikz}
+
+\usepackage[letterpaper]{hyperref}
+\hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,%
+	citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,%
+	urlcolor=linkblue} 
+
+
+
 
 % Title page content
 \title{Open Data Structures (in \lang)}

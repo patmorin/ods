@@ -1,0 +1,382 @@
+%%
+%%  This is the style file for the gnuplot PGF/TikZ terminal
+%%  
+%%  It is associated with the 'gnuplot.lua' script, and usually generated
+%%  automatically. So take care whenever you make any changes!
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gnuplot-lua-tikz}%
+          [2009/10/29 (rev. 96a) GNUPLOT Lua terminal style]
+
+\RequirePackage{tikz,xxcolor,ifpdf,ifxetex}
+
+\usetikzlibrary{arrows,patterns,plotmarks}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  
+%%
+
+%
+% image related stuff
+%
+\def\gp@rawimage@pdf#1#2#3#4#5#6{%
+  \def\gp@tempa{cmyk}%
+  \def\gp@tempb{#1}%
+  \ifx\gp@tempa\gp@tempb%
+    \def\gp@temp{/CMYK}%
+  \else%
+    \def\gp@temp{/RGB}%
+  \fi%
+  \pgf@sys@bp{#4}\pgfsysprotocol@literalbuffered{0 0}\pgf@sys@bp{#5}%
+  \pgfsysprotocol@literalbuffered{0 0 cm}%
+  \pgfsysprotocol@literalbuffered{BI /W #2 /H #3 /CS \gp@temp}%
+  \pgfsysprotocol@literalbuffered{/BPC 8 /F /AHx ID}%
+  \pgfsysprotocol@literal{#6 > EI}%
+}
+\def\gp@rawimage@ps#1#2#3#4#5#6{%
+  \def\gp@tempa{cmyk}%
+  \def\gp@tempb{#1}%
+  \ifx\gp@tempa\gp@tempb%
+    \def\gp@temp{4}%
+  \else%
+    \def\gp@temp{3}%
+  \fi%
+  \pgfsysprotocol@literalbuffered{0 0 translate}%
+  \pgf@sys@bp{#4}\pgf@sys@bp{#5}\pgfsysprotocol@literalbuffered{scale}%
+  \pgfsysprotocol@literalbuffered{#2 #3 8 [#2 0 0 -#3 0 #3]}%
+  \pgfsysprotocol@literalbuffered{currentfile /ASCIIHexDecode filter}%
+  \pgfsysprotocol@literalbuffered{false \gp@temp\space colorimage}%
+  \pgfsysprotocol@literal{#6 >}%
+}
+
+
+\ifpdf
+  \def\gp@rawimage{\gp@rawimage@pdf}
+\else
+  \ifxetex
+    \def\gp@rawimage{\gp@rawimage@pdf}
+  \else
+    \def\gp@rawimage{\gp@rawimage@ps}
+  \fi
+\fi
+
+\def\gp@set@size#1{%
+  \def\gp@image@size{#1}%
+}
+%% \gprawimage{color model}{xcoord}{ycoord}{# of xpixel}{# of ypixel}{xsize}{ysize}{rgb/cmyk hex data RRGGBB/CCMMYYKK ...}
+%% color model is 'cmyk' or 'rgb' (default)
+\def\gprawimage#1#2#3#4#5#6#7#8{%
+  \tikz@scan@one@point\gp@set@size(#6,#7)\relax%
+  \tikz@scan@one@point\pgftransformshift(#2,#3)\relax%
+  \pgftext {%
+    \pgfsys@beginpurepicture%
+    \gp@image@size% fill \pgf@x and \pgf@y
+    \gp@rawimage{#1}{#4}{#5}{\pgf@x}{\pgf@y}{#8}%
+    \pgfsys@endpurepicture%
+  }%
+}
+
+%
+% gnuplottex comapatibility
+% (see http://www.ctan.org/tex-archive/help/Catalogue/entries/gnuplottex.html)
+%
+
+\def\gnuplottexextension@lua{\string tex}
+
+%
+% gnuplot variables getter and setter
+%
+
+\def\gpsetvar#1#2{%
+  \expandafter\xdef\csname gp@var@#1\endcsname{#2}
+}
+
+\def\gpgetvar#1{%
+  \csname gp@var@#1\endcsname %
+}
+
+%
+% some wrapper code
+%
+
+% short for the lengthy xcolor rgb definition
+\def\gprgb#1#2#3{rgb,1000:red,#1;green,#2;blue,#3}
+
+% short for a filled path
+\def\gpfill#1{\path[fill,#1]}
+
+% short for changing the linewidth
+\def\gpsetlinewidth#1{\pgfsetlinewidth{#1\gpbaselw}}
+
+\def\gpsetlinetype#1{\tikzstyle{gp path}=[#1,#1 add]}
+
+% short for changing the pointsize
+\def\gpsetpointsize#1{\tikzstyle{gp point}=[mark size=#1\gpbasems]}
+
+% wrapper for color settings
+\def\gpcolor#1{\pgfsetcolor{#1}}
+
+% prevent plot mark distortions due to changes in the PGF transformation matrix
+% use `\gpscalepointstrue' and `\gpscalepointsfalse' for enabling and disabling
+% point scaling
+%
+\newif\ifgpscalepoints
+\tikzoption{gp shift only}[]{%
+  \ifgpscalepoints%
+  \else%
+    % this is actually the same definition as used by "shift only" (seen
+    % in pgf-1.18 and later)
+    \tikz@addtransform{\pgftransformresetnontranslations}%
+  \fi%
+}
+\def\gppoint#1#2{%
+  \path[solid] plot[only marks,gp point,#1,mark options={gp shift only}] coordinates {#2};%
+}
+
+\def\gpfontsize#1#2{\fontsize{#1}{#2}\selectfont}
+
+%
+% char size calculation, that might be used with gnuplottex
+%
+% Example code (needs gnuplottex.sty):
+%
+%    % calculate the char size when the "gnuplot" style is used
+%    \tikzset{gnuplot/.append style={execute at begin picture=\gpcalccharsize}}
+%
+%    \tikzset{gnuplot/.append style={font=\ttfamily\footnotesize}}
+%
+%    \begin{tikzpicture}[gnuplot]
+%      \begin{gnuplot}[terminal=lua,%
+%          terminaloptions={tikz solid nopic charsize \the\gphcharsize,\the\gpvcharsize}]
+%        test
+%      \end{gnuplot}
+%    \end{tikzpicture}
+%
+%%%
+% The `\gpcalccharsize' command fills the lengths \gpvcharsize and \gphcharsize with
+% the values of the current default font used within nodes and is meant to be called
+% within a tikzpicture environment.
+% 
+\newdimen\gpvcharsize
+\newdimen\gphcharsize
+\def\gpcalccharsize{%
+  \pgfinterruptboundingbox%
+  \pgfsys@begininvisible%
+  \node at (0,0) {%
+    \global\gphcharsize=1.05\fontcharwd\font`0%
+    \global\gpvcharsize=1.05\fontcharht\font`0%
+    \global\advance\gpvcharsize by 1.05\fontchardp\font`g%
+  };%
+  \pgfsys@endinvisible%
+  \endpgfinterruptboundingbox%
+}
+
+%
+%  define a rectangular node in tikz e.g. for the plot area
+%  FIXME: this is done globally to work with gnuplottex.sty
+%
+%  #1 node name
+%  #2 coordinate of "south west"
+%  #3 coordinate of "north east"
+%
+\def\gpdefrectangularnode#1#2#3{%
+  \expandafter\gdef\csname pgf@sh@ns@#1\endcsname{rectangle}
+  \expandafter\gdef\csname pgf@sh@np@#1\endcsname{%
+    \def\southwest{#2}%
+    \def\northeast{#3}%
+  }
+  \pgfgettransform\pgf@temp%
+  % once it is defined, no more transformations will be applied, I hope
+  \expandafter\xdef\csname pgf@sh@nt@#1\endcsname{\pgf@temp}%
+  \expandafter\xdef\csname pgf@sh@pi@#1\endcsname{\pgfpictureid}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  You may want to adapt the following to fit your needs (in your 
+%%  individual style file and/or within your document).
+%%
+
+%
+% style for every plot
+%
+\tikzstyle{gnuplot}=[%
+  >=stealth',%
+  cap=round,%
+  join=round,%
+]
+
+\tikzstyle{gp node left}=[anchor=mid west,yshift=-.12ex]
+\tikzstyle{gp node center}=[anchor=mid,yshift=-.12ex]
+\tikzstyle{gp node right}=[anchor=mid east,yshift=-.12ex]
+
+% basic plot mark size (points)
+\newdimen\gpbasems
+\gpbasems=.4pt
+
+% basic linewidth
+\newdimen\gpbaselw
+\gpbaselw=.4pt
+
+% this is the default color for pattern backgrounds
+\colorlet{gpbgfillcolor}{white}
+
+
+% this should reverse the normal text node presets, for the
+% later referencing as described below
+\tikzstyle{gp refnode}=[coordinate,yshift=.12ex]
+
+% to add an empty label with the referenceable name "my node"
+% to the plot, just add the following line to your gnuplot
+% file:
+%
+% set label "" at 1,1 font ",gp refnode,name=my node"
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  The following TikZ-styles are derived from the 'pgf.styles.*' tables
+%%  in the Lua script.
+%%  To change the number of used styles you should change them there and
+%%  regenerate this style file.
+%%
+
+% arrow styles settings
+\tikzstyle{gp arrow 1} = [>=latex]
+\tikzstyle{gp arrow 2} = [>=angle 90]
+\tikzstyle{gp arrow 3} = [>=angle 60]
+\tikzstyle{gp arrow 4} = [>=angle 45]
+\tikzstyle{gp arrow 5} = [>=o]
+\tikzstyle{gp arrow 6} = [>=*]
+\tikzstyle{gp arrow 7} = [>=diamond]
+\tikzstyle{gp arrow 8} = [>=open diamond]
+\tikzstyle{gp arrow 9} = [>={]}]
+\tikzstyle{gp arrow 10} = [>={[}]
+\tikzstyle{gp arrow 11} = [>=)]
+\tikzstyle{gp arrow 12} = [>=(]
+
+% plotmark settings
+\tikzstyle{gp mark 0} = [mark size=.5\pgflinewidth,mark=*]
+\tikzstyle{gp mark 1} = [mark=+]
+\tikzstyle{gp mark 2} = [mark=x]
+\tikzstyle{gp mark 3} = [mark=star]
+\tikzstyle{gp mark 4} = [mark=square]
+\tikzstyle{gp mark 5} = [mark=square*]
+\tikzstyle{gp mark 6} = [mark=o]
+\tikzstyle{gp mark 7} = [mark=*]
+\tikzstyle{gp mark 8} = [mark=triangle]
+\tikzstyle{gp mark 9} = [mark=triangle*]
+\tikzstyle{gp mark 10} = [mark=triangle,mark options={rotate=180}]
+\tikzstyle{gp mark 11} = [mark=triangle*,mark options={rotate=180}]
+\tikzstyle{gp mark 12} = [mark=diamond]
+\tikzstyle{gp mark 13} = [mark=diamond*]
+\tikzstyle{gp mark 14} = [mark=otimes]
+\tikzstyle{gp mark 15} = [mark=oplus]
+
+% pattern settings
+\tikzstyle{gp pattern 0} = [white]
+\tikzstyle{gp pattern 1} = [pattern=north east lines]
+\tikzstyle{gp pattern 2} = [pattern=north west lines]
+\tikzstyle{gp pattern 3} = [pattern=crosshatch]
+\tikzstyle{gp pattern 4} = [pattern=grid]
+\tikzstyle{gp pattern 5} = [pattern=vertical lines]
+\tikzstyle{gp pattern 6} = [pattern=horizontal lines]
+\tikzstyle{gp pattern 7} = [pattern=dots]
+\tikzstyle{gp pattern 8} = [pattern=crosshatch dots]
+\tikzstyle{gp pattern 9} = [pattern=fivepointed stars]
+\tikzstyle{gp pattern 10} = [pattern=sixpointed stars]
+\tikzstyle{gp pattern 11} = [pattern=bricks]
+
+% if the 'tikzplot' option is used the corresponding lines will be smoothed by default
+\tikzstyle{gp plot axes} = []%
+\tikzstyle{gp plot border} = []%
+\tikzstyle{gp plot 0} = [smooth]%
+\tikzstyle{gp plot 1} = [smooth]%
+\tikzstyle{gp plot 2} = [smooth]%
+\tikzstyle{gp plot 3} = [smooth]%
+\tikzstyle{gp plot 4} = [smooth]%
+\tikzstyle{gp plot 5} = [smooth]%
+\tikzstyle{gp plot 6} = [smooth]%
+\tikzstyle{gp plot 7} = [smooth]%
+
+% linestyle settings
+\tikzstyle{gp lt axes} = [dashed]
+\tikzstyle{gp lt border} = [solid]
+
+% linestyle "addon" settings for overwriting a default linestyle within the
+% TeX document via eg. \tikzstyle{gp lt plot 1 add}=[fill=black,draw=none] etc.
+\tikzstyle{gp lt axes add} = []
+\tikzstyle{gp lt border add} = []
+\tikzstyle{gp lt plot 0 add} = []
+\tikzstyle{gp lt plot 1 add} = []
+\tikzstyle{gp lt plot 2 add} = []
+\tikzstyle{gp lt plot 3 add} = []
+\tikzstyle{gp lt plot 4 add} = []
+\tikzstyle{gp lt plot 5 add} = []
+\tikzstyle{gp lt plot 6 add} = []
+\tikzstyle{gp lt plot 7 add} = []
+
+% linestyle color settings
+\colorlet{gp lt color axes}{black}
+\colorlet{gp lt color border}{black}
+
+% command for switching to dashed lines
+\def\gpdashedlines{%
+  \tikzstyle{gp lt plot 0} = [solid]%
+  \tikzstyle{gp lt plot 1} = [dashed]%
+  \tikzstyle{gp lt plot 2} = [dash pattern=on 1.5pt off 2.25pt]%
+  \tikzstyle{gp lt plot 3} = [dash pattern=on \pgflinewidth off 1.125]%
+  \tikzstyle{gp lt plot 4} = [dash pattern=on 4.5pt off 1.5pt on \pgflinewidth off 1.5pt]%
+  \tikzstyle{gp lt plot 5} = [dash pattern=on 2.25pt off 2.25pt on \pgflinewidth off 2.25pt]%
+  \tikzstyle{gp lt plot 6} = [dash pattern=on 1.5pt off 1.5pt on 1.5pt off 4.5pt]%
+  \tikzstyle{gp lt plot 7} = [dash pattern=on \pgflinewidth off 1.5pt on 4.5pt off 1.5pt on \pgflinewidth off 1.5pt]%
+}
+
+% command for switching to colored lines
+\def\gpcoloredlines{%
+  \colorlet{gp lt color 0}{red}%
+  \colorlet{gp lt color 1}{green!60!black}%
+  \colorlet{gp lt color 2}{blue}%
+  \colorlet{gp lt color 3}{magenta}%
+  \colorlet{gp lt color 4}{cyan}%
+  \colorlet{gp lt color 5}{orange}%
+  \colorlet{gp lt color 6}{yellow!80!red}%
+  \colorlet{gp lt color 7}{blue!80!black}%
+}
+
+% command for switching to solid lines
+\def\gpsolidlines{%
+  \tikzstyle{gp lt plot 0} = [solid]%
+  \tikzstyle{gp lt plot 1} = [solid]%
+  \tikzstyle{gp lt plot 2} = [solid]%
+  \tikzstyle{gp lt plot 3} = [solid]%
+  \tikzstyle{gp lt plot 4} = [solid]%
+  \tikzstyle{gp lt plot 5} = [solid]%
+  \tikzstyle{gp lt plot 6} = [solid]%
+  \tikzstyle{gp lt plot 7} = [solid]%
+}
+
+% command for switching to monochrome (black) lines
+\def\gpmonochromelines{%
+  \colorlet{gp lt color 0}{black}%
+  \colorlet{gp lt color 1}{black}%
+  \colorlet{gp lt color 2}{black}%
+  \colorlet{gp lt color 3}{black}%
+  \colorlet{gp lt color 4}{black}%
+  \colorlet{gp lt color 5}{black}%
+  \colorlet{gp lt color 6}{black}%
+  \colorlet{gp lt color 7}{black}%
+}
+
+%
+% some initialisations
+%
+% by default all lines will be colored and dashed
+\gpcoloredlines
+\gpdashedlines
+\gpsetpointsize{4}
+\gpsetlinetype{gp lt solid}
+\gpscalepointsfalse
+\endinput
