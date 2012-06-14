@@ -100,7 +100,7 @@ As with other array-based structures, we will ignore the time spent in
 calls to #resize()#, since these can be accounted for with the amortization
 argument from \lemref{arraystack-amortized}.  The running times of
 both #add(x)# and #remove()# then depend on the height of the (implicit)
-binary tree.  However, this is a \emph{complete} binary tree;  every level
+binary tree.  Luckily, this is a \emph{complete} binary tree;  every level
 except the last has the maximum possible number of nodes.  Therefore,
 if the height of this tree is $h$, then it has at least $2^h$ nodes.
 Stated another way
