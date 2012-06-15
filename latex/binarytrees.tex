@@ -258,14 +258,15 @@ case, this is equal to the height of the #BinarySearchTree#.
 Deleting a value stored in a node, #u#, of a #BinarySearchTree# is a
 little more difficult.  If #u# is a leaf, then we can just detach #u#
 from its parent.  Even better: If #u# has only one child, then we can
-splice #u# from the tree by having #u.parent# adopt #u#'s child:
+splice #u# from the tree by having #u.parent# adopt #u#'s child (see
+\figref{bst-splice}):
 \codeimport{ods/BinarySearchTree.splice(u)}
 
 \begin{figure}
   \begin{center}
     \includegraphics{figs/bst-splice}
   \end{center}
-  \caption{Deleting a leaf ($6$) or a node with only one child ($9$) is easy.}
+  \caption{Removing a leaf ($6$) or a node with only one child ($9$) is easy.}
   \figlabel{bst-splice}
 \end{figure}
 
@@ -341,13 +342,24 @@ references to specific kinds of binary search trees are provided in
 subsequent chapters.
 
 \begin{exc}
- Write a non-recursive variant of the #size2()# method, #size(u)#,
- that computes the size of the subtree rooted at node #u#.
+  Prove that a binary tree having $#n#\ge 1$ real nodes has $#n#+1$
+  external nodes.
+\end{exc}
+
+\begin{exc}
+  Prove that, if a binary tree, $T$, has at least one leaf then, either
+  (a)~$T$'s root has at most one child or (b)~$T$ has greater than
+  one leaf.
+\end{exc}
+
+\begin{exc}
+  Write a non-recursive variant of the #size2()# method, #size(u)#,
+  that computes the size of the subtree rooted at node #u#.
 \end{exc}
 
 \begin{exc}
   Write a non-recursive method, #height2(u)#, that computes the height
- of node #u# in a  binary search tree.
+  of node #u# in a  binary search tree.
 \end{exc}
 
 \begin{exc}\exclabel{tree-traversal}
@@ -365,7 +377,25 @@ subsequent chapters.
 
 \begin{exc}
   Describe a sequence of #n# operations on an initially empty
- #BinarySearchTree# that results in a tree of height $#n#-1$.
+  #BinarySearchTree# that results in a tree of height $#n#-1$.
+  How many such sequences are there?
+\end{exc}
+
+\begin{exc}
+  If we have some #BinarySearchTree# and perform the operations #add(x)#
+  followed by #remove(x)# (with the same value of #x#) do we necessarily
+  return to the original tree?
+\end{exc}
+
+\begin{exc}
+  Can a #remove(x)# operation increase the height of any node in a
+  #BinarySearchTree#?  If so, by how much?
+\end{exc}
+
+\begin{exc}
+  Can an #add(x)# operation increase the height of any node in a
+  #BinarySearchTree#?  Can it increase the height of the tree?  If so,
+  by how much?
 \end{exc}
 
 \begin{exc}

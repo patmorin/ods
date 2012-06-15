@@ -187,8 +187,8 @@ for all $i\in\{0,\ldots,k-2\}$.  Therefore, the cost of all calls to #size(u)# i
 where the last line follows from the fact that the sum is a geometrically decreasing series.
 \end{proof}
 
-All that remains is to prove an upper-bound on the cost of calls to
-#rebuild(u)#:
+All that remains is to prove an upper-bound on the cost of all calls to
+#rebuild(u)# during a sequence of $m$ operations:
 
 \begin{lem}
   Starting with an empty #ScapegoatTree# any sequence of $m$ #add(x)#
@@ -197,10 +197,11 @@ All that remains is to prove an upper-bound on the cost of calls to
 \end{lem}
 
 \begin{proof}
-  To prove this, we will use a credit scheme.  Each node stores a number
-  of credits.  Each credit can pay for some constant, $c$, units of time
-  spent rebuilding.  The scheme gives out a total of $O(m\log m)$ credits
-  and every call to #rebuild(u)# is paid for with credits stored at #u#.
+  To prove this, we will use a credit scheme.  We imagine that each node
+  stores a number of credits.  Each credit can pay for some constant,
+  $c$, units of time spent rebuilding.  The scheme gives out a total of
+  $O(m\log m)$ credits and every call to #rebuild(u)# is paid for with
+  credits stored at #u#.
 
   During an insertion or deletion, we give one credit to each node on the
   path to the inserted node, or deleted node, #u#.  In this way we hand
@@ -277,8 +278,9 @@ in this book. This may be somewhat surprising, since height bound of
 \] 
 is better than the expected length of a search path in a #Skiplist# and
 not too far from that of a #Treap#.  The implementation could be optimized
-by storing the sizes of subtrees explicitly at each node (or at least
-reusing already computed subtree sizes).  Even with these optimizations,
+by storing the sizes of subtrees explicitly at each node or by reusing
+already computed subtree sizes (Exercises~\ref{exc:scapegoat-quicksize}
+and \ref{exc:scapegoat-explicitsize}).  Even with these optimizations,
 there will always be sequences of #add(x)# and #delete(x)# operation for
 which a #ScapegoatTree# takes longer than other #SSet# implementations.
 
@@ -317,6 +319,33 @@ and related structures based on partial rebuilding may work.  An example of such
   of #find(x)#, #add(x)# and #remove(x)# as a function of #b#?
 \end{exc}
 
+\begin{exc}\exclabel{scapegoat-quicksize}
+  Modify the #add(x)# method of the #ScapegoatTree# so that it does not
+  waste any time recomputing the sizes of subtrees that it has already
+  computed the size of.  This is possible because, by the time the method
+  wants to compute #size(w)#, it has already computed #size(w.left)#
+  or #size(w.right)#.
+
+  Compare the performance of your modified implementation with the
+  implementation given here.
+\end{exc}
+
+\begin{exc}\exclabel{scapegoat-explicitsize}
+  Implement a second version of the #ScapegoatTree# data structure that
+  explicitly stores and maintains the sizes of the subtree rooted at
+  each node.  Compare the performance of the resulting implementation
+  with that of the original #ScapegoatTree# implementation as well as
+  the implementation from \excref{scapegoat-quicksize}.
+\end{exc}
+
+\begin{exc}
+  Reimplement the #rebuild(u)# method discussed at the beginning of this
+  chapter so that it does not require the use of an array to store the
+  nodes of the subtree being rebuilt.  Instead, it should use recursion
+  to first connect the nodes into a linked list and the convert this
+  linked list into a perfectly balanced binary tree.
+\end{exc}
+
 \begin{exc}
   Analyze and implement a #WeightBalancedTree#.  This is a tree in
   which each node #u#, except the root, maintains the \emph{balance
@@ -328,6 +357,20 @@ and related structures based on partial rebuilding may work.  An example of such
   Your analysis should show that operations on a #WeightBalancedTree#
   run in $O(\log#n#)$ amortized time.  
 \end{exc}
+
+\begin{exc}
+  Analyze and implement a #WeightBalancedTree2#.  This is a tree in
+  which each node #u#, except the root, maintains the \emph{balance
+  invariant} that $#size(u)# \le (2/3)#size(u.parent)#$.  The #add(x)# and
+  #remove(x)# operations are identical to the standard #BinarySearchTree#
+  operations, except that any time the balance invariant is violated at
+  a node #u#, rotations are performed in order to restore these invariants.
+
+  Your analysis should show that operations on a #WeightBalancedTree#
+  run in $O(\log#n#)$ amortized time.  
+\end{exc}
+
+
 
 \begin{exc}
   Analyze and implement a #CountdownTree#.  In a #CountdownTree# each

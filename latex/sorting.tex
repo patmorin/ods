@@ -66,9 +66,9 @@ An example is shown in \figref{merge-sort}.
   \figlabel{merge-sort}
 \end{figure}
 
-Compared to sorting, merging the two sorted arrays #a0# and #a1# fairly
-easy.  We add elements to #a# one at a time.  If #a0# or #a1# is empty
-we add the next element from the other (non-empty) array. Otherwise,
+Compared to sorting, merging the two sorted arrays #a0# and #a1# is
+fairly easy.  We add elements to #a# one at a time.  If #a0# or #a1# is
+empty we add the next element from the other (non-empty) array. Otherwise,
 we take the minimum of the next element in #a0# and the next element in
 #a1# and add it to #a#:
 \javaimport{ods/Algorithms.merge(a0,a1,a,c)}
@@ -115,7 +115,8 @@ is not a power of 2.
 
 \begin{proof}
 The proof is by induction on $#n#$.  The base case, in which $#n#=1$,
-is trivial.
+is trivial; when presented with an array of length 0 or 1 the algorithm
+simply returns without performing any comparisons.
 
 Merging two sorted lists of total length $#n#$ requires at most $#n#-1$
 comparisons. Let $C(#n#)$ denote the maximum number of comparisons performed by
@@ -180,9 +181,9 @@ subarrays being sorted, the #quickSort(a,i,n,c)# method only sorts the
 subarray $#a[i]#,\ldots,#a[i+n-1]#$.  Initially, this method is called
 as #quickSort(a,0,a.length,c)#.
 
-At the heart of the quicksort algorithm is the in-place partitioning that,
-without any extra space, swaps elements in #a# and computes indices #p#
-and #q# so that
+At the heart of the quicksort algorithm is the in-place partitioning
+algorithm.  This algorithm, without using any extra space, swaps elements
+in #a# and computes indices #p# and #q# so that
 \[
    #a[i]# \begin{cases} 
          {}< #x# & \text{if $0\le #i#\le #p#$} \\
@@ -220,16 +221,17 @@ means that we can translate \lemref{rbs} to a statement about quicksort:
 
 \begin{lem}\lemlabel{quicksort}
   When quicksort is called to sort an array containing the integers
-  $0,\ldots,#n#-1$, the expected number of times element #i# is compared to
-  a pivot element is at most $H_{#i#+1} + H_{#n#-#i#}$.
+  $0,\ldots,#n#-1$, the expected number of times element #i# is compared
+  to a pivot element is at most $H_{#i#+1} + H_{#n#-#i#}$.
 \end{lem}
 
 A little summing of harmonic numbers gives us the following theorem
 about the running time of quicksort:
 
 \begin{thm}\thmlabel{quicksort-i}
-  When quicksort is called to sort an array containing #n# distinct elements,
-  the expected number of comparisons performed is $2#n#\ln #n# + O(#n#)$.
+  When quicksort is called to sort an array containing #n# distinct
+  elements, the expected number of comparisons performed is at most
+  $2#n#\ln #n# + O(#n#)$.
 \end{thm}
 
 \begin{proof}
@@ -382,7 +384,7 @@ depend on the outcome of the first comparison.  The third comparison
 may depend on the results of the first two, and so on.  In this way,
 any deterministic comparison-based sorting algorithm can be viewed
 as a rooted binary \emph{comparison-tree}.  Each internal node, #u#,
-of this tree is labelled with a pair of of indices #u.i# and #u.j#.
+of this tree is labelled with a pair of indices #u.i# and #u.j#.
 If $#a[u.i]#<#a[u.j]#$ the algorithm proceeds to the left subtree,
 otherwise it proceeds to the right subtree.  Each leaf #w# of this
 tree is labelled with a permutation $#w.p[0]#,\ldots,#w.p[n-1]#$ of
@@ -403,12 +405,12 @@ An example of a comparison tree for an array of size #n=3# is shown in
 
 The comparison tree for a sorting algorithm tells us everything about
 the algorithm.  It tells us exactly the sequence of comparisons that will
-be performed for any input array #a# having #n# distinct elements and
-it tells us how the algorithm will reorder #a# to sort it.
-An immediate consequence of this is that the comparison tree must have
-at least $#n#!$ leaves; if not, then there are two distinct permutations
-that lead to the same leaf, so the algorithm does not correctly sort at
-least one of these permutations.
+be performed for any input array, #a#, having #n# distinct elements and
+it tells us how the algorithm will reorder #a# to sort it.  An immediate
+consequence of this is that the comparison tree must have at least $#n#!$
+leaves; if not, then there are two distinct permutations that lead to
+the same leaf, so the algorithm does not correctly sort at least one of
+these permutations.
 
 For example, the comparison tree in \figref{comparison-tree-2} has only
 $4< 3!=6$ leaves. Inspecting this tree, we see that the two input arrays
@@ -628,8 +630,8 @@ Hoare \cite{h61}.  The original heap-sort algorithm is due to Williams
 \cite{w64}, but the version presented here (in which the heap is
 constructed bottom-up in $O(#n#)$ time) is due to Floyd \cite{f64}.
 Lower-bounds for comparison-based sorting appear to be folklore.
-The following table summarizes
-the performance of these comparison-based algorithms:
+The following table summarizes the performance of these comparison-based
+algorithms:
 
 \begin{center}
   \begin{tabular}{|l|r@{}l@{ }l|l|} \hline

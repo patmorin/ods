@@ -40,13 +40,13 @@ of a skiplist is shown in \figref{skiplist}.
 
 For an element, #x#, in a skiplist, we call the \emph{height} of #x# the
 largest value $r$ such that #x# appears in $L_r$.  Thus, for example,
-elements that only appear in $L_0$ have height $0$.  Notice that the
-height of #x# corresponds to the following experiment:  Toss a coin
-repeatedly until the first time it comes up tails.  How many times did it
-come up heads?  The answer, not surprisingly, is that the expected height
-of a node is 1. (We expect to toss the coin twice before getting tails,
-but we don't count the last toss.) The \emph{height} of a skiplist is
-the height of its tallest node.
+elements that only appear in $L_0$ have height $0$.  If we spend a few
+moments thinking about it, we notice that the height of #x# corresponds
+to the following experiment:  Toss a coin repeatedly until the first time
+it comes up tails.  How many times did it come up heads?  The answer,
+not surprisingly, is that the expected height of a node is 1. (We expect
+to toss the coin twice before getting tails, but we don't count the last
+toss.) The \emph{height} of a skiplist is the height of its tallest node.
 
 At the head of every list is a special node, called the \emph{sentinel},
 that acts as a dummy node for the list. The key property of skiplists
@@ -392,9 +392,9 @@ The expected length of a search path in a skiplist is at most $2\log #n# + O(1)$
   The easiest way to see this is to consider the \emph{reverse search
   path} for a node, #x#.  This path starts at the predecessor of #x#
   in $L_0$.  At any point in time, if the path can go up a level, then
-  it does.  If it cannot go up a level then it goes left.  Observe that
-  the reverse search path for #x# is identical to the search path for #x#,
-  except that it is reversed.
+  it does.  If it cannot go up a level then it goes left.  Thinking about
+  this for a few moments will convince us that the reverse search path for
+  #x# is identical to the search path for #x#, except that it is reversed.
 
   The number of nodes that the reverse search path visits at a particular
   level, #r#, is related to the following experiment:  Toss a coin.

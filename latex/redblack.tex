@@ -447,7 +447,7 @@ At this point, #w# is red and #v# is the root of the subtree we started
 with.  We need to check if #w# causes no-red-edge property to be violated.
 We do this by inspecting #w#'s right child, #q#.  If #q# is black,
 then #w# satisfies the no-red-edge property and we can continue to the
-next iteration with #u#=#v#.
+next iteration with $#u#=#v#$.
 
 Otherwise (#q# is red), both the no-red-edge property and the left-leaning
 property are violated at #q# and #w#, respectively.  A call to
@@ -481,7 +481,7 @@ Case~2 finishes up, but is even simpler since there is no danger of #v#
 not satisfying the left-leaning property.
 
 The more complicated case occurs when #q# is black.  In this case,
-we examine the color if #v#'s left child.  If it is red, then #v# has
+we examine the color of #v#'s left child.  If it is red, then #v# has
 two red children and its extra black can be pushed down with a call to
 #pushBlack(v)#.  At this point, #v# now has #w#'s original color and we
 are done.
@@ -631,6 +631,14 @@ there is no analogue of \thmref{redblack-amortized} for those structures.
     \item If $T'$ is a red-black tree that represents $T$, then how many red
      nodes does $T'$ have?
   \end{enumerate}
+\end{exc}
+
+\begin{exc}
+  Suppose you are given a binary search tree with #n# nodes and height
+  at most $2\log #n#-2$.  Is it always possible to color the nodes red
+  and black so that the tree satisfies the black-height and no-red-edge
+  properties?  If so, can it also be made to satisfy the left-leaning
+  property?
 \end{exc}
 
 \begin{exc}

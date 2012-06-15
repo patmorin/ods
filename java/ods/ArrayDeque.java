@@ -76,7 +76,7 @@ public class ArrayDeque<T> extends AbstractList<T> {
 		if (i < 0 || i > n) throw new IndexOutOfBoundsException();
 		if (n+1 > a.length) resize();
 		if (i < n/2) {	// shift a[0],..,a[i-1] left one position
-			j = (j == 0) ? a.length - 1 : j - 1;
+			j = (j == 0) ? a.length - 1 : j - 1; // (j-1) mod a.length
 			for (int k = 0; k <= i-1; k++)
 				a[(j+k)%a.length] = a[(j+k+1)%a.length];
 		} else {	    // shift a[i],..,a[n-1] right one position

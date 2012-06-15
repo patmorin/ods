@@ -156,11 +156,17 @@ A \emph{FIFO (first-in-first-out) #Queue#} removes items in the same
 order they were added, much in the same way a queue (or line-up) works
 when checking out at a cash register in a grocery store.
 
-A \emph{priority #Queue#} always removes the smallest element from
-the #Queue#, breaking ties arbitrarily.  This is similar to the way
-many airlines manage upgrades to the business class on their flights.
-When a business-class seat becomes available it is given to the most
-important customer waiting on an upgrade.
+A \emph{priority #Queue#} always removes the smallest element from the
+#Queue#, breaking ties arbitrarily.  This is similar to the way patients
+are triaged in a hospital emergency room.  As patients arrive they are
+evaluated and then placed in a waiting room.  When a doctor becomes
+available they first treat the patient with the most life-threatening
+condition.
+
+%This is similar to the way
+%many airlines manage upgrades to the business class on their flights.
+%When a business-class seat becomes available it is given to the most
+%important customer waiting on an upgrade.
 
 A very common queueing discipline is the LIFO (last-in-first-out)
 discipline.  In a \emph{LIFO Queue}, the most recently added element is
@@ -217,8 +223,8 @@ are sometimes used in the names of data structures that implement the
 #List# interface.  When this happens, it is to highlight the fact that
 these data structures can be used to implement the #Stack# or #Deque#
 interface very efficiently.  For example, the #ArrayDeque# class is an
-implementation of the #List# interface that can implement the #Deque#
-operations in constant (amortized) time per operation.
+implementation of the #List# interface that implements all the #Deque#
+operations in constant time per operation.
 
 
 \subsection{The #USet# Interface: Unordered Sets}
@@ -313,7 +319,18 @@ is encouraged to read, and do exercises from, the appropriate sections
 of the very good (and free) textbook on mathematics for computer science
 \cite{llm11}.
 
-\subsection{Logarithms}
+\subsection{Exponentials and Logarithms}
+
+The expression $b^x$ denotes the number $b$ raised to the power of $x$.
+If $x$ is a positive integer, then this is just the value of $b$
+multiplied by itself $x-1$ times:
+\[
+    b^x = \underbrace{b\times b\times \cdots \times b}_{x} \enspace .
+\]
+When $x$ is a negative integer, $b^x=1/b^{-x}$.  When $x=0$, $b^x=1$.
+When $b$ is not an integer, we can still define exponentiation in terms
+of the exponential function $e^x$ (see below), which is itself defined in
+terms of the exponential series, but this is best left to a calculus text.
 
 In this book, the expression $\log_b k$ denotes the \emph{base-$b$ logarithm}
 of $k$.  That is, the unique value $x$ that satisfies
@@ -360,7 +377,7 @@ For a non-negative integer $n$, the notation $n!$ (pronounced ``$n$ factorial'')
    n! = 1\cdot2\cdot3\cdot\cdots\cdot n \enspace .
 \]
 Factorials appear because $n!$ counts the number of distinct
-permutations, i.e., orderings, of n distinct elements.  For the special case $n=0$, $0!$ is defined as 1. 
+permutations, i.e., orderings, of $n$ distinct elements.  For the special case $n=0$, $0!$ is defined as 1. 
 
 The quantity $n!$ can be approximated using \emph{Stirling's Approximation}:
 \[
@@ -394,8 +411,11 @@ set $\{1,\ldots,n\}$.
 
 When analyzing data structures in this book, we will want to talk about
 the running times of various operations.  The exact running times will,
-of course, vary from computer to computer and even from run to run on
-an individual computer.  Therefore, instead of analyzing running times
+of course, vary from computer to computer and even from run to run on an
+individual computer.  When we talk about the running time of an operation
+we are referring to the number of computer instructions performed during
+the operation.  Even for simple code, this quantity can be difficult to compute exactly.
+Therefore, instead of analyzing running times
 exactly, we will use the so-called \emph{big-Oh notation}: For a 
 function $f(n)$, $O(f(n))$ denotes a set of functions,
 \[
@@ -493,15 +513,15 @@ we can be certain that the one with the smaller running time will be
 faster \emph{for large enough values of #n#}.
 
 An example of how big-Oh notation allows us to compare two different
-functions is shown in \figref{intro-asymptotics}, which compares
-the rate of grown of $f_1(#n#)=15#n#$ versus $f_2(n)=2#n#\log#n#$.
-It might be that $f_1(n)$  is the running time of a complicated linear
-time algorithm while $f_2(n)$ is the running time of a considerably
-simpler divide and conquer algorithm.  This illustrates that, although
-$f_1(#n#)$ is greater than $f_2(n)$ for small values of #n#, the opposite
-is true for large values of #n#.  Eventually $f_1(#n#)$ wins out, by an
-increasingly margin.  Analysis using big-Oh notation told us that this
-would happen, since $O(#n#)\subset O(#n#\log #n#)$.
+functions is shown in \figref{intro-asymptotics}, which compares the rate
+of grown of $f_1(#n#)=15#n#$ versus $f_2(n)=2#n#\log#n#$.  It might be
+that $f_1(n)$  is the running time of a complicated linear time algorithm
+while $f_2(n)$ is the running time of a considerably simpler algorithm
+based on the divide-and-conquer paradigm.  This illustrates that,
+although $f_1(#n#)$ is greater than $f_2(n)$ for small values of #n#,
+the opposite is true for large values of #n#.  Eventually $f_1(#n#)$
+wins out, by an increasingly margin.  Analysis using big-Oh notation
+told us that this would happen, since $O(#n#)\subset O(#n#\log #n#)$.
 
 \begin{figure}
   \begin{center}
@@ -807,12 +827,12 @@ described in this book that implement each of the interfaces, #List#,
 \end{center}
 
 \Figref{dependencies} shows the dependencies between various chapters
-in this book.  A dashed arrow indicates only a weak-dependency, in which
-only a small part of the chapter is depends on a previous chapter.
+in this book.  A dashed arrow indicates only a weak-dependency.  Only
+a small part of the chapter is depends on a previous chapter or only the main results of the previous chapter.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/dependencies}
+    \includegraphics[width=.95\textwidth]{figs/dependencies}
   \end{center}
   \caption{The dependencies between chapters in this book.}
   \figlabel{dependencies}
@@ -830,12 +850,15 @@ into #Set#, #Map#, #SortedSet#, and #SortedMap# implementations.}
 
 For a superb (and free) treatment of the mathematics discussed in this
 chapter, including asymptotic notation, logarithms, factorials, Stirling's
-approximation, basic probability, and lots more, see the textbook
-by Leyman, Leighton, and Meyer \cite{llm11}.  For more information on
-basic probability, especially as it relates to computer science, see the
-textbook by Ross \cite{r01}.  Another good reference, that covers both
-asymptotic notation and probability, is the textbook by Graham, Knuth,
-and Patashnik \cite{gkp94}.
+approximation, basic probability, and lots more, see the textbook by
+Leyman, Leighton, and Meyer \cite{llm11}.  For a gentle calculus text
+that includes formal definitions of exponentials and logarithms, see the
+(freely available) classic text by Thompson \cite{t14}.
+
+For more information on basic probability, especially as it relates to
+computer science, see the textbook by Ross \cite{r01}.  Another good
+reference, that covers both asymptotic notation and probability, is the
+textbook by Graham, Knuth, and Patashnik \cite{gkp94}.
 
 \javaonly{Readers wanting to brush up on their Java programming can find
 many Java tutorials online \cite{oracle_tutorials}.}

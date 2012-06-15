@@ -24,8 +24,15 @@ obtained using random bits generated from atmospheric noise.
 
 A #ChainedHashTable# data structure uses \emph{hashing with chaining} to store
 data as an array, #t#, of lists.  An integer, #n#, keeps track of the
-total number of items in all lists:
+total number of items in all lists (see \figref{chainedhashtable}):
 \codeimport{ods/ChainedHashTable.t.n}
+\begin{figure}
+   \begin{center}
+     \includegraphics{figs/chainedhashtable}
+   \end{center}
+   \caption[A ChainedHashTable]{An example of a #ChainedHashTable# with $#n#=14$ and $#t.length#=16$.  In this example $#hash(x)#=6$}
+   \figlabel{chainedhashtable}
+\end{figure}
 The \emph{hash value} of a data item #x#, denoted #hash(x)# is a value
 in the range $\{0,\ldots,#t.length#-1\}$.  All items with hash value #i#
 are stored in the list at #t[i]#.  To ensure that lists don't get too
@@ -56,7 +63,7 @@ the list implementations described in Chapters~\ref{chap:arrays} or
 To remove an element #x# from the hash table we iterate over the list
 #t[hash(x)]# until we find #x# so that we can remove it:
 \codeimport{ods/ChainedHashTable.remove(x)}
-This takes $O(#n#_{#hash(x)#})$time, where $#n#_{#i#}$ denotes the length
+This takes $O(#n#_{#hash(x)#})$ time, where $#n#_{#i#}$ denotes the length
 of the list stored at #t[i]#.
 
 Searching for the element #x# in a hash table is similar.  We perform
@@ -343,7 +350,7 @@ and so on, until we find a #null# or #del# and store #x# at that location, incre
 \codeimport{ods/LinearHashTable.add(x)}
 
 By now, the implementation of the #remove(x)# operation should be obvious.
-we search #t[i]#, $#t#[(#i#+1)\bmod #t.length#]$, $#t#[(#i#+2)\bmod
+We search #t[i]#, $#t#[(#i#+1)\bmod #t.length#]$, $#t#[(#i#+2)\bmod
 #t.length#]$, and so on until we find an index #i'# such that #t[i']=x#
 or #t[i']=null#.  In the former case, we set #t[i']=del# and return
 #true#.  In the latter case we conclude that #x# was not stored in the
@@ -389,19 +396,19 @@ method, called tabulation hashing, that produces a hash function that is
 into the positions of #t# are taken modulo #t.length#, so that #t[i]#
 is really a shorthand for $#t#[#i#\bmod#t.length#]$.
 
-A \emph{run of length $k$ that starts at #i#} occurs when $#t[i]#,
-#t[i+1]#,\ldots,#t#[#i#+k-1]$ are all non-#null# and $#t#[#i#-1]=#t#[#i#+k]=#null#$.
-The number of non-#null# elements of #t# is exactly #q# and the #add(x)#
-method ensures that, at all times, $#q#\le#t.length#/2$.  There are #q#
-elements $#x#_1,\ldots,#x#_{#q#}$ that have been inserted into #t# since
-the last #rebuild()# operation.  By our assumption, each of these has a
-hash value, $#hash#(#x#_j)$, that is uniform and independent of the rest.
-With this setup, we can prove the main lemma required to analyze linear
-probing.
+We say that a \emph{run of length $k$ that starts at #i#} occurs
+when $#t[i]#, #t[i+1]#,\ldots,#t#[#i#+k-1]$ are all non-#null# and
+$#t#[#i#-1]=#t#[#i#+k]=#null#$.  The number of non-#null# elements of
+#t# is exactly #q# and the #add(x)# method ensures that, at all times,
+$#q#\le#t.length#/2$.  There are #q# elements $#x#_1,\ldots,#x#_{#q#}$
+that have been inserted into #t# since the last #rebuild()# operation.
+By our assumption, each of these has a hash value, $#hash#(#x#_j)$,
+that is uniform and independent of the rest.  With this setup, we can
+prove the main lemma required to analyze linear probing.
 
 \begin{lem}\lemlabel{linear-probing}
-For any $#i#\in\{0,\ldots,#t.length#-1\}$, the probability that a run
-of length $k$ starts at #i# is $O(c^k)$ for some constant $0<c<1$.
+Fix a value $#i#\in\{0,\ldots,#t.length#-1\}$.  Then the probability that
+a run of length $k$ starts at #i# is $O(c^k)$ for some constant $0<c<1$.
 \end{lem}
 
 \begin{proof}
@@ -516,13 +523,15 @@ of all the other entries.  In this way, we could implement #hash(x)#
 by extracting a #d#-bit integer from #tab[x.hashCode()]#:
 \codeimport{ods/LinearHashTable.idealHash(x)}
 
-Unfortunately, storing an array of size $2^{#w#}$ is prohibitive in
-terms of memory usage.  The approach used by \emph{tabulation hashing} is to,
-instead, store $#w#/#r#$ arrays each of length $2^{#r#}$.  All the
-entries in these arrays are indepent #w#-bit integers.  To obtain the
-value of #hash(x)# we split #x.hashCode()# up into $#w#/#r#$ #r#-bit
-integers and use these as indices into these arrays.  We then combine all
-these values with the bitwise exclusive-or operator to obtain #hash(x)#.
+Unfortunately, storing an array of size $2^{#w#}$ is prohibitive in terms
+of memory usage.  The approach used by \emph{tabulation hashing} is to,
+instead, treat #w#-bit integers as being comprised of $#w#/#r#$
+integers, each having only $#r#$ bits.  In this way, tabulation hashing
+only needs $#w#/#r#$ arrays each of length $2^{#r#}$.  All the entries
+in these arrays are independent #w#-bit integers.  To obtain the value
+of #hash(x)# we split #x.hashCode()# up into $#w#/#r#$ #r#-bit integers
+and use these as indices into these arrays.  We then combine all these
+values with the bitwise exclusive-or operator to obtain #hash(x)#.
 The following code shows how this works when $#w#=32$ and $#r#=4$:
 \codeimport{ods/LinearHashTable.hash(x)}
 In this case, #tab# is a 2-dimensional array with 4 columns and
@@ -614,7 +623,7 @@ The following theorem shows that, in addition to being straightforward to implem
 Let $#x#_0,\ldots,#x#_{r-1}$ and $#y#_0,\ldots,#y#_{r-1}$ each be sequences of #w# bit integers in $\{0,\ldots,2^{#w#}-1\}$ and assume $#x#_i \neq #y#_i$ for at least one index $i\in\{0,\ldots,r-1\}$. Then 
 \[
    \Pr\{ h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1}) \} 
-        \le 3/2^{#w#} \} \enspace .  
+        \le 3/2^{#w#} \enspace .  
 \] 
 \end{thm}
 
@@ -684,8 +693,10 @@ with the hash function we are using.  In particular, the values of $t$
 and $#z#_i$ in the proof of \thmref{multihash} are no longer independent.
 
 A more rigorous approach is to base our hash codes on polynomials over
-prime fields.  This method is based on the following theorem, which says that
-polynomials over prime fields behave pretty-much like usual polynomials:
+prime fields;  these are just regular polynomials that are evaluated
+modulo some prime number, #p#. This method is based on the following
+theorem, which says that polynomials over prime fields behave pretty-much
+like usual polynomials:
 
 \begin{thm}\thmlabel{prime-polynomial}
  Let $#p#$ be a prime number, and let $f(#z#) = #x#_0#z#^0 + #x#_1#z#^1 +
@@ -763,7 +774,7 @@ following more general theorem:
   $\{0,\ldots,2^{#w#}-1\}$. Then
   \[
      \Pr\{ h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1}) \} 
-          \le \max\{r,r'\}/#p# \} \enspace .  
+          \le \max\{r,r'\}/#p#  \enspace .  
   \] 
 \end{thm}
 

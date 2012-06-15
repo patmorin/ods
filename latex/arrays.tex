@@ -165,10 +165,9 @@ In particular, we will show:
   \[
      \sum_{i=1}^{r} O(#n#_i) \le O(m+r) = O(m)  \enspace ,
   \]
-  which will prove the lemma since $r$ is not more than $m$.  All
-  that remains is to show that the number of calls to #add(i,x)# or
-  #remove(i)# between the $(i-1)$th and the $i$th call to #resize()#
-  is at least $#n#_i/2$.
+  since $r$ is not more than $m$.  All that remains is to show that the
+  number of calls to #add(i,x)# or #remove(i)# between the $(i-1)$th
+  and the $i$th call to #resize()# is at least $#n#_i/2$.
 
   There are two cases to consider. In the first case, #resize()# is
   being called by #add(i,x)# because the backing array #a# is full, i.e.,
@@ -235,7 +234,7 @@ machine instructions that can do this copying much faster than we could do
 using a #for# loop.  Although using these functions does not asymptotically
 decrease the running times, it can still be a worthwhile optimization.
 In the \javaonly{Java}\cpponly{C++} implementations here, the use of \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}
-resulted in speedups of a factor of 2-3 depending on the types of
+resulted in speedups of a factor between 2 and 3, depending on the types of
 operations performed.  Your mileage may vary.
 
 \section{#ArrayQueue#: An Array-Based Queue}
@@ -251,7 +250,7 @@ FIFO queue.  The reason is that we must choose one end of the list to
 add to and then remove from the other end.  One of the two operations
 must work on the head of the list, which involves calling #add(i,x)#
 or #remove(i)# with a value of $#i#=0$.  This gives a running time
-of $\Theta(n)$.
+proportional to #n#.
 
 To obtain an efficient array-based implementation of a queue, we
 first notice that the problem would be easy if we had an infinite
@@ -546,7 +545,7 @@ elements and $\lceil#n#/2\rceil$ elements, respectively.
 \codeimport{ods/DualArrayDeque.balance()}
 
 There is not much to analyze.  If the #balance()# operation does
-rebalancing, then it moves $\Theta(#n#)$ elements and this takes
+rebalancing, then it moves $O(#n#)$ elements and this takes
 $O(#n#)$ time. This is bad, since #balance()# is called with each call to
 #add(i,x)# and #remove(i)#.  However, the following lemma shows that, on
 average, #balance()# only spends a constant amount of time per operation.
@@ -564,8 +563,9 @@ average, #balance()# only spends a constant amount of time per operation.
   As in the proof of \lemref{arraystack-amortized}, this is sufficient
   to prove that the total time spent by #balance()# is $O(m)$.
 
-  We will perform our analysis using the \emph{potential method}.
-  Define the \emph{potential} of the #DualArrayDeque# as
+  We will perform our analysis using a technique knows as the
+  \emph{potential method}.  Define the \emph{potential}, $\Phi$, of the
+  #DualArrayDeque# as the difference in size between #front# and #back#:
   \[  \Phi = |#front.size()# - #back.size()#| \enspace . \]
   The interesting thing about this potential is that a call to #add(i,x)#
   or #remove(i)# that does not do any balancing can increase the potential
@@ -641,9 +641,7 @@ Therefore, all #r# blocks contain a total of
 \[
   1+ 2+ 3+\cdots +#r# = #r#(#r#+1)/2
 \]
-elements.  The above formula (allegedly discovered by the
-mathematician Gau\ss\ at the age of 9) can be obtained as shown in
-\figref{gauss}.
+elements.  The above formula can be obtained as shown in \figref{gauss}.
 
 \begin{figure}
   \begin{center}
@@ -747,7 +745,7 @@ the cost of #grow()# and #shrink()#.  Note that, unlike the
 #ArrayStack.resize()# operation, #grow()# and #shrink()# do not do any
 copying of data.  They only allocate or free an array of size #r#.  In
 some environments, this takes only constant time, while in others, it
-may require $\Theta(#r#))$ time.
+may require time proportional to #r#.
 
 We note that, immediately after a call to #grow()# or #shrink()#, the
 situation is clear. The final block is completely empty and all other
@@ -769,11 +767,11 @@ more than 2 blocks that are not completely full.  The number of blocks,
 #r#, used by a #RootishArrayStack# that stores #n# elements therefore
 satisfies
 \[
-    (#r#-2)(#r#-1) \le #n#
+    (#r#-2)(#r#-1) \le #n# \enspace .
 \]
 Again, using the quadratic equation on this gives
 \[
-   #r# \le (3+\sqrt{1+4#n#})/2 = O(\sqrt{#n#})
+   #r# \le (3+\sqrt{1+4#n#})/2 = O(\sqrt{#n#}) \enspace .
 \]
 The last two blocks have sizes #r# and #r-1#, so the space wasted by these
 two blocks is at most $2#r#-1 = O(\sqrt{#n#})$.  If we store the blocks
@@ -980,11 +978,13 @@ to what can be achieved with the more careful implementation of a
 \end{exc}
 
 \begin{exc}
-  Design and implement a #RandomQueue#.  This is an implementation
-  of the #Queue# interface in which the #remove()# operation removes an
-  element that is chosen uniformly at random among all the elements in
-  the queue.  The #add(x)# and #remove()# operations in a #RandomQueue#
-  should take constant time.
+  Design and implement a \emph{#RandomQueue#}.  This is an implementation
+  of the #Queue# interface in which the #remove()# operation removes
+  an element that is chosen uniformly at random among all the elements
+  currently in the queue.  (Think of a #RandomQueue# as a bag in which
+  we can add elements or reach in and blindly remove some random element.)
+  The #add(x)# and #remove()# operations in a #RandomQueue# should run
+  in constant time per operation.
 \end{exc}
 
 \begin{exc}

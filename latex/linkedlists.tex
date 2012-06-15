@@ -149,11 +149,20 @@ to find the #i#th node, and is therefore $O(1+\min\{#i#,#n#-#i#\})$.
 
 If we have a reference to a node #w# in a #DLList# and we want to insert a
 node #u# before #w#, then this is just a matter of setting $#u.next#=#w#$,
-$#u.prev#=#w.prev#$, and then adjusting #u.prev.next# and #u.next.prev#.
+$#u.prev#=#w.prev#$, and then adjusting #u.prev.next# and #u.next.prev#.  (See \figref{dllist-addbefore}.)
 Thanks to the dummy node, there is no need to worry about #w.prev#
 or #w.next# not existing.
 
 \codeimport{ods/DLList.addBefore(w,x)}
+
+\begin{figure}
+   \begin{center}
+      \includegraphics{figs/dllist-addbefore}
+   \end{center}
+   \caption[Adding to a DLList]{Adding the node #u# before the node #w#
+      in a #DLList#.}
+   \figlabel{dllist-addbefore}
+\end{figure}
 
 Now, the list operation #add(i,x)# is trivial to implement.  We find the
 #i#th node in the #DLList# and insert a new node #u# that contains #x#
@@ -216,12 +225,11 @@ the node can be removed from the list in constant time.}
 \section{#SEList#: A Space-Efficient Linked List}
 \seclabel{selist}
 
-One of the drawbacks of linked lists (besides the time it takes to
-access elements that are deep within the list) is their space usage.
-Each node in a #DLList# requires an additional two references to the next
-and previous nodes in the list.  Two thirds of the fields in a #Node#
-are dedicated to maintaining the list and only one third of the fields
-are for storing data!
+One of the drawbacks of linked lists (besides the time it takes to access
+elements that are deep within the list) is their space usage.  Each node
+in a #DLList# requires an additional two references to the next and
+previous nodes in the list.  Two of the fields in a #Node# are dedicated
+to maintaining the list and only one of the fields is for storing data!
 
 An #SEList# (space-efficient list) reduces this wasted space using
 a simple idea: Rather than store individual elements in a #DLList#,
@@ -257,15 +265,13 @@ at least $#b#-1$ and at most $#b#+1$ elements.  This means that, if an
 \[
     #n#/(#b#-1) + 1 = O(#n#/#b#)
 \]
-blocks.  The #BDeque# for each block contains an array of length
-$#b#+1$ but, for all blocks except the last, at most a constant amount
-of space is wasted in this array.  The remaining memory used by a
-block is also constant.  This means that the wasted space in an
-#SEList# is only $O(#b#+#n#/#b#)$.  By choosing an appropriate value
-of #b# (ideally in $\Theta(\sqrt{#n#})$) we can make the
-space-overhead of an SEList approach the $\Omega(\sqrt{#n#})$ lower
-bound.\footnote{See \secref{rootishspaceusage} for a proof of this lower
-bound.}
+blocks.  The #BDeque# for each block contains an array of length $#b#+1$
+but, for all blocks except the last, at most a constant amount of
+space is wasted in this array.  The remaining memory used by a block is
+also constant.  This means that the wasted space in an #SEList# is only
+$O(#b#+#n#/#b#)$.  By choosing a value of #b# within a constant factor
+of $\sqrt{#n#}$ we can make the space-overhead of an SEList approach
+the $\sqrt{#n#}$ lower bound given in \secref{rootishspaceusage}.
 
 \subsection{Finding Elements}
 
@@ -301,8 +307,9 @@ index in the correct block:
 
 \codeimport{ods/SEList.get(i).set(i,x)}
 
-These operations are dominated by the time it takes to locate the item,
-so they also run in $O(1+\min\{#i#,#n#-#i#\}/#b#)$ time.
+The running times of these operations are dominated by the time it takes
+to locate the item, so they also run in $O(1+\min\{#i#,#n#-#i#\}/#b#)$
+time.
 
 \subsection{Adding an Element}
 
@@ -530,6 +537,14 @@ structure seems to be a well-known data structures exercise.
   Describe and implement the #List# operations #get(i)#, #set(i,x)#,
   #add(i,x)# and #remove(i)# on an #SLList#.  Each of these operations
   should run in $O(1+#i#)$ time.
+\end{exc}
+
+\begin{exc}
+  Without referring to the notes, try to recreate the code for the
+  #addBefore(w)# operation, that creates a node, #u#, and adds it just
+  before the node #w# in a #DLList#. If your code does not exactly match
+  the code given in this book it may still be correct.  Test it and see
+  if it works.
 \end{exc}
 
 \begin{exc}

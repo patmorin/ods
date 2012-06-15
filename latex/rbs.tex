@@ -54,9 +54,12 @@ side of \figref{rbs-lvc}) than we are to get a very unbalanced tree
 
 We can formalize this notion by studying random binary search trees.
 A \emph{random binary search tree} of size #n# is obtained in the
-following way:  Take a random permutation $#x#_0,\ldots,#x#_{#n#-1}$
-of $0,\ldots,#n#-1$ and add its elements, one by one, into a
-#BinarySearchTree#.
+following way:  Take a random permutation, $#x#_0,\ldots,#x#_{#n#-1}$,
+of the integers $0,\ldots,#n#-1$ and add its elements, one by one,
+into a #BinarySearchTree#.  By \emph{random permutation} we mean that
+each of the possible $#n#!$ permutations (orderings) of $0,\ldots,#n#-1$
+is equally likely, so that the probability of obtaining any particular
+permutation is $1/#n#!$.
 
 Note that the values $0,\ldots,#n#-1$ could be replaced by any ordered
 set of #n# elements without changing any of the properties of the
@@ -75,7 +78,7 @@ $H_k$, is defined as
 The harmonic number $H_k$ has no simple closed form, but it is very
 closely related to the natural logarithm of $k$.  In particular,
 \[
-  \ln k \le H_k \le \ln k + 1  \enspace .
+  \ln k < H_k \le \ln k + 1  \enspace .
 \]
 \newcommand{\hint}{\int_1^k\! (1/x)\, \mathrm{d}x}%
 Readers who have studied calculus might notice that this is because
@@ -90,7 +93,9 @@ $1+ \hint$.  (See \figref{harmonic-integral} for a graphical explanation.)
       \includegraphics{figs/harmonic-2} & \includegraphics{figs/harmonic-3}
     \end{tabular}
   \end{center}
-  \caption{The $k$th harmonic number $H_k=\sum_{i=1}^k 1/i$ is upper-bounded by $1+\hint$ and lower-bounded by $\hint$.}
+  \caption{The $k$th harmonic number $H_k=\sum_{i=1}^k 1/i$ is upper-bounded by $1+\hint$ and lower-bounded by $\hint$.  The value of $\hint$ is given by the 
+  area of the shaded region, while the value of $H_k$ is given by the area of
+  the rectangles.}
   \figlabel{harmonic-integral}
 \end{figure}
 
@@ -98,10 +103,14 @@ $1+ \hint$.  (See \figref{harmonic-integral} for a graphical explanation.)
 \begin{lem}\lemlabel{rbs}
   In a random binary search tree of size #n#, the following statements hold:
   \begin{enumerate}
-    \item For any $#x#\in\{0,\ldots,#n#-1\}$, the expected length of
-    the search path for #x# is $H_{#x#+1} + H_{#n#-#x#} - O(1)$.\footnote{The expressions $#x#+1$ and $#n#-#x#$ can be interpreted respectively as the number of elements in the tree less than or equal to #x# and the number of elements in the tree greater than or equal to #x#.}
-    \item For any $#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$, the expected length of the
-    search path for #x# is $H_{\lceil#x#\rceil} + H_{#n#-\lceil#x#\rceil}$.
+    \item For any $#x#\in\{0,\ldots,#n#-1\}$, the expected length of the
+    search path for #x# is $H_{#x#+1} + H_{#n#-#x#} - O(1)$.\footnote{The
+    expressions $#x#+1$ and $#n#-#x#$ can be interpreted respectively
+    as the number of elements in the tree less than or equal to #x#
+    and the number of elements in the tree greater than or equal to #x#.}
+    \item For any $#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$, the
+    expected length of the search path for #x# is $H_{\lceil#x#\rceil}
+    + H_{#n#-\lceil#x#\rceil}$.
   \end{enumerate}
 \end{lem}
 
@@ -111,8 +120,8 @@ we search for an element in a tree of size #n#, then the expected length
 of the search path is at most $2\ln n + O(1)$.  The second part tells
 us the same thing about searching for a value not stored in the tree.
 When we compare the two parts of the lemma, we see that it is only
-slightly faster to search for something that is in a tree compared to
-something that is not in a tree.
+slightly faster to search for something that is in the tree compared to
+something that is not in the tree.
 
 
 \subsection{Proof of \lemref{rbs}}
@@ -218,6 +227,12 @@ In a random binary search tree, the #find(x)# operation takes $O(\log
 #n#)$ expected time.
 \end{thm}
 
+We should emphasize again that the expectation in \thmref{rbs} is with
+respect to the random permutation used to create the random binary
+search tree.  In particular, it does not depend on a random choice of
+#x#; it is true for every value of #x#.
+
+
 \section{#Treap#: A Randomized Binary Search Tree}
 \seclabel{treap}
 
@@ -226,7 +241,8 @@ not dynamic.  They don't support the #add(x)# or #remove(x)# operations
 needed to implement the #SSet# interface.  In this section we describe
 a data structure called a #Treap# that uses \lemref{rbs} to implement
 the #SSet# interface.\footnote{The names #Treap# comes from the fact
-that this data structure is simultaneously a binary search \textbf{tr}ee (\secref{binarysearchtree}) and a h\textbf{eap} (\chapref{heaps}).}
+that this data structure is simultaneously a binary search \textbf{tr}ee
+(\secref{binarysearchtree}) and a h\textbf{eap} (\chapref{heaps}).}
 
 A node in a #Treap# is like a node in a #BinarySearchTree# in that it has
 a data value, #x#, but it also contains a unique numerical \emph{priority},
@@ -234,9 +250,13 @@ a data value, #x#, but it also contains a unique numerical \emph{priority},
 \javaimport{ods/Treap.Node<T>}
 \cppimport{ods/Treap.TreapNode}
 In addition to being a binary search tree, the nodes in a #Treap#
-also obey the \emph{heap property}:  At every node #u#, except the root,
-$#u.parent.p# < #u.p#$.  That is, each node has a priority smaller than
-that of its two children.  An example is shown in \figref{treap}.
+also obey the \emph{heap property}:
+\begin{itemize}
+\item (Heap Property)  At every node #u#, except the root, 
+      $#u.parent.p# < #u.p#$.
+\end{itemize}
+In other words, each node has a priority smaller than that of its two
+children.  An example is shown in \figref{treap}.
 
 \begin{figure}
   \begin{center}
@@ -291,6 +311,9 @@ Restating \lemref{rbs} in terms of #Treap#s, we have:
   \end{enumerate}
   Here, $r(#x#)$ denotes the rank of #x# in the set $S\cup\{#x#\}$.
 \end{lem}
+Again, we emphasize that the expectation in \lemref{rbs-treap} is taken
+over the random choices of the priorities for each node.  It does not
+require any assumptions about the randomness in the keys.
 
 \lemref{rbs-treap} tells us that #Treap#s can implement the #find(x)#
 operation efficiently. However, the real benefit of a #Treap# is that
@@ -463,7 +486,7 @@ should be distinct with high probability and, for each $i\in\{1,\ldots,k\}$,
 \]
 for some constant $c$.
 One such class of hash functions that is easy to implement and fairly
-fast is \emph{tabulation hashing} \cite{pt10}.
+fast is \emph{tabulation hashing} (\secref{tabulation}).
 
 Another #Treap# variant that doesn't store priorities at each node is
 the randomized binarysearch tree of Mart\'\i nez and Roura \cite{mr98}.
