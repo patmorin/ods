@@ -50,8 +50,8 @@ million ($10^6$), items.  It is reasonable, in most applications, to
 assume that the application will want to look up each item at least once.
 This means we can expect to do at least one million ($10^6$) lookups in
 this data.  If each of these $10^6$ lookups inspects  each of the $10^6$
-items stored in $s$, this gives a total of $10^6\times 10^6=10^{12}$
-(one thousand billion) inspections.
+items, this gives a total of $10^6\times 10^6=10^{12}$ (one thousand
+billion) inspections.
 
 At the time of writing, even a very fast desktop computer can not do more
 than one billion ($10^9$) operations per second.\footnote{Computer speeds
@@ -372,7 +372,7 @@ For example, we can use these two manipulations to compare the natural and binar
 \seclabel{factorials}
 
 In one or two places in this book, the \emph{factorial} function is used.
-For a non-negative integer $n$, the notation $n!$ (pronounced ``$n$ factorial'') denotes
+For a non-negative integer $n$, the notation $n!$ (pronounced ``$n$ factorial'') is defined to mean 
 \[
    n! = 1\cdot2\cdot3\cdot\cdots\cdot n \enspace .
 \]
@@ -464,7 +464,7 @@ Again, this would be more correctly written as
 \]
 
 The expression $O(1)$ also brings up another issue. Since there is
-no variable in this expression, it may not be clear what variable is
+no variable in this expression, it may not be clear which variable is
 getting arbitrarily large.  Without context, there is no way to tell.
 In the example above, since the only variable in the rest of the equation
 is $n$, we can assume that this should be read as $T(n) = 2\log n + O(f(n))$,
@@ -475,6 +475,7 @@ It was used by number theorist Paul Bachmann as early as 1894, but it is
 immensely useful in describing the running times of computer algorithms.
 Consider a piece of code like the following:
 \javaimport{junk/Simple.snippet()}
+\cppimport{ods/Simple.snippet()}
 One execution of this method involves
 \begin{itemize}
       \item $1$ assignment (#int i = 0#),
@@ -695,9 +696,8 @@ structures that make an extra effort to keep space usage to a minimum.
 This won't usually affect the (asymptotic) running times of operations,
 but can make the data structures a little slower in practice.
 
-\subsection{Running Time Guarantees}
-
-In this book, we will see three different kinds of running time guarantees:
+When studying data structure we tend to come across three different
+kinds of running time guarantees:
 
 \begin{itemize}
 \item  Worst-case running times:  These are the strongest kind of running
@@ -711,7 +711,7 @@ In this book, we will see three different kinds of running time guarantees:
   if a data structure has an amortized running time of $f(#n#)$,
   then a sequence of $m$ operations takes at most $mf(#n#)$ time.
   Some individual operations may take more than $f(#n#)$ time but the
-  average, over the entire sequence of operations is at most $f(#n#)$.
+  average, over the entire sequence of operations, is at most $f(#n#)$.
 
 \item Expected running times: If we say that the expected running time
   of an operation on a data structure is $f(#n#)$, this means that the
@@ -722,21 +722,21 @@ In this book, we will see three different kinds of running time guarantees:
 \end{itemize}
 
 To understand the difference between worst-case, amortized, and expected
-running times, it helps to some financial examples.   The amount of income
-tax someone pays is proportional to their income.  Someone who must pay
-\$36,000 of income taxes per year may choose to pay their taxes all at
-once, at the end of the fiscal year.  Alternatively, they may choose to
-have \$3,000 of taxes deducted directly from their monthly paycheques.
-The latter person has a worst-case income tax cost of \$3,000 per month,
-while the former person has an amortized monthly cost (over a 12 month
-period) of \$3,000 per month.
+running times, it helps to consider some financial examples.  In most
+countries, the amount of income tax someone pays is proportional to
+their income.  Someone who must pay \$36,000 of income taxes per year
+may choose to pay their taxes all at once, at the end of the fiscal year.
+Alternatively, they may choose to have \$3,000 of taxes deducted directly
+from their monthly paycheques.  The latter person has a worst-case income
+tax cost of \$3,000 per month, while the former person has an amortized
+monthly cost (over a 12 month period) of \$3,000 per month.
 
 An example of an expected cost is the cost of automobile repair.  Over a
 period of 12 months, an automobile may work fine, or it may break down.
 If we have enough information about automobiles, we may learn that
 the expected (or average) yearly repair cost for a particular make of
 automobile is \$2,000.  It may be more, or it may be less.  There is
-not hard and fast guarantee about what repairs will cost over a year,
+no hard and fast guarantee about what repairs will cost over a year,
 two years, or even a decade.
 
 One may wonder why we would ever settle for an amortized or expected
@@ -753,7 +753,8 @@ companies allow homeowners to amortized enormous one-time costs
 but very expensive events (floods, fires, and so on) by replacing them
 with predictable worst-case costs (insurance premiums).   In these cases,
 if one could afford the risk of a fire or flood, or the cost of buying
-house outright, it would be cheaper to forgo the mortgage and/or insurance.
+house outright, it would be cheaper and simpler to forgo the mortgage
+and/or insurance.
 
 
 \section{Code Samples}
@@ -783,52 +784,59 @@ stored in the data structure.
 
 \section{List of Data Structures}
 
-The following table summarize the performance of data structures
-described in this book that implement each of the interfaces, #List#,
-#USet#, and #SSet#, described in \secref{interfaces}.
-
-\begin{center}
-\renewcommand{\thefootnote}{\Alph{footnote}}
-\begin{tabular}{|l|l|l|l|} \hline
-\multicolumn{4}{|c|}{#List# implementations} \\ \hline
- & #get(i)#/#set(i,x)# & #add(i,x)#/#remove(i)# & \\ \hline
-#ArrayStack# & $O(1)$ & $O(1+#n#-#i#)$\footnotemark[1] & \sref{arraystack} \\
-#ArrayDeque# & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$\footnotemark[1] & \sref{arraydeque} \\
-#DualArrayDeque# & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$\footnotemark[1] & \sref{dualarraydeque}\\
-#RootishArrayStack# & $O(1)$ & $O(1+#n#-#i#)$\footnotemark[1]  & \sref{rootisharraystack} \\
-#DLList# & $O(1+\min\{#i#,#n#-#i#\})$ & $O(1+\min\{#i#,#n#-#i#\})$  & \sref{dllist} \\
-#SEList# & $O(1+\min\{#i#,#n#-#i#\}/#b#)$ & $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$\footnotemark[1]  & \sref{selist} \\
-#SkiplistList# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5]  & \sref{skiplistlist} \\ \hline
-\multicolumn{4}{c}{} \\[2ex] \hline
-\multicolumn{4}{|c|}{#USet# implementations} \\ \hline
- & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
-#ChainedHashTable# & $O(1)$\footnotemark[5] & $O(1)$\footnotemark[1]\footnotemark[5] & \sref{hashtable} \\ 
-#LinearHashTable# & $O(1)$\footnotemark[5] & $O(1)$\footnotemark[1]\footnotemark[5] & \sref{linearhashtable} \\ \hline
-\multicolumn{4}{c}{} \\[2ex] \hline
-\multicolumn{4}{|c|}{#SSet# implementations} \\ \hline
- & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
-#SkiplistSSet# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5] & \sref{skiplistset} \\ 
-#Treap# & $O(\log #n#)$\footnotemark[5] & $O(\log #n#)$\footnotemark[5] & \sref{treap} \\ 
-#ScapegoatTree# & $O(\log #n#)$ & $O(\log #n#)$\footnotemark[1] & \sref{scapegoattree} \\
-#RedBlackTree# & $O(\log #n#)$ & $O(\log #n#)$ & \sref{redblacktree} \\ 
-#BinaryTrie#\footnotemark[9] & $O(#w#)$ & $O(#w#)$ & \sref{binarytrie} \\ 
-#XFastTrie#\footnotemark[9] & $O(\log #w#)$\footnotemark[1]\footnotemark[5] & $O(#w#)$\footnotemark[1]\footnotemark[5] & \sref{xfast} \\ 
-#YFastTrie#\footnotemark[9] & $O(\log #w#)$\footnotemark[1]\footnotemark[5] & $O(\log #w#)$\footnotemark[1]\footnotemark[5] & \sref{yfast} \\ \hline
-\multicolumn{4}{c}{} \\[2ex] \hline
-\multicolumn{4}{|c|}{(Priority) #Queue# implementations} \\ \hline
- & #findMin()# & #add(x)#/#remove()# & \\ \hline
-#BinaryHeap# & $O(1)$ & $O(\log #n#)$\footnotemark[1] & \sref{binaryheap} \\ \hline
-#MeldableHeap# & $O(1)$ & $O(\log #n#)$\footnotemark[5] & \sref{meldableheap} \\ \hline
-\end{tabular}
-\footnotetext[1]{Denotes an \emph{amortized} running time. See \chapref{arrays}.}
-\footnotetext[5]{Denotes an \emph{expected} running time.  See \secref{randomization}.}
-\footnotetext[9]{This structure can only store #w#-bit integer data.}
-\renewcommand{\thefootnote}{\arabic{footnote}}
-\end{center}
-
+\tabref{summary} summarizes the performance of data structures described
+in this book that implement each of the interfaces, #List#, #USet#,
+and #SSet#, described in \secref{interfaces}.
 \Figref{dependencies} shows the dependencies between various chapters
 in this book.  A dashed arrow indicates only a weak-dependency.  Only
 a small part of the chapter is depends on a previous chapter or only the main results of the previous chapter.
+
+\begin{table}
+\begin{center}
+\begin{threeparttable}
+%\renewcommand{\thefootnote}{\Alph{footnote}}
+\begin{tabular}{|l|l|l|l|} \hline
+\multicolumn{4}{|c|}{#List# implementations} \\ \hline
+ & #get(i)#/#set(i,x)# & #add(i,x)#/#remove(i)# & \\ \hline
+#ArrayStack# & $O(1)$ & $O(1+#n#-#i#)$\tnote{A} & \sref{arraystack} \\
+#ArrayDeque# & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$\tnote{A} & \sref{arraydeque} \\
+#DualArrayDeque# & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$\tnote{A} & \sref{dualarraydeque}\\
+#RootishArrayStack# & $O(1)$ & $O(1+#n#-#i#)$\tnote{A}  & \sref{rootisharraystack} \\
+#DLList# & $O(1+\min\{#i#,#n#-#i#\})$ & $O(1+\min\{#i#,#n#-#i#\})$  & \sref{dllist} \\
+#SEList# & $O(1+\min\{#i#,#n#-#i#\}/#b#)$ & $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$\tnote{A}  & \sref{selist} \\
+#SkiplistList# & $O(\log #n#)$\tnote{E} & $O(\log #n#)$\tnote{E}  & \sref{skiplistlist} \\ \hline
+\multicolumn{4}{c}{} \\[2ex] \hline
+\multicolumn{4}{|c|}{#USet# implementations} \\ \hline
+ & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
+#ChainedHashTable# & $O(1)$\tnote{E} & $O(1)$\tnote{A,E} & \sref{hashtable} \\ 
+#LinearHashTable# & $O(1)$\tnote{E} & $O(1)$\tnote{A,E} & \sref{linearhashtable} \\ \hline
+\multicolumn{4}{c}{} \\[2ex] \hline
+\multicolumn{4}{|c|}{#SSet# implementations} \\ \hline
+ & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
+#SkiplistSSet# & $O(\log #n#)$\tnote{E} & $O(\log #n#)$\tnote{E} & \sref{skiplistset} \\ 
+#Treap# & $O(\log #n#)$\tnote{E} & $O(\log #n#)$\tnote{E} & \sref{treap} \\ 
+#ScapegoatTree# & $O(\log #n#)$ & $O(\log #n#)$\tnote{A} & \sref{scapegoattree} \\
+#RedBlackTree# & $O(\log #n#)$ & $O(\log #n#)$ & \sref{redblacktree} \\ 
+#BinaryTrie#\tnote{I} & $O(#w#)$ & $O(#w#)$ & \sref{binarytrie} \\ 
+#XFastTrie#\tnote{I} & $O(\log #w#)$\tnote{A,E} & $O(#w#)$\tnote{A,E} & \sref{xfast} \\ 
+#YFastTrie#\tnote{I} & $O(\log #w#)$\tnote{A,E} & $O(\log #w#)$\tnote{A,E} & \sref{yfast} \\ \hline
+\multicolumn{4}{c}{} \\[2ex] \hline
+\multicolumn{4}{|c|}{(Priority) #Queue# implementations} \\ \hline
+ & #findMin()# & #add(x)#/#remove()# & \\ \hline
+#BinaryHeap# & $O(1)$ & $O(\log #n#)$\tnote{A} & \sref{binaryheap} \\ \hline
+#MeldableHeap# & $O(1)$ & $O(\log #n#)$\tnote{E} & \sref{meldableheap} \\ \hline
+\end{tabular}
+\begin{tablenotes}
+\item[A]{Denotes an \emph{amortized} running time.}
+\item[E]{Denotes an \emph{expected} running time.}
+\item[I]{This structure can only store #w#-bit integer data.}
+\end{tablenotes}
+%\renewcommand{\thefootnote}{\arabic{footnote}}
+\end{threeparttable}
+\end{center}
+\caption{Summary of data structures described in this book}
+\tablabel{summary}
+\end{table}
 
 \begin{figure}
   \begin{center}
