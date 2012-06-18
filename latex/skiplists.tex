@@ -133,6 +133,7 @@ More precisely, #stack[r]# is the node in $L_{#r#}$ where the search path
 proceeded down into $L_{#r#-1}$.  The nodes that we modify to insert #x#
 are precisely the nodes $#stack[0]#,\ldots,#stack[k]#$.  The following
 code implements this algorithm for #add(x)#:
+\label{pg:skiplist-add}
 \codeimport{ods/SkiplistSSet.add(x)}
 
 \begin{figure}
@@ -498,6 +499,49 @@ operating system kernel's process management structures \cite{hpux}.
 \end{exc}
 
 \begin{exc}
+  A \emph{finger} in a skiplist is an array that stores the
+  sequence of nodes on a search path at which the search path
+  goes down. (The variable #stack# in the #add(x)# code on
+  page~\pageref{pg:skiplist-add} is a finger;  the shaded nodes in
+  \figref{skiplist-add} show the contents of the finger.)  One can
+  think of a finger as pointing out the path to a node in the lowest
+  list, $L_0$.
+
+  A \emph{finger search} implements the #find(x)# operation using a
+  finger, by walking up the list using the finger until reaching a node
+  #u# such that $#u.x# < #x#$ and $#u.next#=#null#$ or $#u.next.x# >
+  #x#$ and then performing a normal search for #x# starting from #u#.
+  It is possible to prove that the expected number of steps required
+  for a finger search is $O(1+\log r)$, where $r$ is the number values
+  in $L_0$ between #x# and the value pointed to by the finger.
+  
+  Implement a subclass of #Skiplist# called #SkiplistWithFinger# that
+  does all #find(x)# operations using an internal finger.  This class
+  stores a finger and does every search as a finger search.  During the
+  search it also updates the finger so that each #find(x)# operation
+  uses, as a starting point, a finger that points to the result of the
+  previous #find(x)# operation.
+\end{exc}
+
+\begin{exc}\exclabel{skiplist-truncate}
+  Write a method, #truncate(i)#, that truncates a #SkiplistList#
+  at position #i#.  After the execution of this method, the size
+  of the list is #i# and it contains only the elements at indices
+  $0,\ldots,#i#-1$.  The return value is another #SkiplistList# that
+  contains the elements at indices $#i#,\ldots,#n#-1$.  This method
+  should run in $O(\log #n#)$ time.
+\end{exc}
+
+\begin{exc}
+  Write a #SkiplistList# method, #absorb(l2)#, that takes as an
+  argument a #SkiplistList#, #l2#, empties it and appends its contents,
+  in order, to the receiver.  For example, if #l1# contains $a,b,c$
+  and #l2# contains $d,e,f$, then after calling #l1.absorb(l2)#, #l1#
+  will contain $a,b,c,d,e,f$ and #l2# will be empty. This method should
+  run in $O(\log #n#)$ time.
+\end{exc}
+
+\begin{exc}
   Using the ideas from the space-efficient linked-list, #SEList#,
   design and implement a space-efficient #SSet#, #SESSet#.  Do this by
   storing the data, in order, in an #SEList# and then storing the blocks
@@ -519,4 +563,18 @@ operating system kernel's process management structures \cite{hpux}.
 
   \noindent Test your application on some large texts like some of the books
   available at Project Gutenberg \cite{gutenberg}.
+\end{exc}
+
+\begin{exc}
+  (This excercise is to be done after reading about binary search trees,
+  in \secref{binarysearchtree}.)  Compare skiplists with binary search
+  trees in the following ways:  
+  \begin{enumerate}
+     \item Explain how removing some edges of a skiplist lead to
+       a structure that looks like a binary tree and that is similar to
+       a binary search tree.
+     \item Skiplists and binary search trees each use of about the same
+       number of pointers (2 per node).  Skiplists make better use of
+       those pointers, though. Explain why.
+  \end{enumerate}
 \end{exc}

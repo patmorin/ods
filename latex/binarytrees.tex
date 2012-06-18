@@ -362,17 +362,84 @@ subsequent chapters.
   of node #u# in a  binary search tree.
 \end{exc}
 
-\begin{exc}\exclabel{tree-traversal}
-  A \emph{pre-order} traversal of a binary tree is a traversal that
-  visits each node, #u#, before any of its children.
-  An \emph{in-order} traversal visits #u# after visiting all the nodes
-  in #u#'s left subtree but before visiting any of the nodes in #u#'s
-  right subtree.  A \emph{post-order} traversal visits #u# only after
-  visiting all other nodes in #u#'s subtree.
+\begin{exc}
+  Design and implement a method #BinarySearchTree# method #getLE(x)#,
+  that returns a list of all items in the tree that are less than or
+  equal to #x#.  The running time of your method should be $O(#n#'+#h#)$
+  where $#n#'$ is the number of items less than or equal to #x# and #h#
+  is the height of the tree.
+\end{exc}
 
+\begin{exc}
+  A binary tree is \emph{balanced} if, for every node #u#, the size of
+  the subtrees rooted at #u.left# and #u.right# differ by at most one.
+  Write a recursive method, #isBalanced()#, that tests if a binary tree
+  is balanced.  Your method should run in $O(#n#)$ time.  (Be sure to
+  test your code on some large trees with different shapes; it is easy
+  to write a method that takes much longer than $O(#n#)$ time.)
+\end{exc}
+
+A \emph{pre-order} traversal of a binary tree is a traversal that visits
+each node, #u#, before any of its children.  An \emph{in-order} traversal
+visits #u# after visiting all the nodes in #u#'s left subtree but before
+visiting any of the nodes in #u#'s right subtree.  A \emph{post-order}
+traversal visits #u# only after visiting all other nodes in #u#'s subtree.
+The pre/in/post-order numbering of a tree labels the nodes of a tree with
+the integers $0,\ldots,#n#-1$ in the order that they are encountered
+by a pre/in/post-order traversal.  See \figref{binarytree-numbering}
+for an example.
+
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{figs/binarytree-numbering-1}
+    \includegraphics{figs/binarytree-numbering-2} \\[2ex]
+    \includegraphics{figs/binarytree-numbering-3}
+  \end{center}
+  \caption{Pre-order, post-order, and in-order numberings of a binary tree.}
+  \figlabel{binarytree-number}
+\end{figure}
+
+\begin{exc}
+  Create a subclass of #BinaryTree# whose nodes have fields for storing
+  pre-order, post-order, and in-order numbers.  Write recursive methods
+  #preOrderNumber()#, #inOrderNumber()#, and #postOrderNumbers()# that
+  assign these numbers correctly. These methods should each run in
+  $O(#n#)$ time.
+\end{exc}
+
+\begin{exc}\exclabel{tree-traversal}
   Write non-recursive functions #nextPreOrder(u)#, #nextInOrder(u)#, and
   #nextPostOrder(u)# that return the node that follows #u# in a pre-order,
-  in-order, or post-order traversal, respectively.
+  in-order, or post-order traversal, respectively.   These functions
+  should take amortized constant time. That is, if we start at any node
+  #u# and repeatedly call one of these functions and assign the return
+  value to #u# until #u#=#null#, then the cost of all these calls should
+  be $O(#n#)$.
+\end{exc}
+
+\begin{exc}
+  Suppose we are given a binary tree with pre- post- and in-order numbers
+  assigned to the nodes.  Show how these numbers can be used to answer
+  each of the following questions in constant time:
+  \begin{enumerate}
+    \item Given a node #u#, determine the size of the subtree rooted at #u#.
+    \item Given a node #u#, determine the depth of #u#.
+    \item Given two nodes #u# and #w#, determine if #u# is an ancestor of #w#
+  \end{enumerate}
+\end{exc}
+
+\begin{exc}
+  Suppose you are given a list of nodes with pre-order and in-order
+  numbers assigned.  Prove that there is at most one possible tree with
+  this pre-order/in-order numbering and show how to construct it.
+\end{exc}
+
+\begin{exc}
+  Show that the shape of any binary tree on #n# nodes can be represented
+  using at most $2(#n#-1)$ bits.  (Hint: think about recording what
+  happens during a traversal and then playing back that recording to
+  reconstruct the tree.)
 \end{exc}
 
 \begin{exc}

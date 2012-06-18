@@ -389,7 +389,7 @@ The choice is made by the first of the following that apply:
 \item If #u.left# (or #u.right#) is #null#, then perform a right (or left, respectively) rotation at #u#.
 \item If $#u.left.p# < #u.right.p#$ (or $#u.left.p# > #u.right.p#)$, then perform a right rotation (or left rotation, respectively) at #u#.
 \end{enumerate}
-These three rules ensure that the #Treap# doesn't become disconnected and that the heap property is maintained once #u# is removed.
+These three rules ensure that the #Treap# doesn't become disconnected and that the heap property is restored once #u# is removed.
 \codeimport{ods/Treap.remove(x).trickleDown(u)}
 An example of the #remove(x)# operation is shown in \figref{treap-remove}.
 \begin{figure}
@@ -525,7 +525,7 @@ that the removal algorithm in a #Treap# will perform a left or right
 rotation of #u#.
 
 Randomized binary search trees have the disadvantage, compared to treaps,
-that, when adding and removing elements they make many random choices and
+that when adding and removing elements they make many random choices and
 they must maintain the sizes of subtrees.  One advantage of randomized
 binary search trees over treaps is that subtree sizes can serve another
 useful purpose, namely to provide access by rank in $O(\log #n#)$ expected
@@ -546,10 +546,35 @@ stored in treap nodes have no use other than keeping the treap balanced.
   of the $#n#!$ possible permutations of #a# is equally probable. 
 \end{exc}
 
+\begin{exc}
+  
+\end{exc}
+
 \begin{exc}\exclabel{treap-rotates}
   Use both parts of \lemref{rbs-treap} to prove that the expected number
   of rotations performed by an #add(x)# operation (and hence also a
   #remove(x)# operation) is $O(1)$.
+\end{exc}
+
+\begin{exc}
+  Modify the #Treap# implementation given here so that it does not
+  explicitly store priorities.  Instead, it should simulate them by
+  hashing the #hashCode()# of each node.
+\end{exc}
+
+
+\begin{exc}
+  Design and implement a #Treap# implementation in which each node keeps
+  track of the minimum and maximum values in its subtree.  Using this
+  extra information, add a #fingerFind(x,u)# method that executes the
+  #find(x)# operation with the help of a pointer to the node #u# (which
+  is hopefully not far from the node that contains #x#).  This operation
+  should start at #u# and walk upwards until it reaches a node #w#
+  such that $#w.min#\le #x#\le #w.max#$.  and a node that contains a
+  value no less than #x#.  At that point, it should perform a standard
+  search for #x# starting from #w#.  (One can show that #fingerFind(x,u)#
+  takes $O(1+\log r)$ time, where $r$ is the number of elements in the
+  treap whose value is between #x# and #u.x#.)
 \end{exc}
 
 \begin{exc}\exclabel{treap-get}
@@ -559,6 +584,16 @@ stored in treap nodes have no use other than keeping the treap balanced.
   at #u#.)
 \end{exc}
 
+\begin{exc}\exclabel{treap-get}
+  Implement a #TreapList#, an implementation of the #List# interface
+  as a treap.  Each node in the treap should store a list item, and an
+  in-order traversal of the treap finds the items in the same order that
+  they occur in the list.  All the #List# operations #get(i)#, #set(i,x)#,
+  #add(i,x)# and #remove(i)# should run in $O(\log #n#)$ expected time.
+\end{exc}
+
+
+
 \begin{exc}\exclabel{treap-split}
   Design and implement a version of a #Treap# that supports the #split(x)#
   operation.  This operation removes all values from the #Treap# that
@@ -567,7 +602,21 @@ stored in treap nodes have no use other than keeping the treap balanced.
 
   For example, the code #t2 = t.split(x)# removes from #t# all values
   greater than #x# and returns a new #Treap# #t2# containing all
-  these values.  The #split(x)# operation should run in $O(\log #n#)$
+  these values. The #split(x)# operation should run in $O(\log #n#)$
+  expected time.
+
+  Warning: For this modification to work properly and still allow the
+  #size()# method to run in constant time, it is necessary to implement
+  the modifications in \excref{treap-get}.
+\end{exc}
+
+\begin{exc}\exclabel{treap-split}
+  Design and implement a version of a #Treap# that supports the
+  #absorb(t2)# operation, which can be thought of as the inverse of
+  the #split(x)# operation.  This operation removes all values from the
+  #Treap# #t2# and adds them to the receiver.  This operation presupposes
+  that the smallest value in #t2# is greater than the largest value in
+  the receiver.  The #absorb(t2)# operation should run in $O(\log #n#)$
   expected time.
 \end{exc}
 

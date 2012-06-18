@@ -152,8 +152,8 @@ Condition \myeqref{scapegoat-height}, then we can always find a scapegoat:
 Next, we analyze the parts of the running time that we have not yet
 accounted for.  There are two parts:  The cost of calls to #size(u)#
 when search for scapegoat nodes, and the cost of calls to #rebuild(w)#
-when we find a scapegoat #w#.
-The cost of calls to #size(u)# can be related to the cost of calls to #rebuild(w)#, as follows:
+when we find a scapegoat #w#.  The cost of calls to #size(u)# can be
+related to the cost of calls to #rebuild(w)#, as follows:
 \begin{lem}
 During a call to #add(x)# in a #ScapegoatTree#, the cost of finding the scapegoat #w# and rebuilding the subtree rooted at #w# is $O(#size(w)#)$.
 \end{lem}
@@ -353,7 +353,6 @@ and related structures based on partial rebuilding may work.  An example of such
   #remove(x)# operations are identical to the standard #BinarySearchTree#
   operations, except that any time the balance invariant is violated at
   a node #u#, the subtree rooted at #u.parent# is rebuilt.
-
   Your analysis should show that operations on a #WeightBalancedTree#
   run in $O(\log#n#)$ amortized time.  
 \end{exc}
@@ -366,11 +365,9 @@ and related structures based on partial rebuilding may work.  An example of such
   operations, except that any time the balance invariant is violated at
   a node #u#, rotations are performed in order to restore these invariants.
 
-  Your analysis should show that operations on a #WeightBalancedTree#
-  run in $O(\log#n#)$ amortized time.  
+  Your analysis should show that operations on a #WeightBalancedTree2#
+  run in $O(\log#n#)$ worst-case time.  
 \end{exc}
-
-
 
 \begin{exc}
   Analyze and implement a #CountdownTree#.  In a #CountdownTree# each
@@ -382,10 +379,24 @@ and related structures based on partial rebuilding may work.  An example of such
   #u# is involved in a rebuilding operation (either because #u# is rebuilt
   or one of #u#'s ancestors is rebuilt) #u.t# is reset to $#size(u)#/3$.
 
-  Your analysis should show that operations on a countdown tree run
+  Your analysis should show that operations on a #CountdownTree# run
   in $O(\log #n#)$ amortized time.  (Hint: First show that each node #u#
   satisfies some version of a balance invariant.)
 \end{exc}
+
+\begin{exc}
+  Analyze and implement a #DynamiteTree#.  In a #DynamiteTree# each
+  node #u# keeps tracks of the size of the subtree rooted at #u# in a
+  variable #u.size#.  The #add(x)# and #remove(x)# operations are exactly
+  the same as in a standard #BinarySearchTree# except that, whenever one
+  of these operations affects a node #u#'s subtree, #u# \emph{explodes}
+  with probability $1/#u.size#$.  When #u# explodes, its entire subtree
+  is rebuilt into a perfectly balanced binary search tree.
+
+  Your analysis should show that operations on a #DynamiteTree# run
+  in $O(\log #n#)$ expected time. 
+\end{exc}
+ 
 
 \begin{exc}\exclabel{list-order-maintenance}
   Design and implement a #Sequence# data structure that maintains a

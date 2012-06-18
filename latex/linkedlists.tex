@@ -540,84 +540,138 @@ structure seems to be a well-known data structures exercise.
 \end{exc}
 
 \begin{exc}
-  Without referring to the notes, try to recreate the code for the
+  Design and implement #SLList# and #DLList# methods called #checkSize()#.
+  These methods walk through the list and count the number of nodes to
+  see if this matches the value, #n#, stored in the list.  These methods
+  return nothing, but throw an exception if the size they compute does
+  not match the value of #n#.
+\end{exc}
+
+\begin{exc}
+  Without referring to this chapter, try to recreate the code for the
   #addBefore(w)# operation, that creates a node, #u#, and adds it just
   before the node #w# in a #DLList#. If your code does not exactly match
   the code given in this book it may still be correct.  Test it and see
   if it works.
 \end{exc}
 
-The next few exercises involve performing maninpulations on #DLList#s.
+The next few exercises involve performing manipulations on #DLList#s.
 These should all be done without allocating any new nodes or temporary
-arrays.
+arrays.  More specifically, they can all be done only by changing
+the #prev# and #next# values of existing nodes.
 
 \begin{exc}
+  Write a #DLList# method #isPalindrome()# that returns #true# if the
+  list is a palindrome, i.e., the element at position #i# is equal to
+  the element at position $#n#-i-1$ for all $i\in\{0,\ldots,#n#-1\}$.
+  Your code should run in $O(#n#)$ time.
+\end{exc}
+
+\begin{exc}\exclabel{linkedlist-truncate}
   Write a method, #truncate(i)#, that truncates a #DLList# at position
-  #i#.  After the execution of this method, the size of the list is
-  #i# and it contains only the elements at indices $0,\ldots,#i#-1$.
-  The return value is another list that contains the elements at indices
+  #i#.  After the execution of this method, the size of the list is #i#
+  and it contains only the elements at indices $0,\ldots,#i#-1$.  The
+  return value is another #DLList# that contains the elements at indices
   $#i#,\ldots,#n#-1$.  This method should run in $O(\min\{#i#,#n#-#i#\})$
   time.
 \end{exc}
 
 \begin{exc}
-  Write a #DLList# method, #absorb(l2)#, that takes as an argument a
-  #DLList#, #l2#, empties it and appends its contents, in order, to this
-  list.  For example, if #l# contains $a,b,c$ and #l2# contains $d,e,f$,
-  then after calling #l.absorb(l2)#, #l# will contain $a,b,c,d,e,f$
-  and #l2# will be empty.
+  Write a #DLList# method, #absorb(l2)#, that takes as an argument
+  a #DLList#, #l2#, empties it and appends its contents, in order,
+  to the receiver.  For example, if #l1# contains $a,b,c$ and #l2#
+  contains $d,e,f$, then after calling #l1.absorb(l2)#, #l1# will contain
+  $a,b,c,d,e,f$ and #l2# will be empty.
 \end{exc}
 
 \begin{exc}
   Write a method #deal()# that removes all the elements with odd-numbered
   indices from a #DLList# and return a #DLList# containing these elements.
-  For example, if a list, #l#, contains the elements $a,b,c,d,e,f$, then
-  after call #l.deal()#, it should contain $a,c,e$ and a list containing
+  For example, if #l1#, contains the elements $a,b,c,d,e,f$, then after
+  calling #l1.deal()#, #l1# should contain $a,c,e$ and a list containing
   $b,d,f$ should be returned.
 \end{exc}
 
 \begin{exc}
   Write a method, #reverse()#, that reverses the order of elements in
-  a #DLList#.  Your method should not require creating any new nodes or
-  using any auxiliary structures and should run in $O(#n#)$ time.
+  a #DLList#.  
 \end{exc}
+
+\begin{exc}
+  This exercises walks you through an implementation of the merge sort
+  algorithm for sorting a #DLList#, as discussed in \secref{merge-sort}.
+  \javaonly{In your implementation, perform comparisons between elements
+  using the #compareTo(x)# method so that the resulting implementation can
+  sort any #DLList# containing elements that implement the #Comparable#
+  interface.}
+  \begin{enumerate}
+    \item Write a #DLList# method called #takeFirst(l2)#.
+       This method takes the first node from #l2# and appends it to the the
+       receiving list.  This is equivalent to #add(size(),l2.remove(0))#,
+       except that it should not create a new node.
+    \item Write a #DLList# static method, #merge(l1,l2)#, that takes two
+       sorted lists #l1# and #l2#, merges them, and returns a new sorted
+       list containing the result.  This causes #l1# and #l2# to be emptied
+       in the proces.  For example, if #l1# contains $a,c,d$ and #l2# contains
+       $b,e,f$, then this method returns a new list containing $a,b,c,d,e,f$.
+    \item Write a #DLList# method #sort()# that sorts the elements contained
+       in the list using the merge sort algorithm.  This recursive algorithm works as following:
+       \begin{enumerate}
+          \item If the list contains 0 or 1 elements then there is
+            nothing to do.  Otherwise,
+          \item Split the list into two equal length lists #l1# and #l2# using
+              the #truncate(size()/2)# method;
+          \item Recursively sort #l1#;
+          \item Recursively sort #l2#; and, finally,
+          \item Merge #l1# and #l2# into a single sorted list.
+       \end{enumerate}
+  \end{enumerate}
+\end{exc}
+
 
 The next few exercises are more advanced and require a clear
 understanding of what happens to the minimum value stored in a #Stack#
 or #Queue# as items are added and removed.
 
 \begin{exc}
-  Design an implement a #MinStack# data structure that can store
+  Design and implement a #MinStack# data structure that can store
   comparable elements and supports the stack operations #push(x)#,
-  #pop()#, and #size()#, as well as the following operation:
-  \begin{itemize}
-    \item #min()#: returns the minimum value currently stored in the
-    data structure.
-  \end{itemize}
+  #pop()#, and #size()#, as well as the #min()# operation, which
+  returns the minimum value currently stored in the data structure.
   All operations should run in constant time.
 \end{exc}
 
 \begin{exc}
   Design an implement a #MinQueue# data structure that can store
   comparable elements and supports the queue operations #add(x)#,
-  #remove()#, and #size()#, as well as the following operation:
-  \begin{itemize}
-    \item #min()#: returns the minimum value currently stored in the
-    data structure.
-  \end{itemize}
+  #remove()#, and #size()#, as well as the #min()# operation, which
+  returns the minimum value currently stored in the data structure.
   All operations should run in constant amortized time.
 \end{exc}
 
 \begin{exc}
   Design an implement a #MinDeque# data structure that can store
   comparable elements and supports the queue operations #addFirst(x)#,
-  #addLast(x)# #removeFirst()#, #removeLast()# and #size()#, as well as
-  the following operation:
-  \begin{itemize}
-    \item #min()#: returns the minimum value currently stored in the
-    data structure.
-  \end{itemize}
-  All operations should run in constant amortized time.
+  #addLast(x)# #removeFirst()#, #removeLast()# and #size()#, as well
+  as the #min()# operation, which returns the minimum value currently
+  stored in the data structure.  All operations should run in constant
+  amortized time.
+\end{exc}
+
+The next exercises are designed to test the reader's understanding of
+the implementation an analysis of the space-efficient #SEList#:
+
+\begin{exc}
+  Prove that, if an #SEList# is used like a #Stack# (so that the
+  modifications are done using $#push(x)#\equiv #add(size(),x)#$ and
+  $#pop()#\equiv #remove(size()-1)#$) then these operations run in
+  constant amortized time, independent of the value of #b#.
+\end{exc}
+
+\begin{exc}
+  Design an implement of a version of an #SEList# that supports all
+  the #Deque# operations in constant amortized time per operation,
+  independent of the value of #b#.
 \end{exc}
 
 
