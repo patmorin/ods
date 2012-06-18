@@ -846,7 +846,7 @@ a small part of the chapter is depends on a previous chapter or only the main re
   \figlabel{dependencies}
 \end{figure}
 
-\section{References}
+\section{Discussion and Exercises}
 
 The #List#, #USet#, and #SSet# interfaces described in
 \secref{interfaces} are influenced by the Java Collections Framework
@@ -870,6 +870,95 @@ textbook by Graham, Knuth, and Patashnik \cite{gkp94}.
 
 \javaonly{Readers wanting to brush up on their Java programming can find
 many Java tutorials online \cite{oracle_tutorials}.}
+
+\begin{exc}
+  This exercise is designed to help get the reader familiar with choosing
+  the right data structure for the right problem.  If implemented, they
+  should be done by making use of an implementation of the relevant
+  interface (#Stack#, #Queue#, #Deque#, #USet#, or #SSet#) provided
+  by the \javaonly{Java Collections Framework}\cpponly{C++ Standard
+  Template Library}.
+
+  Solve the following problems by reading a text file one line at a
+  time and performing operations on each line in the appropriate data
+  structure(s)
+  \begin{enumerate}
+    \item Read the input one line at a time and then write the lines out
+      in reverse order, so that the last input line is printed first,
+      then the second last input line, and so on.
+
+    \item  Read the first 50 lines of input and then write them out in
+      reverse order. Read the next 50 lines and then write them out in
+      reverse order. Do this until there are no more lines left to read,
+      at which point any remaining lines should be output in reverse
+      order.
+
+      In other words, your output will start with the 50th line, then
+      the 49th, then the 48th, and so on down to the first line. This
+      will be followed by the 100th line, followed by the 99th, and so
+      on down to the 51st line. And so on.
+      
+      Your code should never have to store more than 50 lines at any
+      given time.
+
+    \item Read the input one line at a time.
+      At any point after reading the first 42 lines, if some line is blank
+      (i.e., a string of length 0) then output the line that occured
+      42 lines prior to that one. For example, if Line 242 is blank,
+      then your program should output line 200. This program should
+      be implemented so that it never stores more than 43 lines of the
+      input at any given time.
+
+    \item Read the input one line at a time and write each line to the
+      output if it is not a duplicate of some previous input line. Take
+      special care so that a file with a lot of duplicate lines does not
+      use more memory than what is required for the number of unique lines.
+
+    \item Read the input one line at a time and write each line to the
+      output only if you have already read this line before. (The end
+      result is that you remove the first occurrence of each line.)
+      Take special care so that a file with a lot of duplicate lines
+      does not use more memory than what is required for the number of
+      unique lines.
+
+    \item Read the entire input one line at a time. Then output all lines
+      sorted by length, with the shortest lines first. In the case where
+      two lines have the same length, resolve their order using the usual
+      ``sorted order.''  Duplicate lines should be printed only once.
+
+    \item Do the same as the previous question except that duplicate lines
+      should be printed the same number of times that they appear in the input.
+
+    \item Read the entire input one line at a time and then output the
+      even numbered lines (starting with the first line, line 0) followed
+      by the odd-numbered lines.
+
+    \item Read the entire input one line at a time and randomly permute
+      the lines before outputting them.  To be clear: You should not
+      modify the contents of any line. Instead, the same collection of
+      lines should be printed, but in a random order.
+  \end{enumerate}
+\end{exc}
+
+\begin{exc}
+  From scratch, write and test implementations of the #List#, #USet#
+  and #SSet# interfaces.  These do not have to be efficient.  They can
+  be used later to test the correctness and performance of more efficient
+  implementations.  (The easiest way to do this is to store the elements
+  in an array.)
+\end{exc}
+
+
+\begin{exc}
+  Work to improve the performance of your implementations from the
+  previous question using any tricks you can think of.  Experiment and
+  think about how you could improve the performance of #add(i,x)# and
+  #remove(i)# in your #List# implementation.  Think about how you could
+  improve the performance of the #find(x)# operation in your #USet#
+  and #SSet# implementations.  This exercise is designed to give you a
+  feel for  how difficult it can be to obtain efficient implementations
+  of these interfaces.
+\end{exc}
 
 
 

@@ -547,13 +547,53 @@ structure seems to be a well-known data structures exercise.
   if it works.
 \end{exc}
 
+The next few exercises involve performing maninpulations on #DLList#s.
+These should all be done without allocating any new nodes or temporary
+arrays.
+
+\begin{exc}
+  Write a method, #truncate(i)#, that truncates a #DLList# at position
+  #i#.  After the execution of this method, the size of the list is
+  #i# and it contains only the elements at indices $0,\ldots,#i#-1$.
+  The return value is another list that contains the elements at indices
+  $#i#,\ldots,#n#-1$.  This method should run in $O(\min\{#i#,#n#-#i#\})$
+  time.
+\end{exc}
+
+\begin{exc}
+  Write a #DLList# method, #absorb(l2)#, that takes as an argument a
+  #DLList#, #l2#, empties it and appends its contents, in order, to this
+  list.  For example, if #l# contains $a,b,c$ and #l2# contains $d,e,f$,
+  then after calling #l.absorb(l2)#, #l# will contain $a,b,c,d,e,f$
+  and #l2# will be empty.
+\end{exc}
+
+\begin{exc}
+  Write a method #deal()# that removes all the elements with odd-numbered
+  indices from a #DLList# and return a #DLList# containing these elements.
+  For example, if a list, #l#, contains the elements $a,b,c,d,e,f$, then
+  after call #l.deal()#, it should contain $a,c,e$ and a list containing
+  $b,d,f$ should be returned.
+\end{exc}
+
+\begin{exc}
+  Write a method, #reverse()#, that reverses the order of elements in
+  a #DLList#.  Your method should not require creating any new nodes or
+  using any auxiliary structures and should run in $O(#n#)$ time.
+\end{exc}
+
+The next few exercises are more advanced and require a clear
+understanding of what happens to the minimum value stored in a #Stack#
+or #Queue# as items are added and removed.
+
 \begin{exc}
   Design an implement a #MinStack# data structure that can store
   comparable elements and supports the stack operations #push(x)#,
   #pop()#, and #size()#, as well as the following operation:
-\begin{itemize}
-  \item #min()#: returns the minimum value currently stored in the data structure.
-\end{itemize}
+  \begin{itemize}
+    \item #min()#: returns the minimum value currently stored in the
+    data structure.
+  \end{itemize}
   All operations should run in constant time.
 \end{exc}
 
@@ -561,19 +601,22 @@ structure seems to be a well-known data structures exercise.
   Design an implement a #MinQueue# data structure that can store
   comparable elements and supports the queue operations #add(x)#,
   #remove()#, and #size()#, as well as the following operation:
-\begin{itemize}
-  \item #min()#: returns the minimum value currently stored in the data structure.
-\end{itemize}
+  \begin{itemize}
+    \item #min()#: returns the minimum value currently stored in the
+    data structure.
+  \end{itemize}
   All operations should run in constant amortized time.
 \end{exc}
 
 \begin{exc}
   Design an implement a #MinDeque# data structure that can store
-  comparable elements and supports the queue operations #addFirst(x)#, #addLast(x)#
-  #removeFirst()#, #removeLast()# and #size()#, as well as the following operation:
-\begin{itemize}
-  \item #min()#: returns the minimum value currently stored in the data structure.
-\end{itemize}
+  comparable elements and supports the queue operations #addFirst(x)#,
+  #addLast(x)# #removeFirst()#, #removeLast()# and #size()#, as well as
+  the following operation:
+  \begin{itemize}
+    \item #min()#: returns the minimum value currently stored in the
+    data structure.
+  \end{itemize}
   All operations should run in constant amortized time.
 \end{exc}
 
