@@ -3,7 +3,8 @@ package ods;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Queue;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * An implementation of a B Tree
@@ -24,7 +25,12 @@ public class BTree<T> implements SSet<T> {
 	/**
 	 * The height of the tree
 	 */
-	int h;
+	int hi;
+
+	/**
+	 * Number of elements stored in the tree
+	 */
+	int n;
 	
 	/**
 	 * The block storage mechanism
@@ -37,15 +43,31 @@ public class BTree<T> implements SSet<T> {
 	int ri;
 	
 	/**
-	 * Find the index at which x should be inserted into the sorted array, a
-	 * @param a
-	 * @param x
-	 * @return
+	 * Find the index, i, at which x should be inserted into the null-padded sorted array, a
+	 * @param a the sorted array (padded with null entries)
+	 * @param x the value to search for
+	 * @return i or -i-1 if a[i] equals x
 	 */
 	protected int findIt(T[] a, T x) {
+		int lo = 0, hi = a.length;
+		while (hi != lo) {
+			int m = (hi+lo)/2;
+			int cmp = a[m] == null ? -1 : c.compare(x, a[m]);
+			if (cmp < 0)
+				hi = m;
+			else if (cmp > 0)
+				lo = m+1;
+			else
+				return -m-1;  // found it
+		}
+		return lo;
+	}
+
+	protected int findItSlow(T[] a, T x) {
 		for (int i = 0; i < a.length; i++) {
-			T z = a[i];
-			if (z == null || c.compare(x, z) <= 0) return i;
+			int cmp = a[i] == null ? 1 : c.compare(x, a[i]);
+			if (cmp == 0) return -i-1;
+			if (cmp > 0) return i;
 		}
 		return a.length;
 	}
@@ -53,7 +75,7 @@ public class BTree<T> implements SSet<T> {
 	/**
 	 * A block (node) in a B-tree
 	 * @author morin
-	 *
+	 *return u.data[-(i+1)];
 	 */
 	protected class Block {
 		/**
@@ -83,16 +105,6 @@ public class BTree<T> implements SSet<T> {
 		}
 		
 		/**
-		 * Remove the first key from this block (used after a split)
-		 */
-		public T removeFirst() {
-			T x = data[0];
-			System.arraycopy(data, 1, data, 0, data.length-1);
-			data[data.length-1] = null;
-			return x;
-		}
-		
-		/**
 		 * Add the value x to this block
 		 * @param x the value to add
 		 * @param ci the index of the child associated with x
@@ -100,26 +112,49 @@ public class BTree<T> implements SSet<T> {
 		 */
 		public boolean add(T x, int ci) {
 			int i = findIt(data, x);
-			if (data[i] != null && c.compare(x, data[i]) == 0) return false;
+			if (i < 0) return false;
 			if (i < data.length-1) System.arraycopy(data, i, data, i+1, b-i-1);
 			data[i] = x;
 			if (i < data.length-1) System.arraycopy(children, i+1, children, i+2, b-i-1);
 			children[i+1] = ci;
 			return true;
 		}
-
+		
 		/**
-		 * Remove the value x from this block
-		 * @param x
-		 * @return
+		 * Remove the value x from this block if its exists
+		 * @param x the element to remove
+		 * @return the value of the element removed
 		 */
-		public boolean remove(T x) {
+		public T remove(T x) {
 			int i = findIt(data, x);
-			if (i > b-1 || data[i] == null || c.compare(x, data[i]) != 0) return false;
-			System.arraycopy(data, i+1, data, i, b-i-2);
-			data[data.length-1] = null;
-			return true;
+			if (i >= 0) return null;
+			i = -(i+1);
+			return remove(-(i+1));
 		}
+		
+		/**
+		 * Remove the i'th value from this block
+		 * @param i the index of the element to remove
+		 * @return the value of the element removed
+		 */
+		public T remove(int i) {
+			T y = data[i];
+			if (y == null) System.out.println("Poop");
+			System.arraycopy(data, i+1, data, i, b-i-1);
+			data[data.length-1] = null;
+			// System.arraycopy(children, i+2, children, i+1, b-i-1);
+			return y;
+		}
+
+		public T remove2(int i) {
+			T y = data[i];
+			if (y == null) System.out.println("Poop");
+			System.arraycopy(data, i+1, data, i, b-i-1);
+			data[data.length-1] = null;
+			System.arraycopy(children, i+2, children, i+1, b-i-1);
+			return y;
+		}
+
 		
 		/**
 		 * Test if this block is full (contains b keys)
@@ -131,29 +166,44 @@ public class BTree<T> implements SSet<T> {
 		
 		/**
 		 * Count the number of keys in this block
-		 * FIXME: Could be made to run O(log b) time
-		 * @return
+		 * @return the number of keys in this block
 		 */
 		public int size() {
-			for (int i = 0; i < b; i++) 
-				if (data[i] == null) return i;
-			return b;
+			int lo = 0; hi = data.length;
+			while (hi != lo) {
+				int m = (hi+lo)/2;
+				if (data[m] == null)
+					hi = m;
+				else
+					lo = m+1;
+			}
+			return lo;
 		}
-		
+
 		/**
 		 * Split routine 
 		 * @return the newly created block
 		 */
 		protected Block split() {
-			System.out.print("split: " + this + " => ");
-			Block block2 = new Block();
+			Block w = new Block();
 			int j = data.length/2;
-			System.arraycopy(data, j, block2.data, 0, data.length-j);
+			System.arraycopy(data, j, w.data, 0, data.length-j);
 			Arrays.fill(data, j, data.length, null);
-			System.arraycopy(children, j+1, block2.children, 0, children.length-j-1);
+			System.arraycopy(children, j+1, w.children, 0, children.length-j-1);
 			Arrays.fill(children, j+1, children.length, -1);
-			System.out.println(this + " , " + block2);
-			return block2;
+			return w;
+		}
+		
+		/**
+		 * Absorb the data and children from this node's right sibling, w 
+		 * @param w the node to absorb
+		 * @param a value that splits this and w
+		 */
+		protected void absorb(Block w, T x) {
+			int k = size();
+			data[k] = x;
+			System.arraycopy(w.data, 0, data, k+1, w.size());
+			System.arraycopy(w.children, 0, children, k+1, w.size()+1);
 		}
 		
 		
@@ -161,12 +211,17 @@ public class BTree<T> implements SSet<T> {
 			StringBuffer sb = new StringBuffer();
 			sb.append("[");
 			for (int i = 0; i < b; i++) {
+				sb.append("(" + (children[i] < 0 ? "." : children[i]) + ")");
 				sb.append(data[i] == null ? "_" : data[i].toString());
-				if (i < b-1)
-					sb.append(",");
+//				if (i < b-1)
+//					sb.append(",");
 			}
-			sb.append("]");
+			sb.append("(" + (children[b] < 0 ? "." : children[b]) + ")");
 			return sb.toString();
+		}
+		
+		public boolean isLeaf() {
+			return children[0] < 0;
 		}
 	}
 	
@@ -176,6 +231,7 @@ public class BTree<T> implements SSet<T> {
 	
 	public BTree(int b, Comparator<T> c, Class<T> clz) {
 		this.c = c;
+		b += 1 - (b % 2);
 		this.b = b;
 		f = new Factory<T>(clz);
 		bs = new BlockStore<Block>();
@@ -183,107 +239,150 @@ public class BTree<T> implements SSet<T> {
 	}
 	
 	public boolean add(T x) {
-		Block w = addRecursive(x, ri);
+		Block w;
+		try {
+			w = addRecursive(x, ri);
+		} catch (RuntimeException e) {
+			return false;
+		}
 		if (w != null) {   // root was split
 			Block newroot = new Block();
-			x = w.removeFirst();
+			x = w.remove(0);
 			newroot.children[0] = ri;
 			newroot.data[0] = x;
 			newroot.children[1] = w.id;
 			ri = newroot.id;
-			h++;
+			hi++;
 		}
+		n++;
 		return true;
 	}
 	
 	protected Block addRecursive(T x, int ui) {
 		Block u = bs.readBlock(ui);
 		int i = findIt(u.data, x);
-		if (i < b && u.data[i] != null && c.compare(x, u.data[i]))
-			throw new RuntimeException("");
+		if (i < 0) throw new RuntimeException("");
 		if (u.children[i] < 0) {
 			u.add(x, -1);
 		} else {
 			Block w = addRecursive(x, u.children[i]);
 			if (w != null) {
-				x = w.removeFirst();
+				x = w.remove(0);
 				u.add(x, w.id);
 			}
 		}
 		return u.isFull() ? u.split() : null;
 	}
 	
-	/**
-	 * Add x to the block with index bi
-	 * @param bi
-	 * @param x
-	 */
-//	public void addWithSplits(int bi, T x, int ci) {
-//		Block block = bs.readBlock(bi);
-//		block.add(x, ci);
-//		if (block.isFull()) {
-//			x = block.data[b/2];
-//			Block block2 = block.split();
-//			if (block.parent < 0) {  // root was split, make a new root
-//				Block newroot = new Block();
-//				newroot.children[0] = ri;
-//				ri = block.parent = newroot.id;
-//				h++;
-//			}
-//			block2.parent = block.parent;
-//			addWithSplits(block2.parent, x, block2.id);
-//		}
-//	}
-
-	@Override
 	public boolean remove(T x) {
+		T y = removeRecursive(x, ri);
+		if (y != null) {
+			// FIXME: check for merge
+			n--;
+			return true;
+		}
 		return false;
 	}
-
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-
+	
+	protected T removeRecursive(T x, int ui) {
+		if (ui < 0) return null;
+		Block u = bs.readBlock(ui);
+		int i = findIt(u.data, x);
+		if (i < 0) { // found it
+			i = -(i+1);
+			if (u.isLeaf()) {
+				if (u.size() <= 1) System.out.println("Crap");
+				return u.remove(i);
+			} else {
+				u.data[i] = removeSmallest(u.children[i+1]);
+				checkUnderflow(u, i+1);
+				return u.data[i];  
+			}
+		}
+		T y = removeRecursive(x, u.children[i]); // FIXME: check merge
+		checkUnderflow(u, i);
+		return y;
+	}
+	
+	protected T removeSmallest(int ui) {
+		Block u = bs.readBlock(ui);
+		if (u.children[0] < 0)  { // this is a leaf
+			if (u.size() <= 1) System.out.println("Crap");
+			return u.remove(0);
+		}
+		T y = removeSmallest(u.children[0]);  
+		checkUnderflow(u, 0);
+		return y;
 	}
 
-	@Override
+	/**
+	 * Check if an underflow has occured in the i'th child of u
+	 * @param u
+	 * @param i
+	 */
+	protected void checkUnderflow(Block u, int i) {
+		if (u.children[i] < 0) return;
+		Block w = bs.readBlock(u.children[i]);
+		if (w.size() < b/2) {  // underflow at w
+			if (i == 0) throw new RuntimeException("Not yet implemented");
+			Block v = bs.readBlock(u.children[i-1]);
+			int k = v.size();
+			if (k > b/2) {  // we can borrow
+				System.out.println(v + " is lending to " + w + "[parent is " + u + "]");
+				System.arraycopy(w.data, 0, w.data, 1, w.size());
+				w.data[0] = u.data[i-1];
+				System.arraycopy(w.children, 0, w.children, 1, w.size()+1);
+				w.children[0] = v.children[k];
+				u.data[i-1] = v.remove2(k-1);
+				System.out.println(v + " splits now " + w + "[parent is " + u + "]");
+			} else { // we have to merge
+				System.out.println(v + " is absorbing " + w + "[parent is " + u + "]");
+				v.absorb(w, u.data[i-1]);
+				u.remove2(i-1);
+				System.out.println(v + " absorbed " + w + "[parent is " + u + "]");
+			}
+		}
+	}
+	
+	public void clear() {
+		n = 0;
+		bs.clear();
+		ri = new Block().id;
+	}
+
 	public Comparator<? super T> comparator() {
 		return c;
 	}
 
-	@Override
 	public T find(T x) {
 		T z = null;
 		int ui = ri;
-		for (int j = 0; j <= h; j++) {
-			Block block = bs.readBlock(ui);
-			int i = findIt(block.data, x);
-			if (i < b && block.data[i] != null)
-				z = block.data[i];
-			ui = block.children[i];
+		for (int j = 0; j <= hi; j++) {
+			Block u = bs.readBlock(ui);
+			int i = findIt(u.data, x);
+			if (i < 0) return u.data[-(i+1)]; // found it
+			if (u.data[i] != null)
+				z = u.data[i];
+			ui = u.children[i];
 		}
-		System.out.println();
 		return z;
 	}
 
-	@Override
 	public T findGE(T x) {
 		return find(x);
 	}
 
-	@Override
 	public T findLT(T x) {
 		T z = null;
 		int ui = ri;
-		for (int j = 0; j <= h; j++) {
-			Block block = bs.readBlock(ui);
-			int i = findIt(block.data, x);
+		for (int j = 0; j <= hi; j++) {
+			Block u = bs.readBlock(ui);
+			int i = findIt(u.data, x);
+			if (i < 0) i = -(i+1);
 			if (i > 0)
-				z = block.data[i-1];
-			ui = block.children[i];
+				z = u.data[i-1];
+			ui = u.children[i];
 		}
-		System.out.println();
 		return z;
 	}
 
@@ -295,8 +394,7 @@ public class BTree<T> implements SSet<T> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return n;
 	}
 
 	@Override
@@ -313,45 +411,75 @@ public class BTree<T> implements SSet<T> {
 
 	public void toString(int ui, StringBuffer sb) {
 		if (ui < 0) return;
-		Block block = bs.readBlock(ui);
+		Block u = bs.readBlock(ui);
 		int i = 0;
-		while(i < b && block.data[i] != null) {
-			if (block.children[i] >= 0) {
+		while(i < b && u.data[i] != null) {
+			if (u.children[i] >= 0) {
 				sb.append("(");
-				toString(block.children[i], sb);
+				toString(u.children[i], sb);
 				sb.append(")");
 			}
-			sb.append(block.data[i++] + ",");
+			sb.append(u.data[i++] + ",");
 		}
-		if (block.children[i] >= 0) {
+		if (u.children[i] >= 0) {
 			sb.append("(");
-			toString(block.children[i], sb);
+			toString(u.children[i], sb);
 			sb.append(")");
 		}
 	}
 	
+	protected static <T> T findGE(SortedSet<T> ss, T x) {
+		SortedSet<T> p = ss.tailSet(x);
+		return p.isEmpty() ? null : p.first();
+	}
+	
+	protected static <T> T findLT(SortedSet<T> ss, T x) {
+		SortedSet<T> p = ss.headSet(x);
+		return p.isEmpty() ? null : p.last();
+	}
+
+	protected static boolean equals(Object a, Object b) {
+		return (a == null && b == null) || a.equals(b);
+	}
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		BTree<Integer> t = new BTree<Integer>(4, Integer.class);
+		int b = 10, n = 100, c = 3;
+		BTree<Integer> t = new BTree<Integer>(b, Integer.class);
 		System.out.println(t);
-		int n = 100;
-		java.util.Random rand = new java.util.Random(0);
+		java.util.Random rand = new java.util.Random();
+		SortedSet<Integer> ss = new TreeSet<Integer>();
 		for (int i = 0; i < n; i++) {
-			int x = rand.nextInt(2*n*n);
-			t.add(x);
+			int x = rand.nextInt(c*n);
+			Utils.myassert(t.add(x) == ss.add(x));
+		}
+		if (n <= 100)
+			System.out.println(t);
+		System.out.println("ss.size() = " + ss.size());
+		System.out.println("t.size() = " + t.size());
+		
+		for (int i = 0; i < n; i++) {
+			int x = rand.nextInt(c*n);
+			// System.out.println(t.findLT(x) + " < " + x + " <= " + t.find(x));
+			Utils.myassert(equals(t.find(x),findGE(ss, x)));
+			Utils.myassert(equals(t.findLT(x),findLT(ss, x)));
 			// System.out.println(t + " (added " + x + ")");
 		}
-		System.out.println(t);
 
 		for (int i = 0; i < n; i++) {
-			int x = rand.nextInt(2*n*n);
-			System.out.println(t.findLT(x) + " < " + x + " <= " + t.find(x));
+			int x = rand.nextInt(c*n);
+			Utils.myassert(t.remove(x) == ss.remove(x));
+			System.out.println(t + "(removed " + x + ")");
+			// System.out.println(t.findLT(x) + " < " + x + " <= " + t.find(x));
+			// Utils.myassert(equals(t.find(x),findGE(ss, x)));
+			// Utils.myassert(equals(t.findLT(x),findLT(ss, x)));
 			// System.out.println(t + " (added " + x + ")");
 		}
-	
+		
+		System.out.println("ss.size() = " + ss.size());
+		System.out.println("t.size() = " + t.size());
+
 	}
-
 }

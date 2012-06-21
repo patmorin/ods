@@ -32,6 +32,11 @@ class BlockStore<T> {
 		free = new ArrayList<Integer>();
 	}
 	
+	public void clear() {
+		blocks.clear();
+		free.clear();		
+	}
+	
 	/**
 	 * Allocate a new block and return its index
 	 * @return the index of the newly allocated block
