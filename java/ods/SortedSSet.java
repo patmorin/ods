@@ -109,7 +109,7 @@ public class SortedSSet<T> extends AbstractSet<T> implements SortedSet<T> {
 //		css.add(new java.util.TreeSet<Integer>());
 		for (SortedSet<Integer> ss : css) {
 			System.out.println("Testing sanity of " + Testum.s(ss));
-			// Testum.sortedSetSanityTests(ss, 100);
+			Testum.sortedSetSanityTests(ss, 100);
 		}
 		Testum.sortedSetSpeedTests(css, n);
 	}
