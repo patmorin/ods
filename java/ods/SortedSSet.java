@@ -86,7 +86,9 @@ public class SortedSSet<T> extends AbstractSet<T> implements SortedSet<T> {
 		css.add(new java.util.TreeSet<Integer>());
 //		css.add(new SortedSSet<Integer>(new Treap<Integer>()));
 		css.add(new SortedSSet<Integer>(new RedBlackTree<Integer>()));
+		css.add(new SortedSSet<Integer>(new BTree<Integer>(10,Integer.class)));
 		css.add(new SortedSSet<Integer>(new BTree<Integer>(50,Integer.class)));
+		css.add(new SortedSSet<Integer>(new BTree<Integer>(100,Integer.class)));
 //		css.add(new SortedSSet<Integer>(new ScapegoatTree<Integer>()));
 //		css.add(new SortedSSet<Integer>(new SkiplistSSet<Integer>()));
 		{ 

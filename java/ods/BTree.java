@@ -143,7 +143,6 @@ public class BTree<T> implements SSet<T> {
 
 		public T remove2(int i) {
 			T y = keys[i];
-			if (y == null) System.out.println("Poop");
 			System.arraycopy(keys, i+1, keys, i, b-i-1);
 			keys[keys.length-1] = null;
 			System.arraycopy(children, i+2, children, i+1, b-i-1);
@@ -271,10 +270,10 @@ public class BTree<T> implements SSet<T> {
 	public boolean remove(T x) {
 		T y = removeRecursive(x, ri);
 		if (y != null) {
-			Block r = bs.readBlock(ri);
-			if (r.size() == 0) // root has only one child
-				ri = r.children[0];  
 			n--;
+			Block r = bs.readBlock(ri);
+			if (r.size() == 0 && n > 0) // root has only one child
+				ri = r.children[0];  
 			return true;
 		}
 		return false;
@@ -328,6 +327,22 @@ public class BTree<T> implements SSet<T> {
 			checkUnderflowOdd(u,i);
 	}
 	
+	protected void merge(Block u, int i, Block v, Block w) {
+		Utils.myassert(v.id == u.children[i]);
+		Utils.myassert(w.id == u.children[i+1]);
+		int sv = v.size();
+		int sw = w.size();
+		// copy keys from w to v
+		System.arraycopy(w.keys, 0, v.keys, sv+1, sw);
+		System.arraycopy(w.children, 0, v.children, sv+1, sw+1);
+		// add key to v and remove it from u
+		v.keys[sv] = u.keys[i];
+		System.arraycopy(u.keys, i+1, u.keys, i, b-i-1);
+		u.keys[b-1] = null;
+		System.arraycopy(u.children, i+2, u.children, i+1, b-i-1);
+		u.children[b] = -1;
+	}
+	
 	/**
 	 * Check if an underflow has occured in the i'th child of u
 	 * @param u
@@ -338,22 +353,40 @@ public class BTree<T> implements SSet<T> {
 		if (w.size() < b/2) {  // underflow at w
 			Block v = bs.readBlock(u.children[i-1]);  // v is left sibling of w
 			int sv = v.size();
-			if (sv > b/2) {  // we can borrow from v
-				// System.out.println(v + " is lending to " + w + " [parent is " + u + "]");
-				System.arraycopy(w.keys, 0, w.keys, 1, w.size());
-				w.keys[0] = u.keys[i-1];
-				System.arraycopy(w.children, 0, w.children, 1, w.size()+1);
-				w.children[0] = v.children[sv];
-				u.keys[i-1] = v.remove2(sv-1);
-				// System.out.println(v + "  splits now   " + w + " [parent is " + u + "]");
-			} else { // we have to merge
-				// System.out.println(v + " is absorbing  " + w + " [parent is " + u + "]");
-				v.absorb(w, u.keys[i-1]);
-				u.remove2(i-1);
-				// System.out.println(v + "    absorbed   " + w + " [parent is " + u + "]");
+			if (sv > b/2) {  // w can borrow from v
+				shiftLR(u, i-1, v, w);
+			} else { // v will absorb w
+				merge(u, i-1, v, w);
 			}
 		}
 	}
+	
+	/**
+	 * Shift keys from node v into node w
+	 * @param u the parent of v and w
+	 * @param i the index w in u.children
+	 * @param v the right sibling of w
+	 * @param w the left sibling of v
+	 */
+	public void shiftLR(Block u, int i, Block v, Block w) {
+		// System.out.println("LR before: " + v + " => " + w + " [parent is " + u + "]");
+		int sw = w.size();
+		int sv = v.size();
+		int shift = ((sw+sv)/2) - sw;  // num. keys to shift from v to w
+		Utils.myassert(shift > 0);
+		// make space for new keys in w
+		System.arraycopy(w.keys, 0, w.keys, shift, sw);
+		System.arraycopy(w.children, 0, w.children, shift, sw+1);
+		// move keys and children out of v and into w (and u)
+		w.keys[shift-1] = u.keys[i];
+		u.keys[i] = v.keys[sv-shift];
+		System.arraycopy(v.keys, sv-shift+1, w.keys, 0, shift-1);
+		Arrays.fill(v.keys, sv-shift, sv, null);
+		System.arraycopy(v.children, sv-shift+1, w.children, 0, shift);
+		Arrays.fill(v.children, sv-shift+1, sv+1, -1);
+		// System.out.println("LR after: " + v + "    " + w + " [parent is " + u + "]");
+	}
+
 	
 	protected void checkUnderflowEven(Block u, int i) {
 		Block w = bs.readBlock(u.children[i]); // w is child of u
@@ -361,31 +394,46 @@ public class BTree<T> implements SSet<T> {
 		if (sw < b/2) {  // underflow at w
 			Block v = bs.readBlock(u.children[i+1]);  // v is right sibling of w
 			int sv = v.size();
-			if (sv > b/2) { // we can borrow
-				// System.out.println(w + " is borrowing from " + v + " [parent is " + u + "]");
-				// borrow a child from v and key from v (through u)
-				w.keys[sw] = u.keys[i];
-				w.children[sw+1] = v.children[0];
-				u.keys[i] = v.keys[0];
-				// delete key from w
-				System.arraycopy(v.keys, 1, v.keys, 0, b-1);
-				System.arraycopy(v.children, 1, v.children, 0, b-1);
-				// System.out.println(w + "    splits now   " + v + " [parent is " + u + "]");
-			} else { // we have to merge
-				// System.out.println(w + " being absorbed by " + v + " [parent is " + u + "]");
-				// copy keys and children from w
-				System.arraycopy(v.keys, 0, v.keys, sw+1, b-sw-1);
-				System.arraycopy(w.keys, 0, v.keys, 0, sw);
-				System.arraycopy(v.children, 0, v.children, sw+1, b-sw-1);
-				System.arraycopy(w.children, 0, v.children, 0, sw+1);
-				v.keys[sw] = u.keys[i];  // take key from u
-				// delete key from u
-				System.arraycopy(u.keys, i+1, u.keys, i, b-i-1);
-				System.arraycopy(u.children, i+1, u.children, i, b-i);
-				// System.out.println(w + " was absorbed by  " + v + " [parent is " + u + "]");
+			if (sv > b/2) { // w can borrow from v
+				shiftRL(u, i, v, w);
+//				// borrow a child from v and key from v (through u)
+//				w.keys[sw] = u.keys[i];
+//				w.children[sw+1] = v.children[0];
+//				u.keys[i] = v.keys[0];
+//				// delete key from v
+//				System.arraycopy(v.keys, 1, v.keys, 0, b-1);
+//				System.arraycopy(v.children, 1, v.children, 0, b-1);
+			} else { // w will absorb w
+				merge(u, i, w, v);
+				u.children[i] = w.id;
 			}
 		}
-		
+	}
+
+	/**
+	 * Shift keys from node v into node w
+	 * @param u the parent of v and w
+	 * @param i the index w in u.children
+	 * @param v the left sibling of w
+	 * @param w the right sibling of v
+	 */
+	protected void shiftRL(Block u, int i, Block v, Block w) {
+		// System.out.println("RL before: " + w + " <= " + v + " [parent is " + u + "]");
+		Utils.myassert(w.id == u.children[i] && v.id == u.children[i+1]);
+		int sw = w.size();
+		int sv = v.size();
+		int shift = ((sw+sv)/2) - sw;  // num. keys to shift from v to w
+		Utils.myassert(shift > 0);
+		w.keys[sw] = u.keys[i];
+		System.arraycopy(v.keys, 0, w.keys, sw+1, shift-1);
+		System.arraycopy(v.children, 0, w.children, sw+1, shift);
+		u.keys[i] = v.keys[shift-1];
+		// delete key from v
+		System.arraycopy(v.keys, shift, v.keys, 0, b-shift);
+		Arrays.fill(v.keys, sv-shift, b, null);
+		System.arraycopy(v.children, shift, v.children, 0, b-shift+1);
+		Arrays.fill(v.children, sv-shift+1, b+1, -1);
+		// System.out.println("RL after: " + w + " <= " + v + " [parent is " + u + "]");
 	}
 
 	
@@ -460,16 +508,16 @@ public class BTree<T> implements SSet<T> {
 		int i = 0;
 		while(i < b && u.keys[i] != null) {
 			if (u.children[i] >= 0) {
-				sb.append("(");
+				// sb.append("(");
 				toString(u.children[i], sb);
-				sb.append(")");
+				// sb.append(")");
 			}
 			sb.append(u.keys[i++] + ",");
 		}
 		if (u.children[i] >= 0) {
-			sb.append("(");
+			// sb.append("(");
 			toString(u.children[i], sb);
-			sb.append(")");
+			// sb.append(")");
 		}
 	}
 	
@@ -491,7 +539,7 @@ public class BTree<T> implements SSet<T> {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int b = 6, n = 100000, c = 10, reps = 500;
+		int b = 6, n = 10000, c = 10, reps = 500;
 		BTree<Integer> t = new BTree<Integer>(b, Integer.class);
 		SortedSet<Integer> ss = new TreeSet<Integer>();
 		for (int seed = 0; seed < reps; seed++) {
@@ -513,7 +561,7 @@ public class BTree<T> implements SSet<T> {
 				// System.out.println(t + " (added " + x + ")");
 			}
 	
-			for (int i = 0; i < c*n; i++) {
+			for (int i = 0; i < 10*c*n; i++) {
 				int x = rand.nextInt(c*n);
 				Utils.myassert(t.remove(x) == ss.remove(x));
 				// System.out.println(t + "(removed " + x + ")");
