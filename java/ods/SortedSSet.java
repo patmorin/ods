@@ -102,9 +102,9 @@ public class SortedSSet<T> extends AbstractSet<T> implements SortedSet<T> {
 			class XFT<T> extends XFastTrie<N<T>,T> { 
 				public XFT(Integerizer<T> it) { super(new N<T>(), it); }
 			};
-//			css.add(new SortedSSet<Integer>(new BT<Integer>(new I())));
-//			css.add(new SortedSSet<Integer>(new XFT<Integer>(new I())));
-//			css.add(new SortedSSet<Integer>(new YFastTrie<Integer>(new I())));
+			css.add(new SortedSSet<Integer>(new BT<Integer>(new I())));
+			css.add(new SortedSSet<Integer>(new XFT<Integer>(new I())));
+			css.add(new SortedSSet<Integer>(new YFastTrie<Integer>(new I())));
 		}
 //		css.add(new java.util.TreeSet<Integer>());
 		for (SortedSet<Integer> ss : css) {
