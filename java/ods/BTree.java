@@ -23,11 +23,6 @@ public class BTree<T> implements SSet<T> {
 	int b;
 	
 	/**
-	 * The height of the tree
-	 */
-	int hi;
-
-	/**
 	 * Number of elements stored in the tree
 	 */
 	int n;
@@ -86,7 +81,7 @@ public class BTree<T> implements SSet<T> {
 		/**
 		 * The keys stored in this block
 		 */
-		T[] data;
+		T[] keys;
 		
 		/**
 		 * The indicies of the children of this block (if any)
@@ -98,7 +93,7 @@ public class BTree<T> implements SSet<T> {
 		 * @param leaf set to true if this block is a leaf
 		 */
 		public Block() {
-			data = f.newArray(b);
+			keys = f.newArray(b);
 			children = new int[b+1];
 			Arrays.fill(children, 0, children.length, -1);
 			id = bs.placeBlock(this);
@@ -111,46 +106,46 @@ public class BTree<T> implements SSet<T> {
 		 * @return true on success or false if x was not added
 		 */
 		public boolean add(T x, int ci) {
-			int i = findIt(data, x);
+			int i = findIt(keys, x);
 			if (i < 0) return false;
-			if (i < data.length-1) System.arraycopy(data, i, data, i+1, b-i-1);
-			data[i] = x;
-			if (i < data.length-1) System.arraycopy(children, i+1, children, i+2, b-i-1);
+			if (i < keys.length-1) System.arraycopy(keys, i, keys, i+1, b-i-1);
+			keys[i] = x;
+			if (i < keys.length-1) System.arraycopy(children, i+1, children, i+2, b-i-1);
 			children[i+1] = ci;
 			return true;
 		}
 		
 		/**
-		 * Remove the value x from this block if its exists
+		 * Remove the key x from this block if its exists - don't affect the children
 		 * @param x the element to remove
 		 * @return the value of the element removed
 		 */
-		public T remove(T x) {
-			int i = findIt(data, x);
+		public T removeKey(T x) {
+			int i = findIt(keys, x);
 			if (i >= 0) return null;
 			i = -(i+1);
 			return remove(-(i+1));
 		}
 		
 		/**
-		 * Remove the i'th value from this block
+		 * Remove the i'th value from this block - don't affect this block's children
 		 * @param i the index of the element to remove
 		 * @return the value of the element removed
 		 */
 		public T remove(int i) {
-			T y = data[i];
+			T y = keys[i];
 			if (y == null) System.out.println("Poop");
-			System.arraycopy(data, i+1, data, i, b-i-1);
-			data[data.length-1] = null;
+			System.arraycopy(keys, i+1, keys, i, b-i-1);
+			keys[keys.length-1] = null;
 			// System.arraycopy(children, i+2, children, i+1, b-i-1);
 			return y;
 		}
 
 		public T remove2(int i) {
-			T y = data[i];
+			T y = keys[i];
 			if (y == null) System.out.println("Poop");
-			System.arraycopy(data, i+1, data, i, b-i-1);
-			data[data.length-1] = null;
+			System.arraycopy(keys, i+1, keys, i, b-i-1);
+			keys[keys.length-1] = null;
 			System.arraycopy(children, i+2, children, i+1, b-i-1);
 			return y;
 		}
@@ -161,7 +156,7 @@ public class BTree<T> implements SSet<T> {
 		 * @return true if the block is full
 		 */
 		public boolean isFull() {
-			return data[data.length-1] != null;
+			return keys[keys.length-1] != null;
 		}
 		
 		/**
@@ -169,11 +164,11 @@ public class BTree<T> implements SSet<T> {
 		 * @return the number of keys in this block
 		 */
 		public int size() {
-			int lo = 0; hi = data.length;
-			while (hi != lo) {
-				int m = (hi+lo)/2;
-				if (data[m] == null)
-					hi = m;
+			int lo = 0, h = keys.length;
+			while (h != lo) {
+				int m = (h+lo)/2;
+				if (keys[m] == null)
+					h = m;
 				else
 					lo = m+1;
 			}
@@ -186,9 +181,9 @@ public class BTree<T> implements SSet<T> {
 		 */
 		protected Block split() {
 			Block w = new Block();
-			int j = data.length/2;
-			System.arraycopy(data, j, w.data, 0, data.length-j);
-			Arrays.fill(data, j, data.length, null);
+			int j = keys.length/2;
+			System.arraycopy(keys, j, w.keys, 0, keys.length-j);
+			Arrays.fill(keys, j, keys.length, null);
 			System.arraycopy(children, j+1, w.children, 0, children.length-j-1);
 			Arrays.fill(children, j+1, children.length, -1);
 			return w;
@@ -201,8 +196,8 @@ public class BTree<T> implements SSet<T> {
 		 */
 		protected void absorb(Block w, T x) {
 			int k = size();
-			data[k] = x;
-			System.arraycopy(w.data, 0, data, k+1, w.size());
+			keys[k] = x;
+			System.arraycopy(w.keys, 0, keys, k+1, w.size());
 			System.arraycopy(w.children, 0, children, k+1, w.size()+1);
 		}
 		
@@ -212,7 +207,7 @@ public class BTree<T> implements SSet<T> {
 			sb.append("[");
 			for (int i = 0; i < b; i++) {
 				sb.append("(" + (children[i] < 0 ? "." : children[i]) + ")");
-				sb.append(data[i] == null ? "_" : data[i].toString());
+				sb.append(keys[i] == null ? "_" : keys[i].toString());
 //				if (i < b-1)
 //					sb.append(",");
 			}
@@ -249,10 +244,9 @@ public class BTree<T> implements SSet<T> {
 			Block newroot = new Block();
 			x = w.remove(0);
 			newroot.children[0] = ri;
-			newroot.data[0] = x;
+			newroot.keys[0] = x;
 			newroot.children[1] = w.id;
 			ri = newroot.id;
-			hi++;
 		}
 		n++;
 		return true;
@@ -260,7 +254,7 @@ public class BTree<T> implements SSet<T> {
 	
 	protected Block addRecursive(T x, int ui) {
 		Block u = bs.readBlock(ui);
-		int i = findIt(u.data, x);
+		int i = findIt(u.keys, x);
 		if (i < 0) throw new RuntimeException("");
 		if (u.children[i] < 0) {
 			u.add(x, -1);
@@ -277,7 +271,9 @@ public class BTree<T> implements SSet<T> {
 	public boolean remove(T x) {
 		T y = removeRecursive(x, ri);
 		if (y != null) {
-			// FIXME: check for merge
+			Block r = bs.readBlock(ri);
+			if (r.size() == 0) // root has only one child
+				ri = r.children[0];  
 			n--;
 			return true;
 		}
@@ -287,62 +283,111 @@ public class BTree<T> implements SSet<T> {
 	protected T removeRecursive(T x, int ui) {
 		if (ui < 0) return null;
 		Block u = bs.readBlock(ui);
-		int i = findIt(u.data, x);
+		int i = findIt(u.keys, x);
 		if (i < 0) { // found it
 			i = -(i+1);
 			if (u.isLeaf()) {
-				if (u.size() <= 1) System.out.println("Crap");
 				return u.remove(i);
 			} else {
-				u.data[i] = removeSmallest(u.children[i+1]);
+				T y = u.keys[i];
+				u.keys[i] = removeSmallest(u.children[i+1]);
 				checkUnderflow(u, i+1);
-				return u.data[i];  
+				return y;  
 			}
 		}
 		T y = removeRecursive(x, u.children[i]); // FIXME: check merge
 		checkUnderflow(u, i);
 		return y;
 	}
-	
+
+	/**
+	 * Remove the smallest value in the subtree rooted at ui
+	 * @param ui
+	 * @return the value that was removed
+	 */
 	protected T removeSmallest(int ui) {
 		Block u = bs.readBlock(ui);
-		if (u.children[0] < 0)  { // this is a leaf
-			if (u.size() <= 1) System.out.println("Crap");
+		if (u.isLeaf()) 
 			return u.remove(0);
-		}
 		T y = removeSmallest(u.children[0]);  
 		checkUnderflow(u, 0);
 		return y;
 	}
 
 	/**
-	 * Check if an underflow has occured in the i'th child of u
-	 * @param u
+	 * Check if an underflow has occurred in the i'th child of u and, if so, fix it 
+	 * by borrowing from or merging with a sibling
+	 * @param u 
 	 * @param i
 	 */
 	protected void checkUnderflow(Block u, int i) {
 		if (u.children[i] < 0) return;
-		Block w = bs.readBlock(u.children[i]);
+		if (i == 0) 
+			checkUnderflowEven(u, i);
+		else
+			checkUnderflowOdd(u,i);
+	}
+	
+	/**
+	 * Check if an underflow has occured in the i'th child of u
+	 * @param u
+	 * @param i
+	 */
+	protected void checkUnderflowOdd(Block u, int i) {
+		Block w = bs.readBlock(u.children[i]);  // w is child of u
 		if (w.size() < b/2) {  // underflow at w
-			if (i == 0) throw new RuntimeException("Not yet implemented");
-			Block v = bs.readBlock(u.children[i-1]);
-			int k = v.size();
-			if (k > b/2) {  // we can borrow
-				System.out.println(v + " is lending to " + w + "[parent is " + u + "]");
-				System.arraycopy(w.data, 0, w.data, 1, w.size());
-				w.data[0] = u.data[i-1];
+			Block v = bs.readBlock(u.children[i-1]);  // v is left sibling of w
+			int sv = v.size();
+			if (sv > b/2) {  // we can borrow from v
+				// System.out.println(v + " is lending to " + w + " [parent is " + u + "]");
+				System.arraycopy(w.keys, 0, w.keys, 1, w.size());
+				w.keys[0] = u.keys[i-1];
 				System.arraycopy(w.children, 0, w.children, 1, w.size()+1);
-				w.children[0] = v.children[k];
-				u.data[i-1] = v.remove2(k-1);
-				System.out.println(v + " splits now " + w + "[parent is " + u + "]");
+				w.children[0] = v.children[sv];
+				u.keys[i-1] = v.remove2(sv-1);
+				// System.out.println(v + "  splits now   " + w + " [parent is " + u + "]");
 			} else { // we have to merge
-				System.out.println(v + " is absorbing " + w + "[parent is " + u + "]");
-				v.absorb(w, u.data[i-1]);
+				// System.out.println(v + " is absorbing  " + w + " [parent is " + u + "]");
+				v.absorb(w, u.keys[i-1]);
 				u.remove2(i-1);
-				System.out.println(v + " absorbed " + w + "[parent is " + u + "]");
+				// System.out.println(v + "    absorbed   " + w + " [parent is " + u + "]");
 			}
 		}
 	}
+	
+	protected void checkUnderflowEven(Block u, int i) {
+		Block w = bs.readBlock(u.children[i]); // w is child of u
+		int sw = w.size();
+		if (sw < b/2) {  // underflow at w
+			Block v = bs.readBlock(u.children[i+1]);  // v is right sibling of w
+			int sv = v.size();
+			if (sv > b/2) { // we can borrow
+				// System.out.println(w + " is borrowing from " + v + " [parent is " + u + "]");
+				// borrow a child from v and key from v (through u)
+				w.keys[sw] = u.keys[i];
+				w.children[sw+1] = v.children[0];
+				u.keys[i] = v.keys[0];
+				// delete key from w
+				System.arraycopy(v.keys, 1, v.keys, 0, b-1);
+				System.arraycopy(v.children, 1, v.children, 0, b-1);
+				// System.out.println(w + "    splits now   " + v + " [parent is " + u + "]");
+			} else { // we have to merge
+				// System.out.println(w + " being absorbed by " + v + " [parent is " + u + "]");
+				// copy keys and children from w
+				System.arraycopy(v.keys, 0, v.keys, sw+1, b-sw-1);
+				System.arraycopy(w.keys, 0, v.keys, 0, sw);
+				System.arraycopy(v.children, 0, v.children, sw+1, b-sw-1);
+				System.arraycopy(w.children, 0, v.children, 0, sw+1);
+				v.keys[sw] = u.keys[i];  // take key from u
+				// delete key from u
+				System.arraycopy(u.keys, i+1, u.keys, i, b-i-1);
+				System.arraycopy(u.children, i+1, u.children, i, b-i);
+				// System.out.println(w + " was absorbed by  " + v + " [parent is " + u + "]");
+			}
+		}
+		
+	}
+
 	
 	public void clear() {
 		n = 0;
@@ -357,12 +402,12 @@ public class BTree<T> implements SSet<T> {
 	public T find(T x) {
 		T z = null;
 		int ui = ri;
-		for (int j = 0; j <= hi; j++) {
+		while (ui >= 0) {
 			Block u = bs.readBlock(ui);
-			int i = findIt(u.data, x);
-			if (i < 0) return u.data[-(i+1)]; // found it
-			if (u.data[i] != null)
-				z = u.data[i];
+			int i = findIt(u.keys, x);
+			if (i < 0) return u.keys[-(i+1)]; // found it
+			if (u.keys[i] != null)
+				z = u.keys[i];
 			ui = u.children[i];
 		}
 		return z;
@@ -375,12 +420,12 @@ public class BTree<T> implements SSet<T> {
 	public T findLT(T x) {
 		T z = null;
 		int ui = ri;
-		for (int j = 0; j <= hi; j++) {
+		while (ui >= 0) {
 			Block u = bs.readBlock(ui);
-			int i = findIt(u.data, x);
+			int i = findIt(u.keys, x);
 			if (i < 0) i = -(i+1);
 			if (i > 0)
-				z = u.data[i-1];
+				z = u.keys[i-1];
 			ui = u.children[i];
 		}
 		return z;
@@ -413,13 +458,13 @@ public class BTree<T> implements SSet<T> {
 		if (ui < 0) return;
 		Block u = bs.readBlock(ui);
 		int i = 0;
-		while(i < b && u.data[i] != null) {
+		while(i < b && u.keys[i] != null) {
 			if (u.children[i] >= 0) {
 				sb.append("(");
 				toString(u.children[i], sb);
 				sb.append(")");
 			}
-			sb.append(u.data[i++] + ",");
+			sb.append(u.keys[i++] + ",");
 		}
 		if (u.children[i] >= 0) {
 			sb.append("(");
@@ -446,40 +491,37 @@ public class BTree<T> implements SSet<T> {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int b = 10, n = 100, c = 3;
+		int b = 6, n = 100000, c = 10, reps = 500;
 		BTree<Integer> t = new BTree<Integer>(b, Integer.class);
-		System.out.println(t);
-		java.util.Random rand = new java.util.Random();
 		SortedSet<Integer> ss = new TreeSet<Integer>();
-		for (int i = 0; i < n; i++) {
-			int x = rand.nextInt(c*n);
-			Utils.myassert(t.add(x) == ss.add(x));
+		for (int seed = 0; seed < reps; seed++) {
+			java.util.Random rand = new java.util.Random(seed);
+			for (int i = 0; i < n; i++) {
+				int x = rand.nextInt(c*n);
+				Utils.myassert(t.add(x) == ss.add(x));
+			}
+			if (n <= 100)
+				System.out.println(t);
+			System.out.println("ss.size() = " + ss.size());
+			System.out.println("t.size()  = " + t.size());
+			
+			for (int i = 0; i < n; i++) {
+				int x = rand.nextInt(c*n);
+				// System.out.println(t.findLT(x) + " < " + x + " <= " + t.find(x));
+				Utils.myassert(equals(t.find(x),findGE(ss, x)));
+				Utils.myassert(equals(t.findLT(x),findLT(ss, x)));
+				// System.out.println(t + " (added " + x + ")");
+			}
+	
+			for (int i = 0; i < c*n; i++) {
+				int x = rand.nextInt(c*n);
+				Utils.myassert(t.remove(x) == ss.remove(x));
+				// System.out.println(t + "(removed " + x + ")");
+			}
+			
+			System.out.println("ss.size() = " + ss.size());
+			System.out.println("t.size()  = " + t.size());
 		}
-		if (n <= 100)
-			System.out.println(t);
-		System.out.println("ss.size() = " + ss.size());
-		System.out.println("t.size() = " + t.size());
-		
-		for (int i = 0; i < n; i++) {
-			int x = rand.nextInt(c*n);
-			// System.out.println(t.findLT(x) + " < " + x + " <= " + t.find(x));
-			Utils.myassert(equals(t.find(x),findGE(ss, x)));
-			Utils.myassert(equals(t.findLT(x),findLT(ss, x)));
-			// System.out.println(t + " (added " + x + ")");
-		}
-
-		for (int i = 0; i < n; i++) {
-			int x = rand.nextInt(c*n);
-			Utils.myassert(t.remove(x) == ss.remove(x));
-			System.out.println(t + "(removed " + x + ")");
-			// System.out.println(t.findLT(x) + " < " + x + " <= " + t.find(x));
-			// Utils.myassert(equals(t.find(x),findGE(ss, x)));
-			// Utils.myassert(equals(t.findLT(x),findLT(ss, x)));
-			// System.out.println(t + " (added " + x + ")");
-		}
-		
-		System.out.println("ss.size() = " + ss.size());
-		System.out.println("t.size() = " + t.size());
 
 	}
 }
