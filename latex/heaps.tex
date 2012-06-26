@@ -75,8 +75,8 @@ from the heap, is a little trickier.  We know where the smallest value is
 (at the root), but we need to replace it after we remove it and ensure
 that we maintain the heap property.
 
-The easiest way to do this is to replace the root with the value #a[n]#
-and decrement #n#.  Unfortunately, the new element now at the root is
+The easiest way to do this is to replace the root with the value #a[n-1]#, delete
+that value, and decrement #n#.  Unfortunately, the new root element is now
 probably not the smallest element, so it needs to be moved downwards.
 We do this by repeatedly comparing this element to its two children.
 If it is the smallest of the three then we are done.  Otherwise, we swap
