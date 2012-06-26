@@ -1,0 +1,135 @@
+\chapter{External Memory Searching}
+\chaplabel{b-tree}
+
+[This chapter is still under active development.  Use it at your own risk]
+
+Throughout this book, we have been using the #w#-bit word-RAM model
+of computation defined in \secref{model}.   An implicit assumption of
+this model is that our computer has a large enough random access memory
+to store all the data in the data structure.  In some situations, this
+assumption is not valid.  There exists collections of data so big that
+there is no computer with a memory large enough to store all the data.
+In such cases, the application must resort to storing the data on some
+external storage medium such as a hard disk, a solid state disk, or even
+a network file server (which has its own external storage).
+
+Accessing an item from the external storage is extremely slow.  The hard
+disk attached to the computer on which this book is being written has
+an average access time of 19ms.  The solid state drive attached to this
+computer has an average access time of 0.3ms.  The random access memory in
+this computer has an average access time of less than 0.000113ms.  It is
+more than 2,500 times faster to access RAM than the solid state drive
+and more than 160,000 times faster to access RAM than the hard drive.
+
+%  HDD: Fantom ST3000DM001-9YN166 USB 3 external drive (3TB)
+%  SSD: ATA OCZ-AGILITY 3 (60GB)
+%  Mem: Mushkin Enhanced Essentials 4GB (2 x 2GB) 204-Pin DDR3 
+%       SO-DIMM DDR3 1066 (PC3 8500) Dual Channel Kit Laptop Memory
+%       Model 996643
+%  Memory speed was estimated using this program:
+% #include<stdlib.h>
+% #include<stdio.h>
+% #include<time.h>
+% 
+% 
+% int main(void) {
+%    unsigned *a, x, i, n = 50000000;
+%    clock_t start, stop;
+% 
+%    start = clock();
+%    a = malloc(sizeof(unsigned)*n);
+%    for(i = 0; i < n; i++) {
+%      x |= a[rand()%n];
+%    }
+%    stop = clock();
+%    printf("x=%x, %g\n", x, (((double)(stop-start))/(double)CLOCKS_PER_SEC)/(double)n);
+%    free(a);
+%    return 0;
+% }
+
+These speeds are fairly typical;  accessing a random byte from from RAM
+is thousands of times faster than accessing a random byte from a hard
+disk or solid-state drive.  However, this does not tell the entire story.
+When we access a byte from a hard disk or solid state disk, an entire
+\emph{block} of the disk is read.  Each of the drives attached to
+this computer has a block size of 4,096; each time we read one byte,
+the drive gives us a block containing 4,096 bytes.  If we organize our
+data structure carefully, this means that each disk access could yield
+4,096 bytes that are helpful in answering our query.
+
+% morin@peewee:~/git/ods/latex$ sudo blockdev --report
+% RO    RA   SSZ   BSZ   StartSec            Size   Device
+% rw   256   512  4096          0     60022480896   /dev/sda   SSD
+% rw   256  4096  4096        504   3000581885952   /dev/sdb1  HDD
+
+This is the idea behind the \emph{external memory model} of computation,
+illustrated schematically in \figref{em}.  In this model, the computer
+has access to a large external memory where all the data resides.
+This memory is divided into memory \emph{blocks} each containing $B$
+words.  The computer also has a limited internal memory on which it can
+perform computations.  Transferring a block between internal memory and
+external memory takes constant time.  Computations performed within the
+internal memory are free.  The fact that internal memory computations
+are free may seem a bit strange
+
+\begin{figure}
+  \centering{\includegraphics{figs/em}}
+  \caption{In the external memory model, accessing an individual item,
+  #x#, in the external memory requires reading the entire block containing
+  #x# into RAM.}
+  \figlabel{em}
+\end{figure}
+
+In the full-blown external memory model, the size of the internal memory
+is also a parameter.  However, for the data structures described in this
+chapter, it is sufficient to have an internal memory that is capable
+of storing a constant number of blocks.  In other words, to implement
+these data structures it is sufficient to have an internal memory of
+size $O(B)$.
+
+\ldots
+
+\section{B-Trees}
+
+In this section we discuss a generalization of binary trees, called
+$B$-trees, that is efficient in the external memory model.  Alternatively, $B$-trees can be viewed as the natural generalization of 2-4 trees described in \secref{twofour}.
+
+
+For an even integer $B\ge 4$, a \emph{$B$-tree} is a tree in which all
+leaves have the same depth and every internal node, #u#, has at least
+$B/2+1$ children and at most $B$ children that are stored in an array,
+#u.children#.  If the height of a $B$-tree is $h$, then it follows that
+the number, $\ell$, of leaves in the $B$-tree satisfies
+\[
+    (B/2)^h \le \ell \le B^h \enspace .
+\]
+Taking the logarithm of the first inequality and rearranging terms yields:
+\[
+    h \le \frac{\log \ell}{\log(B/2)} 
+      = \frac{\log \ell}{\log B - 1} = O(\log_B \ell)
+\]
+Each node, #u#, in $B$-tree stores an array of keys
+$#u.keys#[0],\ldots,#u.keys#[k-1]$ where $k\in \{B/2,\ldots,B-1\}$.
+If #u# is an internal node, then the number of keys stored at #u# is
+exactly one less than the number of children of #u#.  The keys in a
+$B$-tree respect an ordering similar to the keys in a binary search tree.
+For any node #u# that stores $k-1$ keys,
+\[
+   #u.keys[0]# < #u.keys[1]# < \cdots < #u.keys#[k-2] \enspace .
+\]
+If #u# is an internal node, then for every $#i#\in\{0,\ldots,k-2\}$,
+$#u.keys[i]#$ is larger than every key stored in the subtree rooted at
+#u.children[i]# but smaller than every key stored in the subtree rooted
+at $#u.children[i+1]#$.  Informally,
+\[
+   #u.children[i]# \prec #u.keys[i]# \prec #u.children[i+1]# \enspace .
+\]
+An example of a $B$-tree is shown in \figref{btree}
+
+\begin{figure}
+  \centering{\includegraphics{figs/btree}}
+  \caption{A $B$-tree with $B=4$.}
+  \figlabel{btree}
+\end{figure}
+
+
