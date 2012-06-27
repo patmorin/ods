@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120626110008" modified="D:20120626163759"/>
+<info created="D:20120626110008" modified="D:20120627100912"/>
+<preamble>\usepackage{kpfonts}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -302,7 +303,7 @@ h
 <path matrix="0.5 0 0 0.3405 128 379.872" stroke="black">
 112 0 0 112 256 576 e
 </path>
-<text matrix="0.809017 0.400282 -0.587785 0.550941 462.475 194.446" pos="160 624" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{x}$</text>
+<text matrix="0.809017 0.400282 -0.587785 0.550941 462.475 194.446" pos="160 624" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{x}$</text>
 <path matrix="1 0 0 0.681 0 183.744" fill="white">
 241.167 621.651 m
 48 0 0 48 256 576 217.167 604.214 a
@@ -311,18 +312,9 @@ h
 48 0 0 48 256 576 e
 </path>
 </group>
-<text matrix="1 0 0 1 -8.745 -3.459" transformations="translations" pos="272.359 574.173" stroke="black" type="label" width="17.49" height="6.918" depth="0" valign="baseline">disk</text>
-<text matrix="1 0 0 1 -32.3081 -6.41423" transformations="translations" pos="136.667 665.724" stroke="black" type="label" width="23.938" height="6.808" depth="0" valign="baseline">RAM</text>
-<text matrix="1 0 0 1 27.1371 0.173" transformations="translations" pos="169.725 572.471" stroke="black" type="label" width="76.851" height="6.926" depth="1.93" halign="right" valign="baseline">External Memory</text>
-<path stroke="black">
-257.526 605.262 m
-296.359 640.24 l
-</path>
-<path stroke="black">
-233.526 593.387 m
-216.359 640.24 l
-216.359 640.24 l
-</path>
+<text matrix="1 0 0 1 -8.745 -3.459" transformations="translations" pos="272.359 574.173" stroke="black" type="label" width="18.72" height="7.173" depth="0.08" valign="baseline">disk</text>
+<text matrix="1 0 0 1 -32.3081 -6.41423" transformations="translations" pos="136.667 665.724" stroke="black" type="label" width="23.133" height="6.804" depth="0.08" valign="baseline">RAM</text>
+<text matrix="1 0 0 1 27.1371 0.173" transformations="translations" pos="169.725 572.471" stroke="black" type="label" width="77.061" height="7.169" depth="2.52" halign="right" valign="baseline">External Memory</text>
 <path matrix="1 0 0 1 24.3589 -15.76" stroke="black">
 112 672 m
 112 656 l
@@ -477,34 +469,15 @@ h
 96 672 l
 h
 </path>
-<text matrix="1 0 0 1 109.744 -9.90446" transformations="translations" pos="144 656" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{x}$</text>
-<path stroke="black">
-227.054 596.589 m
-216.359 656.24 l
-216.359 656.24 l
-</path>
-<path stroke="black">
-255.054 610.443 m
-296.359 656.24 l
-296.359 656.24 l
-</path>
-<path matrix="1 0 0 1 168.359 24.7775" stroke="black" fill="pink">
+<text matrix="1 0 0 1 112.359 -9.974" transformations="translations" pos="144 656" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{x}$</text>
+<path matrix="1 0 0 1 168.384 24.847" stroke="black" fill="pink">
 80 672 m
 80 656 l
 96 656 l
 96 672 l
 h
 </path>
-<text matrix="1 0 0 1 109.744 30.633" transformations="translations" pos="144 656" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{x}$</text>
-<path stroke="black">
-248.359 656.24 m
-248.359 680.777 l
-248.359 680.777 l
-</path>
-<path stroke="black">
-264.359 656.24 m
-264.359 680.777 l
-</path>
+<text matrix="1 0 0 1 112.384 30.633" transformations="translations" pos="144 656" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{x}$</text>
 <path matrix="1 0 0 1 39.3586 -25.3549" stroke="black">
 204.778 747.999 m
 204.778 705.024 l
@@ -512,6 +485,18 @@ h
 261.223 747.999 l
 h
 </path>
-<text matrix="1 0 0 1 43.3878 -19.3218" transformations="translations" pos="218.248 724.266" stroke="black" type="label" width="21.447" height="6.808" depth="0" valign="baseline">CPU</text>
+<text matrix="1 0 0 1 43.3878 -19.3218" transformations="translations" pos="218.248 724.266" stroke="black" type="label" width="20.573" height="6.809" depth="0.23" valign="baseline">CPU</text>
+<path stroke="gray" pen="ultrafat" cap="1" arrow="normal/normal">
+256.378 607.667 m
+296.574 640.24 l
+</path>
+<path stroke="gray" pen="ultrafat" cap="1" arrow="normal/normal">
+230.732 594.77 m
+216.493 640.24 l
+</path>
+<path stroke="gray" pen="ultrafat" cap="1" arrow="normal/normal">
+256.417 656.24 m
+256.417 680.847 l
+</path>
 </page>
 </ipe>

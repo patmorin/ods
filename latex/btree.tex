@@ -18,8 +18,8 @@ disk attached to the computer on which this book is being written has
 an average access time of 19ms.  The solid state drive attached to this
 computer has an average access time of 0.3ms.  The random access memory in
 this computer has an average access time of less than 0.000113ms.  It is
-more than 2,500 times faster to access RAM than the solid state drive
-and more than 160,000 times faster to access RAM than the hard drive.
+more than 2500 times faster to access RAM than the solid state drive
+and more than 160000 times faster to access RAM than the hard drive.
 
 %  HDD: Fantom ST3000DM001-9YN166 USB 3 external drive (3TB)
 %  SSD: ATA OCZ-AGILITY 3 (60GB)
@@ -52,10 +52,10 @@ is thousands of times faster than accessing a random byte from a hard
 disk or solid-state drive.  However, this does not tell the entire story.
 When we access a byte from a hard disk or solid state disk, an entire
 \emph{block} of the disk is read.  Each of the drives attached to
-this computer has a block size of 4,096; each time we read one byte,
-the drive gives us a block containing 4,096 bytes.  If we organize our
+this computer has a block size of 4096; each time we read one byte,
+the drive gives us a block containing 4096 bytes.  If we organize our
 data structure carefully, this means that each disk access could yield
-4,096 bytes that are helpful in answering our query.
+4096 bytes that are helpful in answering our query.
 
 % morin@peewee:~/git/ods/latex$ sudo blockdev --report
 % RO    RA   SSZ   BSZ   StartSec            Size   Device
@@ -89,31 +89,59 @@ size $O(B)$.
 
 \ldots
 
+\section{The Block Store}
+
+In this chapter, we present data structures designed for external memory.
+Since this includes a large number of possible different devices, we
+encapsulate this with an object called #BlockStore#.  A #BlockStore#
+stores a collection of memory blocks, each of size $B$.  Each block is
+uniquely identified by its integer index and supports these operations:
+
+\begin{enumerate}
+  \item #readBlock(i)#: Return the contents of the block whose index is #i#.
+
+  \item #writeBlock(i,b)#: Write contents of #b# to the block whose
+    index is #i#.
+
+  \item #placeBlock(b)#: Return a new index and store the contents of #b#
+    at this index.
+
+  \item #freeBlock(i)#: Free the block whose index is #i#.  This indicates
+    that the contents of this block are no longer used so the external
+    memory allocated by this block may be reused.
+\end{enumerate}
+
 \section{B-Trees}
 
-In this section we discuss a generalization of binary trees, called
-$B$-trees, that is efficient in the external memory model.  Alternatively, $B$-trees can be viewed as the natural generalization of 2-4 trees described in \secref{twofour}.
+In this section we discuss a generalization of binary trees,
+called $B$-trees, that is efficient in the external memory model.
+Alternatively, $B$-trees can be viewed as the natural generalization of
+2-4 trees described in \secref{twofour}. (A 2-4 tree is a special case
+of a $B$-tree that we get by setting $B=2$.)
 
+For an even integer $B\ge 2$, a \emph{$B$-tree} is a tree in which
+all leaves have the same depth and every non-root internal node, #u#,
+has at least $B$ children and at most $2B$ children that are stored
+in an array, #u.children#.  This requirement is relaxed at the root,
+which can have anywhere between 2 and $2B$ children.
 
-For an even integer $B\ge 4$, a \emph{$B$-tree} is a tree in which all
-leaves have the same depth and every internal node, #u#, has at least
-$B/2+1$ children and at most $B$ children that are stored in an array,
-#u.children#.  If the height of a $B$-tree is $h$, then it follows that
-the number, $\ell$, of leaves in the $B$-tree satisfies
+If the height of a $B$-tree is $h$, then it follows that the number,
+$\ell$, of leaves in the $B$-tree satisfies
 \[
-    (B/2)^h \le \ell \le B^h \enspace .
+    2B^{h-1} \le \ell \le 2(2B)^{h-1} \enspace .
 \]
 Taking the logarithm of the first inequality and rearranging terms yields:
-\[
-    h \le \frac{\log \ell}{\log(B/2)} 
-      = \frac{\log \ell}{\log B - 1} = O(\log_B \ell)
-\]
+\begin{align*}
+    h & \le \frac{\log \ell-1}{\log B} + 1  \\
+      & \le \frac{\log \ell}{\log B} + 1 \\
+      & = \log_B \ell + 1 \enspace .
+\end{align*}
 Each node, #u#, in $B$-tree stores an array of keys
-$#u.keys#[0],\ldots,#u.keys#[k-1]$ where $k\in \{B/2,\ldots,B-1\}$.
+$#u.keys#[0],\ldots,#u.keys#[k-1]$ where $k\in \{B-1,\ldots,2B-1\}$.
 If #u# is an internal node, then the number of keys stored at #u# is
 exactly one less than the number of children of #u#.  The keys in a
 $B$-tree respect an ordering similar to the keys in a binary search tree.
-For any node #u# that stores $k-1$ keys,
+For any node, #u#, that stores $k-1$ keys,
 \[
    #u.keys[0]# < #u.keys[1]# < \cdots < #u.keys#[k-2] \enspace .
 \]
@@ -124,12 +152,175 @@ at $#u.children[i+1]#$.  Informally,
 \[
    #u.children[i]# \prec #u.keys[i]# \prec #u.children[i+1]# \enspace .
 \]
-An example of a $B$-tree is shown in \figref{btree}
+An example of a $B$-tree with $B=2$ is shown in \figref{btree}.
 
 \begin{figure}
-  \centering{\includegraphics{figs/btree}}
-  \caption{A $B$-tree with $B=4$.}
+  \centering{\includegraphics[width=\ScaleIfNeeded]{figs/btree-1}}
+  \caption{A $B$-tree with $B=2$.}
   \figlabel{btree}
 \end{figure}
+
+Note that all the data stored in a $B$-tree nodes has size $O(B)$.
+Therefore, in an external memory setting, the value of $B$ in a $B$-tree
+is chosen so that  a node fits into a single external memory block.
+Therefore, the time it takes to perform a $B$-tree operation in the
+external memory model is proportional to the number of nodes that are
+accessed (read or written) by the operation.
+
+For example, if the keys are 4 byte integers and the node references
+are also 4 bytes, then setting $B=256$ means that each node stores
+\[
+(4+4)\times 2B
+ = 8\times512=4096
+\]
+bytes of data.  This would be a perfect value of $B$ for the hard disk
+and solid state drive discussed in the introduction to this chaper,
+which have a block size of $4096$.
+
+\subsection{Searching}
+
+The implementation of the #find(x)# operation, which is illustrated in
+\figref{btree-find}, generalizes the #find(x)# operation in a binary
+search tree.  The search for #x# starts at the root and uses the keys
+stored at a node, #u#, to determine which of the children to of #u#
+to search next.
+
+\begin{figure}
+  \centering{\includegraphics[width=\ScaleIfNeeded]{figs/btree-2}}
+  \caption[Searching in a $B$-tree]{A successful search (for the value 4)
+    and an unsuccessful search (for the value 16.5) in a $B$-tree. Shaded nodes show where the value of #z# is updated during the searches.}
+  \figlabel{btree-find}
+\end{figure}
+More specifically, at a node #u#, the search checks if #x# is stored
+in #u.keys#.  If so, #x# has been found and the search is complete.
+Otherwise, the search finds the smallest integer, #i#, such that
+$#u.keys[i]# > #x#$ and continues the search in the subtree rooted at
+#u.children[i]#.  If no key in #u.keys# is greater than #x#, then the
+search continues in #u#'s rightmost child.  Just like binary search
+trees, the algorithm keeps track of the most recently seen key, #z#,
+that is larger than #x#.  In case #x# is not found, #z# is returned as
+the smallest value that is greater or equal to #x#.
+\javaimport{ods/BTree.find(x)}
+Central to the #find(x)# method is the #findIt(a,x)# method that searches
+in a #null#-padded sorted array, #a#, for the value #x#.  This method
+works for any array, #a#, where $#a#[0],\ldots,#a#[k-1]$ are a sequence
+of keys in sorted order and $#a#[k],\ldots,#a#[#a.length#-1]$ are all
+set to #null#.
+If #x# is in the array at position #i#, then #findIt(a,x)# returns
+$-#i#-1$. Otherwise, it returns the smallest index, #i#, such that
+$#a[i]#>#x#$ or $#a[i]#=#null#$.
+\javaimport{ods/BTree.findIt(a,x)}
+The #findIt(a,x)# method does its job using a binary search that halves
+the search space at each step, so it runs in $O(\log(#a.length#))$ time.
+In this case $#a.length#=2B$, so #findIt(a,x)# runs in $O(\log B)$ time.
+
+We can analyze the running time of a $B$-tree #find(x)# operation both
+the usual word-RAM model (where every instruction counts) and in the
+external memory model (where we only count the number of nodes accessed).
+Since each leaf in a $B$-tree stores at least one key and the height
+of a $B$-Tree with $\ell$ leaves is $O(\log_B\ell)$, the height of a
+$B$-tree that stores #n# keys is $O(\log_B #n#)$.  Therefore, in the
+external memory model, the time taken by the #find(x)# operation is
+$O(\log_B #n#)$.  To determine the running time in the word-RAM model,
+we have to account for the cost of calling #findIt(a,x)# for each node
+we access, so the running time of #find(x)# in the word-RAM model is
+\[
+   O(\log_B #n#)\times O(\log B) = O(\log #n#) \enspace .
+\]
+
+\subsection{Adding}
+
+One important difference between $B$-trees and the #BinarySearchTree#
+data structure from \secref{binarysearchtree} is that the nodes of a $B$-tree do
+not store parent pointers to their parents.  The reason for this will
+be explained later.  The lack of parent pointers has the consequence
+that the #add(x)# and #remove(x)# operations on $B$-trees are most
+conveniently implemented as recursive methods.
+
+Like all balanced search trees, some form of rebalancing is sometimes
+required during an #add(x)# operation.  In a $B$-tree, this is done
+\emph{splitting} nodes.  Refer to \figref{btree-split} for what follows.
+Although splitting takes place across two levels of recursion, it is
+best understood as an operation that takes a node #u# containing $2B$
+keys and having $2B+1$ children.  It creates a new node, #w#, that adopts
+$#u.children#[B],\ldots,#u.children#[2B]$.  The new node #w# also takes
+#u#'s $B-1$ largest keys, $#u.keys#[B],\ldots,#u.keys#[2B-1]$.  At this
+point, #u# has $B$ children and $B$ keys.  The extra key, $#u.keys#[B-1]$,
+is passed up to the parent of #u#, which also adopts #w#.
+
+\begin{figure}
+   \centering{\begin{tabular}{l}
+     \includegraphics{figs/btree-split-1} \\[2ex]
+     \multicolumn{1}{c}{$\Downarrow$} \\ [2ex]
+     \includegraphics{figs/btree-split-2} \\
+   \end{tabular}}
+   \caption{Splitting the node #u# in a $B$-tree ($B=3$). Notice that
+     the key $#u.keys#[2]=\mathrm{m}$ passes from #u# to its parent.}
+   \figlabel{btree-split}
+\end{figure}
+
+The #addRecursive(x,ui)# method adds the value #x# to the subtree
+whose root, #u#, has identifier #ui#.  If #u# is a leaf, then #x# is
+just added into #u.keys#.  Otherwise, #x# is added recursively into
+the appropriate child of #u#.  The result of this recursive call is
+normally #null# but may also be a reference to a newly-created node,
+#w#, that was created because this child was split.  In this case, #u#
+adopts #w# and takes its first key.
+
+After #x# has been added (either to #u# or to a descendant of #u#),
+the #addRecursive(x,ui)# method checks to see if #u# is storing too many
+(more than $2B-1$) keys.  If so, then #u# needs to be \emph{split}
+with a call to the #u.split()# method.  The result of calling #u.split()#,
+is a new node that is used as the return value for #addRecursive(x,ui)#.
+\javaimport{ods/BTree.addRecursive(x,ui)}
+
+The #addRecursive(x,ui)# method is just a helper for the #add(x)#
+method, which calls #addRecursive(x,ri)# to insert #x# into the root of
+the $B$-tree.  If #addRecursive(x,ri)# causes the root to split, then
+a new root is created that takes as its children both the old root and
+the new node created when the old root was split.
+\javaimport{ods/BTree.add(x)}
+
+The #add(x)# method and its helper, #addRecursive(x,ui)#, can be analyzed in two phases: 
+
+\begin{description}
+  \item[Downward phase:]
+    During the downward phase of the recursion, before #x# has been added,
+    they access a sequence of nodes and call #findIt(a,x)# on each node.
+    Like the #find(x)# method, this takes $O(\log_B #n#)$ time is the
+    external memory model and $O(\log #n#)$ time in the word-RAM model.
+  
+  \item[Upward phase:]
+    During the upward phase of the recursion, after #x# has been added,
+    these methods perform a sequence of at most $O(\log_B #n#)$ splits.
+    Each split involves only 3 nodes, so this phase takes $O(\log_B #n#)$
+    time in the external memory model.  However, each split involves
+    moving $B$ keys and children so, in the word-RAM model, this takes
+    $O(B\log #n#)$ time.
+\end{description}
+
+Recall that the value of $B$ can be quite large compared to $\log #n#$
+so, in the word-RAM model, adding a value to a $B$-tree can be much
+slower than adding into a balanced binary search tree.  Later, in
+\secref{btree-amortized}, we will show that the situation is not quite
+so bad; the amortized number of split operations done during an #add(x)#
+operation is constant.  This shows that the (amortized) running time of
+the #add(x)# operation in the word-RAM model is $O(B+\log #n#)$.
+
+
+\subsection{Removing}
+
+
+\javaimport{ods/BTree.add(x)}
+
+
+\subsection{Amortized Analysis of $B$-Trees}
+\seclabel{btree-amortized}
+
+\section{Summary and Exercises}
+\begin{exc}
+  \item Explain why, in a $B$-tree, it would be a bad idea for each node
+    to store a pointer to its parent node.
+\end{exc}
 
 

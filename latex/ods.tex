@@ -11,6 +11,18 @@
 \usepackage{amsfonts}
 \usepackage{graphicx}
 \usepackage{threeparttable}
+
+%% This code allows dynamic scaling of images to fit the page
+%% Usage: \includegraphics[width=\ScaleIfNeeded]{figs/figure}
+\makeatletter
+\def\ScaleIfNeeded{%
+\ifdim\Gin@nat@width>\linewidth
+\linewidth
+\else
+\Gin@nat@width
+\fi
+}
+\makeatother
  
 %\usepackage[mathlines]{lineno}
 %\linenumbers

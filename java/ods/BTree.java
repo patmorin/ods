@@ -55,11 +55,11 @@ public class BTree<T> implements SSet<T> {
 			int m = (hi+lo)/2;
 			int cmp = a[m] == null ? -1 : c.compare(x, a[m]);
 			if (cmp < 0)
-				hi = m;
+				hi = m;      // look in first half
 			else if (cmp > 0)
-				lo = m+1;
+				lo = m+1;    // look in second half
 			else
-				return -m-1;  // found it
+				return -m-1; // found it
 		}
 		return lo;
 	}
@@ -360,7 +360,7 @@ public class BTree<T> implements SSet<T> {
 	 */
 	protected void checkUnderflowNonZero(Node u, int i) {
 		Node w = bs.readBlock(u.children[i]);  // w is child of u
-		if (w.size() < b/2) {  // underflow at w
+		if (w.size() < b/2-1) {  // underflow at w
 			Node v = bs.readBlock(u.children[i-1]);  // v is left sibling of w
 			if (v.size() > b/2) {  // w can borrow from v
 				shiftLR(u, i-1, v, w);
@@ -401,8 +401,7 @@ public class BTree<T> implements SSet<T> {
 	
 	protected void checkUnderflowZero(Node u, int i) {
 		Node w = bs.readBlock(u.children[i]); // w is child of u
-		int sw = w.size();
-		if (sw < b/2) {  // underflow at w
+		if (w.size() < b/2-1) {  // underflow at w
 			Node v = bs.readBlock(u.children[i+1]);  // v is right sibling of w
 			if (v.size() > b/2) { // w can borrow from v
 				shiftRL(u, i, v, w);
@@ -603,7 +602,7 @@ public class BTree<T> implements SSet<T> {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int b = 6, n = 100, c = 10, reps = 500;
+		int b = 6, n = 10000, c = 10, reps = 500;
 		BTree<Integer> t = new BTree<Integer>(b, Integer.class);
 		SortedSet<Integer> ss = new TreeSet<Integer>();
 		for (int seed = 0; seed < reps; seed++) {
