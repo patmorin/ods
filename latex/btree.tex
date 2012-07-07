@@ -7,7 +7,7 @@ Throughout this book, we have been using the #w#-bit word-RAM model
 of computation defined in \secref{model}.   An implicit assumption of
 this model is that our computer has a large enough random access memory
 to store all the data in the data structure.  In some situations, this
-assumption is not valid.  There exists collections of data so big that
+assumption is not valid.  There exist collections of data so big that
 there is no computer with a memory large enough to store all the data.
 In such cases, the application must resort to storing the data on some
 external storage medium such as a hard disk, a solid state disk, or even
@@ -70,7 +70,8 @@ words.  The computer also has a limited internal memory on which it can
 perform computations.  Transferring a block between internal memory and
 external memory takes constant time.  Computations performed within the
 internal memory are free.  The fact that internal memory computations
-are free may seem a bit strange
+are free may seem a bit strange, but this is really to just to emphasize
+the fact that external memory is so much slower than RAM.
 
 \begin{figure}
   \centering{\includegraphics{figs/em}}
@@ -87,15 +88,21 @@ of storing a constant number of blocks.  In other words, to implement
 these data structures it is sufficient to have an internal memory of
 size $O(B)$.
 
-\ldots
+In this chapter we will study search trees for external memory that
+implement the #SSet# interface.  We will analyze these algorithms in
+both the external memory model and in the word-RAM model. \ldots
+
 
 \section{The Block Store}
 
-In this chapter, we present data structures designed for external memory.
-Since this includes a large number of possible different devices, we
-encapsulate this with an object called #BlockStore#.  A #BlockStore#
-stores a collection of memory blocks, each of size $B$.  Each block is
-uniquely identified by its integer index and supports these operations:
+The notion of external memory includes a large number of possible
+different devices, each of which has their own block size and is
+accessed with their own collection of system calls.  To simplify the
+data structures in this chapter so that we can focus on the common ideas,
+ we encapsulate external memory devices with an object called a
+#BlockStore#.  A #BlockStore# stores a collection of memory blocks, each
+of size $B$.  Each block is uniquely identified by its integer index.
+A #BlockStore# supports these operations:
 
 \begin{enumerate}
   \item #readBlock(i)#: Return the contents of the block whose index is #i#.
@@ -111,6 +118,16 @@ uniquely identified by its integer index and supports these operations:
     memory allocated by this block may be reused.
 \end{enumerate}
 
+The easiest way to imagine a #BlockStore# is to think of it as storing a
+file on disk that is partitioned into blocks, each containing $B$ bytes.
+Then #readBlock(i)# and #writeBlock(i,b)# simply read and write bytes
+$#i#B,\ldots,(#i#+1)B-1$ of this file.  In addition, a simple #BlockStore#
+could keep a \emph{free list} of blocks that are available for use. Blocks
+freed with #freeBlock(i)# are added to the free list.  In this way,
+#placeBlock(b)# can use a block from the free list or, if none is
+available, can append a new block to the end of the file.
+
+
 \section{B-Trees}
 
 In this section we discuss a generalization of binary trees,
@@ -121,9 +138,9 @@ of a $B$-tree that we get by setting $B=2$.)
 
 For an even integer $B\ge 2$, a \emph{$B$-tree} is a tree in which
 all leaves have the same depth and every non-root internal node, #u#,
-has at least $B$ children and at most $2B$ children that are stored
-in an array, #u.children#.  This requirement is relaxed at the root,
-which can have anywhere between 2 and $2B$ children.
+has at least $B$ children and at most $2B$ children that are stored in
+an array, #u.children#.  The requirement on the number of children is
+relaxed at the root, which can have anywhere between 2 and $2B$ children.
 
 If the height of a $B$-tree is $h$, then it follows that the number,
 $\ell$, of leaves in the $B$-tree satisfies
@@ -137,11 +154,13 @@ Taking the logarithm of the first inequality and rearranging terms yields:
       & = \log_B \ell + 1 \enspace .
 \end{align*}
 Each node, #u#, in $B$-tree stores an array of keys
-$#u.keys#[0],\ldots,#u.keys#[k-1]$ where $k\in \{B-1,\ldots,2B-1\}$.
-If #u# is an internal node, then the number of keys stored at #u# is
-exactly one less than the number of children of #u#.  The keys in a
-$B$-tree respect an ordering similar to the keys in a binary search tree.
-For any node, #u#, that stores $k-1$ keys,
+$#u.keys#[0],\ldots,#u.keys#[2B-1]$.  If #u# is an internal node with $k$
+children, then the number of keys stored at #u# is exactly $k-1$ and these
+are stored in $#u.keys#[0],\ldots,#u.keys#[k-2]$.  The remaining $2B-k+1$
+entries are set to #null#.  If #u# is a non-root leaf node, then #u#
+contains between $B-1$ and $2B-1$ keys. The keys in a $B$-tree respect
+an ordering similar to the keys in a binary search tree.  For any node,
+#u#, that stores $k-1$ keys,
 \[
    #u.keys[0]# < #u.keys[1]# < \cdots < #u.keys#[k-2] \enspace .
 \]
@@ -160,14 +179,14 @@ An example of a $B$-tree with $B=2$ is shown in \figref{btree}.
   \figlabel{btree}
 \end{figure}
 
-Note that all the data stored in a $B$-tree nodes has size $O(B)$.
+Note that all the data stored in a $B$-tree node has size $O(B)$.
 Therefore, in an external memory setting, the value of $B$ in a $B$-tree
 is chosen so that  a node fits into a single external memory block.
-Therefore, the time it takes to perform a $B$-tree operation in the
+In this way, the time it takes to perform a $B$-tree operation in the
 external memory model is proportional to the number of nodes that are
 accessed (read or written) by the operation.
 
-For example, if the keys are 4 byte integers and the node references
+For example, if the keys are 4 byte integers and the node identifiers
 are also 4 bytes, then setting $B=256$ means that each node stores
 \[
 (4+4)\times 2B
@@ -175,7 +194,13 @@ are also 4 bytes, then setting $B=256$ means that each node stores
 \]
 bytes of data.  This would be a perfect value of $B$ for the hard disk
 and solid state drive discussed in the introduction to this chaper,
-which have a block size of $4096$.
+which have a block size of $4096$ bytes.
+
+The #BTree# class, which implements a $B$-tree, stores a #BlockStore#,
+#bs#, that stores #BTree# nodes as well as the index, #ri#, of the
+root node.  As usual, an integer, #n#, is used to keep track of the number
+of items in the data structure:
+\javaimport{ods/BTree.n.ri.bs}
 
 \subsection{Searching}
 
@@ -231,15 +256,15 @@ we access, so the running time of #find(x)# in the word-RAM model is
 \subsection{Adding}
 
 One important difference between $B$-trees and the #BinarySearchTree#
-data structure from \secref{binarysearchtree} is that the nodes of a $B$-tree do
-not store parent pointers to their parents.  The reason for this will
-be explained later.  The lack of parent pointers has the consequence
-that the #add(x)# and #remove(x)# operations on $B$-trees are most
-conveniently implemented as recursive methods.
+data structure from \secref{binarysearchtree} is that the nodes of
+a $B$-tree do not store pointers to their parents.  The reason for
+this will be explained later.  The lack of parent pointers has the
+consequence that the #add(x)# and #remove(x)# operations on $B$-trees
+are most conveniently implemented as recursive methods.
 
 Like all balanced search trees, some form of rebalancing is sometimes
 required during an #add(x)# operation.  In a $B$-tree, this is done
-\emph{splitting} nodes.  Refer to \figref{btree-split} for what follows.
+by \emph{splitting} nodes.  Refer to \figref{btree-split} for what follows.
 Although splitting takes place across two levels of recursion, it is
 best understood as an operation that takes a node #u# containing $2B$
 keys and having $2B+1$ children.  It creates a new node, #w#, that adopts
@@ -259,13 +284,14 @@ is passed up to the parent of #u#, which also adopts #w#.
    \figlabel{btree-split}
 \end{figure}
 
-The #addRecursive(x,ui)# method adds the value #x# to the subtree
+The real work of the #add(x)# method is implemented by the
+#addRecursive(x,ui)# method, which adds the value #x# to the subtree
 whose root, #u#, has identifier #ui#.  If #u# is a leaf, then #x# is
-just added into #u.keys#.  Otherwise, #x# is added recursively into
-the appropriate child of #u#.  The result of this recursive call is
-normally #null# but may also be a reference to a newly-created node,
-#w#, that was created because this child was split.  In this case, #u#
-adopts #w# and takes its first key.
+just added into #u.keys#.  Otherwise, #x# is added recursively into the
+appropriate child, $#u#'$, of #u#.  The result of this recursive call is
+normally #null# but may also be a reference to a newly-created node, #w#,
+that was created because $#u#'$ was split.  In this case, #u# adopts #w#
+and takes its first key, completing the splitting operation on $#u#'$.
 
 After #x# has been added (either to #u# or to a descendant of #u#),
 the #addRecursive(x,ui)# method checks to see if #u# is storing too many
@@ -280,8 +306,24 @@ the $B$-tree.  If #addRecursive(x,ri)# causes the root to split, then
 a new root is created that takes as its children both the old root and
 the new node created when the old root was split.
 \javaimport{ods/BTree.add(x)}
+The process of adding a new value, and the resulting split operations
+is illustrated in \figref{btree-add}.
 
-The #add(x)# method and its helper, #addRecursive(x,ui)#, can be analyzed in two phases: 
+\begin{figure}
+   \centering{\begin{tabular}{l}
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-add-1} \\[2ex]
+     \multicolumn{1}{c}{$\Downarrow$} \\ [2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-add-2} \\[2ex]
+     \multicolumn{1}{c}{$\Downarrow$} \\ [2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-add-3} 
+   \end{tabular}}
+   \caption{The #add(x)# operation in a #BTree#. Adding the value 21
+      results in two nodes being split.}
+   \figlabel{btree-add}
+\end{figure}
+
+The #add(x)# method and its helper, #addRecursive(x,ui)#, can be analyzed
+in two phases:
 
 \begin{description}
   \item[Downward phase:]
@@ -310,8 +352,62 @@ the #add(x)# operation in the word-RAM model is $O(B+\log #n#)$.
 
 \subsection{Removing}
 
+The #remove(x)# operation in a #BTree# is, again, most easily implemented
+as a recursive method.  The first job of the #remove(x)# method is
+to find the element #x# that should be removed.  If #x# is found in a
+leaf, then #x# is removed from this leaf.  Otherwise, if #x# is found at
+#u.keys[i]# for some internal node #u#, then the algorithm removes the
+smallest value, #x'#, in the subtree rooted at #u.children[i+1]#. This
+process is illustrated in \figref{btree-remove}.  The value #x'# is
+then used to replace #x# in #u.keys[i]#.  The #removeRecursive(x,ui)#
+method implements the preceding algorithm using recursion:
+\begin{figure}
+   \centering{\begin{tabular}{l}
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-1} \\[2ex]
+     \multicolumn{1}{c}{$\Downarrow$} \\ [2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-2} 
+   \end{tabular}}
+   \caption{The #remove(x)# operation in a #BTree#. To remove 10 we replace
+      it with the the value 11 and remove 11 from the leaf that contains it.}
+   \figlabel{btree-remove}
+\end{figure}
+\javaimport{ods/BTree.removeRecursive(x,ui)}
 
-\javaimport{ods/BTree.add(x)}
+Note that, after recursively removing #x# from the #i#th child of #u#,
+#removeRecursive(x,ui)# needs to ensure that this child still has at
+least $B-1$ keys.  In the preceding code, this is done with a call to a
+method called #checkUnderflow(x,i)#.  Let #w# be the #i#th child of #u#.
+If #w# has has only $B-2$ keys, then this needs to be fixed.  The fix
+requires using a Note that, after recursively removing #x# from the #i#th child of #u#,
+#removeRecursive(x,ui)# needs to ensure that this child still has at
+least $B-1$ keys.  In the preceding code, this is done with a call to a
+method called #checkUnderflow(x,i)#.  Let #w# be the #i#th
+child of #u#.  If #w# has has only $B-2$ keys, then this needs to be fixed.
+The fix requires using a sibling of #w#.  This can be either child $#i#+1$ of #u# or child $#i#-1$ of #u#. 
+
+
+or child $#i#-1$ of #u#.  We will usually use child $#i#-1$ of #u#, which is the sibling, #v#, of #w# directly to its left.  The only time this doesn't work is when $#i#=0$, in which case we use the sibling directly to #w#'s right.
+\javaimport{ods/Bree.checkUnderflow(u,i)}
+
+ by calling yet another method:
+
+
+
+In this case, we need to find more keys, or children, for #u#.  There are
+two possible ways to do this.  If #u# has a sibling #w# with more than
+$B-1$ keys, then #u# can borrow some keys (and possibly also children)
+from #w#.  More specifically, if #w# stores #size(w)# keys, then between
+them, #u# and #w# have a total of
+\[
+   B-2 + #size(w)# \ge 2B-1
+\]
+keys.  We can therefore shift keys from #w# to #u# so that each of #w#
+and #u# has at least $B-1$ keys, thereby restoring the invariant.
+
+If #w#'s sibling #u# has only $B-1$ children, we must do something more
+drastic, since it can not afford to lend any keys to #u#.
+
+\javaimport{ods/BTree.remove(x)}
 
 
 \subsection{Amortized Analysis of $B$-Trees}

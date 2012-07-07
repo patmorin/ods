@@ -20,9 +20,13 @@ public class BTree<T> implements SSet<T> {
 	protected Comparator<T> c;
 
 	/**
-	 * The block size
+	 * The maximum number of children of a node (an odd number)
 	 */
 	int b;
+
+    /** b div 2
+     */
+	int B; 
 	
 	/**
 	 * Number of elements stored in the tree
@@ -163,7 +167,7 @@ public class BTree<T> implements SSet<T> {
 		}
 		
 		/**
-		 * Split this node into two nodes, each with b/2 keys
+		 * Split this node into two nodes
 		 * 
 		 * @return the newly created block, which has the larger keys
 		 */
@@ -174,6 +178,7 @@ public class BTree<T> implements SSet<T> {
 			Arrays.fill(keys, j, keys.length, null);
 			System.arraycopy(children, j+1, w.children, 0, children.length-j-1);
 			Arrays.fill(children, j+1, children.length, -1);
+			bs.writeBlock(id, this);
 			return w;
 		}
 
@@ -208,6 +213,7 @@ public class BTree<T> implements SSet<T> {
 		this.c = c;
 		b += 1 - (b % 2);
 		this.b = b;
+		B = b/2;
 		f = new Factory<T>(clz);
 		bs = new BlockStore<Node>();
 		ri = new Node().id;
@@ -223,10 +229,12 @@ public class BTree<T> implements SSet<T> {
 		if (w != null) {   // root was split, make new root
 			Node newroot = new Node();
 			x = w.remove(0);
+			bs.writeBlock(w.id, w);
 			newroot.children[0] = ri;
 			newroot.keys[0] = x;
 			newroot.children[1] = w.id;
 			ri = newroot.id;
+			bs.writeBlock(ri, newroot);
 		}
 		n++;
 		return true;
@@ -252,11 +260,14 @@ public class BTree<T> implements SSet<T> {
 		if (i < 0) throw new DuplicateValueException();
 		if (u.children[i] < 0) { // leaf node, just add it
 			u.add(x, -1);
+			bs.writeBlock(u.id, u);
 		} else {
 			Node w = addRecursive(x, u.children[i]);
 			if (w != null) {  // child was split, w is new child 
 				x = w.remove(0);
+				bs.writeBlock(w.id, w);
 				u.add(x, w.id);
+				bs.writeBlock(u.id, u);
 			}
 		}
 		return u.isFull() ? u.split() : null;
@@ -283,7 +294,7 @@ public class BTree<T> implements SSet<T> {
 	 * @return true if x was removed and false otherwise
 	 */
 	protected boolean removeRecursive(T x, int ui) {
-		if (ui < 0) return false;
+		if (ui < 0) return false;  // didn't find it
 		Node u = bs.readBlock(ui);
 		int i = findIt(u.keys, x);
 		if (i < 0) { // found it
@@ -360,9 +371,9 @@ public class BTree<T> implements SSet<T> {
 	 */
 	protected void checkUnderflowNonZero(Node u, int i) {
 		Node w = bs.readBlock(u.children[i]);  // w is child of u
-		if (w.size() < b/2-1) {  // underflow at w
+		if (w.size() < B-1) {  // underflow at w
 			Node v = bs.readBlock(u.children[i-1]);  // v is left sibling of w
-			if (v.size() > b/2) {  // w can borrow from v
+			if (v.size() > B) {  // w can borrow from v
 				shiftLR(u, i-1, v, w);
 			} else { // v will absorb w
 				merge(u, i-1, v, w);
@@ -401,9 +412,9 @@ public class BTree<T> implements SSet<T> {
 	
 	protected void checkUnderflowZero(Node u, int i) {
 		Node w = bs.readBlock(u.children[i]); // w is child of u
-		if (w.size() < b/2-1) {  // underflow at w
+		if (w.size() < B-1) {  // underflow at w
 			Node v = bs.readBlock(u.children[i+1]);  // v is right sibling of w
-			if (v.size() > b/2) { // w can borrow from v
+			if (v.size() > B) { // w can borrow from v
 				shiftRL(u, i, v, w);
 			} else { // w will absorb w
 				merge(u, i, w, v);
