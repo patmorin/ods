@@ -84,7 +84,7 @@ Refer to \figref{mergesort-recursion}. Merge-sort turns the problem of
 sorting #n# elements into 2 problems, each of sorting $#n#/2$ elements.
 These two subproblem are then turned into 2 problems each, for a total
 of 4 subproblems, each of size $#n#/4$. These 4 subproblems become 8
-subproblems of size $#n#/8$, and so on.  At the bottom of this process,
+subproblems, each of size $#n#/8$, and so on.  At the bottom of this process,
 $#n#/2$ subproblems, each of size 2, are converted into #n# problems,
 each of size $#1#$.  For each subproblem of size $#n#/2^{i}$, the time
 spent merging and copying data is $O(#n#/2^i)$.  Since there are $2^i$
@@ -652,10 +652,11 @@ algorithm and is a close second in terms of the number of comparisons,
 but is randomized so this running time is not always guaranteed.
 Heap-sort does the most comparisons, but it is in-place and deterministic.
 
-There is one setting in which merge-sort is a clear-winner;  this occurs
-when sorting a linked-list.  In this case, the auxiliary array is not
-needed;  two sorted linked lists are very easily merged into a single
-sorted linked-list by pointer manipulations.
+There is one setting in which merge-sort is a clear-winner;  this
+occurs when sorting a linked-list.  In this case, the auxiliary
+array is not needed;  two sorted linked lists are very easily merged
+into a single sorted linked-list by pointer manipulations (see
+\excref{list-merge-sort}).
 
 The counting-sort and radix-sort algorithms described here are due
 to Seward \cite[Section~2.4.6]{s54}.  However, variants of radix-sort
@@ -665,7 +666,7 @@ piles based on the existence (or not) of a hole in a specific location
 on the card.  Repeating this process for different hole locations gives
 an implementation of radix-sort.
 
-\begin{exc}
+\begin{exc}\exclabel{list-merge-sort}
   Implement a version of the merge-sort algorithm that sorts a #DLList#
   without using an auxiliary array. 
 \end{exc}
@@ -692,18 +693,21 @@ an implementation of radix-sort.
 \begin{exc}\exclabel{randomized-lower-bound}
   Prove that, if we pick a random leaf from a binary tree with $k$
   leaves, then the expected height of this leaf is at least $\log k$.
-  (Hint: Use induction along with the inequality $(k_1/k)\log k_1 +
-  (k_2/k)\log k_2) \ge  \log k-1$, when $k_1+k_2=k$.)
+%  (Hint: Use induction along with the inequality $(k_1/k)\log k_1 +
+%  (k_2/k)\log k_2) \ge  \log k-1$, when $k_1+k_2=k$.)
 \end{exc}
 
-\begin{exc}
-  Simple floating point numbers are numbers of the form $x\cdot10^{y}$,
-  where $0\le x\le 1$ and $y$ is an integer and each of $x$ and $y$ can
-  be represented by at most $k$ bits.  Describe a version of radix-sort
-  that can be used to sort simple floating point numbers.
-
-  Extend your version of radix sort so that it can handle signed values
-  of both $x$ and $y$ and implement a version of radix-sort that sorts
-  arrays of type #float#.
-\end{exc}
+% This was a stupid exercise, since IEEE 754 floating point numbers 
+% are correctly ordered when they are treated as signed magnitude integers
+% [i.e., a sign bit followed by an integer ]
+%\begin{exc}
+%  Simple floating point numbers are numbers of the form $x\cdot10^{y}$,
+%  where $0\le x\le 1$ and $y$ is an integer and each of $x$ and $y$ can
+%  be represented by at most $k$ bits.  Describe a version of radix-sort
+%  that can be used to sort simple floating point numbers.
+%
+%  Extend your version of radix sort so that it can handle signed values
+%  of both $x$ and $y$ and implement a version of radix-sort that sorts
+%  arrays of type #float#.
+%\end{exc}
 

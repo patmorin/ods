@@ -31,7 +31,7 @@ An example of a graph is shown in \figref{graph}.
 
 
 Graphs have an enormous number of applications, due to their ability
-to model so many phenomenon. There are many obvious examples. Computer
+to model so many phenomena. There are many obvious examples. Computer
 networks can be modelled as graphs, with vertices corresponding to
 computers and edges corresponding to (directed) communication links
 between those computers.  Street networks can be modelled as graphs,
@@ -156,7 +156,7 @@ i.e., it has close to $#n#^2$ edges, then a memory usage of $#n#^2$
 may be acceptable.
 
 The #AdjacencyMatrix# data structure is also commonly used because
-algebraic operations the matrix #a# can be used to efficiently compute
+algebraic operations on the matrix #a# can be used to efficiently compute
 properties of the graph $G$.  This is a topic for a course on algorithms,
 but we point out one such property here:  If we treat the entries of #a#
 as integers (1 for #true# and 0 for #false#) and multiply #a# by itself
@@ -267,10 +267,10 @@ up include:
   \item Should there be a second adjacency list, #inadj#, that stores,
   for each #i#, the list of vertices, #j#, such that $#(j,i)#\in E$?
   This can greatly reduce the running-time of the #inEdges(i)#
-  operation, but requires slightly more work in the #addEdge(i,j)#
-  and #removeEdge(i,j)# operations.
+  operation, but requires slightly more work when adding or removing
+  edges.
   \item Should the entry for the edge #(i,j)# in #adj[i]# be linked by
-  a reference to the corresponding entry in #inadj[j]#.
+  a reference to the corresponding entry in #inadj[j]#?
   \item Should edges be first-class objects with their own associated data?
   In this way, #adj# would contain lists of edges rather than lists of vertices (integers).
 \end{itemize}
@@ -315,7 +315,7 @@ uses the adjacency lists in \figref{graph-adjlist}.
   \caption[Breadth-first-search]{An example of bread-first-search starting at node 0. Nodes are
   labelled with the order in which they are added to #q#.  Edges that
   result in nodes being added to #q# are drawn in black, other edges
-  are drawn in #grey#.}
+  are drawn in grey.}
   \figlabel{graph-bfs}
 \end{figure}
 
@@ -475,16 +475,12 @@ edges cross each other \cite{ht74}.
 In the following exercises, an undirected graph is one in which, for
 every #i# and #j#, the edge $(#i#,#j#)$ is present if and only if the
 edge $(#j#,#i#)$ is present.
-\begin{exc}
-  Let $G$ be an undirected graph.  We say $G$ is \emph{connected} if, for
-  every pair of vertices #i# and #j# in $G$, there is a path from $#i#$
-  to $#j#$. Show how to test if $G$ is connected in $O(#n#+#m#)$ time.
-\end{exc}
 
 \begin{exc}
-  We say $G$ is \emph{connected} if, for
-  every pair of vertices #i# and #j# in $G$, there is a path from $#i#$
-  to $#j#$. Show how to test if $G$ is connected in $O(#n#+#m#)$ time.
+  Let $G$ be an undirected graph.  We say $G$ is \emph{connected} if,
+  for every pair of vertices #i# and #j# in $G$, there is a path from
+  $#i#$ to $#j#$ (since $G$ is undirected, there is also a path from #j#
+  to #i#). Show how to test if $G$ is connected in $O(#n#+#m#)$ time.
 \end{exc}
 
 \begin{exc}
@@ -499,6 +495,13 @@ edge $(#j#,#i#)$ is present.
   collection of trees, one per component, whose edges are edges of $G$
   and whose vertices contain all vertices of $G$.  Show how to compute
   a spanning forest of of $G$ in $O(#n#+#m#)$ time.
+\end{exc}
+
+\begin{exc}
+  We say that a graph $G$ is \emph{stronly-connected} if, for every
+  pair of vertices #i# and #j# in $G$, there is a path from $#i#$ to
+  $#j#$. Show how to test if $G$ is strongly-connected in $O(#n#+#m#)$
+  time.
 \end{exc}
 
 \begin{exc}
