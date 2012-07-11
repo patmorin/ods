@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120710142153" modified="D:20120710150826"/>
+<info created="D:20120710142153" modified="D:20120711101928"/>
+<preamble>\usepackage{kpfonts}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -239,7 +240,7 @@ h
 144 784 l
 h
 </path>
-<text matrix="1 0 0 1 8 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="baseline">$\mathtt{x}$</text>
+<text matrix="1 0 0 1 8 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{\color{blue}x}$</text>
 <path matrix="1 0 0 1 32 0" stroke="black">
 128 784 m
 128 768 l
@@ -268,7 +269,7 @@ h
 144 784 l
 h
 </path>
-<text matrix="1 0 0 1 136 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="baseline">$\cdots$</text>
+<text matrix="1 0 0 1 136 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="10.793" height="3.049" depth="0" halign="center" valign="baseline">$\cdots$</text>
 <path stroke="black" arrow="normal/normal">
 80 752 m
 96 776
@@ -279,7 +280,7 @@ h
 336 776
 352 752 s
 </path>
-<text matrix="1 0 0 1 16 5.45175" transformations="translations" pos="64 736" stroke="black" type="label" width="83.243" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{add}(\mathtt{x})$/$\mathtt{enqueue}(\mathtt{x})$</text>
-<text matrix="1 0 0 1 288 5.45175" transformations="translations" pos="64 736" stroke="black" type="label" width="88.473" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{remove()}$/$\mathtt{dequeue()}$</text>
+<text matrix="1 0 0 1 16 5.45175" transformations="translations" pos="64 736" stroke="black" type="label" width="81.414" height="7.383" depth="2.52" halign="center" valign="baseline">$\mathtt{add}(\mathtt{\color{blue}x})$/$\mathtt{enqueue}(\mathtt{\color{blue}x})$</text>
+<text matrix="1 0 0 1 288 5.45175" transformations="translations" pos="64 736" stroke="black" type="label" width="86.695" height="7.383" depth="2.52" halign="center" valign="baseline">$\mathtt{remove()}$/$\mathtt{dequeue()}$</text>
 </page>
 </ipe>

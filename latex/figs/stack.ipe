@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120710142153" modified="D:20120710151021"/>
+<info created="D:20120710142153" modified="D:20120711102131"/>
+<preamble>\usepackage{kpfonts}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -267,20 +268,20 @@ h
 144 784 l
 h
 </path>
-<text matrix="1 0 0 1 136 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="baseline">$\cdots$</text>
+<text matrix="1 0 0 1 136 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="10.793" height="3.049" depth="0" halign="center" valign="baseline">$\cdots$</text>
 <path stroke="black" arrow="normal/normal">
 304 776 m
 336 776
 352 752 s
 </path>
-<text matrix="1 0 0 1 288 5.45175" transformations="translations" pos="64 736" stroke="black" type="label" width="70.873" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{remove()}$/
+<text matrix="1 0 0 1 288 5.45175" transformations="translations" pos="64 736" stroke="black" type="label" width="68.114" height="7.383" depth="2.52" halign="center" valign="baseline">$\mathtt{remove()}$/
 $\mathtt{pop()}$</text>
 <path matrix="1 0 0 -1 0 1552" stroke="black" rarrow="normal/normal">
 304 776 m
 336 776
 352 752 s
 </path>
-<text matrix="1 0 0 -1 285.441 1543.99" transformations="translations" pos="64 736" stroke="black" type="label" width="67.552" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{add}(\mathtt{x})$/$\mathtt{push}(\mathtt{x})$</text>
-<text matrix="1 0 0 1 168 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="baseline">$\mathtt{x}$</text>
+<text matrix="1 0 0 -1 285.441 1543.99" transformations="translations" pos="64 736" stroke="black" type="label" width="65.574" height="7.383" depth="2.52" halign="center" valign="baseline">$\mathtt{add}(\mathtt{\color{blue}x})$/$\mathtt{push}(\mathtt{\color{blue}x})$</text>
+<text matrix="1 0 0 1 168 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{\color{blue}x}$</text>
 </page>
 </ipe>

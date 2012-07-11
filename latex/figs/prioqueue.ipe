@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120710142153" modified="D:20120710151646"/>
+<info created="D:20120710142153" modified="D:20120711102030"/>
+<preamble>\usepackage{kpfonts}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -239,7 +240,7 @@ h
 144 784 l
 h
 </path>
-<text matrix="1 0 0 1 38.0826 -40.3339" transformations="translations" pos="128 768" stroke="black" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">16</text>
+<text matrix="1 0 0 1 38.0826 -40.3339" transformations="translations" pos="128 768" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">16</text>
 <path matrix="1 0 0 1 10.6255 -28.7632" stroke="black">
 128 784 m
 128 768 l
@@ -268,12 +269,12 @@ h
 144 784 l
 h
 </path>
-<text matrix="1 0 0 1 48 53.4517" transformations="translations" pos="64 736" stroke="black" type="label" width="28.67" height="7.473" depth="2.49" halign="right" valign="baseline">$\mathtt{add}(\mathtt{x})$</text>
-<text matrix="1 0 0 1 163.831 58.4053" transformations="translations" pos="64 736" stroke="black" type="label" width="98.934" height="7.473" depth="2.49" valign="baseline">$\mathtt{remove()}$/$\mathtt{deleteMin()}$</text>
-<text matrix="1 0 0 1 18.6255 -22.9077" transformations="translations" pos="128 768" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="baseline">$\mathtt{x}$</text>
-<text matrix="1 0 0 1 45.3479 -12.6262" transformations="translations" pos="128 768" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">6</text>
-<text matrix="1 0 0 1 68.9037 -36.3756" transformations="translations" pos="128 768" stroke="black" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">13</text>
-<text matrix="1 0 0 1 79.5994 -8.93188" transformations="translations" pos="128 768" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">3</text>
+<text matrix="1 0 0 1 48 53.4517" transformations="translations" pos="64 736" stroke="black" type="label" width="27.766" height="7.383" depth="2.52" halign="right" valign="baseline">$\mathtt{add}(\mathtt{\color{blue}x})$</text>
+<text matrix="1 0 0 1 163.831 58.4053" transformations="translations" pos="64 736" stroke="black" type="label" width="97.255" height="7.383" depth="2.52" valign="baseline">$\mathtt{remove()}$/$\mathtt{deleteMin()}$</text>
+<text matrix="1 0 0 1 18.6255 -22.9077" transformations="translations" pos="128 768" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{\color{blue}x}$</text>
+<text matrix="1 0 0 1 45.3479 -12.6262" transformations="translations" pos="128 768" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">6</text>
+<text matrix="1 0 0 1 68.9037 -36.3756" transformations="translations" pos="128 768" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">13</text>
+<text matrix="1 0 0 1 79.5994 -8.93188" transformations="translations" pos="128 768" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">3</text>
 <path stroke="black">
 112 784 m
 128 784
