@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120710142153" modified="D:20120710153626"/>
+<info created="D:20120710142153" modified="D:20120711103351"/>
+<preamble>\usepackage{kpfonts}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -239,7 +240,7 @@ h
 144 784 l
 h
 </path>
-<text matrix="1 0 0 1 8 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="4.639" height="4.289" depth="0" halign="center" valign="baseline">$e$</text>
+<text matrix="1 0 0 1 8 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="4.354" height="4.57" depth="0.07" halign="center" valign="baseline">$e$</text>
 <path matrix="1 0 0 1 32 0" stroke="black">
 128 784 m
 128 768 l
@@ -268,16 +269,16 @@ h
 144 784 l
 h
 </path>
-<text matrix="1 0 0 1 8 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">4</text>
-<text matrix="1 0 0 1 40 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">5</text>
-<text matrix="1 0 0 1 72 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">6</text>
-<text matrix="1 0 0 1 104 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">7</text>
-<text matrix="1 0 0 1 168 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="22.388" height="6.421" depth="0.83" halign="center" valign="baseline">$\mathtt{n}-1$</text>
-<text matrix="1 0 0 1 136 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="baseline">$\cdots$</text>
-<text matrix="1 0 0 1 40 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.95" height="6.926" depth="1.93" halign="center" valign="baseline">$f$</text>
-<text matrix="1 0 0 1 72 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="4.276" height="6.918" depth="0" halign="center" valign="baseline">$b$</text>
-<text matrix="1 0 0 1 104 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.5" height="6.918" depth="0" halign="center" valign="baseline">$k$</text>
-<text matrix="1 0 0 1 168 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="4.311" height="4.289" depth="0" halign="center" valign="baseline">$c$</text>
+<text matrix="1 0 0 1 8 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="5.43" height="6.804" depth="0.08" halign="center" valign="baseline">4</text>
+<text matrix="1 0 0 1 40 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">5</text>
+<text matrix="1 0 0 1 72 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">6</text>
+<text matrix="1 0 0 1 104 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">7</text>
+<text matrix="1 0 0 1 168 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="20.118" height="6.6" depth="0.08" halign="center" valign="baseline">$\mathtt{n}-1$</text>
+<text matrix="1 0 0 1 136 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="10.793" height="3.049" depth="0" halign="center" valign="baseline">$\cdots$</text>
+<text matrix="1 0 0 1 40 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="6.207" height="7.143" depth="2.59" halign="center" valign="baseline">$f$</text>
+<text matrix="1 0 0 1 72 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.151" height="7.15" depth="0.07" halign="center" valign="baseline">$b$</text>
+<text matrix="1 0 0 1 104 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.191" height="7.153" depth="0.15" halign="center" valign="baseline">$k$</text>
+<text matrix="1 0 0 1 168 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="4.354" height="4.57" depth="0.07" halign="center" valign="baseline">$c$</text>
 <path matrix="1 0 0 1 -128 0" stroke="black">
 128 784 m
 128 768 l
@@ -285,7 +286,7 @@ h
 144 784 l
 h
 </path>
-<text matrix="1 0 0 1 -120 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.266" height="4.289" depth="0" halign="center" valign="baseline">$a$</text>
+<text matrix="1 0 0 1 -120 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="4.872" height="4.57" depth="0.07" halign="center" valign="baseline">$a$</text>
 <path matrix="1 0 0 1 -96 0" stroke="black">
 128 784 m
 128 768 l
@@ -307,13 +308,13 @@ h
 144 784 l
 h
 </path>
-<text matrix="1 0 0 1 -120 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">0</text>
-<text matrix="1 0 0 1 -88 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">1</text>
-<text matrix="1 0 0 1 -56 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">2</text>
-<text matrix="1 0 0 1 -24 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">3</text>
-<text matrix="1 0 0 1 -88 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="4.276" height="6.918" depth="0" halign="center" valign="baseline">$b$</text>
-<text matrix="1 0 0 1 -56 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="4.311" height="4.289" depth="0" halign="center" valign="baseline">$c$</text>
-<text matrix="1 0 0 1 -24 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.185" height="6.918" depth="0" halign="center" valign="baseline">$d$</text>
-<text matrix="1 0 0 1 136 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="baseline">$\cdots$</text>
+<text matrix="1 0 0 1 -120 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">0</text>
+<text matrix="1 0 0 1 -88 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">1</text>
+<text matrix="1 0 0 1 -56 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">2</text>
+<text matrix="1 0 0 1 -24 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">3</text>
+<text matrix="1 0 0 1 -88 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.151" height="7.15" depth="0.07" halign="center" valign="baseline">$b$</text>
+<text matrix="1 0 0 1 -56 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="4.354" height="4.57" depth="0.07" halign="center" valign="baseline">$c$</text>
+<text matrix="1 0 0 1 -24 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.868" height="7.15" depth="0.07" halign="center" valign="baseline">$d$</text>
+<text matrix="1 0 0 1 136 21.8555" transformations="translations" pos="128 768" stroke="darkgray" type="label" width="10.793" height="3.049" depth="0" halign="center" valign="baseline">$\cdots$</text>
 </page>
 </ipe>
