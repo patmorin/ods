@@ -677,6 +677,17 @@ an implementation of radix-sort.
   that the expected number of comparisons is $2#n#H_#n# -#n# + H_#n#$.
 \end{exc}
 
+\javaonly{
+\begin{exc}
+  The heap sort implementation described here sorts the elements into
+  reverse sorted order and then reverses the array.  This could be avoided
+  by defining a new #Comparator# that negates the results of the input
+  #Comparator#, #c#.  Explain why this would not be a good optimization.
+  (Hint: Consider how many negations would needed to be done in relation
+  to how long it takes to reverse the output.)
+\end{exc}
+}
+
 \begin{exc}
   Find another pair of permutations of $1,2,3$ that are not correctly
   sorted by the comparison-tree in \figref{comparison-tree-2}.
