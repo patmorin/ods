@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20120607145412" modified="D:20120615084839"/>
+<ipe version="70005" creator="Ipe 7.1.1">
+<info created="D:20120607145412" modified="D:20120719133453"/>
 <preamble>\usepackage{kpfonts}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -455,6 +455,21 @@ h
 224 464
 224 464
 240 456 s
+</path>
+<text matrix="1 0 0 1 -5.71973 -48.6155" transformations="translations" pos="250.691 470.291" stroke="black" type="label" width="139.218" height="7.168" depth="2.61" valign="baseline">14. External-memory searching</text>
+<path matrix="1 0 0 1 0 -16" stroke="black">
+240 448 m
+240 432 l
+400 432 l
+400 448 l
+h
+</path>
+<use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="240 432" size="normal" stroke="black"/>
+<path stroke="black" arrow="normal/small">
+192 616 m
+208 608
+208 432
+240 424 s
 </path>
 </page>
 </ipe>

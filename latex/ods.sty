@@ -1,5 +1,36 @@
 \usepackage{kpfonts}
 
+%% AU Press formatting
+%\special{papersize=177mm,253mm}
+%\setlength{\paperwidth}{177mm}
+%\pdfpagewidth=\paperwidth
+%%\setlength{\pdfpagewidth}{177mm}
+%\setlength{\paperheight}{253mm}
+%\pdfpageheight=\paperheight
+%%\setlength{\pdfpageheight}{253mm}
+%\setlength{\textwidth}{116mm}
+%\setlength{\textheight}{200mm}
+%\setlength{\topmargin}{-15mm}
+%\setlength{\oddsidemargin}{6mm}
+%\setlength{\evensidemargin}{4mm}
+%\setlength{\headheight}{0mm}
+%\setlength{\footskip}{20mm}
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\renewcommand{\sectionmark}[1]{}%\markright{\thechapter.\ #1}}
+%\renewcommand{\chaptermark}[1]{% 
+%  \markright{#1}{}} 
+%\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrulewidth}{0pt}
+%\fancyhead[L,R,C]{}
+%\fancyfoot[L,R,C]{}
+%\fancyfoot[RO]{\small{\bf Chapter \thechapter}\ \rightmark\enspace\thepage}
+%\fancyfoot[LE]{\small\thepage\enspace\sf\MakeUppercase{open data structures}}
+
+
+
+
+%% Normal (non AU Press) formatting
 % Page setup
 \setlength{\textheight}{8.5in}
 \setlength{\textwidth}{6in}
@@ -11,18 +42,25 @@
 \setlength{\footskip}{0.500in}
 \setlength{\parskip}{0.5ex}
 \setlength{\parindent}{1.25cm}
+\renewcommand{\baselinestretch}{1.3}
 \flushbottom
 
-% Title block
-%\font\tensfb = cmssbx11
-%\font\titlefont = 
-%\font\authorfont = cmssbx17
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\renewcommand{\chaptermark}[1]{% 
+  \markboth{\thechapter.\ #1}{}} 
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\lhead{\itshape\nouppercase{\leftmark}}
+\rhead{\itshape\nouppercase{\rightmark}}
 
 
+
+% Title block fonts
 \font\tensfb = cmssbx11
 \font\titlefont = cmssbx28
 \font\authorfont = cmssbx17
-
 
 \renewcommand\maketitle{%
   \newlength{\lone}
@@ -34,7 +72,7 @@
   %\ \vspace{\lone}
   \begin{flushleft}
     \ \\[.5in]
-    \includegraphics{images/tree3-thick}\\
+    \includegraphics[width=\ScaleIfNeeded]{images/tree3-thick}\\
     \ \\[.5in]
     {\hspace{-1mm}\fontsize{28}{1}\usefont{OT1}{jkpss}{b}{n}\@title} \\[1ex]
     %{\hspace{-1mm}\titlefont\@title} \\[1ex]

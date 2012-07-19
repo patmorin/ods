@@ -1,4 +1,4 @@
-package junk;
+
 
 public class Comp {
 	static long binom(long a, long b) {

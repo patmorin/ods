@@ -1,5 +1,4 @@
 \documentclass[11pt]{book}
-\renewcommand{\baselinestretch}{1.3}
 %%\usepackage{html}
 \usepackage{kpfonts}
 \usepackage{amsopn}
@@ -16,8 +15,8 @@
 %% Usage: \includegraphics[width=\ScaleIfNeeded]{figs/figure}
 \makeatletter
 \def\ScaleIfNeeded{%
-\ifdim\Gin@nat@width>\linewidth
-\linewidth
+\ifdim\Gin@nat@width>.97\linewidth
+.97\linewidth
 \else
 \Gin@nat@width
 \fi
@@ -141,16 +140,13 @@
 
 \usepackage{tikz,gnuplot-lua-tikz}
 
-\usepackage[letterpaper]{hyperref}
+\usepackage{hyperref}
 \hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,%
 	citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,%
 	urlcolor=linkblue} 
 
-
-
-
 % Title page content
-\title{Open Data Structures (in \lang)}
+\title{Open Data Structures}% (in \lang)}
 \author{Pat Morin}
 \date{Development Edition: \today\ \currenttime
 %Edition 0.1$\Delta$
@@ -161,16 +157,6 @@
 
 % Draft mode only - mark overfull hboxes
 % \overfullrule=5pt
-
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
-\renewcommand{\chaptermark}[1]{% 
-  \markboth{\thechapter.\ #1}{}} 
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
-\lhead{\itshape\nouppercase{\leftmark}}
-\rhead{\itshape\nouppercase{\rightmark}}
 
 \begin{document}
 %\AddToShipoutPicture*{\BackgroundPic}
@@ -206,7 +192,9 @@
 \include{sorting-lang}
 \include{graphs-lang}
 \include{integers-lang}
+\javaonly{
 \include{btree-lang}
+}
 
 \bibliographystyle{plainurl}
 \bibliography{ods,odsproc}

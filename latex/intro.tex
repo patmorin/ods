@@ -819,18 +819,17 @@ stored in the data structure.
 
 \section{List of Data Structures}
 
-\tabref{summary} summarizes the performance of data structures described
-in this book that implement each of the interfaces, #List#, #USet#,
-and #SSet#, described in \secref{interfaces}.  \Figref{dependencies}
-shows the dependencies between various chapters in this book.  A dashed
-arrow indicates only a weak-dependency, in which only a small part of
-the chapter depends on a previous chapter or only the main results of
-the previous chapter.
+Tables~\ref{tab:summary-i} and \ref{tab:summary-ii} summarizes the
+performance of data structures in this book that implement each of the
+interfaces, #List#, #USet#, and #SSet#, described in \secref{interfaces}.
+\Figref{dependencies} shows the dependencies between various chapters in
+this book.  A dashed arrow indicates only a weak-dependency, in which
+only a small part of the chapter depends on a previous chapter or only
+the main results of the previous chapter.
 
 \begin{table}
 \begin{center}
 \begin{threeparttable}
-%\renewcommand{\thefootnote}{\Alph{footnote}}
 \begin{tabular}{|l|l|l|l|} \hline
 \multicolumn{4}{|c|}{#List# implementations} \\ \hline
  & #get(i)#/#set(i,x)# & #add(i,x)#/#remove(i)# & \\ \hline
@@ -846,7 +845,21 @@ the previous chapter.
  & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
 #ChainedHashTable# & $O(1)$\tnote{E} & $O(1)$\tnote{A,E} & \sref{hashtable} \\ 
 #LinearHashTable# & $O(1)$\tnote{E} & $O(1)$\tnote{A,E} & \sref{linearhashtable} \\ \hline
-\multicolumn{4}{c}{} \\[2ex] \hline
+\end{tabular}
+\begin{tablenotes}
+\item[A]{Denotes an \emph{amortized} running time.}
+\item[E]{Denotes an \emph{expected} running time.}
+\end{tablenotes}
+\end{threeparttable}
+\end{center}
+\caption{Summary of #List# and #USet# implementations.}
+\tablabel{summary-i}
+\end{table}
+
+\begin{table}
+\begin{center}
+\begin{threeparttable}
+\begin{tabular}{|l|l|l|l|} \hline
 \multicolumn{4}{|c|}{#SSet# implementations} \\ \hline
  & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
 #SkiplistSSet# & $O(\log #n#)$\tnote{E} & $O(\log #n#)$\tnote{E} & \sref{skiplistset} \\ 
@@ -855,7 +868,9 @@ the previous chapter.
 #RedBlackTree# & $O(\log #n#)$ & $O(\log #n#)$ & \sref{redblacktree} \\ 
 #BinaryTrie#\tnote{I} & $O(#w#)$ & $O(#w#)$ & \sref{binarytrie} \\ 
 #XFastTrie#\tnote{I} & $O(\log #w#)$\tnote{A,E} & $O(#w#)$\tnote{A,E} & \sref{xfast} \\ 
-#YFastTrie#\tnote{I} & $O(\log #w#)$\tnote{A,E} & $O(\log #w#)$\tnote{A,E} & \sref{yfast} \\ \hline
+#YFastTrie#\tnote{I} & $O(\log #w#)$\tnote{A,E} & $O(\log #w#)$\tnote{A,E} & \sref{yfast} \\ 
+\javaonly{#BTree# & $O(\log #n#)$ & $O(B+\log #n#)$\tnote{A} & \sref{btree} \\ 
+#BTree#\tnote{X} & $O(\log_B #n#)$ & $O(\log_B #n#)$ & \sref{btree} \\ } \hline
 \multicolumn{4}{c}{} \\[2ex] \hline
 \multicolumn{4}{|c|}{(Priority) #Queue# implementations} \\ \hline
  & #findMin()# & #add(x)#/#remove()# & \\ \hline
@@ -863,15 +878,14 @@ the previous chapter.
 #MeldableHeap# & $O(1)$ & $O(\log #n#)$\tnote{E} & \sref{meldableheap} \\ \hline
 \end{tabular}
 \begin{tablenotes}
-\item[A]{Denotes an \emph{amortized} running time.}
-\item[E]{Denotes an \emph{expected} running time.}
 \item[I]{This structure can only store #w#-bit integer data.}
+\item[X]{This denotes the running time in the external-memory model; see \chapref{btree}.}
 \end{tablenotes}
 %\renewcommand{\thefootnote}{\arabic{footnote}}
 \end{threeparttable}
 \end{center}
-\caption{Summary of data structures described in this book}
-\tablabel{summary}
+\caption{Summary of #SSet# and priority #Queue# implementations.}
+\tablabel{summary-ii}
 \end{table}
 
 \begin{figure}

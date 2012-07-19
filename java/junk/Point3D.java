@@ -1,4 +1,4 @@
-package junk;
+
 
 public class Point3D {
 	protected Double x0, x1, x2;

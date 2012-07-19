@@ -300,14 +300,13 @@ public class BTree<T> implements SSet<T> {
 		if (i < 0) { // found it
 			i = -(i+1);
 			if (u.isLeaf()) {
-				return u.remove(i) != null;
+				u.remove(i);
 			} else {
 				u.keys[i] = removeSmallest(u.children[i+1]);
 				checkUnderflow(u, i+1);
-				return true;  
 			}
-		}
-		if (removeRecursive(x, u.children[i])) {
+			return true;  
+		} else if (removeRecursive(x, u.children[i])) {
 			checkUnderflow(u, i);
 			return true;
 		}
@@ -339,7 +338,7 @@ public class BTree<T> implements SSet<T> {
 	protected void checkUnderflow(Node u, int i) {
 		if (u.children[i] < 0) return;
 		if (i == 0) 
-			checkUnderflowZero(u, i);
+			checkUnderflowZero(u, i); // use u's right sibling
 		else
 			checkUnderflowNonZero(u,i);
 	}

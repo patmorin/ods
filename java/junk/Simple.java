@@ -1,4 +1,4 @@
-package junk;
+
 
 public class Simple {
 	static int[] a;
