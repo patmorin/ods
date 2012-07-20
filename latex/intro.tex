@@ -337,9 +337,6 @@ expected time.  When choosing which of these structures to use, one should
 always use a #USet# unless the extra functionality offered by an #SSet#
 is really needed.
 
-
-
-
 % \subsection{The DynamicString Interface}
 
 \section{Mathematical Background}
@@ -447,10 +444,10 @@ the running times of various operations.  The exact running times will,
 of course, vary from computer to computer and even from run to run on an
 individual computer.  When we talk about the running time of an operation
 we are referring to the number of computer instructions performed during
-the operation.  Even for simple code, this quantity can be difficult to compute exactly.
-Therefore, instead of analyzing running times
-exactly, we will use the so-called \emph{big-Oh notation}: For a 
-function $f(n)$, $O(f(n))$ denotes a set of functions,
+the operation.  Even for simple code, this quantity can be difficult to
+compute exactly.  Therefore, instead of analyzing running times exactly,
+we will use the so-called \emph{big-Oh notation}: For a function $f(n)$,
+$O(f(n))$ denotes a set of functions,
 \[
    O(f(n)) = \{g(n):\mbox{there exists $c>0$, and $n_0$ such that
              $g(n) \le c\cdot f(n)$ for all $n\ge n_0$}   \} \enspace .
@@ -472,36 +469,35 @@ which demonstrates that the function $f(n)=5n\log n + 8n - 200$ is in the set $O
 
 There are a number of useful shortcuts when using asymptotic notation.  First:
 \[ O(n^{c_1}) \subset O(n^{c_2}) \enspace ,\]
- for any $c_1 < c_2$.  Second:
-For any constants $a,b,c > 0$,
+for any $c_1 < c_2$.  Second: For any constants $a,b,c > 0$,
 \[ O(a) \subset O(\log n) \subset O(n^{b}) \subset O({c}^n) \enspace . \]
-These inclusion relations can be multiplied by any positive value, and they still hold. For example, multiplying by $n$ yields:
+These inclusion relations can be multiplied by any positive value,
+and they still hold. For example, multiplying by $n$ yields:
 \[ O(n) \subset O(n\log n) \subset O(n^{1+b}) \subset O(n{c}^n) \enspace . \]
 
-Continuing in a long and distinguished tradition,
-we will abuse this notation by writing things
-like $f_1(n) = O(f(n))$ when what we really mean is $f_1(n) \in O(f(n))$.
-We will also make statements like ``the running time of this operation
-is $O(f(n))$'' when this statement should be ``the running time of
-this operation is a member of $O(f(n))$.''  These shortcuts are mainly
-to avoid awkward language and to make it easier to use asymptotic
-notation within strings of equations.
+Continuing in a long and distinguished tradition, we will abuse this
+notation by writing things like $f_1(n) = O(f(n))$ when what we really
+mean is $f_1(n) \in O(f(n))$.  We will also make statements like ``the
+running time of this operation is $O(f(n))$'' when this statement should
+be ``the running time of this operation is a member of $O(f(n))$.''
+These shortcuts are mainly to avoid awkward language and to make it
+easier to use asymptotic notation within strings of equations.
 
 A particularly strange example of this comes when we write statements like
 \[
-     T(n) = 2\log n + O(1)  \enspace .
+  T(n) = 2\log n + O(1)  \enspace .
 \]
 Again, this would be more correctly written as
 \[
-     T(n) \le 2\log n + [\mbox{some member of $O(1)$]}  \enspace .
+  T(n) \le 2\log n + [\mbox{some member of $O(1)$]}  \enspace .
 \]
 
 The expression $O(1)$ also brings up another issue. Since there is
 no variable in this expression, it may not be clear which variable is
 getting arbitrarily large.  Without context, there is no way to tell.
 In the example above, since the only variable in the rest of the equation
-is $n$, we can assume that this should be read as $T(n) = 2\log n + O(f(n))$,
-where $f(n) = 1$.
+is $n$, we can assume that this should be read as $T(n) = 2\log n +
+O(f(n))$, where $f(n) = 1$.
 
 Big-Oh notation is not new or unique to computer science.  It was used
 by number theorist Paul Bachmann as early as 1894, but it is immensely
@@ -556,7 +552,7 @@ while $f_2(n)$ is the running time of a considerably simpler algorithm
 based on the divide-and-conquer paradigm.  This illustrates that,
 although $f_1(#n#)$ is greater than $f_2(n)$ for small values of #n#,
 the opposite is true for large values of #n#.  Eventually $f_1(#n#)$
-wins out, by an increasingly margin.  Analysis using big-Oh notation
+wins out, by an increasingly large margin.  Analysis using big-Oh notation
 told us that this would happen, since $O(#n#)\subset O(#n#\log #n#)$.
 
 \begin{figure}
@@ -992,13 +988,33 @@ many Java tutorials online \cite{oracle_tutorials}.}
 \end{exc}
 
 \begin{exc}
+  A \emph{Dyck word} is a sequence of +1's and -1's with the property
+  that sum of any prefix of the sequence is never negative.  Describe any
+  relationship between Dyck words and #Stack# #push(x)# and #pop()#
+  operations.
+\end{exc}
+
+\begin{exc}
+  Suppose you have a #Stack#, #s#, that supports only the #push(x)#
+  and #pop()# operations. Show how, using only a FIFO #Queue#, #q#,
+  you can reverse the order of all elements in #s#.
+\end{exc}
+
+
+\begin{exc}
+  Suppose you have a #Stack#, #s#, that supports only the #push(x)#
+  and #pop()# operations. Show how, using only a FIFO #Queue#, #q#,
+  you can inspect each element of #s# and return them to #s# in their
+  original order.
+\end{exc}
+
+\begin{exc}
   From scratch, write and test implementations of the #List#, #USet#
   and #SSet# interfaces.  These do not have to be efficient.  They can
   be used later to test the correctness and performance of more efficient
   implementations.  (The easiest way to do this is to store the elements
   in an array.)
 \end{exc}
-
 
 \begin{exc}
   Work to improve the performance of your implementations from the
