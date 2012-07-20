@@ -1,5 +1,5 @@
 \documentclass[11pt]{book}
-%%\usepackage{html}
+%\usepackage{html}
 \usepackage{kpfonts}
 \usepackage{amsopn}
 \usepackage{amsmath}
@@ -22,7 +22,7 @@
 \fi
 }
 \makeatother
- 
+
 %\usepackage[mathlines]{lineno}
 %\linenumbers
 %\DeclareGraphicsExtensions{.pdf,.eps}
@@ -62,6 +62,11 @@
 \usepackage[sf,bf,small,raggedright,compact]{titlesec} % formatting titles
 \usepackage{fancyvrb}  % formatting pseudocode
 \usepackage{ods} % Personalization and commands
+
+\htmlonly{
+\newcommand{\ScaleIfNeeded}{\textwidth}
+}
+ 
 
 %\newcommand{\comment}[1]{}
 \newcommand{\chaplabel}[1]{\label{chap:#1}}
