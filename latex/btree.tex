@@ -552,9 +552,12 @@ The following lemma shows that, so far, we have overestimated the number of merg
     \item at most 3 credits are created during any #add(x)# or
       #remove(x)# operation.
   \end{enumerate}
-  Since at most $3m$ credits are ever created and each split, merge,
-  and borrow is paid for with with 2 credits, it follows that at most
-  $3m/2$ splits, merges, and borrows are performed.
+  Since at most $3m$ credits are ever created and each split,
+  merge, and borrow is paid for with with 2 credits, it follows
+  that at most $3m/2$ splits, merges, and borrows are performed.
+  These credits are illustrated using the \textcent\ symbol in
+  Figures~\ref{fig:btree-split}, \ref{fig:btree-borrow}, and
+  \ref{fig:btree-merge}.
 
   To keep track of these credits the proof maintains the following
   \emph{credit invariant}: Any non-root node with $B-1$ keys stores
@@ -596,8 +599,9 @@ The following lemma shows that, so far, we have overestimated the number of merg
   After any merges are performed, at most one borrow operation occurs,
   after which no further merges or borrows occur.  This borrow operation
   occurs when we remove a key from a node, #v#, that has $B-1$ keys.
-  The node #v# therefore has one credit and this credit goes towards the
-  cost of the borrow.  This single credit is not enough to pay for the borrow, so we create one credit to complete the payment.
+  The node #v# therefore has one credit and this credit goes towards
+  the cost of the borrow.  This single credit is not enough to pay for
+  the borrow, so we create one credit to complete the payment.
 
   At this point, we have created one credit and we still to show that the
   credit invariant can be maintained.  In the worst case, #v#'s sibling,
@@ -620,11 +624,11 @@ The following lemma shows that, so far, we have overestimated the number of merg
   borrows and merges that occur. This completes the proof of the lemma.
 \end{proof}
 
-The purpose of \lemref{btree-split} is to show that, in the word-RAM model
-the cost of splits, merges and joins during a sequence of $m$ #add(x)#
-and #remove(x)# operations is only $O(Bm)$.  That is, the amortized cost
-per operation is only $O(B)$, so that the amortized cost of #add(x)#
-and #remove(x)# in the word-RAM model is $O(B+\log #n#)$.
+The purpose of \lemref{btree-split} is to show that, in the word-RAM
+model the cost of splits, merges and joins during a sequence of $m$
+#add(x)# and #remove(x)# operations is only $O(Bm)$.  That is, the
+amortized cost per operation is only $O(B)$, so that the amortized cost
+of #add(x)# and #remove(x)# in the word-RAM model is $O(B+\log #n#)$.
 This is summarized by the following pair of theorems:
 
 \begin{thm}[External Memory $B$-Trees]
@@ -670,15 +674,23 @@ implement the #USet# operations in $O(1)$ expected time in the external
 memory model. However, for a variety of reasons, many applications still
 use $B$-trees.
 
-One reason $B$-trees are so popular is that they often perform better
-than their $O(\log_B #n#)$ running time bounds suggest. The reason for
-this is that, in external memory settings, the value of $B$ is typically
-quite large---in the hundreds or even thousands.  This means that 99\%
-or even 99.9\% of the data in a $B$-tree is stored in the leaves.  In a
-database system with a large memory, it may be possible to cache all the
-internal nodes of a $B$-tree in RAM, since they only represent the 1\% or
-0.1\% of the total data set.  When this happens, this means that a search
-in a $B$-tree involves a very fast search in RAM, through the internal
-nodes, followed by a single external memory access to retrieve a leaf.
+One reason $B$-trees are such a popular choice is that they often perform
+better than their $O(\log_B #n#)$ running time bounds suggest. The
+reason for this is that, in external memory settings, the value of $B$
+is typically quite large---in the hundreds or even thousands.  This means
+that 99\% or even 99.9\% of the data in a $B$-tree is stored in the
+leaves.  In a database system with a large memory, it may be possible
+to cache all the internal nodes of a $B$-tree in RAM, since they only
+represent the 1\% or 0.1\% of the total data set.  When this happens,
+this means that a search in a $B$-tree involves a very fast search in
+RAM, through the internal nodes, followed by a single external memory
+access to retrieve a leaf.
+
+\begin{exc}
+  Draw the credits used in the proof of \lemref{btree-split} on the trees
+  in Figures~\ref{fig:btree-add} and \ref{fig:btree-remove-full}.  Verify
+  that (with 3 additional credits) it is possible to pay for the splits, 
+  merges, and borrows and maintain the credit invariant.
+\end{exc}
 
 
