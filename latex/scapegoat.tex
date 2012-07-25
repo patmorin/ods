@@ -8,12 +8,12 @@ wrong, the first thing we should do is find someone to blame it on (the
 \emph{scapegoat}).  Once blame is firmly established, we can leave the
 scapegoat to fix the problem.
 
-A #ScapegoatTree# that keeps itself balanced by \emph{partial rebuilding
-operations}.  During a partial rebuilding operation, an entire subtree
-is deconstructed and rebuilt into a perfectly balanced subtree.
-There are many ways of rebuilding a subtree rooted at node #u# into
-a perfectly balanced tree.  One of the simplest is to traverse #u#'s
-subtree, gathering all its nodes into an array #a# and then to recursively
+A #ScapegoatTree# keeps itself balanced by \emph{partial rebuilding
+operations}.  During a partial rebuilding operation, an entire subtree is
+deconstructed and rebuilt into a perfectly balanced subtree.  There are
+many ways of rebuilding a subtree rooted at node #u# into a perfectly
+balanced tree.  One of the simplest is to traverse #u#'s subtree,
+gathering all its nodes into an array #a# and then to recursively
 build a balanced subtree using #a#.  If we let $#m#=#a.length#/2$,
 then the element #a[m]# becomes the root of the new subtree,
 $#a#[0],\ldots,#a#[#m#-1]$ get stored recursively in the left subtree
@@ -91,7 +91,7 @@ Therefore, when we rebuild #w#, the height decreases by at least 1 so that heigh
       \includegraphics{figs/scapegoat-insert-4} 
     \end{tabular}
   \end{center}
-  \caption[Adding to a scapegoat tree]{Inserting 3.5 into a #ScapegoatTree# increases its depth to 6, which violates \myeqref{scapegoat-height} since $6 > \log_{3/2} 11 \approx 5.914$.  A scapegoat is found at the node containing 5.}
+  \caption[Adding to a scapegoat tree]{Inserting 3.5 into a #ScapegoatTree# increases its height to 6, which violates \myeqref{scapegoat-height} since $6 > \log_{3/2} 11 \approx 5.914$.  A scapegoat is found at the node containing 5.}
 \end{figure}
 If we ignore the cost of finding the scapegoat #w# and rebuilding the
 subtree rooted at #w#, then the running time of #add(x)# is dominated
@@ -190,7 +190,7 @@ where the last line follows from the fact that the sum is a geometrically decrea
 All that remains is to prove an upper-bound on the cost of all calls to
 #rebuild(u)# during a sequence of $m$ operations:
 
-\begin{lem}
+\begin{lem}\lemlabel{scapegoat-amortized}
   Starting with an empty #ScapegoatTree# any sequence of $m$ #add(x)#
   and #remove(x)# operations causes at most $O(m\log m)$ time to be used
   by #rebuild(u)# operations.
@@ -302,6 +302,18 @@ in constant time when a rotation is performed, but that can be updated
 during a #rebuild(u)# operation.  In such cases, the #ScapegoatTree#
 and related structures based on partial rebuilding may work.  An example of such an application is outlined in \excref{list-order-maintenance}.
 
+\begin{exc}
+  Illustrate the addition of the values 1.5 and then 1.6 on the
+  #ScapegoatTree# in \figref{scapegoat-example}.
+\end{exc}
+
+\begin{exc}
+  Illustrate what happens when we start with an empty #ScapegoatTree#
+  and add the sequence $1,5,2,4,3$ and show where the credits described
+  in the proof of \lemref{scapegoat-amortized} go, and how they are used
+  during this sequence of additions.
+\end{exc}
+
 \begin{exc}\exclabel{scapegoat-nlogn}
   Show that, if we start with an empty #ScapegoatTree# and call #add(x)#
   for $#x#=1,2,3,\ldots,#n#$, then the total time spent during calls to
@@ -325,7 +337,6 @@ and related structures based on partial rebuilding may work.  An example of such
   computed the size of.  This is possible because, by the time the method
   wants to compute #size(w)#, it has already computed #size(w.left)#
   or #size(w.right)#.
-
   Compare the performance of your modified implementation with the
   implementation given here.
 \end{exc}
@@ -342,8 +353,9 @@ and related structures based on partial rebuilding may work.  An example of such
   Reimplement the #rebuild(u)# method discussed at the beginning of this
   chapter so that it does not require the use of an array to store the
   nodes of the subtree being rebuilt.  Instead, it should use recursion
-  to first connect the nodes into a linked list and the convert this
-  linked list into a perfectly balanced binary tree.
+  to first connect the nodes into a linked list and then convert this
+  linked list into a perfectly balanced binary tree.  (There are
+  very elegant recursive implementations of both steps.)
 \end{exc}
 
 \begin{exc}
@@ -364,7 +376,6 @@ and related structures based on partial rebuilding may work.  An example of such
   #remove(x)# operations are identical to the standard #BinarySearchTree#
   operations, except that any time the balance invariant is violated at
   a node #u#, rotations are performed in order to restore these invariants.
-
   Your analysis should show that operations on a #WeightBalancedTree2#
   run in $O(\log#n#)$ worst-case time.  
 \end{exc}

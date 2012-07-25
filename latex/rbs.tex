@@ -533,6 +533,15 @@ time (see \excref{treap-get}).  In comparison, the random priorities
 stored in treap nodes have no use other than keeping the treap balanced.
 
 \begin{exc}
+  Illustrate the addition of 4.5 (with priority 7) and then 7.5 (with
+  priority 20) on the #Treap# in \figref{treap}.
+\end{exc}
+
+\begin{exc}
+  Illustrate the removal of 5 and then 7 on the #Treap# in \figref{treap}.
+\end{exc}
+
+\begin{exc}
   Prove the assertion that there are $21,964,800$ sequences that generate
   the tree on the right hand side of \figref{rbs-lvc}.  (Hint: Give a
   recursive formula for the number of sequences that generate a complete
@@ -546,10 +555,6 @@ stored in treap nodes have no use other than keeping the treap balanced.
   of the $#n#!$ possible permutations of #a# is equally probable. 
 \end{exc}
 
-\begin{exc}
-  
-\end{exc}
-
 \begin{exc}\exclabel{treap-rotates}
   Use both parts of \lemref{rbs-treap} to prove that the expected number
   of rotations performed by an #add(x)# operation (and hence also a
@@ -560,6 +565,17 @@ stored in treap nodes have no use other than keeping the treap balanced.
   Modify the #Treap# implementation given here so that it does not
   explicitly store priorities.  Instead, it should simulate them by
   hashing the #hashCode()# of each node.
+\end{exc}
+
+\begin{exc}
+  Suppose that a binary search tree stores, at each node, #u#, the height,
+  #u.height#, of the subtree rooted at #u#, and the size, #u.size# of
+  the subtree rooted at #u#.  Show how, if we perform a left or right
+  rotation at #u#, then these two quantities can be updated, in constant
+  time, for all nodes affected by the rotation.
+
+  Explain why the same result is not possible if we try to also store
+  the depth, #u.depth#, of each node #u#.
 \end{exc}
 
 
@@ -600,12 +616,12 @@ stored in treap nodes have no use other than keeping the treap balanced.
   are greater than #x# and returns a second #Treap# that contains all
   the removed values.
 
-  For example, the code #t2 = t.split(x)# removes from #t# all values
+  \noindent Example: the code #t2 = t.split(x)# removes from #t# all values
   greater than #x# and returns a new #Treap# #t2# containing all
   these values. The #split(x)# operation should run in $O(\log #n#)$
   expected time.
 
-  Warning: For this modification to work properly and still allow the
+  \noindent Warning: For this modification to work properly and still allow the
   #size()# method to run in constant time, it is necessary to implement
   the modifications in \excref{treap-get}.
 \end{exc}

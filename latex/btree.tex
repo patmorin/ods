@@ -687,10 +687,52 @@ RAM, through the internal nodes, followed by a single external memory
 access to retrieve a leaf.
 
 \begin{exc}
+  Show what happens when the keys 1.5 and then 7.5 are added to the
+  $B$-tree in \figref{btree}.
+\end{exc}
+
+\begin{exc}
+  Show what happens when the keys 3 and then 4 are removed from the
+  $B$-tree in \figref{btree}.
+\end{exc}
+
+\begin{exc}
+  What is the maximum number of internal nodes in a $B$-tree that stores
+  #n# keys (as a function of #n# and $B$)?
+\end{exc}
+
+\begin{exc}
   Draw the credits used in the proof of \lemref{btree-split} on the trees
   in Figures~\ref{fig:btree-add} and \ref{fig:btree-remove-full}.  Verify
   that (with 3 additional credits) it is possible to pay for the splits, 
   merges, and borrows and maintain the credit invariant.
 \end{exc}
+
+\begin{exc}
+  A $B+$-tree, illustrated in \figref{bplustree} stores every key in a
+  leaf and keeps its leaves stored as a doubly-linked list.  As usual,
+  each leaf stores between $B-1$ and $2B-1$ keys.  Above this list is
+  a standard $B$-tree that stores the largest value from each leaf but
+  the last.
+  \begin{enumerate}
+    \item Explain how to efficiently implement #add(x)#, #remove(x)#,
+      and #find(x)# in a $B+$-tree.
+    \item Explain how to efficiently implement the #findRange(x,y)# method,
+      that reports all values
+      greater than #x# and less than or equal to #y#, in
+      a $B+$-tree.
+    \item Implement a class, #BPlusTree#, that implements #find(x)#,
+      #add(x)#, #remove(x)#, and #findRange(x,y)#.
+    \item $B+$-trees duplicate some of the keys because they are stored
+      both in the $B$-tree and in the list.  Explain why this duplication
+      does not add up to much for large values of $B$.
+  \end{enumerate}
+\end{exc}
+
+\begin{figure}
+  \centering{\includegraphics[width=\ScaleIfNeeded]{figs/bplustree}} 
+  \caption{A $B+$-tree is a $B$-tree on top of a doubly-linked list of blocks.}
+  \figlabel{bplustree}
+\end{figure}
 
 

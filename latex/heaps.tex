@@ -302,4 +302,77 @@ This more efficient #decreaseKey(u,y)# operation has applications in
 speeding up several graph algorithms including Dijkstra's shortest path
 algorithm \cite{ft87}.
 
+\begin{exc}
+  Illustrate the addition of the values 7 and then 3 to the #BinaryHeap#
+  shown at the end of \figref{heap-insert}.
+\end{exc}
+
+\begin{exc}
+  Illustrate the removal of the next two values (6 and 8) on the
+  #BinaryHeap# shown at the end of \figref{heap-remove}.
+\end{exc}
+
+\begin{exc}
+  Implement the #remove(i)# method, that removes the value stored in
+  #a[i]# in a #BinaryHeap#.  This method should run in $O(\log #n#)$ time.
+  Next, explain why this method is not likely to be useful.
+\end{exc}
+
+\begin{exc}\exclabel{general-eytzinger}
+  A $d$-ary tree is a generalization of a binary tree in which each
+  internal node has $d$ children.  Using Eytzinger's method it is also
+  possible to represent complete $d$-ary trees using arrays.  Work out
+  the equations that, given an index #i#, determine the index of #i#'s
+  parent and each of #i#'s $d$ children in this representation.
+\end{exc}
+
+\begin{exc}
+  Using what you learned in \excref{general-eytzinger}, design and
+  implement a \emph{#DaryHeap#}, the $d$-ary generalization of a
+  #BinaryHeap#. Analyze the running times of operations on a #DaryHeap#
+  and test the performance of your #DaryHeap# implementation against
+  that of the #BinaryHeap# implementation given here.
+\end{exc}
+
+
+
+\begin{exc}
+  Imagine that the binary tree illustrated in \figref{eytzinger} is a
+  #MeldableHeap#.  Illustrate the addition of the values 3.5 and then 2.5.
+  Use a coin to simulate a random bit when needed.
+\end{exc}
+
+\begin{exc}
+  Imagine that the binary tree illustrated in \figref{eytzinger} is
+  a #MeldableHeap#.  Illustrate the removal of the next two values
+  (0 and 1).  Use a coin to simulate a random bit when needed.
+\end{exc}
+
+\begin{exc}
+  Implement the #remove(u)# method, that removes the node #u# from
+  a #MeldableHeap#.  This method should run in $O(\log #n#)$ expected time.
+\end{exc}
+
+\begin{exc}
+  Show how, in a #BinaryHeap# or #MeldableHeap#, to find the second smallest value in constant time.
+\end{exc}
+
+\begin{exc}
+  Show how, in a #BinaryHeap# or #MeldableHeap#, to find the $k$th
+  smallest value in $O(k\log k)$ time. (Hint: Using another heap might
+  help.)
+\end{exc}
+
+\begin{exc}
+  Suppose you are given #k# sorted lists, of total length #n#.  Show how,
+  using a heap to merge these into a single sorted list in $O(n\log
+  k)$ time.  (Hint: Starting with the case $k=2$ can be instructive.)
+\end{exc}
+
+
+
+
+
+
+
 

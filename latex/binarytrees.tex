@@ -341,13 +341,18 @@ several groups in the 1950s \cite[Section~6.2.2]{k97v3}.  Further
 references to specific kinds of binary search trees are provided in
 subsequent chapters.
 
+
+\begin{exc}
+  Prove that a binary tree having $#n#\ge 1$ nodes has $#n#-1$ edges.
+\end{exc}
+
 \begin{exc}
   Prove that a binary tree having $#n#\ge 1$ real nodes has $#n#+1$
   external nodes.
 \end{exc}
 
 \begin{exc}
-  Prove that, if a binary tree, $T$, has at least one leaf then, either
+  Prove that, if a binary tree, $T$, has at least one leaf, then either
   (a)~$T$'s root has at most one child or (b)~$T$ has greater than
   one leaf.
 \end{exc}
@@ -359,15 +364,7 @@ subsequent chapters.
 
 \begin{exc}
   Write a non-recursive method, #height2(u)#, that computes the height
-  of node #u# in a  binary search tree.
-\end{exc}
-
-\begin{exc}
-  Design and implement a method #BinarySearchTree# method #getLE(x)#,
-  that returns a list of all items in the tree that are less than or
-  equal to #x#.  The running time of your method should be $O(#n#'+#h#)$
-  where $#n#'$ is the number of items less than or equal to #x# and #h#
-  is the height of the tree.
+  of node #u# in a #BinaryTree#.
 \end{exc}
 
 \begin{exc}
@@ -388,7 +385,6 @@ The pre/in/post-order numbering of a tree labels the nodes of a tree with
 the integers $0,\ldots,#n#-1$ in the order that they are encountered
 by a pre/in/post-order traversal.  See \figref{binarytree-numbering}
 for an example.
-
 
 \begin{figure}
   \begin{center}
@@ -443,9 +439,27 @@ for an example.
 \end{exc}
 
 \begin{exc}
-  Describe a sequence of #n# operations on an initially empty
-  #BinarySearchTree# that results in a tree of height $#n#-1$.
-  How many such sequences are there?
+  Illustrate what happens when we add the values $3.5$ and then 4.5 to
+  the binary search tree in \figref{bst}.
+\end{exc}
+
+\begin{exc}
+  Illustrate what happens when we remove the values $3$ and then 5 from
+  the binary search tree in \figref{bst}.
+\end{exc}
+
+\begin{exc}
+  Design and implement a method #BinarySearchTree# method #getLE(x)#,
+  that returns a list of all items in the tree that are less than or
+  equal to #x#.  The running time of your method should be $O(#n#'+#h#)$
+  where $#n#'$ is the number of items less than or equal to #x# and #h#
+  is the height of the tree.
+\end{exc}
+
+\begin{exc}
+  Describe how to add the elements $\{1,\ldots,#n#\}$ to an initially
+  empty #BinarySearchTree# in such a way that the resulting tree has
+  height $#n#-1$.  How many ways are there to do this?
 \end{exc}
 
 \begin{exc}

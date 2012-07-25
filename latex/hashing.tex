@@ -921,11 +921,10 @@ hash codes.
 
 \begin{exc}
   Early versions of the Java #hashCode()# method for the #String# class
-  worked by not using all characters of long strings. For example,
-  for a 16 character string, the hash code was computed using only
-  the 8 even-indexed characters. Explain why this was a very bad idea.
-  Give an example of large set of strings for which half the set would
-  have the same hash code.
+  worked by not using all characters of long strings. For example, for
+  a 16 character string, the hash code was computed using only the 8
+  even-indexed characters. Explain why this was a very bad idea.  Give an
+  example of large set of strings that all have the same hash code.
 \end{exc}
 
 \begin{exc}\exclabel{hash-hack-first}
@@ -943,10 +942,11 @@ hash codes.
 \end{exc}
 
 \begin{exc}\exclabel{hash-hack-last}
-  Suppose you have an object made up of two #w#-bit integers #x# and
-  #y#.  Suppose that the hash code for your object is defined by some
-  deterministic function $h(x,y)$.  Prove that there exists a large set
-  of objects that have the same hash code.
+  Suppose you have an object made up of two #w#-bit integers #x#
+  and #y#.  Suppose that the hash code for your object is defined
+  by some deterministic function $h(#x#,#y#)$ that produces a single
+  #w#-bit integer.  Prove that there exists a large set of objects that
+  have the same hash code.
 \end{exc}
 
 \begin{exc}
@@ -978,7 +978,7 @@ hash codes.
   Depending on how good the implementation is, you may be able to do
   this just by inspecting the code for the implementation, or you may
   have to write some code that does trial insertions and searches,
-  timing how long it takes to add and find particular values. (Exactly
-  this kind of code can be used to launch denial of service attacks
-  on internet servers.)
+  timing how long it takes to add and find particular values. (This
+  kind of approach can be used to launch denial of service attacks on
+  web servers \cite{cw03}.)
 \end{exc}

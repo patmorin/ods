@@ -63,12 +63,13 @@ the number of leaves:
 \end{lem}
 
 \begin{proof}
-The lower-bound of 2 on the degree of an internal node implies that, if the height of a 2-4 tree is $h$, then it has at least $2^h$ leaves.  
-In other words,
-\[
-   #n# \ge 2^h \enspace .
-\]
-Taking logarithms on both sides of this equation gives $h \le \log #n#$.
+  The lower-bound of 2 on the number of children of an internal node
+  implies that, if the height of a 2-4 tree is $h$, then it has at least
+  $2^h$ leaves.  In other words,
+  \[
+     #n# \ge 2^h \enspace .
+  \]
+  Taking logarithms on both sides of this inequality gives $h \le \log #n#$.
 \end{proof}
 
 \subsection{Adding a Leaf}
@@ -95,8 +96,9 @@ the depth of all leaves and so maintains the height property.
      \includegraphics{figs/24tree-add-3}
    \end{tabular}
   \end{center}
-  \caption[Adding a leaf to a 2-4 Tree]{Adding a leaf to a 2-4 Tree.  This process stops after one split
-  because #w.parent# has degree less than 4 before the addition.}
+  \caption[Adding a leaf to a 2-4 Tree]{Adding a leaf to a 2-4 Tree.
+  This process stops after one split because #w.parent# has degree less
+  than 4 before the addition.}
   \figlabel{twofour-add}
 \end{figure}
 
@@ -382,7 +384,7 @@ in $O(\log #n#)$ time.
 
 \subsection{Removal}
 
-The #remove(x)# operation in a #RedBlackTree# tree is the most complicated
+The #remove(x)# operation in a #RedBlackTree# is the most complicated
 operation to implement, and this is true of all known implementations.
 Like #remove(x)# in a \texttt{BinarySearchTree}, this operation boils
 down to finding a node #w# with only one child, #u#, and splicing #w#
@@ -619,6 +621,27 @@ structure defined here.  Unfortunately, none of them can guarantee that
 the amortized time spent rebalancing is $O(1)$ per update.  In particular,
 there is no analogue of \thmref{redblack-amortized} for those structures.
 
+\begin{figure}
+  \centering{\includegraphics{figs/redblack-example}}
+  \caption{A red-black tree to practice on.}
+  \figlabel{redblack-example}
+\end{figure}
+
+\begin{exc}
+  Illustrate the 2-4 tree that corresponds to the #RedBlackTree# in
+  \figref{redblack-example}.
+\end{exc}
+
+\begin{exc}
+  Illustrate the addition of 13, then 3.5, then 3.3 on the #RedBlackTree#
+  in \figref{redblack-example}.
+\end{exc}
+
+\begin{exc}
+  Illustrate the removal of 11, then 9, then 5 on the #RedBlackTree# in 
+  \figref{redblack-example}.
+\end{exc}
+
 \begin{exc}
   Why does the method #remove(x)# in the #RedBlackTree# implementation
   perform the assignment #u.parent=w.parent#?  Shouldn't this already
@@ -642,6 +665,21 @@ there is no analogue of \thmref{redblack-amortized} for those structures.
   properties?  If so, can it also be made to satisfy the left-leaning
   property?
 \end{exc}
+
+\begin{exc}\exclabel{redblack-merge}
+  Suppose you have two AVL trees $T_1$ and $T_2$ that have the same black
+  height, $h$, and that the largest key in $T_1$ is smaller than the
+  smallest key in $T_2$.  Show how to merge $T_1$ and $T_2$ in into a
+  single red-black tree in $O(h)$ time.
+\end{exc}
+
+\begin{exc}
+  Extend your solution to \excref{redblack-merge} to the case where the
+  two trees $T_1$ and $T_2$ have different black heights, $h_1\neq h_2$.
+  The running-time should be $O(\max\{h_1,h_2\})$.
+\end{exc}
+
+
 
 \begin{exc}
   Prove that, during an #add(x)# operation, an AVL tree must perform

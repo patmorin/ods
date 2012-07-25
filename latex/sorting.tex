@@ -163,7 +163,7 @@ The \emph{quicksort} algorithm is another classic divide and conquer
 algorithm.  Unlike merge-sort, which does merging after solving the two
 subproblems, quicksort does all its work upfront.
 
-The algorithm is simple to describe:  Pick a random \emph{pivot} element,
+Quicksort is simple to describe:  Pick a random \emph{pivot} element,
 #x#, from #a#; partition #a# into the set of elements less than #x#, the
 set of elements equal to #x#, and the set of elements greater than #x#;
 and, finally, recursively sort the first and third sets in this partition.
@@ -666,9 +666,34 @@ piles based on the existence (or not) of a hole in a specific location
 on the card.  Repeating this process for different hole locations gives
 an implementation of radix-sort.
 
+\begin{exc}
+  Illustrate the execution of merge-sort and heap-sort on an input array
+  containing $1,7,4,6,2,8,3,5$.  Give a sample illustration of on possible
+  execution of quicksort on the same array.
+\end{exc}
+
 \begin{exc}\exclabel{list-merge-sort}
   Implement a version of the merge-sort algorithm that sorts a #DLList#
   without using an auxiliary array. 
+\end{exc}
+
+\begin{exc}
+  Some implementations of #quickSort(a,i,n,c)# always use #a[i]#
+  as a pivot.  Given an example of an input array of length #n# in which
+  such an implementation would perform $\binom{#n#}{2}$ comparisons.
+\end{exc}
+
+\begin{exc}
+  Some implementations of #quickSort(a,i,n,c)# always use #a[i+n/2]#
+  as a pivot.  Given an example of an input array of length #n# in which
+  such an implementation would perform $\binom{#n#}{2}$ comparisons.
+\end{exc}
+
+\begin{exc}
+  Show that, for any implementation of #quickSort(a,i,n,c)#
+  that chooses a pivot deterministically, without looking at
+  $#a[i]#,\ldots,#a[i+n-1]#$, there exists an input array of length #n#
+  that causes this implementation to perform $\binom{#n#}{2}$ comparisons.
 \end{exc}
 
 \begin{exc}

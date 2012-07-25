@@ -465,11 +465,37 @@ systems \cite{skipdb,redis}. A variant of skiplists is used in the HP-UX
 operating system kernel's process management structures \cite{hpux}.
 \javaonly{Skiplists are even part of the Java 1.6 API \cite{oracle_jdk6}.}
 
+
+\begin{exc}
+  Illustrate the search paths for 2.5 and 5.5 in the skiplist from
+  \figref{skiplist}.
+\end{exc}
+
+\begin{exc}
+  Illustrate the addition of the values 0.5 (with height 1) and then 3.5
+  (with height 2) to the skiplist in \figref{skiplist}.
+\end{exc}
+
+\begin{exc}
+  Illustrate the removal of the values 1 and then 3  from the skiplist
+  in \figref{skiplist}.
+\end{exc}
+
+\begin{exc}
+  Illustrate the execution of #remove(2)# on the #SkiplistList#
+  in \figref{skiplist-lengths}.
+\end{exc}
+
+\begin{exc}
+  Illustrate the execution of #add(3,x)# on the #SkiplistList#
+  in \figref{skiplist-lengths}.  Assume that #pickHeight()# selects a height
+  of 4 for the newly created node.
+\end{exc}
+
 \begin{exc}\exclabel{skiplist-changes}
   Show that, during an #add(x)# or a #remove(x)# operation, the expected
   number of pointers in the structure that get changed is constant.
 \end{exc}
-
 
 \begin{exc}\exclabel{skiplist-opt}
   Suppose that, instead of promoting an element from $L_{i-1}$ into $L_i$
@@ -553,7 +579,9 @@ operating system kernel's process management structures \cite{hpux}.
 \begin{exc}
   Using an #SSet# as your underlying structure, design and implement an
   application that reads a (large) text file and allow you to search,
-  interactively, for any substring contained in the text.
+  interactively, for any substring contained in the text.  As the user
+  types their query, a matching part of the text (if any) should appear 
+  as a result.
 
   \noindent  Hint 1: Every substring is a prefix of some suffix, so it
   suffices to store all suffixes of the text file.
@@ -562,7 +590,9 @@ operating system kernel's process management structures \cite{hpux}.
   integer indicating where the suffix begins in the text.
 
   \noindent Test your application on some large texts like some of the books
-  available at Project Gutenberg \cite{gutenberg}.
+  available at Project Gutenberg \cite{gutenberg}.  If done correctly, your
+  applications will be very responsive; there should be no noticeable lag
+  between typing keystrokes and the results appearing.
 \end{exc}
 
 \begin{exc}
