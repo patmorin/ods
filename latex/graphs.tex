@@ -477,6 +477,42 @@ every #i# and #j#, the edge $(#i#,#j#)$ is present if and only if the
 edge $(#j#,#i#)$ is present.
 
 \begin{exc}
+  Draw an adjacencly list representation and an adjacency matrix
+  representation of the graph in \figref{graph-example2}.
+\end{exc}
+
+\begin{figure}
+  \centering{\includegraphics{figs/graph-example2}}
+  \caption{An example graph.}
+  \figlabel{graph-example2}
+\end{figure}
+
+\begin{exc}
+  The \emph{incidence matrix} representation of a graph,
+  $G$, is an $#n#\times#m#$ matrix, $A$, where
+  \[
+     A_{i,j} = \begin{cases}
+        -1 & \text{if vertex $i$ the source of edge $j$} \\
+        +1 & \text{if vertex $i$ the target of edge $j$} \\
+        0 & \text{otherwise.}
+     \end{cases}
+  \]
+  \begin{enumerate}
+    \item Draw the incident matrix representation of the graph in
+      \figref{graph-example2}.
+    \item Design, analyze and implement an incidence matrix representation
+      of a graph.  Be sure to analyze the space, the cost of
+      #addEdge(i,j)#, #removeEdge(i,j)#, #hasEdge(i,j)#, #inEdges(i)#,
+      and #outEdges(i)#.
+  \end{enumerate}
+\end{exc}
+
+\begin{exc}
+  Illustrate an execution of the #bfs(G,0)# and #dfs(G,0)# on the graph, $#G#$,
+  in \figref{graph-example2}.
+\end{exc}
+
+\begin{exc}
   Let $G$ be an undirected graph.  We say $G$ is \emph{connected} if,
   for every pair of vertices #i# and #j# in $G$, there is a path from
   $#i#$ to $#j#$ (since $G$ is undirected, there is also a path from #j#
@@ -517,6 +553,16 @@ edge $(#j#,#i#)$ is present.
   the same order as #dfs(g,r)#.  (Hint: Just start tracing the execution
   of each algorithm on some graph where #r# is the source of more than
   1 edge.)
+\end{exc}
+
+\begin{exc}
+  A \emph{universal sink} in a graph $G$ is a vertex that is the target
+  of $#n#-1$ edges and the source of no edges.\footnote{A universal sink,
+  #v#, is also sometimes called a \emph{celebrity}: Everyone in the room
+  recognizes #v#, but #v# doesn't recognize anyone else in the room.}
+  Design and implement an algorithm that tests if a graph $G$, represented
+  as an #AdjacencyMatrix# has a universal sink.  Your algorithm should
+  run in $O(#n#)$ time.
 \end{exc}
 
 

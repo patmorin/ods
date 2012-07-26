@@ -487,11 +487,10 @@ permutation of $\{1,\ldots,n\}$ is at least $\log(#n#!)$.  Finally,
 notice that this is true for every choice of $\hat{b}$, therefore it holds even for $\mathcal{R}$.  This completes the proof of the lower-bound for randomized algorithms.
 
 \begin{thm}\thmlabel{randomized-sorting-lower-bound}
-  For any (deterministic or randomized) comparison-based sorting algorithm 
-  $\mathcal{A}$
-  and any integer $#n#\ge 1$, the expected number of comparisons done by
-  $\mathcal{A}$ when sorting a random permutation of $\{1,\ldots,n\}$ is
-  at least $\log(#n#!) = #n#\log#n#-O(#n#)$.
+  For any (deterministic or randomized) comparison-based sorting algorithm
+  $\mathcal{A}$ and any integer $#n#\ge 1$, the expected number of
+  comparisons done by $\mathcal{A}$ when sorting a random permutation
+  of $\{1,\ldots,n\}$ is at least $\log(#n#!) = #n#\log#n#-O(#n#)$.
 \end{thm}
 
 
@@ -500,8 +499,7 @@ notice that this is true for every choice of $\hat{b}$, therefore it holds even 
 
 In this section we consider two sorting algorithms that are not
 comparison-based. These algorithms are specialized for sorting
-small integers.
-These algorithms get around the lower-bounds of
+small integers.  These algorithms get around the lower-bounds of
 \thmref{deterministic-sorting-lower-bound} by using (parts of) the
 elements of #a# as indices into an array.  Consider a statement of
 the form
@@ -666,6 +664,17 @@ piles based on the existence (or not) of a hole in a specific location
 on the card.  Repeating this process for different hole locations gives
 an implementation of radix-sort.
 
+Finally, we note that counting sort and radix-sort can be used to sort
+other types of numbers than non-negative integers.  Straightforward
+modifications of counting sort can sort integers, from any interval
+$\{a,\ldots,b\}$ in $O(#n#+b-a)$ time.  Similarly, radix sort can sort
+these integers in $O(#n#(\log_{#n#}(b-a))$ time.  Finally, both these
+algorithms can also be used to sort floating point numbers in the IEEE 754
+floating point format.  This is because the IEEE format was designed to
+allow comparison of two floating point numbers by comparing their values
+as if they were integers in a signed-magnitude binary representation
+\cite{ieee754}.
+
 \begin{exc}
   Illustrate the execution of merge-sort and heap-sort on an input array
   containing $1,7,4,6,2,8,3,5$.  Give a sample illustration of on possible
@@ -697,9 +706,21 @@ an implementation of radix-sort.
 \end{exc}
 
 \begin{exc}
+  Design a #Comparator#, #c#, that you could pass as an argument
+  to #quickSort(a,i,n,c)# and that would cause quicksort to perform
+  $\binom{#n#}{2}$ comparisons.  (Hint: Your comparator does not actually
+  need to look at the values being compared.)
+\end{exc}
+
+\begin{exc}
   Analyze the expected number of comparisons done by Quicksort a little
   more carefully than the proof of \thmref{quicksort}.  In particular, show
   that the expected number of comparisons is $2#n#H_#n# -#n# + H_#n#$.
+\end{exc}
+
+\begin{exc}
+  Describe an input array that causes heap sort to perform at least
+  $2#n#\log #n#-O(#n#)$ comparisons.  Justify your answer.
 \end{exc}
 
 \javaonly{
@@ -746,4 +767,13 @@ an implementation of radix-sort.
 %  of both $x$ and $y$ and implement a version of radix-sort that sorts
 %  arrays of type #float#.
 %\end{exc}
+
+\begin{exc}
+  The implementation of #radixSort(a,k)# given here works when the input
+  array, #a# contains only \cpponly{unsigned}\javaonly{non-negative}
+  integers.  \javaonly{Extend this implementation so that it also
+  works correctly when #a# contains both negative and non-negative
+  integers.}\cpponly{Write a version that works correctly for signed
+  integers.}
+\end{exc}
 

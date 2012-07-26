@@ -667,12 +667,13 @@ major database system; and key-value stores used in cloud computing.
 Graefe's recent survey \cite{g10} provides a 200+ page overview of the
 many modern applications, variants, and optimizations of $B$-trees.
 
-If only the #USet# interface is needed, then external memory hashing
-could be used as an alternative to $B$-trees.  External memory hashing
-schemes do exist; see, for example, Reference~\cite{jp08}.  These schemes
-implement the #USet# operations in $O(1)$ expected time in the external
-memory model. However, for a variety of reasons, many applications still
-use $B$-trees.
+$B$-trees implement the #SSet# interface.  If only the #USet# interface
+is needed, then external memory hashing could be used as an alternative
+to $B$-trees.  External memory hashing schemes do exist; see, for example,
+Reference~\cite{jp08}.  These schemes implement the #USet# operations
+in $O(1)$ expected time in the external memory model. However, for a
+variety of reasons, many applications still use $B$-trees even though
+they only require #USet# operations.
 
 One reason $B$-trees are such a popular choice is that they often perform
 better than their $O(\log_B #n#)$ running time bounds suggest. The
@@ -707,6 +708,48 @@ access to retrieve a leaf.
   that (with 3 additional credits) it is possible to pay for the splits, 
   merges, and borrows and maintain the credit invariant.
 \end{exc}
+
+\begin{exc}
+  Design a modified version of a $B$-tree in which nodes can have anywhere
+  from $B$ up to $3B$ children (and hence $B-1$ up to $3B-1$ keys).
+  Show that this new version of $B$-trees performs only $O(m/B)$ splits,
+  merges, and borrows during a sequence of $m$ operations.  (Hint:
+  For this to work, you will have to be more agressive with merging,
+  sometimes merging two nodes before it is strictly necessary.)
+\end{exc}
+
+\begin{exc}
+  In this exercise, you will design a modified method of splitting and
+  merging in $B$-trees that asymptotically reduces the number of splits,
+  borrows and merges by considering up to 3 nodes at a time.
+  \begin{enumerate}
+    \item Let #u# be an overfull node and let #v# be a sibling immediately
+    to the right of #u#.  There are two ways to fix the overflow at #u#:
+    \begin{itemize}
+       \item #u# can give some of its keys to #v#; or
+       \item #u# can be split and the keys of #u# and #v# can be evenly
+        distributed among #u#, #v#, and the newly created node, #w#.
+    \end{itemize}
+    Show that this can always be done in such a way that, after the
+    operation, each of the (at most 3) affected nodes has at least
+    $B+\alpha B$ keys and at most $2B-\alpha B$ keys, for some constant
+    $\alpha > 0$.
+    \item Let #u# be an underfull node and let #v# and #w# be siblings of #u#
+    There are two ways to fix the underflow at #u#:
+    \begin{itemize}
+       \item keys can be redistributed among #u#, #v#, and #w#; or
+       \item #u#, #v#, and #w# can be merged into two nodes and the keys
+        of #u#, #v#, and #w# can be redistributed amongst these nodes.
+    \end{itemize}
+    Show that this can always be done in such a way that, after the
+    operation, each of the (at most 3) affected nodes has at least
+    $B+\alpha B$ keys and at most $2B-\alpha B$ keys, for some constant
+    $\alpha > 0$.
+    \item Show that, with these modifications, the number of 
+      merges, borrows, and splits that occur during $m$ operations is $O(m/B)$.
+  \end{enumerate}
+\end{exc}
+
 
 \begin{exc}
   A $B+$-tree, illustrated in \figref{bplustree} stores every key in a
