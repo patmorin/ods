@@ -164,13 +164,13 @@ colors red and black, and in terms of the numeric values 0 and 1.
   $#u.color# + #u.parent.color# \ge 1$.)
 \end{prp}
 Notice that we can always color the root, #r#, of a red-black tree black
-without violating either of these two properties, so we will assume that
-the root is black, and the algorithms for updating a red-black tree will
-maintain this.  Another trick that simplifies red-black trees is to treat
-the external nodes (represented by #nil#) as black nodes.  This way,
-every real node, #u#, of a red-black tree has exactly two children,
-each with a well-defined color.
-An example of a red-black tree is shown in \figref{redblack-example}.
+without violating either of these two properties, so we will assume
+that the root is black, and the algorithms for updating a red-black
+tree will maintain this.  Another trick that simplifies red-black trees
+is to treat the external nodes (represented by #nil#) as black nodes.
+This way, every real node, #u#, of a red-black tree has exactly two
+children, each with a well-defined color.  An example of a red-black
+tree is shown in \figref{redblack-example}.
 
 \begin{figure}
   \begin{center}
@@ -624,22 +624,22 @@ there is no analogue of \thmref{redblack-amortized} for those structures.
 \begin{figure}
   \centering{\includegraphics{figs/redblack-example}}
   \caption{A red-black tree to practice on.}
-  \figlabel{redblack-example}
+  \figlabel{redblack-example2}
 \end{figure}
 
 \begin{exc}
   Illustrate the 2-4 tree that corresponds to the #RedBlackTree# in
-  \figref{redblack-example}.
+  \figref{redblack-example2}.
 \end{exc}
 
 \begin{exc}
   Illustrate the addition of 13, then 3.5, then 3.3 on the #RedBlackTree#
-  in \figref{redblack-example}.
+  in \figref{redblack-example2}.
 \end{exc}
 
 \begin{exc}
   Illustrate the removal of 11, then 9, then 5 on the #RedBlackTree# in 
-  \figref{redblack-example}.
+  \figref{redblack-example2}.
 \end{exc}
 
 \begin{exc}
