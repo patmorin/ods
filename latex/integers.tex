@@ -439,25 +439,25 @@ becomes $O(#n#)$.
 The first data structure to provide $O(\log#w#)$ time #add(x)#,
 #remove(x)#, and #find(x)# operations was proposed by van~Emde~Boas and
 has since become known as the \emph{van~Emde~Boas} (or \emph{stratified})
-\emph{tree}.  The original van~Emde~Boas structure had size $2^{#w#}$,
-so was impractical for large integers.
+\emph{tree} \cite{e77}.  The original van~Emde~Boas structure had size
+$2^{#w#}$, so was impractical for large integers.
 
 The #XFastTrie# and #YFastTrie# data structures were discovered by
 Willard \cite{w83}.  The #XFastTrie# structure is very closely related
-to van~Emde~Boas trees.  One view of this is that the hash tables in an
-#XFastTrie# replace arrays in a van~Emde~Boas tree.  That is, instead
-of storing the hash table #t[i]#, a van~Emde~Boas tree stores an array
-of length $2^{#i#}$.
+to van~Emde~Boas trees.  One view of this is that the
+hash tables in an #XFastTrie# replace arrays in a van~Emde~Boas tree.
+That is, instead of storing the hash table #t[i]#, a van~Emde~Boas tree
+stores an array of length $2^{#i#}$.
 
 Another structure for storing integers is Fredman and Willard's fusion
 trees \cite{fw93}.  This structure can store #n# #w#-bit integers in
 $O(#n#)$ space so that the #find(x)# operation runs in $O((\log #n#)/(\log
-#w#))$ time.  By using a fusion tree when $\log #w# > \sqrt{\log #n#}$
-and a #YFastTrie# when $\log #w# \le \sqrt{\log #n#}$ one obtains an
-$O(#n#)$ space data structure that can implement the #find(x)# operation
-in $O(\sqrt{\log #n#})$ time.  Recent lower-bound results of P\v{a}tra\c{s}cu
-and Thorup \cite{pt07} show that these results are optimal, at least for
-structures that use only $O(#n#)$ space.
+#w#))$ time.  By using a fusion tree when $\log #w# > \sqrt{\log #n#}$ and
+a #YFastTrie# when $\log #w# \le \sqrt{\log #n#}$ one obtains an $O(#n#)$
+space data structure that can implement the #find(x)# operation in
+$O(\sqrt{\log #n#})$ time.  Recent lower-bound results of P\v{a}tra\c{s}cu
+and Thorup \cite{pt07} show that these results are more-or-less optimal,
+at least for structures that use only $O(#n#)$ space.
 
 \begin{exc}
   Design and implement a simplified version of a #BinaryTrie# that
@@ -468,15 +468,36 @@ structures that use only $O(#n#)$ space.
 \begin{exc}
   Design and implement a simplified implementation of an #XFastTrie#
   that doesn't use a binary trie at all. Instead, your implementation
-  should store everything is stored in a doubly-linked list and $#w#$
+  should store everything in a doubly-linked list and $#w#+1$
   hash tables.
 \end{exc}
 
 \begin{exc}
-  For an element #x#, let #d(x)# be the difference between #x# and the
-  value returned by #find(x)# [if #find(x)# returns #null#, then define #d(x)#.  Design and implement a modified version of
-  the #find(x)# operation in an #XFastTrie# that runs in $O(\log #d(x)#)$
-  expected time.
+  We can think of a #BinaryTrie# as a structure that stores bit strings
+  of length #w# in such a way that each bitstring is represented as a
+  root to leaf path.  Extend this idea into an #SSet# implementation that
+  stores variable-length strings and implements #add(s)#, #remove(s)#,
+  and #find(s)# in time proporitional to the length of #s#.
+
+  \noindent Hint: Each node in your data structure should store a hash
+  table that is indexed by character values.
+\end{exc}
+
+\begin{exc}
+  For an integer $#x#\in\{0,\ldots2^{#w#}-1\}$, let $d(#x#)$ denote
+  the difference between #x# and the value returned by #find(x)#
+  [if #find(x)# returns #null#, then define $d(#x#)$ as $2^#w#$].
+  For example, if #find(23)# returns 43, then $d(23)=20$.
+  \begin{enumerate}
+    \item Design and implement a modified version of the #find(x)#
+      operation in an #XFastTrie# that runs in $O(1+\log d(#x#))$
+      expected time. Hint: The hash table $t[#w#]$ contains all the
+      values, #x#, such that $d(#x#)=0$, so that would be a good place
+      to start.
+    \item Design and implement a modified version of the #find(x)#
+      operation in an  #XFastTrie# that runs in $O(1+\log\log d(#x#))$
+      expected time.
+  \end{enumerate}
 \end{exc}
 
 
