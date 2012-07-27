@@ -65,6 +65,7 @@ install : ods-java.pdf ods-cpp.pdf ods-java-grayscale.pdf ods-cpp-grayscale.pdf 
 
 clean:
 	rm -f $(javs) $(cpps) $(javh) $(cpph) *.log *.bbl *.out ods.toc $(pdfs) 
+	rm -rf ods-java/ ods-cpp/
 	cd figs; make clean
 	cd images; make clean
 
@@ -77,7 +78,7 @@ clean:
 # Lots of hackery for generating html using latex2html
 html: java-html cpp-html
 
-java-html : $(javh) ods-java-html.tex
+java-html : $(javh) ods-java-html.tex epsfigs
 	mkdir -p ods-java
 	pdflatex ods-java-html
 	bibtex ods-java-html
@@ -91,7 +92,7 @@ ods-java-html.tex : ods.tex Makefile
 %-java-html.tex : %.tex $(java) snarf-java-html.pl Makefile
 	cat $< | ./snarf-java-html.pl > $*-java-html.tex 
 
-cpp-html : $(cpph) ods-cpp-html.tex
+cpp-html : $(cpph) ods-cpp-html.tex epsfigs
 	mkdir -p ods-cpp
 	pdflatex ods-cpp-html
 	bibtex ods-cpp-html
