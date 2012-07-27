@@ -341,6 +341,34 @@ several groups in the 1950s \cite[Section~6.2.2]{k97v3}.  Further
 references to specific kinds of binary search trees are provided in
 subsequent chapters.
 
+When implementing a binary tree from scratch, there are several design
+decisions to be made.  One of these is the question of whether or not each
+node stores a pointer to its parent.  If most of the operations simply
+follow a root-to-leaf path, then parent pointers are unnecessary, and
+are a potential source of coding errors.  On the other hand, the lack of
+parent pointers means that tree traversals must be done recursively or
+with the use of an explicit stack.  Some other methods (like inserting
+or deleting into some kinds of balanced binary search trees) are also
+complicated by the lack of parent pointers.
+
+Another design decision is concerned with how to store the parent,
+left child, and right child pointers at a node.  In the implementation
+given here, they are stored as separate variables.   Another option is
+to store them in an array, #p#, of length 3, so that #u.p[0]# is the
+left child of #u#, #u.p[1]# is the right child of #u#, and #u.p[2]#
+is the parent of #u#.  Using an array this way means that some sequences
+of if statements can be simplified into algebraic expressions.
+
+An example of such a simplification occurs during tree traversal. If
+a traversal arrives at a node #u# from #u.p[i]#, then the next node in
+the traversal is $#u.p#[(#i#+1)\bmod 3]$.  Similar examples occur when
+there is left-right symmetry.  For example, the sibling of #u.p[i]# is
+$#u.p#[(#i#+1)\bmod 2]$.  This works whether #u.p[i]# is a left child
+($#i#=0$) or a right child ($#i#=1$) of #u#.  In some cases this means
+that some complicated code that would otherwise need to have both a left
+version and right version can be written only once. See the methods
+#rotateLeft(u)# and #rotateRight(u)# on page~\pageref{page:rotations}
+for an example.
 
 \begin{exc}
   Prove that a binary tree having $#n#\ge 1$ nodes has $#n#-1$ edges.
