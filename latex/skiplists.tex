@@ -467,7 +467,7 @@ operating system kernel's process management structures \cite{hpux}.
 
 
 \begin{exc}
-  Illustrate the search paths for 2.5 and 5.5 in the skiplist from
+  Illustrate the search paths for 2.5 and 5.5 on the skiplist in 
   \figref{skiplist}.
 \end{exc}
 
@@ -494,25 +494,30 @@ operating system kernel's process management structures \cite{hpux}.
 
 \begin{exc}\exclabel{skiplist-changes}
   Show that, during an #add(x)# or a #remove(x)# operation, the expected
-  number of pointers in the structure that get changed is constant.
+  number of pointers in a #SkiplistSet# that get changed is constant.
 \end{exc}
 
 \begin{exc}\exclabel{skiplist-opt}
   Suppose that, instead of promoting an element from $L_{i-1}$ into $L_i$
   based on a coin toss, we promote it with some probability $p$, $0 <
-  p < 1$.  Show that the expected length of the search path in this case
-  is at most $(1/p)\log_{1/p} #n# + O(1)$.  What is the value of $p$
-  that minimizes this expression? What is the expected height of the
-  skiplist? What is the expected number of nodes in the skiplist?
+  p < 1$.
+  \begin{enumerate}
+   \item Show that the expected length of a search path is
+     at most $(1/p)\log_{1/p} #n# + O(1)$.
+   \item What is the value of $p$ that minimizes the preceding expression?
+   \item What is the expected height of the skiplist? 
+   \item What is the expected number of nodes in the skiplist?
+  \end{enumerate}
 \end{exc}
 
 
 \begin{exc}\exclabel{skiplist-opt-2}
-  Design and implement a #find(x)# method for #SkiplistSSet# that avoids
-  \emph{locally-redundant comparisons}; these are comparisons that have already
-  been done and occur because $#u.next[r]# = #u.next[r-1]#$.
-  Analyze the expected number of comparisons done by your modified #find(x)#
-  method.
+  The #find(x)# method in a #SkiplistSet# sometimes performs
+  \emph{redundant comparisons}; these occur when #x# is compared to the
+  same value more than once.  They can occur when, for some node, #u#,
+  $#u.next[r]# = #u.next[r-1]#$.  Show how these redundant comparisons
+  happen and modify #find(x)# so that they are avoided.  Analyze the
+  expected number of comparisons done by your modified #find(x)# method.
 \end{exc}
 
 \begin{exc}
@@ -603,7 +608,7 @@ operating system kernel's process management structures \cite{hpux}.
      \item Explain how removing some edges of a skiplist lead to
        a structure that looks like a binary tree and that is similar to
        a binary search tree.
-     \item Skiplists and binary search trees each use of about the same
+     \item Skiplists and binary search trees each use about the same
        number of pointers (2 per node).  Skiplists make better use of
        those pointers, though. Explain why.
   \end{enumerate}

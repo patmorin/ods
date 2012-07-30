@@ -725,22 +725,22 @@ access to retrieve a leaf.
   \begin{enumerate}
     \item Let #u# be an overfull node and let #v# be a sibling immediately
     to the right of #u#.  There are two ways to fix the overflow at #u#:
-    \begin{itemize}
+    \begin{enumerate}
        \item #u# can give some of its keys to #v#; or
        \item #u# can be split and the keys of #u# and #v# can be evenly
         distributed among #u#, #v#, and the newly created node, #w#.
-    \end{itemize}
+    \end{enumerate}
     Show that this can always be done in such a way that, after the
     operation, each of the (at most 3) affected nodes has at least
     $B+\alpha B$ keys and at most $2B-\alpha B$ keys, for some constant
     $\alpha > 0$.
     \item Let #u# be an underfull node and let #v# and #w# be siblings of #u#
     There are two ways to fix the underflow at #u#:
-    \begin{itemize}
+    \begin{enumerate}
        \item keys can be redistributed among #u#, #v#, and #w#; or
        \item #u#, #v#, and #w# can be merged into two nodes and the keys
         of #u#, #v#, and #w# can be redistributed amongst these nodes.
-    \end{itemize}
+    \end{enumerate}
     Show that this can always be done in such a way that, after the
     operation, each of the (at most 3) affected nodes has at least
     $B+\alpha B$ keys and at most $2B-\alpha B$ keys, for some constant

@@ -580,6 +580,14 @@ the #prev# and #next# values of existing nodes.
   Your code should run in $O(#n#)$ time.
 \end{exc}
 
+\begin{exc}
+  Implement a method #rotate(r)# that ``rotates'' a #DLList# so that list
+  item #i# becomes list item $(#i#+#r#)\bmod #n#$.  This method should
+  run in $O(1+\min\{#r#,#n#-#r#\})$ time and should not modify any nodes in
+  the list.
+\end{exc}
+
+
 \begin{exc}\exclabel{linkedlist-truncate}
   Write a method, #truncate(i)#, that truncates a #DLList# at position
   #i#.  After the execution of this method, the size of the list is #i#
@@ -610,7 +618,7 @@ the #prev# and #next# values of existing nodes.
   a #DLList#.  
 \end{exc}
 
-\begin{exc}
+\begin{exc}\exclabel{dllist-sort}
   This exercises walks you through an implementation of the merge sort
   algorithm for sorting a #DLList#, as discussed in \secref{merge-sort}.
   \javaonly{In your implementation, perform comparisons between elements
@@ -632,8 +640,8 @@ the #prev# and #next# values of existing nodes.
        \begin{enumerate}
           \item If the list contains 0 or 1 elements then there is
             nothing to do.  Otherwise,
-          \item Split the list into two equal length lists #l1# and #l2# using
-              the #truncate(size()/2)# method;
+          \item Split the list into two approximately equal length lists
+              #l1# and #l2# using the #truncate(size()/2)# method;
           \item Recursively sort #l1#;
           \item Recursively sort #l2#; and, finally,
           \item Merge #l1# and #l2# into a single sorted list.

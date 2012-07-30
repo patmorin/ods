@@ -571,27 +571,44 @@ stored in treap nodes have no use other than keeping the treap balanced.
 \begin{exc}
   Suppose that a binary search tree stores, at each node, #u#, the height,
   #u.height#, of the subtree rooted at #u#, and the size, #u.size# of
-  the subtree rooted at #u#.  Show how, if we perform a left or right
-  rotation at #u#, then these two quantities can be updated, in constant
-  time, for all nodes affected by the rotation.
+  the subtree rooted at #u#. 
+  \begin{enumerate}
+    \item Show how, if we perform a left or right
+      rotation at #u#, then these two quantities can be updated, in
+      constant time, for all nodes affected by the rotation.
+    \item Explain why the same result is not possible if we try to
+      also store the depth, #u.depth#, of each node #u#.
+  \end{enumerate}
+\end{exc}
 
-  Explain why the same result is not possible if we try to also store
-  the depth, #u.depth#, of each node #u#.
+\begin{exc}
+  Design an implement an algorithm that constructs a #Treap# from a
+  sorted array, #a#, of #n# elements.  This method should run in $O(#n#)$
+  worst-case time and should construct a #Treap# that is indistinguishable
+  from one in which the elements of #a# were added one at a time using
+  the #add(x)# method.
 \end{exc}
 
 
 \begin{exc}
-  Design and implement a #Treap# implementation in which each node keeps
-  track of the minimum and maximum values in its subtree.  Using this
-  extra information, add a #fingerFind(x,u)# method that executes the
-  #find(x)# operation with the help of a pointer to the node #u# (which
-  is hopefully not far from the node that contains #x#).  This operation
-  should start at #u# and walk upwards until it reaches a node #w#
-  such that $#w.min#\le #x#\le #w.max#$.  and a node that contains a
-  value no less than #x#.  At that point, it should perform a standard
-  search for #x# starting from #w#.  (One can show that #fingerFind(x,u)#
-  takes $O(1+\log r)$ time, where $r$ is the number of elements in the
-  treap whose value is between #x# and #u.x#.)
+  This exercise works out the details of how one can efficiently search
+  a #Treap# given a pointer that is close to the node we are searching for.
+  \begin{enumerate}
+    \item Design and implement a #Treap# implementation in which each
+      node keeps track of the minimum and maximum values in its subtree.
+    \item Using this extra information, add a #fingerFind(x,u)# method
+      that executes the #find(x)# operation with the help of a pointer
+      to the node #u# (which is hopefully not far from the node that
+      contains #x#).  This operation should start at #u# and walk upwards
+      until it reaches a node #w# such that $#w.min#\le #x#\le #w.max#$.
+      From that point onwards, it should perform a standard search
+      for #x# starting from #w#.  (One can show that #fingerFind(x,u)#
+      takes $O(1+\log r)$ time, where $r$ is the number of elements in
+      the treap whose value is between #x# and #u.x#.)
+    \item Extend your implementation into a version of a treap that
+      starts all its #find(x)# operations from the node most recently
+      found by #find(x)#.
+  \end{enumerate}
 \end{exc}
 
 \begin{exc}\exclabel{treap-get}

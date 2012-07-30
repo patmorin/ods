@@ -144,15 +144,22 @@ node that is the root of a heap that contains all elements in the subtree
 rooted at #h1# and all elements in the subtree rooted at #h2#.
 
 The nice thing about a #merge(h1,h2)# operation is that it can be defined
-recursively.  If either of #h1# or #h2# is #nil#, then we are merging
-with an empty set, so we return #h2# or #h1#, respectively.  Otherwise,
-assume $#h1.x# \le #h2.x#$ since, if $#h1.x# > #h2.x#$, then we can
-reverse the roles of #h1# and #h2#.  Then we know that the root of the
-merged heap will contain #h1.x# and we can recursively merge #h2# with
-#h1.left# or #h1.right#, as we wish.  This is where randomization comes
-in, and we toss a coin to decide whether to merge #h2# with #h1.left#
-or #h1.right#:
+recursively. See \figref{meldable-merge}.  If either of #h1# or #h2#
+is #nil#, then we are merging with an empty set, so we return #h2#
+or #h1#, respectively.  Otherwise, assume $#h1.x# \le #h2.x#$ since,
+if $#h1.x# > #h2.x#$, then we can reverse the roles of #h1# and #h2#.
+Then we know that the root of the merged heap will contain #h1.x# and
+we can recursively merge #h2# with #h1.left# or #h1.right#, as we wish.
+This is where randomization comes in, and we toss a coin to decide
+whether to merge #h2# with #h1.left# or #h1.right#:
 \codeimport{ods/MeldableHeap.merge(h1,h2)}
+
+\begin{figure}
+  \centering{\includegraphics{figs/meldable-merge}}
+  \caption{Merging #h1# and #h2# is done by merging #h2# with one of
+  #h1.left# or #h1.right#.}
+  \figlabel{meldable-merge}
+\end{figure}
 
 In the next section, we show that #merge(h1,h2)# runs in $O(\log #n#)$
 expected time, where #n# is the total number of elements in #h1# and #h2#.
@@ -337,15 +344,15 @@ algorithm \cite{ft87}.
 
 
 \begin{exc}
-  Imagine that the binary tree illustrated in \figref{eytzinger} is a
-  #MeldableHeap#.  Illustrate the addition of the values 3.5 and then 2.5.
-  Use a coin to simulate a random bit when needed.
+  Illustrate the addition of the values 17 and then 82 in the
+  #MeldableHeap# #h1# shown in \figref{meldable-merge}.  Use a coin to
+  simulate a random bit when needed.
 \end{exc}
 
 \begin{exc}
-  Imagine that the binary tree illustrated in \figref{eytzinger} is
-  a #MeldableHeap#.  Illustrate the removal of the next two values
-  (0 and 1).  Use a coin to simulate a random bit when needed.
+  Illustrate the removal of the next two values (4 and 8) in the
+  #MeldableHeap# #h1# shown in \figref{meldable-merge}.  Use a coin to
+  simulate a random bit when needed.
 \end{exc}
 
 \begin{exc}

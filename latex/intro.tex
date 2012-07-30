@@ -12,19 +12,18 @@ realize that we interact with data structures constantly.
 \begin{itemize}
   \item  Open a file: File system data structures are used to locate
     the parts of that file on disk so they can be retrieved.  This isn't
-    easy; disks contain hundreds of millions of blocks.  Your file could
-    be stored on any one of them.
+    easy; disks contain hundreds of millions of blocks.  The contents of your
+    file could be stored on any one of them.
   \item Look up a contact on your phone:  A data
     structure is used to lookup a phone number based on partial
-    information even before you finish dialing/typing.  This isn't easy;
-    this information may be looked up in a data structure containing
-    information about everyone you have ever had phone or email contact
-    with, and your phone doesn't have a very fast processor or a lot
-    of memory.
+    information even before you finish dialing/typing.  This isn't
+    easy; your phone may contain information about a lot of
+    people---everyone you have ever had phone or email contact with---and
+    your phone doesn't have a very fast processor or a lot of memory.
   \item Login to your favourite social network:  The network servers
     use your login information look up your account information.
-    This isn't easy; popular social networks have nearly a billion
-    active users.
+    This isn't easy; the most popular social networks have hundreds of
+    millions of active users.
   \item Do a web search: The search engine uses data structures to find
     the web pages containing your search terms.  This isn't easy; there
     are over 8.5 billion web pages on the Internet and each page contains
@@ -37,29 +36,36 @@ realize that we interact with data structures constantly.
     from and a delay can mean the difference between life or death.
 \end{itemize}
 
-In the next section, we look at the operations supported by the
-most commonly used data structures.  Anyone with even a little bit of
+\subsection{The Need for Efficiency}
+
+In the next section, we look at the operations supported by the most
+commonly used data structures.  Anyone with even a little bit of
 programming experience will see that these operations are not hard to
-implement.  We can store the data in an array or a linked list and any
-operation can be implemented by iterating over all the elements of the
-array or list and possibly adding or removing an element.
+implement correctly.  We can store the data in an array or a linked list
+and each operation can be implemented by iterating over all the elements
+of the array or list and possibly adding or removing an element.
 
-Although this kind of implementation is easy, it is not very efficient.
-Imagine an application with a moderately-sized data set, say of one
-million ($10^6$), items.  It is reasonable, in most applications, to
-assume that the application will want to look up each item at least once.
-This means we can expect to do at least one million ($10^6$) lookups in
-this data.  If each of these $10^6$ lookups inspects  each of the $10^6$
-items, this gives a total of $10^6\times 10^6=10^{12}$ (one thousand
-billion) inspections.
+This kind of implementation is easy, but not very efficient.  Does it
+really matter?  Computers are getting faster and faster. Maybe the
+obvious implementation is good enough. Let's do some back-of-the-envelope
+calculations to find out.
 
-At the time of writing, even a very fast desktop computer can not do more
-than one billion ($10^9$) operations per second.\footnote{Computer speeds
-are at most a few gigahertz (billions of cycles per second) and each
-operation typically takes a few cycles.} This means that this application
-will take at least $10^{12}/10^9 = 1000$ seconds, or roughly 16 minutes
-and 40 seconds.  16 minutes is an eon in computer time, but a person might
-be willing to put up with it (if they were headed out for a coffee break).
+\paragraph{Number of operations:}  Imagine an application with a
+moderately-sized data set, say of one million ($10^6$), items.  It is
+reasonable, in most applications, to assume that the application will
+want to look up each item at least once.  This means we can expect to do
+at least one million ($10^6$) lookups in this data.  If each of these
+$10^6$ lookups inspects  each of the $10^6$ items, this gives a total
+of $10^6\times 10^6=10^{12}$ (one thousand billion) inspections.
+
+\paragraph{Processor speeds:} At the time of writing, even a very fast
+desktop computer can not do more than one billion ($10^9$) operations per
+second.\footnote{Computer speeds are at most a few gigahertz (billions
+of cycles per second) and each operation typically takes a few cycles.}
+This means that this application will take at least $10^{12}/10^9 =
+1000$ seconds, or roughly 16 minutes and 40 seconds.  16 minutes is an
+eon in computer time, but a person might be willing to put up with it
+(if they were headed out for a coffee break).
 
 %Consider, now an application like the human genome project.  Completed in
 %2003 (when computers were quite a bit slower than they are now), this
@@ -69,29 +75,31 @@ be willing to put up with it (if they were headed out for a coffee break).
 %3 seconds.  Doing a million searches would take $3$ million seconds,
 %or roughly 34 days.  This is starting to get beyond reasonable.
 
-Now consider a company like Google, that indexes over 8.5 billion
-web pages.  By our calculations, doing any kind of query over this data
-would take at least 8.5 seconds.  We already know that this isn't the
-case; web searches complete in much less than 8.5 seconds, and they do
-much more complicated queries than just asking if a particular page is
-in their list of indexed pages.  Google receives approximately $4,500$
-queries per second, meaning that they would require at least $4,500\times
-8.5=38,250$ very fast servers just to keep up.
+\paragraph{Bigger data sets:} Now consider a company like Google, that
+indexes over 8.5 billion web pages.  By our calculations, doing any kind
+of query over this data would take at least 8.5 seconds.  We already
+know that this isn't the case; web searches complete in much less than
+8.5 seconds, and they do much more complicated queries than just asking
+if a particular page is in their list of indexed pages.  At the time
+of writing, Google receives approximately $4,500$ queries per second,
+meaning that they would require at least $4,500\times 8.5=38,250$ very
+fast servers just to keep up.
 
-The preceding examples suggest that operations that require looking
-at everything in the data structure do not scale well when the number
-of items, #n#, in the data structure and the number of operations, $m$,
-performed on the data structure are both large.  In these cases, the time
-(measured in, say, machine instructions) is roughly $#n#\times m$.
+\paragraph{The solution:} 
+These examples tell us that the obvious implementations of data structures
+do not scale well when the number of items, #n#, in the data structure
+and the number of operations, $m$, performed on the data structure
+are both large.  In these cases, the time (measured in, say, machine
+instructions) is roughly $#n#\times m$.
 
 The solution, of course, is to carefully organize data within the data
-structure so that not every operation requires inspecting every item.
-It may seem counterintuitive, but we will see data structures where a
-search requires looking at only 2 items on average, independent of the
-number of items stored in the data structure.  In our billion instruction
-per second computer, these operations take $0.000000002$ seconds to
-execute a search in a data structure containing a billion items (or a
-trillion, or a quadrillion, or even a quintillion items).
+structure so that not every operation requires inspecting every data item.
+Although it sounds impossible at first, we will see data structures
+where a search requires looking at only 2 items on average, independent
+of the number of items stored in the data structure.  In our billion
+instruction per second computer it takes only $0.000000002$ seconds to
+search in a data structure containing a billion items (or a trillion,
+or a quadrillion, or even a quintillion items).
 
 We will also see implementations of data structures that keep the
 items in sorted order, where the number of items inspected during an
@@ -104,12 +112,18 @@ $0.00000006$ seconds each.
 The remainder of this chapter briefly reviews some of the main concepts
 used throughout the rest of the book.   \secref{interfaces} describes
 the interfaces implemented by all the data structures described in this
-book.  It should be considered required reading.  The remaining sections
-discuss asymptotic (big-Oh) notation, probability and randomization,
-the model of computation, an overview of the rest of the chapters, and
-the sample code and typesetting conventions.  A reader with or without
-a background in these areas can easily skip them now and come back to
-them later if necessary.
+book and should be considered required reading.  The remaining sections
+discuss:
+\begin{itemize}
+  \item some mathematical background including exponentials, logarithms,
+  factorials, asymptotic (big-Oh) notation, probability, and randomization;
+  \item the model of computation; 
+  \item correctness, running time, and space;
+  \item an overview of the rest of the chapters; and
+  \item the sample code and typesetting conventions.
+\end{itemize}
+A reader with or without a background in these areas can easily skip
+them now and come back to them later if necessary.
 
 
 \section{Interfaces}
@@ -465,7 +479,7 @@ This is proven as follows:
             \\
         & \le 13n\log n 
 \end{align*}
-which demonstrates that the function $f(n)=5n\log n + 8n - 200$ is in the set $O(\log n)$ using the constants $c=13$ and $n_0 = 2$.
+which demonstrates that the function $f(n)=5n\log n + 8n - 200$ is in the set $O(n\log n)$ using the constants $c=13$ and $n_0 = 2$.
 
 There are a number of useful shortcuts when using asymptotic notation.  First:
 \[ O(n^{c_1}) \subset O(n^{c_2}) \enspace ,\]
@@ -527,11 +541,11 @@ the running time simplifies down to
 \[
     T(#n#)= O(#n#) \enspace .
 \]
-Not only is this more compact, it also gives nearly as much information.
-The fact that the running time depends on the constants $a$, $b$, $c$,
-$d$, and $e$ in the above example means that, in general, it will not be
-possible to compare two running times to know which is faster without
-knowing the values of these constants.  Even if we go through the
+Not only is this more compact, but it also gives nearly as much
+information.  The fact that the running time depends on the constants $a$,
+$b$, $c$, $d$, and $e$ in the above example means that, in general, it
+will not be possible to compare two running times to know which is faster
+without knowing the values of these constants.  Even if we go through the
 effort of determining these constants (say, through timing tests) then
 our conclusion will only be valid for the machine we run our tests on.
 
@@ -552,7 +566,7 @@ while $f_2(n)$ is the running time of a considerably simpler algorithm
 based on the divide-and-conquer paradigm.  This illustrates that,
 although $f_1(#n#)$ is greater than $f_2(n)$ for small values of #n#,
 the opposite is true for large values of #n#.  Eventually $f_1(#n#)$
-wins out, by an increasingly large margin.  Analysis using big-Oh notation
+wins out, by an increasingly wide margin.  Analysis using big-Oh notation
 told us that this would happen, since $O(#n#)\subset O(#n#\log #n#)$.
 
 \begin{figure}
@@ -594,9 +608,10 @@ data structures we are interested in their average or \emph{expected}
 running times.
 
 Formally, the running time of an operation on a randomized data structure
-is a random variable and we want to study its \emph{expected value}. For
-a discrete random variable $X$ taking on values in some countable universe
-$U$, the expected value of $X$, denoted by $\E[X]$ is given the by the formula
+is a random variable and we want to study its \emph{expected value}. For a
+discrete random variable $X$ taking on values in some countable universe
+$U$, the expected value of $X$, denoted by $\E[X]$, is given the by
+the formula
 \[
     \E[X] = \sum_{x\in U} x\cdot\Pr\{X=x\} \enspace .
 \]
@@ -689,30 +704,31 @@ big enough to count the number of elements stored in the data structure.
 
 Space is measured in words so that, when we talk about the amount of
 space used by a data structure, we are referring to the number of words
-of memory used by the structure.  All our data structures store values
-of a generic type #T# and we assume an element of type #T# occupies one
-word of memory.  (In reality, we are storing references to objects of
-type #T#, and these references occupy only one word of memory.)
+of memory used by the structure.  All our data structures store values of
+a generic type #T# and we assume an element of type #T# occupies one word
+of memory.  \javaonly{(In reality, we are storing references to objects
+of type #T#, and these references occupy only one word of memory.)}
 
 \javaonly{The #w#-bit word-RAM model is a fairly close match for the
 (32-bit) Java Virtual Machine (JVM) when $#w#=32$.}\cpponly{The #w#-bit
 word-RAM model is a fairly close match for modern desktop computers when
 $#w#=32$ or $#w#=64$.} The data structures presented in this book don't
-use any special tricks that are not implementable on the JVM and most
-other architectures.
+use any special tricks that are not implementable \javaonly{on the JVM and most
+other architectures.}\cpponly{in C++ on most architectures.}
 
 \section{Correctness, Time Complexity, and Space Complexity}
 
 When studying the performance of a data structure, there are three things
 that matter most:
 
-\begin{itemize}
-  \item Correctness: The data structure should correctly implement its interface.
-  \item Time complexity: The running times of operations on the data
+\begin{description}
+  \item[Correctness:] The data structure should correctly implement
+    its interface.
+  \item[Time complexity:] The running times of operations on the data
     structure should be as small as possible.
-  \item Space complexity: The data structure should use as little memory
+  \item[Space complexity:] The data structure should use as little memory
     as possible.
-\end{itemize}
+\end{description}
 
 %Sometimes these three requirements are in conflict with each other. For
 %example, it may be possible to have a faster data structure by using
@@ -730,13 +746,13 @@ but can make the data structures a little slower in practice.
 When studying running times in the context of data structure we tend to
 come across three different kinds of running time guarantees:
 
-\begin{itemize}
-\item  Worst-case running times:  These are the strongest kind of running
+\begin{description}
+\item[Worst-case running times:] These are the strongest kind of running
   time guarantees.  If a data structure operation has a worst-case
-  running-time of $f(#n#)$, then one of these operations \emph{never}
+  running time of $f(#n#)$, then one of these operations \emph{never}
   takes longer than $f(#n#)$ time.
 
-\item Amortized running times:  If we say that the amortized running
+\item[Amortized running times:] If we say that the amortized running
   time of an operation in a data structure is $f(#n#)$, this means that
   the cost of a typical operation is at most $f(#n#)$.  More precisely,
   if a data structure has an amortized running time of $f(#n#)$,
@@ -744,49 +760,55 @@ come across three different kinds of running time guarantees:
   Some individual operations may take more than $f(#n#)$ time but the
   average, over the entire sequence of operations, is at most $f(#n#)$.
 
-\item Expected running times: If we say that the expected running time
+\item[Expected running times:] If we say that the expected running time
   of an operation on a data structure is $f(#n#)$, this means that the
   actual running time is a random variable (see \secref{randomization})
   and the expected value of this random variable is at most $f(#n#)$.
   The randomization here is with respect to random choices made by the
   data structure.
-\end{itemize}
+\end{description}
 
 To understand the difference between worst-case, amortized, and expected
-running times, it helps to consider some financial examples.  In most
-countries, the amount of income tax someone pays is proportional to
-their income.  Someone who must pay \$36,000 of income taxes per year
-may choose to pay their taxes all at once, at the end of the fiscal year.
-Alternatively, they may choose to have \$3,000 of taxes deducted directly
-from their monthly paycheques.  The latter person has a worst-case income
-tax cost of \$3,000 per month, while the former person has an amortized
-monthly cost (over a 12 month period) of \$3,000 per month.
+running times, it helps to consider a financial example.  Consider the
+cost buying a house.  
+\paragraph{Worst-case versus amortized cost:}
+Suppose that a home costs \$120\,000.  In order to buy this home,
+we might get a 120 month (10 year) mortgage with monthly payments of
+\$1\,200 per month.  In this case, the worst-case monthly cost of paying
+this mortgage is \$1\,200 per month.
 
-An example of an expected cost is the cost of automobile repair.  Over a
-period of 12 months, an automobile may work fine, or it may break down.
-If we have enough information about automobiles, we may learn that
-the expected (or average) yearly repair cost for a particular make of
-automobile is \$2,000.  It may be more, or it may be less.  There is
-no hard and fast guarantee about what repairs will cost over a year,
-two years, or even a decade.
+If we have enough cash on hand, we might choose to buy the house outright,
+with one payment of \$120\,000.  In this case, over a period of 10 years,
+the amortized monthly cost of buying this house is
+\[
+   \$120\,000 / 120\text{ months} = \$1\,000\text{ per month} \enspace .
+\]
+This is much less than the \$1\,200 per month we would have to pay if
+we took out a mortgage.
 
-One may wonder why we would ever settle for an amortized or expected
-running-time over a worst-case running time.  The reason this happens
-is that it is often possible to get a lower expected or amortized
-running-time than worst-case running-time.  At the very least, it is very
-often possible to get a much simpler data structure if one is willing to
-settle for amortized or expected running times.
+\paragraph{Worst-case versus expected cost:}
+Next, consider the issue of fire insurance on our \$120\,000 home.
+By studying hundreds of thousands of cases, insurance companies have
+determined that the expected amount of fire damage caused to a home
+like ours is \$10 per month.  This is a very small number, since most
+homes never have fires, a few homes may have some small fires that
+cause a bit of smoke damage, and a tiny number of homes burn right to
+their foundations.  Based on this information, the insurance company
+charges \$15 per month for fire insurance.
 
-The same scenario occurs in many financial settings as well.  Mortgage
-companies allow homeowners to amortized enormous one-time costs
-(the cost of purchasing a house) over long periods of regular costs
-(mortgage payments).  Home insurance companies protect against unlikely
-but very expensive events (floods, fires, and so on) by replacing them
-with predictable worst-case costs (insurance premiums).   In these cases,
-if one could afford the risk of a fire or flood, or the cost of buying
-house outright, it would be cheaper and simpler to forgo the mortgage
-and/or insurance.
+Now it's decision time. Should we pay the \$15 worst-case monthly cost
+for fire insurance or should we gamble and self-insure at an expected
+cost of \$10 per month?  Clearly, the \$10 per month cost less \emph{in
+expectation}, but we have to be able to accept the possibility that
+\emph{actual cost} may be much higher.  In the unlikely event that the
+entire house burns down, the actual cost will be \$120\,000.
 
+These financial examples also offer insight into why we sometimes settle
+for an amortized or expected running time over a worst-case running time.
+It is often possible to get a lower expected or amortized running time
+than worst-case running time. At the very least, it is very often possible
+to get a much simpler data structure if one is willing to settle for
+amortized or expected running times.
 
 \section{Code Samples}
 
@@ -870,7 +892,7 @@ the main results of the previous chapter.
 \multicolumn{4}{c}{} \\[2ex] \hline
 \multicolumn{4}{|c|}{(Priority) #Queue# implementations} \\ \hline
  & #findMin()# & #add(x)#/#remove()# & \\ \hline
-#BinaryHeap# & $O(1)$ & $O(\log #n#)$\tnote{A} & \sref{binaryheap} \\ \hline
+#BinaryHeap# & $O(1)$ & $O(\log #n#)$\tnote{A} & \sref{binaryheap} \\ 
 #MeldableHeap# & $O(1)$ & $O(\log #n#)$\tnote{E} & \sref{meldableheap} \\ \hline
 \end{tabular}
 \begin{tablenotes}
@@ -919,11 +941,11 @@ many Java tutorials online \cite{oracle_tutorials}.}
 
 \begin{exc}
   This exercise is designed to help get the reader familiar with choosing
-  the right data structure for the right problem.  If implemented, they
-  should be done by making use of an implementation of the relevant
-  interface (#Stack#, #Queue#, #Deque#, #USet#, or #SSet#) provided
-  by the \javaonly{Java Collections Framework}\cpponly{C++ Standard
-  Template Library}.
+  the right data structure for the right problem.  If implemented, the
+  parts of this exercise should be done by making use of an implementation
+  of the relevant interface (#Stack#, #Queue#, #Deque#, #USet#, or #SSet#)
+  provided by the \javaonly{Java Collections Framework}\cpponly{C++
+  Standard Template Library}.
 
   Solve the following problems by reading a text file one line at a
   time and performing operations on each line in the appropriate data
@@ -995,17 +1017,17 @@ many Java tutorials online \cite{oracle_tutorials}.}
 \end{exc}
 
 \begin{exc}
-  Suppose you have a #Stack#, #s#, that supports only the #push(x)#
-  and #pop()# operations. Show how, using only a FIFO #Queue#, #q#,
-  you can reverse the order of all elements in #s#.
+  A \emph{matched string} is a sequence of \{, (, and [ characters that
+  are properly matched.  For example, ``\{\{()[]\}\}'' is a matched string,
+  but this ``\{\{()]\}'' is not, since the second \{ is matched with a ].
+  Show how to use a stack so that, given a string of length #n#, you can 
+  determine if it is a matched string in $O(#n#)$ time.
 \end{exc}
-
 
 \begin{exc}
   Suppose you have a #Stack#, #s#, that supports only the #push(x)#
   and #pop()# operations. Show how, using only a FIFO #Queue#, #q#,
-  you can inspect each element of #s# and return them to #s# in their
-  original order.
+  you can reverse the order of all elements in #s#.
 \end{exc}
 
 \begin{exc}

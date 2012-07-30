@@ -321,14 +321,16 @@ and related structures based on partial rebuilding may work.  An example of such
 \end{exc}
 
 \begin{exc}
-  The #ScapegoatTree#, as described in this chapter guarantees that the
-  length of the search path does not exceed $\log_{3/2}#q#$.  Design,
-  analyze, and implement a modified version of #ScapegoatTree# where the
-  length of the search path does not exceed $\log_{#b#} #q#$, where #b#
-  is a parameter with $1<#b#<2$.
-
-  What does your analysis and/or experiments say about the amortized cost
-  of #find(x)#, #add(x)# and #remove(x)# as a function of #b#?
+  The #ScapegoatTree#, as described in this chapter, guarantees that the
+  length of the search path does not exceed $\log_{3/2}#q#$.
+  \begin{enumerate}
+    \item  Design, analyze, and implement a modified version of
+      #ScapegoatTree# where the length of the search path does not exceed
+      $\log_{#b#} #q#$, where #b# is a parameter with $1<#b#<2$.
+    \item What does your analysis and/or experiments say about the
+      amortized cost of #find(x)#, #add(x)# and #remove(x)# as a function
+      of #n# and #b#?
+  \end{enumerate}
 \end{exc}
 
 \begin{exc}\exclabel{scapegoat-quicksize}
@@ -370,13 +372,13 @@ and related structures based on partial rebuilding may work.  An example of such
 \end{exc}
 
 \begin{exc}
-  Analyze and implement a #WeightBalancedTree2#.  This is a tree in
+  Analyze and implement a #WeightBalancedTree#.  This is a tree in
   which each node #u#, except the root, maintains the \emph{balance
   invariant} that $#size(u)# \le (2/3)#size(u.parent)#$.  The #add(x)# and
   #remove(x)# operations are identical to the standard #BinarySearchTree#
   operations, except that any time the balance invariant is violated at
   a node #u#, rotations are performed in order to restore these invariants.
-  Your analysis should show that operations on a #WeightBalancedTree2#
+  Your analysis should show that operations on a #WeightBalancedTree#
   run in $O(\log#n#)$ worst-case time.  
 \end{exc}
 

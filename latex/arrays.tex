@@ -995,20 +995,21 @@ to what can be achieved with the more careful implementation of a
   \[
      O(1+\min\{#i#, #n#-#i#, |#n#/2-#i#|\}) \enspace .
   \]
-  With this running time, modifications are fast if they are near either
+  In other words, modifications are fast if they are near either
   end or near the middle of the list.
 \end{exc}
 
 \begin{exc}
-  Implement a method #rotate(a,r)# that ``rotates'' the array #a# so that
-  #a[i]# moves to $#a#[(#i#+#r#)\bmod #a.length#]$.  
+  Implement a method #rotate(a,r)# that ``rotates'' the array #a#
+  so that #a[i]# moves to $#a#[(#i#+#r#)\bmod #a.length#]$, for all
+  $#i#\in\{0,\ldots,#a.length#\}$.
 \end{exc}
 
 \begin{exc}
   Implement a method #rotate(r)# that ``rotates'' a #List# so that
-  list item #i# becomes list item $(#i#+#r#)\bmod n$.  When run on
+  list item #i# becomes list item $(#i#+#r#)\bmod #n#$.  When run on
   an #ArrayDeque#, or a #DualArrayDeque#, #rotate(r)# should run in
-  $O(1+\min\{r,n-r\})$ time.
+  $O(1+\min\{#r#,#n#-#r#\})$ time.
 \end{exc}
 
 \begin{exc}
@@ -1033,10 +1034,10 @@ to what can be achieved with the more careful implementation of a
   The amortized cost of all operations should be the same as in an
   #ArrayDeque#.
 
-  Hint: Making this work is really all about how a #rebuild()# operation
-  is performed.  You would like #rebuild()# to put the data structure
-  into a state where the data cannot run off either end until at least
-  $#n#/2$ operations have been performed.
+  \noindent Hint: Making this work is really all about how a #rebuild()#
+  operation is performed.  You would like #rebuild()# to put the data
+  structure into a state where the data cannot run off either end until
+  at least $#n#/2$ operations have been performed.
 
   Test the performance of your implementation against the #ArrayDeque#.
   Optimize your implementation (by using #System.arraycopy(a,i,b,i,n)#)

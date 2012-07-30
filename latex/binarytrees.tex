@@ -381,7 +381,7 @@ for an example.
 
 \begin{exc}
   Prove that, if a binary tree, $T$, has at least one leaf, then either
-  (a)~$T$'s root has at most one child or (b)~$T$ has greater than
+  (a)~$T$'s root has at most one child or (b)~$T$ has more than
   one leaf.
 \end{exc}
 
@@ -436,9 +436,9 @@ for an example.
   Write non-recursive functions #nextPreOrder(u)#, #nextInOrder(u)#, and
   #nextPostOrder(u)# that return the node that follows #u# in a pre-order,
   in-order, or post-order traversal, respectively.   These functions
-  should take amortized constant time. That is, if we start at any node
+  should take amortized constant time; if we start at any node
   #u# and repeatedly call one of these functions and assign the return
-  value to #u# until #u#=#null#, then the cost of all these calls should
+  value to #u# until $#u#=#null#$, then the cost of all these calls should
   be $O(#n#)$.
 \end{exc}
 

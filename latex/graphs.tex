@@ -521,9 +521,9 @@ edge $(#j#,#i#)$ is present.
 
 \begin{exc}
   Let $G$ be an undirected graph.  A \emph{connected-component labelling}
-  of $G$ partitions to the vertices of $G$ into maximal sets, each of
-  which forms a connected subgraph.  Show how to compute a connected
-  component labelling of $G$ in $O(#n#+#m#)$ time.
+  of $G$ partitions the vertices of $G$ into maximal sets, each of which
+  forms a connected subgraph.  Show how to compute a connected component
+  labelling of $G$ in $O(#n#+#m#)$ time.
 \end{exc}
 
 \begin{exc}
@@ -534,7 +534,7 @@ edge $(#j#,#i#)$ is present.
 \end{exc}
 
 \begin{exc}
-  We say that a graph $G$ is \emph{stronly-connected} if, for every
+  We say that a graph $G$ is \emph{strongly-connected} if, for every
   pair of vertices #i# and #j# in $G$, there is a path from $#i#$ to
   $#j#$. Show how to test if $G$ is strongly-connected in $O(#n#+#m#)$
   time.
@@ -561,7 +561,7 @@ edge $(#j#,#i#)$ is present.
   #v#, is also sometimes called a \emph{celebrity}: Everyone in the room
   recognizes #v#, but #v# doesn't recognize anyone else in the room.}
   Design and implement an algorithm that tests if a graph $G$, represented
-  as an #AdjacencyMatrix# has a universal sink.  Your algorithm should
+  as an #AdjacencyMatrix#, has a universal sink.  Your algorithm should
   run in $O(#n#)$ time.
 \end{exc}
 
