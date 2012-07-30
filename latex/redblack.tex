@@ -643,6 +643,19 @@ there is no analogue of \thmref{redblack-amortized} for those structures.
 \end{exc}
 
 \begin{exc}
+  Show that, for arbitrarily large values of #n#, there are red-black
+  trees with #n# nodes that have height $2\log #n#-O(1)$.
+\end{exc}
+
+\begin{exc}
+  Show that, for arbitrarily large values of #n#, there exist sequences
+  of #add(x)# and #remove(x)# operations that lead to red-black trees
+  with #n# nodes that have height $2\log #n#-O(1)$.
+\end{exc}
+
+
+
+\begin{exc}
   Why does the method #remove(x)# in the #RedBlackTree# implementation
   perform the assignment #u.parent=w.parent#?  Shouldn't this already
   be done by the call to #splice(w)#?
