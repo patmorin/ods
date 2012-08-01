@@ -80,12 +80,17 @@ so much slower than RAM.
   \figlabel{em}
 \end{figure}
 
-In the full-blown external memory model, the size of the internal memory
-is also a parameter.  However, for the data structures described in this
-chapter, it is sufficient to have an internal memory that is capable
-of storing a constant number of blocks.  In other words, to implement
-these data structures it is sufficient to have an internal memory of
-size $O(B)$.
+In the full-blown external memory model, the size of the internal
+memory is also a parameter.  However, for the data structures described
+in this chapter, it is sufficient to have an internal memory of size
+$O(B+\log_B #n#)$.  That is, the memory needs to be capable of storing
+a constant number of blocks and a recursion stack of height $O(\log_B
+#n#)$.  In most cases, the $O(B)$ term dominates the memory requirement.
+For example, even with the relatively small value $B=32$, $B\ge \log_B
+#n#$ for all $#n#\le 2^{160}$.  In decimal, $B\ge \log_B #n#$ for any
+$
+#n# \le 1\,461\,501\,637\,330\,902\,918\,203\,684\,832\,716\,283\,019\,655\,932\,542\,976
+$.
 
 \section{The Block Store}
 
@@ -682,7 +687,7 @@ is typically quite large---in the hundreds or even thousands.  This means
 that 99\% or even 99.9\% of the data in a $B$-tree is stored in the
 leaves.  In a database system with a large memory, it may be possible
 to cache all the internal nodes of a $B$-tree in RAM, since they only
-represent the 1\% or 0.1\% of the total data set.  When this happens,
+represent 1\% or 0.1\% of the total data set.  When this happens,
 this means that a search in a $B$-tree involves a very fast search in
 RAM, through the internal nodes, followed by a single external memory
 access to retrieve a leaf.
@@ -700,6 +705,19 @@ access to retrieve a leaf.
 \begin{exc}
   What is the maximum number of internal nodes in a $B$-tree that stores
   #n# keys (as a function of #n# and $B$)?
+\end{exc}
+
+\begin{exc}
+  The introduction to this chapter claims that $B$-trees only need an
+  internal memory of size $O(B+\log_B#n#)$.  However, the implementation
+  given here actually requires more memory.
+  \begin{enumerate}
+    \item Show that the implementation of the #add(x)# and #remove(x)#
+      methods given in this chapter use an internal memory
+      proportional to $B\log_B #n#$.
+    \item Describe how these methods could be modified to reduce their memory
+      consumption to $O(B + \log_B #n#)$.
+  \end{enumerate}
 \end{exc}
 
 \begin{exc}
