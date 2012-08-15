@@ -385,6 +385,15 @@ Most of the logarithms in this book are base 2 (\emph{binary logarithms}),
 in which case we drop the base, so that $\log k$ is shorthand for
 $\log_2 k$.
 
+An informal, but useful, way to think about logarithms is to think
+of $\log_b k$ as the number of times we have to divide $k$ by $b$
+before the result is less than or equal to 1.  For example, when one
+does binary search, each comparison reduces the number of possible
+answers by a factor of 2.  This is repeated until there is at most one
+possible answer.  Therefore, the number of comparison done by binary
+search when there are initially at most $n+1$ possible answers is at
+most $\lceil\log_2(n+1)\rceil$.
+
 Another logarithm that comes up several times in this book is the
 \emph{natural logarithm}.  Here we use the notation $\ln k$ to denote
 $\log_e k$, where $e$ --- \emph{Euler's constant} --- is given by
