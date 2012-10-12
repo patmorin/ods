@@ -23,7 +23,7 @@ by an #XFastTrie# is $O(#n#\cdot#w#)$.
 
 The third data structure, the #YFastTrie#, uses an #XFastTrie# to store
 only a sample of roughly one out of every $#w#$ elements and stores the
-remaining elements a standard #SSet# structure.  This trick reduces the
+remaining elements in a standard #SSet# structure.  This trick reduces the
 running time of #add(x)# and #remove(x)# to $O(\log #w#)$ and decreases
 the space to $O(#n#)$.
 
