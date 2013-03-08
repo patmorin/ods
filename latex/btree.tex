@@ -608,14 +608,14 @@ The following lemma shows that, so far, we have overestimated the number of merg
   the cost of the borrow.  This single credit is not enough to pay for
   the borrow, so we create one credit to complete the payment.
 
-  At this point, we have created one credit and we still to show that the
-  credit invariant can be maintained.  In the worst case, #v#'s sibling,
-  #w#, has exactly $B$ keys before the borrow so that, afterwards, both
-  #v# and #w# have $B-1$ keys.  This means that #v# and #w# each need
-  to be storing a credit when the operation is complete.  Therefore,
-  in this case, we create an addition 2 credits to give to #v# and #w#.
-  Since a borrow happens at most once during a #remove(x)# operation,
-  this means that we create at most 3 credits, as required.
+  At this point, we have created one credit and we still have to show
+  that the credit invariant can be maintained.  In the worst case,
+  #v#'s sibling, #w#, has exactly $B$ keys before the borrow so that,
+  afterwards, both #v# and #w# have $B-1$ keys.  This means that #v# and
+  #w# each need to be storing a credit when the operation is complete.
+  Therefore, in this case, we create an addition 2 credits to give to
+  #v# and #w#.  Since a borrow happens at most once during a #remove(x)#
+  operation, this means that we create at most 3 credits, as required.
 
   If the #remove(x)# operation does not include a borrow operation this
   is because it finishes by removing a key from some node that, prior
