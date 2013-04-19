@@ -30,12 +30,14 @@ public:
 	array(int len, T init);
 	void fill(T x);
 	virtual ~array();
-
+// implemented deep copy
 	array<T>& operator=(array<T> &b) {
 		if (a != NULL) delete[] a;
-		a = b.a;
-		b.a = NULL;
-		length = b.length;
+                length = b.length;
+                a = new T[length];
+                for(int i = 0; i< b.length; i++){
+                    a[i] = b[i];
+                }
 		return *this;
 	}
 
