@@ -130,14 +130,14 @@ MAIN: {
       my $args=$2;
       (my $class) = $line =~ /\{\w+\/(\w+)\./;
       print("%$line");
-      print('\renewcommand{\baselinestretch}{1}'."\n");
+      #print('\renewcommand{\baselinestretch}{1}'."\n");
       print("\\begin{Verbatim}[tabsize=2,frame=single");
       print(',commandchars=\\\\@\\$');
       print(",label=\\texttt{$class},labelposition=topline");
       print("]\n"); 
       snarfit($args, 0); 
       print("\\end{Verbatim}\n");
-      print('\renewcommand{\baselinestretch}{1.3}'."\n");
+      #print('\renewcommand{\baselinestretch}{1.3}'."\n");
     } else {
       print($line);
     }
