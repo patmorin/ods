@@ -186,10 +186,12 @@ In particular, we will show:
   the special case that occurs when $#n#=0$ and $#a.length# = 1$.} Now there
   are $#n#_i\le#a.length#/3$ elements stored in #a#.  Therefore, the number
   of #remove(i)# operations since the last call to #resize()# is at least
-  \[
-      #a.length#/2 - 1 - #a.length#/3 = #a.length#/6 - 1
-         = (#a.length#/3)/2 - 1\ge #n#_i/2 -1\enspace .
-  \]
+  \begin{align*}
+      R & \ge #a.length#/2 - 1 - #a.length#/3 \\
+        & = #a.length#/6 - 1 \\
+        & = (#a.length#/3)/2 - 1 \\
+        & \ge #n#_i/2 -1\enspace .
+  \end{align*}
   In either case, the number of calls to #add(i,x)# or #remove(i)# that
   occur between the $(i-1)$th call to #resize()# and the $i$th call to
   #resize()# is at least $#n#_i/2-1$, as required to complete the proof.
@@ -455,7 +457,7 @@ of elements it contains.
 
 \codeimport{ods/DualArrayDeque.size()}
 
-The #front# #ArrayStack# contains list elements with indices
+The #front# #ArrayStack# stores the list elements that have indices
 $0,\ldots,#front.size()#-1$, but stores them in reverse order.
 The #back# #ArrayStack# contains list elements with indices
 $#front.size()#,\ldots,#size()#-1$ in the normal order.  In this way,
@@ -645,7 +647,7 @@ elements.  The above formula can be obtained as shown in \figref{gauss}.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/rootisharraystack}
+    \includegraphics[width=\ScaleIfNeeded]{figs/rootisharraystack}
   \end{center}
   \caption[Adding and removing in a RootishArrayStack]{A sequence of #add(i,x)# and #remove(i)# operations on a
   #RootishArrayStack#.  Arrows denote elements being copied. }

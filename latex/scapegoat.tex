@@ -13,7 +13,7 @@ operations}.  During a partial rebuilding operation, an entire subtree is
 deconstructed and rebuilt into a perfectly balanced subtree.  There are
 many ways of rebuilding a subtree rooted at node #u# into a perfectly
 balanced tree.  One of the simplest is to traverse #u#'s subtree,
-gathering all its nodes into an array #a# and then to recursively
+gathering all its nodes into an array, #a#, and then to recursively
 build a balanced subtree using #a#.  If we let $#m#=#a.length#/2$,
 then the element #a[m]# becomes the root of the new subtree,
 $#a#[0],\ldots,#a#[#m#-1]$ get stored recursively in the left subtree

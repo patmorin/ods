@@ -95,6 +95,12 @@ sub snarfit($$) {
       $line =~ s/\bUtils\.//g;    # get rid of Util.
       $line =~ s/\bc\.compare/compare/g;    # get rid of Util.
       $line =~ s/([^A-Za-z0-9])f\./$1/g; # hide factories
+      $line =~ s/\(Node(<T>)?\[\]\)//g; # hide type-cast
+      $line =~ s/\bMath\.max/max/g; # hide Math.
+      $line =~ s/\bMath\.min/min/g; # hide Math.
+      $line =~ s/BinarySearchTree\.BSTNode/BSTNode/g;
+      $line =~ s/ArrayStack<Integer>\(Integer.class\)/ArrayStack<Integer>()/g;
+      $line =~ s/\s+throws\s+DuplicateValueException//g;
       printVerbatim($line);
     }
     while ($line =~ /\}/g) {
@@ -131,12 +137,15 @@ MAIN: {
       (my $class) = $line =~ /\{\w+\/(\w+)\./;
       print("%$line");
       #print('\renewcommand{\baselinestretch}{1}'."\n");
-      print("\\begin{Verbatim}[tabsize=2,frame=single");
+      #print("\\resizebox{.98\\textwidth}{!}{");
+      print("\ \\hspace{.5ex}\n");
+      print("\\begin{Verbatim}[fontsize=\\small,gobble=1,tabsize=2,frame=single");
       print(',commandchars=\\\\@\\$');
       print(",label=\\texttt{$class},labelposition=topline");
       print("]\n"); 
       snarfit($args, 0); 
       print("\\end{Verbatim}\n");
+      #print("}");
       #print('\renewcommand{\baselinestretch}{1.3}'."\n");
     } else {
       print($line);

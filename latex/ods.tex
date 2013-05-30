@@ -25,6 +25,49 @@
 }
 \makeatother
 
+\makeatletter
+\def\HalfScaleIfNeeded{%
+\ifdim\Gin@nat@width>.46\linewidth
+.46\linewidth
+\else
+\Gin@nat@width
+\fi
+}
+\makeatother
+
+\makeatletter
+\def\HeightScaleIfNeeded{%
+\ifdim\Gin@nat@height>.8\textheight
+.8\textheight
+\else
+\Gin@nat@height
+\fi
+}
+\makeatother
+
+
+\makeatletter
+\def\QuarterHeightScaleIfNeeded{%
+\ifdim\Gin@nat@height>.22\textheight
+.22\textheight
+\else
+\Gin@nat@height
+\fi
+}
+\makeatother
+
+\makeatletter
+\def\FifthHeightScaleIfNeeded{%
+\ifdim\Gin@nat@height>.168\textheight
+.168\textheight
+\else
+\Gin@nat@height
+\fi
+}
+\makeatother
+
+
+
 %\usepackage[mathlines]{lineno}
 %\linenumbers
 %\DeclareGraphicsExtensions{.pdf,.eps}
@@ -51,6 +94,7 @@
 \hyphenation{Scape-goat-Tree}
 \hyphenation{Binary-Heap}
 \hyphenation{Meld-able-Heap}
+\hyphenation{Java-Script}
 
 \usepackage{everysel}
 \EverySelectfont{%
@@ -62,11 +106,12 @@
 }
 
 \usepackage[sf,bf,small,raggedright,compact]{titlesec} % formatting titles
-\usepackage{fancyvrb}  % formatting pseudocode
+\usepackage{relsize,fancyvrb}  % formatting pseudocode
 \usepackage{ods} % Personalization and commands
 
 \htmlonly{
 \newcommand{\ScaleIfNeeded}{\textwidth}
+\newcommand{\HalfScaleIfNeeded}{\textwidth}
 }
  
 
@@ -153,7 +198,7 @@
 	urlcolor=linkblue} 
 
 % Title page content
-\title{Open Data Structures (in \lang)}
+\title{Open Data Structures}
 \author{Pat Morin}
 \date{%Development Edition: \today\ \currenttime
 Edition 0.1E\cpponly{$\beta$}

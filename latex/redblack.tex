@@ -114,11 +114,11 @@ then #w# is left with only one child and violates the degree property.
 \begin{figure}
   \begin{center}
    \begin{tabular}{c}
-     \includegraphics{figs/24tree-remove-1} \\
-     \includegraphics{figs/24tree-remove-2} \\
-     \includegraphics{figs/24tree-remove-3} \\
-     \includegraphics{figs/24tree-remove-4} \\
-     \includegraphics{figs/24tree-remove-5} \\
+     \includegraphics[height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-1} \\
+     \includegraphics[height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-2} \\
+     \includegraphics[height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-3} \\
+     \includegraphics[height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-4} \\
+     \includegraphics[height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-5} \\
    \end{tabular}
   \end{center}
   \caption[Removing a leaf from a 2-4 Tree]{Removing a leaf from a 2-4 Tree.  This process goes all the way to the root because all of #u#'s ancestors and their siblings have degree 2.}
@@ -304,7 +304,7 @@ The #pullBlack(u)# method reverses this operation:
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/flippullpush}
+    \includegraphics[width=\ScaleIfNeeded]{figs/flippullpush}
   \end{center}
   \caption{Flips, pulls and pushes}
   \figlabel{redblack-flippullpush}
@@ -343,7 +343,7 @@ reader may wish to study this figure before continuing.
 
 \begin{figure}
   \begin{center}
-    \includegraphics[scale=0.8]{figs/rb-addfix}
+    \includegraphics[width=\ScaleIfNeeded]{figs/rb-addfix}
   \end{center}
   \caption{A single round in the process of fixing Property~2 after
   an insertion.}
@@ -418,7 +418,7 @@ Each iteration of the loop in #removeFixup(u)# processes the double-black node #
 
 \begin{figure}
   \begin{center}
-    \includegraphics[scale=0.8]{figs/rb-removefix}
+    \includegraphics[height=\HeightScaleIfNeeded]{figs/rb-removefix}
   \end{center}
   \caption{A single round in the process of eliminating a double-black node
    after a removal.}

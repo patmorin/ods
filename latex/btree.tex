@@ -73,7 +73,7 @@ but this is really just to emphasize the fact that external memory is
 so much slower than RAM.
 
 \begin{figure}
-  \centering{\includegraphics{figs/em}}
+  \centering{\includegraphics[width=\ScaleIfNeeded]{figs/em}}
   \caption[The external memory model]{In the external memory model,
   accessing an individual item, #x#, in the external memory requires
   reading the entire block containing #x# into RAM.}
@@ -291,10 +291,10 @@ of $B$.
 
 \begin{figure}
    \centering{\begin{tabular}{l}
-     \includegraphics{figs/btree-split-1} \\[2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-split-1} \\[2ex]
      \multicolumn{1}{c}{#u.split()#} \\ 
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-     \includegraphics{figs/btree-split-2} \\
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-split-2} \\
    \end{tabular}}
    \caption[Splitting a $B$-tree node]{Splitting the node #u# in a
      $B$-tree ($B=3$). Notice that the key $#u.keys#[2]=\mathrm{m}$
@@ -482,10 +482,10 @@ also children), for #w#.  There are two ways to do this:
 
   \begin{figure}
       \centering{\begin{tabular}{l}
-       \includegraphics{figs/btree-borrow-1} \\[2ex]
+       \includegraphics[width=\ScaleIfNeeded]{figs/btree-borrow-1} \\[2ex]
        \multicolumn{1}{c}{#shiftRL(v,w)#} \\ 
        \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-       \includegraphics{figs/btree-borrow-2} \\
+       \includegraphics[width=\ScaleIfNeeded]{figs/btree-borrow-2} \\
      \end{tabular}}
     \caption[Borrowing in a $B$-tree]{If #v# has more than $B-1$ keys,
        then #w# can borrow keys from #v#.}
@@ -503,10 +503,10 @@ also children), for #w#.  There are two ways to do this:
   
   \begin{figure}
      \centering{\begin{tabular}{l}
-       \includegraphics{figs/btree-merge-1} \\[2ex]
+       \includegraphics[width=\ScaleIfNeeded]{figs/btree-merge-1} \\[2ex]
        \multicolumn{1}{c}{#merge(v,w)#} \\ 
        \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-       \includegraphics{figs/btree-merge-2} \\
+       \includegraphics[width=\ScaleIfNeeded]{figs/btree-merge-2} \\
      \end{tabular}}
      \caption[Merging in a $B$-tree]{Merging two siblings #v# and #w#
      in a $B$-tree ($B=3$).}

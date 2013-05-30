@@ -32,7 +32,7 @@ of a skiplist is shown in \figref{skiplist}.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/skiplist}
+    \includegraphics[width=\ScaleIfNeeded]{figs/skiplist}
   \end{center}
   \caption{A skiplist containing seven elements.}
   \figlabel{skiplist}
@@ -65,7 +65,7 @@ at the occurrence of #w# in the list $L_{h-1}$.  We continue this way
 until we reach the predecessor of #u# in $L_0$. 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/skiplist-searchpath}
+    \includegraphics[width=\ScaleIfNeeded]{figs/skiplist-searchpath}
   \end{center}
   \caption{The search path for the node containing $4$ in a skiplist.}
   \figlabel{skiplist-searchpath}
@@ -138,7 +138,7 @@ code implements this algorithm for #add(x)#:
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/skiplist-add}
+    \includegraphics[width=\ScaleIfNeeded]{figs/skiplist-add}
   \end{center}
   \caption[Adding to a skiplist]{Adding the node containing $3.5$ to a skiplist.  The nodes stored in #stack#
   are highlighted.}
@@ -154,7 +154,7 @@ $#u.next.x#=#x#$ and if so, we splice #u# out of the list:
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/skiplist-remove}
+    \includegraphics[width=\ScaleIfNeeded]{figs/skiplist-remove}
   \end{center}
   \caption{Removing the node containing $3$ from a skiplist.}
   \figlabel{skiplist-remove}
@@ -192,7 +192,7 @@ way:
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/skiplist-lengths}
+    \includegraphics[width=\ScaleIfNeeded]{figs/skiplist-lengths}
   \end{center}
   \caption{The lengths of the edges in a skiplist.}
   \figlabel{skiplist-lengths}
@@ -227,7 +227,7 @@ the lengths of edges are updated properly.  See \figref{skiplist-addix}.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/skiplist-addix}
+    \includegraphics[width=\ScaleIfNeeded]{figs/skiplist-addix}
   \end{center}
   \caption[Adding to a SkiplistList]{Adding an element to a #SkiplistList#.}
   \figlabel{skiplist-addix}
@@ -264,7 +264,7 @@ By now, the implementation of
 the #remove(i)# operation in a #SkiplistList# should be obvious.  We follow the search path for the node at position #i#.  Each time the search path takes a step down from a node, #u#, at level #r# we decrement the length of the edge leaving #u# at that level.  We also check if #u.next[r]# is the element of rank #i# and, if so, splice it out of the list at that level.   An example is shown in \figref{skiplist-removei}.
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/skiplist-removei}
+    \includegraphics[width=\ScaleIfNeeded]{figs/skiplist-removei}
   \end{center}
   \caption[Removing an element from a SkiplistList]{Removing an element from a #SkiplistList#.}
   \figlabel{skiplist-removei}

@@ -472,8 +472,11 @@ compute exactly.  Therefore, instead of analyzing running times exactly,
 we will use the so-called \emph{big-Oh notation}: For a function $f(n)$,
 $O(f(n))$ denotes a set of functions,
 \[
-   O(f(n)) = \{g(n):\mbox{there exists $c>0$, and $n_0$ such that
-             $g(n) \le c\cdot f(n)$ for all $n\ge n_0$}   \} \enspace .
+   O(f(n)) = \left\{
+     \begin{array}{l}
+       g(n):\mbox{there exists $c>0$, and $n_0$ such that} \\
+             \quad\mbox{$g(n) \le c\cdot f(n)$ for all $n\ge n_0$}   
+     \end{array} \right\} \enspace .
 \]
 Thinking graphically, this set consists of the functions $g(n)$ where
 $c\cdot f(n)$ starts to dominate $g(n)$ when $n$ is sufficiently large.
@@ -591,7 +594,7 @@ than one variable. There seems to be no standard for this, but for our
 purposes, the following definition is sufficient:
 \[
    O(f(n_1,\ldots,n_k)) = 
-   \left\{\begin{array}{lll}
+   \left\{\begin{array}{@{}l@{}}
              g(n_1,\ldots,n_k):\mbox{there exists $c>0$, and $z$ such that} \\
              \quad \mbox{$g(n_1,\ldots,n_k) \le c\cdot f(n_1,\ldots,n_k)$} \\
              \qquad \mbox{for all $n_1,\ldots,n_k$ such that $g(n_1,\ldots,n_k)\ge z$}   
@@ -752,7 +755,7 @@ structures that make an extra effort to keep space usage to a minimum.
 This won't usually affect the (asymptotic) running times of operations,
 but can make the data structures a little slower in practice.
 
-When studying running times in the context of data structure we tend to
+When studying running times in the context of data structures we tend to
 come across three different kinds of running time guarantees:
 
 \begin{description}
@@ -832,9 +835,9 @@ the discussion, will be clear from the accompanying text.
 
 These conventions should make most of the code samples understandable by
 anyone with a background in any of the languages from the ALGOL tradition,
-including B, C, C++, C\#, D, Java, JavaScript, and so on.  Readers who want
-the full details of all implementations are encouraged to look at the
-\lang\ source code that accompanies this book.
+including B, C, C++, C\#, Objective-C, D, Java, JavaScript, and so on.
+Readers who want the full details of all implementations are encouraged
+to look at the \lang\ source code that accompanies this book.
 
 This book mixes mathematical analysis of running times with \lang\
 source code for the algorithms being analyzed.  This means that
@@ -856,6 +859,7 @@ the main results of the previous chapter.
 
 \begin{table}
 \begin{center}
+\resizebox{.98\textwidth}{!}{
 \begin{threeparttable}
 \begin{tabular}{|l|l|l|l|} \hline
 \multicolumn{4}{|c|}{#List# implementations} \\ \hline
@@ -877,7 +881,7 @@ the main results of the previous chapter.
 \item[A]{Denotes an \emph{amortized} running time.}
 \item[E]{Denotes an \emph{expected} running time.}
 \end{tablenotes}
-\end{threeparttable}
+\end{threeparttable}}
 \end{center}
 \caption{Summary of #List# and #USet# implementations.}
 \tablabel{summary-i}
@@ -928,7 +932,7 @@ the main results of the previous chapter.
 The #List#, #USet#, and #SSet# interfaces described in
 \secref{interfaces} are influenced by the Java Collections Framework
 \cite{oracle_collections}.  These are essentially simplified versions of
-the #List#, #Set#/#Map#, and #SortedSet#/#SortedMap# interfaces found in
+the #List#, #Set#, #Map#, #SortedSet#, and #SortedMap# interfaces found in
 the Java Collections Framework.  \javaonly{Indeed, the accompanying source
 code includes wrapper classes for making #USet# and #SSet# implementations
 into #Set#, #Map#, #SortedSet#, and #SortedMap# implementations.}

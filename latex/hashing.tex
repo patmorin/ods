@@ -28,7 +28,7 @@ total number of items in all lists (see \figref{chainedhashtable}):
 \codeimport{ods/ChainedHashTable.t.n}
 \begin{figure}
    \begin{center}
-     \includegraphics{figs/chainedhashtable}
+     \includegraphics[width=\ScaleIfNeeded]{figs/chainedhashtable}
    \end{center}
    \caption[A ChainedHashTable]{An example of a #ChainedHashTable# with $#n#=14$ and $#t.length#=16$.  In this example $#hash(x)#=6$}
    \figlabel{chainedhashtable}
@@ -108,6 +108,7 @@ formula is simpler than the formula itself:
 
 \begin{figure}
   \begin{center}
+    \resizebox{.98\textwidth}{!}{
     \begin{tabular}{|lr@{}r|}\hline
     $2^#w#$ (4294967296)&            #1#&#00000000000000000000000000000000# \\
     #z# (4102541685)&                   &#11110100100001111101000101110101# \\
@@ -116,7 +117,7 @@ formula is simpler than the formula itself:
     $(#z#\cdot#x#)\bmod 2^{#w#}$ &      &#00011110010010000101110100110010# \\
     $((#z#\cdot#x#)\bmod 2^{#w#})\ddiv 2^{#w#-#d#}$ &&
                       \multicolumn{1}{@{}l|}{#00011110#} \\\hline
-    \end{tabular}
+    \end{tabular}}
   \end{center}
   \caption{The operation of the multiplicative hash function with $#w#=32$
     and $#d#=8$.}
@@ -857,8 +858,10 @@ Multiply-add hashing has a collision probability of only $1/2^{#d#}$
 There are a number of methods of obtaining hash codes from fixed-length
 sequences of #w#-bit integers.  One particularly fast method
 \cite{bhkkr99} is the function
-\[
-  h(#x#_0,\ldots,#x#_{r-1}) = \left(\sum_{i=0}^{r/2-1} ((#x#_{2i}+#a#_{2i})\bmod 2^{#w#})((#x#_{2i+1}+#a#_{2i+1})\bmod 2^{#w#})\right) \bmod 2^{2#w#}
+\[\begin{array}{l}
+  h(#x#_0,\ldots,#x#_{r-1}) \\
+   \quad = \left(\sum_{i=0}^{r/2-1} ((#x#_{2i}+#a#_{2i})\bmod 2^{#w#})((#x#_{2i+1}+#a#_{2i+1})\bmod 2^{#w#})\right) \bmod 2^{2#w#}
+\end{array}
 \]
 where $r$ is even and $#a#_0,\ldots,#a#_{r-1}$ are randomly chosen from
 $\{0,\ldots,2^{#w#}\}$. This yields a $2#w#$-bit hash code that has
