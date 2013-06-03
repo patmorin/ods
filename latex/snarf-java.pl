@@ -126,7 +126,7 @@ MAIN: {
         $inside = color($inside);
         $inside =~ s/([%&])/\\$1/g;
         $inside =~ s/(\\\&|\\\%|<<|>>>?)/\\text{\\ttfamily $1}/g;
-        $inside = "\\ensuremath{\\mathtt{$inside}}";
+        $inside = "\\ensuremath{\\mathtt{$inside}}";  # should be mathtt
       }
       $line =~ s/#([^#])*#/$inside/;
     } 
@@ -140,7 +140,7 @@ MAIN: {
       #print('\renewcommand{\baselinestretch}{1}'."\n");
       #print("\\resizebox{.98\\textwidth}{!}{");
       print("\ \\hspace{.5ex}\n");
-      print("\\begin{Verbatim}[fontsize=\\small,gobble=1,tabsize=2,frame=single");
+      print("\\begin{Verbatim}[gobble=1,tabsize=2,frame=single");
       print(',commandchars=\\\\@\\$');
       print(",label=\\texttt{$class},labelposition=topline");
       print("]\n"); 

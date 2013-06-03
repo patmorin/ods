@@ -4,11 +4,11 @@
 In this chapter, we discuss two implementations of the extremely useful
 priority #Queue# data structure.  Both of these structures are a special
 kind of binary tree called a \emph{heap}, which means ``a disorganized
-pile.''  This is in contrast to binary search trees that can thought of
-as a highly organized pile.
+pile.''  This is in contrast to binary search trees that can be thought
+of as a highly organized pile.
 
-The first heap implementation uses an array to simulate a complete
-binary tree.  It is very fast and is the basis of one of the fastest
+The first heap implementation uses an array to simulate a complete binary
+tree.  This very fast implementation is the basis of one of the fastest
 known sorting algorithms, namely heapsort (see \secref{heapsort}).
 The second implementation is based on more flexible binary trees.
 It supports a #meld(h)# operation that allows the priority queue to
@@ -17,14 +17,14 @@ absorb the elements of a second priority queue #h#.
 \section{#BinaryHeap#: An Implicit Binary Tree}
 \seclabel{binaryheap}
 
-Our first implementation of a (priority) #Queue# is based on a
-technique that is over 400 years old.  \emph{Eytzinger's method}
-allows us to represent a complete binary tree as an array.  This is
-done by laying out the nodes of the tree in breadth-first order (see
-\secref{bintree:traversal}) in the array.  In this way, the root is
-stored at position 0, the root's left child is stored at position 1,
-the root's right child at position 2, the left child of the left child
-of the root is stored at position 3, and so on. See \figref{eytzinger}.
+Our first implementation of a (priority) #Queue# is based on a technique
+that is over four hundred years old.  \emph{Eytzinger's method} allows us
+to represent a complete binary tree as an array by laying out the nodes
+of the tree in breadth-first order (see \secref{bintree:traversal}).
+In this way, the root is stored at position 0, the root's left child is
+stored at position 1, the root's right child at position 2, the left
+child of the left child of the root is stored at position 3, and so
+on. See \figref{eytzinger}.
 
 \begin{figure}
   \begin{center}
@@ -34,10 +34,11 @@ of the root is stored at position 3, and so on. See \figref{eytzinger}.
   \figlabel{eytzinger}
 \end{figure}
 
-If we do this for a large enough tree, some patterns emerge.  The left
-child of the node at index #i# is at index $#left(i)#=2#i#+1$ and the
-right child of the node at index #i# is at index $#right(i)#=2#i#+2$.
-The parent of the node at index #i# is at index $#parent(i)#=(#i#-1)/2$.
+If we apply Eytzinger's method to sufficiently large tree, some
+patterns emerge.  The left child of the node at index #i# is at index
+$#left(i)#=2#i#+1$ and the right child of the node at index #i# is at
+index $#right(i)#=2#i#+2$.  The parent of the node at index #i# is at
+index $#parent(i)#=(#i#-1)/2$.
 \codeimport{ods/BinaryHeap.left(i).right(i).parent(i)}
 
 A #BinaryHeap# uses this technique to implicitly represent a complete
@@ -51,7 +52,7 @@ In a #BinaryHeap#, the #n# elements are stored in an array #a#:
 \codeimport{ods/BinaryHeap.a.n}
 
 Implementing the #add(x)# operation is fairly straightforward.  As with
-all array-based structures, we first check if #a# is full (because
+all array-based structures, we first check to see if #a# is full (because
 $#a.length#=#n#$) and, if so, we grow #a#.  Next, we place #x# at location
 #a[n]# and increment #n#.  At this point, all that remains is to ensure
 that we maintain the heap property.  We do this by repeatedly swapping
@@ -97,7 +98,7 @@ this element with the smallest of its two children and continue.
 
 
 As with other array-based structures, we will ignore the time spent in
-calls to #resize()#, since these can be accounted for with the amortization
+calls to #resize()#, since these can be accounted for using the amortization
 argument from \lemref{arraystack-amortized}.  The running times of
 both #add(x)# and #remove()# then depend on the height of the (implicit)
 binary tree.  Luckily, this is a \emph{complete} binary tree;  every level
@@ -143,12 +144,12 @@ takes two heap nodes #h1# and #h2# and merges them, returning a heap
 node that is the root of a heap that contains all elements in the subtree
 rooted at #h1# and all elements in the subtree rooted at #h2#.
 
-The nice thing about a #merge(h1,h2)# operation is that it can be defined
-recursively. See \figref{meldable-merge}.  If either of #h1# or #h2#
-is #nil#, then we are merging with an empty set, so we return #h2#
+The nice thing about a #merge(h1,h2)# operation is that it can be
+defined recursively. See \figref{meldable-merge}.  If either #h1# or
+#h2# is #nil#, then we are merging with an empty set, so we return #h2#
 or #h1#, respectively.  Otherwise, assume $#h1.x# \le #h2.x#$ since,
 if $#h1.x# > #h2.x#$, then we can reverse the roles of #h1# and #h2#.
-Then we know that the root of the merged heap will contain #h1.x# and
+Then we know that the root of the merged heap will contain #h1.x#, and
 we can recursively merge #h2# with #h1.left# or #h1.right#, as we wish.
 This is where randomization comes in, and we toss a coin to decide
 whether to merge #h2# with #h1.left# or #h1.right#:
@@ -185,11 +186,11 @@ Each of these operations can be implemented using a constant number of
 \subsection{Analysis of #merge(h1,h2)#}
 
 The analysis of #merge(h1,h2)# is based on the analysis of a random walk
-in a binary tree.  A \emph{random walk} in a binary tree is a walk that
-starts at the root of the tree.  At each step in the walk, a coin is
-tossed and the walk proceeds to the left or right child of the current
-node depending on the result of this coin toss.  The walk ends when it
-falls off the tree (the current node becomes #nil#).
+in a binary tree.  A \emph{random walk} in a binary tree starts at the
+root of the tree.  At each step in the random walk, a coin is tossed and,
+depending on the result of this coin toss, the walk proceeds to the left
+or to the right child of the current node.  The walk ends when it falls
+off the tree (the current node becomes #nil#).
 
 The following lemma is somewhat remarkable because it does not depend
 at all on the shape of the binary tree:
@@ -285,9 +286,10 @@ The following theorem summarizes the performance of a #MeldableHeap#:
 \section{Discussion and Exercises}
 
 The implicit representation of a complete binary tree as an array,
-or list, seems to have been first proposed by Eytzinger \cite{e1590},
-as a representation for pedigree family trees.  The #BinaryHeap# data
-structure described here was first introduced by Williams \cite{w64}.
+or list, seems to have been first proposed by Eytzinger \cite{e1590}.
+He used this representation in books containing pedigree family trees
+of noble families.  The #BinaryHeap# data structure described here was
+first introduced by Williams \cite{w64}.
 
 The randomized #MeldableHeap# data structure described here appears
 to have first been proposed by Gambin and Malinowski \cite{gm98}.
@@ -299,14 +301,14 @@ structure.
 
 Some of the above structures also support a #decreaseKey(u,y)# operation
 in which the value stored at node #u# is decreased to #y#.  (It is a
-pre-condition that $#y#\le#u.x#$.)  This operation can be implemented
-in $O(\log #n#)$ time in most of the above structures by removing node
+pre-condition that $#y#\le#u.x#$.)  In most of the preceding structures,
+this operation can be supported in $O(\log #n#)$ time by removing node
 #u# and adding  #y#.  However, some of these structures can implement
 #decreaseKey(u,y)# more efficiently.  In particular, #decreaseKey(u,y)#
 takes $O(1)$ amortized time in Fibonacci heaps and $O(\log\log #n#)$
 amortized time in a special version of pairing heaps \cite{e09}.
 This more efficient #decreaseKey(u,y)# operation has applications in
-speeding up several graph algorithms including Dijkstra's shortest path
+speeding up several graph algorithms, including Dijkstra's shortest path
 algorithm \cite{ft87}.
 
 \begin{exc}
@@ -361,19 +363,19 @@ algorithm \cite{ft87}.
 \end{exc}
 
 \begin{exc}
-  Show how, in a #BinaryHeap# or #MeldableHeap#, to find the second
-  smallest value in constant time.
+  Show how to find the second smallest value in a #BinaryHeap# or
+  #MeldableHeap# in constant time.
 \end{exc}
 
 \begin{exc}
-  Show how, in a #BinaryHeap# or #MeldableHeap#, to find the $k$th
-  smallest value in $O(k\log k)$ time. (Hint: Using another heap might
-  help.)
+  Show how to find the $k$th smallest value in a #BinaryHeap# or
+  #MeldableHeap# in $O(k\log k)$ time.  (Hint: Using another heap
+  might help.)
 \end{exc}
 
 \begin{exc}
-  Suppose you are given #k# sorted lists, of total length #n#.  Show how,
-  using a heap, to merge these into a single sorted list in $O(n\log
+  Suppose you are given #k# sorted lists, of total length #n#.  Using
+  a heap, show how to merge these into a single sorted list in $O(n\log
   k)$ time.  (Hint: Starting with the case $k=2$ can be instructive.)
 \end{exc}
 

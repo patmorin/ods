@@ -7,10 +7,10 @@ randomization to achieve $O(\log #n#)$ expected time for all operations.
 \section{Random Binary Search Trees}
 \seclabel{rbst}
 
-Consider the two binary search trees shown in \figref{rbs-lvc}.  The one
-on the left is a list and the other is a perfectly balanced binary search
-tree. The one on the left has height $#n#-1=14$ and the one on the right
-has height three.
+Consider the two binary search trees shown in \figref{rbs-lvc}, each of
+which has $#n#=15$ nodes.  The one on the left is a list and the other
+is a perfectly balanced binary search tree. The one on the left has a
+height of $#n#-1=14$ and the one on the right has a height of three.
 
 \begin{figure}
   \begin{center}
@@ -48,7 +48,7 @@ tree on the right and only one that generates the tree on the left.
 
 The above example gives some anecdotal evidence that, if we choose a
 random permutation of $0,\ldots,14$, and add it into a binary search
-tree then we are more likely to get a very balanced tree (the right
+tree, then we are more likely to get a very balanced tree (the right
 side of \figref{rbs-lvc}) than we are to get a very unbalanced tree
 (the left side of \figref{rbs-lvc}).
 
@@ -122,7 +122,7 @@ of the search path is at most $2\ln n + O(1)$.  The second part tells
 us the same thing about searching for a value not stored in the tree.
 When we compare the two parts of the lemma, we see that it is only
 slightly faster to search for something that is in the tree compared to
-something that is not in the tree.
+something that is not.
 
 
 \subsection{Proof of \lemref{rbs}}
@@ -334,10 +334,9 @@ depending on whether #w# is a right or left child of #u#, respectively.
   \figlabel{rotations}
 \end{figure}
 
-The code that implements this has to handle these two possibilities
-and be careful of a boundary
-case (when #u# is the root) so the actual code is a little longer than
-\figref{rotations} would lead a reader to believe:
+The code that implements this has to handle these two possibilities and
+be careful of a boundary case (when #u# is the root), so the actual code
+is a little longer than \figref{rotations} would lead a reader to believe:
 \codeimport{ods/BinarySearchTree.rotateLeft(u).rotateRight(u)}
 \label{page:rotations}
 In terms of the #Treap# data structure, the most important property of a
@@ -406,7 +405,7 @@ An example of the #remove(x)# operation is shown in \figref{treap-remove}.
 \end{figure}
 
 The trick to analyze the running time of the #remove(x)# operation is
-to notice that this operation is the reverse of the #add(x)# operation.
+to notice that this operation reverses the #add(x)# operation.
 In particular, if we were to reinsert #x#, using the same priority #u.p#,
 then the #add(x)# operation would do exactly the same number of rotations
 and would restore the #Treap# to exactly the same state it was in before
@@ -583,7 +582,7 @@ stored in treap nodes have no use other than keeping the treap balanced.
 \end{exc}
 
 \begin{exc}
-  Design an implement an algorithm that constructs a #Treap# from a
+  Design and implement an algorithm that constructs a #Treap# from a
   sorted array, #a#, of #n# elements.  This method should run in $O(#n#)$
   worst-case time and should construct a #Treap# that is indistinguishable
   from one in which the elements of #a# were added one at a time using

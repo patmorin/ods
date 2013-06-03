@@ -3,12 +3,13 @@
 
 This chapter introduces one of the most fundamental structures in computer
 science: binary trees.  The use of the word \emph{tree} here comes from
-the fact that, when we draw them, the resulting drawing often resembles
-the trees we find in a forest.  There are lots of ways of defining
-binary trees.  Mathematically, a \emph{binary tree} is a connected undirected
-finite graph with no cycles, and no vertex of degree greater than three.
+the fact that, when we draw them, the resultant drawing often resembles
+the trees found in a forest.  There are many ways of ways of defining
+binary trees.  Mathematically, a \emph{binary tree} is a connected,
+undirected, finite graph with no cycles, and no vertex of degree greater
+than three.
 
-For most computer science applications, binary trees are \emph{rooted}:
+For most computer science applications, binary trees are \emph{rooted:}
 A special node, #r#, of degree at most two is called the \emph{root}
 of the tree.  For every node, $#u#\neq #r#$, the second node on the
 path from #u# to #r# is called the \emph{parent} of #u#.  Each of the
@@ -19,8 +20,8 @@ between the \emph{left child} and \emph{right child} of #u#.
 In illustrations, binary trees are usually drawn from the root
 downward, with the root at the top of the drawing and the left and right
 children respectively given by left and right positions in the drawing
-(\figref{bintree-orientation}).  A binary tree with nine nodes is drawn
-this way in \figref{binary-tree}.a.
+(\figref{bintree-orientation}).  For example, \figref{binary-tree}.a shows
+a binary tree with nine nodes.
 
 \begin{figure}
   \begin{center}
@@ -44,33 +45,34 @@ this way in \figref{binary-tree}.a.
   \figlabel{binary-tree}
 \end{figure}
 
-Binary trees are so important that a terminology has developed around them:
-The \emph{depth} of a node, #u#, in a binary tree is the length of the
-path from #u# to the root of the tree.   If a node, #w#, is on the path
-from #u# to #r# then #w# is called an \emph{ancestor} of #u# and #u#
-a \emph{descendant} of #w#.  The \emph{subtree} of a node, #u#, is the
-binary tree that is rooted at #u# and contains all of #u#'s descendants.
-The \emph{height} of a node, #u#, is the length of the longest path from
-#u# to one of its descendants.  The height of a tree is the height of its root.
-A node, #u#, is a \emph{leaf} if it has no children.
+Because binary trees are so important, a certain terminology has developed
+for them: The \emph{depth} of a node, #u#, in a binary tree is the
+length of the path from #u# to the root of the tree.   If a node, #w#,
+is on the path from #u# to #r#, then #w# is called an \emph{ancestor}
+of #u# and #u# a \emph{descendant} of #w#.  The \emph{subtree} of a
+node, #u#, is the binary tree that is rooted at #u# and contains all
+of #u#'s descendants.  The \emph{height} of a node, #u#, is the length
+of the longest path from #u# to one of its descendants.  The height of
+a tree is the height of its root.  A node, #u#, is a \emph{leaf} if it
+has no children.
 
 We sometimes think of the tree as being augmented with \emph{external
-nodes}. Any node that does not have a left child has an external node
-as its left child and any node that does not have a right child has an
-external node as its right child (see \figref{binary-tree}.b).  It is
-easy to verify, by induction, that a binary tree having $#n#\ge 1$
-real nodes has $#n#+1$ external nodes.
+nodes}. Any node that does not have a left child has an external
+node as its left child, and, correspondinly, any node that does
+not have a right child has an external node as its right child (see
+\figref{binary-tree}.b).  It is easy to verify, by induction, that a
+binary tree with $#n#\ge 1$ real nodes has $#n#+1$ external nodes.
 
 
 \section{#BinaryTree#: A Basic Binary Tree}
 
-The simplest way to represent a node, #u#, in a binary tree is
-to store the (at most three) neighbours of #u# explicitly:
+The simplest way to represent a node, #u#, in a binary tree is to
+explicitly store the (at most three) neighbours of #u#:
 \javaimport{ods/BinaryTree.BTNode<Node}
 \cppimport{ods/BinaryTree.BTNode}
 When one of these three neighbours is not present, we set it to #nil#.
-In this way, external nodes in the tree as well as the parent of the
-root correspond to the value #nil#.
+In this way, both external nodes of the tree and the parent of the root
+correspond to the value #nil#.
 
 The binary tree itself can then be represented by a
 \javaonly{reference}\cpponly{pointer} to its root node, #r#:
@@ -83,13 +85,14 @@ the number of steps on the path from #u# to the root:
 
 \subsection{Recursive Algorithms}
 
-It is very easy to compute facts about binary trees using recursive algorithms. For example, to compute the size of (number of nodes in)
-a binary tree rooted at node #u#, we recursively compute the sizes of
-the two subtrees rooted at the children of #u#, sum these sizes, and add one:
+Using recursive algorithms makes it very easy to compute facts about
+binary trees. For example, to compute the size of (number of nodes in)
+a binary tree rooted at node #u#, we recursively compute the sizes of the
+two subtrees rooted at the children of #u#, sum up these sizes, and add one:
 
 \codeimport{ods/BinaryTree.size(u)}
 
-To compute the height of a node #u# we can compute the height of #u#'s
+To compute the height of a node #u#, we can compute the height of #u#'s
 two subtrees, take the maximum, and add one:
 
 \codeimport{ods/BinaryTree.height(u)}
@@ -97,26 +100,26 @@ two subtrees, take the maximum, and add one:
 \subsection{Traversing Binary Trees}
 \seclabel{bintree:traversal}
 
-The two algorithms from the previous section use recursion to visit all
-the nodes in a binary tree.  Each of them visits the nodes of the binary
-tree in the same order as the following code:
+The two algorithms from the previous section both use recursion to visit
+all the nodes in a binary tree.  Each of them visits the nodes of the
+binary tree in the same order as the following code:
 \codeimport{ods/BinaryTree.traverse(u)}
 
-Using recursion this way produces very short, simple code, but can
-be problematic.  The maximum depth of the recursion is given by the
-maximum depth of a node in the binary tree, i.e., the tree's height.
-If the height of the tree is very large, then this could very well use
-more stack space than is available, causing a crash.  
+Using recursion this way produces very short, simple code, but it can
+also be problematic.  The maximum depth of the recursion is given by
+the maximum depth of a node in the binary tree, i.e., the tree's height.
+If the height of the tree is very large, then this recursion could very
+well use more stack space than is available, causing a crash.
 
-Luckily, traversing a binary tree can be done without recursion. This
-is done using an algorithm that uses where it came from
-to decide where it will go next.  See \figref{bintree-traverse}.
-If we arrive at a node #u# from #u.parent#, then the next thing to do
-is to visit #u.left#.  If we arrive at #u# from #u.left#, then the next
-thing to do is to visit #u.right#.  If we arrive at #u# from #u.right#,
-then we are done visiting #u#'s subtree, so we return to #u.parent#.
-The following code implements this idea, with code included for handling
-the cases where any of #u.left#, #u.right#, or #u.parent# is #nil#:
+To traverse a binary tree without recursion, you can use an algorithm that
+relies on where it came from to determine where it will go next.  See
+\figref{bintree-traverse}.  If we arrive at a node #u# from #u.parent#,
+then the next thing to do is to visit #u.left#.  If we arrive at #u#
+from #u.left#, then the next thing to do is to visit #u.right#.  If we
+arrive at #u# from #u.right#, then we are done visiting #u#'s subtree,
+and so we return to #u.parent#.  The following code implements this
+idea, with code included for handling the cases where any of #u.left#,
+#u.right#, or #u.parent# is #nil#:
 \codeimport{ods/BinaryTree.traverse2()}
 
 \begin{figure}
@@ -126,14 +129,16 @@ the cases where any of #u.left#, #u.right#, or #u.parent# is #nil#:
       \includegraphics{figs/bintree-3}
     \end{tabular}
   \end{center}
-  \caption[Traversing a BinaryTree]{The three cases that occur at node #u# when traversing a binary tree non-recursively, and the resulting traversal of the tree.}
+  \caption[Traversing a BinaryTree]{The three cases that occur at node
+    #u# when traversing a binary tree non-recursively, and the resultant
+    traversal of the tree.}
   \figlabel{bintree-traverse}
 \end{figure}
 
-The same things that can be computed with recursive algorithms can
-also be done this way. For example, to compute the size of the tree we
-keep a counter, #n#, and increment #n# whenever visiting a node for the
-first time:
+The same facts that can be computed with recursive algorithms can also be
+computed in this way, without recursion. For example, to compute the size
+of the tree we keep a counter, #n#, and increment #n# whenever visiting
+a node for the first time:
 \codeimport{ods/BinaryTree.size2()}
 
 In some implementations of binary trees, the #parent# field is not used.
@@ -143,13 +148,13 @@ of the path from the current node to the root.
 
 A special kind of traversal that does not fit the pattern of the above
 functions is the \emph{breadth-first traversal}.  In a breadth-first
-traversal, the nodes are visited level-by-level starting at the root
-and working our way down, visiting the nodes at each level from left
-to right.  This is similar to the way we would read a page of English
-text. (See \figref{bintree-bfs}.)  This is implemented using a queue, #q#,
-that initially contains only the root, #r#.  At each step, we extract
-the next node, #u#, from #q#, process #u# and add #u.left# and #u.right#
-(if they are non-#nil#) to #q#:
+traversal, the nodes are visited level-by-level starting at the root and
+moving down, visiting the nodes at each level from left to right. (See
+\figref{bintree-bfs}.) This is similar to the way that we would read a
+page of English text.   Breadth-first traversal is implemented using a
+queue, #q#, that initially contains only the root, #r#.  At each step,
+we extract the next node, #u#, from #q#, process #u# and add #u.left#
+and #u.right# (if they are non-#nil#) to #q#:
 \codeimport{ods/BinaryTree.bfTraverse()}
 
 \begin{figure}
@@ -193,9 +198,9 @@ us to quickly locate a value, #x#, in a binary search tree.  To do this we start
 searching for #x# at the root, #r#.  When examining a node, #u#, there
 are three cases:
 \begin{enumerate}
-\item If $#x#< #u.x#$ then the search proceeds to #u.left#;
-\item If $#x#> #u.x#$ then the search proceeds to #u.right#;
-\item If $#x#= #u.x#$ then we have found the node #u# containing #x#.
+\item If $#x#< #u.x#$, then the search proceeds to #u.left#;
+\item If $#x#> #u.x#$, then the search proceeds to #u.right#;
+\item If $#x#= #u.x#$, then we have found the node #u# containing #x#.
 \end{enumerate}
 The search terminates when Case~3 occurs or when #u=nil#.  In the
 former case, we found #x#.  In the latter case, we conclude that #x#
@@ -203,15 +208,15 @@ is not in the binary search tree.
 \codeimport{ods/BinarySearchTree.findEQ(x)}
 
 Two examples of searches in a binary search tree are shown in
-\figref{bst-search}.  As the second example shows, even if we don't find #x#
-in the tree, we still gain some valuable information.  If we look at
-the last node, #u#, at which Case~1 occurred, we see that #u.x# is the smallest
-value in the tree that is greater than #x#.  Similarly, the last node
-at which Case~2 occurred contains the largest value in the tree that is
-less than #x#.  Therefore, by keeping track of the last node, #z#,
-at which Case~1 occurs, a #BinarySearchTree# can implement the #find(x)#
-operation that returns the smallest value stored in the tree that is
-greater than or equal to #x#:
+\figref{bst-search}.  As the second example shows, even if we don't
+find #x# in the tree, we still gain some valuable information.  If we
+look at the last node, #u#, at which Case~1 occurred, we see that #u.x#
+is the smallest value in the tree that is greater than #x#.  Similarly,
+the last node at which Case~2 occurred contains the largest value in the
+tree that is less than #x#.  Therefore, by keeping track of the last
+node, #z#, at which Case~1 occurs, a #BinarySearchTree# can implement
+the #find(x)# operation that returns the smallest value stored in the
+tree that is greater than or equal to #x#:
 \codeimport{ods/BinarySearchTree.find(x)}
 
 \begin{figure}
@@ -237,9 +242,9 @@ search for #x#. Whether the new node is the left or right child of #p# depends o
 \codeimport{ods/BinarySearchTree.findLast(x)}
 \codeimport{ods/BinarySearchTree.addChild(p,u)}
 An example is shown in \figref{bst-insert}. The most time-consuming
-part of this process is the initial search for #x#, which takes time
-proportional to the height of the newly added node #u#.  In the worst
-case, this is equal to the height of the #BinarySearchTree#.
+part of this process is the initial search for #x#, which takes an
+amount of time proportional to the height of the newly added node #u#.
+In the worst case, this is equal to the height of the #BinarySearchTree#.
 
 
 \begin{figure}
@@ -275,8 +280,8 @@ Things get tricky, though, when #u# has two children.  In this case,
 the simplest thing to do is to find a node, #w#, that has less than
 two children such that we can replace #u.x# with #w.x#.  To maintain
 the binary search tree property, the value #w.x# should be close to the
-value of #u.x#.  For example, picking #w# such that #w.x# is the smallest
-value greater than #u.x# will do.  Finding the node #w# is easy; it is
+value of #u.x#.  For example, choosing #w# such that #w.x# is the smallest
+value greater than #u.x# will work.  Finding the node #w# is easy; it is
 the smallest value in the subtree rooted at #u.right#.  This node can
 be easily removed because it has no left child.  (See \figref{bst-remove})
 \codeimport{ods/BinarySearchTree.remove(u)}
@@ -323,7 +328,7 @@ In \chapref{scapegoat} we show how $O(\log #n#)$ \emph{amortized}
 time operations can be achieved with partial rebuilding operations.
 In \chapref{redblack} we show how $O(\log #n#)$ \emph{worst-case}
 time operations can be achieved by simulating a tree that is not binary:
-a tree in which nodes can have up to four children.
+one in which nodes can have up to four children.
 
 \section{Discussion and Exercises}
 
@@ -343,31 +348,31 @@ references to specific kinds of binary search trees are provided in
 subsequent chapters.
 
 When implementing a binary tree from scratch, there are several design
-decisions to be made.  One of these is the question of whether or not each
-node stores a pointer to its parent.  If most of the operations simply
-follow a root-to-leaf path, then parent pointers are unnecessary, and
-are a potential source of coding errors.  On the other hand, the lack of
-parent pointers means that tree traversals must be done recursively or
-with the use of an explicit stack.  Some other methods (like inserting
-or deleting into some kinds of balanced binary search trees) are also
-complicated by the lack of parent pointers.
+decisions to be made.  One of these is the question of whether or not
+each node stores a pointer to its parent.  If most of the operations
+simply follow a root-to-leaf path, then parent pointers are unnecessary,
+waste space, and are a potential source of coding errors.  On the other
+hand, the lack of parent pointers means that tree traversals must be done
+recursively or with the use of an explicit stack.  Some other methods
+(like inserting or deleting into some kinds of balanced binary search
+trees) are also complicated by the lack of parent pointers.
 
-Another design decision is concerned with how to store the parent,
-left child, and right child pointers at a node.  In the implementation
-given here, they are stored as separate variables.   Another option is
-to store them in an array, #p#, of length 3, so that #u.p[0]# is the
-left child of #u#, #u.p[1]# is the right child of #u#, and #u.p[2]#
-is the parent of #u#.  Using an array this way means that some sequences
-of if statements can be simplified into algebraic expressions.
+Another design decision is concerned with how to store the parent, left
+child, and right child pointers at a node.  In the implementation given
+here, these pointers are stored as separate variables.   Another option
+is to store them in an array, #p#, of length 3, so that #u.p[0]# is the
+left child of #u#, #u.p[1]# is the right child of #u#, and #u.p[2]# is
+the parent of #u#.  Using an array this way means that some sequences
+of #if# statements can be simplified into algebraic expressions.
 
 An example of such a simplification occurs during tree traversal. If
 a traversal arrives at a node #u# from #u.p[i]#, then the next node in
 the traversal is $#u.p#[(#i#+1)\bmod 3]$.  Similar examples occur when
 there is left-right symmetry.  For example, the sibling of #u.p[i]# is
-$#u.p#[(#i#+1)\bmod 2]$.  This works whether #u.p[i]# is a left child
-($#i#=0$) or a right child ($#i#=1$) of #u#.  In some cases this means
-that some complicated code that would otherwise need to have both a left
-version and right version can be written only once. See the methods
+$#u.p#[(#i#+1)\bmod 2]$.  This trick works whether #u.p[i]# is a left
+child ($#i#=0$) or a right child ($#i#=1$) of #u#.  In some cases this
+means that some complicated code that would otherwise need to have both a
+left version and right version can be written only once. See the methods
 #rotateLeft(u)# and #rotateRight(u)# on page~\pageref{page:rotations}
 for an example.
 
@@ -444,7 +449,7 @@ for an example.
 \end{exc}
 
 \begin{exc}
-  Suppose we are given a binary tree with pre- post- and in-order numbers
+  Suppose we are given a binary tree with pre-, post-, and in-order numbers
   assigned to the nodes.  Show how these numbers can be used to answer
   each of the following questions in constant time:
   \begin{enumerate}

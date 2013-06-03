@@ -176,14 +176,14 @@ public class SEList<T> extends AbstractSequentialList<T> {
 			u = u.next;
 			r++;
 		}
-		if (r == b) {      // found b blocks each with b+1 elements
+		if (r == b) {      // b blocks each with b+1 elements
 			spread(l.u);
 			u = l.u;
 		} 
-		if (u == dummy) {  // ran off the end of the list - add new node
+		if (u == dummy) {  // ran off the end - add new node
 			u = addBefore(u);
 		}
-		while (u != l.u) { // work backwards, shifting an element at each step 
+		while (u != l.u) { // work backwards, shifting elements
 			u.d.add(0, u.prev.d.remove(u.prev.d.size()-1));
 			u = u.prev;
 		}
@@ -201,7 +201,7 @@ public class SEList<T> extends AbstractSequentialList<T> {
 			u = u.next;
 			r++;
 		}
-		if (r == b) {  // found b blocks each with b-1 elements
+		if (r == b) {  // b blocks each with b-1 elements
 			gather(l.u);
 		}
 		u = l.u;

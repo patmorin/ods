@@ -12,7 +12,7 @@ The first part of this chapter discusses algorithms that sort using only
 comparisons and presents three algorithms that run in $O(#n#\log #n#)$
 time.  As it turns out, all three algorithms are asymptotically optimal;
 no algorithm that uses only comparisons can avoid doing roughly $#n#\log
-#n#$ comparisons in the worst-case and even the average-case.
+#n#$ comparisons in the worst case and even the average case.
 
 Before continuing, we should note that any of the #SSet# or priority
 #Queue# implementations presented in previous chapters can also
@@ -37,12 +37,12 @@ $\{0,\ldots,#n#^c-1\}$ in $O(c#n#)$ time.
 \section{Comparison-Based Sorting}
 
 In this section, we present three sorting algorithms: merge-sort,
-quicksort, and heap-sort.  All these algorithms take an input array #a#
+quicksort, and heap-sort.  Each of these algorithms take an input array #a#
 and sort the elements of #a# into non-decreasing order in $O(#n#\log #n#)$
 (expected) time.  These algorithms are all \emph{comparison-based}.
 \javaonly{Their second argument, #c#, is a #Comparator# that implements
 the #compare(a,b)# method.}  These algorithms don't care what type
-of data is being sorted, the only operation they do on the data is
+of data is being sorted; the only operation they do on the data is
 comparisons using the #compare(a,b)# method. Recall, from \secref{sset},
 that #compare(a,b)# returns a negative value if $#a#<#b#$, a positive
 value if $#a#>#b#$, and zero if $#a#=#b#$.
@@ -79,14 +79,14 @@ comparisons before running out of elements in one of #a0# or #a1#.
 
 To understand the running-time of merge-sort, it is easiest to think
 of it in terms of its recursion tree.  Suppose for now that #n# is a
-power of 2, so that $#n#=2^{\log #n#}$, and $\log #n#$ is an integer.
+power of two, so that $#n#=2^{\log #n#}$, and $\log #n#$ is an integer.
 Refer to \figref{mergesort-recursion}. Merge-sort turns the problem of
-sorting #n# elements into 2 problems, each of sorting $#n#/2$ elements.
-These two subproblem are then turned into 2 problems each, for a total
-of 4 subproblems, each of size $#n#/4$. These 4 subproblems become 8
+sorting #n# elements into two problems, each of sorting $#n#/2$ elements.
+These two subproblem are then turned into two problems each, for a total
+of four subproblems, each of size $#n#/4$. These four subproblems become eight
 subproblems, each of size $#n#/8$, and so on.  At the bottom of this process,
-$#n#/2$ subproblems, each of size 2, are converted into #n# problems,
-each of size $#1#$.  For each subproblem of size $#n#/2^{i}$, the time
+$#n#/2$ subproblems, each of size two, are converted into #n# problems,
+each of size one.  For each subproblem of size $#n#/2^{i}$, the time
 spent merging and copying data is $O(#n#/2^i)$.  Since there are $2^i$
 subproblems of size $#n#/2^i$, the total time spent working on problems
 of size $2^i$, not counting recursive calls, is
@@ -132,7 +132,7 @@ the two subproblems and obtain
   &< #n#\log #n# \enspace .
 \end{align*}
 The case where $#n#$ is odd is slightly more complicated.  For this case,
-we use two inequalities, that are easy to verify:
+we use two inequalities that are easy to verify:
 \begin{equation}
   \log(x+1) \le \log(x) + 1 \enspace , \eqlabel{log-ineq-a}
 \end{equation}
@@ -161,7 +161,7 @@ for all $x\ge 1/2$.  Inequality~\myeqref{log-ineq-a} comes from the fact that $\
 
 The \emph{quicksort} algorithm is another classic divide and conquer
 algorithm.  Unlike merge-sort, which does merging after solving the two
-subproblems, quicksort does all its work upfront.
+subproblems, quicksort does all of its work upfront.
 
 Quicksort is simple to describe:  Pick a random \emph{pivot} element,
 #x#, from #a#; partition #a# into the set of elements less than #x#, the
@@ -197,8 +197,8 @@ by iteratively increasing #p# and decreasing #q# while maintaining the
 first and last of these conditions.  At each step, the element at position
 #j# is either moved to the front, left where it is, or moved to the back.
 In the first two cases, #j# is incremented, while in the last case, #j#
-is not incremented since the new element at position #j# has not been
-processed yet.
+is not incremented since the new element at position #j# has not yet been
+processed.
 
 Quicksort is very closely related to the random binary search trees
 studied in \secref{rbst}.  In fact, if the input to quicksort consists
@@ -207,7 +207,7 @@ binary search tree.  To see this, recall that when constructing a random
 binary search tree the first thing we do is pick a random element #x# and
 make it the root of the tree.  After this, every element will eventually
 be compared to #x#, with smaller elements going into the left subtree
-and larger elements going into the right subtree.
+and larger elements into the right.
 
 In quicksort, we select a random element #x# and immediately compare
 everything to #x#, putting the smaller elements at the beginning of
@@ -226,7 +226,7 @@ means that we can translate \lemref{rbs} to a statement about quicksort:
   to a pivot element is at most $H_{#i#+1} + H_{#n#-#i#}$.
 \end{lem}
 
-A little summing of harmonic numbers gives us the following theorem
+A little summing up of harmonic numbers gives us the following theorem
 about the running time of quicksort:
 
 \begin{thm}\thmlabel{quicksort-i}
@@ -250,7 +250,7 @@ Let $T$ be the number of comparisons performed by quicksort when sorting
 all distinct.  When the input array, #a#, contains duplicate elements,
 the expected running time of quicksort is no worse, and can be even
 better; any time a duplicate element #x# is chosen as a pivot, all
-occurrences of #x# get grouped together and don't take part in either
+occurrences of #x# get grouped together and do not take part in either
 of the two subproblems.
 
 \begin{thm}\thmlabel{quicksort}
@@ -306,7 +306,7 @@ words, each of $#a#[\lfloor#n#/2\rfloor],\ldots,#a[n-1]#$ is a sub-heap
 of size 1.  Now, working backwards, we can call #trickleDown(i)# for
 each $#i#\in\{\lfloor #n#/2\rfloor-1,\ldots,0\}$. This works, because by
 the time we call #trickleDown(i)#, each of the two children of #a[i]#
-are the root of a sub-heap so calling #trickleDown(i)# makes #a[i]#
+are the root of a sub-heap, so calling #trickleDown(i)# makes #a[i]#
 into the root of its own subheap.
 \javaimport{ods/BinaryHeap.BinaryHeap(a,c)}
 \cppimport{ods/BinaryHeap.BinaryHeap(b)}
@@ -314,8 +314,8 @@ into the root of its own subheap.
 The interesting thing about this bottom-up strategy is that it is more
 efficient than calling #add(x)# #n# times.  To see this, notice that,
 for $#n#/2$ elements, we do no work at all, for $#n#/4$ elements, we call
-#trickleDown(i)# on a subheap rooted at #a[i]# and whose height is 1, for
-$#n#/8$ elements, we call #trickleDown(i)# on a subheap whose height is 2,
+#trickleDown(i)# on a subheap rooted at #a[i]# and whose height is one, for
+$#n#/8$ elements, we call #trickleDown(i)# on a subheap whose height is two,
 and so on.  Since the work done by #trickleDown(i)# is proportional to
 the height of the sub-heap rooted at #a[i]#, this means that the total
 work done is at most
@@ -327,7 +327,7 @@ work done is at most
 \]
 The second-last equality follows by recognizing that the sum
 $\sum_{i=1}^{\infty} i/2^{i}$ is equal, by definition, to the expected
-number times we toss a coin up to and including the first time the coin
+number of times we toss a coin up to and including the first time the coin
 comes up as heads and applying \lemref{coin-tosses}.
 
 The following theorem describes the performance of #heapSort(a,c)#.
@@ -337,7 +337,7 @@ The following theorem describes the performance of #heapSort(a,c)#.
 \end{thm}
 
 \begin{proof}
-The algorithm runs in 3 steps:  (1)~Transforming #a# into a heap,
+The algorithm runs in three steps:  (1)~transforming #a# into a heap,
 (2)~repeatedly extracting the minimum element from #a#, and (3)~reversing
 the elements in #a#.  We have just argued that step~1 takes $O(#n#)$
 time and performs $O(#n#)$ comparisons.  Step~3 takes $O(#n#)$ time and
@@ -358,7 +358,7 @@ completes the proof.
 We have now seen three comparison-based sorting algorithms that each run
 in $O(#n#\log #n#)$ time.  By now, we should be wondering if faster
 algorithms exist.  The short answer to this question is no.  If the
-only operations allowed on the elements of #a# are comparisons then no
+only operations allowed on the elements of #a# are comparisons, then no
 algorithm can avoid doing roughly $#n#\log #n#$ comparisons.  This is
 not difficult to prove, but requires a little imagination.  Ultimately,
 it follows from the fact that
@@ -389,7 +389,7 @@ of this tree is labelled with a pair of indices #u.i# and #u.j#.
 If $#a[u.i]#<#a[u.j]#$ the algorithm proceeds to the left subtree,
 otherwise it proceeds to the right subtree.  Each leaf #w# of this
 tree is labelled with a permutation $#w.p[0]#,\ldots,#w.p[n-1]#$ of
-$0,\ldots,#n#-1$.  This permutation represents the permutation that is
+$0,\ldots,#n#-1$.  This permutation represents the one that is
 required to sort #a# if the comparison tree reaches this leaf.  That is,
 \[
    #a[w.p[0]]#<#a[w.p[1]]#<\cdots<#a[w.p[n-1]]# \enspace .
@@ -405,13 +405,13 @@ An example of a comparison tree for an array of size #n=3# is shown in
 \end{figure}
 
 The comparison tree for a sorting algorithm tells us everything about
-the algorithm.  It tells us exactly the sequence of comparisons that will
-be performed for any input array, #a#, having #n# distinct elements and
-it tells us how the algorithm will reorder #a# to sort it.  An immediate
-consequence of this is that the comparison tree must have at least $#n#!$
-leaves; if not, then there are two distinct permutations that lead to
-the same leaf, so the algorithm does not correctly sort at least one of
-these permutations.
+the algorithm.  It tells us exactly the sequence of comparisons that
+will be performed for any input array, #a#, having #n# distinct elements
+and it tells us how the algorithm will reorder #a# in order to sort it.
+Consequently, the comparison tree must have at least $#n#!$ leaves;
+if not, then there are two distinct permutations that lead to the same
+leaf, so the algorithm does not correctly sort at least one of these
+permutations.
 
 For example, the comparison tree in \figref{comparison-tree-2} has only
 $4< 3!=6$ leaves. Inspecting this tree, we see that the two input arrays
@@ -440,7 +440,7 @@ algorithms.
 \begin{proof}
   By the above discussion, the comparison tree defined by $\mathcal{A}$
   must have at least $#n#!$ leaves.  An easy inductive proof shows
-  that any binary tree with $k$ leaves has height at least $\log k$.
+  that any binary tree with $k$ leaves has a height of at least $\log k$.
   Therefore, the comparison tree for $\mathcal{A}$ has a leaf, #w#, of
   depth at least $\log(#n#!)$ and there is an input array #a# that leads
   to this leaf.  The input array #a# is an input for which $\mathcal{A}$
@@ -454,7 +454,7 @@ beat the $\log(#n#!)$ lower bound on the number of comparisons?
 The answer, again, is no.  Again, the way to prove it is to think
 differently about what a randomized algorithm is.
 
-In the following discussion, we will implicitly assume that our decision
+In the following discussion, we will assume that our decision
 trees have been ``cleaned up'' in the following way: Any node that can not
 be reached by some input array #a# is removed.  This cleaning up implies
 that the tree has exactly $#n#!$ leaves.  It has at least $#n#!$ leaves
@@ -464,12 +464,12 @@ elements follows exactly one root to leaf path in the decision tree.
 
 We can think of a randomized sorting algorithm $\mathcal{R}$ as a
 deterministic algorithm that takes two inputs: The input array #a#
-that should be sorted and a long sequence $b=b_1,b_2,b_3,\ldots,b_m$ of
-random real numbers in the range $[0,1]$.  The random numbers provide
-the randomization.  When the algorithm wants to toss a coin or make a
-random choice, it does so by using some element from $b$.  For example,
-to compute the index of the first pivot in quicksort, the algorithm
-could use the formula $\lfloor n b_1\rfloor$.
+that should be sorted and a long sequence $b=b_1,b_2,b_3,\ldots,b_m$
+of random real numbers in the range $[0,1]$.  The random numbers provide
+the randomization for the algorithm.  When the algorithm wants to toss a
+coin or make a random choice, it does so by using some element from $b$.
+For example, to compute the index of the first pivot in quicksort,
+the algorithm could use the formula $\lfloor n b_1\rfloor$.
 
 Now, notice that if we fix $b$ to some particular sequence $\hat{b}$
 then $\mathcal{R}$ becomes a deterministic sorting algorithm,

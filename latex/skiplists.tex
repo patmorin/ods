@@ -3,21 +3,20 @@
 \chaplabel{skiplists}
 
 In this chapter, we discuss a beautiful data structure: the skiplist,
-that has a variety of applications.  Using a skiplist we can implement
-a #List# that is fast for all the operations #get(i)#, #set(i,x)#,
-#add(i,x)#, and #remove(i)#. We can also implement an #SSet# in which
-all operations run in $O(\log #n#)$ expected time.
+which has a variety of applications.  Using a skiplist we can implement a
+#List# that has fast implementations of #get(i)#, #set(i,x)#, #add(i,x)#,
+and #remove(i)#. We can also implement an #SSet# in which all operations
+run in $O(\log #n#)$ expected time.
 %Finally, a skiplist can be used to implement a #Rope# in which all
 %operations run in $O(\log #n#)$ time.
 
-Skiplists rely on \emph{randomization} for their efficiency.
-In particular, a skiplist uses random coin tosses when an element is
-inserted to determine the height of that element.  The performance
-of skiplists is expressed in terms of \emph{expected} running times
-and lengths of paths. This expectation is taken over the random coin
-tosses used by the skiplist.  In the implementation, the random coin
-tosses used by a skiplist are simulated using a pseudo-random number
-(or bit) generator.
+The efficiency of skiplists relies on their use of \emph{randomization}.
+When a new element is added to a skiplist, the skiplist uses random coin
+tosses to determine the height of the new element.  The performance of
+skiplists is expressed in terms of \emph{expected} running times and path
+lengths. This expectation is taken over the random coin tosses used by
+the skiplist.  In the implementation, the random coin tosses used by a
+skiplist are simulated using a pseudo-random number (or bit) generator.
 
 \section{The Basic Structure}
 
@@ -26,7 +25,7 @@ $L_0,\ldots,L_h$, where each $L_r$ contains a subset of the items
 in $L_{r-1}$.  We start with the input list $L_0$ that contains #n#
 items and construct $L_1$ from $L_0$, $L_2$ from $L_1$, and so on.
 The items in $L_r$ are obtained by tossing a coin for each element, #x#,
-in $L_{r-1}$ and including #x# in $L_r$ if the coin comes up heads.
+in $L_{r-1}$ and including #x# in $L_r$ if the coin turns up as heads.
 This process ends when we create a list $L_r$ that is empty.  An example
 of a skiplist is shown in \figref{skiplist}.
 
@@ -42,10 +41,10 @@ For an element, #x#, in a skiplist, we call the \emph{height} of #x# the
 largest value $r$ such that #x# appears in $L_r$.  Thus, for example,
 elements that only appear in $L_0$ have height $0$.  If we spend a few
 moments thinking about it, we notice that the height of #x# corresponds
-to the following experiment:  Toss a coin repeatedly until the first time
-it comes up tails.  How many times did it come up heads?  The answer,
-not surprisingly, is that the expected height of a node is 1. (We expect
-to toss the coin twice before getting tails, but we don't count the last
+to the following experiment:  Toss a coin repeatedly until it comes
+up as tails.  How many times did it come up as heads?  The answer, not
+surprisingly, is that the expected height of a node is 1. (We expect to
+toss the coin twice before getting tails, but we don't count the last
 toss.) The \emph{height} of a skiplist is the height of its tallest node.
 
 At the head of every list is a special node, called the \emph{sentinel},
@@ -57,7 +56,7 @@ a search path for a node, #u#, is easy (see \figref{skiplist-searchpath})
 and always go right unless that would overshoot #u#, in which case you
 should take a step down into the list below.
 
-More precisely, to construct the search path for the node #u# in $L_0$
+More precisely, to construct the search path for the node #u# in $L_0$,
 we start at the sentinel, #w#, in $L_h$.  Next, we examine #w.next#.
 If #w.next# contains an item that appears before #u# in $L_0$, then
 we set $#w#=#w.next#$.  Otherwise, we move down and continue the search
@@ -101,7 +100,7 @@ within $L_r$.
 \seclabel{skiplistset}
 
 A #SkiplistSSet# uses a skiplist structure to implement the #SSet#
-interface.   When used this way, the list $L_0$ stores the elements of
+interface.   When used in this way, the list $L_0$ stores the elements of
 the #SSet# in sorted order.  The #find(x)# method works by following
 the search path for the smallest value #y# such that $#y#\ge#x#$:
 
@@ -109,14 +108,15 @@ the search path for the smallest value #y# such that $#y#\ge#x#$:
 
 Following the search path for #y# is easy:  when situated at
 some node, #u#, in  $L_{#r#}$, we look right to #u.next[r].x#.
-If $#x#>#u.next[r].x#$, then we take a step to the right in $L_{#r#}$,
-otherwise we move down into $L_{#r#-1}$.  Each step (right or down) in
-this search takes only constant time so, by \lemref{skiplist-searchpath},
-the expected running time of #find(x)# is $O(\log #n#)$.
+If $#x#>#u.next[r].x#$, then we take a step to the right in
+$L_{#r#}$; otherwise, we move down into $L_{#r#-1}$.  Each step
+(right or down) in this search takes only constant time; thus, by
+\lemref{skiplist-searchpath}, the expected running time of #find(x)#
+is $O(\log #n#)$.
 
 Before we can add an element to a #SkipListSSet#, we need a method to
 simulate tossing coins to determine the height, #k#, of a new node.
-We do this by picking a random integer, #z#, and counting the number of
+We do so by picking a random integer, #z#, and counting the number of
 trailing $1$s in the binary representation of #z#:\footnote{This method
 does not exactly replicate the coin-tossing experiment since the value of
 #k# will always be less than the number of bits in an #int#.  However,
@@ -174,10 +174,11 @@ expected time per operation.
 \section{#SkiplistList#: An Efficient Random-Access #List# Implementation}
 \seclabel{skiplistlist}
 
-A #SkiplistList# implements the #List# interface on top of a skiplist structure.
-In a #SkiplistList#, $L_0$ contains the elements of the
-list in the order they appear in the list.   Just like with a #SkiplistSSet#,
-elements can be added, removed, and accessed in $O(\log #n#)$ time.
+A #SkiplistList# implements the #List# interface using a skiplist
+structure.  In a #SkiplistList#, $L_0$ contains the elements of the
+list in the order in which they appear in the list.   As in a
+#SkiplistSSet#, elements can be added, removed, and accessed in $O(\log
+#n#)$ time.
 
 For this to be possible, we need a way to follow the search path for
 the #i#th element in $L_0$.  The easiest way to do this is to define
@@ -205,9 +206,8 @@ currently at a node that is at position #j# in $L_0$ and we follow an
 edge of length $\ell$, then we move to a node whose position, in $L_0$,
 is $#j#+\ell$.  In this way, while following a search path, we can keep
 track of the position, #j#, of the current node in $L_0$.  When at a
-node, #u#, in $L_{#r#}$, we go right if #j#
-plus the length of the edge #u.next[r]# is less than #i#, otherwise we go
-down into $L_{#r#-1}$.
+node, #u#, in $L_{#r#}$, we go right if #j# plus the length of the edge
+#u.next[r]# is less than #i#. Otherwise, we go down into $L_{#r#-1}$.
 
 \codeimport{ods/SkiplistList.findPred(i)}
 \codeimport{ods/SkiplistList.get(i).set(i,x)}
@@ -221,7 +221,7 @@ straightforward.  Unlike in a #SkiplistSSet#, we are sure that a new
 node will actually be added, so we can do the addition at the same time
 as we search for the new node's location. We first pick the height, #k#,
 of the newly inserted node, #w#, and then follow the search path for #i#.
-Anytime the search path moves down from $L_{#r#}$ with $#r#\le #k#$, we
+Any time the search path moves down from $L_{#r#}$ with $#r#\le #k#$, we
 splice #w# into $L_{#r#}$.  The only extra care needed is to ensure that
 the lengths of edges are updated properly.  See \figref{skiplist-addix}.
 
@@ -253,7 +253,7 @@ constant time.
   \figlabel{skiplist-lengths-splice}
 \end{figure}
 
-This sounds more complicated than it actually is and the code is actually
+This sounds more complicated than it is, for the code is actually
 quite simple:
 
 \codeimport{ods/SkiplistList.add(i,x)}
@@ -399,15 +399,15 @@ The expected length of a search path in a skiplist is at most $2\log #n# + O(1)$
 
   The number of nodes that the reverse search path visits at a particular
   level, #r#, is related to the following experiment:  Toss a coin.
-  If the coin comes up heads then go up and stop, otherwise go left and
-  repeat the experiment.  The number of coin tosses before the heads then
-  represents the number of steps to the left that a reverse search path
-  takes at a particular level.\footnote{Note that this might overcount
-  the number of steps to the left, since the experiment should end either at
-  the first heads or when the search path reaches the sentinel, whichever
-  comes first. This is not a problem since the lemma is only stating an
-  upper bound.} \lemref{coin-tosses} tells us that the expected number
-  of coin tosses before the first heads is 1.
+  If the coin comes up as heads, then move up and stop. Otherwise, move
+  left and repeat the experiment.  The number of coin tosses before
+  the heads represents the number of steps to the left that a reverse
+  search path takes at a particular level.\footnote{Note that this
+  might overcount the number of steps to the left, since the experiment
+  should end either at the first heads or when the search path reaches
+  the sentinel, whichever comes first. This is not a problem since the
+  lemma is only stating an upper bound.} \lemref{coin-tosses} tells us
+  that the expected number of coin tosses before the first heads is 1.
 
   Let $S_{#r#}$ denote the number of steps the forward search path takes at level
   $#r#$ that go to the right.   We have just argued that $\E[S_{#r#}]\le
@@ -455,12 +455,12 @@ $2\log #n# + O(1)$.
 Skiplists were introduced by Pugh \cite{p91} who also presented
 a number of applications of skiplists \cite{p89}.  Since then they
 have been studied extensively.  Several researchers have done very
-precise analysis of the expected length and variance in length of the
+precise analyses of the expected length and variance of the length of the
 search path for the #i#th element in a skiplist \cite{kp94,kmp95,pmp92}.
 Deterministic versions \cite{mps92}, biased versions \cite{bbg02,esss01},
 and self-adjusting versions \cite{bdl08} of skiplists have all been
 developed.  Skiplist implementations have been written for various
-languages and frameworks and have seen use in open-source database
+languages and frameworks and have been used in open-source database
 systems \cite{skipdb,redis}. A variant of skiplists is used in the HP-UX
 operating system kernel's process management structures \cite{hpux}.
 \javaonly{Skiplists are even part of the Java 1.6 API \cite{oracle_jdk6}.}
@@ -472,8 +472,8 @@ operating system kernel's process management structures \cite{hpux}.
 \end{exc}
 
 \begin{exc}
-  Illustrate the addition of the values 0.5 (with height 1) and then 3.5
-  (with height 2) to the skiplist in \figref{skiplist}.
+  Illustrate the addition of the values 0.5 (with a height of 1) and
+  then 3.5 (with a height of 2) to the skiplist in \figref{skiplist}.
 \end{exc}
 
 \begin{exc}
@@ -545,13 +545,14 @@ operating system kernel's process management structures \cite{hpux}.
   It is possible to prove that the expected number of steps required
   for a finger search is $O(1+\log r)$, where $r$ is the number values
   in $L_0$ between #x# and the value pointed to by the finger.
-  
+
   Implement a subclass of #Skiplist# called #SkiplistWithFinger# that
-  does all #find(x)# operations using an internal finger.  This class
-  stores a finger and does every search as a finger search.  During the
-  search it also updates the finger so that each #find(x)# operation
-  uses, as a starting point, a finger that points to the result of the
-  previous #find(x)# operation.
+  implements #find(x)# operations using an internal finger.  This subclass
+  stores a finger, which is then used so that every #find(x)# operation
+  is implemented as a finger search.  During each #find(x)# operation
+  the finger is updated so that each #find(x)# operation uses, as a
+  starting point, a finger that points to the result of the previous
+  #find(x)# operation.
 \end{exc}
 
 \begin{exc}\exclabel{skiplist-truncate}
@@ -573,12 +574,12 @@ operating system kernel's process management structures \cite{hpux}.
 \end{exc}
 
 \begin{exc}
-  Using the ideas from the space-efficient linked-list, #SEList#,
-  design and implement a space-efficient #SSet#, #SESSet#.  Do this by
-  storing the data, in order, in an #SEList# and then storing the blocks
-  of this #SEList# in an #SSet#. If the original #SSet# implementation
-  uses $O(#n#)$ space to store #n# elements, then the #SESSet# will use
-  enough space for #n# elements plus $O(#n#/#b#+#b#)$ wasted space.
+  Using the ideas from the space-efficient linked-list, #SEList#, design
+  and implement a space-efficient #SSet#, #SESSet#.  To do this, store the
+  data, in order, in an #SEList#, and store the blocks of this #SEList#
+  in an #SSet#. If the original #SSet# implementation uses $O(#n#)$
+  space to store #n# elements, then the #SESSet# will use enough space
+  for #n# elements plus $O(#n#/#b#+#b#)$ wasted space.
 \end{exc}
 
 \begin{exc}
@@ -594,20 +595,20 @@ operating system kernel's process management structures \cite{hpux}.
   \noindent Hint 2:  Any suffix can be represented compactly as a single
   integer indicating where the suffix begins in the text.
 
-  \noindent Test your application on some large texts like some of the books
-  available at Project Gutenberg \cite{gutenberg}.  If done correctly, your
-  applications will be very responsive; there should be no noticeable lag
-  between typing keystrokes and the results appearing.
+  \noindent Test your application on some large texts, such as some of
+  the books available at Project Gutenberg \cite{gutenberg}.  If done
+  correctly, your applications will be very responsive; there should be
+  no noticeable lag between typing keystrokes and seeing the results.
 \end{exc}
 
 \begin{exc}
-  (This excercise is to be done after reading about binary search trees,
+  (This excercise should be done after reading about binary search trees,
   in \secref{binarysearchtree}.)  Compare skiplists with binary search
   trees in the following ways:  
   \begin{enumerate}
-     \item Explain how removing some edges of a skiplist lead to
-       a structure that looks like a binary tree and that is similar to
-       a binary search tree.
+     \item Explain how removing some edges of a skiplist leads to
+       a structure that looks like a binary tree and is similar to a
+       binary search tree.
      \item Skiplists and binary search trees each use about the same
        number of pointers (2 per node).  Skiplists make better use of
        those pointers, though. Explain why.

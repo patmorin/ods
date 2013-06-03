@@ -146,7 +146,7 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 				u = removeFixupCase3(u);
 			}
 		}
-		if (u != r) { // restore left-leaning property, if necessary
+		if (u != r) { // restore left-leaning property if needed
 			Node<T> w = u.parent;
 			if (w.right.color == red && w.left.color == black) {
 				flipLeft(w);

@@ -2,11 +2,10 @@
 \chaplabel{scapegoat}
 
 In this chapter, we study a binary search tree data structure, the
-#ScapegoatTree#.
-This structure is based on the common wisdom that, when something goes
-wrong, the first thing we should do is find someone to blame it on (the
-\emph{scapegoat}).  Once blame is firmly established, we can leave the
-scapegoat to fix the problem.
+#ScapegoatTree#.  This structure is based on the common wisdom that,
+when something goes wrong, the first thing people tend to do is find
+someone to blame (the \emph{scapegoat}).  Once blame is firmly
+established, we can leave the scapegoat to fix the problem.
 
 A #ScapegoatTree# keeps itself balanced by \emph{partial rebuilding
 operations}.  During a partial rebuilding operation, an entire subtree is
@@ -65,11 +64,11 @@ $\log_{3/2}#q#$. If so, then we leave well enough alone and don't do
 anything else.
 
 Unfortunately, it will sometimes happen that $#depth(u)# > \log_{3/2}
-#q#$.  In this case we need to do something to reduce the height.
-This isn't a big job; there is only one node, namely #u#, whose depth
-exceeds $\log_{3/2} #q#$.  To fix #u#, we walk from #u# back up to the
-root looking for a \emph{scapegoat}, #w#.  The scapegoat, #w#, is a very
-unbalanced node.  It has the property that
+#q#$.  In this case, we need to reduce the height.  This isn't a big
+job; there is only one node, namely #u#, whose depth exceeds $\log_{3/2}
+#q#$.  To fix #u#, we walk from #u# back up to the root looking for a
+\emph{scapegoat}, #w#.  The scapegoat, #w#, is a very unbalanced node.
+It has the property that
 \begin{equation}
    \frac{#size(w.child)#}{#size(w)#} > \frac{2}{3} \enspace ,
    \eqlabel{scapegoat}
@@ -102,7 +101,7 @@ using amortized analysis in the next section.
 The implementation of #remove(x)# in a #ScapegoatTree# is very simple.
 We search for #x# and remove it using the usual algorithm for removing a
 node from a #BinarySearchTree#.  (Note that this can never increase the
-height of the tree.)  Next, we decrement #n# but leave #q# unchanged.
+height of the tree.)  Next, we decrement #n#, but leave #q# unchanged.
 Finally, we check if $#q# > 2#n#$ and, if so, we \emph{rebuild the entire
 tree} into a perfectly balanced binary search tree and set $#q#=#n#$.
 \codeimport{ods/ScapegoatTree.remove(x)}
@@ -112,7 +111,7 @@ therefore $O(\log #n#)$.
 
 \subsection{Analysis of Correctness and Running-Time}
 
-In this section we analyze the correctness and amortized running time
+In this section, we analyze the correctness and amortized running time
 of operations on a #ScapegoatTree#.  We first prove the correctness by
 showing that, when the #add(x)# operation results in a node that violates
 Condition \myeqref{scapegoat-height}, then we can always find a scapegoat:
@@ -149,7 +148,7 @@ Condition \myeqref{scapegoat-height}, then we can always find a scapegoat:
   \]
 \end{proof}
 
-Next, we analyze the parts of the running time that we have not yet
+Next, we analyze the parts of the running time that are not yet
 accounted for.  There are two parts:  The cost of calls to #size(u)#
 when search for scapegoat nodes, and the cost of calls to #rebuild(w)#
 when we find a scapegoat #w#.  The cost of calls to #size(u)# can be
@@ -206,7 +205,7 @@ All that remains is to prove an upper-bound on the cost of all calls to
   During an insertion or deletion, we give one credit to each node on the
   path to the inserted node, or deleted node, #u#.  In this way we hand
   out at most $\log_{3/2}#q#\le \log_{3/2}m$ credits per operation.
-  During a deletion we also store an additional 1 credit ``on the side.''
+  During a deletion we also store an additional credit ``on the side.''
   Thus, in total we give out at most $O(m\log m)$ credits.  All that
   remains is to show that these credits are sufficient to pay for all
   calls to #rebuild(u)#.
@@ -244,7 +243,7 @@ All that remains is to prove an upper-bound on the cost of all calls to
   call #rebuild(u)#.
 
   If we call #rebuild(u)# during a deletion, it is because $#q# > 2#n#$.
-  In this case, we have $#q#-#n#> #n#$ credits stored ``on the side'' and
+  In this case, we have $#q#-#n#> #n#$ credits stored ``on the side,'' and
   we use these to pay for the $O(#n#)$ time it takes to rebuild the root.
   This completes the proof.
 \end{proof}
@@ -290,8 +289,8 @@ of time restructuring itself.  \excref{scapegoat-nlogn} asks you to prove
 that there are sequences of #n# operations in which a #ScapegoatTree#
 will spend on the order of $#n#\log #n#$ time in calls to #rebuild(u)#.
 This is in contrast to other #SSet# implementations discussed in this
-book that only make $O(#n#)$ structural changes during a sequence of
-#n# operations.  This is, unfortunately, a necessary consequence of
+book, which only make $O(#n#)$ structural changes during a sequence
+of #n# operations.  This is, unfortunately, a necessary consequence of
 the fact that a #ScapegoatTree# does all its restructuring by calls to
 #rebuild(u)# \cite{d90}.
 
@@ -335,12 +334,11 @@ and related structures based on partial rebuilding may work.  An example of such
 
 \begin{exc}\exclabel{scapegoat-quicksize}
   Modify the #add(x)# method of the #ScapegoatTree# so that it does not
-  waste any time recomputing the sizes of subtrees that it has already
-  computed the size of.  This is possible because, by the time the method
+  waste any time recomputing the sizes of subtrees that have already
+  been computed.  This is possible because, by the time the method
   wants to compute #size(w)#, it has already computed #size(w.left)#
-  or #size(w.right)#.
-  Compare the performance of your modified implementation with the
-  implementation given here.
+  or #size(w.right)#.  Compare the performance of your modified
+  implementation with the implementation given here.
 \end{exc}
 
 \begin{exc}\exclabel{scapegoat-explicitsize}
@@ -430,6 +428,6 @@ and related structures based on partial rebuilding may work.  An example of such
   in the sequence.  To implement #testBefore(e1,e2)# in constant time,
   each element #e# is labelled with an integer that encodes the path from
   the root to #e#.  In this way, #testBefore(e1,e2)# can be implemented
-  just by comparing the labels of #e1# and #e2#.
+  by comparing the labels of #e1# and #e2#.
 \end{exc}
 

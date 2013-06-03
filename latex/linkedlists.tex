@@ -230,7 +230,7 @@ One of the drawbacks of linked lists (besides the time it takes to access
 elements that are deep within the list) is their space usage.  Each node
 in a #DLList# requires an additional two references to the next and
 previous nodes in the list.  Two of the fields in a #Node# are dedicated
-to maintaining the list and only one of the fields is for storing data!
+to maintaining the list, and only one of the fields is for storing data!
 
 An #SEList# (space-efficient list) reduces this wasted space using
 a simple idea: Rather than store individual elements in a #DLList#,
@@ -238,15 +238,14 @@ we store a block (array) containing several items. More precisely, an
 #SEList# is parameterized by a \emph{block size} #b#. Each individual
 node in an #SEList# stores a block that can hold up to #b+1# elements.
 
-It will turn out, for reasons that become clear later, that it will
-be helpful if we can do #Deque# operations on each block.  The data
-structure we choose for this is a #BDeque# (bounded deque), derived
-from the #ArrayDeque# structure described in \secref{arraydeque}.
-The #BDeque# differs from the #ArrayDeque# in one small way: When a
-new #BDeque# is created, the size of the backing array #a#
-is fixed at #b+1# and it never grows or shrinks.
-The important property of a #BDeque# is that it allows for the addition or
-removal of elements at either the front or back in constant time. This
+For reasons that will become clear later, it will be helpful if we
+can do #Deque# operations on each block.  The data structure we choose
+for this is a #BDeque# (bounded deque), derived from the #ArrayDeque#
+structure described in \secref{arraydeque}.  The #BDeque# differs from the
+#ArrayDeque# in one small way: When a new #BDeque# is created, the size
+of the backing array #a# is fixed at #b+1# and never grows or shrinks.
+The important property of a #BDeque# is that it allows for the addition
+or removal of elements at either the front or back in constant time. This
 will be useful as elements are shifted from one block to another.
 
 
@@ -267,25 +266,29 @@ at least $#b#-1$ and at most $#b#+1$ elements.  This means that, if an
     #n#/(#b#-1) + 1 = O(#n#/#b#)
 \]
 blocks.  The #BDeque# for each block contains an array of length $#b#+1$
-but, for all blocks except the last, at most a constant amount of
+but, for every blocks except the last, at most a constant amount of
 space is wasted in this array.  The remaining memory used by a block is
 also constant.  This means that the wasted space in an #SEList# is only
 $O(#b#+#n#/#b#)$.  By choosing a value of #b# within a constant factor
-of $\sqrt{#n#}$ we can make the space-overhead of an SEList approach
+of $\sqrt{#n#}$, we can make the space-overhead of an SEList approach
 the $\sqrt{#n#}$ lower bound given in \secref{rootishspaceusage}.
 
 \subsection{Finding Elements}
 
 The first challenge we face with an #SEList# is finding the list item
 with a given index #i#.  Note that the location of an element consists
-of two parts: The node #u# that contains the block that contains the
-element as well as the index #j# of the element within its block.
+of two parts: 
+\begin{enumerate}
+  \item The node #u# that contains the block that contains the element
+  with index #i#; and
+  \item the index #j# of the element within its block.
+\end{enumerate}
 
 \codeimport{ods/SEList.Location}
 
-To find the block that contains a particular element, we proceed in the
-same way as in a #DLList#.  We either start at the front of the list and
-traverse in the forward direction or at the back of the list and traverse
+To find the block that contains a particular element, we proceed the same
+way as we do in a #DLList#.  We either start at the front of the list and
+traverse in the forward direction, or at the back of the list and traverse
 backwards until we reach the node we want.  The only difference is that,
 each time we move from one node to the next, we skip over a whole block
 of elements.
@@ -296,11 +299,11 @@ of elements.
 Remember that, with the exception of at most one block, each block
 contains at least $#b#-1$ elements, so each step in our search gets
 us $#b#-1$ elements closer to the element we are looking for.  If we
-are searching forward, this means we reach the node we want after
-$O(1+#i#/#b#)$ steps.  If we search backwards, we reach the node we want
-after $O(1+(#n#-#i#)/#b#)$ steps.  The algorithm takes the smaller of
-these two quantities depending on the value of #i#, so the time to locate
-the item with index #i# is $O(1+\min\{#i#,#n#-#i#\}/#b#)$.
+are searching forward, this means that we reach the node we want after
+$O(1+#i#/#b#)$ steps.  If we search backwards, then we reach the node we
+want after $O(1+(#n#-#i#)/#b#)$ steps.  The algorithm takes the smaller
+of these two quantities depending on the value of #i#, so the time to
+locate the item with index #i# is $O(1+\min\{#i#,#n#-#i#\}/#b#)$.
 
 Once we know how to locate the item with index #i#, the #get(i)# and
 #set(i,x)# operations translate into getting or setting a particular
@@ -314,13 +317,13 @@ time.
 
 \subsection{Adding an Element}
 
-Things start to get complicated when adding elements to an #SEList#.
-Before considering the general case, we consider the easier operation,
-#add(x)#, in which #x# is added to the end of the list.  If the last
-block is full (or does not exist because there are no blocks yet),
-then we first allocate a new block and append it to the list of blocks.
-Now that we are sure that the last block exists and is not full, we
-append #x# to the last block.
+Adding elements to an #SEList# is a little more complicated.  Before
+considering the general case, we consider the easier operation, #add(x)#,
+in which #x# is added to the end of the list.  If the last block is full
+(or does not exist because there are no blocks yet), then we first
+allocate a new block and append it to the list of blocks.  Now that
+we are sure that the last block exists and is not full, we append #x#
+to the last block.
 
 \codeimport{ods/SEList.add(x)}
 
@@ -382,17 +385,16 @@ is $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$.
 
 \subsection{Removing an Element}
 
-Removing an element, using the #remove(i)# method from an #SEList#
-is similar to adding an element.  We first locate the node #u# that
-contains the element with index #i#. Now, we have to be prepared for
-the case where we cannot remove an element from #u# without causing #u#'s
-block to have size less than $#b#-1$, which is not allowed.
+Removing an element from an #SEList# is similar to adding an element.
+We first locate the node #u# that contains the element with index #i#.
+Now, we have to be prepared for the case where we cannot remove an element
+from #u# without causing #u#'s block to become smaller than $#b#-1$.
 
 Again, let $#u#_0,#u#_1,#u#_2,\ldots$ denote #u#, #u.next#, #u.next.next#,
-We examine $#u#_0,#u#_1,#u#_2,\ldots$ in order looking for a node from
-which we can borrow an element to make the size of $#u#_0$'s block larger
-than $#b#-1$.  There are three cases to consider
-(see \figref{selist-remove}): 
+and so on.  We examine $#u#_0,#u#_1,#u#_2,\ldots$ in order to look
+for a node from which we can borrow an element to make the size of
+$#u#_0$'s block at least $#b#-1$.  There are three cases to consider
+(see \figref{selist-remove}):
 
 \begin{figure}
   \noindent
@@ -411,23 +413,24 @@ than $#b#-1$.  There are three cases to consider
 \begin{enumerate}
 \item We quickly (in $r+1\le #b#$ steps) find a node whose block contains
 more than $#b#-1$ elements. In this case, we perform $r$ shifts of an
-element from one block into the previous, so that the extra element in
-$#u#_r$ becomes an extra element in $#u#_0$.  We can then remove the
+element from one block into the previous one, so that the extra element
+in $#u#_r$ becomes an extra element in $#u#_0$.  We can then remove the
 appropriate element from $#u#_0$'s block.
 
-\item We quickly (in $r+1\le #b#$ steps) run off the end of the list of blocks.
-In this case, $#u#_r$ is the last block, and there is no requirement that
-$#u#_r$'s block contain at least $#b#-1$ elements.  Therefore, we proceed
-as above, borrowing an element from $#u#_r$ to make an extra element in
-$#u#_0$.  If this causes $#u#_r$'s block to become empty, then we remove it.
+\item We quickly (in $r+1\le #b#$ steps) run off the end of the list of
+blocks.  In this case, $#u#_r$ is the last block, and there is no need
+for $#u#_r$'s block to contain at least $#b#-1$ elements.  Therefore,
+we proceed as above, borrowing an element from $#u#_r$ to make an extra
+element in $#u#_0$.  If this causes $#u#_r$'s block to become empty,
+then we remove it.
 
-\item After #b# steps we do not find any block containing more than
+\item After #b# steps, we do not find any block containing more than
 $#b#-1$ elements.  In this case, $#u#_0,\ldots,#u#_{#b#-1}$ is a sequence
 of #b# blocks that each contain $#b#-1$ elements.  We \emph{gather}
 these $#b#(#b#-1)$ elements into $#u#_0,\ldots,#u#_{#b#-2}$ so that each
 of these $#b#-1$ blocks contains exactly #b# elements and we remove
 $#u#_{#b#-1}$, which is now empty.  Now $#u#_0$'s block contains #b#
-elements so we can remove the appropriate element from it.
+elements and we can then remove the appropriate element from it.
 \end{enumerate}
 
 \codeimport{ods/SEList.remove(i)}
@@ -438,13 +441,15 @@ the #gather(u)# method that occurs in Case~3.
 
 \subsection{Amortized Analysis of Spreading and Gathering}
 
-Next, we consider the cost of the #gather(u)# and #spread(u)# methods that may be executed by the #add(i,x)# and #remove(i)# methods.  For completeness, here they are:
+Next, we consider the cost of the #gather(u)# and #spread(u)# methods
+that may be executed by the #add(i,x)# and #remove(i)# methods.  For the
+sake of completeness, here they are:
 
 \codeimport{ods/SEList.spread(u)}
 \codeimport{ods/SEList.gather(u)}
 
 The running time of each of these methods is dominated by the two
-nested loops.  Both the inner loop and outer loop execute at most
+nested loops.  Both the inner and outer loops execute at most
 $#b#+1$ times, so the total running time of each of these methods
 is $O((#b#+1)^2)=O(#b#^2)$. However, the following lemma shows that
 these methods execute on at most one out of every #b# calls to #add(i,x)#
@@ -470,9 +475,9 @@ or #remove(i)#.
   only one node, $#u#_r$ has the size of its block changed. Therefore,
   at most one node, namely $#u#_r$, goes from being rugged to being
   fragile.  If Case~2 occurs, then a new node is created, and this node
-  is fragile, but no other node changes sizes, so the number of fragile
+  is fragile, but no other node changes size, so the number of fragile
   nodes increases by one.  Thus, in either Case~1 or Case~2 the potential
-  of the SEList increases by at most 1.
+  of the SEList increases by at most one.
 
   Finally, if Case~3 occurs, it is because $#u#_0,\ldots,#u#_{#b#-1}$
   are all fragile nodes.  Then $#spread(#u_0#)#$ is called and these #b#
@@ -513,23 +518,23 @@ structure:
 \end{thm}
 
 The #SEList# is a tradeoff between an #ArrayList# and a #DLList# where
-the relative mix of these two structures depends on the block size
-#b#.  At the extreme $#b#=2$, each #SEList# node stores at most 3
-values, which is really not much different than a #DLList#. At the other
-extreme, $#b#>#n#$, all the elements are stored in a single array,
-just like in an #ArrayList#.  In between these two extremes lies a
-tradeoff between the time it takes to add or remove a list item and
-the time it takes to locate a particular list item.
+the relative mix of these two structures depends on the block size #b#.
+At the extreme $#b#=2$, each #SEList# node stores at most three values,
+which is not much different than a #DLList#. At the other extreme,
+$#b#>#n#$, all the elements are stored in a single array, just like in
+an #ArrayList#.  In between these two extremes lies a tradeoff between
+the time it takes to add or remove a list item and the time it takes to
+locate a particular list item.
 
 \section{Discussion and Exercises}
 
-Both singly-linked and doubly-linked lists are folklore, having been
-used in programs for over 40 years.  They are discussed, for example,
-by Knuth \cite[Sections~2.2.3--2.2.5]{k97v1}.  Even the #SEList# data
-structure seems to be a well-known data structures exercise.
+Both singly-linked and doubly-linked lists are established techniques,
+having been used in programs for over 40 years.  They are discussed,
+for example, by Knuth \cite[Sections~2.2.3--2.2.5]{k97v1}.  Even the
+#SEList# data structure seems to be a well-known data structures exercise.
 
 \begin{exc}
-  Why is it not possible, in an #SLList# to use a dummy node to avoid
+  Why is it not possible to use a dummy node in an #SLList# to avoid
   all the special cases that occur in the operations #push(x)#, #pop()#,
   #add(x)#, and #remove()#?
 \end{exc}
@@ -562,17 +567,17 @@ structure seems to be a well-known data structures exercise.
 \end{exc}
 
 \begin{exc}
-  Without referring to this chapter, try to recreate the code for the
-  #addBefore(w)# operation, that creates a node, #u#, and adds it just
-  before the node #w# in a #DLList#. If your code does not exactly match
-  the code given in this book it may still be correct.  Test it and see
-  if it works.
+  Try to recreate the code for the #addBefore(w)# operation that creates a
+  node, #u#, and adds it in a #DLList# just before the node #w#.  Do not
+  refer to this chapter.  Even if your code does not exactly match the
+  code given in this book it may still be correct.  Test it and see if
+  it works.
 \end{exc}
 
 The next few exercises involve performing manipulations on #DLList#s.
-These should all be done without allocating any new nodes or temporary
-arrays.  More specifically, they can all be done only by changing
-the #prev# and #next# values of existing nodes.
+You should complete them without allocating any new nodes or temporary
+arrays.  They can all be done only by changing the #prev# and #next#
+values of existing nodes.
 
 \begin{exc}
   Write a #DLList# method #isPalindrome()# that returns #true# if the
@@ -591,8 +596,8 @@ the #prev# and #next# values of existing nodes.
 
 \begin{exc}\exclabel{linkedlist-truncate}
   Write a method, #truncate(i)#, that truncates a #DLList# at position
-  #i#.  After the execution of this method, the size of the list is #i#
-  and it contains only the elements at indices $0,\ldots,#i#-1$.  The
+  #i#.  After executing this method, the size of the list will be #i# and
+  it should contain only the elements at indices $0,\ldots,#i#-1$.  The
   return value is another #DLList# that contains the elements at indices
   $#i#,\ldots,#n#-1$.  This method should run in $O(\min\{#i#,#n#-#i#\})$
   time.
@@ -620,7 +625,7 @@ the #prev# and #next# values of existing nodes.
 \end{exc}
 
 \begin{exc}\exclabel{dllist-sort}
-  This exercises walks you through an implementation of the merge sort
+  This exercise walks you through an implementation of the merge sort
   algorithm for sorting a #DLList#, as discussed in \secref{merge-sort}.
   \javaonly{In your implementation, perform comparisons between elements
   using the #compareTo(x)# method so that the resulting implementation can
@@ -636,13 +641,14 @@ the #prev# and #next# values of existing nodes.
        list containing the result.  This causes #l1# and #l2# to be emptied
        in the proces.  For example, if #l1# contains $a,c,d$ and #l2# contains
        $b,e,f$, then this method returns a new list containing $a,b,c,d,e,f$.
-    \item Write a #DLList# method #sort()# that sorts the elements contained
-       in the list using the merge sort algorithm.  This recursive algorithm works as following:
+    \item Write a #DLList# method #sort()# that sorts the elements
+       contained in the list using the merge sort algorithm.
+       This recursive algorithm works in the following way:
        \begin{enumerate}
           \item If the list contains 0 or 1 elements then there is
             nothing to do.  Otherwise,
-          \item Split the list into two approximately equal length lists
-              #l1# and #l2# using the #truncate(size()/2)# method;
+          \item Using the #truncate(size()/2)# method, split the list
+            into two lists of approximately equal length, #l1# and #l2#;
           \item Recursively sort #l1#;
           \item Recursively sort #l2#; and, finally,
           \item Merge #l1# and #l2# into a single sorted list.
@@ -664,7 +670,7 @@ or #Queue# as items are added and removed.
 \end{exc}
 
 \begin{exc}
-  Design an implement a #MinQueue# data structure that can store
+  Design and implement a #MinQueue# data structure that can store
   comparable elements and supports the queue operations #add(x)#,
   #remove()#, and #size()#, as well as the #min()# operation, which
   returns the minimum value currently stored in the data structure.
@@ -672,7 +678,7 @@ or #Queue# as items are added and removed.
 \end{exc}
 
 \begin{exc}
-  Design an implement a #MinDeque# data structure that can store
+  Design and implement a #MinDeque# data structure that can store
   comparable elements and supports the queue operations #addFirst(x)#,
   #addLast(x)# #removeFirst()#, #removeLast()# and #size()#, as well
   as the #min()# operation, which returns the minimum value currently
@@ -681,7 +687,7 @@ or #Queue# as items are added and removed.
 \end{exc}
 
 The next exercises are designed to test the reader's understanding of
-the implementation an analysis of the space-efficient #SEList#:
+the implementation and analysis of the space-efficient #SEList#:
 
 \begin{exc}
   Prove that, if an #SEList# is used like a #Stack# (so that the
@@ -691,7 +697,7 @@ the implementation an analysis of the space-efficient #SEList#:
 \end{exc}
 
 \begin{exc}
-  Design an implement of a version of an #SEList# that supports all
+  Design and implement of a version of an #SEList# that supports all
   the #Deque# operations in constant amortized time per operation,
   independent of the value of #b#.
 \end{exc}

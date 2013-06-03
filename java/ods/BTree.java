@@ -371,7 +371,7 @@ public class BTree<T> implements SSet<T> {
 	protected void checkUnderflowNonZero(Node u, int i) {
 		Node w = bs.readBlock(u.children[i]);  // w is child of u
 		if (w.size() < B-1) {  // underflow at w
-			Node v = bs.readBlock(u.children[i-1]);  // v is left sibling of w
+			Node v = bs.readBlock(u.children[i-1]); // v left of w
 			if (v.size() > B) {  // w can borrow from v
 				shiftLR(u, i-1, v, w);
 			} else { // v will absorb w
@@ -412,7 +412,7 @@ public class BTree<T> implements SSet<T> {
 	protected void checkUnderflowZero(Node u, int i) {
 		Node w = bs.readBlock(u.children[i]); // w is child of u
 		if (w.size() < B-1) {  // underflow at w
-			Node v = bs.readBlock(u.children[i+1]);  // v is right sibling of w
+			Node v = bs.readBlock(u.children[i+1]);  // v right of w
 			if (v.size() > B) { // w can borrow from v
 				shiftRL(u, i, v, w);
 			} else { // w will absorb w
