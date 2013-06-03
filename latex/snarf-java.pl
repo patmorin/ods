@@ -136,6 +136,7 @@ MAIN: {
       my $args=$2;
       (my $class) = $line =~ /\{\w+\/(\w+)\./;
       print("%$line");
+      #print('\begin{singlespace}');
       #print('\renewcommand{\baselinestretch}{1}'."\n");
       #print("\\resizebox{.98\\textwidth}{!}{");
       print("\ \\hspace{.5ex}\n");
@@ -146,7 +147,8 @@ MAIN: {
       snarfit($args, 0); 
       print("\\end{Verbatim}\n");
       #print("}");
-      #print('\renewcommand{\baselinestretch}{1.3}'."\n");
+      #print('\renewcommand{\baselinestretch}{1.4}'."\n");
+      #print('\end{singlespace}');
     } else {
       print($line);
     }

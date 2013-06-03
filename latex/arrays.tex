@@ -1,7 +1,7 @@
 \chapter{Array-Based Lists}
 \chaplabel{arrays}
 
-In this chapter, we study implementations of the #List# and #Queue#
+In this chapter, we will study implementations of the #List# and #Queue#
 interfaces where the underlying data is stored in an array, called the
 \emph{backing array}.  The following table summarizes the running times
 of operations for the data structures presented in this chapter:
@@ -35,15 +35,15 @@ advantages and limitations in common:
   into the new array.  This is an expensive operation.
 \end{itemize}
 The third point is important.  The running times cited in the table
-above do not include the cost of growing and shrinking the backing array.
-We will see that, if carefully managed, the cost of growing and shrinking
-the backing array does not add much to the cost of an \emph{average}
-operation.  More precisely, if we start with an empty data structure,
-and perform any sequence of $m$ #add(i,x)# or #remove(i)# operations,
-then the total cost of growing and shrinking the backing array, over the
-entire sequence of $m$ operations is $O(m)$.  Although some individual
-operations are more expensive, the amortized cost, when amortized over
-all $m$ operations, is only $O(1)$ per operation.
+above do not include the cost associated with growing and shrinking
+the backing array.  We will see that, if carefully managed, the cost of
+growing and shrinking the backing array does not add much to the cost of
+an \emph{average} operation.  More precisely, if we start with an empty
+data structure, and perform any sequence of $m$ #add(i,x)# or #remove(i)#
+operations, then the total cost of growing and shrinking the backing
+array, over the entire sequence of $m$ operations is $O(m)$.  Although
+some individual operations are more expensive, the amortized cost,
+when amortized over all $m$ operations, is only $O(1)$ per operation.
 
 \cpponly{
 In this chapter, and throughout this book, it will be convenient to
@@ -103,10 +103,9 @@ set #a[i]# equal to #x#, and increment #n#.
 \end{figure}
 
 \codeimport{ods/ArrayStack.add(i,x)}
-% TODO: Add shifting figure
-If we ignore the cost of the potential call to #resize()#, the cost of the
-#add(i,x)# operation is proportional to the number of elements we have
-to shift to make room for #x#.  Therefore the cost of this operation
+If we ignore the cost of the potential call to #resize()#, then the cost
+of the #add(i,x)# operation is proportional to the number of elements we
+have to shift to make room for #x#.  Therefore the cost of this operation
 (ignoring the cost of resizing #a#) is $O(#n#-#i#+1)$.
 
 Implementing the #remove(i)# operation is similar.  We shift the elements
@@ -172,7 +171,7 @@ In particular, we will show:
   There are two cases to consider. In the first case, #resize()# is
   being called by #add(i,x)# because the backing array #a# is full, i.e.,
   $#a.length# = #n#=#n#_i$.  Consider the previous call to #resize()#:
-  After this previous call, the size of #a# was #a.length#, but the
+  after this previous call, the size of #a# was #a.length#, but the
   number of elements stored in #a# was at most $#a.length#/2=#n#_i/2$.
   But now the number of elements stored in #a# is $#n#_i=#a.length#$,
   so there must have been at least $#n#_i/2$ calls to #add(i,x)# since
@@ -232,7 +231,7 @@ In Java there is the #System.arraycopy(s,i,d,j,n)# method.
 \codeimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
 
 These functions are usually highly optimized and may even use special
-machine instructions that can do this copying much faster than we could do
+machine instructions that can do this copying much faster than we could by
 using a #for# loop.  Although using these functions does not asymptotically
 decrease the running times, it can still be a worthwhile optimization.
 In the \javaonly{Java}\cpponly{C++} implementations here, the use of \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}
@@ -248,11 +247,11 @@ the #remove()# operation) from the queue in the same order they are added
 (using the #add(x)# operation).
 
 Notice that an #ArrayStack# is a poor choice for an implementation of a
-FIFO queue.  The reason is that we must choose one end of the list to
-add to and then remove from the other end.  One of the two operations
-must work on the head of the list, which involves calling #add(i,x)#
-or #remove(i)# with a value of $#i#=0$.  This gives a running time
-proportional to #n#.
+FIFO queue.  It is not a good choice because we must choose one end of
+the list upon which to add elements and then remove elements from the
+other end.  One of the two operations must work on the head of the list,
+which involves calling #add(i,x)# or #remove(i)# with a value of $#i#=0$.
+This gives a running time proportional to #n#.
 
 To obtain an efficient array-based implementation of a queue, we
 first notice that the problem would be easy if we had an infinite
@@ -268,8 +267,8 @@ decrement #n#.
 Of course, the problem with this solution is that it requires an infinite
 array.  An #ArrayQueue# simulates this by using a finite array #a#
 and \emph{modular arithmetic}.  This is the kind of arithmetic used when
-we are talking about the time of day.  For example 10 o'clock plus 5
-hours gives 3 o'clock.  Formally, we say that
+we are talking about the time of day.  For example 10:00 plus five
+hours gives 3:00.  Formally, we say that
 \[
     10 + 5 = 15 \equiv 3 \pmod{12} \enspace .
 \]
@@ -285,7 +284,7 @@ some integer $k$.  Less formally, the value $r$ is the remainder we get
 when we divide $a$ by $m$.  In many programming languages, including
 \javaonly{Java}\cpponly{C++}, the $\bmod$ operator is represented
 using the #%# symbol.\footnote{This is sometimes referred to as the
-\emph{brain-dead} mod operator since it does not correctly implement
+\emph{brain-dead} mod operator, since it does not correctly implement
 the mathematical mod operator when the first argument is negative.}
 
 Modular arithmetic is useful for simulating an infinite array,
@@ -324,7 +323,7 @@ the size of #a#.  Next, we store #x# in
 
 \codeimport{ods/ArrayQueue.add(x)}
 
-To implement #remove()# we first store #a[j]# so that we can return
+To implement #remove()#, we first store #a[j]# so that we can return
 it later.  Next, we decrement #n# and increment #j# (modulo #a.length#)
 by setting $#j#=(#j#+1)\bmod #a.length#$.  Finally, we return the stored
 value of #a[j]#. If necessary, we may call #resize()# to decrease the
@@ -365,11 +364,11 @@ time spent during all calls to #resize()#.
 \section{#ArrayDeque#: Fast Deque Operations Using an Array}
 \seclabel{arraydeque}
 
-The #ArrayQueue# from the previous section is a data structure
-for representing a sequence that allows us to efficiently add to one
+The #ArrayQueue# from the previous section is a data structure for
+representing a sequence that allows us to efficiently add to one
 end of the sequence and remove from the other end.  The #ArrayDeque#
 data structure allows for efficient addition and removal at both ends.
-This structure implements the #List# interface using the same circular
+This structure implements the #List# interface by using the same circular
 array technique used to represent an #ArrayQueue#.
 
 \codeimport{ods/ArrayDeque.a.j.n}
@@ -439,7 +438,7 @@ Next, we present another data structure, the #DualArrayDeque# that
 achieves the same performance bounds as an #ArrayDeque# by using
 two #ArrayStack#s.  Although the asymptotic performance of the
 #DualArrayDeque# is no better than that of the #ArrayDeque#, it is
-still worth studying since it offers a good example of how to make a
+still worth studying, since it offers a good example of how to make a
 sophisticated data structure by combining two simpler data structures.
 
 A #DualArrayDeque# represents a list using two #ArrayStack#s.  Recall that
@@ -514,7 +513,7 @@ The cost of this is
 
 Notice that the first case \myeqref{das-front} occurs when $#i#<#n#/4$.
 The second case \myeqref{das-back} occurs when $#i#\ge 3#n#/4$.  When
-$#n#/4\le#i#<3#n#/4$, we can't be sure whether the operation affects
+$#n#/4\le#i#<3#n#/4$, we cannot be sure whether the operation affects
 #front# or #back#, but in either case, the operation takes
 $O(#n#)=O(#i#)=O(#n#-#i#)$ time, since $#i#\ge #n#/4$ and $#n#-#i#>
 #n#/4$.  Summarizing the situation, we have
@@ -529,26 +528,26 @@ $O(#n#)=O(#i#)=O(#n#-#i#)$ time, since $#i#\ge #n#/4$ and $#n#-#i#>
 Thus, the running time of #add(i,x)# (ignoring the cost of the call to
 #balance()#) is $O(1+\min\{#i#, #n#-#i#\})$.
 
-The #remove(i)# operation, and its analysis, is similar to the #add(i,x)#
-operation.
+The #remove(i)# operation and its analysis resemble the #add(i,x)#
+operation and analysis.
 
 \codeimport{ods/DualArrayDeque.remove(i)}
 
 \subsection{Balancing}
 
-Finally, we study the #balance()# operation performed by #add(i,x)#
-and #remove(i)#.  This operation is used to ensure that neither #front#
-nor #back# gets too big (or too small).  It ensures that, unless there
-are fewer than 2 elements, each of #front# and #back# contain at least
-$#n#/4$ elements. If this is not the case, then it moves elements between
-them so that #front# and #back# contain exactly $\lfloor#n#/2\rfloor$
-elements and $\lceil#n#/2\rceil$ elements, respectively.
+Finally, we turn to the #balance()# operation performed by #add(i,x)#
+and #remove(i)#.  This operation ensures that neither #front# nor #back#
+becomes too big (or too small).  It ensures that, unless there are fewer
+than two elements, each of #front# and #back# contain at least $#n#/4$
+elements. If this is not the case, then it moves elements between them
+so that #front# and #back# contain exactly $\lfloor#n#/2\rfloor$ elements
+and $\lceil#n#/2\rceil$ elements, respectively.
 
 \codeimport{ods/DualArrayDeque.balance()}
 
-There is not much to analyze.  If the #balance()# operation does
-rebalancing, then it moves $O(#n#)$ elements and this takes
-$O(#n#)$ time. This is bad, since #balance()# is called with each call to
+Here there is little to analyze.  If the #balance()# operation does
+rebalancing, then it moves $O(#n#)$ elements and this takes $O(#n#)$
+time. This is bad, since #balance()# is called with each call to
 #add(i,x)# and #remove(i)#.  However, the following lemma shows that, on
 average, #balance()# only spends a constant amount of time per operation.
 
@@ -601,7 +600,7 @@ average, #balance()# only spends a constant amount of time per operation.
 
 \subsection{Summary}
 
-The following theorem summarizes the performance of a #DualArrayStack#
+The following theorem summarizes the performance of a #DualArrayStack#:
 
 \begin{thm}\thmlabel{dualarraydeque}
   A #DualArrayDeque# implements the #List# interface.  Ignoring the
@@ -621,14 +620,14 @@ The following theorem summarizes the performance of a #DualArrayStack#
 \section{#RootishArrayStack#: A Space-Efficient Array Stack}
 \seclabel{rootisharraystack}
 
-One of the drawbacks of all previous data structures in this chapter
-is that, because they store their data in one or two arrays, and they
-avoid resizing these arrays too often, the arrays are frequently not
-very full.  For example, immediately after a #resize()# operation on
-an #ArrayStack#, the backing array #a# is only half full.  Even worse,
-there are times when only $1/3$ of #a# contains data.
+One of the drawbacks of all previous data structures in this chapter is
+that, because they store their data in one or two arrays and they avoid
+resizing these arrays too often, the arrays frequently are not very full.
+For example, immediately after a #resize()# operation on an #ArrayStack#,
+the backing array #a# is only half full.  Even worse, there are times
+when only $1/3$ of #a# contains data.
 
-In this section, we discuss a data structure, the #RootishArrayStack#,
+In this section, we discuss the #RootishArrayStack# data structure,
 that addresses the problem of wasted space.  The #RootishArrayStack#
 stores #n# elements using $O(\sqrt{#n#})$ arrays.  In these arrays, at
 most $O(\sqrt{#n#})$ array locations are unused at any time.  All
@@ -666,13 +665,13 @@ elements.  The above formula can be obtained as shown in \figref{gauss}.
   \figlabel{gauss}
 \end{figure}
 
-The elements of the list are laid out in the blocks as we might
-expect.  The list element with index 0 is stored in block 0, the
-elements with list indices 1 and 2 are stored in block 1, the elements
-with list indices 3, 4, and 5 are stored in block 2, and so on.  The
-main problem we have to address is that of determining, given an index
-$#i#$, which block contains #i# as well as the index corresponding to
-#i# within that block.
+As we might expect, the elements of the list are laid out in order
+within the blocks.  The list element with index 0 is stored in block 0,
+elements with list indices 1 and 2 are stored in block 1, elements with
+list indices 3, 4, and 5 are stored in block 2, and so on.  The main
+problem we have to address is that of determining, given an index $#i#$,
+which block contains #i# as well as the index corresponding to #i#
+within that block.
 
 Determining the index of #i# within its block turns out to be easy. If
 index #i# is in block #b#, then the number of elements in blocks
@@ -711,9 +710,9 @@ With this out of the way, the #get(i)# and #set(i,x)# methods are straightforwar
 
 If we use any of the data structures in this chapter for representing the #blocks# list, then #get(i)# and #set(i,x)# will each run in constant time.
 
-The #add(i,x)# method will, by now, look familiar.  We first check if
-our data structure is full, by checking if the number of blocks #r#
-is such that $#r#(#r#+1)/2 = #n#$ and, if so, we call #grow()#
+The #add(i,x)# method will, by now, look familiar.  We first check
+to see if our data structure is full, by checking if the number of
+blocks #r# is such that $#r#(#r#+1)/2 = #n#$. If so, we call #grow()#
 to add another block.  With this done, we shift elements with indices
 $#i#,\ldots,#n#-1$ to the right by one position to make room for the
 new element with index #i#:
@@ -744,13 +743,13 @@ therefore $O(#n#-#i#)$.
 
 The above analysis of #add(i,x)# and #remove(i)# does not account for
 the cost of #grow()# and #shrink()#.  Note that, unlike the
-#ArrayStack.resize()# operation, #grow()# and #shrink()# do not do any
-copying of data.  They only allocate or free an array of size #r#.  In
+#ArrayStack.resize()# operation, #grow()# and #shrink()# do not copy
+any data.  They only allocate or free an array of size #r#.  In
 some environments, this takes only constant time, while in others, it
 may require time proportional to #r#.
 
 We note that, immediately after a call to #grow()# or #shrink()#, the
-situation is clear. The final block is completely empty and all other
+situation is clear. The final block is completely empty, and all other
 blocks are completely full.  Another call to #grow()# or #shrink()# will
 not happen until at least $#r#-1$ elements have been added or removed.
 Therefore, even if #grow()# and #shrink()# take $O(#r#)$ time, this
@@ -765,7 +764,7 @@ Next, we analyze the amount of extra space used by a #RootishArrayStack#.
 In particular, we want to count any space used by a #RootishArrayStack# that is not an array element currently used to hold a list element.  We call all such space \emph{wasted space}.
 
 The #remove(i)# operation ensures that a #RootishArrayStack# never has
-more than 2 blocks that are not completely full.  The number of blocks,
+more than two blocks that are not completely full.  The number of blocks,
 #r#, used by a #RootishArrayStack# that stores #n# elements therefore
 satisfies
 \[
@@ -784,24 +783,23 @@ Therefore, the total amount of wasted space in a #RootishArrayStack#
 is $O(\sqrt{#n#})$.
 
 Next, we argue that this space usage is optimal for any data structure
-that starts out empty and can support the addition of one item at a
-time. More precisely, we will show that, at some point during the
-addition of #n# items, the data structure is wasting an amount of
-space at least in $\sqrt{#n#}$ (though it may be only wasted for a
-moment).
+that starts out empty and can support the addition of one item at
+a time. More precisely, we will show that, at some point during the
+addition of #n# items, the data structure is wasting an amount of space
+at least in $\sqrt{#n#}$ (though it may be only wasted for a moment).
 
-Suppose we start with an empty data structure and we add #n# items
-one at a time.  At the end of this process, all #n# items are stored
-in the structure and they are distributed among a collection of #r#
-memory blocks.  If $#r#\ge \sqrt{#n#}$, then the data structure must be
-using #r# pointers (or references) to keep track of these #r# blocks,
-and this is wasted space.  On the other hand, if $#r# < \sqrt{#n#}$
-then, by the pigeonhole principle, some block must have size at least
-$#n#/#r# > \sqrt{#n#}$.  Consider the moment at which this block was
-first allocated.  Immediately after it was allocated, this block was
-empty, and was therefore wasting $\sqrt{#n#}$ space.  Therefore, at some
-point in time during the insertion of #n# elements, the data structure was
-wasting $\sqrt{#n#}$ space.
+Suppose we start with an empty data structure and we add #n# items one
+at a time.  At the end of this process, all #n# items are stored in
+the structure and distributed among a collection of #r# memory blocks.
+If $#r#\ge \sqrt{#n#}$, then the data structure must be using #r#
+pointers (or references) to keep track of these #r# blocks, and these
+pointers are wasted space.  On the other hand, if $#r# < \sqrt{#n#}$
+then, by the pigeonhole principle, some block must have a size of at
+least $#n#/#r# > \sqrt{#n#}$.  Consider the moment at which this block
+was first allocated.  Immediately after it was allocated, this block
+was empty, and was therefore wasting $\sqrt{#n#}$ space.  Therefore,
+at some point in time during the insertion of #n# elements, the data
+structure was wasting $\sqrt{#n#}$ space.
 
 \subsection{Summary}
 
@@ -833,12 +831,13 @@ requires taking square roots.  The square root operation is generally
 not considered a basic operation and is therefore not usually part of
 the word-RAM model.
 
-In this section, we take time to show that the square root operation can
-be implemented efficiently.  In particular, we show that for any integer
+In this section, we show that the square root operation can be
+implemented efficiently.  In particular, we show that for any integer
 $#x#\in\{0,\ldots,#n#\}$,  $\lfloor\sqrt{#x#}\rfloor$ can be computed
 in constant-time, after $O(\sqrt{#n#})$ preprocessing that creates two
-arrays of length $O(\sqrt{#n#})$. 
-The following lemma shows that we can reduce the problem of computing the square root of #x# to the square root of a related value #x'#.
+arrays of length $O(\sqrt{#n#})$.  The following lemma shows that we
+can reduce the problem of computing the square root of #x# to the square
+root of a related value #x'#.
 
 \begin{lem}\lemlabel{root}
 Let $#x#\ge 1$ and let $#x'#=#x#-a$, where $0\le a\le\sqrt{#x#}$.  Then
@@ -930,7 +929,7 @@ Finally, for completeness, we include the following code that initializes #logta
 To summarize, the computations done by the #i2b(i)# method can be
 implemented in constant time on the word-RAM using $O(\sqrt{n})$ extra
 memory to store the #sqrttab# and #logtab# arrays.  These arrays can be
-rebuilt when #n# increases or decreases by a factor of 2, and the cost
+rebuilt when #n# increases or decreases by a factor of two, and the cost
 of this rebuilding can be amortized over the number of #add(i,x)# and
 #remove(i)# operations that caused the change in #n# in the same way that
 the cost of #resize()# is analyzed in the #ArrayStack# implementation.
@@ -940,21 +939,21 @@ the cost of #resize()# is analyzed in the #ArrayStack# implementation.
 
 Most of the data structures described in this chapter are folklore. They
 can be found in implementations dating back over 30 years.  For example,
-implementations of stacks, queues, and deques which generalize easily
+implementations of stacks, queues, and deques, which generalize easily
 to the #ArrayStack#, #ArrayQueue# and #ArrayDeque# structures described
-here are discussed by Knuth \cite[Section~2.2.2]{k97v1}.
+here, are discussed by Knuth \cite[Section~2.2.2]{k97v1}.
 
 Brodnik \etal\ \cite{bcdms99} seem to have been the first to describe
 the #RootishArrayStack# and prove a $\sqrt{n}$ lower-bound like that
 in \secref{rootishspaceusage}.  They also present a different structure
 that uses a more sophisticated choice of block sizes in order to avoid
-computing square roots in the #i2b(i)# method.  With their scheme, the
-block containing #i# is block $\lfloor\log (#i#+1)\rfloor$, which is just
-the index of the leading 1 bit in the binary representation of $#i#+1$.
-Some computer architectures provide an instruction for computing the
-index of the leading 1-bit in an integer.
+computing square roots in the #i2b(i)# method.  Within their scheme,
+the block containing #i# is block $\lfloor\log (#i#+1)\rfloor$, which
+is simply the index of the leading 1 bit in the binary representation
+of $#i#+1$.  Some computer architectures provide an instruction for
+computing the index of the leading 1-bit in an integer.
 
-A structure related to the #RootishArrayStack# is the $2$-level
+A structure related to the #RootishArrayStack# is the two-level
 \emph{tiered-vector} of Goodrich and Kloss \cite{gk99}.  This structure
 supports #get(i,x)# and #set(i,x)# in constant time and #add(i,x)# and
 #remove(i)# in $O(\sqrt{#n#})$ time.  These running times are similar
@@ -966,8 +965,8 @@ to what can be achieved with the more careful implementation of a
   In the #ArrayStack# implementation, after the first call to #remove(i)#,
   the backing array, #a#, contains $#n#+1$ non-#null# values even
   though the #ArrayStack# only contains #n# elements.  Where is the
-  extra non-#null# value?  Discuss any consequences this might have on
-  the Java Runtime Environment's memory manager.
+  extra non-#null# value?  Discuss any consequences this non-#null# value
+  might have on the Java Runtime Environment's memory manager.
 \end{exc}
 }
 
@@ -1036,8 +1035,8 @@ to what can be achieved with the more careful implementation of a
   The amortized cost of all operations should be the same as in an
   #ArrayDeque#.
 
-  \noindent Hint: Making this work is really all about how a #rebuild()#
-  operation is performed.  You would like #rebuild()# to put the data
+  \noindent Hint: Making this work is really all about how you implement
+  the #rebuild()# operation.  You would like #rebuild()# to put the data
   structure into a state where the data cannot run off either end until
   at least $#n#/2$ operations have been performed.
 

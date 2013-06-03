@@ -1,4 +1,4 @@
-\documentclass[11pt]{book}
+\documentclass[10pt]{book}
 
 
 %\usepackage{html}
@@ -105,7 +105,9 @@
 \hyphenchar\font=`\-% to allow hyphenation
 }
 
-\usepackage[sf,bf,small,raggedright,compact]{titlesec} % formatting titles
+\usepackage[sf,bf,small,raggedright]{titlesec} % formatting titles
+\titlespacing*{\section}{0pt}{24pt}{14pt}
+\titlespacing*{\subsection}{0pt}{14pt}{14pt}
 \usepackage{relsize,fancyvrb}  % formatting pseudocode
 \usepackage{ods} % Personalization and commands
 
@@ -226,6 +228,10 @@ Edition 0.1E\cpponly{$\beta$}
 \cpponly{\include{cpp-preface}
 \ \thispagestyle{empty}\newpage
 }
+
+% Use 14pt between lines
+\setlength{\baselineskip}{14pt}
+
 \include{why}
 
 \tableofcontents

@@ -7,8 +7,8 @@ they improve our quality of life and even save lives on a regular basis.
 Many multi-million and several multi-billion dollar companies have been
 built around data structures.
 
-How can this be?  If we think about it for even a few minutes, we
-realize that we interact with data structures constantly.
+How can this be?  If we stop to think about it, we realize that we
+interact with data structures constantly.
 \begin{itemize}
   \item  Open a file: File system data structures are used to locate
     the parts of that file on disk so they can be retrieved.  This isn't
@@ -16,12 +16,12 @@ realize that we interact with data structures constantly.
     file could be stored on any one of them.
   \item Look up a contact on your phone:  A data
     structure is used to lookup a phone number based on partial
-    information even before you finish dialing/typing.  This isn't
-    easy; your phone may contain information about a lot of
-    people---everyone you have ever had phone or email contact with---and
-    your phone doesn't have a very fast processor or a lot of memory.
-  \item Login to your favourite social network:  The network servers
-    use your login information look up your account information.
+    information even before you finish dialing/typing.  This isn't easy;
+    your phone may contain information about a lot of people---everyone
+    you have ever contacted via phone or email---and your phone doesn't
+    have a very fast processor or a lot of memory.
+  \item Log in to your favourite social network:  The network servers
+    use your login information to look up your account information.
     This isn't easy; the most popular social networks have hundreds of
     millions of active users.
   \item Do a web search: The search engine uses data structures to find
@@ -39,31 +39,31 @@ realize that we interact with data structures constantly.
 \subsection{The Need for Efficiency}
 
 In the next section, we look at the operations supported by the most
-commonly used data structures.  Anyone with even a little bit of
-programming experience will see that these operations are not hard to
-implement correctly.  We can store the data in an array or a linked list
-and each operation can be implemented by iterating over all the elements
-of the array or list and possibly adding or removing an element.
+commonly used data structures.  Anyone with a bit of programming
+experience will see that these operations are not hard to implement
+correctly.  We can store the data in an array or a linked list and each
+operation can be implemented by iterating over all the elements of the
+array or list and possibly adding or removing an element.
 
-This kind of implementation is easy, but not very efficient.  Does it
-really matter?  Computers are getting faster and faster. Maybe the
-obvious implementation is good enough. Let's do some back-of-the-envelope
-calculations to find out.
+This kind of implementation is easy, but not very efficient.  Does this
+really matter?  Computers are becoming faster and faster. Maybe the
+obvious implementation is good enough. Let's do some rough calculations
+to find out.
 
 \paragraph{Number of operations:}  Imagine an application with a
 moderately-sized data set, say of one million ($10^6$), items.  It is
 reasonable, in most applications, to assume that the application will
 want to look up each item at least once.  This means we can expect to do
-at least one million ($10^6$) lookups in this data.  If each of these
-$10^6$ lookups inspects  each of the $10^6$ items, this gives a total
+at least one million ($10^6$) searches in this data.  If each of these
+$10^6$ searches inspects  each of the $10^6$ items, this gives a total
 of $10^6\times 10^6=10^{12}$ (one thousand billion) inspections.
 
 \paragraph{Processor speeds:} At the time of writing, even a very fast
 desktop computer can not do more than one billion ($10^9$) operations per
 second.\footnote{Computer speeds are at most a few gigahertz (billions
-of cycles per second) and each operation typically takes a few cycles.}
-This means that this application will take at least $10^{12}/10^9 =
-1000$ seconds, or roughly 16 minutes and 40 seconds.  16 minutes is an
+of cycles per second), and each operation typically takes a few cycles.}
+This means that this application will take at least $10^{12}/10^9 = 1000$
+seconds, or roughly 16 minutes and 40 seconds.  Sixteen minutes is an
 eon in computer time, but a person might be willing to put up with it
 (if they were headed out for a coffee break).
 
@@ -93,13 +93,13 @@ are both large.  In these cases, the time (measured in, say, machine
 instructions) is roughly $#n#\times m$.
 
 The solution, of course, is to carefully organize data within the data
-structure so that not every operation requires inspecting every data item.
-Although it sounds impossible at first, we will see data structures
-where a search requires looking at only 2 items on average, independent
-of the number of items stored in the data structure.  In our billion
-instruction per second computer it takes only $0.000000002$ seconds to
-search in a data structure containing a billion items (or a trillion,
-or a quadrillion, or even a quintillion items).
+structure so that not every operation requires every data item to be
+inspected.  Although it sounds impossible at first, we will see data
+structures where a search requires looking at only two items on average,
+independent of the number of items stored in the data structure.  In our
+billion instruction per second computer it takes only $0.000000002$
+seconds to search in a data structure containing a billion items (or a
+trillion, or a quadrillion, or even a quintillion items).
 
 We will also see implementations of data structures that keep the
 items in sorted order, where the number of items inspected during an
@@ -111,9 +111,9 @@ $0.00000006$ seconds each.
 
 The remainder of this chapter briefly reviews some of the main concepts
 used throughout the rest of the book.   \secref{interfaces} describes
-the interfaces implemented by all the data structures described in this
-book and should be considered required reading.  The remaining sections
-discuss:
+the interfaces implemented by all of the data structures described in
+this book and should be considered required reading.  The remaining
+sections discuss:
 \begin{itemize}
   \item some mathematical background including exponentials, logarithms,
   factorials, asymptotic (big-Oh) notation, probability, and randomization;
@@ -129,20 +129,20 @@ them now and come back to them later if necessary.
 \section{Interfaces}
 \seclabel{interfaces}
 
-In discussing data structures, it is important to understand the
+When discussing data structures, it is important to understand the
 difference between a data structure's interface and its implementation.
 An interface describes what a data structure does, while an implementation
 describes how the data structure does it.
 
-An \emph{interface}, sometimes also called an \emph{abstract data type},
-defines the set of operations supported by a data structure and
+An \emph{interface}, sometimes also called an \emph{abstract data
+type}, defines the set of operations supported by a data structure and
 the semantics, or meaning, of those operations.  An interface tells us
-nothing about how the data structure implements these operations, it only
-provides the list of supported operations along with specifications
-about what types of arguments each operation accepts and the value
-returned by each operation.
+nothing about how the data structure implements these operations; it only
+provides a list of supported operations along with specifications about
+what types of arguments each operation accepts and the value returned
+by each operation.
 
-A data structure \emph{implementation} on the other hand, includes the
+A data structure \emph{implementation}, on the other hand, includes the
 internal representation of the data structure as well as the definitions
 of the algorithms that implement the operations supported by the data
 structure.  Thus, there can be many implementations of a single interface.
@@ -182,11 +182,12 @@ and #dequeue()#, respectively.
 
 A \emph{priority #Queue#}, illustrated in \figref{prioqueue}, always
 removes the smallest element from the #Queue#, breaking ties arbitrarily.
-This is similar to the way patients are triaged in a hospital emergency
-room.  As patients arrive they are evaluated and then placed in a waiting
-room.  When a doctor becomes available they first treat the patient with
-the most life-threatening condition.  The #remove(x)# operation on a
-priority #Queue# is usually called #deleteMin()# in other texts.
+This is similar to the way in which patients are triaged in a hospital
+emergency room.  As patients arrive they are evaluated and then placed in
+a waiting room.  When a doctor becomes available he or she first treats
+the patient with the most life-threatening condition.  The #remove(x)#
+operation on a priority #Queue# is usually called #deleteMin()# in
+other texts.
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/prioqueue}}
@@ -267,7 +268,7 @@ Notice that these operations are easily sufficient to implement the
 Although we will normally not discuss the #Stack#, #Deque# and FIFO
 #Queue# interfaces in subsequent chapters, the terms #Stack# and #Deque#
 are sometimes used in the names of data structures that implement the
-#List# interface.  When this happens, it is to highlight the fact that
+#List# interface.  When this happens, it highlights the fact that
 these data structures can be used to implement the #Stack# or #Deque#
 interface very efficiently.  For example, the #ArrayDeque# class is an
 implementation of the #List# interface that implements all the #Deque#
@@ -276,8 +277,8 @@ operations in constant time per operation.
 
 \subsection{The #USet# Interface: Unordered Sets}
 
-The #USet# interface represents an unordered set of unique elements,
-mimicking a mathematical \emph{set}. A #USet# contains #n# \emph{distinct}
+The #USet# interface represents an unordered set of unique elements, which
+mimics a mathematical \emph{set}. A #USet# contains #n# \emph{distinct}
 elements; no element appears more than once; the elements are in no
 specific order.  A #USet# supports the following operations:
 
@@ -296,17 +297,19 @@ specific order.  A #USet# supports the following operations:
 \end{enumerate}
 
 These definitions are a bit fussy about distinguishing #x#, the element
-we are removing or finding, from #y#, the element we remove or find.
+we are removing or finding, from #y#, the element we may remove or find.
 This is because #x# and #y# might actually be distinct objects that
 are nevertheless treated as equal.\javaonly{\footnote{In Java, this is
-done by overriding the class' #equals(y)# and #hashCode()# methods.}}
-This is a very useful distinction since it allows for the creation of
-\emph{dictionaries} or \emph{maps} that map keys onto values.  This is
-done by creating a compound object called a #Pair# that contains a
-\emph{key} and a \emph{value}. Two #Pair#s are treated as equal if their
-keys are equal.  By storing #Pair#s in a #USet#, we can find the value
-associated with any key #k# by creating a #Pair#, #x#, with key #k#
-and using the #find(x)# method.
+done by overriding the class's #equals(y)# and #hashCode()# methods.}}
+Such a distinction is  useful because it allows for the creation of
+\emph{dictionaries} or \emph{maps} that map keys onto values.
+
+To create a dictionary/map, one forms compound objects called #Pair#s,
+each of which contains a \emph{key} and a \emph{value}. Two #Pair#s
+are treated as equal if their keys are equal.  If we store some pair
+$(#k#,#v#)$ in a #USet# and then later call the #find(x)# method using
+the pair $#x#=(#k#,#null#)$ the result will be $#y#=(#k#,#v#)$.  In other
+works, we can recover the value, #v#, given only the key, #k#.
 
 
 \subsection{The #SSet# Interface: Sorted Sets}
@@ -337,10 +340,10 @@ between a #USet# and an #SSet# is in the #find(x)# method:
 This version of the #find(x)# operation is sometimes referred to
 as a \emph{successor search}.  It differs in a fundamental way from
 #USet.find(x)# since it returns a meaningful result even when there is
-no element in the set that is equal to #x#.
+no element equal to #x# in the set.
 
-The distinction between the #USet# and #SSet# #find(x)# operations is very
-important and is very often missed.  The extra functionality provided
+The distinction between the #USet# and #SSet# #find(x)# operations is
+very important and is often missed.  The extra functionality provided
 by an #SSet# usually comes with a price that includes both a larger
 running time and a higher implementation complexity.  For example, most
 of the #SSet# implementations discussed in this book all have #find(x)#
@@ -349,7 +352,7 @@ On the other hand, the implementation of a #USet# as a #ChainedHashTable#
 in \chapref{hashing} has a #find(x)# operation that runs in constant
 expected time.  When choosing which of these structures to use, one should
 always use a #USet# unless the extra functionality offered by an #SSet#
-is really needed.
+is truly needed.
 
 % \subsection{The DynamicString Interface}
 
@@ -357,10 +360,10 @@ is really needed.
 
 In this section, we review some mathematical notations and tools
 used throughout this book, including logarithms, big-Oh notation, and
-probability theory.  This is intended to be a review of these topics, not
-an introduction.  Any reader who feels they are missing this background
-is encouraged to read, and do exercises from, the appropriate sections
-of the very good (and free) textbook on mathematics for computer science
+probability theory.  This review will be brief and is not intended as
+an introduction. Readers who feel they are missing this background are
+encouraged to read, and do exercises from, the appropriate sections of
+the very good (and free) textbook on mathematics for computer science
 \cite{llm11}.
 
 \subsection{Exponentials and Logarithms}
@@ -462,7 +465,7 @@ set $\{1,\ldots,n\}$.
 
 \subsection{Asymptotic Notation}
 
-When analyzing data structures in this book, we will want to talk about
+When analyzing data structures in this book, we want to talk about
 the running times of various operations.  The exact running times will,
 of course, vary from computer to computer and even from run to run on an
 individual computer.  When we talk about the running time of an operation
@@ -482,18 +485,20 @@ Thinking graphically, this set consists of the functions $g(n)$ where
 $c\cdot f(n)$ starts to dominate $g(n)$ when $n$ is sufficiently large.
 
 We generally use asymptotic notation to simplify functions.  For example,
-in place of $5n\log n + 8n - 200$ we can write, simply,  $O(n\log n)$.
+in place of $5n\log n + 8n - 200$ we can write $O(n\log n)$.
 This is proven as follows:
 \begin{align*} 
        5n\log n + 8n - 200
         & \le 5n\log n + 8n \\
         & \le 5n\log n + 8n\log n & \mbox{ for $n\ge 2$ (so that $\log n \ge 1$)}
             \\
-        & \le 13n\log n 
+        & \le 13n\log n  \enspace .
 \end{align*}
-which demonstrates that the function $f(n)=5n\log n + 8n - 200$ is in the set $O(n\log n)$ using the constants $c=13$ and $n_0 = 2$.
+This demonstrates that the function $f(n)=5n\log n + 8n - 200$ is in
+the set $O(n\log n)$ using the constants $c=13$ and $n_0 = 2$.
 
-There are a number of useful shortcuts when using asymptotic notation.  First:
+A number of useful shortcuts can be applied when using asymptotic
+notation.  First:
 \[ O(n^{c_1}) \subset O(n^{c_2}) \enspace ,\]
 for any $c_1 < c_2$.  Second: For any constants $a,b,c > 0$,
 \[ O(a) \subset O(\log n) \subset O(n^{b}) \subset O({c}^n) \enspace . \]
@@ -505,11 +510,11 @@ Continuing in a long and distinguished tradition, we will abuse this
 notation by writing things like $f_1(n) = O(f(n))$ when what we really
 mean is $f_1(n) \in O(f(n))$.  We will also make statements like ``the
 running time of this operation is $O(f(n))$'' when this statement should
-be ``the running time of this operation is a member of $O(f(n))$.''
+be ``the running time of this operation is \emph{a member of} $O(f(n))$.''
 These shortcuts are mainly to avoid awkward language and to make it
 easier to use asymptotic notation within strings of equations.
 
-A particularly strange example of this comes when we write statements like
+A particularly strange example of this occurs when we write statements like
 \[
   T(n) = 2\log n + O(1)  \enspace .
 \]
@@ -525,10 +530,10 @@ In the example above, since the only variable in the rest of the equation
 is $n$, we can assume that this should be read as $T(n) = 2\log n +
 O(f(n))$, where $f(n) = 1$.
 
-Big-Oh notation is not new or unique to computer science.  It was used
-by number theorist Paul Bachmann as early as 1894, but it is immensely
-useful in describing the running times of computer algorithms.  Consider a
-piece of code like the following:
+Big-Oh notation is not new or unique to computer science.  It was
+used by the number theorist Paul Bachmann as early as 1894, and is
+immensely useful for describing the running times of computer algorithms.
+Consider the following piece of code:
 \javaimport{junk/Simple.snippet()}
 \cppimport{ods/Simple.snippet()}
 One execution of this method involves
@@ -543,13 +548,13 @@ So we could write this running time as
 \[
     T(#n#)=a + b(#n#+1) + c#n# + d#n# + e#n# \enspace , 
 \]
-where $a$, $b$, $c$, $d$, and $e$ are constants that depend on the the
+where $a$, $b$, $c$, $d$, and $e$ are constants that depend on the
 machine running the code and represent the time to perform assignments,
 comparisons, increment operations, array offset calculations, and indirect
-assignments, respectively.  If this is the expression for the running
-time of two lines of code, then clearly this kind of analysis will not
-be tractable to complicated code or algorithms.  Using big-Oh notation,
-the running time simplifies down to
+assignments, respectively.  However, if this expression represents the
+running time of two lines of code, then clearly this kind of analysis
+will not be tractable to complicated code or algorithms.  Using big-Oh
+notation, the running time can be simplified to
 \[
     T(#n#)= O(#n#) \enspace .
 \]
@@ -557,16 +562,16 @@ Not only is this more compact, but it also gives nearly as much
 information.  The fact that the running time depends on the constants $a$,
 $b$, $c$, $d$, and $e$ in the above example means that, in general, it
 will not be possible to compare two running times to know which is faster
-without knowing the values of these constants.  Even if we go through the
-effort of determining these constants (say, through timing tests) then
+without knowing the values of these constants.  Even if we make the
+effort to determine these constants (say, through timing tests), then
 our conclusion will only be valid for the machine we run our tests on.
 
-Big-Oh notation allows us to reason at a much higher level, making it
-possible to analyze much more complicated functions.  If two algorithms
+Big-Oh notation allows us to reason at a much higher level, making
+it possible to analyze more complicated functions.  If two algorithms
 have the same big-Oh running time, then we won't know which is faster,
-and there may not be a clear winner.  One may be faster on one machine
+and there may not be a clear winner.  One may be faster on one machine,
 and the other may be faster on a different machine.  However, if the
-two algorithms have a demonstrably different big-Oh running time, then
+two algorithms have demonstrably different big-Oh running times, then
 we can be certain that the one with the smaller running time will be
 faster \emph{for large enough values of #n#}.
 
@@ -601,11 +606,11 @@ purposes, the following definition is sufficient:
    \end{array}\right\} \enspace .
 \]
 This definition captures the situation we really care about:  when the
-arguments $n_1,\ldots,n_k$ make $g$ take on large values.  This agrees
-with the univariate definition of $O(f(n))$ when $f(n)$ is an increasing
-function of $n$.  The reader should be warned that, although this works
-for our purposes, other texts may treat multivariate functions and
-asymptotic notation differently.
+arguments $n_1,\ldots,n_k$ make $g$ take on large values.  This definition
+also agrees with the univariate definition of $O(f(n))$ when $f(n)$
+is an increasing function of $n$.  The reader should be warned that,
+although this works for our purposes, other texts may treat multivariate
+functions and asymptotic notation differently.
 
 
 \subsection{Randomization and Probability}
@@ -620,22 +625,22 @@ data structures we are interested in their average or \emph{expected}
 running times.
 
 Formally, the running time of an operation on a randomized data structure
-is a random variable and we want to study its \emph{expected value}. For a
-discrete random variable $X$ taking on values in some countable universe
-$U$, the expected value of $X$, denoted by $\E[X]$, is given the by
-the formula
+is a random variable, and we want to study its \emph{expected value}. For
+a discrete random variable $X$ taking on values in some countable
+universe $U$, the expected value of $X$, denoted by $\E[X]$, is given
+by the formula
 \[
     \E[X] = \sum_{x\in U} x\cdot\Pr\{X=x\} \enspace .
 \]
 Here $\Pr\{\mathcal{E}\}$ denotes the probability that the event
-$\mathcal{E}$ occurs.  In all the examples in this book, these
-probabilities are only with respect to whatever random choices are made
-by the randomized data structure;  there is no assumption that the data
-stored in the structure is random or that the sequence of operations
-performed on the data structure is random.
+$\mathcal{E}$ occurs.  In all of the examples in this book, these
+probabilities are only with respect to the random choices made by the
+randomized data structure;  there is no assumption that the data stored
+in the structure nor that the sequence of operations performed on the
+data structure is random.
 
 One of the most important properties of expected values is \emph{linearity
-of expectation}:  For any two random variables $X$ and $Y$,
+of expectation}.  For any two random variables $X$ and $Y$,
 \[
    \E[X+Y] = \E[X] + \E[Y] \enspace .
 \]
@@ -645,13 +650,12 @@ More generally, for any random variables $X_1,\ldots,X_k$,
 \]
 Linearity of expectation allows us to break down complicated random variables (like the left hand sides of the above equations) into sums of simpler random variables (the right hand sides).
 
-A useful trick, that we will use repeatedly, is that of defining
-\emph{indicator random variables}.  These binary variables are useful
-when we want to count something and are best illustrated by an example.
-Suppose we toss a fair coin $k$ times and we want to know the expected
-number of times the coin comes up heads.  Intuitively, we know the answer
-is $k/2$, but if we try to prove it using the definition of expected
-value, we get
+A useful trick, that we will use repeatedly, is defining \emph{indicator
+random variables}.  These binary variables are useful when we want to
+count something and are best illustrated by an example.  Suppose we toss
+a fair coin $k$ times and we want to know the expected number of times
+the coin turns up as heads.  Intuitively, we know the answer is $k/2$,
+but if we try to prove it using the definition of expected value, we get
 \begin{align*}
    \E[X] & = \sum_{i=0}^k i\cdot\Pr\{X=i\} \\
          & = \sum_{i=0}^k i\cdot\binom{k}{i}/2^k \\
@@ -659,11 +663,12 @@ value, we get
          & = k/2 \enspace .
 \end{align*}
 This requires that we know enough to calculate that $\Pr\{X=i\}
-= \binom{k}{i}/2^k$, that we know the binomial identity
-$i\binom{k}{i}=k\binom{k-1}{i}$, and that we know the binomial identity
-$\sum_{i=0}^{k} \binom{k}{i} = 2^{k}$.
+= \binom{k}{i}/2^k$, and that we know the binomial identities
+$i\binom{k}{i}=k\binom{k-1}{i}$ and $\sum_{i=0}^{k} \binom{k}{i} = 2^{k}$.
 
-Using indicator variables and linearity of expectation makes things much easier:  For each $i\in\{1,\ldots,k\}$, define the indicator random variable
+Using indicator variables and linearity of expectation makes things
+much easier.  For each $i\in\{1,\ldots,k\}$, define the indicator
+random variable
 \[
     I_i = \begin{cases}
            1 & \text{if the $i$th coin toss is heads} \\
@@ -680,10 +685,10 @@ Now, $X=\sum_{i=1}^k I_i$, so
          & = k/2 \enspace .
 \end{align*}
 This is a bit more long-winded, but doesn't require that we know any
-magical identities or compute any non-trivial probabilities. Even better:
-It agrees with the intuition that we expect half the coins to come
-up heads precisely because each individual coin has probability $1/2$ of coming
-up heads.
+magical identities or compute any non-trivial probabilities. Even better,
+it agrees with the intuition that we expect half the coins turn up as
+heads precisely because each individual coin turns up as heads with
+probability $1/2$.
 
 \section{The Model of Computation}
 \seclabel{model}
@@ -691,9 +696,9 @@ up heads.
 In this book, we will analyze the theoretical running times of operations
 on the data structures we study.  To do this precisely, we need a
 mathematical model of computation.  For this, we use the \emph{#w#-bit
-word-RAM} model.  RAM stands for Random Access Machine. In this model,
-we have access to a random access memory consisting of \emph{cells}, each
-of which stores a #w#-bit \emph{word}.  This implies a memory cell can
+word-RAM} model.  RAM stands for Random Access Machine. In this model, we
+have access to a random access memory consisting of \emph{cells}, each of
+which stores a #w#-bit \emph{word}.  This implies that a memory cell can
 represent, for example, any integer in the set $\{0,\ldots,2^{#w#}-1\}$.
 
 In the word-RAM model, basic operations on words take constant time.
@@ -701,23 +706,23 @@ This includes arithmetic operations (#+#, #-#, #*#, #/#, #%#), comparisons
 ($<$, $>$, $=$, $\le$, $\ge$), and bitwise boolean operations (bitwise-AND,
 OR, and exclusive-OR).
 
-Any cell can be read or written in constant time.  Our computer's memory
+Any cell can be read or written in constant time.  A computer's memory
 is managed by a memory management system from which we can allocate or
-deallocate a block of memory of any size we like. Allocating a block
-of memory of size $k$ takes $O(k)$ time and returns a reference to the
-newly-allocated memory block.  This reference is small enough to be
-represented by a single word.
+deallocate a block of memory of any size we would like. Allocating a
+block of memory of size $k$ takes $O(k)$ time and returns a reference
+to the newly-allocated memory block.  This reference is small enough to
+be represented by a single word.
 
-The word-size, #w#, is a very important parameter of this model.  The only
-assumption we will make on #w# is that it is at least $#w# \ge \log #n#$,
+The word-size #w# is a very important parameter of this model.  The only
+assumption we will make about #w# is the lower-bound $#w# \ge \log #n#$,
 where #n# is the number of elements stored in any of our data structures.
 This is a fairly modest assumption, since otherwise a word is not even
 big enough to count the number of elements stored in the data structure.
 
-Space is measured in words so that, when we talk about the amount of
+Space is measured in words, so that when we talk about the amount of
 space used by a data structure, we are referring to the number of words
-of memory used by the structure.  All our data structures store values of
-a generic type #T# and we assume an element of type #T# occupies one word
+of memory used by the structure.  All of our data structures store values of
+a generic type #T#, and we assume an element of type #T# occupies one word
 of memory.  \javaonly{(In reality, we are storing references to objects
 of type #T#, and these references occupy only one word of memory.)}
 
@@ -749,11 +754,11 @@ that matter most:
 %occasional) mistakes.
 
 In this introductory text, we will take correctness as a given;  we
-won't consider data structures that give incorrect answers to queries
-or that don't properly perform updates.  We will, however, see data
-structures that make an extra effort to keep space usage to a minimum.
-This won't usually affect the (asymptotic) running times of operations,
-but can make the data structures a little slower in practice.
+won't consider data structures that give incorrect answers to queries or
+don't perform updates properly.  We will, however, see data structures
+that make an extra effort to keep space usage to a minimum.  This won't
+usually affect the (asymptotic) running times of operations, but can
+make the data structures a little slower in practice.
 
 When studying running times in the context of data structures we tend to
 come across three different kinds of running time guarantees:
@@ -765,7 +770,7 @@ come across three different kinds of running time guarantees:
   takes longer than $f(#n#)$ time.
 
 \item[Amortized running times:] If we say that the amortized running
-  time of an operation in a data structure is $f(#n#)$, this means that
+  time of an operation in a data structure is $f(#n#)$, then this means that
   the cost of a typical operation is at most $f(#n#)$.  More precisely,
   if a data structure has an amortized running time of $f(#n#)$,
   then a sequence of $m$ operations takes at most $mf(#n#)$ time.
@@ -782,7 +787,7 @@ come across three different kinds of running time guarantees:
 
 To understand the difference between worst-case, amortized, and expected
 running times, it helps to consider a financial example.  Consider the
-cost of buying a house.  
+cost of buying a house:
 \paragraph{Worst-case versus amortized cost:}
 Suppose that a home costs \$120\,000.  In order to buy this home,
 we might get a 120 month (10 year) mortgage with monthly payments of
@@ -809,29 +814,29 @@ their foundations.  Based on this information, the insurance company
 charges \$15 per month for fire insurance.
 
 Now it's decision time. Should we pay the \$15 worst-case monthly cost
-for fire insurance or should we gamble and self-insure at an expected
-cost of \$10 per month?  Clearly, the \$10 per month cost less \emph{in
+for fire insurance, or should we gamble and self-insure at an expected
+cost of \$10 per month?  Clearly, the \$10 per month costs less \emph{in
 expectation}, but we have to be able to accept the possibility that
-\emph{actual cost} may be much higher.  In the unlikely event that the
+the \emph{actual cost} may be much higher.  In the unlikely event that the
 entire house burns down, the actual cost will be \$120\,000.
 
 These financial examples also offer insight into why we sometimes settle
 for an amortized or expected running time over a worst-case running time.
 It is often possible to get a lower expected or amortized running time
-than worst-case running time. At the very least, it is very often possible
+than a worst-case running time. At the very least, it is very often possible
 to get a much simpler data structure if one is willing to settle for
 amortized or expected running times.
 
 \section{Code Samples}
 
 The code samples in this book are written in the \lang\ programming
-language.  However to make the book accessible even to readers not
-familiar with all of \lang's constructs and keywords, the code samples
-have been simplified.  For example, a reader won't find any of the
-keywords #public#, #protected#, #private#, or #static#.  A reader also
-won't find much discussion about class hierarchies.  Which interfaces
-a particular class implements or which class it extends, if relevant to
-the discussion, will be clear from the accompanying text.
+language.  However to make the book accessible to readers not familiar
+with all of \lang's constructs and keywords, the code samples have
+been simplified.  For example, a reader won't find any of the keywords
+#public#, #protected#, #private#, or #static#.  A reader also won't find
+much discussion about class hierarchies.  Which interfaces a particular
+class implements or which class it extends, if relevant to the discussion,
+should be clear from the accompanying text.
 
 These conventions should make most of the code samples understandable by
 anyone with a background in any of the languages from the ALGOL tradition,
@@ -839,7 +844,7 @@ including B, C, C++, C\#, Objective-C, D, Java, JavaScript, and so on.
 Readers who want the full details of all implementations are encouraged
 to look at the \lang\ source code that accompanies this book.
 
-This book mixes mathematical analysis of running times with \lang\
+This book mixes mathematical analyses of running times with \lang\
 source code for the algorithms being analyzed.  This means that
 some equations contain variables also found in the source code.
 These variables are typeset consistently, both within the source code
@@ -849,7 +854,7 @@ stored in the data structure.
 
 \section{List of Data Structures}
 
-Tables~\ref{tab:summary-i} and \ref{tab:summary-ii} summarizes the
+Tables~\ref{tab:summary-i} and \ref{tab:summary-ii} summarize the
 performance of data structures in this book that implement each of the
 interfaces, #List#, #USet#, and #SSet#, described in \secref{interfaces}.
 \Figref{dependencies} shows the dependencies between various chapters in
@@ -946,14 +951,14 @@ that includes formal definitions of exponentials and logarithms, see the
 
 For more information on basic probability, especially as it relates to
 computer science, see the textbook by Ross \cite{r01}.  Another good
-reference, that covers both asymptotic notation and probability, is the
-textbook by Graham, Knuth, and Patashnik \cite{gkp94}.
+reference, which covers both asymptotic notation and probability, is
+the textbook by Graham, Knuth, and Patashnik \cite{gkp94}.
 
 \javaonly{Readers wanting to brush up on their Java programming can find
 many Java tutorials online \cite{oracle_tutorials}.}
 
 \begin{exc}
-  This exercise is designed to help get the reader familiar with choosing
+  This exercise is designed to help familiarize the reader with choosing
   the right data structure for the right problem.  If implemented, the
   parts of this exercise should be done by making use of an implementation
   of the relevant interface (#Stack#, #Queue#, #Deque#, #USet#, or #SSet#)
@@ -985,7 +990,7 @@ many Java tutorials online \cite{oracle_tutorials}.}
 
     \item Read the input one line at a time.
       At any point after reading the first 42 lines, if some line is blank
-      (i.e., a string of length 0) then output the line that occured
+      (i.e., a string of length 0), then output the line that occured
       42 lines prior to that one. For example, if Line 242 is blank,
       then your program should output line 200. This program should
       be implemented so that it never stores more than 43 lines of the
@@ -1023,14 +1028,15 @@ many Java tutorials online \cite{oracle_tutorials}.}
 \end{exc}
 
 \begin{exc}
-  A \emph{Dyck word} is a sequence of +1's and -1's with the property
-  that sum of any prefix of the sequence is never negative.  Describe any
-  relationship between Dyck words and #Stack# #push(x)# and #pop()#
-  operations.
+  A \emph{Dyck word} is a sequence of +1's and -1's with the property that
+  the sum of any prefix of the sequence is never negative.  For example,
+  $+1,-1,+1,-1$ is a Dyck word, but $+1,-1,-1,+1$ is not a Dyck word
+  since the prefix $+1-1-1<0$.  Describe any relationship
+  between Dyck words and #Stack# #push(x)# and #pop()# operations.
 \end{exc}
 
 \begin{exc}
-  A \emph{matched string} is a sequence of \{, \}, (, ), [, and [
+  A \emph{matched string} is a sequence of \{, \}, (, ), [, and ]
   characters that are properly matched.  For example, ``\{\{()[]\}\}''
   is a matched string, but this ``\{\{()]\}'' is not, since the second \{
   is matched with a ].  Show how to use a stack so that, given a string

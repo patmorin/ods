@@ -4,10 +4,11 @@
 In this chapter, we continue to study implementations of the #List#
 interface, this time using pointer-based data structures rather than
 arrays.  The structures in this chapter are made up of nodes that
-contain the list items.  The nodes are linked together into a sequence
-using references (pointers).  We first study singly-linked lists, which
-can implement #Stack# and (FIFO) #Queue# operations in constant time
-per operation.
+contain the list items.  Using references (pointers) the nodes are
+linked together into a sequence.  We first study singly-linked lists,
+which can implement #Stack# and (FIFO) #Queue# operations in constant
+time per operation and then move on to doubly-linked lists, which can
+implement #Deque# operations in constant time.
 
 Linked lists have advantages and disadvantages relative to array-based
 implementations of the #List# interface.  The primary disadvantage is that
@@ -88,13 +89,13 @@ The following theorem summarizes the performance of an #SLList#:
   in $O(1)$ time per operation.
 \end{thm}
 
-An #SLList# comes very close to implementing the full set of #Deque#
-operations.  The only missing operation is removal from the tail
-of an #SLList#.  Removing from the tail of an #SLList# is difficult
-because it requires updating the value of #tail# so that it points to
-the node #w# that precedes #tail# in the #SLList#; this is the node #w#
-such that $#w.next#=#tail#$.  Unfortunately, the only way to get to #w#
-is by traversing the #SLList# starting at #head# and taking $#n#-2$ steps.
+An #SLList# nearly implements the full set of #Deque# operations.
+The only missing operation is removing from the tail of an #SLList#.
+Removing from the tail of an #SLList# is difficult because it requires
+updating the value of #tail# so that it points to the node #w#
+that precedes #tail# in the #SLList#; this is the node #w# such that
+$#w.next#=#tail#$.  Unfortunately, the only way to get to #w# is by
+traversing the #SLList# starting at #head# and taking $#n#-2$ steps.
 
 \section{#DLList#: A Doubly-Linked List}
 \seclabel{dllist}
@@ -105,10 +106,10 @@ that follows it and the node #u.prev# that precedes it.
 
 \codeimport{ods/DLList.Node}
 
-When implementing an #SLList#, we saw that there were always some special
-cases to worry about. For example, removing the last element from an
-#SLList# or adding an element to an empty #SLList# requires special
-care so that #head# and #tail# are correctly updated.  In a #DLList#,
+When implementing an #SLList#, we saw that there were always several
+special cases to worry about. For example, removing the last element
+from an #SLList# or adding an element to an empty #SLList# requires care
+to ensure that #head# and #tail# are correctly updated.  In a #DLList#,
 the number of these special cases increases considerably.  Perhaps the
 cleanest way to take care of all these special cases in a #DLList# is to
 introduce a #dummy# node. This is a node that does not contain any data,
