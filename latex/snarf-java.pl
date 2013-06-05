@@ -139,13 +139,14 @@ MAIN: {
       #print('\begin{singlespace}');
       #print('\renewcommand{\baselinestretch}{1}'."\n");
       #print("\\resizebox{.98\\textwidth}{!}{");
-      print("\ \\hspace{.5ex}\n");
+      print("\n\n ");
+      print('\ \vspace{.5ex}');
       print("\\begin{Verbatim}[gobble=1,tabsize=2,frame=single");
       print(',commandchars=\\\\@\\$');
       print(",label=\\texttt{$class},labelposition=topline");
       print("]\n"); 
       snarfit($args, 0); 
-      print("\\end{Verbatim}\n");
+      print("\\end{Verbatim}\n\n");
       #print("}");
       #print('\renewcommand{\baselinestretch}{1.4}'."\n");
       #print('\end{singlespace}');

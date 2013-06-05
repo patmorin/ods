@@ -1,7 +1,14 @@
 \documentclass[10pt]{book}
-\usepackage[math]{iwona}
-\SetMathAlphabet{\mathtt}{iwona}{OT1}{\ttdefault}{m}{n}
-\usepackage[T1]{fontenc}
+
+\usepackage{kpfonts}
+
+%\usepackage[nott]{kpfonts}
+%\SetMathAlphabet{\mathtt}{normal}{OT1}{\ttdefault}{m}{n}
+%\SetMathAlphabet{\mathtt}{bold}{OT1}{\ttdefault}{m}{n}
+
+%\usepackage[math]{iwona}
+%\SetMathAlphabet{\mathtt}{iwona}{OT1}{\ttdefault}{m}{n}
+%\usepackage[T1]{fontenc}
 
 \usepackage{amsopn}
 \usepackage{amsmath}
@@ -106,7 +113,7 @@
 \hyphenchar\font=`\-% to allow hyphenation
 }
 
-\usepackage[sf,bf,small,raggedright]{titlesec} % formatting titles
+\usepackage[sf,small,raggedright]{titlesec} % formatting titles
 \titlespacing*{\section}{0pt}{24pt}{14pt}
 \titlespacing*{\subsection}{0pt}{14pt}{14pt}
 \usepackage{relsize,fancyvrb}  % formatting pseudocode
@@ -255,7 +262,7 @@ Edition 0.1E\cpponly{$\beta$}
 \include{btree-lang}
 }
 
-\bibliographystyle{plainurl}
+\bibliographystyle{abbrvurl}
 \bibliography{ods,odsproc}
 
 \end{document}

@@ -4,21 +4,21 @@
 Throughout this book, we have been using the #w#-bit word-RAM model
 of computation defined in \secref{model}.   An implicit assumption of
 this model is that our computer has a large enough random access memory
-to store all the data in the data structure.  In some situations, this
-assumption is not valid.  There exist collections of data so big that
-there is no computer with a memory large enough to store all the data.
-In such cases, the application must resort to storing the data on some
-external storage medium such as a hard disk, a solid state disk, or even
-a network file server (which has its own external storage).
+to store all of the data in the data structure.  In some situations,
+this assumption is not valid.  There exist collections of data so large
+that no computer has enough memory to store them.  In such cases, the
+application must resort to storing the data on some external storage
+medium such as a hard disk, a solid state disk, or even a network file
+server (which has its own external storage).
 
-Accessing an item from the external storage is extremely slow.  The hard
-disk attached to the computer on which this book is being written has
-an average access time of 19ms and the solid state drive attached to
-this computer has an average access time of 0.3ms.  In contrast, the
-random access memory in this computer has an average access time of less
-than 0.000113ms.  It is more than 2\,500 times faster to access RAM than
-the solid state drive and more than 160\,000 times faster to access RAM
-than the hard drive.
+Accessing an item from external storage is extremely slow.  The hard
+disk attached to the computer on which this book was written has an
+average access time of 19ms and the solid state drive attached to this
+computer has an average access time of 0.3ms.  In contrast, the random
+access memory in this computer has an average access time of less than
+0.000113ms.  It is more than 2\,500 times faster to access RAM than the
+solid state drive and more than 160\,000 times faster to access RAM than
+the hard drive.
 
 %  HDD: Fantom ST3000DM001-9YN166 USB 3 external drive (3TB)
 %  SSD: ATA OCZ-AGILITY 3 (60GB)
@@ -62,15 +62,15 @@ data structure carefully, this means that each disk access could yield
 
 This is the idea behind the \emph{external memory model} of computation,
 illustrated schematically in \figref{em}.  In this model, the computer
-has access to a large external memory where all the data resides.
+has access to a large external memory in which all of the data resides.
 This memory is divided into memory \emph{blocks} each containing $B$
-words.  The computer also has a limited internal memory on which it can
+words.  The computer also has limited internal memory on which it can
 perform computations.  Transferring a block between internal memory and
 external memory takes constant time.  Computations performed within the
 internal memory are \emph{free}; they take no time at all.  The fact
-that internal memory computations are free may seem a bit strange,
-but this is really just to emphasize the fact that external memory is
-so much slower than RAM.
+that internal memory computations are free may seem a bit strange, but
+it simply emphasizes the fact that external memory is so much slower
+than RAM.
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/em}}
@@ -95,8 +95,8 @@ $.
 \section{The Block Store}
 
 The notion of external memory includes a large number of possible
-different devices, each of which has their own block size and is
-accessed with their own collection of system calls.  To simplify the
+different devices, each of which has its own block size and is
+accessed with its own collection of system calls.  To simplify the
 exposition of this chapter so that we can focus on the common ideas, we
 encapsulate external memory devices with an object called a #BlockStore#.
 A #BlockStore# stores a collection of memory blocks, each of size $B$.
@@ -117,29 +117,29 @@ supports these operations:
     memory allocated by this block may be reused.
 \end{enumerate}
 
-The easiest way to imagine a #BlockStore# is to think of it as storing a
+The easiest way to imagine a #BlockStore# is to imagine it as storing a
 file on disk that is partitioned into blocks, each containing $B$ bytes.
-Then #readBlock(i)# and #writeBlock(i,b)# simply read and write bytes
-$#i#B,\ldots,(#i#+1)B-1$ of this file.  In addition, a simple #BlockStore#
-could keep a \emph{free list} of blocks that are available for use. Blocks
-freed with #freeBlock(i)# are added to the free list.  In this way,
-#placeBlock(b)# can use a block from the free list or, if none is
-available, can append a new block to the end of the file.
+In this way, #readBlock(i)# and #writeBlock(i,b)# simply read and write
+bytes $#i#B,\ldots,(#i#+1)B-1$ of this file.  In addition, a simple
+#BlockStore# could keep a \emph{free list} of blocks that are available
+for use. Blocks freed with #freeBlock(i)# are added to the free list.
+In this way, #placeBlock(b)# can use a block from the free list or,
+if none is available, append a new block to the end of the file.
 
 
 \section{B-Trees}
 \seclabel{btree}
 
-In this section we discuss a generalization of binary trees,
-called $B$-trees, that is efficient in the external memory model.
+In this section, we discuss a generalization of binary trees,
+called $B$-trees, which is efficient in the external memory model.
 Alternatively, $B$-trees can be viewed as the natural generalization of
 2-4 trees described in \secref{twofour}. (A 2-4 tree is a special case
 of a $B$-tree that we get by setting $B=2$.)
 
-For any integer $B\ge 2$, a \emph{$B$-tree} is a tree in which all leaves
-have the same depth and every non-root internal node, #u#, has at least
-$B$ children and at most $2B$ children.  The children of #u# are stored
-in an array, #u.children#.  The requirement on the number of children is
+For any integer $B\ge 2$, a \emph{$B$-tree} is a tree in which all of
+the leaves have the same depth and every non-root internal node, #u#,
+has at least $B$ children and at most $2B$ children.  The children of #u#
+are stored in an array, #u.children#.  The required number of children is
 relaxed at the root, which can have anywhere between 2 and $2B$ children.
 
 If the height of a $B$-tree is $h$, then it follows that the number,
@@ -162,7 +162,7 @@ children, then the number of keys stored at #u# is exactly $k-1$ and these
 are stored in $#u.keys#[0],\ldots,#u.keys#[k-2]$.  The remaining $2B-k+1$
 array entries in #u.keys# are set to #null#.  If #u# is a non-root leaf
 node, then #u# contains between $B-1$ and $2B-1$ keys. The keys in a
-$B$-tree respect an ordering similar to the keys in a binary search tree.
+$B$-tree respect an order similar to the keys in a binary search tree.
 For any node, #u#, that stores $k-1$ keys,
 \[
    #u.keys[0]# < #u.keys[1]# < \cdots < #u.keys#[k-2] \enspace .
@@ -182,7 +182,7 @@ An example of a $B$-tree with $B=2$ is shown in \figref{btree}.
   \figlabel{btree}
 \end{figure}
 
-Note that all the data stored in a $B$-tree node has size $O(B)$.
+Note that all of the data stored in a $B$-tree node has size $O(B)$.
 Therefore, in an external memory setting, the value of $B$ in a $B$-tree
 is chosen so that  a node fits into a single external memory block.
 In this way, the time it takes to perform a $B$-tree operation in the
@@ -232,7 +232,7 @@ the smallest value that is greater or equal to #x#.
 Central to the #find(x)# method is the #findIt(a,x)# method that
 searches in a #null#-padded sorted array, #a#, for the value #x#.
 This method, illustrated in \figref{findit}, works for any array,
-#a#, where $#a#[0],\ldots,#a#[k-1]$ are a sequence of keys in sorted
+#a#, where $#a#[0],\ldots,#a#[k-1]$ is a sequence of keys in sorted
 order and $#a#[k],\ldots,#a#[#a.length#-1]$ are all set to #null#.
 If #x# is in the array at position #i#, then #findIt(a,x)# returns
 $-#i#-1$. Otherwise, it returns the smallest index, #i#, such that
@@ -243,9 +243,9 @@ $#a[i]#>#x#$ or $#a[i]#=#null#$.
   \figlabel{findit}
 \end{figure}
 \javaimport{ods/BTree.findIt(a,x)}
-The #findIt(a,x)# method does its job using a binary search that halves
-the search space at each step, so it runs in $O(\log(#a.length#))$ time.
-In this case $#a.length#=2B$, so #findIt(a,x)# runs in $O(\log B)$ time.
+The #findIt(a,x)# method uses a binary search that halves the search
+space at each step, so it runs in $O(\log(#a.length#))$ time.  In this
+case $#a.length#=2B$, so #findIt(a,x)# runs in $O(\log B)$ time.
 
 We can analyze the running time of a $B$-tree #find(x)# operation both
 in the usual word-RAM model (where every instruction counts) and in the
@@ -264,30 +264,30 @@ we access, so the running time of #find(x)# in the word-RAM model is
 \subsection{Addition}
 
 One important difference between $B$-trees and the #BinarySearchTree#
-data structure from \secref{binarysearchtree} is that the nodes of
-a $B$-tree do not store pointers to their parents.  The reason for
-this will be explained shortly.  The lack of parent pointers has the
-consequence that the #add(x)# and #remove(x)# operations on $B$-trees
-are most easily implemented using recursion.
+data structure from \secref{binarysearchtree} is that the nodes of a
+$B$-tree do not store pointers to their parents.  The reason for this
+will be explained shortly.  The lack of parent pointers means that
+the #add(x)# and #remove(x)# operations on $B$-trees are most easily
+implemented using recursion.
 
-Like all balanced search trees, some form of rebalancing is sometimes
-required during an #add(x)# operation.  In a $B$-tree, this is done
-by \emph{splitting} nodes.  Refer to \figref{btree-split} for what follows.
+Like all balanced search trees, some form of rebalancing is required
+during an #add(x)# operation.  In a $B$-tree, this is done by
+\emph{splitting} nodes.  Refer to \figref{btree-split} for what follows.
 Although splitting takes place across two levels of recursion, it is
 best understood as an operation that takes a node #u# containing $2B$
-keys and having $2B+1$ children.  It creates a new node, #w#, that adopts
-$#u.children#[B],\ldots,#u.children#[2B]$.  The new node #w# also takes
-#u#'s $B$ largest keys, $#u.keys#[B],\ldots,#u.keys#[2B-1]$.  At this
-point, #u# has $B$ children and $B$ keys.  The extra key, $#u.keys#[B-1]$,
-is passed up to the parent of #u#, which also adopts #w#.
+keys and having $2B+1$ children.  It creates a new node, #w#, that
+adopts $#u.children#[B],\ldots,#u.children#[2B]$.  The new node #w#
+also takes #u#'s $B$ largest keys, $#u.keys#[B],\ldots,#u.keys#[2B-1]$.
+At this point, #u# has $B$ children and $B$ keys.  The extra key,
+$#u.keys#[B-1]$, is passed up to the parent of #u#, which also adopts #w#.
 
-Notice that the splitting operation modifies 3 nodes: #u#, #u#'s parent,
-and the new node, #w#.   This is where it is important that the nodes of
-a $B$-tree do not maintain parent pointers.  If they did, then the $B+1$
-children adopted by #w# would all need to have their parent pointers
-modified. This would increase the number of external memory access from
-3 to $B+4$ and would make $B$-trees much less efficient for large values
-of $B$.
+Notice that the splitting operation modifies three nodes: #u#, #u#'s
+parent, and the new node, #w#.   This is why it is important that the
+nodes of a $B$-tree do not maintain parent pointers.  If they did, then
+the $B+1$ children adopted by #w# would all need to have their parent
+pointers modified. This would increase the number of external memory
+accesses from 3 to $B+4$ and would make $B$-trees much less efficient for
+large values of $B$.
 
 \begin{figure}
    \centering{\begin{tabular}{l}
@@ -306,7 +306,7 @@ The #add(x)# method in a $B$-tree is illustrated in \figref{btree-add}.
 At a high level, this method finds a leaf, #u#, at which to add the
 value #x#.  If this causes #u# to become overfull (because it already
 contained $B-1$ keys), then #u# is split.  If this causes #u#'s parent to
-become overfull then #u#'s parent is also split, which may cause #u#'s
+become overfull, then #u#'s parent is also split, which may cause #u#'s
 grandparent to become overfull, and so on. This process continues,
 moving up the tree one level at a time until reaching a node that
 is not overfull or until the root is split. In the former case, the
@@ -326,25 +326,25 @@ children become the nodes obtained when the original root was split.
    \figlabel{btree-add}
 \end{figure}
 
-In summary, the high-level view of the #add(x)# method is that it walks from
-the root to a leaf searching for #x#, adds #x# to this leaf, and then
-walks back up to the root, splitting any overfull nodes it encounters
+The executive summary of the #add(x)# method is that it walks
+from the root to a leaf searching for #x#, adds #x# to this leaf, and
+then walks back up to the root, splitting any overfull nodes it encounters
 along the way.  With this high level view in mind, we can now delve into
 the details of how this method can be implemented recursively.
 
 The real work of #add(x)# is done by the #addRecursive(x,ui)# method,
-which adds the value #x# to the subtree whose root, #u#, has identifier
-#ui#.  If #u# is a leaf, then #x# is just added into #u.keys#.  Otherwise,
-#x# is added recursively into the appropriate child, $#u#'$, of #u#.
-The result of this recursive call is normally #null# but may also be a
-reference to a newly-created node, #w#, that was created because $#u#'$
-was split.  In this case, #u# adopts #w# and takes its first key,
-completing the splitting operation on $#u#'$.
+which adds the value #x# to the subtree whose root, #u#, has the
+identifier #ui#.  If #u# is a leaf, then #x# is simply inserted into
+#u.keys#.  Otherwise, #x# is added recursively into the appropriate
+child, $#u#'$, of #u#.  The result of this recursive call is normally
+#null# but may also be a reference to a newly-created node, #w#, that
+was created because $#u#'$ was split.  In this case, #u# adopts #w#
+and takes its first key, completing the splitting operation on $#u#'$.
 
 After #x# has been added (either to #u# or to a descendant of #u#),
 the #addRecursive(x,ui)# method checks to see if #u# is storing too many
 (more than $2B-1$) keys.  If so, then #u# needs to be \emph{split}
-with a call to the #u.split()# method.  The result of calling #u.split()#,
+with a call to the #u.split()# method.  The result of calling #u.split()#
 is a new node that is used as the return value for #addRecursive(x,ui)#.
 \javaimport{ods/BTree.addRecursive(x,ui)}
 
@@ -352,7 +352,7 @@ The #addRecursive(x,ui)# method is just a helper for the #add(x)#
 method, which calls #addRecursive(x,ri)# to insert #x# into the root of
 the $B$-tree.  If #addRecursive(x,ri)# causes the root to split, then
 a new root is created that takes as its children both the old root and
-the new node created when the old root was split.
+the new node created by the splitting of the old root.
 \javaimport{ods/BTree.add(x)}
 
 The #add(x)# method and its helper, #addRecursive(x,ui)#, can be analyzed
@@ -368,14 +368,14 @@ in two phases:
   \item[Upward phase:]
     During the upward phase of the recursion, after #x# has been added,
     these methods perform a sequence of at most $O(\log_B #n#)$ splits.
-    Each split involves only 3 nodes, so this phase takes $O(\log_B #n#)$
-    time in the external memory model.  However, each split involves
-    moving $B$ keys and children from one node to another so, in the
-    word-RAM model, this takes $O(B\log #n#)$ time.
+    Each split involves only three nodes, so this phase takes $O(\log_B
+    #n#)$ time in the external memory model.  However, each split
+    involves moving $B$ keys and children from one node to another, so
+    in the word-RAM model, this takes $O(B\log #n#)$ time.
 \end{description}
 
-Recall that the value of $B$ can be quite large, even much larger
-than $\log #n#$.  Therefore, in the word-RAM model, adding a value
+Recall that the value of $B$ can be quite large, much larger
+than even $\log #n#$.  Therefore, in the word-RAM model, adding a value
 to a $B$-tree can be much slower than adding into a balanced binary
 search tree.  Later, in \secref{btree-amortized}, we will show that the
 situation is not quite so bad; the amortized number of split operations
@@ -412,15 +412,15 @@ an \emph{underflow}.
    \figlabel{btree-remove-full}
 \end{figure}
 
-When an underflow occurs, #u# either borrows keys from one of its
-siblings or is merged with one of its siblings.  If #u# is merged with a
-sibling, then #u#'s parent will now have one less child and one less key,
-which can cause #u#'s parent to underflow; this is again corrected by
-borrowing or merging and merging may cause #u#'s grandparent to underflow.
-This process works its way back up to the root until there is no more
-underflow or until the root has its last two children merged into a
-single child.  When the latter case occurs, the root is removed and its
-lone child becomes the new root.
+When an underflow occurs, #u# either borrows keys from, or is merged with,
+one of its siblings.  If #u# is merged with a sibling, then #u#'s parent
+will now have one less child and one less key, which can cause #u#'s
+parent to underflow; this is again corrected by borrowing or merging,
+but merging may cause #u#'s grandparent to underflow.  This process
+works its way back up to the root until there is no more underflow or
+until the root has its last two children merged into a single child.
+When the latter case occurs, the root is removed and its lone child
+becomes the new root.
 
 Next we delve into the details of how each of these steps is implemented.
 The first job of the #remove(x)# method is to find the element #x# that
@@ -450,8 +450,8 @@ preceding algorithm:
 
 Note that, after recursively removing #x# from the #i#th child of #u#,
 #removeRecursive(x,ui)# needs to ensure that this child still has at
-least $B-1$ keys.  In the preceding code, this is done with a call to a
-method called #checkUnderflow(x,i)#, which checks for, and corrects, an
+least $B-1$ keys.  In the preceding code, this is done using a
+method called #checkUnderflow(x,i)#, which checks for and corrects an
 underflow in the #i#th child of #u#.  Let #w# be the #i#th child of #u#.
 If #w# has only $B-2$ keys, then this needs to be fixed.  The fix
 requires using a sibling of #w#.  This can be either child $#i#+1$ of
@@ -493,7 +493,7 @@ also children), for #w#.  There are two ways to do this:
   \end{figure}
   
   \item[Merging:] If #v# has only $B-1$ keys, we must do something more
-  drastic, since #v# can not afford to give any keys to #w#.  Therefore,
+  drastic, since #v# cannot afford to give any keys to #w#.  Therefore,
   we \emph{merge} #v# and #w# as shown in \figref{btree-merge}.  The merge
   operation is the opposite of the split operation.  It takes two nodes
   that contain a total of $2B-3$ keys and merges them into a single
@@ -520,7 +520,7 @@ To summarize, the #remove(x)# method in a $B$-tree follows a root to
 leaf path, removes a key #x'# from a leaf, #u#, and then performs zero
 or more merge operations involving #u# and its ancestors, and performs
 at most one borrowing operation.  Since each merge and borrow operation
-involves modifying only 3 nodes, and only $O(\log_B #n#)$ of these
+involves modifying only three nodes, and only $O(\log_B #n#)$ of these
 operations occur, the entire process takes $O(\log_B #n#)$ time in the
 external memory model.  Again, however, each merge and borrow operation
 takes $O(B)$ time in the word-RAM model, so (for now) the most we can
@@ -554,19 +554,19 @@ The following lemma shows that, so far, we have overestimated the number of merg
     \item each split, merge, or borrow operation is paid for with two
       credits, i.e., a credit is removed each time one of these operations
       occurs; and
-    \item at most 3 credits are created during any #add(x)# or
+    \item at most three credits are created during any #add(x)# or
       #remove(x)# operation.
   \end{enumerate}
   Since at most $3m$ credits are ever created and each split,
-  merge, and borrow is paid for with with 2 credits, it follows
+  merge, and borrow is paid for with with two credits, it follows
   that at most $3m/2$ splits, merges, and borrows are performed.
   These credits are illustrated using the \cent\ symbol in
   Figures~\ref{fig:btree-split}, \ref{fig:btree-borrow}, and
   \ref{fig:btree-merge}.
 
   To keep track of these credits the proof maintains the following
-  \emph{credit invariant}: Any non-root node with $B-1$ keys stores
-  1 credit and any node with $2B-1$ keys stores 3 credits.  A node
+  \emph{credit invariant}: Any non-root node with $B-1$ keys stores one
+  credit and any node with $2B-1$ keys stores three credits.  A node
   that stores at least $B$ keys and most $2B-2$ keys need not store
   any credits.  What remains is to show that we can maintain the credit
   invariant and satisfy properties 1 and 2, above, during each #add(x)#
@@ -577,54 +577,54 @@ The following lemma shows that, so far, we have overestimated the number of merg
   need only consider split operations that occur as a result of calls
   to #add(x)#.
 
-  Each split operation occurs because a key is added to a node,
-  #u#, that already contains $2B-1$ keys.  When this happens, #u#
-  is split into two nodes, #u'# and #u''# having $B-1$ and $B$ keys,
-  respectively.  Prior to this operation, #u# was storing $2B-1$ keys,
-  and hence 3 credits.  Two of these credits can be used to pay for the
-  split and the other credit can be given to #u'# (which has $B-1$ keys)
-  to maintain the credit invariant.  Therefore, we can pay for the split
-  and maintain the credit invariant during any split.
+  Each split operation occurs because a key is added to a node, #u#, that
+  already contains $2B-1$ keys.  When this happens, #u# is split into two
+  nodes, #u'# and #u''# having $B-1$ and $B$ keys, respectively.  Prior to
+  this operation, #u# was storing $2B-1$ keys, and hence three credits.
+  Two of these credits can be used to pay for the split and the other
+  credit can be given to #u'# (which has $B-1$ keys) to maintain the
+  credit invariant.  Therefore, we can pay for the split and maintain
+  the credit invariant during any split.
 
   The only other modification to nodes that occur during an #add(x)#
-  operation happen after all splits, if any, are complete.  This
+  operation happens after all splits, if any, are complete.  This
   modification involves adding a new key to some node #u'#.  If, prior
   to this, #u'# had $2B-2$ children, then it now has $2B-1$ children and
-  must therefore receive 3 credits.  These are the only credits given
+  must therefore receive three credits.  These are the only credits given
   out by the #add(x)# method.
 
   \paragraph{Removing:}
-  During a call to #remove(x)#, zero or more merges occur and are
-  possibly followed by a single borrow.  Each merge occurs because two
-  nodes, #v# and #w#, that each had exactly $B-1$ keys prior to calling
-  #remove(x)# were merged into a single node that has exactly $2B-2$ keys.
-  Each such merge therefore frees up 2 credits that can be used to pay
-  for the merge.
+  During a call to #remove(x)#, zero or more merges occur and are possibly
+  followed by a single borrow.  Each merge occurs because two nodes,
+  #v# and #w#, each of which had exactly $B-1$ keys prior to calling
+  #remove(x)# were merged into a single node with exactly $2B-2$ keys.
+  Each such merge therefore frees up two credits that can be used to
+  pay for the merge.
 
   After any merges are performed, at most one borrow operation occurs,
   after which no further merges or borrows occur.  This borrow operation
-  occurs when we remove a key from a node, #v#, that has $B-1$ keys.
-  The node #v# therefore has one credit and this credit goes towards
+  only occurs if we remove a key from a leaf, #v#, that has $B-1$ keys.
+  The node #v# therefore has one credit, and this credit goes towards
   the cost of the borrow.  This single credit is not enough to pay for
   the borrow, so we create one credit to complete the payment.
 
-  At this point, we have created one credit and we still have to show
+  At this point, we have created one credit and we still need to show
   that the credit invariant can be maintained.  In the worst case,
   #v#'s sibling, #w#, has exactly $B$ keys before the borrow so that,
   afterwards, both #v# and #w# have $B-1$ keys.  This means that #v# and
-  #w# each need to be storing a credit when the operation is complete.
-  Therefore, in this case, we create an addition 2 credits to give to
+  #w# each should be storing a credit when the operation is complete.
+  Therefore, in this case, we create an additional two credits to give to
   #v# and #w#.  Since a borrow happens at most once during a #remove(x)#
-  operation, this means that we create at most 3 credits, as required.
+  operation, this means that we create at most three credits, as required.
 
   If the #remove(x)# operation does not include a borrow operation this
   is because it finishes by removing a key from some node that, prior
   to the operation, had $B$ or more keys.  In the worst case, this node
   had exactly $B$ keys, so that it now has $B-1$ keys and must be given
-  1 credit, which we create.
+  one credit, which we create.
 
   In either case---whether the removal finishes with a borrow
-  operation or not---at most 3 credits need to be created during a
+  operation or not---at most three credits need to be created during a
   call to #remove(x)# to maintain the credit invariant and pay for all
   borrows and merges that occur. This completes the proof of the lemma.
 \end{proof}
@@ -632,7 +632,7 @@ The following lemma shows that, so far, we have overestimated the number of merg
 The purpose of \lemref{btree-split} is to show that, in the word-RAM
 model the cost of splits, merges and joins during a sequence of $m$
 #add(x)# and #remove(x)# operations is only $O(Bm)$.  That is, the
-amortized cost per operation is only $O(B)$, so that the amortized cost
+amortized cost per operation is only $O(B)$, so the amortized cost
 of #add(x)# and #remove(x)# in the word-RAM model is $O(B+\log #n#)$.
 This is summarized by the following pair of theorems:
 
@@ -658,13 +658,13 @@ The external memory model of computation was introduced by Aggarwal and
 Vitter \cite{av88}.  It is sometimes also called the \emph{I/O model}
 or the \emph{disk access model}. 
 
-$B$-Trees are to external memory searching what binary search trees are
-to internal memory searching.  $B$-trees were introduced by Bayer and
-McCreight \cite{bm70} in 1970 and, less than ten years later, they were
-referred to as ubiquitous in the title of Comer's ACM Computing Surveys
-article \cite{c79}.
+$B$-Trees are to external memory searching what binary search trees
+are to internal memory searching.  $B$-trees were introduced by Bayer
+and McCreight \cite{bm70} in 1970 and, less than ten years later, the
+title of Comer's ACM Computing Surveys article referred to
+them as ubiquitous \cite{c79}.
 
-Like binary search trees, there are many variants of $B$-Trees including
+Like binary search trees, there are many variants of $B$-Trees, including
 $B^+$-trees, $B^*$-trees, and counted $B$-trees.  $B$-trees are indeed
 ubiquitous and are the primary data structure in many file systems,
 including Apple's HFS+, Microsoft's NTFS, and Linux's Ext4; every
@@ -723,7 +723,7 @@ access to retrieve a leaf.
 \begin{exc}
   Draw the credits used in the proof of \lemref{btree-split} on the trees
   in Figures~\ref{fig:btree-add} and \ref{fig:btree-remove-full}.  Verify
-  that (with 3 additional credits) it is possible to pay for the splits, 
+  that (with three additional credits) it is possible to pay for the splits, 
   merges, and borrows and maintain the credit invariant.
 \end{exc}
 
@@ -739,7 +739,7 @@ access to retrieve a leaf.
 \begin{exc}
   In this exercise, you will design a modified method of splitting and
   merging in $B$-trees that asymptotically reduces the number of splits,
-  borrows and merges by considering up to 3 nodes at a time.
+  borrows and merges by considering up to three nodes at a time.
   \begin{enumerate}
     \item Let #u# be an overfull node and let #v# be a sibling immediately
     to the right of #u#.  There are two ways to fix the overflow at #u#:

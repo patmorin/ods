@@ -85,14 +85,13 @@ shown in \figref{binarytrie-ex2}
 The #find(x)# operation in a #BinaryTrie# is fairly straightforward.
 We try to follow the search path for #x# in the trie.  If we reach a leaf,
 then we have found #x#.  If, we reach a node #u# where we cannot proceed
-(because #u# is missing a child) then we follow #u.jump#, which takes
-us either to smallest leaf larger than #x# or the largest leaf smaller
-than #x#. Which of these two cases occurs depends on whether #u# is
-missing its left or right child, respectively.  In the former case (#u#
-is missing its left child), we have found the value we are looking for.
-In the latter case (#u# is missing its right child), we can use the
-linked list to reach the value we are looking for. Each of these cases
-is illustrated in \figref{binarytrie-find}.
+(because #u# is missing a child) then we follow #u.jump#, which takes us
+either to smallest leaf larger than #x# or the largest leaf smaller than
+#x#. Which of these two cases occurs depends on whether #u# is missing
+its left or right child, respectively.  In the former case (#u# is missing
+its left child), we have found the node we want.  In the latter case (#u#
+is missing its right child), we can use the linked list to reach the node
+we want. Each of these cases is illustrated in \figref{binarytrie-find}.
 \codeimport{ods/BinaryTrie.find(x)}
 \begin{figure}
   \begin{center}
@@ -104,18 +103,19 @@ is illustrated in \figref{binarytrie-find}.
 The running-time of the #find(x)# method is dominated by the time it
 takes to follow a root-to-leaf path, so it runs in $O(#w#)$ time.
 
-The #add(x)# operation in a #BinaryTrie# is fairly straightforward,
-but it has a lot of things to take care of:
+The #add(x)# operation in a #BinaryTrie# is also fairly straightforward,
+but has a lot of work to do:
 \begin{enumerate}
   \item It follows the search path for #x# until reaching a node #u#
-  where it can no longer proceed.
+    where it can no longer proceed.
   \item It creates the remainder of the search path from #u# to a leaf
-  that contains #x#.
-  \item It adds the node, #u'#, containing #x# to the linked list of
-  leaves (it has access to #u'#'s predecessor, #pred#, in the linked list from
-  the #jump# pointer of the last node, #u#, encountered during step~1.)
-  \item It walks back up the search path for #x# adjusting #jump# pointers at
-  the nodes whose #jump# pointer should now point to #x#.
+    that contains #x#.
+  \item It adds the node, #u'#, containing #x# to the linked list
+    of leaves (it has access to the predecessor, #pred#, of #u'# in
+    the linked list from the #jump# pointer of the last node, #u#,
+    encountered during step~1.)
+  \item It walks back up the search path for #x# adjusting #jump#
+    pointers at the nodes whose #jump# pointer should now point to #x#.
 \end{enumerate}
 An addition is illustrated in \figref{binarytrie-add}.
 \begin{figure}
@@ -129,18 +129,18 @@ An addition is illustrated in \figref{binarytrie-add}.
 \codeimport{ods/BinaryTrie.add(x)}
 This method performs one walk down the search path for #x# and one walk
 back up.  Each step of these walks takes constant time, so the #add(x)#
-runs in $O(#w#)$ time.
+method runs in $O(#w#)$ time.
 
 
 The #remove(x)# operation undoes the work of #add(x)#.  Like #add(x)#,
-it has a lot of things to take care of:
+it has a lot of work to do:
 \begin{enumerate}
   \item It follows the search path for #x# until reaching the leaf, #u#,
   containing #x#.
-  \item It removes #u# from the doubly-linked list 
+  \item It removes #u# from the doubly-linked list.
   \item It deletes #u# and then walks back up the search path for #x#
   deleting nodes until reaching a node #v# that has a child that is not
-  on the search path for #x#
+  on the search path for #x#.
   \item It walks upwards from #v# to the root updating any #jump# pointers
   that point to #u#.
 \end{enumerate}
@@ -165,12 +165,11 @@ stores #n# values is $O(#n#\cdot#w#)$.
 \section{#XFastTrie#: Searching in Doubly-Logarithmic Time}
 \seclabel{xfast}
 
-The performance of the #BinaryTrie# structure is not that impressive.
+The performance of the #BinaryTrie# structure is not very impressive.
 The number of elements, #n#, stored in the structure is at most $2^{#w#}$,
 so $\log #n#\le #w#$.  In other words, any of the comparison-based #SSet#
 structures described in other parts of this book are at least as efficient
-as a #BinaryTrie#, and don't have the restriction of only being able to
-store integers.
+as a #BinaryTrie#, and are not restricted to only storing integers.
 
 Next we describe the #XFastTrie#, which is just a #BinaryTrie# with
 #w+1# hash tables---one for each level of the trie. These hash tables
@@ -192,14 +191,15 @@ refer to \figref{xfast-path}; in this figure the last node, #u#, on
 search path for 14 (whose binary representation is 1110) is the node
 labelled $11{\star\star}$ at level 2 because there is no node labelled
 $111{\star}$ at level 3.  Thus, we can label each node at level #i#
-with an #i#-bit integer.  Then the node #u# we are searching for is at
-or below level #i# if and only if there is a node at level #i# whose
-label matches the highest-order #i# bits of #x#. 
+with an #i#-bit integer.  Then, the node #u# we are searching for would
+be at or below level #i# if and only if there is a node at level #i#
+whose label matches the highest-order #i# bits of #x#.
 \begin{figure}
   \begin{center}
     \includegraphics{figs/xfast-path}
   \end{center}
-  \caption{The search path for 14 (1110) ends at the node labelled $11{\star\star}$ since there is no node labelled $111\star$.}
+  \caption{Since there is no node labelled $111\star$, the search path
+    for 14 (1110) ends at the node labelled $11{\star\star}$ .}
   \figlabel{xfast-path}
 \end{figure}
 
@@ -216,17 +216,17 @@ $0\le #i#< #w#+1$. We therefore initialize $#l#=0$ and $#h#=#w#+1$
 and repeatedly look at the hash table #t[i]#, where $#i#=\lfloor
 (#l+h#)/2\rfloor$.  If $#t[i]#$ contains a node whose label matches
 #x#'s highest-order #i# bits then we set #l=i# (#u# is at or below level
-#i#), otherwise we set #h=i# (#u# is above level #i#).  This process
+#i#); otherwise we set #h=i# (#u# is above level #i#).  This process
 terminates when $#h-l#\le 1$, in which case we determine that #u# is
 at level #l#.  We then complete the #find(x)# operation using #u.jump#
 and the doubly-linked list of leaves.
 \codeimport{ods/XFastTrie.find(x)}
 Each iteration of the #while# loop in the above method decreases #h-l#
-by roughly a factor of 2, so this loop finds #u# after $O(\log #w#)$
+by roughly a factor of two, so this loop finds #u# after $O(\log #w#)$
 iterations.  Each iteration performs a constant amount of work and one
-#find(x)# operation in a #USet#, which takes constant expected time.
-The remaining work takes only constant time, so the #find(x)# method in
-an #XFastTrie# takes only $O(\log#w#)$ expected time.
+#find(x)# operation in a #USet#, which takes a constant expected amount
+of time.  The remaining work takes only constant time, so the #find(x)#
+method in an #XFastTrie# takes only $O(\log#w#)$ expected time.
 
 The #add(x)# and #remove(x)# methods for an #XFastTrie# are almost
 identical to the same methods in a #BinaryTrie#.  The only modifications
@@ -236,9 +236,9 @@ is added to #t[i]#.  During a #remove(x)# operation, when a node is
 removed form level #i#, this node is removed from #t[i]#.  Since adding
 and removing from a hash table take constant expected time, this does
 not increase the running times of #add(x)# and #remove(x)# by more than
-a constant factor. We omit a code listing or #add(x)# and #remove(x)# since
-it is almost identical to the (long) code listing already provided
-for the same methods in a #BinaryTrie#.
+a constant factor. We omit a code listing for #add(x)# and #remove(x)#
+since the code is almost identical to the (long) code listing already
+provided for the same methods in a #BinaryTrie#.
 
 The following theorem summarizes the performance of an #XFastTrie#:
 
@@ -256,14 +256,14 @@ stores #n# values is $O(#n#\cdot#w#)$.
 \section{#YFastTrie#: A Doubly-Logarithmic Time #SSet#}
 \seclabel{yfast}
 
-The #XFastTrie# is a big improvement over the #BinaryTrie# in terms of
-query time---some would even call it an exponential improvement---but
-the #add(x)# and #remove(x)# operations are still not terribly fast.
-Furthermore, the space usage, $O(#n#\cdot#w#)$, is higher than the
-other #SSet# implementation in this book, which all use $O(#n#)$ space.
-These two problems are related; if #n# #add(x)# operations build a
-structure of size $#n#\cdot#w#$ then the #add(x)# operation requires on
-the order of #w# time (and space) per operation.
+The #XFastTrie# is a vast---even exponential---improvement over the
+#BinaryTrie# in terms of query time, but the #add(x)# and #remove(x)#
+operations are still not terribly fast.  Furthermore, the space usage,
+$O(#n#\cdot#w#)$, is higher than the other #SSet# implementations
+described in this book, which all use $O(#n#)$ space.  These two
+problems are related; if #n# #add(x)# operations build a structure of
+size $#n#\cdot#w#$, then the #add(x)# operation requires at least on the
+order of #w# time (and space) per operation.
 
 The #YFastTrie# data structure simultaneously addresses both the space
 and speed issues of #XFastTrie#s.  A #YFastTrie# uses an #XFastTrie#,
@@ -275,7 +275,7 @@ the average cost incurred by calls to #xft#'s #add(x)# and #remove(x)#
 operations is only constant.
 
 The obvious question becomes:  If #xft# only stores #n#/#w# elements,
-where do the remaining $#n#(1-1/#w#)$ elements go?  These elements go
+where do the remaining $#n#(1-1/#w#)$ elements go?  These elements move 
 into \emph{secondary structures}, in this case an extended version of
 treaps (\secref{treap}).  There are roughly #n#/#w# of these secondary
 structures so, on average, each of them stores $O(#w#)$ items.  Treaps
@@ -301,9 +301,9 @@ in \figref{yfast}.
 \end{figure}
 
 The #find(x)# operation in a #YFastTrie# is fairly easy.  We search
-for #x# in #xft# and find some value $#x#_i$ associated with the
-treap $#t#_i$.  When then use the treap #find(x)# method on $#t#_i$
-to answer the query.  The entire method is a one-liner:
+for #x# in #xft# and find some value $#x#_i$ associated with the treap
+$#t#_i$.  We then use the treap #find(x)# method on $#t#_i$ to answer
+the query.  The entire method is a one-liner:
 \codeimport{ods/YFastTrie.find(x)} 
 The first #find(x)# operation (on #xft#) takes $O(\log#w#)$ time.
 The second #find(x)# operation (on a treap) takes $O(\log r)$ time, where
@@ -315,15 +315,15 @@ $O(\log #w#)$ time.\footnote{This is an application of \emph{Jensen's Inequality
 Adding an element to a #YFastTrie# is also fairly simple---most of
 the time.  The #add(x)# method calls #xft.find(x)# to locate the treap,
 #t#, into which #x# should be inserted.  It then calls #t.add(x)# to
-add #x# to #t#.  At this point, it tosses a biased coin, that comes
-up heads with probability $1/#w#$.  If this coin comes up heads, #x#
-will be added to #xft#.
+add #x# to #t#.  At this point, it tosses a biased coin that comes up as
+heads with probability $1/#w#$ and as tails with probability $1-1/#w#$.
+If this coin comes up heads, then #x# will be added to #xft#.
 
 This is where things get a little more complicated.  When #x# is added to
-#xft#, the treap #t# needs to be split into two treaps #t1# and #t'#.
+#xft#, the treap #t# needs to be split into two treaps, #t1# and #t'#.
 The treap #t1# contains all the values less than or equal to #x#;
 #t'# is the original treap, #t#, with the elements of #t1# removed.
-Once this is done we add the pair #(x,t1)# to #xft#.  \figref{yfast-add}
+Once this is done, we add the pair #(x,t1)# to #xft#.  \figref{yfast-add}
 shows an example.
 \codeimport{ods/YFastTrie.add(x)}
 \begin{figure}
@@ -344,7 +344,7 @@ running time of the #add(x)# operation is
     O(\log#w#) + \frac{1}{#w#}O(#w#) = O(\log #w#)
 \]
 
-The #remove(x)# method just undoes the work performed by #add(x)#.
+The #remove(x)# method undoes the work performed by #add(x)#.
 We use #xft# to find the leaf, #u#, in #xft# that contains the answer
 to #xft.find(x)#.  From #u#, we get the treap, #t#, containing #x#
 and remove #x# from #t#.  If #x# was also stored in #xft# (and #x#
@@ -368,8 +368,9 @@ from #xft# takes $O(#w#)$ time, but #x# is only contained in #xft# with
 probability $1/#w#$.  Therefore, the expected time to remove an element
 from a #YFastTrie# is $O(\log #w#)$.
 
-Earlier in the discussion, we put off arguing about the sizes of treaps in
-this structure until later.  Before finishing we prove the result we need.
+Earlier in the discussion, we delayed arguing about the sizes of treaps
+in this structure until later.  Before finishing this chapter, we prove
+the result we need.
 
 \begin{lem}\lemlabel{yfast-subtreesize}
 Let #x# be an integer stored in a #YFastTrie# and let $#n#_#x#$
@@ -381,30 +382,31 @@ Then $\E[#n#_#x#] \le 2#w#-1$.
 Refer to \figref{yfast-sample}. Let
 $#x#_1<#x#_2<\cdots<#x#_i=#x#<\cdots<#x#_#n#$ denote the elements stored
 in the #YFastTrie#.  The treap #t# contains some elements greater than
-or equal to #x#.  These are $#x#_i,#x#_{i+1},\ldots,#x#_{i+j-1}$, where
-$#x#_{i+j-1}$ is the only one of these elements in which the biased coin
-toss performed in the #add(x)# method came up heads.  In other words,
-$\E[j]$ is equal to the expected number of biased coin tosses required
-to obtain the first heads.\footnote{This analysis ignores the fact that
-$j$ never exceeds $#n#-i+1$.  However, this only decreases $\E[j]$, so the
-upper bound still holds}  Each coin toss is independent and comes up heads
-with probability $1/#w#$, so $\E[j]\le#w#$.  (See \lemref{coin-tosses}
-for an analysis of this for the case $#w#=2$.)
+or equal to #x#.  These are $#x#_i,#x#_{i+1},\ldots,#x#_{i+j-1}$,
+where $#x#_{i+j-1}$ is the only one of these elements in which the
+biased coin toss performed in the #add(x)# method turned up as heads.
+In other words, $\E[j]$ is equal to the expected number of biased coin
+tosses required to obtain the first heads.\footnote{This analysis ignores
+the fact that $j$ never exceeds $#n#-i+1$.  However, this only decreases
+$\E[j]$, so the upper bound still holds.}  Each coin toss is independent
+and turns up as heads with probability $1/#w#$, so $\E[j]\le#w#$.
+(See \lemref{coin-tosses} for an analysis of this for the case $#w#=2$.)
 
 Similarly, the elements of #t# smaller than #x# are
-$#x#_{i-1},\ldots,#x#_{i-k}$ where all these $k$ coin tosses come up
-tails and the coin toss for $#x#_{i-k-1}$ comes up heads.  Therefore,
+$#x#_{i-1},\ldots,#x#_{i-k}$ where all these $k$ coin tosses turn up as
+tails and the coin toss for $#x#_{i-k-1}$ turns up as heads.  Therefore,
 $\E[k]\le#w#-1$, since this is the same coin tossing experiment considered
-previously, but in which the last toss doesn't count.  In summary,
-$#n#_#x#=j+k$, so
+in the preceding paragraph, but one in which the last toss is not counted.
+In summary, $#n#_#x#=j+k$, so
 \[  \E[#n#_#x#] = \E[j+k] = \E[j] + \E[k] \le 2#w#-1 \enspace .  \qedhere \]
 \end{proof}
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/yfast-sample}
   \end{center}
-  \caption[The query time in a YFastTrie]{The number of elements in the treap, #t#, containing #x#
-  is determined by two coin tossing experiments.}
+  \caption[The query time in a YFastTrie]{The number of elements in
+  the treap #t# containing #x# is determined by two coin tossing
+  experiments.}
   \figlabel{yfast-sample}
 \end{figure}
 %Surprisingly, the bound in \lemref{yfast-subtreesize} is tight.  (If this
@@ -440,28 +442,29 @@ The first data structure to provide $O(\log#w#)$ time #add(x)#,
 #remove(x)#, and #find(x)# operations was proposed by van~Emde~Boas and
 has since become known as the \emph{van~Emde~Boas} (or \emph{stratified})
 \emph{tree} \cite{e77}.  The original van~Emde~Boas structure had size
-$2^{#w#}$, so was impractical for large integers.
+$2^{#w#}$, making it impractical for large integers.
 
 The #XFastTrie# and #YFastTrie# data structures were discovered by
 Willard \cite{w83}.  The #XFastTrie# structure is very closely related
-to van~Emde~Boas trees.  One view of this is that the
-hash tables in an #XFastTrie# replace arrays in a van~Emde~Boas tree.
-That is, instead of storing the hash table #t[i]#, a van~Emde~Boas tree
-stores an array of length $2^{#i#}$.
+to van~Emde~Boas trees;  for instance, the hash tables in an #XFastTrie#
+replace arrays in a van~Emde~Boas tree.  That is, instead of storing
+the hash table #t[i]#, a van~Emde~Boas tree stores an array of length
+$2^{#i#}$.
 
 Another structure for storing integers is Fredman and Willard's fusion
 trees \cite{fw93}.  This structure can store #n# #w#-bit integers in
 $O(#n#)$ space so that the #find(x)# operation runs in $O((\log #n#)/(\log
 #w#))$ time.  By using a fusion tree when $\log #w# > \sqrt{\log #n#}$ and
-a #YFastTrie# when $\log #w# \le \sqrt{\log #n#}$ one obtains an $O(#n#)$
+a #YFastTrie# when $\log #w# \le \sqrt{\log #n#}$, one obtains an $O(#n#)$
 space data structure that can implement the #find(x)# operation in
 $O(\sqrt{\log #n#})$ time.  Recent lower-bound results of P\v{a}tra\c{s}cu
-and Thorup \cite{pt07} show that these results are more-or-less optimal,
+and Thorup \cite{pt07} show that these results are more or less optimal,
 at least for structures that use only $O(#n#)$ space.
 
 \begin{exc}
   Design and implement a simplified version of a #BinaryTrie# that
-  doesn't have a linked list or jump pointers, but for which #find(x)#
+  does not have a linked list or jump pointers, but for which #find(x)#
+
   still runs in $O(#w#)$ time.
 \end{exc}
 

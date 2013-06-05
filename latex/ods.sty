@@ -1,35 +1,9 @@
 %\usepackage{kpfonts}
 
-%% AU Press formatting
-%\special{papersize=177mm,253mm}
-%\setlength{\paperwidth}{177mm}
-%\pdfpagewidth=\paperwidth
-%%\setlength{\pdfpagewidth}{177mm}
-%\setlength{\paperheight}{253mm}
-%\pdfpageheight=\paperheight
-%%\setlength{\pdfpageheight}{253mm}
-%\setlength{\textwidth}{116mm}
-%\setlength{\textheight}{200mm}
-%\setlength{\topmargin}{-15mm}
-%\setlength{\oddsidemargin}{6mm}
-%\setlength{\evensidemargin}{4mm}
-%\setlength{\headheight}{0mm}
-%\setlength{\footskip}{20mm}
-%\usepackage{fancyhdr}
-%\pagestyle{fancy}
-%\renewcommand{\sectionmark}[1]{}%\markright{\thechapter.\ #1}}
-%\renewcommand{\chaptermark}[1]{% 
-%  \markright{#1}{}} 
-%\renewcommand{\headrulewidth}{0pt}
-%\renewcommand{\footrulewidth}{0pt}
-%\fancyhead[L,R,C]{}
-%\fancyfoot[L,R,C]{}
-%\fancyfoot[RO]{\small{\bf Chapter \thechapter}\ \rightmark\enspace\thepage}
-%\fancyfoot[LE]{\small\thepage\enspace\sf\MakeUppercase{open data structures}}
-%
+
+% AU Press page size 6x9in with 56pt margins all around
 \setlength{\paperwidth}{6in}
 \setlength{\paperheight}{9in}
-
 % Left and right margins
 \setlength{\hoffset}{-1in}
 \setlength{\oddsidemargin}{0in}
@@ -37,7 +11,7 @@
 \setlength{\textwidth}{\paperwidth}
 \addtolength{\textwidth}{-112pt}
 \setlength{\evensidemargin}{\oddsidemargin}
-
+% Top and bottom margins
 \setlength{\voffset}{-1in}
 \setlength{\topmargin}{-0in}
 \addtolength{\topmargin}{56pt}
@@ -46,11 +20,11 @@
 \addtolength{\topmargin}{-\headsep}
 \addtolength{\topmargin}{-\headheight}
 \setlength{\textheight}{\paperheight}
-\addtolength{\textheight}{-56pt}
+\addtolength{\textheight}{-94.08pt}
 \addtolength{\textheight}{-\topmargin}
 \addtolength{\textheight}{-\headheight}
 \addtolength{\textheight}{-\headsep}
-\setlength{\footskip}{50pt}
+\setlength{\footskip}{28pt}
 
 
 
@@ -81,16 +55,28 @@
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
-\renewcommand{\chaptermark}[1]{% 
-  \markboth{\thechapter.\ #1}{}} 
 \renewcommand{\headrulewidth}{0pt}
-%\renewcommand{\footrulewidth}{0.4pt}
-%\lhead{\itshape\nouppercase{\leftmark}}
-\rhead{\small\itshape\thepage}%\itshape\nouppercase{\leftmark}}
-%\lhead[E]{\itshape\nouppercase{\leftmark}}
-\lhead[\small\itshape\nouppercase{\leftmark}]{\small\itshape\nouppercase{\rightmark}}
-\fancyfoot[C]{} %\small\thepage}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead{}   % clear all headers
+\fancyfoot{}   % clear all footers
+\fancyhead[LE,RO]{\small\thepage}  % page numbers on the outside
+\fancyhead[LO]{\small\textsection\thesection]} % section number on the inside
+\fancyhead[RE]{\small[\textsection\thesection} % section number on the inside
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}} 
+\renewcommand{\sectionmark}[1]{\markright{#1}{}} 
+\fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
+\fancyhead[CO]{\small\nouppercase{\rightmark}} % section title, right center
+%\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+%\renewcommand{\chaptermark}[1]{% 
+%  \markboth{\thechapter.\ #1}{}} 
+%\renewcommand{\headrulewidth}{0pt}
+%%\renewcommand{\footrulewidth}{0.4pt}
+%%\lhead{\itshape\nouppercase{\leftmark}}
+%\rhead{\small\itshape\thepage}%\itshape\nouppercase{\leftmark}}
+%%\lhead[E]{\itshape\nouppercase{\leftmark}}
+%
+%\lhead[\small\itshape\nouppercase{\leftmark}]{\small\itshape\nouppercase{\rightmark}}
+%\fancyfoot[C]{} %\small\thepage}
 
 
 

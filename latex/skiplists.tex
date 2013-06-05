@@ -96,7 +96,7 @@ a search path is navigated; in particular, they differ in how
 they decide if a search path should go down into $L_{r-1}$ or go right
 within $L_r$.
 
-\section{#SkiplistSSet#: An Efficient #SSet# Implementation}
+\section{#SkiplistSSet#: An Efficient #SSet#}
 \seclabel{skiplistset}
 
 A #SkiplistSSet# uses a skiplist structure to implement the #SSet#
@@ -122,6 +122,7 @@ does not exactly replicate the coin-tossing experiment since the value of
 #k# will always be less than the number of bits in an #int#.  However,
 this will have negligible impact unless the number of elements in the
 structure is much greater than $2^{32}=4294967296$.}
+
 \codeimport{ods/SkiplistSSet.pickHeight()}
 
 To implement the #add(x)# method in a #SkiplistSSet# we search for #x#
@@ -171,7 +172,7 @@ the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log #n#)$
 expected time per operation.
 \end{thm}
 
-\section{#SkiplistList#: An Efficient Random-Access #List# Implementation}
+\section{#SkiplistList#: An Efficient Random-Access #List#}
 \seclabel{skiplistlist}
 
 A #SkiplistList# implements the #List# interface using a skiplist

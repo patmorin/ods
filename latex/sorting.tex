@@ -177,7 +177,7 @@ An example is shown in \figref{quicksort}.
     \figlabel{quicksort}
   \end{center}
 \end{figure}
-All of this is done in-place, so that instead of making copies of
+All of this is done in place, so that instead of making copies of
 subarrays being sorted, the #quickSort(a,i,n,c)# method only sorts the
 subarray $#a[i]#,\ldots,#a[i+n-1]#$.  Initially, this method is called
 as #quickSort(a,0,a.length,c)#.
@@ -438,13 +438,13 @@ algorithms.
 \end{thm}
 
 \begin{proof}
-  By the above discussion, the comparison tree defined by $\mathcal{A}$
-  must have at least $#n#!$ leaves.  An easy inductive proof shows
-  that any binary tree with $k$ leaves has a height of at least $\log k$.
-  Therefore, the comparison tree for $\mathcal{A}$ has a leaf, #w#, of
-  depth at least $\log(#n#!)$ and there is an input array #a# that leads
-  to this leaf.  The input array #a# is an input for which $\mathcal{A}$
-  does at least $\log(#n#!)$ comparisons.
+  By the preceding discussion, the comparison tree defined by $\mathcal{A}$
+  must have at least $#n#!$ leaves.  An easy inductive proof shows that
+  any binary tree with $k$ leaves has a height of at least $\log k$.
+  Therefore, the comparison tree for $\mathcal{A}$ has a leaf, #w#,
+  with a depth of at least $\log(#n#!)$ and there is an input array #a#
+  that leads to this leaf.  The input array #a# is an input for which
+  $\mathcal{A}$ does at least $\log(#n#!)$ comparisons.
 \end{proof}
 
 \thmref{deterministic-sorting-lower-bound} deals with deterministic
@@ -498,11 +498,10 @@ notice that this is true for every choice of $\hat{b}$, therefore it holds even 
 \section{Counting Sort and Radix Sort}
 
 In this section we consider two sorting algorithms that are not
-comparison-based. These algorithms are specialized for sorting
-small integers.  These algorithms get around the lower-bounds of
-\thmref{deterministic-sorting-lower-bound} by using (parts of) the
-elements of #a# as indices into an array.  Consider a statement of
-the form
+comparison-based. Specialized for sorting small integers, these algorithms
+elude the lower-bounds of \thmref{deterministic-sorting-lower-bound}
+by using (parts of) the elements of #a# as indices into an array.
+Consider a statement of the form
 \[
   #c[a[i]]# = 1 \enspace .
 \]
@@ -552,10 +551,9 @@ $#i#\in\{0,\ldots,#k#-1\}$, the output array, #b#, will have
 \[
    #b[c[i-1]]#=#b[c[i-1]+1]=#\cdots=#b[c[i]-1]#=#i# \enspace .
 \]
-Finally, the
-algorithm scans #a# backwards to put its elements in order into an output
-array #b#.  When scanning, the element #a[i]=j# is placed at location
-#b[c[j]-1]# and the value #c[j]# is decremented.
+Finally, the algorithm scans #a# backwards to place its elements, in order,
+into an output array #b#.  When scanning, the element #a[i]=j# is placed
+at location #b[c[j]-1]# and the value #c[j]# is decremented.
 
 \begin{thm}
   The #countingSort(a,k)# method can sort an array #a# containing #n#
@@ -563,10 +561,9 @@ array #b#.  When scanning, the element #a[i]=j# is placed at location
 \end{thm}
 
 The counting-sort algorithm has the nice property of being \emph{stable};
-it preserves the relative order of elements that are equal.  If two
-elements #a[i]# and #a[j]# have the same value, and $#i#<#j#$ then
-#a[i]# will appear before #a[j]# in #b#.  This will be useful in the
-next section.
+it preserves the relative order of equal elements.  If two elements
+#a[i]# and #a[j]# have the same value, and $#i#<#j#$ then #a[i]# will
+appear before #a[j]# in #b#.  This will be useful in the next section.
 
 \subsection{Radix-Sort}
 
@@ -599,7 +596,7 @@ An example of the steps of this algorithm is shown in \figref{radixsort}.
 \end{figure}
 
 This remarkable algorithm sorts correctly because counting-sort is
-a stable sorting algorithm.  If $#x# < #y#$ are two elements of #a#
+a stable sorting algorithm.  If $#x# < #y#$ are two elements of #a#,
 and the most significant bit at which #x# differs from #y# has index $r$,
 then #x# will be placed before #y# during pass $\lfloor r/#d#\rfloor$
 and subsequent passes will not change the relative order of #x# and #y#.
@@ -622,15 +619,14 @@ the following version of \thmref{radix-sort}.
 
 \section{Discussion and Exercises}
 
-Sorting is probably \emph{the} fundamental algorithmic problem in
-computer science, and has a long history.  Knuth \cite{k97v3} attributes
-the merge-sort algorithm to von~Neumann (1945).  Quicksort is due to
-Hoare \cite{h61}.  The original heap-sort algorithm is due to Williams
-\cite{w64}, but the version presented here (in which the heap is
-constructed bottom-up in $O(#n#)$ time) is due to Floyd \cite{f64}.
-Lower-bounds for comparison-based sorting appear to be folklore.
-The following table summarizes the performance of these comparison-based
-algorithms:
+Sorting is \emph{the} fundamental algorithmic problem in computer science,
+and it has a long history.  Knuth \cite{k97v3} attributes the merge-sort
+algorithm to von~Neumann (1945).  Quicksort is due to Hoare \cite{h61}.
+The original heap-sort algorithm is due to Williams \cite{w64}, but the
+version presented here (in which the heap is constructed bottom-up
+in $O(#n#)$ time) is due to Floyd \cite{f64}.  Lower-bounds for
+comparison-based sorting appear to be folklore.  The following table
+summarizes the performance of these comparison-based algorithms:
 
 \begin{center}
   \begin{tabular}{|l|r@{}l@{ }l|l|} \hline
@@ -641,13 +637,13 @@ algorithms:
   \end{tabular}
 \end{center}
 
-Each of these comparison-based algorithms has advantages and
+Each of these comparison-based algorithms has its advantages and
 disadvantages.  Merge-sort does the fewest comparisons and does not
 rely on randomization.  Unfortunately, it uses an auxilliary array
 during its merge phase.  Allocating this array can be expensive and is a
 potential point of failure if memory is limited.  Quicksort is an in-place
 algorithm and is a close second in terms of the number of comparisons,
-but is randomized so this running time is not always guaranteed.
+but is randomized, so this running time is not always guaranteed.
 Heap-sort does the most comparisons, but it is in-place and deterministic.
 
 There is one setting in which merge-sort is a clear-winner;  this
@@ -658,7 +654,7 @@ into a single sorted linked-list by pointer manipulations (see
 
 The counting-sort and radix-sort algorithms described here are due
 to Seward \cite[Section~2.4.6]{s54}.  However, variants of radix-sort
-have been used since the 1920's to sort punch cards using punched card
+have been used since the 1920s to sort punch cards using punched card
 sorting machines.  These machines can sort a stack of cards into two
 piles based on the existence (or not) of a hole in a specific location
 on the card.  Repeating this process for different hole locations gives
@@ -667,11 +663,11 @@ an implementation of radix-sort.
 Finally, we note that counting sort and radix-sort can be used to sort
 other types of numbers than non-negative integers.  Straightforward
 modifications of counting sort can sort integers, from any interval
-$\{a,\ldots,b\}$ in $O(#n#+b-a)$ time.  Similarly, radix sort can sort
+$\{a,\ldots,b\}$, in $O(#n#+b-a)$ time.  Similarly, radix sort can sort
 these integers in $O(#n#(\log_{#n#}(b-a))$ time.  Finally, both these
 algorithms can also be used to sort floating point numbers in the IEEE 754
 floating point format.  This is because the IEEE format was designed to
-allow comparison of two floating point numbers by comparing their values
+allow the comparison of two floating point numbers by comparing their values
 as if they were integers in a signed-magnitude binary representation
 \cite{ieee754}.
 
@@ -688,7 +684,7 @@ as if they were integers in a signed-magnitude binary representation
 
 \begin{exc}
   Some implementations of #quickSort(a,i,n,c)# always use #a[i]#
-  as a pivot.  Given an example of an input array of length #n# in which
+  as a pivot.  Give an example of an input array of length #n# in which
   such an implementation would perform $\binom{#n#}{2}$ comparisons.
 \end{exc}
 
@@ -726,11 +722,11 @@ as if they were integers in a signed-magnitude binary representation
 \javaonly{
 \begin{exc}
   The heap sort implementation described here sorts the elements into
-  reverse sorted order and then reverses the array.  This last step could
-  be avoided by defining a new #Comparator# that negates the results
-  of the input #Comparator#, #c#.  Explain why this would not be a good
-  optimization.  (Hint: Consider how many negations would needed to be
-  done in relation to how long it takes to reverse the array.)
+  reverse sorted order and then reverses the array.  This last step
+  could be avoided by defining a new #Comparator# that negates the
+  results of the input #Comparator#, #c#.  Explain why this would not
+  be a good optimization.  (Hint: Consider how many negations would need
+  to be done in relation to how long it takes to reverse the array.)
 \end{exc}
 }
 

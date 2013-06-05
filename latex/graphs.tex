@@ -16,22 +16,23 @@ is called the \emph{target}.  A \emph{path} in $G$ is a sequence of
 vertices $v_0,\ldots,v_k$ such that, for every $i\in\{1,\ldots,k\}$,
 the edge $(v_{i-1},v_{i})$ is in $E$.  A path $v_0,\ldots,v_k$ is a
 cycle if, additionally, the edge $(v_k,v_0)$ is in $E$.  A path (or
-cycle) is \emph{simple} if all of its vertices are unique.  If there is
-a path from some vertex $v_i$ to some vertex $v_j$ then we say that $v_j$
-is \emph{reachable} from $v_i$.
-An example of a graph is shown in \figref{graph}.
+cycle) is \emph{simple} if all of its vertices are unique.  If there
+is a path from some vertex $v_i$ to some vertex $v_j$ then we say that
+$v_j$ is \emph{reachable} from $v_i$.  An example of a graph is shown
+in \figref{graph}.
 
 \begin{figure}
   \begin{center}
     \includegraphics{figs/graph}
   \end{center}
-  \caption{A graph with 12 vertices.  Vertices are drawn as numbered circles and edges are drawn as pointed curves pointing from source to target.}
+  \caption{A graph with twelve vertices.  Vertices are drawn as numbered
+    circles and edges are drawn as pointed curves pointing from source
+    to target.}
   \figlabel{graph}
 \end{figure}
 
-
-Graphs have an enormous number of applications, due to their ability
-to model so many phenomena. There are many obvious examples. Computer
+Due to their ability to model so many phenomena, graphs have an enormous
+number of applications. There are many obvious examples. Computer
 networks can be modelled as graphs, with vertices corresponding to
 computers and edges corresponding to (directed) communication links
 between those computers.  Street networks can be modelled as graphs,
@@ -44,7 +45,7 @@ setting we might have a timetable conflict graph whose vertices represent
 courses offered in the university and in which the edge #(i,j)# is present
 if and only if there is at least one student that is taking both class
 #i# and class #j#.  Thus, an edge indicates that the exam for class #i#
-can not be scheduled at the same time as the exam for class #j#.
+should not be scheduled at the same time as the exam for class #j#.
 
 Throughout this section, we will use #n# to denote the number of vertices
 of $G$ and #m# to denote the number of edges of $G$.  That is, $#n#=|V|$
@@ -131,11 +132,11 @@ indices, #j#, where #a[i][j]#, respectively #a[j][i]#, is true.
 These operations clearly take $O(#n#)$ time per operation.  
 
 Another drawback of the adjacency matrix representation is that it
-is big.  It stores an $#n#\times #n#$ boolean matrix, so it requires at
+is large.  It stores an $#n#\times #n#$ boolean matrix, so it requires at
 least $#n#^2$ bits of memory.  The implementation here uses a matrix
 of \javaonly{#boolean#}\cpponly{#bool#} values so it actually uses on the
-order of $#n#^2$ bytes of memory.  A more careful implementation, that
-packs #w# boolean values into each word of memory could reduce this
+order of $#n#^2$ bytes of memory.  A more careful implementation, which
+packs #w# boolean values into each word of memory, could reduce this
 space usage to $O(#n#^2/#w#)$ words of memory.
 
 \begin{thm}
@@ -168,7 +169,7 @@ from the definition of matrix multiplication, that
 Interpreting this sum in terms of the graph $G$, this formula counts the
 number of vertices, $#k#$, such that $G$ contains both edges #(i,k)#
 and #(k,j)#.  That is, it counts the number of paths from $#i#$ to $#j#$
-(through intermediate vertices, $#k#$) that have length exactly 2.
+(through intermediate vertices, $#k#$) whose length is exactly two.
 This observation is the foundation of an algorithm that computes the
 shortest paths between all pairs of vertices in $G$ using only $O(\log
 #n#)$ matrix multiplications.
@@ -176,14 +177,13 @@ shortest paths between all pairs of vertices in $G$ using only $O(\log
 \section{#AdjacencyLists#: A Graph as a Collection of Lists}
 \seclabel{adjacency-list}
 
-\emph{Adjacency list} representations takes a more vertex-centric
-approach.  There are many different possible implementations of
-adjacency lists.  In this section, we present a simple one.  At the end
-of the section, we discuss different possibilities.  In an adjacency
-list representation, the graph $G=(V,E)$ is represented as an array,
-#adj#, of lists.  The list #adj[i]# contains a list of all the vertices
-adjacent to vertex #i#.  That is, it contains every index #j# such that
-$#(i,j)#\in E$.
+\emph{Adjacency list} representations take a more vertex-centric approach.
+There are many possible implementations of adjacency lists.  In this
+section, we present a simple one.  At the end of the section, we discuss
+different possibilities.  In an adjacency list representation, the graph
+$G=(V,E)$ is represented as an array, #adj#, of lists.  The list #adj[i]#
+contains a list of all the vertices adjacent to vertex #i#.  That is,
+it contains every index #j# such that $#(i,j)#\in E$.
 \codeimport{ods/AdjacencyLists.adj.n.AdjacencyLists(n0)}
 (An example is shown in \figref{graph-adjlist}.)  In this particular
 implementation, we represent each list in #adj# as \javaonly{an}\cpponly{a
@@ -279,12 +279,12 @@ space) of implementation and performance features of the implementation.
 
 \section{Graph Traversal}
 
-In this section we present two algorithms for exploring a graph, starting
-at one of its vertices, #i#, and finding all vertices that are reachable
-from #i#.  Both of these algorithms are best suited to graphs represented
-using an adjacency list representation.  Therefore, when analyzing these
-algorithms we will assume that the underlying representation is as an
-#AdjacencyLists#.
+In this section we present two algorithms for exploring a graph,
+starting at one of its vertices, #i#, and finding all vertices that
+are reachable from #i#.  Both of these algorithms are best suited to
+graphs represented using an adjacency list representation.  Therefore,
+when analyzing these algorithms we will assume that the underlying
+representation is an #AdjacencyLists#.
 
 \subsection{Breadth-First Search}
 
@@ -300,7 +300,7 @@ that these neighbours have never been in #q# before.  The only major difference
 between breadth-first-search for graphs and for trees
 is that the algorithm for graphs has to ensure that it does not
 add the same vertex to #q# more than once.  It does this by using an
-auxiliary boolean array, #seen#, that keeps track of which vertices have
+auxiliary boolean array, #seen#, that tracks of which vertices have
 already been discovered.
 \codeimport{ods/Algorithms.bfs(g,r)}
 An example of running #bfs(g,0)# on the graph from \figref{graph}
@@ -323,7 +323,7 @@ Analyzing the running-time of the #bfs(g,i)# routine is fairly
 straightforward.  The use of the #seen# array ensures that no vertex is
 added to #q# more than once.  Adding (and later removing) each vertex
 from #q# takes constant time per vertex for a total of $O(#n#)$ time.
-Since each vertex is processed at most once by the inner loop, each
+Since each vertex is processed by the inner loop at most once, each
 adjacency list is processed at most once, so each edge of $G$ is processed
 at most once.  This processing, which is done in the inner loop takes
 constant time per iteration, for a total of $O(#m#)$ time.  Therefore,
@@ -438,7 +438,7 @@ $P$ is also a cycle.
   \end{center}
   \caption[Cycle detection]{The depth-first-search algorithm can be used to detect cycles
   in $G$.The node #j# is colored #grey# while #i# is still #grey#.  This
-  implies there is a path, $P$, from #i# to #j# in the depth-first-search
+  implies that there is a path, $P$, from #i# to #j# in the depth-first-search
   tree, and the edge #(j,i)# implies that $P$ is also a cycle.}
   \figlabel{dfs-cycle}
 \end{figure}
@@ -466,7 +466,7 @@ and circuit routing, respectively.
 
 Adjacency-list representations of graphs were first popularized by
 Hopcroft and Tarjan \cite{ht73} as an alternative to the (then more
-common) adjacency-matrix representation.  This representation, and
+common) adjacency-matrix representation.  This representation, as well as
 depth-first-search, played a major part in the celebrated Hopcroft-Tarjan
 planarity testing algorithm that can determine, in $O(#n#)$ time, if
 a graph can be drawn, in the plane, and in such a way that no pair of
