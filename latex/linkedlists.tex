@@ -532,6 +532,25 @@ Both singly-linked and doubly-linked lists are established techniques,
 having been used in programs for over 40 years.  They are discussed,
 for example, by Knuth \cite[Sections~2.2.3--2.2.5]{k97v1}.  Even the
 #SEList# data structure seems to be a well-known data structures exercise.
+The #SEList# is sometimes referred to as an \emph{unrolled linked list}
+\cite{sra94}.
+
+Another way to save space in a doubly-linked list is the use of
+so-called XOR-lists.  In an XOR-list, each node, #u#, contains only one
+pointer, #u.nextprev#, that holds the bitwise exclusive-or of #u.prev#
+and #u.next#.  The list itself contains two pointers, one to the #dummy#
+node and one to #dummy.next# (the first node, or #dummy# if the list is
+empty). This technique uses the fact that, if we have pointers to #u#
+and #u.prev#, then we can extract #u.next# using the formula
+\[
+   #u.next# = #u.prev# \verb+^+ #u.nextprev# \enspace .
+\]
+(Here \verb+^+ computes the bitwise exclusive-or of its two arguments.)
+This technique complicates the code a little and is not possible in some
+garbage-collected languages\javaonly{---including Java---}\cpponly{
+}but gives a doubly-linked list implementation that requires only one
+pointer per node.  A detailed discussion of XOR-lists can be found in
+Sinha's magazine article \cite{s04}.
 
 \begin{exc}
   Why is it not possible to use a dummy node in an #SLList# to avoid
@@ -700,6 +719,11 @@ the implementation and analysis of the space-efficient #SEList#:
   Design and implement of a version of an #SEList# that supports all
   the #Deque# operations in constant amortized time per operation,
   independent of the value of #b#.
+\end{exc}
+
+\begin{exc}
+  Explain how to use the bitwise exclusive-or operator, \verb+^+, to
+  swap the values of two #int# variables without using a third variable.
 \end{exc}
 
 
