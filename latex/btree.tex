@@ -73,7 +73,7 @@ it simply emphasizes the fact that external memory is so much slower
 than RAM.
 
 \begin{figure}
-  \centering{\includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/em}}
+  \centering{\includegraphics[width=\ScaleIfNeeded]{figs/em}}
   \caption[The external memory model]{In the external memory model,
   accessing an individual item, #x#, in the external memory requires
   reading the entire block containing #x# into RAM.}
@@ -177,7 +177,7 @@ at $#u.children[i+1]#$.  Informally,
 An example of a $B$-tree with $B=2$ is shown in \figref{btree}.
 
 \begin{figure}
-  \centering{\includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-1}}
+  \centering{\includegraphics[width=\ScaleIfNeeded]{figs/btree-1}}
   \caption{A $B$-tree with $B=2$.}
   \figlabel{btree}
 \end{figure}
@@ -214,7 +214,7 @@ stored at a node, #u#, to determine in which of #u#'s children the search
 should continue.
 
 \begin{figure}
-  \centering{\includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-2}}
+  \centering{\includegraphics[width=\ScaleIfNeeded]{figs/btree-2}}
   \caption[Searching in a $B$-tree]{A successful search (for the value 4)
     and an unsuccessful search (for the value 16.5) in a $B$-tree. Shaded nodes show where the value of #z# is updated during the searches.}
   \figlabel{btree-find}
@@ -290,10 +290,10 @@ large values of $B$.
 
 \begin{figure}
    \centering{\begin{tabular}{@{}l@{}}
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-split-1} \\[2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-split-1} \\[2ex]
      \multicolumn{1}{c}{#u.split()#} \\ 
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-split-2} \\
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-split-2} \\
    \end{tabular}}
    \caption[Splitting a $B$-tree node]{Splitting the node #u# in a
      $B$-tree ($B=3$). Notice that the key $#u.keys#[2]=\mathrm{m}$
@@ -314,11 +314,11 @@ children become the nodes obtained when the original root was split.
 
 \begin{figure}
    \centering{\begin{tabular}{@{}l@{}}
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-add-1} \\[2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-add-1} \\[2ex]
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-add-2} \\[2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-add-2} \\[2ex]
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-add-3} 
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-add-3} 
    \end{tabular}}
    \caption[Adding to a $B$-tree]{The #add(x)# operation in a
       #BTree#. Adding the value 21 results in two nodes being split.}
@@ -396,15 +396,15 @@ an \emph{underflow}.
 
 \begin{figure}
    \centering{\begin{tabular}{@{}l@{}}
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-remove-full-1} \\[2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-full-1} \\[2ex]
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-remove-full-2} \\[2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-full-2} \\[2ex]
      \multicolumn{1}{c}{#merge(v,w)#} \\
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-remove-full-3} \\[2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-full-3} \\[2ex]
      \multicolumn{1}{c}{#shiftLR(w,v)#} \\
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-remove-full-4} \\[2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-full-4} \\[2ex]
    \end{tabular}}
    \caption[Removing from a $B$-tree]{Removing the value 4 from a $B$-tree
      results in one merge and one borrowing operation.}
@@ -433,9 +433,9 @@ in \figref{btree-remove}.
 
 \begin{figure}
    \centering{\begin{tabular}{@{}l@{}}
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-remove-1} \\[2ex]
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-1} \\[2ex]
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-remove-2} 
+     \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-2} 
    \end{tabular}}
    \caption[The remove operation in a $B$-tree] {The #remove(x)# operation
       in a #BTree#. To remove the value $#x#=10$ we replace it with the
@@ -481,10 +481,10 @@ also children), for #w#.  There are two ways to do this:
 
   \begin{figure}
       \centering{\begin{tabular}{@{}l@{}}
-       \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-borrow-1} \\[2ex]
+       \includegraphics[width=\ScaleIfNeeded]{figs/btree-borrow-1} \\[2ex]
        \multicolumn{1}{c}{#shiftRL(v,w)#} \\ 
        \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-       \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-borrow-2} \\
+       \includegraphics[width=\ScaleIfNeeded]{figs/btree-borrow-2} \\
      \end{tabular}}
     \caption[Borrowing in a $B$-tree]{If #v# has more than $B-1$ keys,
        then #w# can borrow keys from #v#.}
@@ -502,10 +502,10 @@ also children), for #w#.  There are two ways to do this:
   
   \begin{figure}
      \centering{\begin{tabular}{@{}l@{}}
-       \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-merge-1} \\[2ex]
+       \includegraphics[width=\ScaleIfNeeded]{figs/btree-merge-1} \\[2ex]
        \multicolumn{1}{c}{#merge(v,w)#} \\ 
        \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
-       \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/btree-merge-2} \\
+       \includegraphics[width=\ScaleIfNeeded]{figs/btree-merge-2} \\
      \end{tabular}}
      \caption[Merging in a $B$-tree]{Merging two siblings #v# and #w#
      in a $B$-tree ($B=3$).}
@@ -790,7 +790,7 @@ access to retrieve a leaf.
 \end{exc}
 
 \begin{figure}
-  \centering{\includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/bplustree}} 
+  \centering{\includegraphics[width=\ScaleIfNeeded]{figs/bplustree}} 
   \caption{A $B+$-tree is a $B$-tree on top of a doubly-linked list of blocks.}
   \figlabel{bplustree}
 \end{figure}

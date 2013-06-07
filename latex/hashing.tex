@@ -28,7 +28,7 @@ total number of items in all lists (see \figref{chainedhashtable}):
 \codeimport{ods/ChainedHashTable.t.n}
 \begin{figure}
    \begin{center}
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/chainedhashtable}
+     \includegraphics[width=\ScaleIfNeeded]{figs/chainedhashtable}
    \end{center}
    \caption[A ChainedHashTable]{An example of a #ChainedHashTable# with $#n#=14$ and $#t.length#=16$.  In this example $#hash(x)#=6$}
    \figlabel{chainedhashtable}
@@ -47,7 +47,9 @@ To add an element, #x#, to the hash table, we first check if
 the length of #t# needs to be increased and, if so, we grow #t#.
 With this out of the way we hash #x# to get an integer, #i#, in the
 range $\{0,\ldots,#t.length#-1\}$, and we append #x# to the list
-#t[i]#: \codeimport{ods/ChainedHashTable.add(x)} Growing the table,
+#t[i]#:
+\codeimport{ods/ChainedHashTable.add(x)}
+Growing the table,
 if necessary, involves doubling the length of #t# and reinserting
 all elements into the new table.  This strategy is exactly the same
 as the one used in the implementation of #ArrayStack# and the same

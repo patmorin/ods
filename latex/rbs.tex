@@ -90,8 +90,8 @@ $1+ \hint$.  (See \figref{harmonic-integral} for a graphical explanation.)
 \begin{figure}
   \begin{center}
     \begin{tabular}{cc}
-      \includegraphics[scale=0.90909,width=\HalfScaleIfNeeded]{figs/harmonic-2} 
-        & \includegraphics[scale=0.90909,width=\HalfScaleIfNeeded]{figs/harmonic-3}
+      \includegraphics[width=\HalfScaleIfNeeded]{figs/harmonic-2} 
+        & \includegraphics[width=\HalfScaleIfNeeded]{figs/harmonic-3}
     \end{tabular}
   \end{center}
   \caption{The $k$th harmonic number $H_k=\sum_{i=1}^k 1/i$ is upper-bounded by $1+\hint$ and lower-bounded by $\hint$.  The value of $\hint$ is given by the 
@@ -148,7 +148,7 @@ will proceed to $#u#_j#.right#$ after visiting $#u#_j$.
 
 \begin{figure}
   \begin{center}
-    \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/rbst-records}
+    \includegraphics[width=\ScaleIfNeeded]{figs/rbst-records}
   \end{center}
   \caption[The search path in a random binary search tree]{The value $i<#x#$ is on the search path for #x# if and only
    if $i$ is the first element among $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ added to the tree.}
@@ -208,8 +208,8 @@ $#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$ are almost identical (see
 \begin{figure}
   \begin{center}
     \begin{tabular}{@{}c@{}}
-      \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/rbst-probs-a} \\ (a) \\[2ex]
-      \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/rbst-probs-b} \\ (b) \\[2ex]
+      \includegraphics[width=\ScaleIfNeeded]{figs/rbst-probs-a} \\ (a) \\[2ex]
+      \includegraphics[width=\ScaleIfNeeded]{figs/rbst-probs-b} \\ (b) \\[2ex]
     \end{tabular}
   \end{center}
   \caption[The probabilities of an element being on a search path]{The probabilities of an element being on the search path for #x#
@@ -261,7 +261,7 @@ children.  An example is shown in \figref{treap}.
 
 \begin{figure}
   \begin{center}
-    \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/treap}
+    \includegraphics[width=\ScaleIfNeeded]{figs/treap}
   \end{center}
   \caption[A Treap]{An example of a #Treap# containing the integers
   $0,\ldots,9$. Each node, #u#, is illustrated as a box containing $#u.x#,#u.p#$.}
@@ -328,7 +328,7 @@ depending on whether #w# is a right or left child of #u#, respectively.
 
 \begin{figure}
   \begin{center}
-     \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/rotation}
+     \includegraphics[width=\ScaleIfNeeded]{figs/rotation}
   \end{center}
   \caption{Left and right rotations in a binary search tree.}
   \figlabel{rotations}
@@ -358,9 +358,9 @@ An example of an #add(x)# operation is shown in \figref{treap-add}.
 
 \begin{figure}
   \begin{center}
-  \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/treap-insert-a} \\
-  \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/treap-insert-b} \\
-  \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/treap-insert-c} \\
+  \includegraphics[width=\ScaleIfNeeded]{figs/treap-insert-a} \\
+  \includegraphics[width=\ScaleIfNeeded]{figs/treap-insert-b} \\
+  \includegraphics[width=\ScaleIfNeeded]{figs/treap-insert-c} \\
   \end{center}
   \caption[Adding to a Treap]{Adding the value 1.5 into the #Treap# from \figref{treap}.}
   \figlabel{treap-add}
@@ -395,10 +395,10 @@ These three rules ensure that the #Treap# doesn't become disconnected and that t
 An example of the #remove(x)# operation is shown in \figref{treap-remove}.
 \begin{figure}
   \begin{center}
-  \includegraphics[scale=0.90909,height=\QuarterHeightScaleIfNeeded]{figs/treap-delete-a} \\
-  \includegraphics[scale=0.90909,height=\QuarterHeightScaleIfNeeded]{figs/treap-delete-b} \\
-  \includegraphics[scale=0.90909,height=\QuarterHeightScaleIfNeeded]{figs/treap-delete-c} \\
-  \includegraphics[scale=0.90909,height=\QuarterHeightScaleIfNeeded]{figs/treap-delete-d} 
+  \includegraphics[height=\QuarterHeightScaleIfNeeded]{figs/treap-delete-a} \\
+  \includegraphics[height=\QuarterHeightScaleIfNeeded]{figs/treap-delete-b} \\
+  \includegraphics[height=\QuarterHeightScaleIfNeeded]{figs/treap-delete-c} \\
+  \includegraphics[height=\QuarterHeightScaleIfNeeded]{figs/treap-delete-d} 
   \end{center}
   \caption[Removing from a treap]{Removing the value 9 from the #Treap# in \figref{treap}.}
   \figlabel{treap-remove}
