@@ -44,7 +44,7 @@ in which the trie stores the integers 3(0011), 9(1001), 12(1100),
 and 13(1101).
 \begin{figure}
   \begin{center}
-    \includegraphics[width=\ScaleIfNeeded]{figs/binarytrie-ex-1}
+    \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/binarytrie-ex-1}
   \end{center}
   \caption{The integers stored in a binary trie are encoded as
     root-to-leaf paths.}
@@ -71,7 +71,7 @@ shown in \figref{binarytrie-ex2}
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=\ScaleIfNeeded]{figs/binarytrie-ex-2}
+    \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/binarytrie-ex-2}
   \end{center}
   \caption[A BinaryTrie]{A #BinaryTrie# with #jump# pointers shown as curved dashed
   edges.}
@@ -95,7 +95,7 @@ we want. Each of these cases is illustrated in \figref{binarytrie-find}.
 \codeimport{ods/BinaryTrie.find(x)}
 \begin{figure}
   \begin{center}
-    \includegraphics[width=\ScaleIfNeeded]{figs/binarytrie-ex-3}
+    \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/binarytrie-ex-3}
   \end{center}
   \caption[Search paths in a BinaryTrie]{The paths followed by #find(5)# and #find(8)#.}
   \figlabel{binarytrie-find}
@@ -120,7 +120,7 @@ but has a lot of work to do:
 An addition is illustrated in \figref{binarytrie-add}.
 \begin{figure}
   \begin{center}
-    \includegraphics[width=\ScaleIfNeeded]{figs/binarytrie-add}
+    \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/binarytrie-add}
   \end{center}
   \caption[Adding to a BinaryTrie]{Adding the values 2 and 15 to the #BinaryTrie# in
   \figref{binarytrie-ex2}.}
@@ -147,7 +147,7 @@ it has a lot of work to do:
 A removal is illustrated in \figref{binarytrie-remove}.
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/binarytrie-remove}
+    \includegraphics[scale=0.90909]{figs/binarytrie-remove}
   \end{center}
   \caption[Removing from a BinaryTrie]{Removing the value 9 from the #BinaryTrie# in
   \figref{binarytrie-ex2}.}
@@ -196,7 +196,7 @@ be at or below level #i# if and only if there is a node at level #i#
 whose label matches the highest-order #i# bits of #x#.
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/xfast-path}
+    \includegraphics[scale=0.90909]{figs/xfast-path}
   \end{center}
   \caption{Since there is no node labelled $111\star$, the search path
     for 14 (1110) ends at the node labelled $11{\star\star}$ .}
@@ -292,7 +292,7 @@ in \figref{yfast}.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/yfast}
+    \includegraphics[scale=0.90909]{figs/yfast}
   \end{center}
   \caption[A YFastTrie]{A #YFastTrie# containing the values 0, 1, 3, 4,
   6, 8, 9, 10, 11, and 13.}
@@ -327,7 +327,7 @@ shows an example.
 \codeimport{ods/YFastTrie.add(x)}
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/yfast-add}
+    \includegraphics[scale=0.90909]{figs/yfast-add}
   \end{center}
   \caption[Adding to a YFastTrie]{Adding the values 2 and 6 to a #YFastTrie#. The coin toss
     for 6 came up heads, so 6 was added to #xft# and the treap containing
@@ -354,7 +354,7 @@ successor in the linked list.   This is illustrated in
 \codeimport{ods/YFastTrie.remove(x)}
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/yfast-remove}
+    \includegraphics[scale=0.90909]{figs/yfast-remove}
   \end{center}
   \caption[Removing from a YFastTrie]{Removing the values 1 and 9 from a #YFastTrie# in \figref{yfast-add}.}
   \figlabel{yfast-remove}
@@ -401,7 +401,7 @@ In summary, $#n#_#x#=j+k$, so
 \end{proof}
 \begin{figure}
   \begin{center}
-    \includegraphics[width=\ScaleIfNeeded]{figs/yfast-sample}
+    \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/yfast-sample}
   \end{center}
   \caption[The query time in a YFastTrie]{The number of elements in
   the treap #t# containing #x# is determined by two coin tossing

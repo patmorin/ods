@@ -1,7 +1,7 @@
 \documentclass[10pt]{book}
 % mark overful hboxes
 %\overfullrule=1mm
-%\usepackage{kpfonts}
+\usepackage{kpfonts}
 
 %\usepackage[nott]{kpfonts}
 %\SetMathAlphabet{\mathtt}{normal}{OT1}{\ttdefault}{m}{n}
@@ -23,7 +23,7 @@
 \usepackage{wasysym}
 
 %% This code allows dynamic scaling of images to fit the page
-%% Usage: \includegraphics[width=\ScaleIfNeeded]{figs/figure}
+%% Usage: \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/figure}
 \makeatletter
 \def\ScaleIfNeeded{%
 \ifdim\Gin@nat@width>.97\linewidth
@@ -212,7 +212,7 @@
 \author{Pat Morin}
 \date{%Development Edition: \today\ \currenttime
 Edition 0.1E\cpponly{$\beta$}
-\htmlonly{\\ \includegraphics[scale=0.5]{images/cc-by}}}
+\htmlonly{\\ \includegraphics[scale=0.90909,scale=0.5]{images/cc-by}}}
 %Version 0.0 pre $\alpha$: \today}
 
 \pagenumbering{roman}
@@ -223,7 +223,7 @@ Edition 0.1E\cpponly{$\beta$}
 \begin{document}
 %\AddToShipoutPicture*{\BackgroundPic}
 \begin{titlepage}
-\htmlonly{\includegraphics{images/tree3-thick}}
+\htmlonly{\includegraphics[scale=0.90909]{images/tree3-thick}}
   \maketitle
 \end{titlepage}
 

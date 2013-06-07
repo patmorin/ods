@@ -51,7 +51,7 @@ A 2-4 tree is a rooted tree with the following properties:
 An example of a 2-4 tree is shown in \figref{twofour-example}.
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/24rb-2}
+    \includegraphics[scale=0.90909]{figs/24rb-2}
   \end{center}
   \caption{A 2-4 tree of height 3.}
   \figlabel{twofour-example}
@@ -92,9 +92,9 @@ the height property.
 \begin{figure}
   \begin{center}
    \begin{tabular}{c}
-     \includegraphics{figs/24tree-add-1} \\
-     \includegraphics{figs/24tree-add-2} \\
-     \includegraphics{figs/24tree-add-3}
+     \includegraphics[scale=0.90909]{figs/24tree-add-1} \\
+     \includegraphics[scale=0.90909]{figs/24tree-add-2} \\
+     \includegraphics[scale=0.90909]{figs/24tree-add-3}
    \end{tabular}
   \end{center}
   \caption[Adding a leaf to a 2-4 Tree]{Adding a leaf to a 2-4 Tree.
@@ -116,11 +116,11 @@ then #w# is left with only one child and violates the degree property.
 \begin{figure}
   \begin{center}
    \begin{tabular}{c}
-     \includegraphics[height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-1} \\
-     \includegraphics[height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-2} \\
-     \includegraphics[height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-3} \\
-     \includegraphics[height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-4} \\
-     \includegraphics[height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-5} \\
+     \includegraphics[scale=0.90909,height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-1} \\
+     \includegraphics[scale=0.90909,height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-2} \\
+     \includegraphics[scale=0.90909,height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-3} \\
+     \includegraphics[scale=0.90909,height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-4} \\
+     \includegraphics[scale=0.90909,height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-5} \\
    \end{tabular}
   \end{center}
   \caption[Removing a leaf from a 2-4 Tree]{Removing a leaf from a
@@ -179,7 +179,7 @@ tree is shown in \figref{redblack-example}.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/24rb-1}
+    \includegraphics[scale=0.90909]{figs/24rb-1}
   \end{center}
   \caption[A red-black tree]{An example of a red-black tree with black-height 3.  External (#nil#) nodes are drawn as squares.} 
   \figlabel{redblack-example}
@@ -202,8 +202,8 @@ we are left with a tree $T'$ having only black nodes.
 \begin{figure}
   \begin{center}
     \begin{tabular}{cc}
-      \includegraphics{figs/24rb-3} \\
-      \includegraphics{figs/24rb-2}
+      \includegraphics[scale=0.90909]{figs/24rb-3} \\
+      \includegraphics[scale=0.90909]{figs/24rb-2}
     \end{tabular}
   \end{center}
   \caption{Every red-black tree has a corresponding 2-4 tree.}
@@ -250,9 +250,9 @@ two children black.  An example of this is shown in \figref{rb-split}.
 \begin{figure}
   \begin{center}
    \begin{tabular}{c}
-     \includegraphics{figs/rb-split-1} \\
-     \includegraphics{figs/rb-split-2} \\
-     \includegraphics{figs/rb-split-3} \\
+     \includegraphics[scale=0.90909]{figs/rb-split-1} \\
+     \includegraphics[scale=0.90909]{figs/rb-split-2} \\
+     \includegraphics[scale=0.90909]{figs/rb-split-3} \\
    \end{tabular}
   \end{center}
   \caption[Simulating a 2-4 tree]{Simulating a 2-4 tree split operation
@@ -311,7 +311,7 @@ The #pullBlack(u)# method reverses this operation:
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=\ScaleIfNeeded]{figs/flippullpush}
+    \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/flippullpush}
   \end{center}
   \caption{Flips, pulls and pushes}
   \figlabel{redblack-flippullpush}
@@ -348,7 +348,7 @@ reader may wish to study this figure before continuing.
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=\ScaleIfNeeded]{figs/rb-addfix}
+    \includegraphics[scale=0.90909,width=\ScaleIfNeeded]{figs/rb-addfix}
   \end{center}
   \caption{A single round in the process of fixing Property~2 after
   an insertion.}
@@ -423,7 +423,7 @@ node #u#, based on one of four cases:
 
 \begin{figure}
   \begin{center}
-    \includegraphics[height=\HeightScaleIfNeeded]{figs/rb-removefix}
+    \includegraphics[scale=0.90909,height=\HeightScaleIfNeeded]{figs/rb-removefix}
   \end{center}
   \caption{A single round in the process of eliminating a double-black node
    after a removal.}
@@ -615,7 +615,7 @@ subtrees differ by two.  See \figref{avl-rebalance}.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/avl-rebalance}
+    \includegraphics[scale=0.90909]{figs/avl-rebalance}
   \end{center}
   \caption{Rebalancing in an AVL tree.  At most two rotations are required
   to convert a node whose subtrees have a height of $h$ and $h+2$ into a node
@@ -630,7 +630,7 @@ the amortized time spent rebalancing is $O(1)$ per update.  In particular,
 there is no analogue of \thmref{redblack-amortized} for those structures.
 
 \begin{figure}
-  \centering{\includegraphics{figs/redblack-example}}
+  \centering{\includegraphics[scale=0.90909]{figs/redblack-example}}
   \caption{A red-black tree on which to practice.}
   \figlabel{redblack-example2}
 \end{figure}
