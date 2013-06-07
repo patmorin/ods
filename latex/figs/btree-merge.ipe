@@ -2,8 +2,8 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
 <info created="D:20120626162443" modified="D:20120720215210"/>
-<preamble>\usepackage[math]{iwona}\SetMathAlphabet{\mathtt}{iwona}{OT1}{\ttdefault}{m}{n}\usepackage[T1]{fontenc}
-\usepackage{wasysym}</preamble>
+<preamble>\usepackage{kpfonts}
+\usepackage{wasysym}\fontsize{10pt}{10pt}\selectfont</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">

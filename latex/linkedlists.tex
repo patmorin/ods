@@ -10,7 +10,7 @@ which can implement #Stack# and (FIFO) #Queue# operations in constant
 time per operation and then move on to doubly-linked lists, which can
 implement #Deque# operations in constant time.
 
-Linked lists have advantages and disadvantages relative to array-based
+Linked lists have advantages and disadvantages when compared to to array-based
 implementations of the #List# interface.  The primary disadvantage is that
 we lose the ability to access any element using #get(i)# or #set(i,x)#
 in constant time.  Instead, we have to walk through the list, one element
@@ -39,7 +39,7 @@ illustrated in \figref{sllist}.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/sllist}
+    \includegraphics[width=\ScaleIfNeeded]{figs/sllist}
   \end{center}
   \caption[A sequence of Queue and Stack operations on an SLList]{A sequence of #Queue# (#add(x)# and #remove()#) and #Stack# (#push(x)# and #pop()#) operations on an #SLList#.}
   \figlabel{sllist}
@@ -65,7 +65,9 @@ Clearly, both the #push(x)# and #pop()# operations run in $O(1)$ time.
 
 \subsection{Queue Operations}
 
-An #SLList# can also efficiently implement the FIFO queue operations #add(x)# and #remove()#.  Removals are done from the head of the list, and are identical to the #pop()# operation:
+An #SLList# can also implement the FIFO queue operations #add(x)# and
+#remove()# in constant time.  Removals are done from the head of the list,
+and are identical to the #pop()# operation:
 
 \codeimport{ods/SLList.remove()}
 
@@ -193,8 +195,8 @@ time.
 The following theorem summarizes the performance of a #DLList#:
 
 \begin{thm}\thmlabel{dllist}
-  A #DLList# implements the #List# interface.  
-  The #get(i)#, #set(i,x)#, #add(i,x)# and #remove(i)# operations run
+  A #DLList# implements the #List# interface.  In this implementation,
+  the #get(i)#, #set(i,x)#, #add(i,x)# and #remove(i)# operations run
   in $O(1+\min\{#i#,#n#-#i#\})$ time per operation.
 \end{thm}
 
@@ -342,7 +344,7 @@ space exploration (see \figref{selist-add}):
 \begin{figure}
   \noindent
   \begin{center}
-    \begin{tabular}{l}
+    \begin{tabular}{@{}l@{}}
       \includegraphics[width=\ScaleIfNeeded]{figs/selist-add-a}\\[4ex]
       \includegraphics[width=\ScaleIfNeeded]{figs/selist-add-b}\\[4ex]
       \includegraphics[width=\ScaleIfNeeded]{figs/selist-add-c}\\
@@ -538,7 +540,7 @@ The #SEList# is sometimes referred to as an \emph{unrolled linked list}
 Another way to save space in a doubly-linked list is the use of
 so-called XOR-lists.  In an XOR-list, each node, #u#, contains only one
 pointer, #u.nextprev#, that holds the bitwise exclusive-or of #u.prev#
-and #u.next#.  The list itself contains two pointers, one to the #dummy#
+and #u.next#.  The list itself needs to store two pointers, one to the #dummy#
 node and one to #dummy.next# (the first node, or #dummy# if the list is
 empty). This technique uses the fact that, if we have pointers to #u#
 and #u.prev#, then we can extract #u.next# using the formula
@@ -546,11 +548,11 @@ and #u.prev#, then we can extract #u.next# using the formula
    #u.next# = #u.prev# \verb+^+ #u.nextprev# \enspace .
 \]
 (Here \verb+^+ computes the bitwise exclusive-or of its two arguments.)
-This technique complicates the code a little and is not possible in some
-garbage-collected languages\javaonly{---including Java---}\cpponly{
-}but gives a doubly-linked list implementation that requires only one
-pointer per node.  A detailed discussion of XOR-lists can be found in
-Sinha's magazine article \cite{s04}.
+This technique complicates the code a little and is not possible in
+some languages that have garbage collection\javaonly{---including
+Java---}\cpponly{ }but gives a doubly-linked list implementation that
+requires only one pointer per node.  A detailed discussion of XOR-lists
+can be found in Sinha's magazine article \cite{s04}.
 
 \begin{exc}
   Why is it not possible to use a dummy node in an #SLList# to avoid
@@ -565,7 +567,7 @@ Sinha's magazine article \cite{s04}.
 \end{exc}
 
 \begin{exc}
-  Describe and implement the #List# operations #get(i)#, #set(i,x)#,
+  Implement the #List# operations #get(i)#, #set(i,x)#,
   #add(i,x)# and #remove(i)# on an #SLList#.  Each of these operations
   should run in $O(1+#i#)$ time.
 \end{exc}
@@ -698,11 +700,11 @@ or #Queue# as items are added and removed.
 
 \begin{exc}
   Design and implement a #MinDeque# data structure that can store
-  comparable elements and supports the queue operations #addFirst(x)#,
-  #addLast(x)# #removeFirst()#, #removeLast()# and #size()#, as well
-  as the #min()# operation, which returns the minimum value currently
-  stored in the data structure.  All operations should run in constant
-  amortized time.
+  comparable elements and supports all the deque operations #addFirst(x)#,
+  #addLast(x)# #removeFirst()#, #removeLast()# and #size()#, and the
+  #min()# operation, which returns the minimum value currently stored in
+  the data structure.  All operations should run in constant amortized
+  time.
 \end{exc}
 
 The next exercises are designed to test the reader's understanding of
@@ -710,9 +712,10 @@ the implementation and analysis of the space-efficient #SEList#:
 
 \begin{exc}
   Prove that, if an #SEList# is used like a #Stack# (so that the
-  modifications are done using $#push(x)#\equiv #add(size(),x)#$ and
-  $#pop()#\equiv #remove(size()-1)#$) then these operations run in
-  constant amortized time, independent of the value of #b#.
+  only modifications to the #SEList# are done using $#push(x)#\equiv
+  #add(size(),x)#$ and $#pop()#\equiv #remove(size()-1)#$) then these
+  operations run in constant amortized time, independent of the value
+  of #b#.
 \end{exc}
 
 \begin{exc}

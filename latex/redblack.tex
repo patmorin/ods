@@ -12,7 +12,7 @@ several reasons for the popularity of red-black trees:
 \item A red-black tree storing #n# values has height at most $2\log #n#$.
 \item The #add(x)# and #remove(x)# operations on a red-black tree run
    in $O(\log #n#)$ \emph{worst-case} time.
-\item The amortized number of rotations done during an #add(x)#
+\item The amortized number of rotations performed during an #add(x)#
    or #remove(x)# operation is constant.
 \end{enumerate}
 The first two of these properties already put red-black trees 
@@ -389,10 +389,10 @@ $O(\log #n#)$ time.
 \subsection{Removal}
 
 The #remove(x)# operation in a #RedBlackTree# is the most complicated
-to implement, and this is true of all known implementations.  Like
-#remove(x)# in a \texttt{BinarySearchTree}, this operation boils down
-to finding a node #w# with only one child, #u#, and splicing #w# out of
-the tree by having #w.parent# adopt #u#.
+to implement, and this is true of all known implementations.  Just like the
+#remove(x)# operation in a \texttt{BinarySearchTree}, this operation
+boils down to finding a node #w# with only one child, #u#, and splicing
+#w# out of the tree by having #w.parent# adopt #u#.
 
 The problem with this is that, if #w# is black, then the black-height
 property will now be violated at #w.parent#.  We may avoid this problem,
@@ -417,7 +417,7 @@ if #u#'s parent violates the left-leaning property and, if so, fixing it.
 
 The #removeFixup(u)# method is illustrated in \figref{rb-removefix}.
 Again, the following text will be very difficult, if not impossible,
-to follow without referring constantly to \figref{rb-removefix}.
+to follow without referring to \figref{rb-removefix}.
 Each iteration of the loop in #removeFixup(u)# processes the double-black
 node #u#, based on one of four cases:
 
@@ -456,11 +456,12 @@ At this point, #w# is red and #v# is the root of the subtree with which
 we started.  We need to check if #w# causes no-red-edge property to
 be violated.  We do this by inspecting #w#'s right child, #q#.  If #q#
 is black, then #w# satisfies the no-red-edge property and we can continue
-to the next iteration with $#u#=#v#$.
+the next iteration with $#u#=#v#$.
 
-Otherwise (#q# is red), both the no-red-edge property and the left-leaning
-property are violated at #q# and #w#, respectively.  A call to
-#rotateLeft(w)# restores the left-leaning property, but the no-red-edge
+Otherwise (#q# is red), so both the no-red-edge property and the left-leaning
+properties are violated at #q# and #w#, respectively.  The left-leaning
+property is restored with a call to  
+#rotateLeft(w)#, but the no-red-edge
 property is still violated.  At this point, #q# is the left child of
 #v# and #w# is the left child of #q#, #q# and #w# are both red and #v#
 is black or double-black.  A #flipRight(v)#  makes #q# the parent of
@@ -468,8 +469,7 @@ both #v# and #w#.  Following this up by a #pushBlack(q)# makes both #v#
 and #w# black and sets the colour of #q# back to the original colour of #w#.
 
 At this point, the double-black node is has been eliminated and the
-no-red-edge and black-height properties are reestablished.  There remains
-only one possible problem: the right child of #v# may be red, in which
+no-red-edge and black-height properties are reestablished.  Only one possible problem remains: the right child of #v# may be red, in which
 case the left-leaning property would be violated.  We check this and
 perform a #flipLeft(v)# to correct it if necessary.
 \codeimport{ods/RedBlackTree.removeFixupCase2(u)}
@@ -496,8 +496,9 @@ two red children and its extra black can be pushed down with a call to
 are done.
 
 If #v#'s left child is black, then #v# violates the left-leaning property,
-and we restore this with a call to #flipLeft(v)#.  The next iteration
-of #removeFixup(u)# then continues with $#u#=#v#$.
+and we restore this with a call to #flipLeft(v)#.  We then return the
+node #v# so that the next iteration of #removeFixup(u)# then continues
+with $#u#=#v#$.
 \codeimport{ods/RedBlackTree.removeFixupCase3(u)}.
 
 Each iteration of #removeFixup(u)# takes constant time.  Cases~2 and 3
@@ -514,7 +515,7 @@ which also terminates.  Since the height of the tree is at most $2\log
 The following theorem summarizes the performance of the #RedBlackTree# data structure:
 
 \begin{thm}
-  A #RedBlackTree# implements the #SSet# interface. A #RedBlackTree#
+  A #RedBlackTree# implements the #SSet# interface and
   supports the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log
   #n#)$ worst-case time per operation.
 \end{thm}
@@ -527,7 +528,7 @@ Not included in the above theorem is the following extra bonus:
   time spent during all calls #addFixup(u)# and #removeFixup(u)#. 
 \end{thm}
 
-We will only sketch a proof of \thmref{redblack-amortized}. By comparing
+We only sketch a proof of \thmref{redblack-amortized}. By comparing
 #addFixup(u)# and #removeFixup(u)# with the algorithms for adding or
 removing a leaf in a 2-4 tree, we can convince ourselves that this
 property is inherited from a 2-4 tree.  In particular, if we can show
@@ -585,10 +586,10 @@ that any node has at most one red child.  This implies that these trees
 simulate 2-3 trees rather than 2-4 trees.  They are significantly simpler,
 though, than the #RedBlackTree# structure presented in this chapter.
 
-Sedgewick \cite{s08} describes at least two versions of left-leaning
-red-black trees.  These use recursion along with a simulation of
-top-down splitting and merging in 2-4 trees. The combination of these
-two techniques makes for particularly short and elegant code.
+Sedgewick \cite{s08} describes two versions of left-leaning red-black
+trees.  These use recursion along with a simulation of top-down splitting
+and merging in 2-4 trees. The combination of these two techniques makes
+for particularly short and elegant code.
 
 A related, and older, data structure is the AVL tree \cite{avl62}.
 AVL trees are \emph{height-balanced}: At each node $u$, the height
@@ -606,11 +607,11 @@ Arguing as in the proof of \lemref{twofour-height}, this implies
 \[
    h \le \log_\varphi #n# \approx 1.440420088\log #n# \enspace ,
 \]
-so AVL trees have smaller height than red-black trees.
-The height-balanced property can be maintained during #add(x)# and
-#remove(x)# operations by walking back up the path to the root and
-performing a rebalancing operation at each node #u# where the height of
-#u#'s left and right subtrees differ by two.  See \figref{avl-rebalance}.
+so AVL trees have smaller height than red-black trees.  The height
+balancing can be maintained during #add(x)# and #remove(x)# operations
+by walking back up the path to the root and performing a rebalancing
+operation at each node #u# where the height of #u#'s left and right
+subtrees differ by two.  See \figref{avl-rebalance}.
 
 \begin{figure}
   \begin{center}
@@ -717,7 +718,7 @@ there is no analogue of \thmref{redblack-amortized} for those structures.
 
 \begin{exc}
   Design and implement a series of experiments that compare the relative
-  performance of #find(x)#, #add(x)#, and #remove(x)# for #SkiplistSSet#,
+  performance of #find(x)#, #add(x)#, and #remove(x)# for the #SSet# implemeentations #SkiplistSSet#,
   #ScapegoatTree#, #Treap#, and #RedBlackTree#.  Be sure to include
   multiple test scenarios, including cases where the data is random,
   already sorted, is removed in random order, is removed in sorted order,

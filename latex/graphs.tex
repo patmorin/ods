@@ -35,7 +35,7 @@ Due to their ability to model so many phenomena, graphs have an enormous
 number of applications. There are many obvious examples. Computer
 networks can be modelled as graphs, with vertices corresponding to
 computers and edges corresponding to (directed) communication links
-between those computers.  Street networks can be modelled as graphs,
+between those computers.  City streets can be modelled as graphs,
 with vertices representing intersections and edges representing streets
 joining consecutive intersections.
 
@@ -94,8 +94,8 @@ The matrix entry #a[i][j]# is defined as
 The adjacency matrix for the graph in \figref{graph} is
 shown in \figref{graph-adj}.
 
-With this representation, the #addEdge(i,j)#,
-#removeEdge(i,j)#, and #hasEdge(i,j)# operations just
+In this representation, the operations #addEdge(i,j)#,
+#removeEdge(i,j)#, and #hasEdge(i,j)# just
 involve setting or reading the matrix entry #a[i][j]#:
 \codeimport{ods/AdjacencyMatrix.addEdge(i,j).removeEdge(i,j).hasEdge(i,j)}
 These operations clearly take constant time per operation.
@@ -150,7 +150,7 @@ An #AdjacencyMatrix# supports the operations
 The space used by an #AdjacencyMatrix# is  $O(#n#^2)$.
 \end{thm}
 
-Despite the high memory usage and poor performance of the #inEdges(i)#
+Despite its high memory requirements and poor performance of the #inEdges(i)#
 and #outEdges(i)# operations, an #AdjacencyMatrix# can still be useful for
 some applications.  In particular, when the graph $G$ is \emph{dense},
 i.e., it has close to $#n#^2$ edges, then a memory usage of $#n#^2$
@@ -292,7 +292,7 @@ The \emph{bread-first-search} algorithm starts at a vertex #i# and visits,
 first the neighbours of #i#, then the neighbours of the neighbours of #i#,
 then the neighbours of the neighbours of the neighbours of #i#, and so on.
 
-This algorithm is a generalization of the breadth-first-search algorithm
+This algorithm is a generalization of the breadth-first traversal algorithm
 for binary trees (\secref{bintree:traversal}), and is very similar; it
 uses a queue, #q#, that initially contains only #i#.  It then repeatedly
 extracts an element from #q# and adds its neighbours to #q#, provided
@@ -464,7 +464,7 @@ Breadth-first search seems to have been discovered independently by
 Moore \cite{m59} and Lee \cite{l61} in the contexts of maze exploration
 and circuit routing, respectively.
 
-Adjacency-list representations of graphs were first popularized by
+Adjacency-list representations of graphs were presented by
 Hopcroft and Tarjan \cite{ht73} as an alternative to the (then more
 common) adjacency-matrix representation.  This representation, as well as
 depth-first-search, played a major part in the celebrated Hopcroft-Tarjan

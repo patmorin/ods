@@ -265,14 +265,13 @@ problems are related; if #n# #add(x)# operations build a structure of
 size $#n#\cdot#w#$, then the #add(x)# operation requires at least on the
 order of #w# time (and space) per operation.
 
-The #YFastTrie# data structure simultaneously addresses both the space
-and speed issues of #XFastTrie#s.  A #YFastTrie# uses an #XFastTrie#,
-#xft#, but only stores $O(#n#/#w#)$ values in #xft#.  In this way,
-the total space used by #xft# is only $O(#n#)$.  Furthermore, only one
-out of every #w# #add(x)# or #remove(x)# operations in the #YFastTrie#
-results in an #add(x)# or #remove(x)# operation in #xft#.  By doing this,
-the average cost incurred by calls to #xft#'s #add(x)# and #remove(x)#
-operations is only constant.
+The #YFastTrie#, discussed next, simultaneously improves the space and
+speed of #XFastTrie#s.  A #YFastTrie# uses an #XFastTrie#, #xft#, but only
+stores $O(#n#/#w#)$ values in #xft#.  In this way, the total space used by
+#xft# is only $O(#n#)$.  Furthermore, only one out of every #w# #add(x)#
+or #remove(x)# operations in the #YFastTrie# results in an #add(x)# or
+#remove(x)# operation in #xft#.  By doing this, the average cost incurred
+by calls to #xft#'s #add(x)# and #remove(x)# operations is only constant.
 
 The obvious question becomes:  If #xft# only stores #n#/#w# elements,
 where do the remaining $#n#(1-1/#w#)$ elements go?  These elements move 
@@ -445,7 +444,7 @@ has since become known as the \emph{van~Emde~Boas} (or \emph{stratified})
 $2^{#w#}$, making it impractical for large integers.
 
 The #XFastTrie# and #YFastTrie# data structures were discovered by
-Willard \cite{w83}.  The #XFastTrie# structure is very closely related
+Willard \cite{w83}.  The #XFastTrie# structure is closely related
 to van~Emde~Boas trees;  for instance, the hash tables in an #XFastTrie#
 replace arrays in a van~Emde~Boas tree.  That is, instead of storing
 the hash table #t[i]#, a van~Emde~Boas tree stores an array of length

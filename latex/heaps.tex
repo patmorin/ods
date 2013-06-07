@@ -52,8 +52,7 @@ In a #BinaryHeap#, the #n# elements are stored in an array #a#:
 \codeimport{ods/BinaryHeap.a.n}
 
 Implementing the #add(x)# operation is fairly straightforward.  As with
-all array-based structures, we first check to see if #a# is full (because
-$#a.length#=#n#$) and, if so, we grow #a#.  Next, we place #x# at location
+all array-based structures, we first check to see if #a# is full (by checking if $#a.length#=#n#$) and, if so, we grow #a#.  Next, we place #x# at location
 #a[n]# and increment #n#.  At this point, all that remains is to ensure
 that we maintain the heap property.  We do this by repeatedly swapping
 #x# with its parent until #x# is no longer smaller than its parent.

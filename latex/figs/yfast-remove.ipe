@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20120124143640" modified="D:20120126135430"/>
-<preamble>\usepackage{ulem}\usepackage[math]{iwona}\SetMathAlphabet{\mathtt}{iwona}{OT1}{\ttdefault}{m}{n}\usepackage[T1]{fontenc}</preamble>
+<ipe version="70005" creator="Ipe 7.1.1">
+<info created="D:20120124143640" modified="D:20130607083858"/>
+<preamble>\usepackage{kpfonts}
+\usepackage{ulem}\fontsize{10pt}{10pt}\selectfont</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -235,7 +236,7 @@ h
 <layer name="beta"/>
 <layer name="gamma"/>
 <view layers="alpha" active="alpha"/>
-<text layer="alpha" matrix="1 0 0 1 -24.4668 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$0$</text>
+<text layer="alpha" matrix="1 0 0 1 -24.4668 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$0$</text>
 <path stroke="gray">
 192 208 m
 192 192 l
@@ -243,7 +244,7 @@ h
 208 208 l
 h
 </path>
-<text matrix="1 0 0 1 -8.4668 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$1$</text>
+<text matrix="1 0 0 1 -8.4668 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$1$</text>
 <path matrix="1 0 0 1 16 0" stroke="gray">
 192 208 m
 192 192 l
@@ -251,7 +252,7 @@ h
 208 208 l
 h
 </path>
-<text matrix="1 0 0 1 7.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$2$</text>
+<text matrix="1 0 0 1 7.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$2$</text>
 <path matrix="1 0 0 1 32 0" stroke="gray">
 192 208 m
 192 192 l
@@ -259,8 +260,8 @@ h
 208 208 l
 h
 </path>
-<text matrix="1 0 0 1 23.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$3$</text>
-<text matrix="1 0 0 1 39.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$4$</text>
+<text matrix="1 0 0 1 23.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$3$</text>
+<text matrix="1 0 0 1 39.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.804" depth="0.08" halign="center" valign="baseline">$4$</text>
 <path matrix="1 0 0 1 64 0" stroke="gray">
 192 208 m
 192 192 l
@@ -268,7 +269,7 @@ h
 208 208 l
 h
 </path>
-<text matrix="1 0 0 1 55.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$5$</text>
+<text matrix="1 0 0 1 55.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$5$</text>
 <path matrix="1 0 0 1 80 0" stroke="gray">
 192 208 m
 192 192 l
@@ -276,8 +277,8 @@ h
 208 208 l
 h
 </path>
-<text matrix="1 0 0 1 71.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$6$</text>
-<text matrix="1 0 0 1 87.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$7$</text>
+<text matrix="1 0 0 1 71.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$6$</text>
+<text matrix="1 0 0 1 87.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$7$</text>
 <path matrix="1 0 0 1 112 0" stroke="gray" dash="dashed">
 192 208 m
 192 192 l
@@ -285,7 +286,7 @@ h
 208 208 l
 h
 </path>
-<text matrix="1 0 0 1 103.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$8$</text>
+<text matrix="1 0 0 1 103.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$8$</text>
 <path matrix="1 0 0 1 128 0" stroke="gray">
 192 208 m
 192 192 l
@@ -293,8 +294,8 @@ h
 208 208 l
 h
 </path>
-<text matrix="1 0 0 1 119.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$9$</text>
-<text matrix="1 0 0 1 135.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">$10$</text>
+<text matrix="1 0 0 1 119.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.604" depth="0.23" halign="center" valign="baseline">$9$</text>
+<text matrix="1 0 0 1 135.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$10$</text>
 <path matrix="1 0 0 1 160 0" stroke="gray">
 192 208 m
 192 192 l
@@ -302,7 +303,7 @@ h
 208 208 l
 h
 </path>
-<text matrix="1 0 0 1 151.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">$11$</text>
+<text matrix="1 0 0 1 151.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$11$</text>
 <path matrix="1 0 0 1 176 0" stroke="gray">
 192 208 m
 192 192 l
@@ -310,9 +311,9 @@ h
 208 208 l
 h
 </path>
-<text matrix="1 0 0 1 167.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">$12$</text>
-<text matrix="1 0 0 1 183.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">$13$</text>
-<text matrix="1 0 0 1 199.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">$14$</text>
+<text matrix="1 0 0 1 167.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$12$</text>
+<text matrix="1 0 0 1 183.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$13$</text>
+<text matrix="1 0 0 1 199.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="10.859" height="6.804" depth="0.08" halign="center" valign="baseline">$14$</text>
 <path matrix="1 0 0 1 224 0" stroke="gray">
 192 208 m
 192 192 l
@@ -320,7 +321,7 @@ h
 208 208 l
 h
 </path>
-<text matrix="1 0 0 1 215.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">$15$</text>
+<text matrix="1 0 0 1 215.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$15$</text>
 <path matrix="1 0 0 1 240 0" stroke="black">
 192 208 m
 192 192 l
@@ -511,21 +512,21 @@ h
 320 320 m
 256 304 l
 </path>
-<text matrix="1 0 0 1 31.533 53.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="24.353" height="6.42" depth="0" halign="center" valign="baseline">$0{\star\star\star}$</text>
-<text matrix="1 0 0 1 159.533 53.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="24.353" height="6.42" depth="0" halign="center" valign="baseline">$1{\star\star\star}$</text>
-<text matrix="1 0 0 1 95.533 85.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="28.781" height="4.635" depth="0" halign="center" valign="baseline">${}\star\star\star\star$</text>
-<text matrix="1 0 0 1 -0.467 21.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$00{\star\star}$</text>
-<text matrix="1 0 0 1 63.533 21.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$01{\star\star}$</text>
-<text matrix="1 0 0 1 127.533 21.005" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$10{\star\star}$</text>
-<text matrix="1 0 0 1 191.533 21.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$11{\star\star}$</text>
-<text matrix="1 0 0 1 -16.467 -10.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$000{\star}$</text>
-<text matrix="1 0 0 1 15.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$001{\star}$</text>
-<text matrix="1 0 0 1 47.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$010{\star}$</text>
-<text matrix="1 0 0 1 79.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$011{\star}$</text>
-<text matrix="1 0 0 1 111.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$100{\star}$</text>
-<text matrix="1 0 0 1 143.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$101{\star}$</text>
-<text matrix="1 0 0 1 175.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$110{\star}$</text>
-<text matrix="1 0 0 1 207.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="19.925" height="6.42" depth="0" halign="center" valign="baseline">$111{\star}$</text>
+<text matrix="1 0 0 1 31.533 53.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="26.115" height="6.6" depth="0.08" halign="center" valign="baseline">$0{\star\star\star}$</text>
+<text matrix="1 0 0 1 159.533 53.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="26.115" height="6.6" depth="0.08" halign="center" valign="baseline">$1{\star\star\star}$</text>
+<text matrix="1 0 0 1 95.533 85.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="29.795" height="5.885" depth="0.07" halign="center" valign="baseline">${}\star\star\star\star$</text>
+<text matrix="1 0 0 1 -0.467 21.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="22.436" height="6.6" depth="0.08" halign="center" valign="baseline">$00{\star\star}$</text>
+<text matrix="1 0 0 1 63.533 21.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="22.436" height="6.6" depth="0.08" halign="center" valign="baseline">$01{\star\star}$</text>
+<text matrix="1 0 0 1 127.533 21.005" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="22.436" height="6.6" depth="0.08" halign="center" valign="baseline">$10{\star\star}$</text>
+<text matrix="1 0 0 1 191.533 21.005" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="22.436" height="6.6" depth="0.08" halign="center" valign="baseline">$11{\star\star}$</text>
+<text matrix="1 0 0 1 -16.467 -10.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="22.077" height="6.6" depth="0.08" halign="center" valign="baseline">$000{\star}$</text>
+<text matrix="1 0 0 1 15.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="22.077" height="6.6" depth="0.08" halign="center" valign="baseline">$001{\star}$</text>
+<text matrix="1 0 0 1 47.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="22.077" height="6.6" depth="0.08" halign="center" valign="baseline">$010{\star}$</text>
+<text matrix="1 0 0 1 79.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="22.077" height="6.6" depth="0.08" halign="center" valign="baseline">$011{\star}$</text>
+<text matrix="1 0 0 1 111.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="22.077" height="6.6" depth="0.08" halign="center" valign="baseline">$100{\star}$</text>
+<text matrix="1 0 0 1 143.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="22.077" height="6.6" depth="0.08" halign="center" valign="baseline">$101{\star}$</text>
+<text matrix="1 0 0 1 175.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="22.077" height="6.6" depth="0.08" halign="center" valign="baseline">$110{\star}$</text>
+<text matrix="1 0 0 1 207.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="22.077" height="6.6" depth="0.08" halign="center" valign="baseline">$111{\star}$</text>
 <path matrix="1 0 0 1 192 0" stroke="gray">
 192 208 m
 192 192 l
@@ -618,7 +619,7 @@ h
 256 128 l
 h
 </path>
-<text matrix="1 0 0 1 -0.467 -106.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="31.548" height="6.428" depth="1.93" halign="center" valign="baseline">0,{\color{red}\sout{1}},2,3
+<text matrix="1 0 0 1 -0.467 -106.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="32.03" height="6.595" depth="1.4" halign="center" valign="baseline">0,{\color{red}\sout{1}},2,3
 </text>
 <path matrix="1.25 0 0 1 136 0" stroke="black">
 224 160 m
@@ -626,7 +627,7 @@ h
 256 128 l
 h
 </path>
-<text matrix="1 0 0 1 191.533 -106.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="48.153" height="6.428" depth="1.93" halign="center" valign="baseline">$8,10,11,13$</text>
+<text matrix="1 0 0 1 191.533 -106.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="48.651" height="6.6" depth="1.31" halign="center" valign="baseline">$8,10,11,13$</text>
 <path stroke="black" arrow="normal/small">
 247.882 192 m
 247.798 175.853
@@ -650,14 +651,14 @@ h
 256 128 l
 h
 </path>
-<text matrix="0.75 0 0 1 111.65 -106.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="23.8" height="6.428" depth="1.93" halign="center" valign="baseline">$4,5,6$</text>
+<text matrix="0.75 0 0 1 111.65 -106.995" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="23.384" height="6.805" depth="1.31" halign="center" valign="baseline">$4,5,6$</text>
 <path matrix="0.75 0 0 1 160 0" stroke="gray">
 224 160 m
 192 128 l
 256 128 l
 h
 </path>
-<text matrix="0.75 0 0 1 159.65 -106.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="14.39" height="6.428" depth="1.93" halign="center" valign="baseline">$8,9$</text>
+<text matrix="0.75 0 0 1 159.65 -106.995" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="14.407" height="6.6" depth="1.31" halign="center" valign="baseline">$8,9$</text>
 <path stroke="black" rarrow="normal/small">
 280 160 m
 279.681 176.257

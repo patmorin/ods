@@ -19,8 +19,8 @@ $#a#[0],\ldots,#a#[#m#-1]$ get stored recursively in the left subtree
 and $#a#[#m#+1],\ldots,#a#[#a.length#-1]$ get stored recursively in the
 right subtree.
 \codeimport{ods/ScapegoatTree.rebuild(u).packIntoArray(u,a,i).buildBalanced(a,i,ns)}
-A call to #rebuild(u)# takes $O(#size(u)#)$ time.  The subtree built by
-#rebuild(u)# has minimum height; there is no tree of smaller height that
+A call to #rebuild(u)# takes $O(#size(u)#)$ time.  The resulting subtree
+has minimum height; there is no tree of smaller height that
 has #size(u)# nodes.
 
 
@@ -307,10 +307,10 @@ and related structures based on partial rebuilding may work.  An example of such
 \end{exc}
 
 \begin{exc}
-  Illustrate what happens when we start with an empty #ScapegoatTree#
-  and add the sequence $1,5,2,4,3$ and show where the credits described
-  in the proof of \lemref{scapegoat-amortized} go, and how they are used
-  during this sequence of additions.
+  Illustrate what happens when the sequence $1,5,2,4,3$ is added to an
+  empty #ScapegoatTree#, and show where the credits described in the
+  proof of \lemref{scapegoat-amortized} go, and how they are used during
+  this sequence of additions.
 \end{exc}
 
 \begin{exc}\exclabel{scapegoat-nlogn}
@@ -336,7 +336,7 @@ and related structures based on partial rebuilding may work.  An example of such
   Modify the #add(x)# method of the #ScapegoatTree# so that it does not
   waste any time recomputing the sizes of subtrees that have already
   been computed.  This is possible because, by the time the method
-  wants to compute #size(w)#, it has already computed #size(w.left)#
+  wants to compute #size(w)#, it has already computed one of #size(w.left)#
   or #size(w.right)#.  Compare the performance of your modified
   implementation with the implementation given here.
 \end{exc}

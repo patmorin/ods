@@ -1,7 +1,9 @@
 %\usepackage{kpfonts}
 
 
-% AU Press page size 6x9in with 56pt margins all around
+
+% AU Press page size 6x9in with 56pt margins top, left, right
+%    94.08pt margin bottom
 \setlength{\paperwidth}{6in}
 \setlength{\paperheight}{9in}
 % Left and right margins
@@ -19,17 +21,19 @@
 \setlength{\headsep}{14pt}
 \addtolength{\topmargin}{-\headsep}
 \addtolength{\topmargin}{-\headheight}
-\setlength{\textheight}{\paperheight}
+\setlength{\textheight}{\paperheight} 
 \addtolength{\textheight}{-94.08pt}
 \addtolength{\textheight}{-\topmargin}
 \addtolength{\textheight}{-\headheight}
 \addtolength{\textheight}{-\headsep}
+%\setlength{\footheight}{12pt}
 \setlength{\footskip}{28pt}
+\addtolength{\footskip}{14pt}
 
 
 
 %\usepackage[total={6in,9in},top=56pt, left=56pt, includefoot]{geometry}
-\flushbottom
+%\flushbottom
 
 
 %\renewcommand{\baselinestretch}{1.4}
@@ -59,13 +63,26 @@
 \renewcommand{\footrulewidth}{0pt}
 \fancyhead{}   % clear all headers
 \fancyfoot{}   % clear all footers
+\fancyfoot[CE,CO]{\small\thepage}
 \fancyhead[LE,RO]{\small\thepage}  % page numbers on the outside
-\fancyhead[LO]{\small\textsection\thesection]} % section number on the inside
-\fancyhead[RE]{\small[\textsection\thesection} % section number on the inside
+\fancyhead[RO]{\small\textsection\thesection} % section number on the inside
+\fancyhead[LE]{\small\textsection\thesection} % section number on the inside
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}} 
 \renewcommand{\sectionmark}[1]{\markright{#1}{}} 
 \fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
 \fancyhead[CO]{\small\nouppercase{\rightmark}} % section title, right center
+
+
+\fancypagestyle{plain}{% for the first page of chapters
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyhf{}%
+  \fancyfoot[C]{\small\thepage}%
+}
+
+
+% small fonts for captions
+\usepackage[font=small]{caption}
+
 %\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
 %\renewcommand{\chaptermark}[1]{% 
 %  \markboth{\thechapter.\ #1}{}} 

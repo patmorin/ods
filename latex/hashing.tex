@@ -55,10 +55,10 @@ result applies: The cost of growing is only constant when amortized
 over a sequence of insertions (see~\lemref{arraystack-amortized} on
 page~\pageref{lem:arraystack-amortized}).
 
-Besides growing, the only other work done when adding #x# to a
-#ChainedHashTable# involves appending #x# to the list #t[hash(x)]#.  For any of
-the list implementations described in Chapters~\ref{chap:arrays} or
-\ref{chap:linkedlists}, this takes only constant time.
+Besides growing, the only other work done when adding a new value #x# to a
+#ChainedHashTable# involves appending #x# to the list #t[hash(x)]#.  For
+any of the list implementations described in Chapters~\ref{chap:arrays}
+or \ref{chap:linkedlists}, this takes only constant time.
 
 To remove an element, #x#, from the hash table, we iterate over the list
 #t[hash(x)]# until we find #x# so that we can remove it:
@@ -282,7 +282,7 @@ random bits followed by a 1.
 
 \subsection{Summary}
 
-The following theorem summarizes the performance of the #ChainedHashTable#
+The following theorem summarizes the performance of a #ChainedHashTable#
 data structure:
 
 \begin{thm}\thmlabel{hashtable}
@@ -397,9 +397,9 @@ method, called tabulation hashing, that produces a hash function that is
 into the positions of #t# are taken modulo #t.length#, so that #t[i]#
 is really a shorthand for $#t#[#i#\bmod#t.length#]$.
 
-We say that a \emph{run of length $k$ that starts at #i#} occurs
-when $#t[i]#, #t[i+1]#,\ldots,#t#[#i#+k-1]$ are all non-#null# and
-$#t#[#i#-1]=#t#[#i#+k]=#null#$.  The number of non-#null# elements of
+We say that a \emph{run of length $k$ that starts at #i#} occurs when all
+the table entries $#t[i]#, #t[i+1]#,\ldots,#t#[#i#+k-1]$ are non-#null#
+and $#t#[#i#-1]=#t#[#i#+k]=#null#$.  The number of non-#null# elements of
 #t# is exactly #q# and the #add(x)# method ensures that, at all times,
 $#q#\le#t.length#/2$.  There are #q# elements $#x#_1,\ldots,#x#_{#q#}$
 that have been inserted into #t# since the last #rebuild()# operation.
@@ -894,8 +894,8 @@ hash codes.
 \end{exc}
 
 \begin{exc}
-  Consider the multiplicative hashing scheme in \secref{multihash}, and
-  suppose $#n#=2^{#d#}$ and $#d#\le #w#/2$.
+  Consider the hashing scheme in \secref{multihash}, and suppose
+  $#n#=2^{#d#}$ and $#d#\le #w#/2$.
   \begin{enumerate}
     \item Show that, for any choice
       of the muliplier, #z#, there exists #n# values that all have
@@ -979,10 +979,10 @@ hash codes.
 \end{exc}
 
 \begin{exc}
-  Find some commonly-used hash table implementation (\javaonly{The Java
+  Find some commonly used hash table implementation such as the (\javaonly{Java
   Collection Framework #HashMap#}\cpponly{The C++ STL #unordered\_map#}
   or the #HashTable# or #LinearHashTable# implementations in this book,
-  for example, and design a program that stores integers in this data
+  and design a program that stores integers in this data
   structure so that there are integers, #x#, such that #find(x)# takes
   linear time.  That is, find a set of #n# integers for which there are
   $c#n#$ elements that hash to the same table location.

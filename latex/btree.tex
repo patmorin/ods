@@ -88,9 +88,9 @@ a constant number of blocks and a recursion stack of height $O(\log_B
 #n#)$.  In most cases, the $O(B)$ term dominates the memory requirement.
 For example, even with the relatively small value $B=32$, $B\ge \log_B
 #n#$ for all $#n#\le 2^{160}$.  In decimal, $B\ge \log_B #n#$ for any
-$
-#n# \le 1\,461\,501\,637\,330\,902\,918\,203\,684\,832\,716\,283\,019\,655\,932\,542\,976
-$.
+\[
+#n# \le 1\,461\,501\,637\,330\,902\,918\,203\,684\,832\,716\,283\,019\,655\,932\,542\,976 \enspace 
+. \]
 
 \section{The Block Store}
 
@@ -244,8 +244,7 @@ $#a[i]#>#x#$ or $#a[i]#=#null#$.
 \end{figure}
 \javaimport{ods/BTree.findIt(a,x)}
 The #findIt(a,x)# method uses a binary search that halves the search
-space at each step, so it runs in $O(\log(#a.length#))$ time.  In this
-case $#a.length#=2B$, so #findIt(a,x)# runs in $O(\log B)$ time.
+space at each step, so it runs in $O(\log(#a.length#))$ time.  In our setting, $#a.length#=2B$, so #findIt(a,x)# runs in $O(\log B)$ time.
 
 We can analyze the running time of a $B$-tree #find(x)# operation both
 in the usual word-RAM model (where every instruction counts) and in the
@@ -290,7 +289,7 @@ accesses from 3 to $B+4$ and would make $B$-trees much less efficient for
 large values of $B$.
 
 \begin{figure}
-   \centering{\begin{tabular}{l}
+   \centering{\begin{tabular}{@{}l@{}}
      \includegraphics[width=\ScaleIfNeeded]{figs/btree-split-1} \\[2ex]
      \multicolumn{1}{c}{#u.split()#} \\ 
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
@@ -314,7 +313,7 @@ process stops.  In the latter case, a new root is created whose two
 children become the nodes obtained when the original root was split.
 
 \begin{figure}
-   \centering{\begin{tabular}{l}
+   \centering{\begin{tabular}{@{}l@{}}
      \includegraphics[width=\ScaleIfNeeded]{figs/btree-add-1} \\[2ex]
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
      \includegraphics[width=\ScaleIfNeeded]{figs/btree-add-2} \\[2ex]
@@ -341,18 +340,18 @@ child, $#u#'$, of #u#.  The result of this recursive call is normally
 was created because $#u#'$ was split.  In this case, #u# adopts #w#
 and takes its first key, completing the splitting operation on $#u#'$.
 
-After #x# has been added (either to #u# or to a descendant of #u#),
+After the value #x# has been added (either to #u# or to a descendant of #u#),
 the #addRecursive(x,ui)# method checks to see if #u# is storing too many
 (more than $2B-1$) keys.  If so, then #u# needs to be \emph{split}
 with a call to the #u.split()# method.  The result of calling #u.split()#
 is a new node that is used as the return value for #addRecursive(x,ui)#.
 \javaimport{ods/BTree.addRecursive(x,ui)}
 
-The #addRecursive(x,ui)# method is just a helper for the #add(x)#
-method, which calls #addRecursive(x,ri)# to insert #x# into the root of
-the $B$-tree.  If #addRecursive(x,ri)# causes the root to split, then
-a new root is created that takes as its children both the old root and
-the new node created by the splitting of the old root.
+The #addRecursive(x,ui)# method is a helper for the #add(x)# method, which
+calls #addRecursive(x,ri)# to insert #x# into the root of the $B$-tree.
+If #addRecursive(x,ri)# causes the root to split, then a new root is
+created that takes as its children both the old root and the new node
+created by the splitting of the old root.
 \javaimport{ods/BTree.add(x)}
 
 The #add(x)# method and its helper, #addRecursive(x,ui)#, can be analyzed
@@ -361,8 +360,8 @@ in two phases:
 \begin{description}
   \item[Downward phase:]
     During the downward phase of the recursion, before #x# has been added,
-    they access a sequence of nodes and call #findIt(a,x)# on each node.
-    Like the #find(x)# method, this takes $O(\log_B #n#)$ time in the
+    they access a sequence of #BTree# nodes and call #findIt(a,x)# on each node.
+    As with the #find(x)# method, this takes $O(\log_B #n#)$ time in the
     external memory model and $O(\log #n#)$ time in the word-RAM model.
   
   \item[Upward phase:]
@@ -396,7 +395,7 @@ may leave #u# with less than $B-1$  keys;  this situation is called
 an \emph{underflow}.
 
 \begin{figure}
-   \centering{\begin{tabular}{l}
+   \centering{\begin{tabular}{@{}l@{}}
      \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-full-1} \\[2ex]
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
      \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-full-2} \\[2ex]
@@ -433,7 +432,7 @@ is then used to replace #x# in #u.keys[i]#.  This process is illustrated
 in \figref{btree-remove}.
 
 \begin{figure}
-   \centering{\begin{tabular}{l}
+   \centering{\begin{tabular}{@{}l@{}}
      \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-1} \\[2ex]
      \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
      \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-2} 
@@ -448,7 +447,7 @@ The #removeRecursive(x,ui)# method is a recursive implementation of the
 preceding algorithm:
 \javaimport{ods/BTree.removeRecursive(x,ui).removeSmallest(ui)}
 
-Note that, after recursively removing #x# from the #i#th child of #u#,
+Note that, after recursively removing the value #x# from the #i#th child of #u#,
 #removeRecursive(x,ui)# needs to ensure that this child still has at
 least $B-1$ keys.  In the preceding code, this is done using a
 method called #checkUnderflow(x,i)#, which checks for and corrects an
@@ -481,7 +480,7 @@ also children), for #w#.  There are two ways to do this:
   \figref{btree-borrow}.
 
   \begin{figure}
-      \centering{\begin{tabular}{l}
+      \centering{\begin{tabular}{@{}l@{}}
        \includegraphics[width=\ScaleIfNeeded]{figs/btree-borrow-1} \\[2ex]
        \multicolumn{1}{c}{#shiftRL(v,w)#} \\ 
        \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
@@ -502,7 +501,7 @@ also children), for #w#.  There are two ways to do this:
   has one less child and therefore needs to give up one of its keys.)
   
   \begin{figure}
-     \centering{\begin{tabular}{l}
+     \centering{\begin{tabular}{@{}l@{}}
        \includegraphics[width=\ScaleIfNeeded]{figs/btree-merge-1} \\[2ex]
        \multicolumn{1}{c}{#merge(v,w)#} \\ 
        \multicolumn{1}{c}{$\Downarrow$} \\[2ex]
@@ -715,7 +714,7 @@ access to retrieve a leaf.
     \item Show that the implementation of the #add(x)# and #remove(x)#
       methods given in this chapter use an internal memory
       proportional to $B\log_B #n#$.
-    \item Describe how these methods could be modified to reduce their memory
+    \item Describe how these methods could be modified in order to reduce their memory
       consumption to $O(B + \log_B #n#)$.
   \end{enumerate}
 \end{exc}
@@ -776,7 +775,7 @@ access to retrieve a leaf.
   a standard $B$-tree that stores the largest value from each leaf but
   the last.
   \begin{enumerate}
-    \item Explain how to efficiently implement #add(x)#, #remove(x)#,
+    \item Describe fast implementations of #add(x)#, #remove(x)#,
       and #find(x)# in a $B+$-tree.
     \item Explain how to efficiently implement the #findRange(x,y)# method,
       that reports all values

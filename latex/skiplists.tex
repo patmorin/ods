@@ -4,9 +4,9 @@
 
 In this chapter, we discuss a beautiful data structure: the skiplist,
 which has a variety of applications.  Using a skiplist we can implement a
-#List# that has fast implementations of #get(i)#, #set(i,x)#, #add(i,x)#,
-and #remove(i)#. We can also implement an #SSet# in which all operations
-run in $O(\log #n#)$ expected time.
+#List# that has $O(\log n)$ time implementations of #get(i)#, #set(i,x)#,
+#add(i,x)#, and #remove(i)#. We can also implement an #SSet# in which
+all operations run in $O(\log #n#)$ expected time.
 %Finally, a skiplist can be used to implement a #Rope# in which all
 %operations run in $O(\log #n#)$ time.
 
@@ -21,7 +21,7 @@ skiplist are simulated using a pseudo-random number (or bit) generator.
 \section{The Basic Structure}
 
 Conceptually, a skiplist is a sequence of singly-linked lists
-$L_0,\ldots,L_h$, where each $L_r$ contains a subset of the items
+$L_0,\ldots,L_h$. Each list $L_r$ contains a subset of the items
 in $L_{r-1}$.  We start with the input list $L_0$ that contains #n#
 items and construct $L_1$ from $L_0$, $L_2$ from $L_1$, and so on.
 The items in $L_r$ are obtained by tossing a coin for each element, #x#,
@@ -167,7 +167,7 @@ The following theorem summarizes the performance of skiplists when used to
 implement sorted sets:
 
 \begin{thm}\thmlabel{skiplist}
-A #SkiplistSSet# implements the #SSet# interface. A #SkiplistSSet# supports
+#SkiplistSSet# implements the #SSet# interface. A #SkiplistSSet# supports
 the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log #n#)$
 expected time per operation.
 \end{thm}
@@ -218,7 +218,7 @@ finding the #i#th node in $L_0$, these operations run in
 $O(\log #n#)$ time.
 
 Adding an element to a #SkiplistList# at a position, #i#, is fairly
-straightforward.  Unlike in a #SkiplistSSet#, we are sure that a new
+simple.  Unlike in a #SkiplistSSet#, we are sure that a new
 node will actually be added, so we can do the addition at the same time
 as we search for the new node's location. We first pick the height, #k#,
 of the newly inserted node, #w#, and then follow the search path for #i#.
@@ -503,8 +503,8 @@ operating system kernel's process management structures \cite{hpux}.
   based on a coin toss, we promote it with some probability $p$, $0 <
   p < 1$.
   \begin{enumerate}
-   \item Show that the expected length of a search path is
-     at most $(1/p)\log_{1/p} #n# + O(1)$.
+   \item Show that, with this modification, the expected length of a
+     search path is at most $(1/p)\log_{1/p} #n# + O(1)$.
    \item What is the value of $p$ that minimizes the preceding expression?
    \item What is the expected height of the skiplist? 
    \item What is the expected number of nodes in the skiplist?
@@ -575,7 +575,7 @@ operating system kernel's process management structures \cite{hpux}.
 \end{exc}
 
 \begin{exc}
-  Using the ideas from the space-efficient linked-list, #SEList#, design
+  Using the ideas from the space-efficient list, #SEList#, design
   and implement a space-efficient #SSet#, #SESSet#.  To do this, store the
   data, in order, in an #SEList#, and store the blocks of this #SEList#
   in an #SSet#. If the original #SSet# implementation uses $O(#n#)$

@@ -5,8 +5,12 @@ In this chapter, we will study implementations of the #List# and #Queue#
 interfaces where the underlying data is stored in an array, called the
 \emph{backing array}.  The following table summarizes the running times
 of operations for the data structures presented in this chapter:
-
+\newlength{\tabsep}
+\setlength{\tabsep}{\itemsep}
+\addtolength{\tabsep}{\parsep}
+\addtolength{\tabsep}{-2pt}
 \begin{center}
+\vspace{\tabsep}
 \begin{tabular}{|l|l|l|} \hline
  & #get(i)#/#set(i,x)# & #add(i,x)#/#remove(i)# \\ \hline
 #ArrayStack# & $O(1)$ & $O(#n#-#i#)$ \\
@@ -14,8 +18,8 @@ of operations for the data structures presented in this chapter:
 #DualArrayDeque# & $O(1)$ & $O(\min\{#i#,#n#-#i#\})$ \\
 #RootishArrayStack# & $O(1)$ & $O(#n#-#i#)$ \\ \hline
 \end{tabular}
+\vspace{\tabsep}
 \end{center}
-
 Data structures that work by storing data in a single array have many
 advantages and limitations in common:
 \begin{itemize}
@@ -112,7 +116,7 @@ Implementing the #remove(i)# operation is similar.  We shift the elements
 $#a[i+1]#,\ldots,#a[n-1]#$ left by one position (overwriting #a[i]#) and
 decrease the value of #n#.  After doing this, we check if #n# is getting
 much smaller than #a.length# by checking if $#a.length# \ge 3#n#$. If so,
-we call #resize()# to reduce the size of #a#.
+then we call #resize()# to reduce the size of #a#.
 
 \codeimport{ods/ArrayStack.remove(i)}
 % TODO: Add shifting figure
@@ -178,7 +182,7 @@ In particular, we will show:
   the previous call to #resize()#.
   % TODO: Add figure
   
-  The second case to consider is when #resize()# is being called by
+  The second case occurs when #resize()# is being called by
   #remove(i)# because $#a.length# \ge 3#n#=3#n#_i$.  Again, after the
   previous call to #resize()# the number of elements stored in #a# was
   at least $#a.length/2#-1$.\footnote{The ${}-1$ in this formula accounts for
@@ -207,9 +211,9 @@ The following theorem summarizes the performance of an #ArrayStack#:
     \item #get(i)# and #set(i,x)# in $O(1)$ time per operation; and
     \item #add(i,x)# and #remove(i)# in $O(1+#n#-#i#)$ time per operation.
   \end{itemize}
-  Furthermore, beginning with an empty #ArrayStack#, any sequence of $m$
-  #add(i,x)# and #remove(i)# operations results in a total of $O(m)$
-  time spent during all calls to #resize()#.
+  Furthermore, beginning with an empty #ArrayStack# and performing any
+  sequence of $m$ #add(i,x)# and #remove(i)# operations results in a
+  total of $O(m)$ time spent during all calls to #resize()#.
 \end{thm}
 
 The #ArrayStack# is an efficient way to implement a #Stack#.
@@ -234,7 +238,7 @@ These functions are usually highly optimized and may even use special
 machine instructions that can do this copying much faster than we could by
 using a #for# loop.  Although using these functions does not asymptotically
 decrease the running times, it can still be a worthwhile optimization.
-In the \javaonly{Java}\cpponly{C++} implementations here, the use of \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}
+In the \lang\ implementations here, the use of the native \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}
 resulted in speedups of a factor between 2 and 3, depending on the types of
 operations performed.  Your mileage may vary.
 
@@ -293,8 +297,8 @@ $0,\ldots,#a.length-1#$.  Using modular arithmetic we can store the
 queue elements at array locations
 \[ #a[j%a.length]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]#
 \enspace. \]
-This treats #a# like a \emph{circular array} in which array indices
-exceeding $#a.length#-1$ ``wrap around'' to the beginning of
+This treats the array #a# like a \emph{circular array} in which array indices
+larger than $#a.length#-1$ ``wrap around'' to the beginning of
 the array.
 % TODO: figure
 
@@ -406,11 +410,11 @@ has to shift more than $\min\{ #i#, #n#-#i# \}$ elements.  Thus, the running
 time of the #add(i,x)# operation (ignoring the cost of a #resize()#
 operation) is $O(1+\min\{#i#,#n#-#i#\})$.
 
-The #remove(i)# operation is similar.  It either shifts elements
-$#a[0]#,\ldots,#a[i-1]#$ right by one position or shifts the elements
-$#a[i+1]#,\ldots,#a[n-1]#$ left by one position depending on whether
-$#i#<#n#/2$.  Again, this means that #remove(i)# never spends more than 
-$O(1+\min\{#i#,#n#-#i#\})$ time to shift elements.
+The implementation of the #remove(i)# operation is similar.  It either
+shifts elements $#a[0]#,\ldots,#a[i-1]#$ right by one position or shifts
+the elements $#a[i+1]#,\ldots,#a[n-1]#$ left by one position depending
+on whether $#i#<#n#/2$.  Again, this means that #remove(i)# never spends
+more than $O(1+\min\{#i#,#n#-#i#\})$ time to shift elements.
 
 \codeimport{ods/ArrayDeque.remove(i)}
 
@@ -426,15 +430,15 @@ data structure:
     \item #add(i,x)# and #remove(i)# in $O(1+\min\{#i#,#n#-#i#\})$ time
           per operation.
   \end{itemize}
-  Furthermore, beginning with an empty #ArrayDeque#, any sequence of $m$
-  #add(i,x)# and #remove(i)# operations results in a total of $O(m)$
-  time spent during all calls to #resize()#.
+  Furthermore, beginning with an empty #ArrayDeque#, performing any
+  sequence of $m$ #add(i,x)# and #remove(i)# operations results in a
+  total of $O(m)$ time spent during all calls to #resize()#.
 \end{thm}
 
 \section{#DualArrayDeque#: Building a Deque from Two Stacks}
 \seclabel{dualarraydeque}
 
-Next, we present another data structure, the #DualArrayDeque# that
+Next, we present a data structure, the #DualArrayDeque# that
 achieves the same performance bounds as an #ArrayDeque# by using
 two #ArrayStack#s.  Although the asymptotic performance of the
 #DualArrayDeque# is no better than that of the #ArrayDeque#, it is
@@ -456,10 +460,10 @@ of elements it contains.
 
 \codeimport{ods/DualArrayDeque.size()}
 
-The #front# #ArrayStack# stores the list elements that have indices
-$0,\ldots,#front.size()#-1$, but stores them in reverse order.
+The #front# #ArrayStack# stores the list elements that whose indices
+are $0,\ldots,#front.size()#-1$, but stores them in reverse order.
 The #back# #ArrayStack# contains list elements with indices
-$#front.size()#,\ldots,#size()#-1$ in the normal order.  In this way,
+in $#front.size()#,\ldots,#size()#-1$ in the normal order.  In this way,
 #get(i)# and #set(i,x)# translate into appropriate calls to #get(i)#
 or #set(i,x)# on either #front# or #back#, which take $O(1)$ time per operation.
 
@@ -495,17 +499,16 @@ sufficient to know that #balance()# ensures that, unless $#size()#<2$,
 of 3.  In particular, $3\cdot#front.size()# \ge #back.size()#$ and
 $3\cdot#back.size()# \ge #front.size()#$.
 
-Next we analyze the cost of #add(i,x)#, ignoring the cost of the
-#balance()# operation.  If $#i#<#front.size()#$, then #add(i,x)# becomes 
-$#front.add(front.size()-i-1,x)#$.
-Since #front# is an #ArrayStack#, the cost of this is 
+Next we analyze the cost of #add(i,x)#, ignoring the cost of calls to
+#balance()#. If $#i#<#front.size()#$, then #add(i,x)# gets implemented
+by the call to $#front.add(front.size()-i-1,x)#$.  Since #front# is an
+#ArrayStack#, the cost of this is
 \begin{equation}
   O(#front.size()#-(#front.size()#-#i#-1)+1) = O(#i#+1) \enspace .
   \eqlabel{das-front}
 \end{equation}
-On the other hand, if $#i#\ge#front.size()#$, then #add(i,x)# becomes
-$#back.add(i-front.size(),x)#$.
-The cost of this is 
+On the other hand, if $#i#\ge#front.size()#$, then #add(i,x)# gets
+implemented as $#back.add(i-front.size(),x)#$.  The cost of this is
 \begin{equation}
   O(#back.size()#-(#i#-#front.size()#)+1) = O(#n#-#i#+1) \enspace .
   \eqlabel{das-back}
@@ -525,8 +528,8 @@ $O(#n#)=O(#i#)=O(#n#-#i#)$ time, since $#i#\ge #n#/4$ and $#n#-#i#>
             O(1+#n#-#i#) & \mbox{if $#i# \ge 3#n#/4$}
           \end{array}\right.
 \]
-Thus, the running time of #add(i,x)# (ignoring the cost of the call to
-#balance()#) is $O(1+\min\{#i#, #n#-#i#\})$.
+Thus, the running time of #add(i,x)#, if we ignore the cost of the call
+to #balance()#, is $O(1+\min\{#i#, #n#-#i#\})$.
 
 The #remove(i)# operation and its analysis resemble the #add(i,x)#
 operation and analysis.
@@ -558,9 +561,9 @@ average, #balance()# only spends a constant amount of time per operation.
 \end{lem}
 
 \begin{proof}
-  We will show that, if #balance()# is forced to shift elements,
-  then the number of #add(i,x)# and #remove(i)# operations since the
-  last time #balance()# shifted any elements is at least $#n#/2-1$.
+  We will show that, if #balance()# is forced to shift elements, then
+  the number of #add(i,x)# and #remove(i)# operations since the last
+  time any elements were shifted by #balance()# is at least $#n#/2-1$.
   As in the proof of \lemref{arraystack-amortized}, this is sufficient
   to prove that the total time spent by #balance()# is $O(m)$.
 
@@ -600,7 +603,7 @@ average, #balance()# only spends a constant amount of time per operation.
 
 \subsection{Summary}
 
-The following theorem summarizes the performance of a #DualArrayStack#:
+The following theorem summarizes the properties of a #DualArrayDeque#:
 
 \begin{thm}\thmlabel{dualarraydeque}
   A #DualArrayDeque# implements the #List# interface.  Ignoring the
@@ -803,7 +806,7 @@ structure was wasting $\sqrt{#n#}$ space.
 
 \subsection{Summary}
 
-The following theorem summarizes the performance of the #RootishArrayStack#
+The following theorem summarizes our discussion of the #RootishArrayStack#
 data structure:
 
 \begin{thm}\thmlabel{rootisharraystack}
@@ -955,18 +958,18 @@ computing the index of the leading 1-bit in an integer.
 
 A structure related to the #RootishArrayStack# is the two-level
 \emph{tiered-vector} of Goodrich and Kloss \cite{gk99}.  This structure
-supports #get(i,x)# and #set(i,x)# in constant time and #add(i,x)# and
-#remove(i)# in $O(\sqrt{#n#})$ time.  These running times are similar
-to what can be achieved with the more careful implementation of a
-#RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
+supports the #get(i,x)# and #set(i,x)# operations in constant time and
+#add(i,x)# and #remove(i)# in $O(\sqrt{#n#})$ time.  These running times
+are similar to what can be achieved with the more careful implementation
+of a #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
 
 \javaonly{
 \begin{exc}
   In the #ArrayStack# implementation, after the first call to #remove(i)#,
-  the backing array, #a#, contains $#n#+1$ non-#null# values even
-  though the #ArrayStack# only contains #n# elements.  Where is the
-  extra non-#null# value?  Discuss any consequences this non-#null# value
-  might have on the Java Runtime Environment's memory manager.
+  the backing array, #a#, contains $#n#+1$ non-#null# values despite
+  the fact that the #ArrayStack# only contains #n# elements.  Where is
+  the extra non-#null# value?  Discuss any consequences this non-#null#
+  value might have on the Java Runtime Environment's memory manager.
 \end{exc}
 }
 
@@ -1016,15 +1019,17 @@ to what can be achieved with the more careful implementation of a
 \begin{exc}
   Modify the #ArrayDeque# implementation so that the shifting
   done by #add(i,x)#, #remove(i)#, and #resize()# is done using
-  #System.arraycopy(s,i,d,j,n)#.
+  the faster #System.arraycopy(s,i,d,j,n)# method.
 \end{exc}
 
 \begin{exc}
   Modify the #ArrayDeque# implementation so that it does not use the
   #%# operator (which is expensive on some systems).  Instead, it
   should make use of the fact that, if #a.length# is a power of 2,
-  then #k%a.length#$=$#k&(a.length-1)#. (Here, #&# is the bitwise-and
-  operator.)
+  then 
+  \[  #k%a.length#=#k&(a.length-1)# \enspace .
+  \]
+  (Here, #&# is the bitwise-and operator.)
 \end{exc}
 
 \begin{exc}
@@ -1035,7 +1040,7 @@ to what can be achieved with the more careful implementation of a
   The amortized cost of all operations should be the same as in an
   #ArrayDeque#.
 
-  \noindent Hint: Making this work is really all about how you implement
+  \noindent Hint: Getting this to work is really all about how you implement
   the #rebuild()# operation.  You would like #rebuild()# to put the data
   structure into a state where the data cannot run off either end until
   at least $#n#/2$ operations have been performed.
@@ -1067,7 +1072,9 @@ to what can be achieved with the more careful implementation of a
 
 \begin{exc}
   Design and implement a #CubishArrayStack#.  This three level structure
-  implements the #List# interface using at most $O(n^{2/3})$ wasted space.  In this structure, #get(i)# and #set(i,x)# take constant time; while #add(i,x)# and #remove(i)# take $O(#n#^{1/3})$ amortized time.
+  implements the #List# interface using $O(n^{2/3})$ wasted space.
+  In this structure, #get(i)# and #set(i,x)# take constant time; while
+  #add(i,x)# and #remove(i)# take $O(#n#^{1/3})$ amortized time.
 \end{exc}
 
 

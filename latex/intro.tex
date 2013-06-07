@@ -115,7 +115,7 @@ the interfaces implemented by all of the data structures described in
 this book and should be considered required reading.  The remaining
 sections discuss:
 \begin{itemize}
-  \item some mathematical background including exponentials, logarithms,
+  \item some mathematical review including exponentials, logarithms,
   factorials, asymptotic (big-Oh) notation, probability, and randomization;
   \item the model of computation; 
   \item correctness, running time, and space;
@@ -166,12 +166,12 @@ Notice that the #remove()# operation takes no argument.  The #Queue#'s
 There are many possible queueing disciplines, the most common of which
 include FIFO, priority, and LIFO.
 
-A \emph{FIFO (first-in-first-out) #Queue#}, illustrated in \figref{queue},
-removes items in the same order they were added, much in the same
-way a queue (or line-up) works when checking out at a cash register
-in a grocery store.  This is the most common kind of #Queue# so the
-qualifier FIFO is often ommitted.  In other texts, the #add(x)# and
-#remove()# operations on a FIFO #Queue# are often called #enqueue(x)#
+A \emph{FIFO (first-in-first-out) #Queue#}, which is illustrated in
+\figref{queue}, removes items in the same order they were added, much
+in the same way a queue (or line-up) works when checking out at a cash
+register in a grocery store.  This is the most common kind of #Queue#
+so the qualifier FIFO is often ommitted.  In other texts, the #add(x)#
+and #remove()# operations on a FIFO #Queue# are often called #enqueue(x)#
 and #dequeue()#, respectively.
 
 \begin{figure}
@@ -220,11 +220,11 @@ disciplines.
 A #Deque# is a generalization of both the FIFO #Queue# and LIFO #Queue#
 (#Stack#).   A #Deque# represents a sequence of elements, with a front
 and a back.  Elements can be added at the front of the sequence or
-the back of the sequence.  The names of the operations on a #Deque#
+the back of the sequence.  The names of the #Deque# operations
 are self-explanatory: #addFirst(x)#, #removeFirst()#, #addLast(x)#,
-and #removeLast()#.  Notice that a #Stack# can be implemented using only
+and #removeLast()#.  It is worth noting that a #Stack# can be implemented using only
 #addFirst(x)# and #removeFirst()# while a FIFO #Queue# can be implemented
-using only #addLast(x)# and #removeFirst()#.
+using #addLast(x)# and #removeFirst()#.
 
 
 \subsection{The #List# Interface: Linear Sequences}
@@ -309,7 +309,7 @@ each of which contains a \emph{key} and a \emph{value}. Two #Pair#s
 are treated as equal if their keys are equal.  If we store some pair
 $(#k#,#v#)$ in a #USet# and then later call the #find(x)# method using
 the pair $#x#=(#k#,#null#)$ the result will be $#y#=(#k#,#v#)$.  In other
-works, we can recover the value, #v#, given only the key, #k#.
+words, it is possible to recover the value, #v#, given only the key, #k#.
 
 
 \subsection{The #SSet# Interface: Sorted Sets}
@@ -688,7 +688,7 @@ This is a bit more long-winded, but doesn't require that we know any
 magical identities or compute any non-trivial probabilities. Even better,
 it agrees with the intuition that we expect half the coins turn up as
 heads precisely because each individual coin turns up as heads with
-probability $1/2$.
+a probability of $1/2$.
 
 \section{The Model of Computation}
 \seclabel{model}
@@ -858,11 +858,12 @@ Tables~\ref{tab:summary-i} and \ref{tab:summary-ii} summarize the
 performance of data structures in this book that implement each of the
 interfaces, #List#, #USet#, and #SSet#, described in \secref{interfaces}.
 \Figref{dependencies} shows the dependencies between various chapters in
-this book.  A dashed arrow indicates only a weak-dependency, in which
+this book.  A dashed arrow indicates only a weak dependency, in which
 only a small part of the chapter depends on a previous chapter or only
 the main results of the previous chapter.
 
 \begin{table}
+\vspace{56pt}
 \begin{center}
 \resizebox{.98\textwidth}{!}{
 \begin{threeparttable}

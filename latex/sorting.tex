@@ -179,8 +179,9 @@ An example is shown in \figref{quicksort}.
 \end{figure}
 All of this is done in place, so that instead of making copies of
 subarrays being sorted, the #quickSort(a,i,n,c)# method only sorts the
-subarray $#a[i]#,\ldots,#a[i+n-1]#$.  Initially, this method is called
-as #quickSort(a,0,a.length,c)#.
+subarray $#a[i]#,\ldots,#a[i+n-1]#$.  Initially, this method is invoked
+with the arguments
+#quickSort(a,0,a.length,c)#.
 
 At the heart of the quicksort algorithm is the in-place partitioning
 algorithm.  This algorithm, without using any extra space, swaps elements
@@ -268,7 +269,7 @@ Recall that the #BinaryHeap# data structure represents a heap using
 a single array.  The heap-sort algorithm converts the input array #a#
 into a heap and then repeatedly extracts the minimum value.
 
-More specifically, a heap stores #n# elements at array locations
+More specifically, a heap stores #n# elements in an array, #a#, at array locations
 $#a[0]#,\ldots,#a[n-1]#$ with the smallest value stored at the root,
 #a[0]#.  After transforming #a# into a #BinaryHeap#, the heap-sort
 algorithm repeatedly swaps #a[0]# and #a[n-1]#, decrements #n#, and
@@ -283,12 +284,12 @@ heap sort algorithm stores the elements directly in ascending order.}
 \begin{figure}
   \begin{center}
     \includegraphics{figs/heapsort}
-    \caption[Heap sort]{A snapshot of the execution of #heapSort(a,c)#.
+  \end{center}
+  \caption[Heap sort]{A snapshot of the execution of #heapSort(a,c)#.
       The shaded part of the
       array is already sorted.  The unshaded part is a #BinaryHeap#.
       During the next iteration, element $5$ will be placed into array
       location $8$.}
-  \end{center}
   \figlabel{heapsort}
 \end{figure}
 
@@ -370,7 +371,7 @@ it follows from the fact that
 \]
 (Proving this fact is left as \excref{log-factorial}.)
 
-We will first focus our attention on deterministic algorithms like
+We will start by focusing our attention on deterministic algorithms like
 merge-sort and heap-sort and on a particular fixed value of #n#.  Imagine
 such an algorithm is being used to sort #n# distinct elements.  The key
 to proving the lower-bound is to observe that, for a deterministic
@@ -487,9 +488,9 @@ permutation of $\{1,\ldots,n\}$ is at least $\log(#n#!)$.  Finally,
 notice that this is true for every choice of $\hat{b}$, therefore it holds even for $\mathcal{R}$.  This completes the proof of the lower-bound for randomized algorithms.
 
 \begin{thm}\thmlabel{randomized-sorting-lower-bound}
-  For any (deterministic or randomized) comparison-based sorting algorithm
-  $\mathcal{A}$ and any integer $#n#\ge 1$, the expected number of
-  comparisons done by $\mathcal{A}$ when sorting a random permutation
+  For any integer $n\ge 1$ and any  (deterministic or randomized)
+  comparison-based sorting algorithm $\mathcal{A}$, the expected number
+  of comparisons done by $\mathcal{A}$ when sorting a random permutation
   of $\{1,\ldots,n\}$ is at least $\log(#n#!) = #n#\log#n#-O(#n#)$.
 \end{thm}
 
@@ -497,10 +498,10 @@ notice that this is true for every choice of $\hat{b}$, therefore it holds even 
 
 \section{Counting Sort and Radix Sort}
 
-In this section we consider two sorting algorithms that are not
+In this section we study two sorting algorithms that are not
 comparison-based. Specialized for sorting small integers, these algorithms
 elude the lower-bounds of \thmref{deterministic-sorting-lower-bound}
-by using (parts of) the elements of #a# as indices into an array.
+by using (parts of) the elements in #a# as indices into an array.
 Consider a statement of the form
 \[
   #c[a[i]]# = 1 \enspace .
@@ -696,8 +697,8 @@ as if they were integers in a signed-magnitude binary representation
 
 \begin{exc}
   Show that, for any implementation of #quickSort(a,i,n,c)#
-  that chooses a pivot deterministically, without looking at
-  $#a[i]#,\ldots,#a[i+n-1]#$, there exists an input array of length #n#
+  that chooses a pivot deterministically, without first looking at
+  any values in $#a[i]#,\ldots,#a[i+n-1]#$, there exists an input array of length #n#
   that causes this implementation to perform $\binom{#n#}{2}$ comparisons.
 \end{exc}
 

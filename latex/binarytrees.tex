@@ -308,8 +308,8 @@ The following (unimpressive) theorem summarizes the performance of the
 #BinarySearchTree# data structure:
 
 \begin{thm}\thmlabel{bst}
-  A #BinarySearchTree# implements the #SSet# interface. A
-  #BinarySearchTree# supports the operations #add(x)#, #remove(x)#,
+  #BinarySearchTree# implements the #SSet# interface and 
+  supports the operations #add(x)#, #remove(x)#,
   and #find(x)# in $O(#n#)$ time per operation.
 \end{thm}
 
@@ -392,8 +392,8 @@ for an example.
 \end{exc}
 
 \begin{exc}
-  Write a non-recursive variant of the #size2()# method, #size(u)#,
-  that computes the size of the subtree rooted at node #u#.
+  Implement a non-recursive method, #size2(u)#, that computes the size
+  of the subtree rooted at node #u#.
 \end{exc}
 
 \begin{exc}
@@ -439,7 +439,7 @@ for an example.
 \end{exc}
 
 \begin{exc}\exclabel{tree-traversal}
-  Write non-recursive functions #nextPreOrder(u)#, #nextInOrder(u)#, and
+  Implement the non-recursive functions #nextPreOrder(u)#, #nextInOrder(u)#, and
   #nextPostOrder(u)# that return the node that follows #u# in a pre-order,
   in-order, or post-order traversal, respectively.   These functions
   should take amortized constant time; if we start at any node
@@ -483,7 +483,7 @@ for an example.
 \end{exc}
 
 \begin{exc}
-  Design and implement a method #BinarySearchTree# method #getLE(x)#,
+  Implement a #BinarySearchTree# method, #getLE(x)#,
   that returns a list of all items in the tree that are less than or
   equal to #x#.  The running time of your method should be $O(#n#'+#h#)$
   where $#n#'$ is the number of items less than or equal to #x# and #h#
@@ -519,7 +519,7 @@ for an example.
   #u.depth# (the depth of #u#), and #u.height# (the height of the subtree
   rooted at #u#).  
 
-  These values should be maintained, even during the #add(x)# and
-  #remove(x)# operations, but this should not increase the cost of these
-  operations by more than a constant factor.
+  These values should be maintained, even during calls to the #add(x)#
+  and #remove(x)# operations, but this should not increase the cost of
+  these operations by more than a constant factor.
 \end{exc}

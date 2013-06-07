@@ -207,7 +207,7 @@ $#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$ are almost identical (see
 
 \begin{figure}
   \begin{center}
-    \begin{tabular}{c}
+    \begin{tabular}{@{}c@{}}
       \includegraphics[width=\ScaleIfNeeded]{figs/rbst-probs-a} \\ (a) \\[2ex]
       \includegraphics[width=\ScaleIfNeeded]{figs/rbst-probs-b} \\ (b) \\[2ex]
     \end{tabular}
@@ -463,17 +463,18 @@ of a random binary search tree is
 \[
   \alpha\ln n - \beta\ln\ln n + O(1)
 \]
-where $\alpha\approx4.31107$ is the unique solution on $[2,\infty)$ of the
-equation $\alpha\ln((2e/\alpha))=1$ and $\beta=\frac{3}{2\ln(\alpha/2)}$ .
-Furthermore, the variance of the height is constant.
+where $\alpha\approx4.31107$ is the unique solution on the
+interval $[2,\infty)$ of the equation $\alpha\ln((2e/\alpha))=1$ and
+$\beta=\frac{3}{2\ln(\alpha/2)}$ .  Furthermore, the variance of the
+height is constant.
 
 The name #Treap# was coined by Aragon and Seidel \cite{as96} who discussed
 #Treap#s and some of their variants.  However, their basic structure was
 studied much earlier by Vuillemin \cite{v80} who called them Cartesian
 trees.
 
-One space-optimization of the #Treap# data structure that is sometimes
-performed is the elimination of the explicit storage of the priority #p#
+One possible space-optimization of the #Treap# data structure 
+is the elimination of the explicit storage of the priority #p#
 in each node. Instead, the priority of a node, #u#, is computed by
 hashing #u#'s address in memory\javaonly{ (in 32-bit Java, this is equivalent
 to hashing #u.hashCode()#)}.  Although a number of hash functions will
@@ -496,11 +497,12 @@ subtree rooted at #u#.  Both the #add(x)# and #remove(x)# algorithms are
 randomized. The algorithm for adding #x# to the subtree rooted at #u#
 does the following:
 \begin{enumerate}
-   \item With probability $1/(#size(u)#+1)$, #x# is added the usual way,
-   as a leaf, and rotations are then done to bring #x# up to the root
-   of this subtree.
-   \item Otherwise, #x# is recursively added into one of the two
-   subtrees rooted at #u.left# or #u.right#, as appropriate.
+   \item With probability $1/(#size(u)#+1)$, the value #x# is added
+   the usual way, as a leaf, and rotations are then done to bring #x#
+   up to the root of this subtree.
+   \item Otherwise (with probability $1-1/(#size(u)#+1)$), the value #x#
+   is recursively added into one of the two subtrees rooted at #u.left#
+   or #u.right#, as appropriate.
 \end{enumerate}
 The first case corresponds to an #add(x)# operation in a #Treap# where
 #x#'s node receives a random priority that is smaller than any of the
