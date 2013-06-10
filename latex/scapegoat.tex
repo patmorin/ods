@@ -4,11 +4,16 @@
 In this chapter, we study a binary search tree data structure, the
 #ScapegoatTree#.  This structure is based on the common wisdom that,
 when something goes wrong, the first thing people tend to do is find
-someone to blame (the \emph{scapegoat}).  Once blame is firmly
+someone to blame (the \emph{scapegoat}).
+\index{scapegoat}
+Once blame is firmly
 established, we can leave the scapegoat to fix the problem.
 
 A #ScapegoatTree# keeps itself balanced by \emph{partial rebuilding
-operations}.  During a partial rebuilding operation, an entire subtree is
+operations}.
+\index{partial rebuilding}
+\index{binary search tree!partial rebuilding}
+During a partial rebuilding operation, an entire subtree is
 deconstructed and rebuilt into a perfectly balanced subtree.  There are
 many ways of rebuilding a subtree rooted at node #u# into a perfectly
 balanced tree.  One of the simplest is to traverse #u#'s subtree,
@@ -28,6 +33,7 @@ has #size(u)# nodes.
 \seclabel{scapegoattree}
 
 
+\index{ScapegoatTree@#ScapegoatTree#}
 A #ScapegoatTree# is a #BinarySearchTree# that, in addition to keeping
 track of the number, #n#, of  nodes in the tree also keeps a counter, #q#,
 that maintains an upper-bound on the number of nodes. 
@@ -150,7 +156,7 @@ Condition \myeqref{scapegoat-height}, then we can always find a scapegoat:
 
 Next, we analyze the parts of the running time that are not yet
 accounted for.  There are two parts:  The cost of calls to #size(u)#
-when search for scapegoat nodes, and the cost of calls to #rebuild(w)#
+when searching for scapegoat nodes, and the cost of calls to #rebuild(w)#
 when we find a scapegoat #w#.  The cost of calls to #size(u)# can be
 related to the cost of calls to #rebuild(w)#, as follows:
 \begin{lem}
@@ -196,7 +202,9 @@ All that remains is to prove an upper-bound on the cost of all calls to
 \end{lem}
 
 \begin{proof}
-  To prove this, we will use a credit scheme.  We imagine that each node
+  To prove this, we will use a \emph{credit scheme}.
+  \index{credit scheme}
+  We imagine that each node
   stores a number of credits.  Each credit can pay for some constant,
   $c$, units of time spent rebuilding.  The scheme gives out a total of
   $O(m\log m)$ credits and every call to #rebuild(u)# is paid for with
@@ -266,7 +274,9 @@ The following theorem summarizes the performance of the #ScapegoatTree# data str
 The term \emph{scapegoat tree} is due to Galperin and Rivest \cite{gr93},
 who define and analyze these trees.  However, the same structure
 was discovered earlier by Andersson \cite{a89,a99}, who called them
-\emph{general balanced trees} since they can have any shape as long as
+\emph{general balanced trees}
+\index{general balanced tree}
+since they can have any shape as long as
 their height is small.
 
 Experimenting with the #ScapegoatTree# implementation will reveal that
@@ -326,7 +336,7 @@ and related structures based on partial rebuilding may work.  An example of such
     \item  Design, analyze, and implement a modified version of
       #ScapegoatTree# where the length of the search path does not exceed
       $\log_{#b#} #q#$, where #b# is a parameter with $1<#b#<2$.
-    \item What does your analysis and/or experiments say about the
+    \item What does your analysis and/or your experiments say about the
       amortized cost of #find(x)#, #add(x)# and #remove(x)# as a function
       of #n# and #b#?
   \end{enumerate}
@@ -359,7 +369,8 @@ and related structures based on partial rebuilding may work.  An example of such
 \end{exc}
 
 \begin{exc}
-  Analyze and implement a #WeightBalancedTree#.  This is a tree in
+  \index{WeightBalancedTree@#WeightBalancedTree#} 
+  Analyze and implement a #WeightBalancedTree#. This is a tree in
   which each node #u#, except the root, maintains the \emph{balance
   invariant} that $#size(u)# \le (2/3)#size(u.parent)#$.  The #add(x)# and
   #remove(x)# operations are identical to the standard #BinarySearchTree#
@@ -370,17 +381,7 @@ and related structures based on partial rebuilding may work.  An example of such
 \end{exc}
 
 \begin{exc}
-  Analyze and implement a #WeightBalancedTree#.  This is a tree in
-  which each node #u#, except the root, maintains the \emph{balance
-  invariant} that $#size(u)# \le (2/3)#size(u.parent)#$.  The #add(x)# and
-  #remove(x)# operations are identical to the standard #BinarySearchTree#
-  operations, except that any time the balance invariant is violated at
-  a node #u#, rotations are performed in order to restore these invariants.
-  Your analysis should show that operations on a #WeightBalancedTree#
-  run in $O(\log#n#)$ worst-case time.  
-\end{exc}
-
-\begin{exc}
+  \index{CountdownTree@#CountdownTree#}
   Analyze and implement a #CountdownTree#.  In a #CountdownTree# each
   node #u# keeps a \emph{timer} #u.t#.  The #add(x)# and #remove(x)#
   operations are exactly the same as in a standard #BinarySearchTree#
@@ -396,6 +397,7 @@ and related structures based on partial rebuilding may work.  An example of such
 \end{exc}
 
 \begin{exc}
+  \index{DynamiteTree@#DynamiteTree#}
   Analyze and implement a #DynamiteTree#.  In a #DynamiteTree# each
   node #u# keeps tracks of the size of the subtree rooted at #u# in a
   variable #u.size#.  The #add(x)# and #remove(x)# operations are exactly
@@ -410,6 +412,7 @@ and related structures based on partial rebuilding may work.  An example of such
  
 
 \begin{exc}\exclabel{list-order-maintenance}
+  \index{Sequence@#Sequence#}
   Design and implement a #Sequence# data structure that maintains a
   sequence (list) of elements.  It supports these operations:
   \begin{itemize}
@@ -421,7 +424,7 @@ and related structures based on partial rebuilding may work.  An example of such
     before #e2# in the sequence.
   \end{itemize}
   The first two operations should run in $O(\log #n#)$ amortized time.
-  The third operation should run in constant-time.
+  The third operation should run in constant time.
 
   The #Sequence# data structure can be implemented by storing the elements
   in something like a #ScapegoatTree#, in the same order that they occur

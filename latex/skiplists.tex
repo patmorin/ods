@@ -10,16 +10,17 @@ all operations run in $O(\log #n#)$ expected time.
 %Finally, a skiplist can be used to implement a #Rope# in which all
 %operations run in $O(\log #n#)$ time.
 
-The efficiency of skiplists relies on their use of \emph{randomization}.
+The efficiency of skiplists relies on their use of randomization.
 When a new element is added to a skiplist, the skiplist uses random coin
 tosses to determine the height of the new element.  The performance of
-skiplists is expressed in terms of \emph{expected} running times and path
+skiplists is expressed in terms of expected running times and path
 lengths. This expectation is taken over the random coin tosses used by
 the skiplist.  In the implementation, the random coin tosses used by a
 skiplist are simulated using a pseudo-random number (or bit) generator.
 
 \section{The Basic Structure}
 
+\index{skiplist}
 Conceptually, a skiplist is a sequence of singly-linked lists
 $L_0,\ldots,L_h$. Each list $L_r$ contains a subset of the items
 in $L_{r-1}$.  We start with the input list $L_0$ that contains #n#
@@ -37,7 +38,9 @@ of a skiplist is shown in \figref{skiplist}.
   \figlabel{skiplist}
 \end{figure}
 
-For an element, #x#, in a skiplist, we call the \emph{height} of #x# the
+For an element, #x#, in a skiplist, we call the \emph{height}
+\index{height!of a skiplist}
+of #x# the
 largest value $r$ such that #x# appears in $L_r$.  Thus, for example,
 elements that only appear in $L_0$ have height $0$.  If we spend a few
 moments thinking about it, we notice that the height of #x# corresponds
@@ -48,8 +51,11 @@ toss the coin twice before getting tails, but we don't count the last
 toss.) The \emph{height} of a skiplist is the height of its tallest node.
 
 At the head of every list is a special node, called the \emph{sentinel},
+\index{sentinel node}
 that acts as a dummy node for the list. The key property of skiplists
-is that there is a short path, called the \emph{search path}, from the
+is that there is a short path, called the \emph{search path}, 
+\index{search path!in a skiplist}
+from the
 sentinel in $L_h$ to every node in $L_0$.  Remembering how to construct
 a search path for a node, #u#, is easy (see \figref{skiplist-searchpath})
 :  Start at the top left corner of your skiplist (the sentinel in $L_h$)
@@ -78,7 +84,7 @@ The expected length of the search path for any node, #u#, in $L_0$ is at
 most $2\log #n# + O(1) = O(\log #n#)$.
 \end{lem}
 
-A space-efficient way to implement a #Skiplist# is to define a #Node#,
+A space-efficient way to implement a skiplist is to define a #Node#,
 #u#, as consisting of a data value, #x#, and an array, #next#, of
 pointers, where #u.next[i]# points to #u#'s successor in the list
 $L_{#i#}$.  In this way, the data, #x#, in a node is
@@ -99,6 +105,7 @@ within $L_r$.
 \section{#SkiplistSSet#: An Efficient #SSet#}
 \seclabel{skiplistset}
 
+\index{SkiplistSSet@#SkiplistSSet#}
 A #SkiplistSSet# uses a skiplist structure to implement the #SSet#
 interface.   When used in this way, the list $L_0$ stores the elements of
 the #SSet# in sorted order.  The #find(x)# method works by following
@@ -175,6 +182,7 @@ expected time per operation.
 \section{#SkiplistList#: An Efficient Random-Access #List#}
 \seclabel{skiplistlist}
 
+\index{SkiplistList@#SkiplistList#}
 A #SkiplistList# implements the #List# interface using a skiplist
 structure.  In a #SkiplistList#, $L_0$ contains the elements of the
 list in the order in which they appear in the list.   As in a
@@ -294,7 +302,9 @@ the search path in a skiplist.  This section requires a background in
 basic probability.  Several proofs are based on the following basic
 observation about coin tosses.
 
+
 \begin{lem}\lemlabel{coin-tosses}
+  \index{coin toss}
   Let $T$ be the number of times a fair coin is tossed up to and including
   the first time the coin comes up heads.  Then $\E[T]=2$.
 \end{lem}
@@ -454,7 +464,7 @@ $2\log #n# + O(1)$.
 \section{Discussion and Exercises}
 
 Skiplists were introduced by Pugh \cite{p91} who also presented
-a number of applications of skiplists \cite{p89}.  Since then they
+a number of applications and extensions of skiplists \cite{p89}.  Since then they
 have been studied extensively.  Several researchers have done very
 precise analyses of the expected length and variance of the length of the
 search path for the #i#th element in a skiplist \cite{kp94,kmp95,pmp92}.
@@ -531,6 +541,8 @@ operating system kernel's process management structures \cite{hpux}.
 \end{exc}
 
 \begin{exc}
+  \index{finger}
+  \index{finger search!in a skiplist}
   A \emph{finger} in a skiplist is an array that stores the
   sequence of nodes on a search path at which the search path
   goes down. (The variable #stack# in the #add(x)# code on
@@ -603,6 +615,8 @@ operating system kernel's process management structures \cite{hpux}.
 \end{exc}
 
 \begin{exc}
+  \index{skiplist!versus binary search tree}
+  \index{binary search tree!versus skiplist}
   (This excercise should be done after reading about binary search trees,
   in \secref{binarysearchtree}.)  Compare skiplists with binary search
   trees in the following ways:  

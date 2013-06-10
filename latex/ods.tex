@@ -1,4 +1,7 @@
 \documentclass[10pt]{book}
+\usepackage{makeidx}
+\makeindex
+%\usepackage{showidx}
 % mark overful hboxes
 %\overfullrule=1mm
 \usepackage{kpfonts}
@@ -262,8 +265,15 @@ Edition 0.1E\cpponly{$\beta$}
 \include{btree-lang}
 }
 
+%% Turn off section numbers for remainder of document
+\fancyhead[RO]{} % section number on the inside
+\fancyhead[LE]{} % section number on the inside
+
+
 \bibliographystyle{abbrvurl}
 \bibliography{ods,odsproc}
+
+\printindex
 
 \end{document}
 

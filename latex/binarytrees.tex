@@ -2,7 +2,11 @@
 \chaplabel{binarytrees}
 
 This chapter introduces one of the most fundamental structures in computer
-science: binary trees.  The use of the word \emph{tree} here comes from
+science: binary trees.  The use of the word \emph{tree}
+\index{tree}
+\index{tree!binary}
+\index{binary tree}
+here comes from
 the fact that, when we draw them, the resultant drawing often resembles
 the trees found in a forest.  There are many ways of ways of defining
 binary trees.  Mathematically, a \emph{binary tree} is a connected,
@@ -10,12 +14,24 @@ undirected, finite graph with no cycles, and no vertex of degree greater
 than three.
 
 For most computer science applications, binary trees are \emph{rooted:}
+\index{tree!rooted}
+\index{rooted tree}
 A special node, #r#, of degree at most two is called the \emph{root}
 of the tree.  For every node, $#u#\neq #r#$, the second node on the
-path from #u# to #r# is called the \emph{parent} of #u#.  Each of the
-other nodes adjacent to #u# is called a \emph{child} of #u#. Most of the
-binary trees we are interested in are \emph{ordered}, so we distinguish
+path from #u# to #r# is called the \emph{parent} of #u#.
+\index{parent}
+Each of the
+other nodes adjacent to #u# is called a \emph{child}
+\index{child} of #u#. Most of the
+binary trees we are interested in are \emph{ordered},
+\index{ordered tree}
+\index{tree!ordered}
+so we distinguish
 between the \emph{left child} and \emph{right child} of #u#.
+\index{left child}
+\index{child!left}
+\index{right child}
+\index{child!right}
 
 In illustrations, binary trees are usually drawn from the root
 downward, with the root at the top of the drawing and the left and right
@@ -46,15 +62,24 @@ a binary tree with nine nodes.
 \end{figure}
 
 Because binary trees are so important, a certain terminology has developed
-for them: The \emph{depth} of a node, #u#, in a binary tree is the
+for them: The \emph{depth}
+\index{depth}
+of a node, #u#, in a binary tree is the
 length of the path from #u# to the root of the tree.   If a node, #w#,
 is on the path from #u# to #r#, then #w# is called an \emph{ancestor}
-of #u# and #u# a \emph{descendant} of #w#.  The \emph{subtree} of a
+\index{ancestor}
+of #u# and #u# a \emph{descendant}
+\index{descendant}
+of #w#.  The \emph{subtree} of a
 node, #u#, is the binary tree that is rooted at #u# and contains all
-of #u#'s descendants.  The \emph{height} of a node, #u#, is the length
-of the longest path from #u# to one of its descendants.  The height of
-a tree is the height of its root.  A node, #u#, is a \emph{leaf} if it
-has no children.
+of #u#'s descendants.  The \emph{height}
+\index{height!in a tree} of a node, #u#, is the length
+of the longest path from #u# to one of its descendants.  The \emph{height} of
+\index{height!of a tree}
+a tree is the height of its root.
+A node, #u#, is a \emph{leaf}
+\index{leaf}
+if it has no children.
 
 We sometimes think of the tree as being augmented with \emph{external
 nodes}. Any node that does not have a left child has an external
@@ -66,6 +91,7 @@ binary tree with $#n#\ge 1$ real nodes has $#n#+1$ external nodes.
 
 \section{#BinaryTree#: A Basic Binary Tree}
 
+\index{BinaryTree@#BinaryTree#}
 The simplest way to represent a node, #u#, in a binary tree is to
 explicitly store the (at most three) neighbours of #u#:
 \javaimport{ods/BinaryTree.BTNode<Node}
@@ -85,6 +111,7 @@ the number of steps on the path from #u# to the root:
 
 \subsection{Recursive Algorithms}
 
+\index{recursive algorithm}
 Using recursive algorithms makes it very easy to compute facts about
 binary trees. For example, to compute the size of (number of nodes in)
 a binary tree rooted at node #u#, we recursively compute the sizes of the
@@ -100,6 +127,9 @@ two subtrees, take the maximum, and add one:
 \subsection{Traversing Binary Trees}
 \seclabel{bintree:traversal}
 
+\index{traversal!of a binary tree}
+\index{tree traversal}
+\index{binary-tree traversal}
 The two algorithms from the previous section both use recursion to visit
 all the nodes in a binary tree.  Each of them visits the nodes of the
 binary tree in the same order as the following code:
@@ -147,7 +177,10 @@ but the implementation has to use a #List# (or #Stack#) to keep track
 of the path from the current node to the root.
 
 A special kind of traversal that does not fit the pattern of the above
-functions is the \emph{breadth-first traversal}.  In a breadth-first
+functions is the \emph{breadth-first traversal}.
+\index{breadth-first traversal}
+\index{traversal!breadth-first}
+In a breadth-first
 traversal, the nodes are visited level-by-level starting at the root and
 moving down, visiting the nodes at each level from left to right. (See
 \figref{bintree-bfs}.) This is similar to the way that we would read a
@@ -174,9 +207,14 @@ level-by-level, and left-to-right within each level.}
 \section{#BinarySearchTree#: An Unbalanced Binary Search Tree}
 \seclabel{binarysearchtree}
 
+\index{BinarySearchTree@#BinarySearchTree#}
+\index{binary search tree}
+\index{binary tree!search}
 A #BinarySearchTree# is a special kind of binary tree in which each node, #u#,
 also stores a data value, #u.x#, from some total order.  The data values in
-a binary search tree obey the \emph{binary search tree property}:  For
+a binary search tree obey the \emph{binary search tree property}:
+\index{binary search tree property}
+For
 a node, #u#, every data value stored in the subtree rooted at #u.left#
 is less than #u.x# and every data value stored in the subtree rooted at
 #u.right# is greater than #u.x#.  An example of a #BinarySearchTree# is shown in \figref{bst}.
@@ -193,6 +231,7 @@ is less than #u.x# and every data value stored in the subtree rooted at
 
 \subsection{Searching}
 
+\index{search path!in a binary search tree}
 The binary search tree property is extremely useful because it allows
 us to quickly locate a value, #x#, in a binary search tree.  To do this we start
 searching for #x# at the root, #r#.  When examining a node, #u#, there
@@ -334,12 +373,17 @@ one in which nodes can have up to four children.
 
 Binary trees have been used to model relationships for literally thousands
 of years.  One reason for this is that binary trees naturally model
-(pedigree) family trees.  These are the family trees in which the root is
+(pedigree) family trees.
+\index{family tree}
+\index{pedigree family tree}
+These are the family trees in which the root is
 a person, the left and right children are the person's parents, and so
 on, recursively.  In more recent centuries binary trees have also been
-used to model species-trees in biology, where the leaves of the tree
+used to model species trees
+\index{species tree} in biology, where the leaves of the tree
 represent extant species and the internal nodes of the tree represent
-\emph{speciation events} in which two populations of a single species
+\emph{speciation events}
+\index{speciation event} in which two populations of a single species
 evolve into two separate species.
 
 Binary search trees appear to have been discovered independently by
@@ -402,7 +446,10 @@ for an example.
 \end{exc}
 
 \begin{exc}
-  A binary tree is \emph{balanced} if, for every node #u#, the size of
+  A binary tree is \emph{size-balanced}
+  \index{size-balanced}
+  \index{binary search tree!size-balanced}
+  if, for every node #u#, the size of
   the subtrees rooted at #u.left# and #u.right# differ by at most one.
   Write a recursive method, #isBalanced()#, that tests if a binary tree
   is balanced.  Your method should run in $O(#n#)$ time.  (Be sure to
@@ -410,6 +457,12 @@ for an example.
   to write a method that takes much longer than $O(#n#)$ time.)
 \end{exc}
 
+\index{traversal!pre-order}
+\index{traversal!post-order}
+\index{traversal!in-order}
+\index{pre-order traversal}
+\index{post-order traversal}
+\index{in-order traversal}
 A \emph{pre-order} traversal of a binary tree is a traversal that visits
 each node, #u#, before any of its children.  An \emph{in-order} traversal
 visits #u# after visiting all the nodes in #u#'s left subtree but before
@@ -431,6 +484,12 @@ for an example.
 \end{figure}
 
 \begin{exc}
+  \index{number!pre-order}
+  \index{number!post-order}
+  \index{number!in-order}
+  \index{pre-order number}
+  \index{post-order number}
+  \index{in-order number}
   Create a subclass of #BinaryTree# whose nodes have fields for storing
   pre-order, post-order, and in-order numbers.  Write recursive methods
   #preOrderNumber()#, #inOrderNumber()#, and #postOrderNumbers()# that

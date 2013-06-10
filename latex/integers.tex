@@ -35,6 +35,7 @@ the text, however, we will simply treat #x# as if it is an integer.
 \section{#BinaryTrie#: A digital search tree}
 \seclabel{binarytrie}
 
+\index{BinaryTrie@#BinaryTrie#}
 A #BinaryTrie# encode a set of #w# bit integers in a binary tree.
 All leaves in the tree have depth #w# and each integer is encoded as a
 root-to-leaf path.  The path for the integer #x# turns left at level #i#
@@ -51,7 +52,9 @@ and 13(1101).
   \figlabel{binarytrie-ex}
 \end{figure}
 
-Because the search path for a value #x# depends on the bits of #x# it will
+Because the search path
+\index{search path!in a #BinaryTrie#}
+for a value #x# depends on the bits of #x# it will
 be helpful to name the children of a node, #u#, #u.child[0]# (#left#)
 and #u.child[1]# (#right#).  These child pointers will actually serve
 double-duty.  Since the leaves in a binary trie have no children, the
@@ -165,6 +168,7 @@ stores #n# values is $O(#n#\cdot#w#)$.
 \section{#XFastTrie#: Searching in Doubly-Logarithmic Time}
 \seclabel{xfast}
 
+\index{XFastTrie@#XFastTrie#}
 The performance of the #BinaryTrie# structure is not very impressive.
 The number of elements, #n#, stored in the structure is at most $2^{#w#}$,
 so $\log #n#\le #w#$.  In other words, any of the comparison-based #SSet#
@@ -180,7 +184,9 @@ proceed to #u.right# (or #u.left#) but #u# has no right (respectively,
 left) child.  At this point, the search uses #u.jump# to jump to a leaf,
 #v#, of the #BinaryTrie# and either return #v# or its successor in the
 linked list of leaves.  An #XFastTrie# speeds up the search process by
-using binary search on the levels of the trie to locate the node #u#.
+using binary search
+\index{binary search}
+on the levels of the trie to locate the node #u#.
 
 To use binary search, we need a way to determine if the node #u# we are
 looking for is above a particular level, #i#, of if #u# is at or below
@@ -265,6 +271,7 @@ problems are related; if #n# #add(x)# operations build a structure of
 size $#n#\cdot#w#$, then the #add(x)# operation requires at least on the
 order of #w# time (and space) per operation.
 
+\index{YFastTrie@#YFastTrie#}
 The #YFastTrie#, discussed next, simultaneously improves the space and
 speed of #XFastTrie#s.  A #YFastTrie# uses an #XFastTrie#, #xft#, but only
 stores $O(#n#/#w#)$ values in #xft#.  In this way, the total space used by
@@ -275,7 +282,9 @@ by calls to #xft#'s #add(x)# and #remove(x)# operations is only constant.
 
 The obvious question becomes:  If #xft# only stores #n#/#w# elements,
 where do the remaining $#n#(1-1/#w#)$ elements go?  These elements move 
-into \emph{secondary structures}, in this case an extended version of
+into \emph{secondary structures},
+\index{secondary structure}
+in this case an extended version of
 treaps (\secref{treap}).  There are roughly #n#/#w# of these secondary
 structures so, on average, each of them stores $O(#w#)$ items.  Treaps
 support logarithmic time #SSet# operations, so the operations on these
@@ -379,7 +388,8 @@ Then $\E[#n#_#x#] \le 2#w#-1$.
 
 \begin{proof}
 Refer to \figref{yfast-sample}. Let
-$#x#_1<#x#_2<\cdots<#x#_i=#x#<\cdots<#x#_#n#$ denote the elements stored
+$#x#_1<#x#_2<\cdots<#x#_i=#x#<\#x#_{i+1}<cdots<#x#_#n#$ denote
+the elements stored
 in the #YFastTrie#.  The treap #t# contains some elements greater than
 or equal to #x#.  These are $#x#_i,#x#_{i+1},\ldots,#x#_{i+j-1}$,
 where $#x#_{i+j-1}$ is the only one of these elements in which the
@@ -439,7 +449,10 @@ becomes $O(#n#)$.
 
 The first data structure to provide $O(\log#w#)$ time #add(x)#,
 #remove(x)#, and #find(x)# operations was proposed by van~Emde~Boas and
-has since become known as the \emph{van~Emde~Boas} (or \emph{stratified})
+has since become known as the \emph{van~Emde~Boas}
+\index{van Emde Boas tree}
+(or \emph{stratified})
+\index{stratified tree}
 \emph{tree} \cite{e77}.  The original van~Emde~Boas structure had size
 $2^{#w#}$, making it impractical for large integers.
 
@@ -451,7 +464,9 @@ the hash table #t[i]#, a van~Emde~Boas tree stores an array of length
 $2^{#i#}$.
 
 Another structure for storing integers is Fredman and Willard's fusion
-trees \cite{fw93}.  This structure can store #n# #w#-bit integers in
+trees \cite{fw93}.
+\index{fusion tree}
+This structure can store #n# #w#-bit integers in
 $O(#n#)$ space so that the #find(x)# operation runs in $O((\log #n#)/(\log
 #w#))$ time.  By using a fusion tree when $\log #w# > \sqrt{\log #n#}$ and
 a #YFastTrie# when $\log #w# \le \sqrt{\log #n#}$, one obtains an $O(#n#)$

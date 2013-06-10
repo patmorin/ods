@@ -36,12 +36,18 @@ $\{0,\ldots,#n#^c-1\}$ in $O(c#n#)$ time.
 
 \section{Comparison-Based Sorting}
 
+\index{comparison-based sorting}
+\index{sorting algorithm!comparison-based}
 In this section, we present three sorting algorithms: merge-sort,
 quicksort, and heap-sort.  Each of these algorithms take an input array #a#
 and sort the elements of #a# into non-decreasing order in $O(#n#\log #n#)$
 (expected) time.  These algorithms are all \emph{comparison-based}.
-\javaonly{Their second argument, #c#, is a #Comparator# that implements
-the #compare(a,b)# method.}  These algorithms don't care what type
+\javaonly{Their second argument, #c#, is a #Comparator#
+\index{Comparator@#Comparator#}
+that implements
+the #compare(a,b)#
+\index{compare@#compare(a,b)#}
+method.}  These algorithms don't care what type
 of data is being sorted; the only operation they do on the data is
 comparisons using the #compare(a,b)# method. Recall, from \secref{sset},
 that #compare(a,b)# returns a negative value if $#a#<#b#$, a positive
@@ -50,8 +56,11 @@ value if $#a#>#b#$, and zero if $#a#=#b#$.
 \subsection{Merge-Sort}
 \seclabel{merge-sort}
 
+\index{merge-sort}
 The \emph{merge-sort} algorithm is a classic example of recursive divide
-and conquer: If the length of #a# is at most 1, then #a# is already
+and conquer: 
+\index{divide-and-conquer}
+If the length of #a# is at most 1, then #a# is already
 sorted, so we do nothing.  Otherwise, we split #a# into two halves,
 $#a0#=#a[0]#,\ldots,#a[n/2-1]#$ and $#a1#=#a[n/2]#,\ldots,#a[n-1]#$.
 We recursively sort #a0# and #a1#, and then we merge (the now sorted)
@@ -106,7 +115,7 @@ Therefore, the total amount of time taken by merge-sort is
   \end{center}
 \end{figure}
 
-The proof of the following theorem is based on the same analysis as above,
+The proof of the following theorem is based on preceding analysis,
 but has to be a little more careful to deal with the cases where #n#
 is not a power of 2.
 \begin{thm}
@@ -159,11 +168,13 @@ for all $x\ge 1/2$.  Inequality~\myeqref{log-ineq-a} comes from the fact that $\
 
 \subsection{Quicksort}
 
+\index{quicksort}
 The \emph{quicksort} algorithm is another classic divide and conquer
 algorithm.  Unlike merge-sort, which does merging after solving the two
 subproblems, quicksort does all of its work upfront.
 
 Quicksort is simple to describe:  Pick a random \emph{pivot} element,
+\index{pivot element}
 #x#, from #a#; partition #a# into the set of elements less than #x#, the
 set of elements equal to #x#, and the set of elements greater than #x#;
 and, finally, recursively sort the first and third sets in this partition.
@@ -238,7 +249,8 @@ about the running time of quicksort:
 
 \begin{proof}
 Let $T$ be the number of comparisons performed by quicksort when sorting
-#n# distinct elements.  Using \lemref{quicksort}, we have:
+#n# distinct elements.  Using \lemref{quicksort} and linearity of
+expectation, we have:
 \begin{align*}
   \E[T] &= \sum_{i=0}^{#n#-1}(H_{#i#+1}+H_{#n#-#i#}) \\ 
         &= 2\sum_{i=1}^{#n#}H_i \\ 
@@ -263,7 +275,8 @@ of the two subproblems.
 \subsection{Heap-sort}
 \seclabel{heapsort}
 
-The heap-sort algorithm is another in-place sorting algorithm.
+\index{heap-sort}
+The \emph{heap-sort} algorithm is another in-place sorting algorithm.
 Heap-sort uses the binary heaps discussed in \secref{binaryheap}.
 Recall that the #BinaryHeap# data structure represents a heap using
 a single array.  The heap-sort algorithm converts the input array #a#
@@ -327,9 +340,9 @@ work done is at most
     =  O(2#n#) = O(#n#) \enspace .
 \]
 The second-last equality follows by recognizing that the sum
-$\sum_{i=1}^{\infty} i/2^{i}$ is equal, by definition, to the expected
-number of times we toss a coin up to and including the first time the coin
-comes up as heads and applying \lemref{coin-tosses}.
+$\sum_{i=1}^{\infty} i/2^{i}$ is equal, by definition of expected value,
+to the expected number of times we toss a coin up to and including the
+first time the coin comes up as heads and applying \lemref{coin-tosses}.
 
 The following theorem describes the performance of #heapSort(a,c)#.
 \begin{thm}
@@ -356,6 +369,8 @@ completes the proof.
 
 \subsection{A Lower-Bound for Comparison-Based Sorting}
 
+\index{lower-bound}
+\index{sorting lower-bound}
 We have now seen three comparison-based sorting algorithms that each run
 in $O(#n#\log #n#)$ time.  By now, we should be wondering if faster
 algorithms exist.  The short answer to this question is no.  If the
@@ -385,7 +400,9 @@ two possible outcomes.  The second comparison done by the algorithm may
 depend on the outcome of the first comparison.  The third comparison
 may depend on the results of the first two, and so on.  In this way,
 any deterministic comparison-based sorting algorithm can be viewed
-as a rooted binary \emph{comparison-tree}.  Each internal node, #u#,
+as a rooted binary \emph{comparison tree}.
+\index{comparison tree}
+Each internal node, #u#,
 of this tree is labelled with a pair of indices #u.i# and #u.j#.
 If $#a[u.i]#<#a[u.j]#$ the algorithm proceeds to the left subtree,
 otherwise it proceeds to the right subtree.  Each leaf #w# of this
@@ -516,7 +533,9 @@ comparison-based algorithms.
 \subsection{Counting Sort}
 
 Suppose we have an input array #a# consisting of #n# integers, each in
-the range $0,\ldots,#k#-1$.  The \emph{counting-sort} algorithm sorts #a#
+the range $0,\ldots,#k#-1$.  The \emph{counting-sort}
+\index{counting-sort}
+algorithm sorts #a#
 using an auxiliary array #c# of counters.  It outputs a sorted version
 of #a# as an auxiliary array #b#.
 
@@ -562,6 +581,7 @@ at location #b[c[j]-1]# and the value #c[j]# is decremented.
 \end{thm}
 
 The counting-sort algorithm has the nice property of being \emph{stable};
+\index{stable sorting algorithm}
 it preserves the relative order of equal elements.  If two elements
 #a[i]# and #a[j]# have the same value, and $#i#<#j#$ then #a[i]# will
 appear before #a[j]# in #b#.  This will be useful in the next section.
@@ -570,7 +590,9 @@ appear before #a[j]# in #b#.  This will be useful in the next section.
 
 Counting-sort is very efficient for sorting an array of integers when the
 length, #n#, of the array is not much smaller than the maximum value,
-$#k#-1$, that appears in the array.  The \emph{radix-sort} algorithm,
+$#k#-1$, that appears in the array.  The \emph{radix-sort}
+\index{radix-sort}
+algorithm,
 which we now describe, uses several passes of counting-sort to allow
 for a much greater range of maximum values.
 
@@ -639,10 +661,11 @@ summarizes the performance of these comparison-based algorithms:
 \end{center}
 
 Each of these comparison-based algorithms has its advantages and
-disadvantages.  Merge-sort does the fewest comparisons and does not
-rely on randomization.  Unfortunately, it uses an auxilliary array
-during its merge phase.  Allocating this array can be expensive and is a
-potential point of failure if memory is limited.  Quicksort is an in-place
+disadvantages.  Merge-sort does the fewest comparisons and does not rely
+on randomization.  Unfortunately, it uses an auxilliary array during its
+merge phase.  Allocating this array can be expensive and is a potential
+point of failure if memory is limited.  Quicksort is an \emph{in-place}
+\index{in-place algorithm}
 algorithm and is a close second in terms of the number of comparisons,
 but is randomized, so this running time is not always guaranteed.
 Heap-sort does the most comparisons, but it is in-place and deterministic.
@@ -667,7 +690,7 @@ modifications of counting sort can sort integers, from any interval
 $\{a,\ldots,b\}$, in $O(#n#+b-a)$ time.  Similarly, radix sort can sort
 these integers in $O(#n#(\log_{#n#}(b-a))$ time.  Finally, both these
 algorithms can also be used to sort floating point numbers in the IEEE 754
-floating point format.  This is because the IEEE format was designed to
+floating point format.  This is because the IEEE format is designed to
 allow the comparison of two floating point numbers by comparing their values
 as if they were integers in a signed-magnitude binary representation
 \cite{ieee754}.
@@ -733,7 +756,7 @@ as if they were integers in a signed-magnitude binary representation
 
 \begin{exc}
   Find another pair of permutations of $1,2,3$ that are not correctly
-  sorted by the comparison-tree in \figref{comparison-tree-2}.
+  sorted by the comparison tree in \figref{comparison-tree-2}.
 \end{exc}
 
 \begin{exc}\exclabel{log-factorial}

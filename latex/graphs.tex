@@ -8,17 +8,33 @@
 In this chapter, we study two representations of graphs and basic
 algorithms on these representations.  
 
-Mathematically, a \emph{(directed) graph} is a pair $G=(V,E)$ where
-$V$ is a set of \emph{vertices} and $E$ is a set of ordered pairs
-of vertices called \emph{edges}.  An edge #(i,j)# is \emph{directed}
-from #i# to #j#;  #i# is called the \emph{source} of the edge and #j#
-is called the \emph{target}.  A \emph{path} in $G$ is a sequence of
+Mathematically, a \emph{(directed) graph}
+\index{graph}
+\index{directed graph}
+is a pair $G=(V,E)$ where
+$V$ is a set of \emph{vertices}
+\index{vertex}
+and $E$ is a set of ordered pairs
+of vertices called \emph{edges}.
+\index{edge}
+An edge #(i,j)# is \emph{directed}
+\index{directed edge}
+from #i# to #j#;  #i# is called the \emph{source}
+\index{source} of the edge and #j#
+is called the \emph{target}.
+\index{target}  A \emph{path}
+\index{path} in $G$ is a sequence of
 vertices $v_0,\ldots,v_k$ such that, for every $i\in\{1,\ldots,k\}$,
 the edge $(v_{i-1},v_{i})$ is in $E$.  A path $v_0,\ldots,v_k$ is a
-cycle if, additionally, the edge $(v_k,v_0)$ is in $E$.  A path (or
-cycle) is \emph{simple} if all of its vertices are unique.  If there
+\emph{cycle}
+\index{cycle}
+if, additionally, the edge $(v_k,v_0)$ is in $E$.  A path (or
+cycle) is \emph{simple}
+\index{simple path/cycle}
+if all of its vertices are unique.  If there
 is a path from some vertex $v_i$ to some vertex $v_j$ then we say that
-$v_j$ is \emph{reachable} from $v_i$.  An example of a graph is shown
+$v_j$ is \emph{reachable}
+\index{reachable vertex} from $v_i$.  An example of a graph is shown
 in \figref{graph}.
 
 \begin{figure}
@@ -41,7 +57,9 @@ joining consecutive intersections.
 
 Less obvious examples occur as soon as we realize that graphs can model
 any pairwise relationships within a set. For example, in a university
-setting we might have a timetable conflict graph whose vertices represent
+setting we might have a timetable \emph{conflict graph}
+\index{conflict graph}
+whose vertices represent
 courses offered in the university and in which the edge #(i,j)# is present
 if and only if there is at least one student that is taking both class
 #i# and class #j#.  Thus, an edge indicates that the exam for class #i#
@@ -79,6 +97,7 @@ For this reason, we discuss two broad categories of graph representations.
 \section{#AdjacencyMatrix#: Representing a Graph by a Matrix}
 \seclabel{adjacency-matrix}
 
+\index{adjacency matrix}
 An \emph{adjacency matrix} is a way of representing an #n# vertex graph
 $G=(V,E)$ by an $#n#\times#n#$ matrix, #a#, whose entries are boolean
 values.
@@ -177,6 +196,7 @@ shortest paths between all pairs of vertices in $G$ using only $O(\log
 \section{#AdjacencyLists#: A Graph as a Collection of Lists}
 \seclabel{adjacency-list}
 
+\index{adjacency list}
 \emph{Adjacency list} representations take a more vertex-centric approach.
 There are many possible implementations of adjacency lists.  In this
 section, we present a simple one.  At the end of the section, we discuss
@@ -217,7 +237,9 @@ This takes constant time.
 The #removeEdge(i,j)# operation searches through the list #adj[i]#
 until it finds #j# and then removes it:
 \codeimport{ods/AdjacencyLists.removeEdge(i,j)}
-This takes $O(\deg(#i#))$ time, where $\deg(#i#)$ (the \emph{degree} of
+This takes $O(\deg(#i#))$ time, where $\deg(#i#)$ (the \emph{degree}
+\index{degree}
+of
 $#i#$) counts the number of edges in $E$ that have $#i#$ as their source.
 
 The #hasEdge(i,j)# operation is similar;  it searches through the list
@@ -288,6 +310,7 @@ representation is an #AdjacencyLists#.
 
 \subsection{Breadth-First Search}
 
+\index{breadth-first-search}
 The \emph{bread-first-search} algorithm starts at a vertex #i# and visits,
 first the neighbours of #i#, then the neighbours of the neighbours of #i#,
 then the neighbours of the neighbours of the neighbours of #i#, and so on.
@@ -343,7 +366,7 @@ the vertices at distance 0 from #r# (#r# itself) will enter #q# before
 the vertices at distance 1, which will enter #q# before the vertices at
 distance 2, and so on.  Thus, the #bfs(g,r)# method visits vertices
 in increasing order of distance from #r# and vertices that can not be
-reached from #r# are never output at all.
+reached from #r# are never visited at all.
 
 A particularly useful application of the breadth-first-search algorithm
 is, therefore, in computing shortest paths.  To compute the shortest
@@ -358,7 +381,9 @@ by taking #p[p[j]#, #p[p[p[j]]]#, and so on we can reconstruct the
 
 \subsection{Depth-First Search}
 
-The \emph{depth-first-search} algorithm is similar to the standard
+The \emph{depth-first-search}
+\index{depth-first-search}
+algorithm is similar to the standard
 algorithm for traversing binary trees;  it first fully explores one
 subtree before returning to the current node and then exploring the
 other subtree.  Another way to think of depth-first-search is by saying
@@ -422,7 +447,9 @@ will be colored (first #grey# then) #black# before #i# is colored #black#.
 (This can be proven by contradiction, by considering any path $P$ from #i#
 to #j#.)
 
-One application of this property is the detection of cycles. Refer
+One application of this property is the detection of cycles.
+\index{cycle detection}
+Refer
 to \figref{dfs-cycle}.  Consider some cycle, $C$, that can be reached
 from #r#.  Let #i# be the first node of $C$ that is colored #grey#,
 and let #j# be the node that precedes #i# on the cycle $C$.  Then,
@@ -468,7 +495,9 @@ Adjacency-list representations of graphs were presented by
 Hopcroft and Tarjan \cite{ht73} as an alternative to the (then more
 common) adjacency-matrix representation.  This representation, as well as
 depth-first-search, played a major part in the celebrated Hopcroft-Tarjan
-planarity testing algorithm that can determine, in $O(#n#)$ time, if
+planarity testing algorithm 
+\index{planarity testing}
+that can determine, in $O(#n#)$ time, if
 a graph can be drawn, in the plane, and in such a way that no pair of
 edges cross each other \cite{ht74}.
 
@@ -488,6 +517,7 @@ edge $(#j#,#i#)$ is present.
 \end{figure}
 
 \begin{exc}
+  \index{incidence matrix}
   The \emph{incidence matrix} representation of a graph,
   $G$, is an $#n#\times#m#$ matrix, $A$, where
   \[
@@ -513,6 +543,8 @@ edge $(#j#,#i#)$ is present.
 \end{exc}
 
 \begin{exc}
+  \index{connected graph}
+  \index{graph!connected}
   Let $G$ be an undirected graph.  We say $G$ is \emph{connected} if,
   for every pair of vertices #i# and #j# in $G$, there is a path from
   $#i#$ to $#j#$ (since $G$ is undirected, there is also a path from #j#
@@ -520,6 +552,7 @@ edge $(#j#,#i#)$ is present.
 \end{exc}
 
 \begin{exc}
+  \index{connected components}
   Let $G$ be an undirected graph.  A \emph{connected-component labelling}
   of $G$ partitions the vertices of $G$ into maximal sets, each of which
   forms a connected subgraph.  Show how to compute a connected component
@@ -527,6 +560,7 @@ edge $(#j#,#i#)$ is present.
 \end{exc}
 
 \begin{exc}
+  \index{spanning forest}
   Let $G$ be an undirected graph.  A \emph{spanning forest} of $G$ is a
   collection of trees, one per component, whose edges are edges of $G$
   and whose vertices contain all vertices of $G$.  Show how to compute
@@ -534,6 +568,8 @@ edge $(#j#,#i#)$ is present.
 \end{exc}
 
 \begin{exc}
+  \index{strongly-connected graph}
+  \index{graph!strongly-connected}
   We say that a graph $G$ is \emph{strongly-connected} if, for every
   pair of vertices #i# and #j# in $G$, there is a path from $#i#$ to
   $#j#$. Show how to test if $G$ is strongly-connected in $O(#n#+#m#)$
@@ -556,6 +592,8 @@ edge $(#j#,#i#)$ is present.
 \end{exc}
 
 \begin{exc}
+  \index{universal sink}
+  \index{celebrity|see{universal sink}}
   A \emph{universal sink} in a graph $G$ is a vertex that is the target
   of $#n#-1$ edges and the source of no edges.\footnote{A universal sink,
   #v#, is also sometimes called a \emph{celebrity}: Everyone in the room

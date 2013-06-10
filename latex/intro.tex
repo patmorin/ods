@@ -10,25 +10,35 @@ built around data structures.
 How can this be?  If we stop to think about it, we realize that we
 interact with data structures constantly.
 \begin{itemize}
-  \item  Open a file: File system data structures are used to locate
+  \item  Open a file: File system 
+    \index{file system}
+    data structures are used to locate
     the parts of that file on disk so they can be retrieved.  This isn't
     easy; disks contain hundreds of millions of blocks.  The contents of your
     file could be stored on any one of them.
   \item Look up a contact on your phone:  A data
-    structure is used to lookup a phone number based on partial
+    structure is used to lookup a phone number in your contact list
+    \index{contact list}
+    based on partial
     information even before you finish dialing/typing.  This isn't easy;
     your phone may contain information about a lot of people---everyone
     you have ever contacted via phone or email---and your phone doesn't
     have a very fast processor or a lot of memory.
-  \item Log in to your favourite social network:  The network servers
+  \item Log in to your favourite social network:
+    \index{social network}
+    The network servers
     use your login information to look up your account information.
     This isn't easy; the most popular social networks have hundreds of
     millions of active users.
-  \item Do a web search: The search engine uses data structures to find
+  \item Do a web search:
+    \index{web search}
+    The search engine uses data structures to find
     the web pages containing your search terms.  This isn't easy; there
     are over 8.5 billion web pages on the Internet and each page contains
     a lot of potential search terms.
-  \item Phone emergency services (9-1-1):  The emergency services network
+  \item Phone emergency services (9-1-1):
+    \index{emergency services}\index{9-1-1}
+    The emergency services network
     looks up your phone number in a data structure that maps phone numbers
     to addresses so that police cars, ambulances, or fire trucks can be
     sent there without delay. This is important;  the person making the
@@ -75,7 +85,9 @@ eon in computer time, but a person might be willing to put up with it
 %3 seconds.  Doing a million searches would take $3$ million seconds,
 %or roughly 34 days.  This is starting to get beyond reasonable.
 
-\paragraph{Bigger data sets:} Now consider a company like Google, that
+\paragraph{Bigger data sets:} Now consider a company like Google,
+\index{Google}
+that
 indexes over 8.5 billion web pages.  By our calculations, doing any kind
 of query over this data would take at least 8.5 seconds.  We already
 know that this isn't the case; web searches complete in much less than
@@ -128,13 +140,15 @@ them now and come back to them later if necessary.
 
 \section{Interfaces}
 \seclabel{interfaces}
-
 When discussing data structures, it is important to understand the
 difference between a data structure's interface and its implementation.
 An interface describes what a data structure does, while an implementation
 describes how the data structure does it.
 
-An \emph{interface}, sometimes also called an \emph{abstract data
+An \emph{interface},
+\index{interface}
+\index{abstract data type|see{interface}}
+sometimes also called an \emph{abstract data
 type}, defines the set of operations supported by a data structure and
 the semantics, or meaning, of those operations.  An interface tells us
 nothing about how the data structure implements these operations; it only
@@ -166,11 +180,14 @@ Notice that the #remove()# operation takes no argument.  The #Queue#'s
 There are many possible queueing disciplines, the most common of which
 include FIFO, priority, and LIFO.
 
-A \emph{FIFO (first-in-first-out) #Queue#}, which is illustrated in
+A \emph{FIFO (first-in-first-out) #Queue#},
+\index{FIFO queue}
+\index{queue!FIFO}
+which is illustrated in
 \figref{queue}, removes items in the same order they were added, much
 in the same way a queue (or line-up) works when checking out at a cash
 register in a grocery store.  This is the most common kind of #Queue#
-so the qualifier FIFO is often ommitted.  In other texts, the #add(x)#
+so the qualifier FIFO is often omitted.  In other texts, the #add(x)#
 and #remove()# operations on a FIFO #Queue# are often called #enqueue(x)#
 and #dequeue()#, respectively.
 
@@ -180,7 +197,11 @@ and #dequeue()#, respectively.
   \figlabel{queue}
 \end{figure}
 
-A \emph{priority #Queue#}, illustrated in \figref{prioqueue}, always
+A \emph{priority #Queue#},
+\index{priority queue}
+\index{priority queue|seealso{heap}}
+\index{queue!priority}
+illustrated in \figref{prioqueue}, always
 removes the smallest element from the #Queue#, breaking ties arbitrarily.
 This is similar to the way in which patients are triaged in a hospital
 emergency room.  As patients arrive they are evaluated and then placed in
@@ -201,6 +222,10 @@ other texts.
 %important customer waiting on an upgrade.
 
 A very common queueing discipline is the LIFO (last-in-first-out)
+\index{LIFO queue}
+\index{LIFO queue|seealso{stack}}
+\index{queue!LIFO}
+\index{stack}
 discipline, illustrated in \figref{stack}.  In a \emph{LIFO Queue},
 the most recently added element is the next one removed.  This is best
 visualized in terms of a stack of plates; plates are placed on the top of
@@ -217,7 +242,9 @@ disciplines.
 \end{figure}
 
 
-A #Deque# is a generalization of both the FIFO #Queue# and LIFO #Queue#
+A #Deque#
+\index{deque}
+is a generalization of both the FIFO #Queue# and LIFO #Queue#
 (#Stack#).   A #Deque# represents a sequence of elements, with a front
 and a back.  Elements can be added at the front of the sequence or
 the back of the sequence.  The names of the #Deque# operations
@@ -231,7 +258,9 @@ using #addLast(x)# and #removeFirst()#.
 
 This book will talk very little about the FIFO #Queue#, #Stack#, or
 #Deque# interfaces.  This is because these interfaces are subsumed by the
-#List# interface.  A #List#, illustrated in \figref{list}, represents a
+#List# interface.  A #List#,
+\index{List@#List#}
+illustrated in \figref{list}, represents a
 sequence, $#x#_0,\ldots,#x#_{#n#-1}$, of values.  The #List# interface
 includes the following operations:
 
@@ -277,7 +306,9 @@ operations in constant time per operation.
 
 \subsection{The #USet# Interface: Unordered Sets}
 
-The #USet# interface represents an unordered set of unique elements, which
+The #USet#
+\index{USet@#USet#}
+interface represents an unordered set of unique elements, which
 mimics a mathematical \emph{set}. A #USet# contains #n# \emph{distinct}
 elements; no element appears more than once; the elements are in no
 specific order.  A #USet# supports the following operations:
@@ -303,8 +334,11 @@ are nevertheless treated as equal.\javaonly{\footnote{In Java, this is
 done by overriding the class's #equals(y)# and #hashCode()# methods.}}
 Such a distinction is  useful because it allows for the creation of
 \emph{dictionaries} or \emph{maps} that map keys onto values.
+\index{dictionary}
+\index{map}
 
 To create a dictionary/map, one forms compound objects called #Pair#s,
+\index{pair}
 each of which contains a \emph{key} and a \emph{value}. Two #Pair#s
 are treated as equal if their keys are equal.  If we store some pair
 $(#k#,#v#)$ in a #USet# and then later call the #find(x)# method using
@@ -315,6 +349,7 @@ words, it is possible to recover the value, #v#, given only the key, #k#.
 \subsection{The #SSet# Interface: Sorted Sets}
 \seclabel{sset}
 
+\index{SSet@#SSet#}
 The #SSet# interface represents a sorted set of elements.  An #SSet#
 stores elements from some total order, so that any two elements #x#
 and #y# can be compared.  In code examples, this will be done with a
@@ -327,6 +362,7 @@ method called #compare(x,y)# in which
         {}=0 & \text{if $#x#=#y#$}
       \end{cases}
 \]
+\index{compare@#compare(x,y)#}
 An #SSet# supports the #size()#, #add(x)#, and #remove(x)# methods with
 exactly the same semantics as in the #USet# interface.  The difference
 between a #USet# and an #SSet# is in the #find(x)# method:
@@ -338,7 +374,9 @@ between a #USet# and an #SSet# is in the #find(x)# method:
 \end{enumerate}
 
 This version of the #find(x)# operation is sometimes referred to
-as a \emph{successor search}.  It differs in a fundamental way from
+as a \emph{successor search}.
+\index{successor search}
+It differs in a fundamental way from
 #USet.find(x)# since it returns a meaningful result even when there is
 no element equal to #x# in the set.
 
@@ -368,6 +406,7 @@ the very good (and free) textbook on mathematics for computer science
 
 \subsection{Exponentials and Logarithms}
 
+\index{exponential}
 The expression $b^x$ denotes the number $b$ raised to the power of $x$.
 If $x$ is a positive integer, then this is just the value of $b$
 multiplied by itself $x-1$ times:
@@ -379,12 +418,15 @@ When $b$ is not an integer, we can still define exponentiation in terms
 of the exponential function $e^x$ (see below), which is itself defined in
 terms of the exponential series, but this is best left to a calculus text.
 
+\index{logarithm}
 In this book, the expression $\log_b k$ denotes the \emph{base-$b$ logarithm}
 of $k$.  That is, the unique value $x$ that satisfies
 \[
     b^{x} = k  \enspace .
 \]
 Most of the logarithms in this book are base 2 (\emph{binary logarithms}),
+\index{binary logarithm}
+\index{logarithm!binary} 
 in which case we drop the base, so that $\log k$ is shorthand for
 $\log_2 k$.
 
@@ -397,9 +439,13 @@ possible answer.  Therefore, the number of comparison done by binary
 search when there are initially at most $n+1$ possible answers is at
 most $\lceil\log_2(n+1)\rceil$.
 
+\index{natural logarithm}
+\index{logarithm!natural} 
 Another logarithm that comes up several times in this book is the
 \emph{natural logarithm}.  Here we use the notation $\ln k$ to denote
 $\log_e k$, where $e$ --- \emph{Euler's constant} --- is given by
+\index{Euler's constant}
+\index{e@$e$}
 \[
    e = \lim_{n\rightarrow\infty} \left(1+\frac{1}{n}\right)^n
    \approx  2.71828 \enspace .
@@ -427,14 +473,18 @@ For example, we can use these two manipulations to compare the natural and binar
 \subsection{Factorials}
 \seclabel{factorials}
 
+\index{factorial}
 In one or two places in this book, the \emph{factorial} function is used.
 For a non-negative integer $n$, the notation $n!$ (pronounced ``$n$ factorial'') is defined to mean 
 \[
    n! = 1\cdot2\cdot3\cdot\cdots\cdot n \enspace .
 \]
 Factorials appear because $n!$ counts the number of distinct
-permutations, i.e., orderings, of $n$ distinct elements.  For the special case $n=0$, $0!$ is defined as 1. 
+permutations, i.e., orderings, of $n$ distinct elements.
+\index{permutation}
+For the special case $n=0$, $0!$ is defined as 1. 
 
+\index{Stirling's Approximation}
 The quantity $n!$ can be approximated using \emph{Stirling's Approximation}:
 \[
 	n! 
@@ -452,6 +502,7 @@ Stirling's Approximation also approximates $\ln(n!)$:
 $\ln(n!)=\ln 1 + \ln 2  + \cdots + \ln n$ by the integral
 $\int_1^n \ln n\,\mathrm{d}n = n\ln n - n +1$.)
 
+\index{binomial coefficients}
 Related to the factorial function are the \emph{binomial coefficients}.
 For a non-negative integer $n$ and an integer $k\in\{0,\ldots,n\}$,
 the notation $\binom{n}{k}$ denotes:
@@ -465,6 +516,8 @@ set $\{1,\ldots,n\}$.
 
 \subsection{Asymptotic Notation}
 
+\index{asymptotic notation}
+\index{big-Oh notation}
 When analyzing data structures in this book, we want to talk about
 the running times of various operations.  The exact running times will,
 of course, vary from computer to computer and even from run to run on an
@@ -616,6 +669,10 @@ functions and asymptotic notation differently.
 \subsection{Randomization and Probability}
 \seclabel{randomization}
 
+\index{randomization}
+\index{probability}
+\index{randomized data structure}
+\index{randomized algorithm}
 Some of the data structures presented in this book are \emph{randomized};
 they make random choices that are independent of the data being stored
 in them or the operations being performed on them.  For this reason,
@@ -623,9 +680,13 @@ performing the same set of operations more than once using these
 structures could result in different running times.  When analyzing these
 data structures we are interested in their average or \emph{expected}
 running times.
+\index{expected running time}
+\index{running time!expected}
 
 Formally, the running time of an operation on a randomized data structure
-is a random variable, and we want to study its \emph{expected value}. For
+is a random variable, and we want to study its \emph{expected value}.
+\index{expected value}
+For
 a discrete random variable $X$ taking on values in some countable
 universe $U$, the expected value of $X$, denoted by $\E[X]$, is given
 by the formula
@@ -640,7 +701,9 @@ in the structure nor that the sequence of operations performed on the
 data structure is random.
 
 One of the most important properties of expected values is \emph{linearity
-of expectation}.  For any two random variables $X$ and $Y$,
+of expectation}.
+\index{linearity of expectation}
+For any two random variables $X$ and $Y$,
 \[
    \E[X+Y] = \E[X] + \E[Y] \enspace .
 \]
@@ -651,10 +714,14 @@ More generally, for any random variables $X_1,\ldots,X_k$,
 Linearity of expectation allows us to break down complicated random variables (like the left hand sides of the above equations) into sums of simpler random variables (the right hand sides).
 
 A useful trick, that we will use repeatedly, is defining \emph{indicator
-random variables}.  These binary variables are useful when we want to
+random variables}.
+\index{indicator random variable}
+These binary variables are useful when we want to
 count something and are best illustrated by an example.  Suppose we toss
 a fair coin $k$ times and we want to know the expected number of times
-the coin turns up as heads.  Intuitively, we know the answer is $k/2$,
+the coin turns up as heads.
+\index{coin toss}
+Intuitively, we know the answer is $k/2$,
 but if we try to prove it using the definition of expected value, we get
 \begin{align*}
    \E[X] & = \sum_{i=0}^k i\cdot\Pr\{X=i\} \\
@@ -696,9 +763,14 @@ a probability of $1/2$.
 In this book, we will analyze the theoretical running times of operations
 on the data structures we study.  To do this precisely, we need a
 mathematical model of computation.  For this, we use the \emph{#w#-bit
-word-RAM} model.  RAM stands for Random Access Machine. In this model, we
+word-RAM}
+\index{word-RAM}
+\index{RAM}
+model.  RAM stands for Random Access Machine. In this model, we
 have access to a random access memory consisting of \emph{cells}, each of
-which stores a #w#-bit \emph{word}.  This implies that a memory cell can
+which stores a #w#-bit \emph{word}.
+\index{word}
+This implies that a memory cell can
 represent, for example, any integer in the set $\{0,\ldots,2^{#w#}-1\}$.
 
 In the word-RAM model, basic operations on words take constant time.
@@ -710,8 +782,8 @@ Any cell can be read or written in constant time.  A computer's memory
 is managed by a memory management system from which we can allocate or
 deallocate a block of memory of any size we would like. Allocating a
 block of memory of size $k$ takes $O(k)$ time and returns a reference
-to the newly-allocated memory block.  This reference is small enough to
-be represented by a single word.
+(a pointer) to the newly-allocated memory block.  This reference is
+small enough to be represented by a single word.
 
 The word-size #w# is a very important parameter of this model.  The only
 assumption we will make about #w# is the lower-bound $#w# \ge \log #n#$,
@@ -741,10 +813,15 @@ that matter most:
 \begin{description}
   \item[Correctness:] The data structure should correctly implement
     its interface.
+    \index{correctness}
   \item[Time complexity:] The running times of operations on the data
     structure should be as small as possible.
+    \index{time complexity}
+    \index{complexity!time}
   \item[Space complexity:] The data structure should use as little memory
     as possible.
+    \index{space complexity}
+    \index{complexity!space}
 \end{description}
 
 %Sometimes these three requirements are in conflict with each other. For
@@ -764,20 +841,28 @@ When studying running times in the context of data structures we tend to
 come across three different kinds of running time guarantees:
 
 \begin{description}
-\item[Worst-case running times:] These are the strongest kind of running
+\item[Worst-case running times:] 
+  \index{running time}
+  \index{running time!worst-case}
+  \index{worst-case running time}
+  These are the strongest kind of running
   time guarantees.  If a data structure operation has a worst-case
   running time of $f(#n#)$, then one of these operations \emph{never}
   takes longer than $f(#n#)$ time.
-
-\item[Amortized running times:] If we say that the amortized running
+\item[Amortized running times:]
+  \index{running time!amortized}
+  \index{amortized running time}
+  If we say that the amortized running
   time of an operation in a data structure is $f(#n#)$, then this means that
   the cost of a typical operation is at most $f(#n#)$.  More precisely,
   if a data structure has an amortized running time of $f(#n#)$,
   then a sequence of $m$ operations takes at most $mf(#n#)$ time.
   Some individual operations may take more than $f(#n#)$ time but the
   average, over the entire sequence of operations, is at most $f(#n#)$.
-
-\item[Expected running times:] If we say that the expected running time
+\item[Expected running times:] 
+  \index{running time!expected}
+  \index{expected running time}
+  If we say that the expected running time
   of an operation on a data structure is $f(#n#)$, this means that the
   actual running time is a random variable (see \secref{randomization})
   and the expected value of this random variable is at most $f(#n#)$.
@@ -789,6 +874,7 @@ To understand the difference between worst-case, amortized, and expected
 running times, it helps to consider a financial example.  Consider the
 cost of buying a house:
 \paragraph{Worst-case versus amortized cost:}
+\index{amortized cost}
 Suppose that a home costs \$120\,000.  In order to buy this home,
 we might get a 120 month (10 year) mortgage with monthly payments of
 \$1\,200 per month.  In this case, the worst-case monthly cost of paying
@@ -804,6 +890,7 @@ This is much less than the \$1\,200 per month we would have to pay if
 we took out a mortgage.
 
 \paragraph{Worst-case versus expected cost:}
+\index{expected cost}
 Next, consider the issue of fire insurance on our \$120\,000 home.
 By studying hundreds of thousands of cases, insurance companies have
 determined that the expected amount of fire damage caused to a home
@@ -849,6 +936,7 @@ source code for the algorithms being analyzed.  This means that
 some equations contain variables also found in the source code.
 These variables are typeset consistently, both within the source code
 and within equations.  The most common such variable is the variable #n#
+\index{n@#n#}
 that, without exception, always refers to the number of items currently
 stored in the data structure.
 
@@ -858,7 +946,9 @@ Tables~\ref{tab:summary-i} and \ref{tab:summary-ii} summarize the
 performance of data structures in this book that implement each of the
 interfaces, #List#, #USet#, and #SSet#, described in \secref{interfaces}.
 \Figref{dependencies} shows the dependencies between various chapters in
-this book.  A dashed arrow indicates only a weak dependency, in which
+this book.
+\index{dependencies}
+A dashed arrow indicates only a weak dependency, in which
 only a small part of the chapter depends on a previous chapter or only
 the main results of the previous chapter.
 
@@ -937,7 +1027,10 @@ the main results of the previous chapter.
 
 The #List#, #USet#, and #SSet# interfaces described in
 \secref{interfaces} are influenced by the Java Collections Framework
-\cite{oracle_collections}.  These are essentially simplified versions of
+\cite{oracle_collections}.
+\index{Java Collections Framework}
+\index{JCF|see{Java Collections Framework}}
+These are essentially simplified versions of
 the #List#, #Set#, #Map#, #SortedSet#, and #SortedMap# interfaces found in
 the Java Collections Framework.  \javaonly{Indeed, the accompanying source
 code includes wrapper classes for making #USet# and #SSet# implementations
@@ -1029,6 +1122,7 @@ many Java tutorials online \cite{oracle_tutorials}.}
 \end{exc}
 
 \begin{exc}
+  \index{Dyck word}
   A \emph{Dyck word} is a sequence of +1's and -1's with the property that
   the sum of any prefix of the sequence is never negative.  For example,
   $+1,-1,+1,-1$ is a Dyck word, but $+1,-1,-1,+1$ is not a Dyck word
@@ -1037,6 +1131,8 @@ many Java tutorials online \cite{oracle_tutorials}.}
 \end{exc}
 
 \begin{exc}
+  \index{matched string}
+  \index{string!matched}
   A \emph{matched string} is a sequence of \{, \}, (, ), [, and ]
   characters that are properly matched.  For example, ``\{\{()[]\}\}''
   is a matched string, but this ``\{\{()]\}'' is not, since the second \{
@@ -1052,6 +1148,7 @@ many Java tutorials online \cite{oracle_tutorials}.}
 \end{exc}
 
 \begin{exc}
+  \index{Bag@#Bag#}
   Using a #USet#, implement a #Bag#.  A #Bag# is like a #USet#---it
   supports the #add(x)#, #remove(x)# and #find(x)# methods---but it allows
   duplicate elements to be stored.  The #find(x)# operation in a #Bag#

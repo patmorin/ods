@@ -53,10 +53,16 @@ side of \figref{rbs-lvc}) than we are to get a very unbalanced tree
 (the left side of \figref{rbs-lvc}).
 
 We can formalize this notion by studying random binary search trees.
-A \emph{random binary search tree} of size #n# is obtained in the
+A \emph{random binary search tree}
+\index{random binary search tree}
+\index{binary search tree!random}
+of size #n# is obtained in the
 following way:  Take a random permutation, $#x#_0,\ldots,#x#_{#n#-1}$,
 of the integers $0,\ldots,#n#-1$ and add its elements, one by one,
-into a #BinarySearchTree#.  By \emph{random permutation} we mean that
+into a #BinarySearchTree#.  By \emph{random permutation}
+\index{permutation!random}
+\index{random permutation}
+we mean that
 each of the possible $#n#!$ permutations (orderings) of $0,\ldots,#n#-1$
 is equally likely, so that the probability of obtaining any particular
 permutation is $1/#n#!$.
@@ -70,7 +76,9 @@ size #n#.
 Before we can present our main result about random binary search trees,
 we must take some time for a short digression to discuss a type of number
 that comes up frequently when studying randomized structures. For a
-non-negative integer, $k$, the $k$-th \emph{harmonic number}, denoted
+non-negative integer, $k$, the $k$-th \emph{harmonic number},
+\index{harmonic number}
+denoted
 $H_k$, is defined as
 \[
   H_k = 1 + 1/2 + 1/3 + \cdots + 1/k \enspace .
@@ -237,6 +245,7 @@ search tree.  In particular, it does not depend on a random choice of
 \section{#Treap#: A Randomized Binary Search Tree}
 \seclabel{treap}
 
+\index{Treap@#Treap#}
 The problem with random binary search trees is, of course, that they are
 not dynamic.  They don't support the #add(x)# or #remove(x)# operations
 needed to implement the #SSet# interface.  In this section we describe
@@ -255,6 +264,7 @@ also obey the \emph{heap property}:
 \begin{itemize}
 \item (Heap Property)  At every node #u#, except the root, 
       $#u.parent.p# < #u.p#$.
+      \index{heap property}
 \end{itemize}
 In other words, each node has a priority smaller than that of its two
 children.  An example is shown in \figref{treap}.
@@ -292,11 +302,11 @@ values
 into a #BinarySearchTree#.
 
 Since the priorities are chosen randomly, this is equivalent to taking a
-random permutation of the keys --- in this case the permutation is
+random permutation of the keys---in this case the permutation is
 \[
   \langle 3, 1, 0, 5, 9, 4, 7, 6, 8, 2 \rangle
 \]
---- and adding these to a #BinarySearchTree#.  But this means that the
+---and adding these to a #BinarySearchTree#.  But this means that the
 shape of a treap is identical to that of a random binary search tree.
 In particular, if we replace each key #x# by its rank,\footnote{The
 rank of an element #x# in a set $S$ of elements is the number of
@@ -320,11 +330,15 @@ require any assumptions about the randomness in the keys.
 operation efficiently. However, the real benefit of a #Treap# is that
 it can support the #add(x)# and #delete(x)# operations.  To
 do this, it needs to perform rotations in order to maintain the heap property.  Refer to \figref{rotations}.
-A \emph{rotation} in a binary
+A \emph{rotation}
+\index{rotation}
+in a binary
 search tree is a local modification that takes a parent #u# of a node #w#
 and makes #w# the parent of #u#, while preserving the binary search tree
 property. Rotations come in two flavours: \emph{left} or \emph{right}
 depending on whether #w# is a right or left child of #u#, respectively.
+\index{left rotation}
+\index{right rotation}
 
 \begin{figure}
   \begin{center}
@@ -457,7 +471,7 @@ a #Treap#.
 
 Random binary search trees have been studied extensively.  Devroye
 \cite{d88} gives a proof of \lemref{rbs} and related results. There are
-much stronger results in the literature as well.  The most impressive
+much stronger results in the literature as well, the most impressive
 of which is due to Reed \cite{r03}, who shows that the expected height
 of a random binary search tree is
 \[
@@ -480,7 +494,9 @@ hashing #u#'s address in memory\javaonly{ (in 32-bit Java, this is equivalent
 to hashing #u.hashCode()#)}.  Although a number of hash functions will
 probably work well for this in practice, for the important parts of the
 proof of \lemref{rbs} to remain valid, the hash function should be randomized
-and have the \emph{min-wise independent property}:  For any distinct
+and have the \emph{min-wise independent property}:
+\index{min-wise independence}
+For any distinct
 values $x_1,\ldots,x_k$, each of the hash values $h(x_1),\ldots,h(x_k)$
 should be distinct with high probability and, for each $i\in\{1,\ldots,k\}$,
 \[
@@ -489,9 +505,14 @@ should be distinct with high probability and, for each $i\in\{1,\ldots,k\}$,
 for some constant $c$.
 One such class of hash functions that is easy to implement and fairly
 fast is \emph{tabulation hashing} (\secref{tabulation}).
+\index{tabulation hashing}
+\index{hashing!tabulation}
 
 Another #Treap# variant that doesn't store priorities at each node is
-the randomized binarysearch tree of Mart\'\i nez and Roura \cite{mr98}.
+the randomized binary search tree
+\index{randomized binary search tree}
+\index{binary search tree!randomized}
+of Mart\'\i nez and Roura \cite{mr98}.
 In this variant, every node, #u#, stores the size, #u.size#, of the
 subtree rooted at #u#.  Both the #add(x)# and #remove(x)# algorithms are
 randomized. The algorithm for adding #x# to the subtree rooted at #u#
@@ -593,6 +614,8 @@ stored in treap nodes have no use other than keeping the treap balanced.
 
 
 \begin{exc}
+  \index{finger}
+  \index{finger search!in a treap}
   This exercise works out the details of how one can efficiently search
   a #Treap# given a pointer that is close to the node we are searching for.
   \begin{enumerate}
@@ -621,6 +644,7 @@ stored in treap nodes have no use other than keeping the treap balanced.
 \end{exc}
 
 \begin{exc}
+  \index{TreapList@#TreapList#}
   Implement a #TreapList#, an implementation of the #List# interface
   as a treap.  Each node in the treap should store a list item, and an
   in-order traversal of the treap finds the items in the same order that

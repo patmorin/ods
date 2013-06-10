@@ -1,6 +1,8 @@
 \chapter{Red-Black Trees}
 \chaplabel{redblack}
 
+\index{binary search tree!red-black}
+\index{red-black tree}
 In this chapter, we present red-black trees, a version of binary search
 trees with logarithmic height.  Red-black trees are one of the most
 widely-used data structures.  They appear as the primary search structure
@@ -28,8 +30,8 @@ treaps also have this property in the expected sense. See
 
 However, the nice properties of red-black trees come with a price:
 implementation complexity. Maintaining a bound of $2\log #n#$ on the
-height is not easy. It requires a careful analysis of a number of cases
-and.  We must make sure that the implementation does exactly the right
+height is not easy. It requires a careful analysis of a number of cases.
+We must ensure that the implementation does exactly the right
 thing in each case.  One misplaced rotation or change of colour produces
 a bug that can be very difficult to understand and track down.
 
@@ -79,8 +81,11 @@ want to add a leaf #u# as the child of some node #w# on the second-last
 level, then we simply make #u# a child of #w#.  This certainly maintains
 the height property, but could violate the degree property;  if #w#
 had four children prior to adding #u#, then #w# now has five children.
-In this case, we split #w# into two nodes, #w# and #w#', having
-two and three children, respectively.  But now #w#' has no parent,
+In this case, we \emph{split}
+\index{split}
+#w# into two nodes, #w# and #w#', having
+two and three children, respectively.
+But now #w#' has no parent,
 so we recursively make #w#' a child of #w#'s parent.  Again, this may
 cause #w#'s parent to have too many children in which case we split it.
 This process goes on until we reach a node that has fewer than 4 children,
@@ -135,8 +140,9 @@ has three or four children, then we take one of these children from #w'#
 and give it to #w#. Now #w# has two children and #w'# has two or three
 children and we are done.
 
-On the other hand, if #w'# has only two children, then we merge #w#
-and #w'# into a single node, #w#, that has three children.  Next we
+On the other hand, if #w'# has only two children, then we \emph{merge}
+\index{merge}
+#w# and #w'# into a single node, #w#, that has three children.  Next we
 recursively remove #w'# from the parent of #w'#.  This process ends when
 we reach a node, #u#, where #u# or its sibling has more than two children;
 or we reach the root.  In the latter case, if the root is left with only
@@ -151,8 +157,12 @@ the process of removing a leaf finishes after at most $\log #n#$ steps.
 \seclabel{redblacktree}
 
 A red-black tree is a binary search tree in which each node, #u#,
-has a \emph{colour} which is either \emph{red} or \emph{black}.  Red is
+has a \emph{colour}
+\index{colour}
+which is either \emph{red} or \emph{black}.  Red is
 represented by the value $0$ and black by the value $1$.
+\index{red node}
+\index{black node}
 \javaimport{ods/RedBlackTree.red.black.Node<T>}
 \cppimport{ods/RedBlackTree.RedBlackNode.red.black}
 
@@ -160,11 +170,13 @@ Before and after any operation on a red-black tree, the following two
 properties are satisfied. Each property is defined both in terms of the
 colours red and black, and in terms of the numeric values 0 and 1.
 \begin{prp}[black-height]
+  \index{black-height property}
   There are the same number of black nodes on every root to leaf
   path. (The sum of the colours on any root to leaf path is the same.)
 \end{prp}
 
 \begin{prp}[no-red-edge]
+  \index{no-red-edge property}
   No two red nodes are adjacent.  (For any node #u#, except the root,
   $#u.colour# + #u.parent.colour# \ge 1$.)
 \end{prp}
@@ -221,7 +233,7 @@ same length.  In other words, $T'$ is a 2-4 tree!
 
 The 2-4 tree $T'$ has $#n#+1$ leaves that correspond to the $#n#+1$
 external nodes of the red-black tree.  Therefore, this tree has height
-$\log (#n#+1)$. Now, every root to leaf path in the 2-4 tree corresponds
+at most $\log (#n#+1)$. Now, every root to leaf path in the 2-4 tree corresponds
 to a path from the root of the red-black tree $T$ to an external node.
 The first and last node in this path are black and at most one out of
 every two internal nodes is red, so this path has at most $\log(#n#+1)$
@@ -272,20 +284,24 @@ Of course, during all of this we must still maintain the no-red-edge
 property and the black-height property.  While it is no longer surprising
 that this can be done, there are a large number of cases that have to
 be considered if we try to do a direct simulation of a 2-4 tree by a
-red-black tree.  At some point, it just becomes simpler disregard the
+red-black tree.  At some point, it just becomes simpler to disregard the
 underlying 2-4 tree and work directly towards maintaining the properties
 of the red-black tree.
 
 \subsection{Left-Leaning Red-Black Trees}
 
+\index{red-black tree}
+\index{left-leaning red-black tree}
 No single definition of a red-black trees exists.  Rather, there are
 a family of structures that manage to maintain the black-height
 and no-red-edge properties during #add(x)# and #remove(x)#
 operations. Different structures do this in different ways.
 Here, we implement a data structure that we call a #RedBlackTree#.
+\index{RedBlackTree@#RedBlackTree#}
 This structure implements a particular variant of red-black trees that
 satisfies an additional property:
 \begin{prp}[left-leaning]\prplabel{left-leaning}\prplabel{redblack-last}
+  \index{left-leaning property}
   At any node #u#, if #u.left# is black, then #u.right# is black.
 \end{prp}
 Note that the red-black tree shown in \figref{redblack-example}  does
@@ -320,9 +336,10 @@ The #pullBlack(u)# method reverses this operation:
 The #flipLeft(u)# method swaps the colours of #u# and #u.right#
 and then performs a left rotation at #u#.  This method reverses the
 colours of these two nodes as well as their parent-child relationship:
-\codeimport{ods/RedBlackTree.flipLeft(u)} The #flipLeft(u)# operation
+\codeimport{ods/RedBlackTree.flipLeft(u)}
+The #flipLeft(u)# operation
 is especially useful in restoring the left-leaning property at a node
-$u$ that violates it (because #u.left# is black and #u.right# is red).
+#u# that violates it (because #u.left# is black and #u.right# is red).
 In this special case, we can be assured that this operation preserves both
 the black-height and no-red-edge properties.  The #flipRight(u)# operation
 is symmetric with #flipLeft(u)# then the roles of left and right reversed.
@@ -389,10 +406,10 @@ $O(\log #n#)$ time.
 \subsection{Removal}
 
 The #remove(x)# operation in a #RedBlackTree# is the most complicated
-to implement, and this is true of all known implementations.  Just like the
-#remove(x)# operation in a \texttt{BinarySearchTree}, this operation
-boils down to finding a node #w# with only one child, #u#, and splicing
-#w# out of the tree by having #w.parent# adopt #u#.
+to implement, and this is true of all known red-black tree variants.
+Just like the #remove(x)# operation in a \texttt{BinarySearchTree},
+this operation boils down to finding a node #w# with only one child,
+#u#, and splicing #w# out of the tree by having #w.parent# adopt #u#.
 
 The problem with this is that, if #w# is black, then the black-height
 property will now be violated at #w.parent#.  We may avoid this problem,
@@ -416,10 +433,10 @@ if #u#'s parent violates the left-leaning property and, if so, fixing it.
 \codeimport{ods/RedBlackTree.removeFixup(u)}
 
 The #removeFixup(u)# method is illustrated in \figref{rb-removefix}.
-Again, the following text will be very difficult, if not impossible,
-to follow without referring to \figref{rb-removefix}.
-Each iteration of the loop in #removeFixup(u)# processes the double-black
-node #u#, based on one of four cases:
+Again, the following text will be difficult, if not impossible, to follow
+without referring to \figref{rb-removefix}.  Each iteration of the loop
+in #removeFixup(u)# processes the double-black node #u#, based on one
+of four cases:
 
 \begin{figure}
   \begin{center}
@@ -536,7 +553,9 @@ that the total time spent splitting, merging, and borrowing in a 2-4
 tree is $O(m)$, then this implies \thmref{redblack-amortized}.
 
 The proof of this theorem for 2-4 trees uses the potential
-method of amortized analysis.\footnote{See the proofs of
+method
+\index{potential method}
+of amortized analysis.\footnote{See the proofs of
 \lemref{dualarraydeque-amortized} and \lemref{selist-amortized} for
 other applications of the potential method.} Define the potential of an
 internal node #u# in a 2-4 tree as
@@ -591,8 +610,12 @@ trees.  These use recursion along with a simulation of top-down splitting
 and merging in 2-4 trees. The combination of these two techniques makes
 for particularly short and elegant code.
 
-A related, and older, data structure is the AVL tree \cite{avl62}.
-AVL trees are \emph{height-balanced}: At each node $u$, the height
+A related, and older, data structure is the \emph{AVL tree} \cite{avl62}.
+\index{AVL tree}
+AVL trees are \emph{height-balanced}:
+\index{height-balanced}
+\index{binary search tree!height balanced}
+At each node $u$, the height
 of the subtree rooted at #u.left# and the subtree rooted at #u.right#
 differ by at most one.  It follows immediately that, if $F(h)$ is the
 minimum number of leaves in a tree of height $h$, then $F(h)$ obeys the
@@ -653,6 +676,12 @@ there is no analogue of \thmref{redblack-amortized} for those structures.
 \begin{exc}
   Show that, for arbitrarily large values of #n#, there are red-black
   trees with #n# nodes that have height $2\log #n#-O(1)$.
+\end{exc}
+
+\begin{exc}
+  Consider the operations #pushBlack(u)# and #pullBlack(u)#.  What do
+  these operations do to the underlying 2-4 tree that is being simulated
+  by the red-black tree?
 \end{exc}
 
 \begin{exc}
