@@ -224,29 +224,64 @@ Edition 0.1E\cpponly{$\beta$}
 % \overfullrule=5pt
 
 \begin{document}
-%\AddToShipoutPicture*{\BackgroundPic}
-\begin{titlepage}
-\htmlonly{\includegraphics[scale=0.90909]{images/tree3-thick}}
-  \maketitle
-\end{titlepage}
 
-% blank page behind title page
-\ \thispagestyle{empty}\newpage
-
-\setcounter{page}{1}
-\include{ack}
-\ \thispagestyle{empty}\newpage
-\cpponly{\include{cpp-preface}
-\ \thispagestyle{empty}\newpage
-}
+%%\AddToShipoutPicture*{\BackgroundPic}
+%\begin{titlepage}
+%\htmlonly{\includegraphics[scale=0.90909]{images/tree3-thick}}
+%  \maketitle
+%\end{titlepage}
+%
+%% blank page behind title page
+%\ \thispagestyle{empty}\newpage
+%
+%\setcounter{page}{1}
+%\include{ack}
+%\ \thispagestyle{empty}\newpage
+%\cpponly{\include{cpp-preface}
+%\ \thispagestyle{empty}\newpage
+%}
 
 % Use 14pt between lines
 \setlength{\baselineskip}{14pt}
 
+\fancyhead[RO,LE]{} % no section numbers yet
+
+\thispagestyle{empty}
+half title page
+\newpage
+
+\thispagestyle{empty}
+series page
+\newpage
+
+\thispagestyle{empty}
+title page
+\newpage
+
+\thispagestyle{empty}
+% blank page
+\newpage
+
+\include{ack}
+
+\thispagestyle{empty}
+% blank page
+\newpage
+
+\fancyhead[CE]{\small Why This Book?} % chapter title, left center
 \include{why}
+\newpage
 
+\fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
 \tableofcontents
+\newpage
 
+\thispagestyle{empty}
+\ % blank page
+\newpage
+
+
+\fancyhead[RO,LE]{\small\textsection\thesection} % section number on the inside
 
 \include{intro-lang}
 \include{arrays-lang}
