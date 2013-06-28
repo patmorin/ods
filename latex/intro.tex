@@ -17,7 +17,7 @@ interact with data structures constantly.
     easy; disks contain hundreds of millions of blocks.  The contents of your
     file could be stored on any one of them.
   \item Look up a contact on your phone:  A data
-    structure is used to lookup a phone number in your contact list
+    structure is used to look up a phone number in your contact list
     \index{contact list}
     based on partial
     information even before you finish dialing/typing.  This isn't easy;
@@ -75,7 +75,7 @@ of cycles per second), and each operation typically takes a few cycles.}
 This means that this application will take at least $10^{12}/10^9 = 1000$
 seconds, or roughly 16 minutes and 40 seconds.  Sixteen minutes is an
 eon in computer time, but a person might be willing to put up with it
-(if they were headed out for a coffee break).
+(if he or she were headed out for a coffee break).
 
 %Consider, now an application like the human genome project.  Completed in
 %2003 (when computers were quite a bit slower than they are now), this
@@ -381,7 +381,7 @@ It differs in a fundamental way from
 no element equal to #x# in the set.
 
 The distinction between the #USet# and #SSet# #find(x)# operations is
-very important and is often missed.  The extra functionality provided
+very important and often missed.  The extra functionality provided
 by an #SSet# usually comes with a price that includes both a larger
 running time and a higher implementation complexity.  For example, most
 of the #SSet# implementations discussed in this book all have #find(x)#
@@ -424,10 +424,10 @@ of $k$.  That is, the unique value $x$ that satisfies
 \[
     b^{x} = k  \enspace .
 \]
-Most of the logarithms in this book are base 2 (\emph{binary logarithms}),
+Most of the logarithms in this book are base 2 (\emph{binary logarithms}).
 \index{binary logarithm}
 \index{logarithm!binary} 
-in which case we drop the base, so that $\log k$ is shorthand for
+For these, we omit the base, so that $\log k$ is shorthand for
 $\log_2 k$.
 
 An informal, but useful, way to think about logarithms is to think
@@ -698,8 +698,8 @@ Here $\Pr\{\mathcal{E}\}$ denotes the probability that the event
 $\mathcal{E}$ occurs.  In all of the examples in this book, these
 probabilities are only with respect to the random choices made by the
 randomized data structure;  there is no assumption that the data stored
-in the structure nor that the sequence of operations performed on the
-data structure is random.
+in the structure, nor the sequence of operations performed on the
+data structure, is random.
 
 One of the most important properties of expected values is \emph{linearity
 of expectation}.

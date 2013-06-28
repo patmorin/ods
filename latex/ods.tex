@@ -24,6 +24,7 @@
 \usepackage{graphicx}
 \usepackage{threeparttable}
 \usepackage{wasysym}
+\usepackage{emptypage}
 
 %% This code allows dynamic scaling of images to fit the page
 %% Usage: \includegraphics[width=\ScaleIfNeeded]{figs/figure}
@@ -224,29 +225,53 @@ Edition 0.1E\cpponly{$\beta$}
 % \overfullrule=5pt
 
 \begin{document}
-%\AddToShipoutPicture*{\BackgroundPic}
-\begin{titlepage}
-\htmlonly{\includegraphics[scale=0.90909]{images/tree3-thick}}
-  \maketitle
-\end{titlepage}
 
-% blank page behind title page
-\ \thispagestyle{empty}\newpage
-
-\setcounter{page}{1}
-\include{ack}
-\ \thispagestyle{empty}\newpage
-\cpponly{\include{cpp-preface}
-\ \thispagestyle{empty}\newpage
-}
+%%\AddToShipoutPicture*{\BackgroundPic}
+%\begin{titlepage}
+%\htmlonly{\includegraphics[scale=0.90909]{images/tree3-thick}}
+%  \maketitle
+%\end{titlepage}
+%
+%% blank page behind title page
+%\ \thispagestyle{empty}\newpage
+%
+%\setcounter{page}{1}
+%\include{ack}
+%\ \thispagestyle{empty}\newpage
+%\cpponly{\include{cpp-preface}
+%\ \thispagestyle{empty}\newpage
+%}
 
 % Use 14pt between lines
 \setlength{\baselineskip}{14pt}
 
-\include{why}
+\pagestyle{empty}
 
+half title page
+\newpage
+
+series page
+\newpage
+
+title page
+\newpage
+
+\addtocontents{toc}{\protect\thispagestyle{empty}} % get rid of page number
 \tableofcontents
+\cleardoublepage
 
+\fancyhead[RO,LE]{} % disable section numbers, for now
+\pagestyle{fancy}
+\include{ack}
+\thispagestyle{empty}
+\cleardoublepage
+
+\fancyhead[CE]{\small Why This Book?} % chapter title, left center
+\include{why}
+\cleardoublepage
+
+\fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
+\fancyhead[RO,LE]{\small\textsection\thesection} % section number on the inside
 
 \include{intro-lang}
 \include{arrays-lang}
@@ -269,10 +294,13 @@ Edition 0.1E\cpponly{$\beta$}
 \fancyhead[RO]{} % section number on the inside
 \fancyhead[LE]{} % section number on the inside
 
-
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliography}
 \bibliographystyle{abbrvurl}
 \bibliography{ods,odsproc}
 
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
 \printindex
 
 \end{document}

@@ -64,7 +64,6 @@
 \fancyhead{}   % clear all headers
 \fancyfoot{}   % clear all footers
 \fancyfoot[CE,CO]{\small\thepage}
-%\fancyhead[LE,RO]{\small\thepage}  % page numbers on the outside
 
 %\fancyhead[LE,RO]{\small\textsection\rightmarksection}
 %\def\numberonly#1. #2!!{#1}
@@ -92,6 +91,7 @@
 
 \renewcommand{\sectionmark}[1]{\markright{\thesection. #1}} 
 
+\fancyhead[LE,RO]{\small\thepage}  % page numbers on the outside
 \fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
 \fancyhead[CO]{\small\nouppercase{\rightmark}} % section title, right center
 
