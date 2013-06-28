@@ -83,7 +83,7 @@ public class LinearHashTable<T> implements USet<T> {
 
 /*  this code is broken - repeatedly adding and removing the same element gives a big chain
 	public boolean addSlow(T x) {
-		if (2*(q+1) > t.length) resize();   // max 50% occupancy
+		if (2*(q+1) > t.length) resize(); // max 50% occupancy
 		int i = hash(x);
 		while (t[i] != null) {
 			if (t[i] != del && x.equals(t[i])) return false;
@@ -97,7 +97,7 @@ public class LinearHashTable<T> implements USet<T> {
 	
 	public boolean add(T x) {
 		if (find(x) != null) return false;
-		if (2*(q+1) > t.length) resize();   // max 50% occupancy
+		if (2*(q+1) > t.length) resize(); // max 50% occupancy
 		int i = hash(x);
 		while (t[i] != null && t[i] != del)
 			i = (i == t.length-1) ? 0 : i + 1; // increment i
@@ -113,7 +113,7 @@ public class LinearHashTable<T> implements USet<T> {
 	 * @return
 	 */
 	public boolean add2(T x) {
-		if (2*(q+1) > t.length) resize();   // max 50% occupancy
+		if (2*(q+1) > t.length) resize(); // max 50% occupancy
 		int i = hash(x), j = -1;
 		while (t[i] != null) {
 			if (t[i] == del && j == -1) j = i;
