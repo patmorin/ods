@@ -11,18 +11,18 @@ application must resort to storing the data on some external storage
 medium such as a hard disk, a solid state disk, or even a network file
 server (which has its own external storage).
 
-\index{external storage}
-\index{external memory}
-\index{hard disk}
-\index{solid-state drive}
+\index{external storage}%
+\index{external memory}%
+\index{hard disk}%
+\index{solid-state drive}%
 Accessing an item from external storage is extremely slow.  The hard
 disk attached to the computer on which this book was written has an
 average access time of 19ms and the solid state drive attached to this
 computer has an average access time of 0.3ms.  In contrast, the random
-access memory in this computer has an average access time of less than
-0.000113ms.  It is more than 2\,500 times faster to access RAM than the
-solid state drive and more than 160\,000 times faster to access RAM than
-the hard drive.
+access memory in this computer has an average access time of less
+than 0.000113ms.  Accessing RAM is more than 2\,500 times faster than
+accessing the solid state drive and more than 160\,000 times faster than
+accessing the hard drive.
 
 %  HDD: Fantom ST3000DM001-9YN166 USB 3 external drive (3TB)
 %  SSD: ATA OCZ-AGILITY 3 (60GB)
@@ -54,7 +54,7 @@ thousands of times faster than accessing a random byte from a hard disk
 or solid-state drive.  Access time, however, does not tell the whole
 story.  When we access a byte from a hard disk or solid state disk, an
 entire \emph{block}
-\index{block}
+\index{block}%
 of the disk is read.  Each of the drives attached
 to this computer has a block size of 4\,096; each time we read one byte,
 the drive gives us a block containing 4\,096 bytes.  If we organize our
@@ -67,12 +67,12 @@ data structure carefully, this means that each disk access could yield
 % rw   256  4096  4096        504   3000581885952   /dev/sdb1  HDD
 
 This is the idea behind the \emph{external memory model}
-\index{external memory model}
+\index{external memory model}%
 of computation,
 illustrated schematically in \figref{em}.  In this model, the computer
 has access to a large external memory in which all of the data resides.
 This memory is divided into memory \emph{blocks}
-\index{block}
+\index{block}%
 each containing $B$
 words.  The computer also has limited internal memory on which it can
 perform computations.  Transferring a block between internal memory and
@@ -104,8 +104,8 @@ For example, even with the relatively small value $B=32$, $B\ge \log_B
 
 \section{The Block Store}
 
-\index{block store}
-\index{BlockStore@#BlockStore#}
+\index{block store}%
+\index{BlockStore@#BlockStore#}%
 The notion of external memory includes a large number of possible
 different devices, each of which has its own block size and is
 accessed with its own collection of system calls.  To simplify the
@@ -148,7 +148,7 @@ Alternatively, $B$-trees can be viewed as the natural generalization of
 2-4 trees described in \secref{twofour}. (A 2-4 tree is a special case
 of a $B$-tree that we get by setting $B=2$.)
 
-\index{B-tree@$B$-tree}
+\index{B-tree@$B$-tree}%
 For any integer $B\ge 2$, a \emph{$B$-tree} is a tree in which all of
 the leaves have the same depth and every non-root internal node, #u#,
 has at least $B$ children and at most $2B$ children.  The children of #u#
@@ -195,12 +195,12 @@ An example of a $B$-tree with $B=2$ is shown in \figref{btree}.
   \figlabel{btree}
 \end{figure}
 
-Note that all of the data stored in a $B$-tree node has size $O(B)$.
-Therefore, in an external memory setting, the value of $B$ in a $B$-tree
-is chosen so that  a node fits into a single external memory block.
-In this way, the time it takes to perform a $B$-tree operation in the
-external memory model is proportional to the number of nodes that are
-accessed (read or written) by the operation.
+Note that the data stored in a $B$-tree node has size $O(B)$.  Therefore,
+in an external memory setting, the value of $B$ in a $B$-tree is chosen
+so that  a node fits into a single external memory block.  In this way,
+the time it takes to perform a $B$-tree operation in the external memory
+model is proportional to the number of nodes that are accessed (read or
+written) by the operation.
 
 For example, if the keys are 4 byte integers and the node indices are
 also 4 bytes, then setting $B=256$ means that each node stores
@@ -257,7 +257,7 @@ $#a[i]#>#x#$ or $#a[i]#=#null#$.
 \end{figure}
 \javaimport{ods/BTree.findIt(a,x)}
 The #findIt(a,x)# method uses a binary search 
-\index{binary search}
+\index{binary search}%
 that halves the search
 space at each step, so it runs in $O(\log(#a.length#))$ time.  In our setting, $#a.length#=2B$, so #findIt(a,x)# runs in $O(\log B)$ time.
 
@@ -287,7 +287,7 @@ implemented using recursion.
 Like all balanced search trees, some form of rebalancing is required
 during an #add(x)# operation.  In a $B$-tree, this is done by
 \emph{splitting} nodes.
-\index{split}
+\index{split}%
 Refer to \figref{btree-split} for what follows.
 Although splitting takes place across two levels of recursion, it is
 best understood as an operation that takes a node #u# containing $2B$
@@ -410,7 +410,7 @@ straightforward.  By shuffling keys around, removal is reduced to the
 problem of removing a value, $#x#'$, from some leaf, #u#.  Removing $#x#'$
 may leave #u# with less than $B-1$  keys;  this situation is called
 an \emph{underflow}.
-\index{underflow}
+\index{underflow}%
 
 \begin{figure}
    \centering{\begin{tabular}{@{}l@{}}
@@ -487,7 +487,7 @@ also children), for #w#.  There are two ways to do this:
 
 \begin{description}
   \item[Borrowing:]
-  \index{borrow}
+  \index{borrow}%
   If #w# has a sibling, #v#, with more than $B-1$ keys,
   then #w# can borrow some keys (and possibly also children) from #v#.
   More specifically, if #v# stores #size(v)# keys, then between them,
@@ -512,7 +512,7 @@ also children), for #w#.  There are two ways to do this:
   \end{figure}
   
   \item[Merging:]
-  \index{merge}
+  \index{merge}%
   If #v# has only $B-1$ keys, we must do something more
   drastic, since #v# cannot afford to give any keys to #w#.  Therefore,
   we \emph{merge} #v# and #w# as shown in \figref{btree-merge}.  The merge
@@ -571,7 +571,7 @@ The following lemma shows that, so far, we have overestimated the number of merg
    The proof of this has already been sketched in
    \secref{redblack-summary} for the special case in which $B=2$.
    The lemma can be proven using a credit scheme,
-   \index{credit scheme}
+   \index{credit scheme}%
    in which
   \begin{enumerate}
     \item each split, merge, or borrow operation is paid for with two
@@ -589,7 +589,7 @@ The following lemma shows that, so far, we have overestimated the number of merg
 
   To keep track of these credits the proof maintains the following
   \emph{credit invariant}:
-  \index{credit invariant}
+  \index{credit invariant}%
   Any non-root node with $B-1$ keys stores one
   credit and any node with $2B-1$ keys stores three credits.  A node
   that stores at least $B$ keys and most $2B-2$ keys need not store
@@ -642,7 +642,7 @@ The following lemma shows that, so far, we have overestimated the number of merg
   #v# and #w#.  Since a borrow happens at most once during a #remove(x)#
   operation, this means that we create at most three credits, as required.
 
-  If the #remove(x)# operation does not include a borrow operation this
+  If the #remove(x)# operation does not include a borrow operation, this
   is because it finishes by removing a key from some node that, prior
   to the operation, had $B$ or more keys.  In the worst case, this node
   had exactly $B$ keys, so that it now has $B-1$ keys and must be given
@@ -681,9 +681,9 @@ This is summarized by the following pair of theorems:
 
 The external memory model of computation was introduced by Aggarwal and
 Vitter \cite{av88}.  It is sometimes also called the \emph{I/O model}
-\index{I/O model}
+\index{I/O model}%
 or the \emph{disk access model}. 
-\index{disk access model}
+\index{disk access model}%
 
 $B$-Trees are to external memory searching what binary search trees
 are to internal memory searching.  $B$-trees were introduced by Bayer
@@ -693,19 +693,19 @@ them as ubiquitous \cite{c79}.
 
 Like binary search trees, there are many variants of $B$-Trees, including
 $B^+$-trees,
-\index{B+-tree@$B^+$-tree}
+\index{B+-tree@$B^+$-tree}%
 $B^*$-trees,
-\index{B*-tree@$B^*$-tree}
+\index{B*-tree@$B^*$-tree}%
 and counted $B$-trees.
-\index{conted $B$-tree}
+\index{conted $B$-tree}%
 $B$-trees are indeed
 ubiquitous and are the primary data structure in many file systems,
 including Apple's HFS+,
-\index{HFS+} 
+\index{HFS+}%
 Microsoft's NTFS, 
-\index{NTFS}
+\index{NTFS}%
 and Linux's Ext4;
-\index{Ext4}
+\index{Ext4}%
 every
 major database system; and key-value stores used in cloud computing.
 Graefe's recent survey \cite{g10} provides a 200+ page overview of the
@@ -713,10 +713,10 @@ many modern applications, variants, and optimizations of $B$-trees.
 
 $B$-trees implement the #SSet# interface.  If only the #USet# interface
 is needed, then external memory hashing
-\index{external memory hashing}
+\index{external memory hashing}%
 could be used as an alternative
 to $B$-trees.  External memory hashing schemes do exist; see, for example,
-Reference~\cite{jp08}.  These schemes implement the #USet# operations
+Jensen and Pagh~\cite{jp08}.  These schemes implement the #USet# operations
 in $O(1)$ expected time in the external memory model. However, for a
 variety of reasons, many applications still use $B$-trees even though
 they only require #USet# operations.
@@ -825,7 +825,7 @@ access to retrieve a leaf.
       a $B^+$-tree.
     \item Implement a class, #BPlusTree#, that implements #find(x)#,
       #add(x)#, #remove(x)#, and #findRange(x,y)#.
-      \index{BPlusTree@#BPlusTree#}
+      \index{BPlusTree@#BPlusTree#}%
     \item $B^+$-trees duplicate some of the keys because they are stored
       both in the $B$-tree and in the list.  Explain why this duplication
       does not add up to much for large values of $B$.

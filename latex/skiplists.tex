@@ -20,7 +20,7 @@ skiplist are simulated using a pseudo-random number (or bit) generator.
 
 \section{The Basic Structure}
 
-\index{skiplist}
+\index{skiplist}%
 Conceptually, a skiplist is a sequence of singly-linked lists
 $L_0,\ldots,L_h$. Each list $L_r$ contains a subset of the items
 in $L_{r-1}$.  We start with the input list $L_0$ that contains #n#
@@ -39,7 +39,7 @@ of a skiplist is shown in \figref{skiplist}.
 \end{figure}
 
 For an element, #x#, in a skiplist, we call the \emph{height}
-\index{height!of a skiplist}
+\index{height!of a skiplist}%
 of #x# the
 largest value $r$ such that #x# appears in $L_r$.  Thus, for example,
 elements that only appear in $L_0$ have height $0$.  If we spend a few
@@ -51,10 +51,10 @@ toss the coin twice before getting tails, but we don't count the last
 toss.) The \emph{height} of a skiplist is the height of its tallest node.
 
 At the head of every list is a special node, called the \emph{sentinel},
-\index{sentinel node}
+\index{sentinel node}%
 that acts as a dummy node for the list. The key property of skiplists
 is that there is a short path, called the \emph{search path}, 
-\index{search path!in a skiplist}
+\index{search path!in a skiplist}%
 from the
 sentinel in $L_h$ to every node in $L_0$.  Remembering how to construct
 a search path for a node, #u#, is easy (see \figref{skiplist-searchpath})
@@ -105,7 +105,7 @@ within $L_r$.
 \section{#SkiplistSSet#: An Efficient #SSet#}
 \seclabel{skiplistset}
 
-\index{SkiplistSSet@#SkiplistSSet#}
+\index{SkiplistSSet@#SkiplistSSet#}%
 A #SkiplistSSet# uses a skiplist structure to implement the #SSet#
 interface.   When used in this way, the list $L_0$ stores the elements of
 the #SSet# in sorted order.  The #find(x)# method works by following
@@ -182,7 +182,7 @@ expected time per operation.
 \section{#SkiplistList#: An Efficient Random-Access #List#}
 \seclabel{skiplistlist}
 
-\index{SkiplistList@#SkiplistList#}
+\index{SkiplistList@#SkiplistList#}%
 A #SkiplistList# implements the #List# interface using a skiplist
 structure.  In a #SkiplistList#, $L_0$ contains the elements of the
 list in the order in which they appear in the list.   As in a
@@ -304,7 +304,7 @@ observation about coin tosses.
 
 
 \begin{lem}\lemlabel{coin-tosses}
-  \index{coin toss}
+  \index{coin toss}%
   Let $T$ be the number of times a fair coin is tossed up to and including
   the first time the coin comes up heads.  Then $\E[T]=2$.
 \end{lem}
@@ -541,8 +541,8 @@ operating system kernel's process management structures \cite{hpux}.
 \end{exc}
 
 \begin{exc}
-  \index{finger}
-  \index{finger search!in a skiplist}
+  \index{finger}%
+  \index{finger search!in a skiplist}%
   A \emph{finger} in a skiplist is an array that stores the
   sequence of nodes on a search path at which the search path
   goes down. (The variable #stack# in the #add(x)# code on
@@ -615,8 +615,8 @@ operating system kernel's process management structures \cite{hpux}.
 \end{exc}
 
 \begin{exc}
-  \index{skiplist!versus binary search tree}
-  \index{binary search tree!versus skiplist}
+  \index{skiplist!versus binary search tree}%
+  \index{binary search tree!versus skiplist}%
   (This excercise should be done after reading about binary search trees,
   in \secref{binarysearchtree}.)  Compare skiplists with binary search
   trees in the following ways:  

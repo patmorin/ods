@@ -4,7 +4,7 @@
 In this chapter, we will study implementations of the #List# and #Queue#
 interfaces where the underlying data is stored in an array, called the
 \emph{backing array}.
-\index{backing array}
+\index{backing array}%
 The following table summarizes the running times
 of operations for the data structures presented in this chapter:
 \newlength{\tabsep}
@@ -24,7 +24,7 @@ of operations for the data structures presented in this chapter:
 \end{center}
 Data structures that work by storing data in a single array have many
 advantages and limitations in common:
-\index{arrays}
+\index{arrays}%
 \begin{itemize}
   \item Arrays offer constant time access to any value in the array.
   This is what allows #get(i)# and #set(i,x)# to run in constant time.
@@ -72,7 +72,7 @@ a pointer manipulation that takes constant time:}
 \section{#ArrayStack#: Fast Stack Operations Using an Array}
 \seclabel{arraystack}
 
-\index{ArrayStack@#ArrayStack#}
+\index{ArrayStack@#ArrayStack#}%
 An #ArrayStack# implements the list interface using an array #a#, called
 the \emph{backing array}.  The list element with index #i# is stored
 in #a[i]#.  At most times, #a# is larger than strictly necessary,
@@ -155,7 +155,7 @@ In particular, we will show:
 \end{lem}
 
 \begin{proof}
-  We will show that anytime #resize()# is called, the number of calls
+  We will show that any time #resize()# is called, the number of calls
   to #add# or #remove# since the last call to #resize()# is at least
   $#n#/2-1$.  Therefore, if $#n#_i$ denotes the value of #n# during the
   $i$th call to #resize()# and $r$ denotes the number of calls to
@@ -228,7 +228,7 @@ amortized time.
 \section{#FastArrayStack#: An Optimized ArrayStack}
 \seclabel{fastarraystack}
 
-\index{FastArrayStack@#FastArrayStack#}
+\index{FastArrayStack@#FastArrayStack#}%
 Much of the work done by an #ArrayStack# involves shifting (by
 #add(i,x)# and #remove(i)#) and copying (by #resize()#) of data.
 In the implementations shown above, this was done using #for# loops. It
@@ -237,9 +237,9 @@ that are very efficient at copying and moving blocks of data.  In the C
 programming language, there are the #memcpy(d,s,n)# and #memmove(d,s,n)#
 functions. In C++ there is the #std::copy(a0,a1,b)# and algorithm.
 In Java there is the #System.arraycopy(s,i,d,j,n)# method.
-\index{memcpy@#memcpy(d,s,n)#}
-\index{std::copy@#std::copy(a0,a1,b)#}
-\index{System.arraycopy@#System.arraycopy(s,i,d,j,n)#}
+\index{memcpy@#memcpy(d,s,n)#}%
+\index{std::copy@#std::copy(a0,a1,b)#}%
+\index{System.arraycopy@#System.arraycopy(s,i,d,j,n)#}%
 
 \codeimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
 
@@ -254,7 +254,7 @@ operations performed.  Your mileage may vary.
 \section{#ArrayQueue#: An Array-Based Queue}
 \seclabel{arrayqueue}
 
-\index{ArrayQueue@#ArrayQueue#}
+\index{ArrayQueue@#ArrayQueue#}%
 In this section, we present the #ArrayQueue# data structure, which
 implements a FIFO (first-in-first-out) queue; elements are removed (using
 the #remove()# operation) from the queue in the same order they are added
@@ -281,7 +281,7 @@ decrement #n#.
 Of course, the problem with this solution is that it requires an infinite
 array.  An #ArrayQueue# simulates this by using a finite array #a#
 and \emph{modular arithmetic}.
-\index{modular arithmetic}
+\index{modular arithmetic}%
 This is the kind of arithmetic used when
 we are talking about the time of day.  For example 10:00 plus five
 hours gives 3:00.  Formally, we say that
@@ -310,8 +310,8 @@ queue elements at array locations
 \[ #a[j%a.length]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]#
 \enspace. \]
 This treats the array #a# like a \emph{circular array}
-\index{circular array}
-\index{array!circular}
+\index{circular array}%
+\index{array!circular}%
 in which array indices
 larger than $#a.length#-1$ ``wrap around'' to the beginning of
 the array.
@@ -383,7 +383,7 @@ time spent during all calls to #resize()#.
 \section{#ArrayDeque#: Fast Deque Operations Using an Array}
 \seclabel{arraydeque}
 
-\index{ArrayDeque@#ArrayDeque#}
+\index{ArrayDeque@#ArrayDeque#}%
 The #ArrayQueue# from the previous section is a data structure for
 representing a sequence that allows us to efficiently add to one
 end of the sequence and remove from the other end.  The #ArrayDeque#
@@ -454,7 +454,7 @@ data structure:
 \section{#DualArrayDeque#: Building a Deque from Two Stacks}
 \seclabel{dualarraydeque}
 
-\index{DualArrayDeque@#DualArrayDeque#}
+\index{DualArrayDeque@#DualArrayDeque#}%
 Next, we present a data structure, the #DualArrayDeque# that
 achieves the same performance bounds as an #ArrayDeque# by using
 two #ArrayStack#s.  Although the asymptotic performance of the
@@ -486,7 +486,7 @@ or #set(i,x)# on either #front# or #back#, which take $O(1)$ time per operation.
 
 \codeimport{ods/DualArrayDeque.get(i).set(i,x)}
 
-Note that, if an index $#i#<#front.size()#$, then it corresponds to the
+Note that if an index $#i#<#front.size()#$, then it corresponds to the
 element of #front# at position $#front.size()#-#i#-1$, since the
 elements of #front# are stored in reverse order.
 
@@ -586,8 +586,8 @@ average, #balance()# only spends a constant amount of time per operation.
 
   We will perform our analysis using a technique knows as the
   \emph{potential method}.
-  \index{potential}
-  \index{potential method}
+  \index{potential}%
+  \index{potential method}%
   Define the \emph{potential}, $\Phi$, of the
   #DualArrayDeque# as the difference in size between #front# and #back#:
   \[  \Phi = |#front.size()# - #back.size()#| \enspace . \]
@@ -643,7 +643,7 @@ The following theorem summarizes the properties of a #DualArrayDeque#:
 \section{#RootishArrayStack#: A Space-Efficient Array Stack}
 \seclabel{rootisharraystack}
 
-\index{RootishArrayStack@#RootishArrayStack#}
+\index{RootishArrayStack@#RootishArrayStack#}%
 One of the drawbacks of all previous data structures in this chapter is
 that, because they store their data in one or two arrays and they avoid
 resizing these arrays too often, the arrays frequently are not very full.
@@ -786,7 +786,7 @@ $O(1)$ per operation.
 
 Next, we analyze the amount of extra space used by a #RootishArrayStack#.
 In particular, we want to count any space used by a #RootishArrayStack# that is not an array element currently used to hold a list element.  We call all such space \emph{wasted space}.
-\index{wasted space}
+\index{wasted space}%
 
 The #remove(i)# operation ensures that a #RootishArrayStack# never has
 more than two blocks that are not completely full.  The number of blocks,
@@ -849,7 +849,7 @@ data structure:
 
 \subsection{Computing Square Roots}
 
-\index{square roots}
+\index{square roots}%
 A reader who has had some exposure to models of computation may notice
 that the #RootishArrayStack#, as described above, does not fit into
 the usual word-RAM model of computation (\secref{model}) because it
@@ -981,7 +981,7 @@ computing the index of the leading 1-bit in an integer.
 
 A structure related to the #RootishArrayStack# is the two-level
 \emph{tiered-vector} of Goodrich and Kloss \cite{gk99}.
-\index{tiered-vector}
+\index{tiered-vector}%
 This structure
 supports the #get(i,x)# and #set(i,x)# operations in constant time and
 #add(i,x)# and #remove(i)# in $O(\sqrt{#n#})$ time.  These running times
@@ -995,8 +995,8 @@ of a #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
   the fact that the #ArrayStack# only contains #n# elements.  Where is
   the extra non-#null# value?  Discuss any consequences this non-#null#
   value might have on the Java Runtime Environment's memory manager.
-  \index{Java Runtime Environment}
-  \index{memory manager}
+  \index{Java Runtime Environment}%
+  \index{memory manager}%
 \end{exc}
 }
 
@@ -1011,7 +1011,7 @@ of a #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
 
 \begin{exc}
   Design and implement a \emph{#RandomQueue#}.
-  \index{RandomQueue@#RandomQueue#}
+  \index{RandomQueue@#RandomQueue#}%
   This is an implementation
   of the #Queue# interface in which the #remove()# operation removes
   an element that is chosen uniformly at random among all the elements
@@ -1023,7 +1023,7 @@ of a #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
 
 \begin{exc}
   Design and implement a #Treque# (triple-ended queue). 
-  \index{Treque@#Treque#}
+  \index{Treque@#Treque#}%
   This is a #List#
   implementation in which #get(i)# and #set(i,x)# run in constant time
   and #add(i,x)# and #remove(i)# run in time
@@ -1103,7 +1103,7 @@ of a #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
 
 \begin{exc}
   Design and implement a #CubishArrayStack#.
-  \index{CubishArrayStack@#CubishArrayStack#}
+  \index{CubishArrayStack@#CubishArrayStack#}%
   This three level structure
   implements the #List# interface using $O(n^{2/3})$ wasted space.
   In this structure, #get(i)# and #set(i,x)# take constant time; while

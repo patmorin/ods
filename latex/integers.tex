@@ -35,8 +35,8 @@ the text, however, we will simply treat #x# as if it is an integer.
 \section{#BinaryTrie#: A digital search tree}
 \seclabel{binarytrie}
 
-\index{BinaryTrie@#BinaryTrie#}
-A #BinaryTrie# encode a set of #w# bit integers in a binary tree.
+\index{BinaryTrie@#BinaryTrie#}%
+A #BinaryTrie# encodes a set of #w# bit integers in a binary tree.
 All leaves in the tree have depth #w# and each integer is encoded as a
 root-to-leaf path.  The path for the integer #x# turns left at level #i#
 if the #i#th most significant bit of #x# is a 0 and turns right if it
@@ -53,8 +53,8 @@ and 13(1101).
 \end{figure}
 
 Because the search path
-\index{search path!in a #BinaryTrie#}
-for a value #x# depends on the bits of #x# it will
+\index{search path!in a #BinaryTrie#}%
+for a value #x# depends on the bits of #x#, it will
 be helpful to name the children of a node, #u#, #u.child[0]# (#left#)
 and #u.child[1]# (#right#).  These child pointers will actually serve
 double-duty.  Since the leaves in a binary trie have no children, the
@@ -70,7 +70,7 @@ left child is missing, then #u.jump# points to the smallest leaf in
 #u#'s subtree.  If #u#'s right child is missing, then #u.jump# points
 to the largest leaf in #u#'s subtree.  An example of a #BinaryTrie#,
 showing #jump# pointers and the doubly-linked list at the leaves, is
-shown in \figref{binarytrie-ex2}
+shown in \figref{binarytrie-ex2}.
 
 \begin{figure}
   \begin{center}
@@ -87,8 +87,8 @@ shown in \figref{binarytrie-ex2}
 
 The #find(x)# operation in a #BinaryTrie# is fairly straightforward.
 We try to follow the search path for #x# in the trie.  If we reach a leaf,
-then we have found #x#.  If, we reach a node #u# where we cannot proceed
-(because #u# is missing a child) then we follow #u.jump#, which takes us
+then we have found #x#.  If we reach a node #u# where we cannot proceed
+(because #u# is missing a child), then we follow #u.jump#, which takes us
 either to smallest leaf larger than #x# or the largest leaf smaller than
 #x#. Which of these two cases occurs depends on whether #u# is missing
 its left or right child, respectively.  In the former case (#u# is missing
@@ -168,7 +168,7 @@ stores #n# values is $O(#n#\cdot#w#)$.
 \section{#XFastTrie#: Searching in Doubly-Logarithmic Time}
 \seclabel{xfast}
 
-\index{XFastTrie@#XFastTrie#}
+\index{XFastTrie@#XFastTrie#}%
 The performance of the #BinaryTrie# structure is not very impressive.
 The number of elements, #n#, stored in the structure is at most $2^{#w#}$,
 so $\log #n#\le #w#$.  In other words, any of the comparison-based #SSet#
@@ -185,7 +185,7 @@ left) child.  At this point, the search uses #u.jump# to jump to a leaf,
 #v#, of the #BinaryTrie# and either return #v# or its successor in the
 linked list of leaves.  An #XFastTrie# speeds up the search process by
 using binary search
-\index{binary search}
+\index{binary search}%
 on the levels of the trie to locate the node #u#.
 
 To use binary search, we need a way to determine if the node #u# we are
@@ -271,7 +271,7 @@ problems are related; if #n# #add(x)# operations build a structure of
 size $#n#\cdot#w#$, then the #add(x)# operation requires at least on the
 order of #w# time (and space) per operation.
 
-\index{YFastTrie@#YFastTrie#}
+\index{YFastTrie@#YFastTrie#}%
 The #YFastTrie#, discussed next, simultaneously improves the space and
 speed of #XFastTrie#s.  A #YFastTrie# uses an #XFastTrie#, #xft#, but only
 stores $O(#n#/#w#)$ values in #xft#.  In this way, the total space used by
@@ -283,7 +283,7 @@ by calls to #xft#'s #add(x)# and #remove(x)# operations is only constant.
 The obvious question becomes:  If #xft# only stores #n#/#w# elements,
 where do the remaining $#n#(1-1/#w#)$ elements go?  These elements move 
 into \emph{secondary structures},
-\index{secondary structure}
+\index{secondary structure}%
 in this case an extended version of
 treaps (\secref{treap}).  There are roughly #n#/#w# of these secondary
 structures so, on average, each of them stores $O(#w#)$ items.  Treaps
@@ -349,7 +349,7 @@ expected time.  Adding the pair (#x#,#t1#) to #xft# takes $O(#w#)$ time,
 but only happens with probability $1/#w#$.  Therefore, the expected
 running time of the #add(x)# operation is
 \[
-    O(\log#w#) + \frac{1}{#w#}O(#w#) = O(\log #w#)
+    O(\log#w#) + \frac{1}{#w#}O(#w#) = O(\log #w#) \enspace .
 \]
 
 The #remove(x)# method undoes the work performed by #add(x)#.
@@ -388,7 +388,7 @@ Then $\E[#n#_#x#] \le 2#w#-1$.
 
 \begin{proof}
 Refer to \figref{yfast-sample}. Let
-$#x#_1<#x#_2<\cdots<#x#_i=#x#<\#x#_{i+1}<cdots<#x#_#n#$ denote
+$#x#_1<#x#_2<\cdots<#x#_i=#x#<#x#_{i+1}<\cdots<#x#_#n#$ denote
 the elements stored
 in the #YFastTrie#.  The treap #t# contains some elements greater than
 or equal to #x#.  These are $#x#_i,#x#_{i+1},\ldots,#x#_{i+j-1}$,
@@ -450,9 +450,9 @@ becomes $O(#n#)$.
 The first data structure to provide $O(\log#w#)$ time #add(x)#,
 #remove(x)#, and #find(x)# operations was proposed by van~Emde~Boas and
 has since become known as the \emph{van~Emde~Boas}
-\index{van Emde Boas tree}
+\index{van Emde Boas tree}%
 (or \emph{stratified})
-\index{stratified tree}
+\index{stratified tree}%
 \emph{tree} \cite{e77}.  The original van~Emde~Boas structure had size
 $2^{#w#}$, making it impractical for large integers.
 
@@ -465,7 +465,7 @@ $2^{#i#}$.
 
 Another structure for storing integers is Fredman and Willard's fusion
 trees \cite{fw93}.
-\index{fusion tree}
+\index{fusion tree}%
 This structure can store #n# #w#-bit integers in
 $O(#n#)$ space so that the #find(x)# operation runs in $O((\log #n#)/(\log
 #w#))$ time.  By using a fusion tree when $\log #w# > \sqrt{\log #n#}$ and

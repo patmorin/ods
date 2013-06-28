@@ -1,17 +1,17 @@
 \chapter{Linked Lists}
 \chaplabel{linkedlists}
 
-\index{linked list}
+\index{linked list}%
 In this chapter, we continue to study implementations of the #List#
 interface, this time using pointer-based data structures rather than
 arrays.  The structures in this chapter are made up of nodes that
-contain the list items.  Using references (pointers) the nodes are
+contain the list items.  Using references (pointers), the nodes are
 linked together into a sequence.  We first study singly-linked lists,
 which can implement #Stack# and (FIFO) #Queue# operations in constant
 time per operation and then move on to doubly-linked lists, which can
 implement #Deque# operations in constant time.
 
-Linked lists have advantages and disadvantages when compared to to array-based
+Linked lists have advantages and disadvantages when compared to array-based
 implementations of the #List# interface.  The primary disadvantage is that
 we lose the ability to access any element using #get(i)# or #set(i,x)#
 in constant time.  Instead, we have to walk through the list, one element
@@ -24,9 +24,9 @@ is true no matter where #u# is in the list.
 \section{#SLList#: A Singly-Linked List}
 \seclabel{sllist}
 
-\index{SLList@#SLList#}
-\index{linked list!singly-}
-\index{singly-linked list}
+\index{SLList@#SLList#}%
+\index{linked list!singly-}%
+\index{singly-linked list}%
 An #SLList# (singly-linked list) is a sequence of #Node#s.  Each node
 #u# stores a data value #u.x# and a reference #u.next# to the next node in
 the sequence.  For the last node #w# in the sequence, $#w.next# = #null#$
@@ -106,9 +106,9 @@ traversing the #SLList# starting at #head# and taking $#n#-2$ steps.
 \section{#DLList#: A Doubly-Linked List}
 \seclabel{dllist}
 
-\index{DLList@#DLList#}
-\index{doubly-linked list}
-\index{linked list!doubly-}
+\index{DLList@#DLList#}%
+\index{doubly-linked list}%
+\index{linked list!doubly-}%
 A #DLList# (doubly-linked list) is very similar to an #SLList# except
 that each node #u# in a #DLList# has references to both the node #u.next#
 that follows it and the node #u.prev# that precedes it.
@@ -122,7 +122,7 @@ to ensure that #head# and #tail# are correctly updated.  In a #DLList#,
 the number of these special cases increases considerably.  Perhaps the
 cleanest way to take care of all these special cases in a #DLList# is to
 introduce a #dummy# node.
-\index{dummy node}
+\index{dummy node}%
 This is a node that does not contain any data,
 but acts as a placeholder so that there are no special nodes; every node
 has both a #next# and a #prev#, with #dummy# acting as the node that
@@ -186,8 +186,9 @@ The only non-constant part of the running time of #add(i,x)# is the time
 it takes to find the #i#th node (using #getNode(i)#).  Thus, #add(i,x)#
 runs in $O(1+\min\{#i#, #n#-#i#\})$ time.
 
-Removing a node #w# from a #DLList# is easy.  We need only adjust pointers
-at #w.next# and #w.prev# so that they skip over #w#.  Again, the use of the dummy node eliminates the need to consider any special cases:
+Removing a node #w# from a #DLList# is easy.  We only need to adjust
+pointers at #w.next# and #w.prev# so that they skip over #w#.  Again, the
+use of the dummy node eliminates the need to consider any special cases:
 
 \codeimport{ods/DLList.remove(w)}
 
@@ -237,8 +238,8 @@ the node can be removed from the list in constant time.}
 \section{#SEList#: A Space-Efficient Linked List}
 \seclabel{selist}
 
-\index{SEList@#SEList#}
-\index{linked list!space-efficient}
+\index{SEList@#SEList#}%
+\index{linked list!space-efficient}%
 One of the drawbacks of linked lists (besides the time it takes to access
 elements that are deep within the list) is their space usage.  Each node
 in a #DLList# requires an additional two references to the next and
@@ -251,12 +252,12 @@ we store a block (array) containing several items. More precisely, an
 #SEList# is parameterized by a \emph{block size} #b#. Each individual
 node in an #SEList# stores a block that can hold up to #b+1# elements.
 
-For reasons that will become clear later, it will be helpful if we
-can do #Deque# operations on each block.  The data structure we choose
+For reasons that will become clear later, it will be helpful if we can
+do #Deque# operations on each block.  The data structure that we choose
 for this is a #BDeque# (bounded deque),
-\index{BDeque@#BDeque#}
-\index{bounded deque}
-\index{deque!bounded}
+\index{BDeque@#BDeque#}%
+\index{bounded deque}%
+\index{deque!bounded}%
 derived from the #ArrayDeque#
 structure described in \secref{arraydeque}.  The #BDeque# differs from the
 #ArrayDeque# in one small way: When a new #BDeque# is created, the size
@@ -283,7 +284,7 @@ at least $#b#-1$ and at most $#b#+1$ elements.  This means that, if an
     #n#/(#b#-1) + 1 = O(#n#/#b#)
 \]
 blocks.  The #BDeque# for each block contains an array of length $#b#+1$
-but, for every blocks except the last, at most a constant amount of
+but, for every block except the last, at most a constant amount of
 space is wasted in this array.  The remaining memory used by a block is
 also constant.  This means that the wasted space in an #SEList# is only
 $O(#b#+#n#/#b#)$.  By choosing a value of #b# within a constant factor
@@ -474,13 +475,13 @@ or #remove(i)#.
 
 \begin{lem}\lemlabel{selist-amortized}
   If an empty #SEList# is created and any sequence of $m\ge 1$ calls
-  to #add(i,x)# and #remove(i)# are performed, then the total time
+  to #add(i,x)# and #remove(i)# is performed, then the total time
   spent during all calls to #spread()# and #gather()# is $O(#b#m)$.
 \end{lem}
 
 \begin{proof}
   We will use the potential method of amortized analysis.
-  \index{potential method}
+  \index{potential method}%
   We say that
   a node #u# is \emph{fragile} if #u#'s block does not contain #b#
   elements (so that #u# is either the last node, or contains $#b#-1$
@@ -536,12 +537,12 @@ structure:
   that stores #n# elements is $#n# +O(#b# + #n#/#b#)$.
 \end{thm}
 
-The #SEList# is a tradeoff between an #ArrayList# and a #DLList# where
+The #SEList# is a trade-off between an #ArrayList# and a #DLList# where
 the relative mix of these two structures depends on the block size #b#.
 At the extreme $#b#=2$, each #SEList# node stores at most three values,
 which is not much different than a #DLList#. At the other extreme,
 $#b#>#n#$, all the elements are stored in a single array, just like in
-an #ArrayList#.  In between these two extremes lies a tradeoff between
+an #ArrayList#.  In between these two extremes lies a trade-off between
 the time it takes to add or remove a list item and the time it takes to
 locate a particular list item.
 
@@ -553,12 +554,12 @@ for example, by Knuth \cite[Sections~2.2.3--2.2.5]{k97v1}.  Even the
 #SEList# data structure seems to be a well-known data structures exercise.
 The #SEList# is sometimes referred to as an \emph{unrolled linked list}
 \cite{sra94}.
-\index{unrolled linked list|seealso{#SEList#}}
-\index{linked list!unrolled|seealso{#SEList#}}
+\index{unrolled linked list|seealso{#SEList#}}%
+\index{linked list!unrolled|seealso{#SEList#}}%
 
 Another way to save space in a doubly-linked list is the use of
 so-called XOR-lists.
-\index{XOR-list}
+\index{XOR-list}%
 In an XOR-list, each node, #u#, contains only one
 pointer, #u.nextprev#, that holds the bitwise exclusive-or of #u.prev#
 and #u.next#.  The list itself needs to store two pointers, one to the #dummy#
@@ -624,7 +625,7 @@ values of existing nodes.
 \begin{exc}
   Write a #DLList# method #isPalindrome()# that returns #true# if the
   list is a \emph{palindrome},
-  \index{palindrome}
+  \index{palindrome}%
   i.e., the element at position #i# is equal to
   the element at position $#n#-i-1$ for all $i\in\{0,\ldots,#n#-1\}$.
   Your code should run in $O(#n#)$ time.
@@ -669,7 +670,7 @@ values of existing nodes.
 \end{exc}
 
 \begin{exc}\exclabel{dllist-sort}
-  \index{merge-sort}
+  \index{merge-sort}%
   This exercise walks you through an implementation of the merge-sort
   algorithm for sorting a #DLList#, as discussed in \secref{merge-sort}.
   \javaonly{In your implementation, perform comparisons between elements
@@ -707,7 +708,7 @@ understanding of what happens to the minimum value stored in a #Stack#
 or #Queue# as items are added and removed.
 
 \begin{exc}
-  \index{MinStack@#MinStack#}
+  \index{MinStack@#MinStack#}%
   Design and implement a #MinStack# data structure that can store
   comparable elements and supports the stack operations #push(x)#,
   #pop()#, and #size()#, as well as the #min()# operation, which
@@ -716,7 +717,7 @@ or #Queue# as items are added and removed.
 \end{exc}
 
 \begin{exc}
-  \index{MinQueue@#MinQueue#}
+  \index{MinQueue@#MinQueue#}%
   Design and implement a #MinQueue# data structure that can store
   comparable elements and supports the queue operations #add(x)#,
   #remove()#, and #size()#, as well as the #min()# operation, which
@@ -725,7 +726,7 @@ or #Queue# as items are added and removed.
 \end{exc}
 
 \begin{exc}
-  \index{MinDeque@#MinDeque#}
+  \index{MinDeque@#MinDeque#}%
   Design and implement a #MinDeque# data structure that can store
   comparable elements and supports all the deque operations #addFirst(x)#,
   #addLast(x)# #removeFirst()#, #removeLast()# and #size()#, and the
@@ -740,7 +741,7 @@ the implementation and analysis of the space-efficient #SEList#:
 \begin{exc}
   Prove that, if an #SEList# is used like a #Stack# (so that the
   only modifications to the #SEList# are done using $#push(x)#\equiv
-  #add(size(),x)#$ and $#pop()#\equiv #remove(size()-1)#$) then these
+  #add(size(),x)#$ and $#pop()#\equiv #remove(size()-1)#$), then these
   operations run in constant amortized time, independent of the value
   of #b#.
 \end{exc}

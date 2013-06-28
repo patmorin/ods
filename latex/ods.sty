@@ -64,11 +64,23 @@
 \fancyhead{}   % clear all headers
 \fancyfoot{}   % clear all footers
 \fancyfoot[CE,CO]{\small\thepage}
+% left mark holds the chapter title
+\renewcommand{\chaptermark}[1]{\markboth{#1}{\textsection\thechapter+#1}} 
+\renewcommand{\sectionmark}[1]{\markright{\textsection\thesection+#1}} 
+\fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
+%\fancyhead[CO]{\small\nouppercase{\rightmark}} % section title, right center
 
-%\fancyhead[LE,RO]{\small\textsection\rightmarksection}
-%\def\numberonly#1. #2!!{#1}
-%\def\titleonly#1. #2!!{#2}
 
+
+
+
+
+%% In our headers, we pack both the section number and the section title
+%% into the \rightmark.  These are then extracted using \rightmarksection
+%% and \rightmarktitle
+%% This code comes from Heiko Oberdiek and David Carlisle
+%% See http://tex.stackexchange.com/questions/121452/separate-section-number-in-headers
+%% for more details
 \makeatletter
 \newcommand*{\rightmarksection}{%
   \begingroup
@@ -76,7 +88,7 @@
     \expandafter\@rightmarksection\temp. \@nil
   \endgroup
 }
-\def\@rightmarksection#1. #2\@nil{%
+\def\@rightmarksection#1+#2\@nil{%
   \def\temp{#2}%
   \ifx\temp\@empty
   \else
@@ -85,17 +97,21 @@
 }
 \makeatother
 
-
-
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}} 
-
-\renewcommand{\sectionmark}[1]{\markright{\thesection. #1}} 
-
-\fancyhead[LE,RO]{\small\thepage}  % page numbers on the outside
-\fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
-\fancyhead[CO]{\small\nouppercase{\rightmark}} % section title, right center
-
-
+\makeatletter
+\newcommand*{\rightmarktitle}{%
+  \begingroup
+    \protected@edef\temp{\rightmark}%
+    \expandafter\@rightmarktitle\temp \@nil
+  \endgroup
+}
+\def\@rightmarktitle#1+#2\@nil{%
+  \def\temp{#2}%
+  \ifx\temp\@empty
+  \else
+    #2%
+  \fi  
+}
+\makeatother
 \fancypagestyle{plain}{% for the first page of chapters
   \renewcommand{\headrulewidth}{0pt}%
   \fancyhf{}%

@@ -4,9 +4,9 @@
 In this chapter, we discuss two implementations of the extremely useful
 priority #Queue# data structure.  Both of these structures are a special
 kind of binary tree called a \emph{heap}, 
-\index{heap}
-\index{binary heap}
-\index{heap!binary}
+\index{heap}%
+\index{binary heap}%
+\index{heap!binary}%
 which means ``a disorganized
 pile.''  This is in contrast to binary search trees that can be thought
 of as a highly organized pile.
@@ -21,10 +21,10 @@ absorb the elements of a second priority queue #h#.
 \section{#BinaryHeap#: An Implicit Binary Tree}
 \seclabel{binaryheap}
 
-\index{BinaryHeap@#BinaryHeap#}
+\index{BinaryHeap@#BinaryHeap#}%
 Our first implementation of a (priority) #Queue# is based on a technique
 that is over four hundred years old.  \emph{Eytzinger's method}
-\index{Eytzinger's method}
+\index{Eytzinger's method}%
 allows us
 to represent a complete binary tree as an array by laying out the nodes
 of the tree in breadth-first order (see \secref{bintree:traversal}).
@@ -41,7 +41,7 @@ on. See \figref{eytzinger}.
   \figlabel{eytzinger}
 \end{figure}
 
-If we apply Eytzinger's method to sufficiently large tree, some
+If we apply Eytzinger's method to a sufficiently large tree, some
 patterns emerge.  The left child of the node at index #i# is at index
 $#left(i)#=2#i#+1$ and the right child of the node at index #i# is at
 index $#right(i)#=2#i#+2$.  The parent of the node at index #i# is at
@@ -50,9 +50,9 @@ index $#parent(i)#=(#i#-1)/2$.
 
 A #BinaryHeap# uses this technique to implicitly represent a complete
 binary tree in which the elements are \emph{heap-ordered}:
-\index{heap-ordered binary tree}
-\index{binary tree!heap-ordered} 
-\index{heap order}
+\index{heap-ordered binary tree}%
+\index{binary tree!heap-ordered}%
+\index{heap order}%
 The value
 stored at any index #i# is not smaller than the value stored at index
 #parent(i)#, with the exception of the root value, $#i#=0$.  It follows
@@ -112,8 +112,8 @@ calls to #resize()#, since these can be accounted for using the amortization
 argument from \lemref{arraystack-amortized}.  The running times of
 both #add(x)# and #remove()# then depend on the height of the (implicit)
 binary tree.  Luckily, this is a \emph{complete}
-\index{binary tree!complete}
-\index{complete binary tree}
+\index{binary tree!complete}%
+\index{complete binary tree}%
 binary tree;  every level
 except the last has the maximum possible number of nodes.  Therefore,
 if the height of this tree is $h$, then it has at least $2^h$ nodes.
@@ -144,7 +144,7 @@ The following theorem summarizes the performance of a #BinaryHeap#:
 \section{#MeldableHeap#: A Randomized Meldable Heap}
 \seclabel{meldableheap}
 
-\index{MeldableHeap@#MeldableHeap#}
+\index{MeldableHeap@#MeldableHeap#}%
 In this section, we describe the #MeldableHeap#, a priority #Queue#
 implementation in which the underlying structure is also a heap-ordered
 binary tree.  However, unlike a #BinaryHeap# in which the underlying
@@ -302,7 +302,7 @@ The following theorem summarizes the performance of a #MeldableHeap#:
 The implicit representation of a complete binary tree as an array,
 or list, seems to have been first proposed by Eytzinger \cite{e1590}.
 He used this representation in books containing pedigree family trees
-\index{pedigree family tree}
+\index{pedigree family tree}%
 of noble families.  The #BinaryHeap# data structure described here was
 first introduced by Williams \cite{w64}.
 
@@ -310,25 +310,25 @@ The randomized #MeldableHeap# data structure described here appears
 to have first been proposed by Gambin and Malinowski \cite{gm98}.
 Other meldable heap implementations exist, including 
 leftist heaps \cite[Section~5.3.2]{c72,k97v3},
-\index{leftist heap}
-\index{heap!leftist}
+\index{leftist heap}%
+\index{heap!leftist}%
 binomial heaps \cite{v78},
-\index{binomial heap}
-\index{heap!binomial}
+\index{binomial heap}%
+\index{heap!binomial}%
 Fibonacci heaps \cite{ft87}, 
-\index{Fibonacci heap}
-\index{heap!Fibonacci}
+\index{Fibonacci heap}%
+\index{heap!Fibonacci}%
 pairing heaps \cite{fsst86},\
-\index{pairing heap}
-\index{heap!pairing}
+\index{pairing heap}%
+\index{heap!pairing}%
  and skew heaps \cite{st83}, 
-\index{skew heap}
-\index{heap!skew}
+\index{skew heap}%
+\index{heap!skew}%
 although none of these are as simple as the #MeldableHeap#
 structure.
 
 Some of the above structures also support a #decreaseKey(u,y)# operation
-\index{decreaseKey@#decreaseKey(u,y)#}
+\index{decreaseKey@#decreaseKey(u,y)#}%
 in which the value stored at node #u# is decreased to #y#.  (It is a
 pre-condition that $#y#\le#u.x#$.)  In most of the preceding structures,
 this operation can be supported in $O(\log #n#)$ time by removing node
@@ -357,7 +357,7 @@ algorithm \cite{ft87}.
 \end{exc}
 
 \begin{exc}\exclabel{general-eytzinger}
-  \index{tree!$d$-ary}
+  \index{tree!$d$-ary}%
   A $d$-ary tree is a generalization of a binary tree in which each
   internal node has $d$ children.  Using Eytzinger's method it is also
   possible to represent complete $d$-ary trees using arrays.  Work out
@@ -366,7 +366,7 @@ algorithm \cite{ft87}.
 \end{exc}
 
 \begin{exc}
-  \index{DaryHeap@#DaryHeap#}
+  \index{DaryHeap@#DaryHeap#}%
   Using what you learned in \excref{general-eytzinger}, design and
   implement a \emph{#DaryHeap#}, the $d$-ary generalization of a
   #BinaryHeap#. Analyze the running times of operations on a #DaryHeap#

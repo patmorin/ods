@@ -54,14 +54,14 @@ side of \figref{rbs-lvc}) than we are to get a very unbalanced tree
 
 We can formalize this notion by studying random binary search trees.
 A \emph{random binary search tree}
-\index{random binary search tree}
-\index{binary search tree!random}
+\index{random binary search tree}%
+\index{binary search tree!random}%
 of size #n# is obtained in the
 following way:  Take a random permutation, $#x#_0,\ldots,#x#_{#n#-1}$,
 of the integers $0,\ldots,#n#-1$ and add its elements, one by one,
 into a #BinarySearchTree#.  By \emph{random permutation}
-\index{permutation!random}
-\index{random permutation}
+\index{permutation!random}%
+\index{random permutation}%
 we mean that
 each of the possible $#n#!$ permutations (orderings) of $0,\ldots,#n#-1$
 is equally likely, so that the probability of obtaining any particular
@@ -77,8 +77,8 @@ Before we can present our main result about random binary search trees,
 we must take some time for a short digression to discuss a type of number
 that comes up frequently when studying randomized structures. For a
 non-negative integer, $k$, the $k$-th \emph{harmonic number},
-\index{harmonic number}
-\index{H@$H_k$ (harmonic number)}
+\index{harmonic number}%
+\index{H@$H_k$ (harmonic number)}%
 denoted
 $H_k$, is defined as
 \[
@@ -103,7 +103,7 @@ $1+ \hint$.  (See \figref{harmonic-integral} for a graphical explanation.)
         & \includegraphics[width=\HalfScaleIfNeeded]{figs/harmonic-3}
     \end{tabular}
   \end{center}
-  \caption{The $k$th harmonic number $H_k=\sum_{i=1}^k 1/i$ is upper-bounded by $1+\hint$ and lower-bounded by $\hint$.  The value of $\hint$ is given by the 
+  \caption{The $k$th harmonic number $H_k=\sum_{i=1}^k 1/i$ is upper- and lower-bounded by two integrals. The value of these integrals is given by the 
   area of the shaded region, while the value of $H_k$ is given by the area of
   the rectangles.}
   \figlabel{harmonic-integral}
@@ -136,15 +136,16 @@ something that is not.
 
 \subsection{Proof of \lemref{rbs}}
 
-The key observation needed to prove \lemref{rbs} is the following: The
-search path for a value #x# in the open interval $(-1,#n#)$ in a random binary search tree, $T$, contains
-the node with key $i < #x#$ if and only if, in the random permutation
-used to create $T$, $i$ appears before any of $\{i+1,i+2,\ldots,\lfloor#x#\rfloor\}$.
+The key observation needed to prove \lemref{rbs} is the following:
+The search path for a value #x# in the open interval $(-1,#n#)$ in a
+random binary search tree, $T$, contains the node with key $i < #x#$
+if, and only if, in the random permutation used to create $T$, $i$
+appears before any of $\{i+1,i+2,\ldots,\lfloor#x#\rfloor\}$.
 
-To see this, refer to \figref{rbst-records} and notice that, until
+To see this, refer to \figref{rbst-records} and notice that until
 some value in $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ is added, the search
 paths for each value in the open interval $(i-1,\lfloor#x#\rfloor+1)$
-are identical.  (Remember that for two search values to have
+are identical.  (Remember that for two values to have
 different search paths, there must be some element in the tree that
 compares differently with them.)  Let $j$ be the first element in
 $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ to appear in the random permutation.
@@ -246,7 +247,7 @@ search tree.  In particular, it does not depend on a random choice of
 \section{#Treap#: A Randomized Binary Search Tree}
 \seclabel{treap}
 
-\index{Treap@#Treap#}
+\index{Treap@#Treap#}%
 The problem with random binary search trees is, of course, that they are
 not dynamic.  They don't support the #add(x)# or #remove(x)# operations
 needed to implement the #SSet# interface.  In this section we describe
@@ -265,7 +266,7 @@ also obey the \emph{heap property}:
 \begin{itemize}
 \item (Heap Property)  At every node #u#, except the root, 
       $#u.parent.p# < #u.p#$.
-      \index{heap property}
+      \index{heap property}%
 \end{itemize}
 In other words, each node has a priority smaller than that of its two
 children.  An example is shown in \figref{treap}.
@@ -332,14 +333,14 @@ operation efficiently. However, the real benefit of a #Treap# is that
 it can support the #add(x)# and #delete(x)# operations.  To
 do this, it needs to perform rotations in order to maintain the heap property.  Refer to \figref{rotations}.
 A \emph{rotation}
-\index{rotation}
+\index{rotation}%
 in a binary
 search tree is a local modification that takes a parent #u# of a node #w#
 and makes #w# the parent of #u#, while preserving the binary search tree
 property. Rotations come in two flavours: \emph{left} or \emph{right}
 depending on whether #w# is a right or left child of #u#, respectively.
-\index{left rotation}
-\index{right rotation}
+\index{left rotation}%
+\index{right rotation}%
 
 \begin{figure}
   \begin{center}
@@ -359,7 +360,7 @@ rotation is that the depth of #w# decreases by one while the depth of #u#
 increases by one.
 
 Using rotations, we can implement the #add(x)# operation as follows:
-We create a new node, #u#, and assign #u.x=x# and pick a random value
+We create a new node, #u#, assign #u.x=x#, and pick a random value
 for #u.p#.  Next we add #u# using the usual #add(x)# algorithm
 for a #BinarySearchTree#, so that #u# is now a leaf of the #Treap#.
 At this point, our #Treap# satisfies the binary search tree property,
@@ -394,8 +395,8 @@ asks you to show that the expected number of rotations performed during
 an addition is actually only $O(1)$.)
 
 The #remove(x)# operation in a #Treap# is the opposite of the #add(x)#
-operation.  We search for the node, #u#, containing #x# and then perform
-rotations to move #u# downwards until it becomes a leaf and then we
+operation.  We search for the node, #u#, containing #x#, then perform
+rotations to move #u# downwards until it becomes a leaf, and then we
 splice #u# from the #Treap#.  Notice that, to move #u# downwards, we can
 perform either a left or right rotation at #u#, which will replace #u#
 with #u.right# or #u.left#, respectively.
@@ -483,7 +484,7 @@ interval $[2,\infty)$ of the equation $\alpha\ln((2e/\alpha))=1$ and
 $\beta=\frac{3}{2\ln(\alpha/2)}$ .  Furthermore, the variance of the
 height is constant.
 
-The name #Treap# was coined by Aragon and Seidel \cite{as96} who discussed
+The name #Treap# was coined by Seidel and Aragon \cite{as96} who discussed
 #Treap#s and some of their variants.  However, their basic structure was
 studied much earlier by Vuillemin \cite{v80} who called them Cartesian
 trees.
@@ -496,7 +497,7 @@ to hashing #u.hashCode()#)}.  Although a number of hash functions will
 probably work well for this in practice, for the important parts of the
 proof of \lemref{rbs} to remain valid, the hash function should be randomized
 and have the \emph{min-wise independent property}:
-\index{min-wise independence}
+\index{min-wise independence}%
 For any distinct
 values $x_1,\ldots,x_k$, each of the hash values $h(x_1),\ldots,h(x_k)$
 should be distinct with high probability and, for each $i\in\{1,\ldots,k\}$,
@@ -506,13 +507,13 @@ should be distinct with high probability and, for each $i\in\{1,\ldots,k\}$,
 for some constant $c$.
 One such class of hash functions that is easy to implement and fairly
 fast is \emph{tabulation hashing} (\secref{tabulation}).
-\index{tabulation hashing}
-\index{hashing!tabulation}
+\index{tabulation hashing}%
+\index{hashing!tabulation}%
 
 Another #Treap# variant that doesn't store priorities at each node is
 the randomized binary search tree
-\index{randomized binary search tree}
-\index{binary search tree!randomized}
+\index{randomized binary search tree}%
+\index{binary search tree!randomized}%
 of Mart\'\i nez and Roura \cite{mr98}.
 In this variant, every node, #u#, stores the size, #u.size#, of the
 subtree rooted at #u#.  Both the #add(x)# and #remove(x)# algorithms are
@@ -550,7 +551,7 @@ that the removal algorithm in a #Treap# will perform a left or right
 rotation of #u#.
 
 Randomized binary search trees have the disadvantage, compared to treaps,
-that when adding and removing elements they make many random choices and
+that when adding and removing elements they make many random choices, and
 they must maintain the sizes of subtrees.  One advantage of randomized
 binary search trees over treaps is that subtree sizes can serve another
 useful purpose, namely to provide access by rank in $O(\log #n#)$ expected
@@ -615,8 +616,8 @@ stored in treap nodes have no use other than keeping the treap balanced.
 
 
 \begin{exc}
-  \index{finger}
-  \index{finger search!in a treap}
+  \index{finger}%
+  \index{finger search!in a treap}%
   This exercise works out the details of how one can efficiently search
   a #Treap# given a pointer that is close to the node we are searching for.
   \begin{enumerate}
@@ -645,7 +646,7 @@ stored in treap nodes have no use other than keeping the treap balanced.
 \end{exc}
 
 \begin{exc}
-  \index{TreapList@#TreapList#}
+  \index{TreapList@#TreapList#}%
   Implement a #TreapList#, an implementation of the #List# interface
   as a treap.  Each node in the treap should store a list item, and an
   in-order traversal of the treap finds the items in the same order that

@@ -5,14 +5,14 @@ In this chapter, we study a binary search tree data structure, the
 #ScapegoatTree#.  This structure is based on the common wisdom that,
 when something goes wrong, the first thing people tend to do is find
 someone to blame (the \emph{scapegoat}).
-\index{scapegoat}
+\index{scapegoat}%
 Once blame is firmly
 established, we can leave the scapegoat to fix the problem.
 
 A #ScapegoatTree# keeps itself balanced by \emph{partial rebuilding
 operations}.
-\index{partial rebuilding}
-\index{binary search tree!partial rebuilding}
+\index{partial rebuilding}%
+\index{binary search tree!partial rebuilding}%
 During a partial rebuilding operation, an entire subtree is
 deconstructed and rebuilt into a perfectly balanced subtree.  There are
 many ways of rebuilding a subtree rooted at node #u# into a perfectly
@@ -33,7 +33,7 @@ has #size(u)# nodes.
 \seclabel{scapegoattree}
 
 
-\index{ScapegoatTree@#ScapegoatTree#}
+\index{ScapegoatTree@#ScapegoatTree#}%
 A #ScapegoatTree# is a #BinarySearchTree# that, in addition to keeping
 track of the number, #n#, of  nodes in the tree also keeps a counter, #q#,
 that maintains an upper-bound on the number of nodes. 
@@ -108,7 +108,7 @@ The implementation of #remove(x)# in a #ScapegoatTree# is very simple.
 We search for #x# and remove it using the usual algorithm for removing a
 node from a #BinarySearchTree#.  (Note that this can never increase the
 height of the tree.)  Next, we decrement #n#, but leave #q# unchanged.
-Finally, we check if $#q# > 2#n#$ and, if so, we \emph{rebuild the entire
+Finally, we check if $#q# > 2#n#$ and, if so, then we \emph{rebuild the entire
 tree} into a perfectly balanced binary search tree and set $#q#=#n#$.
 \codeimport{ods/ScapegoatTree.remove(x)}
 Again, if we ignore the cost of rebuilding, the running time of the
@@ -203,7 +203,7 @@ All that remains is to prove an upper-bound on the cost of all calls to
 
 \begin{proof}
   To prove this, we will use a \emph{credit scheme}.
-  \index{credit scheme}
+  \index{credit scheme}%
   We imagine that each node
   stores a number of credits.  Each credit can pay for some constant,
   $c$, units of time spent rebuilding.  The scheme gives out a total of
@@ -275,7 +275,7 @@ The term \emph{scapegoat tree} is due to Galperin and Rivest \cite{gr93},
 who define and analyze these trees.  However, the same structure
 was discovered earlier by Andersson \cite{a89,a99}, who called them
 \emph{general balanced trees}
-\index{general balanced tree}
+\index{general balanced tree}%
 since they can have any shape as long as
 their height is small.
 
@@ -369,7 +369,7 @@ and related structures based on partial rebuilding may work.  An example of such
 \end{exc}
 
 \begin{exc}
-  \index{WeightBalancedTree@#WeightBalancedTree#} 
+  \index{WeightBalancedTree@#WeightBalancedTree#}%
   Analyze and implement a #WeightBalancedTree#. This is a tree in
   which each node #u#, except the root, maintains the \emph{balance
   invariant} that $#size(u)# \le (2/3)#size(u.parent)#$.  The #add(x)# and
@@ -381,7 +381,7 @@ and related structures based on partial rebuilding may work.  An example of such
 \end{exc}
 
 \begin{exc}
-  \index{CountdownTree@#CountdownTree#}
+  \index{CountdownTree@#CountdownTree#}%
   Analyze and implement a #CountdownTree#.  In a #CountdownTree# each
   node #u# keeps a \emph{timer} #u.t#.  The #add(x)# and #remove(x)#
   operations are exactly the same as in a standard #BinarySearchTree#
@@ -397,7 +397,7 @@ and related structures based on partial rebuilding may work.  An example of such
 \end{exc}
 
 \begin{exc}
-  \index{DynamiteTree@#DynamiteTree#}
+  \index{DynamiteTree@#DynamiteTree#}%
   Analyze and implement a #DynamiteTree#.  In a #DynamiteTree# each
   node #u# keeps tracks of the size of the subtree rooted at #u# in a
   variable #u.size#.  The #add(x)# and #remove(x)# operations are exactly
@@ -412,7 +412,7 @@ and related structures based on partial rebuilding may work.  An example of such
  
 
 \begin{exc}\exclabel{list-order-maintenance}
-  \index{Sequence@#Sequence#}
+  \index{Sequence@#Sequence#}%
   Design and implement a #Sequence# data structure that maintains a
   sequence (list) of elements.  It supports these operations:
   \begin{itemize}

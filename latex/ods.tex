@@ -3,7 +3,7 @@
 \makeindex
 %\usepackage{showidx}
 % mark overful hboxes
-%\overfullrule=1mm
+%\overfullrule=5mm
 \usepackage{kpfonts}
 
 %\usepackage[nott]{kpfonts}
@@ -271,8 +271,8 @@ title page
 \cleardoublepage
 
 \fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
-\fancyhead[RO,LE]{\small\textsection\thesection} % section number on the inside
-
+\fancyhead[CO]{\small\rightmarktitle} % section title, right center
+\fancyhead[RO,LE]{\small\rightmarksection}
 \include{intro-lang}
 \include{arrays-lang}
 \include{linkedlists-lang}
@@ -293,6 +293,9 @@ title page
 %% Turn off section numbers for remainder of document
 \fancyhead[RO]{} % section number on the inside
 \fancyhead[LE]{} % section number on the inside
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}} 
+\renewcommand{\sectionmark}[1]{\markright{#1}} 
+\fancyhead[CO]{\rightmark}
 
 \cleardoublepage
 \addcontentsline{toc}{chapter}{Bibliography}
