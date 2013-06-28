@@ -64,11 +64,34 @@
 \fancyhead{}   % clear all headers
 \fancyfoot{}   % clear all footers
 \fancyfoot[CE,CO]{\small\thepage}
-\fancyhead[LE,RO]{\small\thepage}  % page numbers on the outside
-\fancyhead[RO]{\small\textsection\thesection} % section number on the inside
-\fancyhead[LE]{\small\textsection\thesection} % section number on the inside
+%\fancyhead[LE,RO]{\small\thepage}  % page numbers on the outside
+
+%\fancyhead[LE,RO]{\small\textsection\rightmarksection}
+%\def\numberonly#1. #2!!{#1}
+%\def\titleonly#1. #2!!{#2}
+
+\makeatletter
+\newcommand*{\rightmarksection}{%
+  \begingroup
+    \protected@edef\temp{\rightmark}%
+    \expandafter\@rightmarksection\temp. \@nil
+  \endgroup
+}
+\def\@rightmarksection#1. #2\@nil{%
+  \def\temp{#2}%
+  \ifx\temp\@empty
+  \else
+    #1%
+  \fi  
+}
+\makeatother
+
+
+
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}} 
-\renewcommand{\sectionmark}[1]{\markright{#1}{}} 
+
+\renewcommand{\sectionmark}[1]{\markright{\thesection. #1}} 
+
 \fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
 \fancyhead[CO]{\small\nouppercase{\rightmark}} % section title, right center
 
