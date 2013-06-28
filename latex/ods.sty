@@ -65,10 +65,11 @@
 \fancyfoot{}   % clear all footers
 \fancyfoot[CE,CO]{\small\thepage}
 \fancyhead[LE,RO]{\small\thepage}  % page numbers on the outside
-\fancyhead[RO]{\small\textsection\thesection} % section number on the inside
-\fancyhead[LE]{\small\textsection\thesection} % section number on the inside
+\fancyhead[RO]{\small\textsection\secno} % section number on the inside
+\fancyhead[LE]{\small\textsection\secno} % section number on the inside
+\newcommand{\secno}{x}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}} 
-\renewcommand{\sectionmark}[1]{\markright{#1}{}} 
+\renewcommand{\sectionmark}[1]{\markright{#1}\edef\secno{\thesection}} 
 \fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
 \fancyhead[CO]{\small\nouppercase{\rightmark}} % section title, right center
 
