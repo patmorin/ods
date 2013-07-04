@@ -40,7 +40,7 @@ $\{0,\ldots,#n#^c-1\}$ in $O(c#n#)$ time.
 \index{sorting algorithm!comparison-based}%
 In this section, we present three sorting algorithms: merge-sort,
 quicksort, and heap-sort.  Each of these algorithms takes an input array #a#
-and sorst the elements of #a# into non-decreasing order in $O(#n#\log #n#)$
+and sorts the elements of #a# into non-decreasing order in $O(#n#\log #n#)$
 (expected) time.  These algorithms are all \emph{comparison-based}.
 \javaonly{Their second argument, #c#, is a #Comparator#
 \index{Comparator@#Comparator#}%
@@ -428,8 +428,8 @@ will be performed for any input array, #a#, having #n# distinct elements
 and it tells us how the algorithm will reorder #a# in order to sort it.
 Consequently, the comparison tree must have at least $#n#!$ leaves;
 if not, then there are two distinct permutations that lead to the same
-leaf, so the algorithm does not correctly sort at least one of these
-permutations.
+leaf; therefore the algorithm does not correctly sort at least one of
+these permutations.
 
 For example, the comparison tree in \figref{comparison-tree-2} has only
 $4< 3!=6$ leaves. Inspecting this tree, we see that the two input arrays

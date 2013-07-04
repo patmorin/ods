@@ -248,9 +248,8 @@ the list (and returns false):
 \codeimport{ods/AdjacencyLists.hasEdge(i,j)}
 This also takes $O(\deg(#i#))$ time.
 
-The #outEdges(i)# operation is very simple;  \javaonly{It simply returns
-the list #adj[i]#}\cpponly{It simply copies the values in #adj[i]#
-into the output list}:
+The #outEdges(i)# operation is very simple;  \javaonly{it returns the list
+#adj[i]#}\cpponly{it copies the values in #adj[i]# into the output list}:
 \javaimport{ods/AdjacencyLists.outEdges(i)}
 \cppimport{ods/AdjacencyLists.outEdges(i,edges)}
 \javaonly{This clearly takes constant time.}\cpponly{This clearly takes $O(\deg(#i#))$ time.}
@@ -365,7 +364,7 @@ A breadth-first traversal has some very special properties.  Calling
 the vertices at distance 0 from #r# (#r# itself) will enter #q# before
 the vertices at distance 1, which will enter #q# before the vertices at
 distance 2, and so on.  Thus, the #bfs(g,r)# method visits vertices
-in increasing order of distance from #r# and vertices that can not be
+in increasing order of distance from #r# and vertices that cannot be
 reached from #r# are never visited at all.
 
 A particularly useful application of the breadth-first-search algorithm
@@ -400,7 +399,7 @@ Next, we scan #i#'s adjacency list and recursively visit any white vertex
 we find in this list.  Finally, we are done processing #i#, so we color
 #i# black and return.
 \codeimport{ods/Algorithms.dfs(g,r).dfs(g,i,c)}
-An example of the execution of this algorithm is shown in \figref{graph-dfs}
+An example of the execution of this algorithm is shown in \figref{graph-dfs}.
 
 \begin{figure}
   \begin{center}
@@ -443,7 +442,7 @@ vertex 0 to vertex 11.
 An important property of the depth-first-search algorithm is the
 following: Suppose that when node #i# is colored #grey#, there exists a path
 from #i# to some other node #j# that uses only white vertices.  Then #j#
-will be colored (first #grey# then) #black# before #i# is colored #black#.
+will be colored first #grey# then #black# before #i# is colored #black#.
 (This can be proven by contradiction, by considering any path $P$ from #i#
 to #j#.)
 

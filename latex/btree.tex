@@ -216,7 +216,7 @@ The #BTree# class, which implements a $B$-tree, stores a #BlockStore#,
 #bs#, that stores #BTree# nodes as well as the index, #ri#, of the
 root node.  As usual, an integer, #n#, is used to keep track of the number
 of items in the data structure:
-\javaimport{ods/BTree.n.ri.bs}
+\codeimport{ods/BTree.n.ri.bs}
 
 \subsection{Searching}
 
@@ -241,7 +241,7 @@ search continues in #u#'s rightmost child.  Just like binary search
 trees, the algorithm keeps track of the most recently seen key, #z#,
 that is larger than #x#.  In case #x# is not found, #z# is returned as
 the smallest value that is greater or equal to #x#.
-\javaimport{ods/BTree.find(x)}
+\codeimport{ods/BTree.find(x)}
 Central to the #find(x)# method is the #findIt(a,x)# method that
 searches in a #null#-padded sorted array, #a#, for the value #x#.
 This method, illustrated in \figref{findit}, works for any array,
@@ -255,7 +255,7 @@ $#a[i]#>#x#$ or $#a[i]#=#null#$.
   \caption[The findIt(a,x) method]{The execution of #findIt(a,27)#.}
   \figlabel{findit}
 \end{figure}
-\javaimport{ods/BTree.findIt(a,x)}
+\codeimport{ods/BTree.findIt(a,x)}
 The #findIt(a,x)# method uses a binary search 
 \index{binary search}%
 that halves the search
@@ -362,14 +362,14 @@ the #addRecursive(x,ui)# method checks to see if #u# is storing too many
 (more than $2B-1$) keys.  If so, then #u# needs to be \emph{split}
 with a call to the #u.split()# method.  The result of calling #u.split()#
 is a new node that is used as the return value for #addRecursive(x,ui)#.
-\javaimport{ods/BTree.addRecursive(x,ui)}
+\codeimport{ods/BTree.addRecursive(x,ui)}
 
 The #addRecursive(x,ui)# method is a helper for the #add(x)# method, which
 calls #addRecursive(x,ri)# to insert #x# into the root of the $B$-tree.
 If #addRecursive(x,ri)# causes the root to split, then a new root is
 created that takes as its children both the old root and the new node
 created by the splitting of the old root.
-\javaimport{ods/BTree.add(x)}
+\codeimport{ods/BTree.add(x)}
 
 The #add(x)# method and its helper, #addRecursive(x,ui)#, can be analyzed
 in two phases:
@@ -463,7 +463,7 @@ in \figref{btree-remove}.
 
 The #removeRecursive(x,ui)# method is a recursive implementation of the
 preceding algorithm:
-\javaimport{ods/BTree.removeRecursive(x,ui).removeSmallest(ui)}
+\codeimport{ods/BTree.removeRecursive(x,ui).removeSmallest(ui)}
 
 Note that, after recursively removing the value #x# from the #i#th child of #u#,
 #removeRecursive(x,ui)# needs to ensure that this child still has at
@@ -476,7 +476,7 @@ requires using a sibling of #w#.  This can be either child $#i#+1$ of
 which is the sibling, #v#, of #w# directly to its left.  The only time
 this doesn't work is when $#i#=0$, in which case we use the sibling
 directly to #w#'s right.
-\javaimport{ods/BTree.checkUnderflow(u,i)}
+\codeimport{ods/BTree.checkUnderflow(u,i)}
 In the following, we focus on the case when $#i#\neq 0$ so that any
 underflow at the #i#th child of #u# will be corrected with the help
 of the $(#i#-1)$st child of #u#.  The case $#i#=0$ is similar and the
@@ -535,7 +535,7 @@ also children), for #w#.  There are two ways to do this:
   \end{figure}
 \end{description}
 
-\javaimport{ods/BTree.checkUnderflowNonZero(u,i).checkUnderflowZero(u,i)}
+\codeimport{ods/BTree.checkUnderflowNonZero(u,i).checkUnderflowZero(u,i)}
 
 To summarize, the #remove(x)# method in a $B$-tree follows a root to
 leaf path, removes a key #x'# from a leaf, #u#, and then performs zero

@@ -26,60 +26,6 @@
 \usepackage{wasysym}
 \usepackage{emptypage}
 
-%% This code allows dynamic scaling of images to fit the page
-%% Usage: \includegraphics[width=\ScaleIfNeeded]{figs/figure}
-\makeatletter
-\def\ScaleIfNeeded{%
-\ifdim\Gin@nat@width>.97\linewidth
-.97\linewidth
-\else
-\Gin@nat@width
-\fi
-}
-\makeatother
-
-\makeatletter
-\def\HalfScaleIfNeeded{%
-\ifdim\Gin@nat@width>.46\linewidth
-.46\linewidth
-\else
-\Gin@nat@width
-\fi
-}
-\makeatother
-
-\makeatletter
-\def\HeightScaleIfNeeded{%
-\ifdim\Gin@nat@height>.8\textheight
-.8\textheight
-\else
-\Gin@nat@height
-\fi
-}
-\makeatother
-
-
-\makeatletter
-\def\QuarterHeightScaleIfNeeded{%
-\ifdim\Gin@nat@height>.22\textheight
-.22\textheight
-\else
-\Gin@nat@height
-\fi
-}
-\makeatother
-
-\makeatletter
-\def\FifthHeightScaleIfNeeded{%
-\ifdim\Gin@nat@height>.168\textheight
-.168\textheight
-\else
-\Gin@nat@height
-\fi
-}
-\makeatother
-
-
 
 %\usepackage[mathlines]{lineno}
 %\linenumbers
@@ -125,11 +71,16 @@
 \usepackage{ods} % Personalization and commands
 
 \htmlonly{
-\newcommand{\ScaleIfNeeded}{\textwidth}
-\newcommand{\HalfScaleIfNeeded}{\textwidth}
+  \newcommand{\ScaleIfNeeded}{\textwidth}
+  \newcommand{\HalfScaleIfNeeded}{\textwidth}
+  \newcommand{\HeightScaleIfNeeded}{\textheight}
+  \newcommand{\QuarterHeightScaleIfNeeded}{.25\textheight}
+  \newcommand{\FifthHeightScaleIfNeeded}{.2\textheight}
+  \newcommand{\fancyhead}[2][zzz]{}
+  \newcommand{\fancyfoot}[2][zzz]{}
 }
 
-%\newcommand{\comment}[1]{}
+% Referencing commands 
 \newcommand{\chaplabel}[1]{\label{chap:#1}}
 \newcommand{\Chapref}[1]{Chapter~\ref{chap:#1}}
 \newcommand{\chapref}[1]{Chapter~\ref{chap:#1}}
@@ -158,6 +109,7 @@
 \newcommand{\myeqref}[1]{(\ref{eq:#1})}
 \newcommand{\Eqref}[1]{Equation~(\ref{eq:#1})}
 
+% Theorem-like environments
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[chapter]
 \newcommand{\thmlabel}[1]{\label{thm:#1}}
@@ -182,8 +134,8 @@
 \newcommand{\prplabel}[1]{\label{prp:#1}}
 \newcommand{\prpref}[1]{Property~\ref{prp:#1}}
 
+% Miscellaneous commands
 \newcommand{\etal}{\emph{et al.}}
-
 \newcommand{\voronoi}{Vorono\u\i}
 \newcommand{\ceil}[1]{{\lceil #1 \rceil}}
 \newcommand{\Ceil}[1]{{\left\lceil #1 \right\rceil}}
@@ -286,9 +238,7 @@ title page
 \include{sorting-lang}
 \include{graphs-lang}
 \include{integers-lang}
-\javaonly{
 \include{btree-lang}
-}
 
 %% Turn off section numbers for remainder of document
 \fancyhead[RO]{} % section number on the inside

@@ -169,3 +169,57 @@
 % We can do this since latex2html doesn't read this file
 \newcommand{\htmlonly}[1]{}
 
+%% This code allows dynamic scaling of images to fit the page
+%% Usage: \includegraphics[width=\ScaleIfNeeded]{figs/figure}
+\makeatletter
+\def\ScaleIfNeeded{%
+\ifdim\Gin@nat@width>.97\linewidth
+.97\linewidth
+\else
+\Gin@nat@width
+\fi
+}
+\makeatother
+
+\makeatletter
+\def\HalfScaleIfNeeded{%
+\ifdim\Gin@nat@width>.46\linewidth
+.46\linewidth
+\else
+\Gin@nat@width
+\fi
+}
+\makeatother
+
+\makeatletter
+\def\HeightScaleIfNeeded{%
+\ifdim\Gin@nat@height>.8\textheight
+.8\textheight
+\else
+\Gin@nat@height
+\fi
+}
+\makeatother
+
+
+\makeatletter
+\def\QuarterHeightScaleIfNeeded{%
+\ifdim\Gin@nat@height>.22\textheight
+.22\textheight
+\else
+\Gin@nat@height
+\fi
+}
+\makeatother
+
+\makeatletter
+\def\FifthHeightScaleIfNeeded{%
+\ifdim\Gin@nat@height>.168\textheight
+.168\textheight
+\else
+\Gin@nat@height
+\fi
+}
+\makeatother
+
+

@@ -106,9 +106,9 @@ ods-cpp-html.tex : ods.tex Makefile
 	cat $< | ./snarf-cpp-html.pl > $*-cpp-html.tex 
 
 ods-java-screen.pdf : ods-java.pdf
-	gs -o ods-java-screen.pdf -sDEVICE=pdfwrite -c "[/CropBox [72 72 540 720] /PAGES pdfmark" -f ods-java.pdf
+	gs -o ods-java-screen.pdf -sDEVICE=pdfwrite -c "[/CropBox [53 88 379 595] /PAGES pdfmark" -f ods-java.pdf
 
 ods-cpp-screen.pdf : ods-cpp.pdf
-	gs -o ods-cpp-screen.pdf -sDEVICE=pdfwrite -c "[/CropBox [72 72 540 720] /PAGES pdfmark" -f ods-cpp.pdf
+	gs -o ods-cpp-screen.pdf -sDEVICE=pdfwrite -c "[/CropBox [53 88 379 595] /PAGES pdfmark" -f ods-cpp.pdf
 
 

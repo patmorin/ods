@@ -946,7 +946,7 @@ index of the most significant 1 bit in the binary representation of #x#.
 This means that, for $#x#>2^{#r#/2}$, we can right-shift the bits of
 #x# by $#r#/2$ positions before using it as an index into #logtab#.
 The following code does this using an array #logtab# of size $2^{16}$ to compute
-$\lfloor\log #x#\rfloor$ for all #x# in the range $\{1,\ldots,2^{32}-1\}$
+$\lfloor\log #x#\rfloor$ for all #x# in the range $\{1,\ldots,2^{32}-1\}$.
 \codeimport{ods/FastSqrt.log(x)}
 
 Finally, for completeness, we include the following code that initializes #logtab# and #sqrttab#:

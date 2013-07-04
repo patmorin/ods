@@ -171,7 +171,7 @@ whether to merge #h2# with #h1.left# or #h1.right#:
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/meldable-merge}}
-  \caption{Merging #h1# and #h2# is done by merging #h2# with one of
+  \caption[Merging in a #MeldableHeap#]{Merging #h1# and #h2# is done by merging #h2# with one of
   #h1.left# or #h1.right#.}
   \figlabel{meldable-merge}
 \end{figure}
@@ -220,9 +220,9 @@ all non-negative integers $#n#'< #n#$.
 
 Let $#n#_1$ denote the size of the root's left subtree, so that
 $#n#_2=#n#-#n#_1-1$ is the size of the root's right subtree.  Starting at
-the root, the walk takes one step and then continues in a subtree of size
-$#n#_1$ or continues in a subtree of size $#n#_2$.  By our inductive
-hypothesis, the expected length of the walk is then
+the root, the walk takes one step and then continues in a subtree of
+size $#n#_1$ or $#n#_2$.  By our inductive hypothesis, the expected
+length of the walk is then
 \[
     \E[W] = 1 + \frac{1}{2}\log (#n#_1+1) + \frac{1}{2}\log (#n#_2+1)  \enspace , 
 \] 
