@@ -17,6 +17,7 @@ namespace ods {
 template<class T>
 class SkiplistSSet {
 protected:
+	T null;
 	struct Node {
 		T x;
 		int height;     // length of next
@@ -29,13 +30,13 @@ protected:
 
 	Node *newNode(T x, int h);
 	void deleteNode(Node *u);
+	Node* findPredNode(T x);
+
 public:
 	SkiplistSSet();
 
 	virtual ~SkiplistSSet();
 
-	// FIXME: Move outside
-	Node* findPredNode(T x);
 	T find(T x);
 	bool remove(T x);
 	bool add(T x);
@@ -62,7 +63,8 @@ typename SkiplistSSet<T>::Node* SkiplistSSet<T>::findPredNode(T x) {
 	Node *u = sentinel;
 	int r = h;
 	while (r >= 0) {
-		while (  u->next[r] != NULL && compare(u->next[r]->x, x) < 0)
+		while (u->next[r] != NULL 
+               && compare(u->next[r]->x, x) < 0)
 			u = u->next[r]; // go right in list r
 		r--; // go down into list r-1
 	}
@@ -71,8 +73,9 @@ typename SkiplistSSet<T>::Node* SkiplistSSet<T>::findPredNode(T x) {
 
 template<class T>
 SkiplistSSet<T>::SkiplistSSet() {
+	null = (T)NULL;
 	n = 0;
-	sentinel = newNode(NULL, sizeof(int)*8);
+	sentinel = newNode(null, sizeof(int)*8);
 	memset(sentinel->next, '\0', sizeof(Node*)*sentinel->height);
 	stack = (Node**)new Node*[sentinel->height];
 	h = 0;
@@ -88,7 +91,7 @@ SkiplistSSet<T>::~SkiplistSSet() {
 template<class T>
 T SkiplistSSet<T>::find(T x) {
 	Node *u = findPredNode(x);
-	return u->next[0] == NULL ? NULL : u->next[0]->x;
+	return u->next[0] == NULL ? null : u->next[0]->x;
 }
 
 template<class T>
@@ -98,7 +101,8 @@ bool SkiplistSSet<T>::remove(T x) {
 	int r = h;
 	int comp = 0;
 	while (r >= 0) {
-		while (u->next[r] != NULL && (comp = compare(u->next[r]->x, x)) < 0) {
+		while (u->next[r] != NULL 
+               && (comp = compare(u->next[r]->x, x)) < 0) {
 			u = u->next[r];
 		}
 		if (u->next[r] != NULL && comp == 0) {
@@ -123,15 +127,16 @@ bool SkiplistSSet<T>::add(T x) {
 	int r = h;
 	int comp = 0;
 	while (r >= 0) {
-		while (u->next[r] != NULL && (comp = compare(u->next[r]->x, x)) < 0)
+		while (u->next[r] != NULL 
+               && (comp = compare(u->next[r]->x, x)) < 0)
 			u = u->next[r];
 		if (u->next[r] != NULL && comp == 0)
 			return false;
-		stack[r--] = u; // going down, store u
+		stack[r--] = u;        // going down, store u
 	}
 	Node *w = newNode(x, pickHeight());
 	while (h < w->height)
-		stack[++h] = sentinel; // increasing height of skiplist
+		stack[++h] = sentinel; // height increased
 	for (int i = 0; i < w->height; i++) {
 		w->next[i] = stack[i]->next[i];
 		stack[i]->next[i] = w;

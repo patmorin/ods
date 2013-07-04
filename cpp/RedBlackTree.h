@@ -19,7 +19,7 @@ template<class Node, class T>
 class RedBlackNode : public BSTNode<Node, T> {
 protected:
 	friend class RedBlackTree<Node, T>;
-	char color;
+	char colour;
 };
 
 template<class Node, class T>
@@ -34,7 +34,7 @@ protected:
 	void pullBlack(Node *u);
 	void flipLeft(Node *u);
 	void flipRight(Node *u);
-	void swapColors(Node *u, Node *w);
+	void swapcolours(Node *u, Node *w);
 	void addFixup(Node *u);
 	void removeFixup(Node *u);
 	Node *removeFixupCase1(Node *u);
@@ -59,61 +59,61 @@ class RedBlackTree1 : public RedBlackTree<RedBlackNode1<T>, T> { };
 
 template<class Node, class T>
 void RedBlackTree<Node,T>::pushBlack(Node *u) {
-	u->color--;
-	u->left->color++;
-	u->right->color++;
+	u->colour--;
+	u->left->colour++;
+	u->right->colour++;
 }
 
 
 
 template<class Node, class T>
 void RedBlackTree<Node,T>::pullBlack(Node *u) {
-	u->color++;
-	u->left->color--;
-	u->right->color--;
+	u->colour++;
+	u->left->colour--;
+	u->right->colour--;
 }
 
 
 template<class Node, class T>
 void RedBlackTree<Node,T>::flipLeft(Node *u) {
-	swapColors(u, u->right);
+	swapcolours(u, u->right);
 	rotateLeft(u);
 }
 
 
 template<class Node, class T>
 void RedBlackTree<Node,T>::flipRight(Node *u) {
-	swapColors(u, u->left);
+	swapcolours(u, u->left);
 	rotateRight(u);
 }
 
 
 template<class Node, class T>
-void RedBlackTree<Node,T>::swapColors(Node *u, Node *w) {
-	char tmp = u->color;
-	u->color = w->color;
-	w->color = tmp;
+void RedBlackTree<Node,T>::swapcolours(Node *u, Node *w) {
+	char tmp = u->colour;
+	u->colour = w->colour;
+	w->colour = tmp;
 }
 
 
 
 template<class Node, class T>
 void RedBlackTree<Node,T>::addFixup(Node *u) {
-	while (u->color == red) {
+	while (u->colour == red) {
 		if (u == r) { // u is the root - done
-			u->color = black;
+			u->colour = black;
 			return;
 		}
 		Node *w = u->parent;
-		if (w->left->color == black) { // ensure left-leaning
+		if (w->left->colour == black) { // ensure left-leaning
 			flipLeft(w);
 			u = w;
 			w = u->parent;
 		}
-		if (w->color == black)
+		if (w->colour == black)
 			return; // no red-red edge = done
 		Node *g = w->parent; // grandparent of u
-		if (g->right->color == black) {
+		if (g->right->colour == black) {
 			flipRight(g);
 			return;
 		} else {
@@ -127,10 +127,10 @@ void RedBlackTree<Node,T>::addFixup(Node *u) {
 
 template<class Node, class T>
 void RedBlackTree<Node,T>::removeFixup(Node *u) {
-	while (u->color > black) {
+	while (u->colour > black) {
 		if (u == r) {
-			u->color = black;
-		} else if (u->parent->left->color == red) {
+			u->colour = black;
+		} else if (u->parent->left->colour == red) {
 			u = removeFixupCase1(u);
 		} else if (u == u->parent->left) {
 			u = removeFixupCase2(u);
@@ -138,9 +138,9 @@ void RedBlackTree<Node,T>::removeFixup(Node *u) {
 			u = removeFixupCase3(u);
 		}
 	}
-	if (u != r) { // restore left-leaning property, if necessary
+	if (u != r) { // restore left-leaning property, if needed
 		Node *w = u->parent;
-		if (w->right->color == red && w->left->color == black) {
+		if (w->right->colour == red && w->left->colour == black) {
 			flipLeft(w);
 		}
 	}
@@ -163,11 +163,11 @@ Node* RedBlackTree<Node,T>::removeFixupCase2(Node *u) {
 	pullBlack(w); // w->left
 	flipLeft(w); // w is now red
 	Node *q = w->right;
-	if (q->color == red) { // q-w is red-red
+	if (q->colour == red) { // q-w is red-red
 		rotateLeft(w);
 		flipRight(v);
 		pushBlack(q);
-		if (v->right->color == red)
+		if (v->right->colour == red)
 			flipLeft(v);
 		return q;
 	} else {
@@ -184,16 +184,16 @@ Node* RedBlackTree<Node,T>::removeFixupCase3(Node *u) {
 	pullBlack(w);
 	flipRight(w);            // w is now red
 	Node *q = w->left;
-	if (q->color == red) {    // q-w is red-red
+	if (q->colour == red) { // q-w is red-red
 		rotateRight(w);
 		flipLeft(v);
 		pushBlack(q);
 		return q;
 	} else {
-		if (v->left->color == red) {
-			pushBlack(v);   // both v's children are red
+		if (v->left->colour == red) {
+			pushBlack(v); // both v's children are red
 			return v;
-		} else {            // ensure left-leaning
+		} else { // ensure left-leaning
 			flipLeft(v);
 			return w;
 		}
@@ -211,22 +211,22 @@ void RedBlackTree<Node,T>::verify() {
 template<class Node, class T>
 int RedBlackTree<Node,T>::verify(Node *u) {
 	if (u == nil)
-		return u->color;
-	assert(u->color == red || u->color == black);
-	if (u->color == red)
-		assert(u->left->color == black && u->right->color == black);
-	assert(u->right->color == black || u->left->color == red);
+		return u->colour;
+	assert(u->colour == red || u->colour == black);
+	if (u->colour == red)
+		assert(u->left->colour == black && u->right->colour == black);
+	assert(u->right->colour == black || u->left->colour == red);
 	int dl = verify(u->left);
 	int dr = verify(u->right);
 	if (dl != dr)
-	return dl + u->color;
+	return dl + u->colour;
 }
 
 
 template<class Node, class T>
 RedBlackTree<Node,T>::RedBlackTree() {
 	nil = new Node;
-	nil->color = black;
+	nil->colour = black;
 	r = nil;
 }
 
@@ -244,7 +244,7 @@ bool RedBlackTree<Node,T>::add(T x) {
 	Node *u = new Node();
 	u->left = u->right = u->parent = nil;
 	u->x = x;
-	u->color = red;
+	u->colour = red;
 	bool added = BinarySearchTree<Node,T>::add(u);
 	if (added)
 		addFixup(u);
@@ -269,7 +269,7 @@ bool RedBlackTree<Node,T>::remove(T x) {
 		u = w->right;
 	}
 	splice(w);
-	u->color += w->color;
+	u->colour += w->colour;
 	u->parent = w->parent;
 	delete w;
 	removeFixup(u);

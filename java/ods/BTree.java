@@ -612,10 +612,11 @@ public class BTree<T> implements SSet<T> {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int b = 6, n = 10000, c = 10, reps = 500;
+		int b = 60, n = 100000, c = 10, reps = 500;
 		BTree<Integer> t = new BTree<Integer>(b, Integer.class);
 		SortedSet<Integer> ss = new TreeSet<Integer>();
 		for (int seed = 0; seed < reps; seed++) {
+			System.out.println("Adding " + n + " elements");
 			java.util.Random rand = new java.util.Random(seed);
 			for (int i = 0; i < n; i++) {
 				int x = rand.nextInt(c*n);
@@ -635,6 +636,7 @@ public class BTree<T> implements SSet<T> {
 			System.out.println("ss.size() = " + ss.size());
 			System.out.println("t.size()  = " + t.size());
 			
+			System.out.println("Checking equality");
 			for (int i = 0; i < n; i++) {
 				int x = rand.nextInt(c*n);
 				// System.out.println(t.findLT(x) + " < " + x + " <= " + t.find(x));
@@ -643,12 +645,22 @@ public class BTree<T> implements SSet<T> {
 				// System.out.println(t + " (added " + x + ")");
 			}
 	
+			System.out.println("Removing elements");
 			for (int i = 0; i < 10*c*n; i++) {
 				int x = rand.nextInt(c*n);
 				Utils.myassert(t.remove(x) == ss.remove(x));
 				// System.out.println(t + "(removed " + x + ")");
 			}
-			
+
+			System.out.println("Checking equality");
+			for (int i = 0; i < n; i++) {
+				int x = rand.nextInt(c*n);
+				// System.out.println(t.findLT(x) + " < " + x + " <= " + t.find(x));
+				Utils.myassert(Utils.equals(t.find(x),Utils.findGE(ss, x)));
+				Utils.myassert(Utils.equals(t.findLT(x),Utils.findLT(ss, x)));
+				// System.out.println(t + " (added " + x + ")");
+			}
+
 			System.out.println("ss.size() = " + ss.size());
 			System.out.println("t.size()  = " + t.size());
 		}

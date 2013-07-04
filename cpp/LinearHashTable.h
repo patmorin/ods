@@ -101,7 +101,7 @@ void LinearHashTable<T>::resize() {
 	while ((1<<d) < 3*n) d++;
 	array<T> tnew(1<<d, null);
 	q = n;
-	// insert everything in told
+	// insert everything into tnew
 	for (int k = 0; k < t.length; k++) {
 		if (t[k] != null && t[k] != del) {
 			int i = hash(t[k]);
@@ -128,7 +128,7 @@ bool LinearHashTable<T>::add(T x) {
 	if (2*(q+1) > t.length) resize();   // max 50% occupancy
 	int i = hash(x);
 	while (t[i] != null && t[i] != del)
-		i = (i == t.length-1) ? 0 : i + 1; // increment i (mod t.length)
+		i = (i == t.length-1) ? 0 : i + 1; // increment i
 	if (t[i] == null) q++;
 	n++;
 	t[i] = x;
@@ -140,7 +140,7 @@ T LinearHashTable<T>::find(T x) {
 	int i = hash(x);
 	while (t[i] != null) {
 		if (t[i] != del && t[i] == x) return t[i];
-		i = (i == t.length-1) ? 0 : i + 1; // increment i (mod t.length)
+		i = (i == t.length-1) ? 0 : i + 1; // increment i
 	}
 	return null;
 }
@@ -156,7 +156,7 @@ T LinearHashTable<T>::remove(T x) {
 			if (8*n < t.length) resize(); // min 12.5% occupancy
 			return y;
 		}
-		i = (i == t.length-1) ? 0 : i + 1;  // increment i (mod t.length)
+		i = (i == t.length-1) ? 0 : i + 1;  // increment i
 	}
 	return null;
 }
@@ -167,7 +167,7 @@ bool LinearHashTable<T>::addSlow(T x) {
 	int i = hash(x);
 	while (t[i] != null) {
 			if (t[i] != del && x.equals(t[i])) return false;
-			i = (i == t.length-1) ? 0 : i + 1; // increment i (mod t.length)
+			i = (i == t.length-1) ? 0 : i + 1; // increment i
 	}
 	t[i] = x;
 	n++; q++;

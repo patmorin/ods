@@ -37,6 +37,7 @@ public:
 template<class Node, class T>
 class BinaryTrie {
 protected:
+	T null;
 	enum { left, right };
 	enum { prev, next };
 	Node r;
@@ -59,6 +60,7 @@ public:
 
 template<class Node, class T>
 BinaryTrie<Node,T>::BinaryTrie() {
+	// FIXME: we have to initialize to something reasonable, i.e., null = (T)NULL;
 	dummy.next = &dummy;
 	dummy.prev = &dummy;
 	r.jump = &dummy;
@@ -104,8 +106,8 @@ bool BinaryTrie<Node,T>::add(T x) {
 		if (u->child[c] == NULL) break;
 		u = u->child[c];
 	}
-	if (i == w) return false; // trie already contains x - abort
-	Node *pred = (c == right) ? u->jump : u->jump->left; // save for step 3
+	if (i == w) return false; // already contains x - abort
+	Node *pred = (c == right) ? u->jump : u->jump->left;
 	u->jump = NULL;  // u will have two children shortly
 	// 2 - add path to ix
 	for (; i < w; i++) {
@@ -146,7 +148,7 @@ T BinaryTrie<Node,T>::find(T x) {
 	}
 	if (i == w) return u->x;  // found it
 	u = (c == 0) ? u->jump : u->jump->next;
-	return u == &dummy ? NULL : u->x;
+	return u == &dummy ? null : u->x;
 }
 
 

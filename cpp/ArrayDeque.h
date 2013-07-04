@@ -91,11 +91,11 @@ void ArrayDeque<T>::add(int i, T x) {
 template<class T>
 T ArrayDeque<T>::remove(int i) {
     T x = a[(j+i)%a.length];
-    if (i < n/2) {  // shift a[0],..,[i-1] right one position
+    if (i < n/2) { // shift a[0],..,[i-1] right one position
     	for (int k = i; k > 0; k--)
 			a[(j+k)%a.length] = a[(j+k-1)%a.length];
 		j = (j + 1) % a.length;
-    } else {        // shift a[i+1],..,a[n-1] left one position
+    } else { // shift a[i+1],..,a[n-1] left one position
 		for (int k = i; k < n-1; k++)
 			a[(j+k)%a.length] = a[(j+k+1)%a.length];
     }

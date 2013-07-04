@@ -55,7 +55,7 @@ public class LinearHashTable<T> implements USet<T> {
 		T[] told = t;
 		t = f.newArray(1<<d);
 		q = n;
-		// insert everything in told
+		// insert everything from told
 		for (int k = 0; k < told.length; k++) {
 			if (told[k] != null && told[k] != del) {
 				int i = hash(told[k]);
