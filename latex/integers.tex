@@ -28,7 +28,7 @@ running time of #add(x)# and #remove(x)# to $O(\log #w#)$ and decreases
 the space to $O(#n#)$.
 
 The implementations used as examples in this chapter can store any type of
-data, as long an integer can be associated with it.  In the code samples,
+data, as long as an integer can be associated with it.  In the code samples,
 the variable #ix# is always the integer value associated with #x#, and the method \javaonly{#in.#}#intValue(x)# converts #x# to its associated integer. In
 the text, however, we will simply treat #x# as if it is an integer.
 
@@ -89,7 +89,7 @@ The #find(x)# operation in a #BinaryTrie# is fairly straightforward.
 We try to follow the search path for #x# in the trie.  If we reach a leaf,
 then we have found #x#.  If we reach a node #u# where we cannot proceed
 (because #u# is missing a child), then we follow #u.jump#, which takes us
-either to smallest leaf larger than #x# or the largest leaf smaller than
+either to the smallest leaf larger than #x# or the largest leaf smaller than
 #x#. Which of these two cases occurs depends on whether #u# is missing
 its left or right child, respectively.  In the former case (#u# is missing
 its left child), we have found the node we want.  In the latter case (#u#

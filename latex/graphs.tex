@@ -390,13 +390,13 @@ that it is similar to breadth-first search except that it uses a stack
 instead of a queue.
 
 During the execution of the depth-first-search algorithm, each vertex,
-#i#, is assigned a color, #c[i]#: #white# if we have never seen
+#i#, is assigned a colour, #c[i]#: #white# if we have never seen
 the vertex before, #grey# if we are currently visiting that vertex,
 and #black# if we are done visiting that vertex.  The easiest way to
 think of depth-first-search is as a recursive algorithm.  It starts by
 visiting #r#.  When visiting a vertex #i#, we first mark #i# as #grey#.
 Next, we scan #i#'s adjacency list and recursively visit any white vertex
-we find in this list.  Finally, we are done processing #i#, so we color
+we find in this list.  Finally, we are done processing #i#, so we colour
 #i# black and return.
 \codeimport{ods/Algorithms.dfs(g,r).dfs(g,i,c)}
 An example of the execution of this algorithm is shown in \figref{graph-dfs}.
@@ -418,7 +418,7 @@ given above will fail for many large graphs by causing a stack overflow.
 An alternative implementation is to replace the recursion stack with an
 explicit stack, #s#.  The following implementation does just that:
 \codeimport{ods/Algorithms.dfs2(g,r)} 
-In the preceding code, when the next vertex, #i#, is processed, #i# is colored
+In the preceding code, when the next vertex, #i#, is processed, #i# is coloured
 #grey# and then replaced, on the stack, with its adjacent vertices.
 During the next iteration, one of these vertices will be visited.
 
@@ -440,9 +440,9 @@ a tree rooted at #r#.  In \figref{graph-dfs}, this tree is a path from
 vertex 0 to vertex 11.
 
 An important property of the depth-first-search algorithm is the
-following: Suppose that when node #i# is colored #grey#, there exists a path
+following: Suppose that when node #i# is coloured #grey#, there exists a path
 from #i# to some other node #j# that uses only white vertices.  Then #j#
-will be colored first #grey# then #black# before #i# is colored #black#.
+will be coloured first #grey# then #black# before #i# is coloured #black#.
 (This can be proven by contradiction, by considering any path $P$ from #i#
 to #j#.)
 
@@ -450,9 +450,9 @@ One application of this property is the detection of cycles.
 \index{cycle detection}%
 Refer
 to \figref{dfs-cycle}.  Consider some cycle, $C$, that can be reached
-from #r#.  Let #i# be the first node of $C$ that is colored #grey#,
+from #r#.  Let #i# be the first node of $C$ that is coloured #grey#,
 and let #j# be the node that precedes #i# on the cycle $C$.  Then,
-by the above property, #j# will be colored #grey# and the edge #(j,i)#
+by the above property, #j# will be coloured #grey# and the edge #(j,i)#
 will be considered by the algorithm while #i# is still #grey#.  Thus,
 the algorithm can conclude that there is a path, $P$, from #i# to #j#
 in the depth-first-search tree and the edge #(j,i)# exists.  Therefore,
@@ -463,7 +463,7 @@ $P$ is also a cycle.
     \includegraphics[scale=0.90909]{figs/dfs-cycle}
   \end{center}
   \caption[Cycle detection]{The depth-first-search algorithm can be used to detect cycles
-  in $G$. The node #j# is colored #grey# while #i# is still #grey#.  This
+  in $G$. The node #j# is coloured #grey# while #i# is still #grey#.  This
   implies that there is a path, $P$, from #i# to #j# in the depth-first-search
   tree, and the edge #(j,i)# implies that $P$ is also a cycle.}
   \figlabel{dfs-cycle}

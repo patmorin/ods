@@ -167,7 +167,7 @@
 \title{Open Data Structures}
 \author{Pat Morin}
 \date{%Development Edition: \today\ \currenttime
-Edition 0.1E\cpponly{$\beta$}
+Edition 0.1F\cpponly{$\beta$}
 \htmlonly{\\ \includegraphics[scale=0.90909,scale=0.5]{images/cc-by}}}
 %Version 0.0 pre $\alpha$: \today}
 
@@ -197,8 +197,12 @@ Edition 0.1E\cpponly{$\beta$}
 % Use 14pt between lines
 \setlength{\baselineskip}{14pt}
 
-\pagestyle{empty}
 
+%\begin{titlepage}
+%\maketitle
+%\end{titlepage}
+
+\pagestyle{empty}
 half title page
 \newpage
 
@@ -221,6 +225,11 @@ title page
 \fancyhead[CE]{\small Why This Book?} % chapter title, left center
 \include{why}
 \cleardoublepage
+
+\cpponly{
+  \include{cpp-preface}
+  \cleardoublepage
+}
 
 \fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
 \fancyhead[CO]{\small\rightmarktitle} % section title, right center

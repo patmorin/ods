@@ -17,12 +17,12 @@ server (which has its own external storage).
 \index{solid-state drive}%
 Accessing an item from external storage is extremely slow.  The hard
 disk attached to the computer on which this book was written has an
-average access time of 19ms and the solid state drive attached to this
+average access time of 19ms and the solid state drive attached to the
 computer has an average access time of 0.3ms.  In contrast, the random
-access memory in this computer has an average access time of less
-than 0.000113ms.  Accessing RAM is more than 2\,500 times faster than
-accessing the solid state drive and more than 160\,000 times faster than
-accessing the hard drive.
+access memory in the computer has an average access time of less than
+0.000113ms. Accessing RAM is more than 2\,500 times faster than accessing
+the solid state drive and more than 160\,000 times faster than accessing
+the hard drive.
 
 %  HDD: Fantom ST3000DM001-9YN166 USB 3 external drive (3TB)
 %  SSD: ATA OCZ-AGILITY 3 (60GB)
@@ -56,7 +56,7 @@ story.  When we access a byte from a hard disk or solid state disk, an
 entire \emph{block}
 \index{block}%
 of the disk is read.  Each of the drives attached
-to this computer has a block size of 4\,096; each time we read one byte,
+to the computer has a block size of 4\,096; each time we read one byte,
 the drive gives us a block containing 4\,096 bytes.  If we organize our
 data structure carefully, this means that each disk access could yield
 4\,096 bytes that are helpful in completing whatever operation we are doing.

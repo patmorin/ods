@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20101201111324" modified="D:20110714111340"/>
+<ipe version="70005" creator="Ipe 7.1.1">
+<info created="D:20101201111324" modified="D:20130704103417"/>
 <preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -235,7 +235,8 @@ h
 <layer name="beta"/>
 <layer name="gamma"/>
 <layer name="delta"/>
-<view layers="alpha gamma" active="alpha"/>
+<layer name="epsilon"/>
+<view layers="alpha gamma epsilon" active="epsilon"/>
 <view layers="alpha beta" active="beta"/>
 <view layers="alpha gamma delta" active="beta"/>
 <use layer="alpha" name="mark/square(sx)" pos="176 240" size="large" stroke="black"/>
@@ -278,7 +279,6 @@ h
 272 272 m
 240 304 l
 </path>
-<use name="mark/fdisk(sfx)" pos="240 304" size="large" stroke="black" fill="black"/>
 <path stroke="black">
 240 304 m
 296 336 l
@@ -412,5 +412,14 @@ h
 <use matrix="1 0 0 1 152 0" name="mark/fdisk(sfx)" pos="208 272" size="large" stroke="black" fill="black"/>
 <use matrix="1 0 0 1 184 0" name="mark/fdisk(sfx)" pos="208 272" size="large" stroke="black" fill="black"/>
 <use matrix="1 0 0 1 88 64" name="mark/fdisk(sfx)" pos="208 272" size="large" stroke="black" fill="black"/>
+<use layer="epsilon" name="mark/fdisk(sfx)" pos="240 304" size="large" stroke="black" fill="black"/>
+<group matrix="1 0 0 1 -9.1991 0">
+<use matrix="1 0 0 -1 -22.8009 582.759" name="mark/fdisk(sfx)" pos="208 272" size="large" stroke="black" fill="pink"/>
+<text matrix="1 0 0 -1 -11.1004 662.088" transformations="translations" pos="202.755 351.329" stroke="black" type="label" valign="center">red node</text>
+<group matrix="1 0 0 -1 -6.54638 647.287">
+<use matrix="1 0 0 1 -16.2545 42.7435" name="mark/fdisk(sfx)" pos="208 272" size="large" stroke="black" fill="black"/>
+<text matrix="1 0 0 1 -4.26938 -19.5081" transformations="translations" pos="202.47 334.252" stroke="black" type="label" valign="center">black node</text>
+</group>
+</group>
 </page>
 </ipe>

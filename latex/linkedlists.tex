@@ -561,7 +561,7 @@ Another way to save space in a doubly-linked list is to use
 so-called XOR-lists.
 \index{XOR-list}%
 In an XOR-list, each node, #u#, contains only one
-pointer, #u.nextprev#, that holds the bitwise exclusive-or of #u.prev#
+pointer, called #u.nextprev#, that holds the bitwise exclusive-or of #u.prev#
 and #u.next#.  The list itself needs to store two pointers, one to the #dummy#
 node and one to #dummy.next# (the first node, or #dummy# if the list is
 empty). This technique uses the fact that, if we have pointers to #u#
@@ -573,8 +573,8 @@ and #u.prev#, then we can extract #u.next# using the formula
 This technique complicates the code a little and is not possible in
 some languages that have garbage collection\javaonly{---including
 Java---}\cpponly{ }but gives a doubly-linked list implementation that
-requires only one pointer per node.  A detailed discussion of XOR-lists
-can be found in Sinha's magazine article \cite{s04}.
+requires only one pointer per node.
+See Sinha's magazine article \cite{s04} for a detailed discussion of XOR-lists.
 
 \begin{exc}
   Why is it not possible to use a dummy node in an #SLList# to avoid

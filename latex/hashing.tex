@@ -364,7 +364,8 @@ that #x# is not contained in the hash table and return #null#.
 The #add(x)# operation is also fairly easy to implement. After checking
 that #x# is not already stored in the table (using #find(x)#), we search
 #t[i]#, $#t#[(#i#+1)\bmod #t.length#]$, $#t#[(#i#+2)\bmod #t.length#]$,
-and so on, until we find a #null# or #del# and store #x# at that location, increment #n#, and #q#, if appropriate.:
+and so on, until we find a #null# or #del# and store #x# at that location,
+increment #n#, and #q#, if appropriate.
 \codeimport{ods/LinearHashTable.add(x)}
 
 By now, the implementation of the #remove(x)# operation should be obvious.
@@ -384,14 +385,14 @@ in the table; #t[i']# has always been #null#, so there is no reason that
 a previous #add(x)# operation would have proceeded beyond index #i'#.
 
 The #resize()# method is called by #add(x)# when the number of non-#null#
-entries exceeds #n/2# or by #remove(x)# when the number of data entries is
-less than #t.length/8#.  The #resize()# method works like the #resize()#
-methods in other array-based data structures.  We find the smallest
-non-negative integer #d# such that $2^{#d#} \ge 3#n#$.  We reallocate
-the array #t# so that it has size $2^{#d#}$, and then we insert all the
-elements in the old version of #t# into the newly-resized copy of #t#.
-While doing this, we reset #q# equal to #n# since the newly-allocated #t#
-has no #del# values.
+entries exceeds $#t.length#/2$ or by #remove(x)# when the number of
+data entries is less than #t.length/8#.  The #resize()# method works
+like the #resize()# methods in other array-based data structures.
+We find the smallest non-negative integer #d# such that $2^{#d#}
+\ge 3#n#$.  We reallocate the array #t# so that it has size $2^{#d#}$,
+and then we insert all the elements in the old version of #t# into the
+newly-resized copy of #t#.  While doing this, we reset #q# equal to #n#
+since the newly-allocated #t# contains no #del# values.
 \codeimport{ods/LinearHashTable.resize()}
 
 \subsection{Analysis of Linear Probing}
