@@ -25,6 +25,8 @@
 \usepackage{threeparttable}
 \usepackage{wasysym}
 \usepackage{emptypage}
+\usepackage{titling}
+%\usepackage{calc}
 
 
 %\usepackage[mathlines]{lineno}
@@ -164,7 +166,7 @@
 	urlcolor=linkblue} 
 
 % Title page content
-\title{Open Data Structures}
+\title{Open Data Structures (in \lang)}
 \author{Pat Morin}
 \date{%Development Edition: \today\ \currenttime
 Edition 0.1F\cpponly{$\beta$}
@@ -179,10 +181,13 @@ Edition 0.1F\cpponly{$\beta$}
 \begin{document}
 
 %%\AddToShipoutPicture*{\BackgroundPic}
-%\begin{titlepage}
-%\htmlonly{\includegraphics[scale=0.90909]{images/tree3-thick}}
-%  \maketitle
-%\end{titlepage}
+\htmlonly{\newcommand{\thetitlepage}{
+  \begin{center}\includegraphics[scale=0.90909]{images/tree3-thick}\end{center}
+  \maketitle
+}}
+\thetitlepage
+
+\cleardoublepage
 %
 %% blank page behind title page
 %\ \thispagestyle{empty}\newpage
@@ -202,15 +207,15 @@ Edition 0.1F\cpponly{$\beta$}
 %\maketitle
 %\end{titlepage}
 
-\pagestyle{empty}
-half title page
-\newpage
-
-series page
-\newpage
-
-title page
-\newpage
+%\pagestyle{empty}
+%half title page
+%\newpage
+%
+%series page
+%\newpage
+%
+%title page
+%\newpage
 
 \addtocontents{toc}{\protect\thispagestyle{empty}} % get rid of page number
 \tableofcontents

@@ -141,25 +141,25 @@
 \font\titlefont = cmssbx28
 \font\authorfont = cmssbx17
 
-\renewcommand\maketitle{%
-  \newlength{\lone}
-  \newlength{\ltwo}
-  \newlength{\lthree}
-  \setlength{\lone}{0.3\textheight}
-  \setlength{\ltwo}{0.618033988\lone}
-  \setlength{\lthree}{0.618033988\ltwo}
-  %\ \vspace{\lone}
-  \begin{flushleft}
-    \ \\[.5in]
-    \includegraphics[width=\ScaleIfNeeded]{images/tree3-thick}\\
-    \ \\[.5in]
-    {\hspace{-1mm}\fontsize{28}{1}\usefont{OT1}{jkpss}{b}{n}\@title} \\[1ex]
-    %{\hspace{-1mm}\titlefont\@title} \\[1ex]
-    {\fontsize{17}{1}\usefont{OT1}{jkpss}{b}{n}\@author} \\[\ltwo]
-    {\fontsize{11}{1}\usefont{OT1}{jkpss}{b}{n}\@date} \\[\lthree]
-    \includegraphics[scale=0.5]{images/cc-by}
-  \end{flushleft}
-}
+%\def\title#1{\gdef\@title{#1}\gdef\THETITLE{#1}}
+
+%\renewcommand\maketitle{%
+%  \newlength{\lone}
+%  \newlength{\ltwo}
+%  \newlength{\lthree}
+%  \setlength{\lone}{0.3\textheight}
+%  \setlength{\ltwo}{0.618033988\lone}
+%  \setlength{\lthree}{0.618033988\ltwo}
+%  \begin{flushleft}
+%    \ \\[.5in]
+%    \includegraphics[width=\ScaleIfNeeded]{images/tree3-thick}\\
+%    \ \\[.5in]
+%    {\hspace{-1mm}\fontsize{28}{1}\usefont{OT1}{jkpss}{b}{n}\thetitle} \\[1ex]
+%    {\fontsize{17}{1}\usefont{OT1}{jkpss}{b}{n}\theauthor} \\[\ltwo]
+%    {\fontsize{11}{1}\usefont{OT1}{jkpss}{b}{n}\thedate} \\[\lthree]
+%    \includegraphics[scale=0.5]{images/cc-by}
+%  \end{flushleft}
+%}
 
 \renewcommand{\eqref}[1]{(\ref{eq:#1})}
 
@@ -221,5 +221,25 @@
 \fi
 }
 \makeatother
+
+\newcommand{\thetitlepage}{
+  \begin{titlepage}
+    \newlength{\lone}
+    \newlength{\ltwo}
+    \newlength{\lthree}
+    \setlength{\lone}{0.3\textheight}
+    \setlength{\ltwo}{0.618033988\lone}
+    \setlength{\lthree}{0.618033988\ltwo}
+    \begin{flushleft}
+      \ \\[.1\paperheight]
+      \includegraphics[width=\linewidth]{images/tree3-thick}\\
+      {\fontsize{21}{1}\usefont{OT1}{jkpss}{b}{n}%
+       \resizebox{\linewidth}{!}{\thetitle}} \\[\lthree]
+      {\fontsize{14}{1}\usefont{OT1}{jkpss}{b}{n}\thedate} \\[\lthree]
+      {\fontsize{11}{1}\usefont{OT1}{jkpss}{b}{n}\theauthor} \\[\lthree]
+      \includegraphics[scale=0.5]{images/cc-by}
+    \end{flushleft}
+  \end{titlepage}
+}
 
 
