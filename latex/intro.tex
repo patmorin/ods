@@ -642,7 +642,10 @@ told us that this would happen, since $O(#n#)\subset O(#n#\log #n#)$.
 
 \begin{figure}
   \begin{center}
-    \input{images/bigoh.tex}
+    \newlength{\tmpa}\setlength{\tmpa}{.98\linewidth}
+    \addtolength{\tmpa}{-4mm}
+    \resizebox{\tmpa}{!}{\input{images/bigoh-1.tex}}\\[4ex]
+    \resizebox{.98\linewidth}{!}{\input{images/bigoh-2.tex}}
   \end{center}
   \caption{Plots of $15#n#$ versus $2#n#\log#n#$.}
   \figlabel{intro-asymptotics}
