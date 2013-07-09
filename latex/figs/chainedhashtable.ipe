@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20120614132624" modified="D:20120614133335"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -459,7 +459,7 @@ h
 240 304 l
 h
 </path>
-<text matrix="1 0 0 1 97.6 -10.25" transformations="translations" pos="192 288" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{x}$</text>
+<text matrix="1 0 0 1 97.6 -10.25" transformations="translations" pos="192 288" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{\color{var}x}$</text>
 <path matrix="1 0 0 1 77.8667 -16" stroke="black">
 224 304 m
 224 288 l
@@ -548,6 +548,6 @@ h
 <text matrix="1 0 0 1 208 4.74" transformations="translations" pos="200 304" stroke="darkgray" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$13$</text>
 <text matrix="1 0 0 1 224 4.74" transformations="translations" pos="200 304" stroke="darkgray" type="label" width="10.859" height="6.804" depth="0.08" halign="center" valign="baseline">$14$</text>
 <text matrix="1 0 0 1 240 4.74" transformations="translations" pos="200 304" stroke="darkgray" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$15$</text>
-<text matrix="1 0 0 1 0 4.01095" transformations="translations" pos="177.282 305.8" stroke="black" type="label" width="5.28" height="5.868" depth="0.06" valign="baseline">$\mathtt{t}$</text>
+<text matrix="1 0 0 1 0 4.01095" transformations="translations" pos="177.282 305.8" stroke="black" type="label" width="5.28" height="5.868" depth="0.06" valign="baseline">$\mathtt{\color{var}t}$</text>
 </page>
 </ipe>

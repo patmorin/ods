@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
 <info created="D:20120710142153" modified="D:20120711102131"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -281,7 +281,7 @@ $\mathtt{pop()}$</text>
 336 776
 352 752 s
 </path>
-<text matrix="1 0 0 -1 285.441 1543.99" transformations="translations" pos="64 736" stroke="black" type="label" width="65.574" height="7.383" depth="2.52" halign="center" valign="baseline">$\mathtt{add}(\mathtt{\color{blue}x})$/$\mathtt{push}(\mathtt{\color{blue}x})$</text>
-<text matrix="1 0 0 1 168 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{\color{blue}x}$</text>
+<text matrix="1 0 0 -1 285.441 1543.99" transformations="translations" pos="64 736" stroke="black" type="label" width="65.574" height="7.383" depth="2.52" halign="center" valign="baseline">$\mathtt{add}(\mathtt{\color{var}x})$/$\mathtt{push}(\mathtt{\color{var}x})$</text>
+<text matrix="1 0 0 1 168 5.8555" transformations="translations" pos="128 768" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{\color{var}x}$</text>
 </page>
 </ipe>

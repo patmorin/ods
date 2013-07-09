@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20110525141707" modified="D:20110727130641"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -274,7 +274,7 @@ h
 288 256
 288 352 s
 </path>
-<text layer="alpha" matrix="0.375 0 0 0.375 128.218 169.034" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$\mathtt{u}$</text>
+<text layer="alpha" matrix="0.375 0 0 0.375 128.218 169.034" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$\mathtt{\color{var}u}$</text>
 <text matrix="0.375 0 0 0.375 128.218 223.034" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$\mathtt{u.parent}$</text>
 <text matrix="0.375 0 0 0.375 104.218 121.381" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$\mathtt{u.left}$</text>
 <text matrix="0.375 0 0 0.375 152.218 121.381" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$\mathtt{u.right}$</text>

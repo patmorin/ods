@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
 <info created="D:20120626110008" modified="D:20120627100912"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -303,7 +303,7 @@ h
 <path matrix="0.5 0 0 0.3405 128 379.872" stroke="black">
 112 0 0 112 256 576 e
 </path>
-<text matrix="0.809017 0.400282 -0.587785 0.550941 462.475 194.446" pos="160 624" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{x}$</text>
+<text matrix="0.809017 0.400282 -0.587785 0.550941 462.475 194.446" pos="160 624" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}x}$</text>
 <path matrix="1 0 0 0.681 0 183.744" fill="white">
 241.167 621.651 m
 48 0 0 48 256 576 217.167 604.214 a
@@ -469,7 +469,7 @@ h
 96 672 l
 h
 </path>
-<text matrix="1 0 0 1 112.359 -9.974" transformations="translations" pos="144 656" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{x}$</text>
+<text matrix="1 0 0 1 112.359 -9.974" transformations="translations" pos="144 656" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{\color{var}x}$</text>
 <path matrix="1 0 0 1 168.384 24.847" stroke="black" fill="pink">
 80 672 m
 80 656 l
@@ -477,7 +477,7 @@ h
 96 672 l
 h
 </path>
-<text matrix="1 0 0 1 112.384 30.633" transformations="translations" pos="144 656" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{x}$</text>
+<text matrix="1 0 0 1 112.384 30.633" transformations="translations" pos="144 656" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{\color{var}x}$</text>
 <path matrix="1 0 0 1 39.3586 -25.3549" stroke="black">
 204.778 747.999 m
 204.778 705.024 l

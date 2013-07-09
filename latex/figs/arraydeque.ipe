@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20110228150616" modified="D:20111107150601"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -473,7 +473,7 @@ h
 <text matrix="1 0 0 1 94.0234 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.297" depth="1.93" halign="center" valign="baseline">g</text>
 <text matrix="1 0 0 1 110.023 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">h</text>
 <text matrix="1 0 0 1 96 -14.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="47.073" height="6.919" depth="0.83" valign="baseline">\texttt{remove(2)}</text>
-<text matrix="1 0 0 1 -16 -219.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=0,\mathtt{n}=8$</text>
+<text matrix="1 0 0 1 -16 -219.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=0,\mathtt{\color{var}n}=8$</text>
 <text matrix="1 0 0 1 -1.9766 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.289" depth="0" halign="center" valign="baseline">a</text>
 <group matrix="1 0 0 1 0 -16">
 <path stroke="white">
@@ -722,7 +722,7 @@ h
 <text matrix="1 0 0 1 46.023 -46.197" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
 <text matrix="1 0 0 1 94.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.297" depth="1.93" halign="center" valign="baseline">g</text>
 <text matrix="1 0 0 1 110.023 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">h</text>
-<text matrix="1 0 0 1 -16 -251.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=1,\mathtt{n}=7$</text>
+<text matrix="1 0 0 1 -16 -251.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=1,\mathtt{\color{var}n}=7$</text>
 <group matrix="1 0 0 1 0 -48">
 <path stroke="white">
 96 320 m
@@ -979,7 +979,7 @@ h
 <text matrix="1 0 0 1 46.023 -78.197" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
 <text matrix="1 0 0 1 94.0234 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.044" height="6.918" depth="0" halign="center" valign="baseline">f</text>
 <text matrix="1 0 0 1 110.023 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.297" depth="1.93" halign="center" valign="baseline">g</text>
-<text matrix="1 0 0 1 -16 -283.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=1,\mathtt{n}=8$</text>
+<text matrix="1 0 0 1 -16 -283.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=1,\mathtt{\color{var}n}=8$</text>
 <group matrix="1 0 0 1 0 -80">
 <path stroke="white">
 96 320 m
@@ -1241,7 +1241,7 @@ h
 <text matrix="1 0 0 1 46.023 -110.197" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.258" height="4.297" depth="1.93" halign="center" valign="baseline">y</text>
 <text matrix="1 0 0 1 94.0234 -109.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.044" height="6.918" depth="0" halign="center" valign="baseline">f</text>
 <text matrix="1 0 0 1 110.023 -109.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.297" depth="1.93" halign="center" valign="baseline">g</text>
-<text matrix="1 0 0 1 -16 -315.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=0,\mathtt{n}=9$</text>
+<text matrix="1 0 0 1 -16 -315.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=0,\mathtt{\color{var}n}=9$</text>
 <group matrix="1 0 0 1 0 -112">
 <path stroke="white">
 96 320 m
@@ -1504,7 +1504,7 @@ h
 <text matrix="1 0 0 1 46.023 -142.197" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">z</text>
 <text matrix="1 0 0 1 94.0234 -141.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.044" height="6.918" depth="0" halign="center" valign="baseline">f</text>
 <text matrix="1 0 0 1 110.023 -141.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.297" depth="1.93" halign="center" valign="baseline">g</text>
-<text matrix="1 0 0 1 -16 -347.064" transformations="translations" pos="48 512" stroke="black" type="label" width="61.381" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=11,\mathtt{n}=10$</text>
+<text matrix="1 0 0 1 -16 -347.064" transformations="translations" pos="48 512" stroke="black" type="label" width="61.381" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=11,\mathtt{\color{var}n}=10$</text>
 <group matrix="1 0 0 1 0 -144">
 <path stroke="white">
 96 320 m

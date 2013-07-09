@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20120202112417" modified="D:20120202131420"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -483,7 +483,7 @@ h
 200 288 m
 216 272 l
 </path>
-<text matrix="1 0 0 1 24 200" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{2}$</text>
+<text matrix="1 0 0 1 24 200" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{2}$</text>
 <group matrix="1 0 0 1 16 192">
 <path stroke="white">
 176 336 m
@@ -495,7 +495,7 @@ h
 <use matrix="1 0 0 1 8 -16" name="mark/disk(sx)" pos="176 352" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 32" name="mark/disk(sx)" pos="176 288" size="normal" stroke="white"/>
 </group>
-<text matrix="1 0 0 1 216 200" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{2}$</text>
+<text matrix="1 0 0 1 216 200" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{2}$</text>
 <group matrix="1 0 0 1 208 192">
 <path stroke="white">
 176 336 m
@@ -507,7 +507,7 @@ h
 <use matrix="1 0 0 1 8 -16" name="mark/disk(sx)" pos="176 352" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 32" name="mark/disk(sx)" pos="176 288" size="normal" stroke="white"/>
 </group>
-<text matrix="1 0 0 1 120 232" transformations="translations" pos="176 320" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="center">$\mathtt{\color{blue}n}$</text>
+<text matrix="1 0 0 1 120 232" transformations="translations" pos="176 320" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="center">$\mathtt{\color{var}n}$</text>
 <group matrix="1 0 0 1 112 224">
 <path stroke="white">
 176 336 m
@@ -519,7 +519,7 @@ h
 <use matrix="1 0 0 1 8 -16" name="mark/disk(sx)" pos="176 352" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 32" name="mark/disk(sx)" pos="176 288" size="normal" stroke="white"/>
 </group>
-<text matrix="1 0 0 1 72 168" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{4}$</text>
+<text matrix="1 0 0 1 72 168" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{4}$</text>
 <group matrix="1 0 0 1 64 160">
 <path stroke="white">
 176 336 m
@@ -531,7 +531,7 @@ h
 <use matrix="1 0 0 1 8 -16" name="mark/disk(sx)" pos="176 352" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 32" name="mark/disk(sx)" pos="176 288" size="normal" stroke="white"/>
 </group>
-<text matrix="1 0 0 1 -24 168" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{4}$</text>
+<text matrix="1 0 0 1 -24 168" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{4}$</text>
 <group matrix="1 0 0 1 -32 160">
 <path stroke="white">
 176 336 m
@@ -551,7 +551,7 @@ h
 296 384 m
 344 368 l
 </path>
-<text matrix="1 0 0 1 264 168" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{4}$</text>
+<text matrix="1 0 0 1 264 168" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{4}$</text>
 <group matrix="1 0 0 1 256 160">
 <path stroke="white">
 176 336 m
@@ -563,7 +563,7 @@ h
 <use matrix="1 0 0 1 8 -16" name="mark/disk(sx)" pos="176 352" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 32" name="mark/disk(sx)" pos="176 288" size="normal" stroke="white"/>
 </group>
-<text matrix="1 0 0 1 168 168" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{4}$</text>
+<text matrix="1 0 0 1 168 168" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{4}$</text>
 <group matrix="1 0 0 1 160 160">
 <path stroke="white">
 176 336 m
@@ -583,7 +583,7 @@ h
 296 384 m
 344 368 l
 </path>
-<text matrix="1 0 0 1 -40 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{8}$</text>
+<text matrix="1 0 0 1 -40 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{8}$</text>
 <group matrix="1 0 0 1 -48 128">
 <path stroke="white">
 176 336 m
@@ -595,7 +595,7 @@ h
 <use matrix="1 0 0 1 8 -16" name="mark/disk(sx)" pos="176 352" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 32" name="mark/disk(sx)" pos="176 288" size="normal" stroke="white"/>
 </group>
-<text matrix="1 0 0 1 -8 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{8}$</text>
+<text matrix="1 0 0 1 -8 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{8}$</text>
 <group matrix="1 0 0 1 -16 128">
 <path stroke="white">
 176 336 m
@@ -615,7 +615,7 @@ h
 248 352 m
 264 336 l
 </path>
-<text matrix="1 0 0 1 56 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{8}$</text>
+<text matrix="1 0 0 1 56 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{8}$</text>
 <group matrix="1 0 0 1 48 128">
 <path stroke="white">
 176 336 m
@@ -627,7 +627,7 @@ h
 <use matrix="1 0 0 1 8 -16" name="mark/disk(sx)" pos="176 352" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 32" name="mark/disk(sx)" pos="176 288" size="normal" stroke="white"/>
 </group>
-<text matrix="1 0 0 1 88 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{8}$</text>
+<text matrix="1 0 0 1 88 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{8}$</text>
 <group matrix="1 0 0 1 80 128">
 <path stroke="white">
 176 336 m
@@ -647,7 +647,7 @@ h
 248 352 m
 264 336 l
 </path>
-<text matrix="1 0 0 1 152 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{8}$</text>
+<text matrix="1 0 0 1 152 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{8}$</text>
 <group matrix="1 0 0 1 144 128">
 <path stroke="white">
 176 336 m
@@ -659,7 +659,7 @@ h
 <use matrix="1 0 0 1 8 -16" name="mark/disk(sx)" pos="176 352" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 32" name="mark/disk(sx)" pos="176 288" size="normal" stroke="white"/>
 </group>
-<text matrix="1 0 0 1 184 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{8}$</text>
+<text matrix="1 0 0 1 184 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{8}$</text>
 <group matrix="1 0 0 1 176 128">
 <path stroke="white">
 176 336 m
@@ -679,7 +679,7 @@ h
 248 352 m
 264 336 l
 </path>
-<text matrix="1 0 0 1 248 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{8}$</text>
+<text matrix="1 0 0 1 248 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{8}$</text>
 <group matrix="1 0 0 1 240 128">
 <path stroke="white">
 176 336 m
@@ -691,7 +691,7 @@ h
 <use matrix="1 0 0 1 8 -16" name="mark/disk(sx)" pos="176 352" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 32" name="mark/disk(sx)" pos="176 288" size="normal" stroke="white"/>
 </group>
-<text matrix="1 0 0 1 280 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{blue}n}}{8}$</text>
+<text matrix="1 0 0 1 280 136" transformations="translations" pos="176 320" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" halign="center" valign="center">$\frac{\mathtt{\color{var}n}}{8}$</text>
 <group matrix="1 0 0 1 272 128">
 <path stroke="white">
 176 336 m
@@ -774,12 +774,12 @@ h
 <use matrix="1 0 0 1 8 -16" name="mark/disk(sx)" pos="176 352" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 32" name="mark/disk(sx)" pos="176 288" size="normal" stroke="white"/>
 </group>
-<text matrix="1 0 0 1 328 40" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{blue}n}$</text>
-<text matrix="1 0 0 1 328 72" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{blue}n}$</text>
-<text matrix="1 0 0 1 328 136" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{blue}n}$</text>
-<text matrix="1 0 0 1 328 168" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{blue}n}$</text>
-<text matrix="1 0 0 1 328 200" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{blue}n}$</text>
-<text matrix="1 0 0 1 328 232" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{blue}n}$</text>
+<text matrix="1 0 0 1 328 40" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{var}n}$</text>
+<text matrix="1 0 0 1 328 72" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{var}n}$</text>
+<text matrix="1 0 0 1 328 136" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{var}n}$</text>
+<text matrix="1 0 0 1 328 168" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{var}n}$</text>
+<text matrix="1 0 0 1 328 200" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{var}n}$</text>
+<text matrix="1 0 0 1 328 232" transformations="translations" pos="176 320" stroke="black" type="label" width="18.514" height="4.289" depth="0" halign="center" valign="center">${}=\mathtt{\color{var}n}$</text>
 <text matrix="1 0 0 1 -56 -122.491" transformations="translations" pos="208 480" stroke="black" type="label" width="7.749" height="5.812" depth="0.83" halign="center" valign="baseline">$+$</text>
 <text matrix="1 0 0 1 8 -122.491" transformations="translations" pos="208 480" stroke="black" type="label" width="7.749" height="5.812" depth="0.83" halign="center" valign="baseline">$+$</text>
 <text matrix="1 0 0 1 168 -122.491" transformations="translations" pos="208 480" stroke="black" type="label" width="7.749" height="5.812" depth="0.83" halign="center" valign="baseline">$+$</text>

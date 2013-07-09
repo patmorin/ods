@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120626162443" modified="D:20120720215210"/>
+<info created="D:20120626162443" modified="D:20130709101232"/>
 <preamble>\usepackage{kpfonts}
-\usepackage{wasysym}\fontsize{10pt}{10pt}\selectfont</preamble>
+\usepackage{wasysym}\fontsize{10pt}{10pt}\selectfont
+\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -605,8 +606,8 @@ h
 272 688 m
 400 656 l
 </path>
-<text matrix="1 0 0 1 9.74751 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{blue}v}$</text>
-<text matrix="1 0 0 1 105.748 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{blue}w}$</text>
+<text matrix="1 0 0 1 9.74751 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 105.748 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
 <path layer="post-merge" matrix="1 0 0 1 192 -96" stroke="black">
 64 752 m
 64 736 l
@@ -626,8 +627,8 @@ h
 224 528 l
 h
 </path>
-<text matrix="1 0 0 1 9.74751 58.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" valign="baseline">$\mathtt{\color{blue}u}$</text>
-<text layer="post-merge" matrix="1 0 0 1 9.74751 58.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" valign="baseline">$\mathtt{\color{blue}u}$</text>
+<text matrix="1 0 0 1 9.74751 58.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text layer="post-merge" matrix="1 0 0 1 9.74751 58.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" valign="baseline">$\mathtt{\color{var}u}$</text>
 <path layer="pre-merge" stroke="black">
 240 688 m
 208 656 l
@@ -640,7 +641,7 @@ h
 240 688 m
 240 656 l
 </path>
-<text layer="pre-merge" matrix="1 0 0 1 120 -91.21" transformations="translations" pos="80 752" stroke="black" type="label" width="4.433" height="4.939" depth="0.75" halign="center" valign="baseline">\cent</text>
-<text matrix="1 0 0 1 216 -91.21" transformations="translations" pos="80 752" stroke="black" type="label" width="4.433" height="4.939" depth="0.75" halign="center" valign="baseline">\cent</text>
+<text layer="pre-merge" matrix="1 0 0 1 120 -91.21" transformations="translations" pos="80 752" stroke="black" type="label" width="4.981" height="6.856" depth="1.93" halign="center" valign="baseline">\cent</text>
+<text matrix="1 0 0 1 216 -91.21" transformations="translations" pos="80 752" stroke="black" type="label" width="4.981" height="6.856" depth="1.93" halign="center" valign="baseline">\cent</text>
 </page>
 </ipe>

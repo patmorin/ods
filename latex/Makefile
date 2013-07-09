@@ -9,6 +9,7 @@ cpph = $(sources:.tex=-cpp-html.tex)
 java = $(wildcard ../java/ods/*.java)
 cppsource = $(wildcard ../cpp/*.h)
 pdfs = ods-java.pdf ods-cpp.pdf
+styles=ods.sty ods-colors.sty
 
 LFLAGS=-interaction=nonstopmode -halt-on-error
 
@@ -25,7 +26,7 @@ epsfigs:
 images:
 	cd images ; make
 
-ods-java.pdf : ods-java.tex $(javs) ods.sty images figs
+ods-java.pdf : ods-java.tex $(javs) $(styles) images figs
 	latexmk -pdf ods-java
 #	pdflatex $(LFLAGS) ods-java
 #	bibtex ods-java
@@ -37,7 +38,7 @@ ods-java.tex : ods.tex Makefile
 		| sed 's/-lang/-java/' > ods-java.tex
 	sed -i 's/%HEADCOMMAND/\\newcommand{\\cpponly}[1]{}\\newcommand{\\javaonly}[1]{#1}\\newcommand{\\lang}{Java}/' ods-java.tex
 
-ods-cpp.pdf : ods-cpp.tex $(cpps) ods.sty images figs
+ods-cpp.pdf : ods-cpp.tex $(cpps) $(styles) images figs
 	latexmk -pdf ods-cpp
 #	pdflatex $(LFLAGS) ods-cpp
 #	bibtex ods-cpp
