@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20101201111324" modified="D:20110714093457"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -418,7 +418,7 @@ h
 296 336 m
 296 304 l
 </path>
-<text layer="beta" matrix="1 0 0 1 16 16" transformations="translations" pos="336 224" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
+<text layer="beta" matrix="1 0 0 1 16 16" transformations="translations" pos="336 224" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
 <use layer="gamma" matrix="1 0 0 1 0 -32" name="mark/disk(sx)" pos="352 304" size="large" stroke="black"/>
 <path stroke="black">
 320 240 m

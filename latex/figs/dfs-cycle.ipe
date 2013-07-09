@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20120109160126" modified="D:20120112091213"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -310,8 +310,8 @@ h
 383.167 307.333 l
 </path>
 </group>
-<text layer="alpha" matrix="1 0 0 1 -28.1902 -289.581" transformations="translations" pos="176.133 367.631" stroke="black" type="label" width="5.23" height="6.088" depth="0" halign="center" valign="baseline">$\mathtt{i}$</text>
-<text matrix="1 0 0 1 -76.8371 -289.58" transformations="translations" pos="176.133 367.631" stroke="black" type="label" width="5.23" height="6.092" depth="2.21" halign="center" valign="baseline">$\mathtt{j}$</text>
+<text layer="alpha" matrix="1 0 0 1 -28.1902 -289.581" transformations="translations" pos="176.133 367.631" stroke="black" type="label" width="5.23" height="6.088" depth="0" halign="center" valign="baseline">$\mathtt{\color{var}i}$</text>
+<text matrix="1 0 0 1 -76.8371 -289.58" transformations="translations" pos="176.133 367.631" stroke="black" type="label" width="5.23" height="6.092" depth="2.21" halign="center" valign="baseline">$\mathtt{\color{var}j}$</text>
 <path matrix="1 0 0 1 -21.9269 -32.0096" stroke="black" arrow="normal/small">
 129.616 113.27 m
 161.477 113.27 l

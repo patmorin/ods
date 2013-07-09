@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
 <info created="D:20120110130916" modified="D:20120711151634"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -245,9 +245,9 @@ h
 <use matrix="1.2 0 0 1 -46.3029 0" name="mark/disk(sx)" pos="304 192" size="normal" stroke="black"/>
 <text matrix="1.2 0 0 1 -46.3029 0" transformations="translations" pos="176 176" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$0$</text>
 <text matrix="1.2 0 0 1 -27.1029 0" transformations="translations" pos="176 176" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$1$</text>
-<text matrix="1.2 0 0 1 68.8971 0" transformations="translations" pos="176 176" stroke="black" type="label" width="13.071" height="6.811" depth="2.16" halign="center" valign="baseline">$\lfloor\mathtt{x}\rfloor$</text>
-<text matrix="1.2 0 0 1 88.0971 0" transformations="translations" pos="176 176" stroke="black" type="label" width="13.071" height="6.811" depth="2.16" halign="center" valign="baseline">$\lceil\mathtt{x}\rceil$</text>
-<text matrix="1.2 0 0 1 241.697 0" transformations="translations" pos="176 176" stroke="black" type="label" width="20.118" height="6.6" depth="0.08" halign="center" valign="baseline">$\mathtt{n}-1$</text>
+<text matrix="1.2 0 0 1 68.8971 0" transformations="translations" pos="176 176" stroke="black" type="label" width="13.071" height="6.811" depth="2.16" halign="center" valign="baseline">$\lfloor\mathtt{\color{var}x}\rfloor$</text>
+<text matrix="1.2 0 0 1 88.0971 0" transformations="translations" pos="176 176" stroke="black" type="label" width="13.071" height="6.811" depth="2.16" halign="center" valign="baseline">$\lceil\mathtt{\color{var}x}\rceil$</text>
+<text matrix="1.2 0 0 1 241.697 0" transformations="translations" pos="176 176" stroke="black" type="label" width="20.118" height="6.6" depth="0.08" halign="center" valign="baseline">$\mathtt{\color{var}n}-1$</text>
 <text matrix="1.2 0 0 1 -46.3029 0" transformations="translations" pos="272 208" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$1$</text>
 <text matrix="1.2 0 0 1 -46.3029 0" transformations="translations" pos="304 208" stroke="black" type="label" width="6.518" height="8.939" depth="3.5" halign="center" valign="baseline">$\frac{1}{2}$</text>
 <text matrix="1.2 0 0 1 -65.5029 0" transformations="translations" pos="272 208" stroke="black" type="label" width="6.518" height="8.939" depth="3.5" halign="center" valign="baseline">$\frac{1}{2}$</text>

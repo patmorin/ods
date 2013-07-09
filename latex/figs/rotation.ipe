@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
 <info created="D:20101110125048" modified="D:20120615101844"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -288,11 +288,11 @@ h
 <path matrix="0.375 0 0 0.375 50.9773 55.8614" stroke="black" fill="white">
 16 0 0 16 256 256 e
 </path>
-<text matrix="1 0 0 1 -29.335 -28.7255" transformations="translations" pos="176.312 178.398" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{w}$</text>
+<text matrix="1 0 0 1 -29.335 -28.7255" transformations="translations" pos="176.312 178.398" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{\color{var}w}$</text>
 <path matrix="0.375 0 0 0.375 96.0003 85.9999" stroke="black" fill="white">
 16 0 0 16 256 256 e
 </path>
-<text matrix="1 0 0 1 15.688 1.413" transformations="translations" pos="176.312 178.398" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="center" valign="baseline">$\mathtt{u}$</text>
+<text matrix="1 0 0 1 15.688 1.413" transformations="translations" pos="176.312 178.398" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="center" valign="baseline">$\mathtt{\color{var}u}$</text>
 </group>
 <path stroke="black">
 464 208 m
@@ -344,10 +344,10 @@ h
 <path matrix="-0.375 0 0 0.375 511.999 55.8614" stroke="black" fill="white">
 16 0 0 16 256 256 e
 </path>
-<text matrix="-1 0 0 1 592.312 -28.7255" transformations="translations" pos="176.312 178.398" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="center" valign="baseline">$\mathtt{u}$</text>
+<text matrix="-1 0 0 1 592.312 -28.7255" transformations="translations" pos="176.312 178.398" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="center" valign="baseline">$\mathtt{\color{var}u}$</text>
 <path matrix="-0.375 0 0 0.375 466.976 85.9999" stroke="black" fill="white">
 16 0 0 16 256 256 e
 </path>
-<text matrix="-1 0 0 1 547.289 1.413" transformations="translations" pos="176.312 178.398" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{w}$</text>
+<text matrix="-1 0 0 1 547.289 1.413" transformations="translations" pos="176.312 178.398" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{\color{var}w}$</text>
 </page>
 </ipe>

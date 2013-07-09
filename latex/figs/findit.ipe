@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120711100033" modified="D:20120711101739"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<info created="D:20120711100033" modified="D:20130709101414"/>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont
+\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -394,6 +395,6 @@ h
 216 720 s
 </path>
 <text matrix="1 0 0 1 0 4.59339" transformations="translations" pos="192 640" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">27</text>
-<text matrix="1 0 0 1 -24 4.79" transformations="translations" pos="80 720" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="center" valign="baseline">$\mathtt{\color{blue}a}$</text>
+<text matrix="1 0 0 1 -24 4.79" transformations="translations" pos="80 720" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="center" valign="baseline">$\mathtt{\color{var}a}$</text>
 </page>
 </ipe>

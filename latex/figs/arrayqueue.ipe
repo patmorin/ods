@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20110228150616" modified="D:20110228163431"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -1762,14 +1762,14 @@ h
 <text matrix="1 0 0 1 78.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.297" depth="1.93" halign="center" valign="baseline">g</text>
 <text matrix="1 0 0 1 94.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">h</text>
 <text matrix="1 0 0 1 96 -14.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="41.843" height="6.919" depth="0.83" valign="baseline">\texttt{remove()}</text>
-<text matrix="1 0 0 1 -16 4.93618" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=2,\mathtt{n}=3$</text>
-<text matrix="1 0 0 1 -16 -27.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=2,\mathtt{n}=4$</text>
-<text matrix="1 0 0 1 -16 -59.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=2,\mathtt{n}=5$</text>
-<text matrix="1 0 0 1 -16 -91.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=3,\mathtt{n}=4$</text>
-<text matrix="1 0 0 1 -16 -123.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=3,\mathtt{n}=5$</text>
-<text matrix="1 0 0 1 -16 -155.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=3,\mathtt{n}=6$</text>
-<text matrix="1 0 0 1 -16 -219.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=0,\mathtt{n}=7$</text>
-<text matrix="1 0 0 1 -16 -251.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=1,\mathtt{n}=6$</text>
-<text matrix="1 0 0 1 -16 -187.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{j}=0,\mathtt{n}=6$</text>
+<text matrix="1 0 0 1 -16 4.93618" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=2,\mathtt{\color{var}n}=3$</text>
+<text matrix="1 0 0 1 -16 -27.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=2,\mathtt{\color{var}n}=4$</text>
+<text matrix="1 0 0 1 -16 -59.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=2,\mathtt{\color{var}n}=5$</text>
+<text matrix="1 0 0 1 -16 -91.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=3,\mathtt{\color{var}n}=4$</text>
+<text matrix="1 0 0 1 -16 -123.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=3,\mathtt{\color{var}n}=5$</text>
+<text matrix="1 0 0 1 -16 -155.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=3,\mathtt{\color{var}n}=6$</text>
+<text matrix="1 0 0 1 -16 -219.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=0,\mathtt{\color{var}n}=7$</text>
+<text matrix="1 0 0 1 -16 -251.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=1,\mathtt{\color{var}n}=6$</text>
+<text matrix="1 0 0 1 -16 -187.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=0,\mathtt{\color{var}n}=6$</text>
 </page>
 </ipe>

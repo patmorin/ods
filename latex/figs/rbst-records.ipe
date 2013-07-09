@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20110525141707" modified="D:20110727132300"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -249,7 +249,7 @@ h
 256.124 189.113 s
 </path>
 <text matrix="1 0 0 1 -60.7827 3.39223" transformations="translations" pos="203.206 145.692" stroke="black" type="label" width="65.113" height="6.578" depth="1.93" valign="baseline">$\ldots,i,\ldots,j-1$</text>
-<text matrix="1 0 0 1 -121.243 -120.764" transformations="translations" pos="370.104 269.848" stroke="black" type="label" width="65.715" height="6.578" depth="1.93" valign="baseline">$j+1,\ldots,\lfloor\mathtt{x}\rfloor,\ldots$</text>
+<text matrix="1 0 0 1 -121.243 -120.764" transformations="translations" pos="370.104 269.848" stroke="black" type="label" width="65.715" height="6.578" depth="1.93" valign="baseline">$j+1,\ldots,\lfloor\mathtt{\color{var}x}\rfloor,\ldots$</text>
 <path stroke="black">
 215.418 145.692
 220.845 193.184

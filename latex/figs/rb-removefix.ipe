@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20110711115327" modified="D:20110713143352"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -835,77 +835,77 @@ h
 448 768 m
 448 752 l
 </path>
-<text matrix="1 0 0 1 -32 -80" transformations="translations" pos="480 688" stroke="black" type="label" width="25.709" height="4.289" depth="0" valign="baseline">new $\mathtt{u}$</text>
-<text matrix="1 0 0 1 0 16" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 48 16" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 16 32" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 224 16" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
+<text matrix="1 0 0 1 -32 -80" transformations="translations" pos="480 688" stroke="black" type="label" width="25.709" height="4.289" depth="0" valign="baseline">new $\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 0 16" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 48 16" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 16 32" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 224 16" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
 <text matrix="1 0 0 1 0 16" transformations="translations" pos="64 672" stroke="black" type="label" width="60.052" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{pullBlack(w)}$</text>
 <text matrix="1 0 0 1 176 16" transformations="translations" pos="64 672" stroke="black" type="label" width="60.052" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{pullBlack(w)}$</text>
 <text matrix="1 0 0 1 0 -48" transformations="translations" pos="64 672" stroke="black" type="label" width="54.822" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{flipLeft(w)}$</text>
 <text matrix="1 0 0 1 176 -48" transformations="translations" pos="64 672" stroke="black" type="label" width="60.052" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{flipRight(w)}$</text>
-<text matrix="1 0 0 1 0 -48" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 16 -32" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 48 -48" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 -128 -48" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 176 -48" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 -128 -96" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 -128 -272" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 -128 -384" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 -128 -464" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 0 -128" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 0 -208" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 0 -320" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 0 -400" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 0 -480" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 16 -112" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 16 -192" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 16 -304" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 16 -384" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 16 -464" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 -136 -288" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
-<text matrix="1 0 0 1 -136 -208" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
+<text matrix="1 0 0 1 0 -48" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 16 -32" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 48 -48" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 -128 -48" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 176 -48" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 -128 -96" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 -128 -272" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 -128 -384" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 -128 -464" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 0 -128" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 0 -208" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 0 -320" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 0 -400" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 0 -480" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 16 -112" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 16 -192" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 16 -304" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 16 -384" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 16 -464" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 -136 -288" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{\color{var}q}$</text>
+<text matrix="1 0 0 1 -136 -208" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{\color{var}q}$</text>
 <use matrix="1 0 0 1 0 16" name="mark/fdisk(sfx)" pos="72 544" size="large" stroke="black" fill="white"/>
 <use matrix="1 0 0 1 160 16" name="mark/fdisk(sfx)" pos="72 544" size="large" stroke="black" fill="white"/>
-<text matrix="1 0 0 1 -136 -128" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
-<text matrix="1 0 0 1 -136 -368" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
-<text matrix="1 0 0 1 -136 -448" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
+<text matrix="1 0 0 1 -136 -128" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{\color{var}q}$</text>
+<text matrix="1 0 0 1 -136 -368" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{\color{var}q}$</text>
+<text matrix="1 0 0 1 -136 -448" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{\color{var}q}$</text>
 <text matrix="1 0 0 1 0 -128" transformations="translations" pos="64 672" stroke="black" type="label" width="34.149" height="6.092" depth="2.21" halign="center" valign="baseline">$\mathtt{q.colour}$</text>
 <text matrix="1 0 0 1 0 -224" transformations="translations" pos="64 672" stroke="black" type="label" width="65.282" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{rotateLeft(w)}$</text>
 <text matrix="1 0 0 1 0 -320" transformations="translations" pos="64 672" stroke="black" type="label" width="60.052" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{flipRight(v)}$</text>
 <text matrix="1 0 0 1 0 -400" transformations="translations" pos="64 672" stroke="black" type="label" width="60.052" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{pushBlack(q)}$</text>
-<text matrix="1 0 0 1 -128 -176" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 -72 -208" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
-<text matrix="1 0 0 1 176 -96" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 176 -176" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 176 -272" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 176 -384" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 176 -464" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 32 32" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 32 -32" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 32 -112" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 32 -192" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 32 -304" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 32 -384" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 32 -464" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 184 -208" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{q}$</text>
-<text matrix="1 0 0 1 184 -288" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{q}$</text>
-<text matrix="1 0 0 1 184 -368" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{q}$</text>
-<text matrix="1 0 0 1 184 -448" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{q}$</text>
+<text matrix="1 0 0 1 -128 -176" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 -72 -208" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{\color{var}q}$</text>
+<text matrix="1 0 0 1 176 -96" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 176 -176" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 176 -272" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 176 -384" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 176 -464" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 32 32" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 32 -32" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 32 -112" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 32 -192" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 32 -304" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 32 -384" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 32 -464" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 184 -208" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{\color{var}q}$</text>
+<text matrix="1 0 0 1 184 -288" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{\color{var}q}$</text>
+<text matrix="1 0 0 1 184 -368" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{\color{var}q}$</text>
+<text matrix="1 0 0 1 184 -448" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{\color{var}q}$</text>
 <text matrix="1 0 0 1 176 -128" transformations="translations" pos="64 672" stroke="black" type="label" width="34.149" height="6.092" depth="2.21" halign="center" valign="baseline">$\mathtt{q.colour}$</text>
 <text matrix="1 0 0 1 176 -224" transformations="translations" pos="64 672" stroke="black" type="label" width="70.513" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{rotateRight(w)}$</text>
 <text matrix="1 0 0 1 176 -320" transformations="translations" pos="64 672" stroke="black" type="label" width="54.822" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{flipLeft(v)}$</text>
 <text matrix="1 0 0 1 176 -400" transformations="translations" pos="64 672" stroke="black" type="label" width="60.052" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{pushBlack(q)}$</text>
-<text matrix="1 0 0 1 272 -176" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 272 -256" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 272 -352" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 280 -288" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{q}$</text>
-<text matrix="1 0 0 1 376 -288" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{q}$</text>
-<text matrix="1 0 0 1 280 -208" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{q}$</text>
-<text matrix="1 0 0 1 128 -192" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 224 -272" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 128 -272" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 144 -352" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
+<text matrix="1 0 0 1 272 -176" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 272 -256" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 272 -352" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 280 -288" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{\color{var}q}$</text>
+<text matrix="1 0 0 1 376 -288" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{\color{var}q}$</text>
+<text matrix="1 0 0 1 280 -208" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{\color{var}q}$</text>
+<text matrix="1 0 0 1 128 -192" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 224 -272" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 128 -272" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 144 -352" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
 <path matrix="1 0 0 1 48 16" stroke="black" arrow="normal/small">
 272 448 m
 272 432 l
@@ -914,20 +914,20 @@ h
 272 448 m
 368 432 l
 </path>
-<text matrix="1 0 0 1 48 -208" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 144 -208" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 144 -288" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 240 -288" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 48 -320" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 48 -400" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 48 -480" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
+<text matrix="1 0 0 1 48 -208" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 144 -208" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 144 -288" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 240 -288" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 48 -320" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 48 -400" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 48 -480" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
 <text matrix="1 0 0 1 256 -208" transformations="translations" pos="64 672" stroke="black" type="label" width="57.838" height="6.088" depth="0" halign="center" valign="baseline">$\mathtt{v.left.colour}$</text>
 <path matrix="1 0 0 1 32 16" stroke="black" arrow="normal/small">
 208 528 m
 288 512 l
 </path>
 <text matrix="1 0 0 1 272 -288" transformations="translations" pos="64 672" stroke="black" type="label" width="54.822" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{flipLeft(v)}$</text>
-<text matrix="1 0 0 1 120 -336" transformations="translations" pos="224 688" stroke="black" type="label" width="42.009" height="7.473" depth="2.49" valign="baseline">$\mathtt{w}$ (new $\mathtt{u}$)</text>
+<text matrix="1 0 0 1 120 -336" transformations="translations" pos="224 688" stroke="black" type="label" width="42.009" height="7.473" depth="2.49" valign="baseline">$\mathtt{\color{var}w}$ (new $\mathtt{\color{var}u}$)</text>
 <path matrix="1 0 0 1 32 16" stroke="black" arrow="normal/small">
 384 368 m
 384 352 l
@@ -954,13 +954,13 @@ h
 <use matrix="-1 0 0 1 544 -400" name="mark/fdisk(sfx)" pos="128 752" size="large" stroke="black" fill="white"/>
 <use matrix="-1 0 0 1 592 -192" name="mark/fdisk(sfx)" pos="168 512" size="large" stroke="black" fill="black"/>
 <use matrix="1 0 0 1 112 -128" name="mark/fdisk(sfx)" pos="288 464" size="large" stroke="black" fill="black"/>
-<text matrix="1 0 0 1 376 -368" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{q}$</text>
-<text matrix="1 0 0 1 224 -352" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 240 -368" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{u}$</text>
+<text matrix="1 0 0 1 376 -368" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" valign="baseline">$\mathtt{\color{var}q}$</text>
+<text matrix="1 0 0 1 224 -352" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 240 -368" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
 <text matrix="1 0 0 1 352 -288" transformations="translations" pos="64 672" stroke="black" type="label" width="60.052" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{pushBlack(v)}$</text>
-<text matrix="1 0 0 1 -72 -176" transformations="translations" pos="224 688" stroke="black" type="label" width="42.009" height="7.473" depth="2.49" valign="baseline">$\mathtt{v}$ (new $\mathtt{u}$)</text>
-<text matrix="1 0 0 1 208 32" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 208 -64" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{w}$</text>
+<text matrix="1 0 0 1 -72 -176" transformations="translations" pos="224 688" stroke="black" type="label" width="42.009" height="7.473" depth="2.49" valign="baseline">$\mathtt{\color{var}v}$ (new $\mathtt{\color{var}u}$)</text>
+<text matrix="1 0 0 1 208 32" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 208 -64" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
 <text matrix="1 0 0 1 352 0" transformations="translations" pos="64 672" stroke="black" type="label" width="60.052" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{flipRight(w)}$</text>
 <path matrix="1 0 0 1 -64 -144" stroke="black" arrow="normal/small">
 128 336 m
@@ -993,10 +993,10 @@ h
 112 352 l
 </path>
 <use matrix="1 0 0 1 -80 -592" name="mark/fdisk(sfx)" pos="144 736" size="large" stroke="black" fill="black"/>
-<text matrix="1 0 0 1 -128 -544" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 0 -560" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 16 -544" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 -136 -528" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
+<text matrix="1 0 0 1 -128 -544" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 0 -560" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 16 -544" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 -136 -528" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{\color{var}q}$</text>
 <path matrix="1 0 0 1 16 -224" stroke="black">
 144 368 m
 140 352 l
@@ -1023,10 +1023,10 @@ h
 112 352 l
 </path>
 <use matrix="1 0 0 1 0 -592" name="mark/fdisk(sfx)" pos="144 736" size="large" stroke="black" fill="black"/>
-<text matrix="1 0 0 1 -48 -544" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 80 -560" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 96 -544" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 -56 -528" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
+<text matrix="1 0 0 1 -48 -544" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 80 -560" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 96 -544" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 -56 -528" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{\color{var}q}$</text>
 <path matrix="-1 0 0 1 224 -224" stroke="black">
 144 368 m
 140 352 l
@@ -1059,10 +1059,10 @@ h
 112 352 l
 </path>
 <use matrix="1 0 0 1 -80 -688" name="mark/fdisk(sfx)" pos="144 736" size="large" stroke="black" fill="black"/>
-<text matrix="1 0 0 1 -146.137 -652.039" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 0 -656" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{u}$</text>
-<text matrix="1 0 0 1 16 -640" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{w}$</text>
-<text matrix="1 0 0 1 -136 -608" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{q}$</text>
+<text matrix="1 0 0 1 -146.137 -652.039" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 0 -656" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text matrix="1 0 0 1 16 -640" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 -136 -608" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.293" depth="2.21" halign="right" valign="baseline">$\mathtt{\color{var}q}$</text>
 <use matrix="-0.5 0 0 1 156 -448" name="mark/fdisk(sfx)" pos="144 496" size="large" stroke="black" fill="black"/>
 <path matrix="1 0 0 1 -64 -240" stroke="black" arrow="normal/small">
 128 336 m
@@ -1073,8 +1073,8 @@ h
 64 176 m
 144 160 l
 </path>
-<text matrix="1 0 0 1 176 16" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{v}$</text>
-<text matrix="1 0 0 1 -128 16" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{v}$</text>
+<text matrix="1 0 0 1 176 16" transformations="translations" pos="32 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 -128 16" transformations="translations" pos="224 688" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
 <text matrix="1 0 0 1 352 64" transformations="translations" pos="64 672" stroke="black" type="label" width="96.665" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{removeFixupCase1(u)}$</text>
 <text matrix="1 0 0 1 176 64" transformations="translations" pos="64 672" stroke="black" type="label" width="96.665" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{removeFixupCase3(u)}$</text>
 <text matrix="1 0 0 1 0 64" transformations="translations" pos="64 672" stroke="black" type="label" width="96.665" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathtt{removeFixupCase2(u)}$</text>

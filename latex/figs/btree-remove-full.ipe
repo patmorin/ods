@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120626162443" modified="D:20120712123533"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<info created="D:20120626162443" modified="D:20130709101308"/>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont
+\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -1145,9 +1146,9 @@ h
 80 752 l
 h
 </path>
-<text layer="beta" matrix="1 0 0 1 -118.252 106.327" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{blue}v}$</text>
-<text matrix="1 0 0 1 -54.2525 106.327" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{blue}w}$</text>
-<text layer="gamma" matrix="1 0 0 1 -54.2525 154.327" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{blue}w}$</text>
-<text matrix="1 0 0 1 169.748 154.327" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{blue}v}$</text>
+<text layer="beta" matrix="1 0 0 1 -118.252 106.327" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 -54.2525 106.327" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text layer="gamma" matrix="1 0 0 1 -54.2525 154.327" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 169.748 154.327" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
 </page>
 </ipe>

@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20101105075742" modified="D:20110823131536"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -1516,8 +1516,8 @@ h
 408.002 320 m
 424.002 288 l
 </path>
-<text matrix="1 0 0 1 32 52.541" transformations="translations" pos="144 272" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{a}$</text>
-<text matrix="1 0 0 1 32 -91.459" transformations="translations" pos="144 272" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{a}$</text>
+<text matrix="1 0 0 1 32 52.541" transformations="translations" pos="144 272" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}a}$</text>
+<text matrix="1 0 0 1 32 -91.459" transformations="translations" pos="144 272" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}a}$</text>
 <text matrix="1 0 0 1 16 -43.459" transformations="translations" pos="144 272" stroke="black" type="label" width="10.461" height="6.088" depth="0" halign="right" valign="baseline">$\mathtt{a0}$</text>
 <text matrix="1 0 0 1 0 -43.459" transformations="translations" pos="448 272" stroke="black" type="label" width="10.461" height="6.088" depth="0" valign="baseline">$\mathtt{a1}$</text>
 <text matrix="1 0 0 1 -18.453 0" transformations="translations" pos="288 208" stroke="black" type="label" width="68.908" height="7.473" depth="2.49" valign="baseline">$\mathtt{merge(a0,a1,a)}$</text>

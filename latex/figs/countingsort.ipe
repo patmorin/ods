@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20111021132334" modified="D:20111021134833"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -659,7 +659,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 232 -96.5555" transformations="translations" pos="64 629.512" stroke="black" type="label" width="10.461" height="6.088" depth="0" halign="center" valign="baseline">{20}</text>
-<text matrix="1 0 0 1 72 -96.5555" transformations="translations" pos="64 629.512" stroke="black" type="label" width="8.025" height="7.49" depth="0" halign="center" valign="baseline">$\mathtt{c}&apos;$</text>
+<text matrix="1 0 0 1 72 -96.5555" transformations="translations" pos="64 629.512" stroke="black" type="label" width="8.025" height="7.49" depth="0" halign="center" valign="baseline">$\mathtt{\color{var}c}&apos;$</text>
 <text matrix="1 0 0 1 8 -224.555" transformations="translations" pos="64 629.512" stroke="darkgray" type="label" width="5.23" height="6.088" depth="0" halign="center" valign="baseline">{0}</text>
 <text matrix="1 0 0 1 24 -224.555" transformations="translations" pos="64 629.512" stroke="darkgray" type="label" width="5.23" height="6.088" depth="0" halign="center" valign="baseline">{1}</text>
 <text matrix="1 0 0 1 40 -224.555" transformations="translations" pos="64 629.512" stroke="darkgray" type="label" width="5.23" height="6.088" depth="0" halign="center" valign="baseline">{2}</text>
@@ -1187,7 +1187,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 328 -160.555" transformations="translations" pos="64 629.512" stroke="black" type="label" width="10.461" height="6.088" depth="0" halign="center" valign="baseline">{20}</text>
-<text matrix="1 0 0 1 -8 -160.555" transformations="translations" pos="64 629.512" stroke="black" type="label" width="8.025" height="7.49" depth="0" halign="center" valign="baseline">$\mathtt{c}&apos;$</text>
+<text matrix="1 0 0 1 -8 -160.555" transformations="translations" pos="64 629.512" stroke="black" type="label" width="8.025" height="7.49" depth="0" halign="center" valign="baseline">$\mathtt{\color{var}c}&apos;$</text>
 <path stroke="black" pen="fat" arrow="normal/tiny">
 376 432 m
 384 464 l

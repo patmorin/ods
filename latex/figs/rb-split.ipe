@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20110714105047" modified="D:20110714111738"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -421,10 +421,10 @@ h
 180.559 330.322
 200.678 331.734 u
 </path>
-<text transformations="translations" pos="123.28 309.022" stroke="black" type="label" valign="baseline">$\mathtt{w}$</text>
-<text layer="delta" transformations="translations" pos="123.88 299.225" stroke="black" type="label" valign="baseline">$\mathtt{w}$</text>
-<text transformations="translations" pos="177.059 298.626" stroke="black" type="label" valign="baseline">$\mathtt{w}&apos;$</text>
-<text layer="beta" transformations="translations" pos="184.257 261.64" stroke="black" type="label" valign="baseline">$\mathtt{u}$</text>
+<text transformations="translations" pos="123.28 309.022" stroke="black" type="label" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text layer="delta" transformations="translations" pos="123.88 299.225" stroke="black" type="label" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text transformations="translations" pos="177.059 298.626" stroke="black" type="label" valign="baseline">$\mathtt{\color{var}w}&apos;$</text>
+<text layer="beta" transformations="translations" pos="184.257 261.64" stroke="black" type="label" valign="baseline">$\mathtt{\color{var}u}$</text>
 <use layer="alpha" matrix="1 0 0 1 102.5 37" name="mark/fdisk(sfx)" pos="208 272" size="large" stroke="black" fill="black"/>
 </page>
 </ipe>
