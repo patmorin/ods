@@ -3,9 +3,12 @@ pdfs=$(svgs:.svg=.pdf)
 epss=$(svgs:.svg=.eps)
 
 
-all: $(pdfs) $(epss) bigoh.tex
+all: $(pdfs) $(epss) bigoh-1.tex bigoh-2.tex
 
-bigoh.tex : bigoh.gp
+bigoh-1.tex : bigoh-1.gp
+	gnuplot $<
+
+bigoh-2.tex : bigoh-2.gp
 	gnuplot $<
 
 %.pdf : %.svg
