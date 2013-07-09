@@ -637,7 +637,7 @@ compute a hash code for our object with
 Note that this hash code has a final step (multiplying by #z# and
 dividing by $2^{#w#}$) that uses the multiplicative hash function
 from \secref{multihash} to take the $2#w#$-bit intermediate result and
-reduce it to a #w#-bit final result.  Here is an example of this method applied to a simple compound object with 3 parts #x0#, #x1#, and #x2#:
+reduce it to a #w#-bit final result.  Here is an example of this method applied to a simple compound object with three parts #x0#, #x1#, and #x2#:
 \javaimport{junk/Point3D.x0.hashCode()}
 \cppimport{ods/Point3D.hashCode()}
 The following theorem shows that, in addition to being straightforward to implement, this method is provably good:
