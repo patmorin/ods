@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120626162443" modified="D:20120712115437"/>
+<info created="D:20120626162443" modified="D:20130710153714"/>
 <preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -188,7 +188,7 @@ h
 <color name="violet" value="0.933 0.51 0.933"/>
 <color name="darkblue" value="0 0 0.545"/>
 <color name="darkcyan" value="0 0.545 0.545"/>
-<color name="darkgray" value="0.827"/>
+<color name="darkgray" value="0.663"/>
 <color name="darkgreen" value="0 0.392 0"/>
 <color name="darkmagenta" value="0.545 0 0.545"/>
 <color name="darkorange" value="1 0.549 0"/>
@@ -236,49 +236,7 @@ h
 <view layers="alpha" active="beta"/>
 <view layers="beta" active="beta"/>
 <view layers="gamma" active="gamma"/>
-<path layer="gamma" matrix="1 0 0 1 256 48" stroke="gray">
-64 752 m
-64 736 l
-80 736 l
-80 752 l
-h
-</path>
-<path matrix="1 0 0 1 272 48" stroke="gray">
-64 752 m
-64 736 l
-80 736 l
-80 752 l
-h
-</path>
-<path matrix="1 0 0 1 416 48" stroke="darkgray">
-64 752 m
-64 736 l
-80 736 l
-80 752 l
-h
-</path>
-<path layer="beta" matrix="1 0 0 1 416 0" stroke="darkgray">
-64 752 m
-64 736 l
-80 736 l
-80 752 l
-h
-</path>
-<path matrix="1 0 0 1 352 0" stroke="darkgray">
-64 752 m
-64 736 l
-80 736 l
-80 752 l
-h
-</path>
 <path layer="alpha" matrix="1 0 0 1 192 80" stroke="darkgray">
-64 752 m
-64 736 l
-80 736 l
-80 752 l
-h
-</path>
-<path matrix="1 0 0 1 432 0" stroke="darkgray">
 64 752 m
 64 736 l
 80 736 l
@@ -306,7 +264,56 @@ h
 80 752 l
 h
 </path>
-<path stroke="black">
+<path matrix="1 0 0 1 208 80" stroke="darkgray">
+64 752 m
+64 736 l
+80 736 l
+80 752 l
+h
+</path>
+<path matrix="1 0 0 1 432 0" stroke="darkgray">
+64 752 m
+64 736 l
+80 736 l
+80 752 l
+h
+</path>
+<path layer="gamma" matrix="1 0 0 1 256 48" stroke="darkgray">
+64 752 m
+64 736 l
+80 736 l
+80 752 l
+h
+</path>
+<path matrix="1 0 0 1 272 48" stroke="darkgray">
+64 752 m
+64 736 l
+80 736 l
+80 752 l
+h
+</path>
+<path matrix="1 0 0 1 416 48" stroke="darkgray">
+64 752 m
+64 736 l
+80 736 l
+80 752 l
+h
+</path>
+<path layer="beta" matrix="1 0 0 1 416 0" stroke="darkgray">
+64 752 m
+64 736 l
+80 736 l
+80 752 l
+h
+</path>
+<path matrix="1 0 0 1 352 0" stroke="darkgray">
+64 752 m
+64 736 l
+80 736 l
+80 752 l
+h
+</path>
+<path layer="alpha" stroke="black">
 64 752 m
 64 736 l
 80 736 l
@@ -491,13 +498,6 @@ h
 </path>
 <text matrix="1 0 0 1 312 36.79" transformations="translations" pos="80 752" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$22$</text>
 <text matrix="1 0 0 1 168 68.79" transformations="translations" pos="80 752" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$10$</text>
-<path matrix="1 0 0 1 208 80" stroke="darkgray">
-64 752 m
-64 736 l
-80 736 l
-80 752 l
-h
-</path>
 <path stroke="black">
 128 784 m
 88 752 l
@@ -689,7 +689,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 312 -11.21" transformations="translations" pos="80 752" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$18$</text>
-<path matrix="1 0 0 1 336 0" stroke="gray">
+<path matrix="1 0 0 1 336 0" stroke="darkgray">
 64 752 m
 64 736 l
 80 736 l
@@ -838,7 +838,7 @@ h
 80 752 l
 h
 </path>
-<path matrix="1 0 0 1 352 0" stroke="gray">
+<path matrix="1 0 0 1 352 0" stroke="darkgray">
 64 752 m
 64 736 l
 80 736 l
@@ -978,7 +978,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 312 -11.21" transformations="translations" pos="80 752" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$18$</text>
-<path matrix="1 0 0 1 336 0" stroke="gray">
+<path matrix="1 0 0 1 336 0" stroke="darkgray">
 64 752 m
 64 736 l
 80 736 l
@@ -1117,8 +1117,8 @@ h
 272 816 m
 480 800 l
 </path>
-<text layer="beta" matrix="1 0 0 1 328 -11.21" transformations="translations" pos="80 752" stroke="gray" type="label" width="10.859" height="6.604" depth="0.23" halign="center" valign="baseline">$19$</text>
-<text layer="gamma" matrix="1 0 0 1 248 36.79" transformations="translations" pos="80 752" stroke="gray" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$17$</text>
+<text layer="beta" matrix="1 0 0 1 328 -11.21" transformations="translations" pos="80 752" stroke="darkgray" type="label" width="10.859" height="6.604" depth="0.23" halign="center" valign="baseline">$19$</text>
+<text layer="gamma" matrix="1 0 0 1 248 36.79" transformations="translations" pos="80 752" stroke="darkgray" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">$17$</text>
 <path matrix="1 0 0 1 192 80" stroke="black">
 64 752 m
 64 736 l

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120626162443" modified="D:20130709101232"/>
+<info created="D:20120626162443" modified="D:20130710153812"/>
 <preamble>\usepackage{kpfonts}
 \usepackage{wasysym}\fontsize{10pt}{10pt}\selectfont
 \usepackage{ods-colors}</preamble>
@@ -190,7 +190,7 @@ h
 <color name="violet" value="0.933 0.51 0.933"/>
 <color name="darkblue" value="0 0 0.545"/>
 <color name="darkcyan" value="0 0.545 0.545"/>
-<color name="darkgray" value="0.827"/>
+<color name="darkgray" value="0.663"/>
 <color name="darkgreen" value="0 0.392 0"/>
 <color name="darkmagenta" value="0.545 0 0.545"/>
 <color name="darkorange" value="1 0.549 0"/>
@@ -243,11 +243,39 @@ h
 80 752 l
 h
 </path>
+<path matrix="1 0 0 1 48 128" stroke="darkgray">
+192 528 m
+192 512 l
+208 512 l
+208 528 l
+h
+</path>
+<path matrix="1 0 0 1 48 128" stroke="darkgray">
+208 528 m
+208 512 l
+224 512 l
+224 528 l
+h
+</path>
 <path matrix="1 0 0 1 128 128" stroke="darkgray">
 192 528 m
 192 512 l
 208 512 l
 208 528 l
+h
+</path>
+<path matrix="1 0 0 1 128 128" stroke="darkgray">
+208 528 m
+208 512 l
+224 512 l
+224 528 l
+h
+</path>
+<path matrix="1 0 0 1 144 128" stroke="darkgray">
+208 528 m
+208 512 l
+224 512 l
+224 528 l
 h
 </path>
 <path layer="post-merge" matrix="1 0 0 1 192 -48" stroke="darkgray">
@@ -282,7 +310,7 @@ h
 </path>
 <text matrix="1 0 0 1 168 -107.21" transformations="translations" pos="80 752" stroke="black" type="label" width="8.747" height="4.488" depth="0.08" halign="center" valign="baseline">m</text>
 <text matrix="1 0 0 1 184 -107.21" transformations="translations" pos="80 752" stroke="black" type="label" width="5.24" height="4.488" depth="0.08" halign="center" valign="baseline">o</text>
-<path matrix="1 0 0 1 208 -96" stroke="gray">
+<path matrix="1 0 0 1 208 -96" stroke="darkgray">
 64 752 m
 64 736 l
 80 736 l
@@ -569,27 +597,6 @@ h
 <text matrix="1 0 0 1 192 -13.0282" transformations="translations" pos="96 608" stroke="black" type="label" width="7.801" height="6.6" depth="0.08" halign="center" valign="baseline">N</text>
 <text matrix="1 0 0 1 208 -13.0282" transformations="translations" pos="96 608" stroke="black" type="label" width="6.037" height="6.6" depth="0.08" halign="center" valign="baseline">P</text>
 <text matrix="1 0 0 1 184 -59.21" transformations="translations" pos="80 752" stroke="black" type="label" width="5.589" height="4.484" depth="2.52" halign="center" valign="baseline">q</text>
-<path matrix="1 0 0 1 48 128" stroke="darkgray">
-192 528 m
-192 512 l
-208 512 l
-208 528 l
-h
-</path>
-<path matrix="1 0 0 1 48 128" stroke="darkgray">
-208 528 m
-208 512 l
-224 512 l
-224 528 l
-h
-</path>
-<path matrix="1 0 0 1 128 128" stroke="darkgray">
-208 528 m
-208 512 l
-224 512 l
-224 528 l
-h
-</path>
 <path stroke="black">
 192 688 m
 96 656 l
@@ -620,13 +627,6 @@ h
 304 656 l
 </path>
 <text layer="pre-merge" matrix="1 0 0 1 136 -107.21" transformations="translations" pos="80 752" stroke="black" type="label" width="2.68" height="6.8" depth="2.61" halign="center" valign="baseline">j</text>
-<path matrix="1 0 0 1 144 128" stroke="darkgray">
-208 528 m
-208 512 l
-224 512 l
-224 528 l
-h
-</path>
 <text matrix="1 0 0 1 9.74751 58.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" valign="baseline">$\mathtt{\color{var}u}$</text>
 <text layer="post-merge" matrix="1 0 0 1 9.74751 58.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" valign="baseline">$\mathtt{\color{var}u}$</text>
 <path layer="pre-merge" stroke="black">
