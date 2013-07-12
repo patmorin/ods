@@ -239,7 +239,7 @@ h
 <view layers="alpha gamma" active="alpha"/>
 <view layers="alpha beta gamma epsilon" active="beta"/>
 <view layers="alpha delta epsilon" active="delta"/>
-<path layer="delta" stroke="darkorange">
+<path layer="delta" stroke="darkorange" pen="fat">
 240 240 m
 224 272 l
 </path>
@@ -256,138 +256,138 @@ h
 <use name="mark/square(sx)" pos="384 240" size="large" stroke="black"/>
 <use name="mark/disk(sx)" pos="272 272" size="large" stroke="black"/>
 <group layer="gamma">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
 <group layer="alpha" matrix="1 0 0 1 128 0">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
 <group matrix="1 0 0 1 176 0">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
 <use name="mark/disk(sx)" pos="352 304" size="large" stroke="black"/>
-<path layer="gamma" stroke="black">
+<path layer="gamma" stroke="black" pen="fat">
 176 240 m
 200 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 192 240 m
 200 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 208 240 m
 200 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 224 240 m
 200 272 l
 </path>
-<path layer="alpha" stroke="black">
+<path layer="alpha" stroke="black" pen="fat">
 256 240 m
 272 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 272 240 m
 272 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 288 240 m
 272 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 320 240 m
 328 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 336 240 m
 328 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 368 240 m
 376 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 384 240 m
 376 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 376 272 m
 352 304 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 328 272 m
 352 304 l
 </path>
-<path layer="gamma" stroke="black">
+<path layer="gamma" stroke="black" pen="fat">
 200 272 m
 240 304 l
 </path>
-<path layer="alpha" stroke="black">
+<path layer="alpha" stroke="black" pen="fat">
 272 272 m
 240 304 l
 </path>
 <use name="mark/disk(sx)" pos="240 304" size="large" stroke="black"/>
 <group matrix="1 0 0 1 96 64">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
-<path stroke="black">
+<path stroke="black" pen="fat">
 240 304 m
 296 336 l
 296 336 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 352 304 m
 296 336 l
 </path>
 <use layer="epsilon" name="mark/square(sx)" pos="240 240" size="large" stroke="darkorange"/>
-<path layer="beta" stroke="darkorange">
+<path layer="beta" stroke="darkorange" pen="fat">
 200 272 m
 240 240 l
 </path>
 <group layer="delta" matrix="1 0 0 1 -16 0">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
 <use name="mark/disk(sx)" pos="224 272" size="large" stroke="black"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 176 240 m
 184 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 192 240 m
 184 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 208 240 m
 224 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 224 240 m
 224 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 184 272 m
 240 304 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 224 272 m
 240 304 l
 </path>

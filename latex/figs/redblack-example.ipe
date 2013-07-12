@@ -237,7 +237,7 @@ h
 <layer name="delta"/>
 <layer name="epsilon"/>
 <view layers="alpha" active="alpha"/>
-<path layer="delta" stroke="seagreen" pen="ultrafat" cap="1" arrow="normal/normal">
+<path layer="delta" stroke="seagreen" pen="fat" pen="ultrafat" cap="1" arrow="normal/normal">
 256 528 m
 256 498
 256 498
@@ -255,7 +255,7 @@ h
 269.6 416.4
 276.4 402.8 s
 </path>
-<path layer="beta" stroke="seagreen" pen="ultrafat" cap="1" arrow="normal/normal">
+<path layer="beta" stroke="seagreen" pen="fat" pen="ultrafat" cap="1" arrow="normal/normal">
 256 528 m
 256 498
 256 498
@@ -269,7 +269,7 @@ h
 228.8 443.6
 242.4 430 s
 </path>
-<path layer="gamma" stroke="seagreen" pen="ultrafat" cap="1" arrow="normal/normal">
+<path layer="gamma" stroke="seagreen" pen="fat" pen="ultrafat" cap="1" arrow="normal/normal">
 256 528 m
 256 498
 256 498
@@ -283,27 +283,27 @@ h
 283.2 443.6
 296.8 430 s
 </path>
-<path layer="alpha" matrix="0.85 0 0 0.85 38.4 69.6" stroke="black">
+<path layer="alpha" matrix="0.85 0 0 0.85 38.4 69.6" stroke="black" pen="fat">
 256 504 m
 192 488 l
 </path>
-<path matrix="0.85 0 0 0.85 38.4 69.6" stroke="black">
+<path matrix="0.85 0 0 0.85 38.4 69.6" stroke="black" pen="fat">
 256 504 m
 320 488 l
 </path>
-<path matrix="-0.85 0 0 0.85 364.8 69.6" stroke="black">
+<path matrix="-0.85 0 0 0.85 364.8 69.6" stroke="black" pen="fat">
 192 472 m
 160 456 l
 </path>
-<path matrix="-0.85 0 0 0.85 364.8 69.6" stroke="black">
+<path matrix="-0.85 0 0 0.85 364.8 69.6" stroke="black" pen="fat">
 192 472 m
 224 456 l
 </path>
-<path matrix="-0.85 0 0 0.85 582.4 69.6" stroke="black">
+<path matrix="-0.85 0 0 0.85 582.4 69.6" stroke="black" pen="fat">
 320 472 m
 288 456 l
 </path>
-<path matrix="-0.85 0 0 0.85 582.4 69.6" stroke="black">
+<path matrix="-0.85 0 0 0.85 582.4 69.6" stroke="black" pen="fat">
 320 472 m
 352 456 l
 </path>
@@ -316,81 +316,81 @@ h
 <use layer="epsilon" matrix="0.85 0 0 0.85 52 35.6" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use layer="alpha" matrix="-0.85 0 0 0.85 514.4 49.2" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="-0.85 0 0 0.85 487.2 49.2" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="-0.85 0 0 0.85 364.8 69.6" stroke="black">
+<path matrix="-0.85 0 0 0.85 364.8 69.6" stroke="black" pen="fat">
 224 440 m
 208 424 l
 </path>
-<path matrix="-0.85 0 0 0.85 364.8 69.6" stroke="black">
+<path matrix="-0.85 0 0 0.85 364.8 69.6" stroke="black" pen="fat">
 224 440 m
 240 424 l
 </path>
-<path matrix="0.85 0 0 0.85 92.8 69.6" stroke="black">
+<path matrix="0.85 0 0 0.85 92.8 69.6" stroke="black" pen="fat">
 288 440 m
 272 424 l
 </path>
-<path matrix="-0.85 0 0 0.85 582.4 69.6" stroke="black">
+<path matrix="-0.85 0 0 0.85 582.4 69.6" stroke="black" pen="fat">
 352 440 m
 336 424 l
 </path>
-<path matrix="-0.85 0 0 0.85 582.4 69.6" stroke="black">
+<path matrix="-0.85 0 0 0.85 582.4 69.6" stroke="black" pen="fat">
 352 440 m
 368 424 l
 </path>
-<path matrix="-0.425 0 0 0.425 337.6 341.6" stroke="black" fill="white">
+<path matrix="-0.425 0 0 0.425 337.6 341.6" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="-0.425 0 0 0.425 337.6 341.6" transformations="translations" pos="256 256" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="center">$5$</text>
-<path matrix="0.425 0 0 0.425 92.8 368.8" stroke="black" fill="white">
+<path matrix="0.425 0 0 0.425 92.8 368.8" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.425 0 0 0.425 92.8 368.8" transformations="translations" pos="256 256" stroke="black" type="label" width="5.43" height="6.804" depth="0.08" halign="center" valign="center">$4$</text>
-<path matrix="-0.425 0 0 0.425 296.8 314.4" stroke="black" fill="white">
+<path matrix="-0.425 0 0 0.425 296.8 314.4" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="-0.425 0 0 0.425 296.8 314.4" transformations="translations" pos="256 256" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="center">$3$</text>
-<path matrix="-0.425 0 0 0.425 283.2 341.6" stroke="black" fill="pink">
+<path matrix="-0.425 0 0 0.425 283.2 341.6" stroke="black" pen="fat" fill="pink">
 16 0 0 16 256 256 e
 </path>
 <text matrix="-0.425 0 0 0.425 283.2 341.6" transformations="translations" pos="256 256" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="center">$2$</text>
-<path matrix="-0.425 0 0 0.425 269.6 314.4" stroke="black" fill="white">
+<path matrix="-0.425 0 0 0.425 269.6 314.4" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="-0.425 0 0 0.425 269.6 314.4" transformations="translations" pos="256 256" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="center">$1$</text>
-<path matrix="0.425 0 0 0.425 147.2 396" stroke="black" fill="white">
+<path matrix="0.425 0 0 0.425 147.2 396" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.425 0 0 0.425 147.2 396" transformations="translations" pos="256 256" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="center">$6$</text>
-<path matrix="0.425 0 0 0.425 215.2 314.4" stroke="black" fill="pink">
+<path matrix="0.425 0 0 0.425 215.2 314.4" stroke="black" pen="fat" fill="pink">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.425 0 0 0.425 215.2 314.4" transformations="translations" pos="256 256" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="center">$11$</text>
-<path matrix="-0.425 0 0 0.425 405.6 314.4" stroke="black" fill="white">
+<path matrix="-0.425 0 0 0.425 405.6 314.4" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="-0.425 0 0 0.425 405.6 314.4" transformations="translations" pos="256 256" stroke="black" type="label" width="5.43" height="6.604" depth="0.23" halign="center" valign="center">$9$</text>
-<path matrix="-0.425 0 0 0.425 378.4 314.4" stroke="black" fill="white">
+<path matrix="-0.425 0 0 0.425 378.4 314.4" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="-0.425 0 0 0.425 378.4 314.4" transformations="translations" pos="256 256" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="center">$7$</text>
-<path matrix="-0.425 0 0 0.425 392 341.6" stroke="black" fill="pink">
+<path matrix="-0.425 0 0 0.425 392 341.6" stroke="black" pen="fat" fill="pink">
 16 0 0 16 256 256 e
 </path>
 <text matrix="-0.425 0 0 0.425 392 341.6" transformations="translations" pos="256 256" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="center">$8$</text>
-<path matrix="0.425 0 0 0.425 228.8 341.6" stroke="black" fill="white">
+<path matrix="0.425 0 0 0.425 228.8 341.6" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.425 0 0 0.425 228.8 341.6" transformations="translations" pos="256 256" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="center">$12$</text>
-<path matrix="-0.425 0 0 0.425 419.2 368.8" stroke="black" fill="white">
+<path matrix="-0.425 0 0 0.425 419.2 368.8" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="-0.425 0 0 0.425 419.2 368.8" transformations="translations" pos="256 256" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="center">$10$</text>
 <use layer="epsilon" matrix="0.85 0 0 0.85 58.8 8.4" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="0.85 0 0 0.85 58.8 22" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.425 0 0 0.425 167.6 287.2" stroke="black" fill="white">
+<path matrix="0.425 0 0 0.425 167.6 287.2" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.425 0 0 0.425 167.6 287.2" transformations="translations" pos="256 256" stroke="black" type="label" width="13.3" height="6.6" depth="0.08" halign="center" valign="center">$8.5$</text>
-<path matrix="-0.425 0 0 0.85 392 42.4" stroke="black">
+<path matrix="-0.425 0 0 0.85 392 42.4" stroke="black" pen="fat">
 288 440 m
 272 424 l
 </path>
@@ -399,11 +399,11 @@ h
 <use name="mark/fsquare(sfx)" pos="160 416" size="normal" stroke="black" fill="black"/>
 <use name="mark/fsquare(sfx)" pos="176 416" size="normal" stroke="black" fill="black"/>
 </group>
-<path matrix="-1 0 0 1 388.8 11.5998" stroke="black" fill="black">
+<path matrix="-1 0 0 1 388.8 11.5998" stroke="black" pen="fat" fill="black">
 152 416 m
 160 432 l
 </path>
-<path matrix="-1 0 0 1 388.8 11.5998" stroke="black" fill="black">
+<path matrix="-1 0 0 1 388.8 11.5998" stroke="black" pen="fat" fill="black">
 168 416 m
 160 432 l
 </path>
@@ -411,11 +411,11 @@ h
 <use name="mark/fsquare(sfx)" pos="160 416" size="normal" stroke="black" fill="black"/>
 <use name="mark/fsquare(sfx)" pos="176 416" size="normal" stroke="black" fill="black"/>
 </group>
-<path matrix="-1 0 0 1 348 -15.6002" stroke="black" fill="black">
+<path matrix="-1 0 0 1 348 -15.6002" stroke="black" pen="fat" fill="black">
 152 416 m
 160 432 l
 </path>
-<path matrix="-1 0 0 1 348 -15.6002" stroke="black" fill="black">
+<path matrix="-1 0 0 1 348 -15.6002" stroke="black" pen="fat" fill="black">
 168 416 m
 160 432 l
 </path>
@@ -423,11 +423,11 @@ h
 <use name="mark/fsquare(sfx)" pos="160 416" size="normal" stroke="black" fill="black"/>
 <use name="mark/fsquare(sfx)" pos="176 416" size="normal" stroke="black" fill="black"/>
 </group>
-<path matrix="-1 0 0 1 320.8 -15.6002" stroke="black" fill="black">
+<path matrix="-1 0 0 1 320.8 -15.6002" stroke="black" pen="fat" fill="black">
 152 416 m
 160 432 l
 </path>
-<path matrix="-1 0 0 1 320.8 -15.6002" stroke="black" fill="black">
+<path matrix="-1 0 0 1 320.8 -15.6002" stroke="black" pen="fat" fill="black">
 168 416 m
 160 432 l
 </path>
@@ -435,11 +435,11 @@ h
 <use name="mark/fsquare(sfx)" pos="160 416" size="normal" stroke="black" fill="black"/>
 <use name="mark/fsquare(sfx)" pos="176 416" size="normal" stroke="black" fill="black"/>
 </group>
-<path matrix="1 0 0 1 164 -15.6002" stroke="black" fill="black">
+<path matrix="1 0 0 1 164 -15.6002" stroke="black" pen="fat" fill="black">
 152 416 m
 160 432 l
 </path>
-<path matrix="1 0 0 1 164 -15.6002" stroke="black" fill="black">
+<path matrix="1 0 0 1 164 -15.6002" stroke="black" pen="fat" fill="black">
 168 416 m
 160 432 l
 </path>
@@ -447,11 +447,11 @@ h
 <use name="mark/fsquare(sfx)" pos="160 416" size="normal" stroke="black" fill="black"/>
 <use name="mark/fsquare(sfx)" pos="176 416" size="normal" stroke="black" fill="black"/>
 </group>
-<path matrix="-1 0 0 1 456.8 -15.6002" stroke="black" fill="black">
+<path matrix="-1 0 0 1 456.8 -15.6002" stroke="black" pen="fat" fill="black">
 152 416 m
 160 432 l
 </path>
-<path matrix="-1 0 0 1 456.8 -15.6002" stroke="black" fill="black">
+<path matrix="-1 0 0 1 456.8 -15.6002" stroke="black" pen="fat" fill="black">
 168 416 m
 160 432 l
 </path>
@@ -459,15 +459,15 @@ h
 <use name="mark/fsquare(sfx)" pos="160 416" size="normal" stroke="black" fill="black"/>
 <use name="mark/fsquare(sfx)" pos="176 416" size="normal" stroke="black" fill="black"/>
 </group>
-<path matrix="-1 0 0 1 429.6 -15.6002" stroke="black" fill="black">
+<path matrix="-1 0 0 1 429.6 -15.6002" stroke="black" pen="fat" fill="black">
 152 416 m
 160 432 l
 </path>
-<path matrix="-1 0 0 1 429.6 -15.6002" stroke="black" fill="black">
+<path matrix="-1 0 0 1 429.6 -15.6002" stroke="black" pen="fat" fill="black">
 168 416 m
 160 432 l
 </path>
-<path matrix="1 0 0 1 177.6 11.5998" stroke="black" fill="black">
+<path matrix="1 0 0 1 177.6 11.5998" stroke="black" pen="fat" fill="black">
 168 416 m
 160 432 l
 </path>

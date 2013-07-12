@@ -233,7 +233,7 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" matrix="1 0 0 1 30.0826 -45.1239" stroke="black">
+<path layer="alpha" matrix="1 0 0 1 30.0826 -45.1239" stroke="black" pen="fat">
 128 784 m
 128 768 l
 144 768 l
@@ -241,28 +241,28 @@ h
 h
 </path>
 <text matrix="1 0 0 1 38.0826 -40.3339" transformations="translations" pos="128 768" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">16</text>
-<path matrix="1 0 0 1 10.6255 -28.7632" stroke="black">
+<path matrix="1 0 0 1 10.6255 -28.7632" stroke="black" pen="fat">
 128 784 m
 128 768 l
 144 768 l
 144 784 l
 h
 </path>
-<path matrix="1 0 0 1 37.3479 -17.4162" stroke="black">
+<path matrix="1 0 0 1 37.3479 -17.4162" stroke="black" pen="fat">
 128 784 m
 128 768 l
 144 768 l
 144 784 l
 h
 </path>
-<path matrix="1 0 0 1 60.9037 -41.1656" stroke="black">
+<path matrix="1 0 0 1 60.9037 -41.1656" stroke="black" pen="fat">
 128 784 m
 128 768 l
 144 768 l
 144 784 l
 h
 </path>
-<path matrix="1 0 0 1 71.5994 -13.7219" stroke="black">
+<path matrix="1 0 0 1 71.5994 -13.7219" stroke="black" pen="fat">
 128 784 m
 128 768 l
 144 768 l
@@ -275,7 +275,7 @@ h
 <text matrix="1 0 0 1 45.3479 -12.6262" transformations="translations" pos="128 768" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">6</text>
 <text matrix="1 0 0 1 68.9037 -36.3756" transformations="translations" pos="128 768" stroke="black" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">13</text>
 <text matrix="1 0 0 1 79.5994 -8.93188" transformations="translations" pos="128 768" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">3</text>
-<path stroke="black">
+<path stroke="black" pen="fat">
 112 784 m
 128 784
 128 720
@@ -285,12 +285,12 @@ h
 224 784
 240 784 s
 </path>
-<path stroke="black" arrow="normal/normal">
+<path stroke="black" pen="fat" arrow="normal/normal">
 207.599 770.278 m
 207.776 789.919
 223.345 794.669 s
 </path>
-<path stroke="black" arrow="normal/normal">
+<path stroke="black" pen="fat" arrow="normal/normal">
 115.945 791.766 m
 145.236 791.503
 146.626 755.237 s
