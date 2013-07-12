@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20110228150616" modified="D:20110228163431"/>
+<ipe version="70005" creator="Ipe 7.1.1">
+<info created="D:20110228150616" modified="D:20130712101820"/>
 <preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -203,13 +203,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
-<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
-<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -233,10 +233,10 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<text layer="alpha" matrix="1 0 0 1 30.0234 210.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.289" depth="0" halign="center" valign="baseline">a</text>
-<text matrix="1 0 0 1 46.0234 210.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">b</text>
-<text matrix="1 0 0 1 46.0234 178.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">b</text>
-<text matrix="1 0 0 1 62.0234 178.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
+<text layer="alpha" matrix="1 0 0 1 30.0234 210.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.912" height="4.488" depth="0.08" halign="center" valign="baseline">a</text>
+<text matrix="1 0 0 1 46.0234 210.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.569" height="7.173" depth="0.08" halign="center" valign="baseline">b</text>
+<text matrix="1 0 0 1 46.0234 178.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.569" height="7.173" depth="0.08" halign="center" valign="baseline">b</text>
+<text matrix="1 0 0 1 62.0234 178.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.533" height="4.488" depth="0.08" halign="center" valign="baseline">c</text>
 <group matrix="1 0 0 1 0 208">
 <path stroke="white" pen="fat">
 96 320 m
@@ -477,8 +477,8 @@ h
 h
 </path>
 </group>
-<text matrix="1 0 0 1 30.023 177.803" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.289" depth="0" halign="center" valign="baseline">a</text>
-<text matrix="1 0 0 1 96 209.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="31.382" height="6.919" depth="0.83" valign="baseline">\texttt{add(d)}</text>
+<text matrix="1 0 0 1 30.023 177.803" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.912" height="4.488" depth="0.08" halign="center" valign="baseline">a</text>
+<text matrix="1 0 0 1 96 209.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="31.681" height="6.922" depth="1.79" valign="baseline">\texttt{add(d)}</text>
 <group matrix="1 0 0 1 0 144">
 <path stroke="white" pen="fat">
 96 320 m
@@ -599,7 +599,7 @@ h
 h
 </path>
 </group>
-<text matrix="1 0 0 1 96 177.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="31.382" height="6.919" depth="0.83" valign="baseline">\texttt{add(e)}</text>
+<text matrix="1 0 0 1 96 177.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="31.681" height="6.922" depth="1.79" valign="baseline">\texttt{add(e)}</text>
 <group matrix="1 0 0 1 0 112">
 <path stroke="white" pen="fat">
 96 320 m
@@ -720,7 +720,7 @@ h
 h
 </path>
 </group>
-<text matrix="1 0 0 1 96 145.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="41.843" height="6.919" depth="0.83" valign="baseline">\texttt{remove()}</text>
+<text matrix="1 0 0 1 96 145.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="42.241" height="6.922" depth="1.79" valign="baseline">\texttt{remove()}</text>
 <group matrix="1 0 0 1 0 80">
 <path stroke="white" pen="fat">
 96 320 m
@@ -841,20 +841,20 @@ h
 h
 </path>
 </group>
-<text matrix="1 0 0 1 -1.97656 146.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
-<text matrix="1 0 0 1 46.0234 146.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">b</text>
-<text matrix="1 0 0 1 62.0234 146.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
-<text matrix="1 0 0 1 30.023 145.803" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.289" depth="0" halign="center" valign="baseline">a</text>
-<text matrix="1 0 0 1 78.0234 146.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
-<text matrix="1 0 0 1 -1.97656 114.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
-<text matrix="1 0 0 1 46.0234 114.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">b</text>
-<text matrix="1 0 0 1 62.0234 114.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
-<text matrix="1 0 0 1 78.0234 114.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
-<text matrix="1 0 0 1 -1.97656 82.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
-<text matrix="1 0 0 1 14.0234 82.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.044" height="6.918" depth="0" halign="center" valign="baseline">f</text>
-<text matrix="1 0 0 1 46.0234 82.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">b</text>
-<text matrix="1 0 0 1 62.0234 82.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
-<text matrix="1 0 0 1 78.0234 82.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
+<text matrix="1 0 0 1 -1.97656 146.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.722" height="4.488" depth="0.08" halign="center" valign="baseline">e</text>
+<text matrix="1 0 0 1 46.0234 146.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.569" height="7.173" depth="0.08" halign="center" valign="baseline">b</text>
+<text matrix="1 0 0 1 62.0234 146.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.533" height="4.488" depth="0.08" halign="center" valign="baseline">c</text>
+<text matrix="1 0 0 1 30.023 145.803" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.912" height="4.488" depth="0.08" halign="center" valign="baseline">a</text>
+<text matrix="1 0 0 1 78.0234 146.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.918" height="7.173" depth="0.08" halign="center" valign="baseline">d</text>
+<text matrix="1 0 0 1 -1.97656 114.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.722" height="4.488" depth="0.08" halign="center" valign="baseline">e</text>
+<text matrix="1 0 0 1 46.0234 114.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.569" height="7.173" depth="0.08" halign="center" valign="baseline">b</text>
+<text matrix="1 0 0 1 62.0234 114.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.533" height="4.488" depth="0.08" halign="center" valign="baseline">c</text>
+<text matrix="1 0 0 1 78.0234 114.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.918" height="7.173" depth="0.08" halign="center" valign="baseline">d</text>
+<text matrix="1 0 0 1 -1.97656 82.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.722" height="4.488" depth="0.08" halign="center" valign="baseline">e</text>
+<text matrix="1 0 0 1 14.0234 82.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.577" height="7.173" depth="0.08" halign="center" valign="baseline">f</text>
+<text matrix="1 0 0 1 46.0234 82.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.569" height="7.173" depth="0.08" halign="center" valign="baseline">b</text>
+<text matrix="1 0 0 1 62.0234 82.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.533" height="4.488" depth="0.08" halign="center" valign="baseline">c</text>
+<text matrix="1 0 0 1 78.0234 82.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.918" height="7.173" depth="0.08" halign="center" valign="baseline">d</text>
 <group matrix="1 0 0 1 0 48">
 <path stroke="white" pen="fat">
 96 320 m
@@ -1215,35 +1215,35 @@ h
 h
 </path>
 </group>
-<text matrix="1 0 0 1 -1.97656 18.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">b</text>
-<text matrix="1 0 0 1 14.0234 18.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
-<text matrix="1 0 0 1 46.0234 18.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
-<text matrix="1 0 0 1 62.0234 18.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.044" height="6.918" depth="0" halign="center" valign="baseline">f</text>
-<text matrix="1 0 0 1 30.023 17.803" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
-<text matrix="1 0 0 1 96 81.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="31.382" height="6.922" depth="2.21" valign="baseline">\texttt{add(g)}</text>
-<text matrix="1 0 0 1 96 49.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="35.962" height="6.919" depth="0.83" valign="baseline">\texttt{add(h)}$^*$</text>
-<text matrix="1 0 0 1 -1.97656 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">0</text>
-<text matrix="1 0 0 1 14.0234 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">1</text>
-<text matrix="1 0 0 1 30.0234 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">2</text>
-<text matrix="1 0 0 1 47.0234 -78.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">3</text>
-<text matrix="1 0 0 1 62.0234 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">4</text>
-<text matrix="1 0 0 1 78.0234 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">5</text>
-<text matrix="1 0 0 1 94.0234 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">6</text>
-<text matrix="1 0 0 1 110.023 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">7</text>
-<text matrix="1 0 0 1 126.023 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">8</text>
-<text matrix="1 0 0 1 142.023 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">9</text>
-<text matrix="1 0 0 1 158.023 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">10</text>
-<text matrix="1 0 0 1 174.023 -77.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">11</text>
-<text matrix="1 0 0 1 62.0234 210.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
-<text matrix="1 0 0 1 78.0234 178.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
-<text matrix="1 0 0 1 -1.97656 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
-<text matrix="1 0 0 1 14.0234 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.044" height="6.918" depth="0" halign="center" valign="baseline">f</text>
-<text matrix="1 0 0 1 46.0234 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">b</text>
-<text matrix="1 0 0 1 62.0234 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
-<text matrix="1 0 0 1 78.0234 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
-<text matrix="1 0 0 1 30.0234 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.297" depth="1.93" halign="center" valign="baseline">g</text>
-<text matrix="1 0 0 1 96 113.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="31.382" height="6.919" depth="0.83" valign="baseline">\texttt{add(f)}</text>
-<text matrix="1 0 0 1 78.0234 18.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.297" depth="1.93" halign="center" valign="baseline">g</text>
+<text matrix="1 0 0 1 -1.97656 18.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.569" height="7.173" depth="0.08" halign="center" valign="baseline">b</text>
+<text matrix="1 0 0 1 14.0234 18.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.533" height="4.488" depth="0.08" halign="center" valign="baseline">c</text>
+<text matrix="1 0 0 1 46.0234 18.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.722" height="4.488" depth="0.08" halign="center" valign="baseline">e</text>
+<text matrix="1 0 0 1 62.0234 18.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.577" height="7.173" depth="0.08" halign="center" valign="baseline">f</text>
+<text matrix="1 0 0 1 30.023 17.803" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.918" height="7.173" depth="0.08" halign="center" valign="baseline">d</text>
+<text matrix="1 0 0 1 96 81.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="31.681" height="6.922" depth="1.79" valign="baseline">\texttt{add(g)}</text>
+<text matrix="1 0 0 1 96 49.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="35.125" height="6.922" depth="1.79" valign="baseline">\texttt{add(h)}$^*$</text>
+<text matrix="1 0 0 1 -1.97656 -77.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">0</text>
+<text matrix="1 0 0 1 14.0234 -77.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">1</text>
+<text matrix="1 0 0 1 30.0234 -77.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">2</text>
+<text matrix="1 0 0 1 47.0234 -78.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">3</text>
+<text matrix="1 0 0 1 62.0234 -77.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="5.43" height="6.804" depth="0.08" halign="center" valign="baseline">4</text>
+<text matrix="1 0 0 1 78.0234 -77.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">5</text>
+<text matrix="1 0 0 1 94.0234 -77.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">6</text>
+<text matrix="1 0 0 1 110.023 -77.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">7</text>
+<text matrix="1 0 0 1 126.023 -77.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">8</text>
+<text matrix="1 0 0 1 142.023 -77.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="5.43" height="6.604" depth="0.23" halign="center" valign="baseline">9</text>
+<text matrix="1 0 0 1 158.023 -77.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">10</text>
+<text matrix="1 0 0 1 174.023 -77.802" transformations="translations" pos="105.977 306.738" stroke="darkgray" type="label" width="10.859" height="6.6" depth="0.08" halign="center" valign="baseline">11</text>
+<text matrix="1 0 0 1 62.0234 210.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.533" height="4.488" depth="0.08" halign="center" valign="baseline">c</text>
+<text matrix="1 0 0 1 78.0234 178.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.918" height="7.173" depth="0.08" halign="center" valign="baseline">d</text>
+<text matrix="1 0 0 1 -1.97656 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.722" height="4.488" depth="0.08" halign="center" valign="baseline">e</text>
+<text matrix="1 0 0 1 14.0234 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.577" height="7.173" depth="0.08" halign="center" valign="baseline">f</text>
+<text matrix="1 0 0 1 46.0234 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.569" height="7.173" depth="0.08" halign="center" valign="baseline">b</text>
+<text matrix="1 0 0 1 62.0234 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.533" height="4.488" depth="0.08" halign="center" valign="baseline">c</text>
+<text matrix="1 0 0 1 78.0234 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.918" height="7.173" depth="0.08" halign="center" valign="baseline">d</text>
+<text matrix="1 0 0 1 30.0234 50.1982" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.29" height="4.483" depth="2.61" halign="center" valign="baseline">g</text>
+<text matrix="1 0 0 1 96 113.056" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="31.681" height="6.922" depth="1.79" valign="baseline">\texttt{add(f)}</text>
+<text matrix="1 0 0 1 78.0234 18.198" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.29" height="4.483" depth="2.61" halign="center" valign="baseline">g</text>
 <path stroke="black" pen="fat" arrow="normal/small">
 152 352 m
 104 336 l
@@ -1508,13 +1508,13 @@ h
 h
 </path>
 </group>
-<text matrix="1 0 0 1 -1.97656 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">b</text>
-<text matrix="1 0 0 1 14.0234 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
-<text matrix="1 0 0 1 46.0234 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
-<text matrix="1 0 0 1 62.0234 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.044" height="6.918" depth="0" halign="center" valign="baseline">f</text>
-<text matrix="1 0 0 1 30.023 -14.197" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
-<text matrix="1 0 0 1 78.0234 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.297" depth="1.93" halign="center" valign="baseline">g</text>
-<text matrix="1 0 0 1 94.0234 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">h</text>
+<text matrix="1 0 0 1 -1.97656 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.569" height="7.173" depth="0.08" halign="center" valign="baseline">b</text>
+<text matrix="1 0 0 1 14.0234 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.533" height="4.488" depth="0.08" halign="center" valign="baseline">c</text>
+<text matrix="1 0 0 1 46.0234 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.722" height="4.488" depth="0.08" halign="center" valign="baseline">e</text>
+<text matrix="1 0 0 1 62.0234 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.577" height="7.173" depth="0.08" halign="center" valign="baseline">f</text>
+<text matrix="1 0 0 1 30.023 -14.197" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.918" height="7.173" depth="0.08" halign="center" valign="baseline">d</text>
+<text matrix="1 0 0 1 78.0234 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.29" height="4.483" depth="2.61" halign="center" valign="baseline">g</text>
+<text matrix="1 0 0 1 94.0234 -13.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.798" height="7.173" depth="0.08" halign="center" valign="baseline">h</text>
 <group matrix="1 0 0 1 0 -48">
 <path stroke="white" pen="fat">
 96 320 m
@@ -1755,21 +1755,21 @@ h
 h
 </path>
 </group>
-<text matrix="1 0 0 1 14.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
-<text matrix="1 0 0 1 46.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
-<text matrix="1 0 0 1 62.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.044" height="6.918" depth="0" halign="center" valign="baseline">f</text>
-<text matrix="1 0 0 1 30.023 -46.197" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
-<text matrix="1 0 0 1 78.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.297" depth="1.93" halign="center" valign="baseline">g</text>
-<text matrix="1 0 0 1 94.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">h</text>
-<text matrix="1 0 0 1 96 -14.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="41.843" height="6.919" depth="0.83" valign="baseline">\texttt{remove()}</text>
-<text matrix="1 0 0 1 -16 4.93618" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=2,\mathtt{\color{var}n}=3$</text>
-<text matrix="1 0 0 1 -16 -27.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=2,\mathtt{\color{var}n}=4$</text>
-<text matrix="1 0 0 1 -16 -59.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=2,\mathtt{\color{var}n}=5$</text>
-<text matrix="1 0 0 1 -16 -91.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=3,\mathtt{\color{var}n}=4$</text>
-<text matrix="1 0 0 1 -16 -123.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=3,\mathtt{\color{var}n}=5$</text>
-<text matrix="1 0 0 1 -16 -155.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=3,\mathtt{\color{var}n}=6$</text>
-<text matrix="1 0 0 1 -16 -219.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=0,\mathtt{\color{var}n}=7$</text>
-<text matrix="1 0 0 1 -16 -251.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=1,\mathtt{\color{var}n}=6$</text>
-<text matrix="1 0 0 1 -16 -187.064" transformations="translations" pos="48 512" stroke="black" type="label" width="51.418" height="6.424" depth="2.21" valign="baseline">$\mathtt{\color{var}j}=0,\mathtt{\color{var}n}=6$</text>
+<text matrix="1 0 0 1 14.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.533" height="4.488" depth="0.08" halign="center" valign="baseline">c</text>
+<text matrix="1 0 0 1 46.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.722" height="4.488" depth="0.08" halign="center" valign="baseline">e</text>
+<text matrix="1 0 0 1 62.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="3.577" height="7.173" depth="0.08" halign="center" valign="baseline">f</text>
+<text matrix="1 0 0 1 30.023 -46.197" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.918" height="7.173" depth="0.08" halign="center" valign="baseline">d</text>
+<text matrix="1 0 0 1 78.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.29" height="4.483" depth="2.61" halign="center" valign="baseline">g</text>
+<text matrix="1 0 0 1 94.0234 -45.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.798" height="7.173" depth="0.08" halign="center" valign="baseline">h</text>
+<text matrix="1 0 0 1 96 -14.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="42.241" height="6.922" depth="1.79" valign="baseline">\texttt{remove()}</text>
+<text matrix="1 0 0 1 -16 4.93618" transformations="translations" pos="48 512" stroke="black" type="label" width="46.874" height="6.599" depth="1.79" valign="baseline">$\mathtt{\color{var}j}=2,\mathtt{\color{var}n}=3$</text>
+<text matrix="1 0 0 1 -16 -27.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="46.874" height="6.803" depth="1.79" valign="baseline">$\mathtt{\color{var}j}=2,\mathtt{\color{var}n}=4$</text>
+<text matrix="1 0 0 1 -16 -59.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="46.874" height="6.599" depth="1.79" valign="baseline">$\mathtt{\color{var}j}=2,\mathtt{\color{var}n}=5$</text>
+<text matrix="1 0 0 1 -16 -91.0638" transformations="translations" pos="48 512" stroke="black" type="label" width="46.874" height="6.803" depth="1.79" valign="baseline">$\mathtt{\color{var}j}=3,\mathtt{\color{var}n}=4$</text>
+<text matrix="1 0 0 1 -16 -123.064" transformations="translations" pos="48 512" stroke="black" type="label" width="46.874" height="6.599" depth="1.79" valign="baseline">$\mathtt{\color{var}j}=3,\mathtt{\color{var}n}=5$</text>
+<text matrix="1 0 0 1 -16 -155.064" transformations="translations" pos="48 512" stroke="black" type="label" width="46.874" height="6.599" depth="1.79" valign="baseline">$\mathtt{\color{var}j}=3,\mathtt{\color{var}n}=6$</text>
+<text matrix="1 0 0 1 -16 -219.064" transformations="translations" pos="48 512" stroke="black" type="label" width="46.874" height="6.599" depth="1.79" valign="baseline">$\mathtt{\color{var}j}=0,\mathtt{\color{var}n}=7$</text>
+<text matrix="1 0 0 1 -16 -251.064" transformations="translations" pos="48 512" stroke="black" type="label" width="46.874" height="6.599" depth="1.79" valign="baseline">$\mathtt{\color{var}j}=1,\mathtt{\color{var}n}=6$</text>
+<text matrix="1 0 0 1 -16 -187.064" transformations="translations" pos="48 512" stroke="black" type="label" width="46.874" height="6.599" depth="1.79" valign="baseline">$\mathtt{\color{var}j}=0,\mathtt{\color{var}n}=6$</text>
 </page>
 </ipe>

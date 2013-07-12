@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120626162443" modified="D:20130710153755"/>
+<info created="D:20120626162443" modified="D:20130712114130"/>
 <preamble>\usepackage{kpfonts}
 \usepackage{wasysym}\fontsize{10pt}{10pt}\selectfont
 \usepackage{ods-colors}</preamble>
@@ -236,6 +236,10 @@ h
 <layer name="post-borrow"/>
 <view layers="pre-borrow" active="pre-borrow"/>
 <view layers="post-borrow" active="post-borrow"/>
+<path layer="post-borrow" matrix="1 0 0 1 -16 0" stroke="darkgray" pen="fat">
+336 640 m
+336 624 l
+</path>
 <path layer="pre-borrow" matrix="1 0 0 1 112 128" stroke="darkgray" pen="fat">
 192 528 m
 192 512 l
@@ -662,10 +666,6 @@ h
 <path matrix="1 0 0 1 -16 0" stroke="black" pen="fat">
 336 624 m
 336 640 l
-</path>
-<path matrix="1 0 0 1 -16 0" stroke="darkgray" pen="fat">
-336 640 m
-336 624 l
 </path>
 <text matrix="1 0 0 1 136 -107.21" transformations="translations" pos="80 752" stroke="black" type="label" width="2.68" height="6.8" depth="2.61" halign="center" valign="baseline">j</text>
 <path stroke="black" pen="fat">

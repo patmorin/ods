@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120124143640" modified="D:20130607083858"/>
+<info created="D:20120124143640" modified="D:20130712112639"/>
 <preamble>\usepackage{kpfonts}
 \usepackage{ulem}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
@@ -180,7 +180,7 @@ h
 <color name="orange" value="1 0.647 0"/>
 <color name="gold" value="1 0.843 0"/>
 <color name="purple" value="0.627 0.125 0.941"/>
-<color name="gray" value="1.0"/>
+<color name="gray" value="1"/>
 <color name="brown" value="0.647 0.165 0.165"/>
 <color name="navy" value="0 0 0.502"/>
 <color name="pink" value="1 0.753 0.796"/>
@@ -236,7 +236,39 @@ h
 <layer name="beta"/>
 <layer name="gamma"/>
 <view layers="alpha" active="alpha"/>
-<text layer="alpha" matrix="1 0 0 1 -24.4668 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$0$</text>
+<path layer="alpha" matrix="1 0 0 1 192 0" stroke="gray" pen="fat">
+192 240 m
+192 224 l
+224 224 l
+224 240 l
+h
+</path>
+<path stroke="gray" pen="fat">
+384 288 m
+352 272 l
+</path>
+<path matrix="1 0 0 1 160 0" stroke="gray" pen="fat">
+192 240 m
+192 224 l
+224 224 l
+224 240 l
+h
+</path>
+<path matrix="1 0 0 1 128 0" stroke="gray" pen="fat">
+192 240 m
+192 224 l
+224 224 l
+224 240 l
+h
+</path>
+<path stroke="gray" pen="fat">
+320 272 m
+320 256 l
+384 256 l
+384 272 l
+h
+</path>
+<text matrix="1 0 0 1 -24.4668 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$0$</text>
 <path stroke="gray" pen="fat">
 192 208 m
 192 192 l
@@ -279,7 +311,7 @@ h
 </path>
 <text matrix="1 0 0 1 71.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$6$</text>
 <text matrix="1 0 0 1 87.5332 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$7$</text>
-<path matrix="1 0 0 1 112 0" stroke="gray" pen="fat" dash="dashed">
+<path matrix="1 0 0 1 112 0" stroke="gray" dash="dashed" pen="fat">
 192 208 m
 192 192 l
 208 192 l
@@ -350,13 +382,6 @@ h
 224 240 l
 h
 </path>
-<path matrix="1 0 0 1 160 0" stroke="gray" pen="fat">
-192 240 m
-192 224 l
-224 224 l
-224 240 l
-h
-</path>
 <path matrix="1 0 0 1 224 0" stroke="black" pen="fat">
 192 240 m
 192 224 l
@@ -396,7 +421,7 @@ h
 208 224 m
 200 208 l
 </path>
-<path stroke="gray" pen="fat" dash="dashed">
+<path stroke="gray" dash="dashed" pen="fat">
 208 224 m
 216 208 l
 </path>
@@ -496,10 +521,6 @@ h
 256 288 m
 288 272 l
 </path>
-<path stroke="gray" pen="fat">
-384 288 m
-352 272 l
-</path>
 <path stroke="black" pen="fat">
 384 288 m
 416 272 l
@@ -541,20 +562,6 @@ h
 208 208 l
 h
 </path>
-<path matrix="1 0 0 1 192 0" stroke="gray" pen="fat">
-192 240 m
-192 224 l
-224 224 l
-224 240 l
-h
-</path>
-<path matrix="1 0 0 1 128 0" stroke="gray" pen="fat">
-192 240 m
-192 224 l
-224 224 l
-224 240 l
-h
-</path>
 <path matrix="1 0 0 1 32 0" stroke="black" pen="fat">
 192 240 m
 192 224 l
@@ -569,13 +576,6 @@ h
 256 272 l
 h
 </path>
-<path stroke="gray" pen="fat">
-320 272 m
-320 256 l
-384 256 l
-384 272 l
-h
-</path>
 <path stroke="black" pen="fat">
 384 272 m
 384 256 l
@@ -583,32 +583,32 @@ h
 448 272 l
 h
 </path>
-<path stroke="black" pen="fat" dash="dashed" arrow="normal/small">
+<path stroke="black" dash="dashed" pen="fat" arrow="normal/small">
 224 256 m
 202.009 224
 240 199.016 s
 </path>
-<path stroke="gray" pen="fat" dash="dashed" arrow="normal/small">
+<path stroke="gray" dash="dashed" pen="fat" arrow="normal/small">
 352 256 m
 368 228.79
 352 199.876 s
 </path>
-<path stroke="black" pen="fat" dash="dashed" arrow="normal/small">
+<path stroke="black" dash="dashed" pen="fat" arrow="normal/small">
 240 224 m
 224 208
 240 199.016 s
 </path>
-<path stroke="gray" pen="fat" dash="dashed" arrow="normal/small">
+<path stroke="gray" dash="dashed" pen="fat" arrow="normal/small">
 336 224 m
 328 208
 336 199.589 s
 </path>
-<path stroke="black" pen="fat" dash="dashed" arrow="normal/small">
+<path stroke="black" dash="dashed" pen="fat" arrow="normal/small">
 416 256 m
 393.375 224
 432 199.805 s
 </path>
-<path stroke="black" pen="fat" dash="dashed" arrow="normal/small">
+<path stroke="black" dash="dashed" pen="fat" arrow="normal/small">
 432 224 m
 424 208
 432 199.805 s
@@ -671,12 +671,12 @@ h
 296 176
 296.631 192 s
 </path>
-<path stroke="black" pen="fat" dash="dashed" arrow="normal/small">
+<path stroke="black" dash="dashed" pen="fat" arrow="normal/small">
 288 256 m
 272 224
 288 200.068 s
 </path>
-<path stroke="black" pen="fat" dash="dashed" arrow="normal/small">
+<path stroke="black" dash="dashed" pen="fat" arrow="normal/small">
 304 224 m
 312 208
 304 199.665 s
@@ -688,8 +688,22 @@ h
 208 208 l
 h
 </path>
-<group>
-<path matrix="1 0 0 1 96 0" stroke="gray" pen="fat">
+<path stroke="gray" pen="fat" arrow="normal/small">
+296.631 192 m
+319.63 175.853
+343.929 192 s
+</path>
+<path stroke="black" pen="fat" arrow="normal/small" rarrow="normal/small">
+296.631 192 m
+272 176
+247.882 192 s
+</path>
+<path stroke="black" dash="dashed" pen="fat" arrow="normal/small">
+384 288 m
+368 228.79
+432 199.805 s
+</path>
+<path matrix="1 0 0 1 96 0" stroke="black" pen="fat">
 192 208 m
 192 192 l
 208 192 l
@@ -703,26 +717,10 @@ h
 208 208 l
 h
 </path>
-</group>
-<path stroke="gray" pen="fat" arrow="normal/small">
-296.631 192 m
-319.63 175.853
-343.929 192 s
-</path>
-<path stroke="black" pen="fat" arrow="normal/small" rarrow="normal/small">
-296.631 192 m
-272 176
-247.882 192 s
-</path>
 <path stroke="red" pen="fat" arrow="normal/small" rarrow="normal/small">
 296.631 192 m
 368 176
 439.882 192 s
-</path>
-<path stroke="black" pen="fat" dash="dashed" arrow="normal/small">
-384 288 m
-368 228.79
-432 199.805 s
 </path>
 </page>
 </ipe>

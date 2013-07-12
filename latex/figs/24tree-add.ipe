@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20101201111324" modified="D:20110714091457"/>
+<ipe version="70005" creator="Ipe 7.1.1">
+<info created="D:20101201111324" modified="D:20130712111357"/>
 <preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -239,6 +239,10 @@ h
 <view layers="alpha gamma" active="alpha"/>
 <view layers="alpha beta gamma epsilon" active="beta"/>
 <view layers="alpha delta epsilon" active="delta"/>
+<path layer="beta" stroke="darkorange" pen="fat">
+200 272 m
+240 240 l
+</path>
 <path layer="delta" stroke="darkorange" pen="fat">
 240 240 m
 224 272 l
@@ -355,10 +359,6 @@ h
 296 336 l
 </path>
 <use layer="epsilon" name="mark/square(sx)" pos="240 240" size="large" stroke="darkorange"/>
-<path layer="beta" stroke="darkorange" pen="fat">
-200 272 m
-240 240 l
-</path>
 <group layer="delta" matrix="1 0 0 1 -16 0">
 <path stroke="white" pen="fat">
 192 272 m
@@ -391,9 +391,9 @@ h
 224 272 m
 240 304 l
 </path>
-<text layer="gamma" matrix="1 0 0 1 -16 0" transformations="translations" pos="200 272" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
-<text layer="epsilon" transformations="translations" pos="240 224" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="baseline">$\mathtt{\color{var}u}$</text>
-<text layer="delta" matrix="1 0 0 1 -32 0" transformations="translations" pos="200 272" stroke="black" type="label" width="5.23" height="4.289" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
-<text transformations="translations" pos="208 272" stroke="black" type="label" width="8.025" height="7.49" depth="0" valign="baseline">$\mathtt{\color{var}w}&apos;$</text>
+<text layer="gamma" matrix="1 0 0 1 -16 0" transformations="translations" pos="200 272" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text layer="epsilon" transformations="translations" pos="240 224" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="center" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text layer="delta" matrix="1 0 0 1 -32 0" transformations="translations" pos="200 272" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text transformations="translations" pos="208 272" stroke="black" type="label" width="8.186" height="7.402" depth="0" valign="baseline">$\mathtt{\color{var}w}&apos;$</text>
 </page>
 </ipe>
