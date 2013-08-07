@@ -141,7 +141,7 @@ MAIN: {
       #print("\\resizebox{.98\\textwidth}{!}{");
       print("\n\n ");
       print('\ \vspace{.5ex}');
-      print("\\begin{Verbatim}[gobble=1,tabsize=2,frame=single");
+      print("\\begin{Verbatim}[gobble=1,tabsize=2,frame=single,framerule=1.2pt");
       print(',commandchars=\\\\@\\$');
       print(",label=\\texttt{$class},labelposition=topline");
       print("]\n"); 

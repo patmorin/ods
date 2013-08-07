@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20101201111324" modified="D:20110714093457"/>
+<ipe version="70005" creator="Ipe 7.1.1">
+<info created="D:20101201111324" modified="D:20130710150733"/>
 <preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -245,6 +245,10 @@ h
 <view layers="alpha gamma epsilon eta iota" active="gamma"/>
 <view layers="alpha gamma zeta eta theta" active="zeta"/>
 <view layers="alpha gamma zeta" active="zeta"/>
+<path layer="beta" stroke="darkorange" pen="fat">
+336 240 m
+328 272 l
+</path>
 <use layer="alpha" name="mark/square(sx)" pos="176 240" size="large" stroke="black"/>
 <use name="mark/square(sx)" pos="192 240" size="large" stroke="black"/>
 <use name="mark/square(sx)" pos="208 240" size="large" stroke="black"/>
@@ -258,185 +262,181 @@ h
 <use name="mark/square(sx)" pos="384 240" size="large" stroke="black"/>
 <use name="mark/disk(sx)" pos="272 272" size="large" stroke="black"/>
 <group>
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
 <group layer="delta" matrix="1 0 0 1 128 0">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
 <group matrix="1 0 0 1 176 0">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
 <use layer="epsilon" name="mark/disk(sx)" pos="352 304" size="large" stroke="black"/>
-<path layer="alpha" stroke="black">
+<path layer="alpha" stroke="black" pen="fat">
 176 240 m
 200 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 192 240 m
 200 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 208 240 m
 200 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 224 240 m
 200 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 256 240 m
 272 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 272 240 m
 272 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 288 240 m
 272 272 l
 </path>
-<path layer="delta" stroke="black">
+<path layer="delta" stroke="black" pen="fat">
 320 240 m
 328 272 l
 </path>
-<path layer="beta" stroke="darkorange">
-336 240 m
-328 272 l
-</path>
-<path layer="delta" stroke="black">
+<path stroke="black" pen="fat">
 368 240 m
 376 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 384 240 m
 376 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 376 272 m
 352 304 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 328 272 m
 352 304 l
 </path>
-<path layer="epsilon" stroke="black">
+<path layer="epsilon" stroke="black" pen="fat">
 200 272 m
 240 304 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 272 272 m
 240 304 l
 </path>
 <use name="mark/disk(sx)" pos="240 304" size="large" stroke="black"/>
 <group layer="eta" matrix="1 0 0 1 96 64">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
-<path layer="epsilon" stroke="black">
+<path layer="epsilon" stroke="black" pen="fat">
 240 304 m
 296 336 l
 296 336 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 352 304 m
 296 336 l
 </path>
 <use layer="alpha" name="mark/square(sx)" pos="368 240" size="large" stroke="black"/>
 <use name="mark/square(sx)" pos="384 240" size="large" stroke="black"/>
 <group layer="delta" matrix="1 0 0 1 176 0">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
-<path stroke="black">
+<path stroke="black" pen="fat">
 368 240 m
 376 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 384 240 m
 376 272 l
 </path>
 <use name="mark/square(sx)" pos="368 240" size="large" stroke="black"/>
 <use name="mark/square(sx)" pos="384 240" size="large" stroke="black"/>
 <group matrix="1 0 0 1 176 0">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
-<path stroke="black">
+<path stroke="black" pen="fat">
 368 240 m
 376 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 384 240 m
 376 272 l
 </path>
 <use name="mark/square(sx)" pos="368 240" size="large" stroke="black"/>
 <use name="mark/square(sx)" pos="384 240" size="large" stroke="black"/>
 <group matrix="1 0 0 1 176 0">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
 <group layer="zeta" matrix="1 0 0 1 96 32">
-<path stroke="white">
+<path stroke="white" pen="fat">
 192 272 m
 208 272 l
 </path>
 <use matrix="1 0 0 1 -8 0" name="mark/disk(sx)" pos="208 272" size="large" stroke="black"/>
 </group>
-<path stroke="black">
+<path stroke="black" pen="fat">
 200 272 m
 296 304 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 272 272 m
 296 304 l
 </path>
-<path layer="theta" stroke="black">
+<path layer="theta" stroke="black" pen="fat">
 296 336 m
 296 304 l
 </path>
-<text layer="beta" matrix="1 0 0 1 16 16" transformations="translations" pos="336 224" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text layer="beta" matrix="1 0 0 1 16 16" transformations="translations" pos="336 224" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
 <use layer="gamma" matrix="1 0 0 1 0 -32" name="mark/disk(sx)" pos="352 304" size="large" stroke="black"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 320 240 m
 352 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 368 240 m
 352 272 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 384 240 m
 352 272 l
 </path>
-<path layer="zeta" stroke="black">
+<path layer="zeta" stroke="black" pen="fat">
 296 304 m
 352 272 l
 </path>
-<path layer="iota" stroke="black">
+<path layer="iota" stroke="black" pen="fat">
 352 272 m
 352 304 l
 </path>

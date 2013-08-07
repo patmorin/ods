@@ -234,27 +234,27 @@ h
 <layer name="alpha"/>
 <layer name="beta"/>
 <view layers="alpha" active="beta"/>
-<path layer="alpha" stroke="black">
+<path layer="alpha" stroke="black" pen="fat">
 256 504 m
 192 488 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 256 504 m
 320 488 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 192 472 m
 160 456 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 192 472 m
 224 456 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 320 472 m
 288 456 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 320 472 m
 352 456 l
 </path>
@@ -274,7 +274,7 @@ h
 <use matrix="1 0 0 1 -32 8" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 -96 -8" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 -96 8" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.5 0 0 0.5 16 288" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 16 288" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 16 288" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$0$</text>
@@ -292,91 +292,91 @@ h
 <use matrix="1 0 0 1 80 -24" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 112 -40" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 112 -24" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 160 440 m
 144 424 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 160 440 m
 176 424 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 224 440 m
 208 424 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 224 440 m
 240 424 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 288 440 m
 272 424 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 288 440 m
 304 424 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 352 440 m
 336 424 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 352 440 m
 368 424 l
 </path>
-<path matrix="0.5 0 0 0.5 32 320" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 32 320" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 32 320" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$1$</text>
-<path matrix="0.5 0 0 0.5 48 288" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 48 288" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 48 288" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$2$</text>
-<path matrix="0.5 0 0 0.5 64 352" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 64 352" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 64 352" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$3$</text>
-<path matrix="0.5 0 0 0.5 80 288" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 80 288" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 80 288" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$4$</text>
-<path matrix="0.5 0 0 0.5 96 320" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 96 320" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 96 320" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$5$</text>
-<path matrix="0.5 0 0 0.5 112 288" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 112 288" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 112 288" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$6$</text>
-<path matrix="0.5 0 0 0.5 128 384" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 128 384" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 128 384" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$7$</text>
-<path matrix="0.5 0 0 0.5 144 288" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 144 288" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 144 288" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$8$</text>
-<path matrix="0.5 0 0 0.5 176 288" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 176 288" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 176 288" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$10$</text>
-<path matrix="0.5 0 0 0.5 208 288" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 208 288" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 208 288" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$12$</text>
-<path matrix="0.5 0 0 0.5 240 288" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 240 288" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 240 288" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$14$</text>
-<path matrix="0.5 0 0 0.5 224 320" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 224 320" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 224 320" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$13$</text>
-<path matrix="0.5 0 0 0.5 160 320" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 160 320" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 160 320" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$9$</text>
-<path matrix="0.5 0 0 0.5 192 352" stroke="black" fill="white">
+<path matrix="0.5 0 0 0.5 192 352" stroke="black" pen="fat" fill="white">
 16 0 0 16 256 256 e
 </path>
 <text matrix="0.5 0 0 0.5 192 352" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$11$</text>

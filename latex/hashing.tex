@@ -122,6 +122,7 @@ formula is simpler than the formula itself:
 \begin{figure}
   \begin{center}
     \resizebox{.98\textwidth}{!}{
+    \setlength{\arrayrulewidth}{1pt}
     \begin{tabular}{|lr@{}r|}\hline
     $2^#w#$ (4294967296)&            #1#&#00000000000000000000000000000000# \\
     #z# (4102541685)&                   &#11110100100001111101000101110101# \\
@@ -131,6 +132,7 @@ formula is simpler than the formula itself:
     $((#z#\cdot#x#)\bmod 2^{#w#})\ddiv 2^{#w#-#d#}$ &&
                       \multicolumn{1}{@{}l|}{#00011110#} \\\hline
     \end{tabular}}
+    \setlength{\arrayrulewidth}{.4pt}
   \end{center}
   \caption{The operation of the multiplicative hash function with $#w#=32$
     and $#d#=8$.}

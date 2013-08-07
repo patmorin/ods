@@ -157,7 +157,11 @@
 \usepackage{hyperref}
 \hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,%
 	citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,%
-	urlcolor=linkblue} 
+	urlcolor=linkblue,%
+    pdfauthor={Pat Morin},%
+    pdftitle={Open Data Structures},%
+    pdfsubject={Computer Science, Data Structures},%
+    pdfkeywords={Data structures, algorithms}} 
 
 % Title page content
 \title{Open Data Structures (in \lang)}
@@ -249,11 +253,11 @@ Edition 0.1F\cpponly{$\beta$}
 \include{btree-lang}
 
 %% Turn off section numbers for remainder of document
-\fancyhead[RO]{} % section number on the inside
-\fancyhead[LE]{} % section number on the inside
+\fancyhead[RO]{} % section number on the outside
+\fancyhead[LE]{} % section number on the outside
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}} 
 \renewcommand{\sectionmark}[1]{\markright{#1}} 
-\fancyhead[CO]{\rightmark}
+\fancyhead[CO]{\small\nouppercase\rightmark}
 
 \cleardoublepage
 \addcontentsline{toc}{chapter}{Bibliography}
