@@ -114,7 +114,7 @@ set #a[i]# equal to #x#, and increment #n#.
 If we ignore the cost of the potential call to #resize()#, then the cost
 of the #add(i,x)# operation is proportional to the number of elements we
 have to shift to make room for #x#.  Therefore the cost of this operation
-(ignoring the cost of resizing #a#) is $O(#n#-#i#+1)$.
+(ignoring the cost of resizing #a#) is $O(#n#-#i#)$.
 
 Implementing the #remove(i)# operation is similar.  We shift the elements
 $#a[i+1]#,\ldots,#a[n-1]#$ left by one position (overwriting #a[i]#) and
@@ -977,7 +977,9 @@ computing square roots in the #i2b(i)# method.  Within their scheme,
 the block containing #i# is block $\lfloor\log (#i#+1)\rfloor$, which
 is simply the index of the leading 1 bit in the binary representation
 of $#i#+1$.  Some computer architectures provide an instruction for
-computing the index of the leading 1-bit in an integer.
+computing the index of the leading 1-bit in an integer. \javaonly{In
+Java, the #Integer# class provides a method #numberOfLeadingZeros(i)#
+from which one can easily compute $\lfloor\log (#i#+1)\rfloor$.}
 
 A structure related to the #RootishArrayStack# is the two-level
 \emph{tiered-vector} of Goodrich and Kloss \cite{gk99}.

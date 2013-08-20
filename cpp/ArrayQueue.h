@@ -43,6 +43,7 @@ void ArrayQueue<T>::resize() {
 	for (int k = 0; k < n; k++)
 		b[k] = a[(j+k)%a.length];
 	a = b;
+    j = 0;
 }
 
 template<class T>
