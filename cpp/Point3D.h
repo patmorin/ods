@@ -9,8 +9,10 @@ protected:
 
 public:	
 	unsigned hashCode() {
-		long long z[] = {0x2058cc50L, 0xcb19137eL, 0x2cb6b6fdL}; // random
-		long zz = 0xbea0107e5067d19dL;                      // random
+		// random number from random.org
+		long long z[] = {0x2058cc50L, 0xcb19137eL, 0x2cb6b6fdL};
+		long zz = 0xbea0107e5067d19dL;
+
 		long h0 = ods::hashCode(x0);
 		long h1 = ods::hashCode(x1);
 		long h2 = ods::hashCode(x2);

@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20110603150315" modified="D:20110824091659"/>
-<preamble>\usepackage{amssymb}\usepackage{kpfonts}</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -267,19 +267,19 @@ h
 <use matrix="-0.75 0 0 0.5 288 168" name="mark/fdisk(sfx)" pos="224 320" size="normal" stroke="white" fill="white"/>
 <use matrix="-0.75 0 0 0.5 288 168" name="mark/fdisk(sfx)" pos="160 320" size="normal" stroke="white" fill="white"/>
 <text matrix="-0.75 0 0 0.5 288 168" transformations="translations" pos="192 320" stroke="black" type="label" width="45.274" height="7.473" depth="2.49" halign="center" valign="center">$\mathtt{a[0]\lessgtr a[2]}$</text>
-<path matrix="-1.5 0 0 1 624 16" stroke="black">
+<path matrix="-1.5 0 0 1 624 16" stroke="black" pen="fat">
 288 368 m
 224 352 l
 </path>
-<path matrix="-1.5 0 0 1 624 16" stroke="black">
+<path matrix="-1.5 0 0 1 624 16" stroke="black" pen="fat">
 288 368 m
 352 352 l
 </path>
-<path matrix="-1.5 0 0 1 624 16" stroke="black">
+<path matrix="-1.5 0 0 1 624 16" stroke="black" pen="fat">
 352 336 m
 320 320 l
 </path>
-<path matrix="-1.5 0 0 1 624 16" stroke="black">
+<path matrix="-1.5 0 0 1 624 16" stroke="black" pen="fat">
 352 336 m
 384 320 l
 </path>
@@ -295,11 +295,11 @@ h
 <text matrix="-1 0 0 1 187.465 -0.906994" transformations="translations" pos="61.2733 345.418" stroke="black" type="label" width="7.749" height="5.37" depth="0.39" halign="center" valign="baseline">$&gt;$</text>
 <use matrix="-0.75 0 0 0.5 432 200" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="-0.75 0 0 0.5 480 168" name="mark/fdisk(sfx)" pos="192 336" size="normal" stroke="white" fill="white"/>
-<path matrix="-1.5 0 0 1 816 16" stroke="black">
+<path matrix="-1.5 0 0 1 816 16" stroke="black" pen="fat">
 352 336 m
 320 320 l
 </path>
-<path matrix="-1.5 0 0 1 816 16" stroke="black">
+<path matrix="-1.5 0 0 1 816 16" stroke="black" pen="fat">
 352 336 m
 384 320 l
 </path>
@@ -307,11 +307,11 @@ h
 <text matrix="-1 0 0 1 379.465 -0.906994" transformations="translations" pos="61.2733 345.418" stroke="black" type="label" width="7.749" height="5.37" depth="0.39" halign="center" valign="baseline">$&gt;$</text>
 <use matrix="-0.75 0 0 0.5 288 168" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="-0.75 0 0 0.5 336 136" name="mark/fdisk(sfx)" pos="192 336" size="normal" stroke="white" fill="white"/>
-<path matrix="-1.5 0 0 1 672 -16" stroke="black">
+<path matrix="-1.5 0 0 1 672 -16" stroke="black" pen="fat">
 352 336 m
 320 320 l
 </path>
-<path matrix="-1.5 0 0 1 672 -16" stroke="black">
+<path matrix="-1.5 0 0 1 672 -16" stroke="black" pen="fat">
 352 336 m
 384 320 l
 </path>
@@ -319,11 +319,11 @@ h
 <text matrix="-1 0 0 1 235.465 -32.907" transformations="translations" pos="61.2733 345.418" stroke="black" type="label" width="7.749" height="5.37" depth="0.39" halign="center" valign="baseline">$&gt;$</text>
 <use matrix="-0.75 0 0 0.5 480 168" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="-0.75 0 0 0.5 528 136" name="mark/fdisk(sfx)" pos="192 336" size="normal" stroke="white" fill="white"/>
-<path matrix="-1.5 0 0 1 864 -16" stroke="black">
+<path matrix="-1.5 0 0 1 864 -16" stroke="black" pen="fat">
 352 336 m
 320 320 l
 </path>
-<path matrix="-1.5 0 0 1 864 -16" stroke="black">
+<path matrix="-1.5 0 0 1 864 -16" stroke="black" pen="fat">
 352 336 m
 384 320 l
 </path>

@@ -7,8 +7,10 @@
 @String{ai={Acta Informatica}}
 @String{cacm={Communications of the ACM}}
 @String{jacm={Journal of the ACM}}
+@String{acs={ACM Computing Surveys}}
 @String{actainf={Acta Informatica}}
 @String{tcs={Theoretical Computer Science}}
+@String{ftdb={Foundations and Trends in Databases}}
 @String{bit={BIT}}
 @String{isaac02={Proceedings of the 13th International Symposium on Algorithms and Computation (ISAAC'02)}}
 @String{soda92={Proceedings of the third annual ACM-SIAM symposium on Discrete algorithms (SODA'92)}}
@@ -19,6 +21,7 @@
 @String{alg={Algorithmica}}
 @String{jcss={Journal of computer and system sciences}}
 @String{smd={Soviet Mathematics Doklady}}
+@String{tocs={Theory of Computing Systems}}
 
 @inproceedings{a89,
   title =	 {Improving partial rebuilding by using simple balance
@@ -122,14 +125,12 @@
 @article{l61,
   title =	 {An Algorithm for Path Connection and Its Applications},
   author =	 {C. Y. Lee},
-  booktitle =    {IRE Transaction on Electronic Computers},
+  journal =      {IRE Transaction on Electronic Computers},
   volume =       {EC-10},
   number =       {3},
   pages =	 {346--365},
   year =	 {1961}
 }
-
-
 
 @inproceedings{bdl08,
   author =	 {Bose, P. and Dou\"{\i}eb, K. and Langerman, S.},
@@ -137,7 +138,6 @@
   pages =	 {1106--1114},
   crossref =     {soda08proc},
 }
-
 
 @techreport{c72,
   author =	 {Crane, C.A.},
@@ -253,7 +253,7 @@
 @article{fks84,
   title =	 {Storing a sparse table with 0 (1) worst case access
                   time},
-  author =	 {Fredman, M.L. and Koml{\'o}s, J. and Szemer{\'e}di,
+  author =	 {Fredman, M. L. and Koml{\'o}s, J. and Szemer{\'e}di,
                   E.},
   journal =	 jacm,
   volume =	 31,
@@ -339,8 +339,7 @@
   key =		 {hpux},
   number =	 {5965-4642},
   year =	 1997,
-  url =
-                  {http://h21007.www2.hp.com/portal/download/files/prot/files/STK/pdfs/proc_mgt.pdf},
+  url =          {http://h21007.www2.hp.com/portal/download/files/prot/files/STK/pdfs/proc_mgt.pdf},
   lastchecked =	 {2011-07-20}
 }
 
@@ -464,16 +463,15 @@
   publisher =	 {Elsevier}
 }
 
-@misc{pt10,
-  title =	 {The power of simple tabulation hashing},
-  author =	 {P\v{a}tra\c{s}cu, M. and Thorup, M.},
-  year =	 2010,
-  archivePrefix ={arXiv},
-  eprint =	 {1011.5200},
-  primaryClass = {cs.ds},
+@article{pt12,
+  author =	 {P{\v a}tra{\c s}cu, M. and Thorup, M.},
+  title     = {The Power of Simple Tabulation Hashing},
+  journal   = jacm,
+  volume    = {59},
+  number    = {3},
+  year      = {2012},
+  pages     = {14},
 }
-
-
 
 @book{r01,
   author =	 {S. M. Ross},
@@ -613,7 +611,7 @@ publisher={G. Kempensem},
 @article{w83,
   author    = {D. E. Willard},
   title     = {Log-Logarithmic Worst-Case Range Queries are Possible in
-               Space Theta(N)},
+               Space {$\Theta(N)$}},
   journal   = ipl,
   volume    = {17},
   number    = {2},
@@ -625,8 +623,154 @@ publisher={G. Kempensem},
   author    = {E. Lehman and F. T. Leighton and A. R. Meyer},
   title     = {Mathematics for Computer Science},
   year      = {2011},
-  url       = {http://courses.csail.mit.edu/6.042/spring12/mcsfull.pdf},
-  lastchecked= {2012-03-22}
-
+  url       = {http://courses.csail.mit.edu/6.042/spring12/mcs.pdf},
+  lastchecked= {2012-09-06}
 }
-  
+
+@article{mr98,
+  author    = {C. Mart\'{\i}nez and S. Roura},
+  title     = {Randomized Binary Search Trees},
+  journal   = jacm,
+  volume    = {45},
+  number    = {2},
+  year      = {1998},
+  pages     = {288-323},
+}  
+
+
+@book{t14,
+  author    = {S. P. Thompson},
+  title     = {Calculus Made Easy},
+  year      = {1914},
+  publisher = {MacMillan},
+  address   = {Toronto},
+  note      = {Project Gutenberg EBook 33283},
+  url       = {http://www.gutenberg.org/ebooks/33283},
+  lastchecked =	 {2012-06-14}
+} 
+
+@inproceedings{bm70,
+  author    = {R. Bayer and E. M. McCreight},
+  title     = {Organization and Maintenance of Large Ordered Indexes},
+  booktitle = {SIGFIDET Workshop},
+  year      = {1970},
+  pages     = {107-141},
+  crossref  = {sigmod70},
+}
+
+@article{g10,
+  author    = {Goetz Graefe},
+  title     = {Modern B-Tree Techniques},
+  journal   = ftdb,
+  volume    = {3},
+  number    = {4},
+  pages     = {203--402},
+  year      = {2010},
+}
+
+@article{c79,
+  author    = {D. Comer},
+  title     = {The Ubiquitous {B}-Tree},
+  journal   = acs,
+  volume    = {11},
+  number    = {2},
+  year      = {1979},
+  pages     = {121-137},
+}
+
+@article{jp08,
+  author    = {M. S. Jensen and R. Pagh},
+  title     = {Optimality in External Memory Hashing},
+  journal   = alg,
+  volume    = {52},
+  number    = {3},
+  year      = {2008},
+  pages     = {403-411},
+}
+
+@article{av88,
+  author    = {A. Aggarwal and J. S. Vitter},
+  title     = {The Input/Output Complexity of Sorting and Related Problems},
+  journal   = cacm,
+  volume    = {31},
+  number    = {9},
+  year      = {1988},
+  pages     = {1116-1127},
+}
+
+@inproceedings{cw03,
+  title={Denial of service via algorithmic complexity attacks},
+  author={Crosby, S.A. and Wallach, D.S.},
+  booktitle={Proceedings of the 12th USENIX Security Symposium},
+  pages={29--44},
+  year={2003},
+}
+
+@techreport{ieee754,
+    address = {3 Park Avenue, New York, NY 10016-5997, USA},
+    booktitle = {IEEE Std 754-2008},
+    day = {29},
+    doi = {10.1109/IEEESTD.2008.4610935},
+    institution = {Microprocessor Standards Committee of the IEEE Computer Society},
+    isbn = {978-0-7381-5752-8},
+    journal = {IEEE Std 754-2008},
+    keywords = {ch3, gpgpu},
+    month = "August",
+    organization = {Microprocessor Standards Committee of the IEEE Computer Society},
+    pages = {1--58},
+    title = {{IEEE Standard for Floating-Point Arithmetic}},
+    urlx = {http://dx.doi.org/10.1109/IEEESTD.2008.4610935},
+    year = {2008}
+}
+
+@article {ekz76,
+   author = {van Emde Boas, P. and Kaas, R. and Zijlstra, E.},
+   title = {Design and implementation of an efficient priority queue},
+   journal = tocs,
+   issn = {1432-4350},
+   keyword = {Computer Science},
+   pages = {99--127},
+   volume = {10},
+   issue = {1},
+   urlx = {http://dx.doi.org/10.1007/BF01683268},
+   note = {10.1007/BF01683268},
+   year = {1976}
+}
+
+@article{e77,
+  author    = {Peter van Emde Boas},
+  title     = {Preserving Order in a Forest in Less Than Logarithmic Time
+               and Linear Space},
+  journal   = ipl,
+  volume    = {6},
+  number    = {3},
+  year      = {1977},
+  pages     = {80-82},
+  ee        = {http://dx.doi.org/10.1016/0020-0190(77)90031-X},
+  bibsource = {DBLP, http://dblp.uni-trier.de}
+}
+
+@article{s04,
+  author   = {Prokash Sinha},
+  title    = {A Memory-Efficient Doubly Linked List},
+  journal  = {Linux Journal},
+  volume   = 129,
+  year     = 2005,
+  url      = {http://www.linuxjournal.com/article/6828},
+  lastchecked  = {2013-06-05}
+}
+
+@inproceedings{sra94,
+  author    = {Zhong Shao and
+               John H. Reppy and
+               Andrew W. Appel},
+  title     = {Unrolling Lists},
+  booktitle = {Proceedings of the 1994 ACM conference LISP and Functional Programming (LFP'94)},
+  year      = {1994},
+  pages     = {185-195},
+  publisher = {ACM},
+  address   = {New York},
+  ee        = {http://doi.acm.org/10.1145/182409.182453},
+  bibsource = {DBLP, http://dblp.uni-trier.de}
+}
+

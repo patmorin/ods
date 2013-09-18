@@ -17,6 +17,7 @@ namespace ods {
 template<class T>
 class SkiplistList {
 protected:
+	T null;
 	struct Node {
 		T x;
 		int height;     // length of next
@@ -102,7 +103,7 @@ public:
 	}
 
 	T remove(int i) {
-		T x = NULL;
+		T x = null;
 		Node *u = sentinel, *del;
 		int r = h;
 		int j = -1; // index of node u
@@ -159,8 +160,9 @@ public:
 
 template<class T>
 SkiplistList<T>::SkiplistList() {
+	null = (T)NULL;
 	n = 0;
-	sentinel = newNode(NULL, sizeof(int)*8);
+	sentinel = newNode(null, sizeof(int)*8);
 	memset(sentinel->next, '\0', sizeof(Node*)*sentinel->height);
 	h = 0;
 }

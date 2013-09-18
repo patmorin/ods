@@ -2,27 +2,38 @@
 \chaplabel{scapegoat}
 
 In this chapter, we study a binary search tree data structure, the
-#ScapegoatTree#, that keeps itself balanced by \emph{partial rebuilding
-operations}.  During a partial rebuilding operation, an entire subtree
-is deconstructed and rebuilt into a perfectly balanced subtree.
+#ScapegoatTree#.  This structure is based on the common wisdom that,
+when something goes wrong, the first thing people tend to do is find
+someone to blame (the \emph{scapegoat}).
+\index{scapegoat}%
+Once blame is firmly
+established, we can leave the scapegoat to fix the problem.
 
-There are many ways of rebuilding a subtree rooted at node #u# into
-a perfectly balanced tree.  One of the simplest is to traverse #u#'s
-subtree, gathering all its nodes into an array #a# and then to recursively
+A #ScapegoatTree# keeps itself balanced by \emph{partial rebuilding
+operations}.
+\index{partial rebuilding}%
+\index{binary search tree!partial rebuilding}%
+During a partial rebuilding operation, an entire subtree is
+deconstructed and rebuilt into a perfectly balanced subtree.  There are
+many ways of rebuilding a subtree rooted at node #u# into a perfectly
+balanced tree.  One of the simplest is to traverse #u#'s subtree,
+gathering all its nodes into an array, #a#, and then to recursively
 build a balanced subtree using #a#.  If we let $#m#=#a.length#/2$,
 then the element #a[m]# becomes the root of the new subtree,
 $#a#[0],\ldots,#a#[#m#-1]$ get stored recursively in the left subtree
 and $#a#[#m#+1],\ldots,#a#[#a.length#-1]$ get stored recursively in the
 right subtree.
 \codeimport{ods/ScapegoatTree.rebuild(u).packIntoArray(u,a,i).buildBalanced(a,i,ns)}
-A call to #rebuild(u)# takes $O(#size(u)#)$ time.  The subtree built by
-#rebuild(u)# has minimum height; there is no tree of smaller height that
+A call to #rebuild(u)# takes $O(#size(u)#)$ time.  The resulting subtree
+has minimum height; there is no tree of smaller height that
 has #size(u)# nodes.
 
 
 \section{#ScapegoatTree#: A Binary Search Tree with Partial Rebuilding}
 \seclabel{scapegoattree}
 
+
+\index{ScapegoatTree@#ScapegoatTree#}%
 A #ScapegoatTree# is a #BinarySearchTree# that, in addition to keeping
 track of the number, #n#, of  nodes in the tree also keeps a counter, #q#,
 that maintains an upper-bound on the number of nodes. 
@@ -40,7 +51,7 @@ Even with this constraint, a #ScapegoatTree# can look surprisingly unbalanced.  
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/scapegoat-insert-1}
+    \includegraphics[scale=0.90909]{figs/scapegoat-insert-1}
   \end{center}
   \caption[A ScapegoatTree]{A #ScapegoatTree# with 10 nodes and height 5.}
   \figlabel{scapegoat-example}
@@ -59,11 +70,11 @@ $\log_{3/2}#q#$. If so, then we leave well enough alone and don't do
 anything else.
 
 Unfortunately, it will sometimes happen that $#depth(u)# > \log_{3/2}
-#q#$.  In this case we need to do something to reduce the height.
-This isn't a big job; there is only one node, namely #u#, whose depth
-exceeds $\log_{3/2} #q#$.  To fix #u#, we walk from #u# back up to the
-root looking for a \emph{scapegoat}, #w#.  The scapegoat, #w#, is a very
-unbalanced node.  It has the property that
+#q#$.  In this case, we need to reduce the height.  This isn't a big
+job; there is only one node, namely #u#, whose depth exceeds $\log_{3/2}
+#q#$.  To fix #u#, we walk from #u# back up to the root looking for a
+\emph{scapegoat}, #w#.  The scapegoat, #w#, is a very unbalanced node.
+It has the property that
 \begin{equation}
    \frac{#size(w.child)#}{#size(w)#} > \frac{2}{3} \enspace ,
    \eqlabel{scapegoat}
@@ -81,11 +92,11 @@ Therefore, when we rebuild #w#, the height decreases by at least 1 so that heigh
 \begin{figure}
   \begin{center}
     \begin{tabular}{cc}
-      \includegraphics{figs/scapegoat-insert-3} &
-      \includegraphics{figs/scapegoat-insert-4} 
+      \includegraphics[scale=0.90909]{figs/scapegoat-insert-3} &
+      \includegraphics[scale=0.90909]{figs/scapegoat-insert-4} 
     \end{tabular}
   \end{center}
-  \caption[Adding to a scapegoat tree]{Inserting 3.5 into a #ScapegoatTree# increases its depth to 6, which violates \myeqref{scapegoat-height} since $6 > \log_{3/2} 11 \approx 5.914$.  A scapegoat is found at the node containing 5.}
+  \caption[Adding to a scapegoat tree]{Inserting 3.5 into a #ScapegoatTree# increases its height to 6, which violates \myeqref{scapegoat-height} since $6 > \log_{3/2} 11 \approx 5.914$.  A scapegoat is found at the node containing 5.}
 \end{figure}
 If we ignore the cost of finding the scapegoat #w# and rebuilding the
 subtree rooted at #w#, then the running time of #add(x)# is dominated
@@ -96,8 +107,8 @@ using amortized analysis in the next section.
 The implementation of #remove(x)# in a #ScapegoatTree# is very simple.
 We search for #x# and remove it using the usual algorithm for removing a
 node from a #BinarySearchTree#.  (Note that this can never increase the
-height of the tree.)  Next, we decrement #n# but leave #q# unchanged.
-Finally, we check if $#q# > 2#n#$ and, if so, we \emph{rebuild the entire
+height of the tree.)  Next, we decrement #n#, but leave #q# unchanged.
+Finally, we check if $#q# > 2#n#$ and, if so, then we \emph{rebuild the entire
 tree} into a perfectly balanced binary search tree and set $#q#=#n#$.
 \codeimport{ods/ScapegoatTree.remove(x)}
 Again, if we ignore the cost of rebuilding, the running time of the
@@ -106,7 +117,7 @@ therefore $O(\log #n#)$.
 
 \subsection{Analysis of Correctness and Running-Time}
 
-In this section we analyze the correctness and amortized running time
+In this section, we analyze the correctness and amortized running time
 of operations on a #ScapegoatTree#.  We first prove the correctness by
 showing that, when the #add(x)# operation results in a node that violates
 Condition \myeqref{scapegoat-height}, then we can always find a scapegoat:
@@ -143,11 +154,11 @@ Condition \myeqref{scapegoat-height}, then we can always find a scapegoat:
   \]
 \end{proof}
 
-Next, we analyze the parts of the running time that we have not yet
+Next, we analyze the parts of the running time that are not yet
 accounted for.  There are two parts:  The cost of calls to #size(u)#
-when search for scapegoat nodes, and the cost of calls to #rebuild(w)#
-when we find a scapegoat #w#.
-The cost of calls to #size(u)# can be related to the cost of calls to #rebuild(w)#, as follows:
+when searching for scapegoat nodes, and the cost of calls to #rebuild(w)#
+when we find a scapegoat #w#.  The cost of calls to #size(u)# can be
+related to the cost of calls to #rebuild(w)#, as follows:
 \begin{lem}
 During a call to #add(x)# in a #ScapegoatTree#, the cost of finding the scapegoat #w# and rebuilding the subtree rooted at #w# is $O(#size(w)#)$.
 \end{lem}
@@ -181,25 +192,28 @@ for all $i\in\{0,\ldots,k-2\}$.  Therefore, the cost of all calls to #size(u)# i
 where the last line follows from the fact that the sum is a geometrically decreasing series.
 \end{proof}
 
-All that remains is to prove an upper-bound on the cost of calls to
-#rebuild(u)#:
+All that remains is to prove an upper-bound on the cost of all calls to
+#rebuild(u)# during a sequence of $m$ operations:
 
-\begin{lem}
+\begin{lem}\lemlabel{scapegoat-amortized}
   Starting with an empty #ScapegoatTree# any sequence of $m$ #add(x)#
   and #remove(x)# operations causes at most $O(m\log m)$ time to be used
   by #rebuild(u)# operations.
 \end{lem}
 
 \begin{proof}
-  To prove this, we will use a credit scheme.  Each node stores a number
-  of credits.  Each credit can pay for some constant, $c$, units of time
-  spent rebuilding.  The scheme gives out a total of $O(m\log m)$ credits
-  and every call to #rebuild(u)# is paid for with credits stored at #u#.
+  To prove this, we will use a \emph{credit scheme}.
+  \index{credit scheme}%
+  We imagine that each node
+  stores a number of credits.  Each credit can pay for some constant,
+  $c$, units of time spent rebuilding.  The scheme gives out a total of
+  $O(m\log m)$ credits and every call to #rebuild(u)# is paid for with
+  credits stored at #u#.
 
   During an insertion or deletion, we give one credit to each node on the
   path to the inserted node, or deleted node, #u#.  In this way we hand
   out at most $\log_{3/2}#q#\le \log_{3/2}m$ credits per operation.
-  During a deletion we also store an additional 1 credit ``on the side.''
+  During a deletion we also store an additional credit ``on the side.''
   Thus, in total we give out at most $O(m\log m)$ credits.  All that
   remains is to show that these credits are sufficient to pay for all
   calls to #rebuild(u)#.
@@ -237,7 +251,7 @@ All that remains is to prove an upper-bound on the cost of calls to
   call #rebuild(u)#.
 
   If we call #rebuild(u)# during a deletion, it is because $#q# > 2#n#$.
-  In this case, we have $#q#-#n#> #n#$ credits stored ``on the side'' and
+  In this case, we have $#q#-#n#> #n#$ credits stored ``on the side,'' and
   we use these to pay for the $O(#n#)$ time it takes to rebuild the root.
   This completes the proof.
 \end{proof}
@@ -260,7 +274,9 @@ The following theorem summarizes the performance of the #ScapegoatTree# data str
 The term \emph{scapegoat tree} is due to Galperin and Rivest \cite{gr93},
 who define and analyze these trees.  However, the same structure
 was discovered earlier by Andersson \cite{a89,a99}, who called them
-\emph{general balanced trees} since they can have any shape as long as
+\emph{general balanced trees}
+\index{general balanced tree}%
+since they can have any shape as long as
 their height is small.
 
 Experimenting with the #ScapegoatTree# implementation will reveal that
@@ -271,8 +287,9 @@ in this book. This may be somewhat surprising, since height bound of
 \] 
 is better than the expected length of a search path in a #Skiplist# and
 not too far from that of a #Treap#.  The implementation could be optimized
-by storing the sizes of subtrees explicitly at each node (or at least
-reusing already computed subtree sizes).  Even with these optimizations,
+by storing the sizes of subtrees explicitly at each node or by reusing
+already computed subtree sizes (Exercises~\ref{exc:scapegoat-quicksize}
+and \ref{exc:scapegoat-explicitsize}).  Even with these optimizations,
 there will always be sequences of #add(x)# and #delete(x)# operation for
 which a #ScapegoatTree# takes longer than other #SSet# implementations.
 
@@ -282,8 +299,8 @@ of time restructuring itself.  \excref{scapegoat-nlogn} asks you to prove
 that there are sequences of #n# operations in which a #ScapegoatTree#
 will spend on the order of $#n#\log #n#$ time in calls to #rebuild(u)#.
 This is in contrast to other #SSet# implementations discussed in this
-book that only make $O(#n#)$ structural changes during a sequence of
-#n# operations.  This is, unfortunately, a necessary consequence of
+book, which only make $O(#n#)$ structural changes during a sequence
+of #n# operations.  This is, unfortunately, a necessary consequence of
 the fact that a #ScapegoatTree# does all its restructuring by calls to
 #rebuild(u)# \cite{d90}.
 
@@ -294,6 +311,18 @@ in constant time when a rotation is performed, but that can be updated
 during a #rebuild(u)# operation.  In such cases, the #ScapegoatTree#
 and related structures based on partial rebuilding may work.  An example of such an application is outlined in \excref{list-order-maintenance}.
 
+\begin{exc}
+  Illustrate the addition of the values 1.5 and then 1.6 on the
+  #ScapegoatTree# in \figref{scapegoat-example}.
+\end{exc}
+
+\begin{exc}
+  Illustrate what happens when the sequence $1,5,2,4,3$ is added to an
+  empty #ScapegoatTree#, and show where the credits described in the
+  proof of \lemref{scapegoat-amortized} go, and how they are used during
+  this sequence of additions.
+\end{exc}
+
 \begin{exc}\exclabel{scapegoat-nlogn}
   Show that, if we start with an empty #ScapegoatTree# and call #add(x)#
   for $#x#=1,2,3,\ldots,#n#$, then the total time spent during calls to
@@ -301,29 +330,58 @@ and related structures based on partial rebuilding may work.  An example of such
 \end{exc}
 
 \begin{exc}
-  The #ScapegoatTree#, as described in this chapter guarantees that the
-  length of the search path does not exceed $\log_{3/2}#q#$.  Design,
-  analyze, and implement a modified version of #ScapegoatTree# where the
-  length of the search path does not exceed $\log_{#b#} #q#$, where #b#
-  is a parameter with $1<#b#<2$.
+  The #ScapegoatTree#, as described in this chapter, guarantees that the
+  length of the search path does not exceed $\log_{3/2}#q#$.
+  \begin{enumerate}
+    \item  Design, analyze, and implement a modified version of
+      #ScapegoatTree# where the length of the search path does not exceed
+      $\log_{#b#} #q#$, where #b# is a parameter with $1<#b#<2$.
+    \item What does your analysis and/or your experiments say about the
+      amortized cost of #find(x)#, #add(x)# and #remove(x)# as a function
+      of #n# and #b#?
+  \end{enumerate}
+\end{exc}
 
-  What does your analysis and/or experiments say about the amortized cost
-  of #find(x)#, #add(x)# and #remove(x)# as a function of #b#?
+\begin{exc}\exclabel{scapegoat-quicksize}
+  Modify the #add(x)# method of the #ScapegoatTree# so that it does not
+  waste any time recomputing the sizes of subtrees that have already
+  been computed.  This is possible because, by the time the method
+  wants to compute #size(w)#, it has already computed one of #size(w.left)#
+  or #size(w.right)#.  Compare the performance of your modified
+  implementation with the implementation given here.
+\end{exc}
+
+\begin{exc}\exclabel{scapegoat-explicitsize}
+  Implement a second version of the #ScapegoatTree# data structure that
+  explicitly stores and maintains the sizes of the subtree rooted at
+  each node.  Compare the performance of the resulting implementation
+  with that of the original #ScapegoatTree# implementation as well as
+  the implementation from \excref{scapegoat-quicksize}.
 \end{exc}
 
 \begin{exc}
-  Analyze and implement a #WeightBalancedTree#.  This is a tree in
+  Reimplement the #rebuild(u)# method discussed at the beginning of this
+  chapter so that it does not require the use of an array to store the
+  nodes of the subtree being rebuilt.  Instead, it should use recursion
+  to first connect the nodes into a linked list and then convert this
+  linked list into a perfectly balanced binary tree.  (There are
+  very elegant recursive implementations of both steps.)
+\end{exc}
+
+\begin{exc}
+  \index{WeightBalancedTree@#WeightBalancedTree#}%
+  Analyze and implement a #WeightBalancedTree#. This is a tree in
   which each node #u#, except the root, maintains the \emph{balance
   invariant} that $#size(u)# \le (2/3)#size(u.parent)#$.  The #add(x)# and
   #remove(x)# operations are identical to the standard #BinarySearchTree#
   operations, except that any time the balance invariant is violated at
   a node #u#, the subtree rooted at #u.parent# is rebuilt.
-
   Your analysis should show that operations on a #WeightBalancedTree#
   run in $O(\log#n#)$ amortized time.  
 \end{exc}
 
 \begin{exc}
+  \index{CountdownTree@#CountdownTree#}%
   Analyze and implement a #CountdownTree#.  In a #CountdownTree# each
   node #u# keeps a \emph{timer} #u.t#.  The #add(x)# and #remove(x)#
   operations are exactly the same as in a standard #BinarySearchTree#
@@ -333,12 +391,28 @@ and related structures based on partial rebuilding may work.  An example of such
   #u# is involved in a rebuilding operation (either because #u# is rebuilt
   or one of #u#'s ancestors is rebuilt) #u.t# is reset to $#size(u)#/3$.
 
-  Your analysis should show that operations on a countdown tree run
+  Your analysis should show that operations on a #CountdownTree# run
   in $O(\log #n#)$ amortized time.  (Hint: First show that each node #u#
   satisfies some version of a balance invariant.)
 \end{exc}
 
+\begin{exc}
+  \index{DynamiteTree@#DynamiteTree#}%
+  Analyze and implement a #DynamiteTree#.  In a #DynamiteTree# each
+  node #u# keeps tracks of the size of the subtree rooted at #u# in a
+  variable #u.size#.  The #add(x)# and #remove(x)# operations are exactly
+  the same as in a standard #BinarySearchTree# except that, whenever one
+  of these operations affects a node #u#'s subtree, #u# \emph{explodes}
+  with probability $1/#u.size#$.  When #u# explodes, its entire subtree
+  is rebuilt into a perfectly balanced binary search tree.
+
+  Your analysis should show that operations on a #DynamiteTree# run
+  in $O(\log #n#)$ expected time. 
+\end{exc}
+ 
+
 \begin{exc}\exclabel{list-order-maintenance}
+  \index{Sequence@#Sequence#}%
   Design and implement a #Sequence# data structure that maintains a
   sequence (list) of elements.  It supports these operations:
   \begin{itemize}
@@ -350,13 +424,13 @@ and related structures based on partial rebuilding may work.  An example of such
     before #e2# in the sequence.
   \end{itemize}
   The first two operations should run in $O(\log #n#)$ amortized time.
-  The third operation should run in constant-time.
+  The third operation should run in constant time.
 
   The #Sequence# data structure can be implemented by storing the elements
   in something like a #ScapegoatTree#, in the same order that they occur
   in the sequence.  To implement #testBefore(e1,e2)# in constant time,
   each element #e# is labelled with an integer that encodes the path from
   the root to #e#.  In this way, #testBefore(e1,e2)# can be implemented
-  just by comparing the labels of #e1# and #e2#.
+  by comparing the labels of #e1# and #e2#.
 \end{exc}
 

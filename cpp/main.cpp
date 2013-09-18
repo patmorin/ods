@@ -28,6 +28,7 @@ using namespace std;
 #include "Treap.h"
 #include "ScapegoatTree.h"
 #include "RedBlackTree.h"
+#include "BTree.h"
 
 #include "BinaryTrie.h"
 #include "XFastTrie.h"
@@ -214,12 +215,12 @@ void ssetTests(SSet &ss, int n, unsigned flags) {
 	stop = clock();
 	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
-	cout << "Running binary tree tests...";
-	cout.flush();
-	start = clock();
-	// btTests(ss);
-	stop = clock();
-	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
+//	cout << "Running binary tree tests...";
+//	cout.flush();
+//	start = clock();
+//	btTests(ss);
+//	stop = clock();
+//	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
 	cout << "Removing " << n << " elements...";
 	cout.flush();
@@ -443,6 +444,16 @@ int main(int argc, char **argv)
 
 	srand(0);
 
+
+	{
+		for (int i = 1; i < 10; i++) {
+			int b = i*10;
+			cout << endl << "BTree<int>(" << b << "):" << endl;
+			BTree<int> t(b);
+			ssetTests(t, n, 0x0);
+		}
+	}
+
 	{
 		cout << endl << "Treap<int>:" << endl;
 		Treap1<int> t;
@@ -543,13 +554,13 @@ int main(int argc, char **argv)
 	}
 
 
-/*
+
 	{
 		cout << endl << "SkiplistSet<int>:" << endl;
 		SkiplistSSet<int> s;
 		ssetTests(s, n, 0x0);
 	}
-*/
+
 
 	{
 		BinarySearchTree<BSTNode1<int>,int> s;
@@ -593,6 +604,7 @@ int main(int argc, char **argv)
 	SkiplistList<int> sel;
 	listTests(sel, n, RA|FM);
 	}
+
 
 	return 0;
 }

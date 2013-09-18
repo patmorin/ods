@@ -3,31 +3,32 @@ java/ods contains the java sources
 cpp contains the C++ sources (still under development)
 
 To make the books (ods-java.pdf and ods-cpp.pdf):
-cd latex ; make
+  cd latex ; make
 This will require a decent installation of pdflatex, perl, ipe, inkscape,
-and pdftk.
+gnuplot, and pdftk.
 
 To make the Java archive ods.jar:
-cd java ; make
+  cd java ; make
 
 To make both:
-make
+  make
+
+What's in here:
+  java/test    - Test code from Sun/Oracle and Apache
+  java/junk    - Small sample code snippets used in the text
+  java/ods     - The Java data structures sources
+  cpp          - The C++ data structures sources and sample code
+  latex        - The book's latex source code and scripts
+  latex/figs   - The book's ipe figures
+  latex/images - Images used in the book
+
 
 How it works:
-
-./java/test    - Test code from Sun/Oracle and Apache
-./java/junk    - Small sample code snippets used in the text
-./java/ods     - The Java data structures sources
-./cpp          - The C++ data structures sources and sample code
-./latex        - The book's latex source code and scripts
-./latex/figs   - The book's ipe figures
-./latex/images - Images used in the book
-
 The Makefile and Perl script in ./latex do the following:
-1. Convert ipe figures in ./latex/figs into pdf
-2. Convert svg figures in ./latex/images into pdf
-3. Scan the latex sources and generate -java.tex and -cpp.tex files
-   that include source code from ./java and ./cpp directories
-4. Run pdflatex and bibtex to generate the file ods-java.pdf and
-   ods-cpp.pdf
+  1. Convert ipe figures in ./latex/figs into pdf
+  2. Convert svg figures in ./latex/images into pdf
+  3. Scan the latex sources and generate -java.tex and -cpp.tex files
+     that include source code from ./java and ./cpp directories
+  4. Run pdflatex and bibtex to generate the file ods-java.pdf and
+     ods-cpp.pdf
 

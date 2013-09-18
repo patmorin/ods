@@ -145,9 +145,13 @@ MAIN: {
   while (my $line = <STDIN>) {
     while ($line =~ /#([^#]*)#/) {
       my $inside = $1;
-      $inside =~ s/([%&])/\\$1/g;
-      $inside = color($inside);
-      $inside = "\\ensuremath{\\mathtt{$inside}}";
+      if ($inside =~ /^[A-Z]\w+$/) {
+        $inside = "\\texttt{$inside}";  # just a class name
+      } else {
+        $inside =~ s/([%&])/\\$1/g;
+        $inside = color($inside);
+        $inside = "\\ensuremath{\\mathtt{$inside}}";
+      }
       $line =~ s/#([^#])*#/$inside/;
     } 
     if ($line =~ /\\javaimport\{([^}#]+)\}/) {
@@ -156,8 +160,8 @@ MAIN: {
       print("%$line");
       my $args=$2;
       (my $class) = $line =~ /ods\/(\w+)\./;
-      print('\renewcommand{\baselinestretch}{1}'."\n");
-      print("\\begin{Verbatim}[tabsize=2,frame=single");
+      print('\ \vspace{.5ex}');
+      print("\\begin{Verbatim}[gobble=1,tabsize=2,frame=single");
       print(',commandchars=\\\\@\\$');
       print(",label=\\texttt{$class},labelposition=topline");
       print("]\n"); 
@@ -168,7 +172,6 @@ MAIN: {
         print(STDERR "NO OUTPUT PRINTED ( args=$args )\n");
       }
       print("\\end{Verbatim}\n");
-      print('\renewcommand{\baselinestretch}{1.3}'."\n");
     } else {
       print($line);
     }

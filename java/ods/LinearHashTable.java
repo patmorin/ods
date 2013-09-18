@@ -55,7 +55,7 @@ public class LinearHashTable<T> implements USet<T> {
 		T[] told = t;
 		t = f.newArray(1<<d);
 		q = n;
-		// insert everything in told
+		// insert everything from told
 		for (int k = 0; k < told.length; k++) {
 			if (told[k] != null && told[k] != del) {
 				int i = hash(told[k]);
@@ -83,11 +83,11 @@ public class LinearHashTable<T> implements USet<T> {
 
 /*  this code is broken - repeatedly adding and removing the same element gives a big chain
 	public boolean addSlow(T x) {
-		if (2*(q+1) > t.length) resize();   // max 50% occupancy
+		if (2*(q+1) > t.length) resize(); // max 50% occupancy
 		int i = hash(x);
 		while (t[i] != null) {
 			if (t[i] != del && x.equals(t[i])) return false;
-			i = (i == t.length-1) ? 0 : i + 1; // increment i (mod t.length)
+			i = (i == t.length-1) ? 0 : i + 1; // increment i
 		}
 		t[i] = x;
 		n++; q++;
@@ -97,10 +97,10 @@ public class LinearHashTable<T> implements USet<T> {
 	
 	public boolean add(T x) {
 		if (find(x) != null) return false;
-		if (2*(q+1) > t.length) resize();   // max 50% occupancy
+		if (2*(q+1) > t.length) resize(); // max 50% occupancy
 		int i = hash(x);
 		while (t[i] != null && t[i] != del)
-			i = (i == t.length-1) ? 0 : i + 1; // increment i (mod t.length)
+			i = (i == t.length-1) ? 0 : i + 1; // increment i
 		if (t[i] == null) q++;
 		n++;
 		t[i] = x;
@@ -113,12 +113,12 @@ public class LinearHashTable<T> implements USet<T> {
 	 * @return
 	 */
 	public boolean add2(T x) {
-		if (2*(q+1) > t.length) resize();   // max 50% occupancy
+		if (2*(q+1) > t.length) resize(); // max 50% occupancy
 		int i = hash(x), j = -1;
 		while (t[i] != null) {
 			if (t[i] == del && j == -1) j = i;
 			if (t[i] != del && t[i].equals(x)) return false;
-			i = (i == t.length-1) ? 0 : i + 1; // increment i (mod t.length)
+			i = (i == t.length-1) ? 0 : i + 1; // increment i
 		}
 		t[j == -1 ? i : j] = x;
 		n++; q++;
@@ -131,7 +131,7 @@ public class LinearHashTable<T> implements USet<T> {
 		int i = hash(x);
 		while (t[i] != null) {
 			if (t[i] != del && x.equals(t[i])) return t[i];
-			i = (i == t.length-1) ? 0 : i + 1; // increment i (mod t.length)
+			i = (i == t.length-1) ? 0 : i + 1; // increment i
 		}
 		return null;
 	}
@@ -146,7 +146,7 @@ public class LinearHashTable<T> implements USet<T> {
 				if (8*n < t.length) resize(); // min 12.5% occupancy
 				return y;
 			}
-			i = (i == t.length-1) ? 0 : i + 1;  // increment i (mod t.length)
+			i = (i == t.length-1) ? 0 : i + 1;  // increment i
 		}
 		return null;
 	}

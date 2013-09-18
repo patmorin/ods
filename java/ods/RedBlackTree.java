@@ -10,14 +10,14 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 		implements SSet<T> {
 	
 	protected static class Node<T> extends BinarySearchTree.BSTNode<Node<T>,T> {
-		byte color;
+		byte colour;
 	}
 	static byte red = 0;
 	static byte black = 1;
 	
 	public RedBlackTree(Comparator<T> c) {
 		super(new Node<T>(), new Node<T>(), c);
-		nil.color = black;
+		nil.colour = black;
 	}
 
 	public RedBlackTree() {
@@ -29,9 +29,9 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	 * @param u
 	 */
 	protected void pushBlack(Node<T> u) {
-		u.color--;
-		u.left.color++;
-		u.right.color++;
+		u.colour--;
+		u.left.colour++;
+		u.right.colour++;
 	}
 
 	/**
@@ -39,9 +39,9 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	 * @param u
 	 */
 	protected void pullBlack(Node<T> u) {
-		u.color++;
-		u.left.color--;
-		u.right.color--;
+		u.colour++;
+		u.left.colour--;
+		u.right.colour--;
 	}
 
 	protected void flipLeft(Node<T> u) {
@@ -60,14 +60,14 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	 * @param w
 	 */
 	protected void swapColors(Node<T> u, Node<T> w) {
-		byte tmp = u.color;
-		u.color = w.color;
-		w.color = tmp;
+		byte tmp = u.colour;
+		u.colour = w.colour;
+		w.colour = tmp;
 	}
 
 	public boolean add(T x) {
 		Node<T> u = newNode(x);
-		u.color = red;
+		u.colour = red;
 		boolean added = add(u);
 		if (added)
 			addFixup(u);
@@ -82,21 +82,21 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	 * @param u
 	 */
 	protected void addFixup(Node<T> u) {
-		while (u.color == red) {
+		while (u.colour == red) {
 			if (u == r) { // u is the root - done
-				u.color = black;
+				u.colour = black;
 				return;
 			}
 			Node<T> w = u.parent;
-			if (w.left.color == black) { // ensure left-leaning
+			if (w.left.colour == black) { // ensure left-leaning
 				flipLeft(w);
 				u = w;
 				w = u.parent;
 			}
-			if (w.color == black)
+			if (w.colour == black)
 				return; // no red-red edge = done
 			Node<T> g = w.parent; // grandparent of u
-			if (g.right.color == black) {
+			if (g.right.colour == black) {
 				flipRight(g);
 				return;
 			} else {
@@ -121,7 +121,7 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 			u = w.right;
 		}
 		splice(w);
-		u.color += w.color;
+		u.colour += w.colour;
 		u.parent = w.parent;
 		removeFixup(u);
 		return true;
@@ -135,10 +135,10 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	 * @param u
 	 */
 	protected void removeFixup(Node<T> u) {
-		while (u.color > black) {
+		while (u.colour > black) {
 			if (u == r) {
-				u.color = black;
-			} else if (u.parent.left.color == red) {
+				u.colour = black;
+			} else if (u.parent.left.colour == red) {
 				u = removeFixupCase1(u);
 			} else if (u == u.parent.left) {
 				u = removeFixupCase2(u);
@@ -146,9 +146,9 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 				u = removeFixupCase3(u);
 			}
 		}
-		if (u != r) { // restore left-leaning property, if necessary
+		if (u != r) { // restore left-leaning property if needed
 			Node<T> w = u.parent;
-			if (w.right.color == red && w.left.color == black) {
+			if (w.right.colour == red && w.left.colour == black) {
 				flipLeft(w);
 			}
 		}
@@ -181,11 +181,11 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 		pullBlack(w); // w.left
 		flipLeft(w); // w is now red
 		Node<T> q = w.right;
-		if (q.color == red) { // q-w is red-red
+		if (q.colour == red) { // q-w is red-red
 			rotateLeft(w);
 			flipRight(v);
 			pushBlack(q);
-			if (v.right.color == red)
+			if (v.right.colour == red)
 				flipLeft(v);
 			return q;
 		} else {
@@ -205,18 +205,18 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 		Node<T> w = u.parent;
 		Node<T> v = w.left;
 		pullBlack(w);       
-		flipRight(w);            // w is now red
+		flipRight(w); // w is now red
 		Node<T> q = w.left;
-		if (q.color == red) {    // q-w is red-red
+		if (q.colour == red) { // q-w is red-red
 			rotateRight(w);
 			flipLeft(v);
 			pushBlack(q);
 			return q;
 		} else {
-			if (v.left.color == red) {
-				pushBlack(v);   // both v's children are red
+			if (v.left.colour == red) {
+				pushBlack(v); // both v's children are red
 				return v;
-			} else {            // ensure left-leaning
+			} else { // ensure left-leaning
 				flipLeft(v);
 				return w;
 			}
@@ -241,19 +241,19 @@ public class RedBlackTree<T> extends BinarySearchTree<RedBlackTree.Node<T>, T>
 	 */
 	protected int verify(Node<T> u) {
 		if (u == nil)
-			return u.color;
-		if (u.color < red || u.color > black)
-			throw new AssertionError("Invalid color: " + u.color);
-		if (u.color == red)
-			if (u.left.color == red || u.right.color == red)
+			return u.colour;
+		if (u.colour < red || u.colour > black)
+			throw new AssertionError("Invalid color: " + u.colour);
+		if (u.colour == red)
+			if (u.left.colour == red || u.right.colour == red)
 				throw new AssertionError("red-red edge found");
-		if (u.right.color == red && u.left.color != red)
+		if (u.right.colour == red && u.left.colour != red)
 			throw new AssertionError("non-left-leaning node found");
 		int dl = verify(u.left);
 		int dr = verify(u.right);
 		if (dl != dr)
 			throw new AssertionError("black-height property violated");
-		return dl + u.color;
+		return dl + u.colour;
 	}
 	
 	/**

@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20110228150616" modified="D:20110304095742"/>
-<preamble>\usepackage{kpfonts}</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -235,7 +235,7 @@ h
 <view layers="alpha" active="alpha"/>
 <text layer="alpha" matrix="1 0 0 1 30.0234 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.289" depth="0" halign="center" valign="baseline">a</text>
 <group matrix="1 0 0 1 32 -64">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -246,7 +246,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -257,7 +257,7 @@ h
 <group matrix="1 0 0 1 -32 -144">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -268,7 +268,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -281,7 +281,7 @@ h
 </group>
 <text matrix="1 0 0 1 78.0234 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">b</text>
 <group matrix="1 0 0 1 80 -64">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -292,7 +292,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -303,7 +303,7 @@ h
 <group matrix="1 0 0 1 16 -144">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -314,7 +314,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -327,7 +327,7 @@ h
 </group>
 <text matrix="1 0 0 1 126.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
 <group matrix="1 0 0 1 128 -64">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -338,7 +338,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -349,7 +349,7 @@ h
 <group matrix="1 0 0 1 64 -144">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -360,7 +360,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -371,17 +371,17 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 -16 160" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 -16 160" stroke="black" pen="fat" arrow="normal/small">
 168 88 m
 192 88 l
 </path>
-<path matrix="1 0 0 1 -16 160" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 -16 160" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
 <text matrix="1 0 0 1 174.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
 <group matrix="1 0 0 1 176 -64">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -392,7 +392,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -403,7 +403,7 @@ h
 <group matrix="1 0 0 1 112 -144">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -414,7 +414,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -427,7 +427,7 @@ h
 </group>
 <text matrix="1 0 0 1 222.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
 <group matrix="1 0 0 1 224 -64">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -438,7 +438,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -449,7 +449,7 @@ h
 <group matrix="1 0 0 1 160 -144">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -460,7 +460,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -471,11 +471,11 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 -16 160" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 -16 160" stroke="black" pen="fat" arrow="normal/small">
 264 88 m
 288 88 l
 </path>
-<path matrix="1 0 0 1 80 160" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 80 160" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
@@ -483,7 +483,7 @@ h
 <text matrix="1 0 0 1 128 -30.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="20.921" height="6.088" depth="0" valign="baseline">\texttt{tail}</text>
 <text matrix="1 0 0 1 30.0234 -93.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.981" height="4.289" depth="0" halign="center" valign="baseline">a</text>
 <group matrix="1 0 0 1 32 -96">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -494,7 +494,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -505,7 +505,7 @@ h
 <group matrix="1 0 0 1 -32 -176">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -516,7 +516,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -529,7 +529,7 @@ h
 </group>
 <text matrix="1 0 0 1 78.0234 -93.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">b</text>
 <group matrix="1 0 0 1 80 -96">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -540,7 +540,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -551,7 +551,7 @@ h
 <group matrix="1 0 0 1 16 -176">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -562,7 +562,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -575,7 +575,7 @@ h
 </group>
 <text matrix="1 0 0 1 126.023 -93.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
 <group matrix="1 0 0 1 128 -96">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -586,7 +586,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -597,7 +597,7 @@ h
 <group matrix="1 0 0 1 64 -176">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -608,7 +608,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -619,17 +619,17 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 -16 128" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 -16 128" stroke="black" pen="fat" arrow="normal/small">
 168 88 m
 192 88 l
 </path>
-<path matrix="1 0 0 1 -16 128" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 -16 128" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
 <text matrix="1 0 0 1 174.023 -93.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
 <group matrix="1 0 0 1 176 -96">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -640,7 +640,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -651,7 +651,7 @@ h
 <group matrix="1 0 0 1 112 -176">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -662,7 +662,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -675,7 +675,7 @@ h
 </group>
 <text matrix="1 0 0 1 222.023 -93.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
 <group matrix="1 0 0 1 224 -96">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -686,7 +686,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -697,7 +697,7 @@ h
 <group matrix="1 0 0 1 160 -176">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -708,7 +708,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -719,18 +719,18 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 -16 128" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 -16 128" stroke="black" pen="fat" arrow="normal/small">
 264 88 m
 288 88 l
 </path>
-<path matrix="1 0 0 1 80 128" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 80 128" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
 <text matrix="1 0 0 1 208 -62.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="31.382" height="6.919" depth="0.83" valign="baseline">\texttt{add(x)}</text>
 <text matrix="1 0 0 1 270.023 -93.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.258" height="4.289" depth="0" halign="center" valign="baseline">x</text>
 <group matrix="1 0 0 1 272 -96">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -741,7 +741,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -752,7 +752,7 @@ h
 <group matrix="1 0 0 1 208 -176">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -763,7 +763,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -774,7 +774,7 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 128 128" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 128 128" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
@@ -782,7 +782,7 @@ h
 <text matrix="1 0 0 1 176 -62.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="20.921" height="6.088" depth="0" valign="baseline">\texttt{tail}</text>
 <text matrix="1 0 0 1 78.0234 -125.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">b</text>
 <group matrix="1 0 0 1 80 -128">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -793,7 +793,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -804,7 +804,7 @@ h
 <group matrix="1 0 0 1 16 -208">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -815,7 +815,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -828,7 +828,7 @@ h
 </group>
 <text matrix="1 0 0 1 126.023 -125.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
 <group matrix="1 0 0 1 128 -128">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -839,7 +839,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -850,7 +850,7 @@ h
 <group matrix="1 0 0 1 64 -208">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -861,7 +861,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -872,13 +872,13 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 -16 96" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 -16 96" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
 <text matrix="1 0 0 1 174.023 -125.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
 <group matrix="1 0 0 1 176 -128">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -889,7 +889,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -900,7 +900,7 @@ h
 <group matrix="1 0 0 1 112 -208">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -911,7 +911,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -924,7 +924,7 @@ h
 </group>
 <text matrix="1 0 0 1 222.023 -125.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
 <group matrix="1 0 0 1 224 -128">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -935,7 +935,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -946,7 +946,7 @@ h
 <group matrix="1 0 0 1 160 -208">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -957,7 +957,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -968,18 +968,18 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 -16 96" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 -16 96" stroke="black" pen="fat" arrow="normal/small">
 264 88 m
 288 88 l
 </path>
-<path matrix="1 0 0 1 80 96" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 80 96" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
 <text matrix="1 0 0 1 208 -94.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="41.843" height="6.919" depth="0.83" valign="baseline">\texttt{remove()}</text>
 <text matrix="1 0 0 1 270.023 -125.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.258" height="4.289" depth="0" halign="center" valign="baseline">x</text>
 <group matrix="1 0 0 1 272 -128">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -990,7 +990,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1001,7 +1001,7 @@ h
 <group matrix="1 0 0 1 208 -208">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1012,7 +1012,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1023,7 +1023,7 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 128 96" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 128 96" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
@@ -1031,7 +1031,7 @@ h
 <text matrix="1 0 0 1 176 -94.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="20.921" height="6.088" depth="0" valign="baseline">\texttt{tail}</text>
 <text matrix="1 0 0 1 126.023 -157.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
 <group matrix="1 0 0 1 128 -160">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1042,7 +1042,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1053,7 +1053,7 @@ h
 <group matrix="1 0 0 1 64 -240">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1064,7 +1064,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1077,7 +1077,7 @@ h
 </group>
 <text matrix="1 0 0 1 174.023 -157.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
 <group matrix="1 0 0 1 176 -160">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1088,7 +1088,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1099,7 +1099,7 @@ h
 <group matrix="1 0 0 1 112 -240">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1110,7 +1110,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1123,7 +1123,7 @@ h
 </group>
 <text matrix="1 0 0 1 222.023 -157.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
 <group matrix="1 0 0 1 224 -160">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1134,7 +1134,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1145,7 +1145,7 @@ h
 <group matrix="1 0 0 1 160 -240">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1156,7 +1156,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1167,18 +1167,18 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 -16 64" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 -16 64" stroke="black" pen="fat" arrow="normal/small">
 264 88 m
 288 88 l
 </path>
-<path matrix="1 0 0 1 80 64" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 80 64" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
 <text matrix="1 0 0 1 208 -126.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="26.152" height="6.922" depth="2.21" valign="baseline">\texttt{pop()}</text>
 <text matrix="1 0 0 1 270.023 -157.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.258" height="4.289" depth="0" halign="center" valign="baseline">x</text>
 <group matrix="1 0 0 1 272 -160">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1189,7 +1189,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1200,7 +1200,7 @@ h
 <group matrix="1 0 0 1 208 -240">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1211,7 +1211,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1222,7 +1222,7 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 128 64" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 128 64" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
@@ -1230,7 +1230,7 @@ h
 <text matrix="1 0 0 1 176 -126.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="20.921" height="6.088" depth="0" valign="baseline">\texttt{tail}</text>
 <text matrix="1 0 0 1 78.0234 -189.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.258" height="4.297" depth="1.93" halign="center" valign="baseline">y</text>
 <group matrix="1 0 0 1 80 -192">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1241,7 +1241,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1252,7 +1252,7 @@ h
 <group matrix="1 0 0 1 16 -272">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1263,7 +1263,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1276,7 +1276,7 @@ h
 </group>
 <text matrix="1 0 0 1 126.023 -189.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">c</text>
 <group matrix="1 0 0 1 128 -192">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1287,7 +1287,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1298,7 +1298,7 @@ h
 <group matrix="1 0 0 1 64 -272">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1309,7 +1309,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1320,13 +1320,13 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 -16 32" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 -16 32" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
 <text matrix="1 0 0 1 174.023 -189.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.535" height="6.918" depth="0" halign="center" valign="baseline">d</text>
 <group matrix="1 0 0 1 176 -192">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1337,7 +1337,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1348,7 +1348,7 @@ h
 <group matrix="1 0 0 1 112 -272">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1359,7 +1359,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1372,7 +1372,7 @@ h
 </group>
 <text matrix="1 0 0 1 222.023 -189.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="4.428" height="4.289" depth="0" halign="center" valign="baseline">e</text>
 <group matrix="1 0 0 1 224 -192">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1383,7 +1383,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1394,7 +1394,7 @@ h
 <group matrix="1 0 0 1 160 -272">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1405,7 +1405,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1416,18 +1416,18 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 -16 32" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 -16 32" stroke="black" pen="fat" arrow="normal/small">
 264 88 m
 288 88 l
 </path>
-<path matrix="1 0 0 1 80 32" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 80 32" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>
 <text matrix="1 0 0 1 208 -158.944" transformations="translations" pos="200.196 292.173" stroke="black" type="label" width="36.612" height="6.922" depth="2.21" valign="baseline">\texttt{push(y)}</text>
 <text matrix="1 0 0 1 270.023 -189.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.258" height="4.289" depth="0" halign="center" valign="baseline">x</text>
 <group matrix="1 0 0 1 272 -192">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1438,7 +1438,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1449,7 +1449,7 @@ h
 <group matrix="1 0 0 1 208 -272">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1460,7 +1460,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -1471,7 +1471,7 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path matrix="1 0 0 1 128 32" stroke="black" arrow="normal/small">
+<path matrix="1 0 0 1 128 32" stroke="black" pen="fat" arrow="normal/small">
 216 88 m
 240 88 l
 </path>

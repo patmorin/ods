@@ -1,7 +1,19 @@
-\documentclass[11pt]{book}
-\renewcommand{\baselinestretch}{1.3}
-%%\usepackage{html}
+\documentclass[10pt]{book}
+\usepackage{makeidx}
+\makeindex
+%\usepackage{showidx}
+% mark overful hboxes
+%\overfullrule=5mm
 \usepackage{kpfonts}
+
+%\usepackage[nott]{kpfonts}
+%\SetMathAlphabet{\mathtt}{normal}{OT1}{\ttdefault}{m}{n}
+%\SetMathAlphabet{\mathtt}{bold}{OT1}{\ttdefault}{m}{n}
+
+%\usepackage[math]{iwona}
+%\SetMathAlphabet{\mathtt}{iwona}{OT1}{\ttdefault}{m}{n}
+%\usepackage[T1]{fontenc}
+
 \usepackage{amsopn}
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -10,10 +22,13 @@
 \usepackage{datetime}
 \usepackage{amsfonts}
 \usepackage{graphicx}
-\usepackage[letterpaper]{hyperref}
-\hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,%
-	citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,%
-	urlcolor=linkblue} 
+\usepackage{threeparttable}
+\usepackage{wasysym}
+\usepackage{emptypage}
+\usepackage{titling}
+%\usepackage{calc}
+
+
 %\usepackage[mathlines]{lineno}
 %\linenumbers
 %\DeclareGraphicsExtensions{.pdf,.eps}
@@ -28,7 +43,7 @@
 \hyphenation{Array-Queue}
 \hyphenation{Array-Deque}
 \hyphenation{Dual-Array-Deque}
-\hyphenation{Rootish-Array-Stack}
+\hyphenation{Root-ish-Array-Stack}
 \hyphenation{Skip-list-Set}
 \hyphenation{Skip-list-List}
 \hyphenation{Hash-Table}
@@ -40,6 +55,7 @@
 \hyphenation{Scape-goat-Tree}
 \hyphenation{Binary-Heap}
 \hyphenation{Meld-able-Heap}
+\hyphenation{Java-Script}
 
 \usepackage{everysel}
 \EverySelectfont{%
@@ -50,11 +66,23 @@
 \hyphenchar\font=`\-% to allow hyphenation
 }
 
-\usepackage[sf,bf,small,raggedright,compact]{titlesec} % formatting titles
-\usepackage{fancyvrb}  % formatting pseudocode
+\usepackage[sf,small,raggedright]{titlesec} % formatting titles
+\titlespacing*{\section}{0pt}{24pt}{14pt}
+\titlespacing*{\subsection}{0pt}{14pt}{14pt}
+\usepackage{relsize,fancyvrb}  % formatting pseudocode
 \usepackage{ods} % Personalization and commands
 
-%\newcommand{\comment}[1]{}
+\htmlonly{
+  \newcommand{\ScaleIfNeeded}{\textwidth}
+  \newcommand{\HalfScaleIfNeeded}{\textwidth}
+  \newcommand{\HeightScaleIfNeeded}{\textheight}
+  \newcommand{\QuarterHeightScaleIfNeeded}{.25\textheight}
+  \newcommand{\FifthHeightScaleIfNeeded}{.2\textheight}
+  \newcommand{\fancyhead}[2][zzz]{}
+  \newcommand{\fancyfoot}[2][zzz]{}
+}
+
+% Referencing commands 
 \newcommand{\chaplabel}[1]{\label{chap:#1}}
 \newcommand{\Chapref}[1]{Chapter~\ref{chap:#1}}
 \newcommand{\chapref}[1]{Chapter~\ref{chap:#1}}
@@ -83,6 +111,7 @@
 \newcommand{\myeqref}[1]{(\ref{eq:#1})}
 \newcommand{\Eqref}[1]{Equation~(\ref{eq:#1})}
 
+% Theorem-like environments
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[chapter]
 \newcommand{\thmlabel}[1]{\label{thm:#1}}
@@ -96,17 +125,19 @@
 \newcommand{\corlabel}[1]{\label{cor:#1}}
 \newcommand{\corref}[1]{Corollary~\ref{cor:#1}}
 
-\theoremstyle{remark}
+\theoremstyle{definition}
+
 \newtheorem{exc}{Exercise}[chapter]
 \newcommand{\exclabel}[1]{\label{exc:#1}}
 \newcommand{\excref}[1]{Exercise~\ref{exc:#1}}
+
 
 \newtheorem{prp}{Property}[chapter]
 \newcommand{\prplabel}[1]{\label{prp:#1}}
 \newcommand{\prpref}[1]{Property~\ref{prp:#1}}
 
+% Miscellaneous commands
 \newcommand{\etal}{\emph{et al.}}
-
 \newcommand{\voronoi}{Vorono\u\i}
 \newcommand{\ceil}[1]{{\lceil #1 \rceil}}
 \newcommand{\Ceil}[1]{{\left\lceil #1 \right\rceil}}
@@ -119,20 +150,25 @@
 \newcommand{\E}{\mathrm{E}}
 \DeclareMathOperator{\ddiv}{div}
 
-% Colors for syntax highlighting
-\usepackage[usenames,dvipsnames]{color}
-\definecolor{keyword}{named}{RoyalPurple}
-\definecolor{var}{named}{Blue}
-\definecolor{comment}{named}{ForestGreen}
-\definecolor{linkblue}{named}{Blue}
-\definecolor{fm}{named}{ForestGreen}
+\usepackage{ods-colors}
+
+\usepackage{tikz,gnuplot-lua-tikz}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,%
+	citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,%
+	urlcolor=linkblue,%
+    pdfauthor={Pat Morin},%
+    pdftitle={Open Data Structures},%
+    pdfsubject={Computer Science, Data Structures},%
+    pdfkeywords={Data structures, algorithms}} 
 
 % Title page content
 \title{Open Data Structures (in \lang)}
 \author{Pat Morin}
-\date{Development Edition: \today\ \currenttime
-%Edition 0.1$\Delta$
-\htmlonly{\\ \includegraphics[scale=0.5]{images/cc-by}}}
+\date{%Development Edition: \today\ \currenttime
+Edition 0.1F\cpponly{$\beta$}
+\htmlonly{\\ \includegraphics[scale=0.90909,scale=0.5]{images/cc-by}}}
 %Version 0.0 pre $\alpha$: \today}
 
 \pagenumbering{roman}
@@ -140,37 +176,67 @@
 % Draft mode only - mark overfull hboxes
 % \overfullrule=5pt
 
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
-\renewcommand{\chaptermark}[1]{% 
-  \markboth{\thechapter.\ #1}{}} 
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
-\lhead{\itshape\nouppercase{\leftmark}}
-\rhead{\itshape\nouppercase{\rightmark}}
-
 \begin{document}
-%\AddToShipoutPicture*{\BackgroundPic}
-\begin{titlepage}
-\htmlonly{\includegraphics{images/tree3-thick}}
+
+%%\AddToShipoutPicture*{\BackgroundPic}
+\htmlonly{\newcommand{\thetitlepage}{
+  \begin{center}\includegraphics[scale=0.90909]{images/tree3-thick}\end{center}
   \maketitle
-\end{titlepage}
+}}
+\thetitlepage
 
-% blank page behind title page
-\ \thispagestyle{empty}\newpage
+\cleardoublepage
+%
+%% blank page behind title page
+%\ \thispagestyle{empty}\newpage
+%
+%\setcounter{page}{1}
+%\include{ack}
+%\ \thispagestyle{empty}\newpage
+%\cpponly{\include{cpp-preface}
+%\ \thispagestyle{empty}\newpage
+%}
 
-\setcounter{page}{1}
-\include{ack}
-\ \thispagestyle{empty}\newpage
-\cpponly{\include{cpp-preface}
-\ \thispagestyle{empty}\newpage
-}
-\include{why}
+% Use 14pt between lines
+\setlength{\baselineskip}{14pt}
 
+
+%\begin{titlepage}
+%\maketitle
+%\end{titlepage}
+
+%\pagestyle{empty}
+%half title page
+%\newpage
+%
+%series page
+%\newpage
+%
+%title page
+%\newpage
+
+\addtocontents{toc}{\protect\thispagestyle{empty}} % get rid of page number
 \tableofcontents
+\cleardoublepage
 
+\fancyhead[RO,LE]{} % disable section numbers, for now
+\pagestyle{fancy}
+\include{ack}
+\thispagestyle{empty}
+\cleardoublepage
 
+\fancyhead[CE]{\small Why This Book?} % chapter title, left center
+\include{why}
+\cleardoublepage
+
+\cpponly{
+  \include{cpp-preface}
+  \cleardoublepage
+}
+
+\fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
+\fancyhead[CO]{\small\rightmarktitle} % section title, right center
+\fancyhead[RO,LE]{\small\rightmarksection}
 \include{intro-lang}
 \include{arrays-lang}
 \include{linkedlists-lang}
@@ -184,9 +250,23 @@
 \include{sorting-lang}
 \include{graphs-lang}
 \include{integers-lang}
+\include{btree-lang}
 
-\bibliographystyle{plainurl}
+%% Turn off section numbers for remainder of document
+\fancyhead[RO]{} % section number on the outside
+\fancyhead[LE]{} % section number on the outside
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}} 
+\renewcommand{\sectionmark}[1]{\markright{#1}} 
+\fancyhead[CO]{\small\nouppercase\rightmark}
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{abbrvurl}
 \bibliography{ods,odsproc}
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
 
 \end{document}
 

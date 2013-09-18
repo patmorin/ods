@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20110525141707" modified="D:20110727132300"/>
-<preamble>\usepackage{kpfonts}</preamble>
+<ipe version="70005" creator="Ipe 7.1.1">
+<info created="D:20110525141707" modified="D:20130712110927"/>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -166,6 +166,7 @@ h
 <pen name="heavier" value="0.8"/>
 <pen name="fat" value="1.2"/>
 <pen name="ultrafat" value="2"/>
+<pen name="superfat" value="4"/>
 <symbolsize name="large" value="5"/>
 <symbolsize name="small" value="2"/>
 <symbolsize name="tiny" value="1.1"/>
@@ -234,23 +235,9 @@ h
 <layer name="alpha"/>
 <layer name="beta"/>
 <view layers="alpha beta" active="beta"/>
-<path layer="beta" stroke="seagreen" pen="ultrafat" cap="1" arrow="normal/small">
-215.418 330.908 m
-215.055 312.194
-204.74 293.628
-224.957 277.537
-210.929 259.796
-217.79 240.035
-217.79 226.435
-230.192 211.353
-230.192 211.353
-230.192 197.753
-230.192 197.753
-256.124 189.113 s
-</path>
-<text matrix="1 0 0 1 -60.7827 3.39223" transformations="translations" pos="203.206 145.692" stroke="black" type="label" width="65.113" height="6.578" depth="1.93" valign="baseline">$\ldots,i,\ldots,j-1$</text>
-<text matrix="1 0 0 1 -121.243 -120.764" transformations="translations" pos="370.104 269.848" stroke="black" type="label" width="65.715" height="6.578" depth="1.93" valign="baseline">$j+1,\ldots,\lfloor\mathtt{x}\rfloor,\ldots$</text>
-<path stroke="black">
+<text layer="beta" matrix="1 0 0 1 -60.7827 3.39223" transformations="translations" pos="203.206 145.692" stroke="black" type="label" width="54.528" height="6.919" depth="2.59" valign="baseline">$\ldots,i,\ldots,j-1$</text>
+<text matrix="1 0 0 1 -121.243 -120.764" transformations="translations" pos="370.104 269.848" stroke="black" type="label" width="63.016" height="6.919" depth="2.59" valign="baseline">$j+1,\ldots,\lfloor\mathtt{\color{var}x}\rfloor,\ldots$</text>
+<path stroke="black" pen="fat">
 215.418 145.692
 220.845 193.184
 212.025 198.611
@@ -259,7 +246,7 @@ h
 133.326 118.555
 209.312 123.304 u
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 245.269 194.541
 235.093 162.654
 244.591 121.268
@@ -267,7 +254,7 @@ h
 335.503 170.117
 254.768 195.219 u
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 116.365 129.41
 69.5517 134.159
 81.0853 217.608
@@ -281,32 +268,46 @@ h
 238.485 250.173
 111.615 166.046 u
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 217.79 226.435 m
 230.192 211.353 l
 </path>
 <use matrix="0.85 0 0 0.85 -13.0379 -205.287" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="0.85 0 0 0.85 -13.0379 -191.687" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.425 0 0 0.425 96.441 73.5131" stroke="black" fill="white">
+<path matrix="0.425 0 0 0.425 96.441 73.5131" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path matrix="0.425 0 0 0.425 147.325 73.5131" stroke="black" fill="white">
+<path matrix="0.425 0 0 0.425 147.325 73.5131" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 230.192 197.753 m
 204.562 189.113 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 230.192 197.753 m
 256.124 189.113 l
 </path>
-<path matrix="0.425 0 0 0.425 121.392 95.7534" stroke="black" fill="white">
+<path matrix="0.425 0 0 0.425 121.392 95.7534" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<text matrix="0.425 0 0 0.425 121.392 95.7534" transformations="translations" pos="256 256" stroke="black" type="label" width="4.673" height="6.578" depth="1.93" halign="center" valign="center">$j$</text>
-<path layer="alpha" matrix="0.425 0 0 0.425 108.99 124.435" stroke="black" fill="white">
+<path layer="alpha" matrix="0.425 0 0 0.425 108.99 124.435" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
+<path layer="beta" stroke="lightgreen" pen="superfat" cap="1" arrow="normal/small">
+215.418 330.908 m
+215.055 312.194
+204.74 293.628
+224.957 277.537
+210.929 259.796
+217.79 240.035
+217.79 226.435
+230.192 211.353
+230.192 211.353
+230.192 197.753
+230.192 197.753
+256.124 189.113 s
+</path>
+<text matrix="0.425 0 0 0.425 121.392 95.7534" transformations="translations" pos="256 256" stroke="black" type="label" width="4.134" height="6.919" depth="2.59" halign="center" valign="center">$j$</text>
 </page>
 </ipe>

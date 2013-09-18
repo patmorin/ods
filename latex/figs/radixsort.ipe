@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20111020161822" modified="D:20111021104132"/>
-<preamble>\usepackage{kpfonts}</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -234,7 +234,7 @@ h
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
 <text layer="alpha" matrix="1 0 0 1 -12 23.456" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{01010001}</text>
-<path matrix="1 0 0 1 -9.5 17.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 17.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -242,7 +242,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 -12 7.456" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{00000001}</text>
-<path matrix="1 0 0 1 -9.5 1.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 1.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -250,7 +250,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 -12 -8.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{11001000}</text>
-<path matrix="1 0 0 1 -9.5 -14.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -14.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -258,7 +258,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 -12 -24.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{00101000}</text>
-<path matrix="1 0 0 1 -9.5 -30.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -30.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -266,7 +266,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 -12 -40.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{00001111}</text>
-<path matrix="1 0 0 1 -9.5 -46.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -46.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -274,7 +274,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 -12 -56.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{11110000}</text>
-<path matrix="1 0 0 1 -9.5 -62.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -62.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -282,7 +282,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 -12 -72.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{10101010}</text>
-<path matrix="1 0 0 1 -9.5 -78.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -78.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -290,7 +290,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 -12 -88.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{01010101}</text>
-<path matrix="1 0 0 1 -9.5 -94.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -94.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -298,7 +298,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 68 23.456" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}110010}00}</text>
-<path matrix="1 0 0 1 70.5 17.5" stroke="black">
+<path matrix="1 0 0 1 70.5 17.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -306,7 +306,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 68 7.456" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}001010}00}</text>
-<path matrix="1 0 0 1 70.5 1.5" stroke="black">
+<path matrix="1 0 0 1 70.5 1.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -314,7 +314,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 68 -8.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}111100}00}</text>
-<path matrix="1 0 0 1 70.5 -14.5" stroke="black">
+<path matrix="1 0 0 1 70.5 -14.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -322,7 +322,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 68 -24.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}010100}01}</text>
-<path matrix="1 0 0 1 70.5 -30.5" stroke="black">
+<path matrix="1 0 0 1 70.5 -30.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -330,7 +330,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 68 -40.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}000000}01}</text>
-<path matrix="1 0 0 1 70.5 -46.5" stroke="black">
+<path matrix="1 0 0 1 70.5 -46.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -338,7 +338,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 68 -56.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}010101}01}</text>
-<path matrix="1 0 0 1 70.5 -62.5" stroke="black">
+<path matrix="1 0 0 1 70.5 -62.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -346,7 +346,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 68 -72.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}101010}10}</text>
-<path matrix="1 0 0 1 70.5 -78.5" stroke="black">
+<path matrix="1 0 0 1 70.5 -78.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -354,7 +354,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 68 -88.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}000011}11}</text>
-<path matrix="1 0 0 1 70.5 -94.5" stroke="black">
+<path matrix="1 0 0 1 70.5 -94.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -362,7 +362,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 148 -8.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}0000}0001}</text>
-<path matrix="1 0 0 1 150.5 -14.5" stroke="black">
+<path matrix="1 0 0 1 150.5 -14.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -370,7 +370,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 148 23.456" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}1111}0000}</text>
-<path matrix="1 0 0 1 150.5 17.5" stroke="black">
+<path matrix="1 0 0 1 150.5 17.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -378,7 +378,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 148 -24.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}0101}0101}</text>
-<path matrix="1 0 0 1 150.5 -30.5" stroke="black">
+<path matrix="1 0 0 1 150.5 -30.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -386,7 +386,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 148 -40.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}1100}1000}</text>
-<path matrix="1 0 0 1 150.5 -46.5" stroke="black">
+<path matrix="1 0 0 1 150.5 -46.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -394,7 +394,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 148 -56.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}0010}1000}</text>
-<path matrix="1 0 0 1 150.5 -62.5" stroke="black">
+<path matrix="1 0 0 1 150.5 -62.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -402,7 +402,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 148 -72.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}1010}1010}</text>
-<path matrix="1 0 0 1 150.5 -78.5" stroke="black">
+<path matrix="1 0 0 1 150.5 -78.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -410,7 +410,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 148 7.456" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}0101}0001}</text>
-<path matrix="1 0 0 1 150.5 1.5" stroke="black">
+<path matrix="1 0 0 1 150.5 1.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -418,7 +418,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 148 -88.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}0000}1111}</text>
-<path matrix="1 0 0 1 150.5 -94.5" stroke="black">
+<path matrix="1 0 0 1 150.5 -94.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -426,7 +426,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 228 23.456" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}00}000001}</text>
-<path matrix="1 0 0 1 230.5 17.5" stroke="black">
+<path matrix="1 0 0 1 230.5 17.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -434,7 +434,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 228 7.456" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}11}001000}</text>
-<path matrix="1 0 0 1 230.5 1.5" stroke="black">
+<path matrix="1 0 0 1 230.5 1.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -442,7 +442,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 228 -8.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}00}001111}</text>
-<path matrix="1 0 0 1 230.5 -14.5" stroke="black">
+<path matrix="1 0 0 1 230.5 -14.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -450,7 +450,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 228 -24.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}01}010001}</text>
-<path matrix="1 0 0 1 230.5 -30.5" stroke="black">
+<path matrix="1 0 0 1 230.5 -30.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -458,7 +458,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 228 -40.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}01}010101}</text>
-<path matrix="1 0 0 1 230.5 -46.5" stroke="black">
+<path matrix="1 0 0 1 230.5 -46.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -466,7 +466,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 228 -56.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}00}101000}</text>
-<path matrix="1 0 0 1 230.5 -62.5" stroke="black">
+<path matrix="1 0 0 1 230.5 -62.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -474,7 +474,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 228 -72.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}10}101010}</text>
-<path matrix="1 0 0 1 230.5 -78.5" stroke="black">
+<path matrix="1 0 0 1 230.5 -78.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -482,7 +482,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 228 -88.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{{\color{darkgray}11}110000}</text>
-<path matrix="1 0 0 1 230.5 -94.5" stroke="black">
+<path matrix="1 0 0 1 230.5 -94.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -490,7 +490,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 308 23.456" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{00000001}</text>
-<path matrix="1 0 0 1 310.5 17.5" stroke="black">
+<path matrix="1 0 0 1 310.5 17.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -498,7 +498,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 308 7.456" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{00001111}</text>
-<path matrix="1 0 0 1 310.5 1.5" stroke="black">
+<path matrix="1 0 0 1 310.5 1.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -506,7 +506,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 308 -8.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{00101000}</text>
-<path matrix="1 0 0 1 310.5 -14.5" stroke="black">
+<path matrix="1 0 0 1 310.5 -14.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -514,7 +514,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 308 -24.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{01010001}</text>
-<path matrix="1 0 0 1 310.5 -30.5" stroke="black">
+<path matrix="1 0 0 1 310.5 -30.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -522,7 +522,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 308 -40.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{01010101}</text>
-<path matrix="1 0 0 1 310.5 -46.5" stroke="black">
+<path matrix="1 0 0 1 310.5 -46.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -530,7 +530,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 308 -56.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{10101010}</text>
-<path matrix="1 0 0 1 310.5 -62.5" stroke="black">
+<path matrix="1 0 0 1 310.5 -62.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -538,7 +538,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 308 -72.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{11001000}</text>
-<path matrix="1 0 0 1 310.5 -78.5" stroke="black">
+<path matrix="1 0 0 1 310.5 -78.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
@@ -546,188 +546,188 @@ h
 h
 </path>
 <text matrix="1 0 0 1 308 -88.544" transformations="translations" pos="71.5 477.5" stroke="black" type="label" width="41.843" height="6.088" depth="0" halign="center" valign="baseline">\texttt{11110000}</text>
-<path matrix="1 0 0 1 310.5 -94.5" stroke="black">
+<path matrix="1 0 0 1 310.5 -94.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
 96.5 494.5 l
 h
 </path>
-<path matrix="1 0 0 1 -9.5 1.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 1.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
 96.5 494.5 l
 h
 </path>
-<path matrix="1 0 0 1 -9.5 -14.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -14.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
 96.5 494.5 l
 h
 </path>
-<path matrix="1 0 0 1 -9.5 -30.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -30.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
 96.5 494.5 l
 h
 </path>
-<path matrix="1 0 0 1 -9.5 -46.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -46.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
 96.5 494.5 l
 h
 </path>
-<path matrix="1 0 0 1 -9.5 -62.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -62.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
 96.5 494.5 l
 h
 </path>
-<path matrix="1 0 0 1 -9.5 -78.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -78.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
 96.5 494.5 l
 h
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 87 504 m
 112 456 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 87 488 m
 112 440 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 87 472 m
 112 504 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 87 456 m
 112 488 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 87 440 m
 112 392 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 87 424 m
 112 472 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 87 408 m
 112 408 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 87 392 m
 112 424 l
 </path>
-<path matrix="1 0 0 1 -9.5 -94.5" stroke="black">
+<path matrix="1 0 0 1 -9.5 -94.5" stroke="black" pen="fat">
 41.5 494.5 m
 41.5 478.5 l
 96.5 478.5 l
 96.5 494.5 l
 h
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 167 408 m
 192 408 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 167 488 m
 192 424 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 167 496 m
 192 440 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 167 472 m
 192 504 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 167 456 m
 192 488 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 167 440 m
 192 472 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 167 424 m
 192 456 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 167 392 m
 192 392 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 247 504 m
 272 392 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 247 488 m
 272 456 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 247 472 m
 272 504 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 247 456 m
 272 440 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 247 440 m
 272 488 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 247 424 m
 272 424 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 247 408 m
 272 408 l
 272 408 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 247 392 m
 272 472 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 327 504 m
 352 504 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 327 488 m
 352 408 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 327 472 m
 352 488 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 327 456 m
 352 456 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 327 440 m
 352 440 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 327 424 m
 352 472 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 327 408 m
 352 424 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 327 392 m
 352 392 l
 </path>

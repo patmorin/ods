@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20110603150315" modified="D:20110607135332"/>
-<preamble>\usepackage{kpfonts}</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -235,7 +235,7 @@ h
 <layer name="beta"/>
 <view layers="alpha" active="alpha"/>
 <view layers="alpha beta" active="beta"/>
-<path layer="alpha" matrix="0.5 0 0 0.5 288 88" stroke="black">
+<path layer="alpha" matrix="0.5 0 0 0.5 288 88" stroke="black" pen="fat">
 160 336 m
 160 304 l
 224 304 l
@@ -247,7 +247,7 @@ h
 <use matrix="0.5 0 0 0.5 96 152" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 96 152" name="mark/fdisk(sfx)" pos="224 320" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 96 152" name="mark/fdisk(sfx)" pos="160 320" size="normal" stroke="white" fill="white"/>
-<path matrix="0.5 0 0 0.5 96 152" stroke="black">
+<path matrix="0.5 0 0 0.5 96 152" stroke="black" pen="fat">
 160 336 m
 160 304 l
 224 304 l
@@ -259,7 +259,7 @@ h
 <use matrix="0.5 0 0 0.5 128 184" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 128 184" name="mark/fdisk(sfx)" pos="224 320" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 128 184" name="mark/fdisk(sfx)" pos="160 320" size="normal" stroke="white" fill="white"/>
-<path matrix="0.5 0 0 0.5 128 184" stroke="black">
+<path matrix="0.5 0 0 0.5 128 184" stroke="black" pen="fat">
 160 336 m
 160 304 l
 224 304 l
@@ -271,7 +271,7 @@ h
 <use matrix="0.5 0 0 0.5 160 152" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 160 152" name="mark/fdisk(sfx)" pos="224 320" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 160 152" name="mark/fdisk(sfx)" pos="160 320" size="normal" stroke="white" fill="white"/>
-<path matrix="0.5 0 0 0.5 160 152" stroke="black">
+<path matrix="0.5 0 0 0.5 160 152" stroke="black" pen="fat">
 160 336 m
 160 304 l
 224 304 l
@@ -283,7 +283,7 @@ h
 <use matrix="0.5 0 0 0.5 192 216" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 192 216" name="mark/fdisk(sfx)" pos="224 320" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 192 216" name="mark/fdisk(sfx)" pos="160 320" size="normal" stroke="white" fill="white"/>
-<path matrix="0.5 0 0 0.5 192 216" stroke="black">
+<path matrix="0.5 0 0 0.5 192 216" stroke="black" pen="fat">
 160 336 m
 160 304 l
 224 304 l
@@ -295,7 +295,7 @@ h
 <use matrix="0.5 0 0 0.5 256 184" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 256 184" name="mark/fdisk(sfx)" pos="224 320" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 256 184" name="mark/fdisk(sfx)" pos="160 320" size="normal" stroke="white" fill="white"/>
-<path matrix="0.5 0 0 0.5 256 184" stroke="black">
+<path matrix="0.5 0 0 0.5 256 184" stroke="black" pen="fat">
 160 336 m
 160 304 l
 224 304 l
@@ -307,7 +307,7 @@ h
 <use matrix="0.5 0 0 0.5 224 152" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 224 152" name="mark/fdisk(sfx)" pos="224 320" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 224 152" name="mark/fdisk(sfx)" pos="160 320" size="normal" stroke="white" fill="white"/>
-<path matrix="0.5 0 0 0.5 224 152" stroke="black">
+<path matrix="0.5 0 0 0.5 224 152" stroke="black" pen="fat">
 160 336 m
 160 304 l
 224 304 l
@@ -319,7 +319,7 @@ h
 <use matrix="0.5 0 0 0.5 320 120" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 320 120" name="mark/fdisk(sfx)" pos="224 320" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 320 120" name="mark/fdisk(sfx)" pos="160 320" size="normal" stroke="white" fill="white"/>
-<path matrix="0.5 0 0 0.5 320 120" stroke="black">
+<path matrix="0.5 0 0 0.5 320 120" stroke="black" pen="fat">
 160 336 m
 160 304 l
 224 304 l
@@ -331,7 +331,7 @@ h
 <use matrix="0.5 0 0 0.5 384 152" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 384 152" name="mark/fdisk(sfx)" pos="224 320" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 384 152" name="mark/fdisk(sfx)" pos="160 320" size="normal" stroke="white" fill="white"/>
-<path matrix="0.5 0 0 0.5 384 152" stroke="black">
+<path matrix="0.5 0 0 0.5 384 152" stroke="black" pen="fat">
 160 336 m
 160 304 l
 224 304 l
@@ -343,7 +343,7 @@ h
 <use matrix="0.5 0 0 0.5 352 88" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 352 88" name="mark/fdisk(sfx)" pos="224 320" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 352 88" name="mark/fdisk(sfx)" pos="160 320" size="normal" stroke="white" fill="white"/>
-<path matrix="0.5 0 0 0.5 352 88" stroke="black">
+<path matrix="0.5 0 0 0.5 352 88" stroke="black" pen="fat">
 160 336 m
 160 304 l
 224 304 l
@@ -355,7 +355,7 @@ h
 <use matrix="0.5 0 0 0.5 149.316 120.458" name="mark/fdisk(sfx)" pos="192 304" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 149.316 120.458" name="mark/fdisk(sfx)" pos="224 320" size="normal" stroke="white" fill="white"/>
 <use matrix="0.5 0 0 0.5 149.316 120.458" name="mark/fdisk(sfx)" pos="160 320" size="normal" stroke="white" fill="white"/>
-<path matrix="0.5 0 0 0.5 149.316 120.458" stroke="black" fill="pink">
+<path matrix="0.5 0 0 0.5 149.316 120.458" stroke="black" pen="fat" fill="pink">
 160 336 m
 160 304 l
 224 304 l
@@ -363,43 +363,43 @@ h
 h
 </path>
 <text matrix="0.5 0 0 0.5 149.316 120.458" transformations="translations" pos="192 320" stroke="black" type="label" width="22.139" height="6.428" depth="1.93" halign="center" valign="center">$1.5,4$</text>
-<path stroke="black">
+<path stroke="black" pen="fat">
 256 304 m
 245.316 288.458 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 224 336 m
 192 320 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 224 336 m
 256 320 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 288 368 m
 224 352 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 288 368 m
 352 352 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 352 336 m
 480 320 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 352 336 m
 320 320 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 480 304 m
 416 288 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 416 272 m
 384 256 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 416 272 m
 448 256 l
 </path>

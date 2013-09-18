@@ -129,8 +129,10 @@ public class XFastTrie<Node extends XFastTrie.Nöde<Node,T>, T>
 			}
 		}
 		if (l == w) return u.x;
-		Node pred = (((ix >>> w-l-1) & 1) == 1) ? u.jump : u.jump.child[0];
-		return (pred.child[next] == dummy) ? null : pred.child[next].x;
+		Node pred = (((ix >>> w-l-1) & 1) == 1) 
+			     ? u.jump : u.jump.child[0];
+		return (pred.child[next] == dummy) 
+		             ? null : pred.child[next].x;
 	}
 	
 	public static void main(String[] args) {

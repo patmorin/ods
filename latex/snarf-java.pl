@@ -23,7 +23,7 @@ sub color($) {
   $line =~ s/\b([a-z]\w*)(\s*\()/$p$1$2/g;
   $line =~ s/\b([a-z]\w*)\b/{\\color{var}$1}/g; # color variables
   $line =~ s/$p//g;
-  my @keywords = ("null", "int", "long", "double", "float", "char", "byte", "public", "protected", "private", "static", "if", "while", "else", "for", "do", "T", "K", "V", "extends", "implements", "throw", "new", "class");
+  my @keywords = ("void", "null", "int", "long", "double", "float", "char", "byte", "public", "protected", "private", "static", "if", "while", "else", "for", "do", "T", "K", "V", "extends", "implements", "throw", "new", "class");
  foreach my $k (@keywords) {
     $line =~ s/\{\\color\{\w+\}($k)\}/$1/g;
     $line =~ s/\b($k)\b/{\\color{keyword}$1}/g;
@@ -57,6 +57,7 @@ sub snarfit($$) {
   open(FP, "<",$javafile) || die("Unable to open $javafile");
   while (my $line = <FP>) {
     chomp($line);
+    if ($line =~ /IndexOutOfBoundsException/) { next; }
     $line =~ s/ö/o/g;
     if ($wc && $d == 0 && $line =~ /^($k\s)*class\s/) {
         $line =~ s/($k\s+)//g;
@@ -94,6 +95,12 @@ sub snarfit($$) {
       $line =~ s/\bUtils\.//g;    # get rid of Util.
       $line =~ s/\bc\.compare/compare/g;    # get rid of Util.
       $line =~ s/([^A-Za-z0-9])f\./$1/g; # hide factories
+      $line =~ s/\(Node(<T>)?\[\]\)//g; # hide type-cast
+      $line =~ s/\bMath\.max/max/g; # hide Math.
+      $line =~ s/\bMath\.min/min/g; # hide Math.
+      $line =~ s/BinarySearchTree\.BSTNode/BSTNode/g;
+      $line =~ s/ArrayStack<Integer>\(Integer.class\)/ArrayStack<Integer>()/g;
+      $line =~ s/\s+throws\s+DuplicateValueException//g;
       printVerbatim($line);
     }
     while ($line =~ /\}/g) {
@@ -119,7 +126,7 @@ MAIN: {
         $inside = color($inside);
         $inside =~ s/([%&])/\\$1/g;
         $inside =~ s/(\\\&|\\\%|<<|>>>?)/\\text{\\ttfamily $1}/g;
-        $inside = "\\ensuremath{\\mathtt{$inside}}";
+        $inside = "\\ensuremath{\\mathtt{$inside}}";  # should be mathtt
       }
       $line =~ s/#([^#])*#/$inside/;
     } 
@@ -129,14 +136,20 @@ MAIN: {
       my $args=$2;
       (my $class) = $line =~ /\{\w+\/(\w+)\./;
       print("%$line");
-      print('\renewcommand{\baselinestretch}{1}'."\n");
-      print("\\begin{Verbatim}[tabsize=2,frame=single");
+      #print('\begin{singlespace}');
+      #print('\renewcommand{\baselinestretch}{1}'."\n");
+      #print("\\resizebox{.98\\textwidth}{!}{");
+      print("\n\n ");
+      print('\ \vspace{.5ex}');
+      print("\\begin{Verbatim}[gobble=1,tabsize=2,frame=single,framerule=1.2pt");
       print(',commandchars=\\\\@\\$');
       print(",label=\\texttt{$class},labelposition=topline");
       print("]\n"); 
       snarfit($args, 0); 
-      print("\\end{Verbatim}\n");
-      print('\renewcommand{\baselinestretch}{1.3}'."\n");
+      print("\\end{Verbatim}\n\n");
+      #print("}");
+      #print('\renewcommand{\baselinestretch}{1.4}'."\n");
+      #print('\end{singlespace}');
     } else {
       print($line);
     }

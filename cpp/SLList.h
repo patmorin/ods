@@ -14,6 +14,7 @@ namespace ods {
 
 template<class T>
 class SLList {
+	T null;
 protected:
 	class Node {
 	public:
@@ -31,6 +32,7 @@ protected:
 public:
 
 	SLList() {
+		null = (T)NULL;
 		n = 0;
 		head = tail = NULL;
 	}
@@ -75,7 +77,7 @@ public:
 	}
 
 	T remove() {
-		if (n == 0)	return NULL;
+		if (n == 0)	return null;
 		T x = head->x;
 		Node *u = head;
 		head = head->next;
@@ -85,7 +87,7 @@ public:
 	}
 
 	T pop() {
-		if (n == 0)	return NULL;
+		if (n == 0)	return null;
 		T x = head->x;
 		Node *u = head;
 		head = head->next;

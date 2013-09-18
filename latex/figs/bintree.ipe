@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20110525141707" modified="D:20110727131050"/>
-<preamble>\usepackage{kpfonts}</preamble>
+<ipe version="70005" creator="Ipe 7.1.1">
+<info created="D:20110525141707" modified="D:20130712103718"/>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont
+\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -239,11 +240,48 @@ h
 <view layers="alpha beta" active="beta"/>
 <view layers="alpha gamma" active="gamma"/>
 <view layers="alpha delta" active="delta"/>
-<use layer="alpha" matrix="0.75 0 0 0.75 136 107.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 52 83.2382" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 124 83.2382" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
+<path layer="beta" matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray" pen="fat">
+336 408 m
+320 392 l
+</path>
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray" pen="fat">
+336 408 m
+352 392 l
+</path>
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray" pen="fat">
+352 440 m
+368 424 l
+</path>
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray" pen="fat">
+288 440 m
+304 424 l
+</path>
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray" pen="fat">
+288 440 m
+272 424 l
+</path>
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray" pen="fat">
+240 408 m
+256 392 l
+</path>
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray" pen="fat">
+240 408 m
+224 392 l
+</path>
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray" pen="fat">
+224 440 m
+208 424 l
+</path>
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray" pen="fat">
+160 440 m
+176 424 l
+</path>
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray" pen="fat">
+160 440 m
+144 424 l
+</path>
 <group layer="gamma" matrix="1 0 0 1 188.819 54.2082">
-<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white">
+<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white" pen="fat">
 172.967 458.615 m
 172.967 437.947 l
 193.635 437.947 l
@@ -251,12 +289,12 @@ h
 h
 </path>
 <use matrix="0.75 0 0 0.75 -76.8186 89.0304" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
 </group>
 <group matrix="1 0 0 1 212.819 30.2082">
-<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white">
+<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white" pen="fat">
 172.967 458.615 m
 172.967 437.947 l
 193.635 437.947 l
@@ -264,12 +302,12 @@ h
 h
 </path>
 <use matrix="0.75 0 0 0.75 -76.8186 89.0304" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
 </group>
 <group matrix="1 0 0 1 164.819 30.2082">
-<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white">
+<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white" pen="fat">
 172.967 458.615 m
 172.967 437.947 l
 193.635 437.947 l
@@ -277,12 +315,12 @@ h
 h
 </path>
 <use matrix="0.75 0 0 0.75 -76.8186 89.0304" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
 </group>
 <group matrix="1 0 0 1 200.819 6.20816">
-<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white">
+<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white" pen="fat">
 172.967 458.615 m
 172.967 437.947 l
 193.635 437.947 l
@@ -290,12 +328,12 @@ h
 h
 </path>
 <use matrix="0.75 0 0 0.75 -76.8186 89.0304" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
 </group>
 <group matrix="1 0 0 1 128.819 6.20816">
-<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white">
+<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white" pen="fat">
 172.967 458.615 m
 172.967 437.947 l
 193.635 437.947 l
@@ -303,12 +341,12 @@ h
 h
 </path>
 <use matrix="0.75 0 0 0.75 -76.8186 89.0304" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
 </group>
 <group matrix="1 0 0 1 116.819 30.2082">
-<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white">
+<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white" pen="fat">
 172.967 458.615 m
 172.967 437.947 l
 193.635 437.947 l
@@ -316,12 +354,12 @@ h
 h
 </path>
 <use matrix="0.75 0 0 0.75 -76.8186 89.0304" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
 </group>
 <group matrix="1 0 0 1 92.819 54.2082">
-<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white">
+<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white" pen="fat">
 172.967 458.615 m
 172.967 437.947 l
 193.635 437.947 l
@@ -329,12 +367,12 @@ h
 h
 </path>
 <use matrix="0.75 0 0 0.75 -76.8186 89.0304" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
 </group>
 <group matrix="1 0 0 1 68.8186 30.2078">
-<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white">
+<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white" pen="fat">
 172.967 458.615 m
 172.967 437.947 l
 193.635 437.947 l
@@ -342,12 +380,12 @@ h
 h
 </path>
 <use matrix="0.75 0 0 0.75 -76.8186 89.0304" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
 </group>
 <group matrix="1 0 0 1 140.819 78.2082">
-<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white">
+<path matrix="1 0 0 1 -68.1196 -29.2506" stroke="white" pen="fat">
 172.967 458.615 m
 172.967 437.947 l
 193.635 437.947 l
@@ -355,35 +393,11 @@ h
 h
 </path>
 <use matrix="0.75 0 0 0.75 -76.8186 89.0304" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 19.1813 323.03" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
 </group>
-<path layer="alpha" matrix="0.75 0 0 0.75 64 113.238" stroke="black">
-256 504 m
-192 488 l
-</path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="black">
-256 504 m
-320 488 l
-</path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="black">
-192 472 m
-160 456 l
-</path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="black">
-192 472 m
-224 456 l
-</path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="black">
-320 472 m
-288 456 l
-</path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="black">
-320 472 m
-352 456 l
-</path>
-<use matrix="0.75 0 0 0.75 64 155.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
+<use layer="alpha" matrix="0.75 0 0 0.75 64 155.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="0.75 0 0 0.75 64 167.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="0.75 0 0 0.75 16 131.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="0.75 0 0 0.75 16 143.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
@@ -395,53 +409,53 @@ h
 <use matrix="0.75 0 0 0.75 -7.99998 119.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="0.75 0 0 0.75 52 95.2382" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
 <use matrix="0.75 0 0 0.75 124 95.2382" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="black">
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="black" pen="fat">
 224 440 m
 240 424 l
 </path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="black">
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="black" pen="fat">
 352 440 m
 336 424 l
 </path>
-<path matrix="0.375 0 0 0.375 112 377.238" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 112 377.238" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path matrix="0.375 0 0 0.375 136 353.238" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 136 353.238" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path matrix="0.375 0 0 0.375 148 329.238" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 148 329.238" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path matrix="0.375 0 0 0.375 160 401.238" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 160 401.238" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path matrix="0.375 0 0 0.375 220 329.238" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 220 329.238" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path matrix="0.375 0 0 0.375 232 353.238" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 232 353.238" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path matrix="0.375 0 0 0.375 184 353.238" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 184 353.238" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path matrix="0.375 0 0 0.375 208 377.238" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 208 377.238" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
 <use layer="beta" matrix="0.75 0 0 0.75 -7.99998 107.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="darkgray"/>
 <use matrix="0.75 0 0 0.75 -7.99998 119.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.375 0 0 0.375 88 353.238" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 88 353.238" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
 <use matrix="0.75 0 0 0.75 88 107.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="darkgray"/>
 <use matrix="0.75 0 0 0.75 88 119.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.375 0 0 0.375 184 353.238" stroke="black" fill="white">
+<path matrix="0.375 0 0 0.375 184 353.238" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<text layer="alpha" matrix="0.75 0 0 0.75 78.9974 110.304" transformations="translations" pos="236.562 529.528" stroke="black" type="label" halign="center" valign="baseline">$\mathtt{r}$</text>
-<path matrix="0.375 0 0 0.375 88 353.238" stroke="black" fill="white">
+<text layer="alpha" matrix="0.75 0 0 0.75 78.9974 110.304" transformations="translations" pos="236.562 529.528" stroke="black" type="label" halign="center" valign="baseline">${\color{var}\mathtt{\color{var}r}}$</text>
+<path matrix="0.375 0 0 0.375 88 353.238" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path layer="gamma" stroke="seagreen" pen="ultrafat" arrow="normal/tiny">
+<path layer="gamma" stroke="seagreen" pen="ultrafat" cap="1" arrow="normal/tiny">
 245.666 507.573 m
 245.666 486.905
 197.666 483.573
@@ -482,7 +496,7 @@ h
 266.334 486.905
 266.334 507.573 s
 </path>
-<path layer="delta" stroke="seagreen" pen="fat" arrow="normal/small">
+<path layer="delta" stroke="seagreen" pen="ultrafat" cap="1" arrow="normal/small">
 237.57 497.617 m
 282.233 498.092
 283.709 485.462
@@ -498,145 +512,99 @@ h
 223.823 424.098
 331.025 425.207 s
 </path>
-<use layer="beta" matrix="0.75 0 0 0.75 28 161.238" name="mark/cross(sx)" pos="192 352" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 52 161.238" name="mark/cross(sx)" pos="192 352" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 76 161.238" name="mark/cross(sx)" pos="192 352" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 88 137.238" name="mark/cross(sx)" pos="192 352" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 112 137.238" name="mark/cross(sx)" pos="192 352" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 124 161.238" name="mark/cross(sx)" pos="192 352" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 148 161.238" name="mark/cross(sx)" pos="192 352" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 160 137.238" name="mark/cross(sx)" pos="192 352" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 184 137.238" name="mark/cross(sx)" pos="192 352" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 196 161.238" name="mark/cross(sx)" pos="192 352" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 -19.9999 83.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 -19.9999 95.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.75 0 0 0.75 71.1401 7.78425" stroke="darkgray">
+<path layer="beta" matrix="0.75 0 0 0.75 71.1401 7.78425" stroke="darkgray" pen="fat">
 126.48 564.605 m
 126.48 548.605 l
 142.48 548.605 l
 142.48 564.605 l
 h
 </path>
-<use matrix="0.75 0 0 0.75 4.00007 83.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 4.00007 95.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.75 0 0 0.75 95.1401 7.78425" stroke="darkgray">
+<path matrix="0.75 0 0 0.75 95.1401 7.78425" stroke="darkgray" pen="fat">
 126.48 564.605 m
 126.48 548.605 l
 142.48 548.605 l
 142.48 564.605 l
 h
 </path>
-<use matrix="0.75 0 0 0.75 28.0001 83.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 28.0001 95.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.75 0 0 0.75 119.14 7.78425" stroke="darkgray">
+<path matrix="0.75 0 0 0.75 119.14 7.78425" stroke="darkgray" pen="fat">
 126.48 564.605 m
 126.48 548.605 l
 142.48 548.605 l
 142.48 564.605 l
 h
 </path>
-<use matrix="0.75 0 0 0.75 40.0001 59.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 40.0001 71.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.75 0 0 0.75 131.14 -16.2157" stroke="darkgray">
+<path matrix="0.75 0 0 0.75 131.14 -16.2157" stroke="darkgray" pen="fat">
 126.48 564.605 m
 126.48 548.605 l
 142.48 548.605 l
 142.48 564.605 l
 h
 </path>
-<use matrix="0.75 0 0 0.75 64.0001 59.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 64.0001 71.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.75 0 0 0.75 155.14 -16.2157" stroke="darkgray">
+<path matrix="0.75 0 0 0.75 155.14 -16.2157" stroke="darkgray" pen="fat">
 126.48 564.605 m
 126.48 548.605 l
 142.48 548.605 l
 142.48 564.605 l
 h
 </path>
-<use matrix="0.75 0 0 0.75 76.0001 83.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 76.0001 95.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.75 0 0 0.75 167.14 7.78425" stroke="darkgray">
+<path matrix="0.75 0 0 0.75 167.14 7.78425" stroke="darkgray" pen="fat">
 126.48 564.605 m
 126.48 548.605 l
 142.48 548.605 l
 142.48 564.605 l
 h
 </path>
-<use matrix="0.75 0 0 0.75 100 83.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 100 95.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.75 0 0 0.75 191.14 7.78425" stroke="darkgray">
+<path matrix="0.75 0 0 0.75 191.14 7.78425" stroke="darkgray" pen="fat">
 126.48 564.605 m
 126.48 548.605 l
 142.48 548.605 l
 142.48 564.605 l
 h
 </path>
-<use matrix="0.75 0 0 0.75 112 59.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 112 71.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.75 0 0 0.75 203.14 -16.2157" stroke="darkgray">
+<path matrix="0.75 0 0 0.75 203.14 -16.2157" stroke="darkgray" pen="fat">
 126.48 564.605 m
 126.48 548.605 l
 142.48 548.605 l
 142.48 564.605 l
 h
 </path>
-<use matrix="0.75 0 0 0.75 136 59.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 136 71.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.75 0 0 0.75 227.14 -16.2157" stroke="darkgray">
+<path matrix="0.75 0 0 0.75 227.14 -16.2157" stroke="darkgray" pen="fat">
 126.48 564.605 m
 126.48 548.605 l
 142.48 548.605 l
 142.48 564.605 l
 h
 </path>
-<use matrix="0.75 0 0 0.75 148 83.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<use matrix="0.75 0 0 0.75 148 95.238" name="mark/cross(sx)" pos="256 448" size="normal" stroke="white"/>
-<path matrix="0.75 0 0 0.75 239.14 7.78425" stroke="darkgray">
+<path matrix="0.75 0 0 0.75 239.14 7.78425" stroke="darkgray" pen="fat">
 126.48 564.605 m
 126.48 548.605 l
 142.48 548.605 l
 142.48 564.605 l
 h
 </path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray">
-160 440 m
-144 424 l
+<path layer="alpha" matrix="0.75 0 0 0.75 64 113.238" stroke="black" pen="fat">
+320 472 m
+288 456 l
 </path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray">
-160 440 m
-176 424 l
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="black" pen="fat">
+320 472 m
+352 456 l
 </path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray">
-224 440 m
-208 424 l
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="black" pen="fat">
+256 504 m
+320 488 l
 </path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray">
-240 408 m
-224 392 l
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="black" pen="fat">
+256 504 m
+192 488 l
 </path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray">
-240 408 m
-256 392 l
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="black" pen="fat">
+192 472 m
+160 456 l
 </path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray">
-288 440 m
-272 424 l
-</path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray">
-288 440 m
-304 424 l
-</path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray">
-352 440 m
-368 424 l
-</path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray">
-336 408 m
-320 392 l
-</path>
-<path matrix="0.75 0 0 0.75 64 113.238" stroke="darkgray">
-336 408 m
-352 392 l
+<path matrix="0.75 0 0 0.75 64 113.238" stroke="black" pen="fat">
+192 472 m
+224 456 l
 </path>
 </page>
 </ipe>

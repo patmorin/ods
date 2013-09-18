@@ -42,6 +42,7 @@ int hashCode(XPair<Node> &p) {
 template<class Node, class T>
 class XFastTrie : public BinaryTrie<Node,T> {
 protected:
+	T nullt;
 	using BinaryTrie<Node,T>::w;
 	using BinaryTrie<Node,T>::n;
 	using BinaryTrie<Node,T>::r;
@@ -64,6 +65,7 @@ public:
 
 template<class Node, class T>
 XFastTrie<Node,T>::XFastTrie() : BinaryTrie<Node,T>(), null(UINT_MAX-1, NULL) {
+	// FIXME: make this work --- nullt = (T)NULL;
 	XPair<Node> del(UINT_MAX-2);
 	for (int i = 0; i < w+1; i++) {
 		t[i].setNull(null);
@@ -99,8 +101,9 @@ T XFastTrie<Node,T>::find(T x) {
 		}
 	}
 	if (l == w) return u->x;
-	Node *pred = (((ix >> (w-l-1)) & 1) == 1) ? u->jump : u->jump->prev;
-	return (pred->next == &dummy) ? NULL : pred->next->x;
+	Node *pred = (((ix >> (w-l-1)) & 1) == 1)
+	              ? u->jump : u->jump->prev;
+	return (pred->next == &dummy) ? nullt : pred->next->x;
 }
 
 template<class Node, class T>

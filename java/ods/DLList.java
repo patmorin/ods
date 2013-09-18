@@ -86,7 +86,7 @@ public class DLList<T> extends AbstractSequentialList<T> {
 			for (int j = n; j > i; j--)
 				p = p.prev;
 		}
-		return (p);
+		return p;
 	}
 
 	public ListIterator<T> listIterator(int i) {

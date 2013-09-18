@@ -16,7 +16,8 @@ public:
 		long s = 0;
 		long zi = 1;
 		for (int i = 0; i < x.length; i++) {
-			long long xi = (ods::hashCode(x[i]) * z2) >> 1; // reduce to 31 bits
+			// reduce to 31 bits
+			long long xi = (ods::hashCode(x[i]) * z2) >> 1; 
 			s = (s + zi * xi) % p;
 			zi = (zi * z) % p;	
 		}

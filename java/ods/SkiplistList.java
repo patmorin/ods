@@ -71,7 +71,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 	protected Node findPred(int i) {
 		Node u = sentinel;
 		int r = h;
-		int j = -1;   // the index of the current node in list 0
+		int j = -1;   // index of the current node in list 0
 		while (r >= 0) {
 			while (u.next[r] != null && j + u.length[r] < i) {
 				j += u.length[r];
@@ -111,7 +111,7 @@ public class SkiplistList<T> extends AbstractList<T> {
 				j += u.length[r];
 				u = u.next[r];
 			}
-			u.length[r]++;    // to account for new node in list 0
+			u.length[r]++; // accounts for new node in list 0
 			if (r <= k) {
 				w.next[r] = u.next[r];
 				u.next[r] = w;

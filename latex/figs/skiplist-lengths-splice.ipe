@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20110228150616" modified="D:20110330081343"/>
-<preamble>\usepackage{ulem}\usepackage{kpfonts}</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -236,7 +236,7 @@ h
 <group layer="alpha" matrix="1 0 0 1 32 64">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -247,7 +247,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -261,7 +261,7 @@ h
 <group matrix="1 0 0 1 256 64">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -272,7 +272,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -289,7 +289,7 @@ h
 <group matrix="1 0 0 1 32 0">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -300,7 +300,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -314,7 +314,7 @@ h
 <group matrix="1 0 0 1 304 0">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -325,7 +325,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -341,7 +341,7 @@ h
 <group matrix="1 0 0 1 128 0">
 <group matrix="1 0 0 1 80 0">
 <group matrix="1 0 0 1 0 80">
-<path stroke="white">
+<path stroke="white" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -352,7 +352,7 @@ h
 <use matrix="1 0 0 1 0 8" name="mark/disk(sx)" pos="112 304" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 0 -8" name="mark/disk(sx)" pos="96 320" size="normal" stroke="white"/>
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 304" size="normal" stroke="white"/>
-<path stroke="black">
+<path stroke="black" pen="fat">
 96 320 m
 96 304 l
 112 304 l
@@ -363,23 +363,23 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<path stroke="black" arrow="normal/small">
+<path stroke="black" pen="fat" arrow="normal/small">
 216 392 m
 304 392 l
 </path>
 <text matrix="1 0 0 1 -8 177.876" transformations="translations" pos="320 224" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="baseline">\texttt{w}</text>
 <text matrix="1 0 0 1 -8 145.876" transformations="translations" pos="320 224" stroke="black" type="label" width="5.23" height="6.088" depth="0" halign="center" valign="baseline">\texttt{i}</text>
-<text matrix="1 0 0 1 138.494 17.607" transformations="translations" pos="121.506 377.804" stroke="black" type="label" width="22.637" height="6.092" depth="2.21" halign="center" valign="baseline">$\mathtt{i}-\mathtt{j}$</text>
-<text matrix="1 0 0 1 274.494 17.607" transformations="translations" pos="121.506 377.804" stroke="black" type="label" width="63.871" height="7.473" depth="2.49" halign="center" valign="baseline">$\ell+1-(\mathtt{i}-\mathtt{j})$</text>
-<path stroke="black" arrow="normal/small">
+<text matrix="1 0 0 1 138.494 17.607" transformations="translations" pos="121.506 377.804" stroke="black" type="label" width="22.637" height="6.092" depth="2.21" halign="center" valign="baseline">$\mathtt{\color{var}i}-\mathtt{\color{var}j}$</text>
+<text matrix="1 0 0 1 274.494 17.607" transformations="translations" pos="121.506 377.804" stroke="black" type="label" width="63.871" height="7.473" depth="2.49" halign="center" valign="baseline">$\ell+1-(\mathtt{\color{var}i}-\mathtt{\color{var}j})$</text>
+<path stroke="black" pen="fat" arrow="normal/small">
 216 456 m
 432 456 l
 </path>
-<path stroke="black" arrow="normal/small">
+<path stroke="black" pen="fat" arrow="normal/small">
 312 392 m
 480 392 l
 </path>
-<path stroke="black" arrow="normal/small">
+<path stroke="black" pen="fat" arrow="normal/small">
 216 392 m
 352 432
 480 392 s

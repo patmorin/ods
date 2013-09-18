@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20110714105047" modified="D:20110714111738"/>
-<preamble>\usepackage{kpfonts}</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -242,15 +242,15 @@ h
 <view layers="alpha beta delta" active="delta"/>
 <use layer="beta" matrix="0.5 0 0 1 42.5 21" name="mark/square(sx)" pos="256 240" size="large" stroke="black"/>
 <use matrix="0.5 0 0 1 42.5 21" name="mark/square(sx)" pos="272 240" size="large" stroke="black"/>
-<path matrix="0.5 0 0 1 42.5 21" stroke="black">
+<path matrix="0.5 0 0 1 42.5 21" stroke="black" pen="fat">
 264 256 m
 272 240 l
 </path>
-<path matrix="0.5 0 0 1 42.5 21" stroke="black">
+<path matrix="0.5 0 0 1 42.5 21" stroke="black" pen="fat">
 264 256 m
 256 240 l
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 166.5 293 m
 174.5 277 l
 </path>
@@ -266,73 +266,73 @@ h
 <use matrix="1 0 0 1 -33.5 37" name="mark/square(sx)" pos="368 240" size="large" stroke="black"/>
 <use matrix="1 0 0 1 -33.5 37" name="mark/square(sx)" pos="384 240" size="large" stroke="black"/>
 <use matrix="1 0 0 1 -49.5 37" name="mark/fdisk(sfx)" pos="272 272" size="large" stroke="black" fill="black"/>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 288 240 m
 272 272 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 320 240 m
 328 272 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 336 240 m
 328 272 l
 </path>
-<path matrix="1 0 0 1 -33.5 37" stroke="black">
+<path matrix="1 0 0 1 -33.5 37" stroke="black" pen="fat">
 368 240 m
 376 272 l
 </path>
-<path matrix="1 0 0 1 -33.5 37" stroke="black">
+<path matrix="1 0 0 1 -33.5 37" stroke="black" pen="fat">
 384 240 m
 376 272 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 200 272 m
 240 304 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 272 272 m
 240 304 l
 </path>
 <use matrix="1 0 0 1 -49.5 37" name="mark/fdisk(sfx)" pos="240 304" size="large" stroke="black" fill="black"/>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 240 304 m
 296 336 l
 296 336 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 200 272 m
 184 256 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 184 256 m
 176 240 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 184 256 m
 192 240 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 216 256 m
 208 240 l
 </path>
-<path layer="gamma" matrix="1 0 0 1 -49.5 37" stroke="black">
+<path layer="gamma" matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 216 256 m
 224 240 l
 </path>
-<path layer="alpha" matrix="1 0 0 1 -49.5 37" stroke="black">
+<path layer="alpha" matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 200 272 m
 216 256 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 272 272 m
 264 256 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 264 256 m
 272 240 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 264 256 m
 256 240 l
 </path>
@@ -341,31 +341,31 @@ h
 <use layer="alpha" matrix="1 0 0 1 6.5 21" name="mark/fdisk(sfx)" pos="208 272" size="large" stroke="black" fill="pink"/>
 <use matrix="1 0 0 1 -65.5 37" name="mark/square(sx)" pos="368 240" size="large" stroke="black"/>
 <use matrix="1 0 0 1 -65.5 37" name="mark/square(sx)" pos="384 240" size="large" stroke="black"/>
-<path matrix="1 0 0 1 -65.5 37" stroke="black">
+<path matrix="1 0 0 1 -65.5 37" stroke="black" pen="fat">
 368 240 m
 376 272 l
 </path>
-<path matrix="1 0 0 1 -65.5 37" stroke="black">
+<path matrix="1 0 0 1 -65.5 37" stroke="black" pen="fat">
 384 240 m
 376 272 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 328 272 m
 360 304 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 360 272 m
 376 288 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 392 272 m
 376 288 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 376 288 m
 360 304 l
 </path>
-<path matrix="1 0 0 1 -49.5 37" stroke="black">
+<path matrix="1 0 0 1 -49.5 37" stroke="black" pen="fat">
 360 304 m
 296 336 l
 </path>
@@ -379,7 +379,7 @@ h
 <use name="mark/fdisk(sfx)" pos="166.5 293" size="large" stroke="black" fill="black"/>
 <use name="mark/fdisk(sfx)" pos="150.5 309" size="large" stroke="black" fill="pink"/>
 <use layer="alpha" matrix="1 0 0 1 38.5 101" name="mark/fdisk(sfx)" pos="208 272" size="large" stroke="black" fill="black"/>
-<path layer="zeta" stroke="black">
+<path layer="zeta" stroke="black" pen="fat">
 149.497 320.086
 121.26 292.907
 133.261 279.847
@@ -390,41 +390,41 @@ h
 180.912 298.554
 155.498 317.262 u
 </path>
-<path layer="gamma" stroke="black">
+<path layer="gamma" stroke="black" pen="fat">
 143.497 320.086
 118.436 285.848
 150.556 281.259
 181.971 285.848
 159.38 317.968 u
 </path>
-<path layer="delta" stroke="black">
+<path layer="delta" stroke="black" pen="fat">
 123.68 299.425
 123.378 285.142
 146.321 285.848
 145.272 299.625 u
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 154.439 295.731
 168.558 265.022
 187.618 272.788
 170.676 306.673 u
 </path>
-<path stroke="black">
+<path stroke="black" pen="fat">
 195.03 355.736
 136.084 308.791
 147.38 293.966
 206.325 341.617 u
 </path>
-<path layer="epsilon" stroke="black">
+<path layer="epsilon" stroke="black" pen="fat">
 199.972 352.206
 181.971 352.206
 180.559 330.322
 200.678 331.734 u
 </path>
-<text transformations="translations" pos="123.28 309.022" stroke="black" type="label" valign="baseline">$\mathtt{w}$</text>
-<text layer="delta" transformations="translations" pos="123.88 299.225" stroke="black" type="label" valign="baseline">$\mathtt{w}$</text>
-<text transformations="translations" pos="177.059 298.626" stroke="black" type="label" valign="baseline">$\mathtt{w}&apos;$</text>
-<text layer="beta" transformations="translations" pos="184.257 261.64" stroke="black" type="label" valign="baseline">$\mathtt{u}$</text>
+<text transformations="translations" pos="123.28 309.022" stroke="black" type="label" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text layer="delta" transformations="translations" pos="123.88 299.225" stroke="black" type="label" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text transformations="translations" pos="177.059 298.626" stroke="black" type="label" valign="baseline">$\mathtt{\color{var}w}&apos;$</text>
+<text layer="beta" transformations="translations" pos="184.257 261.64" stroke="black" type="label" valign="baseline">$\mathtt{\color{var}u}$</text>
 <use layer="alpha" matrix="1 0 0 1 102.5 37" name="mark/fdisk(sfx)" pos="208 272" size="large" stroke="black" fill="black"/>
 </page>
 </ipe>

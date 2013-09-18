@@ -93,8 +93,8 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 			if (u.child[c] == null) break;
 			u = u.child[c];
 		}		
-		if (i == w) return false; // trie already contains x - abort
-		Node pred = (c == right) ? u.jump : u.jump.child[0]; // save for step 3 
+		if (i == w) return false; // already contains x - abort
+		Node pred = (c == right) ? u.jump : u.jump.child[0];
 		u.jump = null;  // u will have two children shortly
 		// 2 - add path to ix
 		for (; i < w; i++) {

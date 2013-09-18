@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20120110130916" modified="D:20120110140224"/>
-<preamble>\usepackage{kpfonts}</preamble>
+<ipe version="70005" creator="Ipe 7.1.1">
+<info created="D:20120110130916" modified="D:20120711151634"/>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -233,7 +233,7 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" matrix="1.2 0 0 1 -46.3029 0" stroke="black">
+<path layer="alpha" matrix="1.2 0 0 1 -46.3029 0" stroke="black" pen="fat">
 176 192 m
 416 192 l
 </path>
@@ -243,28 +243,28 @@ h
 <use matrix="1.2 0 0 1 -46.3029 0" name="mark/disk(sx)" pos="288 192" size="normal" stroke="black"/>
 <use matrix="1.2 0 0 1 -46.3029 0" name="mark/disk(sx)" pos="416 192" size="normal" stroke="black"/>
 <use matrix="1.2 0 0 1 -46.3029 0" name="mark/disk(sx)" pos="304 192" size="normal" stroke="black"/>
-<text matrix="1.2 0 0 1 -46.3029 0" transformations="translations" pos="176 176" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$0$</text>
-<text matrix="1.2 0 0 1 -27.1029 0" transformations="translations" pos="176 176" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$1$</text>
-<text matrix="1.2 0 0 1 68.8971 0" transformations="translations" pos="176 176" stroke="black" type="label" width="14.086" height="7.473" depth="2.49" halign="center" valign="baseline">$\lfloor\mathtt{x}\rfloor$</text>
-<text matrix="1.2 0 0 1 88.0971 0" transformations="translations" pos="176 176" stroke="black" type="label" width="14.086" height="7.473" depth="2.49" halign="center" valign="baseline">$\lceil\mathtt{x}\rceil$</text>
-<text matrix="1.2 0 0 1 241.697 0" transformations="translations" pos="176 176" stroke="black" type="label" width="22.388" height="6.421" depth="0.83" halign="center" valign="baseline">$\mathtt{n}-1$</text>
-<text matrix="1.2 0 0 1 -46.3029 0" transformations="translations" pos="272 208" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$1$</text>
-<text matrix="1.2 0 0 1 -46.3029 0" transformations="translations" pos="304 208" stroke="black" type="label" width="6.362" height="8.422" depth="3.43" valign="baseline">$\frac{1}{2}$</text>
-<text matrix="1.2 0 0 1 -65.5029 0" transformations="translations" pos="272 208" stroke="black" type="label" width="6.362" height="8.422" depth="3.43" halign="center" valign="baseline">$\frac{1}{2}$</text>
-<text matrix="1.2 0 0 1 11.2971 0" transformations="translations" pos="272 208" stroke="black" type="label" width="6.362" height="8.422" depth="3.43" halign="center" valign="baseline">$\frac{1}{3}$</text>
+<text matrix="1.2 0 0 1 -46.3029 0" transformations="translations" pos="176 176" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$0$</text>
+<text matrix="1.2 0 0 1 -27.1029 0" transformations="translations" pos="176 176" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$1$</text>
+<text matrix="1.2 0 0 1 68.8971 0" transformations="translations" pos="176 176" stroke="black" type="label" width="13.071" height="6.811" depth="2.16" halign="center" valign="baseline">$\lfloor\mathtt{\color{var}x}\rfloor$</text>
+<text matrix="1.2 0 0 1 88.0971 0" transformations="translations" pos="176 176" stroke="black" type="label" width="13.071" height="6.811" depth="2.16" halign="center" valign="baseline">$\lceil\mathtt{\color{var}x}\rceil$</text>
+<text matrix="1.2 0 0 1 241.697 0" transformations="translations" pos="176 176" stroke="black" type="label" width="20.118" height="6.6" depth="0.08" halign="center" valign="baseline">$\mathtt{\color{var}n}-1$</text>
+<text matrix="1.2 0 0 1 -46.3029 0" transformations="translations" pos="272 208" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$1$</text>
+<text matrix="1.2 0 0 1 -46.3029 0" transformations="translations" pos="304 208" stroke="black" type="label" width="6.518" height="8.939" depth="3.5" halign="center" valign="baseline">$\frac{1}{2}$</text>
+<text matrix="1.2 0 0 1 -65.5029 0" transformations="translations" pos="272 208" stroke="black" type="label" width="6.518" height="8.939" depth="3.5" halign="center" valign="baseline">$\frac{1}{2}$</text>
+<text matrix="1.2 0 0 1 11.2971 0" transformations="translations" pos="272 208" stroke="black" type="label" width="6.518" height="8.939" depth="3.5" halign="center" valign="baseline">$\frac{1}{3}$</text>
 <use matrix="1.2 0 0 1 -46.3029 0" name="mark/disk(sx)" pos="256 192" size="normal" stroke="black"/>
 <use matrix="1.2 0 0 1 -46.3029 0" name="mark/disk(sx)" pos="320 192" size="normal" stroke="black"/>
-<text matrix="1.2 0 0 1 -161.503 0" transformations="translations" pos="272 208" stroke="black" type="label" width="23.97" height="8.416" depth="5.18" halign="center" valign="baseline">$\frac{1}{\lfloor\mathrm{x}\rfloor+1}$</text>
-<text matrix="1.2 0 0 1 -142.303 0" transformations="translations" pos="272 208" stroke="black" type="label" width="13.883" height="8.416" depth="5.18" halign="center" valign="baseline">$\frac{1}{\lfloor\mathrm{x}\rfloor}$</text>
-<text matrix="1.2 0 0 1 126.497 0" transformations="translations" pos="272 208" stroke="black" type="label" width="24.51" height="8.416" depth="5.18" halign="center" valign="baseline">$\frac{1}{\mathrm{n-\lfloor x\rfloor}}$</text>
-<text matrix="1.2 0 0 1 -27.1029 0" transformations="translations" pos="352 208" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="baseline">$\cdots$</text>
-<text matrix="1.2 0 0 1 -36.7029 0" transformations="translations" pos="208 208" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="baseline">$\cdots$</text>
-<text matrix="1.2 0 0 1 -36.7029 -32" transformations="translations" pos="208 208" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="baseline">$\cdots$</text>
-<text matrix="1.2 0 0 1 -27.1029 -32" transformations="translations" pos="352 208" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="baseline">$\cdots$</text>
-<text matrix="1.2 0 0 1 -7.9029 0" transformations="translations" pos="128 176" stroke="black" type="label" width="3.432" height="6.571" depth="0" halign="right" valign="baseline">$i$</text>
-<text matrix="1.2 0 0 1 -7.9029 0" transformations="translations" pos="128 208" stroke="black" type="label" width="46.606" height="7.473" depth="2.49" halign="right" valign="baseline">$\Pr\{I_i=1\}$</text>
+<text matrix="1.2 0 0 1 -161.503 0" transformations="translations" pos="272 208" stroke="black" type="label" width="21.093" height="8.938" depth="5.08" halign="center" valign="baseline">$\frac{1}{\lfloor\mathrm{x}\rfloor+1}$</text>
+<text matrix="1.2 0 0 1 -142.303 0" transformations="translations" pos="272 208" stroke="black" type="label" width="12.227" height="8.938" depth="5.08" halign="center" valign="baseline">$\frac{1}{\lfloor\mathrm{x}\rfloor}$</text>
+<text matrix="1.2 0 0 1 126.497 0" transformations="translations" pos="272 208" stroke="black" type="label" width="21.312" height="8.938" depth="5.08" halign="center" valign="baseline">$\frac{1}{\mathrm{n-\lfloor x\rfloor}}$</text>
+<text matrix="1.2 0 0 1 -27.1029 0" transformations="translations" pos="352 208" stroke="black" type="label" width="10.793" height="3.049" depth="0" halign="center" valign="baseline">$\cdots$</text>
+<text matrix="1.2 0 0 1 -36.7029 0" transformations="translations" pos="208 208" stroke="black" type="label" width="10.793" height="3.049" depth="0" halign="center" valign="baseline">$\cdots$</text>
+<text matrix="1.2 0 0 1 -36.7029 -32" transformations="translations" pos="208 208" stroke="black" type="label" width="10.793" height="3.049" depth="0" halign="center" valign="baseline">$\cdots$</text>
+<text matrix="1.2 0 0 1 -27.1029 -32" transformations="translations" pos="352 208" stroke="black" type="label" width="10.793" height="3.049" depth="0" halign="center" valign="baseline">$\cdots$</text>
+<text matrix="1.2 0 0 1 -7.9029 0" transformations="translations" pos="128 176" stroke="black" type="label" width="3.626" height="6.926" depth="0.07" halign="right" valign="baseline">$i$</text>
+<text matrix="1.2 0 0 1 -7.9029 0" transformations="translations" pos="128 208" stroke="black" type="label" width="39.961" height="7.344" depth="2.16" halign="right" valign="baseline">$\Pr\{I_i=1\}$</text>
 <use matrix="1.2 0 0 1 -46.3029 0" name="mark/disk(sx)" pos="240 192" size="normal" stroke="black"/>
-<text matrix="1.2 0 0 1 -84.7029 0" transformations="translations" pos="272 208" stroke="black" type="label" width="6.362" height="8.422" depth="3.43" halign="center" valign="baseline">$\frac{1}{3}$</text>
-<text matrix="1.2 0 0 1 -27.1029 0" transformations="translations" pos="272 208" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$1$</text>
+<text matrix="1.2 0 0 1 -84.7029 0" transformations="translations" pos="272 208" stroke="black" type="label" width="6.518" height="8.939" depth="3.5" halign="center" valign="baseline">$\frac{1}{3}$</text>
+<text matrix="1.2 0 0 1 -27.1029 0" transformations="translations" pos="272 208" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$1$</text>
 </page>
 </ipe>

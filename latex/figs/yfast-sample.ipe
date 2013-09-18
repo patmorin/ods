@@ -2,7 +2,7 @@
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70010" creator="Ipe 7.0.10">
 <info created="D:20120130093641" modified="D:20120130094640"/>
-<preamble>\usepackage{kpfonts}</preamble>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -233,32 +233,32 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<text layer="alpha" matrix="1 0 0 1 -8 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="27.061" height="4.294" depth="1.49" halign="center" valign="baseline">$\mathtt{\color{blue}x}_i=\mathtt{\color{blue}x}$</text>
-<text matrix="1 0 0 1 24 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="18.634" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{blue}x}_{i+1}$</text>
-<text matrix="1 0 0 1 56 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="18.634" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{blue}x}_{i+2}$</text>
-<text matrix="1 0 0 1 120 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="28.561" height="4.29" depth="2.85" halign="center" valign="baseline">$\mathtt{\color{blue}x}_{i+j-2}$</text>
-<text matrix="1 0 0 1 152 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="28.561" height="4.29" depth="2.85" halign="center" valign="baseline">$\mathtt{\color{blue}x}_{i+j-1}$</text>
+<text layer="alpha" matrix="1 0 0 1 -8 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="27.061" height="4.294" depth="1.49" halign="center" valign="baseline">$\mathtt{\color{var}x}_i=\mathtt{\color{var}x}$</text>
+<text matrix="1 0 0 1 24 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="18.634" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{var}x}_{i+1}$</text>
+<text matrix="1 0 0 1 56 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="18.634" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{var}x}_{i+2}$</text>
+<text matrix="1 0 0 1 120 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="28.561" height="4.29" depth="2.85" halign="center" valign="baseline">$\mathtt{\color{var}x}_{i+j-2}$</text>
+<text matrix="1 0 0 1 152 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="28.561" height="4.29" depth="2.85" halign="center" valign="baseline">$\mathtt{\color{var}x}_{i+j-1}$</text>
 <text matrix="1 0 0 1 88 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="11.623" height="1.052" depth="0" halign="center" valign="baseline">$\ldots$</text>
 <text matrix="1 0 0 1 -8 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="7.195" height="6.808" depth="0" halign="center" valign="baseline">T</text>
 <text matrix="1 0 0 1 24 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="7.195" height="6.808" depth="0" halign="center" valign="baseline">T</text>
 <text matrix="1 0 0 1 56 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="7.195" height="6.808" depth="0" halign="center" valign="baseline">T</text>
 <text matrix="1 0 0 1 120 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="7.195" height="6.808" depth="0" halign="center" valign="baseline">T</text>
 <text matrix="1 0 0 1 152 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="7.472" height="6.808" depth="0" halign="center" valign="baseline">H</text>
-<text matrix="1 0 0 1 -40 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="18.745" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{blue}x}_{i-1}$</text>
+<text matrix="1 0 0 1 -40 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="18.745" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{var}x}_{i-1}$</text>
 <text matrix="1 0 0 1 -40 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="7.195" height="6.808" depth="0" halign="center" valign="baseline">T</text>
-<text matrix="1 0 0 1 -72 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="18.745" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{blue}x}_{i-2}$</text>
+<text matrix="1 0 0 1 -72 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="18.745" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{var}x}_{i-2}$</text>
 <text matrix="1 0 0 1 -72 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="7.195" height="6.808" depth="0" halign="center" valign="baseline">T</text>
-<text matrix="1 0 0 1 -136 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="29.265" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{blue}x}_{i-k+1}$</text>
+<text matrix="1 0 0 1 -136 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="29.265" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{var}x}_{i-k+1}$</text>
 <text matrix="1 0 0 1 -136 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="7.195" height="6.808" depth="0" halign="center" valign="baseline">T</text>
-<text matrix="1 0 0 1 -168 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="19.178" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{blue}x}_{i-k}$</text>
+<text matrix="1 0 0 1 -168 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="19.178" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{var}x}_{i-k}$</text>
 <text matrix="1 0 0 1 -168 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="7.195" height="6.808" depth="0" halign="center" valign="baseline">T</text>
-<text matrix="1 0 0 1 -200 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="29.375" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{blue}x}_{i-k-1}$</text>
+<text matrix="1 0 0 1 -200 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="29.375" height="4.294" depth="2.32" halign="center" valign="baseline">$\mathtt{\color{var}x}_{i-k-1}$</text>
 <text matrix="1 0 0 1 -200 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="7.472" height="6.808" depth="0" halign="center" valign="baseline">H</text>
 <text matrix="1 0 0 1 -104 6.598" transformations="translations" pos="272 304" stroke="black" type="label" width="11.623" height="1.052" depth="0" halign="center" valign="baseline">$\ldots$</text>
 <text matrix="1 0 0 1 -104 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="11.623" height="1.052" depth="0" halign="center" valign="baseline">$\ldots$</text>
 <text matrix="1 0 0 1 88 22.598" transformations="translations" pos="272 304" stroke="black" type="label" width="11.623" height="1.052" depth="0" halign="center" valign="baseline">$\ldots$</text>
 <text matrix="1 0 0 1 -64 -48" transformations="translations" pos="160 384" stroke="black" type="label" width="335.999" height="7.173" depth="0" valign="baseline">$\overbrace{\hspace{118.533mm}}$</text>
-<text matrix="1 0 0 1 7.9995 -16" transformations="translations" pos="256 368" stroke="black" type="label" width="146.147" height="6.926" depth="1.93" halign="center" valign="baseline">elements in treap, $\mathtt{\color{blue}t}$, containing $\mathtt{\color{blue}x}$</text>
+<text matrix="1 0 0 1 7.9995 -16" transformations="translations" pos="256 368" stroke="black" type="label" width="146.147" height="6.926" depth="1.93" halign="center" valign="baseline">elements in treap, $\mathtt{\color{var}t}$, containing $\mathtt{\color{var}x}$</text>
 <text transformations="translations" pos="256 304" stroke="black" type="label" width="176" height="-0.007" depth="7.18" valign="baseline">$\underbrace{\hspace{62.089mm}}$</text>
 <text matrix="1 0 0 1 -160 0" transformations="translations" pos="256 304" stroke="black" type="label" width="144" height="-0.007" depth="7.18" valign="baseline">$\underbrace{\hspace{50.8mm}}$</text>
 <text matrix="1 0 0 1 8 0" transformations="translations" pos="160 288" stroke="black" type="label" width="5.5" height="6.918" depth="0" halign="center" valign="baseline">$k$</text>
