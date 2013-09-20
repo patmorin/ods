@@ -22,31 +22,49 @@ def matches(line, methods):
     
 def touchup_code(line):
     """Touch up a line of python code to make it look more like pseudocode"""
+    line = re.sub(r'\b(for\b[^:]+):', r'\1 do', line)
+    line = re.sub(r'==', r'=', line)
     line = re.sub(r'self\.', '', line)
     line = re.sub(r'\bdef ', '', line)
     line = re.sub(r'\bif (.*):', r'if \1 then', line) 
     line = re.sub(r'\blen\s*\(\s*(\w+)\s*\)', r'length(\1)', line);
-    line = re.sub(r'\brange\s*\(\s*([^)]+)\s*\)', r'0,...,\1-1', line)
+    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*),\s*(.*)\s*\)',
+                  r'\2,...,\1', line)
+    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\-\s*1\s*\)', 
+                  r'\1,...,\2-2', line)
+    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)', r'\1,...,\2-1', line)
+    line = re.sub(r'\brange\s*\(\s*([^),]+)\s*\)', r'0,...,\1-1', line)
     line = re.sub(r'\bself\b,?\s*', '', line)
+    line = re.sub(r'\b(\w+)\b\s*\+=\s*(.*)\s*', r'\1 = \1 + \2', line)
+    line = re.sub(r'\b(\w+)\b\s*-=\s*(.*)\s*', r'\1 = \1 - \2', line)
     line = re.sub(r'_', '', line)
+    return line
+
+def color_code(code):
+    """Syntax highlight a piece of code"""
+    keywords = r'\b(if|then|else|in|for|do)\b'
+    code = re.sub(keywords, r'{\color{keyword}\1}', code)
     return line
 
 def print_code(clazz, methods):
     """Print out the methods in clazz that are listed in methods"""
     print r'\begin{Verbatim}[frame=single,label=\texttt{%s}]' % clazz 
+    printed = False
     try:
         filename = "../python/" + clazz.lower() + ".py"
         code = open(filename).read().splitlines()
-        printing = False;
+        printing = False
         for line in code:
             if printing:
                 printing = line == '' or line.startswith('     ')
             if not printing and matches(line, methods):
                 printing = True
-            if printing:
+            if printing and len(line.strip()) > 0:
+                printed = True
                 print touchup_code(line)
     except IOError:
         print "Unable to open %s" % filename
+    if not printed: print "NO OUTPUT"
     print r'\end{Verbatim}'
 
 def code_subs(line):
@@ -58,6 +76,7 @@ def code_subs(line):
             code = r'\\texttt{%s}' % code # just a class name
         else:
             code = re.sub(r'%', r'\%', code)
+            code = re.sub(r'&', r'\&', code)
             code = r'\ensuremath{\mathtt{%s}}' % code
         line = re.sub(r'#([^#]+)#', code, line, 1)
         m = re.match(r'.*#([^#]+)#', line)
@@ -68,7 +87,6 @@ def snarf(infile):
     lines = infile.read().splitlines();
     for line in lines:
         if line.startswith(r'\cppimport') or line.startswith(r'\javaimport'):
-            # do nothing
             print "%%%s" % line
         elif line.startswith('\\codeimport'):
             print "%%importing %s: " % line
@@ -76,9 +94,7 @@ def snarf(infile):
             clazz = m.group(1)
             methods = m.group(2).lstrip('.').split('.')
             print_code(clazz, methods)
-            # do some stuff
         else:
-            # do some other stuff
             print code_subs(line)
 
 def die(msg, code=-1):
