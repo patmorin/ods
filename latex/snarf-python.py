@@ -22,22 +22,33 @@ def matches(line, methods):
     
 def touchup_code(line):
     """Touch up a line of python code to make it look more like pseudocode"""
-    line = re.sub(r'\b(for\b[^:]+):', r'\1 do', line)
+    # some easy cleanups
     line = re.sub(r'==', r'=', line)
     line = re.sub(r'self\.', '', line)
     line = re.sub(r'\bdef ', '', line)
+    line = re.sub(r'\bself\b,?\s*', '', line)
+    # for <blah>: => for <blah> do
+    line = re.sub(r'\b(for\b[^:]+):', r'\1 do', line)
+    # if <blah>: => if <blah> then
     line = re.sub(r'\bif (.*):', r'if \1 then', line) 
-    line = re.sub(r'\blen\s*\(\s*(\w+)\s*\)', r'length(\1)', line);
-    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*),\s*(.*)\s*\)',
-                  r'\2,...,\1', line)
+    # len(<blah>) => length(<blah>)
+    line = re.sub(r'\blen\s*\(\s*(\w+)\s*\)', r'length(\1)', line)
+    line = re.sub(r'\b(\w+)\.length', r'length(\1)', line)
+    # range(a,b,-1) => a,...,b+1
+    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*),\s*-1\s*\)',
+                  r'\2,...,\1+1', line)
+    # range(a, b-1) => a,...,b-2
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\-\s*1\s*\)', 
                   r'\1,...,\2-2', line)
+    # range(a, b) => a,...,b-1
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)', r'\1,...,\2-1', line)
+    # range(a) => 0,...,a-1
     line = re.sub(r'\brange\s*\(\s*([^),]+)\s*\)', r'0,...,\1-1', line)
-    line = re.sub(r'\bself\b,?\s*', '', line)
+    # a += b => a = a + b
     line = re.sub(r'\b(\w+)\b\s*\+=\s*(.*)\s*', r'\1 = \1 + \2', line)
     line = re.sub(r'\b(\w+)\b\s*-=\s*(.*)\s*', r'\1 = \1 - \2', line)
-    line = re.sub(r'_', '', line)
+    # get rid of any remaining colons
+    line = re.sub(r':', '', line)
     return line
 
 def color_code(code):
@@ -55,6 +66,9 @@ def print_code(clazz, methods):
         code = open(filename).read().splitlines()
         printing = False
         for line in code:
+            line = re.sub(r'[ \.]_', ' ', line)
+            line = re.sub(r'_[ \.]', ' ', line)
+            line = re.sub(r'\(\s*self\s*\)', '()', line)
             if printing:
                 printing = line == '' or line.startswith('     ')
             if not printing and matches(line, methods):
@@ -69,17 +83,18 @@ def print_code(clazz, methods):
 
 def code_subs(line):
     """Touch up code snippets in a line of LaTeX code"""
-    m = re.match(r'.*#([^#]+)#', line)
+    pattern = r'#([^#]+)#'
+    m = re.search(pattern, line)
     while m:
-        code = m.group(1)
-        if re.match(r'[A-Z]\w*', code):
+        code = touchup_code(m.group(1))
+        if re.search(r'[A-Z]\w*', code):
             code = r'\\texttt{%s}' % code # just a class name
         else:
             code = re.sub(r'%', r'\%', code)
             code = re.sub(r'&', r'\&', code)
             code = r'\ensuremath{\mathtt{%s}}' % code
-        line = re.sub(r'#([^#]+)#', code, line, 1)
-        m = re.match(r'.*#([^#]+)#', line)
+        line = re.sub(pattern, code, line, 1)
+        m = re.search(pattern, line)
     return line
 
 def snarf(infile):
