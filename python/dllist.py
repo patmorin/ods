@@ -20,11 +20,11 @@ class DLList(object):
 	def get_node(self, i):
 		if i < self.n/2:
 			p = self.dummy.next	
-			for _ in xrange(0, i):
+			for _ in range(0, i):
 				p = p.next
 		else:
 			p = self.dummy
-			for _ in xrange(self.n, i, -1):
+			for _ in range(self.n, i, -1):
 				p = p.prev
 		return p
 

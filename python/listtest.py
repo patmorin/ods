@@ -11,46 +11,46 @@ from arraydeque import ArrayDeque
 
 def list_test(l, n):
     # append 
-    for i in xrange(n):
+    for i in range(n):
         l.add(len(l), i)
     assert len(l) == n
-    for i in xrange(len(l)):
+    for i in range(len(l)):
         assert l.get(i) == i
 
     # prepend
-    for i in xrange(n):
+    for i in range(n):
         l.add(0, -i-1)
     assert len(l) == 2*n
-    for i in xrange(len(l)):
+    for i in range(len(l)):
         assert l.get(i) == -n+i
         
     # add in middle
-    for i in xrange(n):
+    for i in range(n):
         l.add(n, i+2*n)
     assert len(l) == 3*n
-    for i in xrange(n):
+    for i in range(n):
         assert l.get(i) == -n+i
-    for i in xrange(n, 2*n):
+    for i in range(n, 2*n):
         assert l.get(i) == 4*n - i - 1
-    for i in xrange(2*n, n):
+    for i in range(2*n, n):
         assert l.get(i) == i - 2*n
 
     # remove from middle
-    for i in xrange(n):
+    for i in range(n):
         l.remove(len(l)//2)
     assert len(l) == 2*n
-    for i in xrange(len(l)):
+    for i in range(len(l)):
         assert l.get(i) == -n+i
     
     # remove from end
-    for i in xrange(n):
+    for i in range(n):
         l.remove(len(l)-1)
     assert len(l) == n
-    for i in xrange(len(l)):
+    for i in range(len(l)):
         assert l.get(i) == -n+i
 
     # remove from beginning
-    for i in xrange(n):
+    for i in range(n):
         l.remove(0)
     assert len(l) == 0
 
@@ -60,17 +60,17 @@ import random
 
 def list_cmp(l1, l2):
     assert(len(l1) == len(l2))
-    for i in xrange(len(l1)):
+    for i in range(len(l1)):
         assert(l1.get(i) == l2.get(i))
     
 def list_cmp_test(l1, l2, n):
-    for _ in xrange(n):
+    for _ in range(n):
         x = random.random();
         i = random.randrange(0, len(l1)+1)
         l1.add(i, x)
         l2.add(i, x)
         list_cmp(l1, l2)
-    for _ in xrange(5*n):
+    for _ in range(5*n):
         op = random.randrange(0,3)
         if (op == 0):
             i = random.randrange(0, len(l1)+1)
