@@ -57,9 +57,31 @@ def color_code(code):
     code = re.sub(keywords, r'{\color{keyword}\1}', code)
     return line
 
+def escape_line_of_code(line):
+    keywords = r'\b(if|or|and|then|else|in|for|do|return|raise)\b'
+    line = re.sub(keywords, r'\\textbf{\1}', line)
+    operand = r'(|\w+\(.*\)|\(.*\)|\w+(\[.*\])?)'
+    op = r'(,\.\.\.,|>=|//|<=|=|%|<|>|\+|-|/|\*)'
+    expr = r'(%s(\s*%s\s*%s)+)' % (operand, op, operand)
+    line = re.sub(expr, r'$\1$', line)
+    line = re.sub(r'>=', r'\\ge', line)
+    line = re.sub(r'<=', r'\\le', line)
+    line = re.sub(r'!=', r'\ne', line)
+    line = re.sub(r'%', r'\\bmod ', line)
+    line = re.sub(r'\*', r' ', line)
+    line = re.sub(r'([^=])=([^=])', r'\1\\gets\2', line)
+    line = re.sub(r'==', r'=', line)
+    line = re.sub(r'(\w+)\(', r'\\textrm{\1}(', line)
+    line = re.sub(r'_', r'\\_', line)
+    line = re.sub(r' {4}', r'\hspace*{1em} ', line)  # specific to lines
+    line = re.sub(r'^', '\ ', line)
+    line = re.sub(r'$', r'\\\\', line)
+    return line
+    
 def print_code(clazz, methods):
     """Print out the methods in clazz that are listed in methods"""
-    print r'\begin{Verbatim}[frame=single,label=\texttt{%s}]' % clazz 
+    #print r'\begin{Verbatim}[frame=single,label=\texttt{%s}]' % clazz 
+    print r'\begin{framed}\begin{flushleft}'
     printed = False
     try:
         filename = "../python/" + clazz.lower() + ".py"
@@ -69,17 +91,19 @@ def print_code(clazz, methods):
             line = re.sub(r'[ \.]_', ' ', line)
             line = re.sub(r'_[ \.]', ' ', line)
             line = re.sub(r'\(\s*self\s*\)', '()', line)
+            
             if printing:
                 printing = line == '' or line.startswith('     ')
             if not printing and matches(line, methods):
                 printing = True
             if printing and len(line.strip()) > 0:
                 printed = True
-                print touchup_code(line)
+                print escape_line_of_code(touchup_code(line))
     except IOError:
         print "Unable to open %s" % filename
     if not printed: print "NO OUTPUT"
-    print r'\end{Verbatim}'
+    print r'\end{flushleft}\end{framed}'
+    #print r'\end{Verbatim}'
 
 def code_subs(line):
     """Touch up code snippets in a line of LaTeX code"""
@@ -117,16 +141,17 @@ def die(msg, code=-1):
     sys.stderr.write("Fatal Error: " + msg + "\n")
     sys.exit(code)
 
-if len(argv) == 1:
-    infile = sys.stdin
-elif len(argv) == 2:
-    try:
-        infile = open(argv[1])
-    except IOError:
-        die("Unable to open input file %s" % argv[1])
-else:
-    die("Usage: %s [<infile>]" % argv[0])
-snarf(infile)
+def main():
+    if len(argv) == 1:
+        infile = sys.stdin
+    elif len(argv) == 2:
+        try:
+            infile = open(argv[1])
+        except IOError:
+            die("Unable to open input file %s" % argv[1])
+    else:
+        die("Usage: %s [<infile>]" % argv[0])
+    snarf(infile)
 
 
-
+main()
