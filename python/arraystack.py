@@ -1,14 +1,18 @@
 '''
-Created on 2012-04-02
+An array-based list implementation with O(1+n-i) amortized update time.
 
-@author: morin
+Stores the list in an array, a, so that the i'th list item is stored
+at a[(j+i)%len(a)].
+
+Uses a doubling strategy for resizing a when it becomes full or too empty.
 '''
-
 from utils import new_array
 
-class ArrayStack(object):
+from arraybasedlist import ArrayBasedList
+
+class ArrayStack(ArrayBasedList):
     def __init__(self):
-        self.a = new_array(1)
+        self.a = self.new_array(1)
         self.n = 0
 
     def get(self, i):
@@ -39,7 +43,7 @@ class ArrayStack(object):
         return x
   
     def _resize(self):
-        b = new_array(max(1, 2*self.n))
+        b = self.new_array(max(1, 2*self.n))
         for i in range(self.n):
             b[i] = self.a[i]
         self.a = b
@@ -47,10 +51,5 @@ class ArrayStack(object):
     def size(self):
         return self.n
     
-    def __len__(self):
-        return self.size()
 
-    def __str__(self):
-        return str([self.a[i] for i in range(self.n)])
 
-        

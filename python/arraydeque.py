@@ -1,13 +1,16 @@
 '''
-Created on 2012-04-02
+An array-based list implementation with O(1+min{i,n-i}) amortized update time.
 
-@author: morin
+Stores the list in an array, a, so that the i'th list item is stored
+at a[(j+i)%len(a)].
+
+Uses a doubling strategy for resizing a when it becomes full or too empty.
 '''
+from arraybasedlist import ArrayBasedList
 
-        
-class ArrayDeque(object):
+class ArrayDeque(ArrayBasedList):
     def __init__(self):
-        self.a = [None]
+        self.a = self.new_array(1)
         self.j = 0
         self.n = 0
 
@@ -49,7 +52,7 @@ class ArrayDeque(object):
         return x;
   
     def _resize(self):
-        b = [None] * max(1, 2*self.n)
+        b = self.new_array(max(1, 2*self.n))
         for k in range(self.n):
             b[k] = self.a[(self.j+k)%len(self.a)]
         self.a = b
@@ -58,13 +61,4 @@ class ArrayDeque(object):
     def size(self):
         return self.n
     
-    def __len__(self):
-        return self.size()
-    
-    def __str__(self):
-        s = "["
-        for i in range(self.n):
-            s += self.get(i)
-            if i < self.n-1: s += ","
-        s += "]"
-        
+

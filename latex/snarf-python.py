@@ -20,10 +20,10 @@ def matches(line, methods):
     sig = name + args
     return sig in methods
     
-def touchup_code(line):
-    """Touch up a line of python code to make it look more like pseudocode"""
-    # some easy cleanups
-    line = re.sub(r'==', r'=', line)
+def translate_code(line):
+    # no input checking/exception handling in pseudocode
+    if re.search(r'\braise\b', line): return ''
+    # eliminate self and def 
     line = re.sub(r'self\.', '', line)
     line = re.sub(r'\bdef ', '', line)
     line = re.sub(r'\bself\b,?\s*', '', line)
@@ -36,45 +36,61 @@ def touchup_code(line):
     line = re.sub(r'\b(\w+)\.length', r'length(\1)', line)
     # range(a,b,-1) => a,...,b+1
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*),\s*-1\s*\)',
-                  r'\2,...,\1+1', line)
+                  r'\2,\ldots,\1+1', line)
     # range(a, b-1) => a,...,b-2
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\-\s*1\s*\)', 
-                  r'\1,...,\2-2', line)
+                  r'\1,\ldots,\2-2', line)
     # range(a, b) => a,...,b-1
-    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)', r'\1,...,\2-1', line)
+    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)', r'\1,\ldots,\2-1', line)
     # range(a) => 0,...,a-1
-    line = re.sub(r'\brange\s*\(\s*([^),]+)\s*\)', r'0,...,\1-1', line)
+    line = re.sub(r'\brange\s*\(\s*([^),]+)\s*\)', r'0,\ldots,\1-1', line)
     # a += b => a = a + b
     line = re.sub(r'\b(\w+)\b\s*\+=\s*(.*)\s*', r'\1 = \1 + \2', line)
     line = re.sub(r'\b(\w+)\b\s*-=\s*(.*)\s*', r'\1 = \1 - \2', line)
     # get rid of any remaining colons
     line = re.sub(r':', '', line)
-    return line
-
-def color_code(code):
-    """Syntax highlight a piece of code"""
-    keywords = r'\b(if|then|else|in|for|do)\b'
-    code = re.sub(keywords, r'{\color{keyword}\1}', code)
-    return line
-
-def escape_line_of_code(line):
+    # int(ceil(blah)) => \lceil{blah}\rceil
+    line = re.sub(r'int\(ceil\((.+)\)\)', r'\lceil{\1}\rceil', line)
+    # int(sqrt(blah)) => \sqrt{blah}
+    line = re.sub(r'\bsqrt\((.+)\)', r'\sqrt{\1}', line)
+    # highlight keywords
     keywords = r'\b(if|or|and|then|else|in|for|do|return|raise)\b'
     line = re.sub(keywords, r'\\textbf{\1}', line)
-    operand = r'(|\w+\(.*\)|\(.*\)|\w+(\[.*\])?)'
-    op = r'(,\.\.\.,|>=|//|<=|=|%|<|>|\+|-|/|\*)'
+    # recognize mathematical expression and ensuremath them
+    # warning: doesn't handle nested parentheses or brackets
+    operand = r'(\w+(\.\w+)*\([^\)]+\)|\([^\)]+\)|\w+(\.\w+)*\[.*\]|\w+(\.\w+)*)'
+    op = r'(,\\ldots,|>=|//|<=|==|=|%|<|>|\+|-|/|\*)'
     expr = r'(%s(\s*%s\s*%s)+)' % (operand, op, operand)
-    line = re.sub(expr, r'$\1$', line)
+    line = re.sub(expr, r'\ensuremath{\1}', line)
+    # turn python math operators into latex math operators
     line = re.sub(r'>=', r'\\ge', line)
-    line = re.sub(r'<=', r'\\le', line)
-    line = re.sub(r'!=', r'\ne', line)
-    line = re.sub(r'%', r'\\bmod ', line)
+    line = re.sub(r'<=', r'\le', line)
+    line = re.sub(r'%', r'\\bmod ', line) 
     line = re.sub(r'\*', r' ', line)
-    line = re.sub(r'([^=])=([^=])', r'\1\\gets\2', line)
-    line = re.sub(r'==', r'=', line)
+    line = re.sub(r'!=', r'\ne', line)
+    line = re.sub(r'==', r'\eq', line)
+    line = re.sub(r'//', r'\bdiv', line)
+    #line = re.sub(r'([^\\])&', r'\1AND', line)
+    line = re.sub(r'([^=])=([^=])', r'\1\\gets \2', line)
+    # case on True and False
+    line = re.sub(r'True', r'true', line)
+    line = re.sub(r'False', r'false', line)
+    # typeset function names in textrm 
     line = re.sub(r'(\w+)\(', r'\\textrm{\1}(', line)
+    # typeset variables in mathit
+    # line = re.sub(r'(\w+)([^\(\w])', r'\mathit{\1}\2', line)
+    # last cleanup, ensure everything inside parentheses is in math mode
+    line = re.sub(r'(\([^\)]*\))', r'\ensuremath{\1}', line)
+    # escape underscores
     line = re.sub(r'_', r'\\_', line)
+    return line
+
+def touchup_code_line(line):
+    """Add latex markup for a line in a code listing"""
+    if line == '': return line
+    # 4 spaces => 1em
     line = re.sub(r' {4}', r'\hspace*{1em} ', line)  # specific to lines
-    line = re.sub(r'^', '\ ', line)
+    # add \\ at the end of each line
     line = re.sub(r'$', r'\\\\', line)
     return line
     
@@ -98,7 +114,7 @@ def print_code(clazz, methods):
                 printing = True
             if printing and len(line.strip()) > 0:
                 printed = True
-                print escape_line_of_code(touchup_code(line))
+                print touchup_code_line(translate_code(line))
     except IOError:
         print "Unable to open %s" % filename
     if not printed: print "NO OUTPUT"
@@ -107,17 +123,16 @@ def print_code(clazz, methods):
 
 def code_subs(line):
     """Touch up code snippets in a line of LaTeX code"""
-    pattern = r'#([^#]+)#'
+    pattern = r'^(.*)#([^#]+)#(.*)$'
     m = re.search(pattern, line)
     while m:
-        code = touchup_code(m.group(1))
+        code = translate_code(m.group(2))
         if re.search(r'[A-Z]\w*', code):
-            code = r'\\texttt{%s}' % code # just a class name
+            code = r'\textrm{' + code + '}'
+            pass # just a class name
         else:
-            code = re.sub(r'%', r'\%', code)
-            code = re.sub(r'&', r'\&', code)
-            code = r'\ensuremath{\mathtt{%s}}' % code
-        line = re.sub(pattern, code, line, 1)
+            code = translate_code(code)
+        line = m.group(1) + '\ensuremath{' + code + '}' + m.group(3)
         m = re.search(pattern, line)
     return line
 
