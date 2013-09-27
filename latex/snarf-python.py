@@ -50,9 +50,11 @@ def translate_code(line):
     # get rid of any remaining colons
     line = re.sub(r':', '', line)
     # int(ceil(blah)) => \lceil{blah}\rceil
-    line = re.sub(r'int\(ceil\((.+)\)\)', r'\lceil{\1}\rceil', line)
+    line = re.sub(r'int\(ceil\((.+)\)\)', r'\left\lceil{\1}\\right\\rceil', line)
     # int(sqrt(blah)) => \sqrt{blah}
     line = re.sub(r'\bsqrt\((.+)\)', r'\sqrt{\1}', line)
+    # elif => else if
+    line = re.sub(r'\belif\b', r'else if', line)
     # highlight keywords
     keywords = r'\b(if|or|and|then|else|in|for|do|return|raise)\b'
     line = re.sub(keywords, r'\\textbf{\1}', line)
@@ -67,7 +69,7 @@ def translate_code(line):
     line = re.sub(r'<=', r'\le', line)
     line = re.sub(r'%', r'\\bmod ', line) 
     line = re.sub(r'\*', r' ', line)
-    line = re.sub(r'!=', r'\ne', line)
+    line = re.sub(r'!=', r'\\ne', line)
     line = re.sub(r'==', r'\eq', line)
     line = re.sub(r'//', r'\bdiv', line)
     #line = re.sub(r'([^\\])&', r'\1AND', line)
