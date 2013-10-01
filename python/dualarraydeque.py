@@ -47,16 +47,15 @@ class DualArrayDeque(ArrayBasedList):
     def _balance(self):
         n = self.size()
         mid = n//2
-        if 3*self.front.size() < self.back.size() \
-           or 3*self.back.size() < self.front.size():
-            f2 = ArrayStack()
+        if 3*self.front.size() < self.back.size() or 3*self.back.size() < self.front.size():
+            f = ArrayStack()
             for i in range(mid):
-                f2.add(i, self.get(mid-i-1))
-            b2 = ArrayStack()
+                f.add(i, self.get(mid-i-1))
+            b = ArrayStack()
             for i in range(n-mid):
-                b2.add(i, self.get(mid+i)) 
-            self.front = f2
-            self.back = b2
+                b.add(i, self.get(mid+i)) 
+            self.front = f
+            self.back = b
 
     def size(self):
         return self.front.size() + self.back.size()        

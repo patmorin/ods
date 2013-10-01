@@ -1,6 +1,8 @@
 \documentclass[10pt]{book}
 \usepackage{makeidx}
 \usepackage{framed}
+\setlength{\FrameSep}{0mm}
+
 \makeindex
 %\usepackage{showidx}
 % mark overful hboxes
@@ -166,6 +168,8 @@
     pdfsubject={Computer Science, Data Structures},%
     pdfkeywords={Data structures, algorithms}} 
 
+\DeclareMathOperator{\bdiv}{div}
+
 % Title page content
 \title{Open Data Structures (in \lang)}
 \author{Pat Morin}
@@ -240,7 +244,7 @@ Edition 0.1F\cpponly{$\beta$}
 \fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
 \fancyhead[CO]{\small\rightmarktitle} % section title, right center
 \fancyhead[RO,LE]{\small\rightmarksection}
-%\include{intro-lang}
+\include{intro-lang}
 \include{arrays-lang}
 \include{linkedlists-lang}
 \include{skiplists-lang}

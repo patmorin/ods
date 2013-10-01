@@ -23,7 +23,7 @@ def matches(line, methods):
 def translate_code(line):
     # no input checking/exception handling in pseudocode
     if re.search(r'\braise\b', line): return ''
-    # eliminate self and def 
+    # eliminate self and def
     line = re.sub(r'self\.', '', line)
     line = re.sub(r'\bdef ', '', line)
     line = re.sub(r'\bself\b,?\s*', '', line)
@@ -50,7 +50,7 @@ def translate_code(line):
     # get rid of any remaining colons
     line = re.sub(r':', '', line)
     # int(ceil(blah)) => \lceil{blah}\rceil
-    line = re.sub(r'int\(ceil\((.+)\)\)', r'\left\lceil{\1}\\right\\rceil', line)
+    line = re.sub(r'int\(ceil\((.+)\)\)', r'\ensuremath{\left\lceil{\1}\\right\\rceil}', line)
     # int(sqrt(blah)) => \sqrt{blah}
     line = re.sub(r'\bsqrt\((.+)\)', r'\sqrt{\1}', line)
     # elif => else if
@@ -60,31 +60,43 @@ def translate_code(line):
     line = re.sub(keywords, r'\\textbf{\1}', line)
     # recognize mathematical expression and ensuremath them
     # warning: doesn't handle nested parentheses or brackets
-    operand = r'(\w+(\.\w+)*\([^\)]+\)|\([^\)]+\)|\w+(\.\w+)*\[.*\]|\w+(\.\w+)*)'
-    op = r'(,\\ldots,|>=|//|<=|==|=|%|<|>|\+|-|/|\*)'
-    expr = r'(%s(\s*%s\s*%s)+)' % (operand, op, operand)
-    line = re.sub(expr, r'\ensuremath{\1}', line)
+    basic = r'\b\w+\b'
+    fncall = r'%s(\([^\)]*\))?' % basic
+    indexed = r'%s(\[[^\]]+\])?' % fncall
+    operand = indexed # r'%s(\.%s)*' % (indexed, indexed)
+    op = r'(,\\ldots,|&|>=|\.|,|//|<=|==|!=|=|%|<|>|\+|-|/|\*)'
+    expr0 = r'(%s(\s*%s\s*%s)*)' % (operand, op, operand)
+    parenexpr = r'(%s|\(%s\))' % (expr0, expr0)
+    expr = r'(^|[^{\\])(%s(\s*%s\s*%s)*)' % (parenexpr, op, parenexpr)
+    line = re.sub(expr, r'\1\ensuremath{\2}', line)
     # turn python math operators into latex math operators
-    line = re.sub(r'>=', r'\\ge', line)
+    line = re.sub(r'>=', r'\\ge', line) 
     line = re.sub(r'<=', r'\le', line)
     line = re.sub(r'%', r'\\bmod ', line) 
-    line = re.sub(r'\*', r' ', line)
+    line = re.sub(r'\*', r'\cdot ', line)
     line = re.sub(r'!=', r'\\ne', line)
-    line = re.sub(r'==', r'\eq', line)
-    line = re.sub(r'//', r'\bdiv', line)
+    line = re.sub(r'==', r'\eq', line) 
+    line = re.sub(r'//', r'\\bdiv ', line)
+    line = re.sub(r'(^|[^\\])&', r'\1\& ', line)
     #line = re.sub(r'([^\\])&', r'\1AND', line)
     line = re.sub(r'([^=])=([^=])', r'\1\\gets \2', line)
     # case on True and False
     line = re.sub(r'True', r'true', line)
     line = re.sub(r'False', r'false', line)
-    # typeset function names in textrm 
-    line = re.sub(r'(\w+)\(', r'\\textrm{\1}(', line)
+    # None/null => \textbf{nil}
+    line = re.sub(r'\b(None|null)\b', r'nil', line)
+    # typeset function names in mathrm 
+    line = re.sub(r'\b(\w+)\(', r'\\mathrm{\1}(', line)
     # typeset variables in mathit
-    # line = re.sub(r'(\w+)([^\(\w])', r'\mathit{\1}\2', line)
-    # last cleanup, ensure everything inside parentheses is in math mode
-    line = re.sub(r'(\([^\)]*\))', r'\ensuremath{\1}', line)
+    line = re.sub(r'([^\\\w])([a-z0-9_]+)([^{}\w])', \
+            r'\1\ensuremath{\mathit{\2}}\3', line)
+    # line = re.sub(r'\b([a-z0-9_]+)\.', r'\ensuremath{\mathit{\1}}.', line)
+    # typeset class names in mathrm
+    line = re.sub(r'([A-Z]\w+)', r'\mathrm{\1}', line)
     # escape underscores
-    line = re.sub(r'_', r'\\_', line)
+    line = re.sub(r'_', r'\_', line)
+    # escape hashes
+    line = re.sub(r'#', r'\#', line)
     return line
 
 def touchup_code_line(line):
