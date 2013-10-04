@@ -9,55 +9,82 @@ import re
 
 
 def matches(line, methods):
-    """Math a line of python code to a method definition
+    """Match a line of Python code to a method definition
 
-    Determine if this line of python code is a method definition listed
+    Determine if this line of Python code is a method definition listed
     in methods"""
     m = re.match(r'\s{4}def\s+(\w+)(\(.*\))\s*:', line)
     if (not m): return False
     name = m.group(1)
-    args = re.sub(r' |self,', '', m.group(2))
+    # remove leading and trailing underscores
+    name = re.sub(r'^_*|_*$', '', name)
+    args = m.group(2)
+    # remove self from argument list
+    args = re.sub(r'^\(self\s*,?\s*', '(', args)
+    # remove spaces from argument list
+    args = re.sub(r'\s*', '', args)
     sig = name + args
+    sys.stderr.write("signature: %s %r\n" % (sig, methods))
     return sig in methods
     
 def translate_code(line):
-    # no input checking/exception handling in pseudocode
+    """Translate a snippet of Python into LaTeX markup for pseudocode"""
+    # hide input checking/exception handling in pseudocode
     if re.search(r'\braise\b', line): return ''
+
+    # remove leading and trailing underscores
+    # line = re.sub(r'\b(\\_)*|(\\_)*\b', '', line)
+
     # eliminate self and def
     line = re.sub(r'self\.', '', line)
-    line = re.sub(r'\bdef ', '', line)
+    line = re.sub(r'\bdef\s*', '', line)
     line = re.sub(r'\bself\b,?\s*', '', line)
+
     # for <blah>: => for <blah> do
     line = re.sub(r'\b(for\b[^:]+):', r'\1 do', line)
+
     # if <blah>: => if <blah> then
     line = re.sub(r'\bif (.*):', r'if \1 then', line) 
+
     # len(<blah>) => length(<blah>)
     line = re.sub(r'\blen\s*\(\s*(\w+)\s*\)', r'length(\1)', line)
     line = re.sub(r'\b(\w+)\.length', r'length(\1)', line)
+
     # range(a,b,-1) => a,...,b+1
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*),\s*-1\s*\)',
                   r'\2,\ldots,\1+1', line)
+
     # range(a, b-1) => a,...,b-2
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\-\s*1\s*\)', 
                   r'\1,\ldots,\2-2', line)
+
     # range(a, b) => a,...,b-1
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)', r'\1,\ldots,\2-1', line)
+
     # range(a) => 0,...,a-1
     line = re.sub(r'\brange\s*\(\s*([^),]+)\s*\)', r'0,\ldots,\1-1', line)
+
     # a += b => a = a + b
     line = re.sub(r'\b(\w+)\b\s*\+=\s*(.*)\s*', r'\1 = \1 + \2', line)
     line = re.sub(r'\b(\w+)\b\s*-=\s*(.*)\s*', r'\1 = \1 - \2', line)
+
     # get rid of any remaining colons
     line = re.sub(r':', '', line)
+
     # int(ceil(blah)) => \lceil{blah}\rceil
-    line = re.sub(r'int\(ceil\((.+)\)\)', r'\ensuremath{\left\lceil{\1}\\right\\rceil}', line)
+    line = re.sub(r'int\(ceil\((.+)\)\)', \
+                  r'\ensuremath{\left\lceil{\1}\\right\\rceil}', line)
+
     # int(sqrt(blah)) => \sqrt{blah}
     line = re.sub(r'\bsqrt\((.+)\)', r'\sqrt{\1}', line)
+
     # elif => else if
     line = re.sub(r'\belif\b', r'else if', line)
+
     # highlight keywords
     keywords = r'\b(if|or|and|then|else|in|for|do|return|raise)\b'
     line = re.sub(keywords, r'\\textbf{\1}', line)
+
     # recognize mathematical expression and ensuremath them
     # warning: doesn't handle nested parentheses or brackets
     basic = r'\b\w+\b'
@@ -69,7 +96,8 @@ def translate_code(line):
     parenexpr = r'(%s|\(%s\))' % (expr0, expr0)
     expr = r'(^|[^{\\])(%s(\s*%s\s*%s)*)' % (parenexpr, op, parenexpr)
     line = re.sub(expr, r'\1\ensuremath{\2}', line)
-    # turn python math operators into latex math operators
+
+    # turn Python math operators into LaTeX math operators
     line = re.sub(r'>=', r'\\ge', line) 
     line = re.sub(r'<=', r'\le', line)
     line = re.sub(r'%', r'\\bmod ', line) 
@@ -77,40 +105,46 @@ def translate_code(line):
     line = re.sub(r'!=', r'\\ne', line)
     line = re.sub(r'==', r'\eq', line) 
     line = re.sub(r'//', r'\\bdiv ', line)
-    line = re.sub(r'(^|[^\\])&', r'\1\& ', line)
-    #line = re.sub(r'([^\\])&', r'\1AND', line)
+    line = re.sub(r'(^|[^\\])&', r'\1 and ', line)
     line = re.sub(r'([^=])=([^=])', r'\1\\gets \2', line)
-    # case on True and False
+
+    # lowercase True and False
     line = re.sub(r'True', r'true', line)
     line = re.sub(r'False', r'false', line)
+
     # None/null => \textbf{nil}
     line = re.sub(r'\b(None|null)\b', r'nil', line)
+
     # typeset function names in mathrm 
     line = re.sub(r'\b(\w+)\(', r'\\mathrm{\1}(', line)
+
     # typeset variables in mathit
     line = re.sub(r'([^\\\w])([a-z0-9_]+)([^{}\w])', \
             r'\1\ensuremath{\mathit{\2}}\3', line)
-    # line = re.sub(r'\b([a-z0-9_]+)\.', r'\ensuremath{\mathit{\1}}.', line)
+
     # typeset class names in mathrm
     line = re.sub(r'([A-Z]\w+)', r'\mathrm{\1}', line)
+
     # escape underscores
     line = re.sub(r'_', r'\_', line)
+
     # escape hashes
     line = re.sub(r'#', r'\#', line)
     return line
 
 def touchup_code_line(line):
-    """Add latex markup for a line in a code listing"""
+    """Add LaTeX markup for a line in a code listing"""
     if line == '': return line
+
     # 4 spaces => 1em
     line = re.sub(r' {4}', r'\hspace*{1em} ', line)  # specific to lines
+
     # add \\ at the end of each line
     line = re.sub(r'$', r'\\\\', line)
     return line
     
 def print_code(clazz, methods):
     """Print out the methods in clazz that are listed in methods"""
-    #print r'\begin{Verbatim}[frame=single,label=\texttt{%s}]' % clazz 
     print r'\begin{framed}\begin{flushleft}'
     printed = False
     try:
@@ -118,10 +152,6 @@ def print_code(clazz, methods):
         code = open(filename).read().splitlines()
         printing = False
         for line in code:
-            line = re.sub(r'[ \.]_', ' ', line)
-            line = re.sub(r'_[ \.]', ' ', line)
-            line = re.sub(r'\(\s*self\s*\)', '()', line)
-            
             if printing:
                 printing = line == '' or line.startswith('     ')
             if not printing and matches(line, methods):
@@ -133,7 +163,7 @@ def print_code(clazz, methods):
         print "Unable to open %s" % filename
     if not printed: print "NO OUTPUT"
     print r'\end{flushleft}\end{framed}'
-    #print r'\end{Verbatim}'
+
 
 def code_subs(line):
     """Touch up code snippets in a line of LaTeX code"""
@@ -142,11 +172,10 @@ def code_subs(line):
     while m:
         code = translate_code(m.group(2))
         if re.search(r'[A-Z]\w*', code):
-            code = r'\textrm{' + code + '}'
             pass # just a class name
         else:
-            code = translate_code(code)
-        line = m.group(1) + '\ensuremath{' + code + '}' + m.group(3)
+            code = r'\ensuremath{' + translate_code(code) + r'}'
+        line = m.group(1) + code + m.group(3)
         m = re.search(pattern, line)
     return line
 
@@ -161,6 +190,12 @@ def snarf(infile):
             m = re.search(r'\{\w+/(\w+)(.*)\}', line)
             clazz = m.group(1)
             methods = m.group(2).lstrip('.').split('.')
+            if [m for m in methods if re.match(r'^\w+$', m)]:
+                sys.stderr.write('looking for init() in %s because of %s\n' \
+                                % (clazz, m)) 
+                methods.append('init()')
+            sys.stderr.write('looking for %r in %s\n' \
+                              % (methods, clazz))
             print_code(clazz, methods)
         else:
             print code_subs(line)
