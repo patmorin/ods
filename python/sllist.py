@@ -49,6 +49,9 @@ class SLList(object):
             self.tail = None
         return x
 
+    def _remove(self):
+        return self.pop()
+
     def __str__(self):
         s = "["
         u = self.head

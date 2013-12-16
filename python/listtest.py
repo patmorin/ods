@@ -7,6 +7,9 @@ from controllist import ControlList
 from dllist import DLList
 from arraystack import ArrayStack
 from arraydeque import ArrayDeque
+from sllist import SLList
+from dllist import DLList
+from skiplistlist import SkiplistList
 
 
 def list_test(l, n):
@@ -61,7 +64,9 @@ import random
 def list_cmp(l1, l2):
     assert(len(l1) == len(l2))
     for i in range(len(l1)):
+        print i, l1.get(i), l2.get(i)
         assert(l1.get(i) == l2.get(i))
+    print
     
 def list_cmp_test(l1, l2, n):
     for _ in range(n):
@@ -69,6 +74,8 @@ def list_cmp_test(l1, l2, n):
         i = random.randrange(0, len(l1)+1)
         l1.add(i, x)
         l2.add(i, x)
+        print "l1=" + str(l1)
+        print "l2=" + str(l2)
         list_cmp(l1, l2)
     for _ in range(5*n):
         op = random.randrange(0,3)
@@ -121,4 +128,18 @@ print "done"
 print "Performing comparative list tests ArrayDeque versus ControlList...",
 list_cmp_test(ArrayDeque(), ControlList(), 100)
 print "done"
+
+
+#print "Performing comparative list tests SLList versus ControlList...",
+#list_cmp_test(SLList(), ControlList(), 100)
+#print "done"
+
+print "Performing comparative list tests DLList versus ControlList...",
+list_cmp_test(DLList(), ControlList(), 100)
+print "done"
+
+print "Performing comparative list tests SkiplistList versus ControlList...",
+list_cmp_test(SkiplistList(), ControlList(), 100)
+print "done"
+
 

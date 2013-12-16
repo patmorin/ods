@@ -4,7 +4,6 @@
    Snarf up a LaTeX input file importing appropriate code where requested
    and adding markup to code snippets delimited by #'s"""
 import sys
-from sys import argv
 import re
 
 
@@ -27,13 +26,21 @@ def matches(line, methods):
     sys.stderr.write("signature: %s %r\n" % (sig, methods))
     return sig in methods
     
+
 def translate_code(line):
     """Translate a snippet of Python into LaTeX markup for pseudocode"""
     # hide input checking/exception handling in pseudocode
     if re.search(r'\braise\b', line): return ''
 
-    # remove leading and trailing underscores
-    # line = re.sub(r'\b(\\_)*|(\\_)*\b', '', line)
+    # hide compiler directives
+    line = re.sub(r'#@.*$', '', line)
+
+    # don't touch comments
+    comment = ''
+    m = re.search(r'#.*$', line)
+    if m:
+	comment = m.group(0)
+        line = re.sub(r'#.*$', '', line)
 
     # eliminate self and def
     line = re.sub(r'self\.', '', line)
@@ -52,17 +59,17 @@ def translate_code(line):
 
     # range(a,b,-1) => a,...,b+1
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*),\s*-1\s*\)',
-                  r'\2,\ldots,\1+1', line)
+                  r'\1,\1-1,\1-2,\ldots,\2+1', line)
 
     # range(a, b-1) => a,...,b-2
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\-\s*1\s*\)', 
-                  r'\1,\ldots,\2-2', line)
+                  r'\1,\1+1,\1+2,\ldots,\2-2', line)
 
     # range(a, b) => a,...,b-1
-    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)', r'\1,\ldots,\2-1', line)
+    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)', r'\1,\1+1,\1+2,\ldots,\2-1', line)
 
     # range(a) => 0,...,a-1
-    line = re.sub(r'\brange\s*\(\s*([^),]+)\s*\)', r'0,\ldots,\1-1', line)
+    line = re.sub(r'\brange\s*\(\s*([^),]+)\s*\)', r'0,1,2,\ldots,\1-1', line)
 
     # a += b => a = a + b
     line = re.sub(r'\b(\w+)\b\s*\+=\s*(.*)\s*', r'\1 = \1 + \2', line)
@@ -119,18 +126,29 @@ def translate_code(line):
     line = re.sub(r'\b(\w+)\(', r'\\mathrm{\1}(', line)
 
     # typeset variables in mathit
-    line = re.sub(r'([^\\\w])([a-z0-9_]+)([^{}\w])', \
-            r'\1\ensuremath{\mathit{\2}}\3', line)
-
+    # this loop is a dirty hack to deal with expressions like 'i-front.size()'
+    for i in range(3):   
+        line = re.sub(r'(^|[^\\\w])([a-z_][a-z0-9_]*)([^{}\w]|}?$)', \
+                r'\1\ensuremath{\mathit{\2}}\3', line)
+    
     # typeset class names in mathrm
     line = re.sub(r'([A-Z]\w+)', r'\mathrm{\1}', line)
 
+    # remove leading underscores
+    line = re.sub(r'\b_+(\w+)', r'\1', line)
+
+    # remove trailing underscores
+    line = re.sub(r'([a-z])_+\b', r'\1', line)
+ 
     # escape underscores
     line = re.sub(r'_', r'\_', line)
 
-    # escape hashes
+    # add comment back and escape hashes
+    if comment:
+        line += comment
     line = re.sub(r'#', r'\#', line)
     return line
+
 
 def touchup_code_line(line):
     """Add LaTeX markup for a line in a code listing"""
@@ -143,8 +161,23 @@ def touchup_code_line(line):
     line = re.sub(r'$', r'\\\\', line)
     return line
     
+
 def print_code(clazz, methods):
     """Print out the methods in clazz that are listed in methods"""
+
+    # translate camel-case method names to Python style
+    methods = [re.sub(r'([a-z])([A-Z])', r'\1_\2', s).lower() for s in methods]
+    sys.stderr.write(str(methods) + '\n')
+
+    # stupid special cases. Mostly caused by using method overloading in Java
+    if clazz == 'SLList' and 'remove()' in methods:
+	methods.append('_remove()')
+    if clazz == 'DLList' and 'remove(w)' in methods:
+        methods.append('remove_node(w)')
+    if clazz == 'SkiplistList' and 'add(i,w)' in methods:
+        sys.stderr.write("BRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFFFFFF\n")
+	methods.append('add_node(i,w)')
+
     print r'\begin{framed}\begin{flushleft}'
     printed = False
     try:
@@ -155,13 +188,15 @@ def print_code(clazz, methods):
             if printing:
                 printing = line == '' or line.startswith('     ')
             if not printing and matches(line, methods):
+                if printed: print '\\ \\\\' # to add space between methods
                 printing = True
             if printing and len(line.strip()) > 0:
                 printed = True
                 print touchup_code_line(translate_code(line))
     except IOError:
         print "Unable to open %s" % filename
-    if not printed: print "NO OUTPUT"
+    if not printed: 
+        print r'NO OUTPUT (looking for \verb+' + str(methods) + "+)"
     print r'\end{flushleft}\end{framed}'
 
 
@@ -172,12 +207,13 @@ def code_subs(line):
     while m:
         code = translate_code(m.group(2))
         if re.search(r'[A-Z]\w*', code):
-            pass # just a class name
+            pass # just a class name - leave it as is
         else:
             code = r'\ensuremath{' + translate_code(code) + r'}'
         line = m.group(1) + code + m.group(3)
         m = re.search(pattern, line)
     return line
+
 
 def snarf(infile):
     """Program entry point"""
@@ -200,12 +236,15 @@ def snarf(infile):
         else:
             print code_subs(line)
 
+
 def die(msg, code=-1):
     """Print the error message msg and exit"""
     sys.stderr.write("Fatal Error: " + msg + "\n")
     sys.exit(code)
 
+
 def main():
+    argv = sys.argv
     if len(argv) == 1:
         infile = sys.stdin
     elif len(argv) == 2:

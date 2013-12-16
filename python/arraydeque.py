@@ -6,11 +6,12 @@ at a[(j+i)%len(a)].
 
 Uses a doubling strategy for resizing a when it becomes full or too empty.
 '''
-from arraybasedlist import ArrayBasedList
+from utils import new_array
+from odslist import ODSList
 
-class ArrayDeque(ArrayBasedList):
+class ArrayDeque(ODSList):
     def __init__(self):
-        self.a = self.new_array(1)
+        self.a = new_array(1)
         self.j = 0
         self.n = 0
 
@@ -52,7 +53,7 @@ class ArrayDeque(ArrayBasedList):
         return x;
   
     def _resize(self):
-        b = self.new_array(max(1, 2*self.n))
+        b = new_array(max(1, 2*self.n))
         for k in range(self.n):
             b[k] = self.a[(self.j+k)%len(self.a)]
         self.a = b

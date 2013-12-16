@@ -1,5 +1,5 @@
-
+import numpy
 
 def new_array(n):
-    return [None] * n
+    return numpy.empty(n, dtype=object)
 

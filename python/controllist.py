@@ -4,8 +4,9 @@ Created on 2012-04-03
 
 @author: morin
 '''
+from odslist import ODSList
 
-class ControlList(object):
+class ControlList(ODSList):
     def __init__(self):
         self.a = []
         

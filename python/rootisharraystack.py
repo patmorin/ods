@@ -9,9 +9,9 @@ unused array entries.
 from math import ceil, sqrt
 
 from arraystack import ArrayStack
-from arraybasedlist import ArrayBasedList
+from odslist import ODSList
 
-class RootishArrayStack(ArrayBasedList):
+class RootishArrayStack(ODSList):
     def __init__(self):
         self.n = 0
         self.blocks = ArrayStack()

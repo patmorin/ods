@@ -1,18 +1,14 @@
 """
-An abstract superclass for all array-based lists
+An abstract superclass for all lists
 
-Subclasses of this must implement get(i), set(i,x), add(i,x), remove(i)
-and size()
+Subclasses of this must implement get(i), set(i,x), add(i,x), 
+remove(i) and size().  The main point of subclassing from this
+is that the resulting data structure will support most of the
+operations in Python's list implementation.
 """
 import random
 
-class ArrayBasedList(object):
-    def __str__(self):
-        return str([self.get(i) for i in range(self.size())])
-
-    def __len__(self):
-        return self.size()
-
+class ODSList(object):
     def append(self, x):
         self.add(self.size(), x)
 
@@ -20,11 +16,23 @@ class ArrayBasedList(object):
         while self.size() > 0:
             self.remove(self.size()-1)
 
-    def new_array(self, n):
-        return [None]*n
-
     def insert(i, x):
         self.add(i, x)
+        
+    def __repr__(self):
+        return self.__class__.__name__ + "(" \
+                + repr([x for x in self]) \
+                + ")"
+        
+    def __str__(self):
+        return str([x for x in self])
+
+    def __len__(self):
+        return self.size()
+
+    def __iter__(self):
+        for i in range(len(self)):
+            yield(self.get(i))
 
     def __eq__(self, a):
         if len(a) != len(self): return False

@@ -8,11 +8,11 @@ Uses a doubling strategy for resizing a when it becomes full or too empty.
 '''
 from utils import new_array
 
-from arraybasedlist import ArrayBasedList
+from odslist import ODSList
 
-class ArrayStack(ArrayBasedList):
+class ArrayStack(ODSList):
     def __init__(self):
-        self.a = self.new_array(1)
+        self.a = new_array(1)
         self.n = 0
 
     def get(self, i):
@@ -43,7 +43,7 @@ class ArrayStack(ArrayBasedList):
         return x
   
     def _resize(self):
-        b = self.new_array(max(1, 2*self.n))
+        b = new_array(max(1, 2*self.n))
         for i in range(self.n):
             b[i] = self.a[i]
         self.a = b

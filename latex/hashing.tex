@@ -537,8 +537,8 @@ data structure:
 
 \index{tabulation hashing}%
 While analyzing the #LinearHashTable# structure, we made a very strong
-assumption:  That for any set of elements, $\{#x_1#,\ldots,#x_n#\}$,
-the hash values $#hash(x_1)#,\ldots,#hash(x_n)#$ are independently and
+assumption:  That for any set of elements, $\{#x#_1,\ldots,#x#_#n#\}$,
+the hash values $#hash#($x$_1),\ldots,#hash#(#x#_#n#)$ are independently and
 uniformly distributed over the set $\{0,\ldots,#t.length#-1\}$.  One way to
 achieve this is to store a giant array, #tab#, of length $2^{#w#}$,
 where each entry is a random #w#-bit integer, independent of all the
@@ -770,7 +770,7 @@ the small amount of randomization needed to choose #z#:
        (#x#_0-#y#_0)#z#^0+\cdots+(#x#_{r-1}-#y#_{r-1})#z#^{r-1} 
     \right)\bmod #p# = 0.
   \end{equation}
-  Since $#x_i#\neq #y_i#$, this polynomial is non-trivial.  Therefore,
+  Since $#x#_#i#\neq #y#_#i#$, this polynomial is non-trivial.  Therefore,
   by \thmref{prime-polynomial}, it has at most $r-1$ solutions in #z#.
   The probability that we pick #z# to be one of these solutions is therefore
   at most $(r-1)/#p#$.

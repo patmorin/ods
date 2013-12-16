@@ -88,7 +88,7 @@ A space-efficient way to implement a skiplist is to define a #Node#,
 #u#, as consisting of a data value, #x#, and an array, #next#, of
 pointers, where #u.next[i]# points to #u#'s successor in the list
 $L_{#i#}$.  In this way, the data, #x#, in a node is
-\javaonly{referenced}\cpponly{stored} 
+\javaonly{referenced}\cpponly{stored}\pcodeonly{referenced} 
 only once, even though #x# may appear in several lists.
 
 \javaimport{ods/SkiplistSSet.Node<T>}

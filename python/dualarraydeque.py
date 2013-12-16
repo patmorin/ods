@@ -10,9 +10,9 @@ three times the size of the other.
 
 from arraystack import ArrayStack
 
-from arraybasedlist import ArrayBasedList
+from odslist import ODSList
 
-class DualArrayDeque(ArrayBasedList):
+class DualArrayDeque(ODSList):
     def __init__(self):
         self.front = ArrayStack()
         self.back = ArrayStack()
