@@ -149,7 +149,7 @@ and #remove(i)# operation.  Instead, it considers the cost of all calls to
 In particular, we will show:
 
 \begin{lem}\lemlabel{arraystack-amortized}
-  If an empty #ArrayList# is created and any sequence of $m\ge 1$ calls
+  If an empty #ArrayStack# is created and any sequence of $m\ge 1$ calls
   to #add(i,x)# and #remove(i)# are performed, then the total time spent
   during all calls to #resize()# is $O(m)$.
 \end{lem}
@@ -241,7 +241,9 @@ In Java there is the #System.arraycopy(s,i,d,j,n)# method.
 \index{std::copy@#std::copy(a0,a1,b)#}%
 \index{System.arraycopy@#System.arraycopy(s,i,d,j,n)#}%
 
+\notpcode{
 \codeimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
+}
 
 These functions are usually highly optimized and may even use special
 machine instructions that can do this copying much faster than we could by
@@ -801,7 +803,7 @@ Again, using the quadratic equation on this gives
 \]
 The last two blocks have sizes #r# and #r-1#, so the space wasted by these
 two blocks is at most $2#r#-1 = O(\sqrt{#n#})$.  If we store the blocks
-in (for example) an #ArrayList#, then the amount of space wasted by the
+in (for example) an #ArrayStack#, then the amount of space wasted by the
 #List# that stores those #r# blocks is also $O(#r#)=O(\sqrt{#n#})$.  The
 other space needed for storing #n# and other accounting information is $O(1)$.
 Therefore, the total amount of wasted space in a #RootishArrayStack#
