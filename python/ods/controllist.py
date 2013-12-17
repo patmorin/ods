@@ -7,8 +7,9 @@ Created on 2012-04-03
 from odslist import ODSList
 
 class ControlList(ODSList):
-    def __init__(self):
+    def __init__(self, iterable=[]):
         self.a = []
+        self.add_all(iterable)
         
     def get(self, i):
         return self.a[i]

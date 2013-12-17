@@ -6,9 +6,9 @@ Hash tables are an efficient method of storing a small number,
 #n#, of integers from a large range $U=\{0,\ldots,2^{#w#}-1\}$.
 The term \emph{hash table}
 \index{hash table}%
-includes a broad range of data structures.
-This chapter focuses on one of the most common implementations of hash
-tables, namely hashing with chaining.
+includes a broad range of data structures.  The first part of this
+chapter focuses on two of the most common implementations of hash tables:
+hashing with chaining and linear probing.
 
 Very often hash tables store types of data that are not integers.
 In this case, an integer \emph{hash code}
@@ -110,13 +110,18 @@ integer $#x#\in\{0,\ldots,2^{#w#}-1\}$ is
 \]
 Here, #z# is a randomly chosen \emph{odd} integer in
 $\{1,\ldots,2^{#w#}-1\}$.  This hash function can be realized very
-efficiently by observing that, by default, operations on integers are
-already done modulo $2^{#w#}$ where $#w#$ is the number of bits in
-an integer.  (See \figref{multihashing}.) Furthermore, integer division
-by $2^{#w#-#d#}$ is equivalent to dropping the rightmost $#w#-#d#$ bits
-in a binary representation (which is implemented by shifting the bits
-right by $#w#-#d#$).  In this way, the code that implements the above
-formula is simpler than the formula itself:
+efficiently by observing that, by default, operations on integers
+are already done modulo $2^{#w#}$ where $#w#$ is the number of bits
+in an integer.\footnote{This is true for most programming languages
+including C, C\#, C++, and Java. Notable exceptions are Python and
+Ruby, in which the result of a fixed-length #w#-bit integer operation
+that overflows is upgraded to a variable-length representation.}  (See
+\figref{multihashing}.) Furthermore, integer division by $2^{#w#-#d#}$
+is equivalent to dropping the rightmost $#w#-#d#$ bits in a binary
+representation (which is implemented by shifting the bits right by
+$#w#-#d#$ using the \javaonly{#>>>#}\cpponly{#>>#}\pcodeonly{#>>#}
+operator).  \notpcode{In this way, the code that implements the above
+formula is simpler than the formula itself:}
 \codeimport{ods/ChainedHashTable.hash(x)}
 
 \begin{figure}

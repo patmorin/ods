@@ -1,9 +1,7 @@
-'''
-Created on 2012-04-02
 
-@author: morin
-'''
-class DLList(object):
+from odslist import ODSList
+
+class DLList(ODSList):
     
     class Node(object):
         def __init__(self, x):
@@ -11,7 +9,11 @@ class DLList(object):
             self.next = None
             self.prev = None
 
-    def __init__(self):
+    def __init__(self, iterable=[]):
+        self._initialize()
+        self.add_all(iterable)
+        
+    def _initialize(self):
         self.n = 0
         self.dummy = DLList.Node(None)
         self.dummy.prev = self.dummy

@@ -8,7 +8,7 @@ cpps = $(sources:.tex=-cpp.tex)
 cpph = $(sources:.tex=-cpp-html.tex)
 java = $(wildcard ../java/ods/*.java)
 cppsource = $(wildcard ../cpp/*.h)
-python = $(wildcard ../python/*.py)
+python = $(wildcard ../python/ods/*.py)
 pyts = $(sources:.tex=-python.tex)
 pyth = $(sources:.tex=-python-html.tex)
 pdfs = ods-java.pdf ods-cpp.pdf

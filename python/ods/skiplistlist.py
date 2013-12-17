@@ -11,7 +11,7 @@ class Node(object):
     def __init__(self, x, h):
         self.x = x
         self.next = new_array(h+1)
-        self.length = numpy.zeros(h+1, dtype=int)
+        self.length = numpy.ones(h+1, dtype=int)
 
     def height(self):
         return len(self.next) - 1
@@ -19,12 +19,14 @@ class Node(object):
         
 class SkiplistList(ODSList):
     def __init__(self, iterable=[]):
+        self._initialize()
+        self.add_all(iterable)
+        
+    def _initialize(self):
         self.h = 0
         self.n = 0
         self.sentinel = Node(None, 32)
         self.stack = new_array(self.sentinel.height()+1)
-        for x in iterable:
-            self.append(x)
     
     def find_pred(self, i):
         u = self.sentinel
@@ -70,14 +72,14 @@ class SkiplistList(ODSList):
     def add(self, i, x):
         if i < 0 or i > self.n: raise IndexError()
         w = Node(x, self.pick_height())
-        if w.height > self.h:
+        if w.height() > self.h:
             self.h = w.height()
         self.add_node(i, w)
         
     def append(self, x):
         self.add(len(self), x)
                 
-    def remove(self, i, x):
+    def remove(self, i):
         if i < 0 or i > self.n-1: raise IndexError()
         u = self.sentinel
         r = self.h
@@ -114,12 +116,25 @@ class SkiplistList(ODSList):
             z = z // 2
         return k
         
+    def debug_print(self):
+        print "height=%d" % self.h
+        for r in range(self.h+1):
+            u = self.sentinel
+            print "L%d:" % r,
+            while u != None:
+                print "=%d=>" % u.length[r],
+                assert(r != 0 or u.length[r] == 1)
+                u = u.next[r]
+                if u != None: print u.x,
+            print
         
-sl = SkiplistList()
-sl.add(0, "a")
-print sl
-sl.add(1, "b")
-print sl
-sl.add(0, "c")
-print sl
+        
+def testing():
+    sl = SkiplistList()
+    for i in range(6):
+        sl.add(i, i+100)
+        print
+    sl.debug_print()
+
+testing()
 

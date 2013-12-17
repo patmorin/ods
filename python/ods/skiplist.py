@@ -9,7 +9,11 @@ class Node(object):
         return len(self.next) - 1
         
 class SkiplistSSet(object):
-    def __init__(self):
+    def __init__(self, iterable=[]):
+        self._initalize()
+        self.add_all(iterable)
+        
+    def _initalize(self):
         self.h = 0
         self.n = 0
         self.sentinel = Node(32)

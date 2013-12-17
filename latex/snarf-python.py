@@ -48,14 +48,19 @@ def translate_code(line):
     line = re.sub(r'\bself\b,?\s*', '', line)
 
     # for <blah>: => for <blah> do
-    line = re.sub(r'\b(for\b[^:]+):', r'\1 do', line)
+    # while <blah>: => while <blah> do
+    # Note: The space after 'do' is important here (see [1])
+    line = re.sub(r'\b((for|while)\b[^:]+):', r'\1 do ', line)
 
     # if <blah>: => if <blah> then
-    line = re.sub(r'\bif (.*):', r'if \1 then', line) 
+    # Note: The space after 'then' is important here (see [1])
+    line = re.sub(r'\bif (.*):', r'if \1 then ', line) 
 
     # len(<blah>) => length(<blah>)
     line = re.sub(r'\blen\s*\(\s*(\w+)\s*\)', r'length(\1)', line)
-    line = re.sub(r'\b(\w+)\.length', r'length(\1)', line)
+
+    # array.length (from Java) => length(array)
+    line = re.sub(r'\b(a|t)\.length', r'length(\1)', line)
 
     # range(a,b,-1) => a,...,b+1
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*),\s*-1\s*\)',
@@ -71,9 +76,11 @@ def translate_code(line):
     # range(a) => 0,...,a-1
     line = re.sub(r'\brange\s*\(\s*([^),]+)\s*\)', r'0,1,2,\ldots,\1-1', line)
 
-    # a += b => a = a + b
-    line = re.sub(r'\b(\w+)\b\s*\+=\s*(.*)\s*', r'\1 = \1 + \2', line)
-    line = re.sub(r'\b(\w+)\b\s*-=\s*(.*)\s*', r'\1 = \1 - \2', line)
+    # <blah>.hashCode() => hash_code(<blah>)
+    # line = re.sub(r'(\w+)\.hashCode()', r'hash_code(\1)', line)
+
+    # a += b => a = a + b --- handles +=, -=, *=, and /=
+    line = re.sub(r'([^\s]+)\s*([+*-/])=\s*(.*)$', r'\1 = \1 \2 \3', line) 
 
     # get rid of any remaining colons
     line = re.sub(r':', '', line)
@@ -89,7 +96,7 @@ def translate_code(line):
     line = re.sub(r'\belif\b', r'else if', line)
 
     # highlight keywords
-    keywords = r'\b(if|or|and|then|else|in|for|do|return|raise)\b'
+    keywords = r'\b(if|or|and|then|else|in|for|do|return|raise|while)\b'
     line = re.sub(keywords, r'\\textbf{\1}', line)
 
     # recognize mathematical expression and ensuremath them
@@ -97,8 +104,8 @@ def translate_code(line):
     basic = r'\b\w+\b'
     fncall = r'%s(\([^\)]*\))?' % basic
     indexed = r'%s(\[[^\]]+\])?' % fncall
-    operand = indexed # r'%s(\.%s)*' % (indexed, indexed)
-    op = r'(,\\ldots,|&|>=|\.|,|//|<=|==|!=|=|%|<|>|\+|-|/|\*)'
+    operand = r'(-?%s)' % indexed 
+    op = r'(,\\ldots,|&|>=|\.|,|//|<=|==|!=|=|%|<<|>>|<|>|\+|-|/|\*|\^)'
     expr0 = r'(%s(\s*%s\s*%s)*)' % (operand, op, operand)
     parenexpr = r'(%s|\(%s\))' % (expr0, expr0)
     expr = r'(^|[^{\\])(%s(\s*%s\s*%s)*)' % (parenexpr, op, parenexpr)
@@ -111,9 +118,19 @@ def translate_code(line):
     line = re.sub(r'\*', r'\cdot ', line)
     line = re.sub(r'!=', r'\\ne', line)
     line = re.sub(r'==', r'\eq', line) 
+    line = re.sub(r'(^|[^\\])&', r'\1 \\wedge ', line)
     line = re.sub(r'//', r'\\bdiv ', line)
-    line = re.sub(r'(^|[^\\])&', r'\1 and ', line)
     line = re.sub(r'([^=])=([^=])', r'\1\\gets \2', line)
+
+    # these are hacks and should eventually be fixed
+    line = re.sub(r'\>\>', r'\ensuremath{\\gg}', line) 
+    line = re.sub(r'\^', r'\ensuremath{\oplus}', line)
+
+    # del is a python keyword, but we have a variable called del in Ch. 5
+    line = re.sub(r'\bdl\b', r'\mathit{del}', line)
+
+    # 1 << <blah> => 2^{<blah>}
+    line = re.sub(r'\(?\s*1\s*<<\s*(\w+)\s*\)?', r'2^{\1}', line)
 
     # lowercase True and False
     line = re.sub(r'True', r'true', line)
@@ -128,6 +145,7 @@ def translate_code(line):
     # typeset variables in mathit
     # this loop is a dirty hack to deal with expressions like 'i-front.size()'
     for i in range(3):   
+        # This RE is delicate. It interacts with [1]
         line = re.sub(r'(^|[^\\\w])([a-z_][a-z0-9_]*)([^{}\w]|}?$)', \
                 r'\1\ensuremath{\mathit{\2}}\3', line)
     
@@ -181,7 +199,7 @@ def print_code(clazz, methods):
     print r'\begin{framed}\begin{flushleft}'
     printed = False
     try:
-        filename = "../python/" + clazz.lower() + ".py"
+        filename = "../python/ods/" + clazz.lower() + ".py"
         code = open(filename).read().splitlines()
         printing = False
         for line in code:
@@ -230,6 +248,7 @@ def snarf(infile):
                 sys.stderr.write('looking for init() in %s because of %s\n' \
                                 % (clazz, m)) 
                 methods.append('init()')
+                methods.append('init(iterable)')
             sys.stderr.write('looking for %r in %s\n' \
                               % (methods, clazz))
             print_code(clazz, methods)

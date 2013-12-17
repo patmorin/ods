@@ -12,7 +12,11 @@ from arraystack import ArrayStack
 from odslist import ODSList
 
 class RootishArrayStack(ODSList):
-    def __init__(self):
+    def __init__(self, iterable=[]):
+        self._initialize()
+        self.add_all(iterable)
+        
+    def _initialize(self):
         self.n = 0
         self.blocks = ArrayStack()
 

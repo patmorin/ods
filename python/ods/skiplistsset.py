@@ -15,13 +15,15 @@ class Node(object):
    
         
 class SkiplistSSet(object):
-    def __init__(self, iterable=[]):
+    def __init__(self, iterabe=[]):
+        self._initialize()
+        self.add_all(iterable)
+        
+    def _initialize(self):
         self.h = 0
         self.n = 0
         self.sentinel = Node(None, 32)
         self.stack = new_array(self.sentinel.height()+1)
-        for x in iterable:
-            self.add(x)
     
     def find_pred_node(self, x):
         u = self.sentinel

@@ -13,7 +13,11 @@ from arraystack import ArrayStack
 from odslist import ODSList
 
 class DualArrayDeque(ODSList):
-    def __init__(self):
+    def __init__(self, iterable=[]):
+        self.initialize()
+        self.add_all(iterable)
+        
+    def _initialize(self):
         self.front = ArrayStack()
         self.back = ArrayStack()
     

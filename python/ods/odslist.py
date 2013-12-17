@@ -12,6 +12,10 @@ class ODSList(object):
     def append(self, x):
         self.add(self.size(), x)
 
+    def add_all(self, iterable):
+        for x in iterable:
+            self.append(x)
+        
     def clear(self):
         while self.size() > 0:
             self.remove(self.size()-1)
@@ -42,6 +46,18 @@ class ODSList(object):
 
     def __ne__(self, a):
         return not self == a
+    
+    def index(self, x):
+        for i in range(len(self)):
+            if self.get(i) == x:
+                return i
+        raise ValueError('%r is not in the list' % x)
+    
+    def remove_value(self, x):
+        try:
+            return self.remove(self.index(x))
+        except ValueError:
+            return False
 
     def __getitem__(self, key):
         return self.get(key)
@@ -66,8 +82,7 @@ class ODSList(object):
                 a.insert(j, i)
                 self.add(j, i)
                 assert self == a;
-
-
+                
             while len(a) > 0:
                 j = random.randrange(len(a))
                 del a[j] 

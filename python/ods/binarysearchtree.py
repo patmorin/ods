@@ -13,7 +13,11 @@ class BinarySearchTree(BinaryTree):
             super(BinarySearchTree.Node, self).__init__()
             self.x = x
             
-    def __init__(self):
+    def __init__(self, iterable=[]):
+        self._initialize()
+        super.add_all(iterable)
+        
+    def _initialize(self):
         super(BinarySearchTree, self).__init__()
         self.n = 0
         

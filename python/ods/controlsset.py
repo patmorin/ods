@@ -7,8 +7,9 @@ Created on 2012-04-03
 import bisect
 
 class ControlSSet(object):
-    def __init__(self):
+    def __init__(self, iterable=[]):
         self.a = []
+        self.add_all(iterable)
     
     def add(self, x):
         i = bisect.bisect_left(self.a, x)

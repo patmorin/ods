@@ -11,7 +11,11 @@ from utils import new_array
 from odslist import ODSList
 
 class ArrayStack(ODSList):
-    def __init__(self):
+    def __init__(self, iterable=[]):
+        self._initialize()
+        self.add_all(iterable)
+        
+    def _initialize(self):
         self.a = new_array(1)
         self.n = 0
 
