@@ -73,6 +73,7 @@ public class ChainedHashTable<T> implements USet<T> {
 	protected void resize() {
 		d = 1;
 		while (1<<d <= n) d++;
+        n = 0;
 		List<T>[] oldTable = t;
 		t = allocTable(1<<d);
 		for (int i = 0; i < oldTable.length; i++) {
