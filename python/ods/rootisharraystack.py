@@ -8,6 +8,7 @@ unused array entries.
 """
 from math import ceil, sqrt
 
+from utils import new_array
 from arraystack import ArrayStack
 from odslist import ODSList
 
@@ -24,7 +25,7 @@ class RootishArrayStack(ODSList):
         return int(ceil((-3.0 + sqrt(9 + 8*i)) / 2.0))
     
     def grow(self):
-        self.blocks.append(self.new_array(self.blocks.size()+1))
+        self.blocks.append(new_array(self.blocks.size()+1))
     
     def shrink(self):
         r = self.blocks.size()

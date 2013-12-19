@@ -12,7 +12,6 @@ class LinearHashTable(ODSSet):
         
     def _initialize(self):
         self.dl = object();
-        self.initialize()
         self.add_all(iterable)
         
     def initialize(self):

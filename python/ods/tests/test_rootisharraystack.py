@@ -1,9 +1,9 @@
 import random
 
 from nose.tools import *
-from ods.arraystack import ArrayStack
+from ods.rootisharraystack import RootishArrayStack
 from listtest import list_test
 
 def test_as():
-    list_test(ArrayStack())
+    list_test(RootishArrayStack())
     

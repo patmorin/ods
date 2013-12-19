@@ -245,10 +245,9 @@ def snarf(infile):
             clazz = m.group(1)
             methods = m.group(2).lstrip('.').split('.')
             if [m for m in methods if re.match(r'^\w+$', m)]:
-                sys.stderr.write('looking for init() in %s because of %s\n' \
+                sys.stderr.write('looking for initialize() in %s because of %s\n' \
                                 % (clazz, m)) 
-                methods.append('init()')
-                methods.append('init(iterable)')
+                methods.append('initialize()')
             sys.stderr.write('looking for %r in %s\n' \
                               % (methods, clazz))
             print_code(clazz, methods)

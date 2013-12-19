@@ -14,7 +14,7 @@ from odslist import ODSList
 
 class DualArrayDeque(ODSList):
     def __init__(self, iterable=[]):
-        self.initialize()
+        self._initialize()
         self.add_all(iterable)
         
     def _initialize(self):
@@ -29,7 +29,7 @@ class DualArrayDeque(ODSList):
     
     def set(self, i, x):
         if i < self.front.size():
-            return self.front.set(front.size()-i-1, x)
+            return self.front.set(self.front.size()-i-1, x)
         else:
             return self.back.set(i-self.front.size(), x)
     

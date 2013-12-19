@@ -40,8 +40,10 @@ class ODSList(object):
 
     def __eq__(self, a):
         if len(a) != len(self): return False
+        it1 = iter(a)
+        it2 = iter(self)
         for i in range(len(a)):
-            if (a[i] != self.get(i)): return False
+            if it1.next() != it2.next(): return False
         return True
 
     def __ne__(self, a):
@@ -64,7 +66,7 @@ class ODSList(object):
 
     def __setitem__(self, key, value):
         return self.set(key, value)
-
+        
     def test(self):
         a = list()
         self.clear()
