@@ -12,8 +12,11 @@ class BinaryTree(object):
             self.left = self.right = self.parent = None
 
     def __init__(self):
-        self.r = None
         self.nil = None
+        self.initialize()
+        
+    def initialize(self):
+        self.r = None
         
     def depth(self, u):
         d = 0
@@ -78,8 +81,8 @@ class BinaryTree(object):
 
     def bf_traverse(self):
         q = ArrayQueue()
-        if (self.r != self.nil): q.add(self.r)
-        while (q.size() > 0):
+        if self.r != self.nil: q.add(self.r)
+        while q.size() > 0:
             u = q.remove()
             if u.left != self.nil: q.add(u.left)
             if u.right != self.nil: q.add(u.right)
