@@ -56,6 +56,10 @@ def translate_code(line):
     # Note: The space after 'then' is important here (see [1])
     line = re.sub(r'\bif (.*):', r'if \1 then ', line) 
 
+    # else: <blah> => else <blah>
+    # Note: The space after 'then' is important here (see [1])
+    line = re.sub(r'\belse:', r'else ', line) 
+
     # len(<blah>) => length(<blah>)
     line = re.sub(r'\blen\s*\(\s*(\w+)\s*\)', r'length(\1)', line)
 
@@ -110,6 +114,9 @@ def translate_code(line):
     parenexpr = r'(%s|\(%s\))' % (expr0, expr0)
     expr = r'(^|[^{\\])(%s(\s*%s\s*%s)*)' % (parenexpr, op, parenexpr)
     line = re.sub(expr, r'\1\ensuremath{\2}', line)
+
+    # this hack solves a bunch of problems
+    #line = re.sub(r'(\s*)(.*[<>=/%^&].*)', r'\1\ensuremath{\2}', line)
 
     # turn Python math operators into LaTeX math operators
     line = re.sub(r'>=', r'\\ge', line) 
@@ -237,9 +244,11 @@ def snarf(infile):
     """Program entry point"""
     lines = infile.read().splitlines();
     for line in lines:
-        if line.startswith(r'\cppimport') or line.startswith(r'\javaimport'):
+        if line.startswith(r'\cppimport') \
+                or line.startswith(r'\javaimport'):
             print "%%%s" % line
-        elif line.startswith('\\codeimport'):
+        elif line.startswith('\\codeimport') \
+                or line.startswith(r'\pcodeimport'):
             print "%%importing %s: " % line
             m = re.search(r'\{\w+/(\w+)(.*)\}', line)
             clazz = m.group(1)

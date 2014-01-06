@@ -647,6 +647,7 @@ from \secref{multihash} to take the $2#w#$-bit intermediate result and
 reduce it to a #w#-bit final result.  Here is an example of this method applied to a simple compound object with three parts #x0#, #x1#, and #x2#:
 \javaimport{junk/Point3D.x0.hashCode()}
 \cppimport{ods/Point3D.hashCode()}
+\pcodeimport{ods/Point3d.hashCode()}
 The following theorem shows that, in addition to being straightforward to implement, this method is provably good:
 
 \begin{thm}\thmlabel{multihash}
@@ -815,6 +816,7 @@ The following example code shows how this hash function is applied to
 an object that contains an array, #x#, of values:
 \javaimport{junk/GeomVector.hashCode()}
 \cppimport{ods/GeomVector.hashCode()}
+\pcodeimport{ods/GeomVector.hashCode()}
 
 The preceding code sacrifices some collision probability for implementation
 convenience.  In particular, it applies the multiplicative hash function

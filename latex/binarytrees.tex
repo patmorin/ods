@@ -93,7 +93,7 @@ binary tree with $#n#\ge 1$ real nodes has $#n#+1$ external nodes.
 
 \index{BinaryTree@#BinaryTree#}%
 The simplest way to represent a node, #u#, in a binary tree is to
-explicitly store the (at most three) neighbours of #u#:
+explicitly store the (at most three) neighbours of #u#\notpcode{:}\pcodeonly{.}
 \javaimport{ods/BinaryTree.BTNode<Node}
 \cppimport{ods/BinaryTree.BTNode}
 When one of these three neighbours is not present, we set it to #nil#.
@@ -101,7 +101,7 @@ In this way, both external nodes of the tree and the parent of the root
 correspond to the value #nil#.
 
 The binary tree itself can then be represented by a
-\javaonly{reference}\cpponly{pointer} to its root node, #r#:
+\javaonly{reference}\cpponly{pointer}\pcodeonly{reference} to its root node, #r#:
 \codeimport{ods/BinaryTree.r}
 
 We can compute the depth of a node, #u#, in a binary tree by counting
@@ -117,12 +117,16 @@ binary trees. For example, to compute the size of (number of nodes in)
 a binary tree rooted at node #u#, we recursively compute the sizes of the
 two subtrees rooted at the children of #u#, sum up these sizes, and add one:
 
-\codeimport{ods/BinaryTree.size(u)}
+\javaimport{ods/BinaryTree.size(u)}
+\cppimport{ods/BinaryTree.size(u)}
+\pcodeimport{ods/BinaryTree.size_r(u)}
 
 To compute the height of a node #u#, we can compute the height of #u#'s
 two subtrees, take the maximum, and add one:
 
-\codeimport{ods/BinaryTree.height(u)}
+\javaimport{ods/BinaryTree.height(u)}
+\cppimport{ods/BinaryTree.height(u)}
+\pcodeimport{ods/BinaryTree.height_r(u)}
 
 \subsection{Traversing Binary Trees}
 \seclabel{bintree:traversal}
@@ -323,7 +327,9 @@ value of #u.x#.  For example, choosing #w# such that #w.x# is the smallest
 value greater than #u.x# will work.  Finding the node #w# is easy; it is
 the smallest value in the subtree rooted at #u.right#.  This node can
 be easily removed because it has no left child (see \figref{bst-remove}).
-\codeimport{ods/BinarySearchTree.remove(u)}
+\javaimport{ods/BinarySearchTree.remove(u)}
+\cppimport{ods/BinarySearchTree.remove(u)}
+\pcodeimport{ods/BinarySearchTree.remove_node(u)}
 
 \begin{figure}
   \begin{center}

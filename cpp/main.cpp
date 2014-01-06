@@ -445,14 +445,14 @@ int main(int argc, char **argv)
 	srand(0);
 
 
-	{
+	/* {
 		for (int i = 1; i < 10; i++) {
 			int b = i*10;
 			cout << endl << "BTree<int>(" << b << "):" << endl;
 			BTree<int> t(b);
 			ssetTests(t, n, 0x0);
 		}
-	}
+	} */
 
 	{
 		cout << endl << "Treap<int>:" << endl;

@@ -34,10 +34,12 @@ class LinearHashTable {
 				 ^ tab[3][(h>>24)&0xff])
 				>> (w-d);
 	}
-	// Sample code only -- never use this
+	// Sample code for the book only -- never use this
+	/*
 	int idealHash(T x) {
 		return tab[hashCode(x) >> w-d];
 	}
+	*/
 
 
 public:
@@ -173,9 +175,6 @@ bool LinearHashTable<T>::addSlow(T x) {
 	n++; q++;
 	return true;
 }
-
-
-
 
 
 } /* namespace ods */
