@@ -103,15 +103,3 @@ class SLList(BaseList):
     def __len__(self):
         return self.size()
 
-#l = SLList()
-#for x in range(10):
-#    l.add(x)
-#
-#print(l)
-#
-#print "l.size() = %d" % l.size()
-#print "len(l) = %d" % len(l)
-#
-#while l.size() > 0:
-#    print l.pop()
-#

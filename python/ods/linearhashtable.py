@@ -1124,9 +1124,3 @@ class LinearHashTable(BaseSet):
         0x043d8fbd,
         0xb32d6061]]
 
-import settest
-      
-if __name__ == "__main__":
-    print "Running tests...",
-    settest.set_tests(LinearHashTable(), set())
-    print "done"

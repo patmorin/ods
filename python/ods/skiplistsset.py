@@ -95,27 +95,4 @@ class SkiplistSSet(Collection):
             k += 1
             z = z // 2
         return k
-        
-    
-    
-def test():
-    sl = SkiplistSSet()
-    print sl
-    sl.add(3)
-    sl.add(2)
-    sl.add(4)
-    print sl
-    for i in range(20):
-        sl.add(random.randrange(100))
-    print sl
-    print ["%d=>%r" % (x, sl.find(x)) for x in range(0,100,5)]
-    a = random.sample(sl, 10)
-    print "Removing " + str(a)
-    for x in a: 
-        sl.remove(x)
-    print sl
-    
-    
-    
-    
-test()
+
