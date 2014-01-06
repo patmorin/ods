@@ -1,14 +1,10 @@
-'''
-Created on 2012-04-03
-
-@author: morin
-'''
 
 from binarytree import BinaryTree
-from collection import Collection
+from base import BaseSet
 
-class BinarySearchTree(BinaryTree, Collection):
-
+class BinarySearchTree(BinaryTree,BaseSet):
+    """Base classs for all our binary search trees"""
+    
     class Node(BinaryTree.Node):
         def __init__(self, x):
             super(BinarySearchTree.Node, self).__init__()
@@ -21,6 +17,10 @@ class BinarySearchTree(BinaryTree, Collection):
         
     def _initialize(self):
         super(BinarySearchTree, self).__init__()
+        self.n = 0
+        
+    def clear(self):
+        self.r = self.nil
         self.n = 0
         
     def _find_last(self, x):
@@ -83,7 +83,6 @@ class BinarySearchTree(BinaryTree, Collection):
         p = self._find_last(u.x)
         return self._add_child(p, u)
     
-    
     def splice(self, u):
         if u.left != self.nil:
             s = u.left
@@ -102,7 +101,6 @@ class BinarySearchTree(BinaryTree, Collection):
             s.parent = p
         self.n -= 1
 
-    
     def _remove_node(self, u):
         if u.left == self.nil or u.right == self.nil:
             self.splice(u)
@@ -149,17 +147,14 @@ class BinarySearchTree(BinaryTree, Collection):
         if u.left != None:
             u.left.parent = u
         u.parent = w
+        w.right = u
         if u == self.r:
-            r = w
-            r.parent = None
-            
-    def __str__(self):
-        return '['+ ','.join([str(x) for x in self]) + ']'
-        
+            self.r = w
+            self.r.parent = None
+                    
     def __iter__(self):
         u = self.first_node()
         while u != self.nil:
             yield u.x
             u = self.next_node(u)
             
-

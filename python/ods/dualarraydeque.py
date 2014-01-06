@@ -10,9 +10,9 @@ three times the size of the other.
 
 from arraystack import ArrayStack
 
-from odslist import ODSList
+from base import BaseList
 
-class DualArrayDeque(ODSList):
+class DualArrayDeque(BaseList):
     def __init__(self, iterable=[]):
         self._initialize()
         self.add_all(iterable)
@@ -61,16 +61,12 @@ class DualArrayDeque(ODSList):
             self.front = f
             self.back = b
 
-    def size(self):
-        return self.front.size() + self.back.size()        
-
     def clear(self):
         self.front.clear()
         self.back.clear()
 
-    def _debug_str(self):
-        return str([self.front.get(self.front.size()-i-1) \
-                    for i in range(self.front.size())]) \
-               + str([self.back.get(i) for i in range(self.back.size())])
+    def size(self):
+        return self.front.size() + self.back.size()
+    
 
 

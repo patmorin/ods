@@ -22,6 +22,8 @@ class Treap(BinarySearchTree):
         u = self.new_node(x)
         if self.add_node(u):
             self.bubble_up(u)
+            return True
+        return False
             
     def bubble_up(self, u):
         while u != self.r and u.parent.p > u.p:
@@ -29,16 +31,17 @@ class Treap(BinarySearchTree):
                 self.rotate_left(u.parent)
             else:
                 self.rotate_right(u.parent)
-            if u.parent == self.nil:
-                self.r = u
+
+        if u.parent == self.nil:
+            self.r = u
             
     def remove(self, x):
-        u = self.find_last(x)
+        u = self._find_last(x)
         if u != None and u.x == x:
             self.trickle_down(u)
             self.splice(u)
-            return true
-        return false
+            return True
+        return False
         
     def trickle_down(self, u):
         while u.left != None or u.right != None:
@@ -52,4 +55,4 @@ class Treap(BinarySearchTree):
                 self.rotate_left(u)
             if self.r == u:
                 self.r = u.parent
-            
+        

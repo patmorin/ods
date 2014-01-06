@@ -8,9 +8,9 @@ Uses a doubling strategy for resizing a when it becomes full or too empty.
 '''
 from utils import new_array
 
-from odslist import ODSList
+from base import BaseList
 
-class ArrayStack(ODSList):
+class ArrayStack(BaseList):
     def __init__(self, iterable=[]):
         self._initialize()
         self.add_all(iterable)
@@ -51,9 +51,6 @@ class ArrayStack(ODSList):
         for i in range(self.n):
             b[i] = self.a[i]
         self.a = b
-        
-    def size(self):
-        return self.n
     
 
 

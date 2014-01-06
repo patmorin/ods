@@ -1,7 +1,7 @@
 
-from odslist import ODSList
+from base import BaseList
 
-class DLList(ODSList):
+class DLList(BaseList):
     
     class Node(object):
         def __init__(self, x):
@@ -63,19 +63,9 @@ class DLList(ODSList):
         if i < 0 or i > self.n:    raise IndexError()
         self.add_before(self.get_node(i), x)
 
-    def size(self):
-        return self.n
-
-    def __len__(self):
-        return self.size()
-
-    def __str__(self):
-        s = "["
+    def __iter__(self):
         u = self.dummy.next
         while u != self.dummy:
-            s += "%r" % u.x
+            yield u.x
             u = u.next
-            if u != self.dummy:
-                s += ","
-        return s + "]"
 

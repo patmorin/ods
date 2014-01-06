@@ -4,9 +4,9 @@ Created on 2012-04-03
 
 @author: morin
 '''
-from odslist import ODSList
+from base import BaseList
 
-class ControlList(ODSList):
+class ControlList(BaseList):
     def __init__(self, iterable=[]):
         self.a = []
         self.add_all(iterable)
@@ -27,7 +27,3 @@ class ControlList(ODSList):
     
     def size(self):
         return len(self.a)
-    
-    def __len__(self):
-        return len(self.a)
-        

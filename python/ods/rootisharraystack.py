@@ -10,9 +10,9 @@ from math import ceil, sqrt
 
 from utils import new_array
 from arraystack import ArrayStack
-from odslist import ODSList
+from base import BaseList
 
-class RootishArrayStack(ODSList):
+class RootishArrayStack(BaseList):
     def __init__(self, iterable=[]):
         self._initialize()
         self.add_all(iterable)
@@ -66,9 +66,6 @@ class RootishArrayStack(ODSList):
         if (r-2)*(r-1)/2 >= self.n: self.shrink()
         return x
 
-    def size(self):
-        return self.n
-   
     def clear(self):
         self.blocks.clear()
         n = 0

@@ -87,20 +87,16 @@ class BinaryTree(object):
             if u.left != self.nil: q.add(u.left)
             if u.right != self.nil: q.add(u.right)
             
-    '''
-    Find the first node in an in-order traversal
-    '''
     def first_node(self):
+        """Find the first node in an in-order traversal"""
         w = self.r
         if w == self.nil: return self.nil
         while w.left != self.nil:
             w = w.left
         return w
     
-    '''
-    Find the node that follows w in an in-order traversal
-    '''
     def next_node(self, w):
+        """Find the node that follows w in an in-order traversal"""
         if w.right != self.nil:
             w = w.right;
             while w.left != self.nil:

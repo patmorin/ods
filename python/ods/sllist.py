@@ -1,7 +1,7 @@
 
-from odslist import ODSList
+from base import BaseList
 
-class SLList(ODSList):
+class SLList(BaseList):
     
     class Node(object):
         def __init__(self, x):
@@ -19,9 +19,6 @@ class SLList(ODSList):
 
     def new_node(self, x):
         return SLList.Node(x)
-
-    def size(self):
-        return self.n
 
     def push(self,x):
         u = self.new_node(x)

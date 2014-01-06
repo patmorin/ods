@@ -4,6 +4,8 @@
 import random
 from utils import new_array
 
+from ods.collection import Collection
+
 class Node(object):
     """A node in a skip list"""
     def __init__(self, x, h):
@@ -14,8 +16,8 @@ class Node(object):
         return len(self.next) - 1
    
         
-class SkiplistSSet(object):
-    def __init__(self, iterabe=[]):
+class SkiplistSSet(Collection):
+    def __init__(self, iterable=[]):
         self._initialize()
         self.add_all(iterable)
         
@@ -24,6 +26,9 @@ class SkiplistSSet(object):
         self.n = 0
         self.sentinel = Node(None, 32)
         self.stack = new_array(self.sentinel.height()+1)
+        
+    def clear(self):
+        self._initialize()
     
     def find_pred_node(self, x):
         u = self.sentinel
@@ -69,7 +74,7 @@ class SkiplistSSet(object):
                 removed = True
                 u.next[r] = u.next[r].next[r]
                 if u == self.sentinel and u.next[r] == None:
-                    h -= 1 # height has decreased
+                    self.h -= 1 # height has decreased
             r -= 1
         if removed: self.n -= 1
         return removed    
@@ -79,15 +84,7 @@ class SkiplistSSet(object):
         while u != None:
             yield u.x
             u = u.next[0]
-    
-    def __str__(self):
-        return "<" + ", ".join([str(x) for x in self]) + ">"
-
-    def __repr__(self):
-        return "SkiplistSSet([" \
-                  + ", ".join([repr(x) for x in self]) \
-                  + "])"
-                  
+                      
     def __len__(self):
         return self.n
         

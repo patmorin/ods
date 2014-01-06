@@ -4,7 +4,7 @@
 import random
 import numpy
 from utils import new_array
-from odslist import ODSList
+from base import BaseList
 
 class Node(object):
     """A node in a skip list"""
@@ -17,7 +17,7 @@ class Node(object):
         return len(self.next) - 1
    
         
-class SkiplistList(ODSList):
+class SkiplistList(BaseList):
     def __init__(self, iterable=[]):
         self._initialize()
         self.add_all(iterable)
@@ -76,9 +76,6 @@ class SkiplistList(ODSList):
             self.h = w.height()
         self.add_node(i, w)
         
-    def append(self, x):
-        self.add(len(self), x)
-                
     def remove(self, i):
         if i < 0 or i > self.n-1: raise IndexError()
         u = self.sentinel
@@ -104,10 +101,7 @@ class SkiplistList(ODSList):
         while u != None:
             yield u.x
             u = u.next[0]
-                      
-    def size(self):
-        return self.n
-        
+
     def pick_height(self):
         z = random.getrandbits(32)
         k = 0
@@ -115,26 +109,3 @@ class SkiplistList(ODSList):
             k += 1
             z = z // 2
         return k
-        
-    def debug_print(self):
-        print "height=%d" % self.h
-        for r in range(self.h+1):
-            u = self.sentinel
-            print "L%d:" % r,
-            while u != None:
-                print "=%d=>" % u.length[r],
-                assert(r != 0 or u.length[r] == 1)
-                u = u.next[r]
-                if u != None: print u.x,
-            print
-        
-        
-def testing():
-    sl = SkiplistList()
-    for i in range(6):
-        sl.add(i, i+100)
-        print
-    sl.debug_print()
-
-testing()
-

@@ -6,9 +6,9 @@ Created on 2012-04-03
 
 import bisect
 
-from collection import Collection
+from base import BaseSet
 
-class ControlSSet(Collection):
+class ControlSSet(BaseSet):
     def __init__(self, iterable=[]):
         self.a = []
         self.add_all(iterable)
@@ -40,10 +40,10 @@ class ControlSSet(Collection):
     def size(self):
         return len(self.a)
     
-    def __str__(self):
-        return "[" + ','.join([str(x) for x in self.a]) + "]"
-        
+    def clear(self):
+        self.a = list()
+    
     def __iter__(self):
-        return a.__iter__()
+        return self.a.__iter__()
         
         

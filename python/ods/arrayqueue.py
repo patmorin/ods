@@ -1,7 +1,9 @@
 
 from utils import new_array
 
-class ArrayQueue(object):
+from base import BaseSet
+
+class ArrayQueue(BaseSet):
     def __init__(self, iterable=[]):
         self._initialize()
         self.add_all(iterable)
@@ -18,9 +20,6 @@ class ArrayQueue(object):
         self.a = b
         self.j = 0
     
-    def size(self):
-        return self.n
-
     def add(self, x):
         if self.n + 1 > len(self.a): self._resize()
         self.a[(self.j+self.n) % len(self.a)] = x
@@ -34,17 +33,3 @@ class ArrayQueue(object):
         self.n -= 1
         if len(self.a) >= 3*self.n: self._resize()
         return x
-
-    def __str__(self):
-        return str([self.a[(i+self.j)%len(self.a)] for i in range(self.n)])
-             
-def test():
-    m = 10000
-    n = 50
-    q = ArrayQueue()
-    for i in range(m):
-        q.add(i)
-        if q.size() > n: 
-            x = q.remove()
-            assert x == i - n 
-    print q

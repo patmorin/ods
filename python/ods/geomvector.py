@@ -1,5 +1,5 @@
 """This code doesn't even compile"""
-
+"""
 class GeomVector(object):
     def hash_code(self):
         p = (1<<32)-5    # this is a prime number
@@ -14,3 +14,4 @@ class GeomVector(object):
             zi = (zi * z) % p      
         \ensuremath{s = (s + zi * (p-1)) % p}
         return s%(1<<32)
+"""

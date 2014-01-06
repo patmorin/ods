@@ -1,18 +1,17 @@
-
 from utils import new_array
-from odsset import ODSSet
+from base import BaseSet
 
 w = 32
 
-class LinearHashTable(ODSSet):
+class LinearHashTable(BaseSet):
     
     def __init__(self, iterable=[]):
         self._initialize()
+        self.initialize()
         self.add_all(iterable)
         
     def _initialize(self):
         self.dl = object();
-        self.add_all(iterable)
         
     def initialize(self):
         self.d = 1
@@ -36,8 +35,6 @@ class LinearHashTable(ODSSet):
     def hash_code(self, x):
         return hash(x)
     
-    # I know the code-line in this function is too long, but I need it
-    # this way for type-setting purposes
     def _hash(self, x):
         h = self.hash_code(x)
         return  (self.tab[0][h&0xff] \
@@ -75,14 +72,8 @@ class LinearHashTable(ODSSet):
             i = (i + 1) % len(self.t)
         return None
     
-    def size(self):
-        return self.n
-    
     def clear(self):
-        n = 0
-        q = 0
-        d = 1
-        t = new_array(1<<d)
+        self.initialize()
         
     def __iter__(self):
         for x in self.t:
@@ -105,7 +96,8 @@ class LinearHashTable(ODSSet):
     def ideal_hash(self, x):
         return tab[x.hashCode() >> w-d];
     """
-    
+
+    """A bunch of random values for use in tabulation hashing"""
     tab = \
       [[0x0069aeff,
         0x6ac0719e,

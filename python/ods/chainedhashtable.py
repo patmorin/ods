@@ -2,11 +2,11 @@ import random
 
 from utils import new_array
 from arraystack import ArrayStack
-from odsset import ODSSet
+from base import BaseSet
 
 w = 32
 
-class ChainedHashTable(ODSSet):
+class ChainedHashTable(BaseSet):
     def __init__(self, iterable=[]):
         self._initialize()
         self.add_all(iterable)
@@ -14,10 +14,10 @@ class ChainedHashTable(ODSSet):
     def _initialize(self):
         self.d = 1
         self.t = self._alloc_table((1<<self.d))
-        self.z = self.random_odd_int()
+        self.z = self._random_odd_int()
         self.n = 0
 
-    def random_odd_int(self):
+    def _random_odd_int(self):
         return random.randrange(1<<w) | 1
             
     def clear(self):
@@ -37,9 +37,6 @@ class ChainedHashTable(ODSSet):
         for i in range(len(old_t)):
             for x in old_t[i]:
                 self.add(x)
-                    
-    def size(self):
-        return self.n
     
     def _hash(self, x):
         return ((self.z * hash(x)) % (1<<w)) >> (w-self.d)
@@ -72,14 +69,6 @@ class ChainedHashTable(ODSSet):
             for x in ell:
                 yield x
                 
-    def __str__(self):
-        return str([x for x in self])
-    
-    def debug_print(self):
-        print "len(t) = %d" % len(self.t)
-        for ell in self.t:
-            print ell,
-        print
         
 
 
