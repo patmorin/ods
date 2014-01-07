@@ -12,6 +12,7 @@ class BinaryTree(object):
             self.left = self.right = self.parent = None
 
     def __init__(self):
+        super(BinaryTree, self).__init__()
         self.nil = None
         self.initialize()
         
@@ -26,11 +27,11 @@ class BinaryTree(object):
         return d
     
     def size(self):
-        return self.size_r(self.r)
+        return self._size(self.r)
     
-    def size_r(self, u):
+    def _size(self, u):
         if u == self.nil: return 0
-        return 1 + self.size_r(u.left) + self.size_r(u.right)
+        return 1 + self._size(u.left) + self._size(u.right)
     
     def size2(self):
         u = self.r

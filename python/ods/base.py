@@ -15,7 +15,7 @@ class BaseCollection(object):
     
     def __repr__(self):
         return self.__class__.__name__ \
-            + "("+ ",".join([repr(x) for x in self]) +")"
+            + "(["+ ",".join([repr(x) for x in self]) +"])"
 
 
 class BaseSet(BaseCollection):
@@ -85,12 +85,13 @@ class BaseList(BaseCollection):
         except ValueError:
             return False
 
-    """def __del__(self, i):
-       self.remove(i) """
-        
     def __getitem__(self, key):
         return self.get(key)
 
     def __setitem__(self, key, value):
         return self.set(key, value)
+
+    def __delitem__(self, i):
+       self.remove(i)
+        
         

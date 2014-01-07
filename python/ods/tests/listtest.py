@@ -5,11 +5,7 @@ from nose.tools import *
 from ods.controllist import ControlList
 
 def list_cmp(l1, l2):
-    try:
-        assert(l1 == l2)
-    except AssertionError:
-        print l1
-        print l2
+    assert(l1 == l2)
     assert(list(l1) == list(l2))
     assert(len(l1) == len(l2))
     for i in range(len(l1)):

@@ -13,19 +13,14 @@ def sset_test(t=ControlSSet()):
 
     t.clear()
     n = 200
-    print t
-    print t2
     for i in range(n):
         x = random.randrange(0,5*n)
         t.add(x)
         t2.add(x)
-        print t
-        print t2
         assert(str(t) == str(t2))
         assert(len(t) == len(t2))
 
-    print t
-    print t2
+    assert(t2 == t)
     assert(len(t) == len(t2))
     assert(str(t) == str(t2))
 

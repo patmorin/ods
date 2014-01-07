@@ -1,5 +1,6 @@
 import math
 
+from utils import new_array
 from binarysearchtree import BinarySearchTree
 
 def log32(q):
@@ -16,9 +17,9 @@ class ScapegoatTree(BinarySearchTree):
         
     def remove(self, x):
         if super(ScapegoatTree, self).remove(x):
-            if 2*n < q:
+            if 2*self.n < self.q:
                 self.rebuild(self.r)
-                q = n
+                self.q = self.n
             return True
         return False
         
@@ -61,43 +62,43 @@ class ScapegoatTree(BinarySearchTree):
         if d > log32(self.q):
             # depth exceeded, find scapegoat
             w = u.parent
-            while 3*size(w) <= 2*size(w.parent):
+            while 3*self._size(w) <= 2*self._size(w.parent):
                 w = w.parent
             self.rebuild(w.parent)
         return d >= 0
         
     def rebuild(self, u):
-        ns = size(u)
+        ns = self._size(u)
         p = u.parent
         a = new_array(ns)
-        pack_into_array(u, a, 0)
+        self.pack_into_array(u, a, 0)
         if p == self.nil:
-            self.r = build_balanced(a, 0, ns)
+            self.r = self.build_balanced(a, 0, ns)
             self.r.parent = nil
         elif p.right == u:
-            p.right = build_balanced(a, 0, ns)
+            p.right = self.build_balanced(a, 0, ns)
             p.right.parent = p
         else:
-            p.left = build_balanced(a, 0, ns)
+            p.left = self.build_balanced(a, 0, ns)
             p.left.parent = p
         
     def pack_into_array(self, u, a, i):
         if u == self.nil:
             return i
-        i = pack_into_array(u.left, a, i)
+        i = self.pack_into_array(u.left, a, i)
         a[i] = u
         i += 1
-        return pack_into_array(u.right, a, i)
+        return self.pack_into_array(u.right, a, i)
         
     def build_balanced(self, a, i, ns):
         if ns == 0:
             return self.nil
         m = ns // 2
-        a[i+m].left = build_balanced(a, i, m)
-        if a[i+m].left != nil:
+        a[i+m].left = self.build_balanced(a, i, m)
+        if a[i+m].left != self.nil:
             a[i+m].left.parent = a[i+m]
-        a[i+m].right = build_balanced(a, i+m+1, ns-m-1)
-        if a[i+m].right != nil:
+        a[i+m].right = self.build_balanced(a, i+m+1, ns-m-1)
+        if a[i+m].right != self.nil:
             a[i+m].right.parent = a[i+m]
         return a[i+m]
         

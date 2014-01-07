@@ -15,11 +15,11 @@ class Treap(BinarySearchTree):
     def __init__(self, iterable=[]):
         super(Treap, self).__init__(iterable)
     
-    def new_node(self, x):
+    def _new_node(self, x):
         return Treap.Node(x)
         
     def add(self, x):
-        u = self.new_node(x)
+        u = self._new_node(x)
         if self.add_node(u):
             self.bubble_up(u)
             return True
