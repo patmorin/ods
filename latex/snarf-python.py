@@ -47,6 +47,9 @@ def translate_code(line):
     line = re.sub(r'\bdef\s*', '', line)
     line = re.sub(r'\bself\b,?\s*', '', line)
 
+    # super(Class,self) => super
+    line = re.sub(r'super\([^)]*\)', 'super', line)
+
     # for <blah>: => for <blah> do
     # while <blah>: => while <blah> do
     # Note: The space after 'do' is important here (see [1])
@@ -191,7 +194,7 @@ def print_code(clazz, methods):
     """Print out the methods in clazz that are listed in methods"""
 
     # translate camel-case method names to Python style
-    methods = [re.sub(r'([a-z])([A-Z])', r'\1_\2', s).lower() for s in methods]
+    methods = [re.sub(r'([a-z])([A-Z0-9])', r'\1_\2', s).lower() for s in methods]
     sys.stderr.write(str(methods) + '\n')
 
     # stupid special cases. Mostly caused by using method overloading in Java

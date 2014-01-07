@@ -42,7 +42,7 @@ At all times, #n# and #q# obey the following inequalities:
 \[
       #q#/2 \le  #n# \le #q#  \enspace .
 \]
-In addition, a #ScapegoatTree# has logarithmic height; at all times, the height of the scapegoat tree does not exceed:
+In addition, a #ScapegoatTree# has logarithmic height; at all times, the height of the scapegoat tree does not exceed
 \begin{equation}
      \log_{3/2} #q# \le \log_{3/2} 2#n# < \log_{3/2} #n# + 2\enspace .
      \eqlabel{scapegoat-height}
@@ -85,7 +85,7 @@ take it for granted.  Once we've found the scapegoat #w#, we completely
 destroy the subtree rooted at #w# and rebuild it into a perfectly balanced
 binary search tree.  We know, from \myeqref{scapegoat}, that, even before
 the addition of #u#, #w#'s subtree was not a complete binary tree.
-Therefore, when we rebuild #w#, the height decreases by at least 1 so that height of the #ScapegoatTree# is once again at most $\log_{3/2}#q#$.
+Therefore, when we rebuild #w#, the height decreases by at least 1 so that the height of the #ScapegoatTree# is once again at most $\log_{3/2}#q#$.
 
 \codeimport{ods/ScapegoatTree.add(x)}
 

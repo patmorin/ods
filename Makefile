@@ -10,6 +10,7 @@ clean:
 tarballs:
 	tar czvf ods-java.tgz java/ods/
 	tar czvf ods-cpp.tgz cpp/
+	tar czvf ods-python.tgz python/ods
 
 install: all tarballs
 	(cd latex ; make install)
