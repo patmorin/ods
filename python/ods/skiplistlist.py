@@ -6,18 +6,21 @@ import numpy
 from utils import new_array
 from base import BaseList
 
-class Node(object):
-    """A node in a skip list"""
-    def __init__(self, x, h):
-        self.x = x
-        self.next = new_array(h+1)
-        self.length = numpy.ones(h+1, dtype=int)
-
-    def height(self):
-        return len(self.next) - 1
-   
         
 class SkiplistList(BaseList):
+    class Node(object):
+        """A node in a skip list"""
+        def __init__(self, x, h):
+            self.x = x
+            self.next = new_array(h+1)
+            self.length = numpy.ones(h+1, dtype=int)
+
+        def height(self):
+            return len(self.next) - 1
+
+    def _new_node(self, x, h):
+        return SkiplistList.Node(x, h)
+        
     def __init__(self, iterable=[]):
         self._initialize()
         self.add_all(iterable)
@@ -25,7 +28,7 @@ class SkiplistList(BaseList):
     def _initialize(self):
         self.h = 0
         self.n = 0
-        self.sentinel = Node(None, 32)
+        self.sentinel = self._new_node(None, 32)
         self.stack = new_array(self.sentinel.height()+1)
     
     def find_pred(self, i):
@@ -71,7 +74,7 @@ class SkiplistList(BaseList):
         
     def add(self, i, x):
         if i < 0 or i > self.n: raise IndexError()
-        w = Node(x, self.pick_height())
+        w = self._new_node(x, self.pick_height())
         if w.height() > self.h:
             self.h = w.height()
         self.add_node(i, w)

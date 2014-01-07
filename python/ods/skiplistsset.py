@@ -1,22 +1,20 @@
-"""A skiplist implementation of a sorted set
-
-"""
 import random
 from utils import new_array
-
-from ods.collection import Collection
-
-class Node(object):
-    """A node in a skip list"""
-    def __init__(self, x, h):
-        self.x = x
-        self.next = new_array(h+1)
-
-    def height(self):
-        return len(self.next) - 1
-   
+from base import BaseSet
         
-class SkiplistSSet(Collection):
+class SkiplistSSet(BaseSet):
+    class Node(object):
+        """A node in a skip list"""
+        def __init__(self, x, h):
+            self.x = x
+            self.next = new_array(h+1)
+
+        def height(self):
+            return len(self.next) - 1
+
+    def _new_node(self, x, h):
+        return SkiplistSSet.Node(x, h)
+        
     def __init__(self, iterable=[]):
         self._initialize()
         self.add_all(iterable)
@@ -24,7 +22,7 @@ class SkiplistSSet(Collection):
     def _initialize(self):
         self.h = 0
         self.n = 0
-        self.sentinel = Node(None, 32)
+        self.sentinel = self._new_node(None, 32)
         self.stack = new_array(self.sentinel.height()+1)
         
     def clear(self):
@@ -53,7 +51,7 @@ class SkiplistSSet(Collection):
             if u.next[r] != None and u.next[r].x == x: return False
             self.stack[r] = u
             r -= 1
-        w = Node(x, self.pick_height())
+        w = self._new_node(x, self.pick_height())
         while self.h < w.height():
             self.h += 1
             self.stack[self.h] = self.sentinel   # height increased

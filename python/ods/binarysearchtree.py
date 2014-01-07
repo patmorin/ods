@@ -10,6 +10,9 @@ class BinarySearchTree(BinaryTree,BaseSet):
             super(BinarySearchTree.Node, self).__init__()
             self.x = x
             
+    def _new_node(self, x):
+        return BinarySearchTree.Node(x)
+        
     def __init__(self, iterable=[], nil=None):
         self._initialize()
         self.nil = nil
@@ -77,7 +80,7 @@ class BinarySearchTree(BinaryTree,BaseSet):
         
     def add(self, x):
         p = self._find_last(x)
-        return self._add_child(p, BinarySearchTree.Node(x))
+        return self._add_child(p, self._new_node(x))
         
     def add_node(self, u):
         p = self._find_last(u.x)
