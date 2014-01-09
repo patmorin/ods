@@ -12,12 +12,12 @@ def matches(line, methods):
 
     Determine if this line of Python code is a method definition listed
     in methods"""
-    m = re.match(r'\s{4}def\s+(\w+)(\(.*\))\s*:', line)
+    m = re.match(r'(\s{4})?def\s+(\w+)(\(.*\))\s*:', line)
     if (not m): return False
-    name = m.group(1)
+    name = m.group(2)
     # remove leading and trailing underscores
     name = re.sub(r'^_*|_*$', '', name)
-    args = m.group(2)
+    args = m.group(3)
     # remove self from argument list
     args = re.sub(r'^\(self\s*,?\s*', '(', args)
     # remove spaces from argument list
@@ -35,7 +35,7 @@ def translate_code(line):
     # hide compiler directives
     line = re.sub(r'#@.*$', '', line)
 
-    # don't touch comments
+   # don't touch comments
     comment = ''
     m = re.search(r'#.*$', line)
     if m:
@@ -67,21 +67,28 @@ def translate_code(line):
     line = re.sub(r'\blen\s*\(\s*(\w+)\s*\)', r'length(\1)', line)
 
     # array.length (from Java) => length(array)
-    line = re.sub(r'\b(a|t)\.length', r'length(\1)', line)
+    line = re.sub(r'\b(a|t|c)\.length', r'length(\1)', line)
 
     # range(a,b,-1) => a,...,b+1
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*),\s*-1\s*\)',
                   r'\1,\1-1,\1-2,\ldots,\2+1', line)
 
     # range(a, b-1) => a,...,b-2
-    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\-\s*1\s*\)', 
-                  r'\1,\1+1,\1+2,\ldots,\2-2', line)
+    #line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\-\s*1\s*\)', 
+    #              r'\1,\1+1,\1+2,\ldots,\2-2', line)
 
     # range(a, b) => a,...,b-1
     line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)', r'\1,\1+1,\1+2,\ldots,\2-1', line)
 
     # range(a) => 0,...,a-1
     line = re.sub(r'\brange\s*\(\s*([^),]+)\s*\)', r'0,1,2,\ldots,\1-1', line)
+
+    # -1-1 => -2 and similar arithmetic
+    line = re.sub(r'-\s*1\s*-\s*1', r'-2', line)
+    line = re.sub(r'-\s*1\s*-\s*2', r'-3', line)
+    line = re.sub(r'-\s*1\s*\+\s*1', r'0', line)
+    line = re.sub(r'1\s*\+\s*1', r'2', line)
+    line = re.sub(r'1\s*\+\s*2', r'3', line)
 
     # <blah>.hashCode() => hash_code(<blah>)
     # line = re.sub(r'(\w+)\.hashCode()', r'hash_code(\1)', line)
@@ -146,6 +153,10 @@ def translate_code(line):
     line = re.sub(r'True', r'true', line)
     line = re.sub(r'False', r'false', line)
 
+    # Camelcase variable names to underscores
+    line = re.sub(r'\b([a-z_][a-z0-9_]*)([A-Z])', r'\1_\2', line)
+    line = re.sub(r'_[A-Z]_', lambda s: s.group(0).lower(), line)
+
     # None/null => \textbf{nil}
     line = re.sub(r'\b(None|null)\b', r'nil', line)
 
@@ -174,6 +185,12 @@ def translate_code(line):
     # add comment back and escape hashes
     if comment:
         line += comment
+
+    # when all else fails, annotate the source to \ensuremath
+    # line = re.sub(r'(\s*)(.*)#\s*ensuremath', r'\1\ensuremath{\2}', line) 
+    line = re.sub(r'(\s*)([^#]*\\gets[^\w][^#]*)', r'\1\ensuremath{\2}', line) 
+    
+    # escape hashes 
     line = re.sub(r'#', r'\#', line)
     return line
 
@@ -194,7 +211,7 @@ def print_code(clazz, methods):
     """Print out the methods in clazz that are listed in methods"""
 
     # translate camel-case method names to Python style
-    methods = [re.sub(r'([a-z])([A-Z0-9])', r'\1_\2', s).lower() for s in methods]
+    methods = [re.sub(r'([a-z])([A-Z])', r'\1_\2', s).lower() for s in methods]
     sys.stderr.write(str(methods) + '\n')
 
     # stupid special cases. Mostly caused by using method overloading in Java
@@ -204,7 +221,7 @@ def print_code(clazz, methods):
         methods.append('remove_node(w)')
     if clazz == 'SkiplistList' and 'add(i,w)' in methods:
         sys.stderr.write("BRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFFFFFF\n")
-	methods.append('add_node(i,w)')
+    	methods.append('add_node(i,w)')
 
     print r'\begin{framed}\begin{flushleft}'
     printed = False
@@ -214,12 +231,15 @@ def print_code(clazz, methods):
         printing = False
         for line in code:
             if printing:
-                printing = line == '' or line.startswith('     ')
+                printing = line == '' or line.startswith(indent)
             if not printing and matches(line, methods):
+                indent = re.match(r'\s*', line).group(0) + '    '
                 if printed: print '\\ \\\\' # to add space between methods
                 printing = True
             if printing and len(line.strip()) > 0:
                 printed = True
+                if len(indent) == 4:
+                    line = '    ' + line
                 print touchup_code_line(translate_code(line))
     except IOError:
         print "Unable to open %s" % filename
@@ -237,7 +257,7 @@ def code_subs(line):
         if re.search(r'[A-Z]\w*', code):
             pass # just a class name - leave it as is
         else:
-            code = r'\ensuremath{' + translate_code(code) + r'}'
+            code = r'\ensuremath{' + code + r'}'
         line = m.group(1) + code + m.group(3)
         m = re.search(pattern, line)
     return line

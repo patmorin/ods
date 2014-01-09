@@ -67,6 +67,7 @@ We recursively sort #a0# and #a1#, and then we merge (the now sorted)
 #a0# and #a1# to get our fully sorted array #a#:
 \javaimport{ods/Algorithms.mergeSort(a,c)}
 \cppimport{ods/Algorithms.mergeSort(a)}
+\pcodeimport{ods/Algorithms.mergeSort(a)}
 An example is shown in \figref{merge-sort}.
 \begin{figure}
   \begin{center}
@@ -83,6 +84,7 @@ array. Otherwise, we take the minimum of the next element in #a0# and
 the next element in #a1# and add it to #a#:
 \javaimport{ods/Algorithms.merge(a0,a1,a,c)}
 \cppimport{ods/Algorithms.merge(a0,a1,a)}
+\pcodeimport{ods/Algorithms.merge(a0,a1,a)}
 Notice that the #merge(a0,a1,a,c)# algorithm performs at most $#n#-1$
 comparisons before running out of elements in one of #a0# or #a1#.
 
@@ -119,7 +121,7 @@ The proof of the following theorem is based on preceding analysis,
 but has to be a little more careful to deal with the cases where #n#
 is not a power of 2.
 \begin{thm}
-  The #mergeSort(a,c)# algorithm runs in $O(#n#\log #n#)$ time and
+  The \javaonly{#mergeSort(a,c)#}\cpponly{mergeSort(a)}\pcodeonly{merge\_sort(a)} algorithm runs in $O(#n#\log #n#)$ time and
   performs at most $#n#\log #n#$ comparisons.
 \end{thm}
 
@@ -181,6 +183,7 @@ and, finally, recursively sort the first and third sets in this partition.
 An example is shown in \figref{quicksort}.
 \javaimport{ods/Algorithms.quickSort(a,c).quickSort(a,i,n,c)}
 \cppimport{ods/Algorithms.quickSort(a).quickSort(a,i,n)}
+\pcodeimport{ods/Algorithms.quickSort(a).quickSort(a,i,n)}
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/quicksort}
@@ -267,8 +270,9 @@ occurrences of #x# get grouped together and do not take part in either
 of the two subproblems.
 
 \begin{thm}\thmlabel{quicksort}
-  The #quickSort(a,c)# method runs in $O(#n#\log #n#)$ expected time
-  and the expected number of comparisons it performs is at most
+  The \javaonly{#quickSort(a,c)#} \cpponly{#quickSort(a)#}
+  \pcodeonly{#quickSort(a,c)#} method runs in $O(#n#\log #n#)$ expected
+  time and the expected number of comparisons it performs is at most
   $2#n#\ln #n# +O(#n#)$.
 \end{thm}
 
@@ -308,6 +312,7 @@ heap sort algorithm stores the elements directly in ascending order.}
 
 \javaimport{ods/BinaryHeap.sort(a,c)}
 \cppimport{ods/BinaryHeap.sort(b)}
+\pcodeimport{ods/Algorithms.heapSort(a)}
 
 A key subroutine in heap sort is the constructor for turning
 an unsorted array #a# into a heap.  It would be easy to do this
@@ -603,7 +608,7 @@ their least significant #d# bits, then their next significant #d# bits,
 and so on until, in the last pass, the integers are sorted by their most
 significant #d# bits.
 \codeimport{ods/Algorithms.radixSort(a)}
-(In this code, the expression #(a[i] >> d*p)&((1<<d)-1)# extracts the integer
+(In this code, the expression #(a[i]>>d*p)&((1<<d)-1)# extracts the integer
 whose binary representation is given by bits
 $(#p#+1)#d#-1,\ldots,#p##d#$ of #a[i]#.)
 An example of the steps of this algorithm is shown in \figref{radixsort}.

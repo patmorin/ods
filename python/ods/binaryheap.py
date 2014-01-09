@@ -19,10 +19,10 @@ class BinaryHeap(BaseSet):
             self._initialize()
             self.add_all(iterable)
 
-    def make_heap(self, a):
+    def _make_heap(self, a):
         self.a = a
         self.n = len(a)
-        for i in range(n//2-1, -1, -1):
+        for i in range(self.n//2-1, -1, -1):
             self.trickle_down(i)
             
     def _initialize(self):

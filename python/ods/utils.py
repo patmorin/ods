@@ -1,8 +1,11 @@
 import numpy
 
 def new_array(n, dtype=numpy.object):
-    a = numpy.empty(n, dtype)
-    # a.fill(None)   # is this necessary?
-    return a
+    return numpy.empty(n, dtype)
 
+def _new_array(n):
+    return [None]*n
+    
+def new_zero_array(n):
+    return numpy.zeros(n)
 

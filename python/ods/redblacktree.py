@@ -87,21 +87,21 @@ class RedBlackTree(BinarySearchTree):
             if u == self.r:
                 u.colour = black
             elif u.parent.left.colour == red:
-                u = self.remove_fixup_case_1(u)
+                u = self.remove_fixup_case1(u)
             elif u == u.parent.left:
-                u = self.remove_fixup_case_2(u)
+                u = self.remove_fixup_case2(u)
             else:
-                u = self.remove_fixup_case_3(u)
+                u = self.remove_fixup_case3(u)
         if u != self.r:   # restore left-leaning property, if needed
             w = u.parent
             if w.right.colour == red and w.left.colour == black:
                 self.flip_left(w)
             
-    def remove_fixup_case_1(self, u):
+    def remove_fixup_case1(self, u):
         self.flip_right(u.parent)
         return u
     
-    def remove_fixup_case_2(self, u):
+    def remove_fixup_case2(self, u):
         w = u.parent
         v = w.right
         self.pull_black(w)
@@ -117,7 +117,7 @@ class RedBlackTree(BinarySearchTree):
         else:
             return v
     
-    def remove_fixup_case_3(self, u):
+    def remove_fixup_case3(self, u):
         w = u.parent
         v = w.left
         self.pull_black(w)
