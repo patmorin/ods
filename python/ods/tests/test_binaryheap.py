@@ -1,9 +1,9 @@
 import random
 
-from ods.binaryheap import BinaryHeap
+import ods
 from heaptest import heap_test
 
 def test_bh():
-	heap_test(BinaryHeap())
+	heap_test(ods.BinaryHeap())
 
 

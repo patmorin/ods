@@ -1,11 +1,7 @@
-'''
-Created on 2012-04-04
-
-@author: morin
-'''
-
-from ods.controlsset import ControlSSet
 import random
+
+from ods import ControlSSet
+
         
 
 def sset_test(t=ControlSSet()):

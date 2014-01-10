@@ -1,8 +1,8 @@
 
 
 from nose.tools import *
-from ods.scapegoattree import ScapegoatTree
+import ods
 from ssettest import sset_test
 
 def test_bst():
-    sset_test(ScapegoatTree())
+    sset_test(ods.ScapegoatTree())

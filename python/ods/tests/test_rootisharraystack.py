@@ -1,9 +1,10 @@
 import random
 
 from nose.tools import *
-from ods.rootisharraystack import RootishArrayStack
+
+import ods
 from listtest import list_test
 
 def test_as():
-    list_test(RootishArrayStack())
+    list_test(ods.RootishArrayStack())
     

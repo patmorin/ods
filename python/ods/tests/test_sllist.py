@@ -1,9 +1,10 @@
 import random
 
 from nose.tools import *
-from ods.sllist import SLList
+
+import ods
 from listtest import list_test
 
 def test_as():
-    list_test(SLList())
+    list_test(ods.SLList())
     

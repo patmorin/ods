@@ -33,7 +33,4 @@ def set_tests(s1=set(), s2=set()):
     for i in range(2*n):
         assert((i in s1) == (i in s2))
         
-if __name__ == "__main__":
-    set_tests(ChainedHashTable(), set())
-    set_tests(LinearHashTable(), set())
 

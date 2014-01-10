@@ -1,7 +1,5 @@
-
-
 from settest import set_tests
-from ods.linearhashtable import LinearHashTable
+import ods
 
 def test_cht():
-    set_tests(LinearHashTable())
+    set_tests(ods.ChainedHashTable())

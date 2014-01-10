@@ -1,8 +1,7 @@
 import random
 
 from sorttest import sort_test
-from ods.algorithms import merge_sort, quick_sort, counting_sort, radix_sort,\
-                    heap_sort
+from ods import merge_sort, quick_sort, counting_sort, radix_sort, heap_sort
 
 def test_sorts():
     sort_test(merge_sort)

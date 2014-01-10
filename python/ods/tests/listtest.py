@@ -2,7 +2,7 @@
 import random
 
 from nose.tools import *
-from ods.controllist import ControlList
+from ods import ControlList
 
 def list_cmp(l1, l2):
     assert(l1 == l2)

@@ -1,7 +1,8 @@
 
 from nose.tools import *
-from ods.skiplistsset import SkiplistSSet
+
+import ods
 from ssettest import sset_test
 
 def test_treap():
-    sset_test(t=SkiplistSSet())
+    sset_test(t=ods.Treap())

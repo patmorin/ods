@@ -1,9 +1,9 @@
 import random
 
-from ods.meldableheap import MeldableHeap
+import ods
 from heaptest import heap_test
 
 def test_mh():
-	heap_test(MeldableHeap())
+	heap_test(ods.MeldableHeap())
 
 

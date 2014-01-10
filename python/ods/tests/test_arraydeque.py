@@ -1,9 +1,9 @@
 import random
-
 from nose.tools import *
-from ods.arraydeque import ArrayDeque
+
+import ods
 from listtest import list_test
 
 def test_as():
-    list_test(ArrayDeque())
+    list_test(ods.ArrayDeque())
     
