@@ -36,3 +36,5 @@ from controlsset import ControlSSet
 from algorithms import merge_sort, quick_sort, heap_sort, \
     counting_sort, radix_sort
 
+# Graphs
+from adjacencymatrix import AdjacencyMatrix
