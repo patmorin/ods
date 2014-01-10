@@ -1,5 +1,6 @@
 
-from arraylist import ArrayList
+from arraystack import ArrayStack
+from utils import new_array
 
 length = len
 
@@ -8,16 +9,16 @@ class AdjacencyLists(object):
         self.n = n
         self._initialize()
         
-    def _initialize(self)
+    def _initialize(self):
         self.adj = new_array(self.n)
-        for i in range(n):
-            self.adj[i] = ArrayList()
+        for i in range(self.n):
+            self.adj[i] = ArrayStack()
             
     def add_edge(self, i, j):
-        adj[i].add(j)
+        self.adj[i].append(j)
         
-    def remove_edge(i, j):
-        for k in length(adj[i]):
+    def remove_edge(self, i, j):
+        for k in range(length(self.adj[i])):
             if self.adj[i].get(k) == j:
                 self.adj[i].remove(k)
                 return
@@ -30,11 +31,19 @@ class AdjacencyLists(object):
         
     def out_edges(self, i):
         return self.adj[i]
+
+    def out_degree(self, i):
+        return len(self.adj[i])
         
     def in_edges(self, i):
-        out = ArrayList()
+        out = ArrayStack()
         for j in range(self.n):
-            if self.has_edge(j, i): out.add(j)
+            if self.has_edge(j, i): out.append(j)
         return out
         
+    def in_degree(self, i):
+        deg = 0
+        for j in range(self.n):
+            if self.has_edge(j, i): deg += 1
+        return deg
             

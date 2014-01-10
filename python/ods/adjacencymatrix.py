@@ -4,10 +4,10 @@ from utils import new_boolean_matrix
 class AdjacencyMatrix(object):
     def __init__(self, n):
         self.n = n
-        self._initialize(n)
+        self._initialize()
                 
     def _initialize(self):
-        self.a = new_boolean_matrix(n, n)    
+        self.a = new_boolean_matrix(self.n, self.n)    
 
     def add_edge(self, i, j):
         self.a[i][j] = True
