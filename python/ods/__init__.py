@@ -38,3 +38,4 @@ from algorithms import merge_sort, quick_sort, heap_sort, \
 
 # Graphs
 from adjacencymatrix import AdjacencyMatrix
+from adjacencylists import AdjacencyLists
