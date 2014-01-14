@@ -48,7 +48,7 @@ class LinearHashTable(BaseSet):
         i = self._hash(x)
         while self.t[i] != None and self.t[i] != self.dl:
             i = (i + 1) % len(self.t)
-        if self.t[i] == None: self.q += 1
+        if self.t[i] is None: self.q += 1
         self.n += 1
         self.t[i] = x
         return True

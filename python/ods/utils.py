@@ -12,4 +12,6 @@ def new_zero_array(n):
 def new_boolean_matrix(n, m):
     return numpy.zeros([n, n], bool)
     
+def new_boolean_array(n):
+    return numpy.zeros(n, bool)
 

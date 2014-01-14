@@ -41,14 +41,14 @@ class DLList(BaseList):
         u.x = x
         return y
 
-    def _remove_node(self, w):
+    def _remove(self, w):
         w.prev.next = w.next
         w.next.prev = w.prev
         self.n -= 1    
 
     def remove(self, i):
         if i < 0 or i >= self.n: raise IndexError()
-        self._remove_node(self.get_node(i))
+        self._remove(self.get_node(i))
 
     def add_before(self, w, x):
         u = DLList.Node(x)

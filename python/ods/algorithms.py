@@ -93,3 +93,42 @@ def radix_sort(a):
         a = b
     return b
 
+def bfs(g, r):
+    seen = new_boolean_array(n)
+    q = SLList()
+    q.add(r)
+    seen[r] = True
+    while q.size() > 0:
+        i = q.remove()
+        for j in g.out_edges(i):
+            if seen[j] is False:
+                q.add(j)
+                seen[j] = True
+
+white, grey, black = 0, 1, 2
+
+def dfs(g, r):
+    c = new_array(g.n)
+    _dfs(g, r, c)
+    
+def _dfs(g, i, c):
+    c[i] = grey
+    for j in g.out_edges(i):
+        if c[j] == white:
+            c[j] = grey
+            dfs(g, j, c)
+    c[i] = black
+    
+def dfs2(g, r):
+    c = new_array(g.n)
+    s = SLList()
+    s.push(r)
+    while s.size() > 0:
+        i = s.pop()
+        if c[i] == white:
+            c[i] = grey
+            for j in g.out_edges(i):
+                s.push(j)
+    
+
+    

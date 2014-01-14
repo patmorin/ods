@@ -36,7 +36,7 @@ class SkiplistList(BaseList):
         r = self.h
         j = -1
         while r >= 0:
-            while u.next[r] != None and j + u.length[r] < i:
+            while u.next[r] is not None and j + u.length[r] < i:
                 j += u.length[r]
                 u = u.next[r]  # go right in list r
             r -= 1  # go down into list r-1
@@ -53,13 +53,13 @@ class SkiplistList(BaseList):
         u.x = x
         return y
         
-    def add_node(self, i, w):
+    def _add(self, i, w):
         u = self.sentinel
         k = w.height()
         r = self.h
         j = -1
         while r >= 0:
-            while u.next[r] != None and j+u.length[r] < i:
+            while u.next[r] is not None and j+u.length[r] < i:
                 j += u.length[r]
                 u = u.next[r]
             u.length[r] += 1
@@ -77,7 +77,7 @@ class SkiplistList(BaseList):
         w = self._new_node(x, self.pick_height())
         if w.height() > self.h:
             self.h = w.height()
-        self.add_node(i, w)
+        self._add(i, w)
         
     def remove(self, i):
         if i < 0 or i > self.n-1: raise IndexError()
@@ -85,15 +85,15 @@ class SkiplistList(BaseList):
         r = self.h
         j = -1
         while r >= 0:
-            while u.next[r] != None and j + u.length[r] < i:
+            while u.next[r] is not None and j + u.length[r] < i:
                 j += u.length[r]
                 u = u.next[r]
             u.length[r] -= 1
-            if j + u.length[r] + 1 == i and u.next[r] != None:
+            if j + u.length[r] + 1 == i and u.next[r] is not None:
                 x = u.next[r].x
                 u.length[r] += u.next[r].length[r]
                 u.next[r] = u.next[r].next[r]
-                if u == self.sentinel and u.next[r] == None:
+                if u == self.sentinel and u.next[r] is None:
                     self.h -= 1
             r -= 1
         self.n -= 1
@@ -101,7 +101,7 @@ class SkiplistList(BaseList):
 
     def __iter__(self):
         u = self.sentinel.next[0]
-        while u != None:
+        while u is not None:
             yield u.x
             u = u.next[0]
 
