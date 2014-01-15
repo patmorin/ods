@@ -93,10 +93,10 @@ class SLList(BaseList):
     def __str__(self):
         s = "["
         u = self.head
-        while u != None:
+        while u is not None:
             s += "%r" % u.x
             u = u.next
-            if u != None:
+            if u is not None:
                 s += ","
         return s + "]"
 

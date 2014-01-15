@@ -37,17 +37,17 @@ class Treap(BinarySearchTree):
             
     def remove(self, x):
         u = self._find_last(x)
-        if u != None and u.x == x:
+        if u is not None and u.x == x:
             self.trickle_down(u)
             self.splice(u)
             return True
         return False
         
     def trickle_down(self, u):
-        while u.left != None or u.right != None:
-            if u.left == None:
+        while u.left is not None or u.right is not None:
+            if u.left is None:
                 self.rotate_left(u)
-            elif u.right == None:
+            elif u.right is None:
                 self.rotate_right(u)
             elif u.left.p < u.right.p:
                 self.rotate_right(u)

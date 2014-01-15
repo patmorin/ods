@@ -144,19 +144,17 @@ class BinaryTrie(BaseSet):
             if v.child[1-c] is not None: break
             
         # 4 - update jump pointers
-        c = (ix >> w-i-1) & 1
-        v.jump = u.child[1-c]
+        pred = u.prev
+        succ = u.next
+        v.jump = [pred, succ][v.left is None]
         v = v.parent
-        i -= 1
-        while i >= 0:
-            c = (ix >> w-i-1) & 1
+        while v is not None:
             if v.jump is u:
-                v.jump = u.child[c]
+                v.jump = [pred, succ][v.left is None]
             v = v.parent
-            i -= 1
             
         self.n -= 1
-        self._check()
+        # self._check()
         return True
     
     def _check(self):

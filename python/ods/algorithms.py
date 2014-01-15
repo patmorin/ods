@@ -1,5 +1,5 @@
 import random
-from utils import new_zero_array, new_array, _new_array
+from utils import new_zero_array, new_array, _new_array, w
 from binaryheap import BinaryHeap
 
 def merge_sort(a):
@@ -75,7 +75,6 @@ def counting_sort(a, k):
     return b
     
 d = 8
-w = 32
 
 def radix_sort(a):
     for p in range(w//d):

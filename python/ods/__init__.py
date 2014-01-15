@@ -42,4 +42,5 @@ from adjacencylists import AdjacencyLists
 
 # Integer data structures
 from binarytrie import BinaryTrie
+from xfasttrie import XFastTrie
 

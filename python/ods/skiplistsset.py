@@ -32,23 +32,23 @@ class SkiplistSSet(BaseSet):
         u = self.sentinel
         r = self.h
         while r >= 0:
-            while u.next[r] != None and u.next[r].x < x:
+            while u.next[r] is not None and u.next[r].x < x:
                 u = u.next[r]  # go right in list r
             r -= 1  # go down into list r-1
         return u
 
     def find(self, x):
         u = self.find_pred_node(x)
-        if u.next[0] == None: return None
+        if u.next[0] is None: return None
         return u.next[0].x
         
     def add(self, x):
         u = self.sentinel
         r = self.h
         while r >= 0:
-            while u.next[r] != None and u.next[r].x < x:
+            while u.next[r] is not None and u.next[r].x < x:
                 u = u.next[r]
-            if u.next[r] != None and u.next[r].x == x: return False
+            if u.next[r] is not None and u.next[r].x == x: return False
             self.stack[r] = u
             r -= 1
         w = self._new_node(x, self.pick_height())
@@ -66,12 +66,12 @@ class SkiplistSSet(BaseSet):
         u = self.sentinel
         r = self.h
         while r >= 0:
-            while u.next[r] != None and u.next[r].x < x:
+            while u.next[r] is not None and u.next[r].x < x:
                 u = u.next[r]
-            if u.next[r] != None and u.next[r].x == x:
+            if u.next[r] is not None and u.next[r].x == x:
                 removed = True
                 u.next[r] = u.next[r].next[r]
-                if u == self.sentinel and u.next[r] == None:
+                if u == self.sentinel and u.next[r] is None:
                     self.h -= 1 # height has decreased
             r -= 1
         if removed: self.n -= 1
@@ -79,7 +79,7 @@ class SkiplistSSet(BaseSet):
 
     def __iter__(self):
         u = self.sentinel.next[0]
-        while u != None:
+        while u is not None:
             yield u.x
             u = u.next[0]
                       

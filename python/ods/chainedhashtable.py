@@ -42,7 +42,7 @@ class ChainedHashTable(BaseSet):
         return ((self.z * hash(x)) % (1<<w)) >> (w-self.d)
     
     def add(self, x):
-        if self.find(x) != None: return False
+        if self.find(x) is not None: return False
         if self.n+1 > len(self.t): self._resize()
         self.t[self._hash(x)].append(x)
         self.n += 1

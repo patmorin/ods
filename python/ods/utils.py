@@ -1,5 +1,7 @@
 import numpy
 
+w = 32
+
 def new_array(n, dtype=numpy.object):
     return numpy.empty(n, dtype)
 
@@ -15,3 +17,5 @@ def new_boolean_matrix(n, m):
 def new_boolean_array(n):
     return numpy.zeros(n, bool)
 
+def binfmt(n):
+    return "{0:012b}".format(n)

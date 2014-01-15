@@ -26,9 +26,9 @@ class LinearHashTable(BaseSet):
         self.t = new_array((1<<self.d))
         self.q = self.n
         for x in told:
-            if x != None and x != self.dl:
+            if x is not None and x != self.dl:
                 i = self._hash(x)
-                while self.t[i] != None: 
+                while self.t[i] is not None: 
                     i = (i+1) % len(self.t)
                 self.t[i] = x
 
@@ -43,10 +43,10 @@ class LinearHashTable(BaseSet):
                  ^ self.tab[3][(h>>24)&0xff]) >> (w-self.d)
                   
     def add(self, x):
-        if self.find(x) != None: return False
+        if self.find(x) is not None: return False
         if 2*(self.q+1) > len(self.t): self._resize()
         i = self._hash(x)
-        while self.t[i] != None and self.t[i] != self.dl:
+        while self.t[i] is not None and self.t[i] != self.dl:
             i = (i + 1) % len(self.t)
         if self.t[i] is None: self.q += 1
         self.n += 1
@@ -55,14 +55,14 @@ class LinearHashTable(BaseSet):
       
     def find(self, x):
         i = self._hash(x)
-        while self.t[i] != None:
+        while self.t[i] is not None:
             if self.t[i] != self.dl and x == self.t[i]: 
                 return self.t[i]
             i = (i + 1) % len(self.t)
             
     def remove(self, x):
         i = self._hash(x)
-        while self.t[i] != None:
+        while self.t[i] is not None:
             y = self.t[i]
             if y != self.dl and x == y:
                 self.t[i] = self.dl
@@ -77,7 +77,7 @@ class LinearHashTable(BaseSet):
         
     def __iter__(self):
         for x in self.t:
-            if x != None and x != self.dl:
+            if x is not None and x != self.dl:
                 yield x
 
     """Fake sample code:
@@ -85,7 +85,7 @@ class LinearHashTable(BaseSet):
     def add_slow(self, x):
         if 2*(self.q+1) > len(self.t): resize()
         i = self._hash(x)
-        while self.t[i] != None:
+        while self.t[i] is not None:
             if self.t[1] != self.dl and x == self.t[i]: return False
             i = (i + 1) % len(self.t[i])
         t[i] = x

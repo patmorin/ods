@@ -25,7 +25,7 @@ class BaseSet(BaseCollection):
             self.add(x)
             
     def __in__(self, x):
-        return self.find(x) != None
+        return self.find(x) is not None
 
     def __eq__(self, a):
         if len(a) != len(self): return False
