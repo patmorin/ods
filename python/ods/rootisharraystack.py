@@ -5,6 +5,12 @@ Implements the List interface using a collection of arrays of sizes
 1, 2, 3,..., and so on.  The main advantage of this representation is that
 it uses only O(sqrt(n)) pointers and there are never more than O(sqrt(n))
 unused array entries.
+
+This is an implementation of the (simpler) data structure described by 
+Brodnik et al:
+
+Andrej Brodnik, Svante Carlsson, Erik D. Demaine, J. Ian Munro, 
+Robert Sedgewick: Resizable Arrays in Optimal Time and Space. WADS 1999: 37-48
 """
 from math import ceil, sqrt
 

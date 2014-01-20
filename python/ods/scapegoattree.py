@@ -1,3 +1,15 @@
+"""An implementation of Scapegoat trees
+
+This data structure was described by Andersson (who called it a general
+balanced treet) as well as Galperin and Rivest
+
+I. Galperin and R. Rivest. Scapegoat Trees. Proceedings of the 4th
+  Annual ACM-SIAM Symposium on Discrete Algorithms (SODA '93), pp. 165–174, 
+  1993.
+  
+A. Andersson. General Balanced Trees. In Journal of Algorithms, 30(1),
+  pp. 1–18, 1999.
+"""
 import math
 
 from utils import new_array

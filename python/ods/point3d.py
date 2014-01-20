@@ -1,4 +1,3 @@
-
 """This code doesn't even compile---it's just used as an example"""
 """
 class Point3D(object):

@@ -1,8 +1,4 @@
-'''
-Created on 2012-04-03
-
-@author: morin
-'''
+"""A basic binary tree implementation"""
 
 from arrayqueue import ArrayQueue
 

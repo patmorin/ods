@@ -1,4 +1,4 @@
-"""This code doesn't even compile"""
+"""Demonstration code used to illustrate hashing a variable length object"""
 class GeomVector(object):
     def hash_code(self):
         p = (1<<32)-5    # this is a prime number

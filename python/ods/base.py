@@ -101,5 +101,3 @@ class BaseList(BaseCollection):
 
     def __delitem__(self, i):
        self.remove(i)
-        
-        

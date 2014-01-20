@@ -1,9 +1,4 @@
-'''
-A class that wraps a python list in the ods List interface
-Created on 2012-04-03
-
-@author: morin
-'''
+"""A class that wraps a python list in the ods List interface"""
 from base import BaseList
 
 class ControlList(BaseList):

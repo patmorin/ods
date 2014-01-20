@@ -1,8 +1,4 @@
-'''
-Created on 2012-04-03
-
-@author: morin
-'''
+"""A class that implements a stupid SSet (for testing purposes)"""
 
 import bisect
 

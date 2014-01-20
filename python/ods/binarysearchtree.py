@@ -1,4 +1,4 @@
-
+"""An implementation of a binary search tree"""
 from binarytree import BinaryTree
 from base import BaseSet
 

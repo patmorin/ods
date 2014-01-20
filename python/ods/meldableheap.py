@@ -1,3 +1,10 @@
+"""An implementation of Gambin and Malinowsky's randomized meldable heaps
+
+A. Gambin and A. Malinowski. Randomized meldable priority queues. 
+  Proceedings of the XXVth Seminar on Current Trends in Theory and Practice
+  of Informatics (SOFSEM'98), pp. 344–349, 1998
+"""
+
 import random
 from base import BaseSet
 from binarytree import BinaryTree

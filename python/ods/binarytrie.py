@@ -1,4 +1,8 @@
+"""An implementation of a binary trie for storing w bit integers
 
+This structure is able to store elements, x, where int(x) is an unsigned
+w bit integer.
+"""
 
 from utils import new_array, w, binfmt
 from base import BaseSet

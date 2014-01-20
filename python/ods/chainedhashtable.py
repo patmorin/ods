@@ -1,3 +1,4 @@
+"""A Set implementation that uses hashing with chaining"""
 import random
 
 from utils import new_array

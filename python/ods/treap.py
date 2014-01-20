@@ -1,4 +1,16 @@
+"""An implementation of Treaps/Cartesian trees
 
+This is an implementation of the data structure called a Treap by Aragon
+and Seidel:
+
+C. R. Aragon and R. Seidel. Randomized Search Trees. In Algorithmica, 
+   Vol. 16, Number 4/5, pp. 464–497, 1996.
+
+Pretty-much the same structure was discovered earlier by Vuillemin:
+
+J. Vuillemin. A unifying look at data structures. 
+   Communications of the ACM, 23(4), 229–239, 1980. 
+"""
 import random
 
 from binarysearchtree import BinarySearchTree
@@ -55,4 +67,6 @@ class Treap(BinarySearchTree):
                 self.rotate_left(u)
             if self.r == u:
                 self.r = u.parent
+                
+    def split(self):
         
