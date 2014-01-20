@@ -103,7 +103,6 @@ class BinaryTrie(BaseSet):
                 v.jump = u
             v = v.parent
         self.n += 1
-        # self._check_it(self.r, 0, 0)
         return True
     
     def find(self, x):
@@ -154,7 +153,6 @@ class BinaryTrie(BaseSet):
             v = v.parent
             
         self.n -= 1
-        # self._check()
         return True
     
     def _check(self):

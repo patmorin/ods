@@ -15,7 +15,6 @@ class BinaryTree(object):
         super(BinaryTree, self).__init__()
         self.nil = None
         self.r = None
-        print "bt.init()"
         self.initialize()
         
     def initialize(self):
