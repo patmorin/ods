@@ -1,7 +1,7 @@
 import random
 
 
-def heap_test(h=None):
+def exercise_heap(h=None):
     if h is None: return
     a0 = []
     h

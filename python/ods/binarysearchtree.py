@@ -16,12 +16,13 @@ class BinarySearchTree(BinaryTree,BaseSet):
         return u
         
     def __init__(self, iterable=[], nil=None):
+        super(BinarySearchTree, self).__init__()
+        print self.nil, nil
         self._initialize()
         self.nil = nil
         self.add_all(iterable)
         
     def _initialize(self):
-        super(BinarySearchTree, self).__init__()
         self.n = 0
         
     def clear(self):
@@ -31,7 +32,8 @@ class BinarySearchTree(BinaryTree,BaseSet):
     def _find_last(self, x):
         w = self.r
         prev = self.nil
-        while w != self.nil: 
+        print w, self.nil
+        while w is not self.nil: 
             prev = w
             if (x < w.x):
                 w = w.left

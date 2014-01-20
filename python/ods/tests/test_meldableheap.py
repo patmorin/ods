@@ -1,9 +1,9 @@
 import random
 
 import ods
-from heaptest import heap_test
+from heaptest import exercise_heap
 
 def test_mh():
-	heap_test(ods.MeldableHeap())
+	exercise_heap(ods.MeldableHeap())
 
 

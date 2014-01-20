@@ -2,6 +2,8 @@
 
 class BaseCollection(object):
     """Base class for everything"""
+    def __init__(self):
+        super(BaseCollection, self).__init__()
     
     def size(self):
         """This implementation works for almost every class in ODS"""
@@ -20,6 +22,9 @@ class BaseCollection(object):
 
 class BaseSet(BaseCollection):
     """Base class for Set implementations"""
+    def __init__(self):
+        super(BaseSet, self).__init__()
+                
     def add_all(self, a):
         for x in a:
             self.add(x)
@@ -41,6 +46,9 @@ class BaseSet(BaseCollection):
 
 class BaseList(BaseCollection):
     """Base class for List implementations"""
+    def __init__(self):
+        super(BaseList, self).__init__()
+        
     def append(self, x):
         self.add(self.size(), x)
 

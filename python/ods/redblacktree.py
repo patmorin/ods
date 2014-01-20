@@ -10,10 +10,16 @@ class RedBlackTree(BinarySearchTree):
             super(RedBlackTree.Node, self).__init__(x)
             self.colour = black
         
+    def _new_node(self, x):
+        u = RedBlackTree.Node(x)
+        u.left = u.right = u.parent = self.nil
+        return u
+        
     def __init__(self, iterable=[]):
         self.nil = RedBlackTree.Node(None)
         self.nil.right = self.nil.left = self.nil.parent = self.nil
         super(RedBlackTree, self).__init__([], self.nil)
+        self.r = self.nil
         self.add_all(iterable)
         
     def push_black(self, u):

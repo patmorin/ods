@@ -2,7 +2,7 @@
 from nose.tools import *
 
 import ods
-from ssettest import sset_test
+from ssettest import exercise_sset
 
 def test_treap():
-    sset_test(t=ods.Treap())
+    exercise_sset(ods.Treap())

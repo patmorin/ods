@@ -1,8 +1,8 @@
 
 
 import ods
-from graphtest import graph_test
+from graphtest import exercise_graph
 
 
 def test_al():
-    graph_test(ods.AdjacencyLists)
+    exercise_graph(ods.AdjacencyLists)

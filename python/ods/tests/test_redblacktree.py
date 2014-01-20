@@ -1,8 +1,8 @@
 from nose.tools import *
 
 import ods
-from ssettest import sset_test
+from ssettest import exercise_sset
 
 def test_rbt():
-    sset_test(ods.RedBlackTree())
+    exercise_sset(ods.RedBlackTree())
 

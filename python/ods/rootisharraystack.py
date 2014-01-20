@@ -68,6 +68,6 @@ class RootishArrayStack(BaseList):
 
     def clear(self):
         self.blocks.clear()
-        n = 0
+        self.n = 0
 
 

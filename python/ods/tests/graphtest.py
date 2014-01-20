@@ -2,7 +2,7 @@
 import random
 import ods
 
-def graph_test(Clz=ods.AdjacencyMatrix):
+def exercise_graph(Clz=ods.AdjacencyMatrix):
     n = 50
     g = Clz(n)
     s = set()

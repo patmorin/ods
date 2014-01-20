@@ -3,8 +3,8 @@ import random
 from nose.tools import *
 
 import ods
-from listtest import list_test
+from listtest import exercise_list
 
 def test_dad():
-    list_test(ods.DualArrayDeque())
+    exercise_list(ods.DualArrayDeque())
     

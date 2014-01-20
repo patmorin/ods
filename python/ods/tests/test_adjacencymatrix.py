@@ -1,8 +1,8 @@
 
 
 import ods
-from graphtest import graph_test
+from graphtest import exercise_graph
 
 
 def test_am():
-    graph_test(ods.AdjacencyMatrix)
+    exercise_graph(ods.AdjacencyMatrix)

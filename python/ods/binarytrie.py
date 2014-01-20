@@ -198,18 +198,3 @@ class BinaryTrie(BaseSet):
             u = u.next
             
 
-if __name__ == "__main__":
-    import random
-    random.seed(0)
-    
-    n = 20
-    t = BinaryTrie()
-    for i in range(n):
-        t._check_it(t.r, 0, 0)
-        print t
-        x = random.randrange(5*n)
-        t.add(x)
-    for i in range(n):
-        x = random.randrange(5*n)
-        print "%d=>%d" % (x, t.find(x)),
-    

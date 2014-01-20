@@ -1,5 +1,5 @@
 import ods
-from settest import set_tests
+from settest import exercise_set
 
 def test_cht():
-    set_tests(ods.LinearHashTable())
+    exercise_set(ods.LinearHashTable())

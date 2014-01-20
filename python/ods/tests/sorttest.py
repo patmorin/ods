@@ -1,7 +1,7 @@
 
 import random
 
-def sort_test(sort=sorted, gen=random.random):
+def exercise_sort(sort, gen=random.random):
     """Run some tests on the sorting function, sort"""
     for n in [0, 1, 100, 1000, 10000]: 
         a = [gen() for _ in range(n)]
