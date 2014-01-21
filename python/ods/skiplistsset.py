@@ -2,7 +2,7 @@
 
 
 W. Pugh. Skip Lists: A probabilistic alternative to balanced trees. 
-  In Communications of the ACM, 33(6), pp. 668–676, June 1990.
+  In Communications of the ACM, 33(6), pp. 668-676, June 1990.
 
 W. Pugh. A skip list cookbook. CS-TR-2286.1, University of Maryland, 
   College Park, 1990.

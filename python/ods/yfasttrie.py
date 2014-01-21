@@ -4,7 +4,7 @@ This structure is able to store w-bit integers with O(log w) time searches,
 additions, and removals.
 
 D. E. Willard. Log-logarithmic worst-case range queries are possible in 
-  space Theta(n). Information Processing Letters, 17, 81–84. 1984.
+  space Theta(n). Information Processing Letters, 17, 81-84. 1984.
 """
 import random
 

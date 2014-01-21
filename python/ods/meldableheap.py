@@ -2,7 +2,7 @@
 
 A. Gambin and A. Malinowski. Randomized meldable priority queues. 
   Proceedings of the XXVth Seminar on Current Trends in Theory and Practice
-  of Informatics (SOFSEM'98), pp. 344–349, 1998
+  of Informatics (SOFSEM'98), pp. 344-349, 1998
 """
 
 import random
