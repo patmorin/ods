@@ -9,6 +9,7 @@ from rootisharraystack import RootishArrayStack
 # Linked lists
 from sllist import SLList
 from dllist import DLList
+from selist import SEList
 from skiplistlist import SkiplistList
 
 # Hash tables
