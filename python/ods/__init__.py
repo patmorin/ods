@@ -2,6 +2,7 @@
 from arraydeque import ArrayDeque
 from arrayqueue import ArrayQueue
 from arraystack import ArrayStack
+from fastarraystack import FastArrayStack
 from dualarraydeque import DualArrayDeque
 from rootisharraystack import RootishArrayStack
 
@@ -44,5 +45,8 @@ from adjacencylists import AdjacencyLists
 from binarytrie import BinaryTrie
 from xfasttrie import XFastTrie
 from yfasttrie import YFastTrie
+
+# External memory data structures
+from btree import BTree, BlockStore  # fixme, don't need blockstore
 
 

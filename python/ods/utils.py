@@ -12,10 +12,15 @@ def new_zero_array(n):
     return numpy.zeros(n)
     
 def new_boolean_matrix(n, m):
-    return numpy.zeros([n, n], bool)
+    return numpy.zeros([n, n], numpy.bool_)
     
 def new_boolean_array(n):
-    return numpy.zeros(n, bool)
+    return numpy.zeros(n, numpy.bool_)
+
+def new_int_array(n, init=0):
+    a = numpy.empty(n, numpy.int32)
+    a.fill(init)
+    return a
 
 def binfmt(n):
     return "{0:012b}".format(n)
