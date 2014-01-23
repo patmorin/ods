@@ -35,11 +35,11 @@ def translate_code(line):
     # hide compiler directives
     line = re.sub(r'#@.*$', '', line)
 
-   # don't touch comments
+    # don't touch comments or, rather, save them for later
     comment = ''
     m = re.search(r'#.*$', line)
     if m:
-	comment = m.group(0)
+        comment = m.group(0)
         line = re.sub(r'#.*$', '', line)
 
     # eliminate self and def
@@ -78,10 +78,20 @@ def translate_code(line):
     #              r'\1,\1+1,\1+2,\ldots,\2-2', line)
 
     # range(a, b) => a,...,b-1
-    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)', r'\1,\1+1,\1+2,\ldots,\2-1', line)
+    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)', 
+                  r'\1,\1+1,\1+2,\ldots,\2-1', line)
 
     # range(a) => 0,...,a-1
     line = re.sub(r'\brange\s*\(\s*([^),]+)\s*\)', r'0,1,2,\ldots,\1-1', line)
+
+    # a[x:y] => a[x,x+1,\ldots,y-1]
+    line = re.sub(r'\[([^\]]+):([^\]]+)\]', r'[\ensuremath{\1,\1+1,\ldots,\2-1}]', line)
+    
+    # some dumb arithmetic
+    line = re.sub(r'\+\s*1\s*-\s*1', '', line)
+    line = re.sub(r'-\s*1\s*-\s*1', '-2', line)
+    line = re.sub(r'0\s*\+\s*1', '1', line)
+    
 
     # -1-1 => -2 and similar arithmetic
     line = re.sub(r'-\s*1\s*-\s*1', r'-2', line)
@@ -110,10 +120,14 @@ def translate_code(line):
     line = re.sub(r'\belif\b', r'else if', line)
 
     # highlight keywords
-    keywords = r'\b(if|or|and|then|else|in|for|do|return|raise|while)\b'
+    keywords = r'\b(if|or|and|then|else|in|for|do|return|raise|while|break)\b'
     line = re.sub(keywords, r'\\textbf{\1}', line)
 
-    # recognize mathematical expression and ensuremath them
+    # a is b => a == b (our code doesn't care about equality vs. identity
+    line = re.sub(r'\bis\s+not\b', r'!=', line)
+    line = re.sub(r'\bis\b', '==', line) 
+
+    # recognize mathematical expression and \ensuremath them
     # warning: doesn't handle nested parentheses or brackets
     basic = r'\b\w+\b'
     fncall = r'%s(\([^\)]*\))?' % basic
@@ -124,9 +138,6 @@ def translate_code(line):
     parenexpr = r'(%s|\(%s\))' % (expr0, expr0)
     expr = r'(^|[^{\\])(%s(\s*%s\s*%s)*)' % (parenexpr, op, parenexpr)
     line = re.sub(expr, r'\1\ensuremath{\2}', line)
-
-    # this hack solves a bunch of problems
-    #line = re.sub(r'(\s*)(.*[<>=/%^&].*)', r'\1\ensuremath{\2}', line)
 
     # turn Python math operators into LaTeX math operators
     line = re.sub(r'>=', r'\\ge', line) 
@@ -169,6 +180,9 @@ def translate_code(line):
         # This RE is delicate. It interacts with [1]
         line = re.sub(r'(^|[^\\\w])([a-z_][a-z0-9_]*)([^{}\w]|}?$)', \
                 r'\1\ensuremath{\mathit{\2}}\3', line)
+                
+    # don't be afraid to use l as a variable name
+    line = re.sub(r'\bl\b', r'\ell', line)
     
     # typeset class names in mathrm
     line = re.sub(r'([A-Z]\w+)', r'\mathrm{\1}', line)
@@ -182,15 +196,14 @@ def translate_code(line):
     # escape underscores
     line = re.sub(r'_', r'\_', line)
 
+    # This backstop makes sure we ensuremath any assignment 
+    line = re.sub(r'(\s*)([^#]*\\gets[^\w][^#]*)', r'\1\ensuremath{\2}', line) 
+
     # add comment back and escape hashes
     if comment:
-        line += comment
-
-    # when all else fails, annotate the source to \ensuremath
-    # line = re.sub(r'(\s*)(.*)#\s*ensuremath', r'\1\ensuremath{\2}', line) 
-    line = re.sub(r'(\s*)([^#]*\\gets[^\w][^#]*)', r'\1\ensuremath{\2}', line) 
-    
-    # escape hashes 
+        if not line.endswith(' '):
+            line += r'\ '
+        line += r'{\color{comment}' + comment + '}'
     line = re.sub(r'#', r'\#', line)
     return line
 
@@ -213,15 +226,6 @@ def print_code(clazz, methods):
     # translate camel-case method names to Python style
     methods = [re.sub(r'([a-z])([A-Z])', r'\1_\2', s).lower() for s in methods]
     sys.stderr.write(str(methods) + '\n')
-
-    # stupid special cases. Mostly caused by using method overloading in Java
-    if clazz == 'SLList' and 'remove()' in methods:
-	methods.append('_remove()')
-    if clazz == 'DLList' and 'remove(w)' in methods:
-        methods.append('remove_node(w)')
-    if clazz == 'SkiplistList' and 'add(i,w)' in methods:
-        sys.stderr.write("BRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFFFFFF\n")
-    	methods.append('add_node(i,w)')
 
     print r'\begin{framed}\begin{flushleft}'
     printed = False

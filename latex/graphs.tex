@@ -248,8 +248,11 @@ the list (and returns false):
 \codeimport{ods/AdjacencyLists.hasEdge(i,j)}
 This also takes $O(\deg(#i#))$ time.
 
-The #outEdges(i)# operation is very simple;  \javaonly{it returns the list
-#adj[i]#}\cpponly{it copies the values in #adj[i]# into the output list}:
+The #outEdges(i)# operation is very simple;
+\pcodeonly{it returns the list #adj[i]#}
+\javaonly{it returns the list #adj[i]#}
+\cpponly{it copies the values in #adj[i]# into the output list}:
+\pcodeimport{ods/AdjacencyLists.outEdges(i)}
 \javaimport{ods/AdjacencyLists.outEdges(i)}
 \cppimport{ods/AdjacencyLists.outEdges(i,edges)}
 \javaonly{This clearly takes constant time.}\cpponly{This clearly takes $O(\deg(#i#))$ time.}
@@ -257,6 +260,7 @@ The #outEdges(i)# operation is very simple;  \javaonly{it returns the list
 The #inEdges(i)# operation is much more work.  It scans over every
 vertex $j$ checking if the edge #(i,j)# exists and, if so, adding #j#
 to the output list:
+\pcodeimport{ods/AdjacencyLists.inEdges(i)}
 \javaimport{ods/AdjacencyLists.inEdges(i)}
 \cppimport{ods/AdjacencyLists.inEdges(i,edges)}
 This operation is very slow. It scans the adjacency list of every vertex,
@@ -503,6 +507,8 @@ edges cross each other \cite{ht74}.
 In the following exercises, an undirected graph is one in which, for
 every #i# and #j#, the edge $(#i#,#j#)$ is present if and only if the
 edge $(#j#,#i#)$ is present.
+\index{undirected graph}%
+\index{graph!undirected}%
 
 \begin{exc}
   Draw an adjacency list representation and an adjacency matrix

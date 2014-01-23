@@ -200,6 +200,7 @@ $111{\star}$ at level 3.  Thus, we can label each node at level #i#
 with an #i#-bit integer.  Then, the node #u# we are searching for would
 be at or below level #i# if and only if there is a node at level #i#
 whose label matches the highest-order #i# bits of #x#.
+
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/xfast-path}
@@ -214,9 +215,10 @@ the nodes at level #i# in a #USet#, #t[i]#, that is implemented as a
 hash table (\chapref{hashing}).  Using this #USet# allows us to check
 in constant expected time if there is a node at level #i# whose label
 matches the highest-order #i# bits of #x#.  In fact, we can even find
-this node using 
+this node using
 \javaonly{#t[i].find(x>>>(w-i))#}%
 \cpponly{#t[i].find(x>>(w-i))#}%
+\pcodeonly{#t[i].find(x>>(w-i))#}%
 
 The hash tables $#t[0]#,\ldots,#t[w]#$ allow us to use binary search
 to find #u#.  Initially, we know that #u# is at some level #i# with

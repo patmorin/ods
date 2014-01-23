@@ -920,6 +920,28 @@ amortized or expected running times.
 
 \section{Code Samples}
 
+\pcodeonly{
+The code samples in this book are written in pseudocode. These should be easy enough to read for anyone who has any programming experience in any of the most common programming languages of the last 40 years.  To get an idea of what the pseudocode in this book looks like, here is a function that computes the average of an array, #a#:
+\pcodeimport{ods/Algorithms.average(a)}
+As this code illustrates, we use the convention that the length of an
+array, #a#, is denoted by #len(a)# and array indices start at zero,
+so that #range(len(a))# are the valid indices for #a#.  To shorten code,
+and sometimes make it easier to read, our pseudocode allows for (sub)array assignments.  The following two functions are equivalent:
+\pcodeimport{ods/Algorithms.left_shift_a(a).left_shift_b(a)}
+The following code sets all the values in an array to zero:
+\pcodeimport{ods/Algorithms.zero(a)}
+We take similar shortcuts with variable assignments, so that the code #x,y=0,1# sets #x# to zero and #y# to 1 and the code #x,y = y,x# swaps the values of the variables #x# and #y#.
+
+
+The pseudocode samples in this book are machine translations
+of Python code that can be downloaded from the book's website.\footnote{ \url{http://opendatastructures.org}}  If you ever encounter an ambiguity in the pseudocode that you can't resolve yourself, then you can always refer
+to the corresponding Python code.  If you don't read Python, the code is
+also available in Java and C++.  If you can't decipher the pseudocode,
+or read Python, C++, or Java, then you may not be ready for this book.
+}
+
+
+\notpcode{
 The code samples in this book are written in the \lang\ programming
 language.  However, to make the book accessible to readers not familiar
 with all of \lang's constructs and keywords, the code samples have
@@ -943,6 +965,7 @@ and within equations.  The most common such variable is the variable #n#
 \index{n@#n#}%
 that, without exception, always refers to the number of items currently
 stored in the data structure.
+}
 
 \section{List of Data Structures}
 

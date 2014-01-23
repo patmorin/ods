@@ -241,15 +241,16 @@ In Java there is the #System.arraycopy(s,i,d,j,n)# method.
 \index{std::copy@#std::copy(a0,a1,b)#}%
 \index{System.arraycopy@#System.arraycopy(s,i,d,j,n)#}%
 
-\notpcode{
 \codeimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
-}
 
 These functions are usually highly optimized and may even use special
 machine instructions that can do this copying much faster than we could by
 using a #for# loop.  Although using these functions does not asymptotically
 decrease the running times, it can still be a worthwhile optimization.
-In the \lang\ implementations here, the use of the native \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}
+
+\pcodeonly{In our C++ and Java implementations, the use of fast array
+copying functions}
+\notpcode{In the \lang\ implementations here, the use of the native \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}}
 resulted in speedups of a factor between 2 and 3, depending on the types of
 operations performed.  Your mileage may vary.
 
