@@ -266,13 +266,17 @@ The important property of a #BDeque# is that it allows for the addition
 or removal of elements at either the front or back in constant time. This
 will be useful as elements are shifted from one block to another.
 
+\notpcode{ \codeimport{ods/SEList.BDeque} }
 
-\codeimport{ods/SEList.BDeque}
-
+\notpcode{
 An #SEList# is then a doubly-linked list of blocks:
 
 \codeimport{ods/SEList.Node}
 \codeimport{ods/SEList.n.dummy}
+}
+\pcodeonly{
+An #SEList# is just a doubly-linked list of blocks. In addition to #next# and #prev# pointers, each node #u# in an #SEList# contains a #BDeque#, #u.d#.
+}
 
 \subsection{Space Requirements}
 
@@ -302,7 +306,9 @@ of two parts:
   \item the index #j# of the element within its block.
 \end{enumerate}
 
+\notpcode{
 \codeimport{ods/SEList.Location}
+}
 
 To find the block that contains a particular element, we proceed the same
 way as we do in a #DLList#.  We either start at the front of the list and
@@ -311,6 +317,7 @@ backwards until we reach the node we want.  The only difference is that,
 each time we move from one node to the next, we skip over a whole block
 of elements.
 
+\pcodeimport{ods/SEList.get_location(i)}
 \javaimport{ods/SEList.getLocation(i)}
 \cppimport{ods/SEList.getLocation(i,ell)}
 
@@ -343,7 +350,9 @@ allocate a new block and append it to the list of blocks.  Now that
 we are sure that the last block exists and is not full, we append #x#
 to the last block.
 
-\codeimport{ods/SEList.add(x)}
+\cppimport{ods/SEList.add(x)}
+\javaimport{ods/SEList.add(x)}
+\pcodeimport{ods/SEList.append(x)}
 
 Things get more complicated when we add to the interior of the list
 using #add(i,x)#.  We first locate #i# to get the node #u# whose block

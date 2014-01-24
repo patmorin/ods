@@ -160,7 +160,6 @@ public class BTree<T> implements SSet<T> {
 		 */
 		public T remove(int i) {
 			T y = keys[i];
-			if (y == null) System.out.println("Poop");
 			System.arraycopy(keys, i+1, keys, i, b-i-1);
 			keys[keys.length-1] = null;
 			return y;
@@ -217,6 +216,7 @@ public class BTree<T> implements SSet<T> {
 		f = new Factory<T>(clz);
 		bs = new BlockStore<Node>();
 		ri = new Node().id;
+		n = 0;
 	}
 	
 	public boolean add(T x) {
@@ -430,7 +430,6 @@ public class BTree<T> implements SSet<T> {
 	 * @param w the right sibling of v
 	 */
 	protected void shiftRL(Node u, int i, Node v, Node w) {
-		Utils.myassert(w.id == u.children[i] && v.id == u.children[i+1]);
 		int sw = w.size();
 		int sv = v.size();
 		int shift = ((sw+sv)/2) - sw;  // num. keys to shift from v to w

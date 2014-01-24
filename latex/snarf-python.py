@@ -7,6 +7,9 @@ import sys
 import re
 
 
+# Ack! Global!
+html = False
+
 def matches(line, methods):
     """Match a line of Python code to a method definition
 
@@ -82,7 +85,8 @@ def translate_code(line):
                   r'\1,\1+1,\1+2,\ldots,\2-1', line)
 
     # range(a) => 0,...,a-1
-    line = re.sub(r'\brange\s*\(\s*([^),]+)\s*\)', r'0,1,2,\ldots,\1-1', line)
+    #re.sub(r'\brange\s*\(\s*([^),]+(\([^)]*\)[^)]*)?)\s*\)', 
+    line = re.sub(r'\brange\s*\((.*)\)', r'0,1,2,\ldots,\1-1', line)
 
     # a[x:y] => a[x,x+1,\ldots,y-1]
     line = re.sub(r'\[([^\]]+):([^\]]+)\]', r'[\ensuremath{\1,\1+1,\ldots,\2-1}]', line)
@@ -213,7 +217,7 @@ def touchup_code_line(line):
     if line == '': return line
 
     # 4 spaces => 1em
-    line = re.sub(r' {4}', r'\hspace*{1em} ', line)  # specific to lines
+    line = re.sub(r' {4}', r'\hspace*{1em} ', line)
 
     # add \\ at the end of each line
     line = re.sub(r'$', r'\\\\', line)
@@ -227,7 +231,9 @@ def print_code(clazz, methods):
     methods = [re.sub(r'([a-z])([A-Z])', r'\1_\2', s).lower() for s in methods]
     sys.stderr.write(str(methods) + '\n')
 
-    print r'\begin{framed}\begin{flushleft}'
+    if not html:
+        print r'\begin{oframed}'
+    print r'\begin{flushleft}'
     printed = False
     try:
         filename = "../python/ods/" + clazz.lower() + ".py"
@@ -249,7 +255,9 @@ def print_code(clazz, methods):
         print "Unable to open %s" % filename
     if not printed: 
         print r'NO OUTPUT (looking for \verb+' + str(methods) + "+)"
-    print r'\end{flushleft}\end{framed}'
+    print r'\end{flushleft}'
+    if not html:
+        print r'\end{oframed}'
 
 
 def code_subs(line):
@@ -257,11 +265,11 @@ def code_subs(line):
     pattern = r'^(.*)#([^#]+)#(.*)$'
     m = re.search(pattern, line)
     while m:
-        code = translate_code(m.group(2))
-        if re.search(r'[A-Z]\w*', code):
-            pass # just a class name - leave it as is
+        code = m.group(2)
+        if re.match(r'^[A-Z]\w*$', code):
+            pass
         else:
-            code = r'\ensuremath{' + code + r'}'
+            code = r'\ensuremath{' + translate_code(code) + r'}'
         line = m.group(1) + code + m.group(3)
         m = re.search(pattern, line)
     return line
@@ -297,8 +305,12 @@ def die(msg, code=-1):
     sys.exit(code)
 
 
-def main():
-    argv = sys.argv
+if __name__ == "__main__":
+    argv = sys.argv[:]
+    if "-html" in argv:
+        html = True
+        html = False # fixit
+        argv = [s for s in argv if s != "-html"]
     if len(argv) == 1:
         infile = sys.stdin
     elif len(argv) == 2:
@@ -307,8 +319,7 @@ def main():
         except IOError:
             die("Unable to open input file %s" % argv[1])
     else:
-        die("Usage: %s [<infile>]" % argv[0])
+        die("Usage: %s [-html] [<infile>]" % argv[0])
     snarf(infile)
 
 
-main()

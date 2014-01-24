@@ -122,6 +122,18 @@ ods-cpp-html.tex : ods.tex Makefile
 %-cpp-html.tex : %.tex $(cpp) snarf-cpp-html.pl Makefile
 	cat $< | ./snarf-cpp-html.pl > $*-cpp-html.tex 
 
+%-python-html : $(pyth) ods-python-html.tex epsfigs
+	mkdir -p ods-python
+	pdflatex ods-python-html
+	bibtex ods-python-html
+	latex2html -init_file latex2html-init -dir ods-python ods-python-html
+
+ods-python-html.tex : ods-python.tex Makefile
+	sed 's/-python/-python-html/' ods-python.tex > ods-python-html.tex
+
+%-python-html.tex : %.tex $(pyt) snarf-cpp-html.pl Makefile
+	cat $< | ./snarf-python.py -html > $*-python-html.tex 
+
 ods-java-screen.pdf : ods-java.pdf
 	gs -o ods-java-screen.pdf -sDEVICE=pdfwrite -c "[/CropBox [53 88 379 595] /PAGES pdfmark" -f ods-java.pdf
 

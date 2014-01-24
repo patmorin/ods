@@ -20,6 +20,16 @@ class SLList(BaseList):
     def new_node(self, x):
         return SLList.Node(x)
 
+    def _add(self,x):
+        u = self.new_node(x)
+        if self.n == 0:
+            self.head = u
+        else:
+            self.tail.next = u
+        self.tail = u
+        self.n += 1
+        return True
+
     def push(self,x):
         u = self.new_node(x)
         u.next = self.head

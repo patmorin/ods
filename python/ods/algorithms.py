@@ -3,6 +3,24 @@ import random
 from utils import new_zero_array, new_array, _new_array, w
 from binaryheap import BinaryHeap
 
+def average(a):
+    s = 0
+    for i in range(len(a))
+        s += a[i]
+    return s/len(a)
+
+def left_shift_a(a):
+    for i in range(len(a)-1)
+        a[i] = a[i+1]
+    a[len(a)-1] = None
+
+def left_shift_b(a):
+    a[0:len(a)-1] = a[1:len(a)]
+    a[len(a)-1] = None
+
+def zero(a):
+    a[0:len(a)] = 0
+
 def merge_sort(a):
     if len(a) <= 1:
         return a
