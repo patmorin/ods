@@ -11,7 +11,7 @@ cppsource = $(wildcard ../cpp/*.h)
 python = $(wildcard ../python/ods/*.py)
 pyts = $(sources:.tex=-python.tex)
 pyth = $(sources:.tex=-python-html.tex)
-pdfs = ods-java.pdf ods-cpp.pdf
+pdfs = ods-java.pdf ods-cpp.pdf ods-python.pdf
 styles=ods.sty ods-colors.sty
 
 LFLAGS=-interaction=nonstopmode -halt-on-error
@@ -93,7 +93,7 @@ clean:
 	-dCompatibilityLevel=1.4 $< < /dev/null
 
 # Lots of hackery for generating html using latex2html
-html: java-html cpp-html
+html: java-html cpp-html python-html
 
 java-html : $(javh) ods-java-html.tex epsfigs
 	mkdir -p ods-java
@@ -103,7 +103,7 @@ java-html : $(javh) ods-java-html.tex epsfigs
 	
 ods-java-html.tex : ods.tex Makefile
 	sed 's/-lang/-java-html/' ods.tex > ods-java-html.tex
-	sed -i 's/%HEADCOMMAND/\\newcommand{\\cpponly}[1]{}\\newcommand{\\javaonly}[1]{#1}\\newcommand{\\lang}{Java}/' ods-java-html.tex
+	sed -i 's/%HEADCOMMAND/\\newcommand{\\cpponly}[1]{}\\newcommand{\\pcodeonly}[1]{}\\newcommand{\\javaonly}[1]{#1}\\newcommand{\\notpcode}[1]{#1}\\newcommand{\\lang}{Java}/' ods-java-html.tex
 	sed -i 's/\\include{cpp-preface}//' ods-java-html.tex
 
 %-java-html.tex : %.tex $(java) snarf-java-html.pl Makefile
@@ -117,7 +117,7 @@ cpp-html : $(cpph) ods-cpp-html.tex epsfigs
 	
 ods-cpp-html.tex : ods.tex Makefile
 	sed 's/-lang/-cpp-html/' ods.tex > ods-cpp-html.tex
-	sed -i 's/%HEADCOMMAND/\\newcommand{\\javaonly}[1]{}\\newcommand{\\cpponly}[1]{#1}\\newcommand{\\lang}{C++}/' ods-cpp-html.tex
+	sed -i 's/%HEADCOMMAND/\\newcommand{\\javaonly}[1]{}\\newcommand{\\pcodeonly}[1]{}\\newcommand{\\cpponly}[1]{#1}\\newcommand{\\notpcode}[1]{#1}\\newcommand{\\lang}{C++}/' ods-cpp-html.tex
 
 %-cpp-html.tex : %.tex $(cpp) snarf-cpp-html.pl Makefile
 	cat $< | ./snarf-cpp-html.pl > $*-cpp-html.tex 

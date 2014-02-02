@@ -5,12 +5,12 @@ from binaryheap import BinaryHeap
 
 def average(a):
     s = 0
-    for i in range(len(a))
+    for i in range(len(a)):
         s += a[i]
     return s/len(a)
 
 def left_shift_a(a):
-    for i in range(len(a)-1)
+    for i in range(len(a)-1):
         a[i] = a[i+1]
     a[len(a)-1] = None
 
