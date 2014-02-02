@@ -85,7 +85,7 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 	}
 	
 	public boolean add(T x) {
-		int i, c, ix = it.intValue(x);
+		int i, c = 0, ix = it.intValue(x);
 		Node u = r;
 		// 1 - search for ix until falling out of the trie
 		for (i = 0; i < w; i++) {
@@ -159,7 +159,7 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 	}
 
 	public T find(T x) {
-		int i, c, ix = it.intValue(x);
+		int i, c = 0, ix = it.intValue(x);
 		Node u = r;
 		for (i = 0; i < w; i++) {
 			c = (ix >>> w-i-1) & 1;
