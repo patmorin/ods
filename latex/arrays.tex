@@ -920,8 +920,10 @@ $\lfloor\sqrt{#x#}\rfloor-2$.  From #s# we can determine the value
 of $\lfloor\sqrt{#x#}\rfloor$ by
 incrementing #s# until 
 $(#s#+1)^2 > #x#$.
-\codeimport{ods/FastSqrt.sqrt(x,r)}
-
+} % notpcode
+\javaimport{ods/FastSqrt.sqrt(x,r)}
+\cppimport{ods/FastSqrt.sqrt(x,r)}
+\notpcode{
 Now, this only works for $#x#\in\{2^{#r#},\ldots,2^{#r#+1}-1\}$ and
 #sqrttab# is a special table that only works for a particular value
 of $#r#=\lfloor\log #x#\rfloor$.  To overcome this, we could compute
@@ -940,8 +942,10 @@ $\{2^{#r#},\ldots,2^{#r#+1}-1\}$ so we can look up its square root
 in #sqrttab#.  The following code implements this idea to compute
 $\lfloor\sqrt{#x#}\rfloor$ for all non-negative integers #x# in the
 range $\{0,\ldots,2^{30}-1\}$ using an array, #sqrttab#, of size $2^{16}$.
-\codeimport{ods/FastSqrt.sqrt(x)}
-
+} % notpcode
+\javaimport{ods/FastSqrt.sqrt(x)}
+\cppimport{ods/FastSqrt.sqrt(x)}
+\notpcode{
 Something we have taken for granted thus far is the question of how
 to compute
 $#r#'=\lfloor\log#x#\rfloor$.  Again, this is a problem that can be solved
@@ -952,11 +956,15 @@ This means that, for $#x#>2^{#r#/2}$, we can right-shift the bits of
 #x# by $#r#/2$ positions before using it as an index into #logtab#.
 The following code does this using an array #logtab# of size $2^{16}$ to compute
 $\lfloor\log #x#\rfloor$ for all #x# in the range $\{1,\ldots,2^{32}-1\}$.
-\codeimport{ods/FastSqrt.log(x)}
-
+} % notpcode
+\javaimport{ods/FastSqrt.log(x)}
+\cppimport{ods/FastSqrt.log(x)}
+\notpcode{
 Finally, for completeness, we include the following code that initializes #logtab# and #sqrttab#:
-\codeimport{ods/FastSqrt.inittabs()}
-
+} % notpcode
+\javaimport{ods/FastSqrt.inittabs()}
+\cppimport{ods/FastSqrt.inittabs()}
+\notpcode{
 To summarize, the computations done by the #i2b(i)# method can be
 implemented in constant time on the word-RAM using $O(\sqrt{n})$ extra
 memory to store the #sqrttab# and #logtab# arrays.  These arrays can be
@@ -964,8 +972,7 @@ rebuilt when #n# increases or decreases by a factor of two, and the cost
 of this rebuilding can be amortized over the number of #add(i,x)# and
 #remove(i)# operations that caused the change in #n# in the same way that
 the cost of #resize()# is analyzed in the #ArrayStack# implementation.
-
-}
+} % notpcode
 
 \section{Discussion and Exercises}
 

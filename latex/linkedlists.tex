@@ -266,14 +266,17 @@ The important property of a #BDeque# is that it allows for the addition
 or removal of elements at either the front or back in constant time. This
 will be useful as elements are shifted from one block to another.
 
-\notpcode{ \codeimport{ods/SEList.BDeque} }
+\javaimport{ods/SEList.BDeque} 
+\cppimport{ods/SEList.BDeque} 
 
 \notpcode{
 An #SEList# is then a doubly-linked list of blocks:
+} % notpcode
+\javaimport{ods/SEList.Node}
+\cppimport{ods/SEList.Node}
+\javaimport{ods/SEList.n.dummy}
+\cppimport{ods/SEList.n.dummy}
 
-\codeimport{ods/SEList.Node}
-\codeimport{ods/SEList.n.dummy}
-}
 \pcodeonly{
 An #SEList# is just a doubly-linked list of blocks. In addition to #next# and #prev# pointers, each node #u# in an #SEList# contains a #BDeque#, #u.d#.
 }
@@ -306,9 +309,8 @@ of two parts:
   \item the index #j# of the element within its block.
 \end{enumerate}
 
-\notpcode{
-\codeimport{ods/SEList.Location}
-}
+\javaimport{ods/SEList.Location}
+\cppimport{ods/SEList.Location}
 
 To find the block that contains a particular element, we proceed the same
 way as we do in a #DLList#.  We either start at the front of the list and

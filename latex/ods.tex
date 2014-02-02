@@ -79,6 +79,11 @@
 \usepackage{relsize,fancyvrb}  % formatting pseudocode
 \usepackage{ods} % Personalization and commands
 
+% These command are expanded by scripts, otherwise they should be ignored
+\newcommand{\javaimport}[1]{}
+\newcommand{\cppimport}[1]{}
+\newcommand{\pcodeimport}[1]{}
+
 \htmlonly{
   \newcommand{\ScaleIfNeeded}{\textwidth}
   \newcommand{\HalfScaleIfNeeded}{\textwidth}

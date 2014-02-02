@@ -24,7 +24,7 @@ sub color($) {
   $line =~ s/\b([a-z]\w*)\b/{\\color{var}$1}/g; # color variables
   $line =~ s/$p//g;
   my @keywords = ("void", "null", "int", "long", "double", "float", "char", "byte", "public", "protected", "private", "static", "if", "while", "else", "for", "do", "T", "K", "V", "extends", "implements", "throw", "new", "class");
- foreach my $k (@keywords) {
+  foreach my $k (@keywords) {
     $line =~ s/\{\\color\{\w+\}($k)\}/$1/g;
     $line =~ s/\b($k)\b/{\\color{keyword}$1}/g;
   }
@@ -58,6 +58,7 @@ sub snarfit($$) {
   while (my $line = <FP>) {
     chomp($line);
     if ($line =~ /IndexOutOfBoundsException/) { next; }
+    if ($line =~ /^\s*@/) { next; }
     $line =~ s/ö/o/g;
     if ($wc && $d == 0 && $line =~ /^($k\s)*class\s/) {
         $line =~ s/($k\s+)//g;
