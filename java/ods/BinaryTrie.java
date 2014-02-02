@@ -194,8 +194,8 @@ public class BinaryTrie<Node extends BinaryTrie.Nöde<Node,T>, T> implements SSe
 		// 4 - update jump pointers
 		c = (ix >>> w-i-1) & 1;
 		v.jump = u.child[1-c];
-		v = v.parent
-		i--
+		v = v.parent;
+		i--;
 		for (; i >= 0; i--) {
 			c = (ix >>> w-i-1) & 1;
 			if (v.jump == u) 
