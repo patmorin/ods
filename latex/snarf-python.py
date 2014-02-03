@@ -156,6 +156,7 @@ def translate_code(line):
 
     # these are hacks and should eventually be fixed
     line = re.sub(r'\>\>', r'\ensuremath{\\gg}', line) 
+    line = re.sub(r'\<\<', r'\ensuremath{\\ll}', line) 
     line = re.sub(r'\^', r'\ensuremath{\oplus}', line)
 
     # del is a python keyword, but we have a variable called del in Ch. 5
