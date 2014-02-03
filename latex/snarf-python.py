@@ -186,6 +186,9 @@ def translate_code(line):
         line = re.sub(r'(^|[^\\\w])([a-z_][a-z0-9_]*)([^{}\w]|}?$)', \
                 r'\1\ensuremath{\mathit{\2}}\3', line)
                 
+    # undo mathit for any keywords we accidentally hit
+    line = re.sub(r'\\ensuremath{\\mathit{' + keywords + '}}', r'\1', line)
+    
     # don't be afraid to use l as a variable name
     line = re.sub(r'\bl\b', r'\ell', line)
     
