@@ -45,6 +45,7 @@ def translate_code(line):
         comment = m.group(0)
         line = re.sub(r'#.*$', '', line)
 
+    line = re.sub(r'\bint\(', r'int_value(', line)
     # eliminate self and def
     line = re.sub(r'self\.', '', line)
     line = re.sub(r'\bdef\s*', '', line)
