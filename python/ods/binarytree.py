@@ -96,13 +96,13 @@ class BinaryTree(object):
     def next_node(self, w):
         """Find the node that follows w in an in-order traversal"""
         if w.right != self.nil:
-            w = w.right;
+            w = w.right
             while w.left != self.nil:
-                w = w.left;
+                w = w.left
         else:
             while w.parent != self.nil and w.parent.left != w:
-                w = w.parent;
-            w = w.parent;
-        return w;
+                w = w.parent
+            w = w.parent
+        return w
 
         

@@ -57,7 +57,7 @@ class DLList(BaseList):
         u.next.prev = u
         u.prev.next = u
         self.n += 1
-        return u;
+        return u
 
     def add(self, i, x):
         if i < 0 or i > self.n:    raise IndexError()

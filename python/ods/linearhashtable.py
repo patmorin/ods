@@ -12,7 +12,7 @@ class LinearHashTable(BaseSet):
         self.add_all(iterable)
         
     def _initialize(self):
-        self.dl = object();
+        self.dl = object()
         
     def initialize(self):
         self.d = 1
@@ -95,7 +95,7 @@ class LinearHashTable(BaseSet):
         return True
     
     def ideal_hash(self, x):
-        return tab[x.hashCode() >> w-d];
+        return tab[x.hashCode() >> w-d]
     """
 
     """A bunch of random values for use in tabulation hashing"""

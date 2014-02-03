@@ -32,24 +32,21 @@ class ArrayStack(BaseList):
     def add(self, i, x): 
         if i < 0 or i > self.n: raise IndexError()
         if self.n == len(self.a): self._resize()
-        for j in range(self.n, i, -1):
-            self.a[j] = self.a[j-1]
+        self.a[i+1:self.n+1] = self.a[i:self.n]
         self.a[i] = x
         self.n += 1
 
     def remove(self, i): 
         if i < 0 or i >= self.n: raise IndexError()
         x = self.a[i]
-        for j in range(i, self.n-1): 
-            self.a[j] = self.a[j+1]
+        self.a[i:self.n-1] = self.a[i+1:self.n]
         self.n -= 1
         if len(self.a) >= 3*self.n: self._resize()
         return x
   
     def _resize(self):
         b = new_array(max(1, 2*self.n))
-        for i in range(self.n):
-            b[i] = self.a[i]
+        b[0:self.n] = self.a[0:self.n]
         self.a = b
     
 

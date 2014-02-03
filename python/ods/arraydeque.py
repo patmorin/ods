@@ -53,8 +53,8 @@ class ArrayDeque(BaseList):
             for k in range(i, self.n-1): 
                 self.a[(self.j+k)%len(self.a)] = self.a[(self.j+k+1)%len(self.a)]
         self.n -= 1
-        if len(self.a) >= 3*self.n: self._resize();
-        return x;
+        if len(self.a) >= 3*self.n: self._resize()
+        return x
   
     def _resize(self):
         b = new_array(max(1, 2*self.n))
