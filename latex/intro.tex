@@ -244,14 +244,14 @@ disciplines.
 
 A #Deque#
 \index{deque}%
-is a generalization of both the FIFO #Queue# and LIFO #Queue#
-(#Stack#).   A #Deque# represents a sequence of elements, with a front
-and a back.  Elements can be added at the front of the sequence or
-the back of the sequence.  The names of the #Deque# operations
-are self-explanatory: #addFirst(x)#, #removeFirst()#, #addLast(x)#,
-and #removeLast()#.  It is worth noting that a #Stack# can be implemented using only
-#addFirst(x)# and #removeFirst()# while a FIFO #Queue# can be implemented
-using #addLast(x)# and #removeFirst()#.
+is a generalization of both the FIFO #Queue# and LIFO #Queue# (#Stack#).
+A #Deque# represents a sequence of elements, with a front and a back.
+Elements can be added at the front of the sequence or the back of the
+sequence.  The names of the #Deque# operations are self-explanatory:
+#addFirst(x)#, #removeFirst()#, #addLast(x)#, and #removeLast()#.  It is
+worth noting that a #Stack# can be implemented using only #addFirst(x)#
+and #removeFirst()# while a FIFO #Queue# can be implemented using
+#addLast(x)# and #removeFirst()#.
 
 
 \subsection{The #List# Interface: Linear Sequences}
@@ -926,7 +926,10 @@ The code samples in this book are written in pseudocode.
 \index{pseudocode}%
 These should be easy enough to read for anyone who has any programming experience in any of the most common programming languages of the last 40 years.  To get an idea of what the pseudocode in this book looks like, here is a function that computes the average of an array, #a#:
 \pcodeimport{ods/Algorithms.average(a)}
-As this code illustrates, we use the convention that the length of an
+As this code illustrates, assigning to a variable is done using the $\gets$
+notation.
+% WARNING: graphic typesetting of assignment operator
+We use the convention that the length of an
 array, #a#, is denoted by #len(a)# and array indices start at zero,
 so that #range(len(a))# are the valid indices for #a#.  To shorten
 code, and sometimes make it easier to read, our pseudocode allows for

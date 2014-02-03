@@ -31,17 +31,6 @@ class BinaryHeap(BaseSet):
 
     clear = _initialize
 
-    """ Leave these here for inclusion in the text
-    def left(self, i):
-        return 2*i + 1
-    
-    def right(self, i):
-        return 2*(i+1)
-    
-    def parent(self, i):
-        return (i-1)//2
-    """
-
     def resize(self):
         b = new_array(max(2*self.n, 1))
         for i in range(self.n):

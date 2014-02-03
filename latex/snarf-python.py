@@ -53,6 +53,20 @@ def translate_code(line):
     # super(Class,self) => super
     line = re.sub(r'super\([^)]*\)', 'super', line)
 
+    # turn assignment operator (=) into \gets
+    line = re.sub(r'([^-*/<>!=+])=([^=])', r'\1\\gets \2', line)
+
+    # This backstop makes sure we ensuremath any assignment 
+    line = re.sub(r'(\s*)([^#:]*\\gets[^\w][^#;]*)',
+                  r'\1\ensuremath{\2}', line) 
+
+    # for _ in range(n) => repeat n times
+    line = re.sub(r'for\s+_\s+in\s+range\s*\((\w+)\)', r'repeat \1 times', line)
+
+    # for _ in range(a, b, -1) => repeat b-a times
+    line = re.sub(r'for\s+_\s+in\s+range\s*\((\w+)\s*,\s*(\w+)\s*,\s*-1\)', 
+                  r'repeat \1-\2 times', line)
+     
     # for <blah>: => for <blah> do
     # while <blah>: => while <blah> do
     # Note: The space after 'do' is important here (see [1])
@@ -124,12 +138,15 @@ def translate_code(line):
     line = re.sub(r'\belif\b', r'else if', line)
 
     # highlight keywords
-    keywords = r'\b(if|or|and|then|else|in|for|do|return|raise|while|break)\b'
-    line = re.sub(keywords, r'\\textbf{\1}', line)
+    keywords = ['if', 'or', 'and', 'then', 'else', 'in', 'for', 'do', 'return',
+                'raise', 'while', 'break', 'repeat', 'times']
+    keywords = r'\b(' + '|'.join(keywords) + r')\b'
+    line = re.sub(keywords, r'{\color{black} \\textbf{\1}}', line)
 
     # a is b => a == b (our code doesn't care about equality vs. identity
     line = re.sub(r'\bis\s+not\b', r'!=', line)
     line = re.sub(r'\bis\b', '==', line) 
+
 
     # recognize mathematical expression and \ensuremath them
     # warning: doesn't handle nested parentheses or brackets
@@ -137,11 +154,12 @@ def translate_code(line):
     fncall = r'%s(\([^\)]*\))?' % basic
     indexed = r'%s(\[[^\]]+\])?' % fncall
     operand = r'(-?%s)' % indexed 
-    op = r'(,\\ldots,|&|>=|\.|,|//|<=|==|!=|=|%|<<|>>|<|>|\+|-|/|\*|\^)'
+    op = r'(,\\ldots,|&|>=|\.|,|//|<=|==|!=|=|\gets|%|<<|>>|<|>|\+|-|/|\*|\^|\&)'
     expr0 = r'(%s(\s*%s\s*%s)*)' % (operand, op, operand)
     parenexpr = r'(%s|\(%s\))' % (expr0, expr0)
     expr = r'(^|[^{\\])(%s(\s*%s\s*%s)*)' % (parenexpr, op, parenexpr)
     line = re.sub(expr, r'\1\ensuremath{\2}', line)
+
 
     # turn Python math operators into LaTeX math operators
     line = re.sub(r'>=', r'\\ge', line) 
@@ -152,26 +170,29 @@ def translate_code(line):
     line = re.sub(r'==', r'\eq', line) 
     line = re.sub(r'(^|[^\\])&', r'\1 \\wedge ', line)
     line = re.sub(r'//', r'\\bdiv ', line)
-    line = re.sub(r'([^=])=([^=])', r'\1\\gets \2', line)
 
-    # these are hacks and should eventually be fixed
-    line = re.sub(r'\>\>', r'\ensuremath{\\gg}', line) 
-    line = re.sub(r'\<\<', r'\ensuremath{\\ll}', line) 
+
     line = re.sub(r'\^', r'\ensuremath{\oplus}', line)
-
-    # del is a python keyword, but we have a variable called del in Ch. 5
-    line = re.sub(r'\bdl\b', r'\mathit{del}', line)
 
     # 1 << <blah> => 2^{<blah>}
     line = re.sub(r'\(?\s*1\s*<<\s*(\w+)\s*\)?', r'2^{\1}', line)
 
+    # these are hacks and should eventually be fixed
+    line = re.sub(r'\>\>', r'\ensuremath{\\gg}', line) 
+    line = re.sub(r'\<\<', r'\ensuremath{\\ll}', line) 
+
+    # del is a python keyword, but we have a variable called del in Ch. 5
+    line = re.sub(r'\bdl\b', r'\mathit{del}', line)
+
+
     # lowercase True and False
-    line = re.sub(r'True', r'true', line)
-    line = re.sub(r'False', r'false', line)
+    line = re.sub(r'True', r'\ensuremath{\mathit{true}}', line)
+    line = re.sub(r'False', r'\ensuremath{\mathit{false}}', line)
 
     # Camelcase variable names to underscores
-    line = re.sub(r'\b([a-z_][a-z0-9_]*)([A-Z])', r'\1_\2', line)
-    line = re.sub(r'_[A-Z]_', lambda s: s.group(0).lower(), line)
+    line = re.sub(r'\b([a-z_][a-z0-9_]*)([A-Z])', 
+                  lambda m: m.group(1) + '_' + m.group(2).lower(), line)
+    line = re.sub(r'_[A-Z]_', lambda m: m.group(0).lower(), line)
 
     # None/null => \textbf{nil}
     line = re.sub(r'\b(None|null)\b', r'nil', line)
@@ -190,6 +211,7 @@ def translate_code(line):
     line = re.sub(r'\\ensuremath{\\mathit{' + keywords + '}}', r'\1', line)
     
     # don't be afraid to use l as a variable name
+    line = re.sub(r'\bell\b', r'\ell', line)
     line = re.sub(r'\bl\b', r'\ell', line)
     
     # typeset class names in mathrm
@@ -204,8 +226,9 @@ def translate_code(line):
     # escape underscores
     line = re.sub(r'_', r'\_', line)
 
-    # This backstop makes sure we ensuremath any assignment 
-    line = re.sub(r'(\s*)([^#]*\\gets[^\w][^#]*)', r'\1\ensuremath{\2}', line) 
+    # Some hex constants look better in binary
+    #line = re.sub(r'\b0xff\b', '11111111_2', line)
+    line = re.sub(r'0x(\w+)\b', r'\mathrm{\1}_{16}', line)
 
     # add comment back and escape hashes
     if comment:

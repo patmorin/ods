@@ -57,12 +57,25 @@ class BaseList(BaseCollection):
             self.append(x)
 
     def clear(self):
+        """This can be overridden with more efficient implementations"""
         while self.size() > 0:
             self.remove(self.size()-1)
 
+    def add_first(self, x):
+        return self.add(0, x)
+        
+    def remove_first(self):
+        return self.remove(0)
+        
+    def add_last(self, x):
+        return self.add(self.size(), x)
+    
+    def remove_last(self):
+        return self.remove(self.size()-1)
+        
     def insert(i, x):
         self.add(i, x)
-        
+ 
     def __iter__(self):
         """This implementation is good enough for array-based lists"""
         for i in range(len(self)):
@@ -101,3 +114,5 @@ class BaseList(BaseCollection):
 
     def __delitem__(self, i):
        self.remove(i)
+       
+       

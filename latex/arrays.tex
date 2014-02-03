@@ -231,7 +231,9 @@ amortized time.
 \index{FastArrayStack@#FastArrayStack#}%
 Much of the work done by an #ArrayStack# involves shifting (by
 #add(i,x)# and #remove(i)#) and copying (by #resize()#) of data.
-In the implementations shown above, this was done using #for# loops. It
+\notpcode{In the implementations shown above, this was done using #for# loops.}%
+\pcodeonly{In a naive implementation, this would be done using #for# loops.}
+It
 turns out that many programming environments have specific functions
 that are very efficient at copying and moving blocks of data.  In the C
 programming language, there are the #memcpy(d,s,n)# and #memmove(d,s,n)#
@@ -241,7 +243,8 @@ In Java there is the #System.arraycopy(s,i,d,j,n)# method.
 \index{std::copy@#std::copy(a0,a1,b)#}%
 \index{System.arraycopy@#System.arraycopy(s,i,d,j,n)#}%
 
-\codeimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
+\cppimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
+\javaimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
 
 These functions are usually highly optimized and may even use special
 machine instructions that can do this copying much faster than we could by
@@ -300,11 +303,14 @@ We read the latter part of this equation as ``15 is congruent to 3 modulo
 More generally, for an integer $a$ and positive integer $m$, $a \bmod m$
 is the unique integer $r\in\{0,\ldots,m-1\}$ such that $a = r + km$ for
 some integer $k$.  Less formally, the value $r$ is the remainder we get
-when we divide $a$ by $m$.  In many programming languages, including
+when we divide $a$ by $m$.
+\pcodeonly{In many programming languages, including C, C++, and Java,
+the mod operate is represented using the \% symbol.}
+\notpcode{In many programming languages, including
 \javaonly{Java}\cpponly{C++}, the $\bmod$ operator is represented
 using the #%# symbol.\footnote{This is sometimes referred to as the
 \emph{brain-dead} mod operator, since it does not correctly implement
-the mathematical mod operator when the first argument is negative.}
+the mathematical mod operator when the first argument is negative.}}
 
 Modular arithmetic is useful for simulating an infinite array,
 since $#i#\bmod #a.length#$ always gives a value in the range
@@ -354,7 +360,7 @@ size of #a#.
 \codeimport{ods/ArrayQueue.remove()}
 
 Finally, the #resize()# operation is very similar to the #resize()#
-operation of #ArrayStack#.  It allocates a new array #b# of size $2#n#$
+operation of #ArrayStack#.  It allocates a new array, #b#, of size $2#n#$
 and copies
 \[
    #a[j]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]#
@@ -652,7 +658,7 @@ that, because they store their data in one or two arrays and they avoid
 resizing these arrays too often, the arrays frequently are not very full.
 For example, immediately after a #resize()# operation on an #ArrayStack#,
 the backing array #a# is only half full.  Even worse, there are times
-when only $1/3$ of #a# contains data.
+when only one third of #a# contains data.
 
 In this section, we discuss the #RootishArrayStack# data structure,
 that addresses the problem of wasted space.  The #RootishArrayStack#
@@ -739,7 +745,7 @@ If we use any of the data structures in this chapter for representing the #block
 
 The #add(i,x)# method will, by now, look familiar.  We first check
 to see if our data structure is full, by checking if the number of
-blocks #r# is such that $#r#(#r#+1)/2 = #n#$. If so, we call #grow()#
+blocks, #r#, is such that $#r#(#r#+1)/2 = #n#$. If so, we call #grow()#
 to add another block.  With this done, we shift elements with indices
 $#i#,\ldots,#n#-1$ to the right by one position to make room for the
 new element with index #i#:

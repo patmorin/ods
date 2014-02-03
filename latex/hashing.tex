@@ -106,7 +106,7 @@ In multiplicative hashing, we use a hash table of size $2^{#d#}$ for some
 integer #d# (called the \emph{dimension}).  The formula for hashing an
 integer $#x#\in\{0,\ldots,2^{#w#}-1\}$ is
 \[
-    #hash#(#x#) = ((#z#\cdot#x#) \bmod 2^{#w#}) \ddiv 2^{#w#-#d#} \enspace .
+    #hash(x)# = ((#z#\cdot#x#) \bmod 2^{#w#}) \ddiv 2^{#w#-#d#} \enspace .
 \]
 Here, #z# is a randomly chosen \emph{odd} integer in
 $\{1,\ldots,2^{#w#}-1\}$.  This hash function can be realized very
@@ -550,13 +550,15 @@ where each entry is a random #w#-bit integer, independent of all the
 other entries.  In this way, we could implement #hash(x)# by extracting
 a #d#-bit integer from #tab[x.hashCode()]#:
 \codeimport{ods/LinearHashTable.idealHash(x)}
+\pcodeonly{Here, #>>#, is the \emph{bitwise right shift} operator, so
+#x.hashCode() >> w-d# extracts the #d# most significant bits of #x#'s #w#-bit hash code.}
 
 Unfortunately, storing an array of size $2^{#w#}$ is prohibitive in terms
 of memory usage.  The approach used by \emph{tabulation hashing} is to,
 instead, treat #w#-bit integers as being comprised of $#w#/#r#$
 integers, each having only $#r#$ bits.  In this way, tabulation hashing
 only needs $#w#/#r#$ arrays each of length $2^{#r#}$.  All the entries
-in these arrays are independent #w#-bit integers.  To obtain the value
+in these arrays are independent random #w#-bit integers.  To obtain the value
 of #hash(x)# we split #x.hashCode()# up into $#w#/#r#$ #r#-bit integers
 and use these as indices into these arrays.  We then combine all these
 values with the bitwise exclusive-or operator to obtain #hash(x)#.
@@ -564,6 +566,13 @@ The following code shows how this works when $#w#=32$ and $#r#=4$:
 \codeimport{ods/LinearHashTable.hash(x)}
 In this case, #tab# is a two-dimensional array with four columns and
 $2^{32/4}=256$ rows.
+\pcodeonly{
+Quantities like #0xff#, used above, are \emph{hexadecimal numbers}
+\index{hexadecimal numbers}%
+whose digits have 16 possible values 0--9, which have their usual
+meaning and a--f, which denote 10--15.  The number $#0xff#=15\cdot 16 + 15 = 255$.
+The #&# symbol is the \emph{bitwise and} operator, so
+code like #h >> 8 & 0xff# extracts bits with index 8 through 15 of #h#.}
 
 One can easily verify that, for any #x#, #hash(x)# is uniformly
 distributed over $\{0,\ldots,2^{#d#}-1\}$.  With a little work, one

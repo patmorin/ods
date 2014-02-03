@@ -75,14 +75,14 @@ class SEList(BaseList):
         w = self._add_before(w)
         while w is not u:
             while w.d.size() < self.b:
-                w.d.add(0, w.prev.d.remove(w.prev.d.size()-1))
+                w.d.add_first(w.prev.d.remove_last())
             w = w.prev
             
     def _gather(self, u):
         w = u
         for j in range(self.b-1):
             while w.d.size() < self.b:
-                w.d.append(w.next.d.remove(0))
+                w.d.add_last(w.next.d.remove_first())
             w = w.next
         self._remove_node(w)
         
@@ -104,7 +104,7 @@ class SEList(BaseList):
         if w == self.dummy: # ran off the end - add new node
             w = self._add_before(w)
         while w is not u: # work backwards, shifting elements as we go
-             w.d.add(0, w.prev.d.remove(w.prev.d.size()-1))
+             w.d.add_first(w.prev.d.remove_last())
              w = w.prev
         w.d.add(j, x)
         self.n += 1
@@ -129,7 +129,7 @@ class SEList(BaseList):
             self._gather(u)
         u.d.remove(j)
         while u.d.size() < self.b-1 and u.next is not self.dummy:
-            u.d.append(u.next.d.remove(0))
+            u.d.add_last(u.next.d.remove_first())
             u = u.next
         if u.d.size() == 0: self._remove_node(u)
         self.n -= 1

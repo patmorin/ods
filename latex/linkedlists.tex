@@ -32,7 +32,8 @@ An #SLList# (singly-linked list) is a sequence of #Node#s.  Each node
 the sequence.  For the last node #w# in the sequence, $#w.next# = #null#$
 
 % TODO: Remove constructors from SLList.Node
-\codeimport{ods/SLList.Node}
+\javaimport{ods/SLList.Node}
+\cppimport{ods/SLList.Node}
 
 For efficiency, an #SLList# uses variables #head# and #tail# to keep
 track of the first and last node in the sequence, as well as an integer
@@ -60,7 +61,7 @@ has increased by one:
 \codeimport{ods/SLList.push(x)}
 
 The #pop()# operation, after checking that the #SLList# is not empty,
-removes the head by setting $#head#=#head.next#$ and decrementing #n#.
+removes the head by setting $#head=head.next#$ and decrementing #n#.
 A special case occurs when the last element is being removed, in which case #tail# is set to #null#:
 
 \codeimport{ods/SLList.pop()}
@@ -113,7 +114,8 @@ A #DLList# (doubly-linked list) is very similar to an #SLList# except
 that each node #u# in a #DLList# has references to both the node #u.next#
 that follows it and the node #u.prev# that precedes it.
 
-\codeimport{ods/DLList.Node}
+\javaimport{ods/DLList.Node}
+\cppimport{ods/DLList.Node}
 
 When implementing an #SLList#, we saw that there were always several
 special cases to worry about. For example, removing the last element
@@ -582,10 +584,10 @@ and #u.prev#, then we can extract #u.next# using the formula
 \]
 (Here \verb+^+ computes the bitwise exclusive-or of its two arguments.)
 This technique complicates the code a little and is not possible in
-some languages that have garbage collection\javaonly{---including
-Java---}\cpponly{ }but gives a doubly-linked list implementation that
-requires only one pointer per node.
-See Sinha's magazine article \cite{s04} for a detailed discussion of XOR-lists.
+some languages, like Java and Python, that have garbage collection but gives a
+doubly-linked list implementation that requires only one pointer per node.
+See Sinha's magazine article \cite{s04} for a detailed discussion of
+XOR-lists.
 
 \begin{exc}
   Why is it not possible to use a dummy node in an #SLList# to avoid
@@ -767,6 +769,7 @@ the implementation and analysis of the space-efficient #SEList#:
   Explain how to use the bitwise exclusive-or operator, \verb+^+, to
   swap the values of two #int# variables without using a third variable.
 \end{exc}
+
 
 
 
