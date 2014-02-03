@@ -921,17 +921,50 @@ amortized or expected running times.
 \section{Code Samples}
 
 \pcodeonly{
-The code samples in this book are written in pseudocode. These should be easy enough to read for anyone who has any programming experience in any of the most common programming languages of the last 40 years.  To get an idea of what the pseudocode in this book looks like, here is a function that computes the average of an array, #a#:
+
+The code samples in this book are written in pseudocode.
+\index{pseudocode}%
+These should be easy enough to read for anyone who has any programming experience in any of the most common programming languages of the last 40 years.  To get an idea of what the pseudocode in this book looks like, here is a function that computes the average of an array, #a#:
 \pcodeimport{ods/Algorithms.average(a)}
 As this code illustrates, we use the convention that the length of an
 array, #a#, is denoted by #len(a)# and array indices start at zero,
-so that #range(len(a))# are the valid indices for #a#.  To shorten code,
-and sometimes make it easier to read, our pseudocode allows for (sub)array assignments.  The following two functions are equivalent:
+so that #range(len(a))# are the valid indices for #a#.  To shorten
+code, and sometimes make it easier to read, our pseudocode allows for
+(sub)array assignments.  The following two functions are equivalent:
 \pcodeimport{ods/Algorithms.left_shift_a(a).left_shift_b(a)}
 The following code sets all the values in an array to zero:
 \pcodeimport{ods/Algorithms.zero(a)}
-We take similar shortcuts with variable assignments, so that the code #x,y=0,1# sets #x# to zero and #y# to 1 and the code #x,y = y,x# swaps the values of the variables #x# and #y#.
+When analyzing the running time of code like this, we have to be careful;
+statements like 
+    #a[0:len(a)] = 1#
+or
+   #a[1:len(a)] = a[0:len(a)-1]#
+do not run in constant time. They run in $O(#len(a)#)$ time.
 
+We take similar shortcuts with variable assignments, so that the code
+#x,y=0,1# sets #x# to zero and #y# to 1 and the code #x,y = y,x# swaps
+the values of the variables #x# and #y#.
+\index{swap}
+
+Our pseudocode uses a few operators that may be unfamiliar.  As is
+standard in mathematics, (normal) division is denoted by the $/$ operator.
+In many cases, we want to do integer division instead, in which case we
+use the $#//#$ operator, so that $#a//b# = \lfloor a/b\rfloor$ is the
+integer part of $a/b$.  So, for example, $3/2=1.5$ but $#3//2# = 1$.
+\index{integer division}%
+\index{div operator}%
+Occasionally, we also use the $\bmod$ operator to obtain the
+remainder from integer division, but this will be defined when it is used.
+\index{mod operator}%
+\index{div operator}%
+Later in the book, we may use some bitwise operators including left-shift (#<<#), right shift (#>>#), bitwise and (#&#), and bitwise exclusive-or (#^#).
+\index{left shift}%
+\index{#<<#|see {left shift}}%
+\index{right shift}%
+\index{#>>#|see {right shift}}%
+\index{bitwise and}%
+\index{#&#|see {bitwise and}}%
+\index{#^#|see {bitwise exclusive-or}}%
 
 The pseudocode samples in this book are machine translations
 of Python code that can be downloaded from the book's website.\footnote{ \url{http://opendatastructures.org}}  If you ever encounter an ambiguity in the pseudocode that you can't resolve yourself, then you can always refer
@@ -939,7 +972,6 @@ to the corresponding Python code.  If you don't read Python, the code is
 also available in Java and C++.  If you can't decipher the pseudocode,
 or read Python, C++, or Java, then you may not be ready for this book.
 }
-
 
 \notpcode{
 The code samples in this book are written in the \lang\ programming
