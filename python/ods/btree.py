@@ -106,11 +106,14 @@ class BTree(BaseSet):
     def __init__(self, b):
         self._initialize(b)
         
+    def _new_node(self):
+        return BTree.Node(self)
+        
     def _initialize(self, b):
         self.b = b | 1
         self.B = self.b // 2
         self.bs = BlockStore()
-        self.ri = BTree.Node(self).id
+        self.ri = self.new_node().id
         self.n = 0
         
     def add(self, x):
