@@ -81,12 +81,12 @@ install-pdf : ods-java.pdf ods-cpp.pdf ods-python.pdf ods-java-screen.pdf ods-cp
 	scp -r $< morin@cg.scs.carleton.ca:public_html/ods/
 
 install-html : java-html cpp-html python-html
-	scp -r  $< morin@cg.scs.carleton.ca:public_html/ods/
+	scp -r  ods-java/ ods-cpp/ ods-python/ morin@cg.scs.carleton.ca:public_html/ods/
 
 install : install-pdf install-html
 
 clean:
-	rm -f $(javs) $(cpps) $(javh) $(cpph) *.log *.bbl *.out ods.toc $(pdfs) 
+	rm -f $(javs) $(cpps) $(pyts) $(javh) $(cpph) $(pyth) *.log *.bbl *.out ods.toc $(pdfs) 
 	rm -rf ods-java/ ods-cpp/
 	cd figs; make clean
 	cd figs-python; make clean
@@ -128,7 +128,7 @@ ods-cpp-html.tex : ods.tex Makefile
 %-cpp-html.tex : %.tex $(cpp) snarf-cpp-html.pl Makefile
 	cat $< | ./snarf-cpp-html.pl > $*-cpp-html.tex 
 
-%-python-html : $(pyth) ods-python-html.tex epsfigs
+python-html : $(pyth) ods-python-html.tex epsfigs
 	mkdir -p ods-python
 	pdflatex ods-python-html
 	bibtex ods-python-html
