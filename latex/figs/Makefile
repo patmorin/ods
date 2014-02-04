@@ -3,7 +3,7 @@ sources=$(wildcard *.ipe)
 pdfs=$(sources:.ipe=.pdf)
 burstpdfs=$(sources:.ipe=-1.pdf)
 
-all: $(pdfs) $(burstpdfs) $(burstpdfs) 
+all: $(pdfs) $(burstpdfs)
 
 epss: $(pdfs)
 	./makeepss
