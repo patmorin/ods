@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120626162443" modified="D:20130710153812"/>
+<info created="D:20120626162443" modified="D:20140204142616"/>
 <preamble>\usepackage{kpfonts}
 \usepackage{wasysym}\fontsize{10pt}{10pt}\selectfont
 \usepackage{ods-colors}</preamble>
@@ -234,8 +234,9 @@ h
 <page>
 <layer name="pre-merge"/>
 <layer name="post-merge"/>
-<view layers="pre-merge" active="pre-merge"/>
-<view layers="post-merge" active="post-merge"/>
+<layer name="shared"/>
+<view layers="pre-merge shared" active="shared"/>
+<view layers="post-merge shared" active="post-merge"/>
 <path layer="pre-merge" matrix="1 0 0 1 160 -96" stroke="darkgray" pen="fat">
 64 752 m
 64 736 l
@@ -613,8 +614,8 @@ h
 272 688 m
 400 656 l
 </path>
-<text matrix="1 0 0 1 9.74751 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
-<text matrix="1 0 0 1 105.748 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0 0 1 13.1506 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 109.11 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
 <path layer="post-merge" matrix="1 0 0 1 192 -96" stroke="black" pen="fat">
 64 752 m
 64 736 l
@@ -627,8 +628,7 @@ h
 304 656 l
 </path>
 <text layer="pre-merge" matrix="1 0 0 1 136 -107.21" transformations="translations" pos="80 752" stroke="black" type="label" width="2.68" height="6.8" depth="2.61" halign="center" valign="baseline">j</text>
-<text matrix="1 0 0 1 9.74751 58.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" valign="baseline">$\mathtt{\color{var}u}$</text>
-<text layer="post-merge" matrix="1 0 0 1 9.74751 58.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" valign="baseline">$\mathtt{\color{var}u}$</text>
+<text layer="shared" matrix="1 0 0 1 13.1506 58.5994" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
 <path layer="pre-merge" stroke="black" pen="fat">
 240 688 m
 208 656 l

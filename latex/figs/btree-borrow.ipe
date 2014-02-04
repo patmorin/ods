@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120626162443" modified="D:20130712114130"/>
+<info created="D:20120626162443" modified="D:20140204142947"/>
 <preamble>\usepackage{kpfonts}
 \usepackage{wasysym}\fontsize{10pt}{10pt}\selectfont
 \usepackage{ods-colors}</preamble>
@@ -234,8 +234,9 @@ h
 <page>
 <layer name="pre-borrow"/>
 <layer name="post-borrow"/>
-<view layers="pre-borrow" active="pre-borrow"/>
-<view layers="post-borrow" active="post-borrow"/>
+<layer name="shared"/>
+<view layers="pre-borrow shared" active="shared"/>
+<view layers="post-borrow shared" active="post-borrow"/>
 <path layer="post-borrow" matrix="1 0 0 1 -16 0" stroke="darkgray" pen="fat">
 336 640 m
 336 624 l
@@ -435,9 +436,9 @@ h
 272 688 m
 400 656 l
 </path>
-<text matrix="1 0 0 1 9.74751 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
-<text matrix="1 0 0 1 105.748 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
-<path matrix="1 0 0 1 -32 0" stroke="black" pen="fat">
+<text layer="shared" matrix="1 0 0 1 13.6406 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}v}$</text>
+<text matrix="1 0 0 1 109.641 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="right" valign="baseline">$\mathtt{\color{var}w}$</text>
+<path layer="pre-borrow" matrix="1 0 0 1 -32 0" stroke="black" pen="fat">
 336 624 m
 336 640 l
 </path>
@@ -661,8 +662,6 @@ h
 272 688 m
 400 656 l
 </path>
-<text matrix="1 0 0 1 9.74751 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}v}$</text>
-<text matrix="1 0 0 1 105.748 10.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline">$\mathtt{\color{var}w}$</text>
 <path matrix="1 0 0 1 -16 0" stroke="black" pen="fat">
 336 624 m
 336 640 l
@@ -682,8 +681,8 @@ h
 224 528 l
 h
 </path>
-<text layer="pre-borrow" matrix="1 0 0 1 9.74751 58.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" valign="baseline">$\mathtt{\color{var}u}$</text>
-<path matrix="1 0 0 1 144 -96" stroke="black" pen="fat">
+<text layer="shared" matrix="1 0 0 1 13.6406 58.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="right" valign="baseline">$\mathtt{\color{var}u}$</text>
+<path layer="pre-borrow" matrix="1 0 0 1 144 -96" stroke="black" pen="fat">
 64 752 m
 64 736 l
 80 736 l
@@ -728,7 +727,6 @@ h
 256 688 m
 304 656 l
 </path>
-<text matrix="1 0 0 1 9.74751 58.3272" transformations="translations" pos="176 640" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" valign="baseline">$\mathtt{\color{var}u}$</text>
 <text layer="pre-borrow" matrix="1 0 0 1 216 -91.21" transformations="translations" pos="80 752" stroke="black" type="label" width="4.981" height="6.856" depth="1.93" halign="center" valign="baseline">\cent</text>
 <text layer="post-borrow" matrix="1 0 0 1 216 -91.21" transformations="translations" pos="80 752" stroke="black" type="label" width="4.981" height="6.856" depth="1.93" halign="center" valign="baseline">\cent</text>
 <text matrix="1 0 0 1 120 -91.21" transformations="translations" pos="80 752" stroke="black" type="label" width="4.981" height="6.856" depth="1.93" halign="center" valign="baseline">\cent</text>

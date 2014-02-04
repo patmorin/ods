@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20110228150616" modified="D:20130711140956"/>
+<info created="D:20110228150616" modified="D:20140204095849"/>
 <preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -367,7 +367,7 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<text matrix="1 0.0000002 -0.0000002 1 174.024 82.199" transformations="rigid" pos="105.977 306.738" stroke="black" type="label" halign="center" valign="baseline">$\mathtt{\color{var}w}$</text>
+<text matrix="1 0.0000002 -0.0000002 1 174.024 82.199" transformations="rigid" pos="105.977 306.738" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{\color{var}w}$</text>
 <group matrix="1 0.0000002 -0.0000002 1 141.944 127.271">
 <path stroke="white" pen="fat">
 96 320 m
@@ -438,7 +438,7 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<text matrix="1 0.0000002 -0.0000002 1 139.967 129.469" transformations="rigid" pos="105.977 306.738" stroke="black" type="label" halign="center" valign="baseline">u</text>
+<text matrix="1 0.0000002 -0.0000002 1 139.967 129.469" transformations="rigid" pos="105.977 306.738" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="center" valign="baseline">$\mathtt{\color{var}u}$</text>
 <path matrix="1 0 0 1 64.0009 0.0010208" stroke="black" pen="fat" arrow="normal/small">
 232 392 m
 240 392
@@ -467,8 +467,8 @@ h
 272 416
 280.001 400.001 s
 </path>
-<text transformations="translations" pos="332.367 390.744" stroke="black" type="label" valign="baseline">$\cdots$</text>
-<text matrix="1 0 0 1 5.53147 -0.502861" transformations="translations" pos="145.806 391.247" stroke="black" type="label" valign="baseline">$\cdots$</text>
+<text transformations="translations" pos="332.367 390.744" stroke="black" type="label" width="10.793" height="3.049" depth="0" valign="baseline">$\cdots$</text>
+<text matrix="1 0 0 1 5.53147 -0.502861" transformations="translations" pos="145.806 391.247" stroke="black" type="label" width="10.793" height="3.049" depth="0" valign="baseline">$\cdots$</text>
 <path stroke="black" pen="fat" arrow="normal/small">
 232 392 m
 245.944 431.271 l
@@ -485,8 +485,8 @@ h
 264.001 392.001 m
 245.944 431.271 l
 </path>
-<text matrix="1 0 0 1 20.0925 -28.2197" transformations="translations" pos="253.921 458.128" stroke="black" type="label" valign="baseline">$\mathtt{u.next}$</text>
-<text matrix="1 0 0 1 -22.1259 -24.3883" transformations="translations" pos="212.184 456.116" stroke="black" type="label" valign="baseline">$\mathtt{u.prev}$</text>
+<text matrix="1 0 0 1 20.0925 -28.2197" transformations="translations" pos="253.921 458.128" stroke="black" type="label" width="28.842" height="5.865" depth="0.07" valign="baseline">$\mathtt{{\color{var}u}.{\color{var}next}}$</text>
+<text matrix="1 0 0 1 -22.1259 -24.3883" transformations="translations" pos="212.184 456.116" stroke="black" type="label" width="28.842" height="4.431" depth="1.89" valign="baseline">$\mathtt{{\color{var}u}.{\color{var}prev}}$</text>
 <path matrix="1 0.0000002 -0.0000002 1 112.001 80.001" stroke="white" pen="fat">
 96 320 m
 96 304 l

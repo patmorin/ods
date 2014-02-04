@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70010" creator="Ipe 7.0.10">
-<info created="D:20110228150616" modified="D:20110330055311"/>
+<ipe version="70005" creator="Ipe 7.1.1">
+<info created="D:20110228150616" modified="D:20140204100017"/>
 <preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -233,7 +233,7 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<text layer="alpha" matrix="1 0 0 1 30.0234 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" halign="center" valign="baseline">0</text>
+<text layer="alpha" matrix="1 0 0 1 30.0234 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">0</text>
 <group matrix="1 0 0 1 32 -64">
 <path stroke="white" pen="fat">
 96 320 m
@@ -279,7 +279,7 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<text matrix="1 0 0 1 78.0234 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" halign="center" valign="baseline">1</text>
+<text matrix="1 0 0 1 78.0234 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">1</text>
 <group matrix="1 0 0 1 80 -64">
 <path stroke="white" pen="fat">
 96 320 m
@@ -325,7 +325,7 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<text matrix="1 0 0 1 126.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" halign="center" valign="baseline">2</text>
+<text matrix="1 0 0 1 126.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">2</text>
 <group matrix="1 0 0 1 128 -64">
 <path stroke="white" pen="fat">
 96 320 m
@@ -379,7 +379,7 @@ h
 216 88 m
 240 88 l
 </path>
-<text matrix="1 0 0 1 174.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" halign="center" valign="baseline">3</text>
+<text matrix="1 0 0 1 174.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">3</text>
 <group matrix="1 0 0 1 176 -64">
 <path stroke="white" pen="fat">
 96 320 m
@@ -425,7 +425,7 @@ h
 <use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="96 392" size="normal" stroke="black"/>
 </group>
 </group>
-<text matrix="1 0 0 1 222.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" halign="center" valign="baseline">4</text>
+<text matrix="1 0 0 1 222.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.43" height="6.804" depth="0.08" halign="center" valign="baseline">4</text>
 <group matrix="1 0 0 1 224 -64">
 <path stroke="white" pen="fat">
 96 320 m
@@ -479,7 +479,7 @@ h
 216 88 m
 240 88 l
 </path>
-<text matrix="1 0 0 1 270.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" halign="center" valign="baseline">5</text>
+<text matrix="1 0 0 1 270.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">5</text>
 <group matrix="1 0 0 1 272 -64">
 <path stroke="white" pen="fat">
 96 320 m
@@ -529,7 +529,7 @@ h
 216 88 m
 240 88 l
 </path>
-<text matrix="1 0 0 1 318.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" halign="center" valign="baseline">6</text>
+<text matrix="1 0 0 1 318.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">6</text>
 <group matrix="1 0 0 1 320 -64">
 <path stroke="white" pen="fat">
 96 320 m
@@ -1101,12 +1101,12 @@ h
 392 264 m
 432 264 l
 </path>
-<text matrix="1 0 0 1 -4.65026 0" transformations="translations" pos="79.7288 225.876" stroke="black" type="label" valign="baseline">\texttt{sentinel}</text>
-<text matrix="1 0 0 1 0 0.0422218" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" valign="baseline">$L_0$</text>
-<text matrix="1 0 0 1 0 16.0422" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" valign="baseline">$L_1$</text>
-<text matrix="1 0 0 1 0 32.0422" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" valign="baseline">$L_2$</text>
-<text matrix="1 0 0 1 0 48.0422" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" valign="baseline">$L_3$</text>
-<text matrix="1 0 0 1 0 64.0422" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" valign="baseline">$L_4$</text>
-<text matrix="1 0 0 1 0 80.0422" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" valign="baseline">$L_5$</text>
+<text matrix="1 0 0 1 -4.65026 0" transformations="translations" pos="79.7288 225.876" stroke="black" type="label" width="42.241" height="6.256" depth="0.06" valign="baseline">$\mathtt{\color{var}sentinel}$</text>
+<text matrix="1 0 0 1 0 0.0422218" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" width="10.283" height="6.697" depth="2.1" valign="baseline">$L_0$</text>
+<text matrix="1 0 0 1 0 16.0422" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" width="10.283" height="6.697" depth="2.1" valign="baseline">$L_1$</text>
+<text matrix="1 0 0 1 0 32.0422" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" width="10.283" height="6.697" depth="2.1" valign="baseline">$L_2$</text>
+<text matrix="1 0 0 1 0 48.0422" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" width="10.283" height="6.697" depth="2.1" valign="baseline">$L_3$</text>
+<text matrix="1 0 0 1 0 64.0422" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" width="10.283" height="6.697" depth="2.1" valign="baseline">$L_4$</text>
+<text matrix="1 0 0 1 0 80.0422" transformations="translations" pos="54.3711 244.894" stroke="black" type="label" width="10.283" height="6.697" depth="2.1" valign="baseline">$L_5$</text>
 </page>
 </ipe>

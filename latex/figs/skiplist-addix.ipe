@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20110228150616" modified="D:20130607083710"/>
+<info created="D:20110228150616" modified="D:20140204105716"/>
 <preamble>\usepackage{kpfonts}
 \usepackage{ulem}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
@@ -1078,8 +1078,8 @@ h
 392 264 m
 432 264 l
 </path>
-<text matrix="1 0 0 1 -4.65026 0" transformations="translations" pos="79.7288 225.876" stroke="black" type="label" width="42.241" height="6.256" depth="0.06" valign="baseline">\texttt{sentinel}</text>
-<text matrix="1 0 0 1 222.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">\tt x</text>
+<text matrix="1 0 0 1 -4.65026 0" transformations="translations" pos="79.7288 225.876" stroke="black" type="label" width="42.241" height="6.256" depth="0.06" valign="baseline">$\mathtt{\color{var}sentinel}$</text>
+<text matrix="1 0 0 1 222.023 -61.802" transformations="translations" pos="105.977 306.738" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline">$\mathtt{x}$</text>
 <group matrix="1 0 0 1 224 -64">
 <path stroke="white" pen="fat">
 96 320 m
@@ -1232,8 +1232,8 @@ h
 216 88 m
 240 88 l
 </path>
-<text matrix="1 0 0 1 0 1.876" transformations="translations" pos="320 224" stroke="black" type="label" width="42.241" height="6.922" depth="1.79" valign="baseline">\texttt{add(4,x)}</text>
-<path stroke="seagreen" pen="fat" pen="ultrafat" arrow="normal/small">
+<text matrix="1 0 0 1 0 1.876" transformations="translations" pos="320 224" stroke="black" type="label" width="36.743" height="7.383" depth="2.52" valign="baseline">$\mathtt{add}(4,\mathtt{x})$</text>
+<path stroke="seagreen" pen="ultrafat" arrow="normal/small">
 104 328 m
 128 320
 104 312

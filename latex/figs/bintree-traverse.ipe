@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20110525141707" modified="D:20130711141835"/>
+<info created="D:20110525141707" modified="D:20140204110602"/>
 <preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -235,48 +235,48 @@ h
 <layer name="beta"/>
 <view layers="alpha" active="alpha"/>
 <view layers="alpha beta" active="beta"/>
-<path layer="alpha" matrix="0.375 0 0 0.375 128.218 169.034" stroke="black" pen="fat" fill="white">
+<path layer="alpha" matrix="0.375 0 0 0.375 128.218 169.034" stroke="black" fill="white" pen="fat">
 256 368 m
 256 256 l
 </path>
-<path matrix="0.375 0 0 0.375 128.218 169.034" stroke="black" pen="fat" fill="white">
+<path matrix="0.375 0 0 0.375 128.218 169.034" stroke="black" fill="white" pen="fat">
 256 256 m
 192 160 l
 </path>
-<path matrix="0.375 0 0 0.375 128.218 169.034" stroke="black" pen="fat" fill="white">
+<path matrix="0.375 0 0 0.375 128.218 169.034" stroke="black" fill="white" pen="fat">
 256 256 m
 320 160 l
 </path>
-<path matrix="0.375 0 0 0.375 128.218 211.034" stroke="black" pen="fat" fill="white">
+<path matrix="0.375 0 0 0.375 128.218 211.034" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path matrix="0.375 0 0 0.375 128.218 169.034" stroke="black" pen="fat" fill="white">
+<path matrix="0.375 0 0 0.375 128.218 169.034" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path matrix="0.375 0 0 0.375 152.218 133.034" stroke="black" pen="fat" fill="white">
+<path matrix="0.375 0 0 0.375 152.218 133.034" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path matrix="0.375 0 0 0.375 104.218 133.034" stroke="black" pen="fat" fill="white">
+<path matrix="0.375 0 0 0.375 104.218 133.034" stroke="black" fill="white" pen="fat">
 16 0 0 16 256 256 e
 </path>
-<path layer="beta" matrix="0.375 0 0 0.375 128.3 169.025" stroke="seagreen" pen="fat" fill="white" pen="ultrafat" cap="1" arrow="normal/normal">
+<path layer="beta" matrix="0.375 0 0 0.375 128.3 169.025" stroke="seagreen" fill="white" pen="ultrafat" cap="1" arrow="normal/normal">
 224 352 m
 224 256
 176 192 s
 </path>
-<path matrix="0.375 0 0 0.375 128.3 169.025" stroke="seagreen" pen="fat" fill="white" pen="ultrafat" cap="1" arrow="normal/normal">
+<path matrix="0.375 0 0 0.375 128.3 169.025" stroke="seagreen" fill="white" pen="ultrafat" cap="1" arrow="normal/normal">
 224 144 m
 256 208
 288 144 s
 </path>
-<path matrix="0.375 0 0 0.375 128.3 169.025" stroke="seagreen" pen="fat" fill="white" pen="ultrafat" cap="1" arrow="normal/normal">
+<path matrix="0.375 0 0 0.375 128.3 169.025" stroke="seagreen" fill="white" pen="ultrafat" cap="1" arrow="normal/normal">
 336 192 m
 288 256
 288 352 s
 </path>
-<text layer="alpha" matrix="0.375 0 0 0.375 128.218 169.034" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$\mathtt{\color{var}u}$</text>
-<text matrix="0.375 0 0 0.375 128.218 223.034" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$\mathtt{u.parent}$</text>
-<text matrix="0.375 0 0 0.375 104.218 121.381" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$\mathtt{u.left}$</text>
-<text matrix="0.375 0 0 0.375 152.218 121.381" transformations="translations" pos="256 256" stroke="black" type="label" halign="center" valign="center">$\mathtt{u.right}$</text>
+<text layer="alpha" matrix="0.375 0 0 0.375 128.218 169.034" transformations="translations" pos="256 256" stroke="black" type="label" width="5.28" height="4.438" depth="0.06" halign="center" valign="center">$\mathtt{\color{var}u}$</text>
+<text matrix="0.375 0 0 0.375 128.218 223.034" transformations="translations" pos="256 256" stroke="black" type="label" width="39.402" height="5.861" depth="1.89" halign="center" valign="center">$\mathtt{{\color{var}u}.{\color{var}parent}}$</text>
+<text matrix="0.375 0 0 0.375 104.218 121.381" transformations="translations" pos="256 256" stroke="black" type="label" width="28.842" height="6.254" depth="0.07" halign="center" valign="center">$\mathtt{{\color{var}u}.{\color{var}left}}$</text>
+<text matrix="0.375 0 0 0.375 152.218 121.381" transformations="translations" pos="256 256" stroke="black" type="label" width="34.122" height="6.25" depth="1.79" halign="center" valign="center">$\mathtt{{\color{var}u}.{\color{var}right}}$</text>
 </page>
 </ipe>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120124143640" modified="D:20130712112813"/>
+<info created="D:20120124143640" modified="D:20140204141814"/>
 <preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -264,64 +264,6 @@ h
 320 272 l
 h
 </path>
-<group>
-<path stroke="green" pen="fat">
-384 288 m
-352 272 l
-</path>
-<text matrix="1 0 0 1 127.533 21.005" transformations="translations" pos="224.467 239.785" stroke="green" type="label" width="22.436" height="6.6" depth="0.08" halign="center" valign="baseline">$10{\star\star}$</text>
-<path stroke="green" pen="fat">
-320 272 m
-320 256 l
-384 256 l
-384 272 l
-h
-</path>
-<text matrix="1 0 0 1 119.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="green" type="label" width="5.43" height="6.604" depth="0.23" halign="center" valign="baseline">$9$</text>
-<path matrix="1 0 0 1 128 0" stroke="green" pen="fat">
-208 224 m
-216 208 l
-</path>
-<path stroke="green" pen="fat">
-352 256 m
-336 240 l
-</path>
-<text matrix="1 0 0 1 111.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="green" type="label" width="22.077" height="6.6" depth="0.08" halign="center" valign="baseline">$100{\star}$</text>
-<path matrix="1 0 0 1 144 0" stroke="green" pen="fat">
-192 208 m
-192 192 l
-208 192 l
-208 208 l
-h
-</path>
-<path matrix="1 0 0 1 128 0" stroke="green" pen="fat">
-192 240 m
-192 224 l
-224 224 l
-224 240 l
-h
-</path>
-<path stroke="green" dash="dashed" pen="fat" arrow="normal/small">
-352 256 m
-368 228.79
-352 199.876 s
-</path>
-<path stroke="green" dash="dashed" pen="fat" arrow="normal/small">
-336 224 m
-328 208
-336 199.589 s
-</path>
-<path stroke="green" pen="fat" arrow="normal/small" rarrow="normal/small">
-247.882 192 m
-304 176
-343.929 192 s
-</path>
-<path stroke="green" pen="fat" arrow="normal/small" rarrow="normal/small">
-343.929 192 m
-368 176
-391.809 192 s
-</path>
-</group>
 <text matrix="1 0 0 1 -24.4668 -42.9951" transformations="translations" pos="224.467 239.785" stroke="gray" type="label" width="5.43" height="6.6" depth="0.08" halign="center" valign="baseline">$0$</text>
 <path stroke="gray" pen="fat">
 192 208 m
@@ -414,13 +356,6 @@ h
 h
 </path>
 <path matrix="1 0 0 1 64 0" stroke="gray" pen="fat">
-192 240 m
-192 224 l
-224 224 l
-224 240 l
-h
-</path>
-<path matrix="1 0 0 1 160 0" stroke="gray" pen="fat">
 192 240 m
 192 224 l
 224 224 l
@@ -614,13 +549,6 @@ h
 256 272 l
 h
 </path>
-<path stroke="black" pen="fat">
-384 272 m
-384 256 l
-448 256 l
-448 272 l
-h
-</path>
 <path stroke="black" dash="dashed" pen="fat" arrow="normal/small">
 224 256 m
 202.009 224
@@ -659,6 +587,71 @@ h
 <path stroke="black" pen="fat">
 384 288 m
 416 272 l
+</path>
+<group>
+<path stroke="green" pen="fat">
+384 288 m
+352 272 l
+</path>
+<text matrix="1 0 0 1 127.533 21.005" transformations="translations" pos="224.467 239.785" stroke="green" type="label" width="22.436" height="6.6" depth="0.08" halign="center" valign="baseline">$10{\star\star}$</text>
+<path stroke="green" pen="fat">
+320 272 m
+320 256 l
+384 256 l
+384 272 l
+h
+</path>
+<text matrix="1 0 0 1 119.533 -42.9951" transformations="translations" pos="224.467 239.785" stroke="green" type="label" width="5.43" height="6.604" depth="0.23" halign="center" valign="baseline">$9$</text>
+<path matrix="1 0 0 1 128 0" stroke="green" pen="fat">
+208 224 m
+216 208 l
+</path>
+<path stroke="green" pen="fat">
+352 256 m
+336 240 l
+</path>
+<text matrix="1 0 0 1 111.533 -10.995" transformations="translations" pos="224.467 239.785" stroke="green" type="label" width="22.077" height="6.6" depth="0.08" halign="center" valign="baseline">$100{\star}$</text>
+<path matrix="1 0 0 1 144 0" stroke="green" pen="fat">
+192 208 m
+192 192 l
+208 192 l
+208 208 l
+h
+</path>
+<path matrix="1 0 0 1 128 0" stroke="green" pen="fat">
+192 240 m
+192 224 l
+224 224 l
+224 240 l
+h
+</path>
+<path stroke="green" dash="dashed" pen="fat" arrow="normal/small">
+352 256 m
+368 228.79
+352 199.876 s
+</path>
+<path stroke="green" dash="dashed" pen="fat" arrow="normal/small">
+336 224 m
+328 208
+336 199.589 s
+</path>
+<path stroke="green" pen="fat" arrow="normal/small" rarrow="normal/small">
+247.882 192 m
+304 176
+343.929 192 s
+</path>
+<path stroke="green" pen="fat" arrow="normal/small" rarrow="normal/small">
+343.929 192 m
+368 176
+391.809 192 s
+</path>
+</group>
+<path stroke="black" pen="fat">
+384 272 m
+384 256 l
+448 256 l
+448 272 l
+h
 </path>
 </page>
 </ipe>
