@@ -226,6 +226,9 @@ def translate_code(line):
  
     # escape underscores
     line = re.sub(r'_', r'\_', line)
+    
+    # use subscripts on variable names that end with a single digit
+    line = re.sub(r'(\\mathit{\w+)(\d})', r'\1_\2', line) 
 
     # Some hex constants look better in binary
     #line = re.sub(r'\b0xff\b', '11111111_2', line)
