@@ -22,9 +22,12 @@ all: $(pdfs)
 
 figs:
 	cd figs ; make
+	cd figs-python ; make
+   
 
 epsfigs:
 	cd figs ; make epss
+	cd figs-python ; make epss
 
 images:
 	cd images ; make
@@ -84,6 +87,7 @@ clean:
 	rm -f $(javs) $(cpps) $(javh) $(cpph) *.log *.bbl *.out ods.toc $(pdfs) 
 	rm -rf ods-java/ ods-cpp/
 	cd figs; make clean
+	cd figs-python; make clean
 	cd images; make clean
 
 # A dirty hack for getting a grayscale file

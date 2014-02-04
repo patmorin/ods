@@ -259,8 +259,7 @@ def print_code(clazz, methods):
     methods = [re.sub(r'([a-z])([A-Z])', r'\1_\2', s).lower() for s in methods]
     sys.stderr.write(str(methods) + '\n')
 
-    if not html:
-        print r'\begin{oframed}'
+    print [r'\begin{oframed}', r'\begin{leftbar}'][html]
     print r'\begin{flushleft}'
     printed = False
     try:
@@ -284,9 +283,12 @@ def print_code(clazz, methods):
     if not printed: 
         print r'NO OUTPUT (looking for \verb+' + str(methods) + "+)"
     print r'\end{flushleft}'
-    if not html:
-        print r'\end{oframed}'
+    print [r'\end{oframed}', r'\end{leftbar}'][html]
 
+
+def fig_subs(line):
+    return re.sub(r'(\includegraphics\[[^\]]*\]){figs/', 
+                  r'\1{figs-python/', line)
 
 def code_subs(line):
     """Touch up code snippets in a line of LaTeX code"""
@@ -324,7 +326,7 @@ def snarf(infile):
                               % (methods, clazz))
             print_code(clazz, methods)
         else:
-            print code_subs(line)
+            print code_subs(fig_subs(line))
 
 
 def die(msg, code=-1):
@@ -337,7 +339,6 @@ if __name__ == "__main__":
     argv = sys.argv[:]
     if "-html" in argv:
         html = True
-        html = False # fixit
         argv = [s for s in argv if s != "-html"]
     if len(argv) == 1:
         infile = sys.stdin
