@@ -14,6 +14,6 @@ tarballs:
 
 install: all tarballs
 	(cd latex ; make install)
-	scp ods-java.tgz ods-cpp.tgz morin@cg.scs.carleton.ca:public_html/ods/
+	scp ods-java.tgz ods-cpp.tgz ods-python.tgz morin@cg.scs.carleton.ca:public_html/ods/
 
 
