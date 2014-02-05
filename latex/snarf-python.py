@@ -54,6 +54,9 @@ def translate_code(line):
     # super(Class,self) => super
     line = re.sub(r'super\([^)]*\)', 'super', line)
 
+    # a += b => a = a + b --- handles +=, -=, *=, and /=
+    line = re.sub(r'([^\s]+)\s*([+*-/])=\s*(.*)$', r'\1 = \1 \2 \3', line) 
+
     # turn assignment operator (=) into \gets
     line = re.sub(r'([^-*/<>!=+])=([^=])', r'\1\\gets \2', line)
 
@@ -121,9 +124,6 @@ def translate_code(line):
 
     # <blah>.hashCode() => hash_code(<blah>)
     # line = re.sub(r'(\w+)\.hashCode()', r'hash_code(\1)', line)
-
-    # a += b => a = a + b --- handles +=, -=, *=, and /=
-    line = re.sub(r'([^\s]+)\s*([+*-/])=\s*(.*)$', r'\1 = \1 \2 \3', line) 
 
     # get rid of any remaining colons
     line = re.sub(r':', '', line)
