@@ -10,7 +10,7 @@ class BinarySearchTree(BinaryTree,BaseSet):
             super(BinarySearchTree.Node, self).__init__()
             self.x = x
             
-    def _new_node(self, x):
+    def _new_node(self, x=None):
         u = BinarySearchTree.Node(x)
         u.left = u.right = u.parent = self.nil
         return u

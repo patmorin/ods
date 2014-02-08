@@ -25,6 +25,7 @@ from binarysearchtree import  BinarySearchTree
 from redblacktree import RedBlackTree
 from scapegoattree import ScapegoatTree
 from treap import Treap
+from splaytree import SplayTree
 
 # Priority queues
 from binaryheap import BinaryHeap
