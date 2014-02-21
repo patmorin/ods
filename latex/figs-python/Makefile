@@ -6,7 +6,7 @@ burstpdfs=$(kak:.xml=-1.pdf)
 
 all : $(kak) $(pdfs) $(burstpdfs)
 
-epss : $(pdfs)
+epss : $(pdfs) $(burstpdfs)
 	./makeepss
 
 %.xml : ../figs/%.ipe Makefile snarf-fig.py

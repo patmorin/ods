@@ -5,7 +5,7 @@ burstpdfs=$(sources:.ipe=-1.pdf)
 
 all: $(pdfs) $(burstpdfs)
 
-epss: $(pdfs)
+epss: $(pdfs) $(burstpdfs)
 	./makeepss
 
 %-1.pdf : %.pdf
