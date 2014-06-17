@@ -24,7 +24,6 @@ protected:
 	int d;
 	int z;
 	static const int w = 32; //sizeof(int)*8;
-	void allocTable(int m);
 	void resize();
 	int hash(T x) {
 		return ((unsigned)(z * hashCode(x))) >> (w-d);
@@ -59,18 +58,6 @@ void ChainedHashTable<T>::resize() {
 	}
 	t = newTable;
 }
-
-/*
-template<>
-ChainedHashTable<int>::ChainedHashTable() : t(2)
-{
-	n = 0;
-	d = 1;
-	null = INT_MIN;
-	z = rand() | 1;     // is a random odd integer
-}
-*/
-
 
 template<class T>
 ChainedHashTable<T>::ChainedHashTable() : t(2) {

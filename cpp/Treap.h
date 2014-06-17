@@ -30,6 +30,11 @@ protected:
 	using BinaryTree<Node>::nil;
 	using BinarySearchTree<Node,T>::null;
 	using BinarySearchTree<Node,T>::n;
+	using BinarySearchTree<Node,T>::findLast;
+	using BinarySearchTree<Node,T>::rotateLeft;
+	using BinarySearchTree<Node,T>::rotateRight;
+	using BinarySearchTree<Node,T>::splice;
+
 	void bubbleUp(Node *u);
 	void trickleDown(Node *u);
 public:

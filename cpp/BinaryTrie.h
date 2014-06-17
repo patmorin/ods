@@ -30,7 +30,7 @@ public:
 		N* child[2];
 	};
 	BinaryTrieNode() {
-		left = right = parent = NULL;
+		left = right = parent = jump = NULL;
 	}
 };
 
@@ -176,10 +176,10 @@ bool BinaryTrie<Node,T>::remove(T x) {
 		if (v->child[1-c] != NULL) break;
 	}
 	// 4 - update jump pointers
-	c = (ix >>> w-i-1) & 1;
-	v.jump = u.child[1-c];
-	v = v.parent
-	i--
+	c = (ix >> (w-i-1)) & 1;
+	v->jump = u->child[1-c];
+	v = v->parent;
+	i--;
 	for (; i >= 0; i--) {
 		c = (ix >> (w-i-1)) & 1;
 		if (v->jump == u)

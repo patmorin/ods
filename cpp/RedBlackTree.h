@@ -25,9 +25,15 @@ protected:
 template<class Node, class T>
 class RedBlackTree : public BinarySearchTree<Node, T> {
 protected:
+	// I hate C++
 	using BinaryTree<Node>::r;
 	using BinaryTree<Node>::nil;
 	using BinarySearchTree<Node,T>::n;
+	using BinarySearchTree<Node,T>::findLast;
+	using BinarySearchTree<Node,T>::rotateLeft;
+	using BinarySearchTree<Node,T>::rotateRight;
+	using BinarySearchTree<Node,T>::splice;
+
 	static const int red = 0;
 	static const int black = 1;
 	void pushBlack(Node *u);
