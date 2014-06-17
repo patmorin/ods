@@ -2,7 +2,9 @@ latex/ contains the latex sources
 java/ods contains the java sources
 cpp contains the C++ sources (still under development)
 
-To make the books (ods-java.pdf and ods-cpp.pdf):
+To make the books (ods-java.pdf and ods-cpp.pdf and ods-python.pdf):
+  mkdir ~/texmf/tex/latex/ods/
+  cp ods-colors.sty ~/texmf/tex/latex/ods/
   cd latex ; make
 This will require a decent installation of pdflatex, perl, ipe, inkscape,
 gnuplot, and pdftk.
