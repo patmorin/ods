@@ -7,7 +7,8 @@ To make the books (ods-java.pdf and ods-cpp.pdf and ods-python.pdf):
   cp ods-colors.sty ~/texmf/tex/latex/ods/
   cd latex ; make
 This will require a decent installation of pdflatex, perl, ipe, inkscape,
-gnuplot, and pdftk.
+gnuplot, and pdftk.  If you have problems with tikz figures, consult the 
+solution here: http://goo.gl/hCvlyp
 
 To make the Java archive ods.jar:
   cd java ; make
