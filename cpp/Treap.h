@@ -72,6 +72,7 @@ bool Treap<Node, T>::add(T x) {
 		bubbleUp(u);
 		return true;
 	}
+	delete u;
 	return false;
 }
 
