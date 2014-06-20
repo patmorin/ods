@@ -137,7 +137,7 @@ bool SkiplistSSet<T>::add(T x) {
 	Node *w = newNode(x, pickHeight());
 	while (h < w->height)
 		stack[++h] = sentinel; // height increased
-	for (int i = 0; i < w->height; i++) {
+	for (int i = 0; i <= w->height; i++) {
 		w->next[i] = stack[i]->next[i];
 		stack[i]->next[i] = w;
 	}
