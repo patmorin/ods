@@ -85,7 +85,7 @@ template<class T>
 SkiplistSSet<T>::~SkiplistSSet() {
 	clear();
 	deleteNode(sentinel);
-	delete stack;
+	delete[] stack;
 }
 
 template<class T>
