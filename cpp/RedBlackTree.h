@@ -254,6 +254,8 @@ bool RedBlackTree<Node,T>::add(T x) {
 	bool added = BinarySearchTree<Node,T>::add(u);
 	if (added)
 		addFixup(u);
+	else
+		delete u;
 	return added;
 }
 
