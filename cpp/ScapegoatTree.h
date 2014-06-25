@@ -21,7 +21,7 @@ protected:
 	using BinaryTree<Node>::r;
 	using BinarySearchTree<Node,T>::n;
 	int q;
-	static int log32(int q);
+	static int log_alpha(int q);
 	int addWithDepth(Node *u);
 	void rebuild(Node *u);
 	int packIntoArray(Node *u, Node **a, int i);
@@ -40,7 +40,7 @@ class ScapegoatTree1 : public ScapegoatTree<BSTNode1<T>, T> { };
 
 
 template<class Node, class T>
-inline int ScapegoatTree<Node,T>::log32(int q) {
+inline int ScapegoatTree<Node,T>::log_alpha(int q) {
 	static double log23 = 2.4663034623764317;
 	return (int)ceil(log23*log(q));
 }
@@ -155,7 +155,7 @@ bool ScapegoatTree<Node,T>::add(T x) {
 	u->x = x;
 	u->left = u->right = u->parent = nil;
 	int d = addWithDepth(u);
-	if (d > log32(q)) {
+	if (d > log_alpha(q)) {
 		// depth exceeded, find scapegoat
 		Node *w = u->parent;
 		int a = BinaryTree<Node>::size(w);
@@ -166,9 +166,13 @@ bool ScapegoatTree<Node,T>::add(T x) {
 			b = BinaryTree<Node>::size(w->parent);
 		}
 		rebuild(w->parent);
+	} else if (d < 0) {
+		delete u;
+		return false;
 	}
-	return d >= 0;
+	return true;
 }
+
 
 template<class Node, class T> inline
 bool ScapegoatTree<Node,T>::remove(T x) {
