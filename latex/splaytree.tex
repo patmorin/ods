@@ -1,0 +1,62 @@
+\chapter{#SplayTree#: A Self-Adjusting Binary Search Tree}
+\chaplabel{splaytree}
+\index{splay tree}
+\index{binary search tree!splay tree}
+\index{tree!splay}
+
+In this chapter, we discuss an incredible data structure: the
+\emph{splay tree}.  A splay tree is a binary search tree that is
+\emph{self-adjusting}; after each search, a splay tree changes its shape,
+using rotations, in the hopes of speeding up future searches.
+
+\section{Splaying}
+
+Splay trees using the \emph{splay} operation to move a node #u# from
+its current location to the root of the splay tree.  Splays move #u#
+upwards in the tree using six basic operations (see \figref{splay}).
+\begin{enumerate}
+   \item (zig): If #u# is the left child of the root, then a single
+   right rotation of the root will make #u# the new root.
+   \item (zig-zig): If #u# is the left child of its parent, #v#, and #v#
+   is the left child of its parent, #w#, then a right rotation of #w#
+   followed by a right rotation of #v# moves #u# two levels closer to
+   the root of the tree.
+   \item (zig-zag): If #u# is the right child of its parent, #v#, and #v#
+   is the left child of its parent, #w#, then a left rotation of #v#
+   followed by a right rotation of #w# moves #u# two levels closer to
+   the root of the tree.
+\end{enumerate}
+In addition to the three preceding operations, there are the symmetric
+zag, zag-zag, and zag-zig operations, in which the roles of left and
+right are inverted.  When a node #u# is \emph{splayed}, the appropriate
+sequence of these six operations is applied until #u# becomes the root.
+That is, #u# moves up the tree two levels at a time through a sequence
+of zig-zig, zig-zag, zag-zag, and zag-zig operations until either it
+becomes the root or becomes the child of the root. In the latter case,
+an additional zig or zag operation is performed to make #u# the root.
+
+
+
+\begin{figure}
+   \centerline{\includegraphics{ }}
+   \caption{The zig, zig-zig, and zig-zag operations used by splay trees.}
+\end{figure}
+
+
+\section{Potential Functions}
+\section{The Splay Tree Access Lemma}
+\section{Applications of the Access Lemma}
+
+
+\section{Exercises}
+
+\begin{exc}
+  A \emph{move-to-root} tree is a self-adjusting data structure like a
+  splay tree. The difference is that, when the node #u# containing #x#
+  is found during a #find(x)# operation, the node #u# is moved to the
+  root of the tree by repeatedly performing a left or right rotation at
+  #u#'s parent (as appropriate) in order to move #u# higher in the tree
+  one level at a time.  Show that move-to-root trees are very inefficient
+  by giving an example of a tree of size #n# and a sequence of #find(x)#
+  operations that requires $\Omega(#n#^2)$ time.
+\end{exc}
