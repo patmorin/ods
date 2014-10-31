@@ -1,0 +1,12 @@
+#!/bin/bash -ex
+
+r=${1%.xml}
+if [[ ! -f "$r.xml" ]]; then
+   echo "Error: $r.xml does not exist or is not a file"
+   exit -1
+fi
+
+ipetoipe -pdf "$r.xml" "$r.pdf"
+
+pdftk "$r.pdf" burst output "$r-%d.pdf"
+

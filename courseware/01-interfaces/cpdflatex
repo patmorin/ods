@@ -1,0 +1,16 @@
+#!/bin/bash -ex
+
+fileroot="${1%.tex}"
+filename="$fileroot.tex"
+tempfile="$fileroot-tmp.tex"
+temppdf="$fileroot-tmp.pdf"
+filepdf="$fileroot.pdf"
+
+# (cd figs ; ~/bin/xml2p)
+
+sed -r 's/#([^#]+)#/\\lstinline$\1$/g;s/\\begin\{code\}/\\begin{lstlisting}[default=\\footnotesize\\ttfamily]/;s/\\end\{code\}/\\end{lstlisting}/' \
+	< "$filename" > "$tempfile"
+
+pdflatex "$tempfile"
+mv "$temppdf" "$filepdf"
+
