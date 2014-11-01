@@ -5,7 +5,7 @@ Interfaces/Abstract Data Types
 
 <click>
 
-An interface describes what a data structure does does without specifying
+An interface describes what a data structure does without specifying
 how it does it.
 
 <click>
@@ -28,7 +28,7 @@ doesn't answer the question ``How does it do it?''
 
 The idea of abstracting a data structure's operations away from it's
 implementation was introduced in a 1974 paper by 2008 ACM Turing Award
-Winner Barbara Liskov along with her coauthor Stephen N. Zilles. 
+Winner Barbara Liskov along with her coauthor Stephen N. Zilles.
 
 Liskov and Zilles called this an Abstract Data Type, but we'll stick
 with the name Interface.
@@ -41,10 +41,38 @@ data types studied in this course.
 
 Self-test questions:
 
-Think of an automobile. Which parts of the automobile are parts of the
+Question: Think of an automobile. Which parts of the automobile are parts of the
 driver's interface?  Which parts are not?  
 
+Answer: The steering wheel, shift lever, gas pedal, and brake pedal are
+all parts of the interface. The gas pedal makes the car accelerate,
+the brake pedal slows it down. The steering wheel controls the car's
+direction.  The shift lever determines the car is parked, driving forward,
+or driving in reverse.
+
+Notice that this doesn't describe, at all how the car achieves
+acceleration and braking.
+
 Can you think of more than one implementation of the car interface?
+
+Answer: There are lots of different implementation options for cars.
+
+Most modern cars achieve acceleration through an an internal combustion
+engine, of which there are many different types and sizes.  Some cars
+are driven by electric motors.  Some are hybrids.
+
+Some cars have disk brakes and some have drum brakes.
+
+Most modern cars have some form of power steering.  Some of these systems
+are hydraulic, some are electro-hydraulic, and some are electric.
+
+All of these are implementations of the cars engine, braking, and
+steering system.  They don't change what the gas pedal, the brake pedal,
+or the steering wheel do, they just determine how they do it.
+
+
+
+
 
 %=======================================================================
 % The List Interface
@@ -87,7 +115,33 @@ We can remove a value from the list
 
 <click>
 
+The size operation just returns the number of items in the list
 
+<click>
+<click>
+
+The get(i) operation returns the value stored at list index i.
+
+<click>
+<click>
+
+The set(i,x) operation sets the value at index i to x.
+
+<click>
+<click>
+
+The add(i,x) operation inserts a new value into the list at position i.
+
+<click>
+
+This displaces the elements at positions, i, i+1, and so on so that
+their indices increase by one.
+
+<click>
+
+The newly added item the appears at index i
+
+<click>
 
 
 
