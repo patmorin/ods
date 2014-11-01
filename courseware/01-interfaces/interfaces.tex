@@ -2,6 +2,7 @@
 \beamertemplatenavigationsymbolsempty
 \usepackage[normalem]{ulem}
 \usepackage{comp2402}
+\usepackage{xmpmulti}
 \title{Interfaces/Abstract Data Types}
 \author{COMP2402}
 \date{}
@@ -42,22 +43,22 @@
 
 
 \begin{frame}
-
+  \transdissolve[duration=0.05]
   \frametitle{The #List# Interface}
  
   \begin{itemize}
     \item<+-> Represents a \emph{sequence} of $n$ items\newline
-    \item<+-> Elements indexed by position, $0,\ldots,n-1$.
-    \item<+-> Operations: \only<+->{#size()#}%
-                        \only<+->{, #get(i)#}%
-                        \only<+->{, #set(i,x)#}%
-                        \only<+->{, #add(i,x)#}%
-                        \only<+->{, #remove(x)#}
+    %\item<+-> Elements indexed by position, $0,\ldots,n-1$.
+    \item<3-> Operations: \only<4->{#size()#}%
+                        \only<5->{, #get(i)#}%
+                        \only<6->{, #set(i,x)#}%
+                        \only<7->{, #add(i,x)#}%
+                        \only<8->{, #remove(x)#}
   \end{itemize}
      \begin{center}
       \only<1>{\includegraphics{figs/list-interface-1}}%
       \only<2-8>{\includegraphics{figs/list-interface-2}}%
-      \only<9->{\multiinclude[<+>][start=2,format=pdf]{figs/list-interface}}
+      \only<9->{\multiinclude[<+>][format=pdf,start=5]{figs/list-interface}}
      \end{center}
 
 \end{frame}
