@@ -1,0 +1,97 @@
+%=======================================================================
+% Interfaces
+%======================================================================= 
+Interfaces/Abstract Data Types
+
+<click>
+
+An interface describes what a data structure does does without specifying
+how it does it.
+
+<click>
+
+The interface defines the operations that a data structure supports.
+
+<click>
+
+It also defines what those operations mean---the semantics.
+
+<click>
+
+An interface deliberately <i>does not</i> describe how the data
+structure is represented or how it is implemented.
+
+An interface answers the question: ``What does it do?'' and deliberately 
+doesn't answer the question ``How does it do it?''
+
+<click>
+
+The idea of abstracting a data structure's operations away from it's
+implementation was introduced in a 1974 paper by 2008 ACM Turing Award
+Winner Barbara Liskov along with her coauthor Stephen N. Zilles. 
+
+Liskov and Zilles called this an Abstract Data Type, but we'll stick
+with the name Interface.
+
+Of course, this is all rather vague right now.  Rather than try for a
+more precise definition, we'll jump in and describe some of the abstract
+data types studied in this course.
+
+<finish>
+
+Self-test questions:
+
+Think of an automobile. Which parts of the automobile are parts of the
+driver's interface?  Which parts are not?  
+
+Can you think of more than one implementation of the car interface?
+
+%=======================================================================
+% The List Interface
+%======================================================================= 
+
+The List Interface
+
+<click>
+
+A List represents a sequence of $n$ elements
+
+<click>
+
+The elements are indexed by the position in the list start at zero and
+going up to $n-1$.
+
+<click>
+
+The List interface supports five operations:
+
+<click>
+
+We can ask for the size of the list
+
+<click>
+
+We can get the value of the i'th element in a list
+
+<click>
+
+We can set the value of the i'th element in a list
+
+<click>
+
+We can add a new value at a specific position in the list
+
+<click>
+
+We can remove a value from the list
+
+<click>
+
+
+
+
+
+
+
+
+
