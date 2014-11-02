@@ -3,6 +3,7 @@
 \usepackage[normalem]{ulem}
 \usepackage{comp2402}
 \usepackage{xmpmulti}
+\renewcommand{\emph}[1]{\itshape\color{blue}#1}
 \title{Interfaces/Abstract Data Types}
 \author{COMP2402}
 \date{}
@@ -43,11 +44,11 @@
 
 
 \begin{frame}
-  \transdissolve[duration=0.05]
-  \frametitle{The #List# Interface}
+  %\transdissolve[duration=0.05]
+  \frametitle{The List Interface}
  
   \begin{itemize}
-    \item<+-> Represents a \emph{sequence} of $n$ items\newline
+    \item<+-> #List#: a sequence of $n$ items\newline
     %\item<+-> Elements indexed by position, $0,\ldots,n-1$.
     \item<3-> Operations: \only<4->{#size()#}%
                         \only<5->{, #get(i)#}%
@@ -56,12 +57,31 @@
                         \only<8->{, #remove(x)#}
   \end{itemize}
      \begin{center}
-      \only<1>{\includegraphics{figs/list-interface-1}}%
-      \only<2-8>{\includegraphics{figs/list-interface-2}}%
-      \only<9->{\multiinclude[<+>][format=pdf,start=5]{figs/list-interface}}
+      \only<1>{\includegraphics{figs/list-1}}%
+      \only<2-8>{\includegraphics{figs/list-2}}%
+      \only<9->{\multiinclude[<+>][format=pdf,start=5]{figs/list}}
      \end{center}
 
 \end{frame}
+
+\begin{frame}
+  \frametitle{The USet Interface}
+ 
+  \begin{itemize}
+    \item<+-> #USet#: an \emph{unordered} collection of \emph{distinct} items\newline
+    \item<3-> Operations: \only<4->{#size()#}%
+                        \only<5->{, #add(x)#}%
+                        \only<6->{, #remove(x)#}%
+                        \only<7->{, #find(x)#}%
+  \end{itemize}
+     \begin{center}
+      \only<1>{\includegraphics{figs/uset-1}}%
+      \only<2-8>{\includegraphics{figs/uset-2}}%
+      \only<9->{\multiinclude[<+>][format=pdf,start=5]{figs/list}}
+     \end{center}
+
+\end{frame}
+
 
 
 

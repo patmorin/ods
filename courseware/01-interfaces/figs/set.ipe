@@ -1,15 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141030150854" modified="D:20141031145048"/>
-<preamble>\usepackage{amssymb}
-\usepackage{xcolor}
-\definecolor{cadetblue4}{HTML}{53868B}
-\definecolor{darkorange4}{rgb}{0.545,0.271,0}
-\definecolor{darkorchid4}{rgb}{0.408,0.133,0.545}
-\definecolor{deeppink4}{rgb}{0.545,0.039,0.314}
+<info created="D:20141101220358" modified="D:20141101220358"/>
+<preamble>\usepackage{amssymb,xcolor}
+
+\definecolor{firebrick4}{rgb}{0.545,0.102,0.102}
 \renewcommand{\square}{\blacksquare}
-%\newcommand{\square}{\rule{2ex}{2ex}}</preamble>
+</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -210,13 +207,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -898,442 +895,125 @@ h
 </ipestyle>
 <page>
 <layer name="base"/>
-<layer name="indices"/>
-<layer name="size1"/>
-<layer name="size2"/>
-<layer name="size3"/>
-<layer name="get1"/>
-<layer name="get2"/>
-<layer name="get3"/>
-<layer name="set1"/>
-<layer name="set2"/>
-<layer name="set3"/>
-<layer name="add1"/>
-<layer name="add2"/>
-<layer name="add3"/>
-<layer name="add4"/>
-<layer name="add5"/>
-<layer name="add5.1"/>
-<layer name="add6"/>
-<layer name="add7"/>
-<layer name="add7.1"/>
-<layer name="add8"/>
+<layer name="getsadded"/>
+<layer name="getsremoved"/>
+<layer name="add1.1"/>
+<layer name="add1.2"/>
+<layer name="add1.3"/>
+<layer name="add2.1"/>
+<layer name="add2.2"/>
+<layer name="add2.3"/>
 <layer name="remove1"/>
 <layer name="remove2"/>
 <layer name="remove3"/>
-<layer name="remove3.1"/>
-<layer name="remove4"/>
-<view layers="base" active="base"/>
-<view layers="base indices" active="indices"/>
-<view layers="base indices size1" active="size1"/>
-<view layers="base indices size1 size2" active="size2"/>
-<view layers="base indices size2 size3" active="size1"/>
-<view layers="base indices get1" active="get1"/>
-<view layers="base indices get1 get2" active="get2"/>
-<view layers="base indices get2 get3" active="add5.1"/>
-<view layers="base indices set1" active="set1"/>
-<view layers="base indices set1 set2" active="set2"/>
-<view layers="base indices set1 set3" active="set3"/>
-<view layers="base indices set3 add1" active="add1"/>
-<view layers="base indices set3 add1 add2" active="add2"/>
-<view layers="base indices set3 add1 add3" active="add3"/>
-<view layers="base indices set3 add1 add4 add5.1" active="indices"/>
-<view layers="base indices set3 add1 add4 add5" active="add5"/>
-<view layers="base indices set3 add4 add5 add6" active="add6"/>
-<view layers="base indices set3 add4 add5 add6 add7 add7.1" active="add7.1"/>
-<view layers="base indices set3 add4 add5 add6 add7 add8" active="add8"/>
-<view layers="base indices add4 add5 add7 add8 remove1" active="remove1"/>
-<view layers="base indices add4 add5 add7 add8 remove1 remove2" active="remove2"/>
-<view layers="base indices add4 add5 add7 add8 remove3 remove3.1" active="remove3.1"/>
-<view layers="base indices add4 add5 remove3 remove4" active="add8"/>
-<path layer="base" stroke="black" fill="blue4">
-128 720 m
-128 704 l
-144 704 l
-144 720 l
+<layer name="find1.1"/>
+<layer name="find1.2"/>
+<layer name="find1.3"/>
+<layer name="find2.1"/>
+<layer name="find2.2"/>
+<view layers="base getsremoved" active="base"/>
+<view layers="base getsremoved add1.1" active="add1.1"/>
+<view layers="base getsremoved add1.1 add1.2" active="add1.2"/>
+<view layers="base getsadded getsremoved add1.3" active="add1.3"/>
+<view layers="base getsadded getsremoved add2.1" active="add1.2"/>
+<view layers="base getsadded getsremoved add2.1 add2.2" active="add2.2"/>
+<view layers="base getsadded getsremoved add2.3" active="remove1"/>
+<view layers="base getsadded getsremoved remove1" active="remove1"/>
+<view layers="base getsadded remove1 remove2" active="getsremoved"/>
+<view layers="base getsadded remove1 remove3" active="remove3"/>
+<view layers="base getsadded find1.1" active="getsadded"/>
+<view layers="base getsadded find1.1 find1.2" active="find1.2"/>
+<view layers="base getsadded find1.3" active="getsadded"/>
+<view layers="base getsadded find2.1" active="find2.1"/>
+<view layers="base getsadded find2.2" active="find2.2"/>
+<path layer="base" matrix="1 0 0 1 10.3184 4.31931" stroke="black" fill="cadetblue4">
+192 688 m
+192 672 l
+208 672 l
+208 688 l
 h
 </path>
-<path stroke="black" fill="brown4">
-160 720 m
-160 704 l
-176 704 l
-176 720 l
+<path matrix="1 0 0 1 -50.6319 62.1501" stroke="black" fill="azure4">
+224 656 m
+224 640 l
+240 640 l
+240 656 l
 h
 </path>
-<path stroke="black" fill="burlywood4">
-192 720 m
-192 704 l
-208 704 l
-208 720 l
-h
-</path>
-<path stroke="black" fill="cadetblue4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path stroke="black" fill="chartreuse4">
-256 720 m
-256 704 l
+<path matrix="1 0 0 1 -4.07935 24.956" stroke="black" fill="deepskyblue4">
+272 688 m
 272 704 l
-272 720 l
-h
-</path>
-<path stroke="black" fill="chocolate4">
-288 720 m
 288 704 l
-304 704 l
-304 720 l
+288 688 l
 h
 </path>
-<path stroke="black" fill="cornsilk4">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<text layer="indices" matrix="1 0 0 1 -8 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$0$</text>
-<text matrix="1 0 0 1 24 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$1$</text>
-<text matrix="1 0 0 1 56 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$2$</text>
-<text matrix="1 0 0 1 88 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$3$</text>
-<text matrix="1 0 0 1 120 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$4$</text>
-<text matrix="1 0 0 1 152 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$5$</text>
-<text matrix="1 0 0 1 184 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$6$</text>
-<text layer="get1" matrix="1 0 0 1 -48.0005 0" transformations="translations" pos="176 752" stroke="black" type="label" width="31.382" height="6.922" depth="2.21" valign="baseline">\texttt{get(3)}</text>
-<text layer="size1" matrix="1 0 0 1 -48.0005 0" transformations="translations" pos="176 752" stroke="black" type="label" width="28.67" height="7.473" depth="2.49" valign="baseline">$\mathtt{size()}$</text>
-<path layer="set1" stroke="black" fill="white">
-222.679 751.438 m
-222.679 751.438 l
-222.679 751.438 l
-222.679 751.438 l
-h
-</path>
-<path layer="set2" stroke="gold" fill="chocolate4" pen="ultrafat">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path layer="set3" stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<text layer="set2" matrix="1 0 0 1 152 -27.9228" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$5$</text>
-<path layer="get2" stroke="orange" fill="cadetblue4" pen="ultrafat">
+<path layer="getsremoved" stroke="black" fill="chocolate4">
 224 720 m
 224 704 l
 240 704 l
 240 720 l
 h
 </path>
-<text matrix="1 0 0 1 88 -27.9228" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$3$</text>
-<text layer="get3" matrix="1 0 0 1 -48.001 0" transformations="translations" pos="176 752" stroke="black" type="label" width="51.861" height="6.922" depth="2.21" valign="baseline">\texttt{get(3)}$\Rightarrow{\color{cadetblue4}\square}$</text>
-<text layer="set1" matrix="1 0 0 1 -48.001 0" transformations="translations" pos="176 752" stroke="black" type="label" width="40.847" height="7.473" depth="2.49" valign="baseline">$\mathtt{set(5,\color{darkorchid4}\square})$</text>
-<path layer="size2" matrix="1 0 0 0.4 0 436.8" stroke="black" pen="heavier">
-128 720 m
-128 736 l
-336 736 l
-336 720 l
-336 720 l
-</path>
-<text layer="size3" matrix="1 0 0 1 -48.001 0" transformations="translations" pos="176 752" stroke="black" type="label" width="49.149" height="7.473" depth="2.49" valign="baseline">$\mathtt{size()}\Rightarrow 7$</text>
-<text layer="add1" matrix="1 0 0 1 -48 0" transformations="translations" pos="176 752" stroke="black" type="label" width="40.847" height="7.473" depth="2.49" valign="baseline">$\mathtt{add(3,\color{deeppink4}\square})$</text>
-<path layer="add2" stroke="gold" fill="cadetblue4" pen="ultrafat">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
+<path layer="base" matrix="1 0 0 1 -6.71893 18.4771" stroke="black" fill="goldenrod4">
+256 672 m
+256 656 l
+272 656 l
+272 672 l
 h
 </path>
-<path stroke="gold" fill="chartreuse4" pen="ultrafat">
-256 720 m
-256 704 l
+<path stroke="black">
+144 736
+160 752
+304 752
+320 736
+320 656
+304 640
+160 640
+144 656 u
+</path>
+<text layer="add1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="31.189" height="7.473" depth="2.49" valign="baseline">$\mathtt{{add(\color{firebrick4}\square})}$</text>
+<path layer="add1.2" matrix="1 0 0 1 -86.7189 2.4771" stroke="gold" fill="firebrick4" pen="ultrafat">
+256 672 m
+256 656 l
+272 656 l
+272 672 l
+h
+</path>
+<path layer="getsadded" matrix="1 0 0 1 -86.7189 2.4771" stroke="black" fill="firebrick4">
+256 672 m
+256 656 l
+272 656 l
+272 672 l
+h
+</path>
+<text layer="add2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="31.189" height="7.473" depth="2.49" valign="baseline">$\mathtt{{add(\color{dodgerblue4}\square})}$</text>
+<text layer="add1.3" transformations="translations" pos="160 768" stroke="black" type="label" width="67.607" height="7.473" depth="2.49" valign="baseline">$\mathtt{{add(\color{firebrick4}\square})\Rightarrow \color{blue} true}$</text>
+<path layer="add2.2" matrix="1 0 0 1 -4.07935 24.956" stroke="gold" fill="deepskyblue4" pen="ultrafat">
+272 688 m
 272 704 l
-272 720 l
-h
-</path>
-<path stroke="gold" fill="chocolate4" pen="ultrafat">
-288 720 m
 288 704 l
-304 704 l
-304 720 l
+288 688 l
 h
 </path>
-<path stroke="gold" fill="cornsilk4" pen="ultrafat">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<path stroke="gold" fill="darkorchid4" pen="ultrafat">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<text matrix="1 0 0 1 88 -27.9228" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$3$</text>
-<path layer="add3" matrix="1 0 0 1 32 0" stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="gold" fill="cadetblue4" pen="ultrafat">
+<text layer="add2.3" transformations="translations" pos="160 768" stroke="black" type="label" width="72.838" height="7.473" depth="2.49" valign="baseline">$\mathtt{{add(\color{dodgerblue4}\square})\Rightarrow \color{blue} false}$</text>
+<text layer="remove1" transformations="translations" pos="160 768" stroke="black" type="label" width="46.88" height="7.473" depth="2.49" valign="baseline">$\mathtt{{remove(\color{chocolate4}\square})}$</text>
+<path layer="remove2" stroke="gold" fill="chocolate4" pen="ultrafat">
 224 720 m
 224 704 l
 240 704 l
 240 720 l
 h
 </path>
-<path matrix="1 0 0 1 32 0" stroke="gold" fill="chartreuse4" pen="ultrafat">
-256 720 m
-256 704 l
-272 704 l
-272 720 l
+<text layer="find1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="36.419" height="7.473" depth="2.49" valign="baseline">$\mathtt{{find(\color{cadetblue4}\square})}$</text>
+<path layer="find1.2" matrix="1 0 0 1 10.3184 4.31931" stroke="gold" fill="cadetblue4" pen="ultrafat">
+192 688 m
+192 672 l
+208 672 l
+208 688 l
 h
 </path>
-<path matrix="1 0 0 1 32 0" stroke="gold" fill="chocolate4" pen="ultrafat">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="gold" fill="cornsilk4" pen="ultrafat">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="gold" fill="darkorchid4" pen="ultrafat">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<text matrix="1 0 0 1 216 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$7$</text>
-<path stroke="white" fill="white" pen="ultrafat">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path layer="add4" stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="cadetblue4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="chartreuse4">
-256 720 m
-256 704 l
-272 704 l
-272 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="chocolate4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="cornsilk4">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<text matrix="1 0 0 1 216 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$7$</text>
-<path layer="add5.1" stroke="gold" fill="white" pen="ultrafat">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path layer="add5" stroke="black" fill="deeppink4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<text layer="remove1" matrix="1 0 0 1 -48.001 0" transformations="translations" pos="176 752" stroke="black" type="label" width="44.361" height="7.473" depth="2.49" valign="baseline">$\mathtt{remove(1)}$</text>
-<path layer="remove2" stroke="gold" fill="brown4" pen="ultrafat">
-160 720 m
-160 704 l
-176 704 l
-176 720 l
-h
-</path>
-<text matrix="1 0 0 1 24 -27.9224" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$1$</text>
-<text layer="remove3" matrix="1 0 0 1 -48 0" transformations="translations" pos="176 752" stroke="black" type="label" width="67.607" height="7.473" depth="2.49" valign="baseline">$\mathtt{remove(1)}\Rightarrow{\color{brown4}\square}$</text>
-<path layer="remove3.1" stroke="white" fill="white" pen="ultrafat">
-160 720 m
-160 704 l
-176 704 l
-176 720 l
-h
-</path>
-<path layer="remove4" matrix="1 0 0 1 -32 0" stroke="black" fill="burlywood4">
-192 720 m
-192 704 l
-208 704 l
-208 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="cadetblue4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="chartreuse4">
-256 720 m
-256 704 l
-272 704 l
-272 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="chocolate4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="cornsilk4">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path stroke="black" fill="cadetblue4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path stroke="black" fill="chartreuse4">
-256 720 m
-256 704 l
-272 704 l
-272 720 l
-h
-</path>
-<path stroke="black" fill="chocolate4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path stroke="black" fill="cornsilk4">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<path stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="deeppink4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path stroke="white" fill="white" pen="ultrafat">
-352 720 m
-352 688 l
-368 688 l
-368 720 l
-h
-</path>
-<text layer="add6" matrix="1 0 0 1 -48 0" transformations="translations" pos="176 752" stroke="black" type="label" width="40.847" height="7.473" depth="2.49" valign="baseline">$\mathtt{add(8,\color{darkslategray4}\square})$</text>
-<path layer="add7.1" matrix="1 0 0 1 64 0" stroke="gold" fill="white" pen="ultrafat">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<text layer="add7" matrix="1 0 0 1 248 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$8$</text>
-<text layer="add7.1" matrix="1 0 0 1 248 -27.9224" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$8$</text>
-<path layer="add8" stroke="black" fill="darkslategray4">
-384 720 m
-384 704 l
-400 704 l
-400 720 l
-h
-</path>
-<text layer="remove4" matrix="1 0 0 1 216 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$7$</text>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="darkslategray4">
-384 720 m
-384 704 l
-400 704 l
-400 720 l
-h
-</path>
+<text layer="find1.3" transformations="translations" pos="160 768" stroke="black" type="label" width="59.665" height="7.473" depth="2.49" valign="baseline">$\mathtt{{find(\color{cadetblue4}\square})}\Rightarrow{\color{cadetblue4}\square} $</text>
+<text layer="find2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="36.419" height="7.473" depth="2.49" valign="baseline">$\mathtt{{find(\color{salmon}\square})}$</text>
+<text layer="find2.2" transformations="translations" pos="160 768" stroke="black" type="label" width="72.838" height="7.473" depth="2.49" valign="baseline">$\mathtt{{find(\color{salmon}\square})}\Rightarrow \color{blue}\mathtt{null}$</text>
 </page>
 </ipe>
