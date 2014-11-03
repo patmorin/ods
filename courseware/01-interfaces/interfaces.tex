@@ -5,6 +5,26 @@
 \usepackage{xmpmulti}
 \renewcommand{\emph}[1]{{\itshape\color{blue}#1}}
 \newcommand{\emphen}[1]{{\itshape #1}}
+
+\def\title#1{\gdef\@title{#1}\gdef\THETITLE{#1}}
+
+\makeatletter
+\def\@listii{\leftmargin\leftmarginii
+              \topsep    2ex
+              \parsep    0\p@   \@plus\p@
+              \itemsep   2ex}
+\makeatother
+
+\makeatletter
+\def\@listi{\leftmargin\leftmarginii
+              \topsep    2ex
+              \parsep    0\p@   \@plus\p@
+              \itemsep   2ex}
+\makeatother
+
+\newcommand{\blank}{\begin{frame}\frametitle{End of Lesson}\end{frame}}
+\newcommand{\titler}[1]{\blank\title{#1}\begin{frame}\titlepage\end{frame}}
+
 \title{Interfaces/Abstract Data Types}
 \author{COMP2402}
 \date{}
@@ -31,75 +51,97 @@
 \begin{frame}
   \frametitle{Abstract Data Types/Interfaces}
 
-   B. Liskov and S. N. Zilles, Programming with Abstract Data Types, \emph{SIGPlan Notices}, 9(4), pp. 50-59, 1974.\\
-  \begin{center}
-   \includegraphics[height=.6\textheight]{images/liskov}\\
-   B.~Liskov at the Turing Centenary Celebration (Wikimedia commons)
-  \end{center}
+  \begin{tabular}{p{.3\textwidth}p{.6\textwidth}}
+  \raisebox{-.5\height}{\includegraphics[width=.28\textwidth]{images/liskov}} \newline\newline
+  \raggedright   Barbara Liskov at the ACM Turing Centenary Celebration
+  \mbox{(\copyright~2012~Dennis~Hamilton)}
+ &
+
+   \raggedright B. Liskov and S. N. Zilles, Programming with Abstract Data Types, \emphen{SIGPlan Notices}, 9(4), pp. 50-59, 1974.\\
+  \end{tabular}
 \end{frame}
 
-\begin{frame}
-\title{The List Interface}
-\maketitle
-\end{frame}
+\titler{The List Interface}
 
 
 \begin{frame}
-  %\transdissolve[duration=0.05]
   \frametitle{List}
   \framesubtitle{A sequence of elements}
  
   \begin{itemize}
-    \item<1-> Operations: \only<3->{#size()#}%
-                        \only<4->{, #get(i)#}%
-                        \only<5->{, #set(i,x)#}%
-                        \only<6->{, #add(i,x)#}%
-                        \only<7->{, #remove(x)#}
+    \item<+(2)-> Operations: \only<+(2)->{#get(i)#}%
+                        \only<+(2)->{, #set(i,x)#}%
+                        \only<+(2)->{, #add(i,x)#}%
+                        \only<+(2)->{, #remove(x)#}
   \end{itemize}
      \begin{center}
       \only<1>{\includegraphics{figs/list-1}}%
       \only<2-7>{\includegraphics{figs/list-2}}%
-      \only<8->{\multiinclude[<+>][format=pdf,start=1]{figs/list}}
+      \only<8->{\multiinclude[<+>][format=pdf,start=4]{figs/list}}
      \end{center}
-
 \end{frame}
 
-\begin{frame}
-\title{The USet (Unordered Set) Interface}
-\maketitle
-\end{frame}
+
+\titler{The USet (Unordered Set) Interface}
 
 
 \begin{frame}
   \frametitle{USet}
   \framesubtitle{An \emphen{unordered} collection of \emphen{distinct} items}
   \begin{itemize}
-    \item<+-> Operations: \only<4->{#size()#}%
-                        \only<5->{, #add(x)#}%
-                        \only<6->{, #remove(x)#}%
-                        \only<7->{, #find(x)#}%
+    \item<+-> Operations: \only<+->{#add(x)#}%
+                        \only<+->{, #remove(x)#}%
+                        \only<+->{, #find(x)#}%
   \end{itemize}
      \begin{center}
-      \only<1-6>{\includegraphics{figs/uset-1}}%
-      \only<7->{\multiinclude[<+>][format=pdf,start=1]{figs/uset}}
+      \only<1-4>{\includegraphics{figs/uset-1}}%
+      \only<5->{\multiinclude[<+>][format=pdf,start=1]{figs/uset}}
      \end{center}
 
 \end{frame}
 
 \begin{frame}
   \frametitle{Map}
-  \framesubtitle{Another Kind of USet}
+  \framesubtitle{A #USet# that stores key/value pairs}
  
-  \begin{itemize}
-    \item<+-> #Map#: a #USet# that stores key/value pairs
-  \end{itemize}
      \begin{center}
       \multiinclude[<+>][format=pdf,start=1]{figs/map}
      \end{center}
-
 \end{frame}
 
+\titler{The SSet (Sorted Set) Interface}
 
+\begin{frame}
+  \frametitle{SSet}
+  \framesubtitle{A Sorted Set}
+ 
+  \begin{itemize}
+    \item<+->Stores \emph{comparable} items
+    \begin{itemize}
+       \item<+-> Numbers: $0 < 1 < 2 < 3 < \cdots < 4294967296$
+       \item<+-> Letters: $a < b < c < d < \cdots < z$
+       \item<+-> Strings: $\text{``apple''} < \text{``bread''} < \text{``brie''} 
+                           < \text{``cheese''} < \cdots < \text{``zyxt''}$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SSet}
+  \framesubtitle{A Sorted Set}
+
+  \begin{itemize}
+    \item<+-> Operations: \only<+->{#add(x)#}%
+                        \only<+->{, #remove(x)#}%
+                        \only<+->{, #find(x)#}%
+  \end{itemize}
+  \begin{center}
+      \only<1-4>{\includegraphics{figs/sset-1}}%
+      \only<5->{\multiinclude[<+>][format=pdf,start=1]{figs/sset}}
+  \end{center}
+\end{frame}
+
+\titler{}
 
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141030150854" modified="D:20141031145048"/>
+<info created="D:20141030150854" modified="D:20141103150859"/>
 <preamble>\usepackage{amssymb}
 \usepackage{xcolor}
 \definecolor{cadetblue4}{HTML}{53868B}
@@ -923,6 +923,7 @@ h
 <layer name="remove3"/>
 <layer name="remove3.1"/>
 <layer name="remove4"/>
+<layer name="alpha"/>
 <view layers="base" active="base"/>
 <view layers="base indices" active="indices"/>
 <view layers="base indices size1" active="size1"/>
@@ -946,6 +947,7 @@ h
 <view layers="base indices add4 add5 add7 add8 remove1 remove2" active="remove2"/>
 <view layers="base indices add4 add5 add7 add8 remove3 remove3.1" active="remove3.1"/>
 <view layers="base indices add4 add5 remove3 remove4" active="add8"/>
+<view layers="base indices add4 add5 remove4" active="alpha"/>
 <path layer="base" stroke="black" fill="blue4">
 128 720 m
 128 704 l
@@ -1026,7 +1028,7 @@ h
 h
 </path>
 <text layer="set2" matrix="1 0 0 1 152 -27.9228" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$5$</text>
-<path layer="get2" stroke="orange" fill="cadetblue4" pen="ultrafat">
+<path layer="get2" stroke="gold" fill="cadetblue4" pen="ultrafat">
 224 720 m
 224 704 l
 240 704 l
