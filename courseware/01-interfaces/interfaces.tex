@@ -3,7 +3,8 @@
 \usepackage[normalem]{ulem}
 \usepackage{comp2402}
 \usepackage{xmpmulti}
-\renewcommand{\emph}[1]{\itshape\color{blue}#1}
+\renewcommand{\emph}[1]{{\itshape\color{blue}#1}}
+\newcommand{\emphen}[1]{{\itshape #1}}
 \title{Interfaces/Abstract Data Types}
 \author{COMP2402}
 \date{}
@@ -45,39 +46,55 @@
 
 \begin{frame}
   %\transdissolve[duration=0.05]
-  \frametitle{The List Interface}
+  \frametitle{List}
+  \framesubtitle{A sequence of elements}
  
   \begin{itemize}
-    \item<+-> #List#: a sequence of $n$ items\newline
-    %\item<+-> Elements indexed by position, $0,\ldots,n-1$.
-    \item<3-> Operations: \only<4->{#size()#}%
-                        \only<5->{, #get(i)#}%
-                        \only<6->{, #set(i,x)#}%
-                        \only<7->{, #add(i,x)#}%
-                        \only<8->{, #remove(x)#}
+    \item<1-> Operations: \only<3->{#size()#}%
+                        \only<4->{, #get(i)#}%
+                        \only<5->{, #set(i,x)#}%
+                        \only<6->{, #add(i,x)#}%
+                        \only<7->{, #remove(x)#}
   \end{itemize}
      \begin{center}
       \only<1>{\includegraphics{figs/list-1}}%
-      \only<2-8>{\includegraphics{figs/list-2}}%
-      \only<9->{\multiinclude[<+>][format=pdf,start=5]{figs/list}}
+      \only<2-7>{\includegraphics{figs/list-2}}%
+      \only<8->{\multiinclude[<+>][format=pdf,start=1]{figs/list}}
      \end{center}
 
 \end{frame}
 
 \begin{frame}
-  \frametitle{The USet Interface}
- 
+\title{The USet (Unordered Set) Interface}
+\maketitle
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{USet}
+  \framesubtitle{An \emphen{unordered} collection of \emphen{distinct} items}
   \begin{itemize}
-    \item<+-> #USet#: an \emph{unordered} collection of \emph{distinct} items\newline
-    \item<3-> Operations: \only<4->{#size()#}%
+    \item<+-> Operations: \only<4->{#size()#}%
                         \only<5->{, #add(x)#}%
                         \only<6->{, #remove(x)#}%
                         \only<7->{, #find(x)#}%
   \end{itemize}
      \begin{center}
-      \only<1>{\includegraphics{figs/uset-1}}%
-      \only<2-8>{\includegraphics{figs/uset-2}}%
-      \only<9->{\multiinclude[<+>][format=pdf,start=5]{figs/list}}
+      \only<1-6>{\includegraphics{figs/uset-1}}%
+      \only<7->{\multiinclude[<+>][format=pdf,start=1]{figs/uset}}
+     \end{center}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Map}
+  \framesubtitle{Another Kind of USet}
+ 
+  \begin{itemize}
+    \item<+-> #Map#: a #USet# that stores key/value pairs
+  \end{itemize}
+     \begin{center}
+      \multiinclude[<+>][format=pdf,start=1]{figs/map}
      \end{center}
 
 \end{frame}

@@ -3,6 +3,7 @@
 %======================================================================= 
 Interfaces/Abstract Data Types
 
+<5 second pause>
 <click>
 
 An interface describes what a data structure does without specifying
@@ -24,6 +25,7 @@ structure is represented or how it is implemented.
 An interface answers the question: ``What does it do?'' and deliberately 
 doesn't answer the question ``How does it do it?''
 
+<long pause>
 <click>
 
 The idea of abstracting a data structure's operations away from it's
@@ -33,9 +35,9 @@ Winner Barbara Liskov along with her coauthor Stephen N. Zilles.
 Liskov and Zilles called this an Abstract Data Type, but we'll stick
 with the name Interface.
 
-Of course, this is all rather vague right now.  Rather than try for a
-more precise definition, we'll jump in and describe some of the abstract
-data types studied in this course.
+Of course, this is all rather vague right now.  But instead of trying
+for a more rigorous definition, we'll jump in and describe some of the
+interfaces studied in this course.
 
 <finish>
 
@@ -80,14 +82,16 @@ or the steering wheel do, they just determine how they do it.
 
 The List Interface
 
+<5 second pause>
 <click>
 
-A List represents a sequence of $n$ elements
+A List represents a sequence of elements
 
 <click>
 
-The elements are indexed by the position in the list start at zero and
-going up to $n-1$.
+The elements are indexed by their position in the list, starting at 
+zero and counting up to n-1, where n is the number of elements in the
+list.
 
 <click>
 
@@ -107,11 +111,15 @@ We can set the value of the i'th element in a list
 
 <click>
 
-We can add a new value at a specific position in the list
+We can add a new value at a specific position, i, in the list
 
 <click>
 
-We can remove a value from the list
+We can remove the i'th value from the list
+
+
+<medium pause>
+Let's take a look at each of these operations in turn.
 
 <click>
 
@@ -125,26 +133,123 @@ The get(i) operation returns the value stored at list index i.
 <click>
 <click>
 
-The set(i,x) operation sets the value at index i to x.
+The set(i,x) operation sets the value at index i equal to x.
 
 <click>
+
+<medium pause>
 <click>
 
 The add(i,x) operation inserts a new value into the list at position i.
 
 <click>
 
-This displaces the elements at positions, i, i+1, and so on so that
+This displaces the elements at positions, i, i+1, i+2, and so on so that
 their indices increase by one.
 
 <click>
 
-The newly added item the appears at index i
+The newly added item, x, then appears at index i
+
+<medium pause>
+<click>
+
+The remove(i) operation removes the element at index i from the list
 
 <click>
 
+This would leave a gap at index i so, to fill this gap, the elements at
+positions i+1, i+2, and so each have their indices decreased.
+
+%=======================================================================
+% The List Interface
+%======================================================================= 
+
+The USet, for unordered set, interface represents an unordered collection
+of distinct elements.  There is no particular order associated with the
+elements in the set, and any element appears at most once in the set;
+no two duplicate elements are allowed.
+
+<click>
+
+The USet interface is quite simple and only supports three operations: 
+<click>
+adding an element to the set
+<click>
+removing an element from the set
+<click>
+finding an element in the set
+
+Let's look at these operations a bit more carefully.
+
+<click>
+
+The add(x) operation adds the element x to the set, provided that
+x is not already in the set.
+
+<click>
+<short pause>
+<click>
+
+If we try to add an element x that is already in set then the 
+add method fails.
+
+<click>
+<click>
+
+<short pause>
+<click>
+
+The remove(x) method removes the element x from the set, if it's there,
+and returns its value.
+
+<click>
+<click>
+
+The remove(x) method fails if x is not in the set.
+
+<click>
+<click>
+
+<short pause>
+
+<click>
+
+The find(x) method looks for the element x in the set and returns it if
+it finds it.
+
+<click>
+<click>
+
+If x is not in the set, then the find(x) method fails, letting us know
+that x is not in the set.
+
+<click>
+<click>
 
 
+<click>
+
+By storing USet elements that form key/value pairs, and treating two
+pairs as equal if they have the same key, a USet can be used to implement
+a Map that maps keys onto values.
+
+The add(x) operation can be used with the pair x=(k,v) to add a new
+mapping from the key k to the value v.
+
+The remove(x) operation with the pair x=(k, null) can be used to remove
+the mapping for the key k.
+
+The find(x) operation with the pair x=(k,null) can be used to retrieve
+the pair in the set whose key is k.  The second half of this pair is
+the value that k maps onto.
+
+<click>
+
+Notice that the distinctness property guaranteed by a set ensures that
+no key appears more than once in the set.  Therefore, a map implemented
+this way always maintains a function from the current set of keys onto
+these values.
 
 
 
