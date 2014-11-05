@@ -92,6 +92,7 @@ zero and counting up to n-1, where n is the number of elements in the
 list.
 <click>
 The List interface supports four operations:
+
 <click>
 We can get the value of the i'th element in a list
 <click>
@@ -103,6 +104,11 @@ We can remove the i'th value from the list
 <medium pause>
 Let's take a look at each of these operations in turn.
 <click>
+
+The size operation just returns the number of items in the list
+<click>
+<click>
+
 The get(i) operation returns the value stored at list index i.
 <click>
 <click>
@@ -117,9 +123,8 @@ their indices increase by one.
 <click>
 The newly added item, x, then appears at index i
 <click>
-A special case of the add(i,x) operation happens when i equal n, the length
-of the list.  In this case, nothing needs to be displaced, and the new item
-x is just added to the end of the list.
+A special case of the add(i,x) occurs when i equals n, in which case
+we add x to the end of the list without displacing any existing elements.
 <medium pause>
 <click>
 The remove(i) operation removes the element at index i from the list
