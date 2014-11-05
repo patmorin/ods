@@ -86,78 +86,44 @@ The List Interface
 <click>
 
 A List represents a sequence of elements
-
 <click>
-
 The elements are indexed by their position in the list, starting at 
 zero and counting up to n-1, where n is the number of elements in the
 list.
-
 <click>
-
-The List interface supports five operations:
-
+The List interface supports four operations:
 <click>
-
-We can ask for the size of the list
-
-<click>
-
 We can get the value of the i'th element in a list
-
 <click>
-
 We can set the value of the i'th element in a list
-
 <click>
-
 We can add a new value at a specific position, i, in the list
-
 <click>
-
 We can remove the i'th value from the list
-
-
 <medium pause>
 Let's take a look at each of these operations in turn.
-
 <click>
-
-The size operation just returns the number of items in the list
-
-<click>
-<click>
-
 The get(i) operation returns the value stored at list index i.
-
 <click>
 <click>
-
 The set(i,x) operation sets the value at index i equal to x.
-
 <click>
-
 <medium pause>
 <click>
-
 The add(i,x) operation inserts a new value into the list at position i.
-
 <click>
-
 This displaces the elements at positions, i, i+1, i+2, and so on so that
 their indices increase by one.
-
 <click>
-
 The newly added item, x, then appears at index i
-
+<click>
+A special case of the add(i,x) operation happens when i equal n, the length
+of the list.  In this case, nothing needs to be displaced, and the new item
+x is just added to the end of the list.
 <medium pause>
 <click>
-
 The remove(i) operation removes the element at index i from the list
-
 <click>
-
 This would leave a gap at index i so, to fill this gap, the elements at
 positions i+1, i+2, and so each have their indices decreased.
 
