@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141104150932" modified="D:20141104152040"/>
+<info created="D:20141104150932" modified="D:20141104221224"/>
 <preamble>\usepackage{amssymb}
 \usepackage{xcolor}
+
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 
 \renewcommand{\square}{\blacksquare}
 %\newcommand{\square}{\rule{2ex}{2ex}}</preamble>
@@ -207,13 +209,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
-<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
-<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -965,8 +967,8 @@ h
 h
 </path>
 <text layer="pop2" transformations="translations" pos="128 720" stroke="black" type="label" width="46.686" height="7.473" depth="2.49" valign="baseline">$\mathtt{pop}()\Rightarrow\color{thistle4}\square$</text>
-<text layer="top1" matrix="1 0 0 1 8 16" transformations="translations" pos="224 656" stroke="black" type="label" width="14.391" height="6.135" depth="1.93" halign="center" valign="baseline">top</text>
-<text layer="top2" matrix="1 0 0 1 40 16" transformations="translations" pos="224 656" stroke="black" type="label" width="14.391" height="6.135" depth="1.93" halign="center" valign="baseline">top</text>
-<text layer="top3" matrix="1 0 0 1 72 16" transformations="translations" pos="224 656" stroke="black" type="label" width="14.391" height="6.135" depth="1.93" halign="center" valign="baseline">top</text>
+<text layer="top1" matrix="1 0 0 1 8 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
+<text layer="top2" matrix="1 0 0 1 40 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
+<text layer="top3" matrix="1 0 0 1 72 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
 </page>
 </ipe>

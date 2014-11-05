@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141030150854" modified="D:20141103150859"/>
+<info created="D:20141030150854" modified="D:20141104222008"/>
 <preamble>\usepackage{amssymb}
 \usepackage{xcolor}
-\definecolor{cadetblue4}{HTML}{53868B}
-\definecolor{darkorange4}{rgb}{0.545,0.271,0}
-\definecolor{darkorchid4}{rgb}{0.408,0.133,0.545}
-\definecolor{deeppink4}{rgb}{0.545,0.039,0.314}
+
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
 \renewcommand{\square}{\blacksquare}
 %\newcommand{\square}{\rule{2ex}{2ex}}</preamble>
 <ipestyle name="basic">
@@ -923,31 +922,35 @@ h
 <layer name="remove3"/>
 <layer name="remove3.1"/>
 <layer name="remove4"/>
-<layer name="alpha"/>
 <view layers="base" active="base"/>
 <view layers="base indices" active="indices"/>
 <view layers="base indices size1" active="size1"/>
 <view layers="base indices size1 size2" active="size2"/>
 <view layers="base indices size2 size3" active="size1"/>
+<view layers="base indices" active="remove4"/>
 <view layers="base indices get1" active="get1"/>
 <view layers="base indices get1 get2" active="get2"/>
 <view layers="base indices get2 get3" active="add5.1"/>
+<view layers="base indices" active="remove3.1"/>
 <view layers="base indices set1" active="set1"/>
 <view layers="base indices set1 set2" active="set2"/>
 <view layers="base indices set1 set3" active="set3"/>
+<view layers="base indices set3" active="remove3.1"/>
 <view layers="base indices set3 add1" active="add1"/>
 <view layers="base indices set3 add1 add2" active="add2"/>
 <view layers="base indices set3 add1 add3" active="add3"/>
 <view layers="base indices set3 add1 add4 add5.1" active="indices"/>
 <view layers="base indices set3 add1 add4 add5" active="add5"/>
+<view layers="base indices set3 add4 add5" active="remove3.1"/>
 <view layers="base indices set3 add4 add5 add6" active="add6"/>
 <view layers="base indices set3 add4 add5 add6 add7 add7.1" active="add7.1"/>
 <view layers="base indices set3 add4 add5 add6 add7 add8" active="add8"/>
+<view layers="base indices set3 add4 add5 add7 add8" active="add8"/>
 <view layers="base indices add4 add5 add7 add8 remove1" active="remove1"/>
 <view layers="base indices add4 add5 add7 add8 remove1 remove2" active="remove2"/>
 <view layers="base indices add4 add5 add7 add8 remove3 remove3.1" active="remove3.1"/>
 <view layers="base indices add4 add5 remove3 remove4" active="add8"/>
-<view layers="base indices add4 add5 remove4" active="alpha"/>
+<view layers="base indices add4 add5 remove4" active="remove4"/>
 <path layer="base" stroke="black" fill="blue4">
 128 720 m
 128 704 l

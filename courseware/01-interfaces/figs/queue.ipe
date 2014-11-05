@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141104150932" modified="D:20141104154657"/>
+<info created="D:20141104150932" modified="D:20141104221129"/>
 <preamble>\usepackage{amssymb}
 \usepackage{xcolor}
+
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 
 \renewcommand{\square}{\blacksquare}
 %\newcommand{\square}{\rule{2ex}{2ex}}</preamble>
@@ -207,13 +209,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
-<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
-<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -903,21 +905,26 @@ h
 <layer name="pop2"/>
 <layer name="pop3"/>
 <layer name="pop4"/>
-<layer name="top1"/>
-<layer name="top2"/>
-<layer name="top3"/>
-<view layers="base" active="pop4"/>
-<view layers="base top1" active="top1"/>
-<view layers="base push1 top1" active="push1"/>
-<view layers="base push2 top2" active="push2"/>
-<view layers="base push2 push3" active="push3"/>
-<view layers="base push2 push4 top3" active="top3"/>
-<view layers="base push2 push4 pop1 pop3" active="pop1"/>
-<view layers="base push2 push4 pop2 top3" active="pop2"/>
-<view layers="base push2 top2" active="pop2"/>
-<view layers="base push2 pop3 top2" active="pop3"/>
-<view layers="base pop4 top1" active="pop4"/>
-<view layers="base top1" active="pop2"/>
+<layer name="tail1"/>
+<layer name="tail2"/>
+<layer name="tail3"/>
+<layer name="head1"/>
+<layer name="head2"/>
+<layer name="head3"/>
+<layer name="getsremoved1"/>
+<layer name="getsremoved2"/>
+<view layers="base getsremoved1 getsremoved2" active="pop4"/>
+<view layers="base tail1 head1 getsremoved1 getsremoved2" active="tail1"/>
+<view layers="base push1 tail1 head1 getsremoved1 getsremoved2" active="push1"/>
+<view layers="base push2 tail2 head1 getsremoved1 getsremoved2" active="push2"/>
+<view layers="base push2 push3 tail2 head1 getsremoved1 getsremoved2" active="push3"/>
+<view layers="base push2 push4 tail3 head1 getsremoved1 getsremoved2" active="tail3"/>
+<view layers="base push2 push4 pop1 pop3 tail3 head1 getsremoved1 getsremoved2" active="pop1"/>
+<view layers="base push2 push4 pop2 tail3 head2 getsremoved2" active="head2"/>
+<view layers="base push2 push4 tail3 head2 getsremoved2" active="pop2"/>
+<view layers="base push2 push4 pop3 tail3 head2 getsremoved2" active="pop3"/>
+<view layers="base push2 push4 pop4 tail3 head3" active="getsremoved2"/>
+<view layers="base push2 push4 tail3 head3" active="pop2"/>
 <path layer="base" stroke="black" fill="antiquewhite4">
 128 704 m
 128 688 l
@@ -932,14 +939,14 @@ h
 176 704 l
 h
 </path>
-<path stroke="black" fill="skyblue4">
+<path layer="getsremoved2" stroke="black" fill="skyblue4">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path stroke="black" fill="brown4">
+<path layer="getsremoved1" stroke="black" fill="brown4">
 224 704 m
 224 688 l
 240 688 l
@@ -955,7 +962,7 @@ h
 h
 </path>
 <text layer="pop3" transformations="translations" pos="128 720" stroke="black" type="label" width="39.131" height="7.473" depth="2.49" valign="baseline">$\mathtt{remove}()$</text>
-<text layer="pop4" transformations="translations" pos="128 720" stroke="black" type="label" width="46.686" height="7.473" depth="2.49" valign="baseline">$\mathtt{pop}()\Rightarrow{\color{salmon4}\square}$</text>
+<text layer="pop4" transformations="translations" pos="128 720" stroke="black" type="label" width="62.377" height="7.473" depth="2.49" valign="baseline">$\mathtt{remove}()\Rightarrow{\color{skyblue4}\square}$</text>
 <text layer="push3" transformations="translations" pos="128 720" stroke="black" type="label" width="31.189" height="7.473" depth="2.49" valign="baseline">$\mathtt{add}({\color{thistle4}\square})$</text>
 <path layer="push4" matrix="1 0 0 1 -224 0" stroke="black" fill="thistle4">
 288 704 m
@@ -965,9 +972,11 @@ h
 h
 </path>
 <text layer="pop2" transformations="translations" pos="128 720" stroke="black" type="label" width="62.377" height="7.473" depth="2.49" valign="baseline">$\mathtt{remove}()\Rightarrow\color{brown4}\square$</text>
-<text layer="top1" matrix="1 0 0 1 8 16" transformations="translations" pos="224 656" stroke="black" type="label" width="20.479" height="6.918" depth="0" halign="center" valign="baseline">head</text>
-<text layer="top2" matrix="1 0 0 1 -120 16" transformations="translations" pos="224 656" stroke="black" type="label" width="14.391" height="6.918" depth="0" halign="center" valign="baseline">tail</text>
-<text layer="top3" matrix="1 0 0 1 -152 16" transformations="translations" pos="224 656" stroke="black" type="label" width="14.391" height="6.918" depth="0" halign="center" valign="baseline">tail</text>
-<text layer="top1" matrix="1 0 0 1 -88 16" transformations="translations" pos="224 656" stroke="black" type="label" width="14.391" height="6.918" depth="0" halign="center" valign="baseline">tail</text>
+<text layer="head1" matrix="1 0 0 1 8 16" transformations="translations" pos="224 656" stroke="black" type="label" width="19.51" height="6.918" depth="0" halign="center" valign="baseline">head</text>
+<text layer="tail2" matrix="1 0 0 1 -120 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.145" height="6.918" depth="0" halign="center" valign="baseline">tail</text>
+<text layer="tail3" matrix="1 0 0 1 -152 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.145" height="6.918" depth="0" halign="center" valign="baseline">tail</text>
+<text layer="tail1" matrix="1 0 0 1 -88 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.145" height="6.918" depth="0" halign="center" valign="baseline">tail</text>
+<text layer="head2" matrix="1 0 0 1 -24 16" transformations="translations" pos="224 656" stroke="black" type="label" width="19.51" height="6.918" depth="0" halign="center" valign="baseline">head</text>
+<text layer="head3" matrix="1 0 0 1 -56 16" transformations="translations" pos="224 656" stroke="black" type="label" width="19.51" height="6.918" depth="0" halign="center" valign="baseline">head</text>
 </page>
 </ipe>
