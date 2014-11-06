@@ -1,12 +1,14 @@
 \usepackage{amssymb}
 \usepackage{xcolor}
-\usepackage{marvosym,wasysym}
+%\usepackage{marvosym}
+%,wasysym}
 
 %% Set base font of the document to be sans serif
 \renewcommand*\familydefault{\sfdefault} 
 
 
-
+% These are for making boxes that illustrate lists
 \newcommand{\listbox}[2]{\fcolorbox{black}{#1}{\makebox[1em]{\raisebox{0pt}[.8em][.2em]{\color{white}#2}}}}
-
+\newcommand{\keybox}[2]{\listbox{#1}{#2}}
+\newcommand{\valuebox}[2]{\fcolorbox{black}{#1}{\makebox[1em]{\raisebox{0pt}[.8em][.2em]{\color{black}#2}}}}
 

@@ -1,14 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141104150932" modified="D:20141104221224"/>
-<preamble>\usepackage{amssymb}
-\usepackage{xcolor}
-
-\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
-
-\renewcommand{\square}{\blacksquare}
-%\newcommand{\square}{\rule{2ex}{2ex}}</preamble>
+<info created="D:20141104150932" modified="D:20141106152839"/>
+<preamble>\usepackage{comp2402-figs}
+\usepackage{phaistos}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -908,19 +903,19 @@ h
 <layer name="top1"/>
 <layer name="top2"/>
 <layer name="top3"/>
-<view layers="base" active="pop4"/>
+<view layers="base" active="base"/>
 <view layers="base top1" active="pop4"/>
 <view layers="base push1 top1" active="push1"/>
 <view layers="base push2 top2" active="push2"/>
 <view layers="base push2 push3" active="push3"/>
 <view layers="base push2 push4 top3" active="top3"/>
-<view layers="base push2 push4 pop1 pop3" active="pop1"/>
+<view layers="base push2 push4 pop1 pop3 top3" active="pop1"/>
 <view layers="base push2 pop2 top2" active="pop2"/>
 <view layers="base push2 top2" active="pop2"/>
 <view layers="base push2 pop3 top2" active="pop3"/>
 <view layers="base pop4 top1" active="pop4"/>
 <view layers="base top1" active="pop2"/>
-<path layer="base" stroke="black" fill="antiquewhite4">
+<path layer="base" stroke="white" fill="antiquewhite4">
 128 704 m
 128 688 l
 144 688 l
@@ -948,7 +943,7 @@ h
 240 704 l
 h
 </path>
-<text layer="push1" transformations="translations" pos="128 720" stroke="black" type="label" width="36.419" height="7.473" depth="2.49" valign="baseline">$\mathtt{push}({\color{salmon4}\square})$</text>
+<text layer="push1" transformations="translations" pos="128 720" stroke="black" type="label" width="45.407" height="11.357" depth="5.38" valign="baseline">$\mathtt{push}({\listbox{salmon4}{\raisebox{-.39em}{\PHhelmet}}})$</text>
 <path layer="push2" stroke="black" fill="salmon4">
 256 704 m
 256 688 l
@@ -957,8 +952,8 @@ h
 h
 </path>
 <text layer="pop3" transformations="translations" pos="128 720" stroke="black" type="label" width="23.44" height="7.473" depth="2.49" valign="baseline">$\mathtt{pop}()$</text>
-<text layer="pop4" transformations="translations" pos="128 720" stroke="black" type="label" width="46.686" height="7.473" depth="2.49" valign="baseline">$\mathtt{pop}()\Rightarrow{\color{salmon4}\square}$</text>
-<text layer="push3" transformations="translations" pos="128 720" stroke="black" type="label" width="36.419" height="7.473" depth="2.49" valign="baseline">$\mathtt{push}({\color{thistle4}\square})$</text>
+<text layer="pop4" transformations="translations" pos="128 720" stroke="black" type="label" width="55.674" height="11.357" depth="5.38" valign="baseline">$\mathtt{pop}()\Rightarrow{\listbox{salmon4}{\raisebox{-.4em}{\PHhelmet}}}$</text>
+<text layer="push3" transformations="translations" pos="128 720" stroke="black" type="label" width="45.407" height="11.357" depth="5.38" valign="baseline">$\mathtt{push}({\listbox{thistle4}{\raisebox{-.4em}{\PHmattock}}})$</text>
 <path layer="push4" stroke="black" fill="thistle4">
 288 704 m
 288 688 l
@@ -966,9 +961,15 @@ h
 304 704 l
 h
 </path>
-<text layer="pop2" transformations="translations" pos="128 720" stroke="black" type="label" width="46.686" height="7.473" depth="2.49" valign="baseline">$\mathtt{pop}()\Rightarrow\color{thistle4}\square$</text>
+<text layer="pop2" transformations="translations" pos="128 720" stroke="black" type="label" width="55.674" height="11.357" depth="5.38" valign="baseline">$\mathtt{pop}()\Rightarrow\listbox{thistle4}{\raisebox{-.4em}{\PHmattock}}$</text>
 <text layer="top1" matrix="1 0 0 1 8 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
 <text layer="top2" matrix="1 0 0 1 40 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
 <text layer="top3" matrix="1 0 0 1 72 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
+<text layer="base" matrix="1 0 0 1 -136 -72" transformations="translations" pos="272 768" stroke="white" type="label" width="11.796" height="14.605" depth="0" halign="center" valign="center">\PHeagle</text>
+<text matrix="1 0 0 1 -104 -72" transformations="translations" pos="272 768" stroke="white" type="label" width="11.587" height="13.031" depth="0" halign="center" valign="center">\PHbee</text>
+<text matrix="1 0 0 1 -72 -72" transformations="translations" pos="272 768" stroke="white" type="label" width="9.285" height="13.619" depth="0" halign="center" valign="center">\PHcomb</text>
+<text matrix="1 0 0 1 -40 -72" transformations="translations" pos="272 768" stroke="white" type="label" width="11.148" height="10.7" depth="0" halign="center" valign="center">\PHshield</text>
+<text layer="push2" matrix="1 0 0 1 -8 -72" transformations="translations" pos="272 768" stroke="white" type="label" width="11.298" height="13.619" depth="0" halign="center" valign="center">\PHhelmet</text>
+<text layer="push4" matrix="1 0 0 1 24 -72" transformations="translations" pos="272 768" stroke="white" type="label" width="12.354" height="13.031" depth="0" halign="center" valign="center">\PHmattock</text>
 </page>
 </ipe>
