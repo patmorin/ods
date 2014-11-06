@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141101220358" modified="D:20141104222423"/>
-<preamble>\usepackage{amssymb,xcolor}
+<info created="D:20141101220358" modified="D:20141105233521"/>
+<preamble>\usepackage{amssymb,xcolor,wasysym,marvosym}
 
-\definecolor{firebrick4}{rgb}{0.545,0.102,0.102}
+\newcommand{\listbox}[2]{\mbox{\fcolorbox{black}{#1}{\makebox[1em][c]{\color{white}#2}}}}
+
 
 \newcommand{\squore}{\blacksquare}
 </preamble>
@@ -915,7 +916,7 @@ h
 <view layers="base getsremoved" active="base"/>
 <view layers="base getsremoved add1.1" active="base"/>
 <view layers="base getsremoved add1.1 add1.2" active="add1.2"/>
-<view layers="base getsadded getsremoved add1.3" active="add1.3"/>
+<view layers="base getsadded getsremoved add1.2 add1.3" active="getsadded"/>
 <view layers="base getsadded getsremoved" active="add1.3"/>
 <view layers="base getsadded getsremoved remove1" active="remove1"/>
 <view layers="base getsadded getsremoved remove1 remove2" active="getsremoved"/>
@@ -979,7 +980,7 @@ h
 h
 </path>
 <text layer="add2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="31.189" height="7.473" depth="2.49" valign="baseline">$\mathtt{{add(\color{dodgerblue4}\square})}$</text>
-<text layer="add1.3" transformations="translations" pos="160 768" stroke="black" type="label" width="75.356" height="7.473" depth="2.49" valign="baseline">$\mathtt{{add(\color{firebrick4}\squore\color{firebrick1}\squore})\Rightarrow \color{blue} true}$</text>
+<text layer="add1.2" transformations="translations" pos="160 768" stroke="black" type="label" width="56.914" height="10.686" depth="4.47" valign="baseline">$\mathtt{add(\listbox{firebrick4}{\Venus}\listbox{firebrick1}{\venus}})$</text>
 <path layer="add2.2" matrix="1 0 0 1 -4.07935 24.956" stroke="gold" fill="deepskyblue4" pen="ultrafat">
 272 688 m
 272 704 l
@@ -988,9 +989,9 @@ h
 h
 </path>
 <text layer="add2.3" transformations="translations" pos="160 768" stroke="black" type="label" width="72.838" height="7.473" depth="2.49" valign="baseline">$\mathtt{{add(\color{dodgerblue4}\square})\Rightarrow \color{blue} false}$</text>
-<text layer="remove1" transformations="translations" pos="160 768" stroke="black" type="label" width="54.628" height="7.473" depth="2.49" valign="baseline">$\mathtt{{remove(\color{chocolate4}\squore\color{black}\square})}$</text>
-<text layer="find1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="44.168" height="7.473" depth="2.49" valign="baseline">$\mathtt{{find(\color{cadetblue4}\squore\color{black}\square})}$</text>
-<text layer="find1.3" transformations="translations" pos="160 768" stroke="black" type="label" width="75.162" height="7.473" depth="2.49" valign="baseline">$\mathtt{{find(\color{cadetblue4}\squore\color{black}\square})}\Rightarrow{\color{cadetblue4}\squore\color{cadetblue1}\squore} $</text>
+<text layer="remove1" transformations="translations" pos="160 768" stroke="black" type="label" width="72.605" height="10.693" depth="4.54" valign="baseline">$\mathtt{{remove(\listbox{chocolate4}{\Uranus}\listbox{white}\uranus})}$</text>
+<text layer="find1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="62.145" height="10.687" depth="3.39" valign="baseline">$\mathtt{{find(\listbox{cadetblue4}{\Pluto}\listbox{white}{\pluto}})}$</text>
+<text layer="find1.3" transformations="translations" pos="160 768" stroke="black" type="label" width="111.116" height="10.687" depth="3.39" valign="baseline">$\mathtt{{find(\listbox{cadetblue4}{\Pluto}\listbox{white}{\pluto}})}\Rightarrow{\listbox{cadetblue4}{\Pluto}\listbox{cadetblue1}{\pluto}} $</text>
 <text layer="find2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="36.419" height="7.473" depth="2.49" valign="baseline">$\mathtt{{find(\color{salmon}\square})}$</text>
 <text layer="find2.2" transformations="translations" pos="160 768" stroke="black" type="label" width="72.838" height="7.473" depth="2.49" valign="baseline">$\mathtt{{find(\color{salmon}\square})}\Rightarrow \color{blue}\mathtt{null}$</text>
 <path layer="base" matrix="1 0 0 1 -34.6318 62.1502" stroke="white" fill="azure">
@@ -1056,5 +1057,17 @@ h
 202.318 692.319 l
 h
 </path>
+<text layer="getsremoved" matrix="1 0 0 1 40 -24" transformations="translations" pos="192 736" stroke="white" type="label" width="5.28" height="7.312" depth="0.03" halign="center" valign="center">\Uranus</text>
+<text matrix="1 0 0 1 56 -24" transformations="translations" pos="192 736" stroke="black" type="label" width="5.396" height="6.242" depth="1.15" halign="center" valign="center">\uranus</text>
+<text layer="base" matrix="1 0 0 1 -10.6319 -25.8499" transformations="translations" pos="192 736" stroke="white" type="label" width="5.748" height="7.303" depth="0" halign="center" valign="center">\Jupiter</text>
+<text matrix="1 0 0 1 5.3682 -25.8498" transformations="translations" pos="192 736" stroke="black" type="label" width="6.979" height="6.849" depth="0" halign="center" valign="center">\jupiter</text>
+<text matrix="1 0 0 1 83.9208 -15.0439" transformations="translations" pos="192 736" stroke="white" type="label" width="5.22" height="7.312" depth="0.03" halign="center" valign="center">\Earth</text>
+<text matrix="1 0 0 1 99.9208 -15.0439" transformations="translations" pos="192 736" stroke="black" type="label" width="5.396" height="6.102" depth="1.28" halign="center" valign="center">\earth</text>
+<text matrix="1 0 0 1 65.2812 -53.5228" transformations="translations" pos="192 736" stroke="white" type="label" width="4.463" height="7.312" depth="0.03" halign="center" valign="center">\Mercury</text>
+<text matrix="1 0 0 1 81.2812 -53.5228" transformations="translations" pos="192 736" stroke="black" type="label" width="5.396" height="7.507" depth="1.93" halign="center" valign="center">\mercury</text>
+<text matrix="1 0 0 1 18.3185 -51.6806" transformations="translations" pos="192 736" stroke="white" type="label" width="5.31" height="7.303" depth="0" halign="center" valign="center">\Pluto</text>
+<text matrix="1 0 0 1 34.3185 -51.6806" transformations="translations" pos="192 736" stroke="black" type="label" width="5.812" height="6.849" depth="0" halign="center" valign="center">\pluto</text>
+<text layer="getsadded" matrix="1 0 0 1 -14.7188 -69.5228" transformations="translations" pos="192 736" stroke="white" type="label" width="5.191" height="7.303" depth="0" halign="center" valign="center">\Venus</text>
+<text matrix="1 0 0 1 1.2812 -69.5228" transformations="translations" pos="192 736" stroke="black" type="label" width="5.396" height="6.137" depth="1.08" halign="center" valign="center">\venus</text>
 </page>
 </ipe>

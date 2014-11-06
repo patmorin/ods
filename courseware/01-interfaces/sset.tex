@@ -1,0 +1,48 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{comp2402}
+
+\title{The SSet (Sorted Set) Interface}
+\author{COMP2402}
+\date{\includegraphics[height=1em]{by}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{SSet}
+  \framesubtitle{A Sorted Set}
+ 
+  \begin{itemize}
+    \item<+->Stores \emph{comparable} items
+    \begin{itemize}
+       \item<+-> Numbers: $0 < 1 < 2 < 3 < \cdots < 4294967296$
+       \item<+-> Letters: $a < b < c < d < \cdots < z$
+       \item<+-> Strings: $\text{``apple''} < \text{``bread''} < \text{``brie''} 
+                           < \text{``cheese''} < \cdots < \text{``zyxt''}$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SSet}
+  \framesubtitle{A Sorted Set}
+
+  \begin{itemize}
+    \item<+-> Operations: \only<+->{#add(x)#}%
+                        \only<+->{, #remove(x)#}%
+                        \only<+->{, #find(x)#}%
+  \end{itemize}
+  \begin{center}
+      \only<1-4>{\includegraphics{figs/sset-1}}%
+      \only<5->{\multiinclude[<+>][format=pdf,start=1]{figs/sset}}
+  \end{center}
+\end{frame}
+
+\closing
+
+\end{document}
+

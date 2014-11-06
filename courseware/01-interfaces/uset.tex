@@ -1,0 +1,41 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{comp2402}
+
+\title{The USet (Unordered Set) Interface}
+\author{COMP2402}
+\date{\includegraphics[height=1em]{by}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{USet}
+  \framesubtitle{An \emphen{unordered} collection of \emphen{distinct} items}
+  \begin{itemize}
+    \item<+-> Operations: \only<+->{#add(x)#}%
+                        \only<+->{, #remove(x)#}%
+                        \only<+->{, #find(x)#}%
+  \end{itemize}
+     \begin{center}
+      \only<1-4>{\includegraphics{figs/uset-1}}%
+      \only<5->{\multiinclude[<+>][format=pdf,start=1]{figs/uset}}
+     \end{center}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Map}
+  \framesubtitle{A #USet# that stores key/value pairs}
+ 
+     \begin{center}
+      \multiinclude[<+>][format=pdf,start=1]{figs/map}
+     \end{center}
+\end{frame}
+
+\closing
+
+\end{document}
+

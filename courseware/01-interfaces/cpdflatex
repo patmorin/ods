@@ -2,7 +2,7 @@
 
 fileroot="${1%.tex}"
 filename="$fileroot.tex"
-tempfile="$fileroot-tmp.tex"
+tempfile="$fileroot-tmp.ttex"
 temppdf="$fileroot-tmp.pdf"
 filepdf="$fileroot.pdf"
 
