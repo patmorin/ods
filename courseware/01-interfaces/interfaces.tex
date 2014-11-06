@@ -6,7 +6,6 @@
 \renewcommand{\emph}[1]{{\itshape\color{blue}#1}}
 \newcommand{\emphen}[1]{{\itshape #1}}
 
-\def\title#1{\gdef\@title{#1}\gdef\THETITLE{#1}}
 
 \makeatletter
 \def\@listii{\leftmargin\leftmarginii
@@ -72,7 +71,7 @@
     \item<+(2)-> Operations: \only<+(2)->{#get(i)#}%
                         \only<+(2)->{, #set(i,x)#}%
                         \only<+(2)->{, #add(i,x)#}%
-                        \only<+(2)->{, #remove(x)#}
+                        \only<+(2)->{, #remove(i)#}
   \end{itemize}
      \begin{center}
       \only<1>{\includegraphics{figs/list-1}}%
