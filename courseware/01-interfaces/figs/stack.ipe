@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141030150854" modified="D:20141105161445"/>
+<info created="D:20141104150932" modified="D:20141104221224"/>
 <preamble>\usepackage{amssymb}
 \usepackage{xcolor}
-\usepackage{marvosym}
 
 \renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 
@@ -898,506 +897,78 @@ h
 </ipestyle>
 <page>
 <layer name="base"/>
-<layer name="indices"/>
-<layer name="size1"/>
-<layer name="size2"/>
-<layer name="size3"/>
-<layer name="get1"/>
-<layer name="get2"/>
-<layer name="get3"/>
-<layer name="set1"/>
-<layer name="set2"/>
-<layer name="set3"/>
-<layer name="add1"/>
-<layer name="add2"/>
-<layer name="add3"/>
-<layer name="add4"/>
-<layer name="add5"/>
-<layer name="add5.1"/>
-<layer name="add6"/>
-<layer name="add7"/>
-<layer name="add7.1"/>
-<layer name="add8"/>
-<layer name="remove1"/>
-<layer name="remove2"/>
-<layer name="remove3"/>
-<layer name="remove3.1"/>
-<layer name="remove4"/>
-<layer name="getsremoved"/>
-<view layers="base getsremoved" active="base"/>
-<view layers="base indices getsremoved" active="indices"/>
-<view layers="base indices size1 getsremoved" active="size1"/>
-<view layers="base indices size1 size2 getsremoved" active="size2"/>
-<view layers="base indices size2 size3 getsremoved" active="size1"/>
-<view layers="base indices getsremoved" active="remove4"/>
-<view layers="base indices get1 getsremoved" active="get1"/>
-<view layers="base indices get1 get2 getsremoved" active="get2"/>
-<view layers="base indices get2 get3 getsremoved" active="add5.1"/>
-<view layers="base indices getsremoved" active="remove3.1"/>
-<view layers="base indices set1 getsremoved" active="set1"/>
-<view layers="base indices set1 set2 getsremoved" active="set2"/>
-<view layers="base indices set1 set3 getsremoved" active="set3"/>
-<view layers="base indices set3 getsremoved" active="remove3.1"/>
-<view layers="base indices set3 add1 getsremoved" active="add1"/>
-<view layers="base indices set3 add1 add2 getsremoved" active="add2"/>
-<view layers="base indices add1 add4 getsremoved" active="add4"/>
-<view layers="base indices set3 add1 add4 add5.1 getsremoved" active="add4"/>
-<view layers="base indices set3 add1 add4 add5 getsremoved" active="add5"/>
-<view layers="base indices set3 add4 add5 getsremoved" active="remove3.1"/>
-<view layers="base indices set3 add4 add5 add6 getsremoved" active="add6"/>
-<view layers="base indices set3 add4 add5 add6 add7 add7.1 getsremoved" active="add7.1"/>
-<view layers="base indices set3 add4 add5 add6 add7 add8 getsremoved" active="add8"/>
-<view layers="base indices set3 add4 add5 add7 add8 getsremoved" active="add8"/>
-<view layers="base indices add4 add5 add7 add8 remove1 getsremoved" active="remove1"/>
-<view layers="base indices add4 add5 add7 add8 remove1 remove2 getsremoved" active="remove2"/>
-<view layers="base indices add4 add5 add7 add8 remove3 remove3.1" active="remove3.1"/>
-<view layers="base indices add4 add5 remove3 remove4" active="remove3"/>
-<view layers="base indices add4 add5 remove4" active="remove4"/>
-<text layer="indices" matrix="1 0 0 1 -8 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$0$</text>
-<text matrix="1 0 0 1 24 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$1$</text>
-<text matrix="1 0 0 1 56 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$2$</text>
-<text matrix="1 0 0 1 88 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$3$</text>
-<text matrix="1 0 0 1 120 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$4$</text>
-<text matrix="1 0 0 1 152 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$5$</text>
-<text matrix="1 0 0 1 184 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$6$</text>
-<text layer="get1" matrix="1 0 0 1 -48.0005 0" transformations="translations" pos="176 752" stroke="black" type="label" width="28.67" height="7.473" depth="2.49" valign="baseline">$\mathtt{get(3)}$</text>
-<text layer="size1" matrix="1 0 0 1 -48.0005 0" transformations="translations" pos="176 752" stroke="black" type="label" width="28.67" height="7.473" depth="2.49" valign="baseline">$\mathtt{size()}$</text>
-<path layer="set1" stroke="black" fill="white">
-222.679 751.438 m
-222.679 751.438 l
-222.679 751.438 l
-222.679 751.438 l
-h
-</path>
-<text layer="set2" matrix="1 0 0 1 152 -27.9228" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$5$</text>
-<text layer="get3" matrix="1 0 0 1 -48.001 0" transformations="translations" pos="176 752" stroke="black" type="label" width="60.905" height="10.687" depth="3.43" valign="baseline">$\mathtt{get(3)}\Rightarrow\mbox{\fcolorbox{black}{cadetblue4}{\makebox[1em][c]{\color{white}\Earth}}}$</text>
-<text layer="set1" matrix="1 0 0 1 -48.001 0" transformations="translations" pos="176 752" stroke="black" type="label" width="40.847" height="7.473" depth="2.49" valign="baseline">$\mathtt{set(5,\color{darkorchid4}\square})$</text>
-<path layer="size2" matrix="1 0 0 0.4 0 436.8" stroke="black" pen="heavier">
-128 720 m
-128 736 l
-336 736 l
-336 720 l
-336 720 l
-</path>
-<text layer="size3" matrix="1 0 0 1 -48.001 0" transformations="translations" pos="176 752" stroke="black" type="label" width="49.149" height="7.473" depth="2.49" valign="baseline">$\mathtt{size()}\Rightarrow 7$</text>
-<text layer="add1" matrix="1 0 0 1 -48 0" transformations="translations" pos="176 752" stroke="black" type="label" width="40.847" height="7.473" depth="2.49" valign="baseline">$\mathtt{add(3,\color{deeppink4}\square})$</text>
-<path layer="add2" stroke="gold" pen="ultrafat">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<text matrix="1 0 0 1 88 -27.9228" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$3$</text>
-<text layer="add3" matrix="1 0 0 1 216 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$7$</text>
-<path stroke="white" fill="white" pen="ultrafat">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<text layer="add4" matrix="1 0 0 1 216 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$7$</text>
-<text layer="remove1" matrix="1 0 0 1 -48.001 0" transformations="translations" pos="176 752" stroke="black" type="label" width="44.361" height="7.473" depth="2.49" valign="baseline">$\mathtt{remove(1)}$</text>
-<text layer="remove3" matrix="1 0 0 1 -48 0" transformations="translations" pos="176 752" stroke="black" type="label" width="67.607" height="7.473" depth="2.49" valign="baseline">$\mathtt{remove(1)}\Rightarrow{\color{brown4}\square}$</text>
-<text layer="add6" matrix="1 0 0 1 -48 0" transformations="translations" pos="176 752" stroke="black" type="label" width="40.847" height="7.473" depth="2.49" valign="baseline">$\mathtt{add(8,\color{darkslategray4}\square})$</text>
-<path layer="add7.1" matrix="1 0 0 1 64 0" stroke="gold" fill="white" pen="ultrafat">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<text layer="add7" matrix="1 0 0 1 248 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$8$</text>
-<text layer="add7.1" matrix="1 0 0 1 248 -27.9224" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$8$</text>
-<path layer="add8" stroke="black" fill="darkslategray4">
-384 720 m
-384 704 l
-400 704 l
-400 720 l
-h
-</path>
-<text matrix="1 0 0 1 248 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.28" height="7.312" depth="0.03" halign="center" valign="center">\Uranus</text>
-<path layer="add3" matrix="1 0 0 1 32 0" stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="gold" pen="ultrafat">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="gold" pen="ultrafat">
-256 720 m
-256 704 l
-272 704 l
-272 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="gold" fill="chocolate4" pen="ultrafat">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="gold" pen="ultrafat">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="gold" pen="ultrafat">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<text matrix="1 0 0 1 120 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.22" height="7.312" depth="0.03" halign="center" valign="center">\Earth</text>
-<text matrix="1 0 0 1 152 8" transformations="translations" pos="144 704" stroke="white" type="label" width="8.817" height="6.984" depth="0.03" halign="center" valign="center">\Mars</text>
-<text matrix="1 0 0 1 184 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.748" height="7.303" depth="0" halign="center" valign="center">\Jupiter</text>
-<text matrix="1 0 0 1 216 8" transformations="translations" pos="144 704" stroke="white" type="label" width="6.167" height="6.983" depth="0.19" halign="center" valign="center">\Saturn</text>
-<path layer="add5" stroke="black" fill="deeppink4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<group layer="base">
-<path stroke="white" fill="deepskyblue4">
-128 720 m
-128 704 l
+<layer name="push1"/>
+<layer name="push2"/>
+<layer name="push3"/>
+<layer name="push4"/>
+<layer name="pop1"/>
+<layer name="pop2"/>
+<layer name="pop3"/>
+<layer name="pop4"/>
+<layer name="top1"/>
+<layer name="top2"/>
+<layer name="top3"/>
+<view layers="base" active="pop4"/>
+<view layers="base top1" active="pop4"/>
+<view layers="base push1 top1" active="push1"/>
+<view layers="base push2 top2" active="push2"/>
+<view layers="base push2 push3" active="push3"/>
+<view layers="base push2 push4 top3" active="top3"/>
+<view layers="base push2 push4 pop1 pop3" active="pop1"/>
+<view layers="base push2 pop2 top2" active="pop2"/>
+<view layers="base push2 top2" active="pop2"/>
+<view layers="base push2 pop3 top2" active="pop3"/>
+<view layers="base pop4 top1" active="pop4"/>
+<view layers="base top1" active="pop2"/>
+<path layer="base" stroke="black" fill="antiquewhite4">
+128 704 m
+128 688 l
+144 688 l
 144 704 l
-144 720 l
 h
 </path>
-<text matrix="1 0 0 1 -8 8" transformations="translations" pos="144 704" stroke="white" type="label" width="8.389" height="7.312" depth="0.11" halign="center" valign="center">\Sun</text>
-</group>
-<group layer="getsremoved">
+<path stroke="black" fill="aquamarine4">
+160 704 m
+160 688 l
+176 688 l
+176 704 l
+h
+</path>
+<path stroke="black" fill="skyblue4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
 <path stroke="black" fill="brown4">
-160 720 m
-160 704 l
-176 704 l
-176 720 l
-h
-</path>
-<text matrix="1 0 0 1 24 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.31" height="7.303" depth="0" halign="center" valign="center">\Pluto</text>
-</group>
-<group layer="base">
-<path stroke="black" fill="burlywood4">
-192 720 m
-192 704 l
-208 704 l
-208 720 l
-h
-</path>
-<text matrix="1 0 0 1 56 8" transformations="translations" pos="144 704" stroke="white" type="label" width="4.463" height="7.312" depth="0.03" halign="center" valign="center">\Mercury</text>
-</group>
-<group>
-<path stroke="black" fill="cadetblue4">
-224 720 m
-224 704 l
+224 704 m
+224 688 l
+240 688 l
 240 704 l
-240 720 l
 h
 </path>
-<text matrix="1 0 0 1 88 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.22" height="7.312" depth="0.03" halign="center" valign="center">\Earth</text>
-</group>
-<group>
-<path stroke="black" fill="chartreuse4">
-256 720 m
-256 704 l
+<text layer="push1" transformations="translations" pos="128 720" stroke="black" type="label" width="36.419" height="7.473" depth="2.49" valign="baseline">$\mathtt{push}({\color{salmon4}\square})$</text>
+<path layer="push2" stroke="black" fill="salmon4">
+256 704 m
+256 688 l
+272 688 l
 272 704 l
-272 720 l
 h
 </path>
-<text matrix="1 0 0 1 120 8" transformations="translations" pos="144 704" stroke="white" type="label" width="8.817" height="6.984" depth="0.03" halign="center" valign="center">\Mars</text>
-</group>
-<group>
-<path stroke="black" fill="cornsilk4">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<text matrix="1 0 0 1 184 8" transformations="translations" pos="144 704" stroke="white" type="label" width="6.167" height="6.983" depth="0.19" halign="center" valign="center">\Saturn</text>
-</group>
-<path stroke="black" fill="chocolate4">
-288 720 m
-288 704 l
+<text layer="pop3" transformations="translations" pos="128 720" stroke="black" type="label" width="23.44" height="7.473" depth="2.49" valign="baseline">$\mathtt{pop}()$</text>
+<text layer="pop4" transformations="translations" pos="128 720" stroke="black" type="label" width="46.686" height="7.473" depth="2.49" valign="baseline">$\mathtt{pop}()\Rightarrow{\color{salmon4}\square}$</text>
+<text layer="push3" transformations="translations" pos="128 720" stroke="black" type="label" width="36.419" height="7.473" depth="2.49" valign="baseline">$\mathtt{push}({\color{thistle4}\square})$</text>
+<path layer="push4" stroke="black" fill="thistle4">
+288 704 m
+288 688 l
+304 688 l
 304 704 l
-304 720 l
 h
 </path>
-<text matrix="1 0 0 1 152 8" transformations="translations" pos="144 704" stroke="white" type="label" width="6.645" height="6.984" depth="0.03" halign="center" valign="center">\Neptune</text>
-<group layer="set3">
-<path stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<text matrix="1 0 0 1 152 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.748" height="7.303" depth="0" halign="center" valign="center">\Jupiter</text>
-</group>
-<path layer="set2" stroke="gold" pen="ultrafat">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<group layer="add4">
-<path matrix="1 0 0 1 32 0" stroke="black" fill="cadetblue4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<text matrix="1 0 0 1 120 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.22" height="7.312" depth="0.03" halign="center" valign="center">\Earth</text>
-</group>
-<group>
-<path stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="chartreuse4">
-256 720 m
-256 704 l
-272 704 l
-272 720 l
-h
-</path>
-<text matrix="1 0 0 1 152 8" transformations="translations" pos="144 704" stroke="white" type="label" width="8.817" height="6.984" depth="0.03" halign="center" valign="center">\Mars</text>
-</group>
-<group>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="chocolate4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<text matrix="1 0 0 1 184 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.748" height="7.303" depth="0" halign="center" valign="center">\Jupiter</text>
-</group>
-<group>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="cornsilk4">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<text matrix="1 0 0 1 216 8" transformations="translations" pos="144 704" stroke="white" type="label" width="6.167" height="6.983" depth="0.19" halign="center" valign="center">\Saturn</text>
-</group>
-<path matrix="1 0 0 1 -32.701 -0.268041" stroke="white" fill="white">
-252.773 724.732 m
-252.773 701.412 l
-275.021 701.412 l
-275.021 724.732 l
-h
-</path>
-<path layer="add5.1" stroke="gold" fill="white" pen="ultrafat">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path layer="add2" stroke="gold" pen="ultrafat">
-256 720 m
-256 704 l
-272 704 l
-272 720 l
-h
-</path>
-<path stroke="gold" pen="ultrafat">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path stroke="gold" pen="ultrafat">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<path stroke="gold" pen="ultrafat">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<text layer="add5" matrix="1 0 0 1 88 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.22" height="7.312" depth="0.03" halign="center" valign="center">\Earth</text>
-<group>
-<path stroke="black" fill="deeppink4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<text matrix="1 0 0 1 88 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.191" height="7.303" depth="0" halign="center" valign="center">\Venus</text>
-</group>
-<path layer="remove2" stroke="gold" pen="ultrafat">
-160 720 m
-160 704 l
-176 704 l
-176 720 l
-h
-</path>
-<text matrix="1 0 0 1 24 -27.9224" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$1$</text>
-<path layer="remove4" matrix="1 0 0 1 -32 0" stroke="black" fill="burlywood4">
-192 720 m
-192 704 l
-208 704 l
-208 720 l
-h
-</path>
-<path stroke="white" fill="white" pen="ultrafat">
-352 720 m
-352 688 l
-368 688 l
-368 720 l
-h
-</path>
-<text matrix="1 0 0 1 216 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$7$</text>
-<text matrix="1 0 0 1 24 8" transformations="translations" pos="144 704" stroke="white" type="label" width="4.463" height="7.312" depth="0.03" halign="center" valign="center">\Mercury</text>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="cadetblue4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="chartreuse4">
-256 720 m
-256 704 l
-272 704 l
-272 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="chocolate4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="cornsilk4">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path stroke="black" fill="cadetblue4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path stroke="black" fill="chartreuse4">
-256 720 m
-256 704 l
-272 704 l
-272 720 l
-h
-</path>
-<path stroke="black" fill="chocolate4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path stroke="black" fill="cornsilk4">
-320 720 m
-320 704 l
-336 704 l
-336 720 l
-h
-</path>
-<path stroke="black" fill="darkorchid4">
-288 720 m
-288 704 l
-304 704 l
-304 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="deeppink4">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<path matrix="1 0 0 1 -32 0" stroke="black" fill="darkslategray4">
-384 720 m
-384 704 l
-400 704 l
-400 720 l
-h
-</path>
-<text matrix="1 0 0 1 56 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.191" height="7.303" depth="0" halign="center" valign="center">\Venus</text>
-<text matrix="1 0 0 1 88 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.22" height="7.312" depth="0.03" halign="center" valign="center">\Earth</text>
-<text matrix="1 0 0 1 120 8" transformations="translations" pos="144 704" stroke="white" type="label" width="8.817" height="6.984" depth="0.03" halign="center" valign="center">\Mars</text>
-<text matrix="1 0 0 1 152 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.748" height="7.303" depth="0" halign="center" valign="center">\Jupiter</text>
-<text matrix="1 0 0 1 184 8" transformations="translations" pos="144 704" stroke="white" type="label" width="6.167" height="6.983" depth="0.19" halign="center" valign="center">\Saturn</text>
-<text matrix="1 0 0 1 216 8" transformations="translations" pos="144 704" stroke="white" type="label" width="5.28" height="7.312" depth="0.03" halign="center" valign="center">\Uranus</text>
-<path layer="get2" stroke="gold" pen="ultrafat">
-224 720 m
-224 704 l
-240 704 l
-240 720 l
-h
-</path>
-<text matrix="1 0 0 1 88 -27.9228" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$3$</text>
+<text layer="pop2" transformations="translations" pos="128 720" stroke="black" type="label" width="46.686" height="7.473" depth="2.49" valign="baseline">$\mathtt{pop}()\Rightarrow\color{thistle4}\square$</text>
+<text layer="top1" matrix="1 0 0 1 8 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
+<text layer="top2" matrix="1 0 0 1 40 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
+<text layer="top3" matrix="1 0 0 1 72 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
 </page>
 </ipe>

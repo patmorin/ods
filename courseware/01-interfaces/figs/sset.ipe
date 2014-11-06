@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141103141856" modified="D:20141103150122"/>
+<info created="D:20141103141856" modified="D:20141104222701"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -202,13 +202,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
-<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
-<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -253,16 +253,20 @@ h
 <view layers="base add1 getsremoved" active="add1"/>
 <view layers="base add1 add2.1 add2.2 getsremoved" active="add2.2"/>
 <view layers="base add1 add2.2 getsremoved" active="add2.1"/>
+<view layers="base add2.2 getsremoved" active="add2.1"/>
 <view layers="base add2.2 remove1 getsremoved" active="remove1"/>
 <view layers="base add2.2 remove1 remove2 getsremoved" active="remove2"/>
 <view layers="base add2.2 remove3" active="remove3"/>
+<view layers="base add2.2" active="remove3"/>
 <view layers="base add2.2 find1.1" active="find1.1"/>
 <view layers="base add2.2 find1.1 find1.2" active="find1.2"/>
 <view layers="base add2.2 find1.3" active="find1.3"/>
+<view layers="base add2.2" active="find1.3"/>
 <view layers="base add2.2 find2.1" active="find2.1"/>
 <view layers="base add2.2 find2.1 find2.2" active="find2.2"/>
 <view layers="base add2.2 find2.1 find2.3" active="find2.3"/>
 <view layers="base add2.2 find2.4" active="find2.4"/>
+<view layers="base add2.2" active="find2.4"/>
 <view layers="base add2.2 find3.1" active="find3.1"/>
 <view layers="base add2.2 find3.1 find3.2" active="find3.2"/>
 <view layers="base add2.2 find3.3" active="find3.3"/>

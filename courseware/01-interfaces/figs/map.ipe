@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141101220358" modified="D:20141102233934"/>
+<info created="D:20141101220358" modified="D:20141104222423"/>
 <preamble>\usepackage{amssymb,xcolor}
 
 \definecolor{firebrick4}{rgb}{0.545,0.102,0.102}
@@ -916,12 +916,15 @@ h
 <view layers="base getsremoved add1.1" active="base"/>
 <view layers="base getsremoved add1.1 add1.2" active="add1.2"/>
 <view layers="base getsadded getsremoved add1.3" active="add1.3"/>
+<view layers="base getsadded getsremoved" active="add1.3"/>
 <view layers="base getsadded getsremoved remove1" active="remove1"/>
 <view layers="base getsadded getsremoved remove1 remove2" active="getsremoved"/>
 <view layers="base getsadded remove1 remove3" active="remove3"/>
+<view layers="base getsadded remove3" active="remove3"/>
 <view layers="base getsadded find1.1" active="getsadded"/>
 <view layers="base getsadded find1.1 find1.2" active="find1.2"/>
 <view layers="base getsadded find1.3" active="getsadded"/>
+<view layers="base getsadded" active="getsadded"/>
 <path layer="base" matrix="1 0 0 1 10.3184 4.31931" stroke="white" fill="cadetblue4">
 192 688 m
 192 672 l
