@@ -1,14 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141101220358" modified="D:20141105231740"/>
-<preamble>\usepackage{amssymb,xcolor,marvosym}
-
-\newcommand{\listbox}[2]{\mbox{\fcolorbox{black}{#1}{\makebox[1em][c]{\color{white}#2}}}}
-
-\definecolor{firebrick4}{rgb}{0.545,0.102,0.102}
-\renewcommand{\square}{\blacksquare}
-</preamble>
+<info created="D:20141101220358" modified="D:20141106145130"/>
+<preamble>\usepackage{comp2402-figs}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -978,7 +972,7 @@ h
 160 640
 144 656 u
 </path>
-<text layer="add1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="40.177" height="10.358" depth="3.39" valign="baseline">$\mathtt{{add(\listbox{firebrick4}{\FAX}})}$</text>
+<text layer="add1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="40.177" height="11.357" depth="5.38" valign="baseline">$\mathtt{{add(\listbox{firebrick4}{\FAX}})}$</text>
 <path layer="add1.2" matrix="1 0 0 1 -86.7189 2.4771" stroke="gold" pen="ultrafat">
 256 672 m
 256 656 l
@@ -993,7 +987,7 @@ h
 272 672 l
 h
 </path>
-<text layer="add2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="40.177" height="10.358" depth="3.51" valign="baseline">$\mathtt{{add(\listbox{deepskyblue4}{\Email}})}$</text>
+<text layer="add2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="40.177" height="11.357" depth="5.38" valign="baseline">$\mathtt{{add(\listbox{deepskyblue4}{\Email}})}$</text>
 <path layer="add2.2" matrix="1 0 0 1 -4.07935 24.956" stroke="gold" fill="deepskyblue4" pen="ultrafat">
 272 688 m
 272 704 l
@@ -1001,7 +995,7 @@ h
 288 688 l
 h
 </path>
-<text layer="remove1" transformations="translations" pos="160 768" stroke="black" type="label" width="55.868" height="10.687" depth="3.43" valign="baseline">$\mathtt{{remove(\listbox{chocolate4}{\Faxmachine}})}$</text>
+<text layer="remove1" transformations="translations" pos="160 768" stroke="black" type="label" width="55.868" height="11.357" depth="5.38" valign="baseline">$\mathtt{{remove(\listbox{chocolate4}{\Faxmachine}})}$</text>
 <path layer="remove2" stroke="gold" fill="chocolate4" pen="ultrafat">
 224 720 m
 224 704 l
@@ -1009,7 +1003,7 @@ h
 240 720 l
 h
 </path>
-<text layer="find1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="45.407" height="8.386" depth="3.43" valign="baseline">$\mathtt{{find(\listbox{cadetblue4}{\Letter}})}$</text>
+<text layer="find1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="45.407" height="11.357" depth="5.38" valign="baseline">$\mathtt{{find(\listbox{cadetblue4}{\Letter}})}$</text>
 <path layer="find1.2" matrix="1 0 0 1 10.3184 4.31931" stroke="gold" fill="cadetblue4" pen="ultrafat">
 192 688 m
 192 672 l
@@ -1017,9 +1011,9 @@ h
 208 688 l
 h
 </path>
-<text layer="find1.3" transformations="translations" pos="160 768" stroke="black" type="label" width="77.642" height="8.386" depth="3.43" valign="baseline">$\mathtt{{find(\listbox{cadetblue4}{\Letter}})}\Rightarrow{\listbox{cadetblue4}{\Letter}} $</text>
-<text layer="find2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="45.407" height="10.358" depth="3.39" valign="baseline">$\mathtt{{find(\listbox{salmon4}\Lightning})}$</text>
-<text layer="find2.2" transformations="translations" pos="160 768" stroke="black" type="label" width="81.826" height="10.358" depth="3.39" valign="baseline">$\mathtt{{find(\listbox{salmon4}\Lightning})}\Rightarrow \color{blue}\mathtt{null}$</text>
+<text layer="find1.3" transformations="translations" pos="160 768" stroke="black" type="label" width="77.642" height="11.357" depth="5.38" valign="baseline">$\mathtt{{find(\listbox{cadetblue4}{\Letter}})}\Rightarrow{\listbox{cadetblue4}{\Letter}} $</text>
+<text layer="find2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="45.407" height="11.357" depth="5.38" valign="baseline">$\mathtt{{find(\listbox{salmon4}\Lightning})}$</text>
+<text layer="find2.2" transformations="translations" pos="160 768" stroke="black" type="label" width="81.826" height="11.357" depth="5.38" valign="baseline">$\mathtt{{find(\listbox{salmon4}\Lightning})}\Rightarrow \color{blue}\mathtt{null}$</text>
 <text layer="base" matrix="1 0 0 1 152 -8" transformations="translations" pos="80 720" stroke="white" type="label" width="10.092" height="7.312" depth="0.03" halign="center" valign="center">\Faxmachine</text>
 <text matrix="1 0 0 1 177.281 -37.5229" transformations="translations" pos="80 720" stroke="white" type="label" width="8.608" height="7.307" depth="1.39" halign="center" valign="center">\Mobilefone</text>
 <text matrix="1 0 0 1 101.368 -9.8499" transformations="translations" pos="80 720" stroke="white" type="label" width="8.428" height="5.3" depth="0" halign="center" valign="center">\Telefon</text>
