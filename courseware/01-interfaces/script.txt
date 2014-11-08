@@ -105,10 +105,6 @@ We can remove the i'th value from the list
 Let's take a look at each of these operations in turn.
 <click>
 
-The size operation just returns the number of items in the list
-<click>
-<click>
-
 The get(i) operation returns the value stored at list index i.
 <click>
 <click>
@@ -161,34 +157,28 @@ x is not already in the set.
 <click>
 <short pause>
 <click>
-
 If we try to add an element x that is already in set then the 
 add method fails.
 
 <click>
 <click>
-
 <short pause>
 <click>
 
 The remove(x) method removes the element x from the set, if it's there,
 and returns its value.
-
 <click>
 <click>
 
 The remove(x) method fails if x is not in the set.
-
 <click>
 <click>
 
 <short pause>
-
 <click>
 
 The find(x) method looks for the element x in the set and returns it if
 it finds it.
-
 <click>
 <click>
 
