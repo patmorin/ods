@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141101220358" modified="D:20141114155609"/>
+<info created="D:20141101220358" modified="D:20141114224727"/>
 <preamble>\usepackage{comp2402-figs}
 \usepackage{marvosym,wasysym}</preamble>
 <ipestyle name="basic">
@@ -907,21 +907,18 @@ h
 <layer name="find1.3"/>
 <layer name="find2.1"/>
 <layer name="find2.2"/>
-<layer name="alpha"/>
-<layer name="beta"/>
-<layer name="gamma"/>
-<layer name="delta"/>
-<layer name="epsilon"/>
+<layer name="equality1"/>
+<layer name="equality2"/>
 <layer name="zeta"/>
 <view layers="base getsremoved" active="add1.1"/>
-<view layers="base getsremoved alpha" active="beta"/>
-<view layers="base getsremoved" active="gamma"/>
-<view layers="base getsremoved delta" active="delta"/>
-<view layers="base getsremoved gamma" active="beta"/>
-<view layers="base getsremoved epsilon" active="epsilon"/>
-<view layers="base getsremoved epsilon zeta" active="zeta"/>
+<view layers="base getsremoved equality1" active="equality2"/>
+<view layers="base getsremoved" active="equality2"/>
+<view layers="base getsremoved equality2" active="equality2"/>
+<view layers="base getsremoved" active="equality2"/>
+<view layers="base getsremoved zeta" active="zeta"/>
+<view layers="base getsremoved" active="zeta"/>
 <view layers="base getsremoved add1.1" active="add1.1"/>
-<view layers="base getsadded getsremoved add1.3" active="getsadded"/>
+<view layers="base getsadded getsremoved add1.1 add1.3" active="getsadded"/>
 <view layers="base getsadded getsremoved" active="add1.3"/>
 <view layers="base getsadded getsremoved remove1" active="remove1"/>
 <view layers="base getsadded getsremoved remove1 remove2" active="getsremoved"/>
@@ -995,7 +992,7 @@ h
 <text layer="add2.3" transformations="translations" pos="160 768" stroke="black" type="label" width="72.838" height="7.473" depth="2.49" valign="baseline">$\mathtt{{add(\color{dodgerblue4}\square})\Rightarrow \color{blue} false}$</text>
 <text layer="remove1" transformations="translations" pos="160 768" stroke="black" type="label" width="72.605" height="11.357" depth="5.38" valign="baseline">$\mathtt{{remove(\listbox{chocolate4}{\Uranus}\listbox{white}\uranus})}$</text>
 <text layer="find1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="62.145" height="11.357" depth="5.38" valign="baseline">$\mathtt{{find(\listbox{cadetblue4}{\Pluto}\listbox{white}{\pluto}})}$</text>
-<text layer="find1.3" transformations="translations" pos="160 768" stroke="black" type="label" width="111.116" height="11.357" depth="5.38" valign="baseline">$\mathtt{{find(\listbox{cadetblue4}{\Pluto}\listbox{white}{\pluto}})}\Rightarrow{\listbox{cadetblue4}{\Pluto}\listbox{cadetblue1}{\pluto}} $</text>
+<text layer="find1.3" transformations="translations" pos="160 768" stroke="black" type="label" width="111.116" height="11.357" depth="5.38" valign="baseline">$\mathtt{{find(\listbox{cadetblue4}{\Pluto}\listbox{white}{\pluto}})}\Rightarrow{\listbox{cadetblue4}{\Pluto}\valuebox{cadetblue1}{\pluto}} $</text>
 <text layer="find2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="36.419" height="7.473" depth="2.49" valign="baseline">$\mathtt{{find(\color{salmon}\square})}$</text>
 <text layer="find2.2" transformations="translations" pos="160 768" stroke="black" type="label" width="72.838" height="7.473" depth="2.49" valign="baseline">$\mathtt{{find(\color{salmon}\square})}\Rightarrow \color{blue}\mathtt{null}$</text>
 <path layer="base" matrix="1 0 0 1 -34.6318 62.1502" stroke="black" fill="azure">
@@ -1073,8 +1070,8 @@ h
 <text matrix="1 0 0 1 34.3185 -51.6806" transformations="translations" pos="192 736" stroke="black" type="label" width="5.812" height="6.849" depth="0" halign="center" valign="center">\pluto</text>
 <text layer="getsadded" matrix="1 0 0 1 -14.7188 -69.5228" transformations="translations" pos="192 736" stroke="white" type="label" width="5.191" height="7.303" depth="0" halign="center" valign="center">\Venus</text>
 <text matrix="1 0 0 1 1.2812 -69.5228" transformations="translations" pos="192 736" stroke="black" type="label" width="5.396" height="6.167" depth="1.05" halign="center" valign="center">\venus</text>
-<text layer="alpha" transformations="translations" pos="160 768" stroke="black" type="label" width="80.232" height="11.357" depth="5.38" valign="baseline">$\keybox{firebrick4}{\Venus}\valuebox{firebrick1}{\venus}=\keybox{firebrick4}{\Venus}\valuebox{firebrick1}{\venus}$</text>
-<text layer="gamma" transformations="translations" pos="160 768" stroke="black" type="label" width="80.232" height="11.357" depth="5.38" valign="baseline">$\keybox{cadetblue4}{\Pluto}\valuebox{white}{} = \keybox{cadetblue4}{\Pluto}\valuebox{cadetblue1}{\pluto} $</text>
-<text layer="zeta" transformations="translations" pos="160 768" stroke="black" type="label" valign="baseline">$\mathtt{{find(\listbox{cadetblue4}{\Pluto}\listbox{white}{\pluto}})}\Rightarrow{\listbox{cadetblue4}{\Pluto}\listbox{cadetblue1}{\pluto}} $</text>
+<text layer="equality1" transformations="translations" pos="160 768" stroke="black" type="label" width="80.232" height="11.357" depth="5.38" valign="baseline">$\keybox{firebrick4}{\Venus}\valuebox{firebrick1}{\venus}=\keybox{firebrick4}{\Venus}\valuebox{firebrick1}{\venus}$</text>
+<text layer="equality2" transformations="translations" pos="160 768" stroke="black" type="label" width="80.232" height="11.357" depth="5.38" valign="baseline">$\keybox{cadetblue4}{\Pluto}\valuebox{white}{} = \keybox{cadetblue4}{\Pluto}\valuebox{cadetblue1}{\pluto} $</text>
+<text layer="zeta" transformations="translations" pos="160 768" stroke="black" type="label" width="80.232" height="11.357" depth="5.38" valign="baseline">$\listbox{goldenrod4}{\Mercury}\listbox{white}{}\ne{\listbox{deepskyblue4}{\Earth}\listbox{white}{}} $</text>
 </page>
 </ipe>

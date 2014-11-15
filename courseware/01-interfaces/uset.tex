@@ -15,6 +15,7 @@
   \frametitle{USet}
   \framesubtitle{An \emphen{unordered} collection of \emphen{distinct} items}
   \begin{itemize}
+    \item<+>[]
     \item<+-> Operations: \only<+->{#add(x)#}%
                         \only<+->{, #remove(x)#}%
                         \only<+->{, #find(x)#}%
@@ -30,12 +31,29 @@
   \frametitle{Map}
   \framesubtitle{A #USet# that stores key/value pairs}
 
-     $\keybox{firebrick4}{\Venus}\valuebox{firebrick1}{\venus}
-                =\keybox{firebrick4}{\Venus}\valuebox{firebrick1}{\venus}$ 
   \begin{center}
      \multiinclude[<+>][format=pdf,start=1]{figs/map}
   \end{center}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Map}
+  \framesubtitle{A #USet# that stores key/value pairs}
+
+  \begin{center}
+  \framebox{\raisebox{0pt}[.8em][.2em]{kite}}%
+  \framebox{\raisebox{0pt}[.8em][.2em]{a toy flown in the wind at the end 
+        of a long string}}
+  \\[2em]
+  \framebox{\raisebox{0pt}[.8em][.2em]{turtle}}%
+  \framebox{\raisebox{0pt}[.8em][.2em]{a slow-moving reptile, enclosed in a scaly or leathery domed shell}}
+  \\[2em]
+  \framebox{\raisebox{0pt}[.8em][.2em]{flower}}%
+  \framebox{\raisebox{0pt}[.8em][.2em]{the seed bearing part of a plant}}
+  \end{center}
+\end{frame}
+
+
 
 \closing
 
