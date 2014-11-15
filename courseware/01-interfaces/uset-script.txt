@@ -1,0 +1,38 @@
+The USet, or unordered set, interface represents a mathematical set:
+An unordered collection of distinct elements.  There is no particular ordering associated with the values in a Uset and no value appears more than once.
+
+The USet interface supports only three operations
+<1 sec>
+- We can add an element to the Set
+<1 sec>
+- We can remove an element from the set
+<1 sec>
+- We can find an element in the set.
+<1 sec>
+Let's look at each of these three operations.
+
+The add(x) operation adds the element x to the set.
+<3 sec>
+If the element x is already in the set, then the add(x) operation doesn't do anything.
+<3 sec>
+The remove(x) operation removes the element, x, from the set.
+<3 sec>
+The find(x) operation finds the element, x, in the set and returns it.
+<3 sec>
+If x is not in the set then the find(x) operation returns nothing.
+
+Sets are closely related to another interface, called a Map.  A Map is a set of key/value pairs, where we consider two pairs to be equal if they have the same key, even if they have different values.
+<5sec>
+The add operation in a map adds a new key/value pair to the Map.
+<3sec>
+The remove operation in a map takes a key, $k$, as an argument and removes the pair in the map having the key $k$, if any such pair exists.
+<3sec>
+The find operation in a map takes a key, $k$, as an argument and returns the pair in the map having the key k, again only if such a pair exists.
+<3sec>
+Maps are a useful way to associate keys and values.  For example, to store a dictionary, we might store key/value pairs where the key is a word and the value is the definition of that word.
+
+
+
+
+
+

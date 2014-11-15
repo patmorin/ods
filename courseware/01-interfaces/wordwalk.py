@@ -65,7 +65,7 @@ if __name__ == "__main__":
         next = ''
         i = 0
         for w2 in words:
-            if w2 not in seen and adjacent(w1, w2):
+            if len(w2) > 1 and w2 not in seen and adjacent(w1, w2):
                 i += 1
                 if random.random() < 1/i:
                     next = w2
