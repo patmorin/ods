@@ -1,0 +1,68 @@
+<coursepage>
+  <title>The List Interface</title>
+  <subtitle>A sequence of elements</subtitle>
+  <preface>
+    Watch this video to learn about the List interface.
+  </preface>
+  <video ytid="PyipvZDMqu8"/>
+  <epilogue>
+    <![CDATA[
+     You can also read about the List interface in <a
+     href="http://opendatastructures.org/ods-java/1_2_Interfaces.html#SECTION00422000000000000000"
+     target="_blank">Section 1.2.2</a> of the textbook.
+    ]]>
+  </epilogue>
+  <exercises>
+    <exercise>
+    <![CDATA[
+       Starting with a list that is initially empty, illustrate the evolution
+       of the list as the following operations are performed.  (If you do
+       this correctly, the list will evolve so that it always spells out an
+       english word from <a href="words.txt">this&nbsp;dictionary</a>.)
+       <p>
+       <table id="question"></table>
+       <p>
+       <a class="button" href="nojavascript.html" onclick="loadXMLDoc(); return false">Do it again!</a><p>
+    ]]>
+    </exercise>
+  </exercises>
+  <js-head>
+    <![CDATA[
+    function loadXMLDoc() {
+      var xmlhttp;
+      if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+      } else {
+        // code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+          document.getElementById("question").innerHTML=xmlhttp.responseText;
+          var inputs = document.getElementsByTagName('input');
+          for (i = 0; i < inputs.length; i++) {
+            var input = inputs[i] 
+            input.onkeyup = function() {
+              var correct = document.getElementById(this.id.replace('a', 'c')).innerHTML
+              if (this.value === correct) {
+                this.style.borderColor='green';
+              } else {
+                this.style.borderColor='red';
+              }
+            }
+            input.onkeydown = input.onkeyup;
+            input.onkeyup.call(input);
+          }
+        }
+      }
+      xmlhttp.open("GET","/~morin/cgi-bin/wordwalk3.py",true);
+      xmlhttp.send();
+    ]]>
+  </js-head>
+  <js-tail>
+   <![CDATA[
+     loadXMLDoc();
+   ]]>
+  </js-tail>
+</coursepage>
