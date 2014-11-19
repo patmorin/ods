@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <coursepage title="The List Interface">
   <css>
+      #question {
+          font-family: monospace;
+      }
       .textin {
           letter-spacing: 1em;
       }
@@ -76,6 +79,7 @@
       }
       xmlhttp.open("GET","/~morin/cgi-bin/wordwalk3.py",true);
       xmlhttp.send();
+    }
     ]]>
   </js-head>
   <js-tail>

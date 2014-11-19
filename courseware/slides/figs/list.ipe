@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141030150854" modified="D:20141107222354"/>
+<info created="D:20141030150854" modified="D:20141116230000"/>
 <preamble>\usepackage{comp2402-figs}
 \usepackage{marvosym}</preamble>
 <ipestyle name="basic">
@@ -916,6 +916,7 @@ h
 <layer name="remove2"/>
 <layer name="remove3"/>
 <layer name="remove3.1"/>
+<layer name="remove3.2"/>
 <layer name="remove4"/>
 <layer name="getsremoved"/>
 <view layers="base getsremoved" active="base"/>
@@ -945,6 +946,7 @@ h
 <view layers="base indices add4 add5 add7 add8 remove1 getsremoved" active="remove1"/>
 <view layers="base indices add4 add5 add7 add8 remove1 remove2 getsremoved" active="remove2"/>
 <view layers="base indices add4 add5 add7 add8 remove3 remove3.1" active="remove3.1"/>
+<view layers="base indices add4 add5 add7 add8 remove3 remove3.1 remove3.2" active="remove3.2"/>
 <view layers="base indices add4 add5 remove3 remove4" active="remove3"/>
 <view layers="base indices add4 add5 remove4" active="remove4"/>
 <text layer="indices" matrix="1 0 0 1 -8 -27.9224" transformations="translations" pos="144 720" stroke="darkgray" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$0$</text>
@@ -1393,5 +1395,54 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 -27.9228" transformations="translations" pos="144 720" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$3$</text>
+<path layer="remove3.2" stroke="gold" pen="ultrafat">
+192 720 m
+192 704 l
+208 704 l
+208 720 l
+h
+</path>
+<path matrix="1 0 0 1 32 0" stroke="gold" pen="ultrafat">
+192 720 m
+192 704 l
+208 704 l
+208 720 l
+h
+</path>
+<path matrix="1 0 0 1 64 0" stroke="gold" pen="ultrafat">
+192 720 m
+192 704 l
+208 704 l
+208 720 l
+h
+</path>
+<path matrix="1 0 0 1 96 0" stroke="gold" pen="ultrafat">
+192 720 m
+192 704 l
+208 704 l
+208 720 l
+h
+</path>
+<path matrix="1 0 0 1 128 0" stroke="gold" pen="ultrafat">
+192 720 m
+192 704 l
+208 704 l
+208 720 l
+h
+</path>
+<path matrix="1 0 0 1 160 0" stroke="gold" pen="ultrafat">
+192 720 m
+192 704 l
+208 704 l
+208 720 l
+h
+</path>
+<path matrix="1 0 0 1 192 0" stroke="gold" pen="ultrafat">
+192 720 m
+192 704 l
+208 704 l
+208 720 l
+h
+</path>
 </page>
 </ipe>
