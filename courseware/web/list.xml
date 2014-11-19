@@ -1,4 +1,22 @@
-<coursepage>
+<?xml version="1.0"?>
+<coursepage title="The List Interface">
+  <css>
+      .textin {
+          letter-spacing: 1em;
+      }
+      span.textin {
+          color: lightgray;
+          margin-top: 3px;
+          padding-bottom: 1em;
+          padding-left: 5px;
+      }
+      input.textin {
+          margin: 0px;
+          padding-left: 3px;
+          margin-right: 3em;
+          border: 2px solid rgb(204,0,51); /* CU red */ 
+      }
+  </css>
   <title>The List Interface</title>
   <subtitle>A sequence of elements</subtitle>
   <preface>
