@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<coursepage title="The USet Interface">
+  <css>
+    #question {
+       font-family: monospace;
+    }
+    input.textin {
+        margin: 0px;
+        padding-left: 3px;
+        margin-right: 3em;
+        border: 2px solid rgb(204,0,51); /* CU red */ 
+    }
+    .customcss {
+    }
+  </css>
+  <title>The USet Interface</title>
+  <subtitle>Unordered collections</subtitle>
+  <preface>
+    Watch this video to learn about the Set and Map interfaces.
+  </preface>
+  <video ytid="PyipvZDMqu8"/>
+  <epilogue>
+    <![CDATA[
+     You can read more about these interfaces in <a href="http://opendatastructures.org/ods-java/1_2_Interfaces.html#SECTION00423000000000000000">Section 1.2.3</a>
+     of the textbook.
+    ]]>
+  </epilogue>
+  <exercises>
+    <exercise>
+    <![CDATA[
+       Illustrate the following sequence of operations on a USet
+       <table id="uset_ops">
+       </table>
+    ]]>
+    </exercise>
+    <exercise>
+    <![CDATA[
+       Exercise 2
+    ]]>
+    </exercise>
+  </exercises>
+  <js-head>
+    <![CDATA[
+    function someJSInHeadSection() {
+    }
+    ]]>
+  </js-head>
+  <js-tail>
+   <![CDATA[
+    function makeQuestion1() {
+      var table = document.getElementById("uset_ops");
+      for (i = 0; i < 10; i++) {
+	 var row = table.insertRow(i);
+         var op = row.insertCell(0);
+         var t = document.createTextNode("Hi There");
+         t.className = "textin";
+         t.id = "q" + i;
+         op.appendChild(t);
+
+         var answer = row.insertCell(1);
+         input = document.createElement("INPUT");
+         input.setAttribute("type", "text");
+         input.className = "textin";
+         input.id = "a" + i;
+         answer.appendChild(input);
+      }
+    }
+    makeQuestion1();
+   ]]>
+  </js-tail>
+</coursepage>
