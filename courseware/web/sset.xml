@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<coursepage title="The USet Interface">
+<coursepage title="The SSet Interface">
   <css>
     #question {
     }
@@ -25,22 +25,22 @@
     .customcss {
     }
   </css>
-  <title>The USet Interface</title>
-  <subtitle>Unordered collections</subtitle>
+  <title>The SSet Interface</title>
+  <subtitle>A sorted set</subtitle>
   <preface>
-    Watch this video to learn about the Set and Map interfaces.
+    Watch this video to learn about the SSet interface.
   </preface>
   <video ytid="dummy"/>
   <epilogue>
     <![CDATA[
-     You can read more about these interfaces in <a href="http://opendatastructures.org/ods-java/1_2_Interfaces.html#SECTION00423000000000000000">Section 1.2.3</a>
+     You can read more about these interfaces in <a href="http://opendatastructures.org/ods-java/1_2_Interfaces.html#SECTION00424000000000000000">Section 1.2.4</a>
      of the textbook.
     ]]>
   </epilogue>
   <exercises>
     <exercise>
     <![CDATA[
-       Illustrate the following sequence of operations on a USet
+       Illustrate the following sequence of operations on an SSet
        <p>
        <table id="uset_ops">
        </table>
@@ -50,55 +50,51 @@
     </exercise>
   </exercises>
   <js-head>
-    <![CDATA[
-    function someJSInHeadSection() {
-    }
-    ]]>
   </js-head>
   <js-tail>
    <![CDATA[
-    function DumbSet() {
-      this.chars = [];
+    function SSet() {
+      this.elems = [];
     } 
 
-    DumbSet.prototype.add = function(x) {
-      var idx = this.chars.indexOf(x);
+    SSet.prototype.add = function(x) {
+      var idx = this.elems.indexOf(x);
       if (idx < 0) {
-        this.chars.push(x);
+        this.elems.push(x);
+        this.elems.sort();
       }
     }
 
-    DumbSet.prototype.find = function(x) {
-      var idx = this.chars.indexOf(x);
-      if (idx >= 0) {
-        return this.chars[idx];
-      }
+    SSet.prototype.find = function(x) {
+      console.log(x);
+      console.log(this.elems);
+      for (var i = 0; i < this.elems.length; i++)
+        if (x <= this.elems[i]) return this.elems[i];
       return "null";
     }
 
-    DumbSet.prototype.choose = function() {
-      return this.chars[Math.floor(Math.random(this.chars.length))];
+    SSet.prototype.choose = function() {
+      return this.elems[Math.floor(Math.random(this.elems.length))];
     }
 
-
-    DumbSet.prototype.remove = function(x) {
-      var idx = this.chars.indexOf(x);
+    SSet.prototype.remove = function(x) {
+      var idx = this.elems.indexOf(x);
       if (idx >= 0) {
-        this.chars.splice(idx, 1); 
+        this.elems.splice(idx, 1); 
       }
     }
 
-    DumbSet.prototype.size = function() {
-      return this.chars.length
+    SSet.prototype.size = function() {
+      return this.elems.length
     }
 
     function makeQuestion1() {
       var table = document.getElementById("uset_ops");
       while (table.firstChild) table.removeChild(table.firstChild);
-      var s = new DumbSet();
-      var chars = "abcdefghijkmnopqrstuwxyz";
+      var s = new SSet();
+      var chars = "0123456789";
 
-      for (i = 0; i < 25; i++) {
+      for (var i = 0; i < 25; i++) {
 	 var row = table.insertRow(i);
 
          // operation to perform on the set
@@ -126,19 +122,13 @@
          if (s.size() < 2 || choice < 1/2) {
             var char = chars[Math.floor(Math.random()*chars.length)];
             t.nodeValue = "add('" + char + "')";
-            s.add(char)
+            s.add(char);
             contents.appendChild(input);
-	    correct.appendChild(document.createTextNode(s.chars.join("")));
+	    correct.appendChild(document.createTextNode(s.elems.join("")));
             input.className = "blech";
             input.size = 40;
-         } else if (choice < 5/8) {
-            var char = chars[Math.floor(Math.random()*chars.length)];
-            t.nodeValue = "find('" + char + "')";
-            retval.appendChild(input);
-            correct.appendChild(document.createTextNode(s.find(char)));
-            input.size = 4;
          } else if (choice < 3/4) {
-            var char = s.choose();
+            var char = chars[Math.floor(Math.random()*chars.length)];
             t.nodeValue = "find('" + char + "')";
             retval.appendChild(input);
             correct.appendChild(document.createTextNode(s.find(char)));
@@ -148,7 +138,7 @@
             t.nodeValue = "remove('" + char + "')";
             s.remove(char);
             contents.appendChild(input);
-	    correct.appendChild(document.createTextNode(s.chars.join("")));
+	    correct.appendChild(document.createTextNode(s.elems.join("")));
             input.className = "blech";
             input.size = 40;
          }
@@ -177,7 +167,7 @@
       th.appendChild(document.createTextNode("Operation"));
       headrow.appendChild(th);
       th = document.createElement("th");
-      th.appendChild(document.createTextNode("Contents of USet"));
+      th.appendChild(document.createTextNode("Contents of SSet"));
       headrow.appendChild(th);
       th = document.createElement("th");
       th.appendChild(document.createTextNode("Return value (can be null)"));

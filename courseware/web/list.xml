@@ -70,8 +70,14 @@
           }
         }
       }
-      xmlhttp.open("GET","/~morin/cgi-bin/wordwalk3.py",true);
-      xmlhttp.send();
+      try {
+        xmlhttp.open("GET","/~morin/cgi-bin/wordwalk3.py",true);
+        xmlhttp.send();
+      } catch (err) {
+        document.getElementById("question").innerHTML 
+         = "<tr><td class='errormsg'>Network error: Unable to load exercise.<br>" 
+           + err.message + "</td></tr>";
+      }
     }
     ]]>
   </js-head>
