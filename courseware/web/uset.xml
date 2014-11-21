@@ -2,14 +2,26 @@
 <coursepage title="The USet Interface">
   <css>
     #question {
-       font-family: monospace;
     }
-    input.textin {
+    th {
+       text-align: left;
+    }
+
+    input.blech {
+        letter-spacing: 1em;
         margin: 0px;
         padding-left: 3px;
         margin-right: 3em;
         border: 2px solid rgb(204,0,51); /* CU red */ 
     }
+    input.blech::before {
+        content: "{";
+    }
+    input.blech::after {
+        content: "}";
+    }
+
+
     .customcss {
     }
   </css>
@@ -18,7 +30,7 @@
   <preface>
     Watch this video to learn about the Set and Map interfaces.
   </preface>
-  <video ytid="PyipvZDMqu8"/>
+  <video ytid="dummy"/>
   <epilogue>
     <![CDATA[
      You can read more about these interfaces in <a href="http://opendatastructures.org/ods-java/1_2_Interfaces.html#SECTION00423000000000000000">Section 1.2.3</a>
@@ -29,14 +41,12 @@
     <exercise>
     <![CDATA[
        Illustrate the following sequence of operations on a USet
+       <p>
        <table id="uset_ops">
        </table>
-    ]]>
-    </exercise>
-    <exercise>
-    <![CDATA[
-       Exercise 2
-    ]]>
+       <p>
+       <a class="button" href="nojavascript.html" onclick="makeQuestion1(); return false">Do it again!</a></p>
+           ]]>
     </exercise>
   </exercises>
   <js-head>
@@ -47,23 +57,131 @@
   </js-head>
   <js-tail>
    <![CDATA[
+    function DumbSet() {
+      this.chars = [];
+    } 
+
+    DumbSet.prototype.add = function(x) {
+      idx = this.chars.indexOf(x);
+      if (idx < 0) {
+        this.chars.push(x);
+      }
+    }
+
+    DumbSet.prototype.find = function(x) {
+      idx = this.chars.indexOf(x);
+      if (idx >= 0) {
+        return this.chars[idx];
+      }
+      return "null";
+    }
+
+    DumbSet.prototype.choose = function() {
+      return this.chars[Math.floor(Math.random(this.chars.length))];
+    }
+
+
+    DumbSet.prototype.remove = function(x) {
+      idx = this.chars.indexOf(x);
+      if (idx >= 0) {
+        this.chars.splice(idx, 1); 
+      }
+    }
+
+    DumbSet.prototype.size = function() {
+      return this.chars.length
+    }
+
     function makeQuestion1() {
       var table = document.getElementById("uset_ops");
-      for (i = 0; i < 10; i++) {
+      while (table.firstChild) table.removeChild(table.firstChild);
+      var s = new DumbSet();
+      var chars = "abcdefghijkmnopqrstuwxyz";
+
+      for (i = 0; i < 25; i++) {
 	 var row = table.insertRow(i);
+
+         // operation to perform on the set
          var op = row.insertCell(0);
-         var t = document.createTextNode("Hi There");
-         t.className = "textin";
+         var t = document.createTextNode(choice);
          t.id = "q" + i;
          op.appendChild(t);
 
-         var answer = row.insertCell(1);
+         // put the user's answer into this input
          input = document.createElement("INPUT");
          input.setAttribute("type", "text");
-         input.className = "textin";
          input.id = "a" + i;
-         answer.appendChild(input);
+
+         // the set contents and return value of the function
+         var contents = row.insertCell(1);
+         var retval = row.insertCell(2);
+
+         // the correct answer (input should contain a permutation of this)
+         var correct = row.insertCell(3);
+         correct.id = "c" + i;
+         correct.className = "hidden";
+
+         // generate a random sequence of operations
+         var choice = Math.random();
+         if (s.size() < 2 || choice < 1/2) {
+            var char = chars[Math.floor(Math.random()*chars.length)];
+            t.nodeValue = "add('" + char + "')";
+            s.add(char)
+            contents.appendChild(input);
+	    correct.appendChild(document.createTextNode(s.chars.join("")));
+            input.className = "blech";
+            input.size = 40;
+         } else if (choice < 5/8) {
+            var char = chars[Math.floor(Math.random()*chars.length)];
+            t.nodeValue = "find('" + char + "')";
+            retval.appendChild(input);
+            correct.appendChild(document.createTextNode(s.find(char)));
+            input.size = 4;
+         } else if (choice < 3/4) {
+            var char = s.choose();
+            t.nodeValue = "find('" + char + "')";
+            retval.appendChild(input);
+            correct.appendChild(document.createTextNode(s.find(char)));
+            input.size = 4;
+         } else {
+            var char = s.choose();
+            t.nodeValue = "remove('" + char + "')";
+            s.remove(char);
+            contents.appendChild(input);
+	    correct.appendChild(document.createTextNode(s.chars.join("")));
+            input.className = "blech";
+            input.size = 40;
+         }
+
+         // Show the first three correct answers
+         if (i < 3) input.value = correct.firstChild.nodeValue;
+
+         // Callback to illustrate correct answers
+         input.onkeyup = function() {
+           var correct = document.getElementById(this.id.replace('a', 'c')).firstChild.nodeValue
+           canonical0 = this.value.split("").sort().join("")
+           canonical1 = correct.split("").sort().join("")
+           if (canonical0 == canonical1) {
+             this.style.borderColor='green';
+           } else {
+             this.style.borderColor='red';
+           }
+         }
+         input.onkeydown = input.onkeyup;
+         input.onkeyup.call(input);
       }
+
+      // Table headers
+      var headrow = table.insertRow(0);
+      var th = document.createElement("th");
+      th.appendChild(document.createTextNode("Operation"));
+      headrow.appendChild(th);
+      th = document.createElement("th");
+      th.appendChild(document.createTextNode("Contents of USet"));
+      headrow.appendChild(th);
+      th = document.createElement("th");
+      th.appendChild(document.createTextNode("Return value (can be null)"));
+      headrow.appendChild(th);
     }
     makeQuestion1();
    ]]>
