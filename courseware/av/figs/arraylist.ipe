@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141124114606" modified="D:20141124145027"/>
+<info created="D:20141124114606" modified="D:20141124154548"/>
 <preamble>\usepackage{comp2402-figs}
 \usepackage{hieroglf}</preamble>
 <ipestyle name="basic">
@@ -895,6 +895,7 @@ h
 <layer name="indices"/>
 <layer name="a"/>
 <layer name="n7"/>
+<layer name="length"/>
 <layer name="get1"/>
 <layer name="get2"/>
 <layer name="get3"/>
@@ -920,6 +921,7 @@ h
 <layer name="n9p"/>
 <layer name="beta"/>
 <layer name="indices2"/>
+<layer name="length2"/>
 <layer name="resize1"/>
 <layer name="resize2"/>
 <layer name="resize3"/>
@@ -947,8 +949,24 @@ h
 <layer name="remove6"/>
 <layer name="remove7"/>
 <layer name="nu"/>
+<layer name="eta"/>
+<layer name="theta"/>
+<layer name="iota"/>
+<layer name="kappa"/>
+<layer name="lambda"/>
+<layer name="n5"/>
+<layer name="n5p"/>
+<layer name="mu"/>
+<layer name="xi"/>
+<layer name="omicron"/>
+<layer name="pi"/>
+<layer name="rho"/>
+<layer name="sigma"/>
+<layer name="tau"/>
 <view layers="base indices a getsset" active="base"/>
 <view layers="base indices a n7 getsset" active="n7"/>
+<view layers="base indices a n7 length getsset" active="length"/>
+<view layers="base indices a n7 getsset" active="length"/>
 <view layers="base indices a n7 get1 getsset" active="get1"/>
 <view layers="base indices a n7 get1 get2 getsset" active="get2"/>
 <view layers="base indices a n7 get2 get3 getsset" active="get3"/>
@@ -974,7 +992,7 @@ h
 <view layers="indices a base2 add10 n9" active="n9"/>
 <view layers="indices a base2 add10 n9 add-resize1" active="n9p"/>
 <view layers="indices a base2 add10 add-resize1 n9p" active="n9p"/>
-<view layers="indices a base2 add10 n9 add-resize1 beta indices2" active="indices2"/>
+<view layers="indices a base2 add10 n9 add-resize1 beta indices2 length2" active="indices2"/>
 <view layers="indices a base2 add10 n9 add-resize1 indices2 resize1" active="resize1"/>
 <view layers="indices a base2 add10 n9 add-resize1 indices2 resize2" active="resize2"/>
 <view layers="indices a base2 add10 n9 add-resize1 indices2 resize3" active="resize3"/>
@@ -1001,6 +1019,24 @@ h
 <view layers="indices a indices2 n10 remove1 remove6" active="remove6"/>
 <view layers="indices a indices2 n10 remove1 remove7" active="remove7"/>
 <view layers="indices a n9 indices2 remove1 remove7" active="nu"/>
+<view layers="indices a n9 indices2 remove7" active="eta"/>
+<view layers="indices a n9 indices2 remove7 nu" active="eta"/>
+<view layers="indices a n9 indices2 remove7 nu eta" active="eta"/>
+<view layers="indices a n9 indices2 nu eta theta" active="theta"/>
+<view layers="indices a n8 indices2 nu eta theta" active="theta"/>
+<view layers="indices a n8 indices2 theta" active="theta"/>
+<view layers="indices a n8 indices2 theta iota" active="iota"/>
+<view layers="indices a n8 indices2 theta iota lambda" active="lambda"/>
+<view layers="indices a indices2 kappa n5" active="n5"/>
+<view layers="indices a indices2 kappa n5p" active="n5p"/>
+<view layers="indices a indices2 kappa n5 mu" active="mu"/>
+<view layers="indices a indices2 kappa n5 xi" active="xi"/>
+<view layers="indices a indices2 kappa n5 omicron" active="omicron"/>
+<view layers="indices a indices2 kappa n5 pi" active="pi"/>
+<view layers="indices a indices2 kappa n5 rho" active="rho"/>
+<view layers="indices a indices2 kappa n5 sigma" active="sigma"/>
+<view layers="indices indices2 a2 kappa n5 sigma" active="sigma"/>
+<view layers="a n5 tau" active="tau"/>
 <path layer="base" stroke="black" fill="antiquewhite4">
 192 704 m
 192 688 l
@@ -1504,7 +1540,7 @@ h
 <text matrix="1 0 0 1 136 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
 <text layer="n9" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=9$</text>
 <text layer="add-resize1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="49.586" height="11.357" depth="5.38" valign="baseline">$\mathtt{add}(6,\listbox{plum4}{\raisebox{-.3em}{\textpmhg{\Hscribe}}})$</text>
-<text layer="n9p" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="75.188" height="7.473" depth="2.49" valign="baseline">$n=9=\mathrm{length}(a)$</text>
+<text layer="n9p" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="121.224" height="7.473" depth="2.49" valign="baseline">$n=9=\mathrm{length}(a)\Rightarrow \mathrm{resize}()$</text>
 <path layer="beta" matrix="1 0 0 1 0 16" stroke="black">
 192 704 m
 192 688 l
@@ -4639,5 +4675,1114 @@ h
 240 704 l
 </path>
 <text matrix="1 0 0 1 48 1.97239" transformations="translations" pos="272 720" stroke="black" type="label" width="38.007" height="6.768" depth="0.83" halign="center" valign="baseline">$n-i-1$</text>
+<text layer="nu" matrix="1 0 0 1 -16 0" transformations="translations" pos="192 736" stroke="black" type="label" width="42.48" height="7.473" depth="2.49" valign="baseline">$\mathrm{remove}(8)$</text>
+<path layer="theta" stroke="black" fill="antiquewhite4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
+<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
+<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
+<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
+<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
+<path matrix="1 0 0 1 112 0" stroke="black" fill="cadetblue4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 120 8" transformations="translations" pos="192 688" stroke="white" type="label" width="13.603" height="10.109" depth="0" halign="center" valign="center">\textpmhg{Z}</text>
+<path matrix="1 0 0 1 48 0" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 128 0" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path stroke="black" fill="lightskyblue4">
+240 704 m
+240 688 l
+256 688 l
+256 704 l
+h
+</path>
+<text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
+<path stroke="black">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<text matrix="1 0 0 1 136 8" transformations="translations" pos="192 688" stroke="white" type="label" width="13.648" height="12.444" depth="0" halign="center" valign="center">\textpmhg{m}</text>
+<path matrix="1 0 0 1 16 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 32 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 48 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 64 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 80 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 96 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 112 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 128 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 -64 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 -16 0" stroke="black" fill="plum4">
+288 704 m
+288 688 l
+304 688 l
+304 704 l
+h
+</path>
+<text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="12.238" height="12.444" depth="0" halign="center" valign="center">\textpmhg{\Hscribe}</text>
+<path matrix="1 0 0 1 0 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path layer="eta" stroke="gold" pen="ultrafat">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<text matrix="1 0 0 1 136 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
+<text layer="iota" transformations="translations" pos="176 736" stroke="black" type="label" width="150.685" height="7.473" depth="2.49" valign="baseline">$\mathrm{remove}(7)\ldots
+\mathrm{remove}(6)\ldots
+\mathrm{remove}(5)$</text>
+<path layer="kappa" stroke="black" fill="antiquewhite4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
+<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
+<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
+<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
+<path matrix="1 0 0 1 96 0" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
+<path matrix="1 0 0 1 112 0" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 120 8" transformations="translations" pos="192 688" stroke="white" type="label" width="13.603" height="10.109" depth="0" halign="center" valign="center">\textpmhg{Z}</text>
+<path matrix="1 0 0 1 48 0" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 128 0" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path stroke="black" fill="lightskyblue4">
+240 704 m
+240 688 l
+256 688 l
+256 704 l
+h
+</path>
+<text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
+<path stroke="black">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<text matrix="1 0 0 1 136 8" transformations="translations" pos="192 688" stroke="white" type="label" width="13.648" height="12.444" depth="0" halign="center" valign="center">\textpmhg{m}</text>
+<path matrix="1 0 0 1 16 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 32 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 48 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 64 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 80 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 96 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 112 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 128 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 -64 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 -16 0" stroke="black">
+288 704 m
+288 688 l
+304 688 l
+304 704 l
+h
+</path>
+<text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="12.238" height="12.444" depth="0" halign="center" valign="center">\textpmhg{\Hscribe}</text>
+<path matrix="1 0 0 1 0 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path layer="lambda" stroke="gold" pen="ultrafat">
+272 704 m
+272 688 l
+288 688 l
+288 704 l
+h
+</path>
+<path stroke="gold" pen="ultrafat">
+288 704 m
+288 688 l
+304 688 l
+304 704 l
+h
+</path>
+<path stroke="gold" pen="ultrafat">
+304 704 m
+304 688 l
+320 688 l
+320 704 l
+h
+</path>
+<text layer="n5" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=5$</text>
+<path layer="n5p" stroke="black">
+192 720 m
+288 720 l
+</path>
+<path matrix="0.5 0 0 0.5 96 360" stroke="black">
+192 704 m
+192 720 l
+</path>
+<path matrix="0.5 0 0 0.5 192 360" stroke="black">
+192 704 m
+192 720 l
+</path>
+<text matrix="1 0 0 1 -32 1.97239" transformations="translations" pos="272 720" stroke="black" type="label" width="48.278" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathrm{length}(a)/3$</text>
+<text matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="131.186" height="7.473" depth="2.49" valign="baseline">$n=5 &lt; \mathrm{length}(a)/3\Rightarrow\mathrm{resize}()$</text>
+<text layer="length" matrix="1 0 0 1 88 -12.6505" transformations="translations" pos="176 736" stroke="black" type="label" width="56.58" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathrm{length}(a)=9$</text>
+<path stroke="black">
+192 720 m
+336 720 l
+</path>
+<path matrix="0.5 0 0 0.5 96 360" stroke="black">
+192 704 m
+192 720 l
+</path>
+<path matrix="0.5 0 0 0.5 240 360" stroke="black">
+192 704 m
+192 720 l
+</path>
+<path layer="mu" matrix="1 0 0 1 0 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
+<path matrix="1 0 0 1 16 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
+<path matrix="1 0 0 1 32 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
+<path matrix="1 0 0 1 64 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 72 24" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
+<path matrix="1 0 0 1 96 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 104 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
+<path matrix="1 0 0 1 112 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 120 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.603" height="10.109" depth="0" halign="center" valign="center">\textpmhg{Z}</text>
+<path matrix="1 0 0 1 48 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 128 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 0 16" stroke="black">
+240 704 m
+240 688 l
+256 688 l
+256 704 l
+h
+</path>
+<text matrix="1 0 0 1 56 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
+<path matrix="1 0 0 1 0 16" stroke="black">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<text matrix="1 0 0 1 136 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.648" height="12.444" depth="0" halign="center" valign="center">\textpmhg{m}</text>
+<path matrix="1 0 0 1 -64 0" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 -16 16" stroke="black">
+288 704 m
+288 688 l
+304 688 l
+304 704 l
+h
+</path>
+<text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="12.238" height="12.444" depth="0" halign="center" valign="center">\textpmhg{\Hscribe}</text>
+<path stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path layer="xi" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
+<path matrix="1 0 0 1 16 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
+<path matrix="1 0 0 1 32 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
+<path matrix="1 0 0 1 64 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 72 24" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
+<path matrix="1 0 0 1 96 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 104 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
+<path matrix="1 0 0 1 112 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 120 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.603" height="10.109" depth="0" halign="center" valign="center">\textpmhg{Z}</text>
+<path matrix="1 0 0 1 48 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 128 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 0 16" stroke="black">
+240 704 m
+240 688 l
+256 688 l
+256 704 l
+h
+</path>
+<text matrix="1 0 0 1 56 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
+<path matrix="1 0 0 1 0 16" stroke="black">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<text matrix="1 0 0 1 136 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.648" height="12.444" depth="0" halign="center" valign="center">\textpmhg{m}</text>
+<path matrix="1 0 0 1 -64 0" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 -16 16" stroke="black">
+288 704 m
+288 688 l
+304 688 l
+304 704 l
+h
+</path>
+<text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="12.238" height="12.444" depth="0" halign="center" valign="center">\textpmhg{\Hscribe}</text>
+<path stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path layer="omicron" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
+<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
+<path matrix="1 0 0 1 32 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
+<path matrix="1 0 0 1 64 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 72 24" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
+<path matrix="1 0 0 1 96 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 104 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
+<path matrix="1 0 0 1 112 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 120 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.603" height="10.109" depth="0" halign="center" valign="center">\textpmhg{Z}</text>
+<path matrix="1 0 0 1 48 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 128 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 0 16" stroke="black">
+240 704 m
+240 688 l
+256 688 l
+256 704 l
+h
+</path>
+<text matrix="1 0 0 1 56 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
+<path matrix="1 0 0 1 0 16" stroke="black">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<text matrix="1 0 0 1 136 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.648" height="12.444" depth="0" halign="center" valign="center">\textpmhg{m}</text>
+<path matrix="1 0 0 1 -64 0" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 -16 16" stroke="black">
+288 704 m
+288 688 l
+304 688 l
+304 704 l
+h
+</path>
+<text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="12.238" height="12.444" depth="0" halign="center" valign="center">\textpmhg{\Hscribe}</text>
+<path stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path layer="pi" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
+<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
+<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
+<path matrix="1 0 0 1 64 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 72 24" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
+<path matrix="1 0 0 1 96 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 104 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
+<path matrix="1 0 0 1 112 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 120 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.603" height="10.109" depth="0" halign="center" valign="center">\textpmhg{Z}</text>
+<path matrix="1 0 0 1 48 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 128 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 0 16" stroke="black">
+240 704 m
+240 688 l
+256 688 l
+256 704 l
+h
+</path>
+<text matrix="1 0 0 1 56 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
+<path matrix="1 0 0 1 0 16" stroke="black">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<text matrix="1 0 0 1 136 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.648" height="12.444" depth="0" halign="center" valign="center">\textpmhg{m}</text>
+<path matrix="1 0 0 1 -64 0" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 -16 16" stroke="black">
+288 704 m
+288 688 l
+304 688 l
+304 704 l
+h
+</path>
+<text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="12.238" height="12.444" depth="0" halign="center" valign="center">\textpmhg{\Hscribe}</text>
+<path stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path layer="rho" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
+<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
+<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
+<path matrix="1 0 0 1 64 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 72 24" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
+<path matrix="1 0 0 1 96 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 104 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
+<path matrix="1 0 0 1 112 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 120 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.603" height="10.109" depth="0" halign="center" valign="center">\textpmhg{Z}</text>
+<path matrix="1 0 0 1 48 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 128 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 0 16" stroke="black" fill="lightskyblue4">
+240 704 m
+240 688 l
+256 688 l
+256 704 l
+h
+</path>
+<text matrix="1 0 0 1 56 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
+<path matrix="1 0 0 1 0 16" stroke="black">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<text matrix="1 0 0 1 136 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.648" height="12.444" depth="0" halign="center" valign="center">\textpmhg{m}</text>
+<path matrix="1 0 0 1 -64 0" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 -16 16" stroke="black">
+288 704 m
+288 688 l
+304 688 l
+304 704 l
+h
+</path>
+<text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="12.238" height="12.444" depth="0" halign="center" valign="center">\textpmhg{\Hscribe}</text>
+<path stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path layer="sigma" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
+<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
+<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
+<path matrix="1 0 0 1 64 16" stroke="black" fill="bisque4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 72 24" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
+<path matrix="1 0 0 1 96 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 104 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
+<path matrix="1 0 0 1 112 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 120 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.603" height="10.109" depth="0" halign="center" valign="center">\textpmhg{Z}</text>
+<path matrix="1 0 0 1 48 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 128 16" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 0 16" stroke="black" fill="lightskyblue4">
+240 704 m
+240 688 l
+256 688 l
+256 704 l
+h
+</path>
+<text matrix="1 0 0 1 56 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
+<path matrix="1 0 0 1 0 16" stroke="black">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<text matrix="1 0 0 1 136 24" transformations="translations" pos="192 688" stroke="white" type="label" width="13.648" height="12.444" depth="0" halign="center" valign="center">\textpmhg{m}</text>
+<path matrix="1 0 0 1 -64 0" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 -16 16" stroke="black">
+288 704 m
+288 688 l
+304 688 l
+304 704 l
+h
+</path>
+<text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="12.238" height="12.444" depth="0" halign="center" valign="center">\textpmhg{\Hscribe}</text>
+<path stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path layer="mu" matrix="0.5 0 0 0.5 96 376" stroke="black">
+192 704 m
+192 720 l
+</path>
+<path matrix="0.5 0 0 0.5 256 376" stroke="black">
+192 704 m
+192 720 l
+</path>
+<text matrix="1 0 0 1 0 17.9724" transformations="translations" pos="272 720" stroke="black" type="label" width="10.306" height="6.531" depth="0" halign="center" valign="baseline">$2n$</text>
+<path stroke="black">
+192 736 m
+352 736 l
+</path>
+<path layer="length2" matrix="0.5 0 0 0.5 96 369" stroke="black">
+192 704 m
+192 720 l
+</path>
+<path matrix="0.5 0 0 0.5 384 369" stroke="black">
+192 704 m
+192 720 l
+</path>
+<text matrix="1 0 0 1 64 10.9724" transformations="translations" pos="272 720" stroke="black" type="label" width="10.306" height="6.531" depth="0" halign="center" valign="baseline">$2n$</text>
+<path matrix="1 0 0 1 0 -7" stroke="black">
+192 736 m
+480 736 l
+</path>
+<path layer="tau" stroke="black" fill="antiquewhite4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
+<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
+<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
+<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
+<path matrix="1 0 0 1 96 0" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
+<path matrix="1 0 0 1 112 0" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<text matrix="1 0 0 1 120 8" transformations="translations" pos="192 688" stroke="white" type="label" width="13.603" height="10.109" depth="0" halign="center" valign="center">\textpmhg{Z}</text>
+<path matrix="1 0 0 1 48 0" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path matrix="1 0 0 1 128 0" stroke="black">
+192 704 m
+192 688 l
+208 688 l
+208 704 l
+h
+</path>
+<path stroke="black" fill="lightskyblue4">
+240 704 m
+240 688 l
+256 688 l
+256 704 l
+h
+</path>
+<text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
+<path stroke="black">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<text matrix="1 0 0 1 136 8" transformations="translations" pos="192 688" stroke="white" type="label" width="13.648" height="12.444" depth="0" halign="center" valign="center">\textpmhg{m}</text>
+<path matrix="1 0 0 1 -64 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<path matrix="1 0 0 1 -16 0" stroke="black">
+288 704 m
+288 688 l
+304 688 l
+304 704 l
+h
+</path>
+<text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="12.238" height="12.444" depth="0" halign="center" valign="center">\textpmhg{\Hscribe}</text>
+<path matrix="1 0 0 1 0 -16" stroke="black">
+336 720 m
+336 704 l
+352 704 l
+352 720 l
+h
+</path>
+<text matrix="1 0 0 1 8 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">0</text>
+<text matrix="1 0 0 1 24 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">1</text>
+<text matrix="1 0 0 1 40 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">2</text>
+<text matrix="1 0 0 1 56 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">3</text>
+<text matrix="1 0 0 1 72 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">4</text>
+<text matrix="1 0 0 1 88 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">5</text>
+<text matrix="1 0 0 1 104 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">6</text>
+<text matrix="1 0 0 1 120 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
+<text matrix="1 0 0 1 136 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
+<text matrix="1 0 0 1 152 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">9</text>
 </page>
 </ipe>
