@@ -1,0 +1,49 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{comp2402}
+\usepackage[cm]{sfmath}
+
+\title{ArrayList}
+\author{COMP2402}
+\date{\includegraphics[height=1em]{by}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{ArrayList}
+  \framesubtitle{Implementing a List using an array}
+  \begin{center}
+    \multiinclude[<+>][format=pdf,start=1]{figs/arraylist}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{ArrayList}
+  \framesubtitle{Implementing a List using an array}
+  \begin{block}{Theorem}
+    \only<+->{An ArrayList implements the List interface.} 
+    \only<+->{Ignoring the time
+    spent in calls to $\mathsf{resize}()$,}
+    \begin{itemize}
+        \item<+->$\mathsf{get}(i)$ runs in $O(1)$ time;
+        \item<+->$\mathsf{set}(i,x)$ run in $O(1)$ time;
+        \item<+->$\mathsf{add}(i,x)$ runs in $O(1+n-i)$ time; and
+	\item<+->$\mathsf{remove(i)}$ runs in $O(1+n-i)$ time.
+    \end{itemize}
+  \end{block}
+
+  \begin{block}<+->{Question}
+     What can we say about the cost of calls to $\mathsf{resize}()$?
+  \end{block}
+
+\end{frame}
+
+
+
+\closing
+
+\end{document}
+
