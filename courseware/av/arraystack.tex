@@ -2,7 +2,7 @@
 \usepackage{comp2402}
 \usepackage[cm]{sfmath}
 
-\title{ArrayList}
+\title{ArrayStack}
 \author{COMP2402}
 \date{\includegraphics[height=1em]{by}}
 
@@ -13,18 +13,18 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{ArrayList}
+  \frametitle{ArrayStack}
   \framesubtitle{Implementing a List using an array}
   \begin{center}
-    \multiinclude[<+>][format=pdf,start=1]{figs/arraylist}
+    \multiinclude[<+>][format=pdf,start=1]{figs/arraystack}
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{ArrayList}
+  \frametitle{ArrayStack}
   \framesubtitle{Implementing a List using an array}
   \begin{block}{Theorem}
-    \only<+->{An ArrayList implements the List interface.} 
+    \only<+->{An ArrayStack implements the List interface.} 
     \only<+->{Ignoring the time
     spent in calls to $\mathsf{resize}()$,}
     \begin{itemize}
@@ -36,7 +36,7 @@
   \end{block}
 
   \begin{block}<+->{Question}
-     What can we say about the cost of calls to $\mathsf{resize}()$?
+     What about the calls to $\mathsf{resize}()$?
   \end{block}
 
 \end{frame}

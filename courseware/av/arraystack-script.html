@@ -1,0 +1,130 @@
+<html>
+<head>
+<style type="text/css">
+  body {
+    margin: 1em auto 1em auto;
+    max-width: 55ex;
+  }
+  div.pause {
+    margin: 1em;
+    color: red;
+  }
+  div.pause:before {
+    content: "Pause ";
+  }
+  div.pause:after {
+    content: "s";
+  }
+</style>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+An ArrayStack implements the list interface using an array, \(a\). The $i$th list item is stored at array index $i$.
+
+<div class="pause">1</div>
+
+A counter, $n$, keeps track of the number of elements in the ArrayStack.
+
+<div class="pause">1</div>
+
+Usually, the length of the array is not exactly $n$&mdash;the array has room for some additional elements.
+
+<div class="pause">3</div>
+
+The get(i) operation is easy to implement.  We just return the $i$th value in the array.
+
+<div class="pause">3</div>
+
+The set(i,x) operation is just as easy to implement.  We set the $i$th value in the array equal to $x$.
+
+<div class="pause">3</div>
+
+The add(i,x) operation requires a little more work. Before we can add $x$ at location $i$, $n-i$ elements must be shifted one position to the right to make room for $x$.
+
+<div class="pause">3</div>
+
+Once this shifting is done, we can place $x$ at array location $i$ and increment the value of $n$.
+
+<div class="pause">3</div>
+
+The special case $i=n$ is simpler, since nothing needs to be shifted.
+
+<div class="pause">3</div>
+
+All of this assumes that there is room in the array, $a$, for one more element. Occasionally, we may try to add an element when $a$ is already full. 
+
+<div class="pause">3</div>
+
+Before we can do this, we have to grow the array, $a$. To do this we allocate a new array of length $2n$ and copy all the $n$ elements from $a$ into this new array.
+
+<div class="pause">3</div>
+
+This new array then becomes our next array, $a$.
+
+<div class="pause">3</div>
+
+After this resize() operation, there is room in $a$ to finish the add(i,x) operation as usual.
+
+<div class="pause">3</div>
+
+The remove(i) operation is implemented as expected. We first remove the $i$th element from $a$. This leaves a hole in $a$ we fill by shifting $n-i-1$ elements.
+
+<div class="pause">3</div>
+
+Once this shifting is done, we decrement the value of $n$.
+
+<div class="pause">3</div>
+
+Like adding, removing from the end of the array is faster, since nothing needs to be shifted.
+
+<div class="pause">4</div>
+
+Eventually, if we remove enough elements, the array starts to become very empty.
+
+<div class="pause">2</div>
+
+If we reach a point where more than two thirds of the array, $a$, is empty, then we resize() it.
+
+<div class="pause">2</div>
+
+As before, we allocate an array of length $2n$ and copy the $n$ elements of $a$ into this new array.
+
+<div class="pause">4</div>
+
+This new array becomes the next array, $a$.
+
+<div class="pause">4</div>
+
+An ArrayStack is a nice simple implementation of the List interface and the running time of ArrayList operations are easy to analyze&mdash;except for the resize() operations.
+<p>
+To get around this, we'll ignore the cost of resize()&mdash;for now.
+<div class="pause">2</div>
+The get(i) and set(i) operations are simple array accesses that each take constant time.
+<div class="pause">2</div>
+The add(i,x) operation requires shifting $n-i$ elements of $a$, which takes an additional $O(n-i)$ time.
+<div class="pause">2</div>
+Similarly, the remove(i) operation requires shifting $n-i-1$ elements of $a$, which also takes an additional $O(n-i)$ time.
+
+<div class="pause">4</div>
+So far so good, but we can't just ignore things we don't understand.  We still have to account for calls to resize(), which we'll do in the next module.
+
+</body>
+</html>
