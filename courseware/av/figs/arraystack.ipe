@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141124114606" modified="D:20141124154548"/>
+<info created="D:20141124114606" modified="D:20141125131030"/>
 <preamble>\usepackage{comp2402-figs}
 \usepackage{hieroglf}</preamble>
 <ipestyle name="basic">
@@ -204,13 +204,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
-<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
-<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -1118,7 +1118,7 @@ h
 <text matrix="1 0 0 1 136 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
 <text layer="n7" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=7$</text>
 <text layer="a" matrix="1 0 0 1 0 5.786" transformations="translations" pos="176 688" stroke="black" type="label" width="4.885" height="4.428" depth="0" valign="baseline">$a$</text>
-<text layer="get1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="28.421" height="7.473" depth="2.49" valign="baseline">$\mathrm{get}(3)$</text>
+<text layer="get1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="25.737" height="7.473" depth="2.49" valign="baseline">$\mathrm{get}(3)$</text>
 <path layer="get2" stroke="gold" pen="ultrafat">
 240 704 m
 240 688 l
@@ -1126,8 +1126,8 @@ h
 256 704 l
 h
 </path>
-<text layer="get3" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="60.656" height="11.357" depth="5.38" valign="baseline">$\mathrm{get}(3)\Rightarrow\listbox{bisque4}{\raisebox{-.3em}{\textpmhg{I}}}$</text>
-<text layer="set1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="49.586" height="11.357" depth="5.38" valign="baseline">$\mathrm{set}(4,\listbox{darkolivegreen4}{\raisebox{-.3em}{\textpmhg{b}}})$</text>
+<text layer="get3" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="57.971" height="11.357" depth="5.38" valign="baseline">$\mathrm{get}(3)\Rightarrow\listbox{bisque4}{\raisebox{-.3em}{\textpmhg{I}}}$</text>
+<text layer="set1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="45.74" height="11.357" depth="5.38" valign="baseline">$\mathrm{set}(4,\listbox{darkolivegreen4}{\raisebox{-.3em}{\textpmhg{b}}})$</text>
 <text layer="get2" matrix="1 0 0 1 56 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">3</text>
 <path layer="set3" matrix="1 0 0 1 64 0" stroke="black" fill="darkolivegreen4">
 192 704 m
@@ -1145,7 +1145,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">4</text>
-<text layer="add1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="49.586" height="11.357" depth="5.38" valign="baseline">$\mathrm{add}(3,\listbox{lightskyblue4}{{\textpmhg{l}}})$</text>
+<text layer="add1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline">$\mathrm{add}(3,\listbox{lightskyblue4}{{\textpmhg{l}}})$</text>
 <path layer="add3" stroke="black" fill="antiquewhite4">
 192 704 m
 192 688 l
@@ -1521,7 +1521,7 @@ h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
 <text layer="n8" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=8$</text>
-<text layer="add8" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="49.586" height="11.357" depth="5.38" valign="baseline">$\mathrm{add}(8,\listbox{palegreen4}{\raisebox{-.3em}{\textpmhg{m}}})$</text>
+<text layer="add8" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline">$\mathrm{add}(8,\listbox{palegreen4}{\raisebox{-.3em}{\textpmhg{m}}})$</text>
 <path layer="add10" stroke="black" fill="palegreen4">
 320 704 m
 320 688 l
@@ -1539,7 +1539,7 @@ h
 </path>
 <text matrix="1 0 0 1 136 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
 <text layer="n9" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=9$</text>
-<text layer="add-resize1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="49.586" height="11.357" depth="5.38" valign="baseline">$\mathrm{add}(6,\listbox{plum4}{\raisebox{-.3em}{\textpmhg{\Hscribe}}})$</text>
+<text layer="add-resize1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline">$\mathrm{add}(6,\listbox{plum4}{\raisebox{-.3em}{\textpmhg{\Hscribe}}})$</text>
 <text layer="n9p" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="121.224" height="7.473" depth="2.49" valign="baseline">$n=9=\mathrm{length}(a)\Rightarrow \mathrm{resize}()$</text>
 <path layer="beta" matrix="1 0 0 1 0 16" stroke="black">
 192 704 m
@@ -3644,14 +3644,6 @@ h
 352 720 l
 h
 </path>
-<path layer="alpha" stroke="gold" pen="ultrafat">
-288 704 m
-288 688 l
-304 688 l
-304 704 l
-h
-</path>
-<text matrix="1 0 0 1 104 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">6</text>
 <path layer="epsilon" stroke="black" fill="plum4">
 288 704 m
 288 688 l
@@ -5784,5 +5776,13 @@ h
 <text matrix="1 0 0 1 120 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 136 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
 <text matrix="1 0 0 1 152 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">9</text>
+<path layer="alpha" stroke="gold" pen="ultrafat">
+288 704 m
+288 688 l
+304 688 l
+304 704 l
+h
+</path>
+<text matrix="1 0 0 1 104 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">6</text>
 </page>
 </ipe>

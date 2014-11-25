@@ -1,6 +1,9 @@
 \documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
 \usepackage{comp2402}
 \usepackage[cm]{sfmath}
+%\usepackage{enumitem}
+
+\setlength{\leftmargini}{0pt}
 
 \title{ArrayStack}
 \author{COMP2402}
@@ -24,14 +27,15 @@
   \frametitle{ArrayStack}
   \framesubtitle{Implementing a List using an array}
   \begin{block}{Theorem}
-    \only<+->{An ArrayStack implements the List interface.} 
-    \only<+->{Ignoring the time
-    spent in calls to $\mathsf{resize}()$,}
     \begin{itemize}
-        \item<+->$\mathsf{get}(i)$ runs in $O(1)$ time;
-        \item<+->$\mathsf{set}(i,x)$ run in $O(1)$ time;
-        \item<+->$\mathsf{add}(i,x)$ runs in $O(1+n-i)$ time; and
-	\item<+->$\mathsf{remove(i)}$ runs in $O(1+n-i)$ time.
+      \item<+->[]An ArrayStack implements the List interface.
+      \item<+->[]Ignoring the time spent in calls to $\mathsf{resize}()$,
+      \begin{itemize}
+          \item<+->$\mathsf{get}(i)$ runs in $O(1)$ time;
+          \item<+->$\mathsf{set}(i,x)$ runs in $O(1)$ time;
+          \item<+->$\mathsf{add}(i,x)$ runs in $O(1+n-i)$ time; and
+          \item<+->$\mathsf{remove(i)}$ runs in $O(1+n-i)$ time.
+      \end{itemize}
     \end{itemize}
   \end{block}
 
