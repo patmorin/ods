@@ -1,0 +1,42 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{comp2402}
+\usepackage[cm]{sfmath}
+%\usepackage{enumitem}
+
+\setlength{\leftmargini}{0pt}
+
+\title{ArrayStack: Amortized Analysis}
+\author{COMP2402}
+\date{\includegraphics[height=1em]{by}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{ArrayStack}
+  \framesubtitle{Amortized analysis of $\mathsf{resize}()$}
+  \begin{block}<1->{Theorem}
+    \begin{itemize}
+      \item[]An ArrayStack implements the List interface.
+      \item[]Ignoring the time spent in calls to $\mathsf{resize}()$,
+      \begin{itemize}
+          \item$\mathsf{get}(i)$ and $\mathsf{set}(i,x)$ each run in $O(1)$ time; and
+          \item$\mathsf{add}(i,x)$ and $\mathsf{remove}(i)$ each run in $O(1+n-i)$ time.
+      \end{itemize}
+      \item<3->[]Furthermore, if we start with an empty ArrayStack and perform any sequence of $m$ $\mathsf{add}(i,x)$ and $\mathsf{remove}(i)$ operations, then the total time spent in all calls to $\mathsf{resize}()$ is $O(m)$.
+    \end{itemize}
+  \end{block}
+%  \begin{block}<2>{Question}
+%     What about the calls to $\mathsf{resize}()$?
+%  \end{block}
+\end{frame}
+
+
+
+\closing
+
+\end{document}
+

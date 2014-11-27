@@ -5,6 +5,7 @@
 
 \setlength{\leftmargini}{0pt}
 
+
 \title{ArrayStack}
 \author{COMP2402}
 \date{\includegraphics[height=1em]{by}}
@@ -29,12 +30,12 @@
   \begin{block}{Theorem}
     \begin{itemize}
       \item<+->[]An ArrayStack implements the List interface.
-      \item<+->[]Ignoring the time spent in calls to $\mathsf{resize}()$,
+      \item<+->[]Ignoring the time spent in calls to $\fn{resize}()$,
       \begin{itemize}
-          \item<+->$\mathsf{get}(i)$ runs in $O(1)$ time;
-          \item<+->$\mathsf{set}(i,x)$ runs in $O(1)$ time;
-          \item<+->$\mathsf{add}(i,x)$ runs in $O(1+n-i)$ time; and
-          \item<+->$\mathsf{remove(i)}$ runs in $O(1+n-i)$ time.
+          \item<+->$\fn{get}(i)$ runs in $O(1)$ time;
+          \item<+->$\fn{set}(i,x)$ runs in $O(1)$ time;
+          \item<+->$\fn{add}(i,x)$ runs in $O(1+n-i)$ time; and
+          \item<+->$\fn{remove}(i)$ runs in $O(1+n-i)$ time.
       \end{itemize}
     \end{itemize}
   \end{block}

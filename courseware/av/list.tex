@@ -1,5 +1,5 @@
 \documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
-\usepackage{comp2402}
+\usepackage{comp2402,comp2402-figs}
 
 \title{The List Interface}
 \author{COMP2402}
@@ -16,10 +16,10 @@
   \framesubtitle{A sequence of elements}
  
   \begin{itemize}
-    \item<+(2)-> Operations: \only<+(2)->{#get(i)#}%
-                        \only<+(2)->{, #set(i,x)#}%
-                        \only<+(2)->{, #add(i,x)#}%
-                        \only<+(2)->{, #remove(i)#}
+    \item<+(2)-> Operations: \only<+(2)->{$\fn{get}(i)$}%
+                        \only<+(2)->{, $\fn{set}(i,x)$}%
+                        \only<+(2)->{, $\fn{add}(i,x)$}%
+                        \only<+(2)->{, $\fn{remove}(i)$}
   \end{itemize}
      \begin{center}
       \only<1>{\includegraphics{figs/list-1}}%
