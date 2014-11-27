@@ -1,5 +1,6 @@
 \documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
-\usepackage{comp2402}
+\usepackage{comp2402,comp2402-figs}
+\usepackage{calc}
 \usepackage[cm]{sfmath}
 %\usepackage{enumitem}
 
@@ -32,6 +33,156 @@
 %  \begin{block}<2>{Question}
 %     What about the calls to $\mathsf{resize}()$?
 %  \end{block}
+\end{frame}
+
+\newlength{\nwidth}
+\setlength{\fboxsep}{0pt}
+\setlength{\nwidth}{.25\textwidth}
+
+\begin{frame}
+  \frametitle{The Plan}
+ 
+  \only<1-3>{ 
+  $\fn{resize}()$ during $\fn{add}(i,x)$ \\[1ex]
+  \begin{itemize}
+    \item<2-3>[]$\overbrace{\framebox{\rule{\nwidth}{12pt}}}^{n=\sf{length}(a)}$ 
+    \item<3>[]\makebox[\nwidth]{$\Downarrow$} 
+    \item<3>[]$\underbrace{%
+    \framebox{\rule{\nwidth}{12pt}}%
+    \framebox[\nwidth]{\rule{0pt}{12pt}}%
+    }_{2n}$
+  \end{itemize}
+  }
+
+
+  \only<4->{
+  $\fn{resize}()$ during $\fn{remove}(i)$ \\[1ex]
+  \begin{itemize}
+    \item<5->[]$\overbrace{
+    \framebox{\rule{\nwidth}{12pt}}
+    }^{n<\sf{length}(a)/3}$%
+    \framebox[2\nwidth]{\rule{0pt}{12pt}}\\
+    \item<6->[]
+    \makebox[\nwidth]{$\Downarrow$} 
+    \item<6->[]$\underbrace{%
+    \framebox{\rule{\nwidth}{12pt}}%
+    \framebox[\nwidth]{\rule{0pt}{12pt}}%
+    }_{2n}$
+  \end{itemize}
+  }
+  \begin{block}<7->{Plan}
+    Show that the total number of items copied by resize() is at most $2m$.
+  \end{block}
+
+\end{frame}
+
+\newlength\foo
+\settowidth{\foo}{Then:}
+
+\begin{frame}
+  \frametitle{Resize during $\fn{add}(i,x)$}
+
+  \begin{itemize}
+    \item<2->[]\makebox[\foo]{Then:}
+    $\overbrace{\framebox{\rule{.5\nwidth}{12pt}}}^{n/2}$%
+    \only<2>{\framebox[.5\nwidth]{\rule{0pt}{12pt}}}%
+    \only<3->{%
+       $\overbrace{%
+          \framebox[.5\nwidth]{\color{red} \rule{.5\nwidth}{12pt}}
+       }^{n/2}$
+    }%
+    % \only<3>{\framebox[.5\nwidth]{\color{red}\rule{.5\nwidth]{12pt}}}%
+    \item<3->[]\makebox[\foo]{}\makebox[\nwidth][c]{$\vdots$}
+    \item<3-|alert@3->[]\makebox[\foo]{}\makebox[\nwidth][c]{($\ge n/2$ elements added)}
+    \item<3->[]\makebox[\foo]{}\makebox[\nwidth][c]{$\vdots$}
+    \item<1->[]\makebox[\foo][l]{Now:} 
+    $\underbrace{\framebox{\rule{\nwidth}{12pt}}}_{n=\sf{length}(a)}$ 
+    \item<4->At least $n/2$ $\fn{add}(i,x)$ operations between then and now 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Resize during $\fn{add}(i,x)$}
+
+  \begin{itemize}
+    \item<2->[]\makebox[\foo][l]{Then:}
+    \only<1-2>{%
+       $\overbrace{\framebox{\rule{1.5\nwidth}{12pt}}}^{\fn{length}(a)/2}$%
+       \framebox[1.5\nwidth]{\rule{0pt}{12pt}}%
+       {\color{white}$\underbrace{\framebox[0pt]]{\rule{0pt}{12pt}}}_X$}%
+
+    }%
+    \only<3->{%
+       $\overbrace{%
+          \framebox{\rule{\nwidth}{12pt}}\!%
+          \underbrace{%
+            \framebox[.5\nwidth]{\color{red}\rule{.5\nwidth}{12pt}}%
+          }_{\fn{length}(a)/6}%
+       }^{\fn{length}(a)/2}$%
+       \framebox[1.5\nwidth]{\rule{0pt}{12pt}}}
+
+    \item<3->[]\makebox[\foo]{}\makebox[3\nwidth][c]{$\vdots$}
+    \item<3-| alert@3->[]\makebox[\foo]{}\makebox[3\nwidth][c]{($> n/2$ elements removed)}
+    \item<3->[]\makebox[\foo]{}\makebox[3\nwidth][c]{$\vdots$}
+ 
+    \item<1->[]\makebox[\foo][l]{Now:} 
+    $\underbrace{\framebox{\rule{\nwidth}{12pt}}}_{n<\sf{length}(a)/3}$%
+    \framebox[2\nwidth]{\rule{0pt}{12pt}}
+    \item <4->At least $n/2$ $\fn{remove}(i)$ operations between then and now
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overview}
+
+  \begin{itemize}
+    \item $n_i={}$ the number of items copied by the $i$th $\fn{rebuild}()$ operation
+
+    \item[]
+    \[ 
+      \underbrace{%
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{99}}}{\circ}
+      }_m
+    \]
+
+
+  \end{itemize}
+  
+  
 \end{frame}
 
 
