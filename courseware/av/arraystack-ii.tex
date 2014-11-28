@@ -22,7 +22,8 @@
   \begin{block}<1->{Theorem}
     \begin{itemize}
       \item[]An ArrayStack implements the List interface.
-      \item[]Ignoring the time spent in calls to $\mathsf{resize}()$,
+      \item<1-| alert@2>[]Ignoring the time spent in calls to $\mathsf{resize}()$,
+      \item[]
       \begin{itemize}
           \item$\mathsf{get}(i)$ and $\mathsf{set}(i,x)$ each run in $O(1)$ time; and
           \item$\mathsf{add}(i,x)$ and $\mathsf{remove}(i)$ each run in $O(1+n-i)$ time.
@@ -34,6 +35,7 @@
 %     What about the calls to $\mathsf{resize}()$?
 %  \end{block}
 \end{frame}
+
 
 \newlength{\nwidth}
 \setlength{\fboxsep}{0pt}
@@ -80,7 +82,8 @@
 \settowidth{\foo}{Then:}
 
 \begin{frame}
-  \frametitle{Resize during $\fn{add}(i,x)$}
+  \frametitle{Time Between Resizes}
+  \framesubtitle{Resize triggered by $\fn{add}(i,x)$}
 
   \begin{itemize}
     \item<2->[]\makebox[\foo]{Then:}
@@ -102,7 +105,8 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Resize during $\fn{add}(i,x)$}
+  \frametitle{Time Between Resizes}
+  \framesubtitle{Resize triggered by $\fn{remove}(i)$}
 
   \begin{itemize}
     \item<2->[]\makebox[\foo][l]{Then:}
@@ -133,53 +137,204 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Time Between Resizes}
+  \framesubtitle{Summary}
+
+  \begin{block}{Operations Between Resizes}
+    If a $\fn{resize}()$ operation copies $n$ elements, then there have been at least $n/2$ $\fn{add}(i,x)$ or $\fn{remove}(i)$ operations since the preceding $\fn{resize}()$ operation.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
   \frametitle{Overview}
 
   \begin{itemize}
-    \item $n_i={}$ the number of items copied by the $i$th $\fn{rebuild}()$ operation
+    \item<3-> $n_i={}$ number of items copied by the $i$th $\fn{rebuild}()$ operation
+    \item<4-> $m_i={}$ number of add/remove operations between the $(i-1)^{\text{th}}$ and $i^\text{th}$ $\fn{rebuild}()$.
 
-    \item[]
-    \[ 
+    \item[]%
+    \only<1>{
+     \[ 
       \underbrace{%
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
-        \stackrel{{\color{white} n_{99}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
       }_m
-    \]
-
-
+     \]
+    }%
+    \only<2>{
+     \[ 
+      \underbrace{%
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+      }_m
+     \]
+    }%
+    \only<3>{
+     \[ 
+      \underbrace{%
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{1}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{2}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{3}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{4}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{5}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+      }_m
+     \]
+    }
+    \only<4->{
+     \[ 
+      \underbrace{%
+       \underbrace{
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{1}}}{\bullet}
+       }_{m_1\ge n_1/2}
+       \underbrace{
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{2}}}{\bullet}
+       }_{m_2\ge n_2/2}
+       \underbrace{
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{3}}}{\bullet}
+       }_{m_3\ge n_3/2}
+       \underbrace{
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{4}}}{\bullet}
+       }_{m_4\ge n_4/2}
+       \underbrace{
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{5}}}{\bullet}
+       }_{m_5\ge n_5/2}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+      }_m
+     \]
+    }
+    \item<5->Total number of items copied: $N=n_1+n_2+n_3+\cdots$
+    \item<6->Total number of add/remove operations:
+      \only<-6>{$m\ge m_1+m_2+m_3+\cdots$}%
+      \only<7>{$m\ge n_1/2+n_2/2+n_3/2+\cdots$}%
+      \only<8>{$m\ge N/2$}%
+      %\only<9>{$2m\ge N$}%
+      \only<9>{$N \le 2m$}%
   \end{itemize}
   
   
