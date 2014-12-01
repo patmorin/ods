@@ -44,7 +44,13 @@
     </exercise>
     <exercise>
     <![CDATA[
-       Exercise 2
+       Why is ArrayStack a good name for this data structure?
+       <p>
+       <a class="button" href="nojavascript.html"
+         onclick="document.getElementById('answer2').className='';return false">See answer</a>
+       <div id="answer2" class="hidden">
+         The ArrayStack supports add(i,x) and remove(i) operations in $O(1+n-i)$ time per operation.  This means we can use it to implement a Stack in $O(1)$ time per operation, by implementing push(x) as add(n,x) and implementing pop() as remove(n-1).
+       </div>
     ]]>
     </exercise>
   </exercises>
