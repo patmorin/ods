@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<coursepage title="The List Interface">
+  <css>
+    .customcss {
+    }
+  </css>
+  <title>ArrayStack: Part I</title>
+  <subtitle>An array-based list implementation</subtitle>
+  <preface>
+    Watch this video to learn about the ArrayStack implementation of the List
+    interface
+  </preface>
+  <video ytid="XXXXXX"/>
+  <epilogue>
+    <![CDATA[
+     This implementation is discussed in <a target="_blank" href="http://opendatastructures.org/ods-java/2_1_ArrayStack_Fast_Stack_O.html">Section 2.1</a> of the textbook.
+    ]]>
+  </epilogue>
+  <exercises>
+    <exercise>
+    <![CDATA[
+       Here is the Java code for the <code>resize()</code> operation:
+       <pre>
+   void resize() {
+       T[] b = newArray(Math.max(n*2,1));
+       for (int i = 0; i < n; i++) 
+           b[i] = a[i];
+       a = b;
+   }
+       </pre>
+       It does not work exactly as described in the video. Explain how this
+       code differs slightly from what the video describes and explain why
+       this difference is necessary.<p>
+       <a class="button" href="nojavascript.html"
+         onclick="document.getElementById('answer1').className='';return false">See answer</a>
+       <div id="answer1" class="hidden">
+         The <code>resize()</code> operation allocates an array of minimum
+         size 1. This is to handle the special case when we add
+         into an empty List. Without this special case, 
+         <code>resize()</code> would allocate a new array of size $2n=0$
+         and there would not be room for the newly added element.
+       </div>
+    ]]>
+    </exercise>
+    <exercise>
+    <![CDATA[
+       Exercise 2
+    ]]>
+    </exercise>
+  </exercises>
+  <js-head>
+    <![CDATA[
+    function someJSInHeadSection {
+    }
+    ]]>
+  </js-head>
+  <js-tail>
+   <![CDATA[
+    function someJSInTailSection() {
+    }
+   ]]>
+  </js-tail>
+</coursepage>
