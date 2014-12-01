@@ -150,8 +150,8 @@
   \frametitle{Overview}
 
   \begin{itemize}
-    \item<3-> $n_i={}$ number of items copied by the $i$th $\fn{rebuild}()$ operation
-    \item<4-> $m_i={}$ number of add/remove operations between the $(i-1)^{\text{th}}$ and $i^\text{th}$ $\fn{rebuild}()$.
+    \item<3-> $n_i={}$ number of items copied by the $i$th $\fn{resize}()$ operation
+    \item<4-> $m_i={}$ number of add/remove operations between the $(i-1)^{\text{th}}$ and $i^\text{th}$ $\fn{resize}()$
 
     \item[]%
     \only<1>{
@@ -192,7 +192,10 @@
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
-      }_m
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+      }_{m_{\color{white}{9}}{\color{white}/2}}
      \]
     }%
     \only<2>{
@@ -200,26 +203,6 @@
       \underbrace{%
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\bullet}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\bullet}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\bullet}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
-        \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
@@ -233,12 +216,38 @@
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
-      }_m
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+      }_{m_{\color{white}{9}}{\color{white}/2}}
      \]
     }%
-    \only<3>{
+    \only<3-4>{
      \[ 
       \underbrace{%
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{black} n_{1}}}{\bullet}
@@ -274,24 +283,27 @@
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
-      }_m
+      }_{m_{\color{white}{9}}{\color{white}/2}}
      \]
     }
-    \only<4->{
+    \only<5->{
      \[ 
-      \underbrace{%
-       \underbrace{
+      %\underbrace{%
+       \,\underbrace{
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{black} n_{1}}}{\bullet}
-       }_{m_1\ge n_1/2}
+       }_{m_1\ge n_1/2}\!
        \underbrace{
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{black} n_{2}}}{\bullet}
-       }_{m_2\ge n_2/2}
+       }_{m_2\ge n_2/2}\!
        \underbrace{
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
@@ -303,7 +315,7 @@
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{black} n_{3}}}{\bullet}
-       }_{m_3\ge n_3/2}
+       }_{m_3\ge n_3/2}\!
        \underbrace{
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
@@ -313,33 +325,53 @@
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{black} n_{4}}}{\bullet}
-       }_{m_4\ge n_4/2}
+       }_{m_4\ge n_4/2}\!
        \underbrace{
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{black} n_{5}}}{\bullet}
-       }_{m_5\ge n_5/2}
+       }_{m_5\ge n_5/2}\!
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
         \stackrel{{\color{white} n_{9}}}{\circ}
-      }_m
+      %}_m
      \]
     }
-    \item<5->Total number of items copied: $N=n_1+n_2+n_3+\cdots$
-    \item<6->Total number of add/remove operations:
-      \only<-6>{$m\ge m_1+m_2+m_3+\cdots$}%
-      \only<7>{$m\ge n_1/2+n_2/2+n_3/2+\cdots$}%
-      \only<8>{$m\ge N/2$}%
+    \item<6->Total number of items copied: $N=n_1+n_2+n_3+\cdots$
+    \item<7->Total number of add/remove operations:
+      \only<-7>{$m\ge m_1+m_2+m_3+\cdots$}%
+      \only<8>{$m\ge n_1/2+n_2/2+n_3/2+\cdots$}%
+      \only<9>{$m\ge N/2$}%
       %\only<9>{$2m\ge N$}%
-      \only<9>{$N \le 2m$}%
+      \only<10->{$N \le 2m$}%
+    \item<11-| alert@10>The total number, $N$, of items copied by $\fn{resize}()$ is at most $2m$.
+    \item<12-| alert@11>The total time spent in all calls to $\fn{resize}()$ is $O(m)$
   \end{itemize}
-  
   
 \end{frame}
 
+\begin{frame}
+  \frametitle{ArrayStack}
+  \framesubtitle{Summary}
+  \begin{block}{Theorem}
+    \begin{itemize}
+      \item[]An ArrayStack implements the List interface.
+      \item[]Ignoring the time spent in calls to $\mathsf{resize}()$,
+      \item[]
+      \begin{itemize}
+          \item$\mathsf{get}(i)$ and $\mathsf{set}(i,x)$ each run in $O(1)$ time; and
+          \item$\mathsf{add}(i,x)$ and $\mathsf{remove}(i)$ each run in $O(1+n-i)$ time.
+      \end{itemize}
+      \item[]Furthermore, if we start with an empty ArrayStack and perform any sequence of $m$ $\mathsf{add}(i,x)$ and $\mathsf{remove}(i)$ operations, then the total time spent in all calls to $\mathsf{resize}()$ is $O(m)$.
+    \end{itemize}
+  \end{block}
+%  \begin{block}<2>{Question}
+%     What about the calls to $\mathsf{resize}()$?
+%  \end{block}
+\end{frame}
 
 
 \closing

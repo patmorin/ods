@@ -74,19 +74,44 @@ number of elements copied.  We will show that during our sequence of $m$
 operations, at most $2m$ elements are copied during all the calls to resize().
 <div class="pause">3</div>
 Now, consider the situation just before a resize() triggered by adding an element.  This happens when $a$ is completely full; the length of $a$ is equal to $n$.
-<div class="pause">2</pause>
+<div class="pause">2</div>
 If we look back to the most recent resize() operation---the one that allocated the current array, $a$, we see that, right after that resize() operation, $a$ was exactly half full.  It contained exactly $n/2$ elements.
-<div class="pause">2</pause>
+<div class="pause">2</div>
 Since $a$ now contains $n$ elements, we can conclude that an additional
 $n/2$ elements were added since the last resize() operation.
-<div class="pause">2</pause>
+<div class="pause">2</div>
 This means that, between the previous and current resize() operations at least $n/2$ add(i,x) operations were performed.
-<div class="pause">3</pause>
+<div class="pause">3</div>
 Next, consider the situation just before a resize() triggered by the removal of an element.   This happens when $a$ is less than one third full; $n$ is less than one third the length of $a$.
-<div class="pause">2</pause>
+<div class="pause">2</div>
 Again, if we look back to the situation immediately after the most recent resize() operation we see that, at that time, the array $a$ was exactly half full.  Since the difference between one half and one third is one sixth, we conclude that at least $n/2$ elements must have been removed from $a$ in the meantime.
-<div class="pause">2</pause>
+<div class="pause">2</div>
 To summarize, it doesn't matter whether a resize() is trigged by an add or a remove operation.  If the upcoming resize() operation is going to copy $n$ elements, then at least $n/2$ add or remove operations have occured since the previous resize() operation.
+<div class="pause">2</div>
+Now that we've established this, we can take a step back and look at an entire sequence of $m$ add and remove operations.
+<div class="pause">2</div>
+Some of these add and remove operations trigger a resize() operation.
+<div class="pause">2</div>
+Suppose that, during the $i$th resize() operation, $n_i$ elements are copied.
+<div class="pause">2</div>
+Let $m_i$ denote the number of add or remove operations between the $i-1$st and the $i$th resize operation
+<div class="pause">2</div>
+We've already established that $m_i \ge n_i/2$; there are at least $n_i/2$ add or remove operations that have to occur before the $i$th resize() but after the $i-1$th resize().
+<div class="pause">2</div>
+Let's summarize: The total number of items copied by resize is the sum of the $n_i$'s.
+<div class="pause">2</div>
+The total number of add and remove operations is at least the sum of the $m_i$'s.
+<div class="pause">2</div>
+But each $m_i$ is at least half of $n_i$.
+<div class="pause">2</div>
+This means that the total number of add and remove operations is at least half of the total number of items copied by resize.
+<div class="pause">2</div>
+Another way of saying this is that the total number of items copied is at most twice the total number of add and remove operations.
+<div class="pause">2</div>
+Since all the work done by resize() is bounded by the number of items it copies, we conclude that the total time spent in calls to resize is $O(m)$.
+<div class="pause">3</div>
+This completes the proof of our theorem about ArrayStacks.
+<div class="pause">10</div>
 
 
 
