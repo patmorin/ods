@@ -1,8 +1,6 @@
 /*******************************************************************************
  * File         : arraystack.c
  * Author(s)    : Tekin Ozbek <tekin@tekinozbek.com>
- *
- * Implementation of an array-based stack.
  ******************************************************************************/
 
 #include <stdlib.h>
