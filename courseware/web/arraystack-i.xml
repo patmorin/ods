@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<coursepage title="The List Interface">
+<coursepage title="ArrayStack: An array-based list implementation">
   <css>
     .customcss {
     }
@@ -17,6 +17,21 @@
     ]]>
   </epilogue>
   <exercises>
+    <exercise>
+    <![CDATA[
+       Why is Array<em>Stack</em> a good name for this data structure?
+       <p>
+       <a class="button" href="nojavascript.html"
+         onclick="document.getElementById('answer2').className='';return false">See answer</a>
+       <div id="answer2" class="hidden">
+         The ArrayStack supports add(i,x) and remove(i) operations in
+         $O(1+n-i)$ time per operation.  This means we can use it to
+         implement a Stack in $O(1)$ time per operation, by implementing
+         push(x) as add(n,x) and implementing pop() as remove(n-1).
+       </div>
+    ]]>
+    </exercise>
+
     <exercise>
     <![CDATA[
        Here is the Java code for the <code>resize()</code> operation:
@@ -43,23 +58,18 @@
     ]]>
     </exercise>
     <exercise>
-    <![CDATA[
-       Why is ArrayStack a good name for this data structure?
-       <p>
-       <a class="button" href="nojavascript.html"
-         onclick="document.getElementById('answer2').className='';return false">See answer</a>
-       <div id="answer2" class="hidden">
-         The ArrayStack supports add(i,x) and remove(i) operations in
-         $O(1+n-i)$ time per operation.  This means we can use it to
-         implement a Stack in $O(1)$ time per operation, by implementing
-         push(x) as add(n,x) and implementing pop() as remove(n-1).
-       </div>
-    ]]>
+      TODO: Add exercise that involves performing a sequence of add(i,x)
+      and remove(i) operations on a list and counting the number of elements
+      shifted during each operation.
     </exercise>
   </exercises>
   <js-head>
     <![CDATA[
-    function someJSInHeadSection {
+    String.prototype.add = function(i, c) {
+       return this.slice(0,i-1) + c + this.slice(i, this.length);
+    }
+    String.prototype.remove = function(i) {
+       return this.slice(0,i-1) + this.slice(i+1, this.length);
     }
     ]]>
   </js-head>
