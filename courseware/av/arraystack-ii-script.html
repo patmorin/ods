@@ -67,7 +67,7 @@ After a remove() operation, the array $a$ may be less than one-third
 full. We handle this the same way; we allocate a new array of size $2n$
 and copy the $n$ elements of $a$ into this new array.
 <div class="pause">3</div>
-So that we can focus on a concrete value, our strategy is to study the
+So that we can focus on a concrete quantity, our strategy is to study the
 number of elements copied during all calls to resize(). This is good enough,
 since all the work done in the resize() operations is proportional to the
 number of elements copied.  We will show that during our sequence of $m$
