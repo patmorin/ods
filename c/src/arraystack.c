@@ -1,6 +1,12 @@
 /*******************************************************************************
  * File         : arraystack.c
  * Author(s)    : Tekin Ozbek <tekin@tekinozbek.com>
+ *
+ * Implementation of an array-based stack. The arraystack_t struct holds the
+ * ownership of the backing array. This struct must be initialized using
+ * ods_arraystack_init before use and disposed of using ods_arraystack_dispose
+ * when done so that all system resources allocated by the functions can be
+ * released.
  ******************************************************************************/
 
 #include <stdlib.h>
@@ -22,7 +28,7 @@ void ods_arraystack_init(arraystack_t* s, size_t elem_size) {
     s->elem_size    = elem_size;
 }
 
-void ods_arraystack_resize(arraystack_t* s) {
+static void ods_arraystack_resize(arraystack_t* s) {
 
     size_t realloc_size = 1;
 

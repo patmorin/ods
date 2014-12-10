@@ -2,24 +2,28 @@
  * File         : arraystack.h
  * Author(s)    : Tekin Ozbek <tekin@tekinozbek.com>
  *
- * Implementation of an array-based stack. The struct holds ownership of the
- * backing array and must be initialized at the beginning and disposed at the
- * end.
- *
- * The stack will make copies of inserted elements. To avoid data duplication,
- * you may store pointers in the stack. However, the stack will not claim
- * ownership of these pointers; they must be freed by the user.
+ * Implementation of an array-based stack. The arraystack_t struct holds the
+ * ownership of the backing array. This struct must be initialized using
+ * ods_arraystack_init before use and disposed of using ods_arraystack_dispose
+ * when done so that all system resources allocated by the functions can be
+ * released.
  ******************************************************************************/
 
 #ifndef ODS_ARRAYSTACK_H_
 #define ODS_ARRAYSTACK_H_
 
+#define ods_arraystack_push(s, elem) \
+            ods_arraystack_add((s), (s)->length, (elem))
+
+#define ods_arraystack_pop(s, elem_out) \
+            ods_arraystack_remove((s), (s)->length - 1, (elem_out))
+
 typedef struct {
 
-    size_t alloc_length;  /* allocated length of the array, in bytes */
-    size_t length;        /* logical length of the stack, in num elems */
-    size_t elem_size;     /* size of elements that are stored */
-    void* array;          /* backing array of the stack */
+    size_t alloc_length;
+    size_t length;
+    size_t elem_size;
+    void* array;
     
 } arraystack_t;
 
@@ -38,18 +42,6 @@ typedef struct {
  */
 extern void ods_arraystack_init(arraystack_t* s,
                                 size_t elem_size);
-
-/* FUNCTION
- *      ods_arraystack_resize
- *
- * DESCRIPTION
- *      Resizes the backing array. The resize length is min(n * 2, 1).
- *
- * PARAMETERS
- *      s           A valid (allocated) pointer to an initialized arraystack_t
- *                  struct.
- */
-static void ods_arraystack_resize(arraystack_t* s);
 
 /* FUNCTION
  *      ods_arraystack_add
@@ -176,4 +168,3 @@ extern void ods_arraystack_copy(arraystack_t* s,
 extern void ods_arraystack_dispose(arraystack_t* s);
 
 #endif
- 
