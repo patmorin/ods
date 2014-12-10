@@ -35,9 +35,9 @@ static void ods_arraystack_resize(arraystack_t* s) {
     assert((void *)s > NULL);
     
     if (s->length > 0)
-        realloc_size = s->length * s->elem_size * 2;
+        realloc_size = s->length * 2;
 
-    s->array = realloc(s->array, realloc_size);
+    s->array = realloc(s->array, realloc_size * s->elem_size);
 
     assert(s->array > NULL);
 
@@ -50,7 +50,7 @@ void ods_arraystack_add(arraystack_t* s, size_t pos, void* elem) {
     assert(elem > NULL);
     assert(pos <= s->length);
 
-    if ((1 + s->length) * s->elem_size > s->alloc_length)
+    if (1 + s->length > s->alloc_length)
         ods_arraystack_resize(s);
 
     /* shift elements to the right according to insertion position */
@@ -104,7 +104,7 @@ void ods_arraystack_remove(arraystack_t* s, size_t pos, void* elem_out) {
     --s->length;
 
     /* resize if necessary */
-    if (s->alloc_length >= (3 * s->length * s->elem_size))
+    if (s->alloc_length >= 3 * s->length)
         ods_arraystack_resize(s);
 }
 
@@ -123,7 +123,7 @@ void ods_arraystack_copy(arraystack_t* s, size_t pos,
     assert(src > NULL);
     assert(pos <= s->length);
 
-    if ((s->length + num_elems) * s->elem_size > s->alloc_length) {
+    if (s->length + num_elems > s->alloc_length) {
 
         /* makes resize function resize to (length + num_elems) * 2 */
         s->length += num_elems;

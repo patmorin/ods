@@ -31,10 +31,8 @@ typedef struct {
  *      ods_arraystack_init
  *
  * DESCRIPTION
- *      Initializes an arraystack_t struct with an array size of 1.
- *      This function must be called before any other arraystack-
- *      related functions. After a call to this function, the stack will be
- *      considered INITIALIZED.
+ *      Initializes an arraystack_t struct with an array size of 1. This
+ *      function must be called before any other arraystack-related functions.
  *
  * PARAMETERS
  *      s           A valid (allocated) pointer to an arraystack_t struct.
@@ -159,7 +157,7 @@ extern void ods_arraystack_copy(arraystack_t* s,
  * DESCRIPTION
  *      Releases allocated memory. Make sure to call this function to avoid
  *      memory leaks. The stack, after a call to this function, is considered to
- *      be UNINITIALIZED and must be re-initialized to be able to use again.
+ *      be uninitialized and must be re-initialized in order to be used again.
  *
  * PARAMETERS
  *      s           A valid (allocated) pointer to an initialized arraystack_t
