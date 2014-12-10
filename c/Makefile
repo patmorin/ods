@@ -1,15 +1,15 @@
-COMPILER = gcc
+CC = gcc
 
-OBJ = arraystack.o
+OBJ = arraystack.o arrayqueue.o
 
 shared-lib: $(OBJ)
-	$(COMPILER) -shared -o libodsc.so $^
+	$(CC) -shared -o libodsc.so $^
 
 static-lib: $(OBJ)
 	ar rc libodsc.a $^
 
 %.o: src/%.c
-	$(COMPILER) -ansi -pedantic -Wall -Werror -fpic -I include -c -o $@ $<
+	$(CC) -ansi -pedantic -Wall -Werror -fpic -I include -c -o $@ $<
 
 clean:
-	rm -f *.o *.so *.a
+	rm -f *.o *.so *.a a.out
