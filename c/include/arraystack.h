@@ -35,7 +35,7 @@ typedef struct {
  *      function must be called before any other arraystack-related functions.
  *
  * PARAMETERS
- *      s           A valid (allocated) pointer to an arraystack_t struct.
+ *      s           A valid pointer to an arraystack_t struct.
  *      elem_size   Size of the elements that will be stored in the stack.
  */
 extern void ods_arraystack_init(arraystack_t* s,
@@ -48,14 +48,11 @@ extern void ods_arraystack_init(arraystack_t* s,
  *      Adds an element to the specified position in the stack.
  *
  * PARAMETERS
- *      s           A valid (allocated) pointer to an initialized arraystack_t
- *                  struct.
+ *      s           A valid pointer to an initialized arraystack_t struct.
  *      pos         The position where the element will be inserted.
  *      elem        Pointer to the element that will inserted to the stack. This
  *                  argument cannot be a null pointer. The memory pointed to by
- *                  this argument will be copied into the array. To avoid data
- *                  duplication, store pointers instead of elements and pass
- *                  double pointers to this argument.
+ *                  this argument will be copied into the array.
  */
 extern void ods_arraystack_add(arraystack_t* s,
                                size_t pos,
@@ -68,8 +65,7 @@ extern void ods_arraystack_add(arraystack_t* s,
  *      Gets the element at the specified position.
  *
  * PARAMETERS
- *      s           A valid (allocated) pointer to an initialized arraystack_t
- *                  struct.
+ *      s           A valid pointer to an initialized arraystack_t struct.
  *      pos         The position of the element that will be retrieved.
  *      elem        Pointer to a memory with at least elem_size bytes allocated.
  *                  The data at pos will be copied into this memory.
@@ -86,11 +82,10 @@ extern void ods_arraystack_get(arraystack_t* s,
  *      returned through an output parameter.
  *
  * PARAMETERS
- *      s           A valid (allocated) pointer to an initialized arraystack_t
- *                  struct.
+ *      s           A valid pointer to an initialized arraystack_t struct.
  *      pos         The position of the element that will be set.
- *      elem        Pointer to the new element that will be copied into the
- *                  stack.
+ *      elem        Pointer to the new element that will be inserted into the
+ *                  stack. This argument cannot be null.
  *      old_elem    If not a null pointer, the old element at pos will be copied
  *                  into the memory pointed to by this pointer.
  */
@@ -107,8 +102,7 @@ extern void ods_arraystack_set(arraystack_t* s,
  *      be returned through an output parameter.
  *
  * PARAMETERS
- *      s           A valid (allocated) pointer to an initialized arraystack_t
- *                  struct.
+ *      s           A valid pointer to an initialized arraystack_t struct.
  *      pos         The position of the element to be removed.
  *      elem_out    If not a null pointer, the removed element will be coped
  *                  into the memory pointed to by this pointer.
@@ -124,8 +118,7 @@ extern void ods_arraystack_remove(arraystack_t* s,
  *      Clears the stack.
  *
  * PARAMETERS
- *      s           A valid (allocated) pointer to an initialized arraystack_t
- *                  struct.
+ *      s           A valid pointer to an initialized arraystack_t struct.
  */
 extern void ods_arraystack_clear(arraystack_t* s);
 
@@ -137,8 +130,7 @@ extern void ods_arraystack_clear(arraystack_t* s);
  *      stack.
  *
  * PARAMETERS
- *      s           A valid (allocated) pointer to an initialized arraystack_t
- *                  struct.
+ *      s           A valid pointer to an initialized arraystack_t struct.
  *      pos         The position where the elements from the source array will
  *                  be inserted.
  *      src         Pointer to a block of memory with at least num_elems *
@@ -160,8 +152,7 @@ extern void ods_arraystack_copy(arraystack_t* s,
  *      be uninitialized and must be re-initialized in order to be used again.
  *
  * PARAMETERS
- *      s           A valid (allocated) pointer to an initialized arraystack_t
- *                  struct.
+ *      s           A valid pointer to an initialized arraystack_t struct.
  */
 extern void ods_arraystack_dispose(arraystack_t* s);
 
