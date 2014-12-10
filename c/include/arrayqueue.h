@@ -12,11 +12,17 @@
 #ifndef ODS_ARRAYQUEUE_H_
 #define ODS_ARRAYQUEUE_H_
 
+#define ods_arrayqueue_enqueue(s, elem) \
+            ods_arrayqueue_add((s), (elem))
+
+#define ods_arrayqueue_dequeue(s, elem_out) \
+            ods_arraystack_remove((s), (elem_out))
+
 typedef struct {
 
     size_t alloc_length;
     size_t length;
-    size_t pos;             /* pointer position on circular array */
+    size_t pos;
     size_t elem_size; 
     void* array;
 
