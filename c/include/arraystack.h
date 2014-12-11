@@ -38,6 +38,24 @@ extern void ods_arraystack_init(arraystack_t* s,
                                 size_t elem_size);
 
 /* FUNCTION
+ *      ods_arraystack_reserve
+ *
+ * DESCRIPTION
+ *      Reserves space for the specified amount of elements. The arraystack will
+ *      be able to store this amount of elements without having to reallocate
+ *      memory. This does not impose a limit on the length of the arraystack.
+ *
+ *      Note: keep in mind that ods_arraystack_remove will invoke a resize if
+ *      length * 3 < allocated space.
+ *
+ * PARAMETERS
+ *      s           A valid pointer to an initialized arraystack_t struct.
+ *      n           The number of elements to reserve space for.
+ */
+extern void ods_arraystack_reserve(arraystack_t* s,
+                                   size_t n);
+
+/* FUNCTION
  *      ods_arraystack_add
  *
  * DESCRIPTION

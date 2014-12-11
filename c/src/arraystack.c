@@ -39,6 +39,21 @@ static void ods_arraystack_resize(arraystack_t* s) {
     s->alloc_length = realloc_size;
 }
 
+void ods_arraystack_reserve(arraystack_t* s, size_t n) {
+
+    assert((void *)s > NULL);
+    assert(n >= s->length);
+
+    if (n == s->length)
+        return;
+
+    s->array = realloc(s->array, n * s->elem_size);
+
+    assert(s->array > NULL);
+
+    s->alloc_length = n;
+}
+
 void ods_arraystack_add(arraystack_t* s, size_t pos, void* elem) {
 
     assert((void *)s > NULL);
@@ -102,7 +117,7 @@ void ods_arraystack_remove(arraystack_t* s, size_t pos, void* elem_out) {
     --s->length;
 
     /* resize if necessary */
-    if (s->alloc_length >= 3 * s->length)
+    if (s->length * 3 < s->alloc_length)
         ods_arraystack_resize(s);
 }
 
