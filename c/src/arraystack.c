@@ -125,8 +125,11 @@ void ods_arraystack_clear(arraystack_t* s) {
 
     assert((void *)s > NULL);
 
-    s->length = 0;
-    ods_arraystack_resize(s);
+    s->length       = 0;
+    s->alloc_length = 1;
+    s->array        = realloc(s->array, s->elem_size);
+
+    assert(s->array > NULL);
 }
 
 void ods_arraystack_copy(arraystack_t* s, size_t pos,

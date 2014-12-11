@@ -41,8 +41,8 @@ typedef struct {
  *      d           A valid pointer to an arraydeque_t struct.
  *      elem_size   Size of the elements that will be stored in the stack.
  */
-void ods_arraydeque_init(arraydeque_t* d,
-                         size_t elem_size);
+extern void ods_arraydeque_init(arraydeque_t* d,
+                                size_t elem_size);
 
 /* FUNCTION
  *      ods_arraydeque_get
@@ -57,9 +57,9 @@ void ods_arraydeque_init(arraydeque_t* d,
  *                  copied. Must have at least elem_size bytes allocated. Cannot
  *                  be null.
  */
-void ods_arraydeque_get(arraydeque_t* d,
-                        size_t pos,
-                        void* elem_out);
+extern void ods_arraydeque_get(arraydeque_t* d,
+                               size_t pos,
+                               void* elem_out);
 
 /* FUNCTION
  *      ods_arraydeque_set
@@ -76,10 +76,10 @@ void ods_arraydeque_get(arraydeque_t* d,
  *                  pointed to by this argument. If null, old data will be
  *                  overwritten.
  */
-void ods_arraydeque_set(arraydeque_t* d,
-                        size_t pos,
-                        void* elem,
-                        void* elem_out);
+extern void ods_arraydeque_set(arraydeque_t* d,
+                               size_t pos,
+                               void* elem,
+                               void* elem_out);
 
 /* FUNCTION
  *      ods_arraydeque_add
@@ -93,9 +93,9 @@ void ods_arraydeque_set(arraydeque_t* d,
  *      elem        Pointer to the new element that will be copied into the
  *                  deque.
  */
-void ods_arraydeque_add(arraydeque_t* d,
-                        size_t pos,
-                        void* elem);
+extern void ods_arraydeque_add(arraydeque_t* d,
+                               size_t pos,
+                               void* elem);
 
 /* FUNCTION
  *      ods_arraydeque_remove
@@ -109,9 +109,20 @@ void ods_arraydeque_add(arraydeque_t* d,
  *      elem_out    If not null, the removed element will be copied into the
  *                  memory pointed to by this argument.
  */
-void ods_arraydeque_remove(arraydeque_t*d,
-                           size_t pos,
-                           void* elem_out);
+extern void ods_arraydeque_remove(arraydeque_t* d,
+                                  size_t pos,
+                                  void* elem_out);
+
+/* FUNCTION
+ *      ods_arraydeque_clear
+ *
+ * DESCRIPTION
+ *      Clears the deque. Removes all elements and minimizes allocated space.
+ *
+ * PARAMETERS
+ *      d           A valid pointer to an initialized arraydeque_t struct.
+ */
+extern void ods_arraydeque_clear(arraydeque_t* d);
 
 /* FUNCTION
  *      ods_arraydeque_dispose
@@ -124,6 +135,6 @@ void ods_arraydeque_remove(arraydeque_t*d,
  * PARAMETERS
  *      d           A valid pointer to an initialized arraydeque_t struct.
  */
-void ods_arraydeque_dispose(arraydeque_t* d);
+extern void ods_arraydeque_dispose(arraydeque_t* d);
 
 #endif

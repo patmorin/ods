@@ -93,6 +93,18 @@ void ods_arrayqueue_remove(arrayqueue_t* q, void* elem_out) {
         ods_arrayqueue_resize(q);
 }
 
+void ods_arrayqueue_clear(arrayqueue_t* q) {
+
+    assert((void *)q > NULL);
+
+    q->length       = 0;
+    q->pos          = 0;
+    q->alloc_length = 1;
+    q->array        = realloc(q->array, q->elem_size);
+
+    assert(q->array > NULL);
+}
+
 void ods_arrayqueue_dispose(arrayqueue_t* q) {
 
     assert((void *)q > NULL);

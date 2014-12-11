@@ -35,7 +35,8 @@ typedef struct {
  *      q           A valid pointer to an arrayqueue_t struct.
  *      elem_size   Size of the elements that will be stored in the stack.
  */
-void ods_arrayqueue_init(arrayqueue_t* q, size_t elem_size);
+extern void ods_arrayqueue_init(arrayqueue_t* q,
+                                size_t elem_size);
 
 /* FUNCTION
  *      ods_arrayqueue_add
@@ -48,8 +49,8 @@ void ods_arrayqueue_init(arrayqueue_t* q, size_t elem_size);
  *      elem        Pointer to the element that will be inserted to the queue.
  *                  This argument cannot be null.
  */
-void ods_arrayqueue_add(arrayqueue_t* q,
-                        void* elem);
+extern void ods_arrayqueue_add(arrayqueue_t* q,
+                               void* elem);
 
 /* FUNCTION
  *      ods_arrayqueue_remove
@@ -63,8 +64,19 @@ void ods_arrayqueue_add(arrayqueue_t* q,
  *                  bytes allocated. The removed element will be copied into
  *                  this memory.
  */
-void ods_arrayqueue_remove(arrayqueue_t* q,
-                           void* elem_out);
+extern void ods_arrayqueue_remove(arrayqueue_t* q,
+                                  void* elem_out);
+
+/* FUNCTION
+ *      ods_arrayqueue_clear
+ *
+ * DESCRIPTION
+ *      Clears the queue. Removes all elements and minimizes allocated space.
+ *
+ * PARAMETERS
+ *      q           A valid pointer to an initialized arrayqueue_t struct.
+ */
+extern void ods_arrayqueue_clear(arrayqueue_t* q);
 
 /* FUNCTION
  *      ods_arrayqueue_dispose
@@ -76,6 +88,6 @@ void ods_arrayqueue_remove(arrayqueue_t* q,
  * PARAMETERS
  *      q           A valid pointer to an initialized arrayqueue_t struct.
  */
-void ods_arrayqueue_dispose(arrayqueue_t* q);
+extern void ods_arrayqueue_dispose(arrayqueue_t* q);
 
 #endif

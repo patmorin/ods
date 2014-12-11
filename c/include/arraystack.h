@@ -129,7 +129,7 @@ extern void ods_arraystack_remove(arraystack_t* s,
  *      ods_arraystack_clear
  *
  * DESCRIPTION
- *      Clears the stack.
+ *      Clears the stack. Removes all elements and minimizes allocated space.
  *
  * PARAMETERS
  *      s           A valid pointer to an initialized arraystack_t struct.

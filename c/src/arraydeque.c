@@ -201,6 +201,18 @@ void ods_arraydeque_add(arraydeque_t* d, size_t pos, void* elem) {
     ++d->length;
 }
 
+void ods_arraydeque_clear(arraydeque_t* d) {
+
+    assert((void *)d > NULL);
+
+    d->alloc_length = 1;
+    d->length       = 0;
+    d->pos          = 0;
+    d->array        = realloc(d->array, d->elem_size);
+
+    assert(d->array > NULL);
+}
+
 void ods_arraydeque_dispose(arraydeque_t* d) {
 
     assert((void *)d > NULL);
