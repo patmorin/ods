@@ -79,6 +79,7 @@ void ods_arrayqueue_add(arrayqueue_t* q, void* elem) {
 void ods_arrayqueue_remove(arrayqueue_t* q, void* elem_out) {
 
     assert((void *)q > NULL);
+    assert(q->length > 0);
 
     if (elem_out > NULL)
         memcpy(elem_out,

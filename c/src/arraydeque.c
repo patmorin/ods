@@ -64,13 +64,89 @@ void ods_arraydeque_get(arraydeque_t* d, size_t pos, void* elem_out) {
 
     assert((void *)d > NULL);
     assert(elem_out > NULL);
-    assert(pos <= d->length);
+    assert(d->length > 0);
+    assert(pos < d->length);
 
     memcpy(
         elem_out,
         (char *)d->array + (((d->pos + pos) % d->alloc_length) * d->elem_size),
         d->elem_size
     );
+}
+
+void ods_arraydeque_set(arraydeque_t* d, size_t pos,
+                        void* elem, void* elem_out) {
+
+    assert((void *)d > NULL);
+    assert(elem > NULL);
+    assert(d->length > 0);
+    assert(pos < d->length);
+
+    if (elem_out > NULL) {
+        memcpy(
+            elem_out,
+            (char *)d->array +
+                (((d->pos + pos) % d->alloc_length) * d->elem_size),
+            d->elem_size
+        );
+    }
+
+    memcpy(
+        (char *)d->array + (((d->pos + pos) % d->alloc_length) * d->elem_size),
+        elem,
+        d->elem_size
+    );
+}
+
+void ods_arraydeque_remove(arraydeque_t* d, size_t pos, void* elem_out) {
+
+    size_t i;
+
+    assert((void *)d > NULL);
+    assert(d->length > 0);
+    assert(pos < d->length);
+
+    if (elem_out > NULL) {
+        memcpy(
+            elem_out,
+            (char *)d->array +
+                (((d->pos + pos) % d->alloc_length) * d->elem_size),
+            d->elem_size
+        );
+    }
+
+    /* what about rewriting the following shift without loops?
+     * memcpy'ing as much contiguous blocks as possible? */
+    if (pos < d->length / 2) {
+        for (i = pos; i > 0; --i) {
+            memcpy(
+                (char *)d->array +
+                    (((d->pos + i) % d->alloc_length) * d->elem_size),
+                (char *)d->array +
+                    (((d->pos + i - 1) % d->alloc_length) * d->elem_size),
+                d->elem_size
+            );
+        }
+
+        d->pos = (d->pos + 1) % d->alloc_length;
+    }
+
+    else {
+        for (i = pos; i < d->length - 1; ++i) {
+            memcpy(
+                (char *)d->array +
+                    (((d->pos + i) % d->alloc_length) * d->elem_size),
+                (char *)d->array +
+                    (((d->pos + i + 1) % d->alloc_length) * d->elem_size),
+                d->elem_size
+            );
+        }
+    }
+
+    --d->length;
+
+    if (3 * d->length < d->alloc_length)
+        ods_arraydeque_resize(d);
 }
 
 void ods_arraydeque_add(arraydeque_t* d, size_t pos, void* elem) {
@@ -89,7 +165,8 @@ void ods_arraydeque_add(arraydeque_t* d, size_t pos, void* elem) {
     if (pos < d->length / 2) {
 
         d->pos = (d->pos == 0) ? d->alloc_length - 1 : d->pos - 1;
-        if (pos > 0) { /* size_t is often unsigned */
+        
+        if (pos > 0) { /* size_t is often unsigned, pos-1 might break it */
             for (i = 0; i <= pos - 1; ++i) {
                 memcpy(
                     (char *)d->array +

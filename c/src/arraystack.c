@@ -63,7 +63,8 @@ void ods_arraystack_get(arraystack_t* s, size_t pos, void* elem) {
 
     assert((void *)s > NULL);
     assert(elem > NULL);
-    assert(pos <= s->length);
+    assert(s->length > 0);
+    assert(pos < s->length);
 
     memcpy(elem, (char *)s->array + (pos * s->elem_size), s->elem_size);
 }
@@ -73,6 +74,7 @@ void ods_arraystack_set(arraystack_t* s, size_t pos,
 
     assert((void *)s > NULL);
     assert(elem > NULL);
+    assert(s->length > 0);
     assert(pos < s->length);
 
     /* first copy the old data*/
@@ -85,6 +87,7 @@ void ods_arraystack_set(arraystack_t* s, size_t pos,
 void ods_arraystack_remove(arraystack_t* s, size_t pos, void* elem_out) {
 
     assert((void *)s > NULL);
+    assert(s->length > 0);
     assert(pos < s->length);
 
     /* copy the removed data */
