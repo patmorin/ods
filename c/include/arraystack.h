@@ -1,16 +1,12 @@
 /*******************************************************************************
  * File         : arraystack.h
  * Author(s)    : Tekin Ozbek <tekin@tekinozbek.com>
- *
- * Implementation of an array-based stack. The arraystack_t struct holds the
- * ownership of the backing array. This struct must be initialized using
- * ods_arraystack_init before use and disposed of using ods_arraystack_dispose
- * when done so that all system resources allocated by the functions can be
- * released.
  ******************************************************************************/
 
 #ifndef ODS_ARRAYSTACK_H_
 #define ODS_ARRAYSTACK_H_
+
+#include <stdlib.h>
 
 #define ods_arraystack_push(s, elem) \
             ods_arraystack_add((s), (s)->length, (elem))

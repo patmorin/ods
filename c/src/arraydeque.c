@@ -1,0 +1,132 @@
+/*******************************************************************************
+ * File         : arraydeque.c
+ * Author(s)    : Tekin Ozbek <tekin@tekinozbek.com>
+ ******************************************************************************/
+
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+
+#include <arraydeque.h>
+
+void ods_arraydeque_init(arraydeque_t* d, size_t elem_size) {
+
+    assert((void *)d > NULL);
+    assert(elem_size > 0);
+
+    d->array = malloc(elem_size);
+
+    assert(d->array > NULL);
+
+    d->alloc_length = 1;
+    d->length       = 0;
+    d->pos          = 0;
+    d->elem_size    = elem_size;
+}
+
+static void ods_arraydeque_resize(arraydeque_t* d) {
+
+    void* new;
+    size_t z;
+    size_t realloc_size = 1;
+
+    assert((void *)d > NULL);
+
+    if (d->length > 0)
+        realloc_size = d->length * 2;
+
+    new = malloc(realloc_size * d->elem_size);
+
+    assert(new > NULL);
+
+    /* z = number of elements to copy {i >= pos} (from pos to end) */
+    z = d->alloc_length - d->pos < d->length ?
+            d->alloc_length - d->pos : d->length;
+
+    /* n-z = number of elements to copy {0 <= i < pos} (from beginning) */
+
+    memcpy(new,
+           (char *)d->array + (d->pos * d->elem_size),
+           d->elem_size * z);
+
+    memcpy((char *)new + (z * d->elem_size),
+           (char *)d->array,
+           d->elem_size * (d->length - z));
+
+    free(d->array);
+
+    d->pos          = 0;
+    d->array        = new;
+    d->alloc_length = realloc_size;
+}
+
+void ods_arraydeque_get(arraydeque_t* d, size_t pos, void* elem_out) {
+
+    assert((void *)d > NULL);
+    assert(elem_out > NULL);
+    assert(pos <= d->length);
+
+    memcpy(
+        elem_out,
+        (char *)d->array + (((d->pos + pos) % d->alloc_length) * d->elem_size),
+        d->elem_size
+    );
+}
+
+void ods_arraydeque_add(arraydeque_t* d, size_t pos, void* elem) {
+
+    size_t i;
+
+    assert((void *)d > NULL);
+    assert(elem > NULL);
+    assert(pos <= d->length);
+
+    if (d->length + 1 > d->alloc_length)
+        ods_arraydeque_resize(d);
+
+    /* what about rewriting the following shift without loops?
+     * memcpy'ing as much contiguous blocks as possible? */
+    if (pos < d->length / 2) {
+
+        d->pos = (d->pos == 0) ? d->alloc_length - 1 : d->pos - 1;
+        if (pos > 0) { /* size_t is often unsigned */
+            for (i = 0; i <= pos - 1; ++i) {
+                memcpy(
+                    (char *)d->array +
+                        (((d->pos + i) % d->alloc_length) * d->elem_size),
+                    (char *)d->array +
+                        (((d->pos + i + 1) % d->alloc_length) * d->elem_size),
+                    d->elem_size
+                );
+            }
+        }
+    }
+
+    else {
+        
+        for (i = d->length; i > pos; --i) {
+            memcpy(
+                (char *)d->array +
+                    (((d->pos + i) % d->alloc_length) * d->elem_size),
+                (char *)d->array +
+                    (((d->pos + i - 1) % d->alloc_length) * d->elem_size),
+                d->elem_size
+            );
+        }
+    }
+
+    memcpy(
+        (char *)d->array + (((d->pos + pos) % d->alloc_length) * d->elem_size),
+        elem,
+        d->elem_size
+    );
+
+    ++d->length;
+}
+
+void ods_arraydeque_dispose(arraydeque_t* d) {
+
+    assert((void *)d > NULL);
+
+    free(d->array);
+}

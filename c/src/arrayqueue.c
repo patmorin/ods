@@ -1,12 +1,6 @@
 /*******************************************************************************
  * File         : arrayqueue.c
  * Author(s)    : Tekin Ozbek <tekin@tekinozbek.com>
- *
- * Implementation of an array-based queue. The arrayqueue_t struct holds the
- * ownership of the backing array. This struct must be initialized using
- * ods_arrayqueue_init before use and disposed of using ods_arrayqueue_dispose
- * when done so that all system resources allocated by the functions can be
- * released.
  ******************************************************************************/
 
 #include <assert.h>
@@ -18,6 +12,7 @@
 void ods_arrayqueue_init(arrayqueue_t* q, size_t elem_size) {
 
     assert((void *)q > NULL);
+    assert(elem_size > 0);
 
     q->array = malloc(elem_size);
 
@@ -48,13 +43,13 @@ static void ods_arrayqueue_resize(arrayqueue_t* q) {
     z = q->alloc_length - q->pos < q->length ?
             q->alloc_length - q->pos : q->length;
 
-    /* n - z = number of elements to copy {i < pos} (from beginning to pos) */
+    /* n-z = number of elements to copy {0 <= i < pos} (from beginning) */
 
     memcpy(new,
            (char *)q->array + (q->pos * q->elem_size),
            q->elem_size * z);
 
-    memcpy((char *)new + (z * q->elem_size) + q->elem_size,
+    memcpy((char *)new + (z * q->elem_size),
            (char *)q->array,
            q->elem_size * (q->length - z));
 

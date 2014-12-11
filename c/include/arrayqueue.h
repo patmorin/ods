@@ -1,20 +1,16 @@
 /*******************************************************************************
  * File         : arrayqueue.h
  * Author(s)    : Tekin Ozbek <tekin@tekinozbek.com>
- *
- * Implementation of an array-based queue. The arrayqueue_t struct holds the
- * ownership of the backing array. This struct must be initialized using
- * ods_arrayqueue_init before use and disposed of using ods_arrayqueue_dispose
- * when done so that all system resources allocated by the functions can be
- * released.
  ******************************************************************************/
 
 #ifndef ODS_ARRAYQUEUE_H_
 #define ODS_ARRAYQUEUE_H_
 
+#include <stdlib.h>
+
 #define ods_arrayqueue_enqueue(s, elem) \
             ods_arrayqueue_add((s), (elem))
-
+    
 #define ods_arrayqueue_dequeue(s, elem_out) \
             ods_arraystack_remove((s), (elem_out))
 
