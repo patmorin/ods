@@ -159,12 +159,16 @@ extern void ods_arraystack_reserve(arraystack_t* s,
  *      ods_arraystack_reverse
  *
  * DESCRIPTION
- *      Reverses the backing array.
+ *      Reverses the specified range in the array.
  *
  * PARAMETERS
  *      s           A valid pointer to an initialized arraystack_t struct.
+ *      pos         The position where reversing begins.
+ *      num_elems   Number of elements to reverse starting from pos.
  */
-extern void ods_arraystack_reverse(arraystack_t* s);
+extern void ods_arraystack_reverse(arraystack_t* s,
+                                   size_t pos,
+                                   size_t num_elems);
 
 /* FUNCTION
  *      ods_arraystack_set

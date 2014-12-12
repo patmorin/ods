@@ -157,21 +157,22 @@ void ods_arraystack_reserve(arraystack_t* s, size_t n) {
     s->alloc_length = n;
 }
 
-void ods_arraystack_reverse(arraystack_t* s) {
+void ods_arraystack_reverse(arraystack_t* s, size_t pos, size_t num_elems) {
 
     size_t i, j;
     void* tmp;
 
+    if (num_elems < 2)
+        return;
+
     assert((void *)s > NULL);
+    assert(pos + num_elems <= s->length);
 
     tmp = malloc(s->elem_size);
     
     assert(tmp > NULL);
 
-    if (s->length < 2)
-        return;
-
-    for (i = 0, j = s->length - 1; i < j; ++i, --j) {
+    for (i = pos, j = (pos + num_elems) - 1; i < j; ++i, --j) {
 
         memcpy(tmp, (char *)s->array + (i * s->elem_size), s->elem_size);
         
