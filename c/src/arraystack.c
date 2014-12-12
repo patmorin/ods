@@ -214,7 +214,7 @@ void ods_arraystack_truncate(arraystack_t* s, size_t pos, size_t num_elems) {
         memmove(
             (char *)s->array + (pos * s->elem_size),
             (char *)s->array + ((pos + num_elems) * s->elem_size),
-            s->length - (pos + num_elems)
+            (s->length - (pos + num_elems)) * s->elem_size
         );
     }
 
