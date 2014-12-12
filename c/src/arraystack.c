@@ -26,8 +26,6 @@ void ods_arraystack_init(arraystack_t* s, size_t elem_size) {
 static void ods_arraystack_resize(arraystack_t* s) {
 
     size_t realloc_size = 1;
-
-    assert((void *)s > NULL);
     
     if (s->length > 0)
         realloc_size = s->length * 2;
@@ -52,6 +50,34 @@ void ods_arraystack_reserve(arraystack_t* s, size_t n) {
     assert(s->array > NULL);
 
     s->alloc_length = n;
+}
+
+void ods_arraystack_reverse(arraystack_t* s) {
+
+    size_t i, j;
+    void* tmp;
+
+    assert((void *)s > NULL);
+
+    tmp = malloc(s->elem_size);
+    
+    assert(tmp > NULL);
+
+    if (s->length < 2)
+        return;
+
+    for (i = 0, j = s->length - 1; i < j; ++i, --j) {
+
+        memcpy(tmp, (char *)s->array + (i * s->elem_size), s->elem_size);
+        
+        memcpy(
+            (char *)s->array + (i * s->elem_size),
+            (char *)s->array + (j * s->elem_size),
+            s->elem_size
+        );
+
+        memcpy((char *)s->array + (j * s->elem_size), tmp, s->elem_size);
+    }
 }
 
 void ods_arraystack_add(arraystack_t* s, size_t pos, void* elem) {
@@ -132,27 +158,40 @@ void ods_arraystack_clear(arraystack_t* s) {
     assert(s->array > NULL);
 }
 
-void ods_arraystack_copy(arraystack_t* s, size_t pos,
-                         void* src, size_t num_elems) {
+void ods_arraystack_copy(arraystack_t* dest, size_t dest_pos,
+                         arraystack_t* src, size_t src_pos,
+                         size_t num_elems) {
 
-    assert((void *)s > NULL);
-    assert(src > NULL);
-    assert(pos <= s->length);
+    size_t elem_size;
 
-    if (s->length + num_elems > s->alloc_length) {
+    if (num_elems < 1)
+        return;
 
-        /* makes resize function resize to (length + num_elems) * 2 */
-        s->length += num_elems;
-        ods_arraystack_resize(s);
-    }
+    assert((void *)dest > NULL);
+    assert((void *)src  > NULL);
+    assert(dest->elem_size == src->elem_size); /* elem size mismatch */
+    assert(dest_pos <= dest->length);
+    assert(src_pos + num_elems <= src->length);
 
-    memmove((char *)s->array + ((num_elems + pos) * s->elem_size),
-            (char *)s->array + (pos * s->elem_size),
-            (s->length - pos) * s->elem_size);
+    elem_size = dest->elem_size;
+    
 
-    memcpy((char *)s->array + (pos * s->elem_size),
-           src,
-           num_elems * s->elem_size);
+    if (dest->length + num_elems > dest->alloc_length)
+        ods_arraystack_reserve(dest, dest->length + num_elems);
+
+    memmove(
+        (char *)dest->array + ((dest_pos + num_elems) * elem_size),
+        (char *)dest->array + (dest_pos * elem_size),
+        (dest->length - dest_pos) * elem_size
+    );
+
+    memcpy(
+        (char *)dest->array + (dest_pos * elem_size),
+        (char *)src->array  + (src_pos  * elem_size),
+        num_elems * elem_size
+    );
+
+    dest->length += num_elems;
 }
 
 void ods_arraystack_dispose(arraystack_t* s) {

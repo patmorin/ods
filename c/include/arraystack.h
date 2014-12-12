@@ -38,6 +38,17 @@ extern void ods_arraystack_init(arraystack_t* s,
                                 size_t elem_size);
 
 /* FUNCTION
+ *      ods_arraystack_reverse
+ *
+ * DESCRIPTION
+ *      Reverses the backing array.
+ *
+ * PARAMETERS
+ *      s           A valid pointer to an initialized arraystack_t struct.
+ */
+extern void ods_arraystack_reverse(arraystack_t* s);
+
+/* FUNCTION
  *      ods_arraystack_reserve
  *
  * DESCRIPTION
@@ -50,7 +61,8 @@ extern void ods_arraystack_init(arraystack_t* s,
  *
  * PARAMETERS
  *      s           A valid pointer to an initialized arraystack_t struct.
- *      n           The number of elements to reserve space for.
+ *      n           The number of elements to reserve space for. This value must
+ *                  be greater than (or equal to) the length of the stack.
  */
 extern void ods_arraystack_reserve(arraystack_t* s,
                                    size_t n);
@@ -140,21 +152,25 @@ extern void ods_arraystack_clear(arraystack_t* s);
  *      ods_arraystack_copy
  *
  * DESCRIPTION
- *      Copies elements from a source array to the specified position on the
- *      stack.
+ *      Copies a number of elements from the specified position in the source
+ *      arraystack to the specified position in the destination arraystack.
  *
  * PARAMETERS
- *      s           A valid pointer to an initialized arraystack_t struct.
- *      pos         The position where the elements from the source array will
- *                  be inserted.
- *      src         Pointer to a block of memory with at least num_elems *
- *                  elem_size bytes allocated.
- *      num_elems   The number of elements that will be copied from src into the
- *                  stack.
+ *      dest        A valid pointer to an initialized arraystack_t struct. This
+ *                  is the destination stack.
+ *      dest_pos    The position in the destination where the elements will be
+ *                  inserted into.
+ *      src         A valid pointer to an initialized arraystack_t struct. This
+ *                  is the source stack.
+ *      src_pos     The position in the source array where the copying will
+ *                  begin.
+ *      num_elems   The number of elements to be copied from source to
+ *                  destination.
  */
-extern void ods_arraystack_copy(arraystack_t* s,
-                                size_t pos,
-                                void* src,
+extern void ods_arraystack_copy(arraystack_t* dest,
+                                size_t dest_pos,
+                                arraystack_t* src,
+                                size_t src_pos,
                                 size_t num_elems);
 
 /* FUNCTION
