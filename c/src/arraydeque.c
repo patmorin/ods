@@ -30,8 +30,6 @@ static void ods_arraydeque_resize(arraydeque_t* d) {
     size_t z;
     size_t realloc_size = 1;
 
-    assert((void *)d > NULL);
-
     if (d->length > 0)
         realloc_size = d->length * 2;
 
