@@ -79,6 +79,20 @@ extern void ods_arrayqueue_remove(arrayqueue_t* q,
 extern void ods_arrayqueue_clear(arrayqueue_t* q);
 
 /* FUNCTION
+ *      ods_arrayqueue_peek
+ *
+ * DESCRIPTION
+ *      Retrieves the element next in line, without removing it.
+ *
+ * PARAMETERS
+ *      q           A valid pointer to an initialized arrayqueue_t struct.
+ *      elem_out    The frontmost element will be copied into the memory pointed
+ *                  to by this argument. Cannot be null.
+ */
+extern void ods_arrayqueue_peek(arrayqueue_t* q,
+                                void* elem_out);
+
+/* FUNCTION
  *      ods_arrayqueue_dispose
  *
  * DESCRIPTION

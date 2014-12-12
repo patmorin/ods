@@ -93,6 +93,19 @@ void ods_arrayqueue_remove(arrayqueue_t* q, void* elem_out) {
         ods_arrayqueue_resize(q);
 }
 
+void ods_arrayqueue_peek(arrayqueue_t* q, void* elem_out) {
+
+    assert((void *)q > NULL);
+    assert(elem_out > NULL);
+    assert(q->length > 0);
+    
+    memcpy(
+        elem_out,
+        (char *)q->array + (q->pos * q->elem_size),
+        q->elem_size
+    );
+}
+
 void ods_arrayqueue_clear(arrayqueue_t* q) {
 
     assert((void *)q > NULL);
