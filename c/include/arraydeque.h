@@ -6,6 +6,8 @@
 #ifndef ODS_ARRAYDEQUE_H_
 #define ODS_ARRAYDEQUE_H_
 
+#include <stdlib.h>
+
 #define ods_arraydeque_add_front(d, elem) \
             ods_arraydeque_add((d), 0, (elem))
 
@@ -17,8 +19,6 @@
 
 #define ods_arraydeque_remove_back(d, elem_out) \
             ods_arraydeque_remove((d), (d)->length - 1, (elem_out))
-
-#include <stdlib.h>
 
 typedef struct {
 
