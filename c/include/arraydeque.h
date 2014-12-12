@@ -31,57 +31,6 @@ typedef struct {
 } arraydeque_t;
 
 /* FUNCTION
- *      ods_arraydeque_init
- *
- * DESCRIPTION
- *      Initializes an arraydeque_t struct with an array size of 1. This
- *      function should be called before any other arrraydeque functions.
- *
- * PARAMETERS
- *      d           A valid pointer to an arraydeque_t struct.
- *      elem_size   Size of the elements that will be stored in the stack.
- */
-extern void ods_arraydeque_init(arraydeque_t* d,
-                                size_t elem_size);
-
-/* FUNCTION
- *      ods_arraydeque_get
- *
- * DESCRIPTION
- *      Retrieves the element at the specified position.
- *
- * PARAMETERS
- *      d           A valid pointer to an initialized arraydeque_t struct.
- *      pos         The position of the element that will be retrieved.
- *      elem_out    Pointer to a memory where the retrieved element will be
- *                  copied. Must have at least elem_size bytes allocated. Cannot
- *                  be null.
- */
-extern void ods_arraydeque_get(arraydeque_t* d,
-                               size_t pos,
-                               void* elem_out);
-
-/* FUNCTION
- *      ods_arraydeque_set
- *
- * DESCRIPTION
- *      Sets the element at the specified position.
- *
- * PARAMETERS
- *      d           A valid pointer to an initialized arraydeque_t struct.
- *      pos         The position of the element that will be set.
- *      elem        Pointer to the new element that will replace the old one.
- *                  This cannot be a null pointer.
- *      elem_out    If not null, the old element will be copied into the memory
- *                  pointed to by this argument. If null, old data will be
- *                  overwritten.
- */
-extern void ods_arraydeque_set(arraydeque_t* d,
-                               size_t pos,
-                               void* elem,
-                               void* elem_out);
-
-/* FUNCTION
  *      ods_arraydeque_add
  *
  * DESCRIPTION
@@ -96,22 +45,6 @@ extern void ods_arraydeque_set(arraydeque_t* d,
 extern void ods_arraydeque_add(arraydeque_t* d,
                                size_t pos,
                                void* elem);
-
-/* FUNCTION
- *      ods_arraydeque_remove
- *
- * DESCRIPTION
- *      Removes the element at the specified position.
- *
- * PARAMETERS
- *      d           A valid pointer to an initialized arraydeque_t struct.
- *      pos         The position of the element that will be removed.
- *      elem_out    If not null, the removed element will be copied into the
- *                  memory pointed to by this argument.
- */
-extern void ods_arraydeque_remove(arraydeque_t* d,
-                                  size_t pos,
-                                  void* elem_out);
 
 /* FUNCTION
  *      ods_arraydeque_clear
@@ -136,5 +69,72 @@ extern void ods_arraydeque_clear(arraydeque_t* d);
  *      d           A valid pointer to an initialized arraydeque_t struct.
  */
 extern void ods_arraydeque_dispose(arraydeque_t* d);
+
+/* FUNCTION
+ *      ods_arraydeque_get
+ *
+ * DESCRIPTION
+ *      Retrieves the element at the specified position.
+ *
+ * PARAMETERS
+ *      d           A valid pointer to an initialized arraydeque_t struct.
+ *      pos         The position of the element that will be retrieved.
+ *      elem_out    Pointer to a memory where the retrieved element will be
+ *                  copied. Must have at least elem_size bytes allocated. Cannot
+ *                  be null.
+ */
+extern void ods_arraydeque_get(arraydeque_t* d,
+                               size_t pos,
+                               void* elem_out);
+
+/* FUNCTION
+ *      ods_arraydeque_init
+ *
+ * DESCRIPTION
+ *      Initializes an arraydeque_t struct with an array size of 1. This
+ *      function should be called before any other arrraydeque functions.
+ *
+ * PARAMETERS
+ *      d           A valid pointer to an arraydeque_t struct.
+ *      elem_size   Size of the elements that will be stored in the stack.
+ */
+extern void ods_arraydeque_init(arraydeque_t* d,
+                                size_t elem_size);
+
+/* FUNCTION
+ *      ods_arraydeque_remove
+ *
+ * DESCRIPTION
+ *      Removes the element at the specified position.
+ *
+ * PARAMETERS
+ *      d           A valid pointer to an initialized arraydeque_t struct.
+ *      pos         The position of the element that will be removed.
+ *      elem_out    If not null, the removed element will be copied into the
+ *                  memory pointed to by this argument.
+ */
+extern void ods_arraydeque_remove(arraydeque_t* d,
+                                  size_t pos,
+                                  void* elem_out);
+
+/* FUNCTION
+ *      ods_arraydeque_set
+ *
+ * DESCRIPTION
+ *      Sets the element at the specified position.
+ *
+ * PARAMETERS
+ *      d           A valid pointer to an initialized arraydeque_t struct.
+ *      pos         The position of the element that will be set.
+ *      elem        Pointer to the new element that will replace the old one.
+ *                  This cannot be a null pointer.
+ *      elem_out    If not null, the old element will be copied into the memory
+ *                  pointed to by this argument. If null, old data will be
+ *                  overwritten.
+ */
+extern void ods_arraydeque_set(arraydeque_t* d,
+                               size_t pos,
+                               void* elem,
+                               void* elem_out);
 
 #endif
