@@ -174,7 +174,6 @@ void ods_arraystack_copy(arraystack_t* dest, size_t dest_pos,
     assert(src_pos + num_elems <= src->length);
 
     elem_size = dest->elem_size;
-    
 
     if (dest->length + num_elems > dest->alloc_length)
         ods_arraystack_reserve(dest, dest->length + num_elems);
@@ -197,6 +196,6 @@ void ods_arraystack_copy(arraystack_t* dest, size_t dest_pos,
 void ods_arraystack_dispose(arraystack_t* s) {
 
     assert((void *)s > NULL);
-
+    
     free(s->array);
 }
