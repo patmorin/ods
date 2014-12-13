@@ -33,8 +33,7 @@ static size_t pos2block(size_t pos) {
 
 static void shrink(rootisharraystack_t* r) {
 
-    while (r->bs > 1 &&
-           alloclen(r->bs - 2) >= r->length) {
+    while (r->bs > 1 && alloclen(r->bs - 2) >= r->length) {
 
         /* free the block */
         free(r->blocks[r->bs - 1]);
