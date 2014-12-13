@@ -10,7 +10,7 @@
 #include <arraystack.h>
 #include <dualarraydeque.h>
 
-static void ods_dualarraydeque_balance(dualarraydeque_t* d) {
+static void balance(dualarraydeque_t* d) {
 
     size_t s;
 
@@ -41,8 +41,8 @@ static void ods_dualarraydeque_balance(dualarraydeque_t* d) {
 
 void ods_dualarraydeque_add(dualarraydeque_t* d, size_t pos, void* elem) {
 
-    assert((void *)d > NULL);
-    assert(elem > NULL);
+    assert((void *)d != NULL);
+    assert(elem != NULL);
     assert(pos <= d->length);    
 
     if (pos < d->front->length)
@@ -52,12 +52,12 @@ void ods_dualarraydeque_add(dualarraydeque_t* d, size_t pos, void* elem) {
 
     ++d->length;
 
-    ods_dualarraydeque_balance(d);
+    balance(d);
 }
 
 void ods_dualarraydeque_dispose(dualarraydeque_t* d) {
 
-    assert((void *)d > NULL);
+    assert((void *)d != NULL);
 
     d->length = 0;
     
@@ -67,8 +67,8 @@ void ods_dualarraydeque_dispose(dualarraydeque_t* d) {
 
 void ods_dualarraydeque_get(dualarraydeque_t* d, size_t pos, void* elem_out) {
 
-    assert((void *)d > NULL);
-    assert(elem_out > NULL);
+    assert((void *)d != NULL);
+    assert(elem_out != NULL);
     assert(pos < d->length);
 
     if (pos < d->front->length)
@@ -79,15 +79,15 @@ void ods_dualarraydeque_get(dualarraydeque_t* d, size_t pos, void* elem_out) {
 
 void ods_dualarraydeque_init(dualarraydeque_t* d, size_t elem_size) {
 
-    assert((void *)d > NULL);
+    assert((void *)d != NULL);
     assert(elem_size > 0);
 
     d->length = 0;
     d->front  = malloc(sizeof(arraystack_t));
     d->back   = malloc(sizeof(arraystack_t));
 
-    assert((void *)d->front > NULL);
-    assert((void *)d->back  > NULL);
+    assert((void *)d->front != NULL);
+    assert((void *)d->back  != NULL);
 
     ods_arraystack_init(d->front, elem_size);
     ods_arraystack_init(d->back , elem_size);
@@ -96,7 +96,7 @@ void ods_dualarraydeque_init(dualarraydeque_t* d, size_t elem_size) {
 void ods_dualarraydeque_remove(dualarraydeque_t* d, size_t pos,
                                void* elem_out) {
 
-    assert((void *)d > NULL);
+    assert((void *)d != NULL);
     assert(pos < d->length);
 
     if (pos < d->front->length)
@@ -106,14 +106,14 @@ void ods_dualarraydeque_remove(dualarraydeque_t* d, size_t pos,
 
     --d->length;
 
-    ods_dualarraydeque_balance(d);
+    balance(d);
 }
 
 void ods_dualarraydeque_set(dualarraydeque_t* d, size_t pos,
                             void* elem, void* old_elem) {
 
-    assert((void *)d > NULL);
-    assert(elem > NULL);
+    assert((void *)d != NULL);
+    assert(elem != NULL);
     assert(pos < d->length);
 
     if (pos < d->front->length) {

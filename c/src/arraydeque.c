@@ -9,7 +9,7 @@
 
 #include <arraydeque.h>
 
-static void ods_arraydeque_resize(arraydeque_t* d) {
+static void resize(arraydeque_t* d) {
 
     void* new;
     size_t z;
@@ -20,7 +20,7 @@ static void ods_arraydeque_resize(arraydeque_t* d) {
 
     new = malloc(realloc_size * d->elem_size);
 
-    assert(new > NULL);
+    assert(new != NULL);
 
     /* z = number of elements to copy {i >= pos} (from pos to end) */
     z = d->alloc_length - d->pos < d->length ?
@@ -47,12 +47,12 @@ void ods_arraydeque_add(arraydeque_t* d, size_t pos, void* elem) {
 
     size_t i;
 
-    assert((void *)d > NULL);
-    assert(elem > NULL);
+    assert((void *)d != NULL);
+    assert(elem != NULL);
     assert(pos <= d->length);
 
     if (d->length + 1 > d->alloc_length)
-        ods_arraydeque_resize(d);
+        resize(d);
 
     /* what about rewriting the following shift without loops?
      * memcpy'ing as much contiguous blocks as possible? */
@@ -97,27 +97,27 @@ void ods_arraydeque_add(arraydeque_t* d, size_t pos, void* elem) {
 
 void ods_arraydeque_clear(arraydeque_t* d) {
 
-    assert((void *)d > NULL);
+    assert((void *)d != NULL);
 
     d->alloc_length = 1;
     d->length       = 0;
     d->pos          = 0;
     d->array        = realloc(d->array, d->elem_size);
 
-    assert(d->array > NULL);
+    assert(d->array != NULL);
 }
 
 void ods_arraydeque_dispose(arraydeque_t* d) {
 
-    assert((void *)d > NULL);
+    assert((void *)d != NULL);
 
     free(d->array);
 }
 
 void ods_arraydeque_get(arraydeque_t* d, size_t pos, void* elem_out) {
 
-    assert((void *)d > NULL);
-    assert(elem_out > NULL);
+    assert((void *)d != NULL);
+    assert(elem_out != NULL);
     assert(d->length > 0);
     assert(pos < d->length);
 
@@ -130,12 +130,12 @@ void ods_arraydeque_get(arraydeque_t* d, size_t pos, void* elem_out) {
 
 void ods_arraydeque_init(arraydeque_t* d, size_t elem_size) {
 
-    assert((void *)d > NULL);
+    assert((void *)d != NULL);
     assert(elem_size > 0);
 
     d->array = malloc(elem_size);
 
-    assert(d->array > NULL);
+    assert(d->array != NULL);
 
     d->alloc_length = 1;
     d->length       = 0;
@@ -147,11 +147,11 @@ void ods_arraydeque_remove(arraydeque_t* d, size_t pos, void* elem_out) {
 
     size_t i;
 
-    assert((void *)d > NULL);
+    assert((void *)d != NULL);
     assert(d->length > 0);
     assert(pos < d->length);
 
-    if (elem_out > NULL) {
+    if (elem_out != NULL) {
         memcpy(
             elem_out,
             (char *)d->array +
@@ -191,18 +191,18 @@ void ods_arraydeque_remove(arraydeque_t* d, size_t pos, void* elem_out) {
     --d->length;
 
     if (3 * d->length < d->alloc_length)
-        ods_arraydeque_resize(d);
+        resize(d);
 }
 
 void ods_arraydeque_set(arraydeque_t* d, size_t pos,
                         void* elem, void* elem_out) {
 
-    assert((void *)d > NULL);
-    assert(elem > NULL);
+    assert((void *)d != NULL);
+    assert(elem != NULL);
     assert(d->length > 0);
     assert(pos < d->length);
 
-    if (elem_out > NULL) {
+    if (elem_out != NULL) {
         memcpy(
             elem_out,
             (char *)d->array +

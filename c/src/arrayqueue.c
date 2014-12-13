@@ -9,7 +9,7 @@
 
 #include <arrayqueue.h>
 
-static void ods_arrayqueue_resize(arrayqueue_t* q) {
+static void resize(arrayqueue_t* q) {
 
     void* new;
     size_t z;
@@ -20,7 +20,7 @@ static void ods_arrayqueue_resize(arrayqueue_t* q) {
 
     new = malloc(realloc_size * q->elem_size); /* avoid realloc */
 
-    assert(new > NULL);
+    assert(new != NULL);
 
     /* z = number of elements to copy {i >= pos} (from pos to end) */
     z = q->alloc_length - q->pos < q->length ?
@@ -45,11 +45,11 @@ static void ods_arrayqueue_resize(arrayqueue_t* q) {
 
 void ods_arrayqueue_add(arrayqueue_t* q, void* elem) {
 
-    assert((void *)q > NULL);
-    assert(elem > NULL);
+    assert((void *)q != NULL);
+    assert(elem != NULL);
 
     if (q->length + 1 > q->alloc_length)
-        ods_arrayqueue_resize(q);
+        resize(q);
 
     memcpy((char *)q->array +
                 (((q->pos + q->length) % q->alloc_length) * q->elem_size),
@@ -61,31 +61,31 @@ void ods_arrayqueue_add(arrayqueue_t* q, void* elem) {
 
 void ods_arrayqueue_clear(arrayqueue_t* q) {
 
-    assert((void *)q > NULL);
+    assert((void *)q != NULL);
 
     q->length       = 0;
     q->pos          = 0;
     q->alloc_length = 1;
     q->array        = realloc(q->array, q->elem_size);
 
-    assert(q->array > NULL);
+    assert(q->array != NULL);
 }
 
 void ods_arrayqueue_dispose(arrayqueue_t* q) {
 
-    assert((void *)q > NULL);
+    assert((void *)q != NULL);
 
     free(q->array);
 }
 
 void ods_arrayqueue_init(arrayqueue_t* q, size_t elem_size) {
 
-    assert((void *)q > NULL);
+    assert((void *)q != NULL);
     assert(elem_size > 0);
 
     q->array = malloc(elem_size);
 
-    assert(q->array > NULL);
+    assert(q->array != NULL);
 
     q->alloc_length = 1;
     q->length       = 0;
@@ -95,8 +95,8 @@ void ods_arrayqueue_init(arrayqueue_t* q, size_t elem_size) {
 
 void ods_arrayqueue_peek(arrayqueue_t* q, void* elem_out) {
 
-    assert((void *)q > NULL);
-    assert(elem_out > NULL);
+    assert((void *)q != NULL);
+    assert(elem_out != NULL);
     assert(q->length > 0);
     
     memcpy(
@@ -108,10 +108,10 @@ void ods_arrayqueue_peek(arrayqueue_t* q, void* elem_out) {
 
 void ods_arrayqueue_remove(arrayqueue_t* q, void* elem_out) {
 
-    assert((void *)q > NULL);
+    assert((void *)q != NULL);
     assert(q->length > 0);
 
-    if (elem_out > NULL)
+    if (elem_out != NULL)
         memcpy(elem_out,
                (char *)q->array + (q->pos * q->elem_size),
                q->elem_size);
@@ -120,5 +120,5 @@ void ods_arrayqueue_remove(arrayqueue_t* q, void* elem_out) {
     --q->length;
 
     if (q->alloc_length >= 3 * q->length)
-        ods_arrayqueue_resize(q);
+        resize(q);
 }
