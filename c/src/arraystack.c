@@ -169,7 +169,6 @@ void ods_arraystack_reverse(arraystack_t* s, size_t pos, size_t num_elems) {
     assert(pos + num_elems <= s->length);
 
     tmp = malloc(s->elem_size);
-    
     assert(tmp != NULL);
 
     for (i = pos, j = (pos + num_elems) - 1; i < j; ++i, --j) {
@@ -184,6 +183,8 @@ void ods_arraystack_reverse(arraystack_t* s, size_t pos, size_t num_elems) {
 
         memcpy((char *)s->array + (j * s->elem_size), tmp, s->elem_size);
     }
+
+    free(tmp);
 }
 
 void ods_arraystack_set(arraystack_t* s, size_t pos,

@@ -60,6 +60,9 @@ void ods_dualarraydeque_dispose(dualarraydeque_t* d) {
     assert((void *)d != NULL);
 
     d->length = 0;
+
+    ods_arraystack_dispose(d->front);
+    ods_arraystack_dispose(d->back);
     
     free(d->front);
     free(d->back);
