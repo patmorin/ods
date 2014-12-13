@@ -33,8 +33,7 @@ static size_t pos2block(size_t pos) {
 
 static void shrink(rootisharraystack_t* r) {
 
-    while (r->bs > 1 &&
-           alloclen(r->bs - 2) >= r->length) {
+    while (r->bs > 1 && alloclen(r->bs - 2) >= r->length) {
 
         /* free the block */
         free(r->blocks[r->bs - 1]);
@@ -70,6 +69,8 @@ void ods_rootisharraystack_add(rootisharraystack_t* r, size_t pos,
     }
 
     ods_rootisharraystack_set(r, pos, elem, NULL);
+
+    free(tmp);
 }
 
 void ods_rootisharraystack_dispose(rootisharraystack_t* r) {
@@ -151,6 +152,8 @@ void ods_rootisharraystack_remove(rootisharraystack_t* r, size_t pos,
 
     if (alloclen(r->bs - 2) >= r->length)
         shrink(r);
+
+    free(tmp);
 }
 
 void ods_rootisharraystack_set(rootisharraystack_t* r, size_t pos,
