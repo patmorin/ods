@@ -3,7 +3,17 @@
 This is an implementation of [Open Data Structures](http://opendatastructures.org) in C.
 It is written in ANSI C (C89) to maximize compatibility with other compilers.
 
-##### How to use the library
+#### Implemented data structures
+
+More information on the data structures (implementation details, running times, etc.) can be found in [the book](http://opendatastructures.org).
+
+* [ArrayStack](include/arraystack.h) (equivalent to FastArrayStack in the book)
+* [ArrayQueue](include/arrayqueue.h)
+* [ArrayDeque](include/arraydeque.h)
+* [DualArrayDeque](include/dualarraydeque.h)
+* [RootishArrayStack](include/rootisharraystack.h)
+
+#### How to use the library
 
 The [include](include/) directory contains the headers you will need to include in your
 program. Detailed information on the functions and their arguments can be found in the
