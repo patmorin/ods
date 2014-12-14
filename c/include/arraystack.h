@@ -8,11 +8,11 @@
 
 #include <stdlib.h>
 
-#define ods_arraystack_push(s, elem) \
-            ods_arraystack_add((s), (s)->length, (elem))
+#define arraystack_push(s, elem) \
+            arraystack_add((s), (s)->length, (elem))
 
-#define ods_arraystack_pop(s, elem_out) \
-            ods_arraystack_remove((s), (s)->length - 1, (elem_out))
+#define arraystack_pop(s, elem_out) \
+            arraystack_remove((s), (s)->length - 1, (elem_out))
 
 typedef struct {
 
@@ -24,7 +24,7 @@ typedef struct {
 } arraystack_t;
 
 /* FUNCTION
- *      ods_arraystack_add
+ *      arraystack_add
  *
  * DESCRIPTION
  *      Adds an element to the specified position in the stack.
@@ -36,12 +36,12 @@ typedef struct {
  *                  argument cannot be a null pointer. The memory pointed to by
  *                  this argument will be copied into the array.
  */
-extern void ods_arraystack_add(arraystack_t* s,
-                               size_t pos,
-                               void* elem);
+extern void arraystack_add(arraystack_t* s,
+                           size_t pos,
+                           void* elem);
 
 /* FUNCTION
- *      ods_arraystack_clear
+ *      arraystack_clear
  *
  * DESCRIPTION
  *      Clears the stack. Removes all elements and minimizes allocated space.
@@ -49,10 +49,10 @@ extern void ods_arraystack_add(arraystack_t* s,
  * PARAMETERS
  *      s           A valid pointer to an initialized arraystack_t struct.
  */
-extern void ods_arraystack_clear(arraystack_t* s);
+extern void arraystack_clear(arraystack_t* s);
 
 /* FUNCTION
- *      ods_arraystack_copy
+ *      arraystack_copy
  *
  * DESCRIPTION
  *      Copies a number of elements from the specified position in the source
@@ -70,14 +70,14 @@ extern void ods_arraystack_clear(arraystack_t* s);
  *      num_elems   The number of elements to be copied from source to
  *                  destination.
  */
-extern void ods_arraystack_copy(arraystack_t* dest,
-                                size_t dest_pos,
-                                arraystack_t* src,
-                                size_t src_pos,
-                                size_t num_elems);
+extern void arraystack_copy(arraystack_t* dest,
+                            size_t dest_pos,
+                            arraystack_t* src,
+                            size_t src_pos,
+                            size_t num_elems);
 
 /* FUNCTION
- *      ods_arraystack_dispose
+ *      arraystack_dispose
  *
  * DESCRIPTION
  *      Releases allocated memory. Make sure to call this function to avoid
@@ -87,10 +87,10 @@ extern void ods_arraystack_copy(arraystack_t* dest,
  * PARAMETERS
  *      s           A valid pointer to an initialized arraystack_t struct.
  */
-extern void ods_arraystack_dispose(arraystack_t* s);
+extern void arraystack_dispose(arraystack_t* s);
 
 /* FUNCTION
- *      ods_arraystack_get
+ *      arraystack_get
  *
  * DESCRIPTION
  *      Gets the element at the specified position.
@@ -101,12 +101,12 @@ extern void ods_arraystack_dispose(arraystack_t* s);
  *      elem        Pointer to a memory with at least elem_size bytes allocated.
  *                  The data at pos will be copied into this memory.
  */
-extern void ods_arraystack_get(arraystack_t* s,
-                               size_t pos,
-                               void* elem_out);
+extern void arraystack_get(arraystack_t* s,
+                           size_t pos,
+                           void* elem_out);
 
 /* FUNCTION
- *      ods_arraystack_init
+ *      arraystack_init
  *
  * DESCRIPTION
  *      Initializes an arraystack_t struct with an array size of 1. This
@@ -116,11 +116,11 @@ extern void ods_arraystack_get(arraystack_t* s,
  *      s           A valid pointer to an arraystack_t struct.
  *      elem_size   Size of the elements that will be stored in the stack.
  */
-extern void ods_arraystack_init(arraystack_t* s,
-                                size_t elem_size);
+extern void arraystack_init(arraystack_t* s,
+                            size_t elem_size);
 
 /* FUNCTION
- *      ods_arraystack_remove
+ *      arraystack_remove
  *
  * DESCRIPTION
  *      Removes the element at the specified position. The removed element can
@@ -132,19 +132,19 @@ extern void ods_arraystack_init(arraystack_t* s,
  *      elem_out    If not a null pointer, the removed element will be coped
  *                  into the memory pointed to by this pointer.
  */
-extern void ods_arraystack_remove(arraystack_t* s,
-                                  size_t pos,
-                                  void* elem_out);
+extern void arraystack_remove(arraystack_t* s,
+                              size_t pos,
+                              void* elem_out);
 
 /* FUNCTION
- *      ods_arraystack_reserve
+ *      arraystack_reserve
  *
  * DESCRIPTION
  *      Reserves space for the specified amount of elements. The arraystack will
  *      be able to store this amount of elements without having to reallocate
  *      memory. This does not impose a limit on the length of the arraystack.
  *
- *      Note: keep in mind that ods_arraystack_remove will invoke a resize if
+ *      Note: keep in mind that arraystack_remove will invoke a resize if
  *      length * 3 < allocated space.
  *
  * PARAMETERS
@@ -152,11 +152,11 @@ extern void ods_arraystack_remove(arraystack_t* s,
  *      n           The number of elements to reserve space for. This value must
  *                  be greater than (or equal to) the length of the stack.
  */
-extern void ods_arraystack_reserve(arraystack_t* s,
-                                   size_t n);
+extern void arraystack_reserve(arraystack_t* s,
+                               size_t n);
 
 /* FUNCTION
- *      ods_arraystack_reverse
+ *      arraystack_reverse
  *
  * DESCRIPTION
  *      Reverses the specified range in the array.
@@ -166,12 +166,12 @@ extern void ods_arraystack_reserve(arraystack_t* s,
  *      pos         The position where reversing begins.
  *      num_elems   Number of elements to reverse starting from pos.
  */
-extern void ods_arraystack_reverse(arraystack_t* s,
-                                   size_t pos,
-                                   size_t num_elems);
+extern void arraystack_reverse(arraystack_t* s,
+                               size_t pos,
+                               size_t num_elems);
 
 /* FUNCTION
- *      ods_arraystack_set
+ *      arraystack_set
  *
  * DESCRIPTION
  *      Sets the element at the specified position. The old element can be
@@ -185,13 +185,13 @@ extern void ods_arraystack_reverse(arraystack_t* s,
  *      old_elem    If not a null pointer, the old element at pos will be copied
  *                  into the memory pointed to by this pointer.
  */
-extern void ods_arraystack_set(arraystack_t* s,
-                               size_t pos,
-                               void* elem,
-                               void* old_elem);
+extern void arraystack_set(arraystack_t* s,
+                           size_t pos,
+                           void* elem,
+                           void* old_elem);
 
 /* FUNCTION
- *      ods_arraystack_truncate
+ *      arraystack_truncate
  *
  * DESCRIPTION
  *      Removes specified number of elements starting from the specified
@@ -202,8 +202,8 @@ extern void ods_arraystack_set(arraystack_t* s,
  *      pos         The position where removal will start.
  *      num_elems   Number of elements to remove starting from pos.
  */
-extern void ods_arraystack_truncate(arraystack_t* s,
-                                    size_t pos,
-                                    size_t num_elems);
+extern void arraystack_truncate(arraystack_t* s,
+                                size_t pos,
+                                size_t num_elems);
 
 #endif

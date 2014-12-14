@@ -43,7 +43,7 @@ static void resize(arraydeque_t* d) {
     d->alloc_length = realloc_size;
 }
 
-void ods_arraydeque_add(arraydeque_t* d, size_t pos, void* elem) {
+void arraydeque_add(arraydeque_t* d, size_t pos, void* elem) {
 
     size_t i;
 
@@ -95,7 +95,7 @@ void ods_arraydeque_add(arraydeque_t* d, size_t pos, void* elem) {
     ++d->length;
 }
 
-void ods_arraydeque_clear(arraydeque_t* d) {
+void arraydeque_clear(arraydeque_t* d) {
 
     assert((void *)d != NULL);
 
@@ -107,14 +107,14 @@ void ods_arraydeque_clear(arraydeque_t* d) {
     assert(d->array != NULL);
 }
 
-void ods_arraydeque_dispose(arraydeque_t* d) {
+void arraydeque_dispose(arraydeque_t* d) {
 
     assert((void *)d != NULL);
 
     free(d->array);
 }
 
-void ods_arraydeque_get(arraydeque_t* d, size_t pos, void* elem_out) {
+void arraydeque_get(arraydeque_t* d, size_t pos, void* elem_out) {
 
     assert((void *)d != NULL);
     assert(elem_out != NULL);
@@ -128,7 +128,7 @@ void ods_arraydeque_get(arraydeque_t* d, size_t pos, void* elem_out) {
     );
 }
 
-void ods_arraydeque_init(arraydeque_t* d, size_t elem_size) {
+void arraydeque_init(arraydeque_t* d, size_t elem_size) {
 
     assert((void *)d != NULL);
     assert(elem_size > 0);
@@ -143,7 +143,7 @@ void ods_arraydeque_init(arraydeque_t* d, size_t elem_size) {
     d->elem_size    = elem_size;
 }
 
-void ods_arraydeque_remove(arraydeque_t* d, size_t pos, void* elem_out) {
+void arraydeque_remove(arraydeque_t* d, size_t pos, void* elem_out) {
 
     size_t i;
 
@@ -194,8 +194,7 @@ void ods_arraydeque_remove(arraydeque_t* d, size_t pos, void* elem_out) {
         resize(d);
 }
 
-void ods_arraydeque_set(arraydeque_t* d, size_t pos,
-                        void* elem, void* elem_out) {
+void arraydeque_set(arraydeque_t* d, size_t pos, void* elem, void* elem_out) {
 
     assert((void *)d != NULL);
     assert(elem != NULL);

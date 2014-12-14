@@ -9,6 +9,18 @@
 #include <stdlib.h>
 #include <arraystack.h>
 
+#define dualarraydeque_add_front(d, elem) \
+            dualarraydeque_add((d), 0, (elem))
+
+#define dualarraydeque_add_back(d, elem) \
+            dualarraydeque_add((d), (d)->length, (elem))
+
+#define dualarraydeque_remove_front(d, elem_out) \
+            dualarraydeque_remove((d), 0, (elem_out))
+
+#define dualarraydeque_remove_back(d, elem_out) \
+            dualarraydeque_remove((d), (d)->length - 1, (elem_out))
+
 typedef struct {
 
     size_t length;
@@ -19,7 +31,7 @@ typedef struct {
 } dualarraydeque_t;
 
 /* FUNCTION
- *      ods_dualarraydeque_add
+ *      dualarraydeque_add
  *
  * DESCRIPTION
  *      Adds an element into the deque.
@@ -30,12 +42,12 @@ typedef struct {
  *      elem        The element that will be copied into the deque. Cannot be
  *                  null.
  */
-extern void ods_dualarraydeque_add(dualarraydeque_t* d,
-                                   size_t pos,
-                                   void* elem);
+extern void dualarraydeque_add(dualarraydeque_t* d,
+                               size_t pos,
+                               void* elem);
 
 /* FUNCTION
- *      ods_dualarraydeque_dispose
+ *      dualarraydeque_dispose
  *
  * DESCRIPTION
  *      Releases memory and cleans up.
@@ -43,10 +55,10 @@ extern void ods_dualarraydeque_add(dualarraydeque_t* d,
  * PARAMETERS
  *      d           A valid pointer to an initialized dualarraydeque_t struct.
  */
-extern void ods_dualarraydeque_dispose(dualarraydeque_t* d);
+extern void dualarraydeque_dispose(dualarraydeque_t* d);
 
 /* FUNCTION
- *      ods_dualarraydeque_get
+ *      dualarraydeque_get
  *
  * DESCRIPTION
  *      Gets the element at the specified position in the deque.
@@ -58,12 +70,12 @@ extern void ods_dualarraydeque_dispose(dualarraydeque_t* d);
  *                  to by this argument. Cannot be null. Must have at least
  *                  elem_size bytes allocated.
  */
-extern void ods_dualarraydeque_get(dualarraydeque_t* d,
-                                   size_t pos,
-                                   void* elem_out);
+extern void dualarraydeque_get(dualarraydeque_t* d,
+                               size_t pos,
+                               void* elem_out);
 
 /* FUNCTION
- *      ods_dualarraydeque_init
+ *      dualarraydeque_init
  *
  * DESCRIPTION
  *      Initializes a dualarraydeque_t struct. Allocates memory for internal
@@ -73,11 +85,11 @@ extern void ods_dualarraydeque_get(dualarraydeque_t* d,
  *      d           A valid pointer to a dualarraydeque_t struct.
  *      elem_size   The size of the elements that will be stored in the deque.
  */
-extern void ods_dualarraydeque_init(dualarraydeque_t* d,
-                                    size_t elem_size);
+extern void dualarraydeque_init(dualarraydeque_t* d,
+                                size_t elem_size);
 
 /* FUNCTION
- *      ods_dualarraydeque_remove
+ *      dualarraydeque_remove
  *
  * DESCRIPTION
  *      Removes an element from the deque.
@@ -88,12 +100,12 @@ extern void ods_dualarraydeque_init(dualarraydeque_t* d,
  *      elem_out    If not null, the element at pos will be copied into the
  *                  memory pointed to by this argument.
  */
-extern void ods_dualarraydeque_remove(dualarraydeque_t* d,
-                                      size_t pos,
-                                      void* elem_out);
+extern void dualarraydeque_remove(dualarraydeque_t* d,
+                                  size_t pos,
+                                  void* elem_out);
 
 /* FUNCTION
- *      ods_dualarraydeque_set
+ *      dualarraydeque_set
  *
  * DESCRIPTION
  *      Sets the element at specified position to a new element.
@@ -105,9 +117,9 @@ extern void ods_dualarraydeque_remove(dualarraydeque_t* d,
  *      old_elem    If not null, the old element at pos will be copied into the
  *                  memory pointed to by this argument.
  */
-extern void ods_dualarraydeque_set(dualarraydeque_t* d,
-                                   size_t pos,
-                                   void* elem,
-                                   void* old_elem);
+extern void dualarraydeque_set(dualarraydeque_t* d,
+                               size_t pos,
+                               void* elem,
+                               void* old_elem);
 
 #endif

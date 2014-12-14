@@ -1,7 +1,7 @@
 CC = gcc
 
 OBJ = arraystack.o arrayqueue.o arraydeque.o dualarraydeque.o \
-      rootisharraystack.o
+      rootisharraystack.o sllist.o
 
 shared-lib: $(OBJ)
 	$(CC) -shared -o libodsc.so $^

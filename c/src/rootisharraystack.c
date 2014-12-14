@@ -44,8 +44,8 @@ static void shrink(rootisharraystack_t* r) {
     assert(r->blocks != NULL);
 }
 
-void ods_rootisharraystack_add(rootisharraystack_t* r, size_t pos,
-                               void* elem) {
+void rootisharraystack_add(rootisharraystack_t* r, size_t pos,
+                           void* elem) {
 
     size_t i;
     void* tmp;
@@ -64,16 +64,24 @@ void ods_rootisharraystack_add(rootisharraystack_t* r, size_t pos,
     ++r->length;
 
     for (i = r->length - 1; i > pos; --i) {
-        ods_rootisharraystack_get(r, i - 1, tmp);
-        ods_rootisharraystack_set(r, i, tmp, NULL);
+        rootisharraystack_get(r, i - 1, tmp);
+        rootisharraystack_set(r, i, tmp, NULL);
     }
 
-    ods_rootisharraystack_set(r, pos, elem, NULL);
+    rootisharraystack_set(r, pos, elem, NULL);
 
     free(tmp);
 }
 
-void ods_rootisharraystack_dispose(rootisharraystack_t* r) {
+void rootisharraystack_clear(rootisharraystack_t* r) {
+
+    assert((void *)r != NULL);
+
+    r->length = 0;
+    shrink(r);
+}
+
+void rootisharraystack_dispose(rootisharraystack_t* r) {
 
     assert((void *)r != NULL);
     
@@ -86,8 +94,8 @@ void ods_rootisharraystack_dispose(rootisharraystack_t* r) {
     r->length = 0;
 }
 
-void ods_rootisharraystack_get(rootisharraystack_t* r, size_t pos,
-                               void* elem_out) {
+void rootisharraystack_get(rootisharraystack_t* r, size_t pos,
+                           void* elem_out) {
 
     size_t b, subpos;
     void* block; /* this points to the block where pos resides */
@@ -110,7 +118,7 @@ void ods_rootisharraystack_get(rootisharraystack_t* r, size_t pos,
     );
 }
 
-void ods_rootisharraystack_init(rootisharraystack_t* r, size_t elem_size) {
+void rootisharraystack_init(rootisharraystack_t* r, size_t elem_size) {
 
     assert((void *)r != NULL);
     assert(elem_size > 0);
@@ -128,8 +136,8 @@ void ods_rootisharraystack_init(rootisharraystack_t* r, size_t elem_size) {
     assert(r->blocks[0] != NULL);
 }
 
-void ods_rootisharraystack_remove(rootisharraystack_t* r, size_t pos,
-                                   void* elem_out) {
+void rootisharraystack_remove(rootisharraystack_t* r, size_t pos,
+                              void* elem_out) {
 
     size_t i;
     void* tmp;
@@ -141,11 +149,11 @@ void ods_rootisharraystack_remove(rootisharraystack_t* r, size_t pos,
     assert(tmp != NULL);
 
     if (elem_out != NULL)
-        ods_rootisharraystack_get(r, pos, elem_out);
+        rootisharraystack_get(r, pos, elem_out);
 
     for (i = pos; i < r->length - 1; ++i) {
-        ods_rootisharraystack_get(r, i + 1, tmp);
-        ods_rootisharraystack_set(r, i, tmp, NULL);
+        rootisharraystack_get(r, i + 1, tmp);
+        rootisharraystack_set(r, i, tmp, NULL);
     }
 
     --r->length;
@@ -156,8 +164,8 @@ void ods_rootisharraystack_remove(rootisharraystack_t* r, size_t pos,
     free(tmp);
 }
 
-void ods_rootisharraystack_set(rootisharraystack_t* r, size_t pos,
-                               void* elem, void* elem_out) {
+void rootisharraystack_set(rootisharraystack_t* r, size_t pos,
+                           void* elem, void* elem_out) {
 
     size_t b, subpos;
     void* block;

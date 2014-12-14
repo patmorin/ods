@@ -8,6 +8,12 @@
 
 #include <stdlib.h>
 
+#define rootisharraystack_push(s, elem) \
+            rootisharraystack_add((s), (s)->length, (elem))
+
+#define rootisharraystack_pop(s, elem_out) \
+            rootisharraystack_remove((s), (s)->length - 1, (elem_out))
+
 typedef struct {
 
     size_t length;
@@ -18,7 +24,7 @@ typedef struct {
 } rootisharraystack_t;
 
 /* FUNCTION
- *      ods_rootisharraystack_add
+ *      rootisharraystack_add
  *
  * DESCRIPTION
  *      Adds an element into the array.
@@ -30,12 +36,24 @@ typedef struct {
  *      elem        The element that will be copied into the array. Cannot be
  *                  null.
  */
-extern void ods_rootisharraystack_add(rootisharraystack_t* r,
-                                      size_t pos,
-                                      void* elem);
+extern void rootisharraystack_add(rootisharraystack_t* r,
+                                  size_t pos,
+                                  void* elem);
 
 /* FUNCTION
- *      ods_rootisharraystack_dispose
+ *      rootisharraystack_clear
+ *
+ * DESCRIPTION
+ *      Clears the array.
+ *
+ * PARAMETERS
+ *      r           A valid pointer to an initialized rootisharraystack_t
+ *                  struct.
+ */
+extern void rootisharraystack_clear(rootisharraystack_t* r);
+
+/* FUNCTION
+ *      rootisharraystack_dispose
  *
  * DESCRIPTION
  *      Releases memory and cleans up.
@@ -44,10 +62,10 @@ extern void ods_rootisharraystack_add(rootisharraystack_t* r,
  *      r           A valid pointer to an initialized rootisharraystack_t
  *                  struct.
  */
-extern void ods_rootisharraystack_dispose(rootisharraystack_t* r);
+extern void rootisharraystack_dispose(rootisharraystack_t* r);
 
 /* FUNCTION
- *      ods_rootisharraystack_get
+ *      rootisharraystack_get
  *
  * DESCRIPTION
  *      Gets the element at the specified position in the array.
@@ -60,12 +78,12 @@ extern void ods_rootisharraystack_dispose(rootisharraystack_t* r);
  *                  to by this argument. Cannot be null. Must have at least
  *                  elem_size bytes allocated.
  */
-extern void ods_rootisharraystack_get(rootisharraystack_t* r,
-                                      size_t pos,
-                                      void* elem_out);
+extern void rootisharraystack_get(rootisharraystack_t* r,
+                                  size_t pos,
+                                  void* elem_out);
 
 /* FUNCTION
- *      ods_rootisharraystack_init
+ *      rootisharraystack_init
  *
  * DESCRIPTION
  *      Initializes a rootisharraystack_t struct. Allocates memory for internal
@@ -75,11 +93,11 @@ extern void ods_rootisharraystack_get(rootisharraystack_t* r,
  *      r           A valid pointer to a rootisharraystack_t struct.
  *      elem_size   The size of the elements that will be stored in the array.
  */
-extern void ods_rootisharraystack_init(rootisharraystack_t* r,
-                                       size_t elem_size);
+extern void rootisharraystack_init(rootisharraystack_t* r,
+                                   size_t elem_size);
 
 /* FUNCTION
- *      ods_rootisharraystack_remove
+ *      rootisharraystack_remove
  *
  * DESCRIPTION
  *      Removes an element from the array.
@@ -91,12 +109,12 @@ extern void ods_rootisharraystack_init(rootisharraystack_t* r,
  *      elem_out    If not null, the element at pos will be copied into the
  *                  memory pointed to by this argument.
  */
-extern void ods_rootisharraystack_remove(rootisharraystack_t* r,
-                                         size_t pos,
-                                         void* elem_out);
+extern void rootisharraystack_remove(rootisharraystack_t* r,
+                                     size_t pos,
+                                     void* elem_out);
 
 /* FUNCTION
- *      ods_rootisharraystack_set
+ *      rootisharraystack_set
  *
  * DESCRIPTION
  *      Sets the element at specified position to a new element.
@@ -109,9 +127,9 @@ extern void ods_rootisharraystack_remove(rootisharraystack_t* r,
  *      old_elem    If not null, the old element at pos will be copied into the
  *                  memory pointed to by this argument.
  */
-extern void ods_rootisharraystack_set(rootisharraystack_t* r,
-                                      size_t pos,
-                                      void* elem,
-                                      void* old_elem);
+extern void rootisharraystack_set(rootisharraystack_t* r,
+                                  size_t pos,
+                                  void* elem,
+                                  void* old_elem);
 
 #endif
