@@ -6,7 +6,6 @@
 #ifndef ODS_DUALARRAYDEQUE_H_
 #define ODS_DUALARRAYDEQUE_H_
 
-#include <stdlib.h>
 #include <arraystack.h>
 
 #define dualarraydeque_add_front(d, elem) \
