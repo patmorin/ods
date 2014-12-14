@@ -96,8 +96,7 @@ void dualarraydeque_init(dualarraydeque_t* d, size_t elem_size) {
     arraystack_init(d->back , elem_size);
 }
 
-void dualarraydeque_remove(dualarraydeque_t* d, size_t pos,
-                               void* elem_out) {
+void dualarraydeque_remove(dualarraydeque_t* d, size_t pos, void* elem_out) {
 
     assert((void *)d != NULL);
     assert(pos < d->length);
