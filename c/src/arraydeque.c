@@ -15,6 +15,9 @@ static void resize(arraydeque_t* d) {
     size_t z;
     size_t realloc_size = 1;
 
+    if (d->bound)
+        return;
+
     if (d->length > 0)
         realloc_size = d->length * 2;
 
@@ -50,6 +53,9 @@ void arraydeque_add(arraydeque_t* d, size_t pos, void* elem) {
     assert((void *)d != NULL);
     assert(elem != NULL);
     assert(pos <= d->length);
+
+    if (d->bound)
+        assert(d->length + 1 <= d->alloc_length);
 
     if (d->length + 1 > d->alloc_length)
         resize(d);
@@ -140,6 +146,23 @@ void arraydeque_init(arraydeque_t* d, size_t elem_size) {
     d->alloc_length = 1;
     d->length       = 0;
     d->pos          = 0;
+    d->bound        = 0;
+    d->elem_size    = elem_size;
+}
+
+void arraydeque_init_bound(arraydeque_t* d, size_t elem_size, size_t space) {
+
+    assert((void *)d != NULL);
+    assert(elem_size > 0);
+
+    d->array = malloc(space * elem_size);
+
+    assert(d->array != NULL);
+
+    d->alloc_length = space;
+    d->length       = 0;
+    d->pos          = 0;
+    d->bound        = 1;
     d->elem_size    = elem_size;
 }
 
@@ -190,7 +213,7 @@ void arraydeque_remove(arraydeque_t* d, size_t pos, void* elem_out) {
 
     --d->length;
 
-    if (3 * d->length < d->alloc_length)
+    if (3 * d->length < d->alloc_length && !d->bound)
         resize(d);
 }
 

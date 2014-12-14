@@ -26,6 +26,7 @@ typedef struct {
     size_t length;
     size_t pos;
     size_t elem_size;
+    char bound;
     void* array;
 
 } arraydeque_t;
@@ -100,6 +101,23 @@ extern void arraydeque_get(arraydeque_t* d,
  */
 extern void arraydeque_init(arraydeque_t* d,
                             size_t elem_size);
+
+/* FUNCTION
+ *      arraydeque_init_bound
+ *
+ * DESCRIPTION
+ *      Initializes an arraydeque_t struct bounded by the specified space.
+ *      When initialized with this function, the deque will never grow or
+ *      shrink and thus the space is limited to alloc_length elements.
+ *
+ * PARAMETERS
+ *      d           A valid pointer to an arraydeque_t struct.
+ *      elem_size   Size of the elements that will be stored in the stack.
+ *      space       The number of elements that this deque will be bound to.
+ */
+extern void arraydeque_init_bound(arraydeque_t* d,
+                                  size_t elem_size,
+                                  size_t space);
 
 /* FUNCTION
  *      arraydeque_remove
