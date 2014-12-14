@@ -15,18 +15,18 @@ static dlnode_t* get_node(dllist_t* l, size_t pos) {
     size_t i;
 
     if (l->length == 0)
-        return &l->dummy;
+        return l->dummy;
 
     if (pos < l->length / 2) {
 
-        node = l->dummy.next;
+        node = l->dummy->next;
         for (i = 0; i < pos; ++i)
             node = node->next;
     }
 
     else {
 
-        node = &l->dummy;
+        node = l->dummy;
         for (i = l->length; i > pos; --i)
             node = node->prev;
     }
@@ -69,7 +69,7 @@ void dllist_dispose(dllist_t* l) {
 
     assert((void *)l != NULL);
 
-    for (node = l->dummy.next; node != &l->dummy;) {
+    for (node = l->dummy->next; node != l->dummy;) {
 
         free(node->data);
 
@@ -78,6 +78,8 @@ void dllist_dispose(dllist_t* l) {
 
         free(old_node);
     }
+
+    free(l->dummy);
 }
 
 void dllist_get(dllist_t* l, size_t pos, void* elem_out) {
@@ -98,12 +100,15 @@ void dllist_init(dllist_t* l, size_t elem_size) {
     assert((void *)l != NULL);
     assert(elem_size > 0);
 
+    l->dummy = malloc(sizeof(dlnode_t));
+    assert((void *)l->dummy != NULL);
+
     l->length    = 0;
     l->elem_size = elem_size;
 
-    l->dummy.next = &l->dummy;
-    l->dummy.prev = &l->dummy;
-    l->dummy.data = NULL;
+    l->dummy->next = l->dummy;
+    l->dummy->prev = l->dummy;
+    l->dummy->data = NULL;
 }
 
 void dllist_remove(dllist_t* l, size_t pos, void* elem_out) {

@@ -20,7 +20,7 @@ typedef struct {
 
     size_t elem_size;
     size_t length;
-    dlnode_t dummy;
+    dlnode_t* dummy;
 
 } dllist_t;
 
