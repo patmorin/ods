@@ -1,11 +1,13 @@
 ## Open Data Structures in C
 
-This is an implementation of [Open Data Structures](http://opendatastructures.org) in C.
-It is written in ANSI C (C89) to maximize compatibility with other compilers.
+This is an implementation of [Open Data Structures](http://opendatastructures.org)
+in C. It is written in ANSI C (C89) to maximize compatibility with other
+compilers.
 
 #### Implemented data structures
 
-More information on the data structures (implementation details, running times, etc.) can be found in [the book](http://opendatastructures.org).
+More information on the data structures (implementation details, running times,
+etc.) can be found in [the book](http://opendatastructures.org).
 
 * [ArrayStack](include/arraystack.h) (equivalent to FastArrayStack in the book)
 * [ArrayQueue](include/arrayqueue.h)
@@ -15,12 +17,12 @@ More information on the data structures (implementation details, running times, 
 
 #### How to use the library
 
-The [include](include/) directory contains the headers you will need to include in your
-program. Detailed information on the functions and their arguments can be found in the
-header files.
+The [include](include/) directory contains the headers you will need to include
+in your program. Detailed information on the functions and their arguments can
+be found in the header files.
 
-This library follows a general structure: `ods_[data structure]_[function]`. For example,
-the function to initialize an ArrayStack is `ods_arraystack_init`.
+This library follows a general structure: `[data structure]_[function]`. For
+example, the function to initialize an ArrayStack is `arraystack_init`.
 
 ##### Example
 
@@ -36,19 +38,19 @@ int main() {
     
     /* initialize the struct with the size of the elements you want to store
      * inside. this will allocate memory for the backing array. */
-    ods_arraystack_init(&stack, sizeof(int));
+    arraystack_init(&stack, sizeof(int));
     
     for (i = 0; i < 10; i++)
-        ods_arraystack_push(&stack, &i);
+        arraystack_push(&stack, &i);
 
     while (stack.length > 0) {
         
-        ods_arraystack_pop(&stack, &i);
+        arraystack_pop(&stack, &i);
         printf("popped: %d\n", i);
     }
 
     /* make sure to call dispose when you're done, to avoid memory leaks */
-    ods_arraystack_dispose(&stack);
+    arraystack_dispose(&stack);
 
     return 0;
 }
