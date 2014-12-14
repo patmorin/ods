@@ -22,7 +22,7 @@ static void grow(rootisharraystack_t* r) {
     assert(r->blocks != NULL);
 
     /* make space in the new block */
-    r->blocks[r->bs - 1] = malloc((r->bs - 1) * r->elem_size);
+    r->blocks[r->bs - 1] = malloc((r->bs) * r->elem_size);
     assert(r->blocks[r->bs - 1] != NULL);
 }
 
