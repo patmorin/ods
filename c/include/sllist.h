@@ -61,7 +61,7 @@ extern void sllist_enqueue(sllist_t* l,
  *      Initializes an sllist_t struct.
  *
  * PARAMETERS
- *      l           A valid pointer to an initialized sllist_t struct.
+ *      l           A valid pointer to an sllist_t struct.
  *      elem_size   Size of the elements that will be stored in the list.
  */
 extern void sllist_init(sllist_t* l,

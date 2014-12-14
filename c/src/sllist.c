@@ -16,8 +16,7 @@ void sllist_dispose(sllist_t* l) {
 
     assert((void *)l != NULL);
 
-    node = l->head;
-    while (node != NULL) {
+    for (node = l->head; node != NULL;) {
 
         free(node->data);
 
