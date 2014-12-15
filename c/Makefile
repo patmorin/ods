@@ -12,7 +12,7 @@ LIB = libodsc
 #
 # C compiler
 #
-# Replace this with c89, cc, or whatever. ODSC conforms to ANSI C (ISO C89)
+# Replace this with c89, cc, clang, or whatever. ODSC conforms to ANSI C (C89)
 # specifications. Make sure to check COMPILE and SHARED_LIB variables to match
 # the arguments of your compiler.
 #
