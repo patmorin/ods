@@ -14,9 +14,6 @@ static dlnode_t* get_node(dllist_t* l, size_t pos) {
     dlnode_t* node;
     size_t i;
 
-    if (l->length == 0)
-        return l->dummy;
-
     if (pos < l->length / 2) {
 
         node = l->dummy->next;
