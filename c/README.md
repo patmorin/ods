@@ -14,6 +14,9 @@ etc.) can be found in [the book](http://opendatastructures.org).
 * [ArrayDeque](include/arraydeque.h)
 * [DualArrayDeque](include/dualarraydeque.h)
 * [RootishArrayStack](include/rootisharraystack.h)
+* [SLList](include/sllist.h)
+* [DLList](include/dllist.h)
+* [SEList](include/selist.h)
 
 #### How to use the library
 
