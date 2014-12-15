@@ -7,13 +7,16 @@ compilers.
 #### Implemented data structures
 
 More information on the data structures (implementation details, running times,
-etc.) can be found in [the book](http://opendatastructures.org).
+etc.) can be found in [the book](http://opendatastructures.org). The interfaces
+each 
 
-* [ArrayStack](include/arraystack.h) (equivalent to FastArrayStack in the book)
+* [ArrayStack](include/arraystack.h)
+    * Equivalent to FastArrayStack in the book.
 * [ArrayQueue](include/arrayqueue.h)
 * [ArrayDeque](include/arraydeque.h)
 * [DualArrayDeque](include/dualarraydeque.h)
 * [RootishArrayStack](include/rootisharraystack.h)
+    * Requires `libm`.
 * [SLList](include/sllist.h)
 * [DLList](include/dllist.h)
 * [SEList](include/selist.h)
@@ -22,14 +25,16 @@ etc.) can be found in [the book](http://opendatastructures.org).
 
 If you have [gcc](https://gcc.gnu.org/onlinedocs/gcc/) installed, simply run
 either `make` to compile the shared object file or `make install` to compile and
-install the library (by default, it is moved to `/usr/lib`). After that, you can
-append `-lodsc` to your compiler arguments to link your code with the library.
+install the library (by default, it is moved to `/usr/lib/libodsc.so`). After
+that, you can append `-lodsc` to your compiler arguments to link your code with
+the library.
 
 If you don't have gcc, you can modify the Makefile for your compiler. Or,
 compile the sources in `src/` with the headers in `include/`.
 
-**Note:** Some data structures use `<math.h>` and thus require libm to be
-linked. Add `-lm` to your compiler when using these data structures.
+**Note:** Some data structures use `<math.h>` and thus require the math library
+(`libm`) to be linked. Add `-lm` to your compiler when using these data
+structures.
 
 The [include](include/) directory contains the headers you will need to include
 in your program. Detailed information on the functions and their arguments can
