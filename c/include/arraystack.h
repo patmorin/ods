@@ -7,6 +7,7 @@
 #define ODS_ARRAYSTACK_H_
 
 #include <stdlib.h>
+#include <iterator.h>
 
 #define arraystack_push(s, elem) \
             arraystack_add((s), (s)->length, (elem))
@@ -118,6 +119,25 @@ extern void arraystack_get(arraystack_t* s,
  */
 extern void arraystack_init(arraystack_t* s,
                             size_t elem_size);
+
+/* FUNCTION
+ *      arraystack_iterator
+ *
+ * ITERABLE
+ *      FORWARD     start <= end
+ *      REVERSE     end > start
+ *
+ * DESCRIPTION
+ *      Returns an iterator_t for the specified range [start, end].
+ *
+ * PARAMETERS
+ *      s           A valid pointer to an initialized arraystack_t struct.
+ *      start       Start position (inclusive, must be less than length).
+ *      end         End position (inclusive, must be less than length).
+ */
+extern iterator_t arraystack_iterator(arraystack_t* s,
+                                      size_t start,
+                                      size_t end);
 
 /* FUNCTION
  *      arraystack_remove

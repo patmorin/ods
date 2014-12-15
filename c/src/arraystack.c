@@ -9,6 +9,51 @@
 
 #include <arraystack.h>
 
+struct arraystack_it {
+
+    arraystack_t* stack;
+    
+    size_t start;
+    size_t end;
+    size_t curr;
+    int started;
+    int fwd;
+
+};
+
+static int it_next(iterator_t* it) {
+
+    struct arraystack_it* a = it->istruct;
+
+    if (!a->started) {
+
+        a->started = 1;
+        return 1;
+    }
+
+    if (a->curr == a->end)
+        return 0;
+
+    if (a->fwd)
+        a->curr++;
+    else
+        a->curr--;
+
+    return 1;
+}
+
+static void* it_elem(iterator_t* it) {
+
+    struct arraystack_it* a = it->istruct;
+
+    return (char *)a->stack->array + (a->curr * a->stack->elem_size);
+}
+
+static void it_dispose(iterator_t* it) {
+
+    free(it->istruct);
+}
+
 static void resize(arraystack_t* s) {
 
     size_t realloc_size = 1;
@@ -118,6 +163,37 @@ void arraystack_init(arraystack_t* s, size_t elem_size) {
     s->length       = 0;
     s->alloc_length = 1;
     s->elem_size    = elem_size;
+}
+
+iterator_t arraystack_iterator(arraystack_t* s, size_t start, size_t end) {
+
+    iterator_t it;
+    struct arraystack_it* istruct;
+
+    assert((void *)s != NULL);
+    assert(start < s->length);
+    assert(end < s->length);
+
+    it.next    = it_next;
+    it.elem    = it_elem;
+    it.dispose = it_dispose;
+
+    istruct = malloc(sizeof(struct arraystack_it));
+    assert(istruct != NULL);
+
+    istruct->stack   = s;
+    istruct->start   = start;
+    istruct->end     = end;
+    istruct->curr    = start;
+    istruct->started = 0;
+    istruct->fwd     = 0;
+
+    if (start <= end)
+        istruct->fwd = 1;
+
+    it.istruct = istruct;
+    
+    return it;
 }
 
 void arraystack_remove(arraystack_t* s, size_t pos, void* elem_out) {
