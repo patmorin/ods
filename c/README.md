@@ -20,6 +20,17 @@ etc.) can be found in [the book](http://opendatastructures.org).
 
 #### How to use the library
 
+If you have [gcc](https://gcc.gnu.org/onlinedocs/gcc/) installed, simply run
+either `make` to compile the shared object file or `make install` to compile and
+install the library (by default, it is moved to `/usr/lib`). After that, you can
+append `-lodsc` to your compiler arguments to link your code with the library.
+
+If you don't have gcc, you can modify the Makefile for your compiler. Or,
+compile the sources in `src/` with the headers in `include/`.
+
+**Note:** Some data structures use `<math.h>` and thus require libm to be
+linked. Add `-lm` to your compiler when using these data structures.
+
 The [include](include/) directory contains the headers you will need to include
 in your program. Detailed information on the functions and their arguments can
 be found in the header files.
