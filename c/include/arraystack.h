@@ -7,6 +7,7 @@
 #define ODS_ARRAYSTACK_H_
 
 #include <stdlib.h>
+
 #include <iterator.h>
 
 #define arraystack_push(s, elem) \
