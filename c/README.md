@@ -23,7 +23,7 @@ each
 
 If you have [gcc](https://gcc.gnu.org/onlinedocs/gcc/) installed, simply run
 either `make` to compile the shared object file or `make install` to compile and
-install the library (by default, it is moved to `/usr/local/lib/libodsc.so`).
+install the library (by default, it is moved to `/usr/lib/libodsc.so`).
 After that, you can append `-lodsc` to your compiler arguments to link your code
 with the library.
 

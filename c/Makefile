@@ -41,7 +41,7 @@ SHARED_LIB = $(CC) -shared -o $(LIB).so $^
 #
 # Shared library install directory
 #
-INSDIR = /usr/local/lib
+INSDIR = /usr/lib
 
 OBJ = arraystack.o arrayqueue.o arraydeque.o dualarraydeque.o \
       rootisharraystack.o sllist.o dllist.o selist.o
