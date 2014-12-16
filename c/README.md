@@ -90,7 +90,8 @@ through `_iterator()`. Iterators have three functions:
 
 * `next(iterator_t *)`: Advances to the next element and returns 1, if
 available. Otherwise, returns 0. If iterating in reverse, this will advance to
-the previous element.
+the previous element (**not all data structures can be iterated in reverse
+order**, check the documentation for `_iterator()`).
 * `elem(iterator_t *)`: Returns a pointer to the element *in* the data structure
 (i.e. not a copy). Be careful not to exceed the bounds of this pointer (which is
 `elem_size` bytes).
