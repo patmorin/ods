@@ -7,7 +7,55 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include <iterator.h>
 #include <arrayqueue.h>
+
+struct arrayqueue_it {
+
+    arrayqueue_t* queue;
+
+    size_t start;
+    size_t end;
+    size_t curr;
+    int started;
+    int fwd;
+
+};
+
+static int it_next(iterator_t* it) {
+
+    struct arrayqueue_it* a = it->istruct;
+
+    if (!a->started) {
+        
+        a->started = 1;
+        return 1;
+    }
+
+    if (a->curr == a->end)
+        return 0;
+
+    if (a->fwd)
+        a->curr++;
+    else
+        a->curr--;
+
+    return 1;
+}
+
+static void* it_elem(iterator_t* it) {
+
+    struct arrayqueue_it* a = it->istruct;
+    
+    size_t i = (a->queue->pos + a->curr) % a->queue->alloc_length;
+    
+    return (char *)a->queue->array + (i * a->queue->elem_size);
+}
+
+static void it_dispose(iterator_t* it) {
+
+    free(it->istruct);
+}
 
 static void resize(arrayqueue_t* q) {
 
@@ -108,6 +156,37 @@ void arrayqueue_init(arrayqueue_t* q, size_t elem_size) {
     q->length       = 0;
     q->pos          = 0;
     q->elem_size    = elem_size;
+}
+
+iterator_t arrayqueue_iterator(arrayqueue_t* q, size_t start, size_t end) {
+
+    iterator_t it;
+    struct arrayqueue_it* istruct;
+
+    assert((void *)q != NULL);
+    assert(start < q->length);
+    assert(end < q->length);
+
+    it.next    = it_next;
+    it.elem    = it_elem;
+    it.dispose = it_dispose;
+
+    istruct = malloc(sizeof(struct arrayqueue_it));
+    assert(istruct != NULL);
+
+    istruct->queue   = q;
+    istruct->start   = start;
+    istruct->end     = end;
+    istruct->curr    = start;
+    istruct->started = 0;
+    istruct->fwd     = 0;
+
+    if (start <= end)
+        istruct->fwd = 1;
+
+    it.istruct = istruct;
+    
+    return it;
 }
 
 void arrayqueue_peek(arrayqueue_t* q, void* elem_out) {

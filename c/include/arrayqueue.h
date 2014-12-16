@@ -8,6 +8,8 @@
 
 #include <stdlib.h>
 
+#include <iterator.h>
+
 typedef struct {
 
     size_t alloc_length;
@@ -83,6 +85,25 @@ extern void arrayqueue_enqueue(arrayqueue_t* q,
  */
 extern void arrayqueue_init(arrayqueue_t* q,
                             size_t elem_size);
+
+/* FUNCTION
+ *      arrayqueue_iterator
+ *
+ * ITERABLE
+ *      FORWARD     start <= end
+ *      REVERSE     end > start
+ *
+ * DESCRIPTION
+ *      Returns an iterator_t for the specified range [start, end].
+ *
+ * PARAMETERS
+ *      s           A valid pointer to an initialized arrayqueue_t struct.
+ *      start       Start position (inclusive, must be less than length).
+ *      end         End position (inclusive, must be less than length).
+ */
+extern iterator_t arrayqueue_iterator(arrayqueue_t* q,
+                                      size_t start,
+                                      size_t end);
 
 /* FUNCTION
  *      arrayqueue_peek
