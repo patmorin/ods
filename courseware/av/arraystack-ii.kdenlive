@@ -1,0 +1,631 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mlt title="Anonymous Submission" version="0.9.0" root="/home/morin" LC_NUMERIC="en_CA.UTF-8">
+ <profile width="1920" display_aspect_den="9" colorspace="709" frame_rate_den="1" description="HD 1080p 30 fps" height="1080" display_aspect_num="16" frame_rate_num="30" progressive="1" sample_aspect_num="1" sample_aspect_den="1"/>
+ <producer in="0" out="500" id="black">
+  <property name="mlt_type">producer</property>
+  <property name="length">15000</property>
+  <property name="eof">pause</property>
+  <property name="resource">black</property>
+  <property name="aspect_ratio">0</property>
+  <property name="mlt_service">colour</property>
+ </producer>
+ <playlist id="black_track">
+  <entry in="0" out="10226" producer="black"/>
+ </playlist>
+ <playlist id="playlist1"/>
+ <producer in="0" out="10226" id="36_2">
+  <property name="mlt_type">producer</property>
+  <property name="length">10227</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/audio/arraystack-ii.wav</property>
+  <property name="meta.media.nb_streams">1</property>
+  <property name="meta.media.0.stream.type">audio</property>
+  <property name="meta.media.0.codec.sample_fmt">s16</property>
+  <property name="meta.media.0.codec.sample_rate">96000</property>
+  <property name="meta.media.0.codec.channels">1</property>
+  <property name="meta.media.0.codec.name">pcm_s16le</property>
+  <property name="meta.media.0.codec.long_name">PCM signed 16-bit little-endian</property>
+  <property name="meta.media.0.codec.bit_rate">1536000</property>
+  <property name="meta.attr.title.markup">ArrayStack II</property>
+  <property name="meta.attr.artist.markup">Pat Morin</property>
+  <property name="meta.attr.date.markup">2014</property>
+  <property name="seekable">1</property>
+  <property name="audio_index">0</property>
+  <property name="video_index">-1</property>
+  <property name="mlt_service">avformat</property>
+ </producer>
+ <playlist id="playlist2">
+  <entry in="0" out="10226" producer="36_2"/>
+ </playlist>
+ <playlist id="playlist0"/>
+ <producer in="0" out="749" id="1">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-01.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="749" id="2">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-02.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="749" id="3">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-03.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="1799" id="4">
+  <property name="mlt_type">producer</property>
+  <property name="length">1800</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-04.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="149" id="5">
+  <property name="mlt_type">producer</property>
+  <property name="length">150</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-05.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="368" id="6">
+  <property name="mlt_type">producer</property>
+  <property name="length">369</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-06.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="299" id="7">
+  <property name="mlt_type">producer</property>
+  <property name="length">300</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-07.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="359" id="9">
+  <property name="mlt_type">producer</property>
+  <property name="length">360</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-09.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="749" id="10">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-10.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="749" id="11">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-11.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="749" id="12">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-12.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="449" id="13">
+  <property name="mlt_type">producer</property>
+  <property name="length">450</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-13.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="449" id="14">
+  <property name="mlt_type">producer</property>
+  <property name="length">450</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-14.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="344" id="15">
+  <property name="mlt_type">producer</property>
+  <property name="length">345</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-15.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="449" id="16">
+  <property name="mlt_type">producer</property>
+  <property name="length">450</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-16.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="749" id="17">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-17.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="449" id="18">
+  <property name="mlt_type">producer</property>
+  <property name="length">450</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-18.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="449" id="19">
+  <property name="mlt_type">producer</property>
+  <property name="length">450</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-19.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="749" id="20">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-20.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="899" id="21">
+  <property name="mlt_type">producer</property>
+  <property name="length">900</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-21.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="899" id="22">
+  <property name="mlt_type">producer</property>
+  <property name="length">900</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-22.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="449" id="23">
+  <property name="mlt_type">producer</property>
+  <property name="length">450</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-23.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="449" id="24">
+  <property name="mlt_type">producer</property>
+  <property name="length">450</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-24.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="599" id="25">
+  <property name="mlt_type">producer</property>
+  <property name="length">600</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-25.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="749" id="26">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-26.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="749" id="27">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-27.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="749" id="28">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-28.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="749" id="29">
+  <property name="mlt_type">producer</property>
+  <property name="length">750</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-29.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="299" id="30">
+  <property name="mlt_type">producer</property>
+  <property name="length">300</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-30.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="149" id="31">
+  <property name="mlt_type">producer</property>
+  <property name="length">150</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-31.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="449" id="32">
+  <property name="mlt_type">producer</property>
+  <property name="length">450</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-32.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="449" id="33">
+  <property name="mlt_type">producer</property>
+  <property name="length">450</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-33.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <producer in="0" out="149" id="34">
+  <property name="mlt_type">producer</property>
+  <property name="length">150</property>
+  <property name="eof">pause</property>
+  <property name="resource">ods/courseware/av/arraystack-ii-images/arraystack-ii-34.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+ </producer>
+ <playlist id="playlist5">
+  <entry in="0" out="258" producer="1"/>
+  <entry in="0" out="410" producer="2"/>
+  <entry in="0" out="664" producer="3"/>
+  <entry in="432" out="1409" producer="4"/>
+  <entry in="0" out="149" producer="5"/>
+  <entry in="0" out="135" producer="6"/>
+  <entry in="0" out="232" producer="7"/>
+  <entry in="0" out="196" producer="9"/>
+  <entry in="0" out="240" producer="10"/>
+  <entry in="0" out="735" producer="11"/>
+  <entry in="0" out="366" producer="12"/>
+  <entry in="0" out="449" producer="13"/>
+  <entry in="0" out="297" producer="14"/>
+  <entry in="0" out="344" producer="15"/>
+  <entry in="0" out="382" producer="16"/>
+  <entry in="0" out="269" producer="17"/>
+  <entry in="0" out="141" producer="18"/>
+  <entry in="0" out="211" producer="19"/>
+  <entry in="0" out="532" producer="20"/>
+  <entry in="0" out="252" producer="21"/>
+  <entry in="0" out="189" producer="22"/>
+  <entry in="0" out="179" producer="23"/>
+  <entry in="0" out="311" producer="24"/>
+  <entry in="0" out="555" producer="25"/>
+  <entry in="0" out="246" producer="26"/>
+  <entry in="0" out="177" producer="27"/>
+  <entry in="0" out="188" producer="28"/>
+  <entry in="0" out="176" producer="29"/>
+  <entry in="0" out="180" producer="30"/>
+  <entry in="0" out="149" producer="31"/>
+  <entry in="0" out="184" producer="32"/>
+  <entry in="0" out="331" producer="33"/>
+  <entry in="0" out="90" producer="34"/>
+ </playlist>
+ <tractor title="Anonymous Submission" global_feed="1" in="0" out="10226" id="maintractor">
+  <property name="meta.volume">1</property>
+  <track producer="black_track"/>
+  <track hide="video" producer="playlist1"/>
+  <track hide="video" producer="playlist2"/>
+  <track producer="playlist0"/>
+  <track producer="playlist5"/>
+  <transition id="transition0">
+   <property name="a_track">1</property>
+   <property name="b_track">2</property>
+   <property name="mlt_type">transition</property>
+   <property name="mlt_service">mix</property>
+   <property name="always_active">1</property>
+   <property name="combine">1</property>
+   <property name="internal_added">237</property>
+  </transition>
+  <transition id="transition1">
+   <property name="a_track">1</property>
+   <property name="b_track">3</property>
+   <property name="mlt_type">transition</property>
+   <property name="mlt_service">mix</property>
+   <property name="always_active">1</property>
+   <property name="combine">1</property>
+   <property name="internal_added">237</property>
+  </transition>
+  <transition id="transition2">
+   <property name="a_track">1</property>
+   <property name="b_track">4</property>
+   <property name="mlt_type">transition</property>
+   <property name="mlt_service">mix</property>
+   <property name="always_active">1</property>
+   <property name="internal_added">237</property>
+   <property name="combine">1</property>
+  </transition>
+ </tractor>
+ <kdenlivedoc profile="atsc_1080p_30" kdenliveversion="0.9.6" version="0.88" projectfolder="/home/morin/kdenlive">
+  <customeffects/>
+  <documentproperties documentid="1418725477698" renderdestination="" renderrescalewidth="320" proxyextension="ts" generateproxy="0" proxyimageminsize="2000" rendertctype="0" verticalzoom="1" renderprofile="H.264" renderrescaleheight="240" zonein="173" renderrescale="0" renderscanning="0" renderurl="/home/morin/kdenlive/arraystacks-ii-x.mp4" rendertwopass="0" renderplay="0" position="173" proxyminsize="1000" renderstartguide="-1" zoom="7" renderratio="0" rendercategory="H.264" zoneout="10226" renderzone="1" renderendguide="-1" renderexportaudio="0" proxyparams="-f mpegts -acodec libmp3lame -ac 2 -ab 128k -ar 48000 -vcodec mpeg2video -g 5 -deinterlace -s 480x270 -vb 400k" enableproxy="0" generateimageproxy="0" renderguide="0" rendertcoverlay="0"/>
+  <documentmetadata/>
+  <documentnotes>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:8pt; font-weight:400; font-style:normal;">
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;br />&lt;/p>&lt;/body>&lt;/html></documentnotes>
+  <profileinfo width="1920" display_aspect_den="9" frame_rate_den="1" description="HD 1080p 30 fps" height="1080" frame_rate_num="30" display_aspect_num="16" progressive="1" sample_aspect_num="1" sample_aspect_den="1"/>
+  <tracksinfo>
+   <trackinfo blind="1" mute="0" locked="0" trackname="Noise" type="audio"/>
+   <trackinfo blind="1" mute="0" locked="0" trackname="Audio 1" type="audio"/>
+   <trackinfo blind="0" mute="0" locked="0" trackname="Video 2"/>
+   <trackinfo blind="0" mute="0" locked="0" trackname="Video 1"/>
+  </tracksinfo>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="43019" aspect_ratio="1" out="749" file_hash="64eeb1983bdcd7861672814b1822693c" type="5" id="1" name="arraystack-ii-01.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-01.png"/>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="91190" aspect_ratio="1" out="749" file_hash="dda967ecb35ef7854d045a7e875a4aa7" type="5" id="2" name="arraystack-ii-02.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-02.png"/>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="89787" aspect_ratio="1" out="749" file_hash="991fbe9997854a4c881d49fdc162bdbb" type="5" id="3" name="arraystack-ii-03.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-03.png"/>
+  <kdenlive_producer duration="1800" frame_size="1921x1080" in="0" analysisdata="" file_size="133097" aspect_ratio="1" out="1799" file_hash="8f299a5a5f5790e8c8f8a4b87cebe8c6" type="5" id="4" name="arraystack-ii-04.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-04.png"/>
+  <kdenlive_producer duration="150" frame_size="1921x1080" in="0" analysisdata="" file_size="32745" aspect_ratio="1" out="149" file_hash="2bd943909a17356b2ee3dcdea7a7ffd6" type="5" id="5" name="arraystack-ii-05.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-05.png"/>
+  <kdenlive_producer duration="150" frame_size="1921x1080" in="0" analysisdata="" file_size="39598" aspect_ratio="1" out="149" file_hash="c05cef6915d58494ec2add89ba3c31ce" type="5" id="6" name="arraystack-ii-06.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-06.png"/>
+  <kdenlive_producer duration="300" frame_size="1921x1080" in="0" analysisdata="" file_size="42864" aspect_ratio="1" out="299" file_hash="877b33c162581ddb68d003aec73894dd" type="5" id="7" name="arraystack-ii-07.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-07.png"/>
+  <kdenlive_producer duration="150" frame_size="1921x1080" in="0" analysisdata="" file_size="32358" aspect_ratio="1" out="149" file_hash="2e6eb2785b6e4eaace9a2e318214d718" type="5" id="8" name="arraystack-ii-08.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-08.png"/>
+  <kdenlive_producer duration="360" frame_size="1921x1080" in="0" analysisdata="" file_size="40816" aspect_ratio="1" out="359" file_hash="40349b8c396618bf92e71a56d2551a57" type="5" id="9" name="arraystack-ii-09.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-09.png"/>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="44068" aspect_ratio="1" out="749" file_hash="ec87cd9b25d91ff451dc3d9b341dec7f" type="5" id="10" name="arraystack-ii-10.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-10.png"/>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="62436" aspect_ratio="1" out="749" file_hash="ebe958c0c29d2d4befdd69b95eb5e1c6" type="5" id="11" name="arraystack-ii-11.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-11.png"/>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="46251" aspect_ratio="1" out="749" file_hash="29af3247b5cb0f378cf04f1a13073c91" type="5" id="12" name="arraystack-ii-12.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-12.png"/>
+  <kdenlive_producer duration="450" frame_size="1921x1080" in="0" analysisdata="" file_size="50534" aspect_ratio="1" out="449" file_hash="bfb1c92695e66729cc2ba9b0e7339db4" type="5" id="13" name="arraystack-ii-13.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-13.png"/>
+  <kdenlive_producer duration="450" frame_size="1921x1080" in="0" analysisdata="" file_size="61482" aspect_ratio="1" out="449" file_hash="4919c46364550e433ff6b1e1acf4d4cd" type="5" id="14" name="arraystack-ii-14.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-14.png"/>
+  <kdenlive_producer duration="300" frame_size="1921x1080" in="0" analysisdata="" file_size="77733" aspect_ratio="1" out="299" file_hash="f1c3364e20aa8b2b4d8b611552534684" type="5" id="15" name="arraystack-ii-15.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-15.png"/>
+  <kdenlive_producer duration="450" frame_size="1921x1080" in="0" analysisdata="" file_size="47545" aspect_ratio="1" out="449" file_hash="d47ca3e4b656fe6c041d242fa1e7f022" type="5" id="16" name="arraystack-ii-16.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-16.png"/>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="55423" aspect_ratio="1" out="749" file_hash="200e47c0ca33aa38eb98e3bbb89ec881" type="5" id="17" name="arraystack-ii-17.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-17.png"/>
+  <kdenlive_producer duration="450" frame_size="1921x1080" in="0" analysisdata="" file_size="70900" aspect_ratio="1" out="449" file_hash="b33f770efb0f28ef10164e1c51f64412" type="5" id="18" name="arraystack-ii-18.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-18.png"/>
+  <kdenlive_producer duration="450" frame_size="1921x1080" in="0" analysisdata="" file_size="86303" aspect_ratio="1" out="449" file_hash="020c8bc60056dbc465f9de62dbe2ba57" type="5" id="19" name="arraystack-ii-19.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-19.png"/>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="75272" aspect_ratio="1" out="749" file_hash="0c17709973ecf318206f0f7660f4e2e3" type="5" id="20" name="arraystack-ii-20.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-20.png"/>
+  <kdenlive_producer duration="900" frame_size="1921x1080" in="0" analysisdata="" file_size="28499" aspect_ratio="1" out="899" file_hash="1e1ba3a165d295a3b2801ac13d3c28b3" type="5" id="21" name="arraystack-ii-21.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-21.png"/>
+  <kdenlive_producer duration="900" frame_size="1921x1080" in="0" analysisdata="" file_size="28656" aspect_ratio="1" out="899" file_hash="aac20b591f4608fc0821c2ef1a62f2b7" type="5" id="22" name="arraystack-ii-22.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-22.png"/>
+  <kdenlive_producer duration="450" frame_size="1921x1080" in="0" analysisdata="" file_size="47887" aspect_ratio="1" out="449" file_hash="6700466005ede90c95a6cbdbe33395c7" type="5" id="23" name="arraystack-ii-23.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-23.png"/>
+  <kdenlive_producer duration="450" frame_size="1921x1080" in="0" analysisdata="" file_size="65596" aspect_ratio="1" out="449" file_hash="4ebf8e6f1d5d67f034417f4f05b5770d" type="5" id="24" name="arraystack-ii-24.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-24.png"/>
+  <kdenlive_producer duration="600" frame_size="1921x1080" in="0" analysisdata="" file_size="73031" aspect_ratio="1" out="599" file_hash="1d2eeabfb2428c8ef5c4f40a04829ea0" type="5" id="25" name="arraystack-ii-25.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-25.png"/>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="87031" aspect_ratio="1" out="749" file_hash="9691959056a1c76069bc69be02a524de" type="5" id="26" name="arraystack-ii-26.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-26.png"/>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="101732" aspect_ratio="1" out="749" file_hash="a0f7a088a0693269fd7b1397e96ec1cd" type="5" id="27" name="arraystack-ii-27.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-27.png"/>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="104185" aspect_ratio="1" out="749" file_hash="cf887c4c9eef9615cdcd5ebf94fcac7d" type="5" id="28" name="arraystack-ii-28.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-28.png"/>
+  <kdenlive_producer duration="750" frame_size="1921x1080" in="0" analysisdata="" file_size="101284" aspect_ratio="1" out="749" file_hash="816a12cd03f910cb76a4982fa2268bb7" type="5" id="29" name="arraystack-ii-29.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-29.png"/>
+  <kdenlive_producer duration="150" frame_size="1921x1080" in="0" analysisdata="" file_size="100796" aspect_ratio="1" out="149" file_hash="495301927c74cfab39b53f048df3e75a" type="5" id="30" name="arraystack-ii-30.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-30.png"/>
+  <kdenlive_producer duration="150" frame_size="1921x1080" in="0" analysisdata="" file_size="117840" aspect_ratio="1" out="149" file_hash="24c4e5c18e5b096f7cfb4c95b7b40249" type="5" id="31" name="arraystack-ii-31.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-31.png"/>
+  <kdenlive_producer duration="150" frame_size="1921x1080" in="0" analysisdata="" file_size="132531" aspect_ratio="1" out="149" file_hash="d6aea6f4c587ec0365af3304521dc029" type="5" id="32" name="arraystack-ii-32.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-32.png"/>
+  <kdenlive_producer duration="450" frame_size="1921x1080" in="0" analysisdata="" file_size="126403" aspect_ratio="1" out="449" file_hash="c67dc0cdaee79a93fba242dee73aefc2" type="5" id="33" name="arraystack-ii-33.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-33.png"/>
+  <kdenlive_producer duration="150" frame_size="1921x1080" in="0" analysisdata="" file_size="25276" aspect_ratio="1" out="149" file_hash="d05c2969ed8d9e6cdd7f0cfdc1a6b2a5" type="5" id="34" name="arraystack-ii-34.png" resource="/home/morin/ods/courseware/av/arraystack-ii-images/arraystack-ii-34.png"/>
+  <kdenlive_producer audio_max="35" audiocodec="PCM signed 16-bit little-endian" channels="1" duration="10227" frame_size="1920x1080" frequency="96000" analysisdata="" file_size="65454832" aspect_ratio="0" file_hash="3f1dc9607ffdb8f345d7b971f36be17b" type="1" id="36" name="arraystack-ii.wav" resource="/home/morin/ods/courseware/av/audio/arraystack-ii.wav">
+   <metaproperty tool="" name="meta.attr.artist">Pat Morin</metaproperty>
+   <metaproperty tool="" name="meta.attr.date">2014</metaproperty>
+   <metaproperty tool="" name="meta.attr.title">ArrayStack II</metaproperty>
+  </kdenlive_producer>
+  <markers/>
+  <groups/>
+ </kdenlivedoc>
+</mlt>
