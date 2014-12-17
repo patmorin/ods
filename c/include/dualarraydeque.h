@@ -6,6 +6,9 @@
 #ifndef ODS_DUALARRAYDEQUE_H_
 #define ODS_DUALARRAYDEQUE_H_
 
+#include <stdlib.h>
+
+#include <iterator.h>
 #include <arraystack.h>
 
 #define dualarraydeque_add_front(d, elem) \
@@ -86,6 +89,25 @@ extern void dualarraydeque_get(dualarraydeque_t* d,
  */
 extern void dualarraydeque_init(dualarraydeque_t* d,
                                 size_t elem_size);
+
+/* FUNCTION
+ *      dualarraydeque_iterator
+ *
+ * ITERABLE
+ *      FORWARD     start <= end
+ *      REVERSE     end > start
+ *
+ * DESCRIPTION
+ *      Initializes an iterator_t for the specified range [start, end].
+ *
+ * PARAMETERS
+ *      s           A valid pointer to an initialized dualarraydeque_t struct.
+ *      it          A valid pointer to an iterator_t struct.
+ *      start       Start position (inclusive, must be less than length).
+ *      end         End position (inclusive, must be less than length).
+ */
+extern void dualarraydeque_iterator(dualarraydeque_t* d, iterator_t* it,
+                                    size_t start, size_t end);
 
 /* FUNCTION
  *      dualarraydeque_remove

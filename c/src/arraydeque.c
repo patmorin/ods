@@ -7,6 +7,7 @@
 #include <string.h>
 #include <assert.h>
 
+#include <iterator.h>
 #include <arraydeque.h>
 
 struct arraydeque_it {
