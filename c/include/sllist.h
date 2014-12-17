@@ -8,6 +8,8 @@
 
 #include <stdlib.h>
 
+#include <iterator.h>
+
 #define sllist_dequeue(l, elem) \
             sllist_pop((l), (elem))
 
@@ -66,6 +68,26 @@ extern void sllist_enqueue(sllist_t* l,
  */
 extern void sllist_init(sllist_t* l,
                         size_t elem_size);
+
+/* FUNCTION
+ *      sllist_iterator
+ *
+ * ITERABLE
+ *      FORWARD     start <= end
+ *
+ * DESCRIPTION
+ *      Initializes an iterator_t for the specified range [start, end].
+ *
+ * PARAMETERS
+ *      l           A valid pointer to an initialized sllist_t struct.
+ *      it          A valid pointer to an iterator_t struct.
+ *      start       Start position (inclusive, must be less than length).
+ *      end         End position (inclusive, must be less than length).
+ */
+extern void sllist_iterator(sllist_t* l,
+                            iterator_t* it,
+                            size_t start,
+                            size_t end);
 
 /* FUNCTION
  *      sllist_pop (sllist_dequeue)

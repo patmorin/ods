@@ -7,7 +7,45 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#include <iterator.h>
 #include <sllist.h>
+
+struct sllist_it {
+
+    slnode_t* curr_node;
+    
+    size_t rem;
+    int started;
+
+};
+
+static int it_next(iterator_t* it) {
+
+    struct sllist_it* a = it->istruct;
+
+    if (!a->started)
+        return (a->started = 1);
+
+    if (a->rem == 0)
+        return 0;
+
+    a->rem--;
+    a->curr_node = a->curr_node->next;
+    
+    return 1;
+}
+
+static void* it_elem(iterator_t* it) {
+
+    struct sllist_it* a = it->istruct;
+
+    return a->curr_node->data;
+}
+
+static void it_dispose(iterator_t* it) {
+
+    free(it->istruct);
+}
 
 void sllist_dispose(sllist_t* l) {
 
@@ -62,6 +100,36 @@ void sllist_init(sllist_t* l, size_t elem_size) {
     l->elem_size = elem_size;
     l->head      = NULL;
     l->tail      = NULL;
+}
+
+void sllist_iterator(sllist_t* l, iterator_t* it, size_t start, size_t end) {
+
+    struct sllist_it* istruct;
+    slnode_t* node;
+    size_t i;
+
+    assert((void *)l != NULL);
+    assert((void *)it != NULL);
+    assert(start < l->length);
+    assert(end < l->length);
+    assert(start <= end);
+
+    it->dispose = it_dispose;
+    it->next    = it_next;
+    it->elem    = it_elem;
+
+    istruct = malloc(sizeof(struct sllist_it));
+    assert((void *)istruct != NULL);
+
+    istruct->rem     = end - start;
+    istruct->started = 0;
+
+    /* find the starting node */
+    for (i = 0, node = l->head; i < start; node = node->next, i++);
+
+    istruct->curr_node = node;
+
+    it->istruct = istruct;
 }
 
 void sllist_pop(sllist_t* l, void* elem_out) {
