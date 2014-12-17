@@ -8,6 +8,8 @@
 
 #include <stdlib.h>
 
+#include <iterator.h>
+
 #define rootisharraystack_push(s, elem) \
             rootisharraystack_add((s), (s)->length, (elem))
 
@@ -95,6 +97,28 @@ extern void rootisharraystack_get(rootisharraystack_t* r,
  */
 extern void rootisharraystack_init(rootisharraystack_t* r,
                                    size_t elem_size);
+
+/* FUNCTION
+ *      rootisharraystack_iterator
+ *
+ * ITERABLE
+ *      FORWARD     start <= end
+ *      REVERSE     end > start
+ *
+ * DESCRIPTION
+ *      Initializes an iterator_t for the specified range [start, end].
+ *
+ * PARAMETERS
+ *      r           A valid pointer to an initialized rootisharraystack_t
+ *                  struct.
+ *      it          A valid pointer to an iterator_t struct.
+ *      start       Start position (inclusive, must be less than length).
+ *      end         End position (inclusive, must be less than length).
+ */
+extern void rootisharraystack_iterator(rootisharraystack_t* r,
+                                       iterator_t* it,
+                                       size_t start,
+                                       size_t end);
 
 /* FUNCTION
  *      rootisharraystack_remove

@@ -8,7 +8,75 @@
 #include <assert.h>
 #include <math.h>
 
+#include <iterator.h>
 #include <rootisharraystack.h>
+
+struct rootisharraystack_it {
+
+    rootisharraystack_t* array;
+
+    size_t curr;
+    size_t end;
+    size_t curr_block;      /* current block */
+    size_t curr_block_pos;  /* position within current block */
+    int fwd;
+    int started;
+
+};
+
+static int it_next(iterator_t* it) {
+
+    struct rootisharraystack_it* a = it->istruct;
+
+    if (!a->started)
+        return (a->started = 1);
+
+    if (a->curr == a->end)
+        return 0;
+
+    if (a->fwd) {
+
+        if (a->curr_block_pos == a->curr_block) {
+            
+            a->curr_block_pos = 0;
+            a->curr_block++;
+            a->curr++;
+            return 1;
+        }
+
+        a->curr++;
+        a->curr_block_pos++;
+    }
+
+    else {
+
+        if (a->curr_block_pos == 0) {
+
+            a->curr_block--;
+            a->curr_block_pos = a->curr_block;
+            a->curr--;
+            return 1;
+        }
+
+        a->curr--;
+        a->curr_block_pos--;
+    }
+
+    return 1;
+}
+
+static void* it_elem(iterator_t* it) {
+
+    struct rootisharraystack_it* a = it->istruct;
+
+    return (char *)(a->array->blocks[a->curr_block]) +
+        (a->curr_block_pos * a->array->elem_size);
+}
+
+static void it_dispose(iterator_t* it) {
+
+    free(it->istruct);
+}
 
 static size_t alloclen(size_t num_blocks) {
 
@@ -134,6 +202,37 @@ void rootisharraystack_init(rootisharraystack_t* r, size_t elem_size) {
     /* now allocate space for 1 element */
     r->blocks[0] = malloc(elem_size);
     assert(r->blocks[0] != NULL);
+}
+
+void rootisharraystack_iterator(rootisharraystack_t* r, iterator_t* it,
+                                size_t start, size_t end) {
+
+    struct rootisharraystack_it* istruct;
+
+    assert((void *)r != NULL);
+    assert((void *)it != NULL);
+    assert(start < r->length);
+    assert(end < r->length);
+
+    it->dispose = it_dispose;
+    it->elem    = it_elem;
+    it->next    = it_next;
+
+    istruct = malloc(sizeof(struct rootisharraystack_it));
+    assert((void *)istruct != NULL);
+
+    istruct->array          = r;
+    istruct->curr           = start;
+    istruct->end            = end;
+    istruct->started        = 0;
+    istruct->fwd            = 0;
+    istruct->curr_block     = pos2block(start);
+    istruct->curr_block_pos = start - alloclen(istruct->curr_block);
+
+    if (start <= end)
+        istruct->fwd = 1;
+
+    it->istruct = istruct;
 }
 
 void rootisharraystack_remove(rootisharraystack_t* r, size_t pos,
