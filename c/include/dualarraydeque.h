@@ -101,7 +101,7 @@ extern void dualarraydeque_init(dualarraydeque_t* d,
  *      Initializes an iterator_t for the specified range [start, end].
  *
  * PARAMETERS
- *      s           A valid pointer to an initialized dualarraydeque_t struct.
+ *      d           A valid pointer to an initialized dualarraydeque_t struct.
  *      it          A valid pointer to an iterator_t struct.
  *      start       Start position (inclusive, must be less than length).
  *      end         End position (inclusive, must be less than length).

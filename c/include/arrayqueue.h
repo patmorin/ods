@@ -97,7 +97,7 @@ extern void arrayqueue_init(arrayqueue_t* q,
  *      Initializes an iterator_t for the specified range [start, end].
  *
  * PARAMETERS
- *      s           A valid pointer to an initialized arrayqueue_t struct.
+ *      q           A valid pointer to an initialized arrayqueue_t struct.
  *      it          A valid pointer to an iterator_t struct.
  *      start       Start position (inclusive, must be less than length).
  *      end         End position (inclusive, must be less than length).
