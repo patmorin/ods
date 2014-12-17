@@ -15,8 +15,7 @@ struct rootisharraystack_it {
 
     rootisharraystack_t* array;
 
-    size_t curr;
-    size_t end;
+    size_t rem;
     size_t curr_block;      /* current block */
     size_t curr_block_pos;  /* position within current block */
     int fwd;
@@ -31,7 +30,7 @@ static int it_next(iterator_t* it) {
     if (!a->started)
         return (a->started = 1);
 
-    if (a->curr == a->end)
+    if (a->rem == 0)
         return 0;
 
     if (a->fwd) {
@@ -40,11 +39,10 @@ static int it_next(iterator_t* it) {
             
             a->curr_block_pos = 0;
             a->curr_block++;
-            a->curr++;
+            a->rem--;
             return 1;
         }
 
-        a->curr++;
         a->curr_block_pos++;
     }
 
@@ -54,13 +52,14 @@ static int it_next(iterator_t* it) {
 
             a->curr_block--;
             a->curr_block_pos = a->curr_block;
-            a->curr--;
+            a->rem--;
             return 1;
         }
 
-        a->curr--;
         a->curr_block_pos--;
     }
+
+    a->rem--;
 
     return 1;
 }
@@ -222,8 +221,7 @@ void rootisharraystack_iterator(rootisharraystack_t* r, iterator_t* it,
     assert((void *)istruct != NULL);
 
     istruct->array          = r;
-    istruct->curr           = start;
-    istruct->end            = end;
+    istruct->rem            = start <= end ? end - start : start - end;
     istruct->started        = 0;
     istruct->fwd            = 0;
     istruct->curr_block     = pos2block(start);
