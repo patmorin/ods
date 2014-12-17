@@ -14,7 +14,6 @@ struct arrayqueue_it {
 
     arrayqueue_t* queue;
 
-    size_t start;
     size_t end;
     size_t curr;
     int started;
@@ -158,24 +157,24 @@ void arrayqueue_init(arrayqueue_t* q, size_t elem_size) {
     q->elem_size    = elem_size;
 }
 
-iterator_t arrayqueue_iterator(arrayqueue_t* q, size_t start, size_t end) {
+void arrayqueue_iterator(arrayqueue_t* q, iterator_t *it,
+                         size_t start, size_t end) {
 
-    iterator_t it;
     struct arrayqueue_it* istruct;
 
     assert((void *)q != NULL);
+    assert((void *)it != NULL);
     assert(start < q->length);
     assert(end < q->length);
 
-    it.next    = it_next;
-    it.elem    = it_elem;
-    it.dispose = it_dispose;
+    it->next    = it_next;
+    it->elem    = it_elem;
+    it->dispose = it_dispose;
 
     istruct = malloc(sizeof(struct arrayqueue_it));
     assert(istruct != NULL);
 
     istruct->queue   = q;
-    istruct->start   = start;
     istruct->end     = end;
     istruct->curr    = start;
     istruct->started = 0;
@@ -184,9 +183,7 @@ iterator_t arrayqueue_iterator(arrayqueue_t* q, size_t start, size_t end) {
     if (start <= end)
         istruct->fwd = 1;
 
-    it.istruct = istruct;
-    
-    return it;
+    it->istruct = istruct;
 }
 
 void arrayqueue_peek(arrayqueue_t* q, void* elem_out) {

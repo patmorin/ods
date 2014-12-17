@@ -9,6 +9,52 @@
 
 #include <arraydeque.h>
 
+struct arraydeque_it {
+
+    arraydeque_t* deque;
+
+    size_t curr;
+    size_t end;
+    int fwd;
+    int started;
+
+};
+
+static int it_next(iterator_t* it) {
+
+    struct arraydeque_it* a = it->istruct;
+
+    if (!a->started) {
+
+        a->started = 1;
+        return 1;
+    }
+
+    if (a->curr == a->end)
+        return 0;
+
+    if (a->fwd)
+        a->curr++;
+    else
+        a->curr--;
+
+    return 1;
+}
+
+static void* it_elem(iterator_t* it) {
+
+    struct arraydeque_it* a = it->istruct;
+
+    size_t i = (a->deque->pos + a->curr) % a->deque->alloc_length;
+    
+    return (char *)a->deque->array + (i * a->deque->elem_size);
+}
+
+static void it_dispose(iterator_t* it) {
+
+    free(it->istruct);
+}
+
 static void resize(arraydeque_t* d) {
 
     void* new;
@@ -164,6 +210,35 @@ void arraydeque_init_bound(arraydeque_t* d, size_t elem_size, size_t space) {
     d->pos          = 0;
     d->bound        = 1;
     d->elem_size    = elem_size;
+}
+
+void arraydeque_iterator(arraydeque_t* d, iterator_t* it,
+                         size_t start, size_t end) {
+
+    struct arraydeque_it* istruct;
+
+    assert((void *)d != NULL);
+    assert((void *)it != NULL);
+    assert(start < d->length);
+    assert(end < d->length);
+
+    it->next    = it_next;
+    it->elem    = it_elem;
+    it->dispose = it_dispose;
+
+    istruct = malloc(sizeof(struct arraydeque_it));
+    assert((void *)istruct != NULL);
+
+    istruct->deque   = d;
+    istruct->curr    = start;
+    istruct->end     = end;
+    istruct->started = 0;
+    istruct->fwd     = 0;
+
+    if (start <= end)
+        istruct->fwd = 1;
+
+    it->istruct = istruct;
 }
 
 void arraydeque_remove(arraydeque_t* d, size_t pos, void* elem_out) {

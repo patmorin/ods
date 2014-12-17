@@ -8,6 +8,8 @@
 
 #include <stdlib.h>
 
+#include <iterator.h>
+
 #define arraydeque_add_front(d, elem) \
             arraydeque_add((d), 0, (elem))
 
@@ -26,7 +28,7 @@ typedef struct {
     size_t length;
     size_t pos;
     size_t elem_size;
-    char bound;
+    int bound;
     void* array;
 
 } arraydeque_t;
@@ -118,6 +120,27 @@ extern void arraydeque_init(arraydeque_t* d,
 extern void arraydeque_init_bound(arraydeque_t* d,
                                   size_t elem_size,
                                   size_t space);
+
+/* FUNCTION
+ *      arraydeque_iterator
+ *
+ * ITERABLE
+ *      FORWARD     start <= end
+ *      REVERSE     end > start
+ *
+ * DESCRIPTION
+ *      Initializes an iterator_t for the specified range [start, end].
+ *
+ * PARAMETERS
+ *      s           A valid pointer to an initialized arraydeque_t struct.
+ *      it          A valid pointer to an iterator_t struct.
+ *      start       Start position (inclusive, must be less than length).
+ *      end         End position (inclusive, must be less than length).
+ */
+extern void arraydeque_iterator(arraydeque_t* d,
+                                iterator_t* it,
+                                size_t start,
+                                size_t end);
 
 /* FUNCTION
  *      arraydeque_remove

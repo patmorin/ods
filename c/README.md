@@ -115,7 +115,8 @@ int main() {
         arraystack_push(&stack, &i);
 
     /* make an iterator for stack[1,4] */
-    iterator_t it = arraystack_iterator(&stack, 1, 4);
+    iterator_t it;
+    arraystack_iterator(&stack, &it, 1, 4);
 
     while (it.next(&it))
         printf("%d\n", *(int *)it.elem(&it));

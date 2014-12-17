@@ -12,8 +12,7 @@
 struct arraystack_it {
 
     arraystack_t* stack;
-    
-    size_t start;
+
     size_t end;
     size_t curr;
     int started;
@@ -165,24 +164,23 @@ void arraystack_init(arraystack_t* s, size_t elem_size) {
     s->elem_size    = elem_size;
 }
 
-iterator_t arraystack_iterator(arraystack_t* s, size_t start, size_t end) {
+void arraystack_iterator(arraystack_t* s, iterator_t* it,
+                         size_t start, size_t end) {
 
-    iterator_t it;
     struct arraystack_it* istruct;
 
     assert((void *)s != NULL);
     assert(start < s->length);
     assert(end < s->length);
 
-    it.next    = it_next;
-    it.elem    = it_elem;
-    it.dispose = it_dispose;
+    it->next    = it_next;
+    it->elem    = it_elem;
+    it->dispose = it_dispose;
 
     istruct = malloc(sizeof(struct arraystack_it));
     assert(istruct != NULL);
 
     istruct->stack   = s;
-    istruct->start   = start;
     istruct->end     = end;
     istruct->curr    = start;
     istruct->started = 0;
@@ -191,9 +189,7 @@ iterator_t arraystack_iterator(arraystack_t* s, size_t start, size_t end) {
     if (start <= end)
         istruct->fwd = 1;
 
-    it.istruct = istruct;
-    
-    return it;
+    it->istruct = istruct;
 }
 
 void arraystack_remove(arraystack_t* s, size_t pos, void* elem_out) {

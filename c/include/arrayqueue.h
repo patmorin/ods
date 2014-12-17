@@ -94,16 +94,18 @@ extern void arrayqueue_init(arrayqueue_t* q,
  *      REVERSE     end > start
  *
  * DESCRIPTION
- *      Returns an iterator_t for the specified range [start, end].
+ *      Initializes an iterator_t for the specified range [start, end].
  *
  * PARAMETERS
  *      s           A valid pointer to an initialized arrayqueue_t struct.
+ *      it          A valid pointer to an iterator_t struct.
  *      start       Start position (inclusive, must be less than length).
  *      end         End position (inclusive, must be less than length).
  */
-extern iterator_t arrayqueue_iterator(arrayqueue_t* q,
-                                      size_t start,
-                                      size_t end);
+extern void arrayqueue_iterator(arrayqueue_t* q,
+                                iterator_t* it,
+                                size_t start,
+                                size_t end);
 
 /* FUNCTION
  *      arrayqueue_peek
