@@ -7,7 +7,50 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <iterator.h>
 #include <dllist.h>
+
+struct dllist_it {
+
+    dlnode_t* node;
+
+    size_t rem;
+    int fwd;
+    int started;
+
+};
+
+static int it_next(iterator_t* it) {
+
+    struct dllist_it* a = it->istruct;
+
+    if (!a->started)
+        return (a->started = 1);
+
+    if (a->rem == 0)
+        return 0;
+
+    if (a->fwd)
+        a->node = a->node->next;
+    else
+        a->node = a->node->prev;
+
+    a->rem--;
+
+    return 1;
+}
+
+static void* it_elem(iterator_t* it) {
+
+    struct dllist_it* a = it->istruct;
+
+    return a->node->data;
+}
+
+static void it_dispose(iterator_t* it) {
+
+    free(it->istruct);
+}
 
 static dlnode_t* get_node(dllist_t* l, size_t pos) {
 
@@ -106,6 +149,30 @@ void dllist_init(dllist_t* l, size_t elem_size) {
     l->dummy->next = l->dummy;
     l->dummy->prev = l->dummy;
     l->dummy->data = NULL;
+}
+
+void dllist_iterator(dllist_t* l, iterator_t* it, size_t start, size_t end) {
+
+    struct dllist_it* istruct;
+
+    assert((void *)l != NULL);
+    assert((void *)it != NULL);
+    assert(start < l->length);
+    assert(end < l->length);
+
+    it->dispose = it_dispose;
+    it->next    = it_next;
+    it->elem    = it_elem;
+
+    istruct = malloc(sizeof(struct dllist_it));
+    assert((void *)istruct != NULL);
+
+    istruct->started = 0;
+    istruct->rem     = start <= end ? end - start : start - end;
+    istruct->fwd     = start <= end ? 1 : 0;
+    istruct->node    = get_node(l, start);
+
+    it->istruct = istruct;
 }
 
 void dllist_remove(dllist_t* l, size_t pos, void* elem_out) {

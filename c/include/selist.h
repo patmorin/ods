@@ -6,6 +6,9 @@
 #ifndef ODS_SELIST_H_
 #define ODS_SELIST_H_
 
+#include <stdlib.h>
+
+#include <iterator.h>
 #include <arraydeque.h>
 
 typedef struct senode_t {

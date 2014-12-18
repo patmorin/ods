@@ -6,15 +6,82 @@
 #include <assert.h>
 #include <stdlib.h>
 
+#include <iterator.h>
 #include <arraydeque.h>
 #include <selist.h>
 
 struct location {
 
     senode_t* node;
-    size_t local_pos; /* local position within the node */
+    size_t local_pos;
 
 };
+
+struct selist_it {
+
+    senode_t* node;
+    size_t local_pos;
+    
+    size_t rem;
+    int fwd;
+    int started;
+
+};
+
+static int it_next(iterator_t* it) {
+
+    struct selist_it* a = it->istruct;
+
+    if (!a->started)
+        return (a->started = 1);
+
+    if (a->rem == 0)
+        return 0;
+
+    if (a->fwd) {
+
+        if (a->local_pos == a->node->bdeque->length - 1) {
+
+            a->local_pos = 0;
+            a->node = a->node->next;
+        }
+
+        else {
+            a->local_pos++;
+        }
+    }
+
+    else {
+
+        if (a->local_pos == 0) {
+
+            a->node = a->node->prev;
+            a->local_pos = a->node->bdeque->length - 1;
+        }
+
+        else {
+            a->local_pos--;
+        }
+    }
+
+    a->rem--;
+    return 1;
+}
+
+static void* it_elem(iterator_t* it) {
+
+    struct selist_it* a = it->istruct;
+
+    size_t i = (a->node->bdeque->pos + a->local_pos) %
+                    a->node->bdeque->alloc_length;
+
+    return (char *)a->node->bdeque->array + (i * a->node->bdeque->elem_size);
+}
+
+static void it_dispose(iterator_t* it) {
+
+    free(it->istruct);
+}
 
 static senode_t* add_before(selist_t* l, senode_t* node) {
 
@@ -237,6 +304,34 @@ void selist_init(selist_t* l, size_t elem_size, size_t block_size) {
     l->elem_size  = elem_size;
     l->length     = 0;
     l->block_size = block_size;
+}
+
+void selist_iterator(selist_t* l, iterator_t* it, size_t start, size_t end) {
+
+    struct selist_it* istruct;
+    struct location loc;
+
+    assert((void *)l != NULL);
+    assert((void *)it != NULL);
+    assert(start < l->length);
+    assert(end < l->length);
+
+    it->dispose = it_dispose;
+    it->next    = it_next;
+    it->elem    = it_elem;
+
+    istruct = malloc(sizeof(struct selist_it));
+    assert((void *)istruct != NULL);
+
+    loc = find(l, start);
+
+    istruct->node      = loc.node;
+    istruct->local_pos = loc.local_pos;
+    istruct->started   = 0;
+    istruct->rem       = start <= end ? end - start : start - end;
+    istruct->fwd       = start <= end ? 1 : 0;
+
+    it->istruct = istruct;
 }
 
 void selist_remove(selist_t* l, size_t pos, void* elem_out) {
