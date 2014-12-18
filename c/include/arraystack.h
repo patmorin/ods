@@ -126,7 +126,7 @@ extern void arraystack_init(arraystack_t* s,
  *
  * ITERABLE
  *      FORWARD     start <= end
- *      REVERSE     end > start
+ *      REVERSE     start >  end
  *
  * DESCRIPTION
  *      Initializes an iterator_t for the specified range [start, end].

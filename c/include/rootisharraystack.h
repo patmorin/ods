@@ -20,7 +20,7 @@ typedef struct {
 
     size_t length;
     size_t elem_size;
-    size_t bs; /* size of blocks array */
+    size_t b_length;
     void** blocks;
 
 } rootisharraystack_t;
@@ -103,7 +103,7 @@ extern void rootisharraystack_init(rootisharraystack_t* r,
  *
  * ITERABLE
  *      FORWARD     start <= end
- *      REVERSE     end > start
+ *      REVERSE     start >  end
  *
  * DESCRIPTION
  *      Initializes an iterator_t for the specified range [start, end].

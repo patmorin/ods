@@ -91,7 +91,7 @@ extern void arrayqueue_init(arrayqueue_t* q,
  *
  * ITERABLE
  *      FORWARD     start <= end
- *      REVERSE     end > start
+ *      REVERSE     start >  end
  *
  * DESCRIPTION
  *      Initializes an iterator_t for the specified range [start, end].
