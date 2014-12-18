@@ -126,7 +126,7 @@ extern void arraydeque_init_bound(arraydeque_t* d,
  *
  * ITERABLE
  *      FORWARD     start <= end
- *      REVERSE     end > start
+ *      REVERSE     start >  end
  *
  * DESCRIPTION
  *      Initializes an iterator_t for the specified range [start, end].
