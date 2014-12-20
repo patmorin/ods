@@ -44,7 +44,7 @@ SHARED_LIB = $(CC) -shared -o $(LIB).so $^
 INSDIR = /usr/lib
 
 OBJ = arraystack.o arrayqueue.o arraydeque.o dualarraydeque.o \
-      rootisharraystack.o sllist.o dllist.o selist.o
+      rootisharraystack.o sllist.o dllist.o selist.o skiplistsset.o
 
 lib: $(OBJ)
 	$(SHARED_LIB)
