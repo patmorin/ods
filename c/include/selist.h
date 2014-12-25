@@ -88,6 +88,27 @@ extern void selist_init(selist_t* l,
                         size_t block_size);
 
 /* FUNCTION
+ *      selist_iterator
+ *
+ * ITERABLE
+ *      FORWARD     start <= end
+ *      REVERSE     start >  end
+ *
+ * DESCRIPTION
+ *      Initializes an iterator for the specified range [start, end].
+ *
+ * PARAMETERS
+ *      l           Pointer to an initialized selist_t struct.
+ *      it          A valid pointer to an iterator_t struct.
+ *      start       Start position (inclusive, must be less than length).
+ *      end         End position (inclusive, must be less than length).
+ */
+extern void selist_iterator(selist_t* l,
+                            iterator_t* it,
+                            size_t start,
+                            size_t end);
+
+/* FUNCTION
  *      selist_set
  *
  * DESCRIPTION
