@@ -6,7 +6,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <stdio.h>
 
 #include <skiplistsset.h>
 
@@ -52,7 +51,7 @@ int skiplistsset_add(skiplistsset_t* s, void* elem) {
     node = s->sentinel;
     r    = s->height;
 
-    while (1) { /* break if r == 0 */
+    while (1) {
     
         while (node->next[r] != NULL && 
                (cmp_result = s->cmp(node->next[r]->data, elem)) < 0) {
@@ -90,6 +89,30 @@ int skiplistsset_add(skiplistsset_t* s, void* elem) {
     return 1;
 }
 
+void skiplistsset_dispose(skiplistsset_t* s) {
+
+    skiplistssetnode_t* node;
+    skiplistssetnode_t* rm;
+
+    assert((void *)s != NULL);
+
+    node = s->sentinel->next[0];
+
+    while (node != NULL) {
+
+        rm = node;
+        node = node->next[0];
+
+        free(rm->data);
+        free(rm->next);
+        free(rm);
+    }
+
+    free(s->sentinel->next);
+    free(s->sentinel);
+    free(s->stack);
+}
+
 void skiplistsset_init(skiplistsset_t* s, size_t elem_size,
                        int (*comparator)(void*, void*), int (*random)(void)) {
 
@@ -103,9 +126,61 @@ void skiplistsset_init(skiplistsset_t* s, size_t elem_size,
     s->height = 0;
     s->rand       = random == NULL ? rand : random; /* default rand: stdlib */
 
-    /* TODO: 
+    /* TODO: remove hard-coded limit */
     s->sentinel   = new_node(NULL, 32);
     s->stack      = calloc(32, sizeof(skiplistssetnode_t *));
 
     assert((void *)s->stack != NULL);
+}
+
+int skiplistsset_remove(skiplistsset_t* s, void* elem) {
+
+    skiplistssetnode_t* node;
+    skiplistssetnode_t* old_node;
+    size_t r;
+    int cmp_result = 0;
+    int rm = 0;
+
+    assert((void *)s != NULL);
+    assert(elem != NULL);
+
+    node = s->sentinel;
+    r    = s->height;
+
+    while (1) {
+        
+        while (node->next[r] != NULL &&
+               (cmp_result = s->cmp(node->next[r]->data, elem)) < 0) {
+
+            node = node->next[r];
+        }
+        
+        if (node->next[r] != NULL && cmp_result == 0) {
+
+            rm = 1;
+
+            old_node = node->next[r];
+            node->next[r] = node->next[r]->next[r];
+
+            if (r == 0) {
+
+                /* at r = 0, we're removing the last reference to the node
+                 * that's being removed (old_node), hence we can free it */
+                free(old_node->data);
+                free(old_node->next);
+                free(old_node);
+            }
+
+            if (node == s->sentinel && node->next[r] == NULL)
+                s->height--;
+        }
+
+        if (r-- == 0)
+            break;
+    }
+
+    if (rm)
+        s->length--;
+
+    return rm;
 }
