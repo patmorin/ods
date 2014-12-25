@@ -7,7 +7,33 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#include <iterator.h>
 #include <skiplistsset.h>
+
+static int it_next(iterator_t* it) {
+
+    skiplistssetnode_t* curr_node = it->istruct;
+
+    if (curr_node->next[0] != NULL) {
+
+        curr_node = curr_node->next[0];
+        return 1;
+    }
+
+    return 0;
+}
+
+static void* it_elem(iterator_t* it) {
+
+    skiplistssetnode_t* curr_node = it->istruct;
+
+    return curr_node->data;
+}
+
+static void it_dispose(iterator_t* it) {
+
+    free(it->istruct):
+}
 
 static skiplistssetnode_t* new_node(void* data, size_t h) {
 

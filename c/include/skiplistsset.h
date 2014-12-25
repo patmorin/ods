@@ -8,6 +8,7 @@
 
 #include <stdlib.h>
 
+#include <iterator.h>
 #include <arraydeque.h>
 
 typedef struct skiplistssetnode_t {
@@ -83,6 +84,20 @@ extern void skiplistsset_init(skiplistsset_t* s,
                               size_t elem_size,
                               int (*comparator)(void*, void*),
                               int (*random)(void));
+
+/* FUNCTION
+ *      skiplistsset_iterator
+ *
+ * ITERABLE
+ *      FORWARD
+ *
+ * DESCRIPTION
+ *      Initializes an iterator for the sorted set.
+ *
+ * PARAMETERS
+ *      s           Pointer to an initialized skiplistsset_t struct.
+ */
+extern void skiplistsset_iterator(skiplistsset_t* s);
 
 /* FUNCTION
  *      skiplistsset_remove
