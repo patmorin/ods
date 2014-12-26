@@ -16,7 +16,7 @@ static int it_next(iterator_t* it) {
 
     if (curr_node->next[0] != NULL) {
 
-        curr_node = curr_node->next[0];
+        it->istruct = curr_node->next[0];
         return 1;
     }
 
@@ -32,7 +32,7 @@ static void* it_elem(iterator_t* it) {
 
 static void it_dispose(iterator_t* it) {
 
-    free(it->istruct):
+    return;
 }
 
 static skiplistssetnode_t* new_node(void* data, size_t h) {
@@ -157,6 +157,17 @@ void skiplistsset_init(skiplistsset_t* s, size_t elem_size,
     s->stack      = calloc(32, sizeof(skiplistssetnode_t *));
 
     assert((void *)s->stack != NULL);
+}
+
+void skiplistsset_iterator(skiplistsset_t* s, iterator_t* it) {
+
+    assert((void *)s != NULL);
+    assert((void *)it != NULL);
+
+    it->dispose = it_dispose;
+    it->next    = it_next;
+    it->elem    = it_elem;
+    it->istruct = s->sentinel;
 }
 
 int skiplistsset_remove(skiplistsset_t* s, void* elem) {

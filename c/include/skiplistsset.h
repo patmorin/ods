@@ -96,8 +96,10 @@ extern void skiplistsset_init(skiplistsset_t* s,
  *
  * PARAMETERS
  *      s           Pointer to an initialized skiplistsset_t struct.
+ *      it          Pointer to an interator_t struct.
  */
-extern void skiplistsset_iterator(skiplistsset_t* s);
+extern void skiplistsset_iterator(skiplistsset_t* s,
+                                  iterator_t* it);
 
 /* FUNCTION
  *      skiplistsset_remove
