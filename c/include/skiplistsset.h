@@ -62,6 +62,21 @@ extern int skiplistsset_add(skiplistsset_t* s,
 extern void skiplistsset_dispose(skiplistsset_t* s);
 
 /* FUNCTION
+ *      skiplistsset_contains
+ *
+ * DESCRIPTION
+ *      Checks whether an element is contained in the set.
+ *
+ * PARAMETERS
+ *      s           Pointer to an initialized skiplistsset_t struct.
+ *      elem        The element that will be searched for in the set.
+ *
+ * RETURN VALUE
+ *      Returns 1 if the element exists in the set, 0 otherwise.
+ */
+extern int skiplistsset_contains(skiplistsset_t* s, void* elem);
+
+/* FUNCTION
  *      skiplistsset_init
  *
  * DESCRIPTION

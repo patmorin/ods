@@ -40,7 +40,7 @@ static skiplistssetnode_t* new_node(void* data, size_t h) {
     skiplistssetnode_t* node = malloc(sizeof(skiplistssetnode_t));
     assert((void *)node != NULL);
 
-    node->next = calloc((h + 1), sizeof(skiplistssetnode_t *));
+    node->next = calloc(h + 1, sizeof(skiplistssetnode_t *));
     assert((void *)node->next != NULL);
     
     node->next_length = h + 1;
@@ -139,6 +139,30 @@ void skiplistsset_dispose(skiplistsset_t* s) {
     free(s->stack);
 }
 
+int skiplistsset_contains(skiplistsset_t* s, void* elem) {
+
+    skiplistssetnode_t* node;
+    size_t r;
+
+    assert((void *)s != NULL);
+    assert(elem != NULL);
+
+    node = s->sentinel;
+    r    = s->height;
+
+    while (1) {
+
+        while (node->next[r] != NULL && s->cmp(node->next[r]->data, elem) < 0)
+            node = node->next[r];
+
+        if (r-- == 0)
+            break;
+    }
+
+    return node->next[0] == NULL ? 0 :
+        (s->cmp(node->next[0]->data, elem) == 0 ? 1 : 0);
+}
+
 void skiplistsset_init(skiplistsset_t* s, size_t elem_size,
                        int (*comparator)(void*, void*), int (*random)(void)) {
 
@@ -149,13 +173,13 @@ void skiplistsset_init(skiplistsset_t* s, size_t elem_size,
     s->length     = 0;
     s->elem_size  = elem_size;
     s->cmp        = comparator;
-    s->height = 0;
+    s->height     = 0;
     s->rand       = random == NULL ? rand : random; /* default rand: stdlib */
 
     /* TODO: remove hard-coded limit */
     s->sentinel   = new_node(NULL, 32);
+    
     s->stack      = calloc(32, sizeof(skiplistssetnode_t *));
-
     assert((void *)s->stack != NULL);
 }
 
