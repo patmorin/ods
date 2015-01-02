@@ -18,6 +18,8 @@ each
 * [SLList](include/sllist.h)
 * [DLList](include/dllist.h)
 * [SEList](include/selist.h)
+* [SkiplistSSet](include/skiplistsset.h)
+* [SkiplistList](include/skiplist.h)
 
 #### How to use the library
 
@@ -31,10 +33,6 @@ If you don't have gcc, you can modify the Makefile for your compiler (with
 [clang](http://clang.llvm.org), you only need to change the compiler variable,
 everything else should work the same). Or, compile the sources in `src/` with
 the headers in `include/`.
-
-**Note:** Some data structures use `<math.h>` and thus require the math library
-(`libm`) to be linked. Append `-lm` (depending on your compiler) to your
-compiler arguments when using libodsc.
 
 The [include](include/) directory contains the headers you will need to include
 in your program. Detailed information on the functions and their arguments can

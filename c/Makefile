@@ -36,7 +36,7 @@ COMPILE = $(CC) $(ANSI_ARGS) -fpic -I include/ -c -o $@ $<
 #
 # Shared library arguments
 #
-SHARED_LIB = $(CC) -shared -o $(LIB).so $^
+SHARED_LIB = $(CC) -shared -o $(LIB).so $^ -lm
 
 #
 # Shared library install directory
