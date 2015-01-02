@@ -9,7 +9,6 @@
 #include <stdlib.h>
 
 #include <iterator.h>
-#include <arraydeque.h>
 
 typedef struct skiplistssetnode_t {
 
