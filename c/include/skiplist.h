@@ -44,7 +44,9 @@ typedef struct skiplist_t {
  *      elem        Pointer to the element that will be copied into the list.
  *                  Cannot be null.
  */
-void skiplist_add(skiplist_t* s, size_t pos, void* elem);
+void skiplist_add(skiplist_t* s,
+                  size_t pos,
+                  void* elem);
 
 /* FUNCTION
  *      skiplist_dispose
@@ -69,7 +71,9 @@ void skiplist_dispose(skiplist_t* s);
  *      elem_out    Pointer to a memory with at least elem_size bytes allocated.
  *                  The element at pos will be copied into this memory.
  */
-void skiplist_get(skiplist_t* s, size_t pos, void* elem_out);
+void skiplist_get(skiplist_t* s,
+                  size_t pos,
+                  void* elem_out);
 
 /* FUNCTION
  *      skiplist_init
@@ -84,7 +88,9 @@ void skiplist_get(skiplist_t* s, size_t pos, void* elem_out);
  *                  function must take no arguments and return an int. If left
  *                  null, the default rand() from stdlib.h will be used.
  */
-void skiplist_init(skiplist_t* s, size_t elem_size, int (*random)(void));
+void skiplist_init(skiplist_t* s,
+                   size_t elem_size,
+                   int (*random)(void));
 
 /* FUNCTION
  *      skiplist_iterator
@@ -99,7 +105,8 @@ void skiplist_init(skiplist_t* s, size_t elem_size, int (*random)(void));
  *      s           Pointer to an initialized skiplist_t struct.
  *      it          Pointer to an iterator_t struct.
  */
-void skiplist_iterator(skiplist_t* s, iterator_t* it);
+void skiplist_iterator(skiplist_t* s,
+                       iterator_t* it);
 
 /* FUNCTION
  *      skiplist_remove
@@ -113,7 +120,9 @@ void skiplist_iterator(skiplist_t* s, iterator_t* it);
  *      elem_out    If not null, the element that is being removed will be
  *                  copied into the memory pointed to by this parameter.
  */
-void skiplist_remove(skiplist_t* s, size_t pos, void* elem_out);
+void skiplist_remove(skiplist_t* s,
+                     size_t pos,
+                     void* elem_out);
 
 /* FUNCTION
  *      skiplist_set
@@ -129,6 +138,9 @@ void skiplist_remove(skiplist_t* s, size_t pos, void* elem_out);
  *                  memory pointed to by this parameter before being replaced
  *                  with elem.
  */
-void skiplist_set(skiplist_t* s, size_t pos, void* elem, void* old_elem);
+void skiplist_set(skiplist_t* s,
+                  size_t pos,
+                  void* elem,
+                  void* old_elem);
 
 #endif
