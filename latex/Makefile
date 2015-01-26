@@ -78,7 +78,7 @@ ods-python.tex : ods.tex Makefile
 		| ./snarf-python.py > $*-python.tex 
 
 install-pdf : ods-java.pdf ods-cpp.pdf ods-python.pdf ods-java-screen.pdf ods-cpp-screen.pdf ods-python-screen.pdf
-	scp -r $< morin@cg.scs.carleton.ca:public_html/ods/
+	scp -r $^ morin@cg.scs.carleton.ca:public_html/ods/
 
 install-html : java-html cpp-html python-html
 	scp -r  ods-java/ ods-cpp/ ods-python/ morin@cg.scs.carleton.ca:public_html/ods/
