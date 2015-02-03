@@ -12,7 +12,7 @@ def new_zero_array(n):
     return numpy.zeros(n)
     
 def new_boolean_matrix(n, m):
-    return numpy.zeros([n, n], numpy.bool_)
+    return numpy.zeros([n, m], numpy.bool_)
     
 def new_boolean_array(n):
     return numpy.zeros(n, numpy.bool_)
