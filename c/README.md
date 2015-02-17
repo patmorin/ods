@@ -7,8 +7,7 @@ compilers.
 #### Implemented data structures
 
 More information on the data structures (implementation details, running times,
-etc.) can be found in [the book](http://opendatastructures.org). The interfaces
-each 
+etc.) can be found in [the book](http://opendatastructures.org).
 
 * [ArrayStack](include/arraystack.h) (equivalent to FastArrayStack in the book)
 * [ArrayQueue](include/arrayqueue.h)
