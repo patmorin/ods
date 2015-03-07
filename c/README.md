@@ -72,11 +72,11 @@ int main() {
 }
 ```
 
-#### Unified iteration
+#### Uniform iteration
 
 Different data structures can require different methods to efficiently iterate
 over them. For example, it is possible to iterate through an ArrayStack using
-`_get()` but using the same method on a DLList would be costly. Unified
+`_get()` but using the same method on a DLList would be costly. Uniform
 iterators provide a simple way of iterating over these data structures. Best to
 consider them invalidated if you do any kind of insertion/removal on the data
 structure you are iterating on. Iterators come with overhead since they have to
