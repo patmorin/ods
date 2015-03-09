@@ -19,6 +19,7 @@ etc.) can be found in [the book](http://opendatastructures.org).
 * [SEList](include/selist.h)
 * [SkiplistSSet](include/skiplistsset.h)
 * [SkiplistList](include/skiplist.h)
+* [ChainedHashTable](include/chainedhashtable.h)
 
 #### How to use the library
 
