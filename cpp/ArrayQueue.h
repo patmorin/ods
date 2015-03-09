@@ -43,16 +43,16 @@ void ArrayQueue<T>::resize() {
 	for (int k = 0; k < n; k++)
 		b[k] = a[(j+k)%a.length];
 	a = b;
-    j = 0;
+	j = 0;
 }
 
 template<class T>
 bool ArrayQueue<T>::add(T x) {
-	 if (n + 1 > a.length) resize();
-	 a[(j+n) % a.length] = x;
-	 n++;
-	 return true;
- }
+	if (n + 1 > a.length) resize();
+	a[(j+n) % a.length] = x;
+	n++;
+	return true;
+}
 
 template<class T>
 T ArrayQueue<T>::remove() {
