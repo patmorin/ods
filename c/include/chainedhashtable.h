@@ -94,9 +94,6 @@ extern int chainedhashtable_find(chainedhashtable_t* table,
  *      random      Pointer to a random function that takes no parameters and
  *                  returns an int value. If null, the default rand() from the
  *                  standard library is used.
- * 
- * RETURN VALUES
- *      Returns 1 if the element was found, 0 otherwise.
  */
 extern void chainedhashtable_init(chainedhashtable_t *table,
                                   size_t elem_size,
