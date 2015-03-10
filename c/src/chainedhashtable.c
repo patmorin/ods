@@ -191,6 +191,7 @@ void chainedhashtable_remove(chainedhashtable_t* table, void* elem) {
                 
                 it.dispose(&it);
                 dllist_remove(list, i, NULL);
+                --table->length;
                 return;
             }
             
