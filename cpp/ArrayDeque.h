@@ -66,7 +66,7 @@ void ArrayDeque<T>::resize() {
 	for (int k = 0; k < n; k++)
 		b[k] = a[(j+k)%a.length];
 	a = b;
-    j = 0;
+	j = 0;
 }
 
 template<class T>
@@ -91,18 +91,18 @@ void ArrayDeque<T>::add(int i, T x) {
 
 template<class T>
 T ArrayDeque<T>::remove(int i) {
-    T x = a[(j+i)%a.length];
-    if (i < n/2) { // shift a[0],..,[i-1] right one position
-    	for (int k = i; k > 0; k--)
+	T x = a[(j+i)%a.length];
+	if (i < n/2) { // shift a[0],..,[i-1] right one position
+		for (int k = i; k > 0; k--)
 			a[(j+k)%a.length] = a[(j+k-1)%a.length];
 		j = (j + 1) % a.length;
-    } else { // shift a[i+1],..,a[n-1] left one position
+	} else { // shift a[i+1],..,a[n-1] left one position
 		for (int k = i; k < n-1; k++)
 			a[(j+k)%a.length] = a[(j+k+1)%a.length];
-    }
-    n--;
-    if (3*n < a.length) resize();
-    return x;
+	}
+	n--;
+	if (3*n < a.length) resize();
+	return x;
 }
 
 } /* namespace ods */
