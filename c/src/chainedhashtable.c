@@ -7,7 +7,6 @@
 #include <assert.h>
 #include <limits.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 #include <chainedhashtable.h>
 #include <dllist.h>
