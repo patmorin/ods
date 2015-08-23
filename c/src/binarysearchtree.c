@@ -184,7 +184,7 @@ int binarysearchtree_remove(binarysearchtree_t* tree, void* elem) {
 
     node = find_node(tree, elem);
 
-    if (node == NULL || tree->cmp(elem, node->data) != NULL)
+    if (node == NULL || tree->cmp(elem, node->data) != 0)
         return 0;
 
     if (node->left == NULL || node->right == NULL) {
