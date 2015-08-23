@@ -20,6 +20,7 @@ etc.) can be found in [the book](http://opendatastructures.org).
 * [SkiplistSSet](include/skiplistsset.h)
 * [SkiplistList](include/skiplist.h)
 * [ChainedHashTable](include/chainedhashtable.h)
+* [BinarySearchTree](include/binarysearchtree.h)
 
 #### How to use the library
 
@@ -52,16 +53,16 @@ int main() {
     int i;
 
     arraystack_t stack;
-    
+
     /* initialize the struct with the size of the elements you want to store
      * inside. this will allocate memory for the backing array. */
     arraystack_init(&stack, sizeof(int));
-    
+
     for (i = 0; i < 10; i++)
         arraystack_push(&stack, &i);
 
     while (stack.length > 0) {
-        
+
         arraystack_pop(&stack, &i);
         printf("popped: %d\n", i);
     }

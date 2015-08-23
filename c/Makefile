@@ -45,7 +45,7 @@ INSDIR = /usr/lib
 
 OBJ = arraystack.o arrayqueue.o arraydeque.o dualarraydeque.o \
       rootisharraystack.o sllist.o dllist.o selist.o skiplistsset.o skiplist.o \
-      chainedhashtable.o
+      chainedhashtable.o binarysearchtree.o
 
 lib: $(OBJ)
 	$(SHARED_LIB)
