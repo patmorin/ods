@@ -383,7 +383,7 @@ An #ArrayQueue# implements the (FIFO) #Queue# interface.  Ignoring the cost of
 calls to #resize()#, an #ArrayQueue# supports the operations
 #add(x)# and #remove()# in $O(1)$ time per operation.
 Furthermore, beginning with an empty #ArrayQueue#, any sequence of $m$
-#add(x)# and #remove()# operations results in a total of $O(m)$
+#add(i,x)# and #remove(i)# operations results in a total of $O(m)$
 time spent during all calls to #resize()#.
 \end{thm}
 

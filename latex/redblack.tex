@@ -398,9 +398,9 @@ If #g#'s right child is black, then a call to #flipRight(g)# makes
 satisfies the left-leaning property.  In this case we can stop.
 \codeimport{ods/RedBlackTree.addFixup(u)}
 
-The #addFixup(u)# method takes constant time per iteration and each
+The #insertFixup(u)# method takes constant time per iteration and each
 iteration either finishes or moves #u# closer to the root.  Therefore,
-the #addFixup(u)# method finishes after $O(\log #n#)$ iterations in
+the #insertFixup(u)# method finishes after $O(\log #n#)$ iterations in
 $O(\log #n#)$ time.
 
 \subsection{Removal}

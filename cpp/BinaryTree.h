@@ -181,7 +181,7 @@ void BinaryTree<Node>::bfTraverse() {
 	ArrayDeque<Node*> q;
 	if (r != nil) q.add(q.size(),r);
 	while (q.size() > 0) {
-		Node *u = q.remove(0);
+		Node *u = q.remove(q.size()-1);
 		if (u->left != nil) q.add(q.size(),u->left);
 		if (u->right != nil) q.add(q.size(),u->right);
 	}
