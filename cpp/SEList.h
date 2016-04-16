@@ -27,7 +27,7 @@ protected:
 			n = 0;
 			j = 0;
 			array<int> z(b+1);
-			a = z;
+			a.swap(z);
 		}
 		virtual ~BDeque() { }
 		// C++ Question: Why is this necessary?

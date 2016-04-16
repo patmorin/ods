@@ -55,7 +55,7 @@ template<class T>
 void ArrayStack<T>::clear() {
 	n = 0;
 	array<T> b(1);
-	a = b;
+	a.swap(b);
 }
 
 template <class T>
@@ -72,7 +72,7 @@ void ArrayStack<T>::resize() {
 	array<T> b(max(2 * n, 1));
 	for (int i = 0; i < n; i++)
 		b[i] = a[i];
-	a = b;
+	a.swap(b);
 }
 
 template<class T>

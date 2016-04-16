@@ -52,7 +52,7 @@ template<class T>
 void BinaryHeap<T>::resize() {
 	array<T> b(max(2*n, 1));
 	std::copy(a+0, a+n, b+0);
-	a = b;
+	a.swap(b);
 }
 
 template<class T>
@@ -62,7 +62,7 @@ void BinaryHeap<T>::sort(array<T> &b) {
 		h.a.swap(--h.n, 0);
 		h.trickleDown(0);
 	}
-	b = h.a;
+	b.swap(h.a);
 	b.reverse();
 }
 
@@ -134,7 +134,7 @@ BinaryHeap<T>::BinaryHeap() : a(1) {
 
 template<class T>
 BinaryHeap<T>::BinaryHeap(array<T> &b) : a(0) {
-	a = b;
+	a.swap(b);
 	n = a.length;
 	for (int i = n/2-1; i >= 0; i--) {
 		trickleDown(i);

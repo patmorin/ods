@@ -47,7 +47,7 @@ void ArrayDeque<T>::clear() {
 	n = 0;
 	j = 0;
 	array<T> b(1);
-	a = b;
+	a.swap(b);
 }
 
 template<class T>
@@ -65,7 +65,7 @@ void ArrayDeque<T>::resize() {
 	array<T> b(max(1, 2*n));
 	for (int k = 0; k < n; k++)
 		b[k] = a[(j+k)%a.length];
-	a = b;
+	a.swap(b);
 	j = 0;
 }
 

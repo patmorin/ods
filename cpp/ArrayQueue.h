@@ -41,7 +41,7 @@ void ArrayQueue<T>::resize() {
 	array<T> b(max(1, 2*n));
 	for (int k = 0; k < n; k++)
 		b[k] = a[(j+k)%a.length];
-	a = b;
+	a.swap(b);
 	j = 0;
 }
 

@@ -31,11 +31,13 @@ public:
 	void fill(T x);
 	virtual ~array();
 
-	array<T>& operator=(array<T> &b) {
-		if (a != NULL) delete[] a;
+	void swap(array<T> &b) {
+		T *ta = a;
 		a = b.a;
-		b.a = NULL;
+		b.a = ta;
+		int tl = length;
 		length = b.length;
+		b.length = tl;
 		return *this;
 	}
 
@@ -88,7 +90,7 @@ template<class T>
 void array<T>::copyOfRange(array<T> &a0, array<T> &a, int i, int j) {
 	array<T> b(j-i);
 	std::copy(a.a, a.a+j-i, b.a);
-	a0 = b;
+	a0.swap(b);
 }
 
 template<class T>

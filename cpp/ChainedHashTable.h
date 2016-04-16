@@ -56,7 +56,7 @@ void ChainedHashTable<T>::resize() {
 			newTable[hash(x)].add(x);
 		}
 	}
-	t = newTable;
+	t.swap(newTable);
 }
 
 template<class T>
@@ -114,7 +114,7 @@ void ChainedHashTable<T>::clear() {
 	n = 0;
 	d = 1;
 	array<List> b(2);
-	t = b;
+	t.swap(b);
 }
 
 } /* namespace ods */
