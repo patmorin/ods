@@ -34,7 +34,6 @@ ArrayQueue<T>::ArrayQueue() : a(1) {
 
 template<class T>
 ArrayQueue<T>::~ArrayQueue() {
-	delete a;
 }
 
 template<class T>

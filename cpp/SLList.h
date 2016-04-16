@@ -21,7 +21,7 @@ protected:
 		T x;
 		Node *next;
 		Node(T x0) {
-			x = 0;
+			x = x0;
 			next = NULL;
 		}
 	};

@@ -148,6 +148,7 @@ bool BinarySearchTree<Node, T>::addChild(Node *p, Node *u) {
 			} else if (comp > 0) {
 				p->right = u;
 			} else {
+				delete u;
 				return false;   // u.x is already in the tree
 			}
 			u->parent = p;
