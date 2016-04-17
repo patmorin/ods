@@ -111,7 +111,7 @@ T DLList<T>::set(int i, T x) {
 
 template<class T>
 void DLList<T>::add(int i, T x) {
-    addBefore(getNode(i), x);
+	addBefore(getNode(i), x);
 }
 
 template<class T>
