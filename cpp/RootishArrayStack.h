@@ -41,25 +41,25 @@ int RootishArrayStack<T>::size() {
 
 template<class T> inline 
 T RootishArrayStack<T>::get(int i) {
-    int b = i2b(i);
-    int j = i - b*(b+1)/2;
-    return blocks.get(b)[j];
+	int b = i2b(i);
+	int j = i - b*(b+1)/2;
+	return blocks.get(b)[j];
 }
 
 template<class T> inline 
 T RootishArrayStack<T>::set(int i, T x) {
-    int b = i2b(i);
-    int j = i - b*(b+1)/2;
-    T y = blocks.get(b)[j];
-    blocks.get(b)[j] = x;
-    return y;
+	int b = i2b(i);
+	int j = i - b*(b+1)/2;
+	T y = blocks.get(b)[j];
+	blocks.get(b)[j] = x;
+	return y;
 }
 
 template<class T> inline 
 int RootishArrayStack<T>::i2b(int i) {
-    double db = (-3.0 + sqrt(9 + 8*i)) / 2.0;
-    int b = (int)ceil(db);
-    return b;
+	double db = (-3.0 + sqrt(9 + 8*i)) / 2.0;
+	int b = (int)ceil(db);
+	return b;
 }
 
 template<class T>  
@@ -73,28 +73,28 @@ RootishArrayStack<T>::~RootishArrayStack() {
 
 template<class T> 
 void RootishArrayStack<T>::add(int i, T x) {
-    int r = blocks.size();
-    if (r*(r+1)/2 < n + 1) grow();
-    n++;
-    for (int j = n-1; j > i; j--)
-            set(j, get(j-1));
-    set(i, x);
+	int r = blocks.size();
+	if (r*(r+1)/2 < n + 1) grow();
+	n++;
+	for (int j = n-1; j > i; j--)
+		set(j, get(j-1));
+	set(i, x);
 }
 
 template<class T>  
 T RootishArrayStack<T>::remove(int i) {
-    T x = get(i);
-    for (int j = i; j < n-1; j++)
-            set(j, get(j+1));
-    n--;
-    int r = blocks.size();
-    if ((r-2)*(r-1)/2 >= n) shrink();
-    return x;
+	T x = get(i);
+	for (int j = i; j < n-1; j++)
+		set(j, get(j+1));
+	n--;
+	int r = blocks.size();
+	if ((r-2)*(r-1)/2 >= n) shrink();
+	return x;
 }
 
 template<class T>  
 void RootishArrayStack<T>::grow() {
-    blocks.add(blocks.size(), new T[blocks.size()+1]);
+	blocks.add(blocks.size(), new T[blocks.size()+1]);
 }
 
 template<class T>

@@ -48,7 +48,7 @@ template<class T>
 void ChainedHashTable<T>::resize() {
 	d = 1;
 	while (1<<d <= n) d++;
-    n = 0;
+	n = 0;
 	array<List> newTable(1<<d);
 	for (int i = 0; i < t.length; i++) {
 		for (int j = 0; j < t[i].size(); j++) {

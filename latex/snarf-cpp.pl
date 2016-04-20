@@ -113,7 +113,7 @@ sub snarfit($$) {
       # external function definition
       my $sig = methodSig($2, $3);
       # print(STDERR "$line - $sig");
-      if (wanted($sig, @params)) { $print = $d; }
+      if (wanted($sig, @params)) { $print = $d; $indent = "\t"; }
     } elsif ($d == $d0+1 && $inclass == 1 && $line =~ /^\s*$type\s+(\&|\*)*(\w+).*;.*/) {
       # instance or class variable declaration
       if (wanted($3, @params)) {
