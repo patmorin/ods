@@ -7,7 +7,6 @@
 #include <assert.h>
 #include <limits.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 #include <chainedhashtable.h>
 #include <dllist.h>
@@ -191,6 +190,7 @@ void chainedhashtable_remove(chainedhashtable_t* table, void* elem) {
                 
                 it.dispose(&it);
                 dllist_remove(list, i, NULL);
+                --table->length;
                 return;
             }
             
