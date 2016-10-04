@@ -1,26 +1,66 @@
 <html>
   <head>
-    <title>Open Data Structures</title>
+    <title>TITLE</title>
     <script src='http://cdn.mathjax.org/mathjax/latest/MathJax.js' type='text/javascript'>
-    MathJax.Hub.Config({
-        HTML: ["input/TeX","output/HTML-CSS"],
-        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"],
-               equationNumbers: { autoNumber: "AMS" } },
-        extensions: ["tex2jax.js"],
-        jax: ["input/TeX","output/HTML-CSS"],
-        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-                   processEscapes: true },
-        "HTML-CSS": { availableFonts: ["TeX"],
-                      linebreaks: { automatic: true } }
-    });
+        MathJax.Hub.Config({
+            HTML: ["input/TeX","output/HTML-CSS"],
+            TeX: { extensions: ["AMSmath.js","AMSsymbols.js"],
+                   equationNumbers: { autoNumber: "AMS" } },
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX","output/HTML-CSS"],
+            tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                       displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                       processEscapes: true },
+            "HTML-CSS": { availableFonts: ["TeX"],
+                          linebreaks: { automatic: true } }
+        });
     </script>
     <style type="text/css">
-    #content {
-      max-width: 50em;
+    html, body {       /* for full-height background */
+        font: 14pt/22pt serif;
+        height: 100%;
+        margin: 0;
+        margin-bottom: 3em;
+        padding: 0;
     }
-    p {
-      text-align: justify;
+    #content {
+        max-width: 50em;
+        margin: auto;
+        text-align: justify;
+    }
+    div.caption {
+        margin: 1em;
+    }
+    div.caption:before {
+        content: "Figure: ";
+        font-weight: bold;
+    }
+    div.thm:before {
+        content: "Theorem: ";
+        font-weight: bold;
+    }
+    div.lem:before {
+        content: "Theorem: ";
+        font-weight: bold;
+    }
+    div.proof:before {
+        content: "Proof: ";
+        font-style: italic;
+    }
+    div.proof:after {
+        content: "QED";
+    }
+    div.chapter {
+        font-size: 140%;
+    }
+    div.center {
+        text-align: center;
+    }
+    div.figure {
+        border: 5px solid red;
+    }
+    span.caption {
+        font-weight: bold;
     }
     </style>
   </head>
