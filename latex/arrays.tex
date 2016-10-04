@@ -95,8 +95,8 @@ are illustrated in \figref{arraystack}.  To implement the #add(i,x)#
 operation, we first check if #a# is already full.  If so, we call
 the method #resize()# to increase the size of #a#.  How #resize()#
 is implemented will be discussed later.  For now, it is sufficient to
-know that, after a call to #resize()#, we can be sure that $#a.length#
-> #n#$.  With this out of the way, we now shift the elements
+know that, after a call to #resize()#, we can be sure that
+$#a.length# > #n#$.  With this out of the way, we now shift the elements
 $#a[i]#,\ldots,#a[n-1]#$ right by one position to make room for #x#,
 set #a[i]# equal to #x#, and increment #n#.
 
@@ -168,7 +168,7 @@ In particular, we will show:
   \[
     \sum_{i=1}^{r} #n#_i \le 2m + 2r  \enspace .
   \]
-  On the other hand, the total time spent during all calls to #resize()# is 
+  On the other hand, the total time spent during all calls to #resize()# is
   \[
      \sum_{i=1}^{r} O(#n#_i) \le O(m+r) = O(m)  \enspace ,
   \]
@@ -185,7 +185,7 @@ In particular, we will show:
   so there must have been at least $#n#_i/2$ calls to #add(i,x)# since
   the previous call to #resize()#.
   % TODO: Add figure
-  
+
   The second case occurs when #resize()# is being called by
   #remove(i)# because $#a.length# \ge 3#n#=3#n#_i$.  Again, after the
   previous call to #resize()# the number of elements stored in #a# was
@@ -279,7 +279,7 @@ array #a#.  We could maintain one index #j# that keeps track of the
 next element to remove and an integer #n# that counts the number of
 elements in the queue.  The queue elements would always be stored in
 \[ #a[j]#,#a[j+1]#,\ldots,#a[j+n-1]# \enspace . \]
-Initially, both #j# and #n# would be 
+Initially, both #j# and #n# would be
 set to 0.  To add an element, we would place it in #a[j+n]# and increment #n#.
 To remove an element, we would remove it from #a[j]#, increment #j#, and
 decrement #n#.
@@ -547,7 +547,7 @@ $#n#/4\le#i#<3#n#/4$, we cannot be sure whether the operation affects
 $O(#n#)=O(#i#)=O(#n#-#i#)$ time, since $#i#\ge #n#/4$ and $#n#-#i#>
 #n#/4$.  Summarizing the situation, we have
 \[
-     \mbox{Running time of } #add(i,x)# \le 
+     \mbox{Running time of } #add(i,x)# \le
           \left\{\begin{array}{ll}
             O(1+ #i#) & \mbox{if $#i#< #n#/4$} \\
             O(#n#) & \mbox{if $#n#/4 \le #i# < 3#n#/4$} \\
@@ -729,7 +729,7 @@ solutions: $#b#=(-3 + \sqrt{9+8#i#}) / 2$ and $#b#=(-3 - \sqrt{9+8#i#}) / 2$.
 The second solution makes no sense in our application since it always
 gives a negative value. Therefore, we obtain the solution $#b# = (-3 +
 \sqrt{9+8i}) / 2$.  In general, this solution is not an integer, but
-going back to our inequality, we want the smallest integer $#b#$ such that 
+going back to our inequality, we want the smallest integer $#b#$ such that
 $#b# \ge (-3 + \sqrt{9+8i}) / 2$.  This is simply
 \[
    #b# = \left\lceil(-3 + \sqrt{9+8i}) / 2\right\rceil \enspace .
@@ -890,7 +890,7 @@ Square both sides of this inequality to get
 \[
  #x#-\sqrt{#x#} \ge #x#-2\sqrt{#x#}+1
 \]
-and gather terms to get 
+and gather terms to get
 \[
  \sqrt{#x#} \ge 1
 \]
@@ -911,20 +911,20 @@ possible values of #x'#.  This means that we can use an array, #sqrttab#,
 that stores the value of $\lfloor\sqrt{#x'#}\rfloor$ for each possible
 value of #x'#.  A little more precisely, we have
 \[
-   #sqrttab#[i] 
+   #sqrttab#[i]
     = \left\lfloor
        \sqrt{i 2^{\lfloor #r#/2\rfloor}}
       \right\rfloor \enspace .
 \]
 In this way, $#sqrttab#[i]$ is within 2 of $\sqrt{#x#}$ for all
 $#x#\in\{i2^{\lfloor r/2\rfloor},\ldots,(i+1)2^{\lfloor r/2\rfloor}-1\}$.
-Stated another way, the array entry 
+Stated another way, the array entry
 $#s#=#sqrttab#[#x##>>#\lfloor #r#/2\rfloor]$ is either equal to
 $\lfloor\sqrt{#x#}\rfloor$,
 $\lfloor\sqrt{#x#}\rfloor-1$, or
 $\lfloor\sqrt{#x#}\rfloor-2$.  From #s# we can determine the value
 of $\lfloor\sqrt{#x#}\rfloor$ by
-incrementing #s# until 
+incrementing #s# until
 $(#s#+1)^2 > #x#$.
 } % notpcode
 \javaimport{ods/FastSqrt.sqrt(x,r)}
@@ -1043,7 +1043,7 @@ of a #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
 \end{exc}
 
 \begin{exc}
-  Design and implement a #Treque# (triple-ended queue). 
+  Design and implement a #Treque# (triple-ended queue).
   \index{Treque@#Treque#}%
   This is a #List#
   implementation in which #get(i)# and #set(i,x)# run in constant time
@@ -1080,7 +1080,7 @@ of a #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
   Modify the #ArrayDeque# implementation so that it does not use the
   #%# operator (which is expensive on some systems).  Instead, it
   should make use of the fact that, if #a.length# is a power of 2,
-  then 
+  then
   \[  #k%a.length#=#k&(a.length-1)# \enspace .
   \]
   (Here, #&# is the bitwise-and operator.)
@@ -1132,5 +1132,3 @@ of a #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
   In this structure, #get(i)# and #set(i,x)# take constant time; while
   #add(i,x)# and #remove(i)# take $O(#n#^{1/3})$ amortized time.
 \end{exc}
-
-
