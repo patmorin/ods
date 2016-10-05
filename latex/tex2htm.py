@@ -15,13 +15,6 @@ def get_arg(s, i):
         if depth == 0: return i+1, j
     return i+1, len(s)
 
-def strip_tex_comments(tex):
-    """Strip comments from a latex file"""
-    lines = tex.splitlines()
-    for i in range(len(lines)):
-        lines[i] = re.sub(r'(^|[^\\])\%.*$', r'\1', lines[i])
-    return "\n".join(lines)
-
 def merge_lines(tex):
     """Merge lines in a latex file"""
     lines = [line.strip() for line in tex.splitlines()]
@@ -83,19 +76,24 @@ def process_inline_formulae(tex):
     tex = re.sub('\0', r'\(', tex)
     return re.sub('\1', r'\)', tex)
 
+def process_quotes(tex):
+    return re.sub(r"``(.*?)''", r'<q>\1</q>', tex, 0, re.M|re.S)
+
 def process_display_formulae2(tex, begin, end):
-    pattern = begin + r'(.*?)' + end
+    pattern = re.escape(begin) + r'(.*?)' + re.escape(end)
     m = re.search(pattern, tex, re.M|re.S)
     while m:
-        replacement = '\0' + re.sub('#', r' ', m.group(1)) + '\1'
+        inner = re.sub(r'#(.*?)#', r'\\mathtt{\1}', m.group(1))
+        replacement = '\0' + inner + '\1'
         tex = tex.replace(m.group(0), replacement)
         m = re.search(pattern, tex, re.M|re.S)
-    tex = re.sub('\0', bytes(begin, 'utf-8').decode('unicode_escape'), tex)
-    return re.sub('\1', bytes(end, 'utf-8').decode('unicode_escape'), tex)
+    tex = re.sub('\0', begin, tex)
+    return re.sub('\1', end, tex)
 
 def process_display_formulae(tex):
-    tex = process_display_formulae2(tex, r'\\\[', r'\\\]')
-    tex = process_display_formulae2(tex, r'\\begin{align\*}', r'\\end{align\*}')
+    tex = process_display_formulae2(tex, r'\[', r'\]')
+    tex = process_display_formulae2(tex, r'\begin{align*}', r'\end{align*}')
+    tex = process_display_formulae2(tex, r'\begin{eqnarray*}', r'\end{eqnarray*}')
     return tex
 
 def strip_comments(tex):
@@ -105,9 +103,26 @@ def strip_comments(tex):
     return "\n".join(lines)
 
 def process_tabulars(tex):
-    replacement = r'<div class="tabular">\n\1\n</div>'
-    pattern = r'\\begin{tabular}(.*?)\\end{tabular}'
-    return re.sub(pattern, replacement, tex, 0, re.MULTILINE | re.DOTALL)
+    pattern = r'\\begin{tabular}{.*?}(.*?)\\end{tabular}'
+    m = re.search(pattern, tex, re.M|re.S)
+    while m:
+        i = m.start()
+        j = m.end()
+        print(m.group(1))
+        rows = re.split(r'\\\\', m.group(1))
+        rows = [re.split(r'\&', r) for r in rows]
+        table = '<table align="center">'
+        for r in rows:
+            table += '<tr>'
+            for c in r:
+                table += '<td>' + c + '</td>'
+            table += '</tr>'
+        table += '</table>'
+
+        print(rows)
+        tex = tex[:i] + table + tex[j:]
+        m = re.match(pattern, tex, re.MULTILINE | re.DOTALL)
+    return tex
 
 def process_figures(tex):
     pattern = r'\\begin{figure}(.*?)\\end{figure}'
@@ -116,14 +131,12 @@ def process_figures(tex):
 
 def process_command(tex, cmd, htmlhead, htmltail):
     pattern = '\\' + cmd
-    print("looking for {}".format(pattern))
     i = tex.find(pattern)
     while i >= 0:
         j = i+len(pattern)
         j, k = get_arg(tex, j)
         arg = tex[j:k]
         replacement = htmlhead + arg + htmltail
-        print(replacement)
         tex = tex[:i] + replacement + tex[k+1:]
         i = tex.find(pattern)
     return tex
@@ -168,12 +181,10 @@ def process_theorem_like(tex, env, name):
     replacement = r'<div class="{}">\1</div>'.format(env)
     return re.sub(pattern, replacement, tex, 0, re.M|re.S)
 
-
 def process_dontcares(tex):
-    dontcare=r'(vspace|hspace|index|hspace|setlength|newlength|addtolength)'
+    dontcare=r'(hline|vspace|hspace|index|hspace|setlength|newlength|addtolength)'
     pattern = r'\\' + dontcare + r'({.+?})*'
     return re.sub(pattern, '', tex, 0, re.M|re.S)
-
 
 def process_lists(tex):
     tex = re.sub(r'\\begin{itemize}', '<ul>', tex)
@@ -181,7 +192,7 @@ def process_lists(tex):
     tex = re.sub(r'\\begin{enumerate}', '<ol>', tex)
     tex = re.sub(r'\\end{enumerate}', '\1</ol>', tex)
     tex = re.sub(r'\\item', '\0', tex)
-    tex = re.sub('\0([^\0\1]*)[\0\1]', r'<li>\1</li>', tex, 0, re.M|re.S)
+    tex = re.sub('\0([^\0\1]*)', r'<li>\1</li>', tex, 0, re.M|re.S)
     return tex
 
 def process_references(tex):
@@ -198,17 +209,23 @@ def process_onlies(tex):
     pattern = r'\\' + langs + 'only{.*?}' + r'({.+?})*'
     return re.sub(pattern, '', tex, 0, re.M|re.S)
 
+def process_graphics(tex):
+    pattern = r'\\includegraphics(\[.*?\]){(.*?)}'
+    replacement = r'<img scale="120%" src="\2.svg"/>'
+    return re.sub(pattern, replacement, tex)
+
+
 def tex2html(tex):
-    # The ordering here is critical
+    # The ordering here is important
     tex = preprocess_hashes(tex)
     tex = strip_comments(tex)
     tex = process_dontcares(tex)
     tex = process_onlies(tex)  # danger --- this needs to be better
     chapter, tex = process_headings(tex)
-    chapter = "blah"
     tex = process_inline_formulae(tex)
     tex = process_display_formulae(tex)
     tex = process_hashes(tex)
+    tex = process_quotes(tex)
 
     tex = process_tabulars(tex)
     tex = process_figures(tex)
@@ -220,87 +237,11 @@ def tex2html(tex):
     tex = process_emphasis(tex)
     tex = process_lists(tex)
     tex = process_imports(tex)
+
+    tex = process_graphics(tex)
     tex = process_references(tex)
     tex = split_paragraphs(tex)
     return chapter, tex
-
-    md = tex
-
-    md = merge_lines(strip_tex_comments(md))
-
-    # Strip \addtolength, \setlength, etc..
-    md = re.sub(r'\\\w+length({[^}]+})+', '', md)
-
-    # More LaTeX commands we don't care about
-    dontcare=r'(vspace|hspace|index)'
-    regex = r'\\' + dontcare + r'({[^}]+})+'
-    md = re.sub(regex, '', md)
-
-    # Emphasis (italics)
-    md = re.sub(r'\\emph{(.+?)}', r'<em>\1</em>', md)
-
-    # MathJax doesn't recognize all AMS-TeX displaymath environments
-    md = re.sub(r'\\begin{align\*}', r'\\[\0', md)
-    md = re.sub(r'\\end{align\*}', r'\0\\]', md)
-
-    # md = re.sub(r'\*', r'\\\*', md)
-
-    # Protect display matematics from markup
-    # md = re.sub(r'\\(\[|\])', r'\\\\\1', md)
-
-    # Formulae
-    # For now, prevent interactions between formula and code
-    # TODO: Improve this
-    regex = r'\$(.+?)\$'
-    m = re.search(regex, md)
-    while m:
-        txt = m.group(1)
-        txt2 = re.sub('#(.*?)#', r'\\mathtt{\1}', txt)
-        txt2 = '<span class="formula">~~~' + txt2 + '~~~</span>'
-        md = md.replace(m.group(0), txt2)
-        m = re.search(regex, md)
-    md = re.sub(r'~~~', r'$', md)
-
-    regex = r'\\\[(.*?)\\\]'
-    m = re.search(regex, md)
-    while m:
-        txt = m.group(1)
-        txt2 = re.sub('#(.*?)#', r'\1', txt)
-        txt2 = '\2' + txt2 + '\3'
-        md = md.replace(m.group(0), txt2)
-        m = re.search(regex, md)
-    md = re.sub('\2', r'\n<div class="formula">\n\\\\[\n', md)
-    md = re.sub('\3', r'\n\\\\]\n</div>\n', md)
-
-    # Figures
-    md = re.sub(r'\\begin{figure}', '<div class="figure">', md)
-    md = re.sub(r'\\end{figure}', '</div>', md)
-    md = re.sub(r'\\caption{(.*?)}', '<span class="caption">Figure:</span> \1', md)
-    md = re.sub(r'\\caption(\[.*?\]){(.*?)}', '<span class="caption">Figure:</span> \2', md)
-    md = re.sub(r'\\begin{center}', '<div class="center">', md)
-    md = re.sub(r'\\end{center}', '</div>', md)
-
-    md = re.sub(r'\\begin{proof}', '*Proof:*', md)
-    me = re.sub(r'\\end{proof}', 'QED', md)
-
-    md = re.sub(r"``([^']*)''", r'<q>\1</q>', md)
-    # Code snippets
-    md = re.sub(r'#([^#]+)#', r'`\1`', md)
-
-    # Chapter and section headings
-    md = re.sub(r'\\chapter{([^}]+)}', r'# \1', md)
-    md = re.sub(r'\\section{([^}]+)}', r'## \1', md)
-    md = re.sub(r'\\subsection{([^}]+)}', r'### \1', md)
-    md = re.sub(r'\\subsubsection{([^}]+)}', r'#### \1', md)
-
-    # TODO: Handle labels and references -- for now, just kill them
-    md = re.sub(r'\\(\w+)label{(\w+)}', '', md)
-    md = re.sub(r'\\(\w+)ref{(\w+)}', '**REF**', md)
-
-    # TODO: Handle code imports
-    md = re.sub(r'\\(cpp|java|code|pcode)import{([^}]+)}', r'\\\1import{\2}\n', md)
-
-    return md
 
 
 
