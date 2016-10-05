@@ -16,58 +16,66 @@
         });
     </script>
     <style type="text/css">
-    html, body {       /* for full-height background */
-        font: 14pt/22pt serif;
-        height: 100%;
-        margin: 0;
-        margin-bottom: 3em;
-        padding: 0;
-    }
-    #content {
-        max-width: 50em;
-        margin: auto;
-        text-align: justify;
-    }
-    div.figure {
-        border: 1px solid black;
-        padding: 1em;
-    }
-    div.caption {
-        margin: 1em;
-    }
-    div.caption:before {
-        content: "Figure: ";
-        font-weight: bold;
-    }
-    div.thm:before {
-        content: "Theorem: ";
-        font-weight: bold;
-    }
-    div.lem:before {
-        content: "Theorem: ";
-        font-weight: bold;
-    }
-    div.proof:before {
-        content: "Proof: ";
-        font-style: italic;
-    }
-    div.proof:after {
-        content: "QED";
-    }
-    div.chapter {
-        font-size: 140%;
-    }
-    div.center {
-        text-align: center;
-    }
-    span.caption {
-        font-weight: bold;
-    }
+        html, body {       /* for full-height background */
+            font: 14pt/22pt serif;
+            height: 100%;
+            margin: 0;
+            margin-bottom: 3em;
+            padding: 0;
+        }
+        #content {
+            max-width: 40em;
+            margin: auto;
+            text-align: justify;
+        }
+        div.figure {
+            border: 1px solid black;
+            padding: 1em;
+        }
+        div.caption {
+            margin: 1em;
+        }
+        div.caption:before {
+            content: "Figure: ";
+            font-weight: bold;
+        }
+        div.thm:before {
+            content: "Theorem: ";
+            font-weight: bold;
+        }
+        div.exc:before {
+            content: "Exercise: ";
+            font-weight: bold;
+        }
+        div.lem:before {
+            content: "Theorem: ";
+            font-weight: bold;
+        }
+        div.proof:before {
+            content: "Proof: ";
+            font-style: italic;
+        }
+        div.proof:after {
+            content: "QED";
+        }
+        div.chapter {
+            font-size: 140%;
+        }
+        div.center {
+            text-align: center;
+        }
+        span.caption {
+            font-weight: bold;
+        }
     </style>
+    <script
+      src="http://hyphenator.googlecode.com/svn/tags/Version%204.0.0/Hyphenator.js">
+    </script>
   </head>
-  <body>
+  <body lang="en" class="hyphenate">
     <div id="content">
       CONTENT
     </div>
   </body>
+  <script>Hyphenator.run();</script>
 </html>

@@ -2,8 +2,9 @@ sources=$(wildcard *.ipe)
 
 pdfs=$(sources:.ipe=.pdf)
 burstpdfs=$(sources:.ipe=-1.pdf)
+svgs=$(sources:.ipe=.svg)
 
-all: $(pdfs) $(burstpdfs)
+all: $(pdfs) $(burstpdfs) $(svgs)
 
 epss: $(pdfs) $(burstpdfs)
 	./makeepss
@@ -12,8 +13,11 @@ epss: $(pdfs) $(burstpdfs)
 	pdftk $< burst output $(<:.pdf=-%d.pdf)
 
 %.pdf : %.ipe
-	ipetoipe -pdf $<
+	ipetoipe -pdf -export $<
+
+%.svg : %.ipe
+	./ipetosvgs.py $<
 
 clean :
-	rm -f ./*.pdf ./*.eps
+	rm -f ./*.pdf ./*.svg ./*.eps
 
