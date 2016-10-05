@@ -20,7 +20,6 @@ def strip_tex_comments(tex):
     lines = tex.splitlines()
     for i in range(len(lines)):
         lines[i] = re.sub(r'(^|[^\\])\%.*$', r'\1', lines[i])
-        #lines[i] = re.sub('\\%', '%', lines[i])
     return "\n".join(lines)
 
 def merge_lines(tex):
