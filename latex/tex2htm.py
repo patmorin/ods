@@ -229,6 +229,7 @@ def process_refs_and_labels(tex):
     zipped = [chunks[i] + html[i] for i in range(len(html))]
     zipped.append(chunks[-1])
     tex = "".join(zipped)
+    tex = re.sub(r'^\s*\\(\w+)label{[^}]+}\s*?$\n', '', tex, 0, re.M|re.S)
     tex = re.sub(r'\\(\w+)label{(.+?)}', '', tex)
     return tex, labelmap
 
@@ -292,11 +293,14 @@ def process_oneline_dontcares(tex):
                 'setlength', 'newlength', 'addtolength', 'qedhere',
                 'pagenumbering']
     dontcare = "(" + "|".join(commands) + ")"
-    # TODO: Deal with the case where this creates a blank line
+    # pattern2 deals with the case where this creates a blank line
     pattern = r'\\' + dontcare + r'({.+?})*'
+    pattern2 = r'^\s*\\' + dontcare + r'({[^}]+})*\s*?$\n'
+    return re.sub(pattern2, '', tex, 0, re.M|re.S)
     return re.sub(pattern, '', tex, 0, re.M|re.S)
 
 def process_lists(tex):
+    # FIXME: Eliminate paragraph breaks between list items
     tex = re.sub(r'\\begin{itemize}', '<ul>', tex)
     tex = re.sub(r'\\end{itemize}', '\1</ul>', tex)
     tex = re.sub(r'\\begin{enumerate}', '<ol>', tex)
