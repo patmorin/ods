@@ -175,29 +175,86 @@ def process_emphasis(tex):
     htmltail = '</em>'
     return process_command(tex, cmd, htmlhead, htmltail)
 
-def process_headings2(tex):
+def process_paragraphs(tex):
+    cmd = 'paragraph'
+    htmlhead = '<span class="paragraph">'
+    htmltail = '</span>'
+    return process_command(tex, cmd, htmlhead, htmltail)
+
+def process_refs_and_labels(tex):
     headings = ['chapter'] + ['sub'*i + 'section' for i in range(4)]
     reh = r'(' + '|'.join(headings) + r'){(.+?)}'
-    print(reh)
-    environments = ['thm', 'lem', 'exc']
+    environments = ['thm', 'lem', 'exc', 'figure', 'equation']
     ree = r'begin{(' + '|'.join(environments) + r')}'
-    print(ree)
     rel = r'(\w+)label{(.+?)}'
     bigone = r'\\({})|\\({})|\\({})'.format(reh, ree, rel)
-    print(bigone)
-    sec_ctr = [0]*4
-    thm_ctr = 0
+
+    sec_ctr = [0]*(len(headings)+1)
+    env_ctr = [0]*len(environments)
+    html = []
+    splitters = [0]
+    lastlabel = None
+    labelmap = dict()
     for m in re.finditer(bigone, tex):
+        #print(m.groups())
         if m.group(2):
+            splitters.append(m.start())
             # This is a sectioning command
             i = headings.index(m.group(2))
-            sec_ctr[i] += 1
+            if i == 0:
+                env_ctr = [0]*len(env_ctr)
+            sec_ctr[i:] = [sec_ctr[i]+1]+[0]*(len(headings)-i-1)
             for j in range(i+1, len(sec_ctr)): sec_ctr[j] = 0
-            print(sec_ctr)
-            # print
-        txt = m.group(0)
-        print(txt, m.group(1), m.group(2), m.group(3), m.group(4), m.group(5))
-        #if txt.startswith('')
+            # print(sec_ctr[:i+1], m.group(3))
+            idd = m.group(2) + ":" + ".".join([str(x) for x in sec_ctr[:i+1]])
+            lastlabel = idd
+            html.append("<a id='{}'></a>".format(idd))
+            #print(html[-1])
+        elif m.group(5):
+            splitters.append(m.start())
+            # This is an environment
+            i = environments.index(m.group(5))
+            env_ctr[i] += 1
+            idd = "{}:{}.{}".format(m.group(5), sec_ctr[0], env_ctr[i])
+            lastlabel = idd
+            html.append("<a id='{}'></a>".format(idd))
+            #print(html[-1])
+        elif m.group(7):
+            # This is a labelling command
+            label = "{}:{}".format(m.group(7), m.group(8))
+            labelmap[label] = lastlabel
+            print("{}=>{}".format(label, labelmap[label]))
+    splitters.append(len(tex))
+    chunks = [tex[splitters[i]:splitters[i+1]] for i in range(len(splitters)-1)]
+    zipped = [chunks[i] + html[i] for i in range(len(html))]
+    zipped.append(chunks[-1])
+    tex = "".join(zipped)
+    tex = re.sub(r'\\(\w+)label{(.+?)}', '', tex)
+    return tex, labelmap
+
+def process_references(tex, labelmap):
+    map = dict([('chap', 'Chapter'),
+                ('sec', 'Section'),
+                ('thm', 'Theorem'),
+                ('lem', 'Lemma'),
+                ('fig', 'Figure'),
+                ('eq', 'Equation'),
+                ('exc', 'Exercise')])
+    pattern = r'\\(\w+)ref{(.*?)}'
+    m = re.search(pattern, tex)
+    while m:
+        label = "{}:{}".format(m.group(1), m.group(2))
+        if label not in labelmap:
+            print("Info: undefined label {}".format(label))
+            idd = 'REFERR'
+            num = '??'
+        else:
+            idd = labelmap[label]
+            num = idd[idd.find(':')+1:]
+        html = '<a href="#{}">{}&nbsp;{}</a>'.format(idd, map[m.group(1)], num)
+        print(html)
+        tex = tex[:m.start()]  + html + tex[m.end():]
+        m = re.search(pattern, tex)
     return tex
 
 def process_headings(tex):
@@ -232,7 +289,8 @@ def process_theorem_like(tex, env, name):
 
 def process_oneline_dontcares(tex):
     commands = ['noindent', 'hline', 'vspace', 'hspace', 'index', 'hspace',
-                'setlength', 'newlength', 'addtolength', 'qedhere']
+                'setlength', 'newlength', 'addtolength', 'qedhere',
+                'pagenumbering']
     dontcare = "(" + "|".join(commands) + ")"
     # TODO: Deal with the case where this creates a blank line
     pattern = r'\\' + dontcare + r'({.+?})*'
@@ -246,7 +304,7 @@ def process_lists(tex):
     tex = re.sub(r'\\item', '\0', tex)
     tex = re.sub('\0([^\0\1]*)', r'<li>\1</li>', tex, 0, re.M|re.S)
     return tex
-
+"""
 def process_labels(tex):
     pattern = r'\\(\w+)label{(.*?)}'
     m = re.search(pattern, tex)
@@ -260,7 +318,7 @@ def process_labels(tex):
         m = re.search(pattern, tex)
     return tex
 
-def process_references(tex):
+def process_references(tex, labelmap):
     map = dict([('chap', 'Chapter'),
                 ('sec', 'Section'),
                 ('thm', 'Theorem'),
@@ -280,7 +338,7 @@ def process_references(tex):
         tex = tex[:m.start()]  + tag + tex[m.end():]
         m = re.search(pattern, tex)
     return tex
-
+"""
 def process_imports(tex):
     pattern = r'\\(cpp|java|code|pcode)import{([^}]+)}'
     replacement = r'<div class="import">\\\1import{\2}</div>'
@@ -306,19 +364,21 @@ def process_etals(tex):
     return re.sub(pattern, replacement, tex)
 
 def tex2html(tex):
-    process_headings2(tex)
-    sys.exit(-1)
     # The ordering here is important
     tex = r'$\newcommand{\E}{\mathrm{E}}$' + tex
+    tex = re.sub(r'\\myeqref', r'\eqref', tex)
     tex = preprocess_hashes(tex)
     tex = strip_comments(tex)
     tex = process_oneline_dontcares(tex)
     tex = process_onlies(tex)  # danger --- this needs to be better
-    chapter, tex = process_headings(tex)
     tex = process_inline_formulae(tex)
     tex = process_display_formulae(tex)
     tex = process_nonmath_hashes(tex)
     tex = process_quotes(tex)
+
+    tex, labelmap = process_refs_and_labels(tex)
+    tex = process_references(tex, labelmap)
+    chapter, tex = process_headings(tex)
 
     tex = process_tabulars(tex)
     tex = process_figures(tex)
@@ -330,6 +390,7 @@ def tex2html(tex):
     tex = process_proofs(tex)
 
     tex = process_emphasis(tex)
+    tex = process_paragraphs(tex)
     tex = process_citations(tex)
     tex = process_etals(tex)
 
@@ -337,11 +398,15 @@ def tex2html(tex):
     tex = process_imports(tex)
 
     tex = process_graphics(tex)
-    tex = process_labels(tex)
-    tex = process_references(tex)
+    #tex = process_labels(tex)
+    #tex = process_references(tex)
     tex = split_paragraphs(tex)
     return chapter, tex
 
+
+inputs = [ 'intro', 'arrays', 'linkedlists', 'skiplists', 'hashing',
+	   'binarytrees', 'rbs', 'scapegoat', 'redblack', 'heaps', 'sorting',
+           'graphs', 'integers', 'btree']
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
