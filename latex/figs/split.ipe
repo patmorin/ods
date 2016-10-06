@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120626162443" modified="D:20120627140104"/>
-<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
+<ipe version="70107" creator="Ipe 7.1.10">
+<info created="D:20120626162443" modified="D:20161004184818"/>
+<preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont
+%\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -526,7 +527,7 @@ h
 256 816 m
 376 800 l
 </path>
-<path layer="beta" stroke="darkgreen" pen="fat" pen="ultrafat" arrow="normal/normal">
+<path layer="beta" stroke="darkgreen" pen="ultrafat" arrow="normal/normal">
 256 832 m
 256 816
 256 816
@@ -545,7 +546,7 @@ h
 354.676 722.654 s
 </path>
 <text matrix="1 0 0 1 -6.01991 0.859987" transformations="translations" pos="353.242 712.048" stroke="black" type="label" width="18.73" height="6.6" depth="0.08" valign="baseline">$16.5$</text>
-<path stroke="purple" pen="fat" pen="ultrafat">
+<path stroke="purple" pen="ultrafat">
 240 832 m
 240 832
 240 816
