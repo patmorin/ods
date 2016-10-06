@@ -175,6 +175,31 @@ def process_emphasis(tex):
     htmltail = '</em>'
     return process_command(tex, cmd, htmlhead, htmltail)
 
+def process_headings2(tex):
+    headings = ['chapter'] + ['sub'*i + 'section' for i in range(4)]
+    reh = r'(' + '|'.join(headings) + r'){(.+?)}'
+    print(reh)
+    environments = ['thm', 'lem', 'exc']
+    ree = r'begin{(' + '|'.join(environments) + r')}'
+    print(ree)
+    rel = r'(\w+)label{(.+?)}'
+    bigone = r'\\({})|\\({})|\\({})'.format(reh, ree, rel)
+    print(bigone)
+    sec_ctr = [0]*4
+    thm_ctr = 0
+    for m in re.finditer(bigone, tex):
+        if m.group(2):
+            # This is a sectioning command
+            i = headings.index(m.group(2))
+            sec_ctr[i] += 1
+            for j in range(i+1, len(sec_ctr)): sec_ctr[j] = 0
+            print(sec_ctr)
+            # print
+        txt = m.group(0)
+        print(txt, m.group(1), m.group(2), m.group(3), m.group(4), m.group(5))
+        #if txt.startswith('')
+    return tex
+
 def process_headings(tex):
     chapter = "None"  # FIXME
     cmd = 'chapter'
@@ -207,7 +232,7 @@ def process_theorem_like(tex, env, name):
 
 def process_oneline_dontcares(tex):
     commands = ['noindent', 'hline', 'vspace', 'hspace', 'index', 'hspace',
-                'setlength', 'newlength', 'addtolength']
+                'setlength', 'newlength', 'addtolength', 'qedhere']
     dontcare = "(" + "|".join(commands) + ")"
     # TODO: Deal with the case where this creates a blank line
     pattern = r'\\' + dontcare + r'({.+?})*'
@@ -281,6 +306,8 @@ def process_etals(tex):
     return re.sub(pattern, replacement, tex)
 
 def tex2html(tex):
+    process_headings2(tex)
+    sys.exit(-1)
     # The ordering here is important
     tex = r'$\newcommand{\E}{\mathrm{E}}$' + tex
     tex = preprocess_hashes(tex)
