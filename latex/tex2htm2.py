@@ -226,7 +226,9 @@ def process_references(tex, labelmap):
     pattern = r'\\(\w+)ref{(.*?)}'
     m = re.search(pattern, tex)
     while m:
-        label = "{}:{}".format(m.group(1), m.group(2))
+        kind = m.group(1).lower()
+        print(kind)
+        label = "{}:{}".format(kind, m.group(2))
         if label not in labelmap:
             print("Info: undefined label {}".format(label))
             idd = 'REFERR'
@@ -234,7 +236,10 @@ def process_references(tex, labelmap):
         else:
             idd = labelmap[label]
             num = idd[idd.find(':')+1:]
-        html = '<a href="#{}">{}&nbsp;{}</a>'.format(idd, map[m.group(1)], num)
+        if kind in map:
+            html = '<a href="#{}">{}&nbsp;{}</a>'.format(idd, map[kind], num)
+        else:
+            html = '<a href="#{}">{}&nbsp;{}</a>'.format(idd, kind, num)
         tex = tex[:m.start()]  + html + tex[m.end():]
         m = re.search(pattern, tex)
     return tex
