@@ -3,6 +3,16 @@ import os
 import sys
 import re
 
+def strip_comments(tex):
+    lines = tex.splitlines()
+    nulled = set()
+    for i in range(len(lines)):
+        if len(lines[i]) > 0:
+            lines[i] = re.sub(r'(^|[^\\])\%.*$', r'\1', lines[i])
+            if len(lines[i]) == 0:
+                nulled.add(i)
+    lines = [lines[i] for i in range(len(lines)) if i not in nulled]
+    return "\n".join(lines)
 
 class argument(object):
     def __init__(self, content, start, end):
@@ -37,7 +47,7 @@ def get_args(tex, pos=0, endpos=-1):
 def get_environment(tex, name, pos=0, endpos=-1):
     return get_environment_regex(tex, re.escape(name), pos, endpos)
 
-def get_generic_environment(tex, regex, pos=0, endpos=-1):
+def get_generic_environment(tex, pos=0, endpos=-1):
     return get_environment_regex(tex, r'[^}]+', pos, endpos)
 
 def get_environment_regex(tex, regex, pos=0, endpos=-1):
@@ -61,7 +71,7 @@ def get_environment_regex(tex, regex, pos=0, endpos=-1):
                            args.end, me.start(), args.content)
     return None
 
-def process_recursively(tex):
+def process_environments_recursively(tex):
     handlers = {'dollar': process_inline_math,
                 'tabular': process_tabular }
     displaymaths = ['equation', 'equation*', 'align', 'align*', 'eqnarray*']
@@ -72,10 +82,9 @@ def process_recursively(tex):
         handlers[ell] = process_list
 
     newblocks = list()
-    regex = 'itemize|enumerate|list'
     lastidx = 0
     b = tex
-    env = get_generic_environment(b, regex)
+    env = get_generic_environment(b)
     while env:
         newblocks.append(b[lastidx:env.start])
         lastidx = env.end
@@ -83,9 +92,9 @@ def process_recursively(tex):
             newblocks.extend(handlers[env.name](tex, env))
         else:
             newblocks.append('<div class="{}">'.format(env.name))
-            newblocks.extend(process_recursively(env.content))
+            newblocks.extend(process_environments_recursively(env.content))
             newblocks.append('</div><!-- {} -->'.format(env.name))
-        env = get_generic_environment(b, regex, lastidx)
+        env = get_generic_environment(b, lastidx)
     newblocks.append(b[lastidx:])
     return newblocks
 
@@ -95,34 +104,60 @@ def process_display_math(b, env):
 def process_inline_math(b, env):
     return '\(' + process_math_hashes(env.content) + '\)'
 
+def preprocess_hashes(subtex):
+    blocks = list()
+    rx = re.compile('#([^#]*)#', re.M|re.S)
+    lastidx = 0
+    for m in rx.finditer(subtex):
+        blocks.append(subtex[lastidx:m.start()])
+        lastidx = m.end()
+        blocks.append(re.sub(r'([^\\])%', r'\1\%', m.group(0)))
+        print(blocks[-1])
+    blocks.append(subtex[lastidx:])
+    return "".join(blocks)
+
 def process_math_hashes(subtex):
-    pattern = r'#(.*?)#'
-    m = re.search(pattern, subtex, re.M|re.S)
-    while m:
-        inner = re.sub(r'\&', r'\&', m.group(1))
-        inner = r'\mathtt{' + inner + '}'
-        subtex = subtex[:m.start()] + inner + subtex[m.end():]
-        m = re.search(pattern, subtex, re.M|re.S)
-    return re.sub('[\0\1]', ' ', subtex)
+    blocks = list()
+    rx = re.compile('\0([^\0]*)\0', re.M|re.S)
+    lastidx = 0
+    for m in rx.finditer(subtex):
+        blocks.append(subtex[lastidx:m.start()])
+        lastidx = m.end()
+        blocks.append(r'\mathtt{{{}}}'.format(m.group(1)))
+        print(blocks[-1])
+    blocks.append(subtex[lastidx:])
+    return "".join(blocks)
+
+def process_nonmath_hashes(subtex):
+    blocks = list()
+    rx = re.compile('\0([^\0]*)\0', re.M|re.S)
+    lastidx = 0
+    for m in rx.finditer(subtex):
+        blocks.append(subtex[lastidx:m.start()])
+        lastidx = m.end()
+        blocks.append(r'\(\mathtt{{{}}}\)'.format(m.group(1)))
+        print(blocks[-1])
+    blocks.append(subtex[lastidx:])
+    return "".join(blocks)
 
 def process_list(b, env):
     newblocks = list()
     mapper = dict([('itemize', 'ul'), ('enumerate', 'ol'), ('list', 'ul')])
     tag = mapper[env.name]
     newblocks.append('<{} class="{}">'.format(tag, env.name))
-    newblocks.extend(process_recursively(process_list_items(env.content)))
+    newblocks.extend(process_environments_recursively(process_list_items(env.content)))
     newblocks.append('</li></{}>'.format(tag))
     return newblocks
 
 def process_list_items(b):
-    b = re.sub(r'\\item\s+', '\0', b, 1)
-    b = re.sub(r'\\item\s+', '\1\0', b)
-    b = re.sub(r'\s*' + '\0' + r'\s*', '<li>', b, 0, re.M|re.S)
-    b = re.sub(r'\s*' + '\1' + r'\s*', '</li>', b, 0, re.M|re.S)
+    b = re.sub(r'\\item\s+', '\1', b, 1)
+    b = re.sub(r'\\item\s+', '\2\1', b)
+    b = re.sub(r'\s*' + '\1' + r'\s*', '<li>', b, 0, re.M|re.S)
+    b = re.sub(r'\s*' + '\2' + r'\s*', '</li>', b, 0, re.M|re.S)
     return b
 
 def process_tabular(tex, env):
-    inner = "".join(process_recursively(env.content))
+    inner = "".join(process_environments_recursively(env.content))
     rows = re.split(r'\\\\', inner)
     rows = [re.split(r'\&', r) for r in rows]
     table = '<table align="center">'
@@ -149,10 +184,9 @@ def process_labels_and_refs(tex):
     lastlabel = None
     labelmap = dict()
     for m in re.finditer(bigone, tex):
-        #print(m.groups())
         if m.group(2):
-            splitters.append(m.start())
             # This is a sectioning command
+            splitters.append(m.start())
             i = headings.index(m.group(2))
             if i == 0:
                 env_ctr = [0]*len(env_ctr)
@@ -164,14 +198,13 @@ def process_labels_and_refs(tex):
             html.append("<a id='{}'></a>".format(idd))
             #print(html[-1])
         elif m.group(5):
-            splitters.append(m.start())
             # This is an environment
+            splitters.append(m.start())
             i = environments.index(m.group(5))
             env_ctr[i] += 1
             idd = "{}:{}.{}".format(m.group(5), sec_ctr[0], env_ctr[i])
             lastlabel = idd
             html.append("<a id='{}'></a>".format(idd))
-            #print(html[-1])
         elif m.group(7):
             # This is a labelling command
             label = "{}:{}".format(m.group(7), m.group(8))
@@ -211,33 +244,54 @@ def process_references(tex, labelmap):
         m = re.search(pattern, tex)
     return tex
 
+
+class command(object):
+    def __init__(self, name, args):
+        self.name = name
+        self.args = args
+
+def process_commands_recursively(tex):
+    handlers = {'chapter', process_chapter}
+    newblocks = list()
+    lastidx = 0
+    b = tex
+    env = get_generic_command(b, regex)
+    while env:
+        newblocks.append(b[lastidx:env.start])
+        lastidx = env.end
+        if env.name in handlers:
+            newblocks.extend(handlers[env.name](tex, env))
+        else:
+            newblocks.append('<div class="{}">'.format(env.name))
+            newblocks.extend(process_environments_recursively(env.content))
+            newblocks.append('</div><!-- {} -->'.format(env.name))
+        env = get_generic_environment(b, regex, lastidx)
+    newblocks.append(b[lastidx:])
+    return newblocks
+
+def process_chapter(text, cmd):
+    blocks = list()
+    blocks.append('<div class="chapter">')
+    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.append('</div>')
+    return blocks
+
 def tex2htm(tex):
     # Some preprocessing
+    tex = preprocess_hashes(tex)
+    tex = strip_comments(tex)
     tex = re.sub(r'\\\[', r'\\begin{equation*}', tex)
     tex = re.sub(r'\\\]', r'\end{equation*}', tex)
     tex = re.sub(r'\$([^\$]*(\\\$)?)\$', r'\\begin{dollar}\1\\end{dollar}', tex)
     tex = re.sub(r'\\myeqref', '\\eqref', tex)
+
+    # replace hashes with nulls because html references contain hashes
+    tex = re.sub(r'#', '\0', tex)
     tex = process_labels_and_refs(tex)
 
-    blocks = process_recursively(tex)
+    blocks = process_environments_recursively(tex)
+    blocks = [process_nonmath_hashes(b) for b in blocks]
     return "".join(blocks)
-    print("".join(blocks))
-    sys.exit(0)
-    blocks = [tex]
-
-    blocks = process_lists(blocks)
-    blocks = process_list_items(blocks)
-
-    blocks = process_display_formulae(blocks)
-    blocks = process_inline_formulae(blocks)
-
-
-    blocks = ["".join(blocks)]
-    #blocks = process_easy_environments(blocks)
-
-    html = "".join(blocks)
-    return html
-
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
