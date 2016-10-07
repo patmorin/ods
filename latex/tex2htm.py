@@ -17,6 +17,40 @@ def get_arg(s, i):
         if depth == 0: return i+1, j
     return i+1, len(s)
 
+
+class environment(object):
+    def __init__(self, name, content, start, end, args=''):
+        self.name = name
+        self.content = content
+        self.start = start
+        self.end = end
+
+def get_environment(tex, name):
+    return get_environment_regex(tex, re.escape(name))
+
+def get_environment_regex(tex, regex):
+    rxb = = re.compile(r'\\begin{(' + regex + ')}')
+    m = re.search(begin)
+    if m:
+        rxe = re.compile(r'\\end{(' + regex + ')}')
+        d = 1
+        ib = m.end()
+        ie = m.end()
+        while d > 0:
+            me = rxe.search(tex, ie)
+            d -= 1
+            if !me:
+                print("Info: \\begin{} with no corresponding \\end{}".format(regex, regex))
+                return None
+            while ib < ie:
+                mb = rxb.search(tex, ib)
+                if mb:
+                    if mb.begin() < me.begin:
+                        d += 1
+                    ib = mb.end()
+
+
+
 def merge_lines(tex):
     """Merge lines in a latex file"""
     lines = [line.strip() for line in tex.splitlines()]
@@ -181,82 +215,6 @@ def process_paragraphs(tex):
     htmltail = '</span>'
     return process_command(tex, cmd, htmlhead, htmltail)
 
-def process_refs_and_labels(tex):
-    headings = ['chapter'] + ['sub'*i + 'section' for i in range(4)]
-    reh = r'(' + '|'.join(headings) + r'){(.+?)}'
-    environments = ['thm', 'lem', 'exc', 'figure', 'equation']
-    ree = r'begin{(' + '|'.join(environments) + r')}'
-    rel = r'(\w+)label{(.+?)}'
-    bigone = r'\\({})|\\({})|\\({})'.format(reh, ree, rel)
-
-    sec_ctr = [0]*(len(headings)+1)
-    env_ctr = [0]*len(environments)
-    html = []
-    splitters = [0]
-    lastlabel = None
-    labelmap = dict()
-    for m in re.finditer(bigone, tex):
-        #print(m.groups())
-        if m.group(2):
-            splitters.append(m.start())
-            # This is a sectioning command
-            i = headings.index(m.group(2))
-            if i == 0:
-                env_ctr = [0]*len(env_ctr)
-            sec_ctr[i:] = [sec_ctr[i]+1]+[0]*(len(headings)-i-1)
-            for j in range(i+1, len(sec_ctr)): sec_ctr[j] = 0
-            # print(sec_ctr[:i+1], m.group(3))
-            idd = m.group(2) + ":" + ".".join([str(x) for x in sec_ctr[:i+1]])
-            lastlabel = idd
-            html.append("<a id='{}'></a>".format(idd))
-            #print(html[-1])
-        elif m.group(5):
-            splitters.append(m.start())
-            # This is an environment
-            i = environments.index(m.group(5))
-            env_ctr[i] += 1
-            idd = "{}:{}.{}".format(m.group(5), sec_ctr[0], env_ctr[i])
-            lastlabel = idd
-            html.append("<a id='{}'></a>".format(idd))
-            #print(html[-1])
-        elif m.group(7):
-            # This is a labelling command
-            label = "{}:{}".format(m.group(7), m.group(8))
-            labelmap[label] = lastlabel
-            print("{}=>{}".format(label, labelmap[label]))
-    splitters.append(len(tex))
-    chunks = [tex[splitters[i]:splitters[i+1]] for i in range(len(splitters)-1)]
-    zipped = [chunks[i] + html[i] for i in range(len(html))]
-    zipped.append(chunks[-1])
-    tex = "".join(zipped)
-    tex = re.sub(r'^\s*\\(\w+)label{[^}]+}\s*?$\n', '', tex, 0, re.M|re.S)
-    tex = re.sub(r'\\(\w+)label{(.+?)}', '', tex)
-    return tex, labelmap
-
-def process_references(tex, labelmap):
-    map = dict([('chap', 'Chapter'),
-                ('sec', 'Section'),
-                ('thm', 'Theorem'),
-                ('lem', 'Lemma'),
-                ('fig', 'Figure'),
-                ('eq', 'Equation'),
-                ('exc', 'Exercise')])
-    pattern = r'\\(\w+)ref{(.*?)}'
-    m = re.search(pattern, tex)
-    while m:
-        label = "{}:{}".format(m.group(1), m.group(2))
-        if label not in labelmap:
-            print("Info: undefined label {}".format(label))
-            idd = 'REFERR'
-            num = '??'
-        else:
-            idd = labelmap[label]
-            num = idd[idd.find(':')+1:]
-        html = '<a href="#{}">{}&nbsp;{}</a>'.format(idd, map[m.group(1)], num)
-        print(html)
-        tex = tex[:m.start()]  + html + tex[m.end():]
-        m = re.search(pattern, tex)
-    return tex
 
 def process_headings(tex):
     chapter = "None"  # FIXME
