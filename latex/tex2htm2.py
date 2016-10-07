@@ -3,6 +3,8 @@ import os
 import sys
 import re
 
+from collections import defaultdict
+
 def strip_comments(tex):
     lines = tex.splitlines()
     nulled = set()
@@ -112,7 +114,6 @@ def preprocess_hashes(subtex):
         blocks.append(subtex[lastidx:m.start()])
         lastidx = m.end()
         blocks.append(re.sub(r'([^\\])%', r'\1\%', m.group(0)))
-        print(blocks[-1])
     blocks.append(subtex[lastidx:])
     return "".join(blocks)
 
@@ -124,7 +125,6 @@ def process_math_hashes(subtex):
         blocks.append(subtex[lastidx:m.start()])
         lastidx = m.end()
         blocks.append(r'\mathtt{{{}}}'.format(m.group(1)))
-        print(blocks[-1])
     blocks.append(subtex[lastidx:])
     return "".join(blocks)
 
@@ -136,7 +136,6 @@ def process_nonmath_hashes(subtex):
         blocks.append(subtex[lastidx:m.start()])
         lastidx = m.end()
         blocks.append(r'\(\mathtt{{{}}}\)'.format(m.group(1)))
-        print(blocks[-1])
     blocks.append(subtex[lastidx:])
     return "".join(blocks)
 
@@ -192,11 +191,9 @@ def process_labels_and_refs(tex):
                 env_ctr = [0]*len(env_ctr)
             sec_ctr[i:] = [sec_ctr[i]+1]+[0]*(len(headings)-i-1)
             for j in range(i+1, len(sec_ctr)): sec_ctr[j] = 0
-            # print(sec_ctr[:i+1], m.group(3))
             idd = m.group(2) + ":" + ".".join([str(x) for x in sec_ctr[:i+1]])
             lastlabel = idd
             html.append("<a id='{}'></a>".format(idd))
-            #print(html[-1])
         elif m.group(5):
             # This is an environment
             splitters.append(m.start())
@@ -209,7 +206,6 @@ def process_labels_and_refs(tex):
             # This is a labelling command
             label = "{}:{}".format(m.group(7), m.group(8))
             labelmap[label] = lastlabel
-            print("{}=>{}".format(label, labelmap[label]))
     splitters.append(len(tex))
     chunks = [tex[splitters[i]:splitters[i+1]] for i in range(len(splitters)-1)]
     zipped = [chunks[i] + html[i] for i in range(len(html))]
@@ -239,41 +235,137 @@ def process_references(tex, labelmap):
             idd = labelmap[label]
             num = idd[idd.find(':')+1:]
         html = '<a href="#{}">{}&nbsp;{}</a>'.format(idd, map[m.group(1)], num)
-        print(html)
         tex = tex[:m.start()]  + html + tex[m.end():]
         m = re.search(pattern, tex)
     return tex
 
 
 class command(object):
-    def __init__(self, name, args):
+    def __init__(self, name, optargs, args, start, end):
         self.name = name
+        self.optargs = optargs
         self.args = args
+        self.start = start
+        self.end = end
+
+def match_parens(tex, i, open, close):
+    di = defaultdict(int, {open: 1, close: -1})
+    if i == len(tex): return i
+    try:
+        d = di[tex[i]]
+        j = i+d
+        while d > 0:
+            d += di[tex[j]]
+            j+=1
+        return j
+    except IndexError:
+        sys.stderr.write("Couldn't match parenthesis:\n")
+        sys.stderr.write(tex[max(0,i-10):] + "\n")
+        sys.exit(-1)
+
+def commands(tex):
+    rx = re.compile(r'\\(\w+)')
+    for m in rx.finditer(tex):
+        if m.group(0) != r'\begin':
+            optargs = []
+            j = m.end()
+            k = match_parens(tex, j, '[', ']')
+            while k > j:
+                optargs.append(tex[j+1:k-1])
+                j = k
+                k = match_parens(tex, j, '[', ']')
+            args = []
+            k = match_parens(tex, j, '{', '}')
+            while k > j:
+                args.append(tex[j+1:k-1])
+                j = k
+                k = match_parens(tex, j, '{', '}')
+            cmd = command(m.group(1), optargs, args, m.start(), j)
+            yield cmd
+
 
 def process_commands_recursively(tex):
-    handlers = {'chapter', process_chapter}
+    handlers = {'chapter': process_chapter,
+                'section': process_section,
+                'subsection': process_subsection,
+                'subsubsection': process_subsubsection,
+                'paragraph': process_paragraph,
+                'emph': process_emph,
+                'caption': process_caption,
+                'includegraphics': process_graphics,
+                'codeimport': process_codeimport,
+                'javaimport': process_codeimport
+               }
+    worthless = ['newlength', 'setlength', 'addtolength', 'vspace', 'index',
+                 'cpponly', 'cppimport', 'pcodeonly', 'pcodeimport']
+    for c in worthless:
+        handlers[c] = lambda tex, cmd : ['']
+    strip = ['javaonly', 'notpcode']
+    for c in strip:
+        handlers[c] = strip_command
     newblocks = list()
     lastidx = 0
-    b = tex
-    env = get_generic_command(b, regex)
-    while env:
-        newblocks.append(b[lastidx:env.start])
-        lastidx = env.end
-        if env.name in handlers:
-            newblocks.extend(handlers[env.name](tex, env))
-        else:
-            newblocks.append('<div class="{}">'.format(env.name))
-            newblocks.extend(process_environments_recursively(env.content))
-            newblocks.append('</div><!-- {} -->'.format(env.name))
-        env = get_generic_environment(b, regex, lastidx)
-    newblocks.append(b[lastidx:])
+    for cmd in commands(tex):
+        if cmd.name in handlers:
+            newblocks.append(tex[lastidx:cmd.start])
+            lastidx = cmd.end
+            newblocks.extend(handlers[cmd.name](tex, cmd))
+    newblocks.append(tex[lastidx:])
     return newblocks
+
+def strip_command(text, cmd):
+    return process_commands_recursively(cmd.args[0])
+
+def process_section(text, cmd):
+    blocks = ["<h1>"]
+    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.append("</h1>")
+    return blocks
+
+def process_subsection(text, cmd):
+    blocks = ["<h2>"]
+    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.append("</h2>")
+    return blocks
+
+def process_subsubsection(text, cmd):
+    blocks = ["<h2>"]
+    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.append("</h2>")
+    return blocks
+
+def process_paragraph(text, cmd):
+    blocks = ['<div class="paragraph_title">']
+    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.append("</div><!-- paragraph_title -->")
+    return blocks
+
+def process_emph(text, cmd):
+    blocks = ["<em>"]
+    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.append("</em>")
+    return blocks
 
 def process_chapter(text, cmd):
     blocks = list()
     blocks.append('<div class="chapter">')
     blocks.extend(process_commands_recursively(cmd.args[0]))
-    blocks.append('</div>')
+    blocks.append('</div><!-- chapter -->')
+    return blocks
+
+def process_caption(text, cmd):
+    blocks = ['<div class="caption">']
+    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.append("</div><!-- caption -->")
+    return blocks
+
+def process_graphics(text, cmd):
+    return ['<img src="{}.svg"/>'.format(cmd.args[0])]
+
+def process_codeimport(text, cmd):
+    blocks = ['<div class="codeimport">']
+    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.append("</div><!-- codeimport -->")
     return blocks
 
 def tex2htm(tex):
@@ -282,7 +374,8 @@ def tex2htm(tex):
     tex = strip_comments(tex)
     tex = re.sub(r'\\\[', r'\\begin{equation*}', tex)
     tex = re.sub(r'\\\]', r'\end{equation*}', tex)
-    tex = re.sub(r'\$([^\$]*(\\\$)?)\$', r'\\begin{dollar}\1\\end{dollar}', tex)
+    tex = re.sub(r'\$([^\$]*(\\\$)?)\$', r'\\begin{dollar}\1\\end{dollar}', tex,
+                 0, re.M|re.S)
     tex = re.sub(r'\\myeqref', '\\eqref', tex)
 
     # replace hashes with nulls because html references contain hashes
@@ -291,6 +384,8 @@ def tex2htm(tex):
 
     blocks = process_environments_recursively(tex)
     blocks = [process_nonmath_hashes(b) for b in blocks]
+
+    blocks = process_commands_recursively("".join(blocks))
     return "".join(blocks)
 
 if __name__ == "__main__":
