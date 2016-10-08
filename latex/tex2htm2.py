@@ -79,10 +79,12 @@ def process_environments_recursively(tex):
     displaymaths = ['equation', 'equation*', 'align', 'align*', 'eqnarray*']
     for d in displaymaths:
         handlers[d] = process_display_math
+    passthroughs = ['array', 'cases']
+    for d in passthroughs:
+        handlers[d] = process_passthroughs
     lists = ['itemize', 'enumerate', 'list']
     for ell in lists:
         handlers[ell] = process_list
-
     newblocks = list()
     lastidx = 0
     b = tex
@@ -100,8 +102,15 @@ def process_environments_recursively(tex):
     newblocks.append(b[lastidx:])
     return newblocks
 
+def process_passthroughs(b, env):
+    blocks = [r'\begin{{{}}}'.format(env.name)]
+    blocks.extend(process_environments_recursively(env.content))
+    blocks.append(r'\end{{{}}}'.format(env.name))
+    return blocks
+
 def process_display_math(b, env):
-    return process_math_hashes(b[env.start:env.end])
+    blocks = process_passthroughs(b, env)
+    return process_math_hashes("".join(blocks))
 
 def process_inline_math(b, env):
     return '\(' + process_math_hashes(env.content) + '\)'
@@ -113,7 +122,7 @@ def preprocess_hashes(subtex):
     for m in rx.finditer(subtex):
         blocks.append(subtex[lastidx:m.start()])
         lastidx = m.end()
-        blocks.append(re.sub(r'([^\\])%', r'\1\%', m.group(0)))
+        blocks.append(re.sub(r'(^|[^\\])%', r'\1\%', m.group(0)))
     blocks.append(subtex[lastidx:])
     return "".join(blocks)
 
@@ -124,7 +133,9 @@ def process_math_hashes(subtex):
     for m in rx.finditer(subtex):
         blocks.append(subtex[lastidx:m.start()])
         lastidx = m.end()
-        blocks.append(r'\mathtt{{{}}}'.format(m.group(1)))
+        inner = m.group(1)
+        inner = re.sub(r'(^|[^\\])&', r'\1\&', inner)
+        blocks.append(r'\mathtt{{{}}}'.format(inner))
     blocks.append(subtex[lastidx:])
     return "".join(blocks)
 
@@ -135,7 +146,9 @@ def process_nonmath_hashes(subtex):
     for m in rx.finditer(subtex):
         blocks.append(subtex[lastidx:m.start()])
         lastidx = m.end()
-        blocks.append(r'\(\mathtt{{{}}}\)'.format(m.group(1)))
+        inner = m.group(1)
+        inner = re.sub(r'(^|[^\\])&', r'\1\&', inner)
+        blocks.append(r'\(\mathtt{{{}}}\)'.format(inner))
     blocks.append(subtex[lastidx:])
     return "".join(blocks)
 
@@ -299,10 +312,11 @@ def process_commands_recursively(tex):
                 'caption': process_caption,
                 'includegraphics': process_graphics,
                 'codeimport': process_codeimport,
-                'javaimport': process_codeimport
+                'javaimport': process_codeimport,
+                'cite': lambda tex, cmd: ['[{}]'.format(cmd.args[0])]
                }
     worthless = ['newlength', 'setlength', 'addtolength', 'vspace', 'index',
-                 'cpponly', 'cppimport', 'pcodeonly', 'pcodeimport']
+                 'cpponly', 'cppimport', 'pcodeonly', 'pcodeimport', 'qedhere']
     for c in worthless:
         handlers[c] = lambda tex, cmd : ['']
     strip = ['javaonly', 'notpcode']
@@ -382,6 +396,8 @@ def tex2htm(tex):
     tex = re.sub(r'\$([^\$]*(\\\$)?)\$', r'\\begin{dollar}\1\\end{dollar}', tex,
                  0, re.M|re.S)
     tex = re.sub(r'\\myeqref', '\\eqref', tex)
+    tex = re.sub(r'---', r'&mdash;', tex)
+    tex = re.sub(r'--', r'&ndash;', tex)
 
     # replace hashes with nulls because html references contain hashes
     tex = re.sub(r'#', '\0', tex)

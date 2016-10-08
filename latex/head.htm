@@ -48,9 +48,15 @@
             content: "Exercise: ";
             font-weight: bold;
         }
+        div.exc {
+          margin-top: 1em;
+        }
         div.lem:before {
             content: "Lemma: ";
             font-weight: bold;
+        }
+        div.lem {
+          margin-top: 1em;
         }
         div.proof:before {
             content: "Proof: ";
@@ -83,6 +89,9 @@
   </head>
   <body lang="en" class="hyphenate">
     <div id="content">
+      \(\newcommand{\E}{\mathrm{E}
+       \DeclareMathOperator{\ddiv}{div}}
+      \)
       CONTENT
     </div>
   </body>
