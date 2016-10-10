@@ -2,8 +2,15 @@
 import os
 import sys
 import re
-
 from collections import defaultdict
+
+
+# Some global variables
+environment_handlers = defaultdict(lambda: process_environment_default)
+
+def abort(msg, status=-1):
+    sys.stderr.write(msg + '\n')
+    sys.exit(status)
 
 def strip_comments(tex):
     lines = tex.splitlines()
@@ -23,13 +30,11 @@ class argument(object):
         self.end = end
 
 class environment(object):
-    def __init__(self, name, content, start, end, cstart, cend, args=''):
+    def __init__(self, name, content, start, end, args):
         self.name = name
         self.content = content
         self.start = start
         self.end = end
-        self.cstart = cstart
-        self.cend = cend
         self.args = args
 
     def __repr__(self):
@@ -39,7 +44,7 @@ class environment(object):
                                                     repr(self.end),
                                                     repr(self.args))
 
-def get_args(tex, pos=0, endpos=-1):
+"""def get_args(tex, pos=0, endpos=-1):
     rx = re.compile(r'(\[([^\]]+?)\])?({[^}]+})?\]', re.M|re.S)
     ma = rx.match(tex, pos, endpos)  # FIXME: Not perfect
     if ma:
@@ -73,7 +78,7 @@ def get_environment_regex(tex, regex, pos=0, endpos=-1):
                            args.end, me.start(), args.content)
     return None
 
-def process_environments_recursively(tex):
+def process_recursively(tex):
     handlers = {'dollar': process_inline_math,
                 'tabular': process_tabular }
     displaymaths = ['equation', 'equation*', 'align', 'align*', 'eqnarray*']
@@ -96,15 +101,16 @@ def process_environments_recursively(tex):
             newblocks.extend(handlers[env.name](tex, env))
         else:
             newblocks.append('<div class="{}">'.format(env.name))
-            newblocks.extend(process_environments_recursively(env.content))
+            newblocks.extend(process_recursively(env.content))
             newblocks.append('</div><!-- {} -->'.format(env.name))
         env = get_generic_environment(b, lastidx)
     newblocks.append(b[lastidx:])
     return newblocks
+"""
 
 def process_passthroughs(b, env):
     blocks = [r'\begin{{{}}}'.format(env.name)]
-    blocks.extend(process_environments_recursively(env.content))
+    blocks.extend(process_recursively(env.content))
     blocks.append(r'\end{{{}}}'.format(env.name))
     return blocks
 
@@ -157,7 +163,7 @@ def process_list(b, env):
     mapper = dict([('itemize', 'ul'), ('enumerate', 'ol'), ('list', 'ul')])
     tag = mapper[env.name]
     newblocks.append('<{} class="{}">'.format(tag, env.name))
-    newblocks.extend(process_environments_recursively(process_list_items(env.content)))
+    newblocks.extend(process_recursively(process_list_items(env.content)))
     newblocks.append('</li></{}>'.format(tag))
     return newblocks
 
@@ -169,7 +175,7 @@ def process_list_items(b):
     return b
 
 def process_tabular(tex, env):
-    inner = "".join(process_environments_recursively(env.content))
+    inner = "".join(process_recursively(env.content))
     rows = re.split(r'\\\\', inner)
     rows = [re.split(r'\&', r) for r in rows]
     table = '<table align="center">'
@@ -180,6 +186,13 @@ def process_tabular(tex, env):
         table += '</tr>'
     table += '</table>'
     return table
+
+def process_environment_default(tex, env):
+    newblocks = ['<div class="{}">'.format(env.name)]
+    newblocks.extend(process_recursively(env.content))
+    newblocks.append('</div><!-- {} -->'.format(env.name))
+    return newblocks
+
 
 def process_labels_and_refs(tex):
     headings = ['chapter'] + ['sub'*i + 'section' for i in range(4)]
@@ -266,6 +279,10 @@ class command(object):
         self.start = start
         self.end = end
 
+    def __repr__(self):
+        return "command({},{},{},{},{})".format(repr(self.name), repr(self.optargs),
+                repr(self.args), repr(self.start), repr(self.end))
+
 def match_parens(tex, i, open, close):
     di = defaultdict(int, {open: 1, close: -1})
     if i == len(tex): return i
@@ -284,25 +301,24 @@ def match_parens(tex, i, open, close):
 def commands(tex):
     rx = re.compile(r'\\(\w+)')
     for m in rx.finditer(tex):
-        if m.group(0) != r'\begin':
-            optargs = []
-            j = m.end()
+        optargs = []
+        j = m.end()
+        k = match_parens(tex, j, '[', ']')
+        while k > j:
+            optargs.append(tex[j+1:k-1])
+            j = k
             k = match_parens(tex, j, '[', ']')
-            while k > j:
-                optargs.append(tex[j+1:k-1])
-                j = k
-                k = match_parens(tex, j, '[', ']')
-            args = []
+        args = []
+        k = match_parens(tex, j, '{', '}')
+        while k > j:
+            args.append(tex[j+1:k-1])
+            j = k
             k = match_parens(tex, j, '{', '}')
-            while k > j:
-                args.append(tex[j+1:k-1])
-                j = k
-                k = match_parens(tex, j, '{', '}')
-            cmd = command(m.group(1), optargs, args, m.start(), j)
-            yield cmd
+        cmd = command(m.group(1), optargs, args, m.start(), j)
+        yield cmd
 
 
-def process_commands_recursively(tex):
+def process_recursively(tex):
     handlers = {'chapter': process_chapter,
                 'section': process_section,
                 'subsection': process_subsection,
@@ -313,7 +329,8 @@ def process_commands_recursively(tex):
                 'includegraphics': process_graphics,
                 'codeimport': process_codeimport,
                 'javaimport': process_codeimport,
-                'cite': lambda tex, cmd: ['[{}]'.format(cmd.args[0])]
+                'cite': lambda tex, cmd: ['[{}]'.format(cmd.args[0])],
+                'begin': process_environment
                }
     worthless = ['newlength', 'setlength', 'addtolength', 'vspace', 'index',
                  'cpponly', 'cppimport', 'pcodeonly', 'pcodeimport', 'qedhere']
@@ -333,48 +350,48 @@ def process_commands_recursively(tex):
     return newblocks
 
 def strip_command(text, cmd):
-    return process_commands_recursively(cmd.args[0])
+    return process_recursively(cmd.args[0])
 
 def process_section(text, cmd):
     blocks = ["<h1>"]
-    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0]))
     blocks.append("</h1>")
     return blocks
 
 def process_subsection(text, cmd):
     blocks = ["<h2>"]
-    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0]))
     blocks.append("</h2>")
     return blocks
 
 def process_subsubsection(text, cmd):
     blocks = ["<h2>"]
-    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0]))
     blocks.append("</h2>")
     return blocks
 
 def process_paragraph(text, cmd):
     blocks = ['<div class="paragraph_title">']
-    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0]))
     blocks.append("</div><!-- paragraph_title -->")
     return blocks
 
 def process_emph(text, cmd):
     blocks = ["<em>"]
-    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0]))
     blocks.append("</em>")
     return blocks
 
 def process_chapter(text, cmd):
     blocks = list()
     blocks.append('<div class="chapter">')
-    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0]))
     blocks.append('</div><!-- chapter -->')
     return blocks
 
 def process_caption(text, cmd):
     blocks = ['<div class="caption">']
-    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0]))
     blocks.append("</div><!-- caption -->")
     return blocks
 
@@ -383,9 +400,45 @@ def process_graphics(text, cmd):
 
 def process_codeimport(text, cmd):
     blocks = ['<div class="codeimport">']
-    blocks.extend(process_commands_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0]))
     blocks.append("</div><!-- codeimport -->")
     return blocks
+
+def setup_environment_handlers():
+    environment_handlers['dollar'] = process_inline_math
+    environment_handlers['tabular'] = process_tabular
+    displaymaths = ['equation', 'equation*', 'align', 'align*', 'eqnarray*']
+    for name in displaymaths:
+        environment_handlers[name] = process_display_math
+    passthroughs = ['array', 'cases']
+    for name in passthroughs:
+        environment_handlers[name] = process_passthroughs
+    lists = ['itemize', 'enumerate', 'list']
+    for name in lists:
+        environment_handlers[name] = process_list
+
+def process_environment(tex, cmd):
+    name = cmd.args[0]
+    print("ENV", name)
+    d = 1
+    pos = cmd.end
+    regex = r'\\(begin|end){{{}}}'.format(re.escape(name))
+    print(regex)
+    rx = re.compile(regex)
+    while d >= 0:
+        m = rx.search(tex, pos)
+        if not m:
+            abort("Unmatched environment:". format(cmd.name))
+        if m.group(1) == 'begin':
+            d += 1
+            print("plus")
+        else:
+            d -= 1
+            print("minus")
+    env = environment(name, #cmd.optargs, cmd.args,
+                    tex[cmd.end:m.start()],
+                    cmd.start, m.end(), cmd.args[1:])
+    return environment_handlers[name](tex, env)
 
 def tex2htm(tex):
     # Some preprocessing
@@ -403,10 +456,9 @@ def tex2htm(tex):
     tex = re.sub(r'#', '\0', tex)
     tex = process_labels_and_refs(tex)
 
-    blocks = process_environments_recursively(tex)
+    blocks = process_recursively(tex)
     blocks = [process_nonmath_hashes(b) for b in blocks]
 
-    blocks = process_commands_recursively("".join(blocks))
     return "".join(blocks)
 
 if __name__ == "__main__":
@@ -417,6 +469,9 @@ if __name__ == "__main__":
     base, ext = os.path.splitext(filename)
     outfile = base + ".html"
     print("Reading from {} and writing to {}".format(filename, outfile))
+
+    # Setup a few things
+    setup_environment_handlers()
 
     # Read and translate the input
     tex = open(filename).read()
