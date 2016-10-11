@@ -7,10 +7,33 @@ from collections import defaultdict
 
 # Some global variables
 environment_handlers = defaultdict(lambda: process_environment_default)
+command_handlers = defaultdict(lambda: process_command_default)
+unprocessed_commands = set()
 
+# Math mode
+MATH = 1
+
+#
+# Utilities
+#
 def abort(msg, status=-1):
     sys.stderr.write(msg + '\n')
     sys.exit(status)
+
+#
+# Preprocessing functions
+#
+def preprocess_hashes(subtex):
+    """Prevents percents inside hashes from being treated as comments"""
+    blocks = list()
+    rx = re.compile('#([^#]*)#', re.M|re.S)
+    lastidx = 0
+    for m in rx.finditer(subtex):
+        blocks.append(subtex[lastidx:m.start()])
+        lastidx = m.end()
+        blocks.append(re.sub(r'(^|[^\\])%', r'\1\%', m.group(0)))
+    blocks.append(subtex[lastidx:])
+    return "".join(blocks)
 
 def strip_comments(tex):
     lines = tex.splitlines()
@@ -23,177 +46,11 @@ def strip_comments(tex):
     lines = [lines[i] for i in range(len(lines)) if i not in nulled]
     return "\n".join(lines)
 
-class argument(object):
-    def __init__(self, content, start, end):
-        self.content = content
-        self.start = start
-        self.end = end
-
-class environment(object):
-    def __init__(self, name, content, start, end, args):
-        self.name = name
-        self.content = content
-        self.start = start
-        self.end = end
-        self.args = args
-
-    def __repr__(self):
-        return "environment({},{},{},{},{})".format(repr(self.name),
-                                                    repr(self.content),
-                                                    repr(self.start),
-                                                    repr(self.end),
-                                                    repr(self.args))
-
-"""def get_args(tex, pos=0, endpos=-1):
-    rx = re.compile(r'(\[([^\]]+?)\])?({[^}]+})?\]', re.M|re.S)
-    ma = rx.match(tex, pos, endpos)  # FIXME: Not perfect
-    if ma:
-        return argument(ma.group(0), ma.start(), ma.end())
-    return argument('', pos, pos)
-
-def get_environment(tex, name, pos=0, endpos=-1):
-    return get_environment_regex(tex, re.escape(name), pos, endpos)
-
-def get_generic_environment(tex, pos=0, endpos=-1):
-    return get_environment_regex(tex, r'[^}]+', pos, endpos)
-
-def get_environment_regex(tex, regex, pos=0, endpos=-1):
-    if endpos == -1: endpos = len(tex)
-    rx = re.compile(r'\\begin{(' + regex + ')}')
-    mb = rx.search(tex, pos, endpos)
-    if mb:
-        name = mb.group(1)
-        args = get_args(tex, mb.end(), endpos)
-        rxb = re.compile(r'\\begin{(' + re.escape(name) + ')}')
-        rxe = re.compile(r'\\end{(' + re.escape(name) + ')}')
-        ite = rxe.finditer(tex, mb.end(), endpos)
-        d = 1
-        i = args.end
-        while d > 0:
-            me = ite.__next__()
-            d -= 1
-            d += len(rxb.findall(tex, i, me.start()))
-            i = me.end()
-        return environment(name, tex[args.end:me.start()], mb.start(), me.end(),
-                           args.end, me.start(), args.content)
-    return None
-
-def process_recursively(tex):
-    handlers = {'dollar': process_inline_math,
-                'tabular': process_tabular }
-    displaymaths = ['equation', 'equation*', 'align', 'align*', 'eqnarray*']
-    for d in displaymaths:
-        handlers[d] = process_display_math
-    passthroughs = ['array', 'cases']
-    for d in passthroughs:
-        handlers[d] = process_passthroughs
-    lists = ['itemize', 'enumerate', 'list']
-    for ell in lists:
-        handlers[ell] = process_list
-    newblocks = list()
-    lastidx = 0
-    b = tex
-    env = get_generic_environment(b)
-    while env:
-        newblocks.append(b[lastidx:env.start])
-        lastidx = env.end
-        if env.name in handlers:
-            newblocks.extend(handlers[env.name](tex, env))
-        else:
-            newblocks.append('<div class="{}">'.format(env.name))
-            newblocks.extend(process_recursively(env.content))
-            newblocks.append('</div><!-- {} -->'.format(env.name))
-        env = get_generic_environment(b, lastidx)
-    newblocks.append(b[lastidx:])
-    return newblocks
-"""
-
-def process_passthroughs(b, env):
-    blocks = [r'\begin{{{}}}'.format(env.name)]
-    blocks.extend(process_recursively(env.content))
-    blocks.append(r'\end{{{}}}'.format(env.name))
-    return blocks
-
-def process_display_math(b, env):
-    blocks = process_passthroughs(b, env)
-    return process_math_hashes("".join(blocks))
-
-def process_inline_math(b, env):
-    return '\(' + process_math_hashes(env.content) + '\)'
-
-def preprocess_hashes(subtex):
-    blocks = list()
-    rx = re.compile('#([^#]*)#', re.M|re.S)
-    lastidx = 0
-    for m in rx.finditer(subtex):
-        blocks.append(subtex[lastidx:m.start()])
-        lastidx = m.end()
-        blocks.append(re.sub(r'(^|[^\\])%', r'\1\%', m.group(0)))
-    blocks.append(subtex[lastidx:])
-    return "".join(blocks)
-
-def process_math_hashes(subtex):
-    blocks = list()
-    rx = re.compile('\0([^\0]*)\0', re.M|re.S)
-    lastidx = 0
-    for m in rx.finditer(subtex):
-        blocks.append(subtex[lastidx:m.start()])
-        lastidx = m.end()
-        inner = m.group(1)
-        inner = re.sub(r'(^|[^\\])&', r'\1\&', inner)
-        blocks.append(r'\mathtt{{{}}}'.format(inner))
-    blocks.append(subtex[lastidx:])
-    return "".join(blocks)
-
-def process_nonmath_hashes(subtex):
-    blocks = list()
-    rx = re.compile('\0([^\0]*)\0', re.M|re.S)
-    lastidx = 0
-    for m in rx.finditer(subtex):
-        blocks.append(subtex[lastidx:m.start()])
-        lastidx = m.end()
-        inner = m.group(1)
-        inner = re.sub(r'(^|[^\\])&', r'\1\&', inner)
-        blocks.append(r'\(\mathtt{{{}}}\)'.format(inner))
-    blocks.append(subtex[lastidx:])
-    return "".join(blocks)
-
-def process_list(b, env):
-    newblocks = list()
-    mapper = dict([('itemize', 'ul'), ('enumerate', 'ol'), ('list', 'ul')])
-    tag = mapper[env.name]
-    newblocks.append('<{} class="{}">'.format(tag, env.name))
-    newblocks.extend(process_recursively(process_list_items(env.content)))
-    newblocks.append('</li></{}>'.format(tag))
-    return newblocks
-
-def process_list_items(b):
-    b = re.sub(r'\\item\s+', '\1', b, 1)
-    b = re.sub(r'\\item\s+', '\2\1', b)
-    b = re.sub(r'\s*' + '\1' + r'\s*', '<li>', b, 0, re.M|re.S)
-    b = re.sub(r'\s*' + '\2' + r'\s*', '</li>', b, 0, re.M|re.S)
-    return b
-
-def process_tabular(tex, env):
-    inner = "".join(process_recursively(env.content))
-    rows = re.split(r'\\\\', inner)
-    rows = [re.split(r'\&', r) for r in rows]
-    table = '<table align="center">'
-    for r in rows:
-        table += '<tr>'
-        for c in r:
-            table += '<td>' + c + '</td>'
-        table += '</tr>'
-    table += '</table>'
-    return table
-
-def process_environment_default(tex, env):
-    newblocks = ['<div class="{}">'.format(env.name)]
-    newblocks.extend(process_recursively(env.content))
-    newblocks.append('</div><!-- {} -->'.format(env.name))
-    return newblocks
 
 
+#
+# Label and Refeference Handling
+# TODO: Add numbers to environments
 def process_labels_and_refs(tex):
     headings = ['chapter'] + ['sub'*i + 'section' for i in range(4)]
     reh = r'(' + '|'.join(headings) + r'){(.+?)}'
@@ -270,6 +127,93 @@ def process_references(tex, labelmap):
         m = re.search(pattern, tex)
     return tex
 
+#
+# LaTeX commands
+#
+
+
+
+
+
+class environment(object):
+    def __init__(self, name, content, start, end, args):
+        self.name = name
+        self.content = content
+        self.start = start
+        self.end = end
+        self.args = args
+
+    def __repr__(self):
+        return "environment({},{},{},{},{})".format(repr(self.name),
+                                                    repr(self.content),
+                                                    repr(self.start),
+                                                    repr(self.end),
+                                                    repr(self.args))
+
+
+def process_hash(b, env, mode):
+    inner = r'\mathtt{{{}}}'.format(re.sub(r'(^|[^\\])&', r'\1\&', env.content))
+    if mode & MATH:
+        return [ inner ]
+    else:
+        return [ r'\(', inner, r'\)' ]
+
+def process_passthroughs(b, env, mode):
+    blocks = [r'\begin{{{}}}'.format(env.name)]
+    blocks.extend(process_recursively(env.content, mode))
+    blocks.append(r'\end{{{}}}'.format(env.name))
+    return blocks
+
+def process_display_math(b, env, mode):
+    blocks = [r'\begin{{{}}}'.format(env.name)]
+    blocks.extend(process_recursively(env.content, mode | MATH))
+    blocks.append(r'\end{{{}}}'.format(env.name))
+    return blocks
+
+def process_inline_math(b, env, mode):
+    blocks = [r'\(']
+    blocks.extend(process_recursively(env.content, mode | MATH))
+    blocks.append(r'\)')
+    return blocks
+
+
+def process_list(b, env, mode):
+    newblocks = list()
+    mapper = dict([('itemize', 'ul'), ('enumerate', 'ol'), ('list', 'ul')])
+    tag = mapper[env.name]
+    newblocks.append('<{} class="{}">'.format(tag, env.name))
+    newblocks.extend(process_recursively(process_list_items(env.content), mode))
+    newblocks.append('</li></{}>'.format(tag))
+    return newblocks
+
+def process_list_items(b):
+    b = re.sub(r'\\item\s+', '\1', b, 1)
+    b = re.sub(r'\\item\s+', '\2\1', b)
+    b = re.sub(r'\s*' + '\1' + r'\s*', '<li>', b, 0, re.M|re.S)
+    b = re.sub(r'\s*' + '\2' + r'\s*', '</li>', b, 0, re.M|re.S)
+    return b
+
+def process_tabular(tex, env, mode):
+    inner = "".join(process_recursively(env.content, mode))
+    rows = re.split(r'\\\\', inner)
+    rows = [re.split(r'\&', r) for r in rows]
+    table = '<table align="center">'
+    for r in rows:
+        table += '<tr>'
+        for c in r:
+            table += '<td>' + c + '</td>'
+        table += '</tr>'
+    table += '</table>'
+    return table
+
+def process_environment_default(tex, env, mode):
+    newblocks = ['<div class="{}">'.format(env.name)]
+    newblocks.extend(process_recursively(env.content, mode))
+    newblocks.append('</div><!-- {} -->'.format(env.name))
+    return newblocks
+
+
+
 
 class command(object):
     def __init__(self, name, optargs, args, start, end):
@@ -298,9 +242,10 @@ def match_parens(tex, i, open, close):
         sys.stderr.write(tex[max(0,i-10):] + "\n")
         sys.exit(-1)
 
-def commands(tex):
+def next_command(tex, pos):
     rx = re.compile(r'\\(\w+)')
-    for m in rx.finditer(tex):
+    m = rx.search(tex, pos)
+    if m:
         optargs = []
         j = m.end()
         k = match_parens(tex, j, '[', ']')
@@ -315,10 +260,28 @@ def commands(tex):
             j = k
             k = match_parens(tex, j, '{', '}')
         cmd = command(m.group(1), optargs, args, m.start(), j)
-        yield cmd
+        return cmd
+    return None
 
 
-def process_recursively(tex):
+def process_command_default(tex, cmd, mode):
+    """By default, we just pass commands through untouched"""
+    unprocessed_commands.add(cmd.name)
+    print("Unprocessed: {}".format(cmd.name))
+    blocks = [r'\{}'.format(cmd.name)]
+    for a in cmd.optargs:
+        blocks.append(r'[{}]'.format(a))
+    for a in cmd.args:
+        blocks.append('{')
+        blocks.extend(process_recursively(a, mode))
+        blocks.append('}')
+    return blocks
+
+def process_command_worthless(tex, cmd, mode):
+    print("Worthless command: {}".format(cmd.name))
+    return ['']
+
+def setup_command_handlers():
     handlers = {'chapter': process_chapter,
                 'section': process_section,
                 'subsection': process_subsection,
@@ -329,84 +292,109 @@ def process_recursively(tex):
                 'includegraphics': process_graphics,
                 'codeimport': process_codeimport,
                 'javaimport': process_codeimport,
-                'cite': lambda tex, cmd: ['[{}]'.format(cmd.args[0])],
-                'begin': process_environment
+                'cite': lambda tex, cmd, mode: ['[{}]'.format(cmd.args[0])],
+                'ldots': process_dots_cmd
                }
+    for c in handlers:
+        command_handlers[c] = handlers[c]  # FIXME: Lazy
+    handlers = None
     worthless = ['newlength', 'setlength', 'addtolength', 'vspace', 'index',
-                 'cpponly', 'cppimport', 'pcodeonly', 'pcodeimport', 'qedhere']
+                 'cpponly', 'cppimport', 'pcodeonly', 'pcodeimport', 'qedhere',
+                 'end', 'hline']
     for c in worthless:
-        handlers[c] = lambda tex, cmd : ['']
+        command_handlers[c] = process_command_worthless
     strip = ['javaonly', 'notpcode']
     for c in strip:
-        handlers[c] = strip_command
+        command_handlers[c] = strip_command
+
+def process_dots_cmd(tex, cmd, mode):
+    if mode & MATH:
+        return process_command_default(tex, cmd, mode)
+    else:
+        return [ '&hellip;' ]
+
+def process_recursively(tex, mode):
     newblocks = list()
     lastidx = 0
-    for cmd in commands(tex):
-        if cmd.name in handlers:
-            newblocks.append(tex[lastidx:cmd.start])
+    cmd = next_command(tex, lastidx)
+    while cmd:
+        newblocks.append(tex[lastidx:cmd.start])
+        if cmd.name == 'begin':
+            env = get_environment(tex, cmd)
+            lastidx = env.end
+            print("name='{}'".format(env.name))
+            print("content='{}'".format(env.content))
+            print("everything='{}'".format(tex[env.start:env.end]))
+            newblocks.extend(environment_handlers[env.name](tex, env, mode))
+        else:
             lastidx = cmd.end
-            newblocks.extend(handlers[cmd.name](tex, cmd))
+            print("name='{}'".format(cmd.name))
+            print("args='{}'".format(cmd.args))
+            print("everything='{}'".format(tex[cmd.start:cmd.end]))
+            newblocks.extend(command_handlers[cmd.name](tex, cmd, mode))
+        cmd = next_command(tex, lastidx)
     newblocks.append(tex[lastidx:])
     return newblocks
 
-def strip_command(text, cmd):
-    return process_recursively(cmd.args[0])
+def strip_command(text, cmd, mode):
+    return process_recursively(cmd.args[0], mode)
 
-def process_section(text, cmd):
+def process_section(text, cmd, mode):
     blocks = ["<h1>"]
-    blocks.extend(process_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0], mode))
     blocks.append("</h1>")
     return blocks
 
-def process_subsection(text, cmd):
+def process_subsection(text, cmd, mode):
     blocks = ["<h2>"]
-    blocks.extend(process_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0], mode))
     blocks.append("</h2>")
     return blocks
 
-def process_subsubsection(text, cmd):
+def process_subsubsection(text, cmd, mode):
     blocks = ["<h2>"]
-    blocks.extend(process_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0], mode))
     blocks.append("</h2>")
     return blocks
 
-def process_paragraph(text, cmd):
+def process_paragraph(text, cmd, mode):
     blocks = ['<div class="paragraph_title">']
-    blocks.extend(process_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0], mode))
     blocks.append("</div><!-- paragraph_title -->")
     return blocks
 
-def process_emph(text, cmd):
+def process_emph(text, cmd, mode):
     blocks = ["<em>"]
-    blocks.extend(process_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0], mode))
     blocks.append("</em>")
     return blocks
 
-def process_chapter(text, cmd):
+def process_chapter(text, cmd, mode):
     blocks = list()
     blocks.append('<div class="chapter">')
-    blocks.extend(process_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0], mode))
     blocks.append('</div><!-- chapter -->')
     return blocks
 
-def process_caption(text, cmd):
+def process_caption(text, cmd, mode):
     blocks = ['<div class="caption">']
-    blocks.extend(process_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0], mode))
     blocks.append("</div><!-- caption -->")
     return blocks
 
-def process_graphics(text, cmd):
-    return ['<img src="{}.svg"/>'.format(cmd.args[0])]
+def process_graphics(text, cmd, mode):
+    return ['<img src="{}.svg"/>'.format(cmd.args[0], mode)]
 
-def process_codeimport(text, cmd):
+def process_codeimport(text, cmd, mode):
     blocks = ['<div class="codeimport">']
-    blocks.extend(process_recursively(cmd.args[0]))
+    blocks.extend(process_recursively(cmd.args[0], mode))
     blocks.append("</div><!-- codeimport -->")
     return blocks
 
 def setup_environment_handlers():
     environment_handlers['dollar'] = process_inline_math
     environment_handlers['tabular'] = process_tabular
+    environment_handlers['hash'] = process_hash
     displaymaths = ['equation', 'equation*', 'align', 'align*', 'eqnarray*']
     for name in displaymaths:
         environment_handlers[name] = process_display_math
@@ -417,28 +405,23 @@ def setup_environment_handlers():
     for name in lists:
         environment_handlers[name] = process_list
 
-def process_environment(tex, cmd):
-    name = cmd.args[0]
-    print("ENV", name)
+def get_environment(tex, begincmd):
+    name = begincmd.args[0]
     d = 1
-    pos = cmd.end
+    pos = begincmd.end
     regex = r'\\(begin|end){{{}}}'.format(re.escape(name))
-    print(regex)
     rx = re.compile(regex)
     while d >= 0:
         m = rx.search(tex, pos)
         if not m:
-            abort("Unmatched environment:". format(cmd.name))
+            abort("Unmatched environment:". format(name))
         if m.group(1) == 'begin':
             d += 1
-            print("plus")
         else:
             d -= 1
-            print("minus")
-    env = environment(name, #cmd.optargs, cmd.args,
-                    tex[cmd.end:m.start()],
-                    cmd.start, m.end(), cmd.args[1:])
-    return environment_handlers[name](tex, env)
+    return environment(name, tex[begincmd.end:m.start()],
+
+                       begincmd.start, m.end(), begincmd.args[1:])
 
 def tex2htm(tex):
     # Some preprocessing
@@ -451,13 +434,15 @@ def tex2htm(tex):
     tex = re.sub(r'\\myeqref', '\\eqref', tex)
     tex = re.sub(r'---', r'&mdash;', tex)
     tex = re.sub(r'--', r'&ndash;', tex)
+    tex = re.sub('#([^#]*)#', r'\\begin{hash}\1\end{hash}', tex, 0, re.M|re.S)
+
 
     # replace hashes with nulls because html references contain hashes
     tex = re.sub(r'#', '\0', tex)
     tex = process_labels_and_refs(tex)
 
-    blocks = process_recursively(tex)
-    blocks = [process_nonmath_hashes(b) for b in blocks]
+    blocks = process_recursively(tex, 0)
+    #blocks = [process_nonmath_hashes(b) for b in blocks]
 
     return "".join(blocks)
 
@@ -472,6 +457,7 @@ if __name__ == "__main__":
 
     # Setup a few things
     setup_environment_handlers()
+    setup_command_handlers()
 
     # Read and translate the input
     tex = open(filename).read()
