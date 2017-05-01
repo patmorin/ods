@@ -86,7 +86,7 @@ void ArrayStack<T>::add(int i, T x) {
 
 template<class T>
 T ArrayStack<T>::remove(int i) {
-    T x = a[i];
+	T x = a[i];
 	for (int j = i; j < n - 1; j++)
 		a[j] = a[j + 1];
 	n--;

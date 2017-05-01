@@ -715,7 +715,7 @@ $0,\ldots,#b#-1$ is $#b#(#b#+1)/2$.  Therefore, #i# is stored at location
 within block #b#.  Somewhat more challenging is the problem of determining
 the value of #b#.  The number of elements that have indices less than
 or equal to #i# is $#i#+1$.  On the other hand, the number of elements
-in blocks 0,\ldots,b is $(#b#+1)(#b#+2)/2$.  Therefore, #b# is the smallest
+in blocks $0,\ldots,b$ is $(#b#+1)(#b#+2)/2$.  Therefore, #b# is the smallest
 integer such that
 \[
     (#b#+1)(#b#+2)/2 \ge #i#+1 \enspace .
@@ -1039,7 +1039,7 @@ of a #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
   currently in the queue.  (Think of a #RandomQueue# as a bag in which
   we can add elements or reach in and blindly remove some random element.)
   The #add(x)# and #remove()# operations in a #RandomQueue# should run
-  in constant time per operation.
+  in amortized constant time per operation.
 \end{exc}
 
 \begin{exc}
