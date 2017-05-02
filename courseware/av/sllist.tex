@@ -1,0 +1,46 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{ods}
+\usepackage{ods-figs}
+\usepackage[cm]{sfmath}
+%\usepackage{enumitem}
+
+\setlength{\leftmargini}{0pt}
+
+
+\title{SLList: A Singly-Linked List}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{SLList}
+  \framesubtitle{A singly-linked list}
+  \begin{center}
+    \multiinclude[<+>][format=pdf,start=1]{figs/sllist}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SLList}
+  \framesubtitle{A singly-linked list}
+  \begin{block}{Theorem}
+    \begin{itemize}
+      \item<+->[]An SLList implements the Stack and (FIFO) Queue interfaces.
+      \begin{itemize}
+          \item<+->Stack operations $\fn{push}(x)$ and $\fn{pop}(x)$ each run in $O(1)$ time;
+          \item<+->Queue operations $\fn{add}(x)$ and $\fn{remove}(x)$ each run in $O(1)$ time.
+      \end{itemize}
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+
+
+\closing
+
+\end{document}
+

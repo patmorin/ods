@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170502135821" modified="D:20170502155521"/>
+<info created="D:20170502135821" modified="D:20170502160553"/>
 <preamble>\usepackage{ods-figs}
 \usepackage{marvosym}</preamble>
 <ipestyle name="basic">
@@ -222,13 +222,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
-<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
-<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -380,8 +380,8 @@ h
 h
 </path>
 <text matrix="1 0 0 1 -40 -504" transformations="translations" pos="336 752" stroke="black" type="label" width="8.389" height="7.312" depth="0.11" halign="center" valign="center">\Sun</text>
-<text layer="field_names" matrix="1 0 0 1 -8 -12" transformations="translations" pos="336 720" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="baseline" style="math">\mathtt{x}</text>
-<text matrix="1 0 0 1 -8 -12" transformations="translations" pos="352 720" stroke="black" type="label" width="20.921" height="5.515" depth="0" halign="center" valign="baseline" style="math">\mathtt{next}</text>
+<text layer="field_names" matrix="1 0 0 1 -40 -460" transformations="translations" pos="336 720" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="baseline" style="math">\mathtt{x}</text>
+<text matrix="1 0 0 1 -40 -460" transformations="translations" pos="352 720" stroke="black" type="label" width="20.921" height="5.515" depth="0" halign="center" valign="baseline" style="math">\mathtt{next}</text>
 <use layer="node" matrix="1 0 0 1 -56 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="black"/>
 <path layer="list" matrix="1 0 0 1 16 -448" stroke="black">
 320 704 m
