@@ -1,0 +1,116 @@
+<html>
+<head>
+<style type="text/css">
+  body {
+    margin: 1em auto 1em auto;
+    max-width: 55ex;
+  }
+  div.pause {
+    margin: 1em;
+    color: red;
+  }
+  div.pause:before {
+    content: "Pause ";
+  }
+  div.pause:after {
+    content: "s";
+  }
+</style>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+An SLList, or singly-linked list provides an efficient implementation of a stack or a queue.  
+
+<div class="pause">breath</div>
+
+The basic building block of an SLList is a <em>node</em>. A node has two parts: a piece of data, that we call $x$ and a pointer to another node, that we call $\mathtt{next}$.
+
+<div class="pause">1</div>
+
+The nodes of an SLList are linked together, one after another, through their $\mathtt{next}$ pointers.
+
+<div class="pause">1</div>
+
+The SLList itself consists of a pointer to the first and last node in this sequence.
+
+<div class="pause">1</div>
+
+To add a value to the front of an SLList, we first create a new node, $u$, containing the value we want to add.
+
+<div class="pause">1</div>
+
+Next, we set $u$'s next pointer to the first element in the list.
+
+<div class="pause">1</div>
+
+Finally, we set the SLList's first pointer to point to $u$.
+
+<div class="pause">2</div>
+
+To add a value to the back of an SLList, we create a new node, $u$, containing the value we want to add
+
+<div class="pause">1</div>
+
+Then, we set the next pointer of the last node in the SLList to point to $u$.
+
+<div class="pause">1</div>
+
+Now $u$ is the last node in the list, so we set the SLList's $\mathtt{last}$ pointer to point to $u$.
+
+<div class="pause">2</div>
+
+Removing a value from the front an SLList is easy.  We just change the list's first pointer to the next pointer of the first node.
+
+<div class="pause">3</div>
+
+So far, we've seen that we can add and remove elements from the front
+of SLList, and we can add elements from the back of the list.
+
+<div class="pause">breath</div>
+
+This means we can add implement the push and pop operations of a the Stack interface by adding and removing only at the front of the list.
+
+<div class="pause">1</div>
+
+We can also implement the add and remove operations of the FIFO queue interface by adding at the back and removing from the front.
+
+<div class="pause">1</div>
+
+Unfortunately, we fall short of being able to implement all four deque operations, since there is no efficient way of removing the last element from an SLList.
+
+<div class="pause">2</div>
+
+If you ever find yourself implementing an SLList, there are two cases that need special care.
+
+<div class="pause">0</div>
+
+When we add a value to empty SLList, we have to set both the first and last pointer to the newly added node.
+
+<div class="pause">2</div>
+
+Similarly when removing the last element from an SLList, both the first and last pointer should be set to null.
+
+<div class="pause">2</div>
+
+To summarize, an SLList can implement both the Stack and FIFO Queue interfaces so that each operation takes constant time.
+
+</body>
+</html>
