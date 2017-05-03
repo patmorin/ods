@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170502135821" modified="D:20170502160553"/>
+<info created="D:20170502135821" modified="D:20170503143039"/>
 <preamble>\usepackage{ods-figs}
 \usepackage{marvosym}</preamble>
 <ipestyle name="basic">
@@ -222,13 +222,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -255,6 +255,28 @@ h
 </ipestyle>
 <ipestyle name="beamerpaper">
 <layout paper="800 450" origin="0 0" frame="800 450"/>
+</ipestyle>
+<ipestyle name="odscolors">
+<color name="usc gold" value="1 0.807 0.019"/>
+<color name="tigers eye" value="0.968 0.549 0.235"/>
+<color name="pearl aqua" value="0.556 0.776 0.725"/>
+<color name="granny smith apple" value="0.733 0.858 0.607"/>
+<color name="pale chestnut" value="0.909 0.682 0.717"/>
+<color name="columbia blue" value="0.745 0.847 0.831"/>
+<color name="magic mint" value="0.647 1 0.839"/>
+<color name="light salmon" value="0.98 0.635 0.458"/>
+<color name="dutch white" value="0.866 0.878 0.741"/>
+<color name="medium sea green" value="0.266 0.686 0.411"/>
+<color name="pink-orange" value="1 0.549 0.38"/>
+<color name="diamond" value="0.721 0.882 1"/>
+<color name="laurel green" value="0.67 0.768 0.631"/>
+<color name="steel teal" value="0.4 0.521 0.525"/>
+<color name="rose gold" value="0.741 0.419 0.45"/>
+<color name="myrtle green" value="0.196 0.454 0.427"/>
+<color name="pink raspberry" value="0.639 0.043 0.215"/>
+<color name="trolley grey" value="0.505 0.498 0.458"/>
+<color name="midnight green" value="0.062 0.309 0.333"/>
+<color name="paynes grey" value="0.345 0.435 0.486"/>
 </ipestyle>
 <page>
 <layer name="node"/>
@@ -365,7 +387,7 @@ h
 519.678 229.428
 528 240 c
 </path>
-<path layer="node" matrix="1 0 0 1 -32 -448" stroke="black">
+<path layer="node" matrix="1 0 0 1 -32 -448" stroke="black" fill="trolley grey">
 320 704 m
 320 688 l
 336 688 l
@@ -383,7 +405,7 @@ h
 <text layer="field_names" matrix="1 0 0 1 -40 -460" transformations="translations" pos="336 720" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="baseline" style="math">\mathtt{x}</text>
 <text matrix="1 0 0 1 -40 -460" transformations="translations" pos="352 720" stroke="black" type="label" width="20.921" height="5.515" depth="0" halign="center" valign="baseline" style="math">\mathtt{next}</text>
 <use layer="node" matrix="1 0 0 1 -56 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="black"/>
-<path layer="list" matrix="1 0 0 1 16 -448" stroke="black">
+<path layer="list" matrix="1 0 0 1 16 -448" stroke="black" fill="medium sea green">
 320 704 m
 320 688 l
 336 688 l
@@ -403,7 +425,7 @@ h
 344 696 m
 368 696 l
 </path>
-<path matrix="1 0 0 1 64 -448" stroke="black">
+<path matrix="1 0 0 1 64 -448" stroke="black" fill="tigers eye">
 320 704 m
 320 688 l
 336 688 l
@@ -423,7 +445,7 @@ h
 344 696 m
 368 696 l
 </path>
-<path matrix="1 0 0 1 112 -448" stroke="black">
+<path matrix="1 0 0 1 112 -448" stroke="black" fill="paynes grey">
 320 704 m
 320 688 l
 336 688 l
@@ -443,7 +465,7 @@ h
 344 696 m
 368 696 l
 </path>
-<path matrix="1 0 0 1 160 -448" stroke="black">
+<path matrix="1 0 0 1 160 -448" stroke="black" fill="pink raspberry">
 320 704 m
 320 688 l
 336 688 l
@@ -463,7 +485,7 @@ h
 344 696 m
 368 696 l
 </path>
-<path matrix="1 0 0 1 208 -448" stroke="black">
+<path matrix="1 0 0 1 208 -448" stroke="black" fill="pearl aqua">
 320 704 m
 320 688 l
 336 688 l
@@ -499,7 +521,7 @@ h
 </path>
 <text layer="header" matrix="1 0 0 1 14.8965 -9" transformations="translations" pos="177.524 279.325" stroke="black" type="label" width="26.124" height="6.918" depth="0" halign="center" valign="baseline">SLList</text>
 <text layer="addFront-1" transformations="translations" pos="177.782 309.945" stroke="black" type="label" width="50.638" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{addFront}(\mbox{\Uranus})</text>
-<path layer="addFront-2" matrix="1 0 0 1 -80 -432" stroke="black">
+<path layer="addFront-2" matrix="1 0 0 1 -80 -432" stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -524,7 +546,7 @@ h
 240 264 l
 </path>
 <text layer="addBack-1" transformations="translations" pos="177.782 309.945" stroke="black" type="label" width="49.726" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{addBack}(\mbox{\Saturn})</text>
-<path layer="addBack-2" matrix="1 0 0 1 256 -448" stroke="black">
+<path layer="addBack-2" matrix="1 0 0 1 256 -448" stroke="black" fill="midnight green">
 320 704 m
 320 688 l
 336 688 l
