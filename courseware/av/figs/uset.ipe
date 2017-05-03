@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141101220358" modified="D:20141107222645"/>
+<ipe version="70206" creator="Ipe 7.2.7">
+<info created="D:20141101220358" modified="D:20170503142023"/>
 <preamble>\usepackage{ods-figs}
 \usepackage{marvosym}</preamble>
 <ipestyle name="basic">
@@ -204,13 +204,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -890,6 +890,28 @@ h
 <color name="yellow4" value="0.545 0.545 0"/>
 <color name="yellowgreen" value="0.604 0.804 0.196"/>
 </ipestyle>
+<ipestyle name="odscolors">
+<color name="usc gold" value="1 0.807 0.019"/>
+<color name="tigers eye" value="0.968 0.549 0.235"/>
+<color name="pearl aqua" value="0.556 0.776 0.725"/>
+<color name="granny smith apple" value="0.733 0.858 0.607"/>
+<color name="pale chestnut" value="0.909 0.682 0.717"/>
+<color name="columbia blue" value="0.745 0.847 0.831"/>
+<color name="magic mint" value="0.647 1 0.839"/>
+<color name="light salmon" value="0.98 0.635 0.458"/>
+<color name="dutch white" value="0.866 0.878 0.741"/>
+<color name="medium sea green" value="0.266 0.686 0.411"/>
+<color name="pink-orange" value="1 0.549 0.38"/>
+<color name="diamond" value="0.721 0.882 1"/>
+<color name="laurel green" value="0.67 0.768 0.631"/>
+<color name="steel teal" value="0.4 0.521 0.525"/>
+<color name="rose gold" value="0.741 0.419 0.45"/>
+<color name="myrtle green" value="0.196 0.454 0.427"/>
+<color name="pink raspberry" value="0.639 0.043 0.215"/>
+<color name="trolley grey" value="0.505 0.498 0.458"/>
+<color name="midnight green" value="0.062 0.309 0.333"/>
+<color name="paynes grey" value="0.345 0.435 0.486"/>
+</ipestyle>
 <page>
 <layer name="base"/>
 <layer name="getsadded"/>
@@ -928,35 +950,35 @@ h
 <view layers="base getsadded find2.1" active="find2.1"/>
 <view layers="base getsadded find2.2" active="find2.2"/>
 <view layers="base getsadded" active="find2.2"/>
-<path layer="base" matrix="1 0 0 1 10.3184 4.31931" stroke="black" fill="cadetblue4">
+<path layer="base" matrix="1 0 0 1 10.3184 4.31931" stroke="black" fill="steel teal">
 192 688 m
 192 672 l
 208 672 l
 208 688 l
 h
 </path>
-<path matrix="1 0 0 1 -50.6319 62.1501" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 -50.6319 62.1501" stroke="black" fill="trolley grey">
 224 656 m
 224 640 l
 240 640 l
 240 656 l
 h
 </path>
-<path matrix="1 0 0 1 -4.07935 24.956" stroke="black" fill="deepskyblue4">
+<path matrix="1 0 0 1 -4.07935 24.956" stroke="black" fill="medium sea green">
 272 688 m
 272 704 l
 288 704 l
 288 688 l
 h
 </path>
-<path layer="getsremoved" stroke="black" fill="chocolate4">
+<path layer="getsremoved" stroke="black" fill="pink raspberry">
 224 720 m
 224 704 l
 240 704 l
 240 720 l
 h
 </path>
-<path layer="base" matrix="1 0 0 1 -6.71893 18.4771" stroke="black" fill="goldenrod4">
+<path layer="base" matrix="1 0 0 1 -6.71893 18.4771" stroke="black" fill="midnight green">
 256 672 m
 256 656 l
 272 656 l
@@ -973,7 +995,7 @@ h
 160 640
 144 656 u
 </path>
-<text layer="add1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="40.177" height="11.357" depth="5.38" valign="baseline">$\mathrm{{add(\listbox{firebrick4}{\FAX}})}$</text>
+<text layer="add1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="39.568" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{{add(\listbox{tigers eye}{\FAX}})}</text>
 <path layer="add1.2" matrix="1 0 0 1 -86.7189 2.4771" stroke="gold" pen="ultrafat">
 256 672 m
 256 656 l
@@ -981,30 +1003,30 @@ h
 272 672 l
 h
 </path>
-<path layer="getsadded" matrix="1 0 0 1 -86.7189 2.4771" stroke="black" fill="firebrick4">
+<path layer="getsadded" matrix="1 0 0 1 -86.7189 2.4771" stroke="black" fill="tigers eye">
 256 672 m
 256 656 l
 272 656 l
 272 672 l
 h
 </path>
-<text layer="add2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="40.177" height="11.357" depth="5.38" valign="baseline">$\mathrm{{add(\listbox{deepskyblue4}{\Email}})}$</text>
-<path layer="add2.2" matrix="1 0 0 1 -4.07935 24.956" stroke="gold" fill="deepskyblue4" pen="ultrafat">
+<text layer="add2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="39.568" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{{add(\listbox{medium sea green}{\Email}})}</text>
+<path layer="add2.2" matrix="1 0 0 1 -4.07935 24.956" stroke="gold" fill="medium sea green" pen="ultrafat">
 272 688 m
 272 704 l
 288 704 l
 288 688 l
 h
 </path>
-<text layer="remove1" transformations="translations" pos="160 768" stroke="black" type="label" width="55.868" height="11.357" depth="5.38" valign="baseline">$\mathrm{{remove(\listbox{chocolate4}{\Faxmachine}})}$</text>
-<path layer="remove2" stroke="gold" fill="chocolate4" pen="ultrafat">
+<text layer="remove1" transformations="translations" pos="160 768" stroke="black" type="label" width="54.236" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{{remove(\listbox{pink raspberry}{\Faxmachine}})}</text>
+<path layer="remove2" stroke="gold" fill="pink raspberry" pen="ultrafat">
 224 720 m
 224 704 l
 240 704 l
 240 720 l
 h
 </path>
-<text layer="find1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="45.407" height="11.357" depth="5.38" valign="baseline">$\mathrm{{find(\listbox{cadetblue4}{\Letter}})}$</text>
+<text layer="find1.1" transformations="translations" pos="160 768" stroke="black" type="label" width="40.122" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{{find(\listbox{steel teal}{\Letter}})}</text>
 <path layer="find1.2" matrix="1 0 0 1 10.3184 4.31931" stroke="gold" fill="cadetblue4" pen="ultrafat">
 192 688 m
 192 672 l
@@ -1012,9 +1034,9 @@ h
 208 688 l
 h
 </path>
-<text layer="find1.3" transformations="translations" pos="160 768" stroke="black" type="label" width="77.642" height="11.357" depth="5.38" valign="baseline">$\mathrm{{find(\listbox{cadetblue4}{\Letter}})}\Rightarrow{\listbox{cadetblue4}{\Letter}} $</text>
-<text layer="find2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="45.407" height="11.357" depth="5.38" valign="baseline">$\mathrm{{find(\listbox{salmon4}\Lightning})}$</text>
-<text layer="find2.2" transformations="translations" pos="160 768" stroke="black" type="label" width="81.826" height="11.357" depth="5.38" valign="baseline">$\mathrm{{find(\listbox{salmon4}\Lightning})}\Rightarrow \color{blue}\mathrm{null}$</text>
+<text layer="find1.3" transformations="translations" pos="160 768" stroke="black" type="label" width="72.356" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{{find(\listbox{steel teal}{\Letter}})}\Rightarrow{\listbox{steel teal}{\Letter}} </text>
+<text layer="find2.1" transformations="translations" pos="160 768" stroke="black" type="label" width="40.122" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{{find(\listbox{light salmon}\Lightning})}</text>
+<text layer="find2.2" transformations="translations" pos="160 768" stroke="black" type="label" width="70.674" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{{find(\listbox{light salmon}\Lightning})}\Rightarrow \color{blue}\mathrm{null}</text>
 <text layer="base" matrix="1 0 0 1 152 -8" transformations="translations" pos="80 720" stroke="white" type="label" width="10.092" height="7.312" depth="0.03" halign="center" valign="center">\Faxmachine</text>
 <text matrix="1 0 0 1 177.281 -37.5229" transformations="translations" pos="80 720" stroke="white" type="label" width="8.608" height="7.307" depth="1.39" halign="center" valign="center">\Mobilefone</text>
 <text matrix="1 0 0 1 101.368 -9.8499" transformations="translations" pos="80 720" stroke="white" type="label" width="8.428" height="5.3" depth="0" halign="center" valign="center">\Telefon</text>

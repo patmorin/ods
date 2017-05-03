@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141103141856" modified="D:20141104222701"/>
+<ipe version="70206" creator="Ipe 7.2.7">
+<info created="D:20141103141856" modified="D:20170503143029"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -15,6 +15,24 @@ h
 <path stroke="sym-stroke" fill="white" pen="sym-pen">
 0 0 m
 -1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/ptarc(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/fptarc(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
 -1 -0.333 l
 h
 </path>
@@ -202,13 +220,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -226,8 +244,34 @@ h
 <anglesize name="45 deg" value="45"/>
 <anglesize name="30 deg" value="30"/>
 <anglesize name="22.5 deg" value="22.5"/>
+<opacity name="10%" value="0.1"/>
+<opacity name="30%" value="0.3"/>
+<opacity name="50%" value="0.5"/>
+<opacity name="75%" value="0.75"/>
 <tiling name="falling" angle="-60" step="4" width="1"/>
 <tiling name="rising" angle="30" step="4" width="1"/>
+</ipestyle>
+<ipestyle name="odscolors">
+<color name="usc gold" value="1 0.807 0.019"/>
+<color name="tigers eye" value="0.968 0.549 0.235"/>
+<color name="pearl aqua" value="0.556 0.776 0.725"/>
+<color name="granny smith apple" value="0.733 0.858 0.607"/>
+<color name="pale chestnut" value="0.909 0.682 0.717"/>
+<color name="columbia blue" value="0.745 0.847 0.831"/>
+<color name="magic mint" value="0.647 1 0.839"/>
+<color name="light salmon" value="0.98 0.635 0.458"/>
+<color name="dutch white" value="0.866 0.878 0.741"/>
+<color name="medium sea green" value="0.266 0.686 0.411"/>
+<color name="pink-orange" value="1 0.549 0.38"/>
+<color name="diamond" value="0.721 0.882 1"/>
+<color name="laurel green" value="0.67 0.768 0.631"/>
+<color name="steel teal" value="0.4 0.521 0.525"/>
+<color name="rose gold" value="0.741 0.419 0.45"/>
+<color name="myrtle green" value="0.196 0.454 0.427"/>
+<color name="pink raspberry" value="0.639 0.043 0.215"/>
+<color name="trolley grey" value="0.505 0.498 0.458"/>
+<color name="midnight green" value="0.062 0.309 0.333"/>
+<color name="paynes grey" value="0.345 0.435 0.486"/>
 </ipestyle>
 <page>
 <layer name="base"/>
@@ -278,7 +322,7 @@ h
 144 768 l
 h
 </path>
-<text matrix="1 0 0 1 -8 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$1$</text>
+<text matrix="1 0 0 1 -8 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline" style="math">1</text>
 <path matrix="1 0 0 1 32 0" stroke="black">
 128 768 m
 128 752 l
@@ -286,7 +330,7 @@ h
 144 768 l
 h
 </path>
-<text matrix="1 0 0 1 40 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$4$</text>
+<text matrix="1 0 0 1 40 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline" style="math">4</text>
 <path matrix="1 0 0 1 80 0" stroke="black">
 128 768 m
 128 752 l
@@ -294,7 +338,7 @@ h
 144 768 l
 h
 </path>
-<text matrix="1 0 0 1 88 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$5$</text>
+<text matrix="1 0 0 1 88 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline" style="math">5</text>
 <path layer="getsremoved" matrix="1 0 0 1 128 0" stroke="black">
 128 768 m
 128 752 l
@@ -302,7 +346,7 @@ h
 144 768 l
 h
 </path>
-<text matrix="1 0 0 1 136 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">$14$</text>
+<text matrix="1 0 0 1 136 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline" style="math">14</text>
 <path layer="base" matrix="1 0 0 1 176 0" stroke="black">
 128 768 m
 128 752 l
@@ -310,7 +354,7 @@ h
 144 768 l
 h
 </path>
-<text matrix="1 0 0 1 184 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">$19$</text>
+<text matrix="1 0 0 1 184 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline" style="math">19</text>
 <path matrix="1 0 0 1 224 0" stroke="black">
 128 768 m
 128 752 l
@@ -318,8 +362,8 @@ h
 144 768 l
 h
 </path>
-<text matrix="1 0 0 1 232 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">$42$</text>
-<text layer="add1" transformations="translations" pos="112 784" stroke="black" type="label" width="28.421" height="7.473" depth="2.49" valign="baseline">$\mathrm{add}(7)$</text>
+<text matrix="1 0 0 1 232 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline" style="math">42</text>
+<text layer="add1" transformations="translations" pos="112 784" stroke="black" type="label" width="28.781" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{add}(7)</text>
 <path layer="add2.2" matrix="1 0 0 1 104 0" stroke="black">
 128 768 m
 128 752 l
@@ -327,58 +371,58 @@ h
 144 768 l
 h
 </path>
-<text matrix="1 0 0 1 112 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$7$</text>
-<path layer="add2.1" stroke="gold" pen="ultrafat">
+<text matrix="1 0 0 1 112 4.79" transformations="translations" pos="128 752" stroke="black" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline" style="math">7</text>
+<path layer="add2.1" stroke="usc gold" pen="ultrafat">
 232 768 m
 232 752 l
 248 752 l
 248 768 l
 h
 </path>
-<text layer="remove1" transformations="translations" pos="112 784" stroke="black" type="label" width="49.093" height="7.473" depth="2.49" valign="baseline">$\mathrm{remove}(14)$</text>
-<path layer="remove2" stroke="gold" pen="ultrafat">
+<text layer="remove1" transformations="translations" pos="112 784" stroke="black" type="label" width="48.457" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{remove}(14)</text>
+<path layer="remove2" stroke="1 0.808 0.016" pen="ultrafat">
 256 768 m
 256 752 l
 272 752 l
 272 768 l
 h
 </path>
-<text layer="remove3" transformations="translations" pos="112 784" stroke="black" type="label" width="74.553" height="7.473" depth="2.49" valign="baseline">$\mathrm{remove}(14)\Rightarrow 14$</text>
-<text layer="find1.1" transformations="translations" pos="112 784" stroke="black" type="label" width="33.651" height="7.473" depth="2.49" valign="baseline">$\mathrm{find}(4)$</text>
-<path layer="find1.2" stroke="gold" pen="ultrafat">
+<text layer="remove3" transformations="translations" pos="112 784" stroke="black" type="label" width="73.917" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{remove}(14)\Rightarrow 14</text>
+<text layer="find1.1" transformations="translations" pos="112 784" stroke="black" type="label" width="29.335" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{find}(4)</text>
+<path layer="find1.2" stroke="1 0.808 0.016" pen="ultrafat">
 160 768 m
 160 752 l
 176 752 l
 176 768 l
 h
 </path>
-<text layer="find1.3" transformations="translations" pos="112 784" stroke="black" type="label" width="54.13" height="7.473" depth="2.49" valign="baseline">$\mathrm{find}(4)\Rightarrow 4$</text>
-<text layer="find2.1" transformations="translations" pos="112 784" stroke="black" type="label" width="33.651" height="7.473" depth="2.49" valign="baseline">$\mathrm{find}(9)$</text>
-<path layer="find2.2" matrix="1 0 0 1 139.719 0" stroke="gold" pen="ultrafat">
+<text layer="find1.3" transformations="translations" pos="112 784" stroke="black" type="label" width="49.813" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{find}(4)\Rightarrow 4</text>
+<text layer="find2.1" transformations="translations" pos="112 784" stroke="black" type="label" width="29.335" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{find}(9)</text>
+<path layer="find2.2" matrix="1 0 0 1 139.719 0" stroke="1 0.808 0.016" pen="ultrafat">
 128 768 m
 128 752 l
 144 752 l
 144 768 l
 h
 </path>
-<text matrix="1 0 0 1 147.719 4.79" transformations="translations" pos="128 752" stroke="gold" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline">$9$</text>
-<path layer="find2.3" stroke="gold" pen="ultrafat">
+<text matrix="1 0 0 1 147.719 4.79" transformations="translations" pos="128 752" stroke="1 0.808 0.016" type="label" width="4.981" height="6.42" depth="0" halign="center" valign="baseline" style="math">9</text>
+<path layer="find2.3" stroke="usc gold" pen="ultrafat">
 304 768 m
 304 752 l
 320 752 l
 320 768 l
 h
 </path>
-<text layer="find2.4" transformations="translations" pos="112 784" stroke="black" type="label" width="59.111" height="7.473" depth="2.49" valign="baseline">$\mathrm{find}(9)\Rightarrow 19$</text>
-<text layer="find3.1" transformations="translations" pos="112 784" stroke="black" type="label" width="38.633" height="7.473" depth="2.49" valign="baseline">$\mathrm{find}(55)$</text>
-<path layer="find3.2" matrix="1 0 0 1 272 0" stroke="gold" pen="ultrafat">
+<text layer="find2.4" transformations="translations" pos="112 784" stroke="black" type="label" width="54.795" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{find}(9)\Rightarrow 19</text>
+<text layer="find3.1" transformations="translations" pos="112 784" stroke="black" type="label" width="34.316" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{find}(55)</text>
+<path layer="find3.2" matrix="1 0 0 1 272 0" stroke="1 0.808 0.016" pen="ultrafat">
 128 768 m
 128 752 l
 144 752 l
 144 768 l
 h
 </path>
-<text matrix="1 0 0 1 280 4.79" transformations="translations" pos="128 752" stroke="gold" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline">$55$</text>
-<text layer="find3.3" transformations="translations" pos="112 784" stroke="black" type="label" width="75.051" height="7.473" depth="2.49" valign="baseline">$\mathrm{find}(55)\Rightarrow\mathrm{\color{blue}null}$</text>
+<text matrix="1 0 0 1 280 4.79" transformations="translations" pos="128 752" stroke="1 0.808 0.016" type="label" width="9.963" height="6.42" depth="0" halign="center" valign="baseline" style="math">55</text>
+<text layer="find3.3" transformations="translations" pos="112 784" stroke="black" type="label" width="66.141" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{find}(55)\Rightarrow\mathrm{\color{blue}null}</text>
 </page>
 </ipe>
