@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141104150932" modified="D:20141106152839"/>
+<ipe version="70206" creator="Ipe 7.2.7">
+<info created="D:20141104150932" modified="D:20170503142009"/>
 <preamble>\usepackage{ods-figs}
 \usepackage{phaistos}</preamble>
 <ipestyle name="basic">
@@ -204,13 +204,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -890,6 +890,28 @@ h
 <color name="yellow4" value="0.545 0.545 0"/>
 <color name="yellowgreen" value="0.604 0.804 0.196"/>
 </ipestyle>
+<ipestyle name="odscolors">
+<color name="usc gold" value="1 0.807 0.019"/>
+<color name="tigers eye" value="0.968 0.549 0.235"/>
+<color name="pearl aqua" value="0.556 0.776 0.725"/>
+<color name="granny smith apple" value="0.733 0.858 0.607"/>
+<color name="pale chestnut" value="0.909 0.682 0.717"/>
+<color name="columbia blue" value="0.745 0.847 0.831"/>
+<color name="magic mint" value="0.647 1 0.839"/>
+<color name="light salmon" value="0.98 0.635 0.458"/>
+<color name="dutch white" value="0.866 0.878 0.741"/>
+<color name="medium sea green" value="0.266 0.686 0.411"/>
+<color name="pink-orange" value="1 0.549 0.38"/>
+<color name="diamond" value="0.721 0.882 1"/>
+<color name="laurel green" value="0.67 0.768 0.631"/>
+<color name="steel teal" value="0.4 0.521 0.525"/>
+<color name="rose gold" value="0.741 0.419 0.45"/>
+<color name="myrtle green" value="0.196 0.454 0.427"/>
+<color name="pink raspberry" value="0.639 0.043 0.215"/>
+<color name="trolley grey" value="0.505 0.498 0.458"/>
+<color name="midnight green" value="0.062 0.309 0.333"/>
+<color name="paynes grey" value="0.345 0.435 0.486"/>
+</ipestyle>
 <page>
 <layer name="base"/>
 <layer name="push1"/>
@@ -915,53 +937,53 @@ h
 <view layers="base push2 pop3 top2" active="pop3"/>
 <view layers="base pop4 top1" active="pop4"/>
 <view layers="base top1" active="pop2"/>
-<path layer="base" stroke="white" fill="antiquewhite4">
+<path layer="base" stroke="white" fill="trolley grey">
 128 704 m
 128 688 l
 144 688 l
 144 704 l
 h
 </path>
-<path stroke="black" fill="aquamarine4">
+<path stroke="black" fill="tigers eye">
 160 704 m
 160 688 l
 176 688 l
 176 704 l
 h
 </path>
-<path stroke="black" fill="skyblue4">
+<path stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path stroke="black" fill="brown4">
+<path stroke="black" fill="pink raspberry">
 224 704 m
 224 688 l
 240 688 l
 240 704 l
 h
 </path>
-<text layer="push1" transformations="translations" pos="128 720" stroke="black" type="label" width="45.407" height="11.357" depth="5.38" valign="baseline">$\mathrm{push}({\listbox{salmon4}{\raisebox{-.39em}{\PHhelmet}}})$</text>
-<path layer="push2" stroke="black" fill="salmon4">
+<text layer="push1" transformations="translations" pos="128 720" stroke="black" type="label" width="43.747" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{push}({\listbox{usc gold}{\raisebox{-.39em}{\PHhelmet}}})</text>
+<path layer="push2" stroke="black" fill="usc gold">
 256 704 m
 256 688 l
 272 688 l
 272 704 l
 h
 </path>
-<text layer="pop3" transformations="translations" pos="128 720" stroke="black" type="label" width="23.44" height="7.473" depth="2.49" valign="baseline">$\mathrm{pop}()$</text>
-<text layer="pop4" transformations="translations" pos="128 720" stroke="black" type="label" width="55.674" height="11.357" depth="5.38" valign="baseline">$\mathrm{pop}()\Rightarrow{\listbox{salmon4}{\raisebox{-.4em}{\PHhelmet}}}$</text>
-<text layer="push3" transformations="translations" pos="128 720" stroke="black" type="label" width="45.407" height="11.357" depth="5.38" valign="baseline">$\mathrm{push}({\listbox{thistle4}{\raisebox{-.4em}{\PHmattock}}})$</text>
-<path layer="push4" stroke="black" fill="thistle4">
+<text layer="pop3" transformations="translations" pos="128 720" stroke="black" type="label" width="23.302" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{pop}()</text>
+<text layer="pop4" transformations="translations" pos="128 720" stroke="black" type="label" width="55.536" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{pop}()\Rightarrow{\listbox{usc gold}{\raisebox{-.4em}{\PHhelmet}}}</text>
+<text layer="push3" transformations="translations" pos="128 720" stroke="black" type="label" width="43.747" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{push}({\listbox{paynes grey}{\raisebox{-.4em}{\PHmattock}}})</text>
+<path layer="push4" stroke="black" fill="paynes grey">
 288 704 m
 288 688 l
 304 688 l
 304 704 l
 h
 </path>
-<text layer="pop2" transformations="translations" pos="128 720" stroke="black" type="label" width="55.674" height="11.357" depth="5.38" valign="baseline">$\mathrm{pop}()\Rightarrow\listbox{thistle4}{\raisebox{-.4em}{\PHmattock}}$</text>
+<text layer="pop2" transformations="translations" pos="128 720" stroke="black" type="label" width="55.536" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{pop}()\Rightarrow\listbox{paynes grey}{\raisebox{-.4em}{\PHmattock}}</text>
 <text layer="top1" matrix="1 0 0 1 8 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
 <text layer="top2" matrix="1 0 0 1 40 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
 <text layer="top3" matrix="1 0 0 1 72 16" transformations="translations" pos="224 656" stroke="black" type="label" width="13.726" height="5.7" depth="1.93" halign="center" valign="baseline">top</text>
