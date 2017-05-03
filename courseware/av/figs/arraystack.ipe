@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141124114606" modified="D:20141125141744"/>
+<ipe version="70206" creator="Ipe 7.2.7">
+<info created="D:20141124114606" modified="D:20170503134208"/>
 <preamble>\usepackage{ods-figs}
 \usepackage{hieroglf}</preamble>
 <ipestyle name="basic">
@@ -204,13 +204,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -890,6 +890,28 @@ h
 <color name="yellow4" value="0.545 0.545 0"/>
 <color name="yellowgreen" value="0.604 0.804 0.196"/>
 </ipestyle>
+<ipestyle name="odscolors">
+<color name="usc gold" value="1 0.807 0.019"/>
+<color name="tigers eye" value="0.968 0.549 0.235"/>
+<color name="pearl aqua" value="0.556 0.776 0.725"/>
+<color name="granny smith apple" value="0.733 0.858 0.607"/>
+<color name="pale chestnut" value="0.909 0.682 0.717"/>
+<color name="columbia blue" value="0.745 0.847 0.831"/>
+<color name="magic mint" value="0.647 1 0.839"/>
+<color name="light salmon" value="0.98 0.635 0.458"/>
+<color name="dutch white" value="0.866 0.878 0.741"/>
+<color name="medium sea green" value="0.266 0.686 0.411"/>
+<color name="pink-orange" value="1 0.549 0.38"/>
+<color name="diamond" value="0.721 0.882 1"/>
+<color name="laurel green" value="0.67 0.768 0.631"/>
+<color name="steel teal" value="0.4 0.521 0.525"/>
+<color name="rose gold" value="0.741 0.419 0.45"/>
+<color name="myrtle green" value="0.196 0.454 0.427"/>
+<color name="pink raspberry" value="0.639 0.043 0.215"/>
+<color name="trolley grey" value="0.505 0.498 0.458"/>
+<color name="midnight green" value="0.062 0.309 0.333"/>
+<color name="paynes grey" value="0.345 0.435 0.486"/>
+</ipestyle>
 <page>
 <layer name="base"/>
 <layer name="indices"/>
@@ -1037,7 +1059,7 @@ h
 <view layers="indices a indices2 kappa n5 sigma" active="sigma"/>
 <view layers="indices indices2 a2 kappa n5 sigma" active="sigma"/>
 <view layers="a n5 tau" active="tau"/>
-<path layer="base" stroke="black" fill="antiquewhite4">
+<path layer="base" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1045,7 +1067,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1053,7 +1075,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -1061,7 +1083,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 48 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -1069,7 +1091,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path layer="getsset" matrix="1 0 0 1 64 0" stroke="black" fill="blue4">
+<path layer="getsset" matrix="1 0 0 1 64 0" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -1077,7 +1099,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="4.391" height="12.444" depth="0" halign="center" valign="center">\textpmhg{J}</text>
-<path layer="base" matrix="1 0 0 1 80 0" stroke="black" fill="brown4">
+<path layer="base" matrix="1 0 0 1 80 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1085,7 +1107,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -1116,9 +1138,9 @@ h
 <text matrix="1 0 0 1 104 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">6</text>
 <text matrix="1 0 0 1 120 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 136 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<text layer="n7" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=7$</text>
-<text layer="a" matrix="1 0 0 1 0 5.786" transformations="translations" pos="176 688" stroke="black" type="label" width="4.885" height="4.428" depth="0" valign="baseline">$a$</text>
-<text layer="get1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="25.737" height="7.473" depth="2.49" valign="baseline">$\mathrm{get}(3)$</text>
+<text layer="n7" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline" style="math">n=7</text>
+<text layer="a" matrix="1 0 0 1 0 5.786" transformations="translations" pos="176 688" stroke="black" type="label" width="4.885" height="4.428" depth="0" valign="baseline" style="math">a</text>
+<text layer="get1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="25.737" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{get}(3)</text>
 <path layer="get2" stroke="gold" pen="ultrafat">
 240 704 m
 240 688 l
@@ -1126,10 +1148,10 @@ h
 256 704 l
 h
 </path>
-<text layer="get3" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="57.971" height="11.357" depth="5.38" valign="baseline">$\mathrm{get}(3)\Rightarrow\listbox{bisque4}{\raisebox{-.3em}{\textpmhg{I}}}$</text>
-<text layer="set1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="45.74" height="11.357" depth="5.38" valign="baseline">$\mathrm{set}(4,\listbox{darkolivegreen4}{\raisebox{-.3em}{\textpmhg{b}}})$</text>
+<text layer="get3" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="57.971" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{get}(3)\Rightarrow\listbox{pink raspberry}{\raisebox{-.3em}{\textpmhg{I}}}</text>
+<text layer="set1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="45.74" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{set}(4,\listbox{myrtle green}{\raisebox{-.3em}{\textpmhg{b}}})</text>
 <text layer="get2" matrix="1 0 0 1 56 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">3</text>
-<path layer="set3" matrix="1 0 0 1 64 0" stroke="black" fill="darkolivegreen4">
+<path layer="set3" matrix="1 0 0 1 64 0" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1145,8 +1167,8 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">4</text>
-<text layer="add1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline">$\mathrm{add}(3,\listbox{lightskyblue4}{{\textpmhg{l}}})$</text>
-<path layer="add3" stroke="black" fill="antiquewhite4">
+<text layer="add1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{add}(3,\listbox{paynes grey}{{\textpmhg{l}}})</text>
+<path layer="add3" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1154,7 +1176,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1162,7 +1184,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -1170,7 +1192,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 48 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -1178,7 +1200,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 80 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 80 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1186,7 +1208,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -1208,7 +1230,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1216,7 +1238,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path layer="add4" stroke="black" fill="antiquewhite4">
+<path layer="add4" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1224,7 +1246,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1232,7 +1254,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -1240,7 +1262,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 48 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -1248,7 +1270,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1256,7 +1278,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -1278,7 +1300,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1286,7 +1308,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path layer="add5" stroke="black" fill="antiquewhite4">
+<path layer="add5" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1294,7 +1316,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1302,7 +1324,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -1310,7 +1332,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 48 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -1318,7 +1340,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1326,7 +1348,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -1348,7 +1370,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 0" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 0" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1356,7 +1378,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path layer="add6" stroke="black" fill="antiquewhite4">
+<path layer="add6" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1364,7 +1386,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1372,7 +1394,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -1380,7 +1402,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -1388,7 +1410,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1396,7 +1418,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -1418,7 +1440,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 0" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 0" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1426,7 +1448,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path layer="add7" stroke="black" fill="lightskyblue4">
+<path layer="add7" stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -1442,7 +1464,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">3</text>
-<path layer="base2" stroke="black" fill="antiquewhite4">
+<path layer="base2" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1450,7 +1472,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1458,7 +1480,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -1466,7 +1488,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -1474,7 +1496,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1482,7 +1504,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -1504,7 +1526,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 0" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 0" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1512,7 +1534,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -1520,9 +1542,9 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<text layer="n8" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=8$</text>
-<text layer="add8" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline">$\mathrm{add}(8,\listbox{palegreen4}{\raisebox{-.3em}{\textpmhg{m}}})$</text>
-<path layer="add10" stroke="black" fill="palegreen4">
+<text layer="n8" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline" style="math">n=8</text>
+<text layer="add8" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{add}(8,\listbox{pink-orange}{\raisebox{-.3em}{\textpmhg{m}}})</text>
+<path layer="add10" stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -1538,9 +1560,9 @@ h
 h
 </path>
 <text matrix="1 0 0 1 136 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<text layer="n9" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=9$</text>
-<text layer="add-resize1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline">$\mathrm{add}(6,\listbox{plum4}{\raisebox{-.3em}{\textpmhg{\Hscribe}}})$</text>
-<text layer="n9p" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="121.224" height="7.473" depth="2.49" valign="baseline">$n=9=\mathrm{length}(a)\Rightarrow \mathrm{resize}()$</text>
+<text layer="n9" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline" style="math">n=9</text>
+<text layer="add-resize1" matrix="1 0 0 1 -16 16" transformations="translations" pos="192 720" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{add}(6,\listbox{midnight green}{\raisebox{-.3em}{\textpmhg{\Hscribe}}})</text>
+<text layer="n9p" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="121.224" height="7.473" depth="2.49" valign="baseline" style="math">n=9=\mathrm{length}(a)\Rightarrow \mathrm{resize}()</text>
 <path layer="beta" matrix="1 0 0 1 0 16" stroke="black">
 192 704 m
 192 688 l
@@ -1699,7 +1721,7 @@ h
 <text matrix="1 0 0 1 248 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="9.963" height="6.531" depth="0" halign="center" valign="baseline">15</text>
 <text matrix="1 0 0 1 264 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="9.963" height="6.531" depth="0" halign="center" valign="baseline">16</text>
 <text matrix="1 0 0 1 280 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="9.963" height="6.531" depth="0" halign="center" valign="baseline">17</text>
-<path layer="resize1" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="resize1" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1848,7 +1870,7 @@ h
 352 720 l
 h
 </path>
-<path layer="resize2" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="resize2" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1856,7 +1878,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1997,7 +2019,7 @@ h
 352 720 l
 h
 </path>
-<path layer="resize3" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="resize3" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2005,7 +2027,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2013,7 +2035,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 16" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -2146,7 +2168,7 @@ h
 352 720 l
 h
 </path>
-<path layer="resize4" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="resize4" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2154,7 +2176,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2162,7 +2184,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 16" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -2216,7 +2238,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path matrix="1 0 0 1 0 16" stroke="black" fill="lightskyblue4">
+<path matrix="1 0 0 1 0 16" stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -2295,7 +2317,7 @@ h
 352 720 l
 h
 </path>
-<path layer="resize5" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="resize5" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2303,7 +2325,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2311,7 +2333,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 16" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -2319,7 +2341,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 16" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 16" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -2365,7 +2387,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path matrix="1 0 0 1 0 16" stroke="black" fill="lightskyblue4">
+<path matrix="1 0 0 1 0 16" stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -2444,7 +2466,7 @@ h
 352 720 l
 h
 </path>
-<path layer="resize6" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="resize6" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2452,7 +2474,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2460,7 +2482,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 16" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -2468,7 +2490,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 16" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 16" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -2506,7 +2528,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 16" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 16" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -2514,7 +2536,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path matrix="1 0 0 1 0 16" stroke="black" fill="lightskyblue4">
+<path matrix="1 0 0 1 0 16" stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -2593,7 +2615,7 @@ h
 352 720 l
 h
 </path>
-<path layer="resize7" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="resize7" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2601,7 +2623,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2609,7 +2631,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 16" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -2617,7 +2639,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 16" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 16" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -2625,7 +2647,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 24" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 16" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 16" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -2655,7 +2677,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 16" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 16" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -2663,7 +2685,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path matrix="1 0 0 1 0 16" stroke="black" fill="lightskyblue4">
+<path matrix="1 0 0 1 0 16" stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -2742,7 +2764,7 @@ h
 352 720 l
 h
 </path>
-<path layer="resize8" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="resize8" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2750,7 +2772,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2758,7 +2780,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 16" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -2766,7 +2788,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 16" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 16" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -2774,7 +2796,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 24" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 16" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 16" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -2782,7 +2804,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 16" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 16" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -2804,7 +2826,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 16" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 16" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -2812,7 +2834,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path matrix="1 0 0 1 0 16" stroke="black" fill="lightskyblue4">
+<path matrix="1 0 0 1 0 16" stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -2891,7 +2913,7 @@ h
 352 720 l
 h
 </path>
-<path layer="resize9" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="resize9" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2899,7 +2921,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2907,7 +2929,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 16" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -2915,7 +2937,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 16" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 16" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -2923,7 +2945,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 24" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 16" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 16" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -2931,7 +2953,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 16" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 16" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -2953,7 +2975,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 16" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 16" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -2961,7 +2983,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 24" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path matrix="1 0 0 1 0 16" stroke="black" fill="lightskyblue4">
+<path matrix="1 0 0 1 0 16" stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -2969,7 +2991,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<path matrix="1 0 0 1 0 16" stroke="black" fill="palegreen4">
+<path matrix="1 0 0 1 0 16" stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -3040,7 +3062,7 @@ h
 352 720 l
 h
 </path>
-<path layer="resize10" stroke="black" fill="antiquewhite4">
+<path layer="resize10" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -3048,7 +3070,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -3056,7 +3078,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -3064,7 +3086,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -3072,7 +3094,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -3080,7 +3102,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -3102,7 +3124,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 0" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 0" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -3110,7 +3132,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -3118,7 +3140,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<path stroke="black" fill="palegreen4">
+<path stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -3189,8 +3211,8 @@ h
 352 720 l
 h
 </path>
-<text layer="a2" matrix="1 0 0 1 0 21.786" transformations="translations" pos="176 688" stroke="black" type="label" width="4.885" height="4.428" depth="0" valign="baseline">$a$</text>
-<path layer="gamma" stroke="black" fill="antiquewhite4">
+<text layer="a2" matrix="1 0 0 1 0 21.786" transformations="translations" pos="176 688" stroke="black" type="label" width="4.885" height="4.428" depth="0" valign="baseline" style="math">a</text>
+<path layer="gamma" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -3198,7 +3220,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -3206,7 +3228,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -3214,7 +3236,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -3222,7 +3244,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -3230,7 +3252,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -3252,7 +3274,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 0" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 0" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -3260,7 +3282,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -3268,7 +3290,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="palegreen4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -3339,7 +3361,7 @@ h
 352 720 l
 h
 </path>
-<path layer="delta" stroke="black" fill="antiquewhite4">
+<path layer="delta" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -3347,7 +3369,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -3355,7 +3377,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -3363,7 +3385,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -3371,7 +3393,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -3379,7 +3401,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 128 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 128 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -3401,7 +3423,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 0" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 0" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -3409,7 +3431,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -3417,7 +3439,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="palegreen4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -3488,7 +3510,7 @@ h
 352 720 l
 h
 </path>
-<path layer="zeta" stroke="black" fill="antiquewhite4">
+<path layer="zeta" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -3496,7 +3518,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -3504,7 +3526,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -3512,7 +3534,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -3520,7 +3542,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -3528,7 +3550,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 120 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 128 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 128 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -3550,7 +3572,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 0" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 0" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -3558,7 +3580,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -3566,7 +3588,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="palegreen4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="1 0.549 0.38">
 320 704 m
 320 688 l
 336 688 l
@@ -3644,7 +3666,7 @@ h
 352 720 l
 h
 </path>
-<path layer="epsilon" stroke="black" fill="plum4">
+<path layer="epsilon" stroke="black" fill="midnight green">
 288 704 m
 288 688 l
 304 688 l
@@ -3652,7 +3674,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="12.238" height="12.444" depth="0" halign="center" valign="center">\textpmhg{\Hscribe}</text>
-<path layer="base3" stroke="black" fill="antiquewhite4">
+<path layer="base3" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -3660,7 +3682,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -3668,7 +3690,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -3676,7 +3698,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -3684,7 +3706,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -3692,7 +3714,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 120 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 128 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 128 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -3714,7 +3736,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 0" stroke="black" fill="darkolivegreen4">
+<path matrix="1 0 0 1 80 0" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -3722,7 +3744,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.992" height="11.915" depth="0" halign="center" valign="center">\textpmhg{b}</text>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -3730,7 +3752,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="palegreen4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -3808,7 +3830,7 @@ h
 352 720 l
 h
 </path>
-<path stroke="black" fill="plum4">
+<path stroke="black" fill="midnight green">
 288 704 m
 288 688 l
 304 688 l
@@ -3816,8 +3838,8 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="12.238" height="12.444" depth="0" halign="center" valign="center">\textpmhg{\Hscribe}</text>
-<text layer="n10" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="28.571" height="6.531" depth="0" valign="baseline">$n=10$</text>
-<text layer="remove1" transformations="translations" pos="176 736" stroke="black" type="label" width="42.48" height="7.473" depth="2.49" valign="baseline">$\mathrm{remove}(5)$</text>
+<text layer="n10" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="28.571" height="6.531" depth="0" valign="baseline" style="math">n=10</text>
+<text layer="remove1" transformations="translations" pos="176 736" stroke="black" type="label" width="42.48" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{remove}(5)</text>
 <path layer="remove2" stroke="gold" pen="ultrafat">
 272 704 m
 272 688 l
@@ -3826,7 +3848,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">5</text>
-<path layer="remove3" stroke="black" fill="antiquewhite4">
+<path layer="remove3" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -3834,7 +3856,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -3842,7 +3864,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -3850,7 +3872,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -3858,7 +3880,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -3866,7 +3888,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 120 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 128 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 128 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -3888,7 +3910,7 @@ h
 208 704 l
 h
 </path>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -3896,7 +3918,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="palegreen4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -3974,7 +3996,7 @@ h
 352 720 l
 h
 </path>
-<path stroke="black" fill="plum4">
+<path stroke="black" fill="midnight green">
 288 704 m
 288 688 l
 304 688 l
@@ -3989,7 +4011,7 @@ h
 352 720 l
 h
 </path>
-<path layer="remove4" stroke="black" fill="antiquewhite4">
+<path layer="remove4" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -3997,7 +4019,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -4005,7 +4027,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -4013,7 +4035,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -4021,7 +4043,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -4029,7 +4051,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 120 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 128 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 128 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -4051,7 +4073,7 @@ h
 208 704 l
 h
 </path>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -4059,7 +4081,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="palegreen4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -4137,7 +4159,7 @@ h
 352 720 l
 h
 </path>
-<path matrix="1 0 0 1 -16 0" stroke="black" fill="plum4">
+<path matrix="1 0 0 1 -16 0" stroke="black" fill="midnight green">
 288 704 m
 288 688 l
 304 688 l
@@ -4152,7 +4174,7 @@ h
 352 720 l
 h
 </path>
-<path layer="remove5" stroke="black" fill="antiquewhite4">
+<path layer="remove5" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -4160,7 +4182,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -4168,7 +4190,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -4176,7 +4198,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -4184,7 +4206,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -4192,7 +4214,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 128 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 128 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -4214,7 +4236,7 @@ h
 208 704 l
 h
 </path>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -4222,7 +4244,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="palegreen4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -4300,7 +4322,7 @@ h
 352 720 l
 h
 </path>
-<path matrix="1 0 0 1 -16 0" stroke="black" fill="plum4">
+<path matrix="1 0 0 1 -16 0" stroke="black" fill="midnight green">
 288 704 m
 288 688 l
 304 688 l
@@ -4315,7 +4337,7 @@ h
 352 720 l
 h
 </path>
-<path layer="remove6" stroke="black" fill="antiquewhite4">
+<path layer="remove6" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -4323,7 +4345,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -4331,7 +4353,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -4339,7 +4361,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -4347,7 +4369,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -4355,7 +4377,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -4377,7 +4399,7 @@ h
 208 704 l
 h
 </path>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -4385,7 +4407,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="palegreen4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -4463,7 +4485,7 @@ h
 352 720 l
 h
 </path>
-<path matrix="1 0 0 1 -16 0" stroke="black" fill="plum4">
+<path matrix="1 0 0 1 -16 0" stroke="black" fill="midnight green">
 288 704 m
 288 688 l
 304 688 l
@@ -4478,7 +4500,7 @@ h
 352 720 l
 h
 </path>
-<path layer="remove7" stroke="black" fill="antiquewhite4">
+<path layer="remove7" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -4486,7 +4508,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -4494,7 +4516,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -4502,7 +4524,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -4510,7 +4532,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -4518,7 +4540,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -4540,7 +4562,7 @@ h
 208 704 l
 h
 </path>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -4548,7 +4570,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.295" height="5.057" depth="0" halign="center" valign="center">\textpmhg{l}</text>
-<path stroke="black" fill="palegreen4">
+<path stroke="black" fill="pink-orange">
 320 704 m
 320 688 l
 336 688 l
@@ -4626,7 +4648,7 @@ h
 352 720 l
 h
 </path>
-<path matrix="1 0 0 1 -16 0" stroke="black" fill="plum4">
+<path matrix="1 0 0 1 -16 0" stroke="black" fill="midnight green">
 288 704 m
 288 688 l
 304 688 l
@@ -4653,7 +4675,7 @@ h
 240 720 m
 240 704 l
 </path>
-<text matrix="1 0 0 1 0 1.97239" transformations="translations" pos="272 720" stroke="black" type="label" width="20.849" height="6.768" depth="0.83" halign="center" valign="baseline">$n-i$</text>
+<text matrix="1 0 0 1 0 1.97239" transformations="translations" pos="272 720" stroke="black" type="label" width="20.849" height="6.768" depth="0.83" halign="center" valign="baseline" style="math">n-i</text>
 <path layer="remove2.1" matrix="1 0 0 1 48 0" stroke="black">
 240 720 m
 304 720 l
@@ -4666,9 +4688,9 @@ h
 240 720 m
 240 704 l
 </path>
-<text matrix="1 0 0 1 48 1.97239" transformations="translations" pos="272 720" stroke="black" type="label" width="38.007" height="6.768" depth="0.83" halign="center" valign="baseline">$n-i-1$</text>
-<text layer="nu" matrix="1 0 0 1 -16 0" transformations="translations" pos="192 736" stroke="black" type="label" width="42.48" height="7.473" depth="2.49" valign="baseline">$\mathrm{remove}(8)$</text>
-<path layer="theta" stroke="black" fill="antiquewhite4">
+<text matrix="1 0 0 1 48 1.97239" transformations="translations" pos="272 720" stroke="black" type="label" width="38.007" height="6.768" depth="0.83" halign="center" valign="baseline" style="math">n-i-1</text>
+<text layer="nu" matrix="1 0 0 1 -16 0" transformations="translations" pos="192 736" stroke="black" type="label" width="42.48" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{remove}(8)</text>
+<path layer="theta" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -4676,7 +4698,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -4684,7 +4706,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -4692,7 +4714,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -4700,7 +4722,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 8" transformations="translations" pos="192 688" stroke="white" type="label" width="11.065" height="12.444" depth="0" halign="center" valign="center">\textpmhg{I}</text>
-<path matrix="1 0 0 1 96 0" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 0" stroke="black" fill="usc gold">
 192 704 m
 192 688 l
 208 688 l
@@ -4708,7 +4730,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 8" transformations="translations" pos="192 688" stroke="white" type="label" width="8.537" height="6.391" depth="0" halign="center" valign="center">\textpmhg{Q}</text>
-<path matrix="1 0 0 1 112 0" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 0" stroke="black" fill="pearl aqua">
 192 704 m
 192 688 l
 208 688 l
@@ -4730,7 +4752,7 @@ h
 208 704 l
 h
 </path>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -4809,7 +4831,7 @@ h
 352 720 l
 h
 </path>
-<path matrix="1 0 0 1 -16 0" stroke="black" fill="plum4">
+<path matrix="1 0 0 1 -16 0" stroke="black" fill="midnight green">
 288 704 m
 288 688 l
 304 688 l
@@ -4832,10 +4854,10 @@ h
 h
 </path>
 <text matrix="1 0 0 1 136 -11.601" transformations="translations" pos="192 688" stroke="black" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<text layer="iota" transformations="translations" pos="176 736" stroke="black" type="label" width="150.685" height="7.473" depth="2.49" valign="baseline">$\mathrm{remove}(7)\ldots
+<text layer="iota" transformations="translations" pos="176 736" stroke="black" type="label" width="150.685" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{remove}(7)\ldots
 \mathrm{remove}(6)\ldots
-\mathrm{remove}(5)$</text>
-<path layer="kappa" stroke="black" fill="antiquewhite4">
+\mathrm{remove}(5)</text>
+<path layer="kappa" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -4843,7 +4865,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -4851,7 +4873,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -4859,7 +4881,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -4897,7 +4919,7 @@ h
 208 704 l
 h
 </path>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -5012,7 +5034,7 @@ h
 320 704 l
 h
 </path>
-<text layer="n5" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=5$</text>
+<text layer="n5" matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline" style="math">n=5</text>
 <path layer="n5p" stroke="black">
 192 720 m
 288 720 l
@@ -5025,9 +5047,9 @@ h
 192 704 m
 192 720 l
 </path>
-<text matrix="1 0 0 1 -32 1.97239" transformations="translations" pos="272 720" stroke="black" type="label" width="48.278" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathrm{length}(a)/3$</text>
-<text matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="131.186" height="7.473" depth="2.49" valign="baseline">$n=5 &lt; \mathrm{length}(a)/3\Rightarrow\mathrm{resize}()$</text>
-<text layer="length" matrix="1 0 0 1 88 -12.6505" transformations="translations" pos="176 736" stroke="black" type="label" width="56.58" height="7.473" depth="2.49" halign="center" valign="baseline">$\mathrm{length}(a)=9$</text>
+<text matrix="1 0 0 1 -32 1.97239" transformations="translations" pos="272 720" stroke="black" type="label" width="48.278" height="7.473" depth="2.49" halign="center" valign="baseline" style="math">\mathrm{length}(a)/3</text>
+<text matrix="1 0 0 1 -16 -64" transformations="translations" pos="192 720" stroke="black" type="label" width="131.186" height="7.473" depth="2.49" valign="baseline" style="math">n=5 &lt; \mathrm{length}(a)/3\Rightarrow\mathrm{resize}()</text>
+<text layer="length" matrix="1 0 0 1 88 -12.6505" transformations="translations" pos="176 736" stroke="black" type="label" width="56.58" height="7.473" depth="2.49" halign="center" valign="baseline" style="math">\mathrm{length}(a)=9</text>
 <path stroke="black">
 192 720 m
 336 720 l
@@ -5140,7 +5162,7 @@ h
 352 720 l
 h
 </path>
-<path layer="xi" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="xi" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -5240,7 +5262,7 @@ h
 352 720 l
 h
 </path>
-<path layer="omicron" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="omicron" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -5248,7 +5270,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -5340,7 +5362,7 @@ h
 352 720 l
 h
 </path>
-<path layer="pi" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="pi" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -5348,7 +5370,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -5356,7 +5378,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 16" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -5440,7 +5462,7 @@ h
 352 720 l
 h
 </path>
-<path layer="rho" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="rho" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -5448,7 +5470,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -5456,7 +5478,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 16" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -5502,7 +5524,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 0 16" stroke="black" fill="lightskyblue4">
+<path matrix="1 0 0 1 0 16" stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -5540,7 +5562,7 @@ h
 352 720 l
 h
 </path>
-<path layer="sigma" matrix="1 0 0 1 0 16" stroke="black" fill="antiquewhite4">
+<path layer="sigma" matrix="1 0 0 1 0 16" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -5548,7 +5570,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 24" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 16" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 16" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -5556,7 +5578,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 24" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 16" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 16" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -5564,7 +5586,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 24" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 16" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 16" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -5602,7 +5624,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 0 16" stroke="black" fill="lightskyblue4">
+<path matrix="1 0 0 1 0 16" stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -5648,7 +5670,7 @@ h
 192 704 m
 192 720 l
 </path>
-<text matrix="1 0 0 1 0 17.9724" transformations="translations" pos="272 720" stroke="black" type="label" width="10.306" height="6.531" depth="0" halign="center" valign="baseline">$2n$</text>
+<text matrix="1 0 0 1 0 17.9724" transformations="translations" pos="272 720" stroke="black" type="label" width="10.306" height="6.531" depth="0" halign="center" valign="baseline" style="math">2n</text>
 <path stroke="black">
 192 736 m
 352 736 l
@@ -5661,12 +5683,12 @@ h
 192 704 m
 192 720 l
 </path>
-<text matrix="1 0 0 1 64 10.9724" transformations="translations" pos="272 720" stroke="black" type="label" width="10.306" height="6.531" depth="0" halign="center" valign="baseline">$2n$</text>
+<text matrix="1 0 0 1 64 10.9724" transformations="translations" pos="272 720" stroke="black" type="label" width="10.306" height="6.531" depth="0" halign="center" valign="baseline" style="math">2n</text>
 <path matrix="1 0 0 1 0 -7" stroke="black">
 192 736 m
 480 736 l
 </path>
-<path layer="tau" stroke="black" fill="antiquewhite4">
+<path layer="tau" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -5674,7 +5696,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 8" transformations="translations" pos="192 688" stroke="white" type="label" width="7.478" height="9.428" depth="0" halign="center" valign="center">\textpmhg{B}</text>
-<path matrix="1 0 0 1 16 0" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 0" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -5682,7 +5704,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 8" transformations="translations" pos="192 688" stroke="white" type="label" width="10.056" height="12.83" depth="0" halign="center" valign="center">\textpmhg{Y}</text>
-<path matrix="1 0 0 1 32 0" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 0" stroke="black" fill="tigers eye">
 192 704 m
 192 688 l
 208 688 l
@@ -5690,7 +5712,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 8" transformations="translations" pos="192 688" stroke="white" type="label" width="14.164" height="8.154" depth="0" halign="center" valign="center">\textpmhg{R}</text>
-<path matrix="1 0 0 1 64 0" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 64 0" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -5728,7 +5750,7 @@ h
 208 704 l
 h
 </path>
-<path stroke="black" fill="lightskyblue4">
+<path stroke="black" fill="paynes grey">
 240 704 m
 240 688 l
 256 688 l
@@ -5776,7 +5798,7 @@ h
 <text matrix="1 0 0 1 120 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 136 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
 <text matrix="1 0 0 1 152 -11.601" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">9</text>
-<path layer="alpha" stroke="gold" pen="ultrafat">
+<path layer="alpha" stroke="red" pen="ultrafat">
 288 704 m
 288 688 l
 304 688 l
