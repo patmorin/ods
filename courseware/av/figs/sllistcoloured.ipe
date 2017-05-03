@@ -1,0 +1,721 @@
+<?xml version="1.0"?>
+<!DOCTYPE ipe SYSTEM "ipe.dtd">
+<ipe version="70206" creator="Ipe 7.2.7">
+<<<<<<< HEAD
+<info created="D:20170502135821" modified="D:20170503143039"/>
+=======
+<info created="D:20170502135821" modified="D:20170503143256"/>
+>>>>>>> upstream/courseware
+<preamble>\usepackage{ods-figs}
+\usepackage{marvosym}</preamble>
+<ipestyle name="basic">
+<symbol name="arrow/arc(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/farc(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/ptarc(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/fptarc(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="mark/circle(sx)" transformations="translations">
+<path fill="sym-stroke">
+0.6 0 0 0.6 0 0 e
+0.4 0 0 0.4 0 0 e
+</path>
+</symbol>
+<symbol name="mark/disk(sx)" transformations="translations">
+<path fill="sym-stroke">
+0.6 0 0 0.6 0 0 e
+</path>
+</symbol>
+<symbol name="mark/fdisk(sfx)" transformations="translations">
+<group>
+<path fill="sym-fill">
+0.5 0 0 0.5 0 0 e
+</path>
+<path fill="sym-stroke" fillrule="eofill">
+0.6 0 0 0.6 0 0 e
+0.4 0 0 0.4 0 0 e
+</path>
+</group>
+</symbol>
+<symbol name="mark/box(sx)" transformations="translations">
+<path fill="sym-stroke" fillrule="eofill">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+-0.4 -0.4 m
+0.4 -0.4 l
+0.4 0.4 l
+-0.4 0.4 l
+h
+</path>
+</symbol>
+<symbol name="mark/square(sx)" transformations="translations">
+<path fill="sym-stroke">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+</path>
+</symbol>
+<symbol name="mark/fsquare(sfx)" transformations="translations">
+<group>
+<path fill="sym-fill">
+-0.5 -0.5 m
+0.5 -0.5 l
+0.5 0.5 l
+-0.5 0.5 l
+h
+</path>
+<path fill="sym-stroke" fillrule="eofill">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+-0.4 -0.4 m
+0.4 -0.4 l
+0.4 0.4 l
+-0.4 0.4 l
+h
+</path>
+</group>
+</symbol>
+<symbol name="mark/cross(sx)" transformations="translations">
+<group>
+<path fill="sym-stroke">
+-0.43 -0.57 m
+0.57 0.43 l
+0.43 0.57 l
+-0.57 -0.43 l
+h
+</path>
+<path fill="sym-stroke">
+-0.43 0.57 m
+0.57 -0.43 l
+0.43 -0.57 l
+-0.57 0.43 l
+h
+</path>
+</group>
+</symbol>
+<symbol name="arrow/fnormal(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/pointed(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/fpointed(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/linear(spx)">
+<path stroke="sym-stroke" pen="sym-pen">
+-1 0.333 m
+0 0 l
+-1 -0.333 l
+</path>
+</symbol>
+<symbol name="arrow/fdouble(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+-1 0 m
+-2 0.333 l
+-2 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/double(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+-1 0 m
+-2 0.333 l
+-2 -0.333 l
+h
+</path>
+</symbol>
+<pen name="heavier" value="0.8"/>
+<pen name="fat" value="1.2"/>
+<pen name="ultrafat" value="2"/>
+<symbolsize name="large" value="5"/>
+<symbolsize name="small" value="2"/>
+<symbolsize name="tiny" value="1.1"/>
+<arrowsize name="large" value="10"/>
+<arrowsize name="small" value="5"/>
+<arrowsize name="tiny" value="3"/>
+<color name="red" value="1 0 0"/>
+<color name="green" value="0 1 0"/>
+<color name="blue" value="0 0 1"/>
+<color name="yellow" value="1 1 0"/>
+<color name="orange" value="1 0.647 0"/>
+<color name="gold" value="1 0.843 0"/>
+<color name="purple" value="0.627 0.125 0.941"/>
+<color name="gray" value="0.745"/>
+<color name="brown" value="0.647 0.165 0.165"/>
+<color name="navy" value="0 0 0.502"/>
+<color name="pink" value="1 0.753 0.796"/>
+<color name="seagreen" value="0.18 0.545 0.341"/>
+<color name="turquoise" value="0.251 0.878 0.816"/>
+<color name="violet" value="0.933 0.51 0.933"/>
+<color name="darkblue" value="0 0 0.545"/>
+<color name="darkcyan" value="0 0.545 0.545"/>
+<color name="darkgray" value="0.663"/>
+<color name="darkgreen" value="0 0.392 0"/>
+<color name="darkmagenta" value="0.545 0 0.545"/>
+<color name="darkorange" value="1 0.549 0"/>
+<color name="darkred" value="0.545 0 0"/>
+<color name="lightblue" value="0.678 0.847 0.902"/>
+<color name="lightcyan" value="0.878 1 1"/>
+<color name="lightgray" value="0.827"/>
+<color name="lightgreen" value="0.565 0.933 0.565"/>
+<color name="lightyellow" value="1 1 0.878"/>
+<dashstyle name="dashed" value="[4] 0"/>
+<dashstyle name="dotted" value="[1 3] 0"/>
+<dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
+<dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
+<textsize name="large" value="\large"/>
+<textsize name="Large" value="\Large"/>
+<textsize name="LARGE" value="\LARGE"/>
+<textsize name="huge" value="\huge"/>
+<textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
+<textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
+<textstyle name="center" begin="\begin{center}" end="\end{center}"/>
+<textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
+<textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
+<gridsize name="4 pts" value="4"/>
+<gridsize name="8 pts (~3 mm)" value="8"/>
+<gridsize name="16 pts (~6 mm)" value="16"/>
+<gridsize name="32 pts (~12 mm)" value="32"/>
+<gridsize name="10 pts (~3.5 mm)" value="10"/>
+<gridsize name="20 pts (~7 mm)" value="20"/>
+<gridsize name="14 pts (~5 mm)" value="14"/>
+<gridsize name="28 pts (~10 mm)" value="28"/>
+<gridsize name="56 pts (~20 mm)" value="56"/>
+<anglesize name="90 deg" value="90"/>
+<anglesize name="60 deg" value="60"/>
+<anglesize name="45 deg" value="45"/>
+<anglesize name="30 deg" value="30"/>
+<anglesize name="22.5 deg" value="22.5"/>
+<opacity name="10%" value="0.1"/>
+<opacity name="30%" value="0.3"/>
+<opacity name="50%" value="0.5"/>
+<opacity name="75%" value="0.75"/>
+<tiling name="falling" angle="-60" step="4" width="1"/>
+<tiling name="rising" angle="30" step="4" width="1"/>
+</ipestyle>
+<ipestyle name="beamerpaper">
+<layout paper="800 450" origin="0 0" frame="800 450"/>
+</ipestyle>
+<ipestyle name="odscolors">
+<color name="usc gold" value="1 0.807 0.019"/>
+<color name="tigers eye" value="0.968 0.549 0.235"/>
+<color name="pearl aqua" value="0.556 0.776 0.725"/>
+<color name="granny smith apple" value="0.733 0.858 0.607"/>
+<color name="pale chestnut" value="0.909 0.682 0.717"/>
+<color name="columbia blue" value="0.745 0.847 0.831"/>
+<color name="magic mint" value="0.647 1 0.839"/>
+<color name="light salmon" value="0.98 0.635 0.458"/>
+<color name="dutch white" value="0.866 0.878 0.741"/>
+<color name="medium sea green" value="0.266 0.686 0.411"/>
+<color name="pink-orange" value="1 0.549 0.38"/>
+<color name="diamond" value="0.721 0.882 1"/>
+<color name="laurel green" value="0.67 0.768 0.631"/>
+<color name="steel teal" value="0.4 0.521 0.525"/>
+<color name="rose gold" value="0.741 0.419 0.45"/>
+<color name="myrtle green" value="0.196 0.454 0.427"/>
+<color name="pink raspberry" value="0.639 0.043 0.215"/>
+<color name="trolley grey" value="0.505 0.498 0.458"/>
+<color name="midnight green" value="0.062 0.309 0.333"/>
+<color name="paynes grey" value="0.345 0.435 0.486"/>
+</ipestyle>
+<<<<<<< HEAD
+=======
+<ipestyle name="transparency">
+<opacity name="10%" value="0.1"/>
+<opacity name="30%" value="0.3"/>
+<opacity name="50%" value="0.5"/>
+<opacity name="20%" value="0.2"/>
+<opacity name="40%" value="0.4"/>
+<opacity name="60%" value="0.6"/>
+<opacity name="70%" value="0.7"/>
+<opacity name="80%" value="0.8"/>
+<opacity name="90%" value="0.9"/>
+</ipestyle>
+>>>>>>> upstream/courseware
+<page>
+<layer name="node"/>
+<layer name="field_names"/>
+<layer name="list"/>
+<layer name="header"/>
+<layer name="addFront-1"/>
+<layer name="addFront-1-u"/>
+<layer name="addFront1-a"/>
+<layer name="alpha"/>
+<layer name="addFront-2"/>
+<layer name="addFront-3"/>
+<layer name="addFront-4"/>
+<layer name="cut-1"/>
+<layer name="beta"/>
+<layer name="addBack-1"/>
+<layer name="addBack-2"/>
+<layer name="addBack-2-u"/>
+<layer name="addBack-3"/>
+<layer name="addBack-4"/>
+<layer name="addBack-5"/>
+<layer name="cut-2"/>
+<layer name="removeFront-1"/>
+<layer name="removeFront-2"/>
+<layer name="gamma"/>
+<layer name="removeFront-3"/>
+<layer name="stackops"/>
+<layer name="queueops"/>
+<layer name="addEmpty-1"/>
+<layer name="addEmpty-2"/>
+<layer name="addEmpty-3"/>
+<layer name="addEmpty-4"/>
+<layer name="removeLast-1"/>
+<layer name="removeLast-2"/>
+<view layers="" active="node"/>
+<view layers="node" active="node"/>
+<view layers="node field_names" active="field_names"/>
+<view layers="node list" active="node"/>
+<view layers="node list header cut-1 cut-2" active="header"/>
+<view layers="node list header addFront-1 cut-1 cut-2" active="addFront-1"/>
+<view layers="node list header addFront-1 addFront-1-u addFront-2 cut-1 cut-2" active="addFront-1-u"/>
+<view layers="node list header addFront-1 addFront-1-u addFront1-a addFront-2 cut-1 cut-2" active="addFront1-a"/>
+<view layers="node list header addFront-1 addFront-1-u addFront1-a addFront-2 addFront-3 cut-1 cut-2" active="addFront-2"/>
+<view layers="node list header addFront-1 addFront-1-u addFront-2 addFront-3 addFront-4 cut-2" active="addFront-4"/>
+<view layers="node list header addFront-2 addFront-3 addFront-4 cut-2" active="beta"/>
+<view layers="node list header addFront-2 addFront-3 addFront-4 addBack-1 cut-2" active="addBack-1"/>
+<view layers="node list header addFront-2 addFront-3 addFront-4 addBack-1 addBack-2 addBack-2-u cut-2" active="addBack-2"/>
+<view layers="node list header addFront-2 addFront-3 addFront-4 addBack-1 addBack-2 addBack-2-u addBack-3 cut-2" active="addBack-3"/>
+<view layers="node list header addFront-2 addFront-3 addFront-4 addBack-1 addBack-2 addBack-2-u addBack-3 addBack-4 cut-2" active="addBack-4"/>
+<view layers="node list header addFront-2 addFront-3 addFront-4 addBack-1 addBack-2 addBack-2-u addBack-4 addBack-5" active="addFront-4"/>
+<view layers="node list header addFront-2 addFront-3 addFront-4 addBack-2 addBack-4 addBack-5" active="addFront-4"/>
+<view layers="node list header addFront-2 addFront-3 addFront-4 addBack-2 addBack-4 addBack-5 removeFront-1" active="removeFront-1"/>
+<view layers="node list header addFront-2 addFront-3 addFront-4 addBack-2 addBack-4 addBack-5 removeFront-1 removeFront-2" active="removeFront-2"/>
+<view layers="node list header addFront-2 addFront-3 cut-1 addBack-2 addBack-4 addBack-5 removeFront-1" active="removeFront-3"/>
+<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5 removeFront-1 gamma removeFront-3" active="removeFront-3"/>
+<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5" active="removeFront-3"/>
+<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5 stackops" active="stackops"/>
+<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5" active="stackops"/>
+<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5 queueops" active="queueops"/>
+<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5" active="addEmpty-1"/>
+<view layers="header" active="addEmpty-1"/>
+<view layers="header addEmpty-1" active="addEmpty-1"/>
+<view layers="header addEmpty-1 addEmpty-2" active="addEmpty-2"/>
+<view layers="header addEmpty-1 addEmpty-2 addEmpty-3" active="addEmpty-3"/>
+<view layers="header addEmpty-1 addEmpty-2 addEmpty-3 addEmpty-4" active="addEmpty-4"/>
+<view layers="header addEmpty-2 addEmpty-3 addEmpty-4" active="addEmpty-4"/>
+<view layers="header addEmpty-2 addEmpty-3 addEmpty-4 removeLast-1" active="removeLast-1"/>
+<view layers="header addEmpty-2 addEmpty-4 removeLast-1" active="removeLast-1"/>
+<view layers="header addEmpty-2 removeLast-1" active="removeLast-1"/>
+<view layers="header removeLast-1 removeLast-2" active="removeLast-2"/>
+<view layers="header removeLast-1" active="removeLast-2"/>
+<view layers="header" active="removeLast-2"/>
+<path layer="addBack-3" stroke="gold" pen="ultrafat" arrow="pointed/small">
+208 232 m
+464.817 226.532
+467.784 226.744
+480 240 c
+</path>
+<path layer="queueops" stroke="orange" pen="ultrafat" join="1" arrow="normal/normal">
+288 248 m
+256 256
+240 272 c
+</path>
+<path layer="stackops" stroke="orange" pen="ultrafat" join="1" arrow="normal/normal">
+288 248 m
+256 256
+240 272 c
+</path>
+<path layer="removeFront-2" stroke="orange" pen="ultrafat" join="1">
+240 272 m
+240 256 l
+272 256 l
+272 272 l
+h
+</path>
+<path stroke="orange" pen="ultrafat" join="1" arrow="pointed/small">
+208 248 m
+240 264 l
+</path>
+<path layer="addFront1-a" stroke="orange" pen="ultrafat" arrow="pointed/small">
+208 248 m
+288 248 l
+</path>
+<path layer="addBack-3" stroke="orange" pen="ultrafat" join="1">
+528 256 m
+528 240 l
+560 240 l
+560 256 l
+h
+</path>
+<<<<<<< HEAD
+<path stroke="orange" pen="ultrafat" arrow="pointed/small">
+208 232 m
+519.678 229.428
+519.678 229.428
+528 240 c
+</path>
+<path layer="node" matrix="1 0 0 1 -32 -448" stroke="black" fill="trolley grey">
+=======
+<path layer="node" matrix="1 0 0 1 -32 -448" stroke="black" fill="granny smith apple">
+>>>>>>> upstream/courseware
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<path matrix="1 0 0 1 -32 -448" stroke="black">
+336 704 m
+336 688 l
+352 688 l
+352 704 l
+h
+</path>
+<text matrix="1 0 0 1 -40 -504" transformations="translations" pos="336 752" stroke="black" type="label" width="8.389" height="7.312" depth="0.11" halign="center" valign="center">\Sun</text>
+<text layer="field_names" matrix="1 0 0 1 -40 -460" transformations="translations" pos="336 720" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="baseline" style="math">\mathtt{x}</text>
+<text matrix="1 0 0 1 -40 -460" transformations="translations" pos="352 720" stroke="black" type="label" width="20.921" height="5.515" depth="0" halign="center" valign="baseline" style="math">\mathtt{next}</text>
+<use layer="node" matrix="1 0 0 1 -56 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="black"/>
+<<<<<<< HEAD
+<path layer="list" matrix="1 0 0 1 16 -448" stroke="black" fill="medium sea green">
+=======
+<path layer="list" matrix="1 0 0 1 16 -448" stroke="black" fill="pale chestnut">
+>>>>>>> upstream/courseware
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<path matrix="1 0 0 1 16 -448" stroke="black">
+336 704 m
+336 688 l
+352 688 l
+352 704 l
+h
+</path>
+<text matrix="1 0 0 1 8 -504" transformations="translations" pos="336 752" stroke="black" type="label" width="4.463" height="7.312" depth="0.03" halign="center" valign="center">\Mercury</text>
+<use matrix="1 0 0 1 -8 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="black"/>
+<path matrix="1 0 0 1 -32 -448" stroke="black" arrow="pointed/small">
+344 696 m
+368 696 l
+</path>
+<<<<<<< HEAD
+<path matrix="1 0 0 1 64 -448" stroke="black" fill="tigers eye">
+=======
+<path matrix="1 0 0 1 64 -448" stroke="black" fill="columbia blue">
+>>>>>>> upstream/courseware
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<path matrix="1 0 0 1 64 -448" stroke="black">
+336 704 m
+336 688 l
+352 688 l
+352 704 l
+h
+</path>
+<text matrix="1 0 0 1 56 -504" transformations="translations" pos="336 752" stroke="black" type="label" width="5.191" height="7.303" depth="0" halign="center" valign="center">\Venus</text>
+<use matrix="1 0 0 1 40 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="black"/>
+<path matrix="1 0 0 1 16 -448" stroke="black" arrow="pointed/small">
+344 696 m
+368 696 l
+</path>
+<<<<<<< HEAD
+<path matrix="1 0 0 1 112 -448" stroke="black" fill="paynes grey">
+=======
+<path matrix="1 0 0 1 112 -448" stroke="black" fill="magic mint">
+>>>>>>> upstream/courseware
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<path matrix="1 0 0 1 112 -448" stroke="black">
+336 704 m
+336 688 l
+352 688 l
+352 704 l
+h
+</path>
+<text matrix="1 0 0 1 104 -504" transformations="translations" pos="336 752" stroke="black" type="label" width="5.22" height="7.312" depth="0.03" halign="center" valign="center">\Earth</text>
+<use matrix="1 0 0 1 88 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="black"/>
+<path matrix="1 0 0 1 64 -448" stroke="black" arrow="pointed/small">
+344 696 m
+368 696 l
+</path>
+<<<<<<< HEAD
+<path matrix="1 0 0 1 160 -448" stroke="black" fill="pink raspberry">
+=======
+<path matrix="1 0 0 1 160 -448" stroke="black" fill="light salmon">
+>>>>>>> upstream/courseware
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<path matrix="1 0 0 1 160 -448" stroke="black">
+336 704 m
+336 688 l
+352 688 l
+352 704 l
+h
+</path>
+<text matrix="1 0 0 1 152 -504" transformations="translations" pos="336 752" stroke="black" type="label" width="8.817" height="6.984" depth="0.03" halign="center" valign="center">\Mars</text>
+<use matrix="1 0 0 1 136 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="black"/>
+<path matrix="1 0 0 1 112 -448" stroke="black" arrow="pointed/small">
+344 696 m
+368 696 l
+</path>
+<<<<<<< HEAD
+<path matrix="1 0 0 1 208 -448" stroke="black" fill="pearl aqua">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<path matrix="1 0 0 1 208 -448" stroke="black">
+336 704 m
+336 688 l
+352 688 l
+352 704 l
+h
+</path>
+<text matrix="1 0 0 1 200 -504" transformations="translations" pos="336 752" stroke="black" type="label" width="5.748" height="7.303" depth="0" halign="center" valign="center">\Jupiter</text>
+<use matrix="1 0 0 1 184 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="black"/>
+<path matrix="1 0 0 1 160 -448" stroke="black" arrow="pointed/small">
+344 696 m
+368 696 l
+</path>
+=======
+>>>>>>> upstream/courseware
+<text layer="header" matrix="1 0 0 1 -54 -446.866" transformations="translations" pos="256.337 694.866" stroke="black" type="label" width="16.881" height="6.918" depth="0" halign="right" valign="center" style="math">\mathit{first}</text>
+<use matrix="1 0 0 1 -80 -456" name="mark/disk(sx)" pos="288 704" size="normal" stroke="black"/>
+<path layer="cut-1" stroke="black" arrow="pointed/small">
+208 248 m
+288 248 l
+</path>
+<text layer="header" matrix="1 0 0 1 -54 -462.866" transformations="translations" pos="256.337 694.866" stroke="black" type="label" width="15.304" height="6.918" depth="0" halign="right" valign="center" style="math">\mathit{last}</text>
+<use matrix="1 0 0 1 -80 -472" name="mark/disk(sx)" pos="288 704" size="normal" stroke="black"/>
+<path layer="cut-2" stroke="black" arrow="pointed/small">
+208 232 m
+464.817 226.532
+467.784 226.744
+480 240 c
+</path>
+<text layer="header" matrix="1 0 0 1 14.8965 -9" transformations="translations" pos="177.524 279.325" stroke="black" type="label" width="26.124" height="6.918" depth="0" halign="center" valign="baseline">SLList</text>
+<<<<<<< HEAD
+<text layer="addFront-1" transformations="translations" pos="177.782 309.945" stroke="black" type="label" width="50.638" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{addFront}(\mbox{\Uranus})</text>
+=======
+<text layer="addFront-1" transformations="translations" pos="177.782 309.945" stroke="black" type="label" width="62.095" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{addFront(\valuebox{pink-orange}{\Uranus}})</text>
+>>>>>>> upstream/courseware
+<path layer="addFront-2" matrix="1 0 0 1 -80 -432" stroke="black" fill="pink-orange">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<path matrix="1 0 0 1 -80 -432" stroke="black">
+336 704 m
+336 688 l
+352 688 l
+352 704 l
+h
+</path>
+<text matrix="1 0 0 1 -88 -488" transformations="translations" pos="336 752" stroke="black" type="label" width="5.28" height="7.312" depth="0.03" halign="center" valign="center">\Uranus</text>
+<use matrix="1 0 0 1 -104 -424" name="mark/disk(sx)" pos="368 688" size="normal" stroke="black"/>
+<path layer="addFront-3" stroke="black" join="1" arrow="pointed/small">
+264 264 m
+288 248 l
+</path>
+<path layer="addFront-4" stroke="black" join="1" arrow="pointed/small">
+208 248 m
+240 264 l
+</path>
+<<<<<<< HEAD
+<text layer="addBack-1" transformations="translations" pos="177.782 309.945" stroke="black" type="label" width="49.726" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{addBack}(\mbox{\Saturn})</text>
+<path layer="addBack-2" matrix="1 0 0 1 256 -448" stroke="black" fill="midnight green">
+=======
+<text layer="addBack-1" transformations="translations" pos="177.782 309.945" stroke="black" type="label" width="60.296" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{addBack}(\valuebox{diamond}{\Saturn})</text>
+<path layer="addBack-2" matrix="1 0 0 1 208 -448" stroke="black" fill="diamond">
+>>>>>>> upstream/courseware
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<path matrix="1 0 0 1 208 -448" stroke="black">
+336 704 m
+336 688 l
+352 688 l
+352 704 l
+h
+</path>
+<text matrix="1 0 0 1 200 -504" transformations="translations" pos="336 752" stroke="black" type="label" width="6.167" height="6.983" depth="0.19" halign="center" valign="center">\Saturn</text>
+<use matrix="1 0 0 1 184 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="black"/>
+<path layer="addBack-4" matrix="1 0 0 1 160 -448" stroke="black" arrow="pointed/small">
+344 696 m
+368 696 l
+</path>
+<path layer="addBack-5" stroke="black" arrow="pointed/small">
+208 232 m
+510.306 230.127
+514.439 229.301
+528 240 c
+</path>
+<text layer="removeFront-1" transformations="translations" pos="177.782 309.945" stroke="black" type="label" width="60.025" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{removeFront}()</text>
+<text layer="stackops" transformations="translations" pos="176 336" stroke="black" type="minipage" width="200" height="18.172" depth="13.21" valign="top">$\mathrm{push}(x)=\mathrm{addFront}(x)$ \\
+$\mathrm{pop}()=\mathrm{removeFront}()$ \\
+</text>
+<text layer="queueops" transformations="translations" pos="176 336" stroke="black" type="minipage" width="200" height="18.172" depth="13.21" valign="top">$\mathrm{add}(x)=\mathrm{addBack}(x)$ \\
+$\mathrm{remove}()=\mathrm{removeFront}()$ \\
+</text>
+<path layer="stackops" stroke="orange" pen="ultrafat" join="1" arrow="normal/normal">
+256 288 m
+288 288
+295.117 256 c
+</path>
+<path layer="queueops" matrix="1 0 0 1 -48 0" stroke="orange" pen="ultrafat" join="1" arrow="normal/normal">
+656.901 272.12 m
+624.737 246.903
+608 247.933 c
+</path>
+<path layer="header" stroke="black" join="1">
+171.606 264.915 m
+171.606 214.996 l
+218.437 214.996 l
+218.437 264.915 l
+h
+</path>
+<path layer="removeFront-3" matrix="1 0 0 1 -80 -432" stroke="black" fill="pink-orange" opacity="10%">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<path matrix="1 0 0 1 -80 -432" stroke="black" opacity="10%">
+336 704 m
+336 688 l
+352 688 l
+352 704 l
+h
+</path>
+<text matrix="1 0 0 1 -88 -488" transformations="translations" pos="336 752" stroke="black" type="label" width="5.28" height="7.312" depth="0.03" halign="center" valign="center" opacity="10%">\Uranus</text>
+<use matrix="1 0 0 1 -104 -424" name="mark/disk(sx)" pos="368 688" size="normal" stroke="lightgray"/>
+<path stroke="black" join="1" arrow="pointed/small" opacity="10%">
+264 264 m
+288 248 l
+</path>
+<text layer="addEmpty-1" transformations="translations" pos="177.782 309.945" stroke="black" type="label" width="39.568" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{add}(\valuebox{granny smith apple}{\Sun})</text>
+<path layer="addEmpty-2" matrix="1 0 0 1 -32 -448" stroke="black" fill="granny smith apple">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<path matrix="1 0 0 1 -32 -448" stroke="black">
+336 704 m
+336 688 l
+352 688 l
+352 704 l
+h
+</path>
+<text matrix="1 0 0 1 -40 -504" transformations="translations" pos="336 752" stroke="black" type="label" width="8.389" height="7.312" depth="0.11" halign="center" valign="center">\Sun</text>
+<use matrix="1 0 0 1 -56 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="black"/>
+<path layer="addEmpty-3" stroke="black" arrow="pointed/small">
+208 248 m
+288 248 l
+</path>
+<path layer="addEmpty-4" stroke="black" arrow="pointed/small">
+208 232 m
+264.164 232
+288 240 c
+</path>
+<text layer="removeLast-1" transformations="translations" pos="177.782 309.945" stroke="black" type="label" width="56.372" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{removeFirst}()</text>
+<path layer="removeLast-2" matrix="1 0 0 1 -32 -448" stroke="black" fill="granny smith apple" opacity="10%">
+320 704 m
+320 688 l
+336 688 l
+336 704 l
+h
+</path>
+<path matrix="1 0 0 1 -32 -448" stroke="black" opacity="10%">
+336 704 m
+336 688 l
+352 688 l
+352 704 l
+h
+</path>
+<text matrix="1 0 0 1 -40 -504" transformations="translations" pos="336 752" stroke="black" type="label" width="8.389" height="7.312" depth="0.11" halign="center" valign="center" opacity="10%">\Sun</text>
+<use matrix="1 0 0 1 -56 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="lightgray"/>
+<text layer="addFront-1-u" matrix="1 0 0 1 -8 -10" transformations="translations" pos="256 288" stroke="black" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
+<text layer="addBack-2-u" matrix="1 0 0 1 280 -26" transformations="translations" pos="256 288" stroke="black" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
+</page>
+</ipe>
