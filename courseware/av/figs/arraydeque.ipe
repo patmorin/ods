@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141208155008" modified="D:20141216161828"/>
+<ipe version="70206" creator="Ipe 7.2.7">
+<info created="D:20141208155008" modified="D:20170503132601"/>
 <preamble>\usepackage{ods-figs}
 \usepackage{pifont}</preamble>
 <ipestyle name="basic">
@@ -204,13 +204,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -260,39 +260,38 @@ h
 <color name="lightgray" value="0.827"/>
 <color name="lightgreen" value="0.565 0.933 0.565"/>
 <color name="lightyellow" value="1 1 0.878"/>
-<color name="antiquewhite4" value="0.545 0.514 0.471"/>
-<color name="aquamarine4" value="0.271 0.545 0.455"/>
-<color name="azure4" value="0.514 0.545 0.545"/>
-<color name="bisque4" value="0.545 0.49 0.42"/>
-<color name="blue4" value="0 0 0.545"/>
-<color name="brown4" value="0.545 0.137 0.137"/>
-<color name="cadetblue4" value="0.325 0.525 0.545"/>
 <color name="aliceblue" value="0.941 0.973 1"/>
 <color name="antiquewhite" value="0.98 0.922 0.843"/>
 <color name="antiquewhite1" value="1 0.937 0.859"/>
 <color name="antiquewhite2" value="0.933 0.875 0.8"/>
 <color name="antiquewhite3" value="0.804 0.753 0.69"/>
+<color name="antiquewhite4" value="0.545 0.514 0.471"/>
 <color name="aquamarine" value="0.498 1 0.831"/>
 <color name="aquamarine1" value="0.498 1 0.831"/>
 <color name="aquamarine2" value="0.463 0.933 0.776"/>
 <color name="aquamarine3" value="0.4 0.804 0.667"/>
+<color name="aquamarine4" value="0.271 0.545 0.455"/>
 <color name="azure" value="0.941 1 1"/>
 <color name="azure1" value="0.941 1 1"/>
 <color name="azure2" value="0.878 0.933 0.933"/>
 <color name="azure3" value="0.757 0.804 0.804"/>
+<color name="azure4" value="0.514 0.545 0.545"/>
 <color name="beige" value="0.961 0.961 0.863"/>
 <color name="bisque" value="1 0.894 0.769"/>
 <color name="bisque1" value="1 0.894 0.769"/>
 <color name="bisque2" value="0.933 0.835 0.718"/>
 <color name="bisque3" value="0.804 0.718 0.62"/>
+<color name="bisque4" value="0.545 0.49 0.42"/>
 <color name="blanchedalmond" value="1 0.922 0.804"/>
 <color name="blue1" value="0 0 1"/>
 <color name="blue2" value="0 0 0.933"/>
 <color name="blue3" value="0 0 0.804"/>
+<color name="blue4" value="0 0 0.545"/>
 <color name="blueviolet" value="0.541 0.169 0.886"/>
 <color name="brown1" value="1 0.251 0.251"/>
 <color name="brown2" value="0.933 0.231 0.231"/>
 <color name="brown3" value="0.804 0.2 0.2"/>
+<color name="brown4" value="0.545 0.137 0.137"/>
 <color name="burlywood" value="0.871 0.722 0.529"/>
 <color name="burlywood1" value="1 0.827 0.608"/>
 <color name="burlywood2" value="0.933 0.773 0.569"/>
@@ -302,6 +301,7 @@ h
 <color name="cadetblue1" value="0.596 0.961 1"/>
 <color name="cadetblue2" value="0.557 0.898 0.933"/>
 <color name="cadetblue3" value="0.478 0.773 0.804"/>
+<color name="cadetblue4" value="0.325 0.525 0.545"/>
 <color name="chartreuse" value="0.498 1 0"/>
 <color name="chartreuse1" value="0.498 1 0"/>
 <color name="chartreuse2" value="0.463 0.933 0"/>
@@ -890,6 +890,28 @@ h
 <color name="yellow4" value="0.545 0.545 0"/>
 <color name="yellowgreen" value="0.604 0.804 0.196"/>
 </ipestyle>
+<ipestyle name="odscolors">
+<color name="usc gold" value="1 0.807 0.019"/>
+<color name="tigers eye" value="0.968 0.549 0.235"/>
+<color name="pearl aqua" value="0.556 0.776 0.725"/>
+<color name="granny smith apple" value="0.733 0.858 0.607"/>
+<color name="pale chestnut" value="0.909 0.682 0.717"/>
+<color name="columbia blue" value="0.745 0.847 0.831"/>
+<color name="magic mint" value="0.647 1 0.839"/>
+<color name="light salmon" value="0.98 0.635 0.458"/>
+<color name="dutch white" value="0.866 0.878 0.741"/>
+<color name="medium sea green" value="0.266 0.686 0.411"/>
+<color name="pink-orange" value="1 0.549 0.38"/>
+<color name="diamond" value="0.721 0.882 1"/>
+<color name="laurel green" value="0.67 0.768 0.631"/>
+<color name="steel teal" value="0.4 0.521 0.525"/>
+<color name="rose gold" value="0.741 0.419 0.45"/>
+<color name="myrtle green" value="0.196 0.454 0.427"/>
+<color name="pink raspberry" value="0.639 0.043 0.215"/>
+<color name="trolley grey" value="0.505 0.498 0.458"/>
+<color name="midnight green" value="0.062 0.309 0.333"/>
+<color name="paynes grey" value="0.345 0.435 0.486"/>
+</ipestyle>
 <page>
 <layer name="base"/>
 <layer name="j0"/>
@@ -965,7 +987,7 @@ h
 256 784 m
 176 784 l
 </path>
-<path layer="base" matrix="1 0 0 1 0 64" stroke="black" fill="antiquewhite4">
+<path layer="base" matrix="1 0 0 1 0 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -973,7 +995,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.831" height="7.063" depth="0.13" halign="center" valign="center">\ding{66}</text>
-<path matrix="1 0 0 1 16 64" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -981,7 +1003,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 64" stroke="black" fill="steel teal">
 192 704 m
 192 688 l
 208 688 l
@@ -989,7 +1011,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.044" height="7.063" depth="0.13" halign="center" valign="center">\ding{99}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -997,7 +1019,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.229" height="7.063" depth="0.13" halign="center" valign="center">\ding{95}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -1005,7 +1027,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.934" height="6.944" depth="0" halign="center" valign="center">\ding{101}</text>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1013,7 +1035,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1105,13 +1127,13 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text layer="j0" matrix="1 0 0 1 8 48" transformations="translations" pos="192 736" stroke="black" type="label" width="4.981" height="6.926" depth="1.93" halign="center" valign="top">$\downarrow$</text>
-<text matrix="1 0 0 1 8 50" transformations="translations" pos="192 736" stroke="black" type="label" width="3.57" height="6.775" depth="1.93" halign="center" valign="bottom">$j$</text>
-<text layer="jplusn" matrix="1 0 0 1 104 48" transformations="translations" pos="192 736" stroke="black" type="label" width="4.981" height="6.926" depth="1.93" halign="center" valign="top">$\downarrow$</text>
-<text matrix="1 0 0 1 104 50" transformations="translations" pos="192 736" stroke="black" type="label" width="38.228" height="6.775" depth="1.93" halign="center" valign="bottom">$j+n-1$</text>
-<text layer="n1" transformations="translations" pos="112 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=7$</text>
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text layer="j0" matrix="1 0 0 1 8 48" transformations="translations" pos="192 736" stroke="black" type="label" width="4.981" height="6.926" depth="1.93" halign="center" valign="top" style="math">\downarrow</text>
+<text matrix="1 0 0 1 8 50" transformations="translations" pos="192 736" stroke="black" type="label" width="3.57" height="6.775" depth="1.93" halign="center" valign="bottom" style="math">j</text>
+<text layer="jplusn" matrix="1 0 0 1 104 48" transformations="translations" pos="192 736" stroke="black" type="label" width="4.981" height="6.926" depth="1.93" halign="center" valign="top" style="math">\downarrow</text>
+<text matrix="1 0 0 1 104 50" transformations="translations" pos="192 736" stroke="black" type="label" width="38.228" height="6.775" depth="1.93" halign="center" valign="bottom" style="math">j+n-1</text>
+<text layer="n1" transformations="translations" pos="112 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline" style="math">n=7</text>
 <text layer="base" matrix="1 0 0 1 8 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">0</text>
 <text matrix="1 0 0 1 24 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">1</text>
 <text matrix="1 0 0 1 40 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">2</text>
@@ -1119,7 +1141,7 @@ h
 <text matrix="1 0 0 1 72 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">4</text>
 <text matrix="1 0 0 1 88 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">5</text>
 <text matrix="1 0 0 1 104 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">6</text>
-<text layer="add1" transformations="translations" pos="96 800" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline">$\fn{add}(2,\listbox{chocolate4}{\ding{86}})$</text>
+<text layer="add1" transformations="translations" pos="96 800" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline" style="math">\fn{add}(2,\listbox{pink-orange}{\ding{86}})</text>
 <path layer="add1-1" stroke="black">
 192 784 m
 224 784 l
@@ -1140,8 +1162,8 @@ h
 224 784 m
 304 784 l
 </path>
-<text matrix="1 0 0 1 0 3" transformations="translations" pos="208 784" stroke="black" type="label" width="3.348" height="6.768" depth="0" halign="center" valign="baseline">$i$</text>
-<text matrix="1 0 0 1 -8 -13" transformations="translations" pos="272 800" stroke="black" type="label" width="20.849" height="6.768" depth="0.83" halign="center" valign="baseline">$n-i$</text>
+<text matrix="1 0 0 1 0 3" transformations="translations" pos="208 784" stroke="black" type="label" width="3.348" height="6.768" depth="0" halign="center" valign="baseline" style="math">i</text>
+<text matrix="1 0 0 1 -8 -13" transformations="translations" pos="272 800" stroke="black" type="label" width="20.849" height="6.768" depth="0.83" halign="center" valign="baseline" style="math">n-i</text>
 <path layer="add1-2" stroke="gold" pen="ultrafat" cap="1">
 224 752 m
 224 768 l
@@ -1152,7 +1174,7 @@ h
 224 784 l
 224 776 l
 </path>
-<path layer="add1-6" matrix="1 0 0 1 16 64" stroke="black" fill="aquamarine4">
+<path layer="add1-6" matrix="1 0 0 1 16 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1160,7 +1182,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 64" stroke="black" fill="steel teal">
 192 704 m
 192 688 l
 208 688 l
@@ -1168,7 +1190,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.044" height="7.063" depth="0.13" halign="center" valign="center">\ding{99}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1176,7 +1198,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.229" height="7.063" depth="0.13" halign="center" valign="center">\ding{95}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -1184,7 +1206,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.934" height="6.944" depth="0" halign="center" valign="center">\ding{101}</text>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1192,7 +1214,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1277,8 +1299,8 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
 <path matrix="1 0 0 1 0 64" stroke="black">
 192 704 m
 192 688 l
@@ -1286,7 +1308,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 -16 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 -16 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -1294,7 +1316,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 -8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.831" height="7.063" depth="0.13" halign="center" valign="center">\ding{66}</text>
-<path layer="add1-7" matrix="1 0 0 1 0 64" stroke="black" fill="aquamarine4">
+<path layer="add1-7" matrix="1 0 0 1 0 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1302,7 +1324,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 64" stroke="black" fill="steel teal">
 192 704 m
 192 688 l
 208 688 l
@@ -1310,7 +1332,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.044" height="7.063" depth="0.13" halign="center" valign="center">\ding{99}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1318,7 +1340,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.229" height="7.063" depth="0.13" halign="center" valign="center">\ding{95}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -1326,7 +1348,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.934" height="6.944" depth="0" halign="center" valign="center">\ding{101}</text>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1334,7 +1356,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1419,8 +1441,8 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
 <path matrix="1 0 0 1 16 64" stroke="black">
 192 704 m
 192 688 l
@@ -1428,7 +1450,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 -16 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 -16 64" stroke="black" fill="0.639 0.043 0.216">
 192 704 m
 192 688 l
 208 688 l
@@ -1436,9 +1458,9 @@ h
 h
 </path>
 <text matrix="1 0 0 1 -8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.831" height="7.063" depth="0.13" halign="center" valign="center">\ding{66}</text>
-<text layer="j1" matrix="1 0 0 1 -8 48" transformations="translations" pos="192 736" stroke="black" type="label" width="4.981" height="6.926" depth="1.93" halign="center" valign="top">$\downarrow$</text>
-<text matrix="1 0 0 1 -8 50" transformations="translations" pos="192 736" stroke="black" type="label" width="3.57" height="6.775" depth="1.93" halign="center" valign="bottom">$j$</text>
-<path layer="add1-5" matrix="1 0 0 1 0 64" stroke="black" fill="antiquewhite4">
+<text layer="j1" matrix="1 0 0 1 -8 48" transformations="translations" pos="192 736" stroke="black" type="label" width="4.981" height="6.926" depth="1.93" halign="center" valign="top" style="math">\downarrow</text>
+<text matrix="1 0 0 1 -8 50" transformations="translations" pos="192 736" stroke="black" type="label" width="3.57" height="6.775" depth="1.93" halign="center" valign="bottom" style="math">j</text>
+<path layer="add1-5" matrix="1 0 0 1 0 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -1446,15 +1468,15 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.831" height="7.063" depth="0.13" halign="center" valign="center">\ding{66}</text>
-<path matrix="1 0 0 1 16 64" stroke="black" fill="aquamarine4">
-192 704 m
-192 688 l
-208 688 l
-208 704 l
+<path stroke="black" fill="medium sea green">
+208 768 m
+208 752 l
+224 752 l
+224 768 l
 h
 </path>
 <text matrix="1 0 0 1 24 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 64" stroke="black" fill="steel teal">
 192 704 m
 192 688 l
 208 688 l
@@ -1462,7 +1484,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.044" height="7.063" depth="0.13" halign="center" valign="center">\ding{99}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1470,7 +1492,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.229" height="7.063" depth="0.13" halign="center" valign="center">\ding{95}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -1478,7 +1500,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.934" height="6.944" depth="0" halign="center" valign="center">\ding{101}</text>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1486,7 +1508,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1578,8 +1600,8 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
 <text matrix="1 0 0 1 -8 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">0</text>
 <text matrix="1 0 0 1 8 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">1</text>
 <text matrix="1 0 0 1 24 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">2</text>
@@ -1604,7 +1626,7 @@ h
 <text matrix="1 0 0 1 72 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">5</text>
 <text matrix="1 0 0 1 88 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">6</text>
 <text matrix="1 0 0 1 104 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
-<path layer="add1-8" matrix="1 0 0 1 0 64" stroke="black" fill="aquamarine4">
+<path layer="add1-8" matrix="1 0 0 1 0 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1612,7 +1634,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 64" stroke="black" fill="0.4 0.522 0.525">
 192 704 m
 192 688 l
 208 688 l
@@ -1620,7 +1642,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.044" height="7.063" depth="0.13" halign="center" valign="center">\ding{99}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1628,7 +1650,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.229" height="7.063" depth="0.13" halign="center" valign="center">\ding{95}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -1636,7 +1658,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.934" height="6.944" depth="0" halign="center" valign="center">\ding{101}</text>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1644,7 +1666,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 88 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1729,16 +1751,16 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<path matrix="1 0 0 1 16 64" stroke="black" fill="chocolate4">
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<path matrix="1 0 0 1 16 64" stroke="black" fill="pink-orange">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 -16 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 -16 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -1755,8 +1777,8 @@ h
 <text matrix="1 0 0 1 88 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">6</text>
 <text matrix="1 0 0 1 104 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 24 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.924" height="7.063" depth="0.13" halign="center" valign="center">\ding{86}</text>
-<text layer="n2" transformations="translations" pos="112 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=8$</text>
-<text layer="add2" transformations="translations" pos="96 800" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline">$\fn{add}(5,\listbox{goldenrod4}{\ding{96}})$</text>
+<text layer="n2" transformations="translations" pos="112 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline" style="math">n=8</text>
+<text layer="add2" transformations="translations" pos="96 800" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline" style="math">\fn{add}(5,\listbox{pale chestnut}{\ding{96}})</text>
 <path layer="add2-1" stroke="gold" fill="white" pen="ultrafat" cap="1">
 256 768 m
 256 752 l
@@ -1777,17 +1799,17 @@ h
 192 784 m
 192 768 l
 </path>
-<text matrix="1 0 0 1 8 3" transformations="translations" pos="208 784" stroke="black" type="label" width="3.348" height="6.768" depth="0" halign="center" valign="baseline">$i$</text>
-<text matrix="1 0 0 1 72 3" transformations="translations" pos="208 784" stroke="black" type="label" width="20.849" height="6.768" depth="0.83" halign="center" valign="baseline">$n-i$</text>
+<text matrix="1 0 0 1 8 3" transformations="translations" pos="208 784" stroke="black" type="label" width="3.348" height="6.768" depth="0" halign="center" valign="baseline" style="math">i</text>
+<text matrix="1 0 0 1 72 3" transformations="translations" pos="208 784" stroke="black" type="label" width="20.849" height="6.768" depth="0.83" halign="center" valign="baseline" style="math">n-i</text>
 <path layer="add2-2" stroke="gold" pen="ultrafat">
 256 776 m
 256 784 l
 304 784 l
 304 776 l
 </path>
-<text layer="n3" transformations="translations" pos="112 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=9$</text>
+<text layer="n3" transformations="translations" pos="112 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline" style="math">n=9</text>
 <text layer="add2-3" matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path layer="add2-4" matrix="1 0 0 1 0 64" stroke="black" fill="aquamarine4">
+<path layer="add2-4" matrix="1 0 0 1 0 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1795,7 +1817,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 64" stroke="black" fill="steel teal">
 192 704 m
 192 688 l
 208 688 l
@@ -1803,7 +1825,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.044" height="7.063" depth="0.13" halign="center" valign="center">\ding{99}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1811,7 +1833,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.229" height="7.063" depth="0.13" halign="center" valign="center">\ding{95}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -1819,7 +1841,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 72 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.934" height="6.944" depth="0" halign="center" valign="center">\ding{101}</text>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 80 64" stroke="pink raspberry" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -1897,16 +1919,16 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<path matrix="1 0 0 1 16 64" stroke="black" fill="chocolate4">
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<path matrix="1 0 0 1 16 64" stroke="black" fill="pink-orange">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 -16 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 -16 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -1931,7 +1953,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 112 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -1940,7 +1962,7 @@ h
 </path>
 <text matrix="1 0 0 1 120 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.13" height="7.063" depth="0.12" halign="center" valign="center">\ding{78}</text>
 <text layer="add2-5" matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 0 64" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 0 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -1948,7 +1970,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 64" stroke="black" fill="steel teal">
 192 704 m
 192 688 l
 208 688 l
@@ -1956,7 +1978,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.044" height="7.063" depth="0.13" halign="center" valign="center">\ding{99}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -1964,7 +1986,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 56 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.229" height="7.063" depth="0.13" halign="center" valign="center">\ding{95}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -2042,16 +2064,16 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<path matrix="1 0 0 1 16 64" stroke="black" fill="chocolate4">
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<path matrix="1 0 0 1 16 64" stroke="black" fill="pink-orange">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 -16 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 -16 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -2069,7 +2091,7 @@ h
 <text matrix="1 0 0 1 104 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 24 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.924" height="7.063" depth="0.13" halign="center" valign="center">\ding{86}</text>
 <text matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 112 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 64" stroke="black" fill="0.196 0.455 0.427">
 192 704 m
 192 688 l
 208 688 l
@@ -2084,7 +2106,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -2093,7 +2115,7 @@ h
 </path>
 <text matrix="1 0 0 1 104 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
 <text layer="add2-6" matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 0 64" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 0 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2101,7 +2123,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 64" stroke="black" fill="steel teal">
 192 704 m
 192 688 l
 208 688 l
@@ -2109,7 +2131,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.044" height="7.063" depth="0.13" halign="center" valign="center">\ding{99}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2187,16 +2209,16 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<path matrix="1 0 0 1 16 64" stroke="black" fill="chocolate4">
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<path matrix="1 0 0 1 16 64" stroke="black" fill="pink-orange">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 -16 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 -16 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -2214,7 +2236,7 @@ h
 <text matrix="1 0 0 1 104 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 24 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.924" height="7.063" depth="0.13" halign="center" valign="center">\ding{86}</text>
 <text matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 112 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 64" stroke="black" fill="0.196 0.455 0.427">
 192 704 m
 192 688 l
 208 688 l
@@ -2222,7 +2244,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 120 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.13" height="7.063" depth="0.12" halign="center" valign="center">\ding{78}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -2237,7 +2259,7 @@ h
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -2246,7 +2268,7 @@ h
 </path>
 <text matrix="1 0 0 1 88 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.934" height="6.944" depth="0" halign="center" valign="center">\ding{101}</text>
 <text layer="add2-7" matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 0 64" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 0 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2254,7 +2276,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="azure4">
+<path matrix="1 0 0 1 32 64" stroke="black" fill="steel teal">
 192 704 m
 192 688 l
 208 688 l
@@ -2262,7 +2284,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.044" height="7.063" depth="0.13" halign="center" valign="center">\ding{99}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2340,16 +2362,16 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<path matrix="1 0 0 1 16 64" stroke="black" fill="chocolate4">
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<path matrix="1 0 0 1 16 64" stroke="black" fill="pink-orange">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 -16 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 -16 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -2367,7 +2389,7 @@ h
 <text matrix="1 0 0 1 104 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 24 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.924" height="7.063" depth="0.13" halign="center" valign="center">\ding{86}</text>
 <text matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 112 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -2375,7 +2397,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 120 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.13" height="7.063" depth="0.12" halign="center" valign="center">\ding{78}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -2383,14 +2405,14 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="goldenrod4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="pale chestnut">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -2399,7 +2421,7 @@ h
 </path>
 <text matrix="1 0 0 1 88 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.934" height="6.944" depth="0" halign="center" valign="center">\ding{101}</text>
 <text matrix="1 0 0 1 72 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.12" height="7.063" depth="0.13" halign="center" valign="center">\ding{96}</text>
-<text layer="remove1-1" transformations="translations" pos="96 800" stroke="black" type="label" width="42.48" height="7.473" depth="2.49" valign="baseline">$\fn{remove}(3)$</text>
+<text layer="remove1-1" transformations="translations" pos="96 800" stroke="black" type="label" width="42.48" height="7.473" depth="2.49" valign="baseline" style="math">\fn{remove}(3)</text>
 <path layer="remove1-4" stroke="black">
 240 784 m
 320 784 l
@@ -2424,8 +2446,8 @@ h
 176 784 m
 176 768 l
 </path>
-<text matrix="1 0 0 1 -8 3" transformations="translations" pos="208 784" stroke="black" type="label" width="3.348" height="6.768" depth="0" halign="center" valign="baseline">$i$</text>
-<text matrix="1 0 0 1 72 3" transformations="translations" pos="208 784" stroke="black" type="label" width="38.007" height="6.768" depth="0.83" halign="center" valign="baseline">$n-i-1$</text>
+<text matrix="1 0 0 1 -8 3" transformations="translations" pos="208 784" stroke="black" type="label" width="3.348" height="6.768" depth="0" halign="center" valign="baseline" style="math">i</text>
+<text matrix="1 0 0 1 72 3" transformations="translations" pos="208 784" stroke="black" type="label" width="38.007" height="6.768" depth="0.83" halign="center" valign="baseline" style="math">n-i-1</text>
 <path layer="remove1-5" stroke="gold" pen="ultrafat">
 176 776 m
 176 784 l
@@ -2433,7 +2455,7 @@ h
 224 776 l
 </path>
 <text layer="remove1-3" matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 0 64" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 0 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2441,7 +2463,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="0.506 0.498 0.459">
 192 704 m
 192 688 l
 208 688 l
@@ -2519,16 +2541,16 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<path matrix="1 0 0 1 16 64" stroke="black" fill="chocolate4">
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<path matrix="1 0 0 1 16 64" stroke="black" fill="pink-orange">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 -16 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 -16 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -2546,7 +2568,7 @@ h
 <text matrix="1 0 0 1 104 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 24 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.924" height="7.063" depth="0.13" halign="center" valign="center">\ding{86}</text>
 <text matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 112 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -2554,7 +2576,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 120 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.13" height="7.063" depth="0.12" halign="center" valign="center">\ding{78}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -2562,14 +2584,14 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="goldenrod4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="0.91 0.682 0.718">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -2593,7 +2615,7 @@ h
 h
 </path>
 <text layer="remove1-6" matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 0 64" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 0 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2601,7 +2623,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 8 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2679,16 +2701,16 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="chocolate4">
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<path matrix="1 0 0 1 32 64" stroke="black" fill="pink-orange">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 -16 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 -16 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -2706,7 +2728,7 @@ h
 <text matrix="1 0 0 1 104 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.924" height="7.063" depth="0.13" halign="center" valign="center">\ding{86}</text>
 <text matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 112 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -2714,7 +2736,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 120 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.13" height="7.063" depth="0.12" halign="center" valign="center">\ding{78}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="0.741 0.42 0.451">
 192 704 m
 192 688 l
 208 688 l
@@ -2722,14 +2744,14 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="goldenrod4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="pale chestnut">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -2746,7 +2768,7 @@ h
 h
 </path>
 <text layer="remove1-7" matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 16 64" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2754,7 +2776,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2832,16 +2854,16 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="chocolate4">
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<path matrix="1 0 0 1 32 64" stroke="black" fill="pink-orange">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 -16 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 -16 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -2859,7 +2881,7 @@ h
 <text matrix="1 0 0 1 104 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.924" height="7.063" depth="0.13" halign="center" valign="center">\ding{86}</text>
 <text matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 112 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -2867,7 +2889,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 120 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.13" height="7.063" depth="0.12" halign="center" valign="center">\ding{78}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -2875,14 +2897,14 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="goldenrod4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="pale chestnut">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -2899,7 +2921,7 @@ h
 h
 </path>
 <text layer="remove1-8" matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 16 64" stroke="black" fill="aquamarine4">
+<path matrix="1 0 0 1 16 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -2907,7 +2929,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -2985,16 +3007,16 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="chocolate4">
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<path matrix="1 0 0 1 32 64" stroke="black" fill="pink-orange">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 0 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 0 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -3012,7 +3034,7 @@ h
 <text matrix="1 0 0 1 104 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.924" height="7.063" depth="0.13" halign="center" valign="center">\ding{86}</text>
 <text matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">8</text>
-<path matrix="1 0 0 1 112 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -3020,7 +3042,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 120 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.13" height="7.063" depth="0.12" halign="center" valign="center">\ding{78}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -3028,14 +3050,14 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="goldenrod4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="pale chestnut">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -3051,7 +3073,7 @@ h
 240 768 l
 h
 </path>
-<path layer="remove1-9" matrix="1 0 0 1 16 64" stroke="black" fill="aquamarine4">
+<path layer="remove1-9" matrix="1 0 0 1 16 64" stroke="black" fill="medium sea green">
 192 704 m
 192 688 l
 208 688 l
@@ -3059,7 +3081,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 24 72" transformations="translations" pos="192 688" stroke="white" type="label" width="7.91" height="7.063" depth="0.12" halign="center" valign="center">\ding{71}</text>
-<path matrix="1 0 0 1 48 64" stroke="black" fill="bisque4">
+<path matrix="1 0 0 1 48 64" stroke="black" fill="trolley grey">
 192 704 m
 192 688 l
 208 688 l
@@ -3137,16 +3159,16 @@ h
 208 704 l
 h
 </path>
-<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
-<path matrix="1 0 0 1 32 64" stroke="black" fill="chocolate4">
+<text matrix="1 0 0 1 -104 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<text matrix="1 0 0 1 216 72" transformations="translations" pos="192 688" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center" style="math">\cdots</text>
+<path matrix="1 0 0 1 32 64" stroke="black" fill="pink-orange">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 0 64" stroke="black" fill="antiquewhite4">
+<path matrix="1 0 0 1 0 64" stroke="black" fill="pink raspberry">
 192 704 m
 192 688 l
 208 688 l
@@ -3163,7 +3185,7 @@ h
 <text matrix="1 0 0 1 104 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">6</text>
 <text matrix="1 0 0 1 120 52.399" transformations="translations" pos="192 688" stroke="darkgray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline">7</text>
 <text matrix="1 0 0 1 40 72" transformations="translations" pos="192 688" stroke="white" type="label" width="6.924" height="7.063" depth="0.13" halign="center" valign="center">\ding{86}</text>
-<path matrix="1 0 0 1 112 64" stroke="black" fill="cadetblue4">
+<path matrix="1 0 0 1 112 64" stroke="black" fill="myrtle green">
 192 704 m
 192 688 l
 208 688 l
@@ -3171,7 +3193,7 @@ h
 h
 </path>
 <text matrix="1 0 0 1 120 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.13" height="7.063" depth="0.12" halign="center" valign="center">\ding{78}</text>
-<path matrix="1 0 0 1 96 64" stroke="black" fill="brown4">
+<path matrix="1 0 0 1 96 64" stroke="black" fill="rose gold">
 192 704 m
 192 688 l
 208 688 l
@@ -3179,14 +3201,14 @@ h
 h
 </path>
 <text matrix="1 0 0 1 104 72" transformations="translations" pos="192 688" stroke="white" type="label" width="8.279" height="7.063" depth="0.13" halign="center" valign="center">\ding{79}</text>
-<path matrix="1 0 0 1 64 64" stroke="black" fill="goldenrod4">
+<path matrix="1 0 0 1 64 64" stroke="black" fill="pale chestnut">
 192 704 m
 192 688 l
 208 688 l
 208 704 l
 h
 </path>
-<path matrix="1 0 0 1 80 64" stroke="black" fill="blue4">
+<path matrix="1 0 0 1 80 64" stroke="black" fill="midnight green">
 192 704 m
 192 688 l
 208 688 l
@@ -3202,8 +3224,8 @@ h
 240 768 l
 h
 </path>
-<text layer="n4" transformations="translations" pos="112 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline">$n=8$</text>
-<text layer="j2" matrix="1 0 0 1 8 48" transformations="translations" pos="192 736" stroke="black" type="label" width="4.981" height="6.926" depth="1.93" halign="center" valign="top">$\downarrow$</text>
-<text matrix="1 0 0 1 8 50" transformations="translations" pos="192 736" stroke="black" type="label" width="3.57" height="6.775" depth="1.93" halign="center" valign="bottom">$j$</text>
+<text layer="n4" transformations="translations" pos="112 720" stroke="black" type="label" width="23.589" height="6.531" depth="0" valign="baseline" style="math">n=8</text>
+<text layer="j2" matrix="1 0 0 1 8 48" transformations="translations" pos="192 736" stroke="black" type="label" width="4.981" height="6.926" depth="1.93" halign="center" valign="top" style="math">\downarrow</text>
+<text matrix="1 0 0 1 8 50" transformations="translations" pos="192 736" stroke="black" type="label" width="3.57" height="6.775" depth="1.93" halign="center" valign="bottom" style="math">j</text>
 </page>
 </ipe>
