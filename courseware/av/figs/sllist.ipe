@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170502135821" modified="D:20170503143256"/>
+<info created="D:20170502135821" modified="D:20170503161331"/>
 <preamble>\usepackage{ods-figs}
 \usepackage{marvosym}</preamble>
 <ipestyle name="basic">
@@ -290,6 +290,7 @@ h
 <opacity name="90%" value="0.9"/>
 </ipestyle>
 <page>
+<notes>stackops-fn</notes>
 <layer name="node"/>
 <layer name="field_names"/>
 <layer name="list"/>
@@ -315,7 +316,10 @@ h
 <layer name="gamma"/>
 <layer name="removeFront-3"/>
 <layer name="stackops"/>
+<layer name="stackops-fn"/>
 <layer name="queueops"/>
+<layer name="queueops-fn"/>
+<layer name="noDeque"/>
 <layer name="addEmpty-1"/>
 <layer name="addEmpty-2"/>
 <layer name="addEmpty-3"/>
@@ -344,10 +348,12 @@ h
 <view layers="node list header addFront-2 addFront-3 cut-1 addBack-2 addBack-4 addBack-5 removeFront-1" active="removeFront-3"/>
 <view layers="node list header cut-1 addBack-2 addBack-4 addBack-5 removeFront-1 gamma removeFront-3" active="removeFront-3"/>
 <view layers="node list header cut-1 addBack-2 addBack-4 addBack-5" active="removeFront-3"/>
-<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5 stackops" active="stackops"/>
+<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5 stackops stackops-fn" active="stackops"/>
 <view layers="node list header cut-1 addBack-2 addBack-4 addBack-5" active="stackops"/>
-<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5 queueops" active="queueops"/>
+<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5 queueops queueops-fn" active="queueops"/>
 <view layers="node list header cut-1 addBack-2 addBack-4 addBack-5" active="addEmpty-1"/>
+<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5 stackops queueops noDeque" active="noDeque"/>
+<view layers="node list header cut-1 addBack-2 addBack-4 addBack-5" active="noDeque"/>
 <view layers="header" active="addEmpty-1"/>
 <view layers="header addEmpty-1" active="addEmpty-1"/>
 <view layers="header addEmpty-1 addEmpty-2" active="addEmpty-2"/>
@@ -360,6 +366,11 @@ h
 <view layers="header removeLast-1 removeLast-2" active="removeLast-2"/>
 <view layers="header removeLast-1" active="removeLast-2"/>
 <view layers="header" active="removeLast-2"/>
+<path layer="noDeque" stroke="red" pen="ultrafat" rarrow="normal/normal">
+608 224 m
+592 240
+560 247.933 c
+</path>
 <path layer="addBack-3" stroke="gold" pen="ultrafat" arrow="pointed/small">
 208 232 m
 464.817 226.532
@@ -564,10 +575,10 @@ h
 528 240 c
 </path>
 <text layer="removeFront-1" transformations="translations" pos="177.782 309.945" stroke="black" type="label" width="60.025" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{removeFront}()</text>
-<text layer="stackops" transformations="translations" pos="176 336" stroke="black" type="minipage" width="200" height="18.172" depth="13.21" valign="top">$\mathrm{push}(x)=\mathrm{addFront}(x)$ \\
+<text layer="stackops-fn" transformations="translations" pos="176 336" stroke="black" type="minipage" width="200" height="18.172" depth="13.21" valign="top">$\mathrm{push}(x)=\mathrm{addFront}(x)$ \\
 $\mathrm{pop}()=\mathrm{removeFront}()$ \\
 </text>
-<text layer="queueops" transformations="translations" pos="176 336" stroke="black" type="minipage" width="200" height="18.172" depth="13.21" valign="top">$\mathrm{add}(x)=\mathrm{addBack}(x)$ \\
+<text layer="queueops-fn" transformations="translations" pos="176 336" stroke="black" type="minipage" width="200" height="18.172" depth="13.21" valign="top">$\mathrm{add}(x)=\mathrm{addBack}(x)$ \\
 $\mathrm{remove}()=\mathrm{removeFront}()$ \\
 </text>
 <path layer="stackops" stroke="orange" pen="ultrafat" join="1" arrow="normal/normal">
@@ -652,5 +663,13 @@ h
 <use matrix="1 0 0 1 -56 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="lightgray"/>
 <text layer="addFront-1-u" matrix="1 0 0 1 -8 -10" transformations="translations" pos="256 288" stroke="black" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
 <text layer="addBack-2-u" matrix="1 0 0 1 280 -26" transformations="translations" pos="256 288" stroke="black" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
+<path layer="noDeque" matrix="1 0 0 1 4.0662 22.066" stroke="red" pen="ultrafat">
+576 224 m
+592 208 l
+</path>
+<path matrix="1 0 0 1 4.0662 22.066" stroke="red" pen="ultrafat">
+592 224 m
+576 208 l
+</path>
 </page>
 </ipe>
