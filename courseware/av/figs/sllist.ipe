@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170502135821" modified="D:20170503143256"/>
+<info created="D:20170502135821" modified="D:20170504100014"/>
 <preamble>\usepackage{ods-figs}
 \usepackage{marvosym}</preamble>
 <ipestyle name="basic">
@@ -222,13 +222,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -307,6 +307,7 @@ h
 <layer name="addBack-2"/>
 <layer name="addBack-2-u"/>
 <layer name="addBack-3"/>
+<layer name="addBack-3.5"/>
 <layer name="addBack-4"/>
 <layer name="addBack-5"/>
 <layer name="cut-2"/>
@@ -329,13 +330,13 @@ h
 <view layers="node list header cut-1 cut-2" active="header"/>
 <view layers="node list header addFront-1 cut-1 cut-2" active="addFront-1"/>
 <view layers="node list header addFront-1 addFront-1-u addFront-2 cut-1 cut-2" active="addFront-1-u"/>
-<view layers="node list header addFront-1 addFront-1-u addFront1-a addFront-2 cut-1 cut-2" active="addFront1-a"/>
+<view layers="node list header addFront-1 addFront-1-u alpha addFront-2 cut-1 cut-2" active="alpha"/>
 <view layers="node list header addFront-1 addFront-1-u addFront1-a addFront-2 addFront-3 cut-1 cut-2" active="addFront-2"/>
 <view layers="node list header addFront-1 addFront-1-u addFront-2 addFront-3 addFront-4 cut-2" active="addFront-4"/>
 <view layers="node list header addFront-2 addFront-3 addFront-4 cut-2" active="beta"/>
 <view layers="node list header addFront-2 addFront-3 addFront-4 addBack-1 cut-2" active="addBack-1"/>
 <view layers="node list header addFront-2 addFront-3 addFront-4 addBack-1 addBack-2 addBack-2-u cut-2" active="addBack-2"/>
-<view layers="node list header addFront-2 addFront-3 addFront-4 addBack-1 addBack-2 addBack-2-u addBack-3 cut-2" active="addBack-3"/>
+<view layers="node list header addFront-2 addFront-3 addFront-4 addBack-1 addBack-2 addBack-2-u addBack-3 addBack-3.5 cut-2" active="addBack-3.5"/>
 <view layers="node list header addFront-2 addFront-3 addFront-4 addBack-1 addBack-2 addBack-2-u addBack-3 addBack-4 cut-2" active="addBack-4"/>
 <view layers="node list header addFront-2 addFront-3 addFront-4 addBack-1 addBack-2 addBack-2-u addBack-4 addBack-5" active="addFront-4"/>
 <view layers="node list header addFront-2 addFront-3 addFront-4 addBack-2 addBack-4 addBack-5" active="addFront-4"/>
@@ -360,6 +361,7 @@ h
 <view layers="header removeLast-1 removeLast-2" active="removeLast-2"/>
 <view layers="header removeLast-1" active="removeLast-2"/>
 <view layers="header" active="removeLast-2"/>
+<use layer="addBack-3.5" name="mark/disk(sx)" pos="504 248" size="large" stroke="gold"/>
 <path layer="addBack-3" stroke="gold" pen="ultrafat" arrow="pointed/small">
 208 232 m
 464.817 226.532
@@ -652,5 +654,9 @@ h
 <use matrix="1 0 0 1 -56 -440" name="mark/disk(sx)" pos="368 688" size="normal" stroke="lightgray"/>
 <text layer="addFront-1-u" matrix="1 0 0 1 -8 -10" transformations="translations" pos="256 288" stroke="black" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
 <text layer="addBack-2-u" matrix="1 0 0 1 280 -26" transformations="translations" pos="256 288" stroke="black" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
+<path layer="alpha" stroke="black" join="1" arrow="pointed/small">
+264 264 m
+288 248 l
+</path>
 </page>
 </ipe>
