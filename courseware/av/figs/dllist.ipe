@@ -1,0 +1,1061 @@
+<?xml version="1.0"?>
+<!DOCTYPE ipe SYSTEM "ipe.dtd">
+<ipe version="70206" creator="Ipe 7.2.7">
+<info created="D:20170504132942" modified="D:20170505133736"/>
+<preamble>\usepackage{ods-figs}
+\usepackage{marvosym}
+\usepackage[noend]{algorithmic}</preamble>
+<ipestyle name="beamerpaper16x9">
+<layout paper="800 450" origin="0 0" frame="800 450"/>
+</ipestyle>
+<ipestyle name="odsbasic">
+<symbol name="arrow/arc(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/farc(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/ptarc(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/fptarc(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="mark/circle(sx)" transformations="translations">
+<path fill="sym-stroke">
+0.6 0 0 0.6 0 0 e
+0.4 0 0 0.4 0 0 e
+</path>
+</symbol>
+<symbol name="mark/disk(sx)" transformations="translations">
+<path fill="sym-stroke">
+0.6 0 0 0.6 0 0 e
+</path>
+</symbol>
+<symbol name="mark/fdisk(sfx)" transformations="translations">
+<group>
+<path fill="sym-fill">
+0.5 0 0 0.5 0 0 e
+</path>
+<path fill="sym-stroke" fillrule="eofill">
+0.6 0 0 0.6 0 0 e
+0.4 0 0 0.4 0 0 e
+</path>
+</group>
+</symbol>
+<symbol name="mark/box(sx)" transformations="translations">
+<path fill="sym-stroke" fillrule="eofill">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+-0.4 -0.4 m
+0.4 -0.4 l
+0.4 0.4 l
+-0.4 0.4 l
+h
+</path>
+</symbol>
+<symbol name="mark/square(sx)" transformations="translations">
+<path fill="sym-stroke">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+</path>
+</symbol>
+<symbol name="mark/fsquare(sfx)" transformations="translations">
+<group>
+<path fill="sym-fill">
+-0.5 -0.5 m
+0.5 -0.5 l
+0.5 0.5 l
+-0.5 0.5 l
+h
+</path>
+<path fill="sym-stroke" fillrule="eofill">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+-0.4 -0.4 m
+0.4 -0.4 l
+0.4 0.4 l
+-0.4 0.4 l
+h
+</path>
+</group>
+</symbol>
+<symbol name="mark/cross(sx)" transformations="translations">
+<group>
+<path fill="sym-stroke">
+-0.43 -0.57 m
+0.57 0.43 l
+0.43 0.57 l
+-0.57 -0.43 l
+h
+</path>
+<path fill="sym-stroke">
+-0.43 0.57 m
+0.57 -0.43 l
+0.43 -0.57 l
+-0.57 0.43 l
+h
+</path>
+</group>
+</symbol>
+<symbol name="arrow/fnormal(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/pointed(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/fpointed(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/linear(spx)">
+<path stroke="sym-stroke" pen="sym-pen">
+-1 0.333 m
+0 0 l
+-1 -0.333 l
+</path>
+</symbol>
+<symbol name="arrow/fdouble(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+-1 0 m
+-2 0.333 l
+-2 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/double(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+-1 0 m
+-2 0.333 l
+-2 -0.333 l
+h
+</path>
+</symbol>
+<pen name="heavier" value="0.8"/>
+<pen name="fat" value="1.2"/>
+<pen name="ultrafat" value="2"/>
+<symbolsize name="large" value="5"/>
+<symbolsize name="small" value="2"/>
+<symbolsize name="tiny" value="1.1"/>
+<arrowsize name="large" value="10"/>
+<arrowsize name="small" value="5"/>
+<arrowsize name="tiny" value="3"/>
+<color name="red" value="1 0 0"/>
+<color name="orange" value="1 0.647 0"/>
+<color name="gold" value="1 0.843 0"/>
+<color name="gray" value="0.745"/>
+<dashstyle name="dashed" value="[4] 0"/>
+<dashstyle name="dotted" value="[1 3] 0"/>
+<dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
+<dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
+<textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
+<textsize name="Large" value="\Large"/>
+<textsize name="LARGE" value="\LARGE"/>
+<textsize name="huge" value="\huge"/>
+<textsize name="Huge" value="\Huge"/>
+<textsize name="footnote" value="\footnotesize"/>
+<textstyle name="center" begin="\begin{center}" end="\end{center}"/>
+<textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
+<textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
+<gridsize name="4 pts" value="4"/>
+<gridsize name="8 pts (~3 mm)" value="8"/>
+<gridsize name="16 pts (~6 mm)" value="16"/>
+<gridsize name="32 pts (~12 mm)" value="32"/>
+<gridsize name="10 pts (~3.5 mm)" value="10"/>
+<gridsize name="20 pts (~7 mm)" value="20"/>
+<gridsize name="14 pts (~5 mm)" value="14"/>
+<gridsize name="28 pts (~10 mm)" value="28"/>
+<gridsize name="56 pts (~20 mm)" value="56"/>
+<anglesize name="90 deg" value="90"/>
+<anglesize name="60 deg" value="60"/>
+<anglesize name="45 deg" value="45"/>
+<anglesize name="30 deg" value="30"/>
+<anglesize name="22.5 deg" value="22.5"/>
+<opacity name="10%" value="0.1"/>
+<opacity name="30%" value="0.3"/>
+<opacity name="50%" value="0.5"/>
+<opacity name="75%" value="0.75"/>
+<tiling name="falling" angle="-60" step="4" width="1"/>
+<tiling name="rising" angle="30" step="4" width="1"/>
+</ipestyle>
+<ipestyle name="odscolors">
+<color name="usc gold" value="1 0.807 0.019"/>
+<color name="tigers eye" value="0.968 0.549 0.235"/>
+<color name="pearl aqua" value="0.556 0.776 0.725"/>
+<color name="granny smith apple" value="0.733 0.858 0.607"/>
+<color name="pale chestnut" value="0.909 0.682 0.717"/>
+<color name="columbia blue" value="0.745 0.847 0.831"/>
+<color name="magic mint" value="0.647 1 0.839"/>
+<color name="light salmon" value="0.98 0.635 0.458"/>
+<color name="dutch white" value="0.866 0.878 0.741"/>
+<color name="medium sea green" value="0.266 0.686 0.411"/>
+<color name="pink-orange" value="1 0.549 0.38"/>
+<color name="diamond" value="0.721 0.882 1"/>
+<color name="laurel green" value="0.67 0.768 0.631"/>
+<color name="steel teal" value="0.4 0.521 0.525"/>
+<color name="rose gold" value="0.741 0.419 0.45"/>
+<color name="myrtle green" value="0.196 0.454 0.427"/>
+<color name="pink raspberry" value="0.639 0.043 0.215"/>
+<color name="trolley grey" value="0.505 0.498 0.458"/>
+<color name="midnight green" value="0.062 0.309 0.333"/>
+<color name="paynes grey" value="0.345 0.435 0.486"/>
+</ipestyle>
+<ipestyle name="transparency">
+<opacity name="10%" value="0.1"/>
+<opacity name="30%" value="0.3"/>
+<opacity name="50%" value="0.5"/>
+<opacity name="20%" value="0.2"/>
+<opacity name="40%" value="0.4"/>
+<opacity name="60%" value="0.6"/>
+<opacity name="70%" value="0.7"/>
+<opacity name="80%" value="0.8"/>
+<opacity name="90%" value="0.9"/>
+</ipestyle>
+<ipestyle name="odsdecorations">
+<symbol name="decoration/simple-box-small">
+<path stroke="black" fill="white">
+96 96 m
+304 96 l
+304 204 l
+96 204 l
+h
+</path>
+</symbol>
+<symbol name="decoration/simple-box-large">
+<path stroke="black" fill="white">
+92 208 m
+92 92 l
+308 92 l
+308 208 l
+h
+</path>
+</symbol>
+<symbol name="decoration/rounded-box-small">
+<path stroke="black" fill="white">
+100 204 m
+4 0 0 4 100 200 96 200 a
+96 100 l
+4 0 0 4 100 100 100 96 a
+300 96 l
+4 0 0 4 300 100 304 100 a
+304 200 l
+4 0 0 4 300 200 300 204 a
+h
+</path>
+</symbol>
+<symbol name="decoration/rounded-box-large">
+<path stroke="black" fill="white">
+96 208 m
+4 0 0 4 96 204 92 204 a
+92 96 l
+4 0 0 4 96 96 96 92 a
+304 92 l
+4 0 0 4 304 96 308 96 a
+308 204 l
+4 0 0 4 304 204 304 208 a
+h
+</path>
+</symbol>
+<symbol name="decoration/tabbed">
+<path stroke="black" fill="lightgray">
+96 204 m
+96 96 l
+304 96 l
+304 204 l
+108 204 l
+107 207
+106 208
+105 208
+99 208
+98 208
+97 207
+96 204 s
+h
+</path>
+</symbol>
+<symbol name="decoration/3d-box">
+<group>
+<path stroke="black" fill="lightgray">
+98 206 m
+96 204 l
+96 96 l
+304 96 l
+306 98 l
+306 206 l
+h
+</path>
+<path stroke="black">
+96 204 m
+304 204 l
+304 96 l
+</path>
+<path stroke="black">
+304 204 m
+306 206 l
+</path>
+</group>
+</symbol>
+<symbol name="decoration/comic">
+<path stroke="black" fill="white">
+110 96 m
+106 96
+96 96
+96 106
+96 194
+96 204
+106 204
+294 204
+304 204
+304 194
+304 106
+304 96
+294 96
+118 96 s
+116 92
+106 88 s
+110 92
+110 96 s
+h
+</path>
+</symbol>
+</ipestyle>
+<page>
+<layer name="node"/>
+<layer name="labels"/>
+<layer name="list"/>
+<layer name="cut-1"/>
+<layer name="cut-2"/>
+<layer name="cut-3"/>
+<layer name="cut-4"/>
+<layer name="cut-5"/>
+<layer name="indices-1"/>
+<layer name="dummy"/>
+<layer name="dummy-pointers-a"/>
+<layer name="dummy-pointers-b"/>
+<layer name="dllist"/>
+<layer name="n0"/>
+<layer name="getNode-1"/>
+<layer name="getNode-2"/>
+<layer name="getNode-3"/>
+<layer name="getNode-4"/>
+<layer name="getNode-5"/>
+<layer name="getNode-6"/>
+<layer name="getNode-7"/>
+<layer name="getNode-8"/>
+<layer name="getNode-9"/>
+<layer name="getNode-10"/>
+<layer name="getNode-11"/>
+<layer name="getNode-12"/>
+<layer name="getNode-13"/>
+<layer name="getNode-14"/>
+<layer name="getNode-15"/>
+<layer name="getNode-16"/>
+<layer name="getNode-17"/>
+<layer name="getNode-18"/>
+<layer name="getNode-19"/>
+<layer name="getNode-20"/>
+<layer name="getNode-21"/>
+<layer name="tau"/>
+<layer name="get-1"/>
+<layer name="get-2"/>
+<layer name="set-1"/>
+<layer name="set-2"/>
+<layer name="add-1"/>
+<layer name="add-2a"/>
+<layer name="add-2"/>
+<layer name="add-3"/>
+<layer name="add-4"/>
+<layer name="add-5"/>
+<layer name="add-6"/>
+<layer name="add-7"/>
+<layer name="alpha"/>
+<layer name="indices-2"/>
+<layer name="n1"/>
+<layer name="add-8"/>
+<layer name="add-9"/>
+<layer name="remove-1"/>
+<layer name="remove-2"/>
+<layer name="remove-3"/>
+<layer name="remove-4"/>
+<layer name="indices-3"/>
+<layer name="n2"/>
+<layer name="fade-1"/>
+<layer name="remove-5"/>
+<layer name="remove-6"/>
+<view layers="node" active="node"/>
+<view layers="node labels" active="labels"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1" active="cut-2"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy" active="list"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a" active="dummy-pointers-a"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b" active="dummy-pointers-b"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0" active="n0"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1" active="dummy"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2" active="getNode-2"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2 getNode-3" active="getNode-3"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2 getNode-4" active="getNode-4"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2 getNode-5" active="getNode-5"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2 getNode-6" active="getNode-6"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2 getNode-7" active="getNode-7"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2 getNode-8" active="getNode-8"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2 getNode-9" active="getNode-9"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2 getNode-10" active="getNode-10"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0" active="getNode-10"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-11" active="getNode-11"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-11 getNode-12" active="getNode-12"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-11 getNode-12 getNode-13" active="getNode-13"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-11 getNode-12 getNode-14" active="getNode-14"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-11 getNode-12 getNode-15" active="getNode-15"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-11 getNode-12 getNode-16" active="getNode-16"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-11 getNode-12 getNode-17" active="getNode-17"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-11 getNode-12 getNode-18" active="getNode-18"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0" active="getNode-18"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-19" active="getNode-20"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-19 getNode-20" active="getNode-21"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-19 getNode-21" active="getNode-19"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0" active="getNode-12"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 get-1" active="get-1"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 get-1 get-2" active="get-2"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0" active="get-2"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 set-1" active="set-1"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 set-1 set-2" active="set-2"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0" active="set-2"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 add-1" active="add-1"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 add-1 add-2a add-2" active="add-2"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 add-1 add-2a add-2 add-3" active="add-3"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 add-1 add-2a add-2 add-3 add-4" active="add-4"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 add-1 add-2a add-2 add-3 add-4 add-5" active="add-5"/>
+<view layers="node list cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 add-1 add-2a add-2 add-4 add-5 add-6" active="add-6"/>
+<view layers="node list cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 add-1 add-2a add-2 add-4 add-5 add-6 add-7" active="cut-2"/>
+<view layers="node list cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 add-1 add-2 add-4 add-5 add-6 add-7 alpha" active="alpha"/>
+<view layers="node list cut-3 cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist n0 add-1 add-2 add-4 add-5 add-6 add-7 alpha indices-2" active="indices-2"/>
+<view layers="node list cut-3 cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-1 add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1" active="n1"/>
+<view layers="node list cut-3 cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1" active="n1"/>
+<view layers="node list cut-3 cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 add-8" active="add-8"/>
+<view layers="node list cut-3 cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 add-8 add-9" active="add-9"/>
+<view layers="node list cut-3 cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1" active="remove-1"/>
+<view layers="node list cut-3 cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1" active="remove-1"/>
+<view layers="node list cut-3 cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-2" active="remove-2"/>
+<view layers="node list cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-2 remove-3" active="remove-4"/>
+<view layers="node list cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-2 remove-3 remove-4" active="cut-3"/>
+<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-3 remove-4 indices-3 fade-1" active="indices-3"/>
+<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-1 remove-3 remove-4 indices-3 n2" active="indices-3"/>
+<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-3 remove-4 indices-3 n2" active="indices-3"/>
+<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-3 remove-4 indices-3 n2 remove-5" active="remove-5"/>
+<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-3 remove-4 indices-3 n2 remove-5 remove-6" active="remove-6"/>
+<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-3 remove-4 indices-3 n2" active="remove-6"/>
+<group layer="dllist" decoration="decoration/rounded-box-small">
+<path matrix="1 0 0 1 -2.4911 2" fill="white">
+314.741 216.197 m
+314.741 151.009 l
+378.241 151.009 l
+378.241 216.197 l
+h
+</path>
+</group>
+<path layer="dummy-pointers-a" stroke="black" arrow="pointed/small">
+328 200 m
+313.851 191.525
+141.988 199.726
+129.474 260.885
+160 264.117 c
+</path>
+<path layer="node" matrix="1 0 0 1 -64 0" stroke="black" fill="magic mint">
+432 272 m
+432 256 l
+448 256 l
+448 272 l
+h
+</path>
+<path matrix="1 0 0 1 -64 0" stroke="black">
+448 272 m
+448 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path matrix="1 0 0 1 -64 0" stroke="black">
+416 272 m
+416 256 l
+432 256 l
+432 272 l
+h
+</path>
+<text layer="labels" matrix="1 0 0 1 -48 -10" transformations="translations" pos="416 288" stroke="black" type="label" width="20.921" height="4.293" depth="2.21" halign="right" valign="baseline" style="math">\mathtt{prev}</text>
+<text matrix="1 0 0 1 -64 -10" transformations="translations" pos="448 288" stroke="black" type="label" width="20.921" height="5.515" depth="0" valign="baseline" style="math">\mathtt{next}</text>
+<text matrix="1 0 0 1 -56 -10" transformations="translations" pos="432 288" stroke="black" type="label" width="5.23" height="4.289" depth="0" halign="center" valign="baseline" style="math">\mathtt{x}</text>
+<text layer="node" matrix="1 0 0 1 8 -56" transformations="translations" pos="368 320" stroke="black" type="label" width="8.608" height="7.307" depth="1.39" halign="center" valign="center">\Mobilefone</text>
+<use matrix="1 0 0 1 -8 -24" name="mark/disk(sx)" pos="400 288" size="normal" stroke="black"/>
+<path layer="cut-5" matrix="1 0 0 1 -128 0" stroke="black" fill="granny smith apple">
+432 272 m
+432 256 l
+448 256 l
+448 272 l
+h
+</path>
+<path matrix="1 0 0 1 -128 0" stroke="black">
+448 272 m
+448 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path matrix="1 0 0 1 -128 0" stroke="black">
+416 272 m
+416 256 l
+432 256 l
+432 272 l
+h
+</path>
+<text matrix="1 0 0 1 -56 -56" transformations="translations" pos="368 320" stroke="black" type="label" width="8.787" height="5.011" depth="0.03" halign="center" valign="center">\Letter</text>
+<use matrix="1 0 0 1 -56 -24" name="mark/disk(sx)" pos="352 288" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -72 -24" name="mark/disk(sx)" pos="400 288" size="normal" stroke="black"/>
+<path stroke="black" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path layer="cut-4" matrix="-1 0 -0 -1 688 528" stroke="black" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path layer="list" stroke="black" fill="light salmon">
+432 272 m
+432 256 l
+448 256 l
+448 272 l
+h
+</path>
+<path stroke="black">
+448 272 m
+448 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path stroke="black">
+416 272 m
+416 256 l
+432 256 l
+432 272 l
+h
+</path>
+<text matrix="1 0 0 1 72 -56" transformations="translations" pos="368 320" stroke="black" type="label" width="7.562" height="6.983" depth="0.11" halign="center" valign="center">\Email</text>
+<use matrix="1 0 0 1 56 -24" name="mark/disk(sx)" pos="400 288" size="normal" stroke="black"/>
+<path layer="cut-2" matrix="1 0 0 1 64 0" stroke="black" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path layer="cut-1" matrix="-1 0 0 -1 752 528" stroke="black" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path layer="list" matrix="1 0 0 1 -192 0" stroke="black" fill="columbia blue">
+432 272 m
+432 256 l
+448 256 l
+448 272 l
+h
+</path>
+<path matrix="1 0 0 1 -192 0" stroke="black">
+448 272 m
+448 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path matrix="1 0 0 1 -192 0" stroke="black">
+416 272 m
+416 256 l
+432 256 l
+432 272 l
+h
+</path>
+<text matrix="1 0 0 1 -120 -56" transformations="translations" pos="368 320" stroke="black" type="label" width="8.428" height="5.3" depth="0" halign="center" valign="center">\Telefon</text>
+<use matrix="1 0 0 1 -136 -24" name="mark/disk(sx)" pos="400 288" size="normal" stroke="black"/>
+<path layer="cut-3" matrix="1 0 0 1 -64 0" stroke="black" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path layer="cut-5" matrix="-1 0 0 -1 624 528" stroke="black" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path layer="list" matrix="1 0 0 1 -256 0" stroke="black" fill="pink-orange">
+432 272 m
+432 256 l
+448 256 l
+448 272 l
+h
+</path>
+<path matrix="1 0 0 1 -256 0" stroke="black">
+448 272 m
+448 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path matrix="1 0 0 1 -256 0" stroke="black">
+416 272 m
+416 256 l
+432 256 l
+432 272 l
+h
+</path>
+<text matrix="1 0 0 1 -184 -56" transformations="translations" pos="368 320" stroke="black" type="label" width="10.092" height="7.312" depth="0.03" halign="center" valign="center">\Faxmachine</text>
+<use matrix="1 0 0 1 -200 -24" name="mark/disk(sx)" pos="400 288" size="normal" stroke="black"/>
+<path matrix="1 0 0 1 -128 0" stroke="black" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path matrix="-1 0 0 -1 560 528" stroke="black" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path matrix="1 0 0 1 64 0" stroke="black" fill="dutch white">
+432 272 m
+432 256 l
+448 256 l
+448 272 l
+h
+</path>
+<path matrix="1 0 0 1 64 0" stroke="black">
+448 272 m
+448 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path matrix="1 0 0 1 64 0" stroke="black">
+416 272 m
+416 256 l
+432 256 l
+432 272 l
+h
+</path>
+<text matrix="1 0 0 1 136 -56" transformations="translations" pos="368 320" stroke="black" type="label" width="4.633" height="6.974" depth="0" halign="center" valign="center">\Lightning</text>
+<use matrix="1 0 0 1 120 -24" name="mark/disk(sx)" pos="400 288" size="normal" stroke="black"/>
+<path matrix="1 0 0 1 128 0" stroke="black" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path matrix="-1 0 0 -1 816 528" stroke="black" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path layer="dummy" matrix="1 0 0 1 -96 -64" stroke="black" fill="white">
+432 272 m
+432 256 l
+448 256 l
+448 272 l
+h
+</path>
+<path matrix="1 0 0 1 -96 -64" stroke="black">
+448 272 m
+448 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path matrix="1 0 0 1 -96 -64" stroke="black">
+416 272 m
+416 256 l
+432 256 l
+432 272 l
+h
+</path>
+<text matrix="1 0 0 1 -24 -120" transformations="translations" pos="368 320" stroke="black" type="label" width="7.532" height="6.486" depth="0" halign="center" valign="center">\SquarePipe</text>
+<use matrix="1 0 0 1 -24 -88" name="mark/disk(sx)" pos="352 288" size="normal" stroke="black"/>
+<text layer="indices-1" matrix="1 0 0 1 8 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">0</text>
+<text matrix="1 0 0 1 72 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">1</text>
+<text matrix="1 0 0 1 136 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">2</text>
+<text matrix="1 0 0 1 200 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">3</text>
+<text matrix="1 0 0 1 264 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">4</text>
+<text matrix="1 0 0 1 328 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">5</text>
+<text layer="dummy" matrix="-1 0 -0 -1 552 553.996" transformations="rigid" pos="208 368" stroke="black" type="label" width="31.798" height="6.926" depth="1.93" halign="center" valign="baseline" style="math">\mathit{dummy}</text>
+<path layer="dummy-pointers-a" stroke="black" arrow="pointed/small">
+168 264 m
+144 256
+147.532 234.774
+191.857 211.975
+287.465 196.349
+320 200.424 c
+</path>
+<path layer="dummy-pointers-b" matrix="-1 0 0 1 688 0" stroke="black" arrow="pointed/small">
+328 200 m
+125.516 209.135
+129.474 260.885
+160 260.885 c
+</path>
+<path stroke="black" arrow="pointed/small">
+520 264 m
+553.202 268.888
+550.837 230.045
+500.686 211.94
+400.535 196.349
+368 197.567 c
+</path>
+<text layer="n0" matrix="1 0 0 1 14.2212 15" transformations="translations" pos="329.779 149.774" stroke="black" type="label" width="23.589" height="6.531" depth="0" halign="center" valign="baseline" style="math">n=6</text>
+<use layer="list" matrix="1 0 0 1 -184 -24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black" fill="white"/>
+<use matrix="1 0 0 1 -120 -24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black" fill="white"/>
+<use matrix="1 0 0 1 72 -24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 136 -24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black" fill="white"/>
+<use layer="dummy" matrix="1 0 0 1 -40 -88" name="mark/fdisk(sfx)" pos="400 288" size="normal" stroke="black" fill="white"/>
+<text layer="getNode-1" matrix="1 0 0 1 0 -11" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="47.627" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{getNode(2)}</text>
+<text layer="getNode-2" matrix="1 0 0 1 183.293 -11" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="33.552" height="7.473" depth="2.49" halign="center" valign="baseline" style="math">2 &lt; n/2</text>
+<path matrix="1 0 0 1 0 -15" stroke="black" join="1">
+160 304 m
+336 304 l
+</path>
+<path matrix="0.5 0 0 0.5 80 137" stroke="black" join="1">
+160 304 m
+160 288 l
+</path>
+<path matrix="0.5 0 0 0.5 256 137" stroke="black" join="1">
+160 304 m
+160 288 l
+</path>
+<path layer="getNode-5" stroke="orange" pen="ultrafat" join="1">
+160 272 m
+160 256 l
+208 256 l
+208 272 l
+h
+</path>
+<path layer="getNode-7" stroke="orange" pen="ultrafat" join="1">
+224 272 m
+224 256 l
+272 256 l
+272 272 l
+h
+</path>
+<path layer="getNode-9" stroke="orange" pen="ultrafat" join="1">
+288 272 m
+288 256 l
+336 256 l
+336 272 l
+h
+</path>
+<path layer="getNode-10" stroke="red" pen="ultrafat" join="1">
+288 272 m
+288 256 l
+336 256 l
+336 272 l
+h
+</path>
+<path layer="getNode-3" stroke="orange" pen="ultrafat" join="1">
+320 208 m
+320 192 l
+368 192 l
+368 208 l
+h
+</path>
+<path layer="getNode-6" matrix="1 0 0 1 -128 0" stroke="orange" pen="ultrafat" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path layer="getNode-8" matrix="1 0 0 1 -64 0" stroke="orange" pen="ultrafat" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<text layer="getNode-11" matrix="1 0 0 1 0.00012627 -11" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="47.627" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{getNode(4)}</text>
+<text layer="getNode-12" matrix="1 0 0 1 183.293 -11" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="33.552" height="7.473" depth="2.49" halign="center" valign="baseline" style="math">4 \ge n/2</text>
+<path matrix="1 0 0 1 192 -16" stroke="black" join="1">
+160 304 m
+336 304 l
+</path>
+<path matrix="0.5 0 0 0.5 272 136" stroke="black" join="1">
+160 304 m
+160 288 l
+</path>
+<path matrix="0.5 0 0 0.5 448 136" stroke="black" join="1">
+160 304 m
+160 288 l
+</path>
+<path layer="getNode-13" stroke="orange" pen="ultrafat" join="1">
+308.977 220.667 m
+308.977 149.83 l
+379.023 149.83 l
+379.023 220.667 l
+h
+</path>
+<path layer="getNode-14" matrix="-1 0 0 1 688 0" stroke="orange" pen="ultrafat" arrow="pointed/small">
+328 200 m
+125.516 209.135
+129.474 260.885
+160 260.885 c
+</path>
+<path layer="getNode-15" stroke="orange" pen="ultrafat" join="1">
+480 272 m
+480 256 l
+528 256 l
+528 272 l
+h
+</path>
+<path layer="getNode-16" matrix="-1 0 0 -1 816 528" stroke="orange" pen="ultrafat" arrow="pointed/small">
+328 264 m
+336 272
+352 264 c
+</path>
+<path layer="getNode-17" stroke="orange" pen="ultrafat" join="1">
+416 272 m
+416 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path layer="getNode-18" stroke="red" pen="ultrafat" join="1">
+416 272 m
+416 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path layer="getNode-4" matrix="1 0 0 1 0.00019396 -0.00041873" stroke="orange" pen="ultrafat" arrow="pointed/small">
+328 200 m
+313.851 191.525
+141.988 199.726
+129.474 260.885
+160 264.117 c
+</path>
+<text layer="getNode-19" matrix="1 0 0 1 -0.00004893 -11.0004" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="45.994" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{getNode}(i)</text>
+<text layer="getNode-20" matrix="1 0 0 1 183.293 -11.0004" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="71.188" height="7.473" depth="2.49" halign="center" valign="baseline" style="math">\min\{i+1,n-i\}</text>
+<text layer="getNode-21" matrix="1 0 0 1 183.293 -11.0004" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="87.023" height="7.473" depth="2.49" halign="center" valign="baseline" style="math">O(1+\min\{i,n-i\})</text>
+<group layer="get-1" decoration="decoration/rounded-box-small">
+<text matrix="1 0 0 1 0 -49" transformations="translations" pos="144 384" stroke="black" type="minipage" width="176" height="19.165" depth="14.21" valign="top">$\mathrm{get}(i)$
+\begin{algorithmic}
+\STATE{$u\gets \mathrm{getNode}(i)$}
+\RETURN{$u.x$}
+\end{algorithmic}</text>
+</group>
+<text layer="get-2" matrix="1 0 0 1 -15 -0.902212" transformations="translations" pos="368.108 319.215" stroke="black" type="label" width="88.656" height="7.473" depth="2.49" valign="center" style="math">O(1+\min\{i,n-1\})</text>
+<group layer="set-1" matrix="1 0 0 1 0.00048209 -0.00015717" decoration="decoration/rounded-box-small">
+<text matrix="1 0 0 1 0 -49" transformations="translations" pos="144 384" stroke="black" type="minipage" width="176" height="19.165" depth="14.21" valign="top">$\mathrm{set}(i,x)$
+\begin{algorithmic}
+\STATE{$u\gets \mathrm{getNode}(i)$}
+\RETURN{$u.x \gets x$}
+\end{algorithmic}</text>
+</group>
+<text layer="set-2" matrix="1 0 0 1 -15.0004 -0.902313" transformations="translations" pos="368.108 319.215" stroke="black" type="label" width="88.656" height="7.473" depth="2.49" valign="center" style="math">O(1+\min\{i,n-1\})</text>
+<text layer="add-1" matrix="1 0 0 1 -0.00028632 -10.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="48.977" height="11.357" depth="5.38" valign="baseline" style="math">\mathrm{add}(4,\valuebox{laurel green}{\Bicycle})</text>
+<path layer="add-2" matrix="1 0 0 1 -32 48" stroke="black" fill="laurel green">
+432 272 m
+432 256 l
+448 256 l
+448 272 l
+h
+</path>
+<path matrix="1 0 0 1 -32 48" stroke="black">
+448 272 m
+448 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path matrix="1 0 0 1 -32 48" stroke="black">
+416 272 m
+416 256 l
+432 256 l
+432 272 l
+h
+</path>
+<text matrix="1 0 0 1 40 -8" transformations="translations" pos="368 320" stroke="black" type="label" width="13.33" height="7.312" depth="0.11" halign="center" valign="center">\Bicycle</text>
+<use matrix="1 0 0 1 24 24" name="mark/disk(sx)" pos="400 288" size="normal" stroke="black"/>
+<path layer="add-3" stroke="orange" pen="ultrafat" join="1">
+416 272 m
+416 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path layer="add-4" stroke="orange" pen="ultrafat" join="1">
+448 272 m
+448 272 l
+448 272 l
+448 272 l
+h
+</path>
+<path stroke="black" join="1" arrow="pointed/small">
+392 312 m
+367.77 307.055
+392.089 272 c
+</path>
+<path layer="add-5" stroke="black" join="1" arrow="pointed/small">
+424 312 m
+449.846 323.606
+451.198 308.406
+424.514 272 c
+</path>
+<use layer="add-2" matrix="1 0 0 1 40 24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black"/>
+<path layer="add-6" stroke="black" join="1" arrow="pointed/small">
+424 264 m
+400 264
+423.501 304 c
+</path>
+<path layer="add-7" stroke="black" join="1" arrow="pointed/small">
+392 264 m
+416 264
+393.102 304 c
+</path>
+<path layer="add-2a" stroke="orange" pen="ultrafat" join="1">
+384 320 m
+384 304 l
+432 304 l
+432 320 l
+h
+</path>
+<text layer="indices-2" matrix="1 0 0 1 8 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">0</text>
+<text matrix="1 0 0 1 72 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">1</text>
+<text matrix="1 0 0 1 136 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">2</text>
+<text matrix="1 0 0 1 200 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">3</text>
+<text matrix="1 0 0 1 264 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">5</text>
+<text matrix="1 0 0 1 328 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">6</text>
+<text matrix="1 0 0 1 232 21" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">4</text>
+<text layer="n1" matrix="1 0 0 1 14.2212 15" transformations="translations" pos="329.779 149.774" stroke="black" type="label" width="23.589" height="6.531" depth="0" halign="center" valign="baseline" style="math">n=7</text>
+<text layer="add-8" matrix="1 0 0 1 -0.00028632 -10.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="36.114" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{add}(i,x)</text>
+<text layer="add-9" matrix="1 0 0 1 103.293 -11.0004" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="87.023" height="7.473" depth="2.49" halign="center" valign="baseline" style="math">O(1+\min\{i,n-i\})</text>
+<text layer="remove-1" matrix="1 0 0 1 -0.00028632 -10.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="42.48" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{remove}(2)</text>
+<path layer="remove-2" stroke="orange" pen="ultrafat" join="1">
+288 272 m
+288 256 l
+336 256 l
+336 272 l
+h
+</path>
+<path layer="remove-3" stroke="black" join="1" arrow="pointed/small">
+264 264 m
+311.702 296.922
+352 264 c
+</path>
+<path layer="remove-4" matrix="-1 0 -0 -1 624 528" stroke="black" join="1" arrow="pointed/small">
+264 264 m
+311.702 296.922
+352 264 c
+</path>
+<path layer="fade-1" matrix="1 0 0 1 -128 0" stroke="black" fill="granny smith apple" opacity="10%">
+432 272 m
+432 256 l
+448 256 l
+448 272 l
+h
+</path>
+<path matrix="1 0 0 1 -128 0" stroke="black" opacity="10%">
+448 272 m
+448 256 l
+464 256 l
+464 272 l
+h
+</path>
+<path matrix="1 0 0 1 -128 0" stroke="black" opacity="10%">
+416 272 m
+416 256 l
+432 256 l
+432 272 l
+h
+</path>
+<text matrix="1 0 0 1 -56 -56" transformations="translations" pos="368 320" stroke="black" type="label" width="8.787" height="5.011" depth="0.03" halign="center" valign="center" opacity="10%">\Letter</text>
+<use matrix="1 0 0 1 -56 -24" name="mark/disk(sx)" pos="352 288" size="normal" stroke="gray"/>
+<use matrix="1 0 0 1 -72 -24" name="mark/disk(sx)" pos="400 288" size="normal" stroke="gray"/>
+<path stroke="black" arrow="pointed/small" opacity="10%">
+328 264 m
+336 272
+352 264 c
+</path>
+<path matrix="-1 0 0 -1 624 528" stroke="black" arrow="pointed/small" opacity="10%">
+328 264 m
+336 272
+352 264 c
+</path>
+<path stroke="orange" pen="ultrafat" join="1" opacity="10%">
+288 272 m
+288 256 l
+336 256 l
+336 272 l
+h
+</path>
+<text layer="indices-3" matrix="1 0 0 1 8 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">0</text>
+<text matrix="1 0 0 1 72 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">1</text>
+<text matrix="1 0 0 1 200 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">2</text>
+<text matrix="1 0 0 1 264 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">4</text>
+<text matrix="1 0 0 1 328 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">5</text>
+<text matrix="1 0 0 1 232 21" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">3</text>
+<use layer="node" matrix="1 0 0 1 8 -24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black" fill="white"/>
+<text layer="n2" matrix="1 0 0 1 14.2212 15" transformations="translations" pos="329.779 149.774" stroke="black" type="label" width="23.589" height="6.531" depth="0" halign="center" valign="baseline" style="math">n=6</text>
+<path layer="fade-1" matrix="1 0 0 1 -128 0" stroke="black" fill="granny smith apple" opacity="10%">
+432 272 m
+432 256 l
+448 256 l
+448 272 l
+h
+</path>
+<text layer="remove-5" matrix="1 0 0 1 -0.00028632 -10.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="40.846" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{remove}(i)</text>
+<text layer="remove-6" matrix="1 0 0 1 103.293 -11.0004" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="87.023" height="7.473" depth="2.49" halign="center" valign="baseline" style="math">O(1+\min\{i,n-i\})</text>
+</page>
+</ipe>
