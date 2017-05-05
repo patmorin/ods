@@ -1,0 +1,184 @@
+<html>
+<head>
+<style type="text/css">
+  body {
+    margin: 1em auto 1em auto;
+    max-width: 55ex;
+  }
+  div.pause {
+    margin: 1em;
+    color: red;
+  }
+  div.pause:before {
+    content: "Pause ";
+  }
+  div.pause:after {
+    content: "s";
+  }
+</style>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+A DLList, or doubly-linked list implements the full List interface and also provides an efficient implementation of the Deque interface 
+
+<div class="pause">breath</div>
+
+The basic building block of a DLList is a <em>node</em>. A node has three parts: a piece of data, that we call $x$, a pointer to the next list node, that we call $\mathtt{next}$, and a pointer to the previous list node, that we call $\mathtt{prev}$..
+
+<div class="pause">1</div>
+
+The nodes of a DLList are linked together, one after another, through their $\mathtt{next}$ and $\mathtt{prev}$ pointers.
+
+<div class="pause">1</div>
+
+To make things simpler, and avoid special cases, it helps to introduce a special empty node that we call the <em>dummy</em>.  
+
+<div class="pause">1</div>
+
+The dummy's next pointer points to the first node in the list and the dummy's last pointer points to the last node in the list.
+
+<div class="pause">0</div>
+
+We can think of the dummy as a node that appears both before the first node in the list and after the last node in the list.
+
+<div class="pause">1</div>
+
+The DLList itself consists of the dummy node and an integer, $n$, that keeps track of the number of items in the list.
+
+<div class="pause">1</div>
+
+Most of the work required in implementing the List operations comes from finding the node in a DLList that has a specific index, $i$.  This is done by a helper function called getNode(i).
+
+<div class="pause">1</div>
+
+To get the $i$th node in a DLList, we first check if the $i$th node is in the first or second half of the list by comparing $i$ to $n/2$.
+
+<div class="pause">1</div>
+
+If $i< n/2$, then the $i$th node is in the first half of the list, and we can get to it by starting at the dummy and following $i+1$ next pointers.
+
+<div class="pause">4</div>
+
+If $i \ge n/2$, then the $i$th node is in the second half of the list, and we can get to it by starting at the dummy and following $n-i$ prev pointers.
+
+<div class="pause">4</div>
+
+Putting all this together, this means that we can get to the $i$th node in a DLList by following the minimum of $i+1$ or $n-i$ pointers.
+
+<div class="pause">2</div>
+
+This means that the getNode(i) function runs in $O(1+\min\{i, n-i\})$ time.
+It takes at least constant time, plus time proportional to the minimum
+of $i$ and $n-i$.
+
+<div class="pause">2</div>
+
+With the getNode(i) function, getting and setting values in a DLList becomes easy.
+
+
+<div class="pause">2</div>
+
+To get the $i$th value in a DLList we just get the $i$th node and return its value.  
+
+<div class="pause">1</div>
+
+This takes only constant time, once we've found the $i$th list node.
+
+<div class="pause">2</div>
+
+To set the $i$th value in a DLList we just get the $i$th node and set its value.
+
+<div class="pause">1</div>
+
+Again, this takes only constant time, once we've found the $i$th list node.
+
+<div class="pause">2</div>
+
+Adding and removing from a DLList is also fairly easy, but requires some
+careful pointer manipulations to get everything working just right.
+
+<div class="pause">2</div>
+
+To add a new value to a DLList at position $i$, we first create a new
+node, $u$, that contains the value we want to add.
+
+<div class="pause">2</div>
+
+Next, we use the getNode function to find the node, $w$, currently at position $i$.
+
+<div class="pause">2</div>
+
+Now we have to set four pointers to splice the new node into the list:
+Two of these pointers are in the new node, $u$,.  One pointer is 
+$w$'s prev pointer and the last pointer is in the node that appears
+before $w$.
+
+<div class="pause">1</div>
+
+These pointer changes only require four lines of code, but it's easy to
+get them wrong.
+
+<div class="pause">2</div>
+
+Finally, we increment the value $n$, since the list now contains one
+more value than before.  Note that adding the new node $u$ to the list
+implicitly changes the indices of all the nodes that come after $u$.
+
+<div class="pause">2</div>
+
+As with the other DLList operations, add(i,x) only takes constant time
+once we've we've used getNode(i) to find the $i$th node in the list.
+
+<div class="pause">1</div>
+
+Removing the $i$th value from a DLList is a bit easier. We first use
+the getNode(i) function to find the $i$th list node, $u$.
+
+<div class="pause">1</div>
+
+Next, we update two pointers to splice $u$ out of the list.  One pointer
+is in the node preceding $u$ and the other is the node that comes
+after $u$.
+
+<div class="pause">3</div>
+
+If we're working in a programming language that requires explicitly freeing memory then we should now free the space allocated to node $u$.
+
+<div class="pause">3</div>
+
+Finally, we decrement the value of $n$, since the list now contains one less value.  Note that removing the node $u$ has the side-effect of implicitly changing the indices of all the nodes that came after $u$.
+
+<div class="pause">3</div>
+
+Again, the remove(i) operation only takes constant time
+once we've used getNode(i) to find the $i$th node in the list.
+
+<div class="pause">4</div>
+
+To summarize:  A DLList implmements the List interface so that each of the operations get(i), set(i,x), add(i,x), and remove(i) runs in time $O(1+min\{i,n-i\})$.
+
+When we specialize this to the Deque interface, each of the operations addFront(), addBack(), removeFront(), adn removeBack() runs in constant time.
+
+<div class="pause">10</div>
+
+
+</body>
+</html>

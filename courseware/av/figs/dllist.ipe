@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170504132942" modified="D:20170505133736"/>
+<info created="D:20170504132942" modified="D:20170505154603"/>
 <preamble>\usepackage{ods-figs}
 \usepackage{marvosym}
 \usepackage[noend]{algorithmic}</preamble>
@@ -256,6 +256,7 @@ h
 <color name="trolley grey" value="0.505 0.498 0.458"/>
 <color name="midnight green" value="0.062 0.309 0.333"/>
 <color name="paynes grey" value="0.345 0.435 0.486"/>
+<color name="lightgray" value="0.827"/>
 </ipestyle>
 <ipestyle name="transparency">
 <opacity name="10%" value="0.1"/>
@@ -494,7 +495,7 @@ h
 <view layers="node list cut-3 cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-2" active="remove-2"/>
 <view layers="node list cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-2 remove-3" active="remove-4"/>
 <view layers="node list cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-2 remove-3 remove-4" active="cut-3"/>
-<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-3 remove-4 indices-3 fade-1" active="indices-3"/>
+<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-3 remove-4 fade-1" active="indices-3"/>
 <view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-1 remove-3 remove-4 indices-3 n2" active="indices-3"/>
 <view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-3 remove-4 indices-3 n2" active="indices-3"/>
 <view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-3 remove-4 indices-3 n2 remove-5" active="remove-5"/>
@@ -571,7 +572,7 @@ h
 336 272
 352 264 c
 </path>
-<path layer="cut-4" matrix="-1 0 -0 -1 688 528" stroke="black" arrow="pointed/small">
+<path layer="cut-4" matrix="-1 0 0 -1 688 528" stroke="black" arrow="pointed/small">
 328 264 m
 336 272
 352 264 c
@@ -737,7 +738,7 @@ h
 <text matrix="1 0 0 1 200 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">3</text>
 <text matrix="1 0 0 1 264 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">4</text>
 <text matrix="1 0 0 1 328 -27" transformations="translations" pos="176 304" stroke="gray" type="label" width="4.981" height="6.531" depth="0" halign="center" valign="baseline" style="math">5</text>
-<text layer="dummy" matrix="-1 0 -0 -1 552 553.996" transformations="rigid" pos="208 368" stroke="black" type="label" width="31.798" height="6.926" depth="1.93" halign="center" valign="baseline" style="math">\mathit{dummy}</text>
+<text layer="dummy" matrix="-1 0 0 -1 552 553.996" transformations="rigid" pos="208 368" stroke="black" type="label" width="31.798" height="6.926" depth="1.93" halign="center" valign="baseline" style="math">\mathit{dummy}</text>
 <path layer="dummy-pointers-a" stroke="black" arrow="pointed/small">
 168 264 m
 144 256
@@ -763,7 +764,6 @@ h
 <text layer="n0" matrix="1 0 0 1 14.2212 15" transformations="translations" pos="329.779 149.774" stroke="black" type="label" width="23.589" height="6.531" depth="0" halign="center" valign="baseline" style="math">n=6</text>
 <use layer="list" matrix="1 0 0 1 -184 -24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black" fill="white"/>
 <use matrix="1 0 0 1 -120 -24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black" fill="white"/>
-<use matrix="1 0 0 1 72 -24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black"/>
 <use matrix="1 0 0 1 136 -24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black" fill="white"/>
 <use layer="dummy" matrix="1 0 0 1 -40 -88" name="mark/fdisk(sfx)" pos="400 288" size="normal" stroke="black" fill="white"/>
 <text layer="getNode-1" matrix="1 0 0 1 0 -11" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="47.627" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{getNode(2)}</text>
@@ -994,7 +994,7 @@ h
 311.702 296.922
 352 264 c
 </path>
-<path layer="remove-4" matrix="-1 0 -0 -1 624 528" stroke="black" join="1" arrow="pointed/small">
+<path layer="remove-4" matrix="-1 0 0 -1 624 528" stroke="black" join="1" arrow="pointed/small">
 264 264 m
 311.702 296.922
 352 264 c
@@ -1021,8 +1021,8 @@ h
 h
 </path>
 <text matrix="1 0 0 1 -56 -56" transformations="translations" pos="368 320" stroke="black" type="label" width="8.787" height="5.011" depth="0.03" halign="center" valign="center" opacity="10%">\Letter</text>
-<use matrix="1 0 0 1 -56 -24" name="mark/disk(sx)" pos="352 288" size="normal" stroke="gray"/>
-<use matrix="1 0 0 1 -72 -24" name="mark/disk(sx)" pos="400 288" size="normal" stroke="gray"/>
+<use matrix="1 0 0 1 -56 -24" name="mark/disk(sx)" pos="352 288" size="normal" stroke="lightgray"/>
+<use matrix="1 0 0 1 -72 -24" name="mark/disk(sx)" pos="400 288" size="normal" stroke="lightgray"/>
 <path stroke="black" arrow="pointed/small" opacity="10%">
 328 264 m
 336 272
@@ -1057,5 +1057,10 @@ h
 </path>
 <text layer="remove-5" matrix="1 0 0 1 -0.00028632 -10.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="40.846" height="7.473" depth="2.49" valign="baseline" style="math">\mathrm{remove}(i)</text>
 <text layer="remove-6" matrix="1 0 0 1 103.293 -11.0004" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="87.023" height="7.473" depth="2.49" halign="center" valign="baseline" style="math">O(1+\min\{i,n-i\})</text>
+<text layer="add-2a" matrix="1 0 0 1 231.293 -8.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
+<text layer="add-3" matrix="1 0 0 1 263.293 -56.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="7.887" height="4.428" depth="0" halign="center" valign="baseline" style="math">w</text>
+<text layer="remove-2" matrix="1 0 0 1 135.293 -56.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
+<text layer="indices-3" matrix="1 0 0 1 135.293 -56.9995" transformations="translations" pos="160.707 334.036" stroke="lightgray" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
+<use layer="list" matrix="1 0 0 1 72 -24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black"/>
 </page>
 </ipe>
