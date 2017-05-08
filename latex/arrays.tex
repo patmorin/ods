@@ -802,11 +802,11 @@ more than two blocks that are not completely full.  The number of blocks,
 #r#, used by a #RootishArrayStack# that stores #n# elements therefore
 satisfies
 \[
-    (#r#-2)(#r#-1) \le #n# \enspace .
+    (#r#-2)(#r#-1)/2 \le #n# \enspace .
 \]
 Again, using the quadratic equation on this gives
 \[
-   #r# \le (3+\sqrt{1+4#n#})/2 = O(\sqrt{#n#}) \enspace .
+   #r# \le \frac{1}{2}\left(3+\sqrt{8#n#+1}\right) = O(\sqrt{#n#}) \enspace .
 \]
 The last two blocks have sizes #r# and #r-1#, so the space wasted by these
 two blocks is at most $2#r#-1 = O(\sqrt{#n#})$.  If we store the blocks
@@ -819,8 +819,7 @@ is $O(\sqrt{#n#})$.
 Next, we argue that this space usage is optimal for any data structure
 that starts out empty and can support the addition of one item at
 a time. More precisely, we will show that, at some point during the
-addition of #n# items, the data structure is wasting an amount of space
-at least in $\sqrt{#n#}$ (though it may be only wasted for a moment).
+addition of #n# items, the data structure is wasting at least in $\sqrt{#n#}$ space (though it may be only wasted for a moment).
 
 Suppose we start with an empty data structure and we add #n# items one
 at a time.  At the end of this process, all #n# items are stored in
@@ -828,7 +827,7 @@ the structure and distributed among a collection of #r# memory blocks.
 If $#r#\ge \sqrt{#n#}$, then the data structure must be using #r#
 pointers (or references) to keep track of these #r# blocks, and these
 pointers are wasted space.  On the other hand, if $#r# < \sqrt{#n#}$
-then, by the pigeonhole principle, some block must have a size of at
+then, by the pigeonhole principle, some block must have size at
 least $#n#/#r# > \sqrt{#n#}$.  Consider the moment at which this block
 was first allocated.  Immediately after it was allocated, this block
 was empty, and was therefore wasting $\sqrt{#n#}$ space.  Therefore,
