@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170504132942" modified="D:20170505154603"/>
+<info created="D:20170504132942" modified="D:20170508104013"/>
 <preamble>\usepackage{ods-figs}
 \usepackage{marvosym}
 \usepackage[noend]{algorithmic}</preamble>
@@ -204,13 +204,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -236,6 +236,7 @@ h
 <tiling name="rising" angle="30" step="4" width="1"/>
 </ipestyle>
 <ipestyle name="odscolors">
+<color name="lightgray" value="0.827"/>
 <color name="usc gold" value="1 0.807 0.019"/>
 <color name="tigers eye" value="0.968 0.549 0.235"/>
 <color name="pearl aqua" value="0.556 0.776 0.725"/>
@@ -256,7 +257,6 @@ h
 <color name="trolley grey" value="0.505 0.498 0.458"/>
 <color name="midnight green" value="0.062 0.309 0.333"/>
 <color name="paynes grey" value="0.345 0.435 0.486"/>
-<color name="lightgray" value="0.827"/>
 </ipestyle>
 <ipestyle name="transparency">
 <opacity name="10%" value="0.1"/>
@@ -389,7 +389,11 @@ h
 <layer name="indices-1"/>
 <layer name="dummy"/>
 <layer name="dummy-pointers-a"/>
+<layer name="dummynext"/>
 <layer name="dummy-pointers-b"/>
+<layer name="dummyprev"/>
+<layer name="dummynode-first"/>
+<layer name="dummynode-last"/>
 <layer name="dllist"/>
 <layer name="n0"/>
 <layer name="getNode-1"/>
@@ -413,6 +417,8 @@ h
 <layer name="getNode-19"/>
 <layer name="getNode-20"/>
 <layer name="getNode-21"/>
+<layer name="getNode-22"/>
+<layer name="getNode-23"/>
 <layer name="tau"/>
 <layer name="get-1"/>
 <layer name="get-2"/>
@@ -436,6 +442,7 @@ h
 <layer name="remove-3"/>
 <layer name="remove-4"/>
 <layer name="indices-3"/>
+<layer name="greyedOutU"/>
 <layer name="n2"/>
 <layer name="fade-1"/>
 <layer name="remove-5"/>
@@ -444,10 +451,10 @@ h
 <view layers="node labels" active="labels"/>
 <view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1" active="cut-2"/>
 <view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy" active="list"/>
-<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a" active="dummy-pointers-a"/>
-<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b" active="dummy-pointers-b"/>
-<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0" active="n0"/>
-<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1" active="dummy"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummynext" active="dummynode-last"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummynext dummy-pointers-b dummyprev" active="dummynext"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dummynode-first dummynode-last dllist n0" active="n0"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1" active="dummy-pointers-a"/>
 <view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2" active="getNode-2"/>
 <view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2 getNode-3" active="getNode-3"/>
 <view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-1 getNode-2 getNode-4" active="getNode-4"/>
@@ -468,8 +475,10 @@ h
 <view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-11 getNode-12 getNode-18" active="getNode-18"/>
 <view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0" active="getNode-18"/>
 <view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-19" active="getNode-20"/>
-<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-19 getNode-20" active="getNode-21"/>
-<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-19 getNode-21" active="getNode-19"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-19 getNode-20" active="dummy-pointers-a"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-19 getNode-21" active="getNode-21"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-19 getNode-22" active="getNode-22"/>
+<view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 getNode-19 getNode-21 getNode-23" active="getNode-23"/>
 <view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0" active="getNode-12"/>
 <view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 get-1" active="get-1"/>
 <view layers="node list cut-1 cut-2 cut-3 cut-4 cut-5 indices-1 dummy dummy-pointers-a dummy-pointers-b dllist n0 get-1 get-2" active="get-2"/>
@@ -495,8 +504,8 @@ h
 <view layers="node list cut-3 cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-2" active="remove-2"/>
 <view layers="node list cut-4 cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-2 remove-3" active="remove-4"/>
 <view layers="node list cut-5 dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-2 remove-3 remove-4" active="cut-3"/>
-<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-3 remove-4 fade-1" active="indices-3"/>
-<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-1 remove-3 remove-4 indices-3 n2" active="indices-3"/>
+<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha indices-2 n1 remove-1 remove-3 remove-4 greyedOutU fade-1" active="indices-3"/>
+<view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-1 remove-3 remove-4 indices-3 greyedOutU n2" active="greyedOutU"/>
 <view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-3 remove-4 indices-3 n2" active="indices-3"/>
 <view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-3 remove-4 indices-3 n2 remove-5" active="remove-5"/>
 <view layers="node list dummy dummy-pointers-a dummy-pointers-b dllist add-2 add-4 add-5 add-6 add-7 alpha remove-3 remove-4 indices-3 n2 remove-5 remove-6" active="remove-6"/>
@@ -1059,8 +1068,13 @@ h
 <text layer="remove-6" matrix="1 0 0 1 103.293 -11.0004" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="87.023" height="7.473" depth="2.49" halign="center" valign="baseline" style="math">O(1+\min\{i,n-i\})</text>
 <text layer="add-2a" matrix="1 0 0 1 231.293 -8.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
 <text layer="add-3" matrix="1 0 0 1 263.293 -56.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="7.887" height="4.428" depth="0" halign="center" valign="baseline" style="math">w</text>
-<text layer="remove-2" matrix="1 0 0 1 135.293 -56.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
-<text layer="indices-3" matrix="1 0 0 1 135.293 -56.9995" transformations="translations" pos="160.707 334.036" stroke="lightgray" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
+<text layer="remove-2" matrix="1 0 0 1 135.293 -52.9995" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
+<text layer="greyedOutU" matrix="1 0 0 1 135.293 -52.9995" transformations="translations" pos="160.707 334.036" stroke="lightgray" type="label" width="5.563" height="4.428" depth="0" halign="center" valign="baseline" style="math">u</text>
 <use layer="list" matrix="1 0 0 1 72 -24" name="mark/fdisk(sfx)" pos="352 288" size="normal" stroke="black"/>
+<text layer="dummynext" matrix="-1 0 0 -1 532 585.996" transformations="rigid" pos="208 368" stroke="black" type="label" width="18.487" height="5.693" depth="0" halign="center" valign="baseline" style="math">\mathit{next}</text>
+<text layer="dummyprev" matrix="-1 0 0 -1 572 585.996" transformations="rigid" pos="208 368" stroke="black" type="label" width="18.376" height="4.435" depth="1.93" halign="center" valign="baseline" style="math">\mathit{prev}</text>
+<text layer="dummynode-first" matrix="1 0 0 1 -4 0" transformations="translations" pos="328 212" stroke="black" type="label" width="15.59" height="6.227" depth="0" halign="center" valign="baseline" size="small" style="math">first</text>
+<text layer="dummynode-last" matrix="1 0 0 1 4 -4" transformations="translations" pos="360 216" stroke="black" type="label" width="14.13" height="6.227" depth="0" halign="center" valign="baseline" size="small" style="math">last</text>
+<text layer="getNode-22" matrix="1 0 0 1 183.293 -11.0004" transformations="translations" pos="160.707 334.036" stroke="black" type="label" width="87.023" height="7.473" depth="2.49" halign="center" valign="baseline" style="math">O(\textcolor{yellow}{1}+\min\{i,n-i\})</text>
 </page>
 </ipe>
