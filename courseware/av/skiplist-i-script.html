@@ -1,0 +1,154 @@
+<html>
+<head>
+<style type="text/css">
+  body {
+    margin: 1em auto 1em auto;
+    max-width: 55ex;
+  }
+  div.pause {
+    margin: 1em;
+    color: red;
+  }
+  div.pause:before {
+    content: "Pause ";
+  }
+  div.pause:after {
+    content: "s";
+  }
+</style>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+A <em>skiplist</em> is a type of random-access list.  We can think of a skiplist as being created as follows:
+
+<div class="pause">1</pause>
+
+First, we start with a sorted singly-linked list containing, say, $n$ numbers in sorted order.
+
+<div class="pause">1</pause>
+
+We attach a special node, called the <em>sentinel</em> to the front of this list.
+
+<div class="pause">1</pause>
+
+We call this list, including the sentinel, $L_0$.
+
+<div class="pause">1</pause>
+
+Now we're going to make a second list called $L_1$.  To make $L_1$, we start wit the first non-sentinel node in $L_0$ and we toss a coin
+
+<div class="pause">1</pause>
+
+(audio)
+
+<div class="pause">1</pause>
+
+If that coin comes up heads, then this node will also appear in $L_1$.  If not, then it won't.
+
+<div class="pause">1</pause>
+
+Next we move to the next node in $L_0$ and toss the coin again.  We will include this node in $L_1$ only if the coin comes up heads.
+
+<div class="pause">1</pause>
+
+We repeat this for every node in $L_0$.  
+
+<div class="pause">1</pause>
+
+Heads, we keep it.
+<div class="pause">1</pause>
+Heads, we keep it.
+<div class="pause">1</pause>
+Heads, we keep it.
+<div class="pause">1</pause>
+Tails, we leave it.
+<div class="pause">1</pause>
+Heads, we keep it.
+<div class="pause">1</pause>
+Tails, we leave it.
+<div class="pause">1</pause>
+Heads, we keep it.
+<div class="pause">1</pause>
+Tails we leave it.
+<div class="pause">1</pause>
+
+At the end of this process, if any of the nodes made it into $L_1$, then we tack a sentinel node on to the front and this gives us $L_1$.
+<div class="pause">1</pause>
+
+We don't stop there, though.  We repeate the same process on $L_1$ to get a new list, $L_2$.
+<div class="pause">5</pause>
+
+From $L_2$ we make $L_3$, and so on, until eventually we get an empty list.
+<div class="pause">1</pause>
+
+The resulting sequence of nested structures is called a skiplist, since the upper lists have edges that skip over nodes in the lower lists.
+<div class="pause">2</pause>
+
+The most important concept in studying a skiplist is the notion of a <em>search path</em>.  We usually think of a search path as looking for a specific value that may or may not be contained in the bottom list, $L_0$.  
+<div class="pause">2</pause>
+
+In this case, we'll consider the search path for 4.5, which is not contained in $L_0$, but if it were, it would be between the values 4 and 5, which both appear in $L_0$.
+<div class="pause">1</pause>
+
+The search path starts at the highest sentinel node and uses a greedy strategy:  If the search path can move to the right without overshooting or reaching the value we're looking for, then it does. Otherwise, it moves down.
+<div class="pause">1</pause>
+
+In this case, right step would take us to 9, which is not less than 4.5, so instead, the search path goes down one level, into the list $L_3$.
+<div class="pause">2</pause>
+
+Now, the next step to the right takes us to 1, which is less than 4.5, so the search path goes to the right, to the node in $L_3$ containing the value 1.
+<div class="pause">1</pause>
+
+Now, though the next step to the right would go too far, so the search path goes down into $L_2$.
+<div class="pause">1</pause>
+
+Still, the next step to the right would go too far, so the search path goes down into $L_1$.
+<div class="pause">1</pause>
+
+Now, the search path goes right, to the node containing 3.
+<div class="pause">1</pause>
+
+Again, to the right, to the node containing 4.
+<div class="pause">1</pause>
+
+Now, though, a step to the right would take us to five, so we go down into $L_0$.
+<div class="pause">1</pause>
+
+Even in $L_0$, a step to the right would take us to five, so the search path ends here, at the node containing 4 in $L_0$.
+<div class="pause">1</pause>
+
+This gives us a search path for $L_4$ that takes 8 steps and visits 8 nodes so we say this search path has length 8.
+<div class="pause">1</pause>
+
+There are a few different ways to think about search paths.  The way we just described talks about the search path for a value.  We can also think of the search path for a node. The path we just described is the search path for the node $u$ in $L_0$ that contains the value 5.  The search path for $u$ always ends in the node of $L_0$ that appears just before $u$.
+<div class="pause">1</pause>
+
+If we think about the nodes at which the search path proceeds downwards, these are exactly the edges of the skiplist whose left endpoint comes before $u$ and whose right endpoint is either $u$ or some node that comes after $u$.
+<div class="pause">2</pause>
+
+Still another way to think of the search path is in terms of the <em>reverse search path</em>.  We can build this path by starting at the node just before $u$ in $L_0$ and repeatedly going up whenever we can.  If we are unable to go up, then we go left.
+<div class="pause">6</pause>
+
+Though we don't see it in this small example, search paths tend to be very short compared to the number of elements in $L_0$. This is because they can use very long edges in the upper lists to skip over many nodes in $L_0$.  In a subsequent module, we will prove that the expected length of the search path for any node in $L_0$ is only $2\log n + O(1)$.  The constant 2 is not really critical here, so the thing to keep in mind is that the expected length of the search path is $O(\log n)$.
+
+</body>
+</html>
