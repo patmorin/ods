@@ -166,6 +166,10 @@
 
 \usepackage{tikz,gnuplot-lua-tikz}
 
+% The following is a work-around for bad distribution of gnuplot-tex
+% https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=835028
+\def\gpsetdashtype#1{}  
+
 \usepackage[bookmarks]{hyperref}
 \hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,%
 	citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,%
