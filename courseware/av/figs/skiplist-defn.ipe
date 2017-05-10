@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170504132942" modified="D:20170509143132"/>
+<info created="D:20170504132942" modified="D:20170509173103"/>
 <preamble>\usepackage{ods-figs}
 \usepackage{marvosym}</preamble>
 <bitmap id="1" width="499" height="498" length="513684" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
@@ -18898,13 +18898,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -18969,6 +18969,7 @@ h
 <layer name="label0"/>
 <layer name="construct-1"/>
 <layer name="coin-head"/>
+<layer name="L1-grey"/>
 <layer name="construct-3"/>
 <layer name="construct-4"/>
 <layer name="coin-tail"/>
@@ -19044,33 +19045,33 @@ h
 <view layers="L_0 s0" active="s0"/>
 <view layers="L_0 s0 label0" active="label0"/>
 <view layers="L_0 s0 label0 construct-1" active="construct-1"/>
-<view layers="L_0 s0 label0 construct-1 coin-head" active="coin-head"/>
-<view layers="L_0 s0 label0 construct-1 coin-head construct-3" active="construct-3"/>
-<view layers="L_0 s0 s0-label label0 construct-1 construct-3" active="s0-label"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-4" active="construct-4"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-4 coin-tail" active="coin-tail"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-4" active="construct-5"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-5" active="construct-5"/>
-<view layers="L_0 s0 s0-label label0 coin-head construct-3 construct-5" active="construct-6"/>
-<view layers="L_0 s0 s0-label label0 coin-head construct-3 construct-5 construct-6" active="construct-6"/>
-<view layers="L_0 s0 s0-label label0 coin-head construct-3 construct-5 construct-6 construct-7" active="construct-7"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-5 construct-6 construct-7" active="construct-7"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-6 construct-7 construct-8" active="construct-8"/>
-<view layers="L_0 s0 s0-label label0 coin-head construct-3 construct-6 construct-7 construct-8 construct-9" active="construct-9"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-6 construct-7 construct-9 construct-10" active="construct-10"/>
-<view layers="L_0 s0 s0-label label0 coin-head construct-3 construct-6 construct-7 construct-9 construct-10 construct-11" active="construct-11"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-6 construct-7 construct-9 construct-11 construct-12" active="construct-12"/>
-<view layers="L_0 s0 s0-label label0 construct-3 coin-tail construct-6 construct-7 construct-9 construct-11 construct-12" active="construct-12"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-6 construct-7 construct-9 construct-11 construct-13" active="construct-13"/>
-<view layers="L_0 s0 s0-label label0 coin-head construct-3 construct-6 construct-7 construct-9 construct-11 construct-13 construct-14" active="construct-14"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-15" active="construct-15"/>
-<view layers="L_0 s0 s0-label label0 construct-3 coin-tail construct-6 construct-7 construct-9 construct-11 construct-14 construct-15" active="construct-15"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-16" active="construct-16"/>
-<view layers="L_0 s0 s0-label label0 coin-head construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-16 construct-17" active="construct-17"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-17 construct-18" active="construct-18"/>
-<view layers="L_0 s0 s0-label label0 construct-3 coin-tail construct-6 construct-7 construct-9 construct-11 construct-14 construct-17 construct-18" active="construct-18"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-17" active="construct-18"/>
-<view layers="L_0 s0 s0-label label0 construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-17 construct-19" active="construct-19"/>
+<view layers="L_0 s0 label0 construct-1 coin-head L1-grey" active="L1-grey"/>
+<view layers="L_0 s0 label0 construct-1 coin-head L1-grey construct-3" active="construct-3"/>
+<view layers="L_0 s0 s0-label label0 construct-1 L1-grey construct-3" active="s0-label"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-4" active="construct-4"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-4 coin-tail" active="coin-tail"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-4" active="construct-5"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-5" active="construct-5"/>
+<view layers="L_0 s0 s0-label label0 coin-head L1-grey construct-3 construct-5" active="construct-6"/>
+<view layers="L_0 s0 s0-label label0 coin-head L1-grey construct-3 construct-5 construct-6" active="construct-6"/>
+<view layers="L_0 s0 s0-label label0 coin-head L1-grey construct-3 construct-5 construct-6 construct-7" active="construct-7"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-5 construct-6 construct-7" active="construct-7"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-6 construct-7 construct-8" active="construct-8"/>
+<view layers="L_0 s0 s0-label label0 coin-head L1-grey construct-3 construct-6 construct-7 construct-8 construct-9" active="construct-9"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-6 construct-7 construct-9 construct-10" active="construct-10"/>
+<view layers="L_0 s0 s0-label label0 coin-head L1-grey construct-3 construct-6 construct-7 construct-9 construct-10 construct-11" active="construct-11"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-6 construct-7 construct-9 construct-11 construct-12" active="construct-12"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 coin-tail construct-6 construct-7 construct-9 construct-11 construct-12" active="construct-12"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-6 construct-7 construct-9 construct-11 construct-13" active="construct-13"/>
+<view layers="L_0 s0 s0-label label0 coin-head L1-grey construct-3 construct-6 construct-7 construct-9 construct-11 construct-13 construct-14" active="construct-14"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-15" active="construct-15"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 coin-tail construct-6 construct-7 construct-9 construct-11 construct-14 construct-15" active="construct-15"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-16" active="construct-16"/>
+<view layers="L_0 s0 s0-label label0 coin-head L1-grey construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-16 construct-17" active="construct-17"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-17 construct-18" active="construct-18"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 coin-tail construct-6 construct-7 construct-9 construct-11 construct-14 construct-17 construct-18" active="construct-18"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-17" active="construct-18"/>
+<view layers="L_0 s0 s0-label label0 L1-grey construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-17 construct-19" active="construct-19"/>
 <view layers="L_0 s0 s0-label label0 construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-17 construct-19 construct-20" active="construct-20"/>
 <view layers="L_0 s0 s0-label label0 construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-17 construct-19 construct-20 construct-21" active="construct-21"/>
 <view layers="L_0 s0 s0-label label0 coin-head construct-3 construct-6 construct-7 construct-9 construct-11 construct-14 construct-17 construct-19 construct-20 construct-21 construct-22" active="construct-22"/>
@@ -19985,5 +19986,6 @@ h
 <path layer="reverse-8" matrix="1 0 0 1 -56 -88" stroke="rose gold" fill="dutch white" pen="heavier">
 4.38386 0 0 4.38386 160 352 e
 </path>
+<text layer="L1-grey" matrix="1 0 0 1 16 22.2243" transformations="translations" pos="48 192" stroke="black" type="label" width="9.599" height="6.923" depth="1.49" halign="right" valign="baseline" style="math" opacity="20%">L_1</text>
 </page>
 </ipe>
