@@ -14,7 +14,7 @@ http://goo.gl/hCvlyp
 
 If ipetoipe generates errors about ods-colors.sty, then try this:
 
-  mkdir -p ~textmf/tex/latex/ods/
+  mkdir -p ~/texmf/tex/latex/ods/
   ln -s $PWD/latex/ods-colors.sty ~textmf/tex/latex/ods/
   texhash
 
