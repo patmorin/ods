@@ -1,0 +1,39 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{ods}
+\usepackage{ods-figs}
+\usepackage[cm]{sfmath}
+%\usepackage{enumitem}
+
+\setlength{\leftmargini}{0pt}
+
+
+\title{Skiplists}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Skiplist: Search, Adding, and Removing}
+  \framesubtitle{A Randomized Random-Access List}
+
+  \begin{center}
+       \multiinclude[<+>][format=pdf,start=1]{figs/skiplist-ii}%
+  \end{center}
+
+  \begin{block}{Lemma}<82->
+     In a skiplist containing $n$ values, the expected length of
+     the search path for any node $u$ in $L_0$ is at most $2\log
+     n+O(1)\only<83->{=O(\log n)}$.
+  \end{block}
+
+\end{frame}
+
+
+
+\closing
+
+\end{document}
+

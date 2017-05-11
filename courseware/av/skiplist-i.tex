@@ -7,7 +7,7 @@
 \setlength{\leftmargini}{0pt}
 
 
-\title{Skiplists}
+\title{Skiplist: A Randomized Random-Access List}
 
 \begin{document}
 
@@ -24,6 +24,22 @@
   \end{center}
 
   \begin{block}{Lemma}<82->
+     In a skiplist containing $n$ values, the expected length of
+     the search path for any node $u$ in $L_0$ is at most $2\log
+     n+O(1)\only<83->{=O(\log n)}$.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Skiplist}
+  \framesubtitle{A Randomized Random-Access List}
+
+  \begin{center}
+       \multiinclude[<+>][format=pdf,start=2,graphics={height=49.24pt,width=\textwidth}]{figs/skiplist-big}%
+  \end{center}
+
+  \begin{block}{Lemma}<1->
      In a skiplist containing $n$ values, the expected length of
      the search path for any node $u$ in $L_0$ is at most $2\log
      n+O(1)\only<83->{=O(\log n)}$.
