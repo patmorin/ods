@@ -7,7 +7,7 @@
 \setlength{\leftmargini}{0pt}
 
 
-\title{Skiplists}
+\title{Skiplist: Searching, Adding, and Removing}
 
 \begin{document}
 
@@ -16,17 +16,39 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Skiplist: Search, Adding, and Removing}
-  \framesubtitle{A Randomized Random-Access List}
+  \frametitle{Skiplist}
+  \framesubtitle{Searching, adding, and removing}
 
   \begin{center}
-       \multiinclude[<+>][format=pdf,start=1]{figs/skiplist-ii}%
+     \includegraphics[width=\textwidth]{figs/skiplist-sample}
+  \end{center}
+  \begin{block}{Lemma}
+     In a skiplist containing $n$ values, the expected length of
+     the search path for any node $u$ in $L_0$ is at most $O(\log n)$.
+  \end{block}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Skiplist}
+  \framesubtitle{Searching, adding, and removing}
+
+  \begin{center}
+       \multiinclude[<+>][format=pdf,start=1,graphics={width=\textwidth}]{figs/skiplist-ii}%
   \end{center}
 
-  \begin{block}{Lemma}<82->
-     In a skiplist containing $n$ values, the expected length of
-     the search path for any node $u$ in $L_0$ is at most $2\log
-     n+O(1)\only<83->{=O(\log n)}$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Skiplist}
+  \framesubtitle{Searching, adding, and removing}
+
+  \begin{block}{Theorem}
+     A Skiplist implements the SSet interface.
+    \begin{itemize}
+       \item The $\mathsf{find}(x)$, $\mathsf{add}(x)$, and $\mathsf{remove}(x)$ operations each run in $O(\log n)$ expected time.
+    \end{itemize}
   \end{block}
 
 \end{frame}
