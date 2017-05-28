@@ -33,13 +33,13 @@ public class ScapegoatTree<T>
 	}
 	
 	/**
-	 * Compute the ceiling of log_{3/2}(q)
+	 * Compute the floor of log_{3/2}(q)
 	 * @param q
-	 * @return the ceiling of log_{3/2}(q)
+	 * @return the floor of log_{3/2}(q)
 	 */
 	protected static final int log32(int q) {
 		final double log23 = 2.4663034623764317;
-		return (int)Math.ceil(log23*Math.log(q));
+		return (int)Math.floor(log23*Math.log(q));
 	}
 
 	/***
