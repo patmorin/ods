@@ -1,0 +1,776 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mlt root="/home/gahenthanabalasingam/Downloads" producer="main bin" LC_NUMERIC="en_CA.UTF-8" version="6.0.0" title="Anonymous Submission">
+ <profile width="1920" frame_rate_num="30" sample_aspect_den="1" description="HD 1080p 30 fps" frame_rate_den="1" height="1080" progressive="1" display_aspect_den="9" sample_aspect_num="1" colorspace="709" display_aspect_num="16"/>
+ <producer out="10226" id="36" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:05:40:27</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/audio/arraystack-ii.wav</property>
+  <property name="meta.media.nb_streams">1</property>
+  <property name="meta.media.0.stream.type">audio</property>
+  <property name="meta.media.0.codec.sample_fmt">s16</property>
+  <property name="meta.media.0.codec.sample_rate">96000</property>
+  <property name="meta.media.0.codec.channels">1</property>
+  <property name="meta.media.0.codec.name">pcm_s16le</property>
+  <property name="meta.media.0.codec.long_name">PCM signed 16-bit little-endian</property>
+  <property name="meta.media.0.codec.bit_rate">1536000</property>
+  <property name="meta.attr.encoder.markup">Lavf56.40.101</property>
+  <property name="seekable">1</property>
+  <property name="audio_index">0</property>
+  <property name="video_index">-1</property>
+  <property name="mute_on_pause">1</property>
+  <property name="mlt_service">avformat</property>
+  <property name="meta.attr.title.markup">ArrayStack II</property>
+  <property name="meta.attr.artist.markup">Pat Morin</property>
+  <property name="meta.attr.date.markup">2014</property>
+  <property name="kdenlive:file_hash">3f1dc9607ffdb8f345d7b971f36be17b</property>
+  <property name="kdenlive:file_size">65454832</property>
+  <property name="kdenlive:clipname">arraystack-ii.wav</property>
+ </producer>
+ <producer out="749" id="1" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-01.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">64eeb1983bdcd7861672814b1822693c</property>
+  <property name="kdenlive:file_size">43019</property>
+  <property name="kdenlive:clipname">arraystack-ii-01.png</property>
+ </producer>
+ <producer out="749" id="2" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-02.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">dda967ecb35ef7854d045a7e875a4aa7</property>
+  <property name="kdenlive:file_size">91190</property>
+  <property name="kdenlive:clipname">arraystack-ii-02.png</property>
+ </producer>
+ <producer out="749" id="3" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-03.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">991fbe9997854a4c881d49fdc162bdbb</property>
+  <property name="kdenlive:file_size">89787</property>
+  <property name="kdenlive:clipname">arraystack-ii-03.png</property>
+ </producer>
+ <producer out="1799" id="4" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:01:00:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-04.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">8f299a5a5f5790e8c8f8a4b87cebe8c6</property>
+  <property name="kdenlive:file_size">133097</property>
+  <property name="kdenlive:clipname">arraystack-ii-04.png</property>
+ </producer>
+ <producer out="149" id="5" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:05:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-05.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">2bd943909a17356b2ee3dcdea7a7ffd6</property>
+  <property name="kdenlive:file_size">32745</property>
+  <property name="kdenlive:clipname">arraystack-ii-05.png</property>
+ </producer>
+ <producer out="368" id="6" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:12:09</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-06.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">c05cef6915d58494ec2add89ba3c31ce</property>
+  <property name="kdenlive:file_size">39598</property>
+  <property name="kdenlive:clipname">arraystack-ii-06.png</property>
+ </producer>
+ <producer out="299" id="7" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:10:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-07.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">877b33c162581ddb68d003aec73894dd</property>
+  <property name="kdenlive:file_size">42864</property>
+  <property name="kdenlive:clipname">arraystack-ii-07.png</property>
+ </producer>
+ <producer out="359" id="9" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:12:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-09.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">40349b8c396618bf92e71a56d2551a57</property>
+  <property name="kdenlive:file_size">40816</property>
+  <property name="kdenlive:clipname">arraystack-ii-09.png</property>
+ </producer>
+ <producer out="749" id="10" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-10.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">ec87cd9b25d91ff451dc3d9b341dec7f</property>
+  <property name="kdenlive:file_size">44068</property>
+  <property name="kdenlive:clipname">arraystack-ii-10.png</property>
+ </producer>
+ <producer out="749" id="11" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-11.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">ebe958c0c29d2d4befdd69b95eb5e1c6</property>
+  <property name="kdenlive:file_size">62436</property>
+  <property name="kdenlive:clipname">arraystack-ii-11.png</property>
+ </producer>
+ <producer out="749" id="12" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-12.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">29af3247b5cb0f378cf04f1a13073c91</property>
+  <property name="kdenlive:file_size">46251</property>
+  <property name="kdenlive:clipname">arraystack-ii-12.png</property>
+ </producer>
+ <producer out="449" id="13" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:15:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-13.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">bfb1c92695e66729cc2ba9b0e7339db4</property>
+  <property name="kdenlive:file_size">50534</property>
+  <property name="kdenlive:clipname">arraystack-ii-13.png</property>
+ </producer>
+ <producer out="449" id="14" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:15:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-14.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">4919c46364550e433ff6b1e1acf4d4cd</property>
+  <property name="kdenlive:file_size">61482</property>
+  <property name="kdenlive:clipname">arraystack-ii-14.png</property>
+ </producer>
+ <producer out="344" id="15" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:11:15</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-15.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">f1c3364e20aa8b2b4d8b611552534684</property>
+  <property name="kdenlive:file_size">77733</property>
+  <property name="kdenlive:clipname">arraystack-ii-15.png</property>
+ </producer>
+ <producer out="449" id="16" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:15:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-16.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">d47ca3e4b656fe6c041d242fa1e7f022</property>
+  <property name="kdenlive:file_size">47545</property>
+  <property name="kdenlive:clipname">arraystack-ii-16.png</property>
+ </producer>
+ <producer out="749" id="17" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-17.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">200e47c0ca33aa38eb98e3bbb89ec881</property>
+  <property name="kdenlive:file_size">55423</property>
+  <property name="kdenlive:clipname">arraystack-ii-17.png</property>
+ </producer>
+ <producer out="449" id="18" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:15:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-18.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">b33f770efb0f28ef10164e1c51f64412</property>
+  <property name="kdenlive:file_size">70900</property>
+  <property name="kdenlive:clipname">arraystack-ii-18.png</property>
+ </producer>
+ <producer out="449" id="19" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:15:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-19.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">020c8bc60056dbc465f9de62dbe2ba57</property>
+  <property name="kdenlive:file_size">86303</property>
+  <property name="kdenlive:clipname">arraystack-ii-19.png</property>
+ </producer>
+ <producer out="749" id="20" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-20.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">0c17709973ecf318206f0f7660f4e2e3</property>
+  <property name="kdenlive:file_size">75272</property>
+  <property name="kdenlive:clipname">arraystack-ii-20.png</property>
+ </producer>
+ <producer out="899" id="21" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:30:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-21.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">1e1ba3a165d295a3b2801ac13d3c28b3</property>
+  <property name="kdenlive:file_size">28499</property>
+  <property name="kdenlive:clipname">arraystack-ii-21.png</property>
+ </producer>
+ <producer out="899" id="22" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:30:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-22.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">aac20b591f4608fc0821c2ef1a62f2b7</property>
+  <property name="kdenlive:file_size">28656</property>
+  <property name="kdenlive:clipname">arraystack-ii-22.png</property>
+ </producer>
+ <producer out="449" id="23" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:15:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-23.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">6700466005ede90c95a6cbdbe33395c7</property>
+  <property name="kdenlive:file_size">47887</property>
+  <property name="kdenlive:clipname">arraystack-ii-23.png</property>
+ </producer>
+ <producer out="449" id="24" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:15:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-24.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">4ebf8e6f1d5d67f034417f4f05b5770d</property>
+  <property name="kdenlive:file_size">65596</property>
+  <property name="kdenlive:clipname">arraystack-ii-24.png</property>
+ </producer>
+ <producer out="599" id="25" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:20:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-25.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">1d2eeabfb2428c8ef5c4f40a04829ea0</property>
+  <property name="kdenlive:file_size">73031</property>
+  <property name="kdenlive:clipname">arraystack-ii-25.png</property>
+ </producer>
+ <producer out="749" id="26" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-26.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">9691959056a1c76069bc69be02a524de</property>
+  <property name="kdenlive:file_size">87031</property>
+  <property name="kdenlive:clipname">arraystack-ii-26.png</property>
+ </producer>
+ <producer out="749" id="27" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-27.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">a0f7a088a0693269fd7b1397e96ec1cd</property>
+  <property name="kdenlive:file_size">101732</property>
+  <property name="kdenlive:clipname">arraystack-ii-27.png</property>
+ </producer>
+ <producer out="749" id="28" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-28.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">cf887c4c9eef9615cdcd5ebf94fcac7d</property>
+  <property name="kdenlive:file_size">104185</property>
+  <property name="kdenlive:clipname">arraystack-ii-28.png</property>
+ </producer>
+ <producer out="749" id="29" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:25:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-29.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">816a12cd03f910cb76a4982fa2268bb7</property>
+  <property name="kdenlive:file_size">101284</property>
+  <property name="kdenlive:clipname">arraystack-ii-29.png</property>
+ </producer>
+ <producer out="299" id="30" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:10:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-30.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">495301927c74cfab39b53f048df3e75a</property>
+  <property name="kdenlive:file_size">100796</property>
+  <property name="kdenlive:clipname">arraystack-ii-30.png</property>
+ </producer>
+ <producer out="149" id="31" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:05:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-31.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">24c4e5c18e5b096f7cfb4c95b7b40249</property>
+  <property name="kdenlive:file_size">117840</property>
+  <property name="kdenlive:clipname">arraystack-ii-31.png</property>
+ </producer>
+ <producer out="449" id="32" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:15:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-32.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">d6aea6f4c587ec0365af3304521dc029</property>
+  <property name="kdenlive:file_size">132531</property>
+  <property name="kdenlive:clipname">arraystack-ii-32.png</property>
+ </producer>
+ <producer out="449" id="33" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:15:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-33.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">c67dc0cdaee79a93fba242dee73aefc2</property>
+  <property name="kdenlive:file_size">126403</property>
+  <property name="kdenlive:clipname">arraystack-ii-33.png</property>
+ </producer>
+ <producer out="149" id="34" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:00:05:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-34.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_hash">d05c2969ed8d9e6cdd7f0cfdc1a6b2a5</property>
+  <property name="kdenlive:file_size">25276</property>
+  <property name="kdenlive:clipname">arraystack-ii-34.png</property>
+ </producer>
+ <producer out="149" id="8" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">00:08:20:00</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/arraystack-ii-images/arraystack-ii-08.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">qimage</property>
+  <property name="analysisdata"/>
+  <property name="kdenlive:file_hash">2e6eb2785b6e4eaace9a2e318214d718</property>
+  <property name="kdenlive:file_size">32358</property>
+  <property name="kdenlive:clipname">arraystack-ii-08.png</property>
+ </producer>
+ <playlist id="main bin" kdenlive:customeffects="&lt;customeffects/>&#xa;">
+  <property name="kdenlive:docproperties.version">0.91</property>
+  <property name="kdenlive:docproperties.projectfolder">/home/gahenthanabalasingam/kdenlive</property>
+  <property name="kdenlive:docproperties.documentid">1493827797729</property>
+  <property name="kdenlive:docproperties.enableproxy">0</property>
+  <property name="kdenlive:docproperties.generateimageproxy">0</property>
+  <property name="kdenlive:docproperties.generateproxy">0</property>
+  <property name="kdenlive:docproperties.kdenliveversion">15.12.3</property>
+  <property name="kdenlive:docproperties.position">403</property>
+  <property name="kdenlive:docproperties.profile">atsc_1080p_30</property>
+  <property name="kdenlive:docproperties.proxyextension">mpg</property>
+  <property name="kdenlive:docproperties.proxyimageminsize">2000</property>
+  <property name="kdenlive:docproperties.proxyminsize">1000</property>
+  <property name="kdenlive:docproperties.proxyparams">-s 640x480 -g 5 -qscale 6 -ab 128k -vcodec mpeg2video -acodec mp2</property>
+  <property name="kdenlive:docproperties.verticalzoom">1</property>
+  <property name="kdenlive:docproperties.zonein">0</property>
+  <property name="kdenlive:docproperties.zoneout">100</property>
+  <property name="kdenlive:docproperties.zoom">7</property>
+  <property name="kdenlive:documentnotes"/>
+  <property name="kdenlive:clipgroups">&lt;groups/>
+</property>
+  <property name="xml_retain">1</property>
+  <entry out="10226" in="0" producer="36"/>
+  <entry out="749" in="0" producer="1"/>
+  <entry out="749" in="0" producer="2"/>
+  <entry out="749" in="0" producer="3"/>
+  <entry out="1799" in="0" producer="4"/>
+  <entry out="149" in="0" producer="5"/>
+  <entry out="149" in="0" producer="6"/>
+  <entry out="299" in="0" producer="7"/>
+  <entry out="359" in="0" producer="9"/>
+  <entry out="749" in="0" producer="10"/>
+  <entry out="749" in="0" producer="11"/>
+  <entry out="749" in="0" producer="12"/>
+  <entry out="449" in="0" producer="13"/>
+  <entry out="449" in="0" producer="14"/>
+  <entry out="299" in="0" producer="15"/>
+  <entry out="449" in="0" producer="16"/>
+  <entry out="749" in="0" producer="17"/>
+  <entry out="449" in="0" producer="18"/>
+  <entry out="449" in="0" producer="19"/>
+  <entry out="749" in="0" producer="20"/>
+  <entry out="899" in="0" producer="21"/>
+  <entry out="899" in="0" producer="22"/>
+  <entry out="449" in="0" producer="23"/>
+  <entry out="449" in="0" producer="24"/>
+  <entry out="599" in="0" producer="25"/>
+  <entry out="749" in="0" producer="26"/>
+  <entry out="749" in="0" producer="27"/>
+  <entry out="749" in="0" producer="28"/>
+  <entry out="749" in="0" producer="29"/>
+  <entry out="149" in="0" producer="30"/>
+  <entry out="149" in="0" producer="31"/>
+  <entry out="149" in="0" producer="32"/>
+  <entry out="449" in="0" producer="33"/>
+  <entry out="149" in="0" producer="34"/>
+  <entry out="149" in="0" producer="8"/>
+ </playlist>
+ <producer out="500" id="black" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">15000</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/morin/black</property>
+  <property name="aspect_ratio">0</property>
+  <property name="mlt_service">colour</property>
+ </producer>
+ <playlist id="black_track">
+  <entry out="10409" in="0" producer="black"/>
+ </playlist>
+ <playlist id="playlist1"/>
+ <producer out="10226" id="36_playlist2" in="0">
+  <property name="mlt_type">producer</property>
+  <property name="length">10227</property>
+  <property name="eof">pause</property>
+  <property name="resource">/home/gahenthanabalasingam/ods/courseware/av/audio/arraystack-ii.wav</property>
+  <property name="meta.media.nb_streams">1</property>
+  <property name="meta.media.0.stream.type">audio</property>
+  <property name="meta.media.0.codec.sample_fmt">s16</property>
+  <property name="meta.media.0.codec.sample_rate">44100</property>
+  <property name="meta.media.0.codec.channels">2</property>
+  <property name="meta.media.0.codec.name">pcm_s16le</property>
+  <property name="meta.media.0.codec.long_name">PCM signed 16-bit little-endian</property>
+  <property name="meta.media.0.codec.bit_rate">1411200</property>
+  <property name="meta.attr.encoder.markup">Lavf56.40.101</property>
+  <property name="seekable">1</property>
+  <property name="audio_index">0</property>
+  <property name="video_index">-1</property>
+  <property name="mute_on_pause">1</property>
+  <property name="mlt_service">avformat</property>
+  <property name="meta.attr.title.markup">ArrayStack II</property>
+  <property name="meta.attr.artist.markup">Pat Morin</property>
+  <property name="meta.attr.date.markup">2014</property>
+ </producer>
+ <playlist id="playlist2">
+  <blank length="183"/>
+  <entry out="10226" in="0" producer="36_playlist2"/>
+ </playlist>
+ <playlist id="playlist0"/>
+ <playlist id="playlist5">
+  <entry out="258" in="0" producer="1"/>
+  <entry out="410" in="0" producer="2"/>
+  <entry out="664" in="0" producer="3"/>
+  <entry out="1409" in="432" producer="4"/>
+  <entry out="149" in="0" producer="5"/>
+  <entry out="135" in="0" producer="6"/>
+  <entry out="232" in="0" producer="7"/>
+  <entry out="196" in="0" producer="9"/>
+  <entry out="240" in="0" producer="10"/>
+  <entry out="735" in="0" producer="11"/>
+  <entry out="366" in="0" producer="12"/>
+  <entry out="449" in="0" producer="13"/>
+  <entry out="297" in="0" producer="14"/>
+  <entry out="344" in="0" producer="15"/>
+  <entry out="382" in="0" producer="16"/>
+  <entry out="269" in="0" producer="17"/>
+  <entry out="141" in="0" producer="18"/>
+  <entry out="211" in="0" producer="19"/>
+  <entry out="532" in="0" producer="20"/>
+  <entry out="252" in="0" producer="21"/>
+  <entry out="189" in="0" producer="22"/>
+  <entry out="179" in="0" producer="23"/>
+  <entry out="311" in="0" producer="24"/>
+  <entry out="555" in="0" producer="25"/>
+  <entry out="246" in="0" producer="26"/>
+  <entry out="177" in="0" producer="27"/>
+  <entry out="188" in="0" producer="28"/>
+  <entry out="176" in="0" producer="29"/>
+  <entry out="180" in="0" producer="30"/>
+  <entry out="149" in="0" producer="31"/>
+  <entry out="184" in="0" producer="32"/>
+  <entry out="331" in="0" producer="33"/>
+  <entry out="90" in="0" producer="34"/>
+ </playlist>
+ <tractor out="10409" id="maintractor" in="0" global_feed="1" title="Anonymous Submission">
+  <property name="meta.volume">1</property>
+  <track producer="black_track"/>
+  <track hide="video" producer="playlist1"/>
+  <track hide="video" producer="playlist2"/>
+  <track producer="playlist0"/>
+  <track producer="playlist5"/>
+  <transition id="transition0">
+   <property name="a_track">1</property>
+   <property name="b_track">2</property>
+   <property name="mlt_type">transition</property>
+   <property name="mlt_service">mix</property>
+   <property name="always_active">1</property>
+   <property name="combine">1</property>
+   <property name="internal_added">237</property>
+  </transition>
+  <transition id="transition1">
+   <property name="a_track">1</property>
+   <property name="b_track">3</property>
+   <property name="mlt_type">transition</property>
+   <property name="mlt_service">mix</property>
+   <property name="always_active">1</property>
+   <property name="combine">1</property>
+   <property name="internal_added">237</property>
+  </transition>
+  <transition id="transition2">
+   <property name="a_track">1</property>
+   <property name="b_track">4</property>
+   <property name="mlt_type">transition</property>
+   <property name="mlt_service">mix</property>
+   <property name="always_active">1</property>
+   <property name="internal_added">237</property>
+   <property name="combine">1</property>
+  </transition>
+ </tractor>
+</mlt>

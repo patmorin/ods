@@ -1,0 +1,70 @@
+\usepackage{xmpmulti}
+\usepackage{listings}
+\mode<presentation>{
+
+\usetheme{Madrid}
+\useoutertheme{noslidenum}
+
+\definecolor{odsyellow}{HTML}{FFCE05}
+\definecolor{odsorange}{HTML}{F78C3C}
+\definecolor{odsgreen}{HTML}{8EC6B9}
+
+%\definecolor{darkscarlet}{HTML}{5C0029}
+%\definecolor{winedregs}{HTML}{61304B}
+
+\definecolor{terracotta}{HTML}{E85F5C}
+\definecolor{waterspout}{HTML}{9CFFFA}
+
+%\setbeamercolor{frametitle}{fg=black,bg=odsyellow}
+%\setbeamercolor{title}{fg=black,bg=odsorange}
+\setbeamercolor{palette primary}{fg=black,bg=odsyellow}
+\setbeamercolor{palette secondary}{fg=black,bg=odsorange}
+\setbeamercolor{palette tertiary}{fg=black,bg=odsgreen}
+
+
+%\setbeamercolor{block}{fg=white,bg=terracotta}
+\setbeamercolor{block title}{fg=black,bg=odsgreen}
+
+}
+%\usepackage[nosf,notext]{kpfonts}
+\lstset{
+  language=java,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{RoyalPurple}\textbf,
+  %identifierstyle=\color{NavyBlue},
+  stringstyle=\color{Blue},
+  showstringspaces=false,
+  commentstyle=\color{ForestGreen},
+  gobble=4,
+  frame=trBL
+}
+
+\beamertemplatenavigationsymbolsempty
+\usepackage[normalem]{ulem}
+\usepackage{xmpmulti}
+\renewcommand{\emph}[1]{{\itshape\color{terracotta}#1}}
+\newcommand{\emphen}[1]{{\itshape #1}}
+
+
+\makeatletter
+\def\@listii{\leftmargin\leftmarginii
+              \topsep    2ex
+              \parsep    0\p@   \@plus\p@
+              \itemsep   2ex}
+\makeatother
+
+\makeatletter
+\def\@listi{\leftmargin\leftmarginii
+              \topsep    2ex
+              \parsep    0\p@   \@plus\p@
+              \itemsep   2ex}
+\makeatother
+
+\newcommand{\blank}{\begin{frame}\frametitle{End of Lesson}\end{frame}}
+\newcommand{\titler}[1]{\blank\title{#1}\begin{frame}\titlepage\end{frame}}
+\newcommand{\closing}{\blank}
+
+\date{}
+\author{Open Data Structures}
+\titlegraphic{\includegraphics[height=1em]{by}}
+

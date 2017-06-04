@@ -1,0 +1,34 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{ods,ods-figs}
+
+\title{The List Interface}
+\author{Open Data Structures}
+\titlegraphic{\includegraphics[height=1em]{by}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{List}
+  \framesubtitle{A sequence of elements}
+ 
+  \begin{itemize}
+    \item<+(2)-> Operations: \only<+(2)->{$\fn{get}(i)$}%
+                        \only<+(2)->{, $\fn{set}(i,x)$}%
+                        \only<+(2)->{, $\fn{add}(i,x)$}%
+                        \only<+(2)->{, $\fn{remove}(i)$}
+  \end{itemize}
+     \begin{center}
+      \only<1>{\includegraphics{figs/list-1}}%
+      \only<2-7>{\includegraphics{figs/list-2}}%
+      \only<8->{\multiinclude[<+>][format=pdf,start=4]{figs/list}}
+     \end{center}
+\end{frame}
+
+\closing
+
+\end{document}
+

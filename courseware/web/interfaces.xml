@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<coursepage title="Interfaces Summary">
+  <css>
+   dt {
+      margin-top: 1em;
+   }
+  </css>
+  <title>Interfaces (Summary)</title>
+  <subtitle> </subtitle>
+  <preface>
+    <![CDATA[
+    ]]>
+  </preface>
+  <video ytid="XXXXXXXX"/>
+  <epilogue>
+    <![CDATA[
+    ]]>
+  </epilogue>
+  <exercises>
+    <exercise>
+    <![CDATA[
+       Look at the libraries for one of your favourite programming languages
+       and try to find implemenations of List, USet, and SSet interfaces.
+       The exact names maybe different, but most languages and libraries
+       implement these interfaces.<p>
+       Here are some of the languages we know about:
+       <dl>
+         <dt><a class="button" href="nojavascript.html"
+         onclick="document.getElementById('cpp').className='';return false">C++</a></dt> 
+         <dd id="cpp" class="hidden">In the C++ Standard Template
+         Library, there are several implementations of the List
+         interface, including <code>vector</code>, <code>list</code>,
+         and <code>slist</code>. The USet interface is implemented
+         by the <code>hash_set</code> class and the SSet interface is
+         implemented by the <code>hash_set</code> class.
+         <p>
+         The STL also includes the <code>map</code> and
+         <code>hash_map</code> implementations of the Map interface as
+         well as restricted lists, including the <code>queue</code>,
+         <code>stack</code>, and <code>deque</code>.
+         <dd>
+
+         <dt><a class="button" href="nojavascript.html"
+         onclick="document.getElementById('python').className='';return false">Python</a></dt> 
+         <dd id="python" class="hidden">In the standard Python libraries,
+         the List interface is implemented by the <code>list</code> class,
+         the USet interface is implemented by the <code>set</code> class,
+         and the Map interface is implemented by the <code>dict</code> class.
+         The standard Python library does not include any implementation
+         of the SSet interface, though the third-party <code>sortedcontainers</code> library provides a <code>SortedSet</code> class.
+
+         <dt><a class="button" href="nojavascript.html"
+         onclick="document.getElementById('java').className='';return false">Java</a></dt> 
+         <dd id="java" class="hidden">In Java, the List interface is
+         implemented
+         by the <code>Vector</code>, <code>ArrayList</code>, and
+         <code>LinkedList</code> classes, among others.  The Uset
+         interface is called the <code>Set</code> interface and is
+         implemented by the <code>HashSet</code> class.  The SSet
+         interface is called the <code>SortedSet</code> interface and
+         is implemented by the <code>TreeSet</code> class.
+         <p>
+         Java also has the <code>Map</code> interface that is implemented
+         by the <code>HashMap</code> and <code>SortedMap</code>
+         classes.  The Java SDK also contains the <code>Stack</code>
+         and <code>ArrayDeque</code> classes that implement the Stack
+         and Deque interfaces.
+         <dd>
+       </dl>
+       <p>
+       How about other languages like PHP, JavaScript, Perl, Ruby, Objective-C,
+       C#, Swift, or Perl?
+       </p>
+    ]]>
+    </exercise>
+    <exercise>
+    <![CDATA[
+       Do as many as you can of Exercises <a target="_blank" href="http://opendatastructures.org/ods-java/1_8_Discussion_Exercises.html">1.1&ndash;1.7</a> in the textbook.  Use any programming language you like. (Note: For most of these exercises it helps if you've done the previous exercise for hte programming language you've chosen.)
+    ]]>
+    </exercise>
+  </exercises>
+  <js-head>
+    <![CDATA[
+    ]]>
+  </js-head>
+  <js-tail>
+   <![CDATA[
+    function someJSInTailSection() {
+    }
+   ]]>
+  </js-tail>
+</coursepage>

@@ -1,0 +1,119 @@
+<html>
+<head>
+<style type="text/css">
+  body {
+    margin: 1em auto 1em auto;
+    max-width: 55ex;
+  }
+  div.pause {
+    margin: 1em;
+    color: red;
+  }
+  div.pause:before {
+    content: "Pause ";
+  }
+  div.pause:after {
+    content: "s";
+  }
+</style>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+In the last module we studied the ArrayStack implementation of a List.
+In this implementation, the list elements are stored in an array, $a$.
+Occasionally, $a$ gets too full or too empty and has to be resized.
+<p>
+To make things easy, we studied the efficiency of the ArrayStack
+operations by ignoring the cost of these resize() operations.
+<p>
+Now it's time to show that these resize operations don't add much
+to the overall running-time.  We'll do this using a technique called
+<em>amortized analysis</em>, in which we study the running time of a
+whole sequence of operations.
+<div class="pause">1</div>
+For an ArrayStack, this means that we'll study the total time spent
+resizing when we start with an empty ArrayStack and perform a sequence of
+$m$ add and remove operations.  In particular, we'll show that the total
+time spent in calls to the resize() function is only proportional to $m$.
+<p>
+Although the cost of resizing varies from one add or remove operation
+to another this result tells us that, the <em>average</em> or
+<em>amortized</em> cost of resizing is only constant.
+<div class="pause">3</div>
+Recall how the resize() operation works during an add(i,x) operation.
+<div class="pause">1</div>
+When we try to add an element and $a$ is already full, we allocate a new
+array of size $2n$ and copy the $n$ elements of $a$ into this new array.
+<div class="pause">2</div>
+After a remove() operation, the array $a$ may be less than one-third
+full. We handle this the same way; we allocate a new array of size $2n$
+and copy the $n$ elements of $a$ into this new array.
+<div class="pause">3</div>
+So that we can focus on a concrete quantity, our strategy is to study the
+number of elements copied during all calls to resize(). This is good enough,
+since all the work done in the resize() operations is proportional to the
+number of elements copied.  We will show that during our sequence of $m$
+operations, at most $2m$ elements are copied during all the calls to resize().
+<div class="pause">3</div>
+Now, consider the situation just before a resize() triggered by adding an element.  This happens when $a$ is completely full; the length of $a$ is equal to $n$.
+<div class="pause">2</div>
+If we look back to the most recent resize() operation---the one that allocated the current array, $a$, we see that, right after that resize() operation, $a$ was exactly half full.  It contained exactly $n/2$ elements.
+<div class="pause">2</div>
+Since $a$ now contains $n$ elements, we can conclude that an additional
+$n/2$ elements were added since the last resize() operation.
+<div class="pause">2</div>
+This means that, between the previous and current resize() operations at least $n/2$ add(i,x) operations were performed.
+<div class="pause">3</div>
+Next, consider the situation just before a resize() triggered by the removal of an element.   This happens when $a$ is less than one third full; $n$ is less than one third the length of $a$.
+<div class="pause">2</div>
+Again, if we look back to the situation immediately after the most recent resize() operation we see that, at that time, the array $a$ was exactly half full.  Since the difference between one half and one third is one sixth, we conclude that at least $n/2$ elements must have been removed from $a$ in the meantime.
+<div class="pause">2</div>
+To summarize, it doesn't matter whether a resize() is trigged by an add or a remove operation.  If the upcoming resize() operation is going to copy $n$ elements, then at least $n/2$ add or remove operations have occured since the previous resize() operation.
+<div class="pause">2</div>
+Now that we've established this, we can take a step back and look at an entire sequence of $m$ add and remove operations.
+<div class="pause">2</div>
+Some of these add and remove operations trigger a resize() operation.
+<div class="pause">2</div>
+Suppose that, during the $i$th resize() operation, $n_i$ elements are copied.
+<div class="pause">2</div>
+Let $m_i$ denote the number of add or remove operations between the $i-1$st and the $i$th resize operation
+<div class="pause">2</div>
+We've already established that $m_i \ge n_i/2$; there are at least $n_i/2$ add or remove operations that have to occur before the $i$th resize() but after the $i-1$th resize().
+<div class="pause">2</div>
+Let's summarize: The total number of items copied by resize is the sum of the $n_i$'s.
+<div class="pause">2</div>
+The total number of add and remove operations is at least the sum of the $m_i$'s.
+<div class="pause">2</div>
+But each $m_i$ is at least half of $n_i$.
+<div class="pause">2</div>
+This means that the total number of add and remove operations is at least half of the total number of items copied by resize.
+<div class="pause">2</div>
+Another way of saying this is that the total number of items copied is at most twice the total number of add and remove operations.
+<div class="pause">2</div>
+Since all the work done by resize() is bounded by the number of items it copies, we conclude that the total time spent in calls to resize is $O(m)$.
+<div class="pause">3</div>
+This completes the proof of our theorem about ArrayStacks.
+<div class="pause">10</div>
+
+
+
+</body>
+</html>

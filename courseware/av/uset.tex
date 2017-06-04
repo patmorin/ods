@@ -1,0 +1,60 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{ods,ods-figs,marvosym,wasysym}
+
+\title{The USet (Unordered Set) Interface}
+\author{Open Data Structures}
+\titlegraphic{\includegraphics[height=1em]{by}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{USet}
+  \framesubtitle{An \emphen{unordered} collection of \emphen{distinct} items}
+  \begin{itemize}
+    \item<+>[]
+    \item<+-> Operations: \only<+->{$\fn{add}(x)$}%
+                        \only<+->{, $\fn{remove}(x)$}%
+                        \only<+->{, $\fn{find}(x)$}%
+  \end{itemize}
+  \begin{center}
+    \only<1-4>{\includegraphics{figs/uset-1}}%
+    \only<5->{\multiinclude[<+>][format=pdf,start=1]{figs/uset}}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Map}
+  \framesubtitle{A USet that stores key/value pairs}
+
+  \begin{center}
+     \multiinclude[<+>][format=pdf,start=1]{figs/map}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Map}
+  \framesubtitle{A USet that stores key/value pairs}
+
+  \begin{center}
+  \framebox{\raisebox{0pt}[.8em][.2em]{kite}}%
+  \framebox{\raisebox{0pt}[.8em][.2em]{a toy flown in the wind at the end 
+        of a long string}}
+  \\[2em]
+  \framebox{\raisebox{0pt}[.8em][.2em]{turtle}}%
+  \framebox{\raisebox{0pt}[.8em][.2em]{a slow-moving reptile, enclosed in a scaly or leathery domed shell}}
+  \\[2em]
+  \framebox{\raisebox{0pt}[.8em][.2em]{flower}}%
+  \framebox{\raisebox{0pt}[.8em][.2em]{the seed bearing part of a plant}}
+  \end{center}
+\end{frame}
+
+
+
+\closing
+
+\end{document}
+

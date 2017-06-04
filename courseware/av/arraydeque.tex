@@ -1,0 +1,75 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{ods}
+\usepackage{ods-figs}
+\usepackage[cm]{sfmath}
+%\usepackage{enumitem}
+
+\setlength{\leftmargini}{0pt}
+
+
+\title{ArrayDeque}
+\author{Open Data Structures}
+\titlegraphic{\includegraphics[height=1em]{by}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{ArrayDeque}
+  \framesubtitle{Fast Deque operations using an array}
+
+  \begin{itemize}
+    \item<+-> ArrayStack: $\fn{add}(i,x)$ and $\fn{remove}(i)$ take $O(1+n-i)$ amortized time
+    \begin{itemize}
+      \item<+-> $O(1)$ when $i=n$ or $i=n-1$
+      \item<+-> Stack operations in $O(1)$ amortized time
+    \end{itemize}
+    \item<+-> ArrayDeque: $\fn{add}(i,x)$ and $\fn{remove}(i)$ take $O(1+\min\{i,n-i\})$ time
+    \begin{itemize}
+      \item<+-> $O(1)$ when $i=0$, $i=n$, or $i=n-1$
+      \item<+-> Deque operations in $O(1)$ amortized time
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{ArrayDeque}
+
+  \begin{center}
+    \multiinclude[<+>][format=pdf,start=1]{figs/arraydeque}
+  \end{center}
+\end{frame}
+
+\end{document}
+\begin{frame}
+  \frametitle{ArrayStack}
+  \framesubtitle{Implementing a List using an array}
+  \begin{block}{Theorem}
+    \begin{itemize}
+      \item<+->[]An ArrayStack implements the List interface.
+      \item<+->[]Ignoring the time spent in calls to $\fn{resize}()$,
+      \begin{itemize}
+          \item<+->$\fn{get}(i)$ runs in $O(1)$ time;
+          \item<+->$\fn{set}(i,x)$ runs in $O(1)$ time;
+          \item<+->$\fn{add}(i,x)$ runs in $O(1+n-i)$ time; and
+          \item<+->$\fn{remove}(i)$ runs in $O(1+n-i)$ time.
+      \end{itemize}
+    \end{itemize}
+  \end{block}
+
+  \begin{block}<+->{Question}
+     What about the calls to $\mathsf{resize}()$?
+  \end{block}
+
+\end{frame}
+
+
+
+\closing
+
+\end{document}
+

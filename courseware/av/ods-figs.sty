@@ -1,0 +1,23 @@
+\usepackage{amssymb}
+\usepackage{xcolor}
+%\usepackage{marvosym}
+%,wasysym}
+
+%% Set base font of the document to be sans serif
+\renewcommand*\familydefault{\sfdefault} 
+\usepackage[cm]{sfmath}
+
+
+% These are for making boxes that illustrate lists
+\newcommand{\listbox}[2]{\fcolorbox{black}{#1}{\makebox[1em]{\raisebox{0pt}[.8em][.2em]{\color{white}#2}}}}
+\newcommand{\keybox}[2]{\listbox{#1}{#2}}
+\newcommand{\valuebox}[2]{\fcolorbox{black}{#1}{\makebox[1em]{\raisebox{0pt}[.8em][.2em]{\color{black}#2}}}}
+
+
+\newcommand{\vkeybox}[2]{\vlistbox{#1}{#2}}
+\newcommand{\vlistbox}[2]{\fcolorbox{black}{#1}{\raisebox{0pt}[.8em][.2em]{\color{white}#2}}}
+\newcommand{\vvaluebox}[2]{\fcolorbox{black}{#1}{\raisebox{0pt}[.8em][.2em]{\color{black}#2}}}
+
+% Here is how we typeset function/method names
+\newcommand{\fn}[1]{\mathsf{#1}}
+

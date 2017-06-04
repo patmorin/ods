@@ -1,0 +1,380 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{ods,ods-figs}
+\usepackage{calc}
+\usepackage[cm]{sfmath}
+%\usepackage{enumitem}
+
+\setlength{\leftmargini}{0pt}
+
+\title{ArrayStack: Amortized Analysis}
+\author{Open Data Structures}
+\titlegraphic{\includegraphics[height=1em]{by}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{ArrayStack}
+  \framesubtitle{Amortized analysis of $\mathsf{resize}()$}
+  \begin{block}<1->{Theorem}
+    \begin{itemize}
+      \item[]An ArrayStack implements the List interface.
+      \item<1-| alert@2>[]Ignoring the time spent in calls to $\mathsf{resize}()$,
+      \item[]
+      \begin{itemize}
+          \item$\mathsf{get}(i)$ and $\mathsf{set}(i,x)$ each run in $O(1)$ time; and
+          \item$\mathsf{add}(i,x)$ and $\mathsf{remove}(i)$ each run in $O(1+n-i)$ time.
+      \end{itemize}
+      \item<3->[]Furthermore, if we start with an empty ArrayStack and perform any sequence of $m$ $\mathsf{add}(i,x)$ and $\mathsf{remove}(i)$ operations, then the total time spent in all calls to $\mathsf{resize}()$ is $O(m)$.
+    \end{itemize}
+  \end{block}
+%  \begin{block}<2>{Question}
+%     What about the calls to $\mathsf{resize}()$?
+%  \end{block}
+\end{frame}
+
+
+\newlength{\nwidth}
+\setlength{\fboxsep}{0pt}
+\setlength{\nwidth}{.25\textwidth}
+
+\begin{frame}
+  \frametitle{The Plan}
+ 
+  \only<1-3>{ 
+  $\fn{resize}()$ during $\fn{add}(i,x)$ \\[1ex]
+  \begin{itemize}
+    \item<2-3>[]$\overbrace{\framebox{\color{gray}\rule{\nwidth}{12pt}}}^{n=\sf{length}(a)}$ 
+    \item<3>[]\makebox[\nwidth]{$\Downarrow$} 
+    \item<3>[]$\underbrace{%
+    \framebox{\color{gray}\rule{\nwidth}{12pt}}%
+    \framebox[\nwidth]{\rule{0pt}{12pt}}%
+    }_{2n}$
+  \end{itemize}
+  }
+
+
+  \only<4->{
+  $\fn{resize}()$ during $\fn{remove}(i)$ \\[1ex]
+  \begin{itemize}
+    \item<5->[]$\overbrace{
+    \framebox{\color{gray}\rule{\nwidth}{12pt}}
+    }^{n<\sf{length}(a)/3}$%
+    \framebox[2\nwidth]{\rule{0pt}{12pt}}\\
+    \item<6->[]
+    \makebox[\nwidth]{$\Downarrow$} 
+    \item<6->[]$\underbrace{%
+    \framebox{\color{gray}\rule{\nwidth}{12pt}}%
+    \framebox[\nwidth]{\rule{0pt}{12pt}}%
+    }_{2n}$
+  \end{itemize}
+  }
+  \begin{block}<7->{Plan}
+    Show that the total number of items copied by resize() is at most $2m$.
+  \end{block}
+
+\end{frame}
+
+\newlength\foo
+\settowidth{\foo}{Then:}
+
+\begin{frame}
+  \frametitle{Time Between Resizes}
+  \framesubtitle{Resize triggered by $\fn{add}(i,x)$}
+
+  \begin{itemize}
+    \item<2->[]\makebox[\foo]{Then:}
+    $\overbrace{\framebox{\color{gray}\rule{.5\nwidth}{12pt}}}^{n/2}$%
+    \only<2>{\framebox[.5\nwidth]{\color{gray}\rule{0pt}{12pt}}}%
+    \only<3->{%
+       $\overbrace{%
+          \framebox[.5\nwidth]{\color{red} \rule{.5\nwidth}{12pt}}
+       }^{n/2}$
+    }%
+    % \only<3>{\framebox[.5\nwidth]{\color{red}\rule{.5\nwidth]{12pt}}}%
+    \item<3->[]\makebox[\foo]{}\makebox[\nwidth][c]{$\vdots$}
+    \item<3-|alert@3->[]\makebox[\foo]{}\makebox[\nwidth][c]{($\ge n/2$ elements added)}
+    \item<3->[]\makebox[\foo]{}\makebox[\nwidth][c]{$\vdots$}
+    \item<1->[]\makebox[\foo][l]{Now:} 
+    $\underbrace{\framebox{\color{gray}\rule{\nwidth}{12pt}}}_{n=\sf{length}(a)}$ 
+    \item<4->At least $n/2$ $\fn{add}(i,x)$ operations between then and now 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Time Between Resizes}
+  \framesubtitle{Resize triggered by $\fn{remove}(i)$}
+
+  \begin{itemize}
+    \item<2->[]\makebox[\foo][l]{Then:}
+    \only<1-2>{%
+       $\overbrace{\framebox{\color{gray}\rule{1.5\nwidth}{12pt}}}^{\fn{length}(a)/2}$%
+       \framebox[1.5\nwidth]{\color{gray}\rule{0pt}{12pt}}%
+       {\color{white}$\underbrace{\framebox[0pt]]{\rule{0pt}{12pt}}}_X$}%
+
+    }%
+    \only<3->{%
+       $\overbrace{%
+          \framebox{\color{gray}\rule{\nwidth}{12pt}}\!%
+          \underbrace{%
+            \framebox[.5\nwidth]{\color{red}\rule{.5\nwidth}{12pt}}%
+          }_{\fn{length}(a)/6}%
+       }^{\fn{length}(a)/2}$%
+       \framebox[1.5\nwidth]{\color{gray}\rule{0pt}{12pt}}}
+
+    \item<3->[]\makebox[\foo]{}\makebox[3\nwidth][c]{$\vdots$}
+    \item<3-| alert@3->[]\makebox[\foo]{}\makebox[3\nwidth][c]{($> n/2$ elements removed)}
+    \item<3->[]\makebox[\foo]{}\makebox[3\nwidth][c]{$\vdots$}
+ 
+    \item<1->[]\makebox[\foo][l]{Now:} 
+    $\underbrace{\framebox{\color{gray}\rule{\nwidth}{12pt}}}_{n<\sf{length}(a)/3}$%
+    \framebox[2\nwidth]{\color{gray}\rule{0pt}{12pt}}
+    \item <4->At least $n/2$ $\fn{remove}(i)$ operations between then and now
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Time Between Resizes}
+  \framesubtitle{Summary}
+
+  \begin{block}{Operations Between Resizes}
+    If a $\fn{resize}()$ operation copies $n$ elements, then there have been at least $n/2$ $\fn{add}(i,x)$ or $\fn{remove}(i)$ operations since the preceding $\fn{resize}()$ operation.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overview}
+
+  \begin{itemize}
+    \item<3-> $n_i={}$ number of items copied by the $i^\text{th}$ $\fn{resize}()$ operation
+    \item<4-> $m_i={}$ number of add/remove operations between the $(i-1)^{\text{th}}$ and $i^\text{th}$ $\fn{resize}()$
+
+    \item[]%
+    \only<1>{
+     \[ 
+      \underbrace{%
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+      }_{m_{\color{white}{9}}{\color{white}/2}}
+     \]
+    }%
+    \only<2>{
+     \[ 
+      \underbrace{%
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+      }_{m_{\color{white}{9}}{\color{white}/2}}
+     \]
+    }%
+    \only<3-4>{
+     \[ 
+      \underbrace{%
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{1}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{2}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{3}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{4}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{5}}}{\bullet}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+      }_{m_{\color{white}{9}}{\color{white}/2}}
+     \]
+    }
+    \only<5->{
+     \[ 
+      %\underbrace{%
+       \,\underbrace{
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{1}}}{\bullet}
+       }_{m_1\ge n_1/2}\!
+       \underbrace{
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{2}}}{\bullet}
+       }_{m_2\ge n_2/2}\!
+       \underbrace{
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{3}}}{\bullet}
+       }_{m_3\ge n_3/2}\!
+       \underbrace{
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{4}}}{\bullet}
+       }_{m_4\ge n_4/2}\!
+       \underbrace{
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{black} n_{5}}}{\bullet}
+       }_{m_5\ge n_5/2}\!
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+        \stackrel{{\color{white} n_{9}}}{\circ}
+      %}_m
+     \]
+    }
+    \item<6->Total number of items copied: $N=n_1+n_2+n_3+\cdots$
+    \item<7->Total number of add/remove operations:
+      \only<-7>{$m\ge m_1+m_2+m_3+\cdots$}%
+      \only<8>{$m\ge n_1/2+n_2/2+n_3/2+\cdots$}%
+      \only<9>{$m\ge N/2$}%
+      %\only<9>{$2m\ge N$}%
+      \only<10->{$N \le 2m$}%
+    \item<11-| alert@10>The total number, $N$, of items copied by $\fn{resize}()$ is at most $2m$.
+    \item<12-| alert@11>The total time spent in all calls to $\fn{resize}()$ is $O(m)$
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{ArrayStack}
+  \framesubtitle{Summary}
+  \begin{block}{Theorem}
+    \begin{itemize}
+      \item[]An ArrayStack implements the List interface.
+      \item[]Ignoring the time spent in calls to $\mathsf{resize}()$,
+      \item[]
+      \begin{itemize}
+          \item$\mathsf{get}(i)$ and $\mathsf{set}(i,x)$ each run in $O(1)$ time; and
+          \item$\mathsf{add}(i,x)$ and $\mathsf{remove}(i)$ each run in $O(1+n-i)$ time.
+      \end{itemize}
+      \item[]Furthermore, if we start with an empty ArrayStack and perform any sequence of $m$ $\mathsf{add}(i,x)$ and $\mathsf{remove}(i)$ operations, then the total time spent in all calls to $\mathsf{resize}()$ is $O(m)$.
+    \end{itemize}
+  \end{block}
+%  \begin{block}<2>{Question}
+%     What about the calls to $\mathsf{resize}()$?
+%  \end{block}
+\end{frame}
+
+
+\closing
+
+\end{document}
+

@@ -1,0 +1,115 @@
+<html lang="en">
+  <head>
+    <title>#pagetitle#</title>
+    <style type="text/css">
+      body {
+        font: 14pt/22pt sans-serif;
+      }
+      div.titleblock {
+        /* background-color: #abcdd9; */
+        background-color: rgb(204,0,51); /* CU red */ 
+        padding: 4ex 4ex 4ex 4ex;
+        color: white;
+      }
+      div.title {
+        padding: 1ex 0ex 1ex 0ex;
+        font-size: 168%;
+        font-family: "FreeSans", sans-serif;
+        font-weight: 900;
+      }
+      div.subtitle {
+        font-size: 100%;
+        font-family: "FreeSans", sans-serif;
+      }
+      a.button {
+        padding: 3pt 6pt 3pt 6pt;
+        border: 2px solid rgb(204,0,51); /* CU red */ 
+        color: rgb(204,0,51); /* CU red */ 
+      }
+      a.button:active {
+        border-color: black;
+        border-style: black;
+        color: black;
+      }
+      #contents {
+         margin: auto;
+	 max-width: 784px;
+         text-align: justify;
+      }
+      a {
+          text-decoration: none;
+          color: rgb(204,0,51); /* CU red */ 
+      }
+      .hidden {
+          display: none;
+      }
+      div.exercise:before {
+        font-weight: bold;
+        display: block;
+	content: "Exercise";
+      }
+      div.exercise {
+        border: 1px solid rgb(204,0,51); /* CU red */ 
+        padding: 1em 1em 1em 1em;
+        margin: 1em 0px 1em 0px;
+      }
+      div.answer:before {
+        font-weight: bold;
+	content: "Answer:";
+      }
+      div.answer {
+      }
+
+      .errormsg {
+         color: red;
+      }
+      #css#
+    </style>
+    
+    <script>
+     #js_head#
+    </script>
+    <script 
+      src="http://hyphenator.googlecode.com/svn/tags/Version%204.0.0/Hyphenator.js">
+    </script>
+    <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+  </head>
+  <body lang="en" class="hyphenate">
+
+
+    <div class="titleblock">
+      <div class="title">#title#</div>    
+      <div class="subtitle">#subtitle#</div>
+    </div>
+    <div id="contents">
+      <p>
+       #preface#
+      </p>
+         <iframe width="784" height="441" src="http://www.youtube.com/embed/#ytid#?rel=0" frameborder="0" allowfullscreen></iframe> 
+      <p>
+      #epilogue#
+      </p>
+      #exercises#
+    </div> <!-- contents -->
+  </body>
+  <script>Hyphenator.run();</script>
+  <script>#js_tail#</script>
+</html>
+

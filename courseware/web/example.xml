@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<coursepage title="The List Interface">
+  <css>
+    .customcss {
+    }
+  </css>
+  <title>Example Title</title>
+  <subtitle>Example subtitle</subtitle>
+  <preface>
+    Some text before the video
+  </preface>
+  <video ytid="PyipvZDMqu8"/>
+  <epilogue>
+    <![CDATA[
+     Some longer text after the video.
+    ]]>
+  </epilogue>
+  <exercises>
+    <exercise>
+    <![CDATA[
+       Exercise 1
+    ]]>
+    </exercise>
+    <exercise>
+    <![CDATA[
+       Exercise 2
+    ]]>
+    </exercise>
+  </exercises>
+  <js-head>
+    <![CDATA[
+    function someJSInHeadSection {
+    }
+    ]]>
+  </js-head>
+  <js-tail>
+   <![CDATA[
+    function someJSInTailSection() {
+    }
+   ]]>
+  </js-tail>
+</coursepage>
