@@ -8,7 +8,7 @@ all : $(images)
 .PHONY: images figs
 
 figs :
-	cd figs ; make
+	make -C figs
 
 
 %.pdf : %.tex figs 

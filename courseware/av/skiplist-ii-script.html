@@ -1,0 +1,71 @@
+<html>
+<head>
+<style type="text/css">
+  body {
+    margin: 1em auto 1em auto;
+    max-width: 55ex;
+  }
+  div.pause {
+    margin: 1em;
+    color: red;
+  }
+  div.pause:before {
+    content: "Pause ";
+  }
+  div.pause:after {
+    content: "s";
+  }
+</style>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+In this module, we'll discuss how to implement the SSet, or SortedSet, interface using a skiplist.  The algorithms for find(x), add(x), remove(x) all work by following the search path for x in the Skiplist.
+<p>
+Recall that in the previous module we claimed that in a skiplist containing n values, the expected length of the search path for any node u in L_0 is O(log n).  This makes the skiplist an efficient choice for implementing the SSet interface.
+<div class="pause">2</div>
+find(x) is the easiest of the operations.  We begin at the topmost sentinel node and we follow the search path for x.
+<div class="pause">2</div>
+At each step, we know whether the path should proceed to the right or down by comparing x to the value of the node to the right of the current node.
+<div class="pause">3</div>
+The search path for x ends at the node, $u$, of L_0 that <em>would</em> precede x <em>if</em> x were in L_0.
+<div class="pause">3</div>
+We then return the value stored in $u$'s successor
+<div class="pause">3</div>
+It doesn't matter if x is in the list or not. This still gives the correct result.
+<div class="pause">3</div>
+A special case occurs when x is larger than every value in the skiplist.  In this case, the search path ends at the last node in L_0 and we should return nil.
+<div class="pause">3</div>
+To implement the add(x) operation, we follow the search path for x but while doing so we also keep track of the nodes at which the search path turns down.  These are the nodes whose pointers may need to be changed when we add x.
+<div class="pause">3</div>
+Once we've done this, and checked that x is not already in the skiplist, we create a new node, $w$, containing x.  We also pick a height for $w$ by counting the number of coin tosses we have to make until the first tails.
+<div class="pause">3</div>
+Next, we use that we saved on the way down to splice $w$ into the appropriate lists, starting at $L_0$ adn working up to the height of $w$.
+<div class="pause">3</div>
+One special case we have to look out for occurs when the height of $w$ exceeds the height of the skiplist. If this happens, we should increase the height of the sentinel to match the height of $w$.
+<div class="pause">3</div>
+The remove(x) operation can be implemented with one pass down the search path.  We follow the search path in the usual way, but any time the node to the right of the current node contains x, we splice it out of its list.  By the end of this process, all occurrences of x are gone from all lists.
+<div class="pause">3</div>
+To summarize, each of the find(x), add(x), remove(x), and remove operations in a skiplist is dominated by the cost of following the search path for x, which has expected length $O(\log n)$.
+<div class="pause">1</div>
+This gives us an SSet implementation in which each operation runs in $O(\log n)$ expected time.
+
+</body>
+</html>
