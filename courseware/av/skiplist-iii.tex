@@ -1,0 +1,171 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{ods}
+\usepackage{ods-figs}
+\usepackage[cm]{sfmath}
+%\usepackage{enumitem}
+\usepackage{array}
+
+\setlength{\leftmargini}{0pt}
+
+
+\title{Skiplist: Analysis}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Skiplist}
+  \framesubtitle{Analysis}
+
+  \begin{block}{Lemma}
+     In a skiplist containing $n$ values, the expected length of
+     the search path for any node $u$ in $L_0$ is at most $O(\log n)$.
+  \end{block}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Expected Size}
+ 
+  What is the expected number of nodes (not counting the sentinel) in $L_r$?
+
+\begin{tabular}{m{.45\textwidth}m{.45\textwidth}}
+     \visible<2->{
+     \[ I_x = \begin{cases}1 & \text{if $x$ is in $L_r$} \\
+                           0 & \text{otherwise} 
+              \end{cases} 
+     \]} & 
+     \[  \visible<6->{\E[I_x] = 1/2^r \]} 
+\end{tabular}
+\[
+   \visible<3->{\visible<4->{\E[}|L_r|\visible<4->{]} 
+       = \visible<4->{\E\left[}\sum_{x\in L_0} I_x\visible<4->{\right]}}
+        \visible<5->{=\sum_{x\in L_0} \E[I_x]}
+        \visible<7->{=\sum_{x\in L_0} 1/2^r}
+        \visible<8->{=n/2^r}
+\]
+\begin{block}{Lemma}<9->
+  The expected number of nodes in $L_i$ (not counting the sentinel) is $n/2^r$.
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Expected Size}
+
+  What is the expected number of nodes in the whole skiplist (not counting
+  occurrences of the sentinel)? 
+
+\[
+   \only<2>{\E\left[\sum_{r=0}^\infty |L_r]  \right]}
+   \only<3->{\sum_{r=0}^\infty \E[|L_r|]}
+   \visible<4->{=\sum_{r=0}^\infty n/2^r}
+   \visible<5->{=\left(\sum_{r=0}^\infty 1/2^r\right)n}
+   \visible<6->{=\left(}
+   \visible<7->{1+}
+   \visible<8->{\frac{1}{2}+}
+   \visible<9->{\frac{1}{4}+}
+   \visible<10->{\frac{1}{8}+}
+   \visible<11->{\frac{1}{16}+}
+   \visible<12->{\cdots}\visible<6->{\right)n}
+   \visible<13->{=2n}
+\]
+     \centering{
+       \only<-5>{\includegraphics[width=.95\textwidth]{figs/zeno-1}}%
+       \only<6>{\includegraphics[width=.95\textwidth]{figs/zeno-2}}%
+       \only<7>{\includegraphics[width=.95\textwidth]{figs/zeno-3}}%
+       \only<8>{\includegraphics[width=.95\textwidth]{figs/zeno-4}}%
+       \only<9>{\includegraphics[width=.95\textwidth]{figs/zeno-5}}%
+       \only<10>{\includegraphics[width=.95\textwidth]{figs/zeno-6}}%
+       \only<11>{\includegraphics[width=.95\textwidth]{figs/zeno-7}}%
+       \only<12->{\includegraphics[width=.95\textwidth]{figs/zeno-8}}%
+     }
+\begin{block}{Lemma}<14->
+  The expected number of nodes in the whole skiplist (not counting
+  occurrences of the sentinel) is $2n$
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Expected Height}
+
+  \visible<2->{$h = \max\{r : \text{$L_r$ is non-empty} \}$}
+
+\begin{tabular}{m{.45\textwidth}m{.45\textwidth}}
+     \visible<3->{
+     \[ I_r = \begin{cases}1 & \text{if $|L_r|\ge 1$}\\
+                           0 & \text{otherwise} 
+              \end{cases} 
+     \]} & 
+     \[  \visible<6->{\E[I_i] = \left(\frac{1}{2}\right)^{i-1} \]} 
+\end{tabular}
+     \begin{align*}
+       \visible<4->
+       \E[h] = \sum_{r=1}^{\infty}\E[I_r]
+     \end{align*}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Coin Tosses}
+
+What is the expected number of coin tosses we have to perform up to
+       and including the first time a toss comes up tails?
+\begin{tabular}{m{.45\textwidth}m{.45\textwidth}}
+     \visible<2->{
+     \[ I_i = \begin{cases}1 & \temporal<2-4>{}{\text{if $i$th coin toss is performed}}{\text{if the first $i-1$ coins are tails}} \\
+                           0 & \text{otherwise} 
+              \end{cases} 
+     \]} & 
+     \[  \visible<6->{\E[I_i] = \left(\frac{1}{2}\right)^{i-1} \]} 
+\end{tabular}
+     \visible<3->{
+     \[
+      \E[\text{\# coin tosses}] = \E\left[\sum_{i=1}^{\infty} I_i\right] 
+       \visible<4->{= \sum_{i=1}^{\infty} \E[I_i]}
+       \visible<7->{= \sum_{i=1}^{\infty} \left(\frac{1}{2}\right)^{i-1}}
+       \visible<9->{= 1+}
+       \visible<10->{\frac{1}{2}+}
+       \visible<11->{\frac{1}{4}+}
+       \visible<12->{\frac{1}{8}+}
+       \visible<13->{\frac{1}{16}+}
+       \visible<14->{\cdots}
+       \visible<15->{=2}
+     \]
+     }
+     \centering{
+       \only<-7>{\includegraphics[width=.95\textwidth]{figs/zeno-1}}%
+       \only<8>{\includegraphics[width=.95\textwidth]{figs/zeno-2}}%
+       \only<9>{\includegraphics[width=.95\textwidth]{figs/zeno-3}}%
+       \only<10>{\includegraphics[width=.95\textwidth]{figs/zeno-4}}%
+       \only<11>{\includegraphics[width=.95\textwidth]{figs/zeno-5}}%
+       \only<12>{\includegraphics[width=.95\textwidth]{figs/zeno-6}}%
+       \only<13>{\includegraphics[width=.95\textwidth]{figs/zeno-7}}%
+       \only<14->{\includegraphics[width=.95\textwidth]{figs/zeno-8}}%
+     }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Coin Tosses}
+
+  \begin{block}{Theorem}
+    The expected number of coin tosses we have to perform up to
+    and including the first time a toss comes up tails is 2.
+  \end{block}
+\end{frame}
+
+
+
+
+
+\closing
+
+\end{document}
+
