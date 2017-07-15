@@ -656,6 +656,7 @@ The following lemma shows that, so far, we have overestimated the number of merg
   borrows and merges that occur. This completes the proof of the lemma.
 \end{proof}
 
+XXX: joins? borrows?
 The purpose of \lemref{btree-split} is to show that, in the word-RAM
 model the cost of splits, merges and joins during a sequence of $m$
 #add(x)# and #remove(x)# operations is only $O(Bm)$.  That is, the
@@ -699,7 +700,7 @@ $B^+$-trees,
 $B^*$-trees,
 \index{B*-tree@$B^*$-tree}%
 and counted $B$-trees.
-\index{conted $B$-tree}%
+\index{conuted $B$-tree}%
 $B$-trees are indeed
 ubiquitous and are the primary data structure in many file systems,
 including Apple's HFS+,
@@ -795,7 +796,8 @@ access to retrieve a leaf.
     operation, each of the (at most 3) affected nodes has at least
     $B+\alpha B$ keys and at most $2B-\alpha B$ keys, for some constant
     $\alpha > 0$.
-    \item Let #u# be an underfull node and let #v# and #w# be siblings of #u#
+	%XXX: underfull -> underflow?
+    \item Let #u# be an underfull node and let #v# and #w# be siblings of #u#.
     There are two ways to fix the underflow at #u#:
     \begin{enumerate}
        \item keys can be redistributed among #u#, #v#, and #w#; or

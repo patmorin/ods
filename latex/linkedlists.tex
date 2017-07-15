@@ -51,9 +51,9 @@ illustrated in \figref{sllist}.
 \end{figure}
 
 
-An #SLList# can efficiently implement the #Stack# operations #push()#
+An #SLList# can efficiently implement the #Stack# operations #push(x)#
 and #pop()# by adding and removing elements at the head of the sequence.
-The #push()# operation simply creates a new node #u# with data value #x#,
+The #push(x)# operation simply creates a new node #u# with data value #x#,
 sets #u.next# to the old head of the list and makes #u# the new head
 of the list. Finally, it increments #n# since the size of the #SLList#
 has increased by one:
