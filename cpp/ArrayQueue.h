@@ -8,6 +8,7 @@
 #ifndef ARRAYQUEUE_H_
 #define ARRAYQUEUE_H_
 #include "array.h"
+#include "utils.h"
 
 namespace ods {
 
