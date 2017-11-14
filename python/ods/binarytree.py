@@ -50,10 +50,10 @@ class BinaryTree(object):
         return n 
     
     def height(self):
-        return self.height_r(self.r)
+        return self._height(self.r)
     
     def _height(self, u):
-        if u == self.nil: return 0
+        if u == self.nil: return -1 
         return 1 + max(self._height(u.left), self._height(u.right))
     
     def traverse(self, u):
