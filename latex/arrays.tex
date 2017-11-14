@@ -548,11 +548,11 @@ $O(#n#)=O(#i#)=O(#n#-#i#)$ time, since $#i#\ge #n#/4$ and $#n#-#i#>
 #n#/4$.  Summarizing the situation, we have
 \[
      \mbox{Running time of } #add(i,x)# \le 
-          \left\{\begin{array}{ll}
+          \begin{cases}
             O(1+ #i#) & \mbox{if $#i#< #n#/4$} \\
             O(#n#) & \mbox{if $#n#/4 \le #i# < 3#n#/4$} \\
             O(1+#n#-#i#) & \mbox{if $#i# \ge 3#n#/4$}
-          \end{array}\right.
+          \end{cases}
 \]
 Thus, the running time of #add(i,x)#, if we ignore the cost of the call
 to #balance()#, is $O(1+\min\{#i#, #n#-#i#\})$.
@@ -916,7 +916,7 @@ value of #x'#.  A little more precisely, we have
       \right\rfloor \enspace .
 \]
 In this way, $#sqrttab#[i]$ is within 2 of $\sqrt{#x#}$ for all
-$#x#\in\{i2^{\lfloor r/2\rfloor},\ldots,(i+1)2^{\lfloor r/2\rfloor}-1\}$.
+$#x#\in\{i2^{\lfloor #r#/2\rfloor},\ldots,(i+1)2^{\lfloor #r#/2\rfloor}-1\}$.
 Stated another way, the array entry 
 $#s#=#sqrttab#[#x##>>#\lfloor #r#/2\rfloor]$ is either equal to
 $\lfloor\sqrt{#x#}\rfloor$,

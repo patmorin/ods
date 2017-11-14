@@ -8,6 +8,7 @@
 #ifndef ARRAYQUEUE_H_
 #define ARRAYQUEUE_H_
 #include "array.h"
+#include "utils.h"
 
 namespace ods {
 
@@ -34,7 +35,6 @@ ArrayQueue<T>::ArrayQueue() : a(1) {
 
 template<class T>
 ArrayQueue<T>::~ArrayQueue() {
-	delete a;
 }
 
 template<class T>
