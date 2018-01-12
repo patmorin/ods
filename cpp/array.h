@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
 namespace ods {
 
@@ -33,9 +34,10 @@ public:
 
 	array<T>& operator=(array<T> &b) {
 		if (a != NULL) delete[] a;
-		a = b.a;
-		b.a = NULL;
+		/*deep copy*/
 		length = b.length;
+		a = new T[length];
+		memcpy(a, b.a, length);
 		return *this;
 	}
 
