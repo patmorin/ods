@@ -34,10 +34,9 @@ public:
 
 	array<T>& operator=(array<T> &b) {
 		if (a != NULL) delete[] a;
-		/*deep copy*/
 		length = b.length;
 		a = new T[length];
-		memcpy(a, b.a, length);
+		if (a != NULL) memcpy(a, b.a, length);
 		return *this;
 	}
 
