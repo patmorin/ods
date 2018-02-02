@@ -428,7 +428,7 @@ the table entries $#t[i]#, #t[i+1]#,\ldots,#t#[#i#+k-1]$ are non-#null#
 and $#t#[#i#-1]=#t#[#i#+k]=#null#$.  The number of non-#null# elements of
 #t# is exactly #q# and the #add(x)# method ensures that, at all times,
 $#q#\le#t.length#/2$.  There are #q# elements $#x#_1,\ldots,#x#_{#q#}$
-that have been inserted into #t# since the last #rebuild()# operation.
+that have been inserted into #t# since the last #resize()# operation.
 By our assumption, each of these has a hash value, $#hash#(#x#_j)$,
 that is uniform and independent of the rest.  With this setup, we can
 prove the main lemma required to analyze linear probing.
