@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mlt producer="main bin" LC_NUMERIC="en_CA.UTF-8" version="6.0.0" root="/home/morin/ods/courseware/av" title="Anonymous Submission">
- <profile height="1080" width="1920" colorspace="709" display_aspect_den="9" display_aspect_num="16" sample_aspect_num="1" sample_aspect_den="1" frame_rate_den="1" progressive="1" description="HD 1080p 30 fps" frame_rate_num="30"/>
- <producer id="1" out="749" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+<mlt title="Anonymous Submission" version="6.5.0" root="/home/morin/ods/courseware/av" producer="main bin" LC_NUMERIC="en_CA.UTF-8">
+ <profile width="1920" frame_rate_den="1" height="1080" display_aspect_num="16" display_aspect_den="9" frame_rate_num="30" colorspace="709" sample_aspect_den="1" description="HD 1080p 30 fps" progressive="1" sample_aspect_num="1"/>
+ <producer id="1" title="Anonymous Submission" out="749" in="0">
   <property name="length">00:00:25:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-01.png</property>
@@ -18,9 +17,9 @@
   <property name="kdenlive:file_size">41602</property>
   <property name="kdenlive:clipname">arraystack-ii-01.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">750</property>
  </producer>
- <producer id="10" out="749" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="10" title="Anonymous Submission" out="749" in="0">
   <property name="length">00:00:25:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-10.png</property>
@@ -36,9 +35,9 @@
   <property name="kdenlive:file_size">43455</property>
   <property name="kdenlive:clipname">arraystack-ii-10.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">750</property>
  </producer>
- <producer id="11" out="886" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="11" title="Anonymous Submission" out="886" in="0">
   <property name="length">00:00:29:17</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-11.png</property>
@@ -54,9 +53,9 @@
   <property name="kdenlive:file_size">61717</property>
   <property name="kdenlive:clipname">arraystack-ii-11.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">887</property>
  </producer>
- <producer id="12" out="749" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="12" title="Anonymous Submission" out="749" in="0">
   <property name="length">00:00:25:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-12.png</property>
@@ -72,9 +71,9 @@
   <property name="kdenlive:file_size">44370</property>
   <property name="kdenlive:clipname">arraystack-ii-12.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">750</property>
  </producer>
- <producer id="13" out="449" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="13" title="Anonymous Submission" out="449" in="0">
   <property name="length">00:00:15:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-13.png</property>
@@ -90,9 +89,9 @@
   <property name="kdenlive:file_size">48666</property>
   <property name="kdenlive:clipname">arraystack-ii-13.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">450</property>
  </producer>
- <producer id="14" out="460" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="14" title="Anonymous Submission" out="460" in="0">
   <property name="length">00:00:15:11</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-14.png</property>
@@ -108,9 +107,9 @@
   <property name="kdenlive:file_size">59548</property>
   <property name="kdenlive:clipname">arraystack-ii-14.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">461</property>
  </producer>
- <producer id="15" out="486" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="15" title="Anonymous Submission" out="486" in="0">
   <property name="length">00:00:16:07</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-15.png</property>
@@ -126,9 +125,9 @@
   <property name="kdenlive:file_size">75756</property>
   <property name="kdenlive:clipname">arraystack-ii-15.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">487</property>
  </producer>
- <producer id="16" out="539" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="16" title="Anonymous Submission" out="539" in="0">
   <property name="length">00:00:18:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-16.png</property>
@@ -144,9 +143,9 @@
   <property name="kdenlive:file_size">45697</property>
   <property name="kdenlive:clipname">arraystack-ii-16.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">540</property>
  </producer>
- <producer id="17" out="749" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="17" title="Anonymous Submission" out="749" in="0">
   <property name="length">00:00:25:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-17.png</property>
@@ -162,9 +161,9 @@
   <property name="kdenlive:file_size">53271</property>
   <property name="kdenlive:clipname">arraystack-ii-17.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">750</property>
  </producer>
- <producer id="18" out="449" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="18" title="Anonymous Submission" out="449" in="0">
   <property name="length">00:00:15:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-18.png</property>
@@ -180,9 +179,9 @@
   <property name="kdenlive:file_size">69039</property>
   <property name="kdenlive:clipname">arraystack-ii-18.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">450</property>
  </producer>
- <producer id="19" out="449" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="19" title="Anonymous Submission" out="449" in="0">
   <property name="length">00:00:15:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-19.png</property>
@@ -198,9 +197,9 @@
   <property name="kdenlive:file_size">84250</property>
   <property name="kdenlive:clipname">arraystack-ii-19.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">450</property>
  </producer>
- <producer id="2" out="749" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="2" title="Anonymous Submission" out="749" in="0">
   <property name="length">00:00:25:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-02.png</property>
@@ -216,9 +215,9 @@
   <property name="kdenlive:file_size">89176</property>
   <property name="kdenlive:clipname">arraystack-ii-02.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">750</property>
  </producer>
- <producer id="20" out="749" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="20" title="Anonymous Submission" out="749" in="0">
   <property name="length">00:00:25:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-20.png</property>
@@ -234,9 +233,9 @@
   <property name="kdenlive:file_size">73390</property>
   <property name="kdenlive:clipname">arraystack-ii-20.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">750</property>
  </producer>
- <producer id="21" out="899" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="21" title="Anonymous Submission" out="899" in="0">
   <property name="length">00:00:30:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-21.png</property>
@@ -252,9 +251,9 @@
   <property name="kdenlive:file_size">27674</property>
   <property name="kdenlive:clipname">arraystack-ii-21.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">900</property>
  </producer>
- <producer id="22" out="899" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="22" title="Anonymous Submission" out="899" in="0">
   <property name="length">00:00:30:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-22.png</property>
@@ -270,9 +269,9 @@
   <property name="kdenlive:file_size">27827</property>
   <property name="kdenlive:clipname">arraystack-ii-22.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">900</property>
  </producer>
- <producer id="23" out="449" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="23" title="Anonymous Submission" out="449" in="0">
   <property name="length">00:00:15:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-23.png</property>
@@ -288,9 +287,9 @@
   <property name="kdenlive:file_size">47061</property>
   <property name="kdenlive:clipname">arraystack-ii-23.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">450</property>
  </producer>
- <producer id="24" out="477" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="24" title="Anonymous Submission" out="477" in="0">
   <property name="length">00:00:15:28</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-24.png</property>
@@ -306,9 +305,9 @@
   <property name="kdenlive:file_size">64755</property>
   <property name="kdenlive:clipname">arraystack-ii-24.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">478</property>
  </producer>
- <producer id="25" out="720" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="25" title="Anonymous Submission" out="720" in="0">
   <property name="length">00:00:24:01</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-25.png</property>
@@ -324,9 +323,9 @@
   <property name="kdenlive:file_size">72277</property>
   <property name="kdenlive:clipname">arraystack-ii-25.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">721</property>
  </producer>
- <producer id="26" out="749" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="26" title="Anonymous Submission" out="749" in="0">
   <property name="length">00:00:25:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-26.png</property>
@@ -342,9 +341,9 @@
   <property name="kdenlive:file_size">86179</property>
   <property name="kdenlive:clipname">arraystack-ii-26.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">750</property>
  </producer>
- <producer id="27" out="749" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="27" title="Anonymous Submission" out="749" in="0">
   <property name="length">00:00:25:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-27.png</property>
@@ -360,9 +359,9 @@
   <property name="kdenlive:file_size">100929</property>
   <property name="kdenlive:clipname">arraystack-ii-27.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">750</property>
  </producer>
- <producer id="28" out="749" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="28" title="Anonymous Submission" out="749" in="0">
   <property name="length">00:00:25:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-28.png</property>
@@ -378,9 +377,9 @@
   <property name="kdenlive:file_size">103343</property>
   <property name="kdenlive:clipname">arraystack-ii-28.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">750</property>
  </producer>
- <producer id="29" out="749" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="29" title="Anonymous Submission" out="749" in="0">
   <property name="length">00:00:25:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-29.png</property>
@@ -396,9 +395,9 @@
   <property name="kdenlive:file_size">100548</property>
   <property name="kdenlive:clipname">arraystack-ii-29.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">750</property>
  </producer>
- <producer id="3" out="749" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="3" title="Anonymous Submission" out="749" in="0">
   <property name="length">00:00:25:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-03.png</property>
@@ -414,9 +413,9 @@
   <property name="kdenlive:file_size">87673</property>
   <property name="kdenlive:clipname">arraystack-ii-03.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">750</property>
  </producer>
- <producer id="30" out="359" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="30" title="Anonymous Submission" out="359" in="0">
   <property name="length">00:00:12:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-30.png</property>
@@ -432,9 +431,9 @@
   <property name="kdenlive:file_size">100290</property>
   <property name="kdenlive:clipname">arraystack-ii-30.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">360</property>
  </producer>
- <producer id="31" out="291" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="31" title="Anonymous Submission" out="291" in="0">
   <property name="length">00:00:09:22</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-31.png</property>
@@ -450,9 +449,9 @@
   <property name="kdenlive:file_size">117473</property>
   <property name="kdenlive:clipname">arraystack-ii-31.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">292</property>
  </producer>
- <producer id="32" out="449" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="32" title="Anonymous Submission" out="449" in="0">
   <property name="length">00:00:15:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-32.png</property>
@@ -468,9 +467,9 @@
   <property name="kdenlive:file_size">132095</property>
   <property name="kdenlive:clipname">arraystack-ii-32.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">450</property>
  </producer>
- <producer id="33" out="492" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="33" title="Anonymous Submission" out="492" in="0">
   <property name="length">00:00:16:13</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-33.png</property>
@@ -486,9 +485,9 @@
   <property name="kdenlive:file_size">124700</property>
   <property name="kdenlive:clipname">arraystack-ii-33.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">493</property>
  </producer>
- <producer id="34" out="149" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="34" title="Anonymous Submission" out="149" in="0">
   <property name="length">00:00:05:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-34.png</property>
@@ -504,9 +503,9 @@
   <property name="kdenlive:file_size">24461</property>
   <property name="kdenlive:clipname">arraystack-ii-34.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">150</property>
  </producer>
- <producer id="4" out="1799" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="4" title="Anonymous Submission" out="1799" in="0">
   <property name="length">00:01:00:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-04.png</property>
@@ -522,9 +521,9 @@
   <property name="kdenlive:file_size">130692</property>
   <property name="kdenlive:clipname">arraystack-ii-04.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">1800</property>
  </producer>
- <producer id="5" out="327" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="5" title="Anonymous Submission" out="327" in="0">
   <property name="length">00:00:10:28</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-05.png</property>
@@ -540,9 +539,9 @@
   <property name="kdenlive:file_size">32055</property>
   <property name="kdenlive:clipname">arraystack-ii-05.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">328</property>
  </producer>
- <producer id="6" out="368" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="6" title="Anonymous Submission" out="368" in="0">
   <property name="length">00:00:12:09</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-06.png</property>
@@ -558,9 +557,9 @@
   <property name="kdenlive:file_size">38903</property>
   <property name="kdenlive:clipname">arraystack-ii-06.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">369</property>
  </producer>
- <producer id="7" out="423" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="7" title="Anonymous Submission" out="423" in="0">
   <property name="length">00:00:14:04</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-07.png</property>
@@ -576,9 +575,9 @@
   <property name="kdenlive:file_size">42165</property>
   <property name="kdenlive:clipname">arraystack-ii-07.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">424</property>
  </producer>
- <producer id="8" out="149" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="8" title="Anonymous Submission" out="14999" in="0">
   <property name="length">00:08:20:00</property>
   <property name="eof">pause</property>
   <property name="resource">arraystack-ii-images/arraystack-ii-08.png</property>
@@ -595,12 +594,16 @@
   <property name="kdenlive:file_size">31693</property>
   <property name="kdenlive:clipname">arraystack-ii-08.png</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">150</property>
  </producer>
- <producer id="36" out="10226" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="36" title="Anonymous Submission" out="10226" in="0">
   <property name="length">00:05:40:27</property>
   <property name="eof">pause</property>
   <property name="resource">audio/arraystack-ii.wav</property>
+  <property name="audio_index">0</property>
+  <property name="video_index">-1</property>
+  <property name="mute_on_pause">1</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">audio</property>
   <property name="meta.media.0.codec.sample_fmt">s16</property>
@@ -611,20 +614,19 @@
   <property name="meta.media.0.codec.bit_rate">1411200</property>
   <property name="meta.attr.encoder.markup">Lavf56.40.101</property>
   <property name="seekable">1</property>
-  <property name="audio_index">0</property>
-  <property name="video_index">-1</property>
-  <property name="mute_on_pause">1</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:file_hash">7286b6dfa3d9f40cde5f419e416f9d93</property>
   <property name="kdenlive:file_size">59117646</property>
   <property name="kdenlive:clipname">arraystack-ii.wav</property>
   <property name="global_feed">1</property>
  </producer>
- <producer id="38" out="10053" in="0" title="Anonymous Submission">
-  <property name="mlt_type">mlt_producer</property>
+ <producer id="38" title="Anonymous Submission" out="10053" in="0">
   <property name="length">00:05:35:04</property>
   <property name="eof">pause</property>
   <property name="resource">audio/arraystack-ii.flac</property>
+  <property name="audio_index">0</property>
+  <property name="video_index">-1</property>
+  <property name="mute_on_pause">1</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">audio</property>
   <property name="meta.media.0.codec.sample_fmt">s16</property>
@@ -634,25 +636,21 @@
   <property name="meta.media.0.codec.long_name">FLAC (Free Lossless Audio Codec)</property>
   <property name="meta.media.0.codec.bit_rate">0</property>
   <property name="seekable">1</property>
-  <property name="audio_index">0</property>
-  <property name="video_index">-1</property>
-  <property name="mute_on_pause">1</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:file_size">10612999</property>
   <property name="kdenlive:file_hash">1b64df9ce0ca126d945593125cbce3fc</property>
   <property name="global_feed">1</property>
  </producer>
- <playlist id="main bin" kdenlive:customeffects="&lt;customeffects/>&#xa;">
+ <playlist id="main bin">
   <property name="kdenlive:customeffects">&lt;customeffects/>
 </property>
-  <property name="kdenlive:docproperties.version">0.91</property>
+  <property name="kdenlive:docproperties.version">0.95</property>
   <property name="kdenlive:docproperties.projectfolder">/home/morin/kdenlive</property>
   <property name="kdenlive:docproperties.documentid">1493660969891</property>
   <property name="kdenlive:docproperties.enableproxy">0</property>
   <property name="kdenlive:docproperties.generateimageproxy">0</property>
   <property name="kdenlive:docproperties.generateproxy">0</property>
-  <property name="kdenlive:docproperties.kdenliveversion">15.12.3</property>
-  <property name="kdenlive:docproperties.position">10226</property>
+  <property name="kdenlive:docproperties.kdenliveversion">17.04.3</property>
+  <property name="kdenlive:docproperties.position">0</property>
   <property name="kdenlive:docproperties.profile">atsc_1080p_30</property>
   <property name="kdenlive:docproperties.proxyextension">mpg</property>
   <property name="kdenlive:docproperties.proxyimageminsize">2000</property>
@@ -664,8 +662,35 @@
   <property name="kdenlive:docproperties.zoom">9</property>
   <property name="kdenlive:guide.21.8">ignoring the cost</property>
   <property name="kdenlive:documentnotes"/>
-  <property name="kdenlive:clipgroups">&lt;groups/>
-</property>
+  <property name="kdenlive:clipgroups"/>
+  <property name="kdenlive:docproperties.audiotargettrack">-1</property>
+  <property name="kdenlive:docproperties.decimalPoint">.</property>
+  <property name="kdenlive:docproperties.dirtypreviewchunks"/>
+  <property name="kdenlive:docproperties.disablepreview">0</property>
+  <property name="kdenlive:docproperties.previewchunks"/>
+  <property name="kdenlive:docproperties.previewextension"/>
+  <property name="kdenlive:docproperties.previewparameters"/>
+  <property name="kdenlive:docproperties.renderaudioquality">6</property>
+  <property name="kdenlive:docproperties.rendercategory">Generic (HD for web, mobile devices...)</property>
+  <property name="kdenlive:docproperties.renderendguide">0</property>
+  <property name="kdenlive:docproperties.renderexportaudio">0</property>
+  <property name="kdenlive:docproperties.renderguide">0</property>
+  <property name="kdenlive:docproperties.renderplay">0</property>
+  <property name="kdenlive:docproperties.renderprofile">WebM - the widespread free format (VP8/Vorbis)</property>
+  <property name="kdenlive:docproperties.renderquality">23</property>
+  <property name="kdenlive:docproperties.renderratio">1</property>
+  <property name="kdenlive:docproperties.renderrescale">0</property>
+  <property name="kdenlive:docproperties.renderrescaleheight">180</property>
+  <property name="kdenlive:docproperties.renderrescalewidth">320</property>
+  <property name="kdenlive:docproperties.renderscanning">0</property>
+  <property name="kdenlive:docproperties.renderspeed">2</property>
+  <property name="kdenlive:docproperties.renderstartguide">0</property>
+  <property name="kdenlive:docproperties.rendertcoverlay">0</property>
+  <property name="kdenlive:docproperties.rendertctype">0</property>
+  <property name="kdenlive:docproperties.rendertwopass">0</property>
+  <property name="kdenlive:docproperties.renderurl">/home/morin/Documents/untitled.webm</property>
+  <property name="kdenlive:docproperties.renderzone">0</property>
+  <property name="kdenlive:docproperties.videotargettrack">-1</property>
   <property name="xml_retain">1</property>
   <entry out="749" producer="1" in="0"/>
   <entry out="749" producer="10" in="0"/>
@@ -704,18 +729,17 @@
   <entry out="10053" producer="38" in="0"/>
  </playlist>
  <producer id="black" out="500" in="0">
-  <property name="mlt_type">producer</property>
   <property name="length">15000</property>
   <property name="eof">pause</property>
   <property name="resource">/home/seanhodges/black</property>
   <property name="aspect_ratio">0</property>
   <property name="mlt_service">colour</property>
+  <property name="set.test_audio">0</property>
  </producer>
  <playlist id="black_track">
   <entry out="10226" producer="black" in="0"/>
  </playlist>
- <producer id="38_playlist1" out="10053" in="0" title="Anonymous Submission">
-  <property name="mlt_type">producer</property>
+ <producer id="38_playlist1" title="Anonymous Submission" out="10053" in="0">
   <property name="length">00:05:35:04</property>
   <property name="eof">pause</property>
   <property name="resource">audio/arraystack-ii.flac</property>
@@ -740,8 +764,7 @@
  <playlist id="playlist1">
   <entry out="10053" producer="38_playlist1" in="0"/>
  </playlist>
- <producer id="36_playlist2" out="10226" in="0" title="Anonymous Submission">
-  <property name="mlt_type">producer</property>
+ <producer id="36_playlist2" title="Anonymous Submission" out="10226" in="0">
   <property name="length">00:05:40:27</property>
   <property name="eof">pause</property>
   <property name="resource">audio/arraystack-ii.wav</property>
@@ -804,7 +827,7 @@
   <entry out="491" producer="33" in="0"/>
   <entry out="90" producer="34" in="0"/>
  </playlist>
- <tractor id="maintractor" out="10226" global_feed="1" in="0" title="Anonymous Submission">
+ <tractor id="maintractor" title="Anonymous Submission" global_feed="1" out="10226" in="0">
   <property name="meta.volume">1</property>
   <track producer="black_track"/>
   <track producer="playlist1" hide="video"/>
@@ -814,7 +837,6 @@
   <transition id="transition0">
    <property name="a_track">1</property>
    <property name="b_track">2</property>
-   <property name="mlt_type">transition</property>
    <property name="mlt_service">mix</property>
    <property name="always_active">1</property>
    <property name="combine">1</property>
@@ -823,7 +845,6 @@
   <transition id="transition1">
    <property name="a_track">1</property>
    <property name="b_track">3</property>
-   <property name="mlt_type">transition</property>
    <property name="mlt_service">mix</property>
    <property name="always_active">1</property>
    <property name="combine">1</property>
@@ -832,7 +853,6 @@
   <transition id="transition2">
    <property name="a_track">1</property>
    <property name="b_track">4</property>
-   <property name="mlt_type">transition</property>
    <property name="mlt_service">mix</property>
    <property name="always_active">1</property>
    <property name="internal_added">237</property>
@@ -842,7 +862,6 @@
    <property name="a_track">3</property>
    <property name="b_track">4</property>
    <property name="factory">loader</property>
-   <property name="mlt_type">transition</property>
    <property name="mlt_service">luma</property>
    <property name="automatic">1</property>
    <property name="kdenlive_id">dissolve</property>

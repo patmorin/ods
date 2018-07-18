@@ -1,9 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mlt LC_NUMERIC="en_CA.UTF-8" producer="main bin" title="Anonymous Submission" version="6.0.0" root="/home/morin/ods/courseware/av">
- <profile sample_aspect_den="1" progressive="1" frame_rate_den="1" colorspace="601" sample_aspect_num="1" frame_rate_num="25" description="1024x576 16:9 PAL" display_aspect_num="16" display_aspect_den="9" height="576" width="1024"/>
- <producer id="1" out="173" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:06:24</property>
+<mlt title="Anonymous Submission" version="6.5.0" root="/home/morin/ods/courseware/av" producer="main bin" LC_NUMERIC="en_CA.UTF-8">
+ <profile width="1920" frame_rate_den="1" height="1080" display_aspect_num="16" display_aspect_den="9" frame_rate_num="30" colorspace="709" sample_aspect_den="1" description="HD 1080p 30 fps" progressive="1" sample_aspect_num="1"/>
+ <producer id="1" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-01.png</property>
   <property name="ttl">25</property>
@@ -14,149 +13,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">30974</property>
-  <property name="kdenlive:file_hash">81709498ec0a957d3fb30ee0516bf297</property>
+  <property name="kdenlive:file_size">36951</property>
+  <property name="kdenlive:file_hash">971a27b5c716d41622605b03526595d0</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">174</property>
  </producer>
- <producer id="2" out="124" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:05:00</property>
-  <property name="eof">pause</property>
-  <property name="resource">list-images/list-02.png</property>
-  <property name="ttl">25</property>
-  <property name="aspect_ratio">1</property>
-  <property name="progressive">1</property>
-  <property name="seekable">1</property>
-  <property name="loop">1</property>
-  <property name="meta.media.width">1921</property>
-  <property name="meta.media.height">1080</property>
-  <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">31917</property>
-  <property name="kdenlive:file_hash">18d8abf79c424a1b7606d654fc9edb6c</property>
-  <property name="global_feed">1</property>
- </producer>
- <producer id="3" out="233" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:09:09</property>
-  <property name="eof">pause</property>
-  <property name="resource">list-images/list-03.png</property>
-  <property name="ttl">25</property>
-  <property name="aspect_ratio">1</property>
-  <property name="progressive">1</property>
-  <property name="seekable">1</property>
-  <property name="loop">1</property>
-  <property name="meta.media.width">1921</property>
-  <property name="meta.media.height">1080</property>
-  <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">35983</property>
-  <property name="kdenlive:file_hash">9481a6f8f137f9feff75dfc0ccf678b6</property>
-  <property name="global_feed">1</property>
- </producer>
- <producer id="4" out="186" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:07:12</property>
-  <property name="eof">pause</property>
-  <property name="resource">list-images/list-04.png</property>
-  <property name="ttl">25</property>
-  <property name="aspect_ratio">1</property>
-  <property name="progressive">1</property>
-  <property name="seekable">1</property>
-  <property name="loop">1</property>
-  <property name="meta.media.width">1921</property>
-  <property name="meta.media.height">1080</property>
-  <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">41977</property>
-  <property name="kdenlive:file_hash">fc982a315689efa056e0f2cfdeabe034</property>
-  <property name="global_feed">1</property>
- </producer>
- <producer id="5" out="142" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:05:18</property>
-  <property name="eof">pause</property>
-  <property name="resource">list-images/list-05.png</property>
-  <property name="ttl">25</property>
-  <property name="aspect_ratio">1</property>
-  <property name="progressive">1</property>
-  <property name="seekable">1</property>
-  <property name="loop">1</property>
-  <property name="meta.media.width">1921</property>
-  <property name="meta.media.height">1080</property>
-  <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">45251</property>
-  <property name="kdenlive:file_hash">b5bd0909fa8d6846ebb5941ebedf85a1</property>
-  <property name="global_feed">1</property>
- </producer>
- <producer id="6" out="124" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:05:00</property>
-  <property name="eof">pause</property>
-  <property name="resource">list-images/list-06.png</property>
-  <property name="ttl">25</property>
-  <property name="aspect_ratio">1</property>
-  <property name="progressive">1</property>
-  <property name="seekable">1</property>
-  <property name="loop">1</property>
-  <property name="meta.media.width">1921</property>
-  <property name="meta.media.height">1080</property>
-  <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">48208</property>
-  <property name="kdenlive:file_hash">602d7cdefc906e2e6a3b8cc92d3810ac</property>
-  <property name="global_feed">1</property>
- </producer>
- <producer id="7" out="147" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:05:23</property>
-  <property name="eof">pause</property>
-  <property name="resource">list-images/list-07.png</property>
-  <property name="ttl">25</property>
-  <property name="aspect_ratio">1</property>
-  <property name="progressive">1</property>
-  <property name="seekable">1</property>
-  <property name="loop">1</property>
-  <property name="meta.media.width">1921</property>
-  <property name="meta.media.height">1080</property>
-  <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">50794</property>
-  <property name="kdenlive:file_hash">661e38819c2038fcd85019f1500fa6f9</property>
-  <property name="global_feed">1</property>
- </producer>
- <producer id="8" out="157" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:06:08</property>
-  <property name="eof">pause</property>
-  <property name="resource">list-images/list-08.png</property>
-  <property name="ttl">25</property>
-  <property name="aspect_ratio">1</property>
-  <property name="progressive">1</property>
-  <property name="seekable">1</property>
-  <property name="loop">1</property>
-  <property name="meta.media.width">1921</property>
-  <property name="meta.media.height">1080</property>
-  <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">53220</property>
-  <property name="kdenlive:file_hash">7aeef5a0c226939374e24ac723153f39</property>
-  <property name="global_feed">1</property>
- </producer>
- <producer id="9" out="181" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:07:07</property>
-  <property name="eof">pause</property>
-  <property name="resource">list-images/list-09.png</property>
-  <property name="ttl">25</property>
-  <property name="aspect_ratio">1</property>
-  <property name="progressive">1</property>
-  <property name="seekable">1</property>
-  <property name="loop">1</property>
-  <property name="meta.media.width">1921</property>
-  <property name="meta.media.height">1080</property>
-  <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">53220</property>
-  <property name="kdenlive:file_hash">7aeef5a0c226939374e24ac723153f39</property>
-  <property name="global_feed">1</property>
- </producer>
- <producer id="10" out="204" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:08:05</property>
+ <producer id="10" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-10.png</property>
   <property name="ttl">25</property>
@@ -167,13 +30,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">57124</property>
-  <property name="kdenlive:file_hash">b00bb9d1f6c0d2379cd0f5bea4eab63e</property>
+  <property name="kdenlive:file_size">60295</property>
+  <property name="kdenlive:file_hash">085fb87bb89f0ccf5a4159b4fd3d1a46</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">205</property>
  </producer>
- <producer id="11" out="326" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:13:02</property>
+ <producer id="11" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-11.png</property>
   <property name="ttl">25</property>
@@ -184,13 +47,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">57405</property>
-  <property name="kdenlive:file_hash">25829bfe021ef16bb8f91cf4899df2f0</property>
+  <property name="kdenlive:file_size">60586</property>
+  <property name="kdenlive:file_hash">1ddd1d5bd7b41917962ba879de650725</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">327</property>
  </producer>
- <producer id="12" out="421" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:16:22</property>
+ <producer id="12" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-12.png</property>
   <property name="ttl">25</property>
@@ -201,13 +64,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">58974</property>
-  <property name="kdenlive:file_hash">4b6d931175f05e29b00a54b5b9ca442a</property>
+  <property name="kdenlive:file_size">62034</property>
+  <property name="kdenlive:file_hash">590141ce46ce988901dd341a7cd52951</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">422</property>
  </producer>
- <producer id="13" out="402" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:16:03</property>
+ <producer id="13" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-13.png</property>
   <property name="ttl">25</property>
@@ -218,13 +81,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">53220</property>
-  <property name="kdenlive:file_hash">7aeef5a0c226939374e24ac723153f39</property>
+  <property name="kdenlive:file_size">56204</property>
+  <property name="kdenlive:file_hash">d45c47ca104e695cc0b47408acd04e83</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">403</property>
  </producer>
- <producer id="14" out="469" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:18:20</property>
+ <producer id="14" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-14.png</property>
   <property name="ttl">25</property>
@@ -235,13 +98,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">57441</property>
-  <property name="kdenlive:file_hash">b52343d4bf815ac3c5bab0efaf0768c7</property>
+  <property name="kdenlive:file_size">60590</property>
+  <property name="kdenlive:file_hash">9db19bf1541fc29eed03b90591899144</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">470</property>
  </producer>
- <producer id="15" out="533" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:21:09</property>
+ <producer id="15" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-15.png</property>
   <property name="ttl">25</property>
@@ -252,13 +115,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">57630</property>
-  <property name="kdenlive:file_hash">31c8818ed3dc708739db996880805387</property>
+  <property name="kdenlive:file_size">60777</property>
+  <property name="kdenlive:file_hash">c76f9cd142e82af2278cd527d86507bc</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">534</property>
  </producer>
- <producer id="16" out="625" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:25:01</property>
+ <producer id="16" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-16.png</property>
   <property name="ttl">25</property>
@@ -269,13 +132,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">57483</property>
-  <property name="kdenlive:file_hash">9f4e6c3aca2b7c4e6e64001ae81b46dd</property>
+  <property name="kdenlive:file_size">60739</property>
+  <property name="kdenlive:file_hash">c406a0da3e70bc106be5b34d80cf53c7</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">626</property>
  </producer>
- <producer id="17" out="733" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:29:09</property>
+ <producer id="17" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-17.png</property>
   <property name="ttl">25</property>
@@ -286,13 +149,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">53252</property>
-  <property name="kdenlive:file_hash">64f8047fcaed63be05fcdcef948e6a7d</property>
+  <property name="kdenlive:file_size">56361</property>
+  <property name="kdenlive:file_hash">8afe46fd42f1dd61379714e559e0f851</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">734</property>
  </producer>
- <producer id="18" out="742" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:29:18</property>
+ <producer id="18" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-18.png</property>
   <property name="ttl">25</property>
@@ -303,13 +166,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">57850</property>
-  <property name="kdenlive:file_hash">838f44decbbcaa84d888c606538ab89d</property>
+  <property name="kdenlive:file_size">61120</property>
+  <property name="kdenlive:file_hash">35c8115bf265c525ba3a1247ffeeedbf</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">743</property>
  </producer>
- <producer id="19" out="757" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:30:08</property>
+ <producer id="19" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-19.png</property>
   <property name="ttl">25</property>
@@ -320,13 +183,30 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">58417</property>
-  <property name="kdenlive:file_hash">f1996ea3a021864014257296be06bd45</property>
+  <property name="kdenlive:file_size">61617</property>
+  <property name="kdenlive:file_hash">be0145cb9743ec977ac9323d88511bed</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">758</property>
  </producer>
- <producer id="20" out="659" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:26:10</property>
+ <producer id="2" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
+  <property name="eof">pause</property>
+  <property name="resource">list-images/list-02.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_size">33747</property>
+  <property name="kdenlive:file_hash">ffcb04728b26ebc91fb83fccb7a1631d</property>
+  <property name="global_feed">1</property>
+  <property name="kdenlive:duration">125</property>
+ </producer>
+ <producer id="20" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-20.png</property>
   <property name="ttl">25</property>
@@ -337,13 +217,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">58230</property>
-  <property name="kdenlive:file_hash">6f02189c2e22b2d6502abfd44d6aa0f7</property>
+  <property name="kdenlive:file_size">61463</property>
+  <property name="kdenlive:file_hash">4adc122dfef531a2400a61c459cb66e4</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">660</property>
  </producer>
- <producer id="21" out="705" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:28:06</property>
+ <producer id="21" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-21.png</property>
   <property name="ttl">25</property>
@@ -354,13 +234,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">58393</property>
-  <property name="kdenlive:file_hash">d7e75959ee5e31fab90f245ecba397ee</property>
+  <property name="kdenlive:file_size">61612</property>
+  <property name="kdenlive:file_hash">bcfa8adffd209ea23579ec785f67141f</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">706</property>
  </producer>
- <producer id="22" out="778" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:31:04</property>
+ <producer id="22" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-22.png</property>
   <property name="ttl">25</property>
@@ -371,13 +251,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">59045</property>
-  <property name="kdenlive:file_hash">947ff036cd3be8b1152c7b82bde91cee</property>
+  <property name="kdenlive:file_size">62194</property>
+  <property name="kdenlive:file_hash">ea3e9769c01c5d52dfbd35035ac07125</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">779</property>
  </producer>
- <producer id="23" out="779" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:31:05</property>
+ <producer id="23" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-23.png</property>
   <property name="ttl">25</property>
@@ -388,13 +268,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">54550</property>
-  <property name="kdenlive:file_hash">88ee6d5d83fa941a86f2cee981ac600d</property>
+  <property name="kdenlive:file_size">57671</property>
+  <property name="kdenlive:file_hash">94711957386c64ace7b077990ee828f7</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">780</property>
  </producer>
- <producer id="24" out="943" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:37:19</property>
+ <producer id="24" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-24.png</property>
   <property name="ttl">25</property>
@@ -405,13 +285,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">59440</property>
-  <property name="kdenlive:file_hash">8839a4cb4cc92529258fbb98ee0bbd87</property>
+  <property name="kdenlive:file_size">62605</property>
+  <property name="kdenlive:file_hash">986e6dfa1223ef874448c7b4f3cfa9dc</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">944</property>
  </producer>
- <producer id="25" out="963" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:38:14</property>
+ <producer id="25" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-25.png</property>
   <property name="ttl">25</property>
@@ -422,13 +302,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">60495</property>
-  <property name="kdenlive:file_hash">373252b781b732a0905720636483fe49</property>
+  <property name="kdenlive:file_size">63819</property>
+  <property name="kdenlive:file_hash">a9fed2e6eac0a4e467d3b1cc31112615</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">964</property>
  </producer>
- <producer id="26" out="983" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:39:09</property>
+ <producer id="26" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-26.png</property>
   <property name="ttl">25</property>
@@ -439,13 +319,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">61319</property>
-  <property name="kdenlive:file_hash">63c7869ea6fd1b62ca1d23d9227ae7a0</property>
+  <property name="kdenlive:file_size">64662</property>
+  <property name="kdenlive:file_hash">fc9ad0502cf32f8593538a84a7a192a6</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">984</property>
  </producer>
- <producer id="27" out="1063" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:42:14</property>
+ <producer id="27" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-27.png</property>
   <property name="ttl">25</property>
@@ -456,13 +336,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">56619</property>
-  <property name="kdenlive:file_hash">ec68d46c85bb0058499931709e7d1df8</property>
+  <property name="kdenlive:file_size">59677</property>
+  <property name="kdenlive:file_hash">273829ee2d366ec61dae747f6482a84f</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">1064</property>
  </producer>
- <producer id="28" out="1125" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:45:01</property>
+ <producer id="28" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-28.png</property>
   <property name="ttl">25</property>
@@ -473,13 +353,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">60478</property>
-  <property name="kdenlive:file_hash">df5480a683ca67cbdbfba763dc22954a</property>
+  <property name="kdenlive:file_size">63822</property>
+  <property name="kdenlive:file_hash">6f96e9ec7d2466281505751bd1f68a3e</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">1126</property>
  </producer>
- <producer id="29" out="1208" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:48:09</property>
+ <producer id="29" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-29.png</property>
   <property name="ttl">25</property>
@@ -490,13 +370,30 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">60682</property>
-  <property name="kdenlive:file_hash">6c5f7951d0123146940a0a889fe38f4c</property>
+  <property name="kdenlive:file_size">64007</property>
+  <property name="kdenlive:file_hash">cc68aae99b1ce4b680f9360460fe5bcd</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">1209</property>
  </producer>
- <producer id="30" out="1276" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:51:02</property>
+ <producer id="3" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
+  <property name="eof">pause</property>
+  <property name="resource">list-images/list-03.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_size">37881</property>
+  <property name="kdenlive:file_hash">b2886b9f22daffe074bb9215d9f35bca</property>
+  <property name="global_feed">1</property>
+  <property name="kdenlive:duration">234</property>
+ </producer>
+ <producer id="30" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-30.png</property>
   <property name="ttl">25</property>
@@ -507,13 +404,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">61380</property>
-  <property name="kdenlive:file_hash">2af5e78fc8782872cc4d172ec75bd2d5</property>
+  <property name="kdenlive:file_size">64698</property>
+  <property name="kdenlive:file_hash">2b01bf59804d27d31b6b0f428d975542</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">1277</property>
  </producer>
- <producer id="31" out="1327" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:53:03</property>
+ <producer id="31" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-31.png</property>
   <property name="ttl">25</property>
@@ -524,13 +421,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">61736</property>
-  <property name="kdenlive:file_hash">3afac740c8393f297280afe46403abed</property>
+  <property name="kdenlive:file_size">65023</property>
+  <property name="kdenlive:file_hash">4fafef2b7e197fee2ef85c5f8fb5387f</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">1328</property>
  </producer>
- <producer id="32" out="1226" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:49:02</property>
+ <producer id="32" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-32.png</property>
   <property name="ttl">25</property>
@@ -541,13 +438,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">60507</property>
-  <property name="kdenlive:file_hash">3a728004bdd131e803900a9d23c143f4</property>
+  <property name="kdenlive:file_size">63825</property>
+  <property name="kdenlive:file_hash">60d3bd5788b15ed737ce90d03dd5bac0</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">1227</property>
  </producer>
- <producer id="33" out="1337" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:53:13</property>
+ <producer id="33" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-33.png</property>
   <property name="ttl">25</property>
@@ -558,13 +455,13 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">54697</property>
-  <property name="kdenlive:file_hash">ae0116bad64090a3c3c908761c26b1d2</property>
+  <property name="kdenlive:file_size">57796</property>
+  <property name="kdenlive:file_hash">fb7a3de55461dbdc282ec531da58a0e4</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">1338</property>
  </producer>
- <producer id="34" out="1301" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:00:52:02</property>
+ <producer id="34" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
   <property name="eof">pause</property>
   <property name="resource">list-images/list-34.png</property>
   <property name="ttl">25</property>
@@ -575,19 +472,15 @@
   <property name="meta.media.width">1921</property>
   <property name="meta.media.height">1080</property>
   <property name="mlt_service">pixbuf</property>
-  <property name="kdenlive:file_size">20870</property>
-  <property name="kdenlive:file_hash">ecfc7e82970583f8e63861d07af7fc4e</property>
+  <property name="kdenlive:file_size">22722</property>
+  <property name="kdenlive:file_hash">ee71d577fb95fb748b01210a737f8d18</property>
   <property name="global_feed">1</property>
+  <property name="kdenlive:duration">1302</property>
  </producer>
- <producer id="35" out="3008" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:02:00:09</property>
+ <producer id="35" title="Anonymous Submission" out="3610" in="0">
+  <property name="length">00:02:00:11</property>
   <property name="eof">pause</property>
   <property name="resource">audio/list.wav</property>
-  <property name="audio_index">0</property>
-  <property name="video_index">-1</property>
-  <property name="mute_on_pause">1</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">audio</property>
   <property name="meta.media.0.codec.sample_fmt">s16</property>
@@ -598,13 +491,16 @@
   <property name="meta.media.0.codec.bit_rate">1411200</property>
   <property name="meta.attr.encoder.markup">Lavf56.40.101</property>
   <property name="seekable">1</property>
+  <property name="audio_index">0</property>
+  <property name="video_index">-1</property>
+  <property name="mute_on_pause">1</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:file_size">21233742</property>
   <property name="kdenlive:file_hash">e0d38db670ff620aa449f5558788768d</property>
   <property name="global_feed">1</property>
  </producer>
- <producer id="36" out="3008" title="Anonymous Submission" in="0">
-  <property name="mlt_type">mlt_producer</property>
-  <property name="length">00:02:00:09</property>
+ <producer id="36" title="Anonymous Submission" out="3610" in="0">
+  <property name="length">00:02:00:11</property>
   <property name="eof">pause</property>
   <property name="resource">audio/list.flac</property>
   <property name="meta.media.nb_streams">1</property>
@@ -624,81 +520,209 @@
   <property name="kdenlive:file_hash">9fa062df6c5c72a0f3f38d6334b5b123</property>
   <property name="global_feed">1</property>
  </producer>
- <playlist id="main bin" kdenlive:customeffects="&lt;customeffects/>&#xa;">
+ <producer id="4" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
+  <property name="eof">pause</property>
+  <property name="resource">list-images/list-04.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_size">44674</property>
+  <property name="kdenlive:file_hash">97ee5d05e37f7fbadc8e0269faebca6f</property>
+  <property name="global_feed">1</property>
+  <property name="kdenlive:duration">187</property>
+ </producer>
+ <producer id="5" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
+  <property name="eof">pause</property>
+  <property name="resource">list-images/list-05.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_size">47897</property>
+  <property name="kdenlive:file_hash">7543e7ff24be6586b7a5a4ea2cae06ea</property>
+  <property name="global_feed">1</property>
+  <property name="kdenlive:duration">143</property>
+ </producer>
+ <producer id="6" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
+  <property name="eof">pause</property>
+  <property name="resource">list-images/list-06.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_size">50080</property>
+  <property name="kdenlive:file_hash">8183d1d2f9a2dc9b536eb02c488edd3c</property>
+  <property name="global_feed">1</property>
+  <property name="kdenlive:duration">125</property>
+ </producer>
+ <producer id="7" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
+  <property name="eof">pause</property>
+  <property name="resource">list-images/list-07.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_size">53355</property>
+  <property name="kdenlive:file_hash">91487377e3159786cfd8d0b9442fa50f</property>
+  <property name="global_feed">1</property>
+  <property name="kdenlive:duration">148</property>
+ </producer>
+ <producer id="8" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
+  <property name="eof">pause</property>
+  <property name="resource">list-images/list-08.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_size">56204</property>
+  <property name="kdenlive:file_hash">d45c47ca104e695cc0b47408acd04e83</property>
+  <property name="global_feed">1</property>
+  <property name="kdenlive:duration">158</property>
+ </producer>
+ <producer id="9" title="Anonymous Submission" out="14999" in="0">
+  <property name="length">0</property>
+  <property name="eof">pause</property>
+  <property name="resource">list-images/list-09.png</property>
+  <property name="ttl">25</property>
+  <property name="aspect_ratio">1</property>
+  <property name="progressive">1</property>
+  <property name="seekable">1</property>
+  <property name="loop">1</property>
+  <property name="meta.media.width">1921</property>
+  <property name="meta.media.height">1080</property>
+  <property name="mlt_service">pixbuf</property>
+  <property name="kdenlive:file_size">56204</property>
+  <property name="kdenlive:file_hash">d45c47ca104e695cc0b47408acd04e83</property>
+  <property name="global_feed">1</property>
+  <property name="kdenlive:duration">182</property>
+ </producer>
+ <playlist id="main bin">
   <property name="kdenlive:customeffects">&lt;customeffects/>
 </property>
   <property name="kdenlive:docproperties.documentid">1493735336191</property>
   <property name="kdenlive:docproperties.enableproxy">0</property>
   <property name="kdenlive:docproperties.generateimageproxy">0</property>
   <property name="kdenlive:docproperties.generateproxy">0</property>
-  <property name="kdenlive:docproperties.kdenliveversion">15.12.3</property>
+  <property name="kdenlive:docproperties.kdenliveversion">17.04.3</property>
   <property name="kdenlive:docproperties.position">0</property>
-  <property name="kdenlive:docproperties.profile">square_pal_wide</property>
+  <property name="kdenlive:docproperties.profile">atsc_1080p_30</property>
   <property name="kdenlive:docproperties.projectfolder">/home/morin/kdenlive</property>
   <property name="kdenlive:docproperties.proxyextension">mpg</property>
   <property name="kdenlive:docproperties.proxyimageminsize">2000</property>
   <property name="kdenlive:docproperties.proxyminsize">1000</property>
   <property name="kdenlive:docproperties.proxyparams">-s 640x480 -g 5 -qscale 6 -ab 128k -vcodec mpeg2video -acodec mp2</property>
-  <property name="kdenlive:docproperties.version">0.91</property>
+  <property name="kdenlive:docproperties.version">0.95</property>
   <property name="kdenlive:docproperties.verticalzoom">1</property>
   <property name="kdenlive:docproperties.zonein">0</property>
   <property name="kdenlive:docproperties.zoneout">100</property>
   <property name="kdenlive:docproperties.zoom">5</property>
   <property name="kdenlive:documentnotes"/>
-  <property name="kdenlive:clipgroups">&lt;groups/>
-</property>
+  <property name="kdenlive:clipgroups"/>
+  <property name="kdenlive:docproperties.audiotargettrack">-1</property>
+  <property name="kdenlive:docproperties.decimalPoint">.</property>
+  <property name="kdenlive:docproperties.dirtypreviewchunks"/>
+  <property name="kdenlive:docproperties.disablepreview">0</property>
+  <property name="kdenlive:docproperties.previewchunks"/>
+  <property name="kdenlive:docproperties.previewextension"/>
+  <property name="kdenlive:docproperties.previewparameters"/>
+  <property name="kdenlive:docproperties.renderaudioquality">6</property>
+  <property name="kdenlive:docproperties.rendercategory">Generic (HD for web, mobile devices...)</property>
+  <property name="kdenlive:docproperties.renderendguide">-1</property>
+  <property name="kdenlive:docproperties.renderexportaudio">0</property>
+  <property name="kdenlive:docproperties.renderguide">0</property>
+  <property name="kdenlive:docproperties.renderplay">0</property>
+  <property name="kdenlive:docproperties.renderprofile">WebM - the widespread free format (VP8/Vorbis)</property>
+  <property name="kdenlive:docproperties.renderquality">23</property>
+  <property name="kdenlive:docproperties.renderratio">1</property>
+  <property name="kdenlive:docproperties.renderrescale">0</property>
+  <property name="kdenlive:docproperties.renderrescaleheight">180</property>
+  <property name="kdenlive:docproperties.renderrescalewidth">320</property>
+  <property name="kdenlive:docproperties.renderscanning">0</property>
+  <property name="kdenlive:docproperties.renderspeed">2</property>
+  <property name="kdenlive:docproperties.renderstartguide">-1</property>
+  <property name="kdenlive:docproperties.rendertcoverlay">0</property>
+  <property name="kdenlive:docproperties.rendertctype">0</property>
+  <property name="kdenlive:docproperties.rendertwopass">0</property>
+  <property name="kdenlive:docproperties.renderurl">list.webm</property>
+  <property name="kdenlive:docproperties.renderzone">0</property>
+  <property name="kdenlive:docproperties.videotargettrack">-1</property>
   <property name="xml_retain">1</property>
-  <entry producer="1" out="124" in="0"/>
-  <entry producer="2" out="124" in="0"/>
-  <entry producer="3" out="124" in="0"/>
-  <entry producer="4" out="124" in="0"/>
-  <entry producer="5" out="124" in="0"/>
-  <entry producer="6" out="124" in="0"/>
-  <entry producer="7" out="124" in="0"/>
-  <entry producer="8" out="124" in="0"/>
-  <entry producer="9" out="124" in="0"/>
-  <entry producer="10" out="124" in="0"/>
-  <entry producer="11" out="124" in="0"/>
-  <entry producer="12" out="124" in="0"/>
-  <entry producer="13" out="124" in="0"/>
-  <entry producer="14" out="124" in="0"/>
-  <entry producer="15" out="124" in="0"/>
-  <entry producer="16" out="124" in="0"/>
-  <entry producer="17" out="124" in="0"/>
-  <entry producer="18" out="124" in="0"/>
-  <entry producer="19" out="124" in="0"/>
-  <entry producer="20" out="124" in="0"/>
-  <entry producer="21" out="124" in="0"/>
-  <entry producer="22" out="124" in="0"/>
-  <entry producer="23" out="124" in="0"/>
-  <entry producer="24" out="124" in="0"/>
-  <entry producer="25" out="124" in="0"/>
-  <entry producer="26" out="124" in="0"/>
-  <entry producer="27" out="124" in="0"/>
-  <entry producer="28" out="124" in="0"/>
-  <entry producer="29" out="124" in="0"/>
-  <entry producer="30" out="124" in="0"/>
-  <entry producer="31" out="124" in="0"/>
-  <entry producer="32" out="124" in="0"/>
-  <entry producer="33" out="124" in="0"/>
-  <entry producer="34" out="124" in="0"/>
-  <entry producer="35" out="3008" in="0"/>
-  <entry producer="36" out="3008" in="0"/>
+  <entry out="-1" producer="1" in="-1"/>
+  <entry out="-1" producer="10" in="-1"/>
+  <entry out="-1" producer="11" in="-1"/>
+  <entry out="-1" producer="12" in="-1"/>
+  <entry out="-1" producer="13" in="-1"/>
+  <entry out="-1" producer="14" in="-1"/>
+  <entry out="-1" producer="15" in="-1"/>
+  <entry out="-1" producer="16" in="-1"/>
+  <entry out="-1" producer="17" in="-1"/>
+  <entry out="-1" producer="18" in="-1"/>
+  <entry out="-1" producer="19" in="-1"/>
+  <entry out="-1" producer="2" in="-1"/>
+  <entry out="-1" producer="20" in="-1"/>
+  <entry out="-1" producer="21" in="-1"/>
+  <entry out="-1" producer="22" in="-1"/>
+  <entry out="-1" producer="23" in="-1"/>
+  <entry out="-1" producer="24" in="-1"/>
+  <entry out="-1" producer="25" in="-1"/>
+  <entry out="-1" producer="26" in="-1"/>
+  <entry out="-1" producer="27" in="-1"/>
+  <entry out="-1" producer="28" in="-1"/>
+  <entry out="-1" producer="29" in="-1"/>
+  <entry out="-1" producer="3" in="-1"/>
+  <entry out="-1" producer="30" in="-1"/>
+  <entry out="-1" producer="31" in="-1"/>
+  <entry out="-1" producer="32" in="-1"/>
+  <entry out="-1" producer="33" in="-1"/>
+  <entry out="-1" producer="34" in="-1"/>
+  <entry out="3610" producer="35" in="0"/>
+  <entry out="3610" producer="36" in="0"/>
+  <entry out="-1" producer="4" in="-1"/>
+  <entry out="-1" producer="5" in="-1"/>
+  <entry out="-1" producer="6" in="-1"/>
+  <entry out="-1" producer="7" in="-1"/>
+  <entry out="-1" producer="8" in="-1"/>
+  <entry out="-1" producer="9" in="-1"/>
  </playlist>
  <producer id="black" out="500" in="0">
-  <property name="mlt_type">producer</property>
   <property name="length">15000</property>
   <property name="eof">pause</property>
   <property name="resource">/home/seanhodges/tmp/ods/courseware/av/black</property>
   <property name="aspect_ratio">0</property>
   <property name="mlt_service">colour</property>
+  <property name="set.test_audio">0</property>
  </producer>
  <playlist id="black_track">
-  <entry producer="black" out="3008" in="0"/>
+  <entry out="3008" producer="black" in="0"/>
  </playlist>
- <producer id="36_playlist1" out="3008" title="Anonymous Submission" in="0">
-  <property name="mlt_type">producer</property>
-  <property name="length">00:02:00:09</property>
+ <producer id="36_playlist1" title="Anonymous Submission" out="3610" in="0">
+  <property name="length">3611</property>
   <property name="eof">pause</property>
   <property name="resource">audio/list.flac</property>
   <property name="audio_index">0</property>
@@ -714,11 +738,10 @@
  <playlist id="playlist1">
   <property name="kdenlive:track_name">Audio 2</property>
   <property name="kdenlive:audio_track">1</property>
-  <entry producer="36_playlist1" out="3008" in="0"/>
+  <entry out="3008" producer="36_playlist1" in="0"/>
  </playlist>
- <producer id="35_playlist2" out="3008" title="Anonymous Submission" in="0">
-  <property name="mlt_type">producer</property>
-  <property name="length">00:02:00:09</property>
+ <producer id="35_playlist2" title="Anonymous Submission" out="3610" in="0">
+  <property name="length">3611</property>
   <property name="eof">pause</property>
   <property name="resource">audio/list.wav</property>
   <property name="audio_index">0</property>
@@ -730,20 +753,11 @@
   <property name="kdenlive:file_hash">e0d38db670ff620aa449f5558788768d</property>
   <property name="global_feed">1</property>
   <property name="xml">was here</property>
-  <property name="meta.media.nb_streams">1</property>
-  <property name="meta.media.0.stream.type">audio</property>
-  <property name="meta.media.0.codec.sample_fmt">s16</property>
-  <property name="meta.media.0.codec.sample_rate">44100</property>
-  <property name="meta.media.0.codec.channels">2</property>
-  <property name="meta.media.0.codec.name">pcm_s16le</property>
-  <property name="meta.media.0.codec.long_name">PCM signed 16-bit little-endian</property>
-  <property name="meta.media.0.codec.bit_rate">1411200</property>
-  <property name="meta.attr.encoder.markup">Lavf56.40.101</property>
  </producer>
  <playlist id="playlist2">
   <property name="kdenlive:track_name">Audio 1</property>
   <property name="kdenlive:audio_track">1</property>
-  <entry producer="35_playlist2" out="3008" in="0"/>
+  <entry out="3008" producer="35_playlist2" in="0"/>
  </playlist>
  <playlist id="playlist4">
   <property name="kdenlive:track_name">Video 2</property>
@@ -754,42 +768,42 @@
   <property name="kdenlive:track_name">Video 1</property>
   <property name="kdenlive:locked_track">0</property>
   <property name="kdenlive:composite">1</property>
-  <entry producer="1" out="172" in="0"/>
-  <entry producer="2" out="110" in="48"/>
-  <entry producer="3" out="232" in="0"/>
-  <entry producer="4" out="185" in="94"/>
-  <entry producer="5" out="141" in="61"/>
-  <entry producer="6" out="102" in="17"/>
-  <entry producer="7" out="114" in="0"/>
-  <entry producer="8" out="100" in="0"/>
-  <entry producer="9" out="101" in="0"/>
-  <entry producer="10" out="2" in="0"/>
-  <entry producer="11" out="29" in="0"/>
-  <entry producer="12" out="60" in="0"/>
-  <entry producer="13" out="140" in="0"/>
-  <entry producer="14" out="60" in="0"/>
-  <entry producer="15" out="32" in="0"/>
-  <entry producer="16" out="37" in="0"/>
-  <entry producer="17" out="115" in="21"/>
-  <entry producer="18" out="157" in="0"/>
-  <entry producer="19" out="182" in="48"/>
-  <entry producer="20" out="91" in="0"/>
-  <entry producer="21" out="78" in="0"/>
-  <entry producer="22" out="22" in="0"/>
-  <entry producer="23" out="61" in="0"/>
-  <entry producer="24" out="104" in="0"/>
-  <entry producer="25" out="104" in="0"/>
-  <entry producer="26" out="44" in="0"/>
-  <entry producer="27" out="62" in="0"/>
-  <entry producer="28" out="41" in="0"/>
-  <entry producer="29" out="56" in="0"/>
-  <entry producer="30" out="153" in="0"/>
-  <entry producer="31" out="225" in="80"/>
-  <entry producer="32" out="13" in="0"/>
-  <entry producer="33" out="160" in="0"/>
-  <entry producer="34" out="59" in="0"/>
+  <entry out="-1" producer="1" in="-1"/>
+  <entry out="-1" producer="2" in="-1"/>
+  <entry out="-1" producer="3" in="-1"/>
+  <entry out="-1" producer="4" in="-1"/>
+  <entry out="-1" producer="5" in="-1"/>
+  <entry out="-1" producer="6" in="-1"/>
+  <entry out="-1" producer="7" in="-1"/>
+  <entry out="-1" producer="8" in="-1"/>
+  <entry out="-1" producer="9" in="-1"/>
+  <entry out="-1" producer="10" in="-1"/>
+  <entry out="-1" producer="11" in="-1"/>
+  <entry out="-1" producer="12" in="-1"/>
+  <entry out="-1" producer="13" in="-1"/>
+  <entry out="-1" producer="14" in="-1"/>
+  <entry out="-1" producer="15" in="-1"/>
+  <entry out="-1" producer="16" in="-1"/>
+  <entry out="-1" producer="17" in="-1"/>
+  <entry out="-1" producer="18" in="-1"/>
+  <entry out="-1" producer="19" in="-1"/>
+  <entry out="-1" producer="20" in="-1"/>
+  <entry out="-1" producer="21" in="-1"/>
+  <entry out="-1" producer="22" in="-1"/>
+  <entry out="-1" producer="23" in="-1"/>
+  <entry out="-1" producer="24" in="-1"/>
+  <entry out="-1" producer="25" in="-1"/>
+  <entry out="-1" producer="26" in="-1"/>
+  <entry out="-1" producer="27" in="-1"/>
+  <entry out="-1" producer="28" in="-1"/>
+  <entry out="-1" producer="29" in="-1"/>
+  <entry out="-1" producer="30" in="-1"/>
+  <entry out="-1" producer="31" in="-1"/>
+  <entry out="-1" producer="32" in="-1"/>
+  <entry out="-1" producer="33" in="-1"/>
+  <entry out="-1" producer="34" in="-1"/>
  </playlist>
- <tractor id="maintractor" out="3008" title="Anonymous Submission" in="0" global_feed="1">
+ <tractor id="maintractor" title="Anonymous Submission" global_feed="1" out="3008" in="0">
   <track producer="black_track"/>
   <track producer="playlist1" hide="video"/>
   <track producer="playlist2" hide="both"/>
@@ -798,7 +812,6 @@
   <transition id="transition0">
    <property name="a_track">0</property>
    <property name="b_track">1</property>
-   <property name="mlt_type">transition</property>
    <property name="mlt_service">mix</property>
    <property name="always_active">1</property>
    <property name="combine">1</property>
@@ -807,7 +820,6 @@
   <transition id="transition1">
    <property name="a_track">0</property>
    <property name="b_track">2</property>
-   <property name="mlt_type">transition</property>
    <property name="mlt_service">mix</property>
    <property name="always_active">1</property>
    <property name="combine">1</property>
@@ -816,7 +828,6 @@
   <transition id="transition2">
    <property name="a_track">0</property>
    <property name="b_track">3</property>
-   <property name="mlt_type">transition</property>
    <property name="mlt_service">mix</property>
    <property name="always_active">1</property>
    <property name="combine">1</property>
@@ -825,7 +836,6 @@
   <transition id="transition3">
    <property name="a_track">0</property>
    <property name="b_track">4</property>
-   <property name="mlt_type">transition</property>
    <property name="mlt_service">mix</property>
    <property name="always_active">1</property>
    <property name="combine">1</property>
@@ -835,7 +845,6 @@
    <property name="a_track">3</property>
    <property name="b_track">4</property>
    <property name="version">0.9</property>
-   <property name="mlt_type">transition</property>
    <property name="mlt_service">frei0r.cairoblend</property>
    <property name="internal_added">237</property>
   </transition>
