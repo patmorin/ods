@@ -80,6 +80,7 @@ public class SLList<T> extends AbstractQueue<T> {
 
 	@Override
 	public T peek() {
+		if (n == 0) return null;
 		return head.x;
 	}
 
