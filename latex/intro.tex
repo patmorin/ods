@@ -272,7 +272,7 @@ includes the following operations:
     $#x#_{#i#},\ldots,#x#_{#n#-1}$; \\ 
     Set $#x#_{j+1}=#x#_j$, for all
     $j\in\{#n#-1,\ldots,#i#\}$, increment #n#, and set $#x#_i=#x#$
-  \item #remove(i)# remove the value $#x#_{#i#}$, displacing
+  \item #remove(i)#: remove the value $#x#_{#i#}$, displacing
     $#x#_{#i+1#},\ldots,#x#_{#n#-1}$; \\ 
     Set $#x#_{j}=#x#_{j+1}$, for all
     $j\in\{#i#,\ldots,#n#-2\}$ and decrement #n#
@@ -409,7 +409,7 @@ the very good (and free) textbook on mathematics for computer science
 \index{exponential}%
 The expression $b^x$ denotes the number $b$ raised to the power of $x$.
 If $x$ is a positive integer, then this is just the value of $b$
-multiplied by itself $x-1$ times:
+multiplied by itself $x$ times:
 \[
     b^x = \underbrace{b\times b\times \cdots \times b}_{x} \enspace .
 \]
