@@ -692,13 +692,13 @@ values of existing nodes.
   interface.}
   \begin{enumerate}
     \item Write a #DLList# method called #takeFirst(l2)#.
-       This method takes the first node from #l2# and appends it to the the
+       This method takes the first node from #l2# and appends it to the
        receiving list.  This is equivalent to #add(size(),l2.remove(0))#,
        except that it should not create a new node.
     \item Write a #DLList# static method, #merge(l1,l2)#, that takes two
        sorted lists #l1# and #l2#, merges them, and returns a new sorted
        list containing the result.  This causes #l1# and #l2# to be emptied
-       in the proces.  For example, if #l1# contains $a,c,d$ and #l2# contains
+       in the process.  For example, if #l1# contains $a,c,d$ and #l2# contains
        $b,e,f$, then this method returns a new list containing $a,b,c,d,e,f$.
     \item Write a #DLList# method #sort()# that sorts the elements
        contained in the list using the merge sort algorithm.
@@ -742,7 +742,7 @@ or #Queue# as items are added and removed.
   \index{MinDeque@#MinDeque#}%
   Design and implement a #MinDeque# data structure that can store
   comparable elements and supports all the deque operations #addFirst(x)#,
-  #addLast(x)# #removeFirst()#, #removeLast()# and #size()#, and the
+  #addLast(x)#, #removeFirst()#, #removeLast()# and #size()#, and the
   #min()# operation, which returns the minimum value currently stored in
   the data structure.  All operations should run in constant amortized
   time.
