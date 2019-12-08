@@ -1034,6 +1034,7 @@ hash codes.
   \[
       (x\bmod 2^{#w#}) + (x\ddiv 2^{#w#}) \equiv x \bmod (2^{#w#}-1) \enspace .
   \]
+  \javaonly{
   (This gives an algorithm for computing $x \bmod (2^{#w#}-1)$ by
   repeatedly setting
   \javaonly{\[
@@ -1042,13 +1043,13 @@ hash codes.
   \cpponly{\[
     #x = x&((1<<w)-1) + x>>w#
   \]}
-  until $#x# \le 2^{#w#}-1$.)
+  until $#x# \le 2^{#w#}-1$.)}
 \end{exc}
 
 \begin{exc}
-  Find some commonly used hash table implementation such as the (\javaonly{Java
-  Collection Framework #HashMap#}\cpponly{The C++ STL #unordered\_map#}
-  or the #HashTable# or #LinearHashTable# implementations in this book,
+  Find some commonly used hash table implementation such as the \javaonly{Java
+  Collection Framework #HashMap#,}\cpponly{C++ STL #unordered\_map#,}
+  the #HashTable# or #LinearHashTable# implementations in this book,
   and design a program that stores integers in this data
   structure so that there are integers, #x#, such that #find(x)# takes
   linear time.  That is, find a set of #n# integers for which there are
