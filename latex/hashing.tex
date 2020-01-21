@@ -184,13 +184,6 @@ With \lemref{universal-hashing}, the performance of #remove(x)#, and
   as required.
 \end{proof}
 
-Now, we want to prove \lemref{universal-hashing}, but first we need a
-result from number theory.  In the following proof, we use the notation
-$(b_r,\ldots,b_0)_2$ to denote $\sum_{i=0}^r b_i2^i$, where each $b_i$
-is a bit, either 0 or 1.  In other words, $(b_r,\ldots,b_0)_2$ is
-the integer whose binary representation is given by $b_r,\ldots,b_0$.
-We use $\star$ to denote a bit of unknown value.
-
 \begin{lem}\lemlabel{hashing-mapping}
   Let $S$ be the set of odd integers in $\{1,\ldots,2^{#w#}-1\}$; let $q$
   and $i$ be any two elements in $S$.  Then there is exactly one value
@@ -215,32 +208,8 @@ We use $\star$ to denote a bit of unknown value.
   \begin{equation}
     (#z#-#z#')q = k 2^{#w#} \eqlabel{factors} 
   \end{equation}
-  for some integer $k$.  Thinking in terms of binary numbers, we have 
-  \[
-    (#z#-#z#')q = k\cdot(1,\underbrace{0,\ldots,0}_{#w#})_2 \enspace ,
-  \]
-  so that the #w# trailing bits in the binary representation of
-  $(#z#-#z#')q$ are all 0's.
-
-  Furthermore $k\neq 0$, since $q\neq 0$ and $#z#-#z#'\neq 0$.  Since $q$
-  is odd, it has no trailing 0's in its binary representation:
-  \[
-    q = (\star,\ldots,\star,1)_2 \enspace .
-  \]
-  Since $|#z#-#z#'| < 2^{#w#}$, $#z#-#z#'$ has fewer than #w# trailing
-  0's in its binary representation:
-  \[
-    #z#-#z#' = (\star,\ldots,\star,1,\underbrace{0,\ldots,0}_{<#w#})_2
-      \enspace .
-  \]
-  Therefore, the product $(#z#-#z#')q$ has fewer than #w# trailing 0's in
-  its binary representation:
-  \[
-   (#z#-#z#')q = (\star,\cdots,\star,1,\underbrace{0,\ldots,0}_{<#w#})_2 
-    \enspace .
-  \]
-  Therefore $(#z#-#z#')q$ cannot satisfy \myeqref{factors}, yielding a
-  contradiction and completing the proof.
+  for some integer $k$. Since $z$ is in $S$, $k$ is necessarily zero, 
+  which means that $z=z'$, a contradiction. This completes the proof.
 \end{proof}
 
 The utility of \lemref{hashing-mapping} comes from the following
@@ -248,6 +217,13 @@ observation:  If #z# is chosen uniformly at random from $S$, then #zt#
 is uniformly distributed over $S$.  In the following proof, it helps
 to think of the binary representation of #z#, which consists of $#w#-1$
 random bits followed by a 1.
+
+Now, we want to prove \lemref{universal-hashing}, but first we need a
+result from number theory.  In the following proof, we use the notation
+$(b_r,\ldots,b_0)_2$ to denote $\sum_{i=0}^r b_i2^i$, where each $b_i$
+is a bit, either 0 or 1.  In other words, $(b_r,\ldots,b_0)_2$ is
+the integer whose binary representation is given by $b_r,\ldots,b_0$.
+We use $\star$ to denote a bit of unknown value.
 
 \begin{proof}[Proof of \lemref{universal-hashing}]
   First we note that the condition $#hash(x)#=#hash(y)#$ is equivalent to
