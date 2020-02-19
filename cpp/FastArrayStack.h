@@ -37,7 +37,7 @@ template<class T>
 void FastArrayStack<T>::resize() {
 	array<T> b(max(1, 2*n));
 	std::copy(a+0, a+n, b+0);
-	a = b;
+	a.swap(b);
 }
 
 template<class T>

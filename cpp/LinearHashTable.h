@@ -112,7 +112,7 @@ void LinearHashTable<T>::resize() {
 			tnew[i] = t[k];
 		}
 	}
-	t = tnew;
+	t.swap(tnew);
 }
 
 template<class T>
@@ -121,7 +121,7 @@ void LinearHashTable<T>::clear() {
 	q = 0;
 	d = 1;
 	array<T> tnew(2, null);
-	t = tnew;
+	t.swap(tnew);
 }
 
 template<class T>

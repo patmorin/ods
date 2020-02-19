@@ -147,7 +147,7 @@ void countingSort(array<int> &a, int k) {
 	array<int> b(a.length);
 	for (int i = a.length-1; i >= 0; i--)
 		b[--c[a[i]]] = a[i];
-	a = b;
+	a.swap(b);
 }
 
 void radixSort(array<int> &a) {
@@ -162,7 +162,7 @@ void radixSort(array<int> &a) {
 			c[i] += c[i-1];
 		for (int i = a.length-1; i >= 0; i--)
 			b[--c[(a[i] >> d*p)&((1<<d)-1)]] = a[i];
-		a = b;
+		a.swap(b);
 	}
 }
 

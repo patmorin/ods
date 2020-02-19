@@ -97,9 +97,9 @@ void DualArrayDeque<T>::balance() {
 		for (int i = 0; i < nb; i++) {
 			ab[i] = get(nf+i);
 		}
-		front.a = af;
+		front.a.swap(af);
 		front.n = nf;
-		back.a = ab;
+		back.a.swap(ab);
 		back.n = nb;
 	}
 }

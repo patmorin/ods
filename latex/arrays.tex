@@ -65,9 +65,9 @@ The size of an #array# is specified at the time of creation:
 \cppimport{ods/array.array(len)}
 \cpponly{The elements of an array can be indexed:}
 \cppimport{ods/array.operator[]}
-\cpponly{Finally, when one array is assigned to another, this is just
+\cpponly{Finally, when one array is swapped with another, this is just
 a pointer manipulation that takes constant time:}
-\cppimport{ods/array.operator=}
+\cppimport{ods/array.swap(b)}
 
 \section{#ArrayStack#: Fast Stack Operations Using an Array}
 \seclabel{arraystack}
@@ -132,7 +132,7 @@ is $O(#n#-#i#)$.
 
 The #resize()# method is fairly straightforward; it allocates a new
 array #b# whose size is $2#n#$ and copies the #n# elements of #a# into
-the first #n# positions in #b#, and then sets #a# to #b#. Thus, after a call to #resize()#, $#a.length# = 2#n#$.
+the first #n# positions in #b#, and then \javaonly{sets #a# to #b#}\cpponly{swaps #a# with #b#}. Thus, after a call to #resize()#, $#a.length# = 2#n#$.
 
 \codeimport{ods/ArrayStack.resize()}
 
