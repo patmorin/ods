@@ -272,7 +272,7 @@ includes the following operations:
     $#x#_{#i#},\ldots,#x#_{#n#-1}$; \\ 
     Set $#x#_{j+1}=#x#_j$, for all
     $j\in\{#n#-1,\ldots,#i#\}$, increment #n#, and set $#x#_i=#x#$
-  \item #remove(i)# remove the value $#x#_{#i#}$, displacing
+  \item #remove(i)#: remove the value $#x#_{#i#}$, displacing
     $#x#_{#i+1#},\ldots,#x#_{#n#-1}$; \\ 
     Set $#x#_{j}=#x#_{j+1}$, for all
     $j\in\{#i#,\ldots,#n#-2\}$ and decrement #n#
@@ -631,11 +631,11 @@ faster \emph{for large enough values of #n#}.
 
 An example of how big-Oh notation allows us to compare two different
 functions is shown in \figref{intro-asymptotics}, which compares the rate
-of growth of $f_1(#n#)=15#n#$ versus $f_2(n)=2#n#\log#n#$.  It might be
-that $f_1(n)$  is the running time of a complicated linear time algorithm
-while $f_2(n)$ is the running time of a considerably simpler algorithm
+of growth of $f_1(#n#)=15#n#$ versus $f_2(#n#)=2#n#\log#n#$.  It might be
+that $f_1(#n#)$  is the running time of a complicated linear time algorithm
+while $f_2(#n#)$ is the running time of a considerably simpler algorithm
 based on the divide-and-conquer paradigm.  This illustrates that,
-although $f_1(#n#)$ is greater than $f_2(n)$ for small values of #n#,
+although $f_1(#n#)$ is greater than $f_2(#n#)$ for small values of #n#,
 the opposite is true for large values of #n#.  Eventually $f_1(#n#)$
 wins out, by an increasingly wide margin.  Analysis using big-Oh notation
 told us that this would happen, since $O(#n#)\subset O(#n#\log #n#)$.
@@ -1118,7 +1118,7 @@ many Java tutorials online \cite{oracle_tutorials}.}
   parts of this exercise should be done by making use of an implementation
   of the relevant interface (#Stack#, #Queue#, #Deque#, #USet#, or #SSet#)
   provided by the \javaonly{Java Collections Framework}\cpponly{C++
-  Standard Template Library}.
+  Standard Template Library}. % looks weird in pseudo-code version
 
   Solve the following problems by reading a text file one line at a
   time and performing operations on each line in the appropriate data

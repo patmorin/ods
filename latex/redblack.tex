@@ -23,7 +23,7 @@ Skiplists and treaps rely on randomization and their $O(\log #n#)$
 running times are only expected. Scapegoat trees have a guaranteed
 bound on their height, but #add(x)# and #remove(x)# only run in $O(\log
 #n#)$ amortized time.  The third property is just icing on the cake. It
-tells us that  that the time needed to add or remove an element #x# is
+tells us that the time needed to add or remove an element #x# is
 dwarfed by the time it takes to find #x#.\footnote{Note that skiplists and
 treaps also have this property in the expected sense. See
 Exercises~\ref{exc:skiplist-changes} and \ref{exc:treap-rotates}.}
@@ -747,7 +747,7 @@ there is no analogue of \thmref{redblack-amortized} for those structures.
 
 \begin{exc}
   Design and implement a series of experiments that compare the relative
-  performance of #find(x)#, #add(x)#, and #remove(x)# for the #SSet# implemeentations #SkiplistSSet#,
+  performance of #find(x)#, #add(x)#, and #remove(x)# for the #SSet# implementations #SkiplistSSet#,
   #ScapegoatTree#, #Treap#, and #RedBlackTree#.  Be sure to include
   multiple test scenarios, including cases where the data is random,
   already sorted, is removed in random order, is removed in sorted order,
