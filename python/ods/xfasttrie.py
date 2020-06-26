@@ -49,26 +49,11 @@ class XFastTrie(BinaryTrie):
         return False
     
     def find(self, x):
-        ix = int(x)
-        l, h = 0, w+1
-        u = self.r
-        q = self._new_node()
-        while h-l > 1:
-            i = (l+h)/2
-            q.prefix = ix >> w-i
-            v = self.t[i].find(q)
-            if v is None:
-                h = i
-            else:
-                u = v
-                l = i
-        if l == w: return u.x
-        c = ix >> (w-l-1) & 1
-        pred = [u.jump.prev, u.jump][c]
-        if pred.next is None: return None
-        return pred.next.x
+        node = self.find_node(x)
+        if node is None:
+            return None
+        return node.x
 
-    # TODO: Too much duplication with find(x)
     def find_node(self, x):
         ix = int(x)
         l, h = 0, w+1
