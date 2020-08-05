@@ -236,8 +236,8 @@ external nodes of the red-black tree.  Therefore, this tree has height
 at most $\log (#n#+1)$. Now, every root to leaf path in the 2-4 tree corresponds
 to a path from the root of the red-black tree $T$ to an external node.
 The first and last node in this path are black and at most one out of
-every two internal nodes is red, so this path has at most $\log(#n#+1)$
-black nodes and at most $\log(#n#+1)-1$ red nodes.  Therefore, the longest path from the root to any \emph{internal} node in $T$ is at most
+every two internal nodes is red, so this path has at most $\log(#n#+1)+1$
+black nodes and at most $\log(#n#+1)$ red nodes.  Therefore, the longest path from the root to any \emph{internal} node in $T$ is at most
 \[
    2\log(#n#+1) -2 \le 2\log #n# \enspace ,
 \]
