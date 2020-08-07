@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 """Touch up a LaTeX file
 
    Snarf up a LaTeX input file importing appropriate code where requested
