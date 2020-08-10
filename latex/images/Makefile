@@ -12,10 +12,10 @@ bigoh-2.tex : bigoh-2.gp
 	gnuplot $<
 
 %.pdf : %.svg
-inkscape --export-type=pdf --export-filename=$@ $<
+	inkscape --export-type=pdf --export-filename=$@ $<
 
 %.eps : %.svg
-inkscape --export-type=eps --export-filename=$@ $<
+	inkscape --export-type=eps --export-filename=$@ $<
 
 clean:
 	rm -f $(pdfs)
