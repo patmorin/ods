@@ -28,7 +28,7 @@ def matches(line, methods):
     sig = name + args
     sys.stderr.write("signature: %s %r\n" % (sig, methods))
     return sig in methods
-    
+
 
 def translate_code(line):
     """Translate a snippet of Python into LaTeX markup for pseudocode"""
@@ -55,22 +55,22 @@ def translate_code(line):
     line = re.sub(r'super\([^)]*\)', 'super', line)
 
     # a += b => a = a + b --- handles +=, -=, *=, and /=
-    line = re.sub(r'([^\s]+)\s*([+*-/])=\s*(.*)$', r'\1 = \1 \2 \3', line) 
+    line = re.sub(r'([^\s]+)\s*([+*-/])=\s*(.*)$', r'\1 = \1 \2 \3', line)
 
     # turn assignment operator (=) into \gets
     line = re.sub(r'([^-*/<>!=+])=([^=])', r'\1\\gets \2', line)
 
-    # This backstop makes sure we ensuremath any assignment 
+    # This backstop makes sure we ensuremath any assignment
     line = re.sub(r'(\s*)([^#:]*\\gets[^\w][^#;]*)',
-                  r'\1\ensuremath{\2}', line) 
+                  r'\1\ensuremath{\2}', line)
 
     # for _ in range(n) => repeat n times
     line = re.sub(r'for\s+_\s+in\s+range\s*\((\w+)\)', r'repeat \1 times', line)
 
     # for _ in range(a, b, -1) => repeat b-a times
-    line = re.sub(r'for\s+_\s+in\s+range\s*\((\w+)\s*,\s*(\w+)\s*,\s*-1\)', 
+    line = re.sub(r'for\s+_\s+in\s+range\s*\((\w+)\s*,\s*(\w+)\s*,\s*-1\)',
                   r'repeat \1-\2 times', line)
-     
+
     # for <blah>: => for <blah> do
     # while <blah>: => while <blah> do
     # Note: The space after 'do' is important here (see [1])
@@ -78,11 +78,11 @@ def translate_code(line):
 
     # if <blah>: => if <blah> then
     # Note: The space after 'then' is important here (see [1])
-    line = re.sub(r'\bif (.*):', r'if \1 then ', line) 
+    line = re.sub(r'\bif (.*):', r'if \1 then ', line)
 
     # else: <blah> => else <blah>
     # Note: The space after 'then' is important here (see [1])
-    line = re.sub(r'\belse:', r'else ', line) 
+    line = re.sub(r'\belse:', r'else ', line)
 
     # len(<blah>) => length(<blah>)
     line = re.sub(r'\blen\s*\(\s*(\w+)\s*\)', r'length(\1)', line)
@@ -95,25 +95,25 @@ def translate_code(line):
                   r'\1,\1-1,\1-2,\ldots,\2+1', line)
 
     # range(a, b-1) => a,...,b-2
-    #line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\-\s*1\s*\)', 
+    #line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\-\s*1\s*\)',
     #              r'\1,\1+1,\1+2,\ldots,\2-2', line)
 
     # range(a, b) => a,...,b-1
-    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)', 
+    line = re.sub(r'\brange\s*\(\s*(.*),\s*(.*)\s*\)',
                   r'\1,\1+1,\1+2,\ldots,\2-1', line)
 
     # range(a) => 0,...,a-1
-    #re.sub(r'\brange\s*\(\s*([^),]+(\([^)]*\)[^)]*)?)\s*\)', 
+    #re.sub(r'\brange\s*\(\s*([^),]+(\([^)]*\)[^)]*)?)\s*\)',
     line = re.sub(r'\brange\s*\((.*)\)', r'0,1,2,\ldots,\1-1', line)
 
     # a[x:y] => a[x,x+1,\ldots,y-1]
     line = re.sub(r'\[([^\]]+):([^\]]+)\]', r'[\ensuremath{\1,\1+1,\ldots,\2-1}]', line)
-    
+
     # some dumb arithmetic
     line = re.sub(r'\+\s*1\s*-\s*1', '', line)
     line = re.sub(r'-\s*1\s*-\s*1', '-2', line)
     line = re.sub(r'0\s*\+\s*1', '1', line)
-    
+
 
     # -1-1 => -2 and similar arithmetic
     line = re.sub(r'-\s*1\s*-\s*1', r'-2', line)
@@ -146,7 +146,7 @@ def translate_code(line):
 
     # a is b => a == b (our code doesn't care about equality vs. identity
     line = re.sub(r'\bis\s+not\b', r'!=', line)
-    line = re.sub(r'\bis\b', '==', line) 
+    line = re.sub(r'\bis\b', '==', line)
 
 
     # recognize mathematical expression and \ensuremath them
@@ -154,7 +154,7 @@ def translate_code(line):
     basic = r'\b\w+\b'
     fncall = r'%s(\([^\)]*\))?' % basic
     indexed = r'%s(\[[^\]]+\])?' % fncall
-    operand = r'(-?%s)' % indexed 
+    operand = r'(-?%s)' % indexed
     op = r'(,\\ldots,|&|>=|\.|,|//|<=|==|!=|=|\gets|%|<<|>>|<|>|\+|-|/|\*|\^|\&)'
     expr0 = r'(%s(\s*%s\s*%s)*)' % (operand, op, operand)
     parenexpr = r'(%s|\(%s\))' % (expr0, expr0)
@@ -163,12 +163,12 @@ def translate_code(line):
 
 
     # turn Python math operators into LaTeX math operators
-    line = re.sub(r'>=', r'\\ge', line) 
+    line = re.sub(r'>=', r'\\ge', line)
     line = re.sub(r'<=', r'\le', line)
-    line = re.sub(r'%', r'\\bmod ', line) 
+    line = re.sub(r'%', r'\\bmod ', line)
     line = re.sub(r'\*', r'\cdot ', line)
     line = re.sub(r'!=', r'\\ne', line)
-    line = re.sub(r'==', r'\eq', line) 
+    line = re.sub(r'==', r'\eq', line)
     line = re.sub(r'(^|[^\\])&', r'\1 \\wedge ', line)
     line = re.sub(r'//', r'\\bdiv ', line)
 
@@ -179,8 +179,8 @@ def translate_code(line):
     line = re.sub(r'\(?\s*1\s*<<\s*(\w+)\s*\)?', r'2^{\1}', line)
 
     # these are hacks and should eventually be fixed
-    line = re.sub(r'\>\>', r'\ensuremath{\\gg}', line) 
-    line = re.sub(r'\<\<', r'\ensuremath{\\ll}', line) 
+    line = re.sub(r'\>\>', r'\ensuremath{\\gg}', line)
+    line = re.sub(r'\<\<', r'\ensuremath{\\ll}', line)
 
     # del is a python keyword, but we have a variable called del in Ch. 5
     line = re.sub(r'\bdl\b', r'\mathit{del}', line)
@@ -191,30 +191,30 @@ def translate_code(line):
     line = re.sub(r'False', r'\ensuremath{\mathit{false}}', line)
 
     # Camelcase variable names to underscores
-    line = re.sub(r'\b([a-z_][a-z0-9_]*)([A-Z])', 
+    line = re.sub(r'\b([a-z_][a-z0-9_]*)([A-Z])',
                   lambda m: m.group(1) + '_' + m.group(2).lower(), line)
     line = re.sub(r'_[A-Z]_', lambda m: m.group(0).lower(), line)
 
     # None/null => \textbf{nil}
     line = re.sub(r'\b(None|null)\b', r'nil', line)
 
-    # typeset function names in mathrm 
+    # typeset function names in mathrm
     line = re.sub(r'\b(\w+)\(', r'\\mathrm{\1}(', line)
 
     # typeset variables in mathit
     # this loop is a dirty hack to deal with expressions like 'i-front.size()'
-    for i in range(3):   
+    for i in range(3):
         # This RE is delicate. It interacts with [1]
         line = re.sub(r'(^|[^\\\w])([a-z_][a-z0-9_]*)([^{}\w]|}?$)', \
                 r'\1\ensuremath{\mathit{\2}}\3', line)
-                
+
     # undo mathit for any keywords we accidentally hit
     line = re.sub(r'\\ensuremath{\\mathit{' + keywords + '}}', r'\1', line)
-    
+
     # don't be afraid to use l as a variable name
     line = re.sub(r'\bell\b', r'\ell', line)
     line = re.sub(r'\bl\b', r'\ell', line)
-    
+
     # typeset class names in mathrm
     line = re.sub(r'([A-Z]\w+)', r'\mathrm{\1}', line)
 
@@ -223,12 +223,12 @@ def translate_code(line):
 
     # remove trailing underscores
     line = re.sub(r'([a-z])_+\b', r'\1', line)
- 
+
     # escape underscores
     line = re.sub(r'_', r'\_', line)
-    
+
     # use subscripts on variable names that end with a single digit
-    line = re.sub(r'(\\mathit{\w+)(\d})', r'\1_\2', line) 
+    line = re.sub(r'(\\mathit{\w+)(\d})', r'\1_\2', line)
 
     # Some hex constants look better in binary
     #line = re.sub(r'\b0xff\b', '11111111_2', line)
@@ -253,7 +253,7 @@ def touchup_code_line(line):
     # add \\ at the end of each line
     line = re.sub(r'$', r'\\\\', line)
     return line
-    
+
 
 def print_code(clazz, methods):
     """Print out the methods in clazz that are listed in methods"""
@@ -283,14 +283,14 @@ def print_code(clazz, methods):
                 print touchup_code_line(translate_code(line))
     except IOError:
         print "Unable to open %s" % filename
-    if not printed: 
+    if not printed:
         print r'NO OUTPUT (looking for \verb+' + str(methods) + "+)"
     print r'\end{flushleft}'
     print [r'\end{oframed}', r'\end{leftbar}'][html]
 
 
 def fig_subs(line):
-    return re.sub(r'(\includegraphics\[[^\]]*\]){figs/', 
+    return re.sub(r'(\includegraphics\[[^\]]*\]){figs/',
                   r'\1{figs-python/', line)
 
 def code_subs(line):
@@ -323,7 +323,7 @@ def snarf(infile):
             methods = m.group(2).lstrip('.').split('.')
             if [m for m in methods if re.match(r'^\w+$', m)]:
                 sys.stderr.write('looking for initialize() in %s because of %s\n' \
-                                % (clazz, m)) 
+                                % (clazz, m))
                 methods.append('initialize()')
             sys.stderr.write('looking for %r in %s\n' \
                               % (methods, clazz))

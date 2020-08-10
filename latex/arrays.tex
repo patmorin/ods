@@ -1,12 +1,11 @@
-\chapter{Array-Based Lists}
+\chapter{Listas Baseadas em Array}
 \chaplabel{arrays}
 
-In this chapter, we will study implementations of the #List# and #Queue#
-interfaces where the underlying data is stored in an array, called the
-\emph{backing array}.
+Neste capítulo, iremos estudar implementações das interfaces #List# e #Queue#,
+onde os dados são armazenados em um array chamado de \emph{backing array} ou \emph{array de apoio}.
 \index{backing array}%
-The following table summarizes the running times
-of operations for the data structures presented in this chapter:
+\index{array de apoio}%
+A tabela a seguir resume o tempo de execução de operações para estruturas de dados apresentadas nestes capítulo:
 \newlength{\tabsep}
 \setlength{\tabsep}{\itemsep}
 \addtolength{\tabsep}{\parsep}
@@ -22,197 +21,212 @@ of operations for the data structures presented in this chapter:
 \end{tabular}
 \vspace{\tabsep}
 \end{center}
-Data structures that work by storing data in a single array have many
-advantages and limitations in common:
+Estruturas de dados que funcionam armazenando em um único array têm muitas vantagens e limitações em comum:
 \index{arrays}%
 \begin{itemize}
-  \item Arrays offer constant time access to any value in the array.
-  This is what allows #get(i)# and #set(i,x)# to run in constant time.
+  \item Arrays permitem acesso em tempo constante a qualquer valor no array.
+  Isso é o que permite #get(i)# e #set(i,x)# rodarem em tempo constante.
 
-  \item Arrays are not very dynamic.  Adding or removing an element
-  near the middle of a list means that a large number of elements in the
-  array need to be shifted to make room for the newly added element or
-  to fill in the gap created by the deleted element.  This is why the
-  operations #add(i,x)# and #remove(i)# have running times that depend
-  on #n# and #i#.
+  \item Arrays não são muito dinâmicos. Adicionar ou remover um elemento perto do meio de uma lista significa que um grande número de elemento no array precisam
+ser deslocados para abrir espaço para o elemento recentemente adicionado ou
+preencher a lacuna criada pelo elemento removido. Essa é a razão pela qual as operações 
+  #add(i,x)# e #remove(i)# tem tempos de execução que dependem de 
+   #n# e #i#.
 
-  \item Arrays cannot expand or shrink.  When the number of elements in
-  the data structure exceeds the size of the backing array, a new array needs
-  to be allocated and the data from the old array needs to be copied
-  into the new array.  This is an expensive operation.
+  \item Arrays não podem expandir ou encolher por si só. Quando o número de elementos na
+    estrutura de dados excede o tamanho do array de apoio, um novo array precisa
+    ser alocado e os dados do antigo array precisa ser copiado 
+    no novo array. Essa é uma operação cara.
 \end{itemize}
-The third point is important.  The running times cited in the table
-above do not include the cost associated with growing and shrinking
-the backing array.  We will see that, if carefully managed, the cost of
-growing and shrinking the backing array does not add much to the cost of
-an \emph{average} operation.  More precisely, if we start with an empty
-data structure, and perform any sequence of $m$ #add(i,x)# or #remove(i)#
-operations, then the total cost of growing and shrinking the backing
-array, over the entire sequence of $m$ operations is $O(m)$.  Although
-some individual operations are more expensive, the amortized cost,
-when amortized over all $m$ operations, is only $O(1)$ per operation.
+Um terceiro ponto é importante. Os tempos de execução citados na tabela
+acima não incluem o custo associado com expandir ou encolher o array de apoio.
+Veremos que, se não gerenciado com cuidado, o custo de expandir ou encolher o array de apoio não aumenta muito o custo de uma operação \emph{média}.
+Mais precisamente, se iniciarmos com um estrutura de dados vazia e 
+realizarmos qualquer sequência de $m$ operações #add(i,x)# ou #remove(i)#
+, então o custo total de expandir e encolher o array de apoio, sobre a sequência inteira de $m$ operações é $O(m)$. Embora algumas operações individuais sejam mais caras, o custo amortizado, quando dividido por todas as $m$ operações, é somente $O(1)$ por operação.
 
 \cpponly{
-In this chapter, and throughout this book, it will be convenient to
-have arrays that keep track of their size.  The usual C++ arrays do
-not do this, so we have defined a class,  #array#, that keeps track
-of its length.  The implementation of this class is straightforward.
-It is implemented as a standard C++ array, #a#, and an integer, #length#:}
+Neste capítulo, e ao longo deste livro, seria conveniente ter arrays que guardam seus tamanhos. Os arrays típicos do C++ não fazem isso, então definimos uma classe, #array#, que registra seu tamanho. A implementação dessa classe direta. Ela é feita como um array C++ padrão, #a#, e um inteiro, #length#:
+}
 \cppimport{ods/array.a.length}
 \cpponly{
-The size of an #array# is specified at the time of creation:
+O tamanho de um #array# é especificado no momento de criação:
 }
 \cppimport{ods/array.array(len)}
-\cpponly{The elements of an array can be indexed:}
+\cpponly{Os eleementos de um array podem ser indexados:}
 \cppimport{ods/array.operator[]}
-\cpponly{Finally, when one array is assigned to another, this is just
-a pointer manipulation that takes constant time:}
+\cpponly{Finalmente, quando um array é atribuído para outro, ocorre apenas uma manipulação de ponteiros que leva um tempo constante:}
 \cppimport{ods/array.operator=}
 
-\section{#ArrayStack#: Fast Stack Operations Using an Array}
+\section{#ArrayStack#: Operações de Stack Rápida Usando um Array}
 \seclabel{arraystack}
 
 \index{ArrayStack@#ArrayStack#}%
-An #ArrayStack# implements the list interface using an array #a#, called
-the \emph{backing array}.  The list element with index #i# is stored
-in #a[i]#.  At most times, #a# is larger than strictly necessary,
-so an integer #n# is used to keep track of the number of elements
-actually stored in #a#.  In this way, the list elements are stored in
-#a[0]#,\ldots,#a[n-1]# and, at all times, $#a.length# \ge #n#$.
+Um 
+#ArrayStack# implementa a interface lista usando um array #a#, chamado de 
+\emph{array de apoio}. O elemento da lista com índice #i# é armazenado
+em #a[i]#.  Na maior parte do tempo, #a# é maior que o estritamente necessário,  
+então um inteiro 
+#n# é usado para registrar o número de elementos realmente armazenados em #a#. 
+Dessa maneira, os elementos da lista são guardados em 
+#a[0]#,\ldots,#a[n-1]# e, sempre, $#a.length# \ge #n#$.
 
 \codeimport{ods/ArrayStack.a.n.size()}
 
-\subsection{The Basics}
+\subsection{O Básico}
 
-Accessing and modifying the elements of an #ArrayStack# using #get(i)#
-and #set(i,x)# is trivial. After performing any necessary bounds-checking
-we simply return or set, respectively, #a[i]#.
+Acessar e modificar os elementos de uma 
+#ArrayStack# usando #get(i)# e #set(i,x)# é trivial. 
+Após realizar as verificações de limites necessárias, simplesmente retornamos ou atribuímos, respectivamente, #a[i]#.
 
 \codeimport{ods/ArrayStack.get(i).set(i,x)}
 
-The operations of adding and removing elements from an #ArrayStack#
-are illustrated in \figref{arraystack}.  To implement the #add(i,x)#
-operation, we first check if #a# is already full.  If so, we call
-the method #resize()# to increase the size of #a#.  How #resize()#
-is implemented will be discussed later.  For now, it is sufficient to
-know that, after a call to #resize()#, we can be sure that $#a.length#
-> #n#$.  With this out of the way, we now shift the elements
-$#a[i]#,\ldots,#a[n-1]#$ right by one position to make room for #x#,
-set #a[i]# equal to #x#, and increment #n#.
+As operações de adicionar e remover elementos de um 
+ #ArrayStack#
+estão ilustradas em 
+ \figref{arraystack}.  Para implementar a operação #add(i,x)#,
+primeiro verificamos se #a# está cheio. Caso positivo, chamamos o método
+#resize()# para aumentar o tamanho de #a#. Como #resize()#
+é implementado será discutido depois. Por ora, é suficiente 
+saber que, após uma chamada para #resize()#, temos certeza que $#a.length#
+> #n#$.  
+Com isso resolvido, agora nós deslocamos os elementos
+$#a[i]#,\ldots,#a[n-1]#$ para uma posição à direita para
+abrir espaço para #x#, atribuir
+#a[i]# igual a #x#, e incrementar #n#.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/arraystack}
   \end{center}
-  \caption[Adding to an ArrayStack]{A sequence of #add(i,x)# and #remove(i)# operations on an
-  #ArrayStack#.  Arrows denote elements being copied.  Operations that
-  result in a call to #resize()# are marked with an asterisk.}
+  \caption[Adicionando a um ArrayStack]{Uma sequência de operações #add(i,x)# e #remove(i)# em um
+  #ArrayStack#.  Flechas denotam elementos sendo copiados. Operações que
+  resultam em uma chamada para 
+  #resize()# são marcados em um arterisco.}
   \figlabel{arraystack}
 \end{figure}
 
 \codeimport{ods/ArrayStack.add(i,x)}
-If we ignore the cost of the potential call to #resize()#, then the cost
-of the #add(i,x)# operation is proportional to the number of elements we
-have to shift to make room for #x#.  Therefore the cost of this operation
-(ignoring the cost of resizing #a#) is $O(#n#-#i#)$.
+Se ignorarmos o custo de uma potencial chamada a
+#resize()#, então o cusot da operação 
+#add(i,x)# é proporcional ao número de elementos que temos que deslocar para
+abrir espaço para 
+ #x#.  Portanto o custo dessa operação 
+(ignorando o custo de redimensionar #a#) é $O(#n#-#i#)$.
 
-Implementing the #remove(i)# operation is similar.  We shift the elements
-$#a[i+1]#,\ldots,#a[n-1]#$ left by one position (overwriting #a[i]#) and
-decrease the value of #n#.  After doing this, we check if #n# is getting
-much smaller than #a.length# by checking if $#a.length# \ge 3#n#$. If so,
-then we call #resize()# to reduce the size of #a#.
+Implementar a operação
+#remove(i)# é similar. Desloca-se os elementos 
+$#a[i+1]#,\ldots,#a[n-1]#$ à esquerda por uma posição (sobrescrevendo #a[i]#) 
+e decrementar o valor de  
+ #n#. Após fazer isso, verificamos se #n# muito menor 
+ que #a.length# ao verificar se $#a.length# \ge 3#n#$. 
+Caso positivo, então chamamos #resize()# para reduzir o tamanho de #a#.
 
 \codeimport{ods/ArrayStack.remove(i)}
 % TODO: Add shifting figure
-If we ignore the cost of the #resize()# method, the cost of a #remove(i)#
-operation is proportional to the number of elements we shift, which
-is $O(#n#-#i#)$.
+Ao ignorar o custo do método #resize()#, o custo de uma operação #remove(i)#
+é proporcional ao número de elementos que deslocamos, que é $O(#n#-#i#)$.
 
-\subsection{Growing and Shrinking}
+\subsection{Expansão e Redução}
 
-The #resize()# method is fairly straightforward; it allocates a new
-array #b# whose size is $2#n#$ and copies the #n# elements of #a# into
-the first #n# positions in #b#, and then sets #a# to #b#. Thus, after a call to #resize()#, $#a.length# = 2#n#$.
+O método 
+ #resize()# razoavelmente direto; ele aloca um novo array
+#b# de tamanho $2#n#$ e copia os #n# elementos de #a# nas primeiras 
+#n# posições em #b#, e então atribui #a# em #b#. Então, após isso faz uma chamada a #resize()#, $#a.length# = 2#n#$.
 
 \codeimport{ods/ArrayStack.resize()}
 
-Analyzing the actual cost of the #resize()# operation is easy. It
-allocates an array #b# of size $2#n#$ and copies the #n# elements of #a#
-into #b#.  This takes $O(#n#)$ time.
+Analisar o custo real da operação 
+#resize()# é fácil.
+Ela aloca um array 
+ #b# de tamanho $2#n#$ e copia os #n# elementos de #a# em 
+#b#. Isso leva $O(#n#)$ de tempo.
 
-The running time analysis from the previous section ignored the cost
-of calls to #resize()#.  In this section we analyze this cost using a
-technique known as \emph{amortized analysis}.  This technique does not
-try to determine the cost of resizing during each individual #add(i,x)#
-and #remove(i)# operation.  Instead, it considers the cost of all calls to
-#resize()# during a sequence of $m$ calls to #add(i,x)# or #remove(i)#.
-In particular, we will show:
+A análise de tempo de execução da seção anterior ignorou o custo de chamadas a
+#resize()#.  Nesta seção analisaremos esse custo usando uma técnica chamada de 
+\emph{análise amortizada}.  Essa técnica não tenta determinar o custo de 
+redimensionar o array durante cada operação 
+#add(i,x)# e  #remove(i)#.  Em vez disso, ela considera o custo de todas as chamadas a 
+#resize()# durante a sequência de $m$ chamadas a #add(i,x)# ou #remove(i)#.
+Em particular, mostraremos que:
 
 \begin{lem}\lemlabel{arraystack-amortized}
-  If an empty #ArrayStack# is created and any sequence of $m\ge 1$ calls
-  to #add(i,x)# and #remove(i)# are performed, then the total time spent
-  during all calls to #resize()# is $O(m)$.
+  Se um 
+   #ArrayStack# vazio é criado e qualquer sequência de $m\ge 1$ chamadas a  
+  #add(i,x)# e #remove(i)# são executadas, então o tempo total gasto durante
+  todas as chamadas a 
+ #resize()# é $O(m)$.
 \end{lem}
 
 \begin{proof}
-  We will show that any time #resize()# is called, the number of calls
-  to #add# or #remove# since the last call to #resize()# is at least
-  $#n#/2-1$.  Therefore, if $#n#_i$ denotes the value of #n# during the
-  $i$th call to #resize()# and $r$ denotes the number of calls to
-  #resize()#, then the total number of calls to #add(i,x)# or
-  #remove(i)# is at least
+  Nós iremos mostra que em qualquer momento que
+ #resize()# é chamada, o número de chamadas a 
+  #add# ou #remove# desde a última chamada a #resize()# é pelo menos 
+  $#n#/2-1$.  Portanto, se $#n#_i$ denota o valor de #n# durante a 
+  $i$-ésima chamada a #resize()# e $r$ denota o número de chamadas a 
+  #resize()#, então o número total de chamadas a #add(i,x)# ou
+  #remove(i)# é pelo menos 
   \[
      \sum_{i=1}^{r} (#n#_i/2-1) \le m  \enspace ,
   \]
-  which is equivalent to
+  o que é equivalente a
   \[
     \sum_{i=1}^{r} #n#_i \le 2m + 2r  \enspace .
   \]
-  On the other hand, the total time spent during all calls to #resize()# is 
+  Por outro lado, o tempo total gasto durante todas as chamadas a  #resize()# é 
   \[
      \sum_{i=1}^{r} O(#n#_i) \le O(m+r) = O(m)  \enspace ,
   \]
-  since $r$ is not more than $m$.  All that remains is to show that the
-  number of calls to #add(i,x)# or #remove(i)# between the $(i-1)$th
-  and the $i$th call to #resize()# is at least $#n#_i/2$.
+  uma vez que 
+  $r$ não é maior que $m$.  O que resta é mostrar que o número de chamadas a 
+   #add(i,x)# ou #remove(i)# entre a $(i-1)$-ésima
+  e a $i$-ésima chamada a #resize()# é de pelo menos $#n#_i/2$.
 
-  There are two cases to consider. In the first case, #resize()# is
-  being called by #add(i,x)# because the backing array #a# is full, i.e.,
-  $#a.length# = #n#=#n#_i$.  Consider the previous call to #resize()#:
-  after this previous call, the size of #a# was #a.length#, but the
-  number of elements stored in #a# was at most $#a.length#/2=#n#_i/2$.
-  But now the number of elements stored in #a# is $#n#_i=#a.length#$,
-  so there must have been at least $#n#_i/2$ calls to #add(i,x)# since
-  the previous call to #resize()#.
+  Há dois casos a considerar. No primeiro caso, 
+ #resize()# está sendo chamado por 
+#add(i,x)# pois o array de apoio #a# está cheio, i.e.,
+  $#a.length# = #n#=#n#_i$.  Considere a chamada anterior a #resize()#:
+  após essa chamada prévia, o tamanho de 
+ #a# era #a.length#, mas o número de elementos guardados em #a# 
+  era no máximo $#a.length#/2=#n#_i/2$.
+  Mas agora o número de elementos guardados em 
+ #a# é $#n#_i=#a.length#$, então deve ter havido pelo menos
+$#n#_i/2$ chamadas a #add(i,x)# desde a chamada anterior a 
+   #resize()#.
   % TODO: Add figure
   
-  The second case occurs when #resize()# is being called by
-  #remove(i)# because $#a.length# \ge 3#n#=3#n#_i$.  Again, after the
-  previous call to #resize()# the number of elements stored in #a# was
-  at least $#a.length/2#-1$.\footnote{The ${}-1$ in this formula accounts for
-  the special case that occurs when $#n#=0$ and $#a.length# = 1$.} Now there
-  are $#n#_i\le#a.length#/3$ elements stored in #a#.  Therefore, the number
-  of #remove(i)# operations since the last call to #resize()# is at least
+  O segundo caso ocorre quando 
+ #resize()# está sendo chamado por 
+  #remove(i)# porque $#a.length# \ge 3#n#=3#n#_i$.  Novamente, após a
+  chamada anterior a
+ #resize()# o número de elementos guardados em #a# era pelo menos 
+   $#a.length/2#-1$.\footnote{O ${}-1$ nessa fórmula inclui o caso especial que ocorre quando 
+   $#n#=0$ e $#a.length# = 1$.} Agora há 
+  $#n#_i\le#a.length#/3$ elementos guardados em #a#.  Portanto, o número de 
+  operações #remove(i)# desde a última chamada a #resize()# é pelo menos 
   \begin{align*}
       R & \ge #a.length#/2 - 1 - #a.length#/3 \\
         & = #a.length#/6 - 1 \\
         & = (#a.length#/3)/2 - 1 \\
         & \ge #n#_i/2 -1\enspace .
   \end{align*}
-  In either case, the number of calls to #add(i,x)# or #remove(i)# that
-  occur between the $(i-1)$th call to #resize()# and the $i$th call to
-  #resize()# is at least $#n#_i/2-1$, as required to complete the proof.
+Nos dois casos, o número de chamadas a 
+ #add(i,x)# ou #remove(i)# que ocorrem 
+ entre 
+   $(i-1)$-ésima chamada a #resize()# e a $i$-ésima chamada a 
+  #resize()# é pelo menos $#n#_i/2-1$, conforme exigido para completar a prova.
 \end{proof}
 
-\subsection{Summary}
+\subsection{Resumo}
 
-The following theorem summarizes the performance of an #ArrayStack#:
+O teorema a seguir resume o desempenho de uma #ArrayStack#:
 
 \begin{thm}\thmlabel{arraystack}
-  An #ArrayStack# implements the #List# interface.  Ignoring the cost of
-  calls to #resize()#, an #ArrayStack# supports the operations
+  Uma
+   #ArrayStack# implementa a interface #List#. Ignorando o custo de chamadas a 
+  #resize()#, uma #ArrayStack# aceita as operações
   \begin{itemize}
-    \item #get(i)# and #set(i,x)# in $O(1)$ time per operation; and
+    \item #get(i)# e #set(i,x)# em tempo $O(1)$ por operação; e
     \item #add(i,x)# and #remove(i)# in $O(1+#n#-#i#)$ time per operation.
   \end{itemize}
   Furthermore, beginning with an empty #ArrayStack# and performing any
