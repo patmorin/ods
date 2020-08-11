@@ -513,11 +513,13 @@ and #traseira#, de modo complementar de tal forma que as operações são rápid
 
 \codeimport{ods/DualArrayDeque.front.back}
 
-A #DualArrayDeque# does not explicitly store the number, #n#,
-of elements it contains.  It doesn't need to, since it contains
-$#n#=#front.size()# + #back.size()#$ elements.  Nevertheless, when
-analyzing the #DualArrayDeque# we will still use #n# to denote the number
-of elements it contains.
+Um
+ #DualArrayDeque# não guarda explicitamente o número, #n#,
+ de elementos contidos. Ele não precisa, pois ele contém
+$#n#=#front.size()# + #back.size()#$ elementos. De qualquer forma, ao
+analisar o 
+#DualArrayDeque# iremos usar ainda o #n# para denotar o número de 
+elementos nele.
 
 \codeimport{ods/DualArrayDeque.size()}
 
@@ -530,129 +532,144 @@ ou #set(i,x)# e ambos #front# ou #back#, que levam tempo $O(1)$ time por operaç
 
 \codeimport{ods/DualArrayDeque.get(i).set(i,x)}
 
-Note that if an index $#i#<#front.size()#$, then it corresponds to the
-element of #front# at position $#front.size()#-#i#-1$, since the
-elements of #front# are stored in reverse order.
+Note que se um índice
+ $#i#<#front.size()#$, então ele corresponde ao elemento 
+de #front# na posição $#front.size()#-#i#-1$, pois
+elementos de #front# são guardados em ordem inversa.
 
-Adding and removing elements from a #DualArrayDeque# is illustrated in
-\figref{dualarraydeque}.  The #add(i,x)# operation manipulates either #front#
-or #back#, as appropriate:
+A adição e remoção de elementos de uma #DualArrayDeque# é ilustrado em 
+\figref{dualarraydeque}.  A operação #add(i,x)# manipula #front#
+ou #back#, conforme apropriado:
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/dualarraydeque}
   \end{center}
-  \caption[Adding and removing in a DualArrayDeque]{A sequence of #add(i,x)# and #remove(i)# operations on a
-  #DualArrayDeque#.  Arrows denote elements being copied.  Operations that
-  result in a rebalancing by #balance()# are marked with an asterisk.}
+  \caption[Adição e remoção em um DualArrayDeque]{Uma sequência de operações #add(i,x)# e #remove(i)# em um 
+  #DualArrayDeque#.  Flechas denotam elementos sendo copiados.  Operações que resultam em um
+  rebalanceamento por #balance()# são marcados com um asterisco.}
   \figlabel{dualarraydeque}
 \end{figure}
 
-
-
 \codeimport{ods/DualArrayDeque.add(i,x)}
 
-The #add(i,x)# method performs rebalancing of the two #ArrayStack#s
-#front# and #back#, by calling the #balance()# method.  The
-implementation of #balance()# is described below, but for now it is
-sufficient to know that #balance()# ensures that, unless $#size()#<2$,
-#front.size()# and #back.size()# do not differ by more than a factor
-of 3.  In particular, $3\cdot#front.size()# \ge #back.size()#$ and
+O método 
+#add(i,x)# realiza balanceamento das duas  #ArrayStack#s
+#front# e #back#, ao chamar o método #balance()#.
+A implementação de 
+#balance()# é descrita a seguir, mas no memento é suficiente 
+saber que #balance()# garantes que, a não ser que $#size()#<2$,
+#front.size()# e #back.size()# não diferem por mais de um fator 
+de 3.  Em particular, $3\cdot#front.size()# \ge #back.size()#$ e
 $3\cdot#back.size()# \ge #front.size()#$.
 
-Next we analyze the cost of #add(i,x)#, ignoring the cost of calls to
-#balance()#. If $#i#<#front.size()#$, then #add(i,x)# gets implemented
-by the call to $#front.add(front.size()-i-1,x)#$.  Since #front# is an
-#ArrayStack#, the cost of this is
+A seguir, nós analisamos o custo de 
+ #add(i,x)#, ignorando o custo de chamadas 
+#balance()#. Se $#i#<#front.size()#$, então #add(i,x)# é implementada 
+pela chamada a
+ $#front.add(front.size()-i-1,x)#$.  Como #front# é uma 
+#ArrayStack#, o custo disso é 
 \begin{equation}
   O(#front.size()#-(#front.size()#-#i#-1)+1) = O(#i#+1) \enspace .
   \eqlabel{das-front}
 \end{equation}
-On the other hand, if $#i#\ge#front.size()#$, then #add(i,x)# gets
-implemented as $#back.add(i-front.size(),x)#$.  The cost of this is
+Por outro lado, se 
+ $#i#\ge#front.size()#$, então #add(i,x)# é 
+implementado como $#back.add(i-front.size(),x)#$.  O custo disso é 
 \begin{equation}
   O(#back.size()#-(#i#-#front.size()#)+1) = O(#n#-#i#+1) \enspace .
   \eqlabel{das-back}
 \end{equation}
 
-Notice that the first case \myeqref{das-front} occurs when $#i#<#n#/4$.
-The second case \myeqref{das-back} occurs when $#i#\ge 3#n#/4$.  When
-$#n#/4\le#i#<3#n#/4$, we cannot be sure whether the operation affects
-#front# or #back#, but in either case, the operation takes
-$O(#n#)=O(#i#)=O(#n#-#i#)$ time, since $#i#\ge #n#/4$ and $#n#-#i#>
-#n#/4$.  Summarizing the situation, we have
+Note que o primeiro caso 
+ \myeqref{das-front} ocorre quando $#i#<#n#/4$.
+ O segundo caso
+ \myeqref{das-back} ocorre quando $#i#\ge 3#n#/4$.  Quando
+$#n#/4\le#i#<3#n#/4$, não temos certeza se a operação afeta 
+#front# ou #back#, mas nos dois casos, a operação leva 
+$O(#n#)=O(#i#)=O(#n#-#i#)$ de tempo, pois $#i#\ge #n#/4$ e $#n#-#i#>
+#n#/4$.  Resumindo a situação, temos 
 \[
-     \mbox{Running time of } #add(i,x)# \le 
+     \mbox{Tempo de execução } #add(i,x)# \le 
           \begin{cases}
-            O(1+ #i#) & \mbox{if $#i#< #n#/4$} \\
-            O(#n#) & \mbox{if $#n#/4 \le #i# < 3#n#/4$} \\
-            O(1+#n#-#i#) & \mbox{if $#i# \ge 3#n#/4$}
+            O(1+ #i#) & \mbox{se $#i#< #n#/4$} \\
+            O(#n#) & \mbox{se $#n#/4 \le #i# < 3#n#/4$} \\
+            O(1+#n#-#i#) & \mbox{se $#i# \ge 3#n#/4$}
           \end{cases}
 \]
-Thus, the running time of #add(i,x)#, if we ignore the cost of the call
-to #balance()#, is $O(1+\min\{#i#, #n#-#i#\})$.
+Então, o tempo de operação de 
+ #add(i,x)#, se ignorarmos o custo à chamada 
+#balance()#, é $O(1+\min\{#i#, #n#-#i#\})$.
 
-The #remove(i)# operation and its analysis resemble the #add(i,x)#
-operation and analysis.
+A operação #remove(i)# e sua análise lembra a análise de #add(i,x)#.
+
 
 \codeimport{ods/DualArrayDeque.remove(i)}
 
-\subsection{Balancing}
+\subsection{Balanceamento}
 
-Finally, we turn to the #balance()# operation performed by #add(i,x)#
-and #remove(i)#.  This operation ensures that neither #front# nor #back#
-becomes too big (or too small).  It ensures that, unless there are fewer
-than two elements, each of #front# and #back# contain at least $#n#/4$
-elements. If this is not the case, then it moves elements between them
-so that #front# and #back# contain exactly $\lfloor#n#/2\rfloor$ elements
-and $\lceil#n#/2\rceil$ elements, respectively.
+Finalmente, passamos à operação 
+ #balance()# usada por #add(i,x)#
+e #remove(i)#.  Essa operação garante que nem #front# nem #back#
+se tornem grandes demais (ou pequenos demais). 
+Ela garante que, ao menos que haja menos de dois elementos, o 
+ #front# e o #back# contém $#n#/4$ elementos cada. 
+Se esse não for o caso, então ele move elementos entre elas 
+de tal forma que #front# e #back# contêm exatamente $\lfloor#n#/2\rfloor$ elementos
+e $\lceil#n#/2\rceil$ elementos, respectivamente.
 
 \codeimport{ods/DualArrayDeque.balance()}
 
-Here there is little to analyze.  If the #balance()# operation does
-rebalancing, then it moves $O(#n#)$ elements and this takes $O(#n#)$
-time. This is bad, since #balance()# is called with each call to
-#add(i,x)# and #remove(i)#.  However, the following lemma shows that, on
-average, #balance()# only spends a constant amount of time per operation.
+Aqui há pouco para analisar. Se a operação 
+#balance()# faz rebalanceamento 
+, então ela move $O(#n#)$ elementos e isso leva $O(#n#)$ de tempo.
+Isso é ruim, pois
+ #balance()# é chamada a cada operação
+#add(i,x)# e #remove(i)#.  Porém, o lema a seguir mostra que
+na média, #balance()# somente gasta um tempo constante por operação.
 
 \begin{lem}\lemlabel{dualarraydeque-amortized}
-  If an empty #DualArrayDeque# is created and any sequence of $m\ge 1$ calls
-  to #add(i,x)# and #remove(i)# are performed, then the total time spent
-  during all calls to #balance()# is $O(m)$.
+  Se uma 
+  #DualArrayDeque# vazia é criada e qualquer sequência de chamadas $m\ge 1$ a
+ #add(i,x)# e #remove(i)# são realizadas, então o tempo total gasto 
+ durante todas as chamadas a 
+ #balance()# é $O(m)$.
 \end{lem}
 
 \begin{proof}
-  We will show that, if #balance()# is forced to shift elements, then
-  the number of #add(i,x)# and #remove(i)# operations since the last
-  time any elements were shifted by #balance()# is at least $#n#/2-1$.
-  As in the proof of \lemref{arraystack-amortized}, this is sufficient
-  to prove that the total time spent by #balance()# is $O(m)$.
+  Iremos mostrar que, se 
+ #balance()# é forçada a deslocar elementos, então o número de operações 
+  #add(i,x)# e #remove(i)# desde a última vez que elementos foram deslocador por 
+   #balance()# é pelo menos $#n#/2-1$.
+   Como na prova de 
+ \lemref{arraystack-amortized}, é suficiente provar que o tempo total gasto por 
+   #balance()# é $O(m)$.
 
-  We will perform our analysis using a technique knows as the
-  \emph{potential method}.
-  \index{potential}%
-  \index{potential method}%
-  Define the \emph{potential}, $\Phi$, of the
-  #DualArrayDeque# as the difference in size between #front# and #back#:
+   Iremos realizar nossa análise usando uma técnica conhecida como o \emph{método do potencial}.
+  \index{potencial}%
+  \index{método do potential}%
+  Definimos o \emph{potencial}, $\Phi$, do 
+  #DualArrayDeque# como a diferença em tamanho entre #front# e #back#:
   \[  \Phi = |#front.size()# - #back.size()#| \enspace . \]
-  The interesting thing about this potential is that a call to #add(i,x)#
-  or #remove(i)# that does not do any balancing can increase the potential
-  by at most 1.
+  A propriedade interessante desse potencial é que uma chamada a 
+ #add(i,x)#
+  ou #remove(i)# que não faz nenhum balanceamento pode aumentar o potencial em até 1.
 
-  Observe that, immediately after a call to #balance()# that shifts
-  elements, the potential, $\Phi_0$, is at most 1, since
+  Observe que, imediatamente depois de uma chamada a #balance()# que desloca elementos 
+  , o potencial , $\Phi_0$, é no máximo 1, pois
   \[ \Phi_0 = \left|\lfloor#n#/2\rfloor-\lceil#n#/2\rceil\right|\le 1  \enspace .\]
 
-  Consider the situation immediately before a call to #balance()# that
-  shifts elements and suppose, without loss of generality, that #balance()#
-  is shifting elements because $3#front.size()# < #back.size()#$.
-  Notice that, in this case,
+  Considere a situação no momento exatamente anterior a uma chamada #balance()# que 
+  desloca elementos e suponha, sem perda de generalidade, que 
+ #balance()#
+está deslocando elementos porque $3#front.size()# < #back.size()#$.
+Note que, nesse caso
   \begin{eqnarray*}
    #n# & = & #front.size()#+#back.size()# \\
        & < & #back.size()#/3+#back.size()# \\
        & = & \frac{4}{3}#back.size()#
   \end{eqnarray*}
-  Furthermore, the potential at this point in time is
+  Além disso, o potencial nesse momento é 
   \begin{eqnarray*}
   \Phi_1 & = & #back.size()# - #front.size()# \\
       &>& #back.size()# - #back.size()#/3 \\
@@ -660,64 +677,72 @@ average, #balance()# only spends a constant amount of time per operation.
       &>& \frac{2}{3}\times\frac{3}{4}#n# \\
       &=& #n#/2
   \end{eqnarray*}
-  Therefore, the number of calls to #add(i,x)# or #remove(i)# since
-  the last time #balance()# shifted elements is at least $\Phi_1-\Phi_0
-  > #n#/2-1$. This completes the proof.
+  Portanto, o número de chamadas a 
+ #add(i,x)# ou #remove(i)# desde a última vez que 
+   #balance()# deslocou elementos é pelo menos $\Phi_1-\Phi_0
+  > #n#/2-1$. Isso completa a prova.
 \end{proof}
 
-\subsection{Summary}
+\subsection{Resumo}
 
-The following theorem summarizes the properties of a #DualArrayDeque#:
+O teorma a seguir resume as propriedades de uma #DualArrayDeque#:
 
 \begin{thm}\thmlabel{dualarraydeque}
-  A #DualArrayDeque# implements the #List# interface.  Ignoring the
-  cost of calls to #resize()# and #balance()#, a #DualArrayDeque#
-  supports the operations
+  Uma
+   #DualArrayDeque# implementa a interface #List#. Ignorando o custo de chamadas a 
+   #resize()# e #balance()#, uma #DualArrayDeque#
+  aceita as operações 
   \begin{itemize}
-    \item #get(i)# and #set(i,x)# in $O(1)$ time per operation; and
-    \item #add(i,x)# and #remove(i)# in $O(1+\min\{#i#,#n#-#i#\})$ time
-          per operation.
+    \item #get(i)# e #set(i,x)# em tempo $O(1)$ por operação; e 
+    \item #add(i,x)# e #remove(i)# em tempo $O(1+\min\{#i#,#n#-#i#\})$ 
+          por operação.
   \end{itemize}
-  Furthermore, beginning with an empty #DualArrayDeque#, any sequence of $m$
-  #add(i,x)# and #remove(i)# operations results in a total of $O(m)$
-  time spent during all calls to #resize()# and #balance()#.
+  Além disso, ao começar com uma 
+#DualArrayDeque# vazia, qualquer sequência de $m$ operações
+  #add(i,x)# e #remove(i)# resulta em um total de tempo $O(m)$
+  durante todas as chamadas a #resize()# e #balance()#.
 \end{thm}
 
 
-\section{#RootishArrayStack#: A Space-Efficient Array Stack}
+\section{#RootishArrayStack#: Uma Stack Array Eficiente No Uso de Espaço}
 \seclabel{rootisharraystack}
 
 \index{RootishArrayStack@#RootishArrayStack#}%
-One of the drawbacks of all previous data structures in this chapter is
-that, because they store their data in one or two arrays and they avoid
-resizing these arrays too often, the arrays frequently are not very full.
-For example, immediately after a #resize()# operation on an #ArrayStack#,
-the backing array #a# is only half full.  Even worse, there are times
-when only one third of #a# contains data.
+Uma das desvantagem de todas as estruturas de dados anteriores neste capítulo
+é que, porque elas guardam os dados um array ou dois e evitam redimensionar
+esses arrays com frequência, os arrays frequentemente não estão muito cheios.
+Por exemplo, imediatamente após uma operação 
+ #resize()# em uma #ArrayStack#,
+o array de apoio #a# tem somente metade do espaço em uso.
+E pior, às vezes somente um terço de #a# contém dados.
 
-In this section, we discuss the #RootishArrayStack# data structure,
-that addresses the problem of wasted space.  The #RootishArrayStack#
-stores #n# elements using $O(\sqrt{#n#})$ arrays.  In these arrays, at
-most $O(\sqrt{#n#})$ array locations are unused at any time.  All
-remaining array locations are used to store data.  Therefore, these
-data structures waste at most $O(\sqrt{#n#})$ space when storing #n#
-elements.
+Nesta seção, distimos a estrutura de dados 
+#RootishArrayStack#, que resolve o problema de espaço desperdiçado.
+A #RootishArrayStack# guarda 
+#n# elementos usando arrays de tamanho $O(\sqrt{#n#})$.
+Nesses arrays, no máximo 
+$O(\sqrt{#n#})$ posições do array estão vazias a qualquer momento.
+Todo o restante do array está usando para guardar dados. Portanto,
+essas estruturas de dados gastam até 
+ $O(\sqrt{#n#})$ de espaço ao guardar #n#
+elementos.
 
-A #RootishArrayStack# stores its elements in a list of #r#
-arrays called \emph{blocks} that are numbered $0,1,\ldots,#r#-1$.
-See \figref{rootisharraystack}.  Block $b$ contains $b+1$ elements.
-Therefore, all #r# blocks contain a total of
+Uma #RootishArrayStack# guarda seus elementos em uma lista de #r#
+arrays chamados de \emph{blocos} que são numerados $0,1,\ldots,#r#-1$.
+Ver \figref{rootisharraystack}.  O bloco $b$ contém $b+1$ elementos.
+Então, todos os 
+ #r# blocos contém um total de
 \[
   1+ 2+ 3+\cdots +#r# = #r#(#r#+1)/2
 \]
-elements.  The above formula can be obtained as shown in \figref{gauss}.
+elementos. A fórmula acima pode ser obtida conforme mostrado em \figref{gauss}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/rootisharraystack}
   \end{center}
-  \caption[Adding and removing in a RootishArrayStack]{A sequence of #add(i,x)# and #remove(i)# operations on a
-  #RootishArrayStack#.  Arrows denote elements being copied. }
+  \caption[Adição e remoção em uma RootishArrayStack]{Uma sequÊncia de operações #add(i,x)# e #remove(i)# em uma 
+  #RootishArrayStack#.  Flechas denotam elementos sendo copiados. }
   \figlabel{rootisharraystack}
 \end{figure}
 
@@ -727,45 +752,49 @@ elements.  The above formula can be obtained as shown in \figref{gauss}.
   \begin{center}
     \includegraphics[scale=0.90909]{figs/gauss}
   \end{center}
-  \caption{The number of white squares is $1+2+3+\cdots+#r#$.  The number of
-  shaded squares is the same.  Together the white and shaded squares make a
-  rectangle consisting of $#r#(#r#+1)$ squares.}
+  \caption{O número de quadrados brancos é $1+2+3+\cdots+#r#$.  O número de quadrados sombreados é o mesmo.
+  Juntos, os quadrados brancos e sombreados compõem um retângulo consistindo de 
+   $#r#(#r#+1)$ quadrados.}
   \figlabel{gauss}
 \end{figure}
 
-As we might expect, the elements of the list are laid out in order
-within the blocks.  The list element with index 0 is stored in block 0,
-elements with list indices 1 and 2 are stored in block 1, elements with
-list indices 3, 4, and 5 are stored in block 2, and so on.  The main
-problem we have to address is that of determining, given an index $#i#$,
-which block contains #i# as well as the index corresponding to #i#
-within that block.
+Como podemos esperar, os elementos da lista estão dispostos em ordem dentro dos blocos.
+O elemento da lista com índice 0 é guardado no bloco 0, 
+elementos com índices 1 e 2 são guardados no bloco 1, elementos
+com índices 3, 4 e 5 são guardados no bloco 2 e assim por diante.
+O principal problema que temos para resolver é o de determinar, dado um índice
+ $#i#$,
+ qual bloco contém 
+ #i# e também o índice correspondente a #i# naquele bloco.
 
-Determining the index of #i# within its block turns out to be easy. If
-index #i# is in block #b#, then the number of elements in blocks
-$0,\ldots,#b#-1$ is $#b#(#b#+1)/2$.  Therefore, #i# is stored at location
+Determinar o índice de #i# no bloco acaba sendo fácil.
+Se o índice 
+#i# está no bloco #b#, então o número de elementos nos blocos 
+$0,\ldots,#b#-1$ é $#b#(#b#+1)/2$.  Portanto, #i# é guardado na posição 
 \[
      #j# = #i# - #b#(#b#+1)/2
 \]
-within block #b#.  Somewhat more challenging is the problem of determining
-the value of #b#.  The number of elements that have indices less than
-or equal to #i# is $#i#+1$.  On the other hand, the number of elements
-in blocks $0,\ldots,b$ is $(#b#+1)(#b#+2)/2$.  Therefore, #b# is the smallest
-integer such that
+dentro do bloco #b#.  Um pouco mais desafiador é o problema de determinar o valor de 
+#b#.  O número de elementos que tem índices menores que ou iguais a 
+#i# é $#i#+1$.  Por outro lado, o número de elementos nos blocos 
+$0,\ldots,b$ é $(#b#+1)(#b#+2)/2$.  Portanto, #b# é o menor inteiro tal que 
+
 \[
     (#b#+1)(#b#+2)/2 \ge #i#+1 \enspace .
 \]
-We can rewrite this equation as
+Podemos reescrever essa equação da forma
 \[
     #b#^2 + 3#b# - 2#i# \ge  0 \enspace .
 \]
-The corresponding quadratic equation $#b#^2 + 3#b# - 2#i# =  0$ has two
-solutions: $#b#=(-3 + \sqrt{9+8#i#}) / 2$ and $#b#=(-3 - \sqrt{9+8#i#}) / 2$.
-The second solution makes no sense in our application since it always
-gives a negative value. Therefore, we obtain the solution $#b# = (-3 +
-\sqrt{9+8i}) / 2$.  In general, this solution is not an integer, but
-going back to our inequality, we want the smallest integer $#b#$ such that 
-$#b# \ge (-3 + \sqrt{9+8i}) / 2$.  This is simply
+A equação quadrática correspondente 
+ $#b#^2 + 3#b# - 2#i# =  0$ tem duas soluções
+: $#b#=(-3 + \sqrt{9+8#i#}) / 2$ e $#b#=(-3 - \sqrt{9+8#i#}) / 2$.
+A segunda solução não faz sentido na nossa aplicação pois é um valor negativo.
+Portanto, obtemos a solução
+$#b# = (-3 +
+\sqrt{9+8i}) / 2$.  Em geral, essa solução não é um inteiro, mas retornando à nossa desigualdade, queremos o menor inteiro 
+ $#b#$ tal que
+$#b# \ge (-3 + \sqrt{9+8i}) / 2$.  Isso é simplesmente
 \[
    #b# = \left\lceil(-3 + \sqrt{9+8i}) / 2\right\rceil \enspace .
 \]
@@ -776,62 +805,70 @@ With this out of the way, the #get(i)# and #set(i,x)# methods are straightforwar
 
 \codeimport{ods/RootishArrayStack.get(i).set(i,x)}
 
-If we use any of the data structures in this chapter for representing the #blocks# list, then #get(i)# and #set(i,x)# will each run in constant time.
+Se usarmos quaisquer estruturas de dados neste capítulo para representar a lista de 
+#blocks#, então #get(i)# e #set(i,x)# irão rodar em tempo constante.
 
-The #add(i,x)# method will, by now, look familiar.  We first check
-to see if our data structure is full, by checking if the number of
-blocks, #r#, is such that $#r#(#r#+1)/2 = #n#$. If so, we call #grow()#
-to add another block.  With this done, we shift elements with indices
-$#i#,\ldots,#n#-1$ to the right by one position to make room for the
-new element with index #i#:
+O método #add(i,x)# irá, a esta altura, parecer familiar.  Primeiro verificamos 
+se nossa estrutura de dados está cheia ao ver se o número de blocos 
+, #r#, é tal que $#r#(#r#+1)/2 = #n#$. Caso positivo, chamamos #grow()#
+para adicionar outro bloco. Com isso feito, deslocamos elementos com índices
+$#i#,\ldots,#n#-1$ à direita por uma posição para abrir espaço para o novo elemento com índice 
+ #i#:
 
 \codeimport{ods/RootishArrayStack.add(i,x)}
 
-The #grow()# method does what we expect. It adds a new block:
+O método #grow()# faz o que esperamos dele. Ele adiciona um novo bloco à estrutura de dados: 
 
 \codeimport{ods/RootishArrayStack.grow()}
 
-Ignoring the cost of the #grow()# operation, the cost of an #add(i,x)#
-operation is dominated by the cost of shifting and is therefore
-$O(1+#n#-#i#)$, just like an #ArrayStack#.
+Ignorando o custo da operação 
+ #grow()#, o custo da operação #add(i,x)# é dominado pelo custo de deslocamento e é portanto
+$O(1+#n#-#i#)$, como um #ArrayStack#.
 
-The #remove(i)# operation is similar to #add(i,x)#.  It shifts the
-elements with indices $#i#+1,\ldots,#n#$ left by one position and then,
-if there is more than one empty block, it calls the #shrink()# method
-to remove all but one of the unused blocks:
+A operação #remove(i)# é similar a #add(i,x)#.  Ela desloca os elementos com índices 
+$#i#+1,\ldots,#n#$ à esquerda por uma posição e então, se há mais de um bloco vazio, ela chama o método 
+#shrink()# para remover todos menos um dos blocos não usados:
 
 \codeimport{ods/RootishArrayStack.remove(i)}
 \codeimport{ods/RootishArrayStack.shrink()}
 
-Once again, ignoring the cost of the #shrink()# operation, the cost of
-a #remove(i)# operation is dominated by the cost of shifting  and is
-therefore $O(#n#-#i#)$.
+Novamente, ignorando o custo da operação 
+ #shrink()#, o custo de uma operação 
+#remove(i)# é dominado pelo custo de deslocamento e portanto
+$O(#n#-#i#)$.
 
-\subsection{Analysis of Growing and Shrinking}
+\subsection{Análise de expandir e encolher}
 
-The above analysis of #add(i,x)# and #remove(i)# does not account for
-the cost of #grow()# and #shrink()#.  Note that, unlike the
-#ArrayStack.resize()# operation, #grow()# and #shrink()# do not copy
-any data.  They only allocate or free an array of size #r#.  In
-some environments, this takes only constant time, while in others, it
-may require time proportional to #r#.
+A análise acima de 
+ #add(i,x)# e #remove(i)# não leva em conta o custo de 
+#grow()# e #shrink()#.  Note que, diferentemente da operação
+#ArrayStack.resize()#, #grow()# e #shrink()# não copiam nenhum dado 
+. Elas simplesmente alocam ou liberam um array de tamanho #r#.  
+Em alguns ambientes, isso leva apenas tempo constante, enquanto em outros, pode ser necessário tempo proporcional a #r#.
 
-We note that, immediately after a call to #grow()# or #shrink()#, the
-situation is clear. The final block is completely empty, and all other
-blocks are completely full.  Another call to #grow()# or #shrink()# will
-not happen until at least $#r#-1$ elements have been added or removed.
-Therefore, even if #grow()# and #shrink()# take $O(#r#)$ time, this
-cost can be amortized over at least $#r#-1$ #add(i,x)# or #remove(i)#
-operations, so that the amortized cost of #grow()# and #shrink()# is
-$O(1)$ per operation.
+Note que, imediatamente após uma chamada a 
+#grow()# ou #shrink()#, a situação é clara
+. O bloco final está completamente vazio e todos os outros blocos estão completamente cheios. 
+Outra chamada a 
+   #grow()# ou #shrink()# não acontecerá até após pelo menos 
+ $#r#-1$ elementos tenham sido adicionados ou removidos.
+ Portanto, mesmo se 
+#grow()# e #shrink()# leve tempo $O(#r#)$, esse custo pode ser amortizado sobre pelo menos 
+$#r#-1$ operações #add(i,x)# ou #remove(i)#
+fazendo com que o custo amortizado de 
+ #grow()# e #shrink()# seja
+$O(1)$ por operação.
 
-\subsection{Space Usage}
+\subsection{Uso de Espaço}
 \seclabel{rootishspaceusage}
 
-Next, we analyze the amount of extra space used by a #RootishArrayStack#.
-In particular, we want to count any space used by a #RootishArrayStack# that is not an array element currently used to hold a list element.  We call all such space \emph{wasted space}.
-\index{wasted space}%
+A seguir, analisaremos a quantidade de espaço extra usada por uma 
+ #RootishArrayStack#.
 
+Em particular, queremos contar qualquer espaço usado por uma #RootishArrayStack# que não é um elemento de array usado no momento para guardar um elemento da lista. Chamamos todo esse espaço de \emph{espaço desperdiçado}.
+\index{espaço desperdiçado}%
+
+% TODO continuar
 The #remove(i)# operation ensures that a #RootishArrayStack# never has
 more than two blocks that are not completely full.  The number of blocks,
 #r#, used by a #RootishArrayStack# that stores #n# elements therefore
