@@ -227,32 +227,36 @@ O teorema a seguir resume o desempenho de uma #ArrayStack#:
   #resize()#, uma #ArrayStack# aceita as operações
   \begin{itemize}
     \item #get(i)# e #set(i,x)# em tempo $O(1)$ por operação; e
-    \item #add(i,x)# and #remove(i)# in $O(1+#n#-#i#)$ time per operation.
+    \item #add(i,x)# e #remove(i)# em $O(1+#n#-#i#)$ tempo por operação.
   \end{itemize}
-  Furthermore, beginning with an empty #ArrayStack# and performing any
-  sequence of $m$ #add(i,x)# and #remove(i)# operations results in a
-  total of $O(m)$ time spent during all calls to #resize()#.
+  Além disso, ao comerçarmos com um 
+ #ArrayStack# vazio e realizarmos qualquer sequência de $m$ operações 
+   #add(i,x)# e #remove(i)# resulta em um total de
+   $O(m)$ tempo gasto durante todas as chamadas a #resize()#.
 \end{thm}
 
-The #ArrayStack# is an efficient way to implement a #Stack#.
-In particular, we can implement #push(x)# as #add(n,x)# and #pop()#
-as #remove(n-1)#, in which case these operations will run in $O(1)$
-amortized time.
+O #ArrayStack# é um jeito eficiente de implementar a #Stack#.
+Em especial, podemos implementar 
+ #push(x)# como #add(n,x)# e #pop()#
+como #remove(n-1)# e nesse caso essas operações rodarão $O(1)$
+de tempo amortizado.
 
-\section{#FastArrayStack#: An Optimized ArrayStack}
+\section{#FastArrayStack#: Uma ArrayStack otimizada}
 \seclabel{fastarraystack}
 
 \index{FastArrayStack@#FastArrayStack#}%
-Much of the work done by an #ArrayStack# involves shifting (by
-#add(i,x)# and #remove(i)#) and copying (by #resize()#) of data.
-\notpcode{In the implementations shown above, this was done using #for# loops.}%
-\pcodeonly{In a naive implementation, this would be done using #for# loops.}
-It
-turns out that many programming environments have specific functions
-that are very efficient at copying and moving blocks of data.  In the C
-programming language, there are the #memcpy(d,s,n)# and #memmove(d,s,n)#
-functions. In the C++ language there is the #std::copy(a0,a1,b)# algorithm.
-In Java there is the #System.arraycopy(s,i,d,j,n)# method.
+Muito do trabalho feito por uma 
+ #ArrayStack# envolver o deslocamento (por 
+#add(i,x)# e #remove(i)#) e cópias (pelo #resize()#) de dados.
+\notpcode{Nas implementações mostradas acima, isso era feito usando laços #for#.}%
+\pcodeonly{Em uma implementação naive, isso seria feito usando laços #for#.}
+Acontece que muitos ambientes de programação tem funções específicas que são muito 
+eficientes em copiar e mover blocos de dados.
+Na linguagem C,
+existem as funções #memcpy(d,s,n)# e #memmove(d,s,n)#. 
+Na linguagem C++ existe o algoritmo #std::copy(a0,a1,b)#.
+Em Java, existe o 
+método #System.arraycopy(s,i,d,j,n)#.
 \index{memcpy@#memcpy(d,s,n)#}%
 \index{std::copy@#std::copy(a0,a1,b)#}%
 \index{System.arraycopy@#System.arraycopy(s,i,d,j,n)#}%
@@ -260,235 +264,252 @@ In Java there is the #System.arraycopy(s,i,d,j,n)# method.
 \cppimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
 \javaimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
 
-These functions are usually highly optimized and may even use special
-machine instructions that can do this copying much faster than we could by
-using a #for# loop.  Although using these functions does not asymptotically
-decrease the running times, it can still be a worthwhile optimization.
+Essas funções são em geral altamente otimizadas e podem usar até mesmo de 
+instruções de máquina especiais que podem fazer esse copiar muito mais rápido 
+que poderíamos usando um laço #for#.
+Embora o uso dessas funções não diminuam o tempo de execução assintoticamente falando,
+pode ser uma otimização que vale a pena.
 
-\pcodeonly{In our C++ and Java implementations, the use of fast array
-copying functions}
-\notpcode{In the \lang\ implementations here, the use of the native \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}}
-resulted in speedups of a factor between 2 and 3, depending on the types of
-operations performed.  Your mileage may vary.
+\pcodeonly{Nas nossas implementações em C++ e Java, o uso de funções de cópia rápida de arrays
+}
+\notpcode{Nas implementações em \lang\ aqui, o uso do nativo \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}}
+resultaram em um fator de speedups (aceleração) entre 2 e 3, dependendo dos tipos de operações realizadas.
+O resultados podem variar de acordo com o caso.
 
-\section{#ArrayQueue#: An Array-Based Queue}
+\section{#ArrayQueue#: Uma Queue Baseada Em Array}
 \seclabel{arrayqueue}
 
 \index{ArrayQueue@#ArrayQueue#}%
-In this section, we present the #ArrayQueue# data structure, which
-implements a FIFO (first-in-first-out) queue; elements are removed (using
-the #remove()# operation) from the queue in the same order they are added
-(using the #add(x)# operation).
 
-Notice that an #ArrayStack# is a poor choice for an implementation of a
-FIFO queue.  It is not a good choice because we must choose one end of
-the list upon which to add elements and then remove elements from the
-other end.  One of the two operations must work on the head of the list,
-which involves calling #add(i,x)# or #remove(i)# with a value of $#i#=0$.
-This gives a running time proportional to #n#.
+Nesta seção, apresentamos a estrutura de dados 
+ #ArrayQueue#, que implementa uma queue do tipo 
+ FIFO (first-in-first-out, primeiro-que-chega-primeiro-que-sai);
+ elementos são removidos (usando a operação 
+#remove()#) da queue na mesma ordem em que são adicionados 
+(usando a operação #add(x)#).
 
-To obtain an efficient array-based implementation of a queue, we
-first notice that the problem would be easy if we had an infinite
-array #a#.  We could maintain one index #j# that keeps track of the
-next element to remove and an integer #n# that counts the number of
-elements in the queue.  The queue elements would always be stored in
+Note uma 
+#ArrayStack# é uma escolha ruim para uma implementação de uma 
+queue do tipo FIFO. Não é uma boa escolha porque precisamos escolher um fim da lista ao qual adicionaremos elementos e então remover elementos do outro lado. 
+Uma das duas operações precisa trabalhar na cabeça da lista, o que envolve chamar
+#add(i,x)# ou #remove(i)# com um valor de $#i#=0$.
+Isso resulta em um tempo de execução proporcional a #n#.
+
+Para obter uma implementação de queue eficiente baseada em array,
+primeiro observamos que o problema seria fácil se tivéssemos um array #a# infinito.
+Poderíamos manter um índice
+ #j# que guarda qual é o próximo elemento a remover e um inteiro
+#n# que conta o número de elementos na queue.
+Os elementos da queue sempre seriam guardados em 
 \[ #a[j]#,#a[j+1]#,\ldots,#a[j+n-1]# \enspace . \]
-Initially, both #j# and #n# would be 
-set to 0.  To add an element, we would place it in #a[j+n]# and increment #n#.
-To remove an element, we would remove it from #a[j]#, increment #j#, and
-decrement #n#.
+Inicialmente, ambos #j# e #n# receberiam o valor 0. 
+Para adicionar um elemento, teríamos que colocá-lo em #a[j+n]# e incrementar #n#.
+Para remover um elemento, o removeríamos de 
+ #a[j]#, incrementando #j#, e 
+decrementando #n#.
 
-Of course, the problem with this solution is that it requires an infinite
-array.  An #ArrayQueue# simulates this by using a finite array #a#
-and \emph{modular arithmetic}.
-\index{modular arithmetic}%
-This is the kind of arithmetic used when
-we are talking about the time of day.  For example 10:00 plus five
-hours gives 3:00.  Formally, we say that
+É claro, o problema com essa solução é que ela requer um array infinito.
+Um 
+#ArrayQueue# simula isso ao usar um array finito #a#
+e \emph{aritmética modular}.
+\index{aritmética modular}%
+Esse é o tipo de aritmética usada quando estamos falando sobre a hora do dia.
+Por exemplo, 10:00 mais cinco horas resulta em 3:00. Formalmente, dizemos que
 \[
     10 + 5 = 15 \equiv 3 \pmod{12} \enspace .
 \]
-We read the latter part of this equation as ``15 is congruent to 3 modulo
-12.'' We can also treat $\bmod$ as a binary operator, so that
+Lemos a última parte dessa equação da forma ``15 é congruente a 3 módulo 12.''
+Podemos também tratar 
+ $\bmod$ como um operador binário, tal que 
 \[
    15 \bmod 12 = 3 \enspace .
 \]
 
-More generally, for an integer $a$ and positive integer $m$, $a \bmod m$
-is the unique integer $r\in\{0,\ldots,m-1\}$ such that $a = r + km$ for
-some integer $k$.  Less formally, the value $r$ is the remainder we get
-when we divide $a$ by $m$.
-\pcodeonly{In many programming languages, including C, C++, and Java,
-the mod operate is represented using the \% symbol.}
-\notpcode{In many programming languages, including
-\javaonly{Java}\cpponly{C++}, the $\bmod$ operator is represented
-using the #%# symbol.\footnote{This is sometimes referred to as the
-\emph{brain-dead} mod operator, since it does not correctly implement
-the mathematical mod operator when the first argument is negative.}}
+De modo mais geral, para um inteiro
+$a$ e um inteiro positivo $m$, $a \bmod m$
+é único inteiro 
+ $r\in\{0,\ldots,m-1\}$ tal que $a = r + km$ para algum inteiro $k$. 
+Informalmente, o valor $r$ é o resto obtido quando dividimos $a$ por $m$.
+\pcodeonly{Em muitas linguagens de programação, incluindo C, C++ e Java, o operador mod é representado
+usando o símbolo \%.} 
+\notpcode{Em muitas linguagens de programação incluindo 
+\javaonly{Java}\cpponly{C++}, o operador $\bmod$ é representado 
+usando o símbolo
+ #%# symbol.\footnote{Isso às vezes é chamado de 
+operador mod com \emph{morte cerebral}, pois não implementa corretamente
+o operador matemático mod quando o primeiro argumento é negativo.}}
 
-Modular arithmetic is useful for simulating an infinite array,
-since $#i#\bmod #a.length#$ always gives a value in the range
-$0,\ldots,#a.length-1#$.  Using modular arithmetic we can store the
-queue elements at array locations
+Aritmética modular é útil para simular um array infinito 
+uma vez que 
+$#i#\bmod #a.length#$ sempre resulta em um valor no intervalo
+$0,\ldots,#a.length-1#$.  Usando aritmética modular podemos guardar
+os elementos da queue em posições do array
 \[ #a[j%a.length]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]#
 \enspace. \]
-This treats the array #a# like a \emph{circular array}
-\index{circular array}%
-\index{array!circular}%
-in which array indices
-larger than $#a.length#-1$ ``wrap around'' to the beginning of
-the array.
+Desse jeito trata-se o array 
+ #a# como um \emph{array circular}
+\index{array circular}%
+\index{circular!array}%
+no qual os índices do array maiores que
+$#a.length#-1$ ``dão a volta'' ao começo do array. 
 % TODO: figure
 
-The only remaining thing to worry about is taking care that the number
-of elements in the #ArrayQueue# does not exceed the size of #a#.
+A única coisa que falta considerar é cuidar que o número de elementos no
+ #ArrayQueue# não ultrapasse o tamanho de #a#.
 
 \codeimport{ods/ArrayQueue.a.j.n}
 
-A sequence of #add(x)# and #remove()# operations on an #ArrayQueue# is
-illustrated in \figref{arrayqueue}.  To implement #add(x)#, we first
-check if #a# is full and, if necessary, call #resize()# to increase
-the size of #a#.  Next, we store #x# in
-#a[(j+n)%a.length]# and increment #n#.
+A sequência de operações  
+#add(x)# e #remove()# em um #ArrayQueue# é
+ilustrado na \figref{arrayqueue}.  Para implementar #add(x)#, primeiro 
+verificamos se 
+ #a# está cheio e, se necessário, chamamos #resize()# para aumentar o tamanho de  
+#a#.  Em seguida, guardamos #x# em
+#a[(j+n)%a.length]# e incrementamos #n#.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/arrayqueue}
   \end{center}
-  \caption[Adding and removing from an ArrayQueue]{A sequence of #add(x)# and #remove(i)# operations on an
-  #ArrayQueue#.  Arrows denote elements being copied.  Operations that
-  result in a call to #resize()# are marked with an asterisk.}
+  \caption[Adicionar e remover de um ArrayQueue]{Uma sequência de operações #add(x)# e #remove(i)# em um 
+  #ArrayQueue#.  Flechas denotam elementos sendo copiados. Operações que resultam em uma chamada a
+ #resize()# são marcadas com um asterisco.}
   \figlabel{arrayqueue}
 \end{figure}
 
-
-
 \codeimport{ods/ArrayQueue.add(x)}
 
-To implement #remove()#, we first store #a[j]# so that we can return
-it later.  Next, we decrement #n# and increment #j# (modulo #a.length#)
-by setting $#j#=(#j#+1)\bmod #a.length#$.  Finally, we return the stored
-value of #a[j]#. If necessary, we may call #resize()# to decrease the
-size of #a#.
+Para implementar 
+#remove()#, primeiro guardamos #a[j]# para que reutilizá-lo depois. 
+A seguir, decrementamos #n# e incrementamos #j# (módulo #a.length#)
+ao atribuir
+$#j#=(#j#+1)\bmod #a.length#$.  Finalmente, retornamos o valor guardado de
+#a[j]#. Se necessário, podemos chamar  #resize()# para diminuir o tamanho de  #a#.
 
 \codeimport{ods/ArrayQueue.remove()}
 
-Finally, the #resize()# operation is very similar to the #resize()#
-operation of #ArrayStack#.  It allocates a new array, #b#, of size $2#n#$
-and copies
+Finalmente, a operação  
+#resize()# é muito similar à operação #resize()#
+do #ArrayStack#. Ela aloca um novo array, #b#, de tamanho $2#n#$
+e copia 
 \[
    #a[j]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]#
 \]
-onto
+em 
 \[
    #b[0]#,#b[1]#,\ldots,#b[n-1]#
 \]
-and sets $#j#=0$.
+e atribui $#j#=0$.
 
 \codeimport{ods/ArrayQueue.resize()}
 
-\subsection{Summary}
+\subsection{Resumo}
 
-The following theorem summarizes the performance of the #ArrayQueue#
-data structure:
+O teorema a seguir resume o desempenho da estrutura de dados #ArrayQueue#:
 
 \begin{thm}
-An #ArrayQueue# implements the (FIFO) #Queue# interface.  Ignoring the cost of
-calls to #resize()#, an #ArrayQueue# supports the operations
-#add(x)# and #remove()# in $O(1)$ time per operation.
-Furthermore, beginning with an empty #ArrayQueue#, any sequence of $m$
-#add(i,x)# and #remove(i)# operations results in a total of $O(m)$
-time spent during all calls to #resize()#.
+Um #ArrayQueue# implementa a interface (FIFO) #Queue#. Ignorando o custo das chamadas a 
+#resize()#, uma #ArrayQueue# aceita as operações 
+#add(x)# e #remove()# em tempo $O(1)$ por operação. 
+Além disso, ao começar com um #ArrayQueue# vazio, qualquer sequência de $m$
+operações #add(i,x)# e #remove(i)# resulta em um total de $O(m)$ tempo gasto
+durante todas as chamadas a #resize()#.
 \end{thm}
 
 %TODO: Discuss the use of bitwise-and as a replacement for the mod operator
 
-\section{#ArrayDeque#: Fast Deque Operations Using an Array}
+\section{#ArrayDeque#: Operações Rápidas para Deque Usando um Array}
 \seclabel{arraydeque}
 
 \index{ArrayDeque@#ArrayDeque#}%
-The #ArrayQueue# from the previous section is a data structure for
-representing a sequence that allows us to efficiently add to one
-end of the sequence and remove from the other end.  The #ArrayDeque#
-data structure allows for efficient addition and removal at both ends.
-This structure implements the #List# interface by using the same circular
-array technique used to represent an #ArrayQueue#.
+O #ArrayQueue# da seção anterior é uma estrutura de daos para 
+representar a sequência que nos permite eficientemente adicionar a
+um lado da sequência e remover do outro.
+
+A estrutura de dados #ArrayDeque# permite a edição e remoção eficiente em ambos lados.
+Essa estrutura implementa a interface 
+ #List# ao usar a mesma técnica de array circular
+usada para representar um #ArrayQueue#.
 
 \codeimport{ods/ArrayDeque.a.j.n}
 
-The #get(i)# and #set(i,x)# operations on an #ArrayDeque# are
-straightforward.  They get or set the array element $#a[#{#(j+i)#\bmod
+As operações #get(i)# e #set(i,x)# em um #ArrayDeque# são simples
+. Elas obtém ou atribui a um elemento do array $#a[#{#(j+i)#\bmod
 #a.length#}#]#$.
 
 \codeimport{ods/ArrayDeque.get(i).set(i,x)}
 
-The implementation of #add(i,x)# is a little more interesting.  As
-usual, we first check if #a# is full and, if necessary, call
-#resize()# to resize #a#.  Remember that we want this operation to be
-fast when #i# is small (close to 0) or when #i# is large (close to
-#n#).  Therefore, we check if $#i#<#n#/2$.  If so, we shift the
-elements $#a[0]#,\ldots,#a[i-1]#$ left by one position.  Otherwise
-($#i#\ge#n#/2$), we shift the elements $#a[i]#,\ldots,#a[n-1]#$ right
-by one position.  See \figref{arraydeque} for an illustration of
-#add(i,x)# and #remove(x)# operations on an #ArrayDeque#.
+A implementação de 
+ #add(i,x)# é um pouco mais interessante. Como sempre, primeiro 
+ verificamos se 
+ #a# está cheio e, se necessário, chamados 
+#resize()# para redimensionar #a#.  Lembre-se que queremos que essa operação
+seja rápida quando 
+#i# for pequeno (perto de 0) ou quando #i# é grande (perto de 
+#n#).  Portanto, verificamos se $#i#<#n#/2$.  Caso positiov, deslocamos os
+elementos $#a[0]#,\ldots,#a[i-1]#$ à esquerda por uma posição.  Caso contrário, 
+($#i#\ge#n#/2$), deslocamos os elementos $#a[i]#,\ldots,#a[n-1]#$ à direito por uma posição 
+. Veja \figref{arraydeque} para uma ilustração das operações 
+#add(i,x)# e #remove(x)# em um #ArrayDeque#.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/arraydeque}
   \end{center}
-  \caption[Adding and removing from an ArrayDeque]{A sequence of #add(i,x)# and #remove(i)# operations on an
-  #ArrayDeque#.  Arrows denote elements being copied.}
+  \caption[Adição e remoção de ArrayDeque]{Uma sequência de operações #add(i,x)# e #remove(i)# em um 
+  #ArrayDeque#.  Flechas denotam elementos sendo copiados.}
   \figlabel{arraydeque}
 \end{figure}
 
 
 \codeimport{ods/ArrayDeque.add(i,x)}
 
-By doing the shifting in this way, we guarantee that #add(i,x)# never
-has to shift more than $\min\{ #i#, #n#-#i# \}$ elements.  Thus, the running
-time of the #add(i,x)# operation (ignoring the cost of a #resize()#
-operation) is $O(1+\min\{#i#,#n#-#i#\})$.
+Ao deslocar dessa maneira, nós garantimos que #add(i,x)# nunca tem que deslocar mais de 
+ $\min\{ #i#, #n#-#i# \}$ elementos.  Então, o tempo de execução da operação 
+#add(i,x)# (ignorando o custo de uma operação #resize()#
+) é $O(1+\min\{#i#,#n#-#i#\})$.
 
-The implementation of the #remove(i)# operation is similar.  It either
-shifts elements $#a[0]#,\ldots,#a[i-1]#$ right by one position or shifts
-the elements $#a[i+1]#,\ldots,#a[n-1]#$ left by one position depending
-on whether $#i#<#n#/2$.  Again, this means that #remove(i)# never spends
-more than $O(1+\min\{#i#,#n#-#i#\})$ time to shift elements.
+A implementação da operação  #remove(i)# é similar.  Ela ou desloca elementos
+$#a[0]#,\ldots,#a[i-1]#$ à direita uma posição ou desloca elementos 
+$#a[i+1]#,\ldots,#a[n-1]#$ à esquerda uma posição dependendo se 
+$#i#<#n#/2$.  Novamente, isso significa que #remove(i)# nunca gasta mais de 
+$O(1+\min\{#i#,#n#-#i#\})$ tempo para deslocar elementos.
 
 \codeimport{ods/ArrayDeque.remove(i)}
 
-\subsection{Summary}
+\subsection{Resumo}
 
-The following theorem summarizes the performance of the #ArrayDeque#
-data structure:
+O teorema a seguir resume o desempenho da estrutura de dados
+ #ArrayDeque#:
 \begin{thm}\thmlabel{arraydeque}
-  An #ArrayDeque# implements the #List# interface.  Ignoring the cost of
-  calls to #resize()#, an #ArrayDeque# supports the operations
+  Uma #ArrayDeque# implementa a interface #List#.  Ignorando o custo de chamadas 
+  a #resize()#, um #ArrayDeque# aceita as operações 
   \begin{itemize}
-    \item #get(i)# and #set(i,x)# in $O(1)$ time per operation; and
-    \item #add(i,x)# and #remove(i)# in $O(1+\min\{#i#,#n#-#i#\})$ time
-          per operation.
+    \item #get(i)# e  #set(i,x)# em tempo $O(1)$ por operação; e 
+    \item #add(i,x)# e #remove(i)# em tempo $O(1+\min\{#i#,#n#-#i#\})$ 
+          por operação.
   \end{itemize}
-  Furthermore, beginning with an empty #ArrayDeque#, performing any
-  sequence of $m$ #add(i,x)# and #remove(i)# operations results in a
-  total of $O(m)$ time spent during all calls to #resize()#.
+  Além disso, começar com um 
+ #ArrayDeque# vazio, realizar qualquer sequência de $m$ operações 
+  #add(i,x)# e #remove(i)# resulta em um
+  total de tempo $O(m)$ gasto durante todas as chamadas a #resize()#.
 \end{thm}
 
-\section{#DualArrayDeque#: Building a Deque from Two Stacks}
+\section{#DualArrayDeque#: Construção de um Deque a Partir de Duas Stacks}
 \seclabel{dualarraydeque}
 
 \index{DualArrayDeque@#DualArrayDeque#}%
-Next, we present a data structure, the #DualArrayDeque# that
-achieves the same performance bounds as an #ArrayDeque# by using
-two #ArrayStack#s.  Although the asymptotic performance of the
-#DualArrayDeque# is no better than that of the #ArrayDeque#, it is
-still worth studying, since it offers a good example of how to make a
-sophisticated data structure by combining two simpler data structures.
+A seguir, apresentamos uma estrutura de dados, o 
+ #DualArrayDeque# que atinge os mesmos desempenhos 
+que um #ArrayDeque# ao usar 
+duas #ArrayStack#s.  Embora o desempenho assintótico do
+#DualArrayDeque# não é melhor que do #ArrayDeque#, ainda vale estudá-lo 
+,pois oferece um bom exemplo de como fazer uma estrutura de dados sofisticada pela combinação de duas estruturas de dados mais simples.
 
-A #DualArrayDeque# represents a list using two #ArrayStack#s.  Recall that
-an #ArrayStack# is fast when the operations on it modify elements near
-the end.  A #DualArrayDeque# places two #ArrayStack#s, called #front#
-and #back#, back-to-back so that operations are fast at either end.
+Um #DualArrayDeque# representa uma lista usando duas #ArrayStack#s.  Relembre que um 
+#ArrayStack# é rápido quando as operações dele modificam elementos perto do final.
+Uma #DualArrayDeque# posiciona duas #ArrayStack#s, chamadas de #frontal#
+and #traseira#, de modo complementar de tal forma que as operações são rápidas em ambas as direções.
 
 \codeimport{ods/DualArrayDeque.front.back}
 
@@ -500,12 +521,12 @@ of elements it contains.
 
 \codeimport{ods/DualArrayDeque.size()}
 
-The #front# #ArrayStack# stores the list elements that whose indices
-are $0,\ldots,#front.size()#-1$, but stores them in reverse order.
-The #back# #ArrayStack# contains list elements with indices
-in $#front.size()#,\ldots,#size()#-1$ in the normal order.  In this way,
-#get(i)# and #set(i,x)# translate into appropriate calls to #get(i)#
-or #set(i,x)# on either #front# or #back#, which take $O(1)$ time per operation.
+A #ArrayStack# #front# guarda os elementos da lista cujos índices são 
+$0,\ldots,#front.size()#-1$, mas guarda-os em ordem reversa.
+O #ArrayStack# #back# contém elementos da lista com índices 
+em $#front.size()#,\ldots,#size()#-1$ na ordem normal. Desse jeito, 
+#get(i)# e #set(i,x)# traduzem-se em chamadas apropriadas para #get(i)#
+ou #set(i,x)# e ambos #front# ou #back#, que levam tempo $O(1)$ time por operação.
 
 \codeimport{ods/DualArrayDeque.get(i).set(i,x)}
 
