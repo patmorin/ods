@@ -1,24 +1,21 @@
 \chapter{Skiplists}
-
 \chaplabel{skiplists}
 
-In this chapter, we discuss a beautiful data structure: the skiplist,
-which has a variety of applications.  Using a skiplist we can implement a
-#List# that has $O(\log n)$ time implementations of #get(i)#, #set(i,x)#,
-#add(i,x)#, and #remove(i)#. We can also implement an #SSet# in which
-all operations run in $O(\log #n#)$ expected time.
+Neste capítulo, discutimos uma elegante estrutura de dados:
+a skiplist, que tem uma variedade de aplicações.
+Usando uma skiplist podemos implementar uma 
+#List# que tem implementações $O(\log n)$ de time para #get(i)#, #set(i,x)#,
+#add(i,x)# e #remove(i)#. Podemos também implementar um #SSet# no qual todas as operações rodam em tempo $O(\log #n#)$.
 %Finally, a skiplist can be used to implement a #Rope# in which all
 %operations run in $O(\log #n#)$ time.
 
-The efficiency of skiplists relies on their use of randomization.
-When a new element is added to a skiplist, the skiplist uses random coin
-tosses to determine the height of the new element.  The performance of
-skiplists is expressed in terms of expected running times and path
-lengths. This expectation is taken over the random coin tosses used by
-the skiplist.  In the implementation, the random coin tosses used by a
-skiplist are simulated using a pseudo-random number (or bit) generator.
+A eficiência de skiplists está o seu uso de 
+randomization.
+Quando um novo elemento é adicionado a uma skiplist, a skiplists usa um lançamento de uma moeda aleatória para determinar a altura do novo elemento.
+O desempenho das skiplists é expresso em termos da esperança do tempo de execução e do comprimento de caminhos percorridos.
+Essa esperança (relativo ao valor esperado ou médio) é feita sobre os lançamentos da moeda aleatória usados pela skiplist. Na implementação, os lançamentos são simulados usando um gerador de números (ou bits) pseudo-aleatórios.
 
-\section{The Basic Structure}
+\section{A Estrutura Básica}
 
 \index{skiplist}%
 Conceptually, a skiplist is a sequence of singly-linked lists
