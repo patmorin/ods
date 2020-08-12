@@ -869,339 +869,368 @@ Em particular, queremos contar qualquer espaço usado por uma #RootishArrayStack
 \index{espaço desperdiçado}%
 
 % TODO continuar
-The #remove(i)# operation ensures that a #RootishArrayStack# never has
-more than two blocks that are not completely full.  The number of blocks,
-#r#, used by a #RootishArrayStack# that stores #n# elements therefore
-satisfies
+A operação
+#remove(i)# assegura que uma #RootishArrayStack# nunca tem mais que dois
+blocos que não estão complementamente cheios.
+O número de blocos #r#, usados por uma 
+#RootishArrayStack# que guarda #n# elementos portanto satisfaz
 \[
     (#r#-2)(#r#-1)/2 \le #n# \enspace .
 \]
-Again, using the quadratic equation on this gives
+De novo, usando a equação quadrática nisso resulta em
 \[
    #r# \le \frac{1}{2}\left(3+\sqrt{8#n#+1}\right) = O(\sqrt{#n#}) \enspace .
 \]
-The last two blocks have sizes #r# and #r-1#, so the space wasted by these
-two blocks is at most $2#r#-1 = O(\sqrt{#n#})$.  If we store the blocks
-in (for example) an #ArrayStack#, then the amount of space wasted by the
-#List# that stores those #r# blocks is also $O(#r#)=O(\sqrt{#n#})$.  The
-other space needed for storing #n# and other accounting information is $O(1)$.
-Therefore, the total amount of wasted space in a #RootishArrayStack#
-is $O(\sqrt{#n#})$.
+Os últimos dois blocos tem tamanhos #r# e #r-1#, então o espaço desperdiçado por esses dois blocos é até
+ $2#r#-1 = O(\sqrt{#n#})$.  Se guardarmos os blocos 
+em (por exemplo) uma #ArrayStack#, então a quantidade de espaço gasto pela 
+#List# que guarda esses #r# blocks também é $O(#r#)=O(\sqrt{#n#})$.  
+O espaço adicional ncessário para guardar #n# e outras informações auxiliares é $O(1)$.
+Portanto, a quantidade total de espaço desperdiçado em uma #RootishArrayStack#
+é $O(\sqrt{#n#})$.
 
-Next, we argue that this space usage is optimal for any data structure
-that starts out empty and can support the addition of one item at
-a time. More precisely, we will show that, at some point during the
-addition of #n# items, the data structure is wasting at least in $\sqrt{#n#}$ space (though it may be only wasted for a moment).
+A seguir, demonstramos que esse uso de espaço é ótimo qualquer estrutura 
+de dados que inicia vazia e permite a adição de um item por vez.
+Mais precisamente, mostraremos que, em algum momento durante a
+adição de #n# itens, a estrutura de dados está desperdiçando pelo menos
+um espaço de $\sqrt{#n#}$ (embora possa ser por apenas um curto momento).
 
-Suppose we start with an empty data structure and we add #n# items one
-at a time.  At the end of this process, all #n# items are stored in
-the structure and distributed among a collection of #r# memory blocks.
-If $#r#\ge \sqrt{#n#}$, then the data structure must be using #r#
-pointers (or references) to keep track of these #r# blocks, and these
-pointers are wasted space.  On the other hand, if $#r# < \sqrt{#n#}$
-then, by the pigeonhole principle, some block must have size at
-least $#n#/#r# > \sqrt{#n#}$.  Consider the moment at which this block
-was first allocated.  Immediately after it was allocated, this block
-was empty, and was therefore wasting $\sqrt{#n#}$ space.  Therefore,
-at some point in time during the insertion of #n# elements, the data
-structure was wasting $\sqrt{#n#}$ space.
+Suponha que iniciamos com uma estrutura de dados vazia e adicionamos #n# itens, 
+um por vez. No fim desse processo, todos os #n# intens são guardados na 
+estrutura e distribuídos entre uma coleção de #r# blocos de memória.
+Se $#r#\ge \sqrt{#n#}$, então a estrutura de dados precisa usar #r#
+ponteiros (ou referências) para gerenciar esses #r# blocos, e esses
+ponteiros são espaço desperdiçado.
+Por outro lado, se 
+ $#r# < \sqrt{#n#}$
+ então, pelo princípio das casas de pombos, algum bloco deve ter tamanho de
+ pelo menos
+$#n#/#r# > \sqrt{#n#}$.  Considere o momento no qual esse bloco 
+foi inicialmente alocado. Imediatamente após alocá-lo, esse
+bloco estava vazio e portanto desperdiçando
+um espaço de $\sqrt{#n#}$. Portanto, em algum momento durante a inserção de  
+#n# elementos, a estrutura de dados estava gastando
+ $\sqrt{#n#}$ de espaço.
 
-\subsection{Summary}
+\subsection{Resumo}
 
-The following theorem summarizes our discussion of the #RootishArrayStack#
-data structure:
+O seguinte teorema resume a discussão sobre a estrutura de dados #RootishArrayStack#:
 
 \begin{thm}\thmlabel{rootisharraystack}
-  A #RootishArrayStack# implements the #List# interface.  Ignoring the cost of
-  calls to #grow()# and #shrink()#, a #RootishArrayStack# supports the operations
+  Uma #RootishArrayStack# implementa a interface #List#. Ignorando o custo das chamadas 
+a #grow()# e #shrink()#, uma #RootishArrayStack# aceita as operações
   \begin{itemize}
-    \item #get(i)# and #set(i,x)# in $O(1)$ time per operation; and
-    \item #add(i,x)# and #remove(i)# in $O(1+#n#-#i#)$ time per operation.
+    \item #get(i)# e #set(i,x)# em tempo $O(1)$ por operações; e  
+    \item #add(i,x)# e #remove(i)# em tempo $O(1+#n#-#i#)$ por operação.
   \end{itemize}
-  Furthermore, beginning with an empty #RootishArrayStack#, any sequence of $m$
-  #add(i,x)# and #remove(i)# operations results in a total of $O(m)$
-  time spent during all calls to #grow()# and #shrink()#.
-
-  The space (measured in words)\footnote{Recall \secref{model} for a
-  discussion of how memory is measured.} used by a #RootishArrayStack#
-  that stores #n# elements is $#n# +O(\sqrt{#n#})$.
+  Além disso, ao começar com uma 
+ #RootishArrayStack# vazia, qualquer sequência de $m$ operações
+  #add(i,x)# e #remove(i)# resulta em um total de $O(m)$
+  tempo gasto durante todas as chamadas de #grow()# e #shrink()#.
+  O espaço (medido em palavras)\footnote{Reveja \secref{model} para uma discussão de como a memória é medida.} usada por uma #RootishArrayStack# que guarda
+#n# elementos é $#n# +O(\sqrt{#n#})$.
 \end{thm}
 
 \notpcode{
 
-\subsection{Computing Square Roots}
+\subsection{Computando Raizes Quadradas}
 
-\index{square roots}%
-A reader who has had some exposure to models of computation may notice
-that the #RootishArrayStack#, as described above, does not fit into
-the usual word-RAM model of computation (\secref{model}) because it
-requires taking square roots.  The square root operation is generally
-not considered a basic operation and is therefore not usually part of
-the word-RAM model.
+\index{raizes quadradas}%
+Um leitor que tenha tido alguma exposição a modelos de computação
+podem notar que 
+a #RootishArrayStack#, conforme descrita anteriormente,
+não se encaixa no modelo de computação normal word-RAM 
+(\secref{model}) porque requer a computação de raizes quadradas. 
+A operação raiz quadrada não é geralmente considerada uma operação básica e portante não é normalmente parte do modelo
+word-RAM.
 
-In this section, we show that the square root operation can be
-implemented efficiently.  In particular, we show that for any integer
-$#x#\in\{0,\ldots,#n#\}$,  $\lfloor\sqrt{#x#}\rfloor$ can be computed
-in constant-time, after $O(\sqrt{#n#})$ preprocessing that creates two
-arrays of length $O(\sqrt{#n#})$.  The following lemma shows that we
-can reduce the problem of computing the square root of #x# to the square
+Nesta seção, mostraremos que a operação raiz quadrada pode ser
+implementada eficientemente. Em particular, mostramos que para qualquer inteiro
+$#x#\in\{0,\ldots,#n#\}$,  $\lfloor\sqrt{#x#}\rfloor$ pode ser computado 
+em tempo constante, após um pré-processamento com tempo de execução de 
+$O(\sqrt{#n#})$ que cria dois array de tamanho 
+$O(\sqrt{#n#})$.  O lema a seguir mostra que podemos reduzir o problema de computar a raiz quadrada de #x# à raiz quadrada de um valor relacionado #x'#.
 root of a related value #x'#.
 
 \begin{lem}\lemlabel{root}
-Let $#x#\ge 1$ and let $#x'#=#x#-a$, where $0\le a\le\sqrt{#x#}$.  Then
+Seja $#x#\ge 1$ e seja $#x'#=#x#-a$, onde $0\le a\le\sqrt{#x#}$. Então 
    $\sqrt{x'} \ge \sqrt{#x#}-1$.
 \end{lem}
 
 \begin{proof}
-It suffices to show that
+É suficiente mostrar que 
 \[
 \sqrt{#x#-\sqrt{#x#}} \ge \sqrt{#x#}-1 \enspace .
 \]
-Square both sides of this inequality to get
+Eleva-se ao quadrado ambos lados dessa desigualdade para obter 
 \[
  #x#-\sqrt{#x#} \ge #x#-2\sqrt{#x#}+1
 \]
-and gather terms to get 
+e juntar termos para obter
 \[
  \sqrt{#x#} \ge 1
 \]
-which is clearly true for any $#x#\ge 1$.
+o que é claramente verdadeiro para qualquer $#x#\ge 1$.
 \end{proof}
 
-Start by restricting the problem a little, and assume that $2^{#r#} \le
-#x# < 2^{#r#+1}$, so that $\lfloor\log #x#\rfloor=#r#$, i.e., #x# is an
-integer having $#r#+1$ bits in its binary representation.  We can take
-$#x'#=#x# - (#x#\bmod 2^{\lfloor r/2\rfloor})$.  Now, #x'# satisfies
-the conditions of \lemref{root}, so $\sqrt{#x#}-\sqrt{#x'#} \le 1$.
-Furthermore, #x'# has all of its lower-order $\lfloor #r#/2\rfloor$ bits
-equal to 0, so there are only
+Inicia-se restringindo o problema um pouco, e assume que 
+ $2^{#r#} \le
+#x# < 2^{#r#+1}$, tal que $\lfloor\log #x#\rfloor=#r#$, isto é, #x# é um
+inteiro com 
+$#r#+1$ bits na sua representação binária. Podemos fazer que
+$#x'#=#x# - (#x#\bmod 2^{\lfloor r/2\rfloor})$.  Agora, #x'# satisfaz
+as condições de \lemref{root}, então $\sqrt{#x#}-\sqrt{#x'#} \le 1$.
+Além disso, 
+ #x'# tem todos os seu bits de baixa ordem $\lfloor #r#/2\rfloor$ bits
+iguais a 0, então só há 
 \[
   2^{#r#+1-\lfloor #r#/2\rfloor} \le 4\cdot2^{#r#/2} \le 4\sqrt{#x#}
 \]
-possible values of #x'#.  This means that we can use an array, #sqrttab#,
-that stores the value of $\lfloor\sqrt{#x'#}\rfloor$ for each possible
-value of #x'#.  A little more precisely, we have
+valores possíveis de #x'#.  Isso significa que podemos umas um array #sqrttab#,
+que guarda o valor de 
+ $\lfloor\sqrt{#x'#}\rfloor$ para cada possível valor de 
+#x'#.  Um pouco mais precisamente, temos 
 \[
    #sqrttab#[i] 
     = \left\lfloor
        \sqrt{i 2^{\lfloor #r#/2\rfloor}}
       \right\rfloor \enspace .
 \]
-In this way, $#sqrttab#[i]$ is within 2 of $\sqrt{#x#}$ for all
+Desse jeito, $#sqrttab#[i]$ tem um diferença de até 2 em relação a $\sqrt{#x#}$ para todo 
 $#x#\in\{i2^{\lfloor #r#/2\rfloor},\ldots,(i+1)2^{\lfloor #r#/2\rfloor}-1\}$.
-Stated another way, the array entry 
-$#s#=#sqrttab#[#x##>>#\lfloor #r#/2\rfloor]$ is either equal to
+De outra forma, a entrada do array
+$#s#=#sqrttab#[#x##>>#\lfloor #r#/2\rfloor]$ é ou igual a 
 $\lfloor\sqrt{#x#}\rfloor$,
-$\lfloor\sqrt{#x#}\rfloor-1$, or
-$\lfloor\sqrt{#x#}\rfloor-2$.  From #s# we can determine the value
-of $\lfloor\sqrt{#x#}\rfloor$ by
-incrementing #s# until 
+$\lfloor\sqrt{#x#}\rfloor-1$, ou
+$\lfloor\sqrt{#x#}\rfloor-2$.  A partir de #s# podemos determinar o valor 
+ $\lfloor\sqrt{#x#}\rfloor$  ao incrementar 
+#s# até u
 $(#s#+1)^2 > #x#$.
 } % notpcode
 \javaimport{ods/FastSqrt.sqrt(x,r)}
 \cppimport{ods/FastSqrt.sqrt(x,r)}
 \notpcode{
-Now, this only works for $#x#\in\{2^{#r#},\ldots,2^{#r#+1}-1\}$ and
-#sqrttab# is a special table that only works for a particular value
-of $#r#=\lfloor\log #x#\rfloor$.  To overcome this, we could compute
-$\lfloor\log #n#\rfloor$ different #sqrttab# arrays, one for each possible
-value of $\lfloor\log #x#\rfloor$. The sizes of these tables form an exponential sequence whose largest value is at most $4\sqrt{#n#}$, so the total size of all tables is $O(\sqrt{#n#})$.
+Isso é funciona para 
+ $#x#\in\{2^{#r#},\ldots,2^{#r#+1}-1\}$ e 
+#sqrttab# é uma tabela especial que funciona somente para um valor particular de 
+$#r#=\lfloor\log #x#\rfloor$.  Para superar isso, poderíamos computar 
+$\lfloor\log #n#\rfloor$ arrays #sqrttab# diferentes, um para cada valor possível de 
+$\lfloor\log #x#\rfloor$. Os tamanhos dessas tabelas formam uma sequência exponencial cujo maior valor é até $4\sqrt{#n#}$, então o tamanho total de todas as tabelas é $O(\sqrt{#n#})$.
 
-However, it turns out that more than one #sqrttab# array is unnecessary;
-we only need one #sqrttab# array for the value $#r#=\lfloor\log
-#n#\rfloor$.  Any value #x# with $\log#x#=#r'#<#r#$ can be \emph{upgraded}
-by multiplying #x# by $2^{#r#-#r'#}$ and using the equation
+Porém, acontece que mais um array 
+ #sqrttab# é desnecessário;
+ somente precisamos de um array
+ #sqrttab# para o valor $#r#=\lfloor\log
+#n#\rfloor$.  Qualquer valor #x# com $\log#x#=#r'#<#r#$ pode ser \emph{atualizado}
+ao multiplicar 
+#x# por $2^{#r#-#r'#}$ e usar a equação 
 \[
     \sqrt{2^{#r#-#r'#}x} = 2^{(#r#-#r#')/2}\sqrt{#x#} \enspace .
 \]
-The quantity $2^{#r#-#r#'}x$ is in the range
-$\{2^{#r#},\ldots,2^{#r#+1}-1\}$ so we can look up its square root
-in #sqrttab#.  The following code implements this idea to compute
-$\lfloor\sqrt{#x#}\rfloor$ for all non-negative integers #x# in the
-range $\{0,\ldots,2^{30}-1\}$ using an array, #sqrttab#, of size $2^{16}$.
+A quantidade 
+$2^{#r#-#r#'}x$ está no intervalo 
+$\{2^{#r#},\ldots,2^{#r#+1}-1\}$ então podemos procurar sua raiz quadrada em 
+#sqrttab#.  O código a seguir implementa essa ideia para computar 
+$\lfloor\sqrt{#x#}\rfloor$ para todo inteiro não negativo #x# no intervalo 
+$\{0,\ldots,2^{30}-1\}$ usando um array, #sqrttab#, de tamanho $2^{16}$.
 } % notpcode
 \javaimport{ods/FastSqrt.sqrt(x)}
 \cppimport{ods/FastSqrt.sqrt(x)}
 \notpcode{
-Something we have taken for granted thus far is the question of how
-to compute
-$#r#'=\lfloor\log#x#\rfloor$.  Again, this is a problem that can be solved
-with an array, #logtab#, of size $2^{#r#/2}$.  In this case, the
-code is particularly simple, since $\lfloor\log #x#\rfloor$ is just the
-index of the most significant 1 bit in the binary representation of #x#.
-This means that, for $#x#>2^{#r#/2}$, we can right-shift the bits of
-#x# by $#r#/2$ positions before using it as an index into #logtab#.
-The following code does this using an array #logtab# of size $2^{16}$ to compute
-$\lfloor\log #x#\rfloor$ for all #x# in the range $\{1,\ldots,2^{32}-1\}$.
+  Algo que tinhamos tido como certo até agora depende de como computamos
+$#r#'=\lfloor\log#x#\rfloor$.  De novo, esse problema pode ser resolvido 
+com um array, #logtab#, de tamanho $2^{#r#/2}$.  Nesse caso, o código 
+é particularmente simples, pois 
+ $\lfloor\log #x#\rfloor$ é somente o índice do bit 1 mais significativo na representação binária de #x#. 
+Isso significa que, para 
+ $#x#>2^{#r#/2}$, podemos deslocar à direita os bits de 
+#x# por $#r#/2$ posições antes de usá-lo como um índice em #logtab#.
+O código a seguir faz isso usando um array
+ #logtab# de tamanho $2^{16}$ para computar 
+$\lfloor\log #x#\rfloor$ para todo #x# no intervalo $\{1,\ldots,2^{32}-1\}$.
 } % notpcode
 \javaimport{ods/FastSqrt.log(x)}
 \cppimport{ods/FastSqrt.log(x)}
 \notpcode{
-Finally, for completeness, we include the following code that initializes #logtab# and #sqrttab#:
+  Finalmente, para completude, incluimos o código a seguir que inicializa 
+ #logtab# e #sqrttab#:
 } % notpcode
 \javaimport{ods/FastSqrt.inittabs()}
 \cppimport{ods/FastSqrt.inittabs()}
 \notpcode{
-To summarize, the computations done by the #i2b(i)# method can be
-implemented in constant time on the word-RAM using $O(\sqrt{n})$ extra
-memory to store the #sqrttab# and #logtab# arrays.  These arrays can be
-rebuilt when #n# increases or decreases by a factor of two, and the cost
-of this rebuilding can be amortized over the number of #add(i,x)# and
-#remove(i)# operations that caused the change in #n# in the same way that
-the cost of #resize()# is analyzed in the #ArrayStack# implementation.
+Para resumir, as computações feitas pelo método
+ #i2b(i)# podem ser implementadas em tempo constante no modelo 
+word-RAM usando $O(\sqrt{n})$ de memória extra para guardar 
+os arrays #sqrttab# e #logtab#. Esses arrays podem ser recontruídos
+quando 
+ #n# aumenta ou diminui por um fator de dois, e o custo dessa reconstrução 
+pode ser amortizado sobre o número de 
+operações #add(i,x)# e 
+#remove(i)# que causaram a mudança do mesmo jeito que o custo de
+#resize()# é analisado na implementação da #ArrayStack#.
 } % notpcode
 
 \section{Discussion and Exercises}
 
-Most of the data structures described in this chapter are folklore. They
-can be found in implementations dating back over 30 years.  For example,
-implementations of stacks, queues, and deques, which generalize easily
-to the #ArrayStack#, #ArrayQueue# and #ArrayDeque# structures described
-here, are discussed by Knuth \cite[Section~2.2.2]{k97v1}.
+A maior parte das estruturas de daos descritas neste capítula são folclore.
+Elas podem ser encontradas em implementações de pelo menos 30 anos atrás.
+Por exemplo, implementações de stacks, queues e deques que generalizam
+facilmente para as estruturas 
+#ArrayStack#, #ArrayQueue# e #ArrayDeque# descritas
+aqui, são discutidas por Knuth \cite[Section~2.2.2]{k97v1}.
 
-Brodnik \etal\ \cite{bcdms99} seem to have been the first to describe
-the #RootishArrayStack# and prove a $\sqrt{n}$ lower-bound like that
-in \secref{rootishspaceusage}.  They also present a different structure
-that uses a more sophisticated choice of block sizes in order to avoid
-computing square roots in the #i2b(i)# method.  Within their scheme,
-the block containing #i# is block $\lfloor\log (#i#+1)\rfloor$, which
-is simply the index of the leading 1 bit in the binary representation
-of $#i#+1$.  Some computer architectures provide an instruction for
-computing the index of the leading 1-bit in an integer. \javaonly{In
-Java, the #Integer# class provides a method #numberOfLeadingZeros(i)#
-from which one can easily compute $\lfloor\log (#i#+1)\rfloor$.}
+Brodnik \etal\ \cite{bcdms99} parece ter sido o primeiro a descrever 
+a #RootishArrayStack# e provar um limitante inferior de $\sqrt{n}$ como em 
+\secref{rootishspaceusage}.  Eles também apresentam uma estrutura diferente que
+usa uma escolha de tamanhos de blocos mais sofisticada a fim de evitar a computação de raizes quadradas usando o método 
+#i2b(i)#. Com o esquema deles, o bloco contendo 
+#i# é o bloco $\lfloor\log (#i#+1)\rfloor$, que é simplesmente o índice do primeiro bit 1 na representação binária de 
+$#i#+1$.  Algumas arquiteturas de computadores provêm uma instrução para computar o índice do primeiro bit 1 em um inteiro. 
+\javaonly{Em 
+Java, a classe #Integer# provê um método chamado #numberOfLeadingZeros(i)#
+a partir do qual pode-se facilmente computar
+ $\lfloor\log (#i#+1)\rfloor$.}
 
-A structure related to the #RootishArrayStack# is the two-level
-\emph{tiered-vector} of Goodrich and Kloss \cite{gk99}.
-\index{tiered-vector}%
-This structure
-supports the #get(i,x)# and #set(i,x)# operations in constant time and
-#add(i,x)# and #remove(i)# in $O(\sqrt{#n#})$ time.  These running times
-are similar to what can be achieved with the more careful implementation
-of a #RootishArrayStack# discussed in \excref{rootisharraystack-fast}.
+ Uma estrutura relacionada à 
+ #RootishArrayStack# é o \emph{vetor em camadas}
+\index{vetor em camadas}%
+de Goodrich e Kloss \cite{gk99}.
+Essa estrutura suporta as operações 
+#get(i,x)# e #set(i,x)# em tempo constante e 
+#add(i,x)# e #remove(i)# em $O(\sqrt{#n#})$ de tempo.
+Esses tempos de execução são similare ao que pode ser conseguido com uma implementação mais cuidadosa de uma
+#RootishArrayStack# discutida em \excref{rootisharraystack-fast}.
 
 \javaonly{
 \begin{exc}
-  In the #ArrayStack# implementation, after the first call to #remove(i)#,
-  the backing array, #a#, contains $#n#+1$ non-#null# values despite
-  the fact that the #ArrayStack# only contains #n# elements.  Where is
-  the extra non-#null# value?  Discuss any consequences this non-#null#
-  value might have on the Java Runtime Environment's memory manager.
+  Na implementação da 
+  #ArrayStack#, após a primeira chamada a #remove(i)#,
+  o array de apoio
+, #a#, contém $#n#+1$ valores não #null# apesar do fato de que 
+  a #ArrayStack# somente contém #n# elementos. Onde está o valor 
+  não #null# extra?  Discuta as consequências que esse valor não #null#
+  possa ter no gerenciador de memória da Java Runtime Environment.
   \index{Java Runtime Environment}%
-  \index{memory manager}%
+  \index{gerenciador de memória}%
 \end{exc}
 }
 
 \begin{exc}
-  The #List# method #addAll(i,c)# inserts all elements of the #Collection#
-  #c# into the list at position #i#.  (The #add(i,x)# method is a special
-  case where $#c#=\{#x#\}$.)  Explain why, for the data structures
-  in this chapter, it is not efficient to implement #addAll(i,c)# by
-  repeated calls to #add(i,x)#.  Design and implement a more efficient
-  implementation.
+  O método da 
+  #List# #addAll(i,c)# insere todos os elementos da #Collection#
+  #c# na posição #i# da lista.  (O método #add(i,x)# é um caso especial onde 
+  $#c#=\{#x#\}$.)  Explique porque, para as estruturas de dados deste capítulo 
+  , não é eficiente implementar #addAll(i,c)# fazendo chamadas repetidas a 
+  #add(i,x)#.  Projete e codifique uma implementação mais eficiente. 
 \end{exc}
 
 \begin{exc}
-  Design and implement a \emph{#RandomQueue#}.
+  Projete e implemente uma 
+\emph{#RandomQueue#}.
   \index{RandomQueue@#RandomQueue#}%
-  This is an implementation
-  of the #Queue# interface in which the #remove()# operation removes
-  an element that is chosen uniformly at random among all the elements
-  currently in the queue.  (Think of a #RandomQueue# as a bag in which
-  we can add elements or reach in and blindly remove some random element.)
-  The #add(x)# and #remove()# operations in a #RandomQueue# should run
-  in amortized constant time per operation.
+Essa é uma implementação da interface
+#Queue# na qual a operação #remove()# remove um elemento que é escolhido de uma distribuição aleatória uniforme entre todos os elementos atualmente na queue. 
+  (Considere uma #RandomQueue# como sendo uma sacola na qual 
+  podemos adicionar elementos ou por a mão e sem ver remover algum elemento aleatório.)
+  As operações
+  #add(x)# e #remove()# em uma #RandomQueue# deve rodar em um tempo constante amortizado por operação.
 \end{exc}
 
 \begin{exc}
-  Design and implement a #Treque# (triple-ended queue). 
+  Projete e implemente uma 
+ #Treque# (uma queue com três pontas). 
   \index{Treque@#Treque#}%
-  This is a #List#
-  implementation in which #get(i)# and #set(i,x)# run in constant time
-  and #add(i,x)# and #remove(i)# run in time
+Essa é uma implementação de uma #List#
+  na qual #get(i)# e #set(i,x)# rodas em tempo constante
+  e #add(i,x)# e #remove(i)# rodam em tempo 
   \[
      O(1+\min\{#i#, #n#-#i#, |#n#/2-#i#|\}) \enspace .
   \]
-  In other words, modifications are fast if they are near either
-  end or near the middle of the list.
+  Em outras palabras, modificações são rápidas se elas estão perto ou do fim, ou do meio da lista.
 \end{exc}
 
 \begin{exc}
-  Implement a method #rotate(a,r)# that ``rotates'' the array #a#
-  so that #a[i]# moves to $#a#[(#i#+#r#)\bmod #a.length#]$, for all
+  Implemente um método
+#rotate(a,r)# que ``rotaciona'' o array #a# de tal forma que
+  #a[i]# moves para $#a#[(#i#+#r#)\bmod #a.length#]$, para todo 
   $#i#\in\{0,\ldots,#a.length#\}$.
 \end{exc}
 
 \begin{exc}
-  Implement a method #rotate(r)# that ``rotates'' a #List# so that
-  list item #i# becomes list item $(#i#+#r#)\bmod #n#$.  When run on
-  an #ArrayDeque#, or a #DualArrayDeque#, #rotate(r)# should run in
-  $O(1+\min\{#r#,#n#-#r#\})$ time.
+  Implemente um método 
+#rotate(r)# que ``rotaciona'' uma #List# tal que o item da lista 
+  #i# se torna o item $(#i#+#r#)\bmod #n#$.  Ao rodar em uma 
+   #ArrayDeque# ou uma #DualArrayDeque#, #rotate(r)# deve rodar em 
+  $O(1+\min\{#r#,#n#-#r#\})$ de tempo.
 \end{exc}
 
 \begin{exc}
-  \pcodeonly{This exercise is left out of the \lang\ edition.}
+  \pcodeonly{Esse exercício não é incluído na edição da linguagem\lang\ .}
   \notpcode{
-  Modify the #ArrayDeque# implementation so that the shifting
-  done by #add(i,x)#, #remove(i)#, and #resize()# is done using
-  the faster #System.arraycopy(s,i,d,j,n)# method.}
+    Modifique a implementação
+  da #ArrayDeque# tal que o deslocamente feito por
+   #add(i,x)#, #remove(i)#, e #resize()# é realizado usando o método 
+  rápido #System.arraycopy(s,i,d,j,n)#.}
 \end{exc}
 
 \begin{exc}
-  Modify the #ArrayDeque# implementation so that it does not use the
-  #%# operator (which is expensive on some systems).  Instead, it
-  should make use of the fact that, if #a.length# is a power of 2,
-  then 
+  Modifique a implementação da 
+  #ArrayDeque# tal que não use o operador 
+  #%# (que é caro em alguns sistemas). Em vez disso, deve fazer uso do
+  fato que se
+   #a.length# é uma potência de 2,
+  então 
   \[  #k%a.length#=#k&(a.length-1)# \enspace .
   \]
-  (Here, #&# is the bitwise-and operator.)
+  (Aqui, #&# é o operador and bit-a-bit.)
 \end{exc}
 
 \begin{exc}
-  Design and implement a variant of #ArrayDeque# that does not do any
-  modular arithmetic at all.  Instead, all the data sits in a consecutive
-  block, in order, inside an array.  When the data overruns the beginning
-  or the end of this array, a modified #rebuild()# operation is performed.
-  The amortized cost of all operations should be the same as in an
+  Projete e implemente uma variante da 
+ #ArrayDeque# que não faz uso de aritmética modular. Em vez disso, todos os dados ficam em um bloco consecutivo, em ordem, dentro de um array. 
+  Quando os dados sobrescrevem o começo ou fim desse array, uma operação #rebuild()# modificada é realizada.
+  O custo amortizado de todas as operações deve ser o mesmo que em uma 
   #ArrayDeque#.
 
-  \noindent Hint: Getting this to work is really all about how you implement
-  the #rebuild()# operation.  You would like #rebuild()# to put the data
-  structure into a state where the data cannot run off either end until
-  at least $#n#/2$ operations have been performed.
+  \noindent Dica: Fazer isso funcionar tem a ver como você implementa a operação #rebuild()#. Deve-se fazer #rebuild()# para colocar dados na estrutura de dados em um estado onde os dados não podem sair pelas duas pontas até que pelo menos
+  $#n#/2$ operações tenham sido realizadas. 
 
-  Test the performance of your implementation against the #ArrayDeque#.
-  Optimize your implementation (by using #System.arraycopy(a,i,b,i,n)#)
-  and see if you can get it to outperform the #ArrayDeque# implementation.
+  Teste o desempenho da sua implementação em comparação à 
+ #ArrayDeque#. Otimize sua implementação
+  (usando #System.arraycopy(a,i,b,i,n)#)
+  e veja se consegue fazê-la mais rápida que a implementação da #ArrayDeque#.
 \end{exc}
 
 \begin{exc}
-  Design and implement a version of a #RootishArrayStack# that has
-  only $O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)#
-  and #remove(i,x)# operations in $O(1+\min\{#i#,#n#-#i#\})$ time.
+  Projete e implemente uma versão de uma 
+ #RootishArrayStack# que desperdiça somente 
+  $O(\sqrt{#n#})$ de espaço, mas que pode realizar as operações  #add(i,x)#
+  e #remove(i,x)# de $O(1+\min\{#i#,#n#-#i#\})$ de tempo.
 \end{exc}
 
 \begin{exc}\exclabel{rootisharraystack-fast}
-  Design and implement a version of a #RootishArrayStack# that has
-  only $O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)#
-  and #remove(i,x)# operations in $O(1+\min\{\sqrt{#n#},#n#-#i#\})$
-  time. (For an idea on how to do this, see \secref{selist}.)
+  Projete e implemente uma versão de 
+ #RootishArrayStack# que desperdiça somente 
+   $O(\sqrt{#n#})$ de espaço, mas que pode rodar as operações #add(i,x)#
+  e #remove(i,x)# em $O(1+\min\{\sqrt{#n#},#n#-#i#\})$
+  de tempo. (Para uma ideia de como fazer isso, veja \secref{selist}.)
 \end{exc}
 
 \begin{exc}
-  Design and implement a version of a #RootishArrayStack# that has
-  only $O(\sqrt{#n#})$ wasted space, but that can perform #add(i,x)# and
-  #remove(i,x)# operations in $O(1+\min\{#i#,\sqrt {#n#},#n#-#i#\})$ time.
-  (See \secref{selist} for ideas on how to achieve this.)
+  Projete e implemente uma versão de 
+uma #RootishArrayStack# que desperdiça somente 
+  $O(\sqrt{#n#})$ de espaço, mas que pode rodar as operações #add(i,x)# e 
+  #remove(i,x)# em $O(1+\min\{#i#,\sqrt {#n#},#n#-#i#\})$ de tempo.
+  (Veja \secref{selist} para ideia de como conseguir isso.)
 \end{exc}
 
 \begin{exc}
-  Design and implement a #CubishArrayStack#.
+  Projete e implemente uma #CubishArrayStack#.
   \index{CubishArrayStack@#CubishArrayStack#}%
-  This three level structure
-  implements the #List# interface using $O(#n#^{2/3})$ wasted space.
-  In this structure, #get(i)# and #set(i,x)# take constant time; while
-  #add(i,x)# and #remove(i)# take $O(#n#^{1/3})$ amortized time.
+Essa estrutura de três níveis implementa a interface 
+  #List# desperdiçando $O(#n#^{2/3})$ de espaço.
+  Nessa estrutura, #get(i)# e #set(i,x)# funcionam em tempo constante; enquanto 
+  #add(i,x)# e #remove(i)# levam $O(#n#^{1/3})$ de tempo amortizado.
 \end{exc}
 
 
