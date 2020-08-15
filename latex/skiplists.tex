@@ -18,126 +18,140 @@ Essa esperança (relativo ao valor esperado ou médio) é feita sobre os lançam
 \section{A Estrutura Básica}
 
 \index{skiplist}%
-Conceptually, a skiplist is a sequence of singly-linked lists
-$L_0,\ldots,L_h$. Each list $L_r$ contains a subset of the items
-in $L_{r-1}$.  We start with the input list $L_0$ that contains #n#
-items and construct $L_1$ from $L_0$, $L_2$ from $L_1$, and so on.
-The items in $L_r$ are obtained by tossing a coin for each element, #x#,
-in $L_{r-1}$ and including #x# in $L_r$ if the coin turns up as heads.
-This process ends when we create a list $L_r$ that is empty.  An example
-of a skiplist is shown in \figref{skiplist}.
+Conceitualmente, uma skiplist é uma sequência de listas simplesmente ligadas 
+$L_0,\ldots,L_h$. Cada lista $L_r$ contém um subconjunto de itens 
+em $L_{r-1}$.  
+Iniciamos com a lista de entrada
+$L_0$ que contém #n# itens e construímos 
+ $L_1$ usando $L_0$, $L_2$ usando $L_1$ e assim por diante.
+ Os itens em $L_r$ são obtidos por lançamento de uma moeda para cada elemento #x#
+na $L_{r-1}$ e incluindo #x# na $L_r$ se a moeda sai do lado cara.
+Esse processo termina quando criamos uma lista $L_r$ que está vazia. 
+Um exemplo de uma skiplist é mostrado em \figref{skiplist}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/skiplist}
   \end{center}
-  \caption{A skiplist containing seven elements.}
+  \caption{Uma skiplist contendo sete elementos.}
   \figlabel{skiplist}
 \end{figure}
 
-For an element, #x#, in a skiplist, we call the \emph{height}
-\index{height!of a skiplist}%
-of #x# the
-largest value $r$ such that #x# appears in $L_r$.  Thus, for example,
-elements that only appear in $L_0$ have height $0$.  If we spend a few
-moments thinking about it, we notice that the height of #x# corresponds
-to the following experiment:  Toss a coin repeatedly until it comes
-up as tails.  How many times did it come up as heads?  The answer, not
-surprisingly, is that the expected height of a node is 1. (We expect to
-toss the coin twice before getting tails, but we don't count the last
-toss.) The \emph{height} of a skiplist is the height of its tallest node.
+Para um elemento #x# em uma skiplist, chamamos de \emph{altura}
+\index{altura!de uma skiplist}%
+de #x# o 
+maior valor $r$ tal que #x# aparece em $L_r$.  Então, por exemplo
+elementos que somente aparecem em $L_0$ tem altura $0$.
+Se pararmos alguns momentos para pensar sobre isso, notamos que a altura de #x#
+corresponde ao seguinte experimento:
+jogar uma moeda repetidamente até que saia coroa. Quantas vezes sai cara?
+A resposta, pouco supreendentemente, é que a altura esperada de um nodo é 1.
+(Esperamos jogar a moeda duas vezes antes de sair coroa, mas não contamos o último lançamento.) A \emph{altura} de uma skiplist é a altura do seu nodo mais alto.
 
-At the head of every list is a special node, called the \emph{sentinel},
-\index{sentinel node}%
-that acts as a dummy node for the list. The key property of skiplists
-is that there is a short path, called the \emph{search path}, 
-\index{search path!in a skiplist}%
-from the
-sentinel in $L_h$ to every node in $L_0$.  Remembering how to construct
-a search path for a node, #u#, is easy (see \figref{skiplist-searchpath})
-:  Start at the top left corner of your skiplist (the sentinel in $L_h$)
-and always go right unless that would overshoot #u#, in which case you
-should take a step down into the list below.
+A cabeça de toda lista é um nodo especial, chamado de 
+\emph{sentinela},
+\index{nodo sentinela}%
+que atua como um nodo dummy para a lista. A propriedade chama de skiplists
+é existe um caminho curto, chamado de 
+\emph{caminho de busca}, 
+\index{caminho de busca!em uma skiplist}%
+do sentinela em 
+$L_h$ para todo nodo em $L_0$.  Como construir um caminho de busca para um nodo #u# é facil (veja \figref{skiplist-searchpath})
+: inicie no canto superior esquerdo da sua skiplist (o sentila em $L_h$)
+e sempre vá à direita a menos que ultrapasse #u#, nesse caso você deve descer à lista logo abaixo.
 
-More precisely, to construct the search path for the node #u# in $L_0$,
-we start at the sentinel, #w#, in $L_h$.  Next, we examine #w.next#.
-If #w.next# contains an item that appears before #u# in $L_0$, then
-we set $#w#=#w.next#$.  Otherwise, we move down and continue the search
-at the occurrence of #w# in the list $L_{h-1}$.  We continue this way
-until we reach the predecessor of #u# in $L_0$. 
+Mais precisamente, para construir o caminho de busca para o nodo #u# em $L_0$,
+começamos no sentinela #w# em $L_h$. Depois examinamos #w.next#.
+Se 
+#w.next# contém um item que aparece antes de #u# em $L_0$, então
+fazemos 
+ $#w#=#w.next#$.  Caso contrário, seguimos a busca na lista abaixo e buscamos a ocorrência de #w# na lista 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/skiplist-searchpath}
   \end{center}
-  \caption{The search path for the node containing $4$ in a skiplist.}
+  \caption{O caminho de busca para o nodo contendo $4$ em uma skiplist.}
   \figlabel{skiplist-searchpath}
 \end{figure}
 
-The following result, which we will prove in \secref{skiplist-analysis},
-shows that the search path is quite short:
+O resultado a seguir, que provaremos em 
+\secref{skiplist-analysis},
+mostra que o caminho de busca é bem curto:
 
 \begin{lem}\lemlabel{skiplist-searchpath}
-The expected length of the search path for any node, #u#, in $L_0$ is at
-most $2\log #n# + O(1) = O(\log #n#)$.
+  O comprimento esperado do caminho de busca para qualquer nodo #u# em 
+$L_0$ é no máximo $2\log #n# + O(1) = O(\log #n#)$.
 \end{lem}
 
-A space-efficient way to implement a skiplist is to define a #Node#,
-#u#, as consisting of a data value, #x#, and an array, #next#, of
-pointers, where #u.next[i]# points to #u#'s successor in the list
-$L_{#i#}$.  In this way, the data, #x#, in a node is
-\javaonly{referenced}\cpponly{stored}\pcodeonly{referenced} 
-only once, even though #x# may appear in several lists.
+Um modo eficiente em relação ao espaço para implementar uma 
+skiplist é definir um #Node# #u# consistindo de um valor #x#
+e um array #next# de ponteiros onde #u.next[i]# aponta para o sucessor de #u#
+na lista 
+$L_{#i#}$.  Desse jeito, o valor #x# em um nodo é 
+\javaonly{referenciado}\cpponly{guardado}\pcodeonly{referenciado} 
+somente uma vez #x# pode aparecer em várias listas.
 
 \javaimport{ods/SkiplistSSet.Node<T>}
 \cppimport{ods/SkiplistSSet.Node}
 
-The next two sections of this chapter discuss two different applications
-of skiplists.  In each of these applications, $L_0$ stores the main
-structure (a list of elements or a sorted set of elements).
-The primary difference between these structures is in how
-a search path is navigated; in particular, they differ in how
-they decide if a search path should go down into $L_{r-1}$ or go right
-within $L_r$.
+As próximas duas seções deste capítulo discutem duas diferentes aplicações de 
+skiplists. Em cada uma dessas aplicações, $L_0$ guarda a estrutura principal
+(uma lista de elementos or um conjunto ordenado de elementos).
+A principal diferença entre essas estruturas está em como um caminho
+de busca é navegado; em particular, eles diferem em como eles 
+decidem se um caminho de busca ir para a lista abaixo $L_{r-1}$ ou à direita em $L_r$.
 
-\section{#SkiplistSSet#: An Efficient #SSet#}
+\section{#SkiplistSSet#: Um #SSet# Eficiente}
 \seclabel{skiplistset}
 
 \index{SkiplistSSet@#SkiplistSSet#}%
-A #SkiplistSSet# uses a skiplist structure to implement the #SSet#
-interface.   When used in this way, the list $L_0$ stores the elements of
-the #SSet# in sorted order.  The #find(x)# method works by following
-the search path for the smallest value #y# such that $#y#\ge#x#$:
+Um #SkiplistSSet# usa uma estrutura de skiplist para implementar a interface #SSet#.
+Quando usada dessa maneira, a lista 
+$L_0$ guarda os elementos de 
+#SSet# de modo ordenado. O método #find(x)# funciona seguindo o caminho de busa para o menor valor #y# tal que 
+$#y#\ge#x#$:
 
 \codeimport{ods/SkiplistSSet.find(x).findPredNode(x)}
 
-Following the search path for #y# is easy:  when situated at
-some node, #u#, in  $L_{#r#}$, we look right to #u.next[r].x#.
-If $#x#>#u.next[r].x#$, then we take a step to the right in
-$L_{#r#}$; otherwise, we move down into $L_{#r#-1}$.  Each step
-(right or down) in this search takes only constant time; thus, by
-\lemref{skiplist-searchpath}, the expected running time of #find(x)#
-is $O(\log #n#)$.
+Seguir o caminho de busca para #y# é fácil: quando situado em
+algum nodo #u# em $L_{#r#}$ olhamos diretamente para 
+ #u.next[r].x#.
+ Se
+ $#x#>#u.next[r].x#$, então damos um passo à direita em 
+$L_{#r#}$; caso contrário, descemos para a lista $L_{#r#-1}$.  
+Cada passo (à direita ou embaixo) nessa busca leva apenas um tempo constante,
+então, pelo 
+\lemref{skiplist-searchpath}, o tempo esperado de execução de #find(x)#
+é $O(\log #n#)$.
 
-Before we can add an element to a #SkipListSSet#, we need a method to
-simulate tossing coins to determine the height, #k#, of a new node.
-We do so by picking a random integer, #z#, and counting the number of
-trailing $1$s in the binary representation of #z#:\footnote{This method
-does not exactly replicate the coin-tossing experiment since the value of
-#k# will always be less than the number of bits in an #int#.  However,
-this will have negligible impact unless the number of elements in the
-structure is much greater than $2^{32}=4294967296$.}
+Antes de podermos adicionar um elemento a uma
+ #SkipListSSet#, precisamos de um método para simular o lançamento
+ de moedas para determinar a altura, #k#, de um novo nodo. 
+Fazemos isso ao escolher um inteiro aleatório, #z#, e contar o número de
+$1$s na representação binária de #z#:
+
+\footnote{Esse método não replica exatamente o experimento de lançamento de
+moedas pois o valor de #k# será sempre menor que o número de bits em um #int#.
+Porém, esse fato terá um impacto negligível a menos que o número de elementos em 
+uma estrutura seja muito maior que $2^{32}=4294967296$.}
 
 \codeimport{ods/SkiplistSSet.pickHeight()}
 
-To implement the #add(x)# method in a #SkiplistSSet# we search for #x#
-and then splice #x# into a few lists $L_0$,\ldots,$L_{#k#}$, where #k#
-is selected using the #pickHeight()# method. The easiest way to do this
-is to use an array, #stack#, that keeps track of the nodes at which
-the search path goes down from some list $L_{#r#}$ into $L_{#r#-1}$.
-More precisely, #stack[r]# is the node in $L_{#r#}$ where the search path
-proceeded down into $L_{#r#-1}$.  The nodes that we modify to insert #x#
-are precisely the nodes $#stack[0]#,\ldots,#stack[k]#$.  The following
-code implements this algorithm for #add(x)#:
+Para implementar o método 
+ #add(x)# em uma #SkiplistSSet# procuramos por #x#
+ e então dividimos #x# em algumas listas
+ $L_0$,\ldots,$L_{#k#}$, onde #k# é selecionado usando o método 
+#pickHeight()#. O jeito mais fácil de fazer isso 
+é usar um array 
+#stack#, que registra os nodos em que o caminho de busca desce de alguma lista
+ $L_{#r#}$ em $L_{#r#-1}$.
+ Mais precisamente, 
+#stack[r]# é o nodo em $L_{#r#}$ onde o caminho de busca desceu em 
+$L_{#r#-1}$.  Os nodos que modificamos para inserir  #x# são 
+precisamente os nodos 
+ $#stack[0]#,\ldots,#stack[k]#$.  O código a seguir implementa esse
+ algoritmo para 
+#add(x)#:
 \label{pg:skiplist-add}
 \codeimport{ods/SkiplistSSet.add(x)}
 
@@ -145,16 +159,17 @@ code implements this algorithm for #add(x)#:
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/skiplist-add}
   \end{center}
-  \caption[Adding to a skiplist]{Adding the node containing $3.5$ to a skiplist.  The nodes stored in #stack#
-  are highlighted.}
+  \caption[Adicionando a uma skiplist]{Adicionando o nodo contendo $3.5$ a uma skiplist.  Os nodos guardados em #stack# estão em destaque.  }
   \figlabel{skiplist-add}
 \end{figure}
 
-Removing an element, #x#, is done in a similar way, except that there
-is no need for #stack# to keep track of the search path.  The removal
-can be done as we are following the search path.  We search for #x#
-and each time the search moves downward from a node #u#, we check if
-$#u.next.x#=#x#$ and if so, we splice #u# out of the list:
+A remoção de um elemento #x# é feita de modo similar, exceto que
+não há necessidade para a 
+ #stack# registrar o caminho de busca. A remoção pode ser feita
+ conforme vamos seguindo o caminho de busca.
+Buscamos por #x# e cada vez que a busca segue para baixo de um novo #u#,
+verificamos se 
+$#u.next.x#$ é igual a $#x#$ e, caso positivo, tiramos #u# da lista:
 \codeimport{ods/SkiplistSSet.remove(x)}
 
 \begin{figure}
@@ -165,160 +180,161 @@ $#u.next.x#=#x#$ and if so, we splice #u# out of the list:
   \figlabel{skiplist-remove}
 \end{figure}
 
-\subsection{Summary}
+\subsection{Resumo}
 
-The following theorem summarizes the performance of skiplists when used to
-implement sorted sets:
+O teorema a seguir resumo o desempenho de skiplists quando usadas para implementar conjuntos ordenados:
 
 \begin{thm}\thmlabel{skiplist}
-#SkiplistSSet# implements the #SSet# interface. A #SkiplistSSet# supports
-the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log #n#)$
-expected time per operation.
+#SkiplistSSet# implementa a interface #SSet#. Uma #SkiplistSSet# aceita as 
+operações #add(x)#, #remove(x)# e #find(x)# em $O(\log #n#)$ de tempo esperado por operação.
 \end{thm}
 
-\section{#SkiplistList#: An Efficient Random-Access #List#}
+\section{#SkiplistList#: Uma #List# com Acesso Aleatório Eficiente}
 \seclabel{skiplistlist}
 
 \index{SkiplistList@#SkiplistList#}%
-A #SkiplistList# implements the #List# interface using a skiplist
-structure.  In a #SkiplistList#, $L_0$ contains the elements of the
-list in the order in which they appear in the list.   As in a
-#SkiplistSSet#, elements can be added, removed, and accessed in $O(\log
-#n#)$ time.
+Uma #SkiplistList# implementa a interface #List# usando uma estrutura skiplist.  Em uma #SkiplistList#, $L_0$ contém os elementos da lista na ordem que eles aparecem na lista. Como em uma 
+#SkiplistSSet#, elementos podem ser adicionados, removidos e acessados em  $O(\log
+#n#)$ de tempo.
 
-For this to be possible, we need a way to follow the search path for
-the #i#th element in $L_0$.  The easiest way to do this is to define
-the notion of the \emph{length} of an edge in some list, $L_{#r#}$.
-We define the length of every edge in $L_{0}$ as 1.  The length of an edge, #e#,
-in $L_{#r#}$, $#r#>0$, is defined as the sum of the lengths of the edges below #e#
-in $L_{#r#-1}$.  Equivalently, the length of #e# is
-the number of edges in $L_0$ below #e#.  See \figref{skiplist-lengths} for
-an example of a skiplist with the lengths of its edges shown.  Since the
-edges of skiplists are stored in arrays, the lengths can be stored the same
-way:
+Para isso ser possível, precisamos de um jeito de seguir o caminho de busca para o 
+#i#-ésimo em $L_0$.
+O jeito mais fácil de fazer isso é definir a noção de \emph{comprimento} de uma aresta em alguma lista, $#L_{#r#}#$.
+
+Definimos o comprimento de toda aresta em 
+$L_{0}$ como 1. O comprimento de uma aresta, #e#,
+em $L_{#r#}$, $#r#>0$, é definido como a soma dos comprimentos das arestas abaixo de #e# em 
+ $L_{#r#-1}$.  De maneira equivalente, o comprimento de #e# é o número de arestas em 
+$L_0$ abaixo de #e#.  Veja \figref{skiplist-lengths} para um exemplo
+de uma skiplist com os comprimentos de suas arestas mostradas. 
+Como as arestas de skiplists são guardadas em arrays, os comprimentos podem ser guardados do mesmo jeito:
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/skiplist-lengths}
   \end{center}
-  \caption{The lengths of the edges in a skiplist.}
+  \caption{Os comprimentos das arestas em uma skiplist.}
   \figlabel{skiplist-lengths}
 \end{figure}
 
 \javaimport{ods/SkiplistList.Node}
 \cppimport{ods/SkiplistList.Node}
 
-The useful property of this definition of length is that, if we are
-currently at a node that is at position #j# in $L_0$ and we follow an
-edge of length $\ell$, then we move to a node whose position, in $L_0$,
-is $#j#+\ell$.  In this way, while following a search path, we can keep
-track of the position, #j#, of the current node in $L_0$.  When at a
-node, #u#, in $L_{#r#}$, we go right if #j# plus the length of the edge
-#u.next[r]# is less than #i#. Otherwise, we go down into $L_{#r#-1}$.
+Essa definição de comprimento tem a útil propriedade de que se estivermos
+atualmente em um nodo que está na posição #j#
+em $L_0$ e seguimos uma aresta e de comprimento 
+$\ell$, então movemos para um nodo cuja posição, em $L_0$,
+é $#j#+\ell$.  Desse jeito, enquanto seguirmos um caminho de busca, podemos 
+rastrear a posição, #j#, do nodo atual em $L_0$.  
+Quando em um nodo 
+, #u#, em $L_{#r#}$, iremos à direita se #j# mais o comprimento da aresta 
+#u.next[r]# é menor que #i#. Caso contrário, descemos para $L_{#r#-1}$.
 
 \codeimport{ods/SkiplistList.findPred(i)}
 \codeimport{ods/SkiplistList.get(i).set(i,x)}
 
-Since the hardest part of the operations #get(i)# and #set(i,x)# is
-finding the #i#th node in $L_0$, these operations run in
-$O(\log #n#)$ time.
+Uma vez que a parte mais difícil das operações #get(i)# e #set(i,x)# é achar 
+o 
+#i#-ésimo nodo em $L_0$, essas operações rodam em 
+$O(\log #n#)$ de tempo.
 
-Adding an element to a #SkiplistList# at a position, #i#, is fairly
-simple.  Unlike in a #SkiplistSSet#, we are sure that a new
-node will actually be added, so we can do the addition at the same time
-as we search for the new node's location. We first pick the height, #k#,
-of the newly inserted node, #w#, and then follow the search path for #i#.
-Any time the search path moves down from $L_{#r#}$ with $#r#\le #k#$, we
-splice #w# into $L_{#r#}$.  The only extra care needed is to ensure that
-the lengths of edges are updated properly.  See \figref{skiplist-addix}.
+Adicionar um elemento na 
+ #SkiplistList# em uma posição #i# razoavelmente simples. Diferentemente de uma  #SkiplistSSet#, temos certeza que um novo nodo será realmente adicionado, então podemos fazer a adição ao mesmo tempo que procuramos pelo lugar de um novo nodo.
+Primeiro pegamos a altura #k# do nodo recentemente inserido #w#
+e então seguimos o caminho de busca para #i#.
+Toda vez que o caminho de busca desce a partir de 
+
+$L_{#r#}$ com $#r#\le #k#$, inserimos #w#
+em $L_{#r#}$.  O último cuidade extra necessário é assegurar que os comprimentos das arestas são atualizadas corretamente. Veja \figref{skiplist-addix}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/skiplist-addix}
   \end{center}
-  \caption[Adding to a SkiplistList]{Adding an element to a #SkiplistList#.}
+  \caption[Adicionando a uma SkiplistList]{Adicionando um elemento a uma #SkiplistList#.}
   \figlabel{skiplist-addix}
 \end{figure}
 
-Note that, each time the search path goes down at a node, #u#, in $L_{#r#}$,
-the length of the edge #u.next[r]# increases by one, since we are adding
-an element below that edge at position #i#.  Splicing  the node #w# between two nodes,
-#u# and #z#, works as shown in \figref{skiplist-lengths-splice}.  While
-following the search path we are already keeping track of the position,
-#j#, of #u# in $L_0$.  Therefore, we know that the length of the edge from
-#u# to #w# is $#i#-#j#$.  We can also deduce the length of the edge
-from #w#  to #z# from the length, $\ell$, of the edge from #u# to #z#.
-Therefore, we can splice in #w# and update the lengths of the edges in
-constant time.
+Note que, cada vez que o caminho de busca desce em um novo #u# em $L_{#r#}$,
+o comprimento da aresta 
+ #u.next[r]# aumenta em um, pois estamos adicionando um elemento abaixo daquela aresta na posição #i#.
+
+A divisão do nodo #w# entre dois nodos, #u# e #z# funciona como mostrado em  \figref{skiplist-lengths-splice}.  
+Ao seguir o caminho de busca já estamos guardando a posição
+#j#, de #u# em $L_0$.  Portanto, sabemos que o comprimento da aresta 
+de #u# a #w# é $#i#-#j#$.  Também podemos deduzir o comprimento da aresta de #w# a #z# a patir do comprimento $\ell$ de uma aresta de #u# a #z#.
+Portanto, podemos dividir em #w# e atualizar os comprimentos das arestas em tempo constante.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/skiplist-lengths-splice}
   \end{center}
-  \caption[Adding to a SkiplistList]{Updating the lengths of edges while splicing a node 
-   #w# into a skiplist.}
+  \caption[Adição à a SkiplistList]{Atualizar os comprimentos das arestas enquanto dividindo um nodo #w# em uma skiplist.}
   \figlabel{skiplist-lengths-splice}
 \end{figure}
 
-This sounds more complicated than it is, for the code is actually
-quite simple:
+Isso parece mais complicado do que é, porque o código é bem simples:
 
 \codeimport{ods/SkiplistList.add(i,x)}
 \codeimport{ods/SkiplistList.add(i,w)}
 
-
-By now, the implementation of 
-the #remove(i)# operation in a #SkiplistList# should be obvious.  We follow the search path for the node at position #i#.  Each time the search path takes a step down from a node, #u#, at level #r# we decrement the length of the edge leaving #u# at that level.  We also check if #u.next[r]# is the element of rank #i# and, if so, splice it out of the list at that level.   An example is shown in \figref{skiplist-removei}.
+Agora a implementação da operação #remove(i)# em uma #SkiplistList# deve ser óbvia. 
+Seguimos o caminho de pesquisa para o nodo na posição #i#. Cada vez que o caminho de busca desce a partir de um nodo #u# no nível #r# nós decrementamos o comprimento
+da aresta que deixa #u# naquele nível. Também verificamos se 
+ #u.next[r]# é o elemento do #i# e, se o for, o removemos da lista naquele nível. Um exemplo é mostrado em \figref{skiplist-removei}.
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/skiplist-removei}
   \end{center}
-  \caption[Removing an element from a SkiplistList]{Removing an element from a #SkiplistList#.}
+  \caption[Remoção de um elemento de uma SkiplistList]{Remoção de um elemento de uma #SkiplistList#.}
   \figlabel{skiplist-removei}
 \end{figure}
 \codeimport{ods/SkiplistList.remove(i)}
 
-\subsection{Summary}
+\subsection{Resumo}
 
-The following theorem summarizes the performance of the #SkiplistList#
-data structure:
+O teorema a seguir resume o desempenho da estrutura de dados 
+#SkiplistList#:
 
 \begin{thm}\thmlabel{skiplistlist}
-  A #SkiplistList# implements the #List# interface.  A #SkiplistList#
-  supports the operations #get(i)#, #set(i,x)#, #add(i,x)#, and
-  #remove(i)# in $O(\log #n#)$ expected time per operation.
+  Uma #SkiplistList# implementa a interface #List#. Uma #SkiplistList#
+  aceita a oeprações #get(i)#, #set(i,x)#, #add(i,x)#, e
+  #remove(i)# em $O(\log #n#)$ de tempo esperado por operação.
 \end{thm}
 
 %\section{Skiplists as Ropes}
 %TODO: A section on ropes
 
-\section{Analysis of Skiplists}
+\section{Análise de Skiplists}
 \seclabel{skiplist-analysis}
 
-In this section, we analyze the expected height, size, and length of
-the search path in a skiplist.  This section requires a background in
-basic probability.  Several proofs are based on the following basic
-observation about coin tosses.
-
+Nesta seção, analisaremos a altura esperada, tamanho, e comprimento do caminho
+de busca em uma skiplist. Esta seção que conhecimentos básicos de 
+probabilidades.
+Várias provas são baseadas na seguinte obervação básica sobre lançamentos de 
+moedas.
 
 \begin{lem}\lemlabel{coin-tosses}
   \index{coin toss}%
-  Let $T$ be the number of times a fair coin is tossed up to and including
-  the first time the coin comes up heads.  Then $\E[T]=2$.
+Seja $T$ o número de vezes que uma moeda honesta é lançada, incluindo
+a primeira vez que a moeda saiu com a face cara. Então
+  $\E[T]=2$.
 \end{lem}
 
 \begin{proof}
-  Suppose we stop tossing the coin the first time it comes up
-  heads. Define the indicator variable
+  Suponha que paramos de lança a moeda na primeira vez que sai cara.
+  Defina a variável indicadora
   \[ I_{i} = \left\{\begin{array}{ll}
-     0 & \mbox{if the coin is tossed less than $i$ times} \\
-     1 & \mbox{if the coin is tossed $i$ or more times} 
+     0 & \mbox{se a moeda é lançada menos de $i$ vezes} \\
+     1 & \mbox{se a moeda é lança $i$ vezes ou mais} 
      \end{array}\right.
   \]
-  Note that $I_i=1$ if and only if the first $i-1$ coin tosses are tails,
-  so $\E[I_i]=\Pr\{I_i=1\}=1/2^{i-1}$.  Observe that $T$, the total
-  number of coin tosses, can be written as $T=\sum_{i=1}^{\infty} I_i$.
-  Therefore,
+  Note que 
+   $I_i=1$ se, e somente se, os primeiros $i-1$ lançamentos saem coroa,
+  então $\E[I_i]=\Pr\{I_i=1\}=1/2^{i-1}$.  Observe que $T$, o número
+  total de lançamentos, pode ser escrito como 
+   $T=\sum_{i=1}^{\infty} I_i$.
+  Portanto,
   \begin{align*}
     \E[T] & =  \E\left[\sum_{i=1}^\infty I_i\right] \\
      & =  \sum_{i=1}^\infty \E\left[I_i\right] \\
@@ -328,44 +344,46 @@ observation about coin tosses.
   \end{align*} 
 \end{proof}
 
-The next two lemmata tell us that skiplists have linear size:
+Os próximos dois lemas afirmam que skiplists tem tamanho linear:
 
 \begin{lem}\lemlabel{skiplist-size1}
-  The expected number of nodes in a skiplist containing $#n#$ elements,
-  not including occurrences of the sentinel, is $2#n#$.
+  O número esperado de nodos em um skiplist contendo 
+   $#n#$ elementos,
+   sem incluir as ocorrências da sentinela, é 
+  $2#n#$.
 \end{lem}
 
 \begin{proof}
-  The probability that any particular element, #x#, is included in list
-  $L_{#r#}$ is $1/2^{#r#}$, so the expected number of nodes in $L_{#r#}$
-  is $#n#/2^{#r#}$.\footnote{See \secref{randomization} to see how this
-  is derived using indicator variables and linearity of expectation.}
-  Therefore, the total expected number of nodes in all lists is
+  A probabilidade que qualquer elemento em particular, #x#, seja incluído
+  na lista 
+  $L_{#r#}$ é $1/2^{#r#}$, então o número esperado de nodos em $L_{#r#}$
+  é $#n#/2^{#r#}$.\footnote{Veja \secref{randomização} para ver como isso é obtido usando variáveis indicadores e linearidade de esperança.}
+  Portanto, o número esperado total de nodos em todas as listas é 
   \[ \sum_{#r#=0}^\infty #n#/2^{#r#} = #n#(1+1/2+1/4+1/8+\cdots) = 2#n# \enspace . \qedhere \]
 \end{proof}
 
 \begin{lem}\lemlabel{skiplist-height}
-  The expected height of a skiplist containing #n# elements is at most
+  A altura esperada de uma skiplist contendo #n# elementos é até 
   $\log #n# + 2$.
 \end{lem}
 
 \begin{proof}
-  For each $#r#\in\{1,2,3,\ldots,\infty\}$, 
-  define the indicator random variable
+  Para cada $#r#\in\{1,2,3,\ldots,\infty\}$, 
+  defina a variável indicadora aleatória
   \[ I_{#r#} = \left\{\begin{array}{ll}
-     0 & \mbox{if $L_{#r#}$ is empty} \\
-     1 & \mbox{if $L_{#r#}$ is non-empty}
+     0 & \mbox{se $L_{#r#}$ está vazia } \\
+     1 & \mbox{se $L_{#r#}$ não está vazia}
      \end{array}\right.
   \]
-  The height, #h#, of the skiplist is then given by
+  A altura, #h# da skiplist é então dada por
   \[
        #h# = \sum_{r=1}^\infty I_{#r#} \enspace .
   \]
-  Note that $I_{#r#}$ is never more than the length, $|L_{#r#}|$, of $L_{#r#}$, so 
+  Note que $I_{#r#}$ nunca é maior que o comprimento, $|L_{#r#}|$, de $L_{#r#}$, então
   \[
      \E[I_{#r#}] \le \E[|L_{#r#}|] = #n#/2^{#r#} \enspace .
   \]
-  Therefore, we have
+  Portanto, temos
   \begin{align*}
        \E[#h#] &= \E\left[\sum_{r=1}^\infty I_{#r#}\right] \\
         &= \sum_{#r#=1}^{\infty} E[I_{#r#}] \\
@@ -380,54 +398,58 @@ The next two lemmata tell us that skiplists have linear size:
 \end{proof}
 
 \begin{lem}\lemlabel{skiplist-size2}
-  The expected number of nodes in a skiplist containing $#n#$ elements,
-  including all occurrences of the sentinel, is $2#n#+O(\log #n#)$.
+  O número esperado de nodos em uma skiplist contendo 
+   $#n#$ elementos, incluindo todas as ocorrências da sentinela é 
+  $2#n#+O(\log #n#)$.
 \end{lem}
 
 \begin{proof}
-  By \lemref{skiplist-size1}, the expected number of nodes, not
-  including the sentinel, is $2#n#$.  The number of occurrences of
-  the sentinel is equal to the height, $#h#$, of the skiplist so, by
-  \lemref{skiplist-height} the expected number of occurrences of the
-  sentinel is at most $\log #n#+2 = O(\log #n#)$.
+  Segundo \lemref{skiplist-size1}, o número esperado de nodos, sem incluir o sentinela, 
+  é $2#n#$.  O número de ocorrências do sentinela é igual à altura 
+  $#h#$ da skiplist então, segundo
+  \lemref{skiplist-height}, o número esperado de ocorrências da sentinela é até 
+  $\log #n#+2 = O(\log #n#)$.
 \end{proof}
 
-
-
 \begin{lem}
-The expected length of a search path in a skiplist is at most $2\log #n# + O(1)$.
+O comprimento esperado de um caminho de busca em uma skiplist é até
+$2\log #n# + O(1)$.
 \end{lem}
 
 \begin{proof}
-  The easiest way to see this is to consider the \emph{reverse search
-  path} for a node, #x#.  This path starts at the predecessor of #x#
-  in $L_0$.  At any point in time, if the path can go up a level, then
-  it does.  If it cannot go up a level then it goes left.  Thinking about
-  this for a few moments will convince us that the reverse search path for
-  #x# is identical to the search path for #x#, except that it is reversed.
+  O jeito mais fácil de ver issso é considerar o 
+   \emph{caminho de busca reverso}. Esse caminho inicia-se no predecessor de #x#
+   em 
+   $L_0$.  Em qualquer momento, se o caminho pode subir um nível, então ele o faz.
+   Se ele não puder subir um nível, então vai à esquerda. Considerando isso 
+   por alguns momentos vemos que o caminho de busca reverso para #x# é idêntico
+   ao caminho de busca para #x#, exceto que é invertido.
 
-  The number of nodes that the reverse search path visits at a particular
-  level, #r#, is related to the following experiment:  Toss a coin.
-  If the coin comes up as heads, then move up and stop. Otherwise, move
-  left and repeat the experiment.  The number of coin tosses before
-  the heads represents the number of steps to the left that a reverse
-  search path takes at a particular level.\footnote{Note that this
-  might overcount the number of steps to the left, since the experiment
-  should end either at the first heads or when the search path reaches
-  the sentinel, whichever comes first. This is not a problem since the
-  lemma is only stating an upper bound.} \lemref{coin-tosses} tells us
-  that the expected number of coin tosses before the first heads is 1.
-
-  Let $S_{#r#}$ denote the number of steps the forward search path takes at level
-  $#r#$ that go to the right.   We have just argued that $\E[S_{#r#}]\le
-  1$.  Furthermore, $S_{#r#}\le |L_{#r#}|$, since we can't take more steps
-  in $L_{#r#}$ than the length of $L_{#r#}$, so
+   O número de nodos que o caminho de busca reverso visita em um dado
+   nível #r# é relacionado ao seguinte experimento: lance uma moeda.
+   Se a moeda cai cara, então suba um nível e pare. Caro contrário,
+   vá à esquerda e repita o experimento. O número de lançamentos
+   obtido dessa forma representa o número de passos à esquerda que um 
+   caminho de busca invertido faz em um dado nível.
+  \footnote{Note que isso pode superestimar o número de passos à
+  esquerda pois o experimento deve terminar ou em um lançamento cara ou
+  quando o caminho de busca chega no sentinela, aquele que vier primeiro.
+  Isso não é um problema porque o lema está somente apresentando um limitante
+  superior.}
+   \lemref{coin-tosses} afirma que o número esperado de lançamento de moedas
+   antes da primeira cada é 1. 
+Seja 
+   $S_{#r#}$ o número de passos que uma caminho de busca (direta) usa no
+   nível
+  $#r#$ para ir à direita.  Acabamos de mostrar que $\E[S_{#r#}]\le
+  1$.  Além disso, $S_{#r#}\le |L_{#r#}|$, pois não podemos fazer mais passos em
+  $L_{#r#}$ que o próprio comprimento de $L_{#r#}$, então
   \[
     \E[S_{#r#}] \le \E[|L_{#r#}|] = #n#/2^{#r#} \enspace .
   \]
-  We can now finish as in the proof of \lemref{skiplist-height}.
-  Let $S$ be  the length of the search path for some node, #u#, in a
-  skiplist, and let $#h#$ be the height of the skiplist.  Then
+  Podemos agora terminar como na prova de 
+  \lemref{skiplist-height}.
+  Seja $S$ o comprimento do caminho de busca para algum nodo #u# em uma skiplist e seja $#h#$ a altura da skiplist. Então
   \begin{align*}
       \E[S] 
          &= \E\left[ #h# + \sum_{#r#=0}^\infty S_{#r#} \right] \\
@@ -445,185 +467,183 @@ The expected length of a search path in a skiplist is at most $2\log #n# + O(1)$
   \end{align*}
 \end{proof}
 
-
-The following theorem summarizes the results in this section:
+O teorema a seguir resume os resultados nessa seção:
 \begin{thm}
-A skiplist containing $#n#$ elements has expected size $O(#n#)$ and the
-expected length of the search path for any particular element is at most
+  Uma skiplist contendo
+$#n#$ elementos tem tamanho esperado $O(#n#)$ e o comprimento esperado
+  do caminho de busca para qualquer elemento é até
 $2\log #n# + O(1)$.
 \end{thm}
-
-
 
 %\section{Iteration and Finger Search}
 
 %TODO: Write this section
 
-\section{Discussion and Exercises}
+\section{Discussão e Exercícios}
 
-Skiplists were introduced by Pugh \cite{p91} who also presented
-a number of applications and extensions of skiplists \cite{p89}.  Since then they
-have been studied extensively.  Several researchers have done very
-precise analyses of the expected length and variance of the length of the
-search path for the #i#th element in a skiplist \cite{kp94,kmp95,pmp92}.
-Deterministic versions \cite{mps92}, biased versions \cite{bbg02,esss01},
-and self-adjusting versions \cite{bdl08} of skiplists have all been
-developed.  Skiplist implementations have been written for various
-languages and frameworks and have been used in open-source database
-systems \cite{skipdb,redis}. A variant of skiplists is used in the HP-UX
-operating system kernel's process management structures \cite{hpux}.
-\javaonly{Skiplists are even part of the Java 1.6 API \cite{oracle_jdk6}.}
+Skiplists foram inicialmente propostas por \cite{p91} que também apresentou várias aplicações e extensões de skiplists 
+\cite{p89}.  Desde então ela tem sido extensivamente estudada.
+Vários pesquisadores tem realizado análises bem precisas do comprimento
+esperado e da variância do comprimento do caminho de busca para o
+#i#-ésimo elemento em uma skiplist \cite{kp94,kmp95,pmp92}.
+Versões determinísticas
+ \cite{mps92}, versões tendenciosas \cite{bbg02,esss01},
+e versões auto-ajustáveis \cite{bdl08} de skiplists têm surgido.  Implementações de skiplists têm sido escritas para várias linguagens e frameworks e usadas em sistemas de bancos de dados open-source \cite{skipdb,redis}. Uma variante de skiplists é usada nas estruturas do gerenciador de processos do kernel do sistema operacional HP-UDX A variant of skiplists is used in the HP-UX
+\cite{hpux}.
+\javaonly{Skiplists são até parte da Java 1.6 API \cite{oracle_jdk6}.}
 
 
 \begin{exc}
-  Illustrate the search paths for 2.5 and 5.5 on the skiplist in 
+  Desenhe os caminhos de busca para 2.5 e 5.5 na skiplists em 
   \figref{skiplist}.
 \end{exc}
 
 \begin{exc}
-  Illustrate the addition of the values 0.5 (with a height of 1) and
-  then 3.5 (with a height of 2) to the skiplist in \figref{skiplist}.
+  Desenhe a adição de valores 0.5 (com altura de 1) e então 3.5 (com
+  uma altura de 2) para a skiplist em 
+  \figref{skiplist}.
 \end{exc}
 
 \begin{exc}
-  Illustrate the removal of the values 1 and then 3  from the skiplist
-  in \figref{skiplist}.
+  Desenhe a remoção de valores 1 e então 3 da skiplist em 
+   \figref{skiplist}.
 \end{exc}
 
 \begin{exc}
-  Illustrate the execution of #remove(2)# on the #SkiplistList#
-  in \figref{skiplist-lengths}.
+  Desenhe a execução de 
+   #remove(2)# na #SkiplistList# em 
+  \figref{skiplist-lengths}.
 \end{exc}
 
 \begin{exc}
-  Illustrate the execution of #add(3,x)# on the #SkiplistList#
-  in \figref{skiplist-lengths}.  Assume that #pickHeight()# selects a height
-  of 4 for the newly created node.
+  Desenhe a execução de 
+   #add(3,x)# na #SkiplistList#
+  da \figref{skiplist-lengths}.  Assuma que #pickHeight()# seleciona uma altura
+  de 4 para o nodo recentemente criado. 
 \end{exc}
 
 \begin{exc}\exclabel{skiplist-changes}
-  Show that, during an #add(x)# or a #remove(x)# operation, the expected
-  number of pointers in a #SkiplistSet# that get changed is constant.
+  Mostre que, durante uma operação
+  #add(x)# ou #remove(x)#, o número esperado de ponteiros em 
+  uma #SkiplistSet# que é alterado é constante. 
 \end{exc}
 
 \begin{exc}\exclabel{skiplist-opt}
-  Suppose that, instead of promoting an element from $L_{i-1}$ into $L_i$
-  based on a coin toss, we promote it with some probability $p$, $0 <
+  Suponha que, em vez de promover um elemento de 
+   $L_{i-1}$ em $L_i$ usando um lançamento de moeda
+  , fizermos a promoção com uma probabilidade $p$, $0 <
   p < 1$.
   \begin{enumerate}
-   \item Show that, with this modification, the expected length of a
-     search path is at most $(1/p)\log_{1/p} #n# + O(1)$.
-   \item What is the value of $p$ that minimizes the preceding expression?
-   \item What is the expected height of the skiplist? 
-   \item What is the expected number of nodes in the skiplist?
+   \item Mostre que, com essa modificação, o comprimento esperado de um caminho de busca é até $(1/p)\log_{1/p} #n# + O(1)$.
+   \item Qual é o valor esperado de $p$ que minimiza a expressão precedente? 
+   \item Qual é altura esperada da skiplist? 
+   \item Qual é o número esperado de nodos na skiplist? 
   \end{enumerate}
 \end{exc}
 
-
 \begin{exc}\exclabel{skiplist-opt-2}
-  The #find(x)# method in a #SkiplistSet# sometimes performs
-  \emph{redundant comparisons}; these occur when #x# is compared to the
-  same value more than once.  They can occur when, for some node, #u#,
-  $#u.next[r]# = #u.next[r-1]#$.  Show how these redundant comparisons
-  happen and modify #find(x)# so that they are avoided.  Analyze the
-  expected number of comparisons done by your modified #find(x)# method.
+O método #find(x)# em uma a #SkiplistSet# às vezes faz 
+  \emph{comparações redundantes}; essas ocorrem quando #x# é comparado ao mesmo valor mais de uma vez. Eles podem ocorrer quando, para algum nodo #u# 
+  $#u.next[r]# = #u.next[r-1]#$.  Mostre quando essas comparações redundantes acontecem e modifique 
+  #find(x)# para que sejam evitadas. Analise o número esperado de comparações feito pelo seu método modificado #find(x)#. 
 \end{exc}
 
 \begin{exc}
-  Design and implement a version of a skiplist that implements the
-  #SSet# interface, but also allows fast access to elements by rank.
-  That is, it also supports the function #get(i)#, which returns the
-  element whose rank is #i# in $O(\log #n#)$ expected time. (The rank
-  of an element #x# in an #SSet# is the number of elements in the #SSet#
-  that are less than #x#.)
+  Projete e implemente uma versão de uma skiplist que implemente a interface
+  #SSet#, mas também permite acesso rápido a eles pelo rank.
+  Isto é, também aceita a função 
+  #get(i)#, que retorna o elemento cujo rank é #i#
+   #i# em $O(\log #n#)$ de tempo esperado. (O rank
+   de um elemento #x# em uma #SSet# é o número de elementos em #SSet#
+   que são menores que #x#.)
 \end{exc}
 
 \begin{exc}
   \index{finger}%
   \index{finger search!in a skiplist}%
-  A \emph{finger} in a skiplist is an array that stores the
-  sequence of nodes on a search path at which the search path
-  goes down. (The variable #stack# in the #add(x)# code on
-  page~\pageref{pg:skiplist-add} is a finger;  the shaded nodes in
-  \figref{skiplist-add} show the contents of the finger.)  One can
-  think of a finger as pointing out the path to a node in the lowest
-  list, $L_0$.
+  Um \emph{finger} em uma skiplist é um array que guarda a sequência de nodos em um caminho de busca no qual o caminho de busca desce.
+  (A variável #stack# no código #add(x)# na página~\pageref{pg:skiplist-add} é um finger;  os nodos com sombra em 
+  \figref{skiplist-add} mostra o conteúdo do finger.) Pode-se pensar de um finger como estar apontando o caminho para um nodo na lista mais baixa, $L_0$. 
 
-  A \emph{finger search} implements the #find(x)# operation using a
-  finger, by walking up the list using the finger until reaching a node
-  #u# such that $#u.x# < #x#$ and $#u.next#=#null#$ or $#u.next.x# >
-  #x#$ and then performing a normal search for #x# starting from #u#.
-  It is possible to prove that the expected number of steps required
-  for a finger search is $O(1+\log r)$, where $r$ is the number values
-  in $L_0$ between #x# and the value pointed to by the finger.
+  Uma \emph{busca finger} implementa a operação #find(x)# usando um 
+  finger, ao percorrer a lista usando finger até chegar em um nodo 
+  #u# tal que $#u.x# < #x#$ e $#u.next#=#null#$ ou $#u.next.x# >
+  #x#$ e então fazer uma busca normal por #x# començando de #u#. 
+  É possível provar que o número esperado de passos necessários
+  para uma busca finger é 
+   $O(1+\log r)$, onde $r$ é o número de valores em 
+  $L_0$ entre #x# e o valor apontado pelo finger.
 
-  Implement a subclass of #Skiplist# called #SkiplistWithFinger# that
-  implements #find(x)# operations using an internal finger.  This subclass
-  stores a finger, which is then used so that every #find(x)# operation
-  is implemented as a finger search.  During each #find(x)# operation
-  the finger is updated so that each #find(x)# operation uses, as a
-  starting point, a finger that points to the result of the previous
-  #find(x)# operation.
+  Implemente uma subclasse de #Skiplist# chamada #SkiplistWithFinger# que 
+  implementa operações #find(x)# usando um finger interno. Essa subclasse
+  guarda um finger, que é então usado para que toda operação 
+  #find(x)# seja implementada como uma busca finger. 
+  Durante cada operação 
+  #find(x)# o finger é atualizado tal que cada operação  
+  #find(x)# usa como ponto de partida 
+  , um finger que aponta para o resultado da operação 
+  #find(x)# prévia.
 \end{exc}
 
 \begin{exc}\exclabel{skiplist-truncate}
-  Write a method, #truncate(i)#, that truncates a #SkiplistList#
-  at position #i#.  After the execution of this method, the size
-  of the list is #i# and it contains only the elements at indices
-  $0,\ldots,#i#-1$.  The return value is another #SkiplistList# that
-  contains the elements at indices $#i#,\ldots,#n#-1$.  This method
-  should run in $O(\log #n#)$ time.
+  Escreva um método
+  #truncate(i)# que trunca uma #SkiplistList#
+  na posição #i#.  Após a execução desse método, o tamanho da lista é #i#
+  e contém somente os elementos nos índices
+  $0,\ldots,#i#-1$.  O valor retornado é outra #SkiplistList# que 
+  contém os elementos nos índices 
+   $#i#,\ldots,#n#-1$.  Esse método deve rodar em 
+   $O(\log #n#)$ de tempo.
 \end{exc}
 
 \begin{exc}
-  Write a #SkiplistList# method, #absorb(l2)#, that takes as an
-  argument a #SkiplistList#, #l2#, empties it and appends its contents,
-  in order, to the receiver.  For example, if #l1# contains $a,b,c$
-  and #l2# contains $d,e,f$, then after calling #l1.absorb(l2)#, #l1#
-  will contain $a,b,c,d,e,f$ and #l2# will be empty. This method should
-  run in $O(\log #n#)$ time.
+  Escreva um método para a
+  #SkiplistList# chamado #absorb(l2)#, que recebe como argumento uma 
+  #SkiplistList#, #l2#, a vazia e coloca seu conteúdo na estrutura receptora.  
+Por exemplo, se 
+  #l1# contém $a,b,c$
+  e #l2# contém $d,e,f$, então após chamar #l1.absorb(l2)#, #l1#
+  conterá $a,b,c,d,e,f$ e #l2# estará vazia. Esse método deve rodar em 
+  $O(\log #n#)$ de tempo.
 \end{exc}
 
 \begin{exc}
-  Using the ideas from the space-efficient list, #SEList#, design
-  and implement a space-efficient #SSet#, #SESSet#.  To do this, store the
-  data, in order, in an #SEList#, and store the blocks of this #SEList#
-  in an #SSet#. If the original #SSet# implementation uses $O(#n#)$
-  space to store #n# elements, then the #SESSet# will use enough space
-  for #n# elements plus $O(#n#/#b#+#b#)$ wasted space.
+  Usando as ideias da lista eficiente em espaço, #SEList#, projete
+  e implemente uma #SSet# eficiente em espaço #SSet#s, #SESSet#.
+  Para isso, guarde os dados, em ordem, em uma #SEList# e armazene os blocos dessa
+  #SEList# em uma #SSet#. Se a implementação original #SSet# usa
+  $O(#n#)$
+  de espaço para guardar #n# elementos, então a #SESSet# irá usar espaço suficiente 
+  para #n# elementos mais 
+  $O(#n#/#b#+#b#)$ de espaço desperdiçado.
 \end{exc}
 
 \begin{exc}
-  Using an #SSet# as your underlying structure, design and implement an
-  application that reads a (large) text file and allows you to search,
-  interactively, for any substring contained in the text.  As the user
-  types their query, a matching part of the text (if any) should appear 
-  as a result.
+  Usando uma #SSet# com estrutura básica, projete e implemente uma
+  aplicação que lê um arquivo de texto (potencialmente enorme) e permite
+  você buscar, iterativamente, por qualquer substring contida no texto.
+  Conforme o usuário digita a consulta, uma parte do texto que corresponde
+  à busca (se houver) deve aparecer como resultado. 
 
-  \noindent  Hint 1: Every substring is a prefix of some suffix, so it
-  suffices to store all suffixes of the text file.
+  \noindent  Dica 1: toda substring é um prefixo de algum sufixo, então basta guarda todos os sufixos do arquivo de texto. 
 
-  \noindent Hint 2:  Any suffix can be represented compactly as a single
-  integer indicating where the suffix begins in the text.
+  \noindent Dica 2: qualquer sufixo pode ser representado como um único inteiro indicando onde o sufixo começa no texto.
 
-  \noindent Test your application on some large texts, such as some of
-  the books available at Project Gutenberg \cite{gutenberg}.  If done
-  correctly, your applications will be very responsive; there should be
-  no noticeable lag between typing keystrokes and seeing the results.
+  \noindent Teste sua aplicação em textos maiores, tais como alguns livros disponibilizados pelo 
+  Projeto Gutenberg \cite{gutenberg}.  Se feito corretamente, 
+  a sua aplicação será bem rápida; não deve have atraso considerável
+  entre digitar letras e ver os resultados.
 \end{exc}
 
 \begin{exc}
-  \index{skiplist!versus binary search tree}%
-  \index{binary search tree!versus skiplist}%
-  (This exercise should be done after reading about binary search trees,
-  in \secref{binarysearchtree}.)  Compare skiplists with binary search
-  trees in the following ways:  
+  \index{skiplist!versus árvore binária de busca}%
+  \index{árvore binária de busca!versus skiplist}%
+  (Este exercício deve ser feito após a leitura sobre árvores binárias de busca
+  em
+   \secref{binarysearchtree}.)  Compare skiplists com árvores binárias de busca
+  das seguintes maneiras:
   \begin{enumerate}
-     \item Explain how removing some edges of a skiplist leads to
-       a structure that looks like a binary tree and is similar to a
-       binary search tree.
-     \item Skiplists and binary search trees each use about the same
-       number of pointers (2 per node).  Skiplists make better use of
-       those pointers, though. Explain why.
+     \item Explique como algumas arestas de uma skiplist leva a uma estrutura que parece uma árvore binária e é similar a uma árvore de busca binária. 
+     \item Skiplists e árvores de busca binária usam aproximadamente o mesmo número de ponteiros (2 por nodo). Contundo, skiplists fazer melhor uso desses ponteiros. Explique porque.
   \end{enumerate}
 \end{exc}
