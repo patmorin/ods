@@ -1,16 +1,16 @@
-\chapter{Random Binary Search Trees}
+\chapter{Árvores Binárias de Busca Aleatórias}
 \chaplabel{rbs}
 
-In this chapter, we present a binary search tree structure that uses
-randomization to achieve $O(\log #n#)$ expected time for all operations.
+Neste capítulo, apresentamos uma estrutura de árvore binária de busca que
+usa randomização para obter 
+$O(\log #n#)$ de tempo esperado para todas as operações. 
 
-\section{Random Binary Search Trees}
+\section{Árvores Binárias de Busca Aleatórias}
 \seclabel{rbst}
 
-Consider the two binary search trees shown in \figref{rbs-lvc}, each of
-which has $#n#=15$ nodes.  The one on the left is a list and the other
-is a perfectly balanced binary search tree. The one on the left has a
-height of $#n#-1=14$ and the one on the right has a height of three.
+Considere as duas árvores binárias de busca mostradas em \figref{rbs-lvc}, cada qual com 
+$#n#=15$ nodos. A árvore na esquerda é uma lista e a outra é uma árvore binária de busca perfeitament balanceada. A altura da árvore na esquerda é 
+$#n#-1=14$ e da direita é três.
 
 \begin{figure}
   \begin{center}
@@ -19,82 +19,77 @@ height of $#n#-1=14$ and the one on the right has a height of three.
       \includegraphics[scale=0.90909,scale=0.95]{figs/bst-balanced}
     \end{tabular}
   \end{center}
-  \caption{Two binary search trees containing the integers $0,\ldots,14$.}
+  \caption{Duas árvores binárias de busca contendo inteiros $0,\ldots,14$.}
   \figlabel{rbs-lvc}
 \end{figure}
 
-Imagine how these two trees could have been constructed.  The one on
-the left occurs if we start with an empty #BinarySearchTree# and add
-the sequence
+Imagine como essas duas árvores podem ter sido construídas. Aquela na esquerda ocorre se iniciamos com uma 
+#BinarySearchTree# vazia e adicionando a 
+sequência 
 \[
     \langle 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14 \rangle \enspace .
 \]
-No other sequence of additions will create this tree (as you can prove
-by induction on #n#). On the other hand, the tree on the right can be
-created by the sequence
+Nenhuma outra sequência de adições irá criar essa árvore (como você pode provar
+por indução em #n#). Por outro lado, a árvore na direita pode ser criada pela sequência
 \[
     \langle 7,3,11,1,5,9,13,0,2,4,6,8,10,12,14 \rangle  \enspace .
 \]
-Other sequences work as well, including
+Outras sequências também funcionariam, incluindo
 \[
     \langle 7,3,1,5,0,2,4,6,11,9,13,8,10,12,14 \rangle  \enspace ,
 \]
-and
+e
 \[
     \langle 7,3,1,11,5,0,2,4,6,9,13,8,10,12,14 \rangle \enspace .
 \]
-In fact, there are $21,964,800$ addition sequences that generate the
-tree on the right and only one that generates the tree on the left.
+De fato, há 
+ $21,964,800$ sequências que gerariam a árvore na direita e somente uma gera a àrvore na esquerda. 
 
-The above example gives some anecdotal evidence that, if we choose a
-random permutation of $0,\ldots,14$, and add it into a binary search
-tree, then we are more likely to get a very balanced tree (the right
-side of \figref{rbs-lvc}) than we are to get a very unbalanced tree
-(the left side of \figref{rbs-lvc}).
+ O exemplo acima passa uma ideia de que, se escolhermos uma permutação
+ aleatória de 
+$0,\ldots,14$, e a adicionarmos em uma árvore binária de busca, então teremos uma chance maior de obter uma árvore muito balanceada (o lado direito de 
+\figref{rbs-lvc}) que temos de obter uma árvore muito desbalanceada 
+(o lado esquerdo de \figref{rbs-lvc}).
 
-We can formalize this notion by studying random binary search trees.
-A \emph{random binary search tree}
-\index{random binary search tree}%
-\index{binary search tree!random}%
-of size #n# is obtained in the
-following way:  Take a random permutation, $#x#_0,\ldots,#x#_{#n#-1}$,
-of the integers $0,\ldots,#n#-1$ and add its elements, one by one,
-into a #BinarySearchTree#.  By \emph{random permutation}
-\index{permutation!random}%
-\index{random permutation}%
-we mean that
-each of the possible $#n#!$ permutations (orderings) of $0,\ldots,#n#-1$
-is equally likely, so that the probability of obtaining any particular
-permutation is $1/#n#!$.
+Podemos formalizar essa noção ao estudar árvores binárias de busca aleatórias.
+Uma \emph{árvore binária de busca aleatória}
+\index{árvore binária de busca aleatória}%
+\index{árvore binária de busca!aleatória}%
+de tamanho #n# é obtida da seguinte forma: pegue uma permutação aleatória,
+ $#x#_0,\ldots,#x#_{#n#-1}$,
+de inteiros $0,\ldots,#n#-1$ e adicione seus elementos, um por um em uma 
+#BinarySearchTree#.  Queremos dizer com \emph{permutação aleatória}
+\index{permutação!aleatória}%
+\index{permutação aleatória}%
+que cada uma das possíveis $#n#!$ permutações (reordenações) de $0,\ldots,#n#-1$
+é igualmente provável, tal que a probabilidade de obter qualqueer permutação em particular é 
+$1/#n#!$.
 
-Note that the values $0,\ldots,#n#-1$ could be replaced by any ordered
-set of #n# elements without changing any of the properties of the
-random binary search tree.  The element $#x#\in\{0,\ldots,#n#-1\}$ is
-simply standing in for the element of rank #x# in an ordered set of
-size #n#.
+Note que os valore $0,\ldots,#n#-1$ poderiam ser substituídos por qualquer conjunto ordenado de #n# elmento sem alterar a propriedade das árvores binárias de busca aleatória. 
+O elemento
+ $#x#\in\{0,\ldots,#n#-1\}$ está simplesmente representando o elemento de ranking (posição) #x# em um conjunto ordenado de tamanho #n#.
 
-Before we can present our main result about random binary search trees,
-we must take some time for a short digression to discuss a type of number
-that comes up frequently when studying randomized structures. For a
-non-negative integer, $k$, the $k$-th \emph{harmonic number},
-\index{harmonic number}%
-\index{H@$H_k$ (harmonic number)}%
-denoted
-$H_k$, is defined as
+Antes de apresentarmos nosso principal resultado sobre árvores binárias de busca aleatórias, precisamos fazer uma curta discussão sobre um tipo de número que 
+aparece frequentemente ao estudar estruturas randomizadas. Para um inteiro não-negativo $k$, o $k$-ésimo \emph{número harmônico},
+\index{número harmônico}%
+\index{H@$H_k$ (númro harmônico)}%
+denotado por
+$H_k$, é definido como 
 \[
   H_k = 1 + 1/2 + 1/3 + \cdots + 1/k \enspace .
 \] 
-The harmonic number $H_k$ has no simple closed form, but it is very
-closely related to the natural logarithm of $k$.  In particular,
+O número harmônico 
+ $H_k$ na tem forma fechada simples, mas é muito relacionado ao
+ logaritmo natural de $k$. Em particular, 
 \[
   \ln k < H_k \le \ln k + 1  \enspace .
 \]
 \newcommand{\hint}{\int_1^k\! (1/x)\, \mathrm{d}x}%
-Readers who have studied calculus might notice that this is because
-the integral $\hint = \ln k$.  Keeping in mind that an integral can be
-interpreted as the area between a curve and the $x$-axis, the value of
-$H_k$ can be lower-bounded by the integral $\hint$ and upper-bounded by
-$1+ \hint$.  (See \figref{harmonic-integral} for a graphical explanation.)
+Leitores que estudaram cálculo podem perceber que isso é verdadeiro
+pois a integral
+$\hint = \ln k$.  Tendo em mente que uma integral pode ser interpretada como a área entre uma curva e o eixo $x$, o valor de 
+$H_k$ pode ser limitado inferiormente pela integral $\hint$ e limitado superiormente por 
+$1+ \hint$.  (Veja \figref{harmonic-integral} para uma explicação gráfica.)
 
 \begin{figure}
   \begin{center}
@@ -103,101 +98,110 @@ $1+ \hint$.  (See \figref{harmonic-integral} for a graphical explanation.)
         & \includegraphics[width=\HalfScaleIfNeeded]{figs/harmonic-3}
     \end{tabular}
   \end{center}
-  \caption{The $k$th harmonic number $H_k=\sum_{i=1}^k 1/i$ is upper- and lower-bounded by two integrals. The value of these integrals is given by the 
-  area of the shaded region, while the value of $H_k$ is given by the area of
-  the rectangles.}
+  \caption{O $k$-ésimo número harmônico $H_k=\sum_{i=1}^k 1/i$ é limitado superiormente e inferiormente por duas integrais. O valor dessas integrais é dado pela área da região sombreada, enquanto o valor de 
+  $H_k$ é dado pela área dos retângulos.} 
   \figlabel{harmonic-integral}
 \end{figure}
 
 
 \begin{lem}\lemlabel{rbs}
-  In a random binary search tree of size #n#, the following statements hold:
+  Em uma árvore binária de busca aleatória de tamanho #n#, as seguintes afirmações valem:
   \begin{enumerate}
-    \item For any $#x#\in\{0,\ldots,#n#-1\}$, the expected length of the
-    search path for #x# is $H_{#x#+1} + H_{#n#-#x#} - O(1)$.\footnote{The
-    expressions $#x#+1$ and $#n#-#x#$ can be interpreted respectively
-    as the number of elements in the tree less than or equal to #x#
-    and the number of elements in the tree greater than or equal to #x#.}
-    \item For any $#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$, the
-    expected length of the search path for #x# is $H_{\lceil#x#\rceil}
+    \item Para qualquer $#x#\in\{0,\ldots,#n#-1\}$, o comprimento esperado do caminho de busca por 
+    #x# é $H_{#x#+1} + H_{#n#-#x#} - O(1)$.\footnote{As expressões
+    $#x#+1$ e $#n#-#x#$ podem ser interpretadas respectivamente 
+    como o número de elementos na árvore menos que ou igual a #x#
+      e o número de elementos na árvore maiores que ou iguais a #x#.}
+    \item Para qualquer $#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$, o
+      comprimento esperado do caminho de busca para #x# é 
+    $H_{\lceil#x#\rceil}
     + H_{#n#-\lceil#x#\rceil}$.
   \end{enumerate}
 \end{lem}
 
-We will prove \lemref{rbs} in the next section.  For now, consider what
-the two parts of \lemref{rbs} tell us.  The first part tells us that if
-we search for an element in a tree of size #n#, then the expected length
-of the search path is at most $2\ln n + O(1)$.  The second part tells
-us the same thing about searching for a value not stored in the tree.
-When we compare the two parts of the lemma, we see that it is only
-slightly faster to search for something that is in the tree compared to
-something that is not.
+Provaremos 
+\lemref{rbs} na seção a seguire. Por enquanto, considere 
+o que as duas partes de 
+ \lemref{rbs} nos diz. A primeira parte nos diz que se buscarmos por um elemento em uma árvore de tamanho #n#, então o comprimento esperado do caminho de busca é no máximo $2\ln n + O(1)$.  
 
+A segunda parte no diz sobre a busca de um valor não guardado na árvore.
+Ao compararmos duas partes do lema, vemos que buscar algo que está na 
+árvore é apenas pouco mais rápido do que algo que não está.
 
-\subsection{Proof of \lemref{rbs}}
+\subsection{Prova de \lemref{rbs}}
 
-The key observation needed to prove \lemref{rbs} is the following:
-The search path for a value #x# in the open interval $(-1,#n#)$ in a
-random binary search tree, $T$, contains the node with key $i < #x#$
-if, and only if, in the random permutation used to create $T$, $i$
-appears before any of $\{i+1,i+2,\ldots,\lfloor#x#\rfloor\}$.
+A observação chave necessária para provar 
+\lemref{rbs} é a seguinte: 
+o caminho de busca por um valor #x# no intervalo aberto
+ $(-1,#n#)$ em uma árvore binária de busca aleatória
+$T$ contém o nodo com chave $i < #x#$
+se, e somente se, na permutação aleatória usada para criar
+ $T$, $i$
+aparece antes de qualquer $\{i+1,i+2,\ldots,\lfloor#x#\rfloor\}$.
 
-To see this, refer to \figref{rbst-records} and notice that until
-some value in $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ is added, the search
-paths for each value in the open interval $(i-1,\lfloor#x#\rfloor+1)$
-are identical.  (Remember that for two values to have
-different search paths, there must be some element in the tree that
-compares differently with them.)  Let $j$ be the first element in
-$\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ to appear in the random permutation.
-Notice that $j$ is now and will always be on the search path for #x#.
-If $j\neq i$ then the node $#u#_j$ containing $j$ is created before the
-node $#u#_i$ that contains $i$.  Later, when $i$ is added, it will be
-added to the subtree rooted at $#u#_j#.left#$, since $i<j$.  On the other
-hand, the search path for #x# will never visit this subtree because it
-will proceed to $#u#_j#.right#$ after visiting $#u#_j$.
+Para ver isso, 
+To see this, observe \figref{rbst-records} e note que até que algum valor em
+$\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ seja adicionado, os caminhos de busca para cada valor no intervalo aberto 
+$(i-1,\lfloor#x#\rfloor+1)$
+são idênticos. (Lembre-se que para dois valores terem caminhos distintos,    
+precisa haver algum elemento na árvore que compara de modo diferente entre eles.)
+Seja $j$ o primeiro elemento em 
+$\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ para aparecer na permutação aleatória.
+Note que $j$ é agora e sempre estará no caminho de busca por #x#.
+Se $j\neq i$ então o nodo $#u#_j$ contendo $j$ é criado antes do nodo 
+$#u#_i$ que contém $i$.  Depois, quando $i$ for adicionado, ele será adicionado na subárvore enraizada em  
+$#u#_j#.left#$, pois $i<j$.  Por outro lado, o caminho de busca para #x# nunca
+visitará essa subárvore porque irá proceder para
+$#u#_j#.right#$ após visitar $#u#_j$.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/rbst-records}
   \end{center}
-  \caption[The search path in a random binary search tree]{The value $i<#x#$ is on the search path for #x# if and only
-   if $i$ is the first element among $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ added to the tree.}
+  \caption[O caminho de busca em uma árvore binária de busca aleatória]{O valor $i<#x#$ está no caminho de árvore para #x# se e somente se 
+   $i$ for o primeiro elemento entre $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ adicionado à árvore.}
   \figlabel{rbst-records}
 \end{figure}
 
-Similarly, for $i>#x#$, $i$ appears in the search path for #x#
-if and only if $i$ appears before any of $\{\lceil#x#\rceil,
-\lceil#x#\rceil+1,\ldots,i-1\}$ in the random permutation used to
-create $T$.
+De modo similar, para 
+$i>#x#$, $i$ aparece no caminho de busca para #x#
+se e somente se
+ $i$ aparece antes de $\{\lceil#x#\rceil,
+\lceil#x#\rceil+1,\ldots,i-1\}$ na permutação aleatória usada para criar $T$.
 
-Notice that, if we start with a random permutation of $\{0,\ldots,#n#\}$,
-then the subsequences containing only $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$
-and $\{\lceil#x#\rceil, \lceil#x#\rceil+1,\ldots,i-1\}$ are also random
-permutations of their respective elements.  Each element, then, in the
-subsets $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ and $\{\lceil#x#\rceil,
-\lceil#x#\rceil+1,\ldots,i-1\}$ is equally likely to appear before
-any other in its subset in the random permutation used to create $T$.
-So we have
+Note que, se iniciarmos com uma permutação aleatória de 
+ $\{0,\ldots,#n#\}$,
+ então as subsequências contendo somente
+ $\{i,i+1,\ldots,\lfloor#x#\rfloor\}$
+e $\{\lceil#x#\rceil, \lceil#x#\rceil+1,\ldots,i-1\}$ também são 
+permutações aleatórias de seus respectivos elementos.
+Cada elemento, então, nos subconjuntos 
+$\{i,i+1,\ldots,\lfloor#x#\rfloor\}$ e $\{\lceil#x#\rceil,
+\lceil#x#\rceil+1,\ldots,i-1\}$ é igualmente provável de aparecer antes
+de que qualquer outro no seu subconjunto na permutação aleatória 
+usada para criar $T$.
+Então temos
 \[
-  \Pr\{\mbox{$i$ is on the search path for #x#}\}
+  \Pr\{\mbox{$i$ está no caminho de busca por #x#}\}
   = \left\{ \begin{array}{ll}
-     1/(\lfloor#x#\rfloor-i+1) & \mbox{if $i < #x#$} \\
-     1/(i-\lceil#x#\rceil+1) & \mbox{if $i > #x#$} 
+     1/(\lfloor#x#\rfloor-i+1) & \mbox{se $i < #x#$} \\
+     1/(i-\lceil#x#\rceil+1) & \mbox{se $i > #x#$} 
      \end{array}\right . \enspace .
 \]
 
-With this observation, the proof of \lemref{rbs}
-involves some simple calculations with harmonic numbers:
+A partir dessa observação, a prova de 
+ \lemref{rbs}
+envolve alguns cálculos simples com números harmônicos:
 
-\begin{proof}[Proof of \lemref{rbs}]
-Let $I_i$ be the indicator random variable that is equal to one when $i$
-appears on the search path for #x# and zero otherwise.  Then the length
-of the search path is given by
+\begin{proof}[Prova de \lemref{rbs}]
+Seja
+$I_i$ seja uma variável indicadora aleatória que é igual a um quando $i$
+aparece no caminho de busca por #x# e zero caso contrário. Então, o comprimento
+do caminho de busca é dado por 
 \[
   \sum_{i\in\{0,\ldots,#n#-1\}\setminus\{#x#\}} I_i
 \]
-so, if $#x#\in\{0,\ldots,#n#-1\}$, the expected length of the search
-path is given by (see \figref{rbst-probs}.a)
+  então, se $#x#\in\{0,\ldots,#n#-1\}$, o comprimento esperado do caminho de busca é dado por (veja \figref{rbst-probs}.a)
 \begin{align*}
   \E\left[\sum_{i=0}^{#x#-1} I_i + \sum_{i=#x#+1}^{#n#-1} I_i\right]
    & =  \sum_{i=0}^{#x#-1} \E\left[I_i\right]
@@ -210,8 +214,8 @@ path is given by (see \figref{rbst-probs}.a)
    & \quad {} + \frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{#n#-#x#} \\
    & = H_{#x#+1} + H_{#n#-#x#} - 2  \enspace .
 \end{align*}
-The corresponding calculations for a search value
-$#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$ are almost identical (see
+Os cálculos correspondentes para um valor buscado 
+$#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$ são quase idênticos (veja 
 \figref{rbst-probs}.b).
 \end{proof}
 
@@ -222,155 +226,159 @@ $#x#\in(-1,n)\setminus\{0,\ldots,#n#-1\}$ are almost identical (see
       \includegraphics[width=\ScaleIfNeeded]{figs/rbst-probs-b} \\ (b) \\[2ex]
     \end{tabular}
   \end{center}
-  \caption[The probabilities of an element being on a search path]{The probabilities of an element being on the search path for #x#
-   when (a)~#x# is an integer and (b)~when #x# is not an integer.}
+  \caption[As probabilidade de um elemento estar em um caminho de busca]{As probabilidade de um elemento estar no caminho de busca por #x# quando 
+   (a)~#x# é um inteiro e (b)~quando #x# não é um inteiro. }
   \figlabel{rbst-probs}
 \end{figure}
 
-\subsection{Summary}
+\subsection{Resumo}
 
-The following theorem summarizes the performance of a random binary
-search tree:
+O teorema a seguir resumo o desempenho de uma árvore binária de busca aleatória:
 
 \begin{thm}\thmlabel{rbs}
-A random binary search tree can be constructed in $O(#n#\log #n#)$ time.
-In a random binary search tree, the #find(x)# operation takes $O(\log
-#n#)$ expected time.
+  Uma árvore binária de busca aleatória pode ser construída em 
+$O(#n#\log #n#)$ de tempo.
+Em uma árvore binária de busca aleatória, a operação 
+#find(x)# leva $O(\log
+#n#)$ de tempo esperado.
 \end{thm}
 
-We should emphasize again that the expectation in \thmref{rbs} is with
-respect to the random permutation used to create the random binary
-search tree.  In particular, it does not depend on a random choice of
-#x#; it is true for every value of #x#.
+Devemos enfatizar novamente que o valor esperado em 
+ \thmref{rbs} é em respeito à permutação aleatória usada em respeito
+ à permutação aleatória usada para criar a árvore binária de busca aleatória.
+Em particular, não depende em uma escolha aleatória de #x#; isso é verdade para
+todo valor de #x#.
 
-
-\section{#Treap#: A Randomized Binary Search Tree}
+\section{#Treap#: Uma Árvore Binária de Busca Aleatória}
 \seclabel{treap}
 
 \index{Treap@#Treap#}%
-The problem with random binary search trees is, of course, that they are
-not dynamic.  They don't support the #add(x)# or #remove(x)# operations
-needed to implement the #SSet# interface.  In this section we describe
-a data structure called a #Treap# that uses \lemref{rbs} to implement
-the #SSet# interface.\footnote{The name #Treap# comes from the fact
-that this data structure is simultaneously a binary search \textbf{tr}ee
-(\secref{binarysearchtree}) and a h\textbf{eap} (\chapref{heaps}).}
+O problema com uma árvore binária de busca aleatória é, claramente, que
+elas não são dinâmica. Elas não aceitam as operações
+#add(x)# ou #remove(x)# necessárias para implementar a interface #SSet#.
+Nesta seção descrevemos uma estrutura de dados chamada de #Treap# que usa
+o \lemref{rbs} para implementar 
+a interface #SSet#.\footnote{O nome #Treap# vem do fato que essa estrutura de dados é simultâneamente uma árvore binária de busca 
+(do inglês, binary search \textbf{tr}ee) (\secref{binarysearchtree}) e uma 
+ h\textbf{eap} (\chapref{heaps}).}
 
-A node in a #Treap# is like a node in a #BinarySearchTree# in that it has
-a data value, #x#, but it also contains a unique numerical \emph{priority},
-#p#, that is assigned at random:
+Um nodo em uma #Treap# é como um nodo em uma #BinarySearchTree# em que ele tem um valor de dado #x# mas também contém um valor único chamado \emph{priority} #p#
+#p#, que é atribuído aleatoriamente: 
 \javaimport{ods/Treap.Node<T>}
 \cppimport{ods/Treap.TreapNode}
-In addition to being a binary search tree, the nodes in a #Treap#
-also obey the \emph{heap property}:
+Além de ser uma árvore binária de busca, os nodos em uma #Treap# também obedecem a \emph{propriedade das heaps}:
 \begin{itemize}
-\item (Heap Property)  At every node #u#, except the root, 
+\item (Propriedade das Heaps)  Em todo nodo #u#, exceto na raiz, 
       $#u.parent.p# < #u.p#$.
-      \index{heap property}%
+      \index{propriedade raiz}%
 \end{itemize}
-In other words, each node has a priority smaller than that of its two
-children.  An example is shown in \figref{treap}.
+Em outras palavras, cada nodo tem uma prioridade menor que aquelas de seus filhos.
+Um exemplo é mostrado em \figref{treap}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/treap}
   \end{center}
-  \caption[A Treap]{An example of a #Treap# containing the integers
-  $0,\ldots,9$. Each node, #u#, is illustrated as a box containing $#u.x#,#u.p#$.}
+  \caption[Uma Treap]{Um exemplo de uma #Treap# contendo os inteiros $0,\ldots,9$. Cada nodo, #u#, é ilustrado como uma caixa contendo $#u.x#,#u.p#$.}
   \figlabel{treap}
 \end{figure}
 
-The heap and binary search tree conditions together ensure that, once
-the key (#x#) and priority (#p#) for each node are defined, the
-shape of the #Treap# is completely determined. The heap property tells us that
-the node with minimum priority has to be the root, #r#, of the #Treap#.
-The binary search tree property tells us that all nodes with keys smaller
-than #r.x# are stored in the subtree rooted at #r.left# and all nodes
-with keys larger than #r.x# are stored in the subtree rooted at #r.right#.
+As condições impostas pela heap e por uma árvore binária de busca juntas asseguram que, uma vez que a chave (#x#) e a prioridade (#p#) para cada nodo estejam definidos, a forma da #Treap# está completamente determinada.
 
-The important point about the priority values in a #Treap# is that they
-are unique and assigned at random.  Because of this, there are
-two equivalent ways we can think about a #Treap#.  As defined above, a
-#Treap# obeys the heap and binary search tree properties.  Alternatively,
-we can think of a #Treap# as a #BinarySearchTree# whose nodes
-were added in increasing order of priority.  For example, the #Treap#
-in \figref{treap} can be obtained by adding the sequence of $(#x#,#p#)$
-values 
+A propriedade das heaps nos diz que o nodo com prioridade mínima tem que ser a raiz #r# da #Treap#. A propriedade das árvores binárias de busca nos diz que todos os nodos com
+chaves menores que #r.x# são guardados na subárvores enraizada na #r.left# e todos
+os nodos com chaves maiores que #r.x# são guardados na subárvore enraizada em #r.right#.
+
+Um fato importante sobre os valores de prioridades em uma #Treap# é que
+ele são únicos e atribuídos aleatoriamente.
+Por causa disso, existem duas formas equivalentes que podem pensar sobre uma #Treap#. Conforme definido acima, uma #Treap# obedece as propriedades das árvores binárias de buca e das heaps.
+Alternativamente,
+podemos que uma #Treap# como uma
+#BinarySearchTree# cujos nodos são adicionados em ordem crescente de prioridade.
+Por exemplo, a #Treap#
+em \figref{treap} pode ser obtida ao adicionar a sequência $(#x#,#p#)$
 \[
   \langle
    (3,1), (1,6), (0,9), (5,11), (4,14), (9,17), (7,22), (6,42), (8,49), (2,99)
   \rangle
 \]
-into a #BinarySearchTree#.
+em uma #BinarySearchTree#.
 
-Since the priorities are chosen randomly, this is equivalent to taking a
-random permutation of the keys---in this case the permutation is
+Como as prioridades são escolhidas aleatoriamente, isso é equivalente a obter uma permutação aleatória das chaves --- nesse caso a permutação é 
 \[
   \langle 3, 1, 0, 5, 9, 4, 7, 6, 8, 2 \rangle
 \]
----and adding these to a #BinarySearchTree#.  But this means that the
-shape of a treap is identical to that of a random binary search tree.
-In particular, if we replace each key #x# by its rank,\footnote{The
-rank of an element #x# in a set $S$ of elements is the number of
-elements in $S$ that are less than #x#.} then \lemref{rbs} applies.
-Restating \lemref{rbs} in terms of #Treap#s, we have:
-\begin{lem}\lemlabel{rbs-treap}
-  In a #Treap# that stores a set $S$ of #n# keys, the following statements hold:
-  \begin{enumerate}
-    \item For any $#x#\in S$, the expected length of
-    the search path for #x# is $H_{r(#x#)+1} + H_{#n#-r(#x#)} - O(1)$.
-    \item For any $#x#\not\in S$, the expected length of the
-    search path for #x# is $H_{r(#x#)} + H_{#n#-r(#x#)}$.
-  \end{enumerate}
-  Here, $r(#x#)$ denotes the rank of #x# in the set $S\cup\{#x#\}$.
-\end{lem}
-Again, we emphasize that the expectation in \lemref{rbs-treap} is taken
-over the random choices of the priorities for each node.  It does not
-require any assumptions about the randomness in the keys.
+---e inserí-las à uma #BinarySearchTree#.  
 
-\lemref{rbs-treap} tells us that #Treap#s can implement the #find(x)#
-operation efficiently. However, the real benefit of a #Treap# is that
-it can support the #add(x)# and #delete(x)# operations.  To
-do this, it needs to perform rotations in order to maintain the heap property.  Refer to \figref{rotations}.
-A \emph{rotation}
-\index{rotation}%
-in a binary
-search tree is a local modification that takes a parent #u# of a node #w#
-and makes #w# the parent of #u#, while preserving the binary search tree
-property. Rotations come in two flavours: \emph{left} or \emph{right}
-depending on whether #w# is a right or left child of #u#, respectively.
-\index{left rotation}%
-\index{right rotation}%
+Mas isso significa que a forma de uma treap é idêntica àquela de uma árvore binária de busca binária.
+Em particular, se substituímos cad chave #x# por seu rank, \footnote{O
+rank de um elemento #x# em um conjunto $S$ de elementos é o número de elementos
+em $S$ que são menores que #x#.} então \lemref{rbs} aplica-se.
+
+Reafirmando 
+\lemref{rbs} em termos de #Treap#s, temos:
+\begin{lem}\lemlabel{rbs-treap}
+  Em uma #Treap# que guarda um conjunto $S$ de #n# chaves, as seguintes afirmações valem: 
+  \begin{enumerate}
+    \item Para qualquer $#x#\in S$, o comprimento esperado do caminho
+      de busca por #x# é $H_{r(#x#)+1} + H_{#n#-r(#x#)} - O(1)$.
+    \item Para qualquer $#x#\not\in S$,  comprimento esperado do caminho de busca por #x# é $H_{r(#x#)} + H_{#n#-r(#x#)}$.
+  \end{enumerate}
+  Aqui, $r(#x#)$ denota o rank #x# no conjunto $S\cup\{#x#\}$.
+\end{lem}
+Novamente, enfatizamos que o valor esperado em 
+\lemref{rbs-treap} é obtido sobre escolhas aleatórias das prioridade para cada nodo. Isso não requer quaisquer premissas sobre a aleatoriedade nas chaves.
+
+\lemref{rbs-treap} nos diz que #Treap#s podem implementar a operação #find(x)#
+eficientemente. Contudo, o benefício real de uma #Treap# é que ela
+pode implementar as operações
+ #add(x)# e #delete(x)#.  Para fazer isso, ela precisa realizar rotações para manter a propriedade de heaps.
+Veja \figref{rotations}.
+Uma \emph{rotação}
+\index{rotação}%
+em uma árvore binária de busca é uma modificação local que pega um pai #u#
+de um nodo #w# e torna #w# o pai de #u#, preservando a propriedade das árvores binárias de busca. Rotações vêm em dois sabores: à \emph{esquerda} e à \emph{direita}
+dependendo em se #w# é um filho à direita ou esquerda de #u#, respectivamente.
+\index{rotação à esquerda}%
+\index{rotação à direita}%
 
 \begin{figure}
   \begin{center}
      \includegraphics[width=\ScaleIfNeeded]{figs/rotation}
   \end{center}
-  \caption{Left and right rotations in a binary search tree.}
+  \caption{Rotações à esquerda e direita em uma árvore binária de busca.}
   \figlabel{rotations}
 \end{figure}
 
-The code that implements this has to handle these two possibilities and
-be careful of a boundary case (when #u# is the root), so the actual code
-is a little longer than \figref{rotations} would lead a reader to believe:
+O código que implementa isso tem que lidar com essas duas possibilidades
+e ser cuidadoso com um caso especial (quando #u# for a raiz), então o
+código real é um pouco mais longo que 
+ \figref{rotations} daria a entender:
 \codeimport{ods/BinarySearchTree.rotateLeft(u).rotateRight(u)}
 \label{page:rotations}
-In terms of the #Treap# data structure, the most important property of a
-rotation is that the depth of #w# decreases by one while the depth of #u#
-increases by one.
+Em termos da estrutura de dados #Treap#, a propriedade mais importante de uma rotação é que a profundidade de #w# é reduzido em 1 enquanto a profundidade de
+#w# aumenta em 1.
 
-Using rotations, we can implement the #add(x)# operation as follows:
-We create a new node, #u#, assign #u.x=x#, and pick a random value
-for #u.p#.  Next we add #u# using the usual #add(x)# algorithm
-for a #BinarySearchTree#, so that #u# is now a leaf of the #Treap#.
-At this point, our #Treap# satisfies the binary search tree property,
-but not necessarily the heap property.  In particular, it may be the
-case that #u.parent.p > u.p#.  If this is the case, then we perform a
-rotation at node #w#=#u.parent# so that #u# becomes the parent of #w#.
-If #u# continues to violate the heap property, we will have to repeat this, decreasing #u#'s depth by one every time, until
-#u# either becomes the root or $#u.parent.p# < #u.p#$.
+Usando rotações, podemos implementar a operação
+#add(x)# da forma a seguir: 
+criamos um nodo #u#, atribuímos #u.x = x# e pegamos um valor aleatório
+para #u.p#. Depois adicionamos #u# usando o algoritmo #add(x)# usual para
+uma 
+#BinarySearchTree#, então #u# é agora uma folha da #Treap#.
+Nesse ponto, nossa #Treap# satisfaz a propriedade das árvores binárias de busca,
+mas não necessariamente a propriedade das heaps.
+
+Em particular, pode ser o caso que #u.parent.p > u.p#.
+Se esse é o caso, então realizamos uma rotação no nodo 
+#w#=#u.parent# tal que #u# se torna o pai de #w#.
+
+Se #u# continua a violar a propriedade das heaps, teremos que repetir isso,
+decrescendo a profundidade de #u# em um a cada vez, até que
+#u# se torne raiz ou 
+$#u.parent.p# < #u.p#$.
 \codeimport{ods/Treap.add(x).bubbleUp(u)}
-An example of an #add(x)# operation is shown in \figref{treap-add}.
+Um exemplo de uma operação
+#add(x)# é mostrado em \figref{treap-add}.
 
 \begin{figure}
   \begin{center}
@@ -378,37 +386,32 @@ An example of an #add(x)# operation is shown in \figref{treap-add}.
   \includegraphics[width=\ScaleIfNeeded]{figs/treap-insert-b} \\
   \includegraphics[width=\ScaleIfNeeded]{figs/treap-insert-c} \\
   \end{center}
-  \caption[Adding to a Treap]{Adding the value 1.5 into the #Treap# from \figref{treap}.}
+  \caption[Adiciionando a uma Treap]{Adicionando o valor 1.5 na #Treap# em \figref{treap}.}
   \figlabel{treap-add}
 \end{figure}
 
-The running time of the #add(x)# operation is given by the time it
-takes to follow the search path for #x# plus the number of rotations
-performed to move the newly-added node, #u#, up to its correct location
-in the #Treap#.  By \lemref{rbs-treap}, the expected length of the
-search path is at most $2\ln #n#+O(1)$.  Furthermore, each rotation
-decreases the depth of #u#.   This stops if #u# becomes the root, so
-the expected number of rotations cannot exceed the expected length of
-the search path.  Therefore, the expected running time of the #add(x)#
-operation in a #Treap# is $O(\log #n#)$.  (\excref{treap-rotates}
-asks you to show that the expected number of rotations performed during
-an addition is actually only $O(1)$.)
+O tempo de execução da operação 
+#add(x)# é dado pelo tempo que leva para seguir o caminho de busca para #x# mais o número de rotações realizadas para mover o novo nodo #u# subindo a árvore até sua posição correta na
+#Treap#.  
+De acordo com \lemref{rbs-treap}, o comprimento esperado do caminho de busca é no máximo $2\ln #n#+O(1)$.  Além disso, cada rotação reduz a profundidade de #u#.
+Isso para se #u# se torna raiz, então o número esperado de rotações não pode exceder o comprimento esperado do caminho de busca. Portanto o tempo esperado de execução da operação #add(x)# em uma #Treap# é $O(\log #n#)$. (\excref{treap-rotates} pede que se mostre que o número esperado de rotações realizadas durante uma adição é na verdade somente $O(1)$.)
 
-The #remove(x)# operation in a #Treap# is the opposite of the #add(x)#
-operation.  We search for the node, #u#, containing #x#, then perform
-rotations to move #u# downwards until it becomes a leaf, and then we
-splice #u# from the #Treap#.  Notice that, to move #u# downwards, we can
-perform either a left or right rotation at #u#, which will replace #u#
-with #u.right# or #u.left#, respectively.
-The choice is made by the first of the following that apply:
+A operação
+#remove(x)# em uma #Treap# é o oposto da operação #add(x)#. 
+Buscamos pelo nodo #u#, contendo #x#, então realizamos rotações para mover
+#u# abaixo na árvore até que se torne uma folha e então removemos
+#u# da #Treap#. Note que, para mover #u# árvore abaixo, podemos fazer
+uma rotação à esquerda ou direita em #u#, que subtituir #u# com #u.right#
+ou #u.left#, respectivamente.
+A escolha é feita de acordo com a primeira das seguintes regras que for adequada:
 \begin{enumerate}
-\item If #u.left# and #u.right# are both #null#, then #u# is a leaf and no rotation is performed.
-\item If #u.left# (or #u.right#) is #null#, then perform a right (or left, respectively) rotation at #u#.
-\item If $#u.left.p# < #u.right.p#$ (or $#u.left.p# > #u.right.p#)$, then perform a right rotation (or left rotation, respectively) at #u#.
+\item Se #u.left# e #u.right# forem ambos #null#, então #u# é uma folha e nenhuma rotação é realizada.
+\item Se #u.left# (ou #u.right#) for #null#, então realizar uma rotação à direita (ou à esquerda, respectivamente) em #u#.
+\item Se $#u.left.p# < #u.right.p#$ (ou $#u.left.p# > #u.right.p#)$, então realizar uma rotação à direita (ou rotação à esquerda, respectivamente) em #u#.
 \end{enumerate}
-These three rules ensure that the #Treap# doesn't become disconnected and that the heap property is restored once #u# is removed.
+Essas três regras asseguram que #Treap# não se torne desconectada e que a propriedade das heaps é restabelecida uma vez que #u# seja removida. 
 \codeimport{ods/Treap.remove(x).trickleDown(u)}
-An example of the #remove(x)# operation is shown in \figref{treap-remove}.
+Um exemplo da operação #remove(x)# é mostrado em \figref{treap-remove}.
 \begin{figure}
   \begin{center}
   \includegraphics[height=\QuarterHeightScaleIfNeeded]{figs/treap-delete-a} \\
@@ -416,275 +419,258 @@ An example of the #remove(x)# operation is shown in \figref{treap-remove}.
   \includegraphics[height=\QuarterHeightScaleIfNeeded]{figs/treap-delete-c} \\
   \includegraphics[height=\QuarterHeightScaleIfNeeded]{figs/treap-delete-d} 
   \end{center}
-  \caption[Removing from a treap]{Removing the value 9 from the #Treap# in \figref{treap}.}
+  \caption[Removendo de uma treap]{Removendo o valor 9 da #Treap# em \figref{treap}.}
   \figlabel{treap-remove}
 \end{figure}
 
-The trick to analyze the running time of the #remove(x)# operation is
-to notice that this operation reverses the #add(x)# operation.
-In particular, if we were to reinsert #x#, using the same priority #u.p#,
-then the #add(x)# operation would do exactly the same number of rotations
-and would restore the #Treap# to exactly the same state it was in before
-the #remove(x)# operation took place.  (Reading from bottom-to-top,
-\figref{treap-remove} illustrates the addition of the value 9 into a
-#Treap#.) This means that the expected running time of the #remove(x)#
-on a #Treap# of size #n# is proportional to the expected running time
-of the #add(x)# operation on a #Treap# of size $#n#-1$.  We conclude
-that the expected running time of #remove(x)# is $O(\log #n#)$.
+O truque para analisar o tempo de execução da operação 
+#remove(x)# é notar que essa operação inverte a operação #add(x)#. 
+Em particular, se fossemos reinserir #x# usando a mesmo prioridade #u.p#, 
+então a operação #add(x)# faria exatamente o mesmo número de rotações
+e restabeceria a #Treap# para exatamente o mesmo estado que estava antes
+que a operação #remove(x)# ocorreu.
 
-\subsection{Summary}
+(Lendo de cima para baixo, \figref{treap-remove} ilustra a adição do valor $9$ em uma #Treap#.)
+Isso significa que o tempo de execução esperado de #remove(x)# em uma #Treap# de tamanho #n# é proporcional ao tempo esperado de execução da operação #add(x)# em um #Treap# de tamanho $#n#-1$.  Concluímos que o tempo esperado de execução de #remove(x)# é $O(\log #n#)$.
 
-The following theorem summarizes the performance of the #Treap# data
-structure:
+\subsection{Resumo}
+
+O teorema a seguir resume o desempenho da estrutura de dados #Treap#:
 
 \begin{thm}
-A #Treap# implements the #SSet# interface. A #Treap# supports
-the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log #n#)$
-expected time per operation.
+Uma #Treap# implementa a interface #SSet#. Uma #Treap# executa 
+as operações #add(x)#, #remove(x)# e #find(x)# em $O(\log #n#)$
+de tempo esperado por operação.
 \end{thm}
 
-It is worth comparing the #Treap# data structure to the #SkiplistSSet#
-data structure.  Both implement the #SSet# operations in $O(\log #n#)$
-expected time per operation.  In both data structures, #add(x)# and
-#remove(x)# involve a search and then a constant number of pointer changes
-(see \excref{treap-rotates} below).  Thus, for both these structures,
-the expected length of the search path is the critical value in assessing
-their performance.  In a #SkiplistSSet#, the expected length of a search
-path is
+Vale a pena comparar a estrutura de dados 
+#Treap# à estrutura de dados #SkiplistSSet#
+.  Ambas implementam operações #SSet# em $O(\log #n#)$ de tempo esperado por operação. 
+Na duas estruturas de dados, #add(x)# e #remove(x)# envolvem uma busca e então um número constante de mudanças de ponteiros
+(veja \excref{treap-rotates} a seguir). Então, para essas estruturas, o comprimento esperado do caminho de busca é um valor crítico na avaliação de seus desempenhos.
+Em uma #SkiplistSSet#, o comprimento esperado de um caminho de busca é 
 \[
      2\log #n# + O(1) \enspace ,
 \]
-In a #Treap#, the expected length of a search path is 
+Em uma #Treap#, o comprimento esperado de um caminho de busca é
 \[
     2\ln #n# +O(1) \approx 1.386\log #n#  + O(1) \enspace .
 \]
-Thus, the search paths in a #Treap# are considerably shorter and this
-translates into noticeably faster operations on #Treap#s than #Skiplist#s.
-\excref{skiplist-opt} in \chapref{skiplists} shows how the
-expected length of the search path in a #Skiplist# can be reduced to
+Então, os caminhos de busca em um 
+#Treap# são consideravelmente mais curtos e isso traduz em operações 
+mais rápidas em #Treap#s que #Skiplist#s. 
+\excref{skiplist-opt} em \chapref{skiplists} mostra como o comprimento
+esperado do caminho de busca em uma 
+ #Skiplist# pode ser reduzido a 
 \[
      e\ln #n# + O(1) \approx 1.884\log #n# + O(1) 
 \]
-by using biased coin tosses.  Even with this optimization, the expected
-length of search paths in a #SkiplistSSet# is noticeably longer than in
-a #Treap#.
+pelo uso de lançamentos de moedas tendenciosas.
+Mesmo com essa otimização, o comprimento esperado de caminhos de busca 
+em uma 
+#SkiplistSSet# é notavelmente maior que em uma 
+#Treap#.
 
-\section{Discussion and Exercises}
+\section{Discussão e Exercícios}
 
-Random binary search trees have been studied extensively.  Devroye
-\cite{d88} gives a proof of \lemref{rbs} and related results. There are
-much stronger results in the literature as well, the most impressive
-of which is due to Reed \cite{r03}, who shows that the expected height
-of a random binary search tree is
+Árvores binárias de busca aleatórias têm sido estudados extensivamente.
+Devroye
+\cite{d88} provou \lemref{rbs} e outros resultados relacionados. 
+Há resultados bem mais precisos na literatura também, o mais impressionant do qual é
+de Reed
+\cite{r03}, que mostra que a altura esperada de uma árvore binária de busca aleatória é 
 \[
   \alpha\ln n - \beta\ln\ln n + O(1)
 \]
-where $\alpha\approx4.31107$ is the unique solution on the
-interval $[2,\infty)$ of the equation $\alpha\ln((2e/\alpha))=1$ and
-$\beta=\frac{3}{2\ln(\alpha/2)}$ .  Furthermore, the variance of the
-height is constant.
+onde $\alpha\approx4.31107$ é a única solução no intervalo 
+$[2,\infty)$ da equação $\alpha\ln((2e/\alpha))=1$ e 
+$\beta=\frac{3}{2\ln(\alpha/2)}$ .  Além disso, a variância da altura é constante.
 
-The name #Treap# was coined by Seidel and Aragon \cite{as96} who discussed
-#Treap#s and some of their variants.  However, their basic structure was
-studied much earlier by Vuillemin \cite{v80} who called them Cartesian
-trees.
+O nome #Treap# foi cunhado por 
+ Seidel e Aragon \cite{as96} que discutiram as propriedades das 
+#Treap#s e algumas de suas variantes. Entretanto, 
+a estrutura básica da #Treap# foi estudada muito antes por 
+Vuillemin \cite{v80} que chamou elas de árvores cartesianas.
 
-One possible space-optimization of the #Treap# data structure 
-is the elimination of the explicit storage of the priority #p#
-in each node. Instead, the priority of a node, #u#, is computed by
-hashing #u#'s address in memory\javaonly{ (in 32-bit Java, this is equivalent
-to hashing #u.hashCode()#)}.  Although a number of hash functions will
-probably work well for this in practice, for the important parts of the
-proof of \lemref{rbs} to remain valid, the hash function should be randomized
-and have the \emph{min-wise independent property}:
-\index{min-wise independence}%
-For any distinct
-values $x_1,\ldots,x_k$, each of the hash values $h(x_1),\ldots,h(x_k)$
-should be distinct with high probability and, for each $i\in\{1,\ldots,k\}$,
+Uma possibilidade de otimização relacionada ao uso de memória da 
+estrutura de dados #Treap# é a eliminação do armazenamento explícito
+da prioridade #p# em cada nodo. Em vez idsso, a prioridade de um nodo #u#
+é computado usando o hashing do endereço de #u# em memória
+\javaonly{ (no Java 32-bits, isso é equivalente a fazer o hashing de 
+#u.hashCode()#)}.  Embora muitas funções has provavelmente funcionam bem para isso na prática, para as partes importantes da prova 
+de \lemref{rbs} continuarem a serem válidas, a função hash deve ser randomizada e ter 
+a \emph{propriedade de independência em relação ao mínimo}:
+\index{independência em relação ao mínimo}%
+Para quaisquer valores distintos
+$x_1,\ldots,x_k$, cada um dos valores hash $h(x_1),\ldots,h(x_k)$
+devem ser distintos com alta probabilidade e para cada $i\in\{1,\ldots,k\}$,
 \[
    \Pr\{h(x_i) = \min\{h(x_1),\ldots,h(x_k)\}\} \le c/k
 \]
-for some constant $c$.
-One such class of hash functions that is easy to implement and fairly
-fast is \emph{tabulation hashing} (\secref{tabulation}).
-\index{tabulation hashing}%
-\index{hashing!tabulation}%
+para alguma constante $c$.
+Uma classe de funções hash desse tipo que é fácil de implementar e
+razoavelmente rápida é \emph{hashing por tabulação} 
+(\secref{tabulation}).
+\index{hashing por tabulação}%
+\index{hashing!tabulaçãofilme star wars luke nasceu}%
 
-Another #Treap# variant that doesn't store priorities at each node is
-the randomized binary search tree
-\index{randomized binary search tree}%
-\index{binary search tree!randomized}%
-of Mart\'\i nez and Roura \cite{mr98}.
-In this variant, every node, #u#, stores the size, #u.size#, of the
-subtree rooted at #u#.  Both the #add(x)# and #remove(x)# algorithms are
-randomized. The algorithm for adding #x# to the subtree rooted at #u#
-does the following:
+Outra variante 
+#Treap# que não guarda prioridade em cada nodo é a árvore binária de busca randomizada. 
+\index{árvore binária de busca randomizada}%
+\index{árvore binária de busca!randomizada}%
+de Mart\'\i nez e Roura \cite{mr98}.
+Nessa variante, todo nodo #u# guarda o tamanho #u.size# da subárvore enraizada em #u#. Ambos algoritmos 
+ #add(x)# e #remove(x)# algorithms são randomizados 
+. O algoritmo para adicionar #x# à subárvore enraizada em #u#
+faz o seguinte:
 \begin{enumerate}
-   \item With probability $1/(#size(u)#+1)$, the value #x# is added
-   the usual way, as a leaf, and rotations are then done to bring #x#
-   up to the root of this subtree.
-   \item Otherwise (with probability $1-1/(#size(u)#+1)$), the value #x#
-   is recursively added into one of the two subtrees rooted at #u.left#
-   or #u.right#, as appropriate.
+   \item Com probabilidade $1/(#size(u)#+1)$, %TODO
+     o valor #x# é adicionado normalmente, como uma folha, e rotações 
+     são então feitas para trazer #x# à raiz dessa subárvore. 
+   \item Caso contrário, (com probabilidade $1-1/(#size(u)#+1)$), o valor #x#
+   é recursivamente adicionado em uma das duas subárvores enraizadas em  #u.left#
+   ou #u.right#, conforme apropriado.
 \end{enumerate}
-The first case corresponds to an #add(x)# operation in a #Treap# where
-#x#'s node receives a random priority that is smaller than any of the
-#size(u)# priorities in #u#'s subtree, and this case occurs with exactly
-the same probability.
+O primeiro caso corresponde a uma operação #add(x)# em uma #Treap# onde o nodo 
+de #x# recebe uma prioridade aleatória que é menor que qualquer uma das prioridades na subárvore de #u# e esse caso ocorre com exatamente a mesma probabilidade.
 
-Removing a value #x# from a randomized binary search tree is similar
-to the process of removing from a #Treap#.  We find the node, #u#,
-that contains #x# and then perform rotations that repeatedly increase
-the depth of #u# until it becomes a leaf, at which point we can splice
-it from the tree.  The choice of whether to perform a left or right
-rotation at each step is randomized.
+A remoção de um valor #x# de uma árvore binária de busca randomizada é similar
+ao processo de remoção de uma #Treap#. Achamos o nodo #u# que contém #x# e então
+realizamos rotações que repetidamente aumentar a profundidade de #u# até tornar-se uma folha, onde podemos remover da árvore. A decisão de fazer rotações à esquerda
+ou direita é randomizada. 
 \begin{enumerate}
-  \item With probability #u.left.size/(u.size-1)#, we perform a right
-  rotation at #u#, making #u.left# the root of the subtree that was
-  formerly rooted at #u#.
-  \item  With probability #u.right.size/(u.size-1)#, we perform a left
-  rotation at #u#, making #u.right# the root of the subtree that was
-  formerly rooted at #u#.
+  \item Com probabilidade #u.left.size/(u.size-1)#, fazemos uma rotação à direita em #u#, fazendo #u.left# a raiz da subárvore que anteriormente estava enraizada em #u#. 
+  \item  Com probabilidade #u.right.size/(u.size-1)#, realizamos uma rotação à esquerda em #u#, fazendo #u.right# a raiz da subárvore que estava anteriormente 
+    enraizada em #u#.
 \end{enumerate}
-Again, we can easily verify that these are exactly the same probabilities
-that the removal algorithm in a #Treap# will perform a left or right
-rotation of #u#.
+Novamente, podemos facilmente verificar que essas são exatamente as mesmas
+probabilidades que o algoritmo de remoção em uma #Treap# terá para fazer rotação à esquerda ou direita de #u#.
 
-Randomized binary search trees have the disadvantage, compared to treaps,
-that when adding and removing elements they make many random choices, and
-they must maintain the sizes of subtrees.  One advantage of randomized
-binary search trees over treaps is that subtree sizes can serve another
-useful purpose, namely to provide access by rank in $O(\log #n#)$ expected
-time (see \excref{treap-get}).  In comparison, the random priorities
-stored in treap nodes have no use other than keeping the treap balanced.
+Árvores binárias de busca randomizada tem a desvantagem, em relação às treaps,
+de que ao adicionar ou remover elementos elas farão muitas escolhas aleatórias
+e precisam manter os tamanhos das subárvores.
+Uma vantagem de árvores binárias de busca randomizada em relação às treaps é que
+os tamanhos de subárvores pode servir para outra utilidade: prover acesso por rank
+em tempo esperado $O(\log #n#)$ (veja \excref{treap-get}).  
+Em comparação, as prioridades aleatórias guardadas em nodos de uma treap somente são úteis para manter a treap balanceada. 
 
 \begin{exc}
-  Illustrate the addition of 4.5 (with priority 7) and then 7.5 (with
-  priority 20) on the #Treap# in \figref{treap}.
+  Simule a adição de 4.5 (com prioridade 7) e então 7.5 (com prioridade 20) na #Treap# em \figref{treap}.
 \end{exc}
 
 \begin{exc}
-  Illustrate the removal of 5 and then 7 on the #Treap# in \figref{treap}.
+  Simule a remoção do elemento 5 e então do elemento 7 na #Treap# em
+  \figref{treap}.
 \end{exc}
 
 \begin{exc}
-  Prove the assertion that there are $21,964,800$ sequences that generate
-  the tree on the right hand side of \figref{rbs-lvc}.  (Hint: Give a
-  recursive formula for the number of sequences that generate a complete
-  binary tree of height $h$ and evaluate this formula for $h=3$.)
+  Prove que existem $21,964,800$ sequências que geram a árvore
+  do lado direito de 
+   \figref{rbs-lvc}.  (Dica: obtenha uma fórmula recursiva para o número
+   de sequências que geram uma árvore binária de altura $h$ e use essa
+   fórmula para $h=3$.) 
 \end{exc}
 
 \begin{exc}
-  Design and implement the #permute(a)# method that takes as input an
-  array, #a#, that contains #n# distinct values and randomly permutes #a#.
-  The method should run in $O(#n#)$ time and you should prove that each
-  of the $#n#!$ possible permutations of #a# is equally probable. 
+  Projete e implemente o método
+  #permute(a)# que contém #n# valores distintos e aleatoriamente permuta #a#. 
+  O método deve rodar em 
+  $O(#n#)$ de tempo e você deve provar que cada uma das 
+  $#n#!$ possíveis permutações de #a# é igualmente provável.
 \end{exc}
 
 \begin{exc}\exclabel{treap-rotates}
-  Use both parts of \lemref{rbs-treap} to prove that the expected number
-  of rotations performed by an #add(x)# operation (and hence also a
-  #remove(x)# operation) is $O(1)$.
+  Use ambas partes de
+  \lemref{rbs-treap} para provar que o número esperado de rotações
+  realizadas por uma operação #add(x)# (e portanto uma operação 
+  #remove(x)#) é $O(1)$.
 \end{exc}
 
 \begin{exc}
-  Modify the #Treap# implementation given here so that it does not
-  explicitly store priorities.  Instead, it should simulate them by
-  hashing the #hashCode()# of each node.
+  Modifique a implementação
+  #Treap# dada aqui para que não guarde explicitamente os valores de prioridades. 
+  Em vez disso, você deve simular esses valores com o hashing de cada nodo usando #hashCode()#.
 \end{exc}
 
 \begin{exc}
-  Suppose that a binary search tree stores, at each node, #u#, the height,
-  #u.height#, of the subtree rooted at #u#, and the size, #u.size# of
-  the subtree rooted at #u#. 
+  Suponha que uma árvore binária de busca guarda em cada nodo #u# a altura 
+  #u.height# da subárvore enraizada em #u# e o tamanho #u.size# da subárvore
+  enraizada em #u#. 
   \begin{enumerate}
-    \item Show how, if we perform a left or right
-      rotation at #u#, then these two quantities can be updated, in
-      constant time, for all nodes affected by the rotation.
-    \item Explain why the same result is not possible if we try to
-      also store the depth, #u.depth#, of each node #u#.
+    \item Mostre que, se fizermos uma rotação à esquerda ou direita em #u#, então
+      essas duas quantidade podem ser atualizadas em tempo constante para todos os nodos afetados pela rotação. 
+    \item Explique porque o mesmo resultado não é possível se tentarmos também guardar a profundidade #u.depth# de cada nodo #u#. 
   \end{enumerate}
 \end{exc}
 
 \begin{exc}
-  Design and implement an algorithm that constructs a #Treap# from a
-  sorted array, #a#, of #n# elements.  This method should run in $O(#n#)$
-  worst-case time and should construct a #Treap# that is indistinguishable
-  from one in which the elements of #a# were added one at a time using
-  the #add(x)# method.
+  Projete e implemente um algoritmo que constrói uma #Treap# a partir de um 
+  array ordenado #a# de #n# elementos. Esse método deve rodar em 
+  $O(#n#)$ de tempo no pios caso e deve construir uma #Treap# que é
+  indistinguível de uma em que os elementos de #a# foram adicionados um
+  por vez usando o método #add(x)#.
 \end{exc}
-
 
 \begin{exc}
   \index{finger}%
-  \index{finger search!in a treap}%
-  This exercise works out the details of how one can efficiently search
-  a #Treap# given a pointer that is close to the node we are searching for.
+  \index{busca finger!em uma treap}%
+  Este exercício trabalha os detalhes de como é possível eficientemente
+  fazer buscas em uma #Treap# dado um ponteiro que está próximo ao nodo
+  que estamos procurando. 
   \begin{enumerate}
-    \item Design and implement a #Treap# implementation in which each
-      node keeps track of the minimum and maximum values in its subtree.
-    \item Using this extra information, add a #fingerFind(x,u)# method
-      that executes the #find(x)# operation with the help of a pointer
-      to the node #u# (which is hopefully not far from the node that
-      contains #x#).  This operation should start at #u# and walk upwards
-      until it reaches a node #w# such that $#w.min#\le #x#\le #w.max#$.
-      From that point onwards, it should perform a standard search
-      for #x# starting from #w#.  (One can show that #fingerFind(x,u)#
-      takes $O(1+\log r)$ time, where $r$ is the number of elements in
-      the treap whose value is between #x# and #u.x#.)
-    \item Extend your implementation into a version of a treap that
-      starts all its #find(x)# operations from the node most recently
-      found by #find(x)#.
+    \item Projete e implemente uma #Treap# em que cada nodo registra os valores mínimos e máximos em sua subárvore. 
+    \item Usando essa informação extrea, adicione um método #fingerFind(x,u)#
+      que executa a operação
+      #find(x)# com a ajudar de um ponteiro para o nodo #u# (que 
+      espera-se que não esteja distante do nodo que contém #x#).
+      Essa operação deve iniciar em #u# subir na árvore até que alcance um
+      nodo #w# tal que 
+       $#w.min#\le #x#\le #w.max#$.
+      A partir desse ponto, deve-se realizar uma busca padrão por #x#
+      partindo de #w#. 
+      (É possível mostrar que
+       #fingerFind(x,u)# leva
+      $O(1+\log r)$ de tempo, onde $r$ é o número de elementos em uma treap cujo valor está entre #x# e #u.x#.) 
+    \item Estenda sua implementação em uma versão de treap que  inicia todas as operações #find(x)# a partir do nodo mais recentemente encontrado por #find(x)#. 
   \end{enumerate}
 \end{exc}
 
 \begin{exc}\exclabel{treap-get}
-  Design and implement a version of a #Treap# that includes a #get(i)#
-  operation that returns the key with rank #i# in the #Treap#.  (Hint:
-  Have each node, #u#, keep track of the size of the subtree rooted
-  at #u#.)
+  Projete e implemente uma versão de #Treap# que inclui uma operação
+  #get(i)#
+  que retorna a chave com rank #i# na #Treap#.  (Dica: faça que cada nodo #u# registre o tamanho da subárvore enraizada em #u#.) Hint:
 \end{exc}
 
 \begin{exc}
   \index{TreapList@#TreapList#}%
-  Implement a #TreapList#, an implementation of the #List# interface
-  as a treap.  Each node in the treap should store a list item, and an
-  in-order traversal of the treap finds the items in the same order that
-  they occur in the list.  All the #List# operations #get(i)#, #set(i,x)#,
-  #add(i,x)# and #remove(i)# should run in $O(\log #n#)$ expected time.
+  Codifique uma #TreapList#, uma implementação de uma interface #List# na forma de uma treap.  Cada nodo na treap deve guardar um item da lista e uma 
+  travessia em-ordem na treap encontra os itens na mesma ordem que ocorrem na lista.
+  Todas as operações da #List#,
+  #get(i)#, #set(i,x)#,
+  #add(i,x)# e #remove(i)# rodar em tempo esperado $O(\log #n#)$.
 \end{exc}
 
-
-
 \begin{exc}\exclabel{treap-split}
-  Design and implement a version of a #Treap# that supports the #split(x)#
-  operation.  This operation removes all values from the #Treap# that
-  are greater than #x# and returns a second #Treap# that contains all
-  the removed values.
+  Projete e implemente uma versão de uma #Treap# que aceita a operação #split(x)#.
+  Essa operação remove todos os valores da #Treap# que são maiores que 
+  #x# e retorna uma segunda #Treap# que contém todos os valores removidos.
 
-  \noindent Example: the code #t2 = t.split(x)# removes from #t# all values
-  greater than #x# and returns a new #Treap# #t2# containing all
-  these values. The #split(x)# operation should run in $O(\log #n#)$
-  expected time.
+  \noindent Exemplo: o código #t2 = t.split(x)# remove de #t# todos os
+  valores maiores que 
+  #x# e retorna uma nova #Treap# #t2# contendo todos esses valores. 
+ A operação #split(x)# devem rodar em tempo esperado $O(\log #n#)$.
 
-  \noindent Warning: For this modification to work properly and still allow the
-  #size()# method to run in constant time, it is necessary to implement
-  the modifications in \excref{treap-get}.
+  \noindent Aviso: Para essa modificação funcionar adequadamente e ainda possibilitar o método #size()# rodar em tempo constante, é necessário implementar as modificações em \excref{treap-get}.
 \end{exc}
 
 \begin{exc}\exclabel{treap-join}
-  Design and implement a version of a #Treap# that supports the
-  #absorb(t2)# operation, which can be thought of as the inverse of
-  the #split(x)# operation.  This operation removes all values from the
-  #Treap# #t2# and adds them to the receiver.  This operation presupposes
-  that the smallest value in #t2# is greater than the largest value in
-  the receiver.  The #absorb(t2)# operation should run in $O(\log #n#)$
-  expected time.
+  Projete e implemente uma versão de uma #Treap# que aceita a operação
+  #absorb(t2)#, que pode ser pensada como o inverso da operação #split(x)#. 
+  Essa operação remove todos os valores da #Treap# #t2# e os adiciona ao receptor.
+  Essa operação pressupõe que o menor valor em #t2# é maior que o maior valor no receptor. A operação #absorb(t2)# deve rodar em tempo esperado 
+  $O(\log #n#)$.
 \end{exc}
 
 \begin{exc}
-  Implement Martinez's randomized binary search trees, as discussed in
-  this section.  Compare the performance of your implementation with
-  that of the #Treap# implementation.
+  Implemente a árvore binária de busca randomizada de Martinez conforme discutido nesta seção. Compare o desempenho da sua implementação com a implementação da #Treap#. 
 \end{exc}
-
