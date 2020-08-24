@@ -1,98 +1,105 @@
-\chapter{Red-Black Trees}
+%%merge = união
+%%split = repartição
+\r{ck.tex" 776L, 36435C written
+ Árvores Rubro-Negras}
 \chaplabel{redblack}
 
 \index{binary search tree!red-black}%
+\index{árvore binária de busca!rubro-negra}%
 \index{red-black tree}%
-In this chapter, we present red-black trees, a version of binary search
-trees with logarithmic height.  Red-black trees are one of the most
-widely used data structures.  They appear as the primary search structure
-in many library implementations, including the Java Collections Framework
-and several implementations of the C++ Standard Template Library. They
-are also used within the Linux operating system kernel.  There are
-several reasons for the popularity of red-black trees:
+\index{árvore rubro-negra}%
+Neste capítulo, apresentamos as árvores rubro-negras (em inglês, red-black trees), 
+uma versão de árvores binárias de busca com altura logarítmica.
+Árvores rubros-negras são as estruturas de dados mais amplamente usadas.
+Elas aparecerem como estrutura de busca primária em muitas implementações, incluindo a 
+Java Collections Framework
+e várias implementações da 
+C++ Standard Template Library. Elas também são usadas dentro do kernel Linux. Existem várias razões para a popularidade das árvores rubro-negras:
 \begin{enumerate}
-\item A red-black tree storing #n# values has height at most $2\log #n#$.
-\item The #add(x)# and #remove(x)# operations on a red-black tree run
-   in $O(\log #n#)$ \emph{worst-case} time.
-\item The amortized number of rotations performed during an #add(x)#
-   or #remove(x)# operation is constant.
+\item Uma árvore rubro-negra com #n# valores tem altura no máximo $2\log #n#$.
+\item As operações #add(x)# e #remove(x)# em uma árvore rubro-negra rodam em tempo 
+    $O(\log #n#)$ no \emph{pior caso}.
+\item O número amortizado de rotações realizado durante uma operação #add(x)#
+   ou #remove(x)# é constante.
 \end{enumerate}
-The first two of these properties already put red-black trees 
-ahead of skiplists, treaps, and scapegoat trees.
-Skiplists and treaps rely on randomization and their $O(\log #n#)$
-running times are only expected. Scapegoat trees have a guaranteed
-bound on their height, but #add(x)# and #remove(x)# only run in $O(\log
-#n#)$ amortized time.  The third property is just icing on the cake. It
-tells us that  that the time needed to add or remove an element #x# is
-dwarfed by the time it takes to find #x#.\footnote{Note that skiplists and
-treaps also have this property in the expected sense. See
-Exercises~\ref{exc:skiplist-changes} and \ref{exc:treap-rotates}.}
+As duas primeiras propriedades põem árvores rubro-negras a frente de skiplists,
+treaps e árvores scapegoat.
+Skiplists e treaps dependem de randomization e seus tempos de execução $O(\log #n#)$
+somente são esperados. Árvores scapegoat tem limitante garantido na altura, mas #add(x)# e #remove(x)# somente rodam em 
+tempo amortizado $O(\log
+#n#)$. A terceira propriedade é apenas a cereja do bolo. Ela nos diz que o tempo necessário para adicionar ou remover um elemento #x# é minúsculo em relação ao tempo que leva para achar #x#. 
+\footnote{Note que skiplists e
+treaps também tem essas propriedade de forma esperada. Veja 
+Exercícios~\ref{exc:skiplist-changes} e \ref{exc:treap-rotates}.}
 
-However, the nice properties of red-black trees come with a price:
-implementation complexity. Maintaining a bound of $2\log #n#$ on the
-height is not easy. It requires a careful analysis of a number of cases.
-We must ensure that the implementation does exactly the right
-thing in each case.  One misplaced rotation or change of colour produces
-a bug that can be very difficult to understand and track down.
+Entretanto, as boas propriedades de árvores rubro-negras têm um preço: complexidade de implementação. Manter um limitante de 
+$2\log #n#$ na altura não é fácil. 
+Isso exige uma análise cuidadosa de vários casos.
+Precisamos assegurar que a implementação siga exatamente os passos corretos em cada caso.
+Uma rotação mal posicionada ou um alteração de cor errada causa um bug que pode ser muito difícil de entender e resolver.
 
-Rather than jumping directly into the implementation of red-black trees,
-we will first provide some background on a related data structure:
-2-4 trees.  This will give some insight into how red-black trees were
-discovered and why efficiently maintaining them is even possible.
+Em vez de pular diretamente à implementação de árvores rubro-negras,
+primeiro construímos uma base por meio de uma estrutura de dados diretamente relacionada: árvore 2-4. Isso fornecerá entendimento de como árvores rubro-negras
+foram descobertas e porque é possível manter essa estrutura eficientemente.
 
-\section{2-4 Trees}
+\section{Árvore 2-4}
 \seclabel{twofour}
 
-A 2-4 tree is a rooted tree with the following properties:
+Uma árvore 2-4 é uma árvore enraizada com as seguintes propriedades: 
 \begin{prp}[height]
-  All leaves have the same depth.
+  Todas as folhas tem a mesma profundidade. 
 \end{prp}
 \begin{prp}[degree]
-  Every internal node has 2, 3, or 4 children.
+  Todo nodo interno tem 2,3 ou 4 filhos.
 \end{prp}
-An example of a 2-4 tree is shown in \figref{twofour-example}.
+Um exemplo de uma árvore 2-4 é mostrado na \figref{twofour-example}.
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/24rb-2}
   \end{center}
-  \caption{A 2-4 tree of height 3.}
+  \caption{Uma árvore 2-4 de altura 3.}
   \figlabel{twofour-example}
 \end{figure}
-The properties of 2-4 trees imply that their height is logarithmic in
-the number of leaves:
+As propriedades de uma árvore 2-4 implicam que sua altura é logarítmica no número de folhas:
 \begin{lem}\lemlabel{twofour-height}
-  A 2-4 tree with #n# leaves has height at most $\log #n#$.
+  A árvore 2-4 com #n# folhas tem altura até $\log #n#$.
 \end{lem}
 
 \begin{proof}
-  The lower-bound of 2 on the number of children of an internal node
-  implies that, if the height of a 2-4 tree is $h$, then it has at least
-  $2^h$ leaves.  In other words,
+  O limitante inferior de 2 no número de filhos de um nodo interno
+  implica que, se 
+   altura de uma árvore 2-4 é $h$, então ela tem pelo menos 
+  $2^h$ folhas.  Em outras palavras,
   \[
      #n# \ge 2^h \enspace .
   \]
-  Taking logarithms on both sides of this inequality gives $h \le \log #n#$.
+  Aplicando logaritmos em ambos lados dessa desigualdade resulta em 
+  $h \le \log #n#$.
 \end{proof}
 
-\subsection{Adding a Leaf}
+\subsection{Adição de uma Folha}
 
-Adding a leaf to a 2-4 tree is easy (see \figref{twofour-add}).  If we
-want to add a leaf #u# as the child of some node #w# on the second-last
-level, then we simply make #u# a child of #w#.  This certainly maintains
-the height property, but could violate the degree property;  if #w#
-had four children prior to adding #u#, then #w# now has five children.
-In this case, we \emph{split}
-\index{split}%
-#w# into two nodes, #w# and #w#', having
-two and three children, respectively.
-But now #w#' has no parent,
-so we recursively make #w#' a child of #w#'s parent.  Again, this may
-cause #w#'s parent to have too many children in which case we split it.
-This process goes on until we reach a node that has fewer than four children,
-or until we split the root, #r#, into two nodes #r# and #r'#.  In the
-latter case, we make a new root that has #r# and #r'# as children.
-This simultaneously increases the depth of all leaves and so maintains
-the height property.
+Adicionar uma folha a uma 
+árvore 2-4 é fácil (veja a \figref{twofour-add}).  Se
+queremos adicionar uma folha
+#u# com filha de um nodo #w# no penúltimo nível,
+então simplesmente fazemos #u# um filho de #w#. Isso certamente
+mantém a 
+propriedade da altura, mas pode violar a propriedade do grau; se #w#
+tinha quatro filhos antes de adicionar #u#, então #w# agora tem cinco filhos.
+Neste caso, \emph{repartimos}
+\index{repartição}%
+#w# em dois nodos, #w# e #w#', com dois e três filhos, respectivamente. 
+Mas agora 
+#w#' não tem pai, 
+então recursivamente tornamos 
+#w#' um filho do pai de #w#.  Novamente, isso pode fazer com que o pai de #w#
+tenha muitos filhos e, dessa forma, teremos que repartí-los.
+Esse processo segue repetidamente até alcançar um nodo que tem menos que quatro filhos, ou até repartimos a raiz #w# em dois nodos #r# e #r'#. No último caso,
+fazemos uma nova raiz que tem #r# e #r'# como filhos.
+Isso simultaneamente aumenta a
+ profundidade de todas as folhas e assim mantém propridade da
+altura.
 
 \begin{figure}
   \begin{center}
@@ -102,21 +109,22 @@ the height property.
      \includegraphics[scale=0.90909]{figs/24tree-add-3}
    \end{tabular}
   \end{center}
-  \caption[Adding a leaf to a 2-4 Tree]{Adding a leaf to a 2-4 Tree.
-  This process stops after one split because #w.parent# has a degree of less
-  than 4 before the addition.}
+  \caption[Adição de uma folha em uma árvore 2-4]{Adição de uma folha a uma árvore 2-4. Esse processo para após um repartição porque #w.parent# tem um grau menor que 4 antes da adição.}
   \figlabel{twofour-add}
 \end{figure}
 
-Since the height of the 2-4 tree is never more than $\log #n#$, the
-process of adding a leaf finishes after at most $\log #n#$ steps.
+Como a altura da árvore 2-4 nunca é maior que $\log #n#$, o 
+processo de adicionar uma folha termina após no máximo
+$\log #n#$ passos.
 
-\subsection{Removing a Leaf}
+\subsection{Remoção de um Folha}
 
-Removing a leaf from a 2-4 tree is a little more tricky (see
-\figref{twofour-remove}).  To remove a leaf #u# from its parent #w#, we
-just remove it.  If #w# had only two children prior to the removal of #u#,
-then #w# is left with only one child and violates the degree property.
+Remoção de uma folha de uma 
+árvore 2-4 é um pouco mais complicada (veja
+a \figref{twofour-remove}).  Para remover uma folha #u# de seu pai #w#, 
+então simplesmente a removemos. 
+Se #w# tivesse somente dois filhos antes à remoção de #u#,
+então #w# é deixamos com somente um filho o que viola a propriedade de grau.
 
 \begin{figure}
   \begin{center}
@@ -128,89 +136,92 @@ then #w# is left with only one child and violates the degree property.
      \includegraphics[height=\FifthHeightScaleIfNeeded]{figs/24tree-remove-5} \\
    \end{tabular}
   \end{center}
-  \caption[Removing a leaf from a 2-4 Tree]{Removing a leaf from a
-    2-4 Tree.  This process goes all the way to the root because each of
-    #u#'s ancestors and their siblings have only two children.}
+  \caption[Remoção de uma folha de uma árvore 2-4]{Remoção de uma folha de uma 
+    árvore 2-4.  Esse processo segue até a raiz pois cada 
+    ancestral de #u# e seus irmãos tem somente dois filhos.} 
   \figlabel{twofour-remove}
 \end{figure}
 
-To correct this, we look at #w#'s sibling, #w'#.  The node #w'# is
-sure to exist since #w#'s parent had at least two children.  If #w'#
-has three or four children, then we take one of these children from #w'#
-and give it to #w#. Now #w# has two children and #w'# has two or three
-children and we are done.
+Para corrigir isso, olhamos em um irmão de #w#, o #w'#. O nodo #w'#
+com certeza existe pois o pai de #w# tem pelo menos dois filhos. Se #w'#
+tem três ou quatro filhos, então pegamos um desses filhos de #w'#
+e o transferimos para #w#. Agora #w# tem dois filhos e #w'# tem dois ou
+três filhos e terminamos o processo.
 
-On the other hand, if #w'# has only two children, then we \emph{merge}
-\index{merge}%
-#w# and #w'# into a single node, #w#, that has three children.  Next we
-recursively remove #w'# from the parent of #w'#.  This process ends
-when we reach a node, #u#, where #u# or its sibling has more than two
-children, or when we reach the root.  In the latter case, if the root
-is left with only one child, then we delete the root and make its child
-the new root.  Again, this simultaneously decreases the height of every
-leaf and therefore maintains the height property.
+Por outro lado, se #w'# tem somente dois filhos, então fazemos uma fusão
+\index{fusão}%
+de #w# e #w'# em um único nodo, #w#, que tem três filhos. A seguir, 
+recursivamente removemos #w'# do pai de #w'#.  Esse processo
+termina guando alcançamos um nodo #u#, onde #u# ou um irmão seu tem mais de
+dois filhos, ou quando chegamos à raiz. No último caso, se a raiz 
+é deixada com somente um filho, então removemos a raiz e fazemos seu filho a
+nova raiz.
 
-Again, since the height of the tree is never more than $\log #n#$,
-the process of removing a leaf finishes after at most $\log #n#$ steps.
+Novamente, isso simultaneamente reduz a altua de toda folha e portanto
+mantém a propriedade de altura.
 
-\section{#RedBlackTree#: A Simulated 2-4 Tree}
+Como a altura da árvore não passa de $\log #n#$, o processo de remover uma folha acaba após no máximo $\log #n#$ passos.
+
+\section{#RedBlackTree#: Uma Árvore 2-4 Simulada}
 \seclabel{redblacktree}
 
-A red-black tree is a binary search tree in which each node, #u#,
-has a \emph{colour}
-\index{colour}%
-which is either \emph{red} or \emph{black}.  Red is
-represented by the value $0$ and black by the value $1$.
-\index{red node}%
-\index{black node}%
+Uma árvore rubro-negra é uma árvore binária de busca em que cada nodo #u#
+tem uma \emph{cor}
+\index{cor}%
+que é 
+\emph{vermelha} ou \emph{preta}.  Vermelho é representado pelo valor $0$
+e preto pelo valor $1$. 
+\index{nodo vermelho}%
+\index{nodo preto}%
 \javaimport{ods/RedBlackTree.red.black.Node<T>}
 \cppimport{ods/RedBlackTree.RedBlackNode.red.black}
 
-Before and after any operation on a red-black tree, the following two
-properties are satisfied. Each property is defined both in terms of the
-colours red and black, and in terms of the numeric values 0 and 1.
+Antes e depois de qualquer operação em uma árvore rubro-negra, as 
+seguinter duas propriedades satisfeitas. Cada propriedade é definida em
+termos das cores vermelha e preta e em termos dos valores numéricos 0 e 1.
+
 \begin{prp}[black-height]
-  \index{black-height property}%
-  There are the same number of black nodes on every root to leaf
-  path. (The sum of the colours on any root to leaf path is the same.)
+  \index{propriedade da altura preta}%
+  Há o mesmo número de nodos pretos em todo caminho da raiz para a folha.
+  (A soma das cores em qualquer caminho da raiz a uma folha é a mesma.)
 \end{prp}
 
 \begin{prp}[no-red-edge]
-  \index{no-red-edge property}%
-  No two red nodes are adjacent.  (For any node #u#, except the root,
+  \index{propriedade de nenhuma aresta vermelha}%
+  Não há nodos vermelhos adjacentes. (Para qualquer nodo #u#, exceto a raiz,
   $#u.colour# + #u.parent.colour# \ge 1$.)
 \end{prp}
-Notice that we can always colour the root, #r#, of a red-black tree black
-without violating either of these two properties, so we will assume
-that the root is black, and the algorithms for updating a red-black
-tree will maintain this.  Another trick that simplifies red-black trees
-is to treat the external nodes (represented by #nil#) as black nodes.
-This way, every real node, #u#, of a red-black tree has exactly two
-children, each with a well-defined colour.  An example of a red-black
-tree is shown in \figref{redblack-example}.
+Note que sempre podemos colorir a raiz #r# de uma árvore rubro-negra de preto 
+sem violar nenhuma dessas duas propriedades, então iremos
+assumir que a raiz é preta e os algoritmos para atualizar uma árvore rubro-negra
+irão manter isso.
+Outro truque que simplifica 
+rubro-negras
+é tratar os nodos externos (representados por #nil#) como nodos pretos.
+Dessa forma, todo nodo real, #u#, de uma árvore rubro-negra tem exatamente
+dois filhos, cada qual com uma cor bem definida. Um exemplo de uma
+árvore rubro-negra é mostrado na 
+\figref{redblack-example}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/24rb-1}
   \end{center}
-  \caption[A red-black tree]{An example of a red-black tree with black-height 3.  External (#nil#) nodes are drawn as squares.} 
+  \caption[Uma árvore rubro-negra]{Um exemplo de uma árvore rubro-negra com uma altura preta de 3. Nodos externos (#nil#) são desenhados como quadrados.}
   \figlabel{redblack-example}
 \end{figure}
 
 
-\subsection{Red-Black Trees and 2-4 Trees}
+\subsection{Árvores Rubro-Negras e Árvores 2-4}
 
-At first it might seem surprising that a red-black tree can be efficiently
-updated to maintain the black-height and no-red-edge properties, and
-it seems unusual to even consider these as useful properties.  However,
-red-black trees were designed to be an efficient simulation of 2-4 trees
-as binary trees.
+À primeira vista, pode parecer supreendente que uma árvore rubro-negra possa
+ser atualizada eficientemente para manter as propriedades de altura preta e de 
+nenhuma aresta vermelha e parece estranho considerar essas propriedades como úteis.
+Entretanto, árvores rubro-negras foram projetada para ser uma simulação eficiente das árvores 2-4 na forma de árvores binárias.
 
-Refer to \figref{twofour-redblack}.
-Consider any red-black tree, $T$, having #n# nodes and perform the
-following transformation: Remove each red node #u# and connect #u#'s two
-children directly to the (black) parent of #u#.  After this transformation
-we are left with a tree $T'$ having only black nodes.
+Veja a \figref{twofour-redblack}.
+Considere qualquer árvore rubro-negra, $T$, com #n# nodos e realize a seguinte transformação: remova cada nodo vermelho #u# e conecte os dois filhos de #u# diretamente ao pai (preto) de #u#.
+Após essa transformação, a árvore resultante $T'$ possui somente nodos pretos.
 \begin{figure}
   \begin{center}
     \begin{tabular}{cc}
@@ -218,46 +229,55 @@ we are left with a tree $T'$ having only black nodes.
       \includegraphics[scale=0.90909]{figs/24rb-2}
     \end{tabular}
   \end{center}
-  \caption{Every red-black tree has a corresponding 2-4 tree.}
+  \caption{Toda árvore rubro-negra tem uma árvore 2-4 correspondente.}
   \figlabel{twofour-redblack}
 \end{figure}
 
-Every internal node in $T'$ has two, three, or four children: A black
-node that started out with two black children will still have two
-black children after this transformation.  A black node that started
-out with one red and one black child will have three children after this
-transformation.  A black node that started out with two red children will
-have four children after this transformation.  Furthermore, the black-height
-property now guarantees that every root-to-leaf path in $T'$ has the
-same length.  In other words, $T'$ is a 2-4 tree!
+Todo nodo interno em $T'$ tem dois, três ou quatro filhos: um nodo preto 
+que tinha dois filhos pretos continuará com
+dois filhos pretos após essa transformação.
+Um nodo preto que tinha com um nodo preto e um vermelho terá três
+filhos após essa transformação.
+Um nodo preto que começou com dois filhos vermelhos terá quatro filhos após
+essa transformação. Além disso, a propriedade de altura preta garante
+que todo caminho da raiz até a folha em $T'$ tem o mesmo comprimento.
+Em outras palavras, $T'$ é uma 
+árvore 2-4!
 
-The 2-4 tree $T'$ has $#n#+1$ leaves that correspond to the $#n#+1$
-external nodes of the red-black tree.  Therefore, this tree has height
-at most $\log (#n#+1)$. Now, every root to leaf path in the 2-4 tree corresponds
-to a path from the root of the red-black tree $T$ to an external node.
-The first and last node in this path are black and at most one out of
-every two internal nodes is red, so this path has at most $\log(#n#+1)$
-black nodes and at most $\log(#n#+1)-1$ red nodes.  Therefore, the longest path from the root to any \emph{internal} node in $T$ is at most
+A árvore 2-4 $T'$ tem $#n#+1$ folhas que correspondem
+a $#n#+1$ nodos externos da árvore rubro-negra. Portanto, essa árvore
+tem altura de até 
+$\log (#n#+1)$. Agora, todo caminho da raiz para uma folha na árvore 2-4 corresponde
+a um caminho da raiz da árvore rubro-negra $T$ a um nodo externo.
+
+O primeiro e último nodo nesse caminho são pretos e no máximo de cada dois
+nodos internos é vermelho, então esse caminho tem no máximo
+$\log(#n#+1)$ nodos pretos e no máximo 
+$\log(#n#+1)-1$ nodos vermelhos. Portanto, o caminho mais longo da raiz para qualquer nodo \emph{interno} em $T$ é no máximo 
 \[
    2\log(#n#+1) -2 \le 2\log #n# \enspace ,
 \]
-for any $#n#\ge 1$.  This proves the most important property of
-red-black trees:
+para todo
+$#n#\ge 1$.  Isso a propriedade mais importante das 
+árvores rubro-negras:
 \begin{lem}
-The height of red-black tree with #n# nodes is at most $2\log #n#$.
+The altura de uma árvore rubro-negra com #n# nodos é no máximo $2\log #n#$.
 \end{lem}
 
-Now that we have seen the relationship between 2-4 trees and
-red-black trees, it is not hard to believe that we can efficiently
-maintain a red-black tree while adding and removing elements.  
+Agora que vimos a relação entre as árvores 2-4 e as 
+árvores rubro-negras, não é difícil de acreditar que podemos manter eficientemente uma árvore rubro-negra ao adicionar e remover elementos. 
 
-We have already seen that adding an element in a #BinarySearchTree#
-can be done by adding a new leaf.  Therefore, to implement #add(x)# in a
-red-black tree we need a method of simulating splitting a node with five
-children in a 2-4 tree.  A 2-4 tree node with five children is represented
-by a black node that has two red children, one of which also has a red
-child. We can ``split'' this node by colouring it red and colouring its
-two children black.  An example of this is shown in \figref{rb-split}.
+Vimos que a adição de elementos em uma 
+ #BinarySearchTree#
+ pode ser feita pela adição de uma nova folha. Portanto, para implementar 
+#add(x)# em uma árvore rubro-negra precisamos de um método de simular
+a repartição de um nodo com cinco filhos em uma 
+árvore 2-4.  O nodo da árvore 2-4 com cinco filhos é representado por
+um nodo preto que tem dois filhos vermelhos, um dos quais também tem um filho
+vermelho. Podemos ``reparticionar'' esse nodo pintando ele de vermelho
+e pintando seus dois filhos de preto. 
+Um exemplo disso é mostrado na 
+ \figref{rb-split}.
 
 \begin{figure}
   \begin{center}
@@ -267,489 +287,485 @@ two children black.  An example of this is shown in \figref{rb-split}.
      \includegraphics[scale=0.90909]{figs/rb-split-3} \\
    \end{tabular}
   \end{center}
-  \caption[Simulating a 2-4 tree]{Simulating a 2-4 tree split operation
-    during an addition in a red-black tree.  (This simulates the 2-4
-    tree addition shown in \figref{twofour-add}.)}
+  \caption[Simulando uma árvore 2-4]{Simulando uma operação de reparticionamento de uma árvore 2-4 durante a adição em uma árvore rubro-negra. (Isso simula
+  a adição da árvore 2-4 mostrada em 
+     \figref{twofour-add}.)}
   \figlabel{rb-split}
 \end{figure}
 
-Similarly, implementing #remove(x)# requires a method of merging two nodes
-and borrowing a child from a sibling.  Merging two nodes is the inverse of
-a split (shown in \figref{rb-split}), and involves colouring two (black)
-siblings red and colouring their (red) parent black.  Borrowing from
-a sibling is the most complicated of the procedures and involves both
-rotations and recolouring nodes.
+De modo similar, implemtar 
+#remove(x)# exige um método de unir dois nodos e empresta um filho de um irmão.
+A união de dois nodos é o inverse da repartição (mostrado na 
+\figref{rb-split}), e envolve pintar dois irmãos vermelhos de preto e pintar o pai (que é vermelho) de preto. Emprestar um irmão é o procedimento mais complicado
+e envolve ambas as rotações e pintar os nodos.
 
-Of course, during all of this we must still maintain the no-red-edge
-property and the black-height property.  While it is no longer surprising
-that this can be done, there are a large number of cases that have to
-be considered if we try to do a direct simulation of a 2-4 tree by a
-red-black tree.  At some point, it just becomes simpler to disregard the
-underlying 2-4 tree and work directly towards maintaining the properties
-of the red-black tree.
+Obviamente, durante tudo isso devemos ainda manter a propriedade de nenhuma aresta 
+vermelha e a propriedade da altura preta. Enquanto não é mais supreendente 
+que isso pode ser feito, existe um grande número de casos que devem ser considerados
+se tentarmos fazer uma simulação direta de uma 
+árvore 2-4 com uma árvore rubro-negra. 
+Eventualmente, torna-se mais simples desconsiderar a árvore 2-4 e trabalhar
+diretamente com a manutenção das propriedades da árvore rubro-negra.
 
-\subsection{Left-Leaning Red-Black Trees}
+\subsection{Árvores Rubro-Negras Pendentes à Esquerda}
 
-\index{red-black tree}%
-\index{left-leaning red-black tree}%
-No single definition of red-black trees exists.  Rather, there is
-a family of structures that manage to maintain the black-height
-and no-red-edge properties during #add(x)# and #remove(x)#
-operations. Different structures do this in different ways.
-Here, we implement a data structure that we call a #RedBlackTree#.
+\index{árvore rubro-negra}%
+\index{árvore rubro-negra pendente à esquerda}%
+Não existe uma única definição de 
+árvores rubro-negras. Em vez disso, existe uma família
+de estruturas que conseguem manter as propriedades da altura preta
+e nenhuma aresta vermelha 
+durante as operações #add(x)# e #remove(x)#. Estruturas diferentes fazem isso diferentemente. 
+Aqui, implementamos uma estrutura de dados que chamamos de 
+#RedBlackTree#.
 \index{RedBlackTree@#RedBlackTree#}%
-This structure implements a particular variant of red-black trees that
-satisfies an additional property:
+Essa estrutura implementar uma variante de árvore rubro-negra que satisfaz
+uma propriedade adicional:
 \begin{prp}[left-leaning]\prplabel{left-leaning}\prplabel{redblack-last}
-  \index{left-leaning property}%
-  At any node #u#, if #u.left# is black, then #u.right# is black.
+  \index{propriedade de pender à esquerda}%
+  Em qualquer nodo #u#, se #u.left# for preto, então #u.right# é preto. 
 \end{prp}
-Note that the red-black tree shown in \figref{redblack-example}  does
-not satisfy the left-leaning property;  it is violated by the parent of
-the red node in the rightmost path.
+Note que a árvore rubro-negra mostrada na 
+\figref{redblack-example}  não satisfaz a propriedade de pender 
+à esquerda; 
+ela é violada pelo pai do nodo vermelho no caminho mais à esquerda.
 
-The reason for maintaining the left-leaning property is that it reduces
-the number of cases encountered when updating the tree during #add(x)#
-and #remove(x)# operations.  In terms of 2-4 trees, it implies that every
-2-4 tree has a unique representation:  A node of degree two becomes
-a black node with two black children.  A node of degree three becomes
-a black node whose left child is red and whose right child is black.
-A node of degree four becomes a black node with two red children.
+A razão para manter a propriedade de pender à esquerda é que ela reduz
+o número de casos encontrados durante a atualização da árvore nas operações
+#add(x)#
+e #remove(x)#.  Em termos de uma árvore 2-4, isso implica que toda árvore 2-4 tem uma representação única: um nodo de grau dois se torna um nodo preto com dois filhos pretos.
+Um nodo de grau três se torna um nodo preto cujo filho à esquerda é vermelho 
+e cujo filho à direita é preto.
+Um nodo de grau quatro se torna um nodo preto com dois filhos vermelhos.
 
-Before we describe the implementation of #add(x)# and #remove(x)# in
-detail, we first present some simple subroutines used by these methods
-that are illustrated in \figref{redblack-flippullpush}.  The first two
-subroutines are for manipulating colours while preserving the black-height
-property. The #pushBlack(u)# method takes as input a black node #u#
-that has two red children and colours #u# red and its two children black.
-The #pullBlack(u)# method reverses this operation:
+Antes de descrevermos a implementação de 
+ #add(x)# e #remove(x)# em detalhes, primeiro apresentamos alguma subrotinas
+ simples usadas por esses métodos que estão ilustradas na 
+ \figref{redblack-flippullpush}.  As duas primeiras subrotinas são para manipular
+ as cores e presentar a propriedade da altura preta.
+ O método 
+#pushBlack(u)# recebe como entrada um nodo preto #u#
+que tem dois filhos vermelhos e pinta #u# de vermelho e seus dois filhos de preto.
+O método 
+#pullBlack(u)# inverte essa operação
 \codeimport{ods/RedBlackTree.pushBlack(u).pullBlack(u)}
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/flippullpush}
   \end{center}
-  \caption{Flips, pulls and pushes}
+  \caption{Operações de \emph{flips}, \emph{pulls} e \emph{pushes}}
   \figlabel{redblack-flippullpush}
 \end{figure}
 
-The #flipLeft(u)# method swaps the colours of #u# and #u.right#
-and then performs a left rotation at #u#.  This method reverses the
-colours of these two nodes as well as their parent-child relationship:
+O método
+#flipLeft(u)# troca as cores de #u# e #u.right#
+e então realiza uma rotação à esquerda em #u#.
+Esse método inverte as cores desses dois nodo assim como seu relacionamento
+pai-filho:
 \codeimport{ods/RedBlackTree.flipLeft(u)}
-The #flipLeft(u)# operation
-is especially useful in restoring the left-leaning property at a node
-#u# that violates it (because #u.left# is black and #u.right# is red).
-In this special case, we can be assured that this operation preserves both
-the black-height and no-red-edge properties.  The #flipRight(u)# operation
-is symmetric with #flipLeft(u)#, when the roles of left and right are reversed.
+A operação #flipLeft(u)# é especialmente útil ao restaurar a
+propriedade de pender à esquerda em um nodo #u# que a viola (porque 
+ #u.left# é preto e #u.right# é vermelho).
+ Nesse caso especial, temos a certeza de que essa operação preserva 
+ as propriedades de altura preta e de nenhuma aresta vermelha.
+ A operação
+#flipRight(u)# é simétrica 
+#flipLeft(u)#, quando os papéis de esquerda e direita são invertidos. 
 \codeimport{ods/RedBlackTree.flipRight(u)}
 
-\subsection{Addition}
+\subsection{Adição}
 
-To implement #add(x)# in a #RedBlackTree#, we perform a standard
-#BinarySearchTree# insertion to add a new leaf, #u#, with $#u.x#=#x#$ and
-set $#u.colour#=#red#$.  Note that this does not change the black height
-of any node, so it does not violate the black-height property.  It may,
-however, violate the left-leaning property (if #u# is the right child of
-its parent), and it may violate the no-red-edge property (if #u#'s parent
-is #red#).  To restore these properties, we call the method #addFixup(u)#.
+Para implementar
+#add(x)# em uma #RedBlackTree#, fazems uma inserção de um 
+#BinarySearchTree# padrão para adicionar uma nova folha #u#, com $#u.x#=#x#$ e atribuímos 
+$#u.colour#=#red#$.  Note que isso não muda a altura preta de nenhum nodo e, portanto, não viola a propriedade de altura preta.
+Ela pode, entretanto, violar a propriedade de pender à esquerda (se #u# é o filho
+à direita de seu pai) e pode violar a propriedade de nenhuma aresta vermelha (se o pai de #u# for #red#)
+Para restaurar essas propriedades, chamamos o método #addFixup(u)#.
 \codeimport{ods/RedBlackTree.add(x)}
 
-Illustrated in \figref{rb-addfix}, the #addFixup(u)# method takes
-as input a node #u# whose colour is red and which may violate the
-no-red-edge property and/or the left-leaning property.  The following
-discussion is probably impossible to follow without referring to
-\figref{rb-addfix} or recreating it on a piece of paper.  Indeed, the
-reader may wish to study this figure before continuing.
+Ilustrados na \figref{rb-addfix}, o método #addFixup(u)# recebe como entrada
+um nodo #u# cuja cor é vermelha e que pode violar a propriedade de nenhuma
+aresta vermelhe e/ou a propriedade pendente à esquerda.
+A discussão a seguir é provavelmente impossível de acompanhar sem 
+observa a \figref{rb-addfix} ou recriá-la em um papel. 
+Certamente, o leitor deve estudar essa figura antes de continuar este capítulo.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/rb-addfix}
   \end{center}
-  \caption{A single round in the process of fixing Property~2 after
-  an insertion.}
+  \caption{Uma única rodada no processo de restaurar a Propriedade~2 após uma inserção.}
   \figlabel{rb-addfix}
 \end{figure}
 
-If #u# is the root of the tree, then we can colour #u# black to restore
-both properties.  If #u#'s sibling is also red, then #u#'s parent must be
-black, so both the left-leaning and no-red-edge properties already hold.
+Se #u# é a raiz da árvore, então podemos pintar #u# de preto para reestabelecer as duas propriedades. Se 
+o irmão de #u# também for vermelho, então o pai de #u# precisa ser preto, de forma que as propriedades de pender à esquerda e nenhuma aresta vermelha valham. 
 
-Otherwise, we first determine if #u#'s parent, #w#, violates the
-left-leaning property and, if so, perform a #flipLeft(w)# operation and
-set $#u#=#w#$.  This leaves us in a well-defined state:  #u# is the left
-child of its parent, #w#, so #w# now satisfies the left-leaning property.
-All that remains is to ensure the no-red-edge property at #u#.  We only
-have to worry about the case in which #w# is red, since otherwise #u#
-already satisfies the no-red-edge property.
+Caso contrário, primeiro determinamos se o pai de #u#, que é #w#, viola a
+propriedade de pender à esquerda e, se esse for o caso, realizamos uma operação
+#flipLeft(w)# e atribuímos
+$#u#=#w#$.  Isso nos deixa em um estado bem definido: #u# é o filho de seu pai
+#w# então #w# agora satisfaz a propriedade de pender à esquerda.
 
-Since we are not done yet, #u# is red and #w# is red.  The no-red-edge
-property (which is only violated by #u# and not by #w#) implies that
-#u#'s grandparent #g# exists and is black.  If #g#'s right child is red,
-then the left-leaning property ensures that both #g#'s children are red,
-and a call to #pushBlack(g)# makes #g# red and #w# black.  This restores
-the no-red-edge property at #u#, but may cause it to be violated at #g#,
-so the whole process starts over with $#u#=#g#$.
+Resta apenas assegurarmos que não há nenhuma aresta vermelha em #u#. Nós somente devemos nos preocupar com o caso em que #w# é vermelho, pois caso contrário #u#
+satisfaz a propriedade de nenhuma aresta vermelha.
 
-If #g#'s right child is black, then a call to #flipRight(g)# makes
-#w# the (black) parent of #g# and gives #w# two red children, #u# and
-#g#. This ensures that #u# satisfies the no-red-edge property and #g#
-satisfies the left-leaning property.  In this case we can stop.
+Como ainda não terminamos, #u# é vermelho e #w# é vermelho. A propriedade
+de nenhuma aresta vermelha (que é violada por #u# e não por #w#) implica que 
+o avô de #u#, o nodo #g#, existe e é preto. Se o filho à direita de #g# for
+vermelho, então a propriedade de pender à esquerda garante que os dois filhos de #g# sejam vermelhos e uma chamada a 
+#pushBlack(g)# torna #g# vermelho e #w# preto. Isso restaura
+a propriedade nenhuma aresta vermelha em #u#, mas pode fazer que seja violada em #g# e, por isso, o processo reinicia com $#u#=#g#$.
+
+Se o filho à direita de #g# for preto, então uma chamada a 
+#flipRight(g)# faz 
+#w# ser o pai (preto) de #g# e dá a #w# dois filhos vermelhos, #u# e 
+#g#. Isso assegura que #u# satisfaz a propriedade de nenhuma aresta vermelha e #g#
+satisfaz a propriedade de pender à esquerda. Nesse caso podemos parar.
 \codeimport{ods/RedBlackTree.addFixup(u)}
 
-The #insertFixup(u)# method takes constant time per iteration and each
-iteration either finishes or moves #u# closer to the root.  Therefore,
-the #insertFixup(u)# method finishes after $O(\log #n#)$ iterations in
-$O(\log #n#)$ time.
+O método
+#insertFixup(u)# leva tempo constante por iteração e cada iteração ou termina ou move #u# mais próximo à raiz. 
+Portanto, o método 
+#insertFixup(u)# termina após $O(\log #n#)$ iterações em tempo 
+$O(\log #n#)$.
 
-\subsection{Removal}
+\subsection{Remoção}
 
-The #remove(x)# operation in a #RedBlackTree# is the most complicated
-to implement, and this is true of all known red-black tree variants.
-Just like the #remove(x)# operation in a \texttt{BinarySearchTree},
-this operation boils down to finding a node #w# with only one child,
-#u#, and splicing #w# out of the tree by having #w.parent# adopt #u#.
+A operação 
+#remove(x)# em uma #RedBlackTree# é a mais complicada para implementar 
+e isso é verdade para todas as variantes conhecidas de árvores rubro-negras. 
+Assim como a operação #remove(x)# em uma \texttt{BinarySearchTree},
+essa operação se resume a achar um nodo #w# com somente um filho #u#
+e remover #w# da árvore fazendo o #w.parent# adotar #u#.
 
-The problem with this is that, if #w# is black, then the black-height
-property will now be violated at #w.parent#.  We may avoid this problem,
-temporarily, by adding #w.colour# to #u.colour#.  Of course, this introduces
-two other problems:  (1)~if #u# and #w# both started out black, then
-$#u.colour#+#w.colour#=2$ (double black), which is an invalid colour.
-If #w# was red, then it is replaced by a black node #u#, which may
-violate the left-leaning property at $#u.parent#$.  Both of these
-problems can be resolved with a call to the #removeFixup(u)# method.
+O problema com isso é que, se #w# for preto, então a propriedade da altura preta 
+será violada em #w.parent#. Podemos evitar esse problema, temporariamente, 
+ao adicionar #w.colour# a #u.colour#. Isso causa dois outros problemas:
+(1)~se #u# e #w# iniciaram-se pretos, então 
+$#u.colour#+#w.colour#=2$ (preto duplo), que é uma cor inválida.
+Se #w# era vermelho, então é substituído por um nodo preto #u#,
+que pode violar a propriedade de pender à esquerda em 
+ $#u.parent#$.  Esse dois problemas podem ser resolvidos com uma
+ chamada ao método #removeFixup(u)#.
 \codeimport{ods/RedBlackTree.remove(x)}
 
-The #removeFixup(u)# method takes as its input a node #u# whose colour is black
-(1) or double-black (2).  If #u# is double-black, then #removeFixup(u)#
-performs a series of rotations and recolouring operations that move the
-double-black node up the tree until it can be eliminated.  During this
-process, the node #u# changes until, at the end of this process, #u#
-refers to the root of the subtree that has been changed.  The root of
-this subtree may have changed colour.  In particular, it may have gone
-from red to black, so the #removeFixup(u)# method finishes by checking
-if #u#'s parent violates the left-leaning property and, if so, fixing it.
+O método #removeFixup(u)# recebe como entrada um nodo #u# cuja cor é preto
+(1) ou preto duplo(2). Se #u# for preto duplo, então #removeFixup(u)#
+realiza uma série de operações de rotações e alterações de cor que
+movem o nodo preto duplo acima na árvore até que possa ser eliminado. Durante esse processo,
+o nodo #u# muda até que, no final desse processo, #u#
+refere-se à raiz da subárvore que foi alterada.
+A raiz dessa subárvore pode ter mudado de cor. Em particular,
+pode ter ido de vermelho para preto, então o método 
+#removeFixup(u)# terminar ao verificar se 
+o pai de #u# viola a propriedade de pender à esquerda e, caso positivo, corrigindo esse problema. 
 \codeimport{ods/RedBlackTree.removeFixup(u)}
 
-The #removeFixup(u)# method is illustrated in \figref{rb-removefix}.
-Again, the following text will be difficult, if not impossible, to follow
-without referring to \figref{rb-removefix}.  Each iteration of the loop
-in #removeFixup(u)# processes the double-black node #u#, based on one
-of four cases:
+O método
+#removeFixup(u)# é ilustrado na \figref{rb-removefix}.
+Novamente, o texto a seguir será difícil, senão impossível, de acompanhar sem 
+observar a \figref{rb-removefix}.  Cada iteração do laço em 
+#removeFixup(u)# processa o nodo preto duplo #u#, baseado em um de quatro casos: 
 
 \begin{figure}
   \begin{center}
     \includegraphics[height=\HeightScaleIfNeeded]{figs/rb-removefix}
   \end{center}
-  \caption{A single round in the process of eliminating a double-black node
-   after a removal.}
+  \caption{Uma rodada no processo de eliminar um nodo preto duplo após uma remoção.}
   \figlabel{rb-removefix}
 \end{figure}
 
 \noindent
-Case 0: #u# is the root.  This is the easiest case to treat.  We recolour
-#u# to be black (this does not violate any of the red-black tree
-properties).
+Caso 0: #u# é a raiz. Esse é o caso mais fácil de tratar. Repintamos #u# em preto (isso não viola nenhuma das propriedades da árvore rubro-negra). 
 
 \noindent 
-Case 1: #u#'s sibling, #v#, is red.  In this case, #u#'s sibling is the
-left child of its parent, #w# (by the left-leaning property).  We perform
-a right-flip at #w# and then proceed to the next iteration.  Note that
-this action causes #w#'s parent to violate the left-leaning property and
-the depth of #u# to increase.  However, it also implies that the next
-iteration will be in Case~3 with #w# coloured red.  When examining Case~3
-below, we will see that the process will stop during the next iteration.
+Caso 1: o irmão de #u#, #v#, é vermelho. Nesse caso, o irmão de  #u# é filho à esquerda de seu pai, #w# (de acordo com a propriedade de pender à esquerda).
+Nós realizamos um 
+right-flip em #w# e então procedemos à próxima iteração. Note que essa ação 
+faz com que o pai de #w# viole a propriedade de pender à esquerda e a 
+profundidade de #u# aumentar. Entretando, isso também implica que a próxima iteração será no Caso~3 com #w# pintado de vermelho. Ao examinar o Caso~3 a seguir, veremos que o processo irá parar na próxima iteração. 
 \codeimport{ods/RedBlackTree.removeFixupCase1(u)}
 
 \noindent
-Case 2: #u#'s sibling, #v#, is black, and #u# is the left child of its
-parent, #w#.  In this case, we call #pullBlack(w)#, making #u# black,
-#v# red, and darkening the colour of #w# to black or double-black.
-At this point, #w# does not satisfy the left-leaning property, so we
-call #flipLeft(w)# to fix this.
+Caso 2: o irmão de #u#, #v#, é preto, e #u# é o filho à esquerda de seu pai, #w#.
+Nesse caso, chamamos 
+#pullBlack(w)#, fazendo #u# preto,
+#v# vermelho, e tornando #w# preto ou duplo preto. 
+Nesse ponto, #w# não satisfaz a propriedade de pender à esquerda, então
+chamamos #flipLeft(w)# para arrumar isso. 
+Além disso, #w# é vermelho e #v# é a raiz da subárvore com que começamos.
+Precisamos verificar se #w# faz a propriedade de não haver nenhuma aresta vermelha ser violada. Fazer isso inspecionando o filho à direita de #w#, #q#.
+Se #q# é preto, então #w# satisfaz a propriedade de nenhuma aresta vermelha e podemos continuar a próxima iteração com $#u#=#v#$.
 
-At this point, #w# is red and #v# is the root of the subtree with which
-we started.  We need to check if #w# causes the no-red-edge property to
-be violated.  We do this by inspecting #w#'s right child, #q#.  If #q#
-is black, then #w# satisfies the no-red-edge property and we can continue
-the next iteration with $#u#=#v#$.
+Caso contrário (#q# é vermelho) então as duas propriedades de não haver nenhuma aresta vermelha e de pender à esquerda são violadas em #q# e #w#, respectivamente.
 
-Otherwise (#q# is red), so both the no-red-edge property and the left-leaning
-properties are violated at #q# and #w#, respectively.  The left-leaning
-property is restored with a call to  
-#rotateLeft(w)#, but the no-red-edge
-property is still violated.  At this point, #q# is the left child of
-#v#, #w# is the left child of #q#, #q# and #w# are both red, and #v#
-is black or double-black.  A #flipRight(v)#  makes #q# the parent of
-both #v# and #w#.  Following this up by a #pushBlack(q)# makes both #v#
-and #w# black and sets the colour of #q# back to the original colour of #w#.
+A propriedade de pender à esquerda é restaurada com uma chamada a 
+#rotateLeft(w)#, mas a propriedade de não haver nenhuma aresta vermelha continua sendo violada. Nesse ponto, #q# é o filho à esquerda de #v#, #w# é o filho à esquerda de #q#, #q# e #w# são vermelhos e #v# é preto ou duplo preto. Uma
+#flipRight(v)# torna #q# o pai de 
+#v# e de #w#.  
+Seguindo isso por um 
+#pushBlack(q)# faz #v#
+e #w# pretos e devolve a cor de #q# de volta à cor original de #w#.
 
-At this point, the double-black node is has been eliminated and the
-no-red-edge and black-height properties are reestablished.  Only one possible problem remains: the right child of #v# may be red, in which
-case the left-leaning property would be violated.  We check this and
-perform a #flipLeft(v)# to correct it if necessary.
+Nesse ponto, o nodo duplo preto foi eliminado e as propriedades  
+nenhuma aresta vermelha e altura preta são restabelecidas.
+Somente resta resolver um problema: o filho à direita de #v# pode ser vermelho e, nesse caso, a propriedade de pender à esquerda seria violada. Verificamos isso
+e realizamos, se necessária uma correção, uma chamada a  
+#flipLeft(v)#.
 \codeimport{ods/RedBlackTree.removeFixupCase2(u)}
 
 \noindent
-Case 3: #u#'s sibling is black and #u# is the right child of its parent,
-#w#.  This case is symmetric to Case~2 and is handled mostly the same way.
-The only differences come from the fact that the left-leaning property
-is asymmetric, so it requires different handling.
+Caso 3: o irmão de #u# é preto e #u# é o filho à direita de seu pai, #w#. 
+Esse caso é simétrico ao Caso~2 e é tratado quase da mesma forma.
+As únicas diferenças vêm do fato que a propriedade de pender à esquerda é assimétrica e, portanto, requer tratamento diferenciado.
 
-As before, we begin with a call to #pullBlack(w)#, which makes #v# red
-and #u# black.  A call to #flipRight(w)# promotes #v# to the root of
-the subtree.  At this point #w# is red, and the code branches two ways
-depending on the colour of #w#'s left child, #q#.
+Como antes, começamos com uma chamada a 
+#pullBlack(w)#, que torna #v# vermelho e #u# preto. Uma chamada a 
+#flipRight(w)# promove #v# à raiz da subárvore. Nesse momento, #w# é vermelho e existem duas formas de tratamento dependente da cor do filho à esquerda de #w#, #q#.
 
-If #q# is red, then the code finishes up exactly the same way as Case~2
-does, but is even simpler since there is no danger of #v# not
-satisfying the left-leaning property.
+Se #q# é vermelho, então o código termina exatamente da mesma maneira que o Caso~2,
+mas é ainda mais simples pois não há perigo de #v# não satisfazer a propriedade de pender à esquerda.
 
-The more complicated case occurs when #q# is black.  In this case,
-we examine the colour of #v#'s left child.  If it is red, then #v# has
-two red children and its extra black can be pushed down with a call to
-#pushBlack(v)#.  At this point, #v# now has #w#'s original colour, and we
-are done.
+O caso mais complicado ocorre quando #q# é preto. Nesse caso,
+examinamos a cor do filho à esquerda de #v#. Se for vermelho, então #v# tem
+dois filhos vermelhos e seu extra preto pode ser empurrado abaixo com uma 
+chamada a 
+#pushBlack(v)#.  Nesse ponto, #v# agora tem a cor original de #w# e terminamos o processo.
 
-If #v#'s left child is black, then #v# violates the left-leaning property,
-and we restore this with a call to #flipLeft(v)#.  We then return the
-node #v# so that the next iteration of #removeFixup(u)# then continues
-with $#u#=#v#$.
+Se o filho à esquerda de #v#'s for preto, então #v# viola a propriedade de pender à esquerda e a restauramos com uma chamada a 
+#flipLeft(v)#.  Então retornamos o nodo #v# tal que a próxima iteração de
+#removeFixup(u)# então constinua com 
+$#u#=#v#$.
 \codeimport{ods/RedBlackTree.removeFixupCase3(u)}.
 
-Each iteration of #removeFixup(u)# takes constant time.  Cases~2 and 3
-either finish or move #u# closer to the root of the tree.  Case~0 (where
-#u# is the root) always terminates and Case~1 leads immediately to Case~3,
-which also terminates.  Since the height of the tree is at most $2\log
-#n#$, we conclude that there are at most $O(\log #n#)$ iterations of
-#removeFixup(u)#, so #removeFixup(u)# runs in $O(\log #n#)$ time.
+Cada iteração de 
+ #removeFixup(u)# leva tempo constante. Casos~2 e 3
+ ou terminam ou movem #u# mais próximo à raiz da árvore. Caso~0 (one #u# é 
+ a raiz) sempre termina e Caso~1 levam imediatamente ao Caso~3,
+ que também termina. Como a
+altura da árvore é no máximo $2\log
+#n#$, concluimos o processo em até $O(\log #n#)$ iterações de 
+#removeFixup(u)#, então #removeFixup(u)# roda em tempo $O(\log #n#)$.
 
 
-\section{Summary}
+\section{Resumo}
 \seclabel{redblack-summary}
 
-The following theorem summarizes the performance of the #RedBlackTree# data structure:
+O teorema a seguir resume o desempenho de uma estrutura de dados 
+#RedBlackTree#:
 
 \begin{thm}
-  A #RedBlackTree# implements the #SSet# interface and
-  supports the operations #add(x)#, #remove(x)#, and #find(x)# in $O(\log
-  #n#)$ worst-case time per operation.
+  Uma #RedBlackTree# implementa a interface #SSet# interface e aceita as
+  operações 
+  #add(x)#, #remove(x)# e #find(x)# em tempo $O(\log
+  #n#)$ no pior caso, por operação.
 \end{thm}
 
-Not included in the above theorem is the following extra bonus:
+Não incluído no teorema anterior é o extra bônus:
 
 \begin{thm}\thmlabel{redblack-amortized}
-  Beginning with an empty #RedBlackTree#, any sequence of $m$
-  #add(x)# and #remove(x)# operations results in a total of $O(m)$
-  time spent during all calls #addFixup(u)# and #removeFixup(u)#. 
+Começando com uma #RedBlackTree# vazia, qualquer sequência de $m$ operações
+  #add(x)# e #remove(x)# resulta em um total de tempo $O(m)$
+  durante todas as chamadas 
+   #addFixup(u)# e #removeFixup(u)#. 
 \end{thm}
 
-We only sketch a proof of \thmref{redblack-amortized}. By comparing
-#addFixup(u)# and #removeFixup(u)# with the algorithms for adding or
-removing a leaf in a 2-4 tree, we can convince ourselves that this
-property is inherited from a 2-4 tree.  In particular, if we can show
-that the total time spent splitting, merging, and borrowing in a 2-4
-tree is $O(m)$, then this implies \thmref{redblack-amortized}.
+Apenas rascunhamos uma prova do 
+\thmref{redblack-amortized}. Ao comparar 
+#addFixup(u)# e #removeFixup(u)# com os algoritmos para adicionar ou remover uma folha em uma 
+árvore 2-4, podemos nos convencer que essa propriedade é herdada de uma 
+ árvore 2-4.  Em particular, se podemos mostrar que o tempo total gasto com
+ repartições de nodos, uniões e empréstimos em uma árvore 2-4 é $O(m)$ 
+ então isso implica no \thmref{redblack-amortized}.
 
-The proof of this theorem for 2-4 trees uses the potential
-method
-\index{potential method}%
-of amortized analysis.\footnote{See the proofs of
-\lemref{dualarraydeque-amortized} and \lemref{selist-amortized} for
-other applications of the potential method.} Define the potential of an
-internal node #u# in a 2-4 tree as
+ A prova desse teorema para 
+ a árvore 2-4 usa o método potencial 
+\index{método potencial}%
+de análise amortizada.\footnote{Veja as prova de 
+\lemref{dualarraydeque-amortized} e \lemref{selist-amortized} para
+outras aplicações do método potencial.} Defina o potencial de um nodo
+interno #u# em uma 
+árvore 2-4 como
 \[
   \Phi(#u#) = 
     \begin{cases} 
-      1 & \text{if #u# has 2 children} \\ 
-      0 & \text{if #u# has 3 children} \\ 
-      3 & \text{if #u# has 4 children}  
+      1 & \text{se #u# tem 2 filhos } \\ 
+      0 & \text{se #u# tem 3 filhos} \\ 
+      3 & \text{se #u# tem 4 filhos}  
     \end{cases}
 \]
-and the potential of a 2-4 tree as the sum of the potentials of its nodes.
-When a split occurs, it is because a node with four children becomes
-two nodes, with two and three children.  This means that the overall
-potential drops by $3-1-0 = 2$. When a merge occurs, two nodes that used
-to have two children are replaced by one node with three children. The
-result is a drop in potential of $2-0=2$.  Therefore, for every split
-or merge, the potential decreases by two.
+e o potencial de uma 
+ árvore 2-4 como a soma dos potenciais de seus nodos. 
+ Quando uma repartição ocorre, é porque um nodo com quatro filhos
+ de torna dois nodos, com dois e três filhos. Isso significa que o potencial geral cai em 
+$3-1-0 = 2$. Quando uma união ocorre, dois modos que tinham dois filhos
+são substituídos por um nodo com três filhos. O resultado é uma queda em potencial
+de 
+ $2-0=2$.  Portanto, para todas repartição ou união, o potencial diminui em dois.
 
-Next notice that, if we ignore splitting and merging of nodes, there are
-only a constant number of nodes whose number of children is changed by
-the addition or removal of a leaf.  When adding a node, one node has
-its number of children increase by one, increasing the potential by
-at most three.  During the removal of a leaf, one node has its number
-of children decrease by one, increasing the potential by at most one,
-and two nodes may be involved in a borrowing operation, increasing their
-total potential by at most one.
+A seguir note que se ignorarmos a repartição e união de nodos, há somente
+um número constante de nodo cujo número de filhos é alterado pela adição
+ou remoção de uma folha. Ao adicionar um nodo, algum nodo tem seu número
+número de filhos aumentado em um, aumentando o potencial por até três.
+Durante a remoção de uma folha, um nodo tem seu número de filhos reduzido
+em um, aumentando o potencial em até um, e dois nodos podem estar envolvidos em
+uma operação de empréstimo aumentando seu potencial total em até um.
 
-To summarize, each merge and split causes the potential to drop by
-at least two.  Ignoring merging and splitting, each addition or removal
-causes the potential to rise by at most three, and the potential is always
-non-negative.  Therefore, the number of splits and merges caused by $m$
-additions or removals on an initially empty tree is at most $3m/2$.
-\thmref{redblack-amortized} is a consequence of this analysis and the
-correspondence between 2-4 trees and red-black trees.
+Para resumir, cada união e repartição faz que o potencial caia por ao menos dois.
+Ignorando uniões e repartições, cada adição ou remoção faz com que o potencial aumentar em até três e o potencial sempre é não-negativo.
+Portanto, o número de repartições e uniões causado por $m$
+adições ou remoções em uma árvore inicialmente vazia é até 
+$3m/2$.
+\thmref{redblack-amortized} é uma consequência dessa análise e a correspondência entre árvores 2-4 e árvores rubro-negras.
 
-\section{Discussion and Exercises}
+\section{Discussão e Exercícios}
 
-Red-black trees were first introduced by Guibas and Sedgewick \cite{gs78}.
-Despite their high implementation complexity they are found in some of
-the most commonly used libraries and applications.  Most algorithms and
-data structures textbooks discuss some variant of red-black trees.
+Árvores rubro-negra foi inicialmente desenvolvidas por Guibas e Sedgewick \cite{gs78}.
+Embora sua implementação de alta complexidade, ela é encontrada em algumas
+das bibliotecas e aplicações mais utilizadas. A maior parte dos livros didáticos
+de algoritmos e estruturas de dados discutem alguma variante de 
+árvores rubro-negras.
 
-Andersson \cite{a93} describes a left-leaning version of balanced trees
-that is similar to red-black trees but has the additional constraint
-that any node has at most one red child.  This implies that these trees
-simulate 2-3 trees rather than 2-4 trees.  They are significantly simpler,
-though, than the #RedBlackTree# structure presented in this chapter.
+Andersson \cite{a93} descreve uma versão pendente à esquerda de árvores balanceadas que é similar às 
+árvores rubro-negras mas tem a restrições adicional de que todo nodo tem no máximo um filho vermelho. Isso implica que essas árvores simulam árvores 2-3 em vez de árvores 2-4. Ela são significantemente mais simples que a estrutura 
+#RedBlackTree# apresentada neste capítulo.
 
-Sedgewick \cite{s08} describes two versions of left-leaning red-black
-trees.  These use recursion along with a simulation of top-down splitting
-and merging in 2-4 trees. The combination of these two techniques makes
-for particularly short and elegant code.
+Sedgewick \cite{s08} descreve duas versões de árvores rubro-negras pendentes à esquerda. Elas usam recursão juntamente com uma simulação top-down de repartição e união em árvore 2-4. A combinação dessas duas técnicas tornam seus códigos particulamente curtos e elegantes.
 
-A related, and older, data structure is the \emph{AVL tree} \cite{avl62}.
-\index{AVL tree}%
-AVL trees are \emph{height-balanced}:
-\index{height-balanced}%
-\index{binary search tree!height balanced}%
-At each node $u$, the height
-of the subtree rooted at #u.left# and the subtree rooted at #u.right#
-differ by at most one.  It follows immediately that, if $F(h)$ is the
-minimum number of leaves in a tree of height $h$, then $F(h)$ obeys the
-Fibonacci recurrence
+Uma estrutura de dados relacionada e mais antigos é a \emph{árvore AVL}
+\cite{avl62}.
+\index{árvore AVL}%
+Árvores AVL são \emph{balanceadas na altura}:
+\index{balanceamento na altura}%
+\index{árvore binária de busca!balanceamento na altura}%
+A cada nodo $u$, a 
+altura da subárvore enraizada em 
+#u.left# e a subárvore enraizada em #u.right# difere em até um.
+Segue imediatamente que se 
+$F(h)$ é o número de folhas em uma árvore de altura $h$, então 
+$F(h)$ segue a recorrência de Fibonacci 
 \[
    F(h) = F(h-1) + F(h-2)
 \]
-with base cases $F(0)=1$ and $F(1)=1$.  This means $F(h)$ is approximately
-$\varphi^h/\sqrt{5}$, where $\varphi=(1+\sqrt{5})/2\approx1.61803399$ is the
-\emph{golden ratio}.  (More precisely, $|\varphi^h/\sqrt{5} - F(h)|\le 1/2$.)
-Arguing as in the proof of \lemref{twofour-height}, this implies
+com casos base $F(0)=1$ e $F(1)=1$.  Isso significa que $F(h)$ é aproximadamente  
+$\varphi^h/\sqrt{5}$, onde $\varphi=(1+\sqrt{5})/2\approx1.61803399$ é a 
+\emph{razão dourada}.  (Mais precisamente, $|\varphi^h/\sqrt{5} - F(h)|\le 1/2$.)
+Seguindo de modo similar à prova do 
+\lemref{twofour-height}, isso implica em 
 \[
    h \le \log_\varphi #n# \approx 1.440420088\log #n# \enspace ,
 \]
-so AVL trees have smaller height than red-black trees.  The height
-balancing can be maintained during #add(x)# and #remove(x)# operations
-by walking back up the path to the root and performing a rebalancing
-operation at each node #u# where the height of #u#'s left and right
-subtrees differ by two.  See \figref{avl-rebalance}.
+então as árvores AVL tem altura menor que árvore 
+rubro-negras.  O balanceamento da altura pode ser mantido durante as operações
+#add(x)# e #remove(x)# ao percorrer o caminho em direção à raiz realizando 
+uma operação de rebalanceamento em cada nodo #u# onde a altura das subárvores
+à esquerda e à direita de #u# difere em dois.
+Veja a \figref{avl-rebalance}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/avl-rebalance}
   \end{center}
-  \caption{Rebalancing in an AVL tree.  At most two rotations are required
-  to convert a node whose subtrees have a height of $h$ and $h+2$ into a node
-  whose subtrees each have a height of at most $h+1$.}
+  \caption{Rebalanceamento em um árvore AVL.  No máximo duas rotações são necessárias para converter um nodo cujas subárvores tem altura de $h$ e $h+2$ em um nodo cujas subárvores tem altura de até $h+1$}
   \figlabel{avl-rebalance}
 \end{figure}
 
-Andersson's variant of red-black trees, Sedgewick's variant of red-black
-trees, and AVL trees are all simpler to implement than the #RedBlackTree#
-structure defined here.  Unfortunately, none of them can guarantee that
-the amortized time spent rebalancing is $O(1)$ per update.  In particular,
-there is no analogue of \thmref{redblack-amortized} for those structures.
+As variantes de árvores rubro-negras de Andersson e de Sedgewick
+e as árvores AVL são mais simples de implementar que a estrutura #RedBlackTree#
+aqui definida. Infelizmente nenhuma delas pode garantir que o tempo amortizado gasto rebalanceando é $O(1)$ por atualização. Em particular não há teorema análogo 
+ao \thmref{redblack-amortized} para essas estruturas. 
 
 \begin{figure}
   \centering{\includegraphics[scale=0.90909]{figs/redblack-example}}
-  \caption{A red-black tree on which to practice.}
+  \caption{Uma árvore rubro-negra para praticar.}
   \figlabel{redblack-example2}
 \end{figure}
 
 \begin{exc}
-  Illustrate the 2-4 tree that corresponds to the #RedBlackTree# in
+  Desenhe a árvore 2-4 que corresponde à #RedBlackTree# em
   \figref{redblack-example2}.
 \end{exc}
 
 \begin{exc}
-  Illustrate the addition of 13, then 3.5, then 3.3 on the #RedBlackTree#
-  in \figref{redblack-example2}.
+  Desenhe a adição de 13, então 3.5 e depois 3.3 na #RedBlackTree#
+  em \figref{redblack-example2}.
 \end{exc}
 
 \begin{exc}
-  Illustrate the removal of 11, then 9, then 5 on the #RedBlackTree# in 
+  Desenhe a remoção de 11, então 9 e depois 5 na #RedBlackTree# em
   \figref{redblack-example2}.
 \end{exc}
 
 \begin{exc}
-  Show that, for arbitrarily large values of #n#, there are red-black
-  trees with #n# nodes that have height $2\log #n#-O(1)$.
+  Mostre que, para valores arbitrariamente grandes de #n#, há árvores rubro-negras com #n# nodos com altura $2\log #n#-O(1)$.
 \end{exc}
 
 \begin{exc}
-  Consider the operations #pushBlack(u)# and #pullBlack(u)#.  What do
-  these operations do to the underlying 2-4 tree that is being simulated
-  by the red-black tree?
+  Considere as operações #pushBlack(u)# e #pullBlack(u)#.  O que essas operações fazem com a 
+árvore 2-4 implícita que está sendo simulada pela árvore rubro-negra? 
 \end{exc}
 
 \begin{exc}
-  Show that, for arbitrarily large values of #n#, there exist sequences
-  of #add(x)# and #remove(x)# operations that lead to red-black trees
-  with #n# nodes that have height $2\log #n#-O(1)$.
-\end{exc}
-
-
-
-\begin{exc}
-  Why does the method #remove(x)# in the #RedBlackTree# implementation
-  perform the assignment #u.parent=w.parent#?  Shouldn't this already
-  be done by the call to #splice(w)#?
+Mostre que, para valores arbitrariamente grandes de #n#, existem sequências de operações 
+#add(x)# e #remove(x)# que resultam em árvores rubro-negras com
+  #n# nodos que têm altura $2\log #n#-O(1)$.
 \end{exc}
 
 \begin{exc}
-  Suppose a 2-4 tree, $T$, has $#n#_\ell$ leaves and $#n#_i$ internal nodes.
+Porque o método #remove(x)# na implementação da #RedBlackTree# realiza
+  a atribuição 
+  #u.parent=w.parent#?  Isso não seria feito pela chamada 
+   #splice(w)#?
+\end{exc}
+
+\begin{exc}
+  Suponha que a árvore 2-4, $T$, tem $#n#_\ell$ folhas e $#n#_i$ nodos internos.
   \begin{enumerate}
-    \item What is the minimum value of $#n#_i$, as a function of $#n#_\ell$?
-    \item What is the maximum value of $#n#_i$, as a function of $#n#_\ell$?
-    \item If $T'$ is a red-black tree that represents $T$, then how many red
-     nodes does $T'$ have?
+    \item Qual é o valor mínimo de $#n#_i$, como uma função de $#n#_\ell$?
+    \item Qual é o valor máximo de $#n#_i$, como uma função de $#n#_\ell$?
+    \item Se $T'$ é uma árvore rubro-negra que representa $T$, então quantos nodos vermelhos $T'$ tem?
   \end{enumerate}
 \end{exc}
 
 \begin{exc}
-  Suppose you are given a binary search tree with #n# nodes and a
-  height of at most $2\log #n#-2$.  Is it always possible to colour the
-  nodes red and black so that the tree satisfies the black-height and
-  no-red-edge properties?  If so, can it also be made to satisfy the
-  left-leaning property?
+  Suponha que você é dado uma árvore binária de busca com #n# nodos e uma altura de até 
+  $2\log #n#-2$.  É sempre possível colorir os nodos vermelhos e pretos tal que a árcore satisfaz as propriedades da altura preta e de que não há nenhuma aresta vermelha? Se sim, também é possível fazê-la satisfazer a propriedade de pender à esquerda?
 \end{exc}
 
 \begin{exc}\exclabel{redblack-merge}
-  Suppose you have two red-black trees $T_1$ and $T_2$ that have the
-  same black height, $h$, and such that the largest key in $T_1$ is smaller
-  than the smallest key in $T_2$.  Show how to merge $T_1$ and $T_2$
-  into a single red-black tree in $O(h)$ time.
+  Suponha que você tem duas árvores rubro-negras $T_1$ e $T_2$ que tem a
+  mesma altura preta 
+  , $h$, e tal que a maior chave em $T_1$ é menor que a menor chave em 
+  $T_2$.  Mostre como juntar $T_1$ e $T_2$ em uma única árvore rubro-negra em
+  tempo $O(h)$.
 \end{exc}
 
 \begin{exc}
-  Extend your solution to \excref{redblack-merge} to the case where the
-  two trees $T_1$ and $T_2$ have different black heights, $h_1\neq h_2$.
-  The running-time should be $O(\max\{h_1,h_2\})$.
-\end{exc}
-
-
-
-\begin{exc}
-  Prove that, during an #add(x)# operation, an AVL tree must perform
-  at most one rebalancing operation (that involves at most two rotations;
-  see \figref{avl-rebalance}).  Give an example of an AVL tree and a
-  #remove(x)# operation on that tree that requires on the order of $\log
-  #n#$ rebalancing operations.
+  Extenda sua solução para \excref{redblack-merge} para o caso onde 
+  as duas árvores
+  $T_1$ e $T_2$ têm diferentes alturas pretas, $h_1\neq h_2$.
+  O tempo de execução deve ser
+   $O(\max\{h_1,h_2\})$.
 \end{exc}
 
 \begin{exc}
-  Implement an #AVLTree# class that implements AVL trees as described
-  above.  Compare its performance to that of the #RedBlackTree#
-  implementation.   Which implementation has a faster #find(x)# operation?
+  Prove que, durante uma operação #add(x)#, uma árvore AVL deve realizar 
+  até uma operação de rebalanceamento (que envolve até duas rotações;
+  veja a \figref{avl-rebalance}).  Dê um exemplo de uma árvore AVL e uma operação 
+  #remove(x)# nessa árvore que requer na ordem de  $\log
+  #n#$ operações de rebalanceamento. 
 \end{exc}
 
 \begin{exc}
-  Design and implement a series of experiments that compare the relative
-  performance of #find(x)#, #add(x)#, and #remove(x)# for the #SSet# implemeentations #SkiplistSSet#,
-  #ScapegoatTree#, #Treap#, and #RedBlackTree#.  Be sure to include
-  multiple test scenarios, including cases where the data is random,
-  already sorted, is removed in random order, is removed in sorted order,
-  and so on.
+  Implemente uma classe #AVLTree# que implementa árvores AVL conforme descrito acima. Compare seu desempenho à implementação da 
+  #RedBlackTree# . Qual implementação tem uma operação #find(x)# mais rápida?
+\end{exc}
+
+\begin{exc}
+  Projete e implemente uma séries de experimentos que comparam o desempenho de 
+  #find(x)#, #add(x)# e #remove(x)# para as implementações #SSet#: #SkiplistSSet#,
+  #ScapegoatTree#, #Treap# e #RedBlackTree#.  Inclua diferentes cenários de teste, incluindo casos onde os dados são aleatórios, previamente ordenados, são removidos em ordem aleatória, são removidos em ordem crescente e assim por diante. 
 \end{exc}
