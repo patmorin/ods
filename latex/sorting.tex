@@ -5,16 +5,16 @@ Este capítulo discute algoritmos para ordenação de um conjunto de #n# itens.
 Esse pode ser um tópico estranho para um livro em estruturas de dados,
 mas existem várias boas razões para incluí-lo aqui.
 A razão mais óbvia é que dois desses algoritmos de ordenação (quicksort e heap-sort)
-são intimamente relacionados com duas das estruturas de dados que estudadas neste livro (árvores binárias de busca aleatórias e heaps, respectivamente).
+são intimamente relacionados com duas das estruturas de dados que são estudadas neste livro (árvores binárias de busca aleatórias e heaps).
 
 A primeira parte deste capítulo discute algoritmos que ordenam usando somente
 comparações e apresenta três algoritmos que rodam em 
 $O(#n#\log #n#)$ de tempo.
-Acontece que, esses três algoritmos são assintóticamente ótimos;
+Acontece que, esses três algoritmos são assintoticamente ótimos;
 nenhum algoritmo que usa somente comparações pode evitar fazer
 aproximadamente $#n#\log #n#$ comparações no pior caso e mesmo no caso médio.
 
-Antes de continuar, devemos notas que quaisquer implementações do #SSet#
+Antes de continuar, devemos notar que quaisquer implementações do #SSet#
 ou da #Queue# de prioridades apresentadas nos capítulos anteriores
 também podem ser usadas para obter um algoritmo de ordenação 
  $O(#n#\log #n#)$.
@@ -23,7 +23,7 @@ Por exemplo, podemos ordenar #n# itens ao fazer #n#
  operações #add(x)# seguidas de 
  #n# operações #remove()# em uma #BinaryHeap# ou #MeldableHeap#. 
  Alternativamente, podemos usar #n# operações #add(x)# 
- em qualquer estrutura de dados de árvore de busca binára e então
+ em qualquer estrutura de dados de árvore de busca binária e então
  realizar uma travessia em ordem 
 (\excref{tree-traversal}) para extrair os elementos ordenados 
 Porém, nos dois casos teremos muitos gastos para construir uma estrutura

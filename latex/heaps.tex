@@ -1,73 +1,69 @@
 \chapter{Heaps}
 \chaplabel{heaps}
 
-In this chapter, we discuss two implementations of the extremely useful
-priority #Queue# data structure.  Both of these structures are a special
-kind of binary tree called a \emph{heap}, 
+Neste capítulo, nós discutimos duas implementações da estrutura de dados estremamente útil #Queue# de prioridades. Essas duas estruturas são
+um tipo especial de árvore binária chamada de \emph{heap},
 \index{heap}%
-\index{binary heap}%
-\index{heap!binary}%
-which means ``a disorganized
-pile.''  This is in contrast to binary search trees that can be thought
-of as a highly organized pile.
+\index{heap binária}%
+\index{heap!binária}%
+que significa ``uma pilha desorganizada.'' Isso é em contraste a árvores binárias de busca que podem ser pensadas com pilhas altamente organizadas.
 
-The first heap implementation uses an array to simulate a complete binary
-tree.  This very fast implementation is the basis of one of the fastest
-known sorting algorithms, namely heapsort (see \secref{heapsort}).
-The second implementation is based on more flexible binary trees.
-It supports a #meld(h)# operation that allows the priority queue to
-absorb the elements of a second priority queue #h#.
+A primeira implementação da heap usa um array que simula uma árvore binária 
+completa. Essa implementação muito rápida é a base de um dos algoritmos
+mais rápido de ordenação, chamado de heapsort (veja a \secref{heapsort}).
+A segunda implementação é baseada em árvores binárias mais flexíveis.
+Ela aceita a operação
+#meld(h)# que permite que a fila de prioridades absorva os elementos a uma segunda fila de prioridades $h$. 
 
-\section{#BinaryHeap#: An Implicit Binary Tree}
+\section{#BinaryHeap#: Uma Árvore Binária Implícita}
 \seclabel{binaryheap}
 
 \index{BinaryHeap@#BinaryHeap#}%
-Our first implementation of a (priority) #Queue# is based on a technique
-that is over four hundred years old.  \emph{Eytzinger's method}
-\index{Eytzinger's method}%
-allows us
-to represent a complete binary tree as an array by laying out the nodes
-of the tree in breadth-first order (see \secref{bintree:traversal}).
-In this way, the root is stored at position 0, the root's left child is
-stored at position 1, the root's right child at position 2, the left
-child of the left child of the root is stored at position 3, and so
-on. See \figref{eytzinger}.
+Nossa primeira implementação de uma 
+ #Queue# (de prioridades) é baseada em uma técnica criada há quatrocentos anos atrás. O \emph{método de Eytzinger} 
+\index{método de Eytzinger}%
+nos permite representar uma árvore binária completa como um array 
+listando os nodos da árvore em ordem de largura (veja a 
+ \secref{bintree:traversal}).
+ Dessa forma, a raiz é guardada na posição 0, o filho à esquerda da raiz é
+ guardada na posição 1, o filho à direita da raiz na posição 2, o filho à esquerda do filho à esquerda da raiz é guardado na posição 3 e assim por diante.
+Veja a 
+\figref{eytzinger}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/eytzinger}
   \end{center}
-  \caption{Eytzinger's method represents a complete binary tree as an array.}
+  \caption{O método de Eytzinger representa uma árvore binária completa como um array.} 
   \figlabel{eytzinger}
 \end{figure}
 
-If we apply Eytzinger's method to a sufficiently large tree, some
-patterns emerge.  The left child of the node at index #i# is at index
-$#left(i)#=2#i#+1$ and the right child of the node at index #i# is at
-index $#right(i)#=2#i#+2$.  The parent of the node at index #i# is at
-index $#parent(i)#=(#i#-1)/2$.
+Se aplicarmos o método de Eytzinger a alguma árvore grande o suficiente, alguns
+padrão emergem. O filho à esquerda do nodo no índice #i# está no índice
+$#left(i)#=2#i#+1$ e o filho à direita do nodo no índice #i# está no índice
+$#right(i)#=2#i#+2$.  O pai do nodo no índice #i# está no índice
+$#parent(i)#=(#i#-1)/2$.
 \codeimport{ods/BinaryHeap.left(i).right(i).parent(i)}
 
-A #BinaryHeap# uses this technique to implicitly represent a complete
-binary tree in which the elements are \emph{heap-ordered}:
-\index{heap-ordered binary tree}%
-\index{binary tree!heap-ordered}%
-\index{heap order}%
-The value
-stored at any index #i# is not smaller than the value stored at index
-#parent(i)#, with the exception of the root value, $#i#=0$.  It follows
-that the smallest value in the priority #Queue# is therefore stored at
-position 0 (the root).
+Uma #BinaryHeap# usa essa técnica para implicitamente representar uma árvore binária na qual os elementos estão \emph{ordenados em uma pilha}:
+\index{árvore binária ordenada em pilha}%
+\index{árvore binária!ordenada em pilha}%
+\index{ordem em uma pilha}%
+O valor guardado em qualquer índice 
+#i# não é menor que o valor guardado no índice 
+#parent(i)#, com exceção do valor na raiz, $#i#=0$.  Portanto, o menor
+valor na #Queue# com prioridades é guardado na posição 0 (a raiz).
 
-In a #BinaryHeap#, the #n# elements are stored in an array #a#:
+Em uma #BinaryHeap#, os #n# elementos são guardados em um array #a#:
 \codeimport{ods/BinaryHeap.a.n}
 
-Implementing the #add(x)# operation is fairly straightforward.  As with
-all array-based structures, we first check to see if #a# is full (by checking if $#a.length#=#n#$) and, if so, we grow #a#.  Next, we place #x# at location
-#a[n]# and increment #n#.  At this point, all that remains is to ensure
-that we maintain the heap property.  We do this by repeatedly swapping
-#x# with its parent until #x# is no longer smaller than its parent.
-See \figref{heap-insert}.
+Implementar a operação #add(x)# razoavelmente simples.
+Assim como todas as estruturas baseadas em array, primeiro verificamos se
+#a# está cheio (verificando se 
+ $#a.length#=#n#$) e, caso positivo, expandimos #a#.
+ A seguir, posicionamos #x# na posição
+#a[n]# e incrementamos #n#.  Nesse ponto, resta garantirmos que mantemos a propriedade heap. Fazemos isso repetidamente trocando #x# com seu pai, #x#, até não seja mais menor que seu pai. 
+Veja a \figref{heap-insert}.
 \codeimport{ods/BinaryHeap.add(x).bubbleUp(i)}
 
 \begin{figure}
@@ -77,21 +73,21 @@ See \figref{heap-insert}.
     \includegraphics[height=\QuarterHeightScaleIfNeeded]{figs/heap-insert-3} \\
     \includegraphics[height=\QuarterHeightScaleIfNeeded]{figs/heap-insert-4} \\
   \end{center}
-  \caption[Adding to a BinaryHeap]{Adding the value 6 to a #BinaryHeap#.}
+  \caption[Adição em uma BinaryHeap]{Adição do valor 6 a uma #BinaryHeap#.}
   \figlabel{heap-insert}
 \end{figure}
 
-Implementing the #remove()# operation, which removes the smallest value
-from the heap, is a little trickier.  We know where the smallest value is
-(at the root), but we need to replace it after we remove it and ensure
-that we maintain the heap property.
+A implementação da 
+operação #remove()#, que remove o menor valor da heap é um pouco mais complicado. Sabemos onde o menor valor está (na raiz) mas precisamos substituí-lo após sua remoção e garantir a manutenção da propriedade heap. 
 
-The easiest way to do this is to replace the root with the value #a[n-1]#, delete
-that value, and decrement #n#.  Unfortunately, the new root element is now
-probably not the smallest element, so it needs to be moved downwards.
-We do this by repeatedly comparing this element to its two children.
-If it is the smallest of the three then we are done.  Otherwise, we swap
-this element with the smallest of its two children and continue.
+O modo mais fácil de fazer isso é substituir a raiz com o valor
+ #a[n-1]#, remover esse valor e decrementar #n#. delete
+ Infelizmente, o novo elemento na raiz agora provavelmente não é o menor
+ elemento, então ele precisa ser movido para baixo na árvore.
+ Fazemos isso repetidamente, comparando esse elemento aos seus dois filhos.
+ Se for menor dos três, então paramos. Caso contrário, trocamos esse elemento
+ com o menor de seus dois filhos e continuamos.
+
 \codeimport{ods/BinaryHeap.remove().trickleDown(i)}
 
 \begin{figure}
@@ -101,38 +97,37 @@ this element with the smallest of its two children and continue.
     \includegraphics[height=\QuarterHeightScaleIfNeeded]{figs/heap-remove-3} \\
     \includegraphics[height=\QuarterHeightScaleIfNeeded]{figs/heap-remove-4} \\
   \end{center}
-  \caption[Removing from a BinaryHeap]{Removing the minimum value, 4, from a #BinaryHeap#.}
+  \caption[Remoção de uma BinaryHeap]{Removendo o valor mínimo, 4, de uma #BinaryHeap#.}
   \figlabel{heap-remove}
 \end{figure}
 
-
-
-As with other array-based structures, we will ignore the time spent in
-calls to #resize()#, since these can be accounted for using the amortization
-argument from \lemref{arraystack-amortized}.  The running times of
-both #add(x)# and #remove()# then depend on the height of the (implicit)
-binary tree.  Luckily, this is a \emph{complete}
-\index{binary tree!complete}%
-\index{complete binary tree}%
-binary tree;  every level
-except the last has the maximum possible number of nodes.  Therefore,
-if the height of this tree is $h$, then it has at least $2^h$ nodes.
-Stated another way
+Assim como em outras estruturas baseadas em array, iremos ignorar o tempo
+gasto em chamadas #resize()#, pois essas podem ser consideradas usando o argumento
+de amortização do 
+\lemref{arraystack-amortized}.  Os tempos de execução de 
+#add(x)# e de #remove()# então dependem da altura da árvore binária (implícita).
+Felizmente, essa árvore binária está \emph{completa}
+\index{árvore binária!completa}%
+\index{árvore binária completa %
+; todo nível exceto o último têm o maior número possível de nodos.
+Portanto, se a altura dessa árvore é $h$, então ele tem pelo menos $2^h$ nodos.
+Se outra forma podemos afirmar
 \[
   #n# \ge 2^h \enspace .
 \]  
-Taking logarithms on both sides of this equation gives
+Fazendo logaritmos nos dois lados dessa equação resulta em 
 \[
    h \le \log #n# \enspace .
 \]
-Therefore, both the #add(x)# and #remove()# operation run in $O(\log #n#)$ time.
+Portanto, as operações
+Therefore, #add(x)# e #remove()# rodam em $O(\log #n#)$ de tempo. 
 
-\subsection{Summary}
+\subsection{Resumo}
 
-The following theorem summarizes the performance of a #BinaryHeap#:
+O teorema a seguir resume o desempenho de uma #BinaryHeap#:
 
 \begin{thm}\thmlabel{binaryheap}
-  A #BinaryHeap# implements the (priority) #Queue# interface.  Ignoring
+  Uma #BinaryHeap# implementa a interface #Queue# de prioridades.  Ignoring
   the cost of calls to #resize()#, a #BinaryHeap# supports the operations
   #add(x)# and #remove()# in $O(\log #n#)$ time per operation.
 
