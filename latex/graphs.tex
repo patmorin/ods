@@ -1,123 +1,120 @@
-\chapter{Graphs}
+\chapter{Grafos}
 \chaplabel{graphs}
 
 %\textbf{Warning to the Reader:} This chapter is still being actively
 %developed, meaning that the code has not been thoroughly tested and/or
 %the text has not be carefully proofread.
 
-In this chapter, we study two representations of graphs and basic
-algorithms that use these representations.  
+Neste capítulo, estudamos duas representações de grafos e algoritmos
+básicos que usam essas representações.
 
-Mathematically, a \emph{(directed) graph}
-\index{graph}%
-\index{directed graph}%
-is a pair $G=(V,E)$ where
-$V$ is a set of \emph{vertices}
-\index{vertex}%
-and $E$ is a set of ordered pairs
-of vertices called \emph{edges}.
-\index{edge}%
-An edge #(i,j)# is \emph{directed}
-\index{directed edge}%
-from #i# to #j#;  #i# is called the \emph{source}
-\index{source} of the edge and #j#
-is called the \emph{target}.
-\index{target}  A \emph{path}%
-\index{path} in $G$ is a sequence of
-vertices $v_0,\ldots,v_k$ such that, for every $i\in\{1,\ldots,k\}$,
-the edge $(v_{i-1},v_{i})$ is in $E$.  A path $v_0,\ldots,v_k$ is a
-\emph{cycle}
-\index{cycle}%
-if, additionally, the edge $(v_k,v_0)$ is in $E$.  A path (or
-cycle) is \emph{simple}
-\index{simple path/cycle}%
-if all of its vertices are unique.  If there
-is a path from some vertex $v_i$ to some vertex $v_j$ then we say that
-$v_j$ is \emph{reachable}
-\index{reachable vertex} from $v_i$.  An example of a graph is shown
-in \figref{graph}.
+Matematicamente, um \emph{grafo (direcionado)}
+\index{grafo}%
+\index{grafo direcionado}%
+é um par
+$G=(V,E)$ onde
+$V$ é um conjunto de \emph{vértices}
+\index{vértice}%
+e $E$ é um conjunto de pares ordenados de vértices chamados de 
+\emph{arestas}.
+\index{aresta}%
+Uma aresta #(i,j)# é \emph{direcionada}
+\index{aresta direcionada}%
+de #i# para #j#;  #i# é chamado de \emph{origem}
+\index{origem}, ou \emph{source} em inglês, da aresta e #j#
+é chamado de destino, ou \emph{target} em inglês.
+\index{target}  Um caminho, \emph{path},%
+\index{path} em $G$ é uma sequência de vértices 
+$v_0,\ldots,v_k$ tal que, para todo $i\in\{1,\ldots,k\}$,
+a aresta $(v_{i-1},v_{i})$ está em $E$.  Um caminho $v_0,\ldots,v_k$ é um
+\emph{ciclo}
+\index{ciclo}%
+se, adicionalmente, a aresta
+ $(v_k,v_0)$ está em $E$.  Um caminho (ou ciclo) é 
+\emph{simples}
+\index{caminho/ciclo simples}%
+se todos o seus vértices são únicos. Se existir um caminho de algum vértice
+$v_i$ para algum vértice $v_j$ então dizemos que 
+$v_j$ é \emph{alcançável}
+\index{vértice alcançável} de $v_i$.  Um exemplo de um grafo é mostrado na 
+\figref{graph}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/graph}
   \end{center}
-  \caption{A graph with twelve vertices.  Vertices are drawn as numbered
-    circles and edges are drawn as pointed curves pointing from source
-    to target.}
+  \caption{Um grafo com doze vértices. Vértices são desenhados como círculos numerados e arestas são desenhadas como curvas com setas apontando da origem ao destino.}
   \figlabel{graph}
 \end{figure}
 
-Due to their ability to model so many phenomena, graphs have an enormous
-number of applications. There are many obvious examples. Computer
-networks can be modelled as graphs, with vertices corresponding to
-computers and edges corresponding to (directed) communication links
-between those computers.  City streets can be modelled as graphs,
-with vertices representing intersections and edges representing streets
-joining consecutive intersections.
+Devido à sua habilidade de modelar tantos fenômenos, grafos tem um número enorme de aplicações. Existem muitos exemplos óbvios. Redes de computadores podem
+ser modeladas como grafos, com vértices correspondentes a computadores e arestas correspondentes a links (direcionados) de comunicação entre computadores.
+Ruas de cidades podem ser modeladas como grafos, com vértices representando cruzamentos e arestas representando a ligação entre dois cruzamentos consecutivos.
 
-Less obvious examples occur as soon as we realize that graphs can model
-any pairwise relationships within a set. For example, in a university
-setting we might have a timetable \emph{conflict graph}
-\index{conflict graph}%
-whose vertices represent
-courses offered in the university and in which the edge #(i,j)# is present
-if and only if there is at least one student that is taking both class
-#i# and class #j#.  Thus, an edge indicates that the exam for class #i#
-should not be scheduled at the same time as the exam for class #j#.
+Exemplos menos óbvios ocorrem assim que percebemos que grafos podem 
+modelar qualquer relações que ocorrem em pares de elementos de um conjunto.
+Por exemplo, em uma universidade podemos ter um \emph{grafo de conflitos} de horários
+\index{grafo de conflitos} cujos vértices representam cursos oferecidos em uma 
+universidade no qual a aresta #(i,j)# está presente se e somente se existe pelo 
+menos um estudante que está frequentando a disciplina #i# e a disciplina #j#.
+Então, uma aresta indica que a prova para a disciplina #i# não pode ser
+agendada no mesmo horário que o exame para a disciplina #j#.
 
-Throughout this section, we will use #n# to denote the number of vertices
-of $G$ and #m# to denote the number of edges of $G$.  That is, $#n#=|V|$
-and $#m#=|E|$. Furthermore, we will assume that $V=\{0,\ldots,#n#-1\}$.
-Any other data that we would like to associate with the elements of $V$
-can be stored in an array of length $#n#$.
+Ao longo dessa seção, iremos usar #n# para denotar o número de vértices
+de $G$ e #m# para denotar o número de arestas de $G$. Isto é, 
+$#n#=|V|$ e
+$#m#=|E|$. Além disso, assumiremos que $V=\{0,\ldots,#n#-1\}$.
+Outros dados que gostariamos de associar com os elementos de $V$
+podem ser guardados em um array de tamanho $#n#$.
 
-Some typical operations performed on graphs are:
+Algumas operações típicas realizadas em grafos são:
 \begin{itemize}
-  \item #addEdge(i,j)#: Add the edge $(#i#,#j#)$ to $E$.
-  \item #removeEdge(i,j)#: Remove the edge $(#i#,#j#)$ from $E$.
-  \item #hasEdge(i,j)#: Check if the edge $(#i#,#j#)\in E$ 
-  \item #outEdges(i)#: Return a #List# of all integers $#j#$ such that
+  \item #addEdge(i,j)#: Adicionar a aresta $(#i#,#j#)$ a $E$.
+  \item #removeEdge(i,j)#: Remover a aresta $(#i#,#j#)$ de $E$.
+  \item #hasEdge(i,j)#: Verificar se a aresta $(#i#,#j#)\in E$ 
+  \item #outEdges(i)#: Retornar uma #List# de todos os inteiros $#j#$ tais que
   $(#i#,#j#)\in E$
-  \item #inEdges(i)#: Return a #List# of all integers $#j#$ such that
+  \item #inEdges(i)#: Retornar uma #List# de todos os inteiros $#j#$ tais que 
   $(#j#,#i#)\in E$
 \end{itemize}
 
-Note that these operations are not terribly difficult to implement
-efficiently. For example, the first three operations can be implemented
-directly by using a #USet#, so they can be implemented in constant
-expected time using the hash tables discussed in \chapref{hashing}.
-The last two operations can be implemented in constant time by storing,
-for each vertex, a list of its adjacent vertices.
+Note que essas oepraçoes não são terrivelmente difíceis de implementar eficientemente. 
+Por exemplo, as três primeiras operações podem ser implementadas diretamente 
+usando um #USet#, de forma que podem ser implementadas em tempo constante esperado usando tabelas hash discutidas no \chapref{hashing}.
+As duas últimas operações podem ser implementadas em tempo constante guardando, para cada vértice, uma lista de seu vértices adjacentes.
 
-However, different applications of graphs have different performance
-requirements for these operations and, ideally, we can use the simplest
-implementation that satisfies all the application's requirements.
-For this reason, we discuss two broad categories of graph representations.
+Entretanto, diferentes aplicações de grafos tem diferentes exigências de desempenho 
+para essas operações e, idealmente, podemos usar a implementação 
+mais simples que satisfaz todos os requisitos da aplicação.
+Devido essa razão, nós discutimos duas grandes categorias de representações
+de grafos.
 
-\section{#AdjacencyMatrix#: Representing a Graph by a Matrix}
+\section{#AdjacencyMatrix#: Representando um Grafo com um Matriz}
 \seclabel{adjacency-matrix}
 
-\index{adjacency matrix}%
-An \emph{adjacency matrix} is a way of representing an #n# vertex graph
-$G=(V,E)$ by an $#n#\times#n#$ matrix, #a#, whose entries are boolean
-values.
+\index{matriz de adjacências}%
+Uma \emph{matriz de adjacências} é uma forma de representar um grafo com #n# vértices 
+$G=(V,E)$ com uma matriz $#n#\times#n#$, #a#, cujas entradas são valores booleanos. 
 \codeimport{ods/AdjacencyMatrix.a.n.AdjacencyMatrix(n0)}
 
-The matrix entry #a[i][j]# is defined as
+A valor da matriz #a[i][j]# é definido como 
 \[  #a[i][j]#= 
     \begin{cases}
-      #true# & \text{if $#(i,j)#\in E$} \\
-      #false# & \text{otherwise}
+      #true# & \text{se $#(i,j)#\in E$} \\
+      #false# & \text{caso contrário}
     \end{cases}
 \]
-The adjacency matrix for the graph in \figref{graph} is
-shown in \figref{graph-adj}.
 
-In this representation, the operations #addEdge(i,j)#,
-#removeEdge(i,j)#, and #hasEdge(i,j)# just
-involve setting or reading the matrix entry #a[i][j]#:
+A matriz de adjacências para o grafo na \figref{graph} é mostrado na 
+\figref{graph-adj}.
+
+Nessa representação, as operações 
+#addEdge(i,j)#,
+#removeEdge(i,j)#, e #hasEdge(i,j)# somente atribuir e ler a entrada
+da matriz
+#a[i][j]#:
 \codeimport{ods/AdjacencyMatrix.addEdge(i,j).removeEdge(i,j).hasEdge(i,j)}
-These operations clearly take constant time per operation.
+Essas operações claramente levam tempo constante por operação. 
 
 \begin{figure}
   \begin{center}
@@ -138,78 +135,86 @@ These operations clearly take constant time per operation.
       11&0&0&0&0&0&0&0&1&0&0&1 &0\\
     \end{tabular} 
   \end{center}
-  \caption{A graph and its adjacency matrix.}
+  \caption{Um grafo e seu matriz de adjacências.}
   \figlabel{graph-adj}
 \end{figure}
 
-Where the adjacency matrix performs poorly is with the #outEdges(i)# and
-#inEdges(i)# operations.  To implement these, we must scan all #n#
-entries in the corresponding row or column of #a# and gather up all the
-indices, #j#, where #a[i][j]#, respectively #a[j][i]#, is true.
+A matriz de adjacências tem desempenho ruim com as operações
+#outEdges(i)# e 
+#inEdges(i)#.  Para implementá-las, precisamos varrer todas as #n# entradas na correspondente linha ou coluna de #a# e reunir todos os índices #j# 
+onde #a[i][j]#, respectivamente #a[j][i]#, seja true.
 \javaimport{ods/AdjacencyMatrix.outEdges(i).inEdges(i)}
 \cppimport{ods/AdjacencyMatrix.outEdges(i,edges).inEdges(i,edges)}
-These operations clearly take $O(#n#)$ time per operation.  
+Essas operações claramente levam 
+$O(#n#)$ de tempo por operação. 
 
-Another drawback of the adjacency matrix representation is that it
-is large.  It stores an $#n#\times #n#$ boolean matrix, so it requires at
-least $#n#^2$ bits of memory.  The implementation here uses a matrix
-of \javaonly{#boolean#}\cpponly{#bool#} values so it actually uses on the
-order of $#n#^2$ bytes of memory.  A more careful implementation, which
-packs #w# boolean values into each word of memory, could reduce this
-space usage to $O(#n#^2/#w#)$ words of memory.
+Outra desvantagem da matriz de adjacências é o seu tamanho. Ela guarda
+uma matriz booleana de tamanho $#n#\times #n#$, o que exige o uso de pelo 
+menos $#n#^2$ bits de memória.   A implementação aqui usa uma matriz de 
+valores \javaonly{#boolean#}\cpponly{#bool#} tal que ela na verdade usa na ordem de 
+of $#n#^2$ bytes de memória.  Uma implementação mais cuidadosa, que empacota #w# valores booleanos em cada palavra de memória, poderia reduzir esse uso de espaço a 
+$O(#n#^2/#w#)$ palavras de memória.
 
 \begin{thm}
-The #AdjacencyMatrix# data structure implements the #Graph# interface.
-An #AdjacencyMatrix# supports the operations
+  A estrutura de dados #AdjacencyMatrix# implementa a interface #Graph#.
+Uma #AdjacencyMatrix# aceita as operações 
 \begin{itemize}
-  \item #addEdge(i,j)#, #removeEdge(i,j)#, and #hasEdge(i,j)# in constant
-  time per operation; and
-  \item #inEdges(i)#, and #outEdges(i)# in $O(#n#)$ time per operation.
+  \item #addEdge(i,j)#, #removeEdge(i,j)# e #hasEdge(i,j)# em tempo
+    constante por operação; e 
+  \item #inEdges(i)# e #outEdges(i)# em $O(#n#)$ tempo por operações.
 \end{itemize}
-The space used by an #AdjacencyMatrix# is  $O(#n#^2)$.
+O espaço usado por uma 
+#AdjacencyMatrix# é $O(#n#^2)$.
 \end{thm}
 
-Despite its high memory requirements and poor performance of the #inEdges(i)#
-and #outEdges(i)# operations, an #AdjacencyMatrix# can still be useful for
-some applications.  In particular, when the graph $G$ is \emph{dense},
-i.e., it has close to $#n#^2$ edges, then a memory usage of $#n#^2$
-may be acceptable.
+Apesar de alto uso de memória e desempenho ruim das operações 
+ #inEdges(i)#
+e #outEdges(i)#, uma #AdjacencyMatrix# pode ainda ser útil para
+algumas aplicações. Em especial, quando o grafo $G$ é \emph{denso},
+ele tem quase 
+ $#n#^2$ arestas, então um uso de memória de $#n#^2$ pode
+ ser aceitável. 
 
-The #AdjacencyMatrix# data structure is also commonly used because
-algebraic operations on the matrix #a# can be used to efficiently compute
-properties of the graph $G$.  This is a topic for a course on algorithms,
-but we point out one such property here:  If we treat the entries of #a#
-as integers (1 for #true# and 0 for #false#) and multiply #a# by itself
-using matrix multiplication then we get the matrix $#a#^2$.  Recall,
-from the definition of matrix multiplication, that
+A estrutura de dados #AdjacencyMatrix# também é frequentemente usada
+porque operações algébricas na matriz #a# podem ser usadas para computar
+eficientemente as propriedades do grafo $G$. 
+Isso é um tópico para uma disciplina sobre algoritmos, mas uma dessas
+propriedades é: se tratarmos as entradas de #a# como inteiros (1 para #true# e 0 para
+#false#) e multiplicarmos #a# por si mesma usando multiplicação de matrizes
+então obtemos a matriz 
+$#a#^2$.  Lembre-se, da definição de multiplicação de matrizes, que 
 \[
     #a^2[i][j]# = \sum_{k=0}^{#n#-1} #a[i][k]#\cdot #a[k][j]# \enspace .
 \]
-Interpreting this sum in terms of the graph $G$, this formula counts the
-number of vertices, $#k#$, such that $G$ contains both edges #(i,k)#
-and #(k,j)#.  That is, it counts the number of paths from $#i#$ to $#j#$
-(through intermediate vertices, $#k#$) whose length is exactly two.
-This observation is the foundation of an algorithm that computes the
-shortest paths between all pairs of vertices in $G$ using only $O(\log
-#n#)$ matrix multiplications.
+Interpretando essa soma em termos do grafo $G$, essa fórmula conta o
+número de vértices, 
+$#k#$, tal que $G$ contém as arestas #(i,k)#
+e #(k,j)#.  Isto é, isso conta o número de caminhos de $#i#$ a $#j#$
+(por meio de vértices intermediários, $#k#$) cujo comprimento é exatamente dois.
+Essa observação é a fundação de um algoritmo que computa os caminhos
+mais curtos entre todos os pares de vértices em 
+$G$ usando somente $O(\log
+#n#)$ multiplicações de matrizes.
 
-\section{#AdjacencyLists#: A Graph as a Collection of Lists}
+\section{#AdjacencyLists#: Um Grafo como uma Coleção de Listas}
 \seclabel{adjacency-list}
 
-\index{adjacency list}%
-\emph{Adjacency list} representations of graphs take a more vertex-centric
-approach.  There are many possible implementations of adjacency lists.
-In this section, we present a simple one.  At the end of the section,
-we discuss different possibilities.  In an adjacency list representation,
-the graph $G=(V,E)$ is represented as an array, #adj#, of lists.  The list
-#adj[i]# contains a list of all the vertices adjacent to vertex #i#.
-That is, it contains every index #j# such that $#(i,j)#\in E$.
+\index{listas de adjacências}%
+Representações de grafos com \emph{listas de adjacências} é uma abordagem centrada nos vértices.
+Existem muitas implementações possíveis de listas de adjacências.
+Nesta seção, apresentamos uma simples. No final da seção, discutimos
+diferentes possibilidades. Em uma representação de listas de adjacências,
+o grafo 
+$G=(V,E)$ é representado como um array #adj# de listas. A lista 
+#adj[i]# contém uma lista de vértices adjacentes ao vértice #i#.
+Isto é, ela contém todo índice #j# tal que $#(i,j)#\in E$.
 \codeimport{ods/AdjacencyLists.adj.n.AdjacencyLists(n0)}
-(An example is shown in \figref{graph-adjlist}.)  In this particular
-implementation, we represent each list in #adj# as \javaonly{an}\cpponly{a
-subclass of} #ArrayStack#, because we would like constant time access
-by position. Other options are also possible.  Specifically, we could
-have implemented #adj# as a #DLList#.
+(Uma exemplo é mostrado na \figref{graph-adjlist}.)  
+Nessa implementação em especial, nós representamos cada lista em #adj# como 
+\javaonly{uma}\cpponly{uma 
+subclasse de} #ArrayStack#, porque gostariamos acesso pela posição em tempo constante.
+Especificamente, poderíamos implementar 
+#adj# como uma #DLList#.
 
 
 \begin{figure}
@@ -224,76 +229,71 @@ have implemented #adj# as a #DLList#.
          & & & & &4&  &  & &  &  & \\
     \end{tabular} 
   \end{center}
-  \caption{A graph and its adjacency lists}
+  \caption{Uma grafo e suas listas de adjacência.}
   \figlabel{graph-adjlist}
 \end{figure}
 
-
-
-The #addEdge(i,j)# operation just appends the value #j# to the list #adj[i]#:
+A operação
+#addEdge(i,j)# simplesmente acrescenta o valor #j# no final da lista #adj[i]#:
 \codeimport{ods/AdjacencyLists.addEdge(i,j)}
-This takes constant time.
+Isso leva tempo constante.
 
-The #removeEdge(i,j)# operation searches through the list #adj[i]#
-until it finds #j# and then removes it:
+A operação #removeEdge(i,j)# busca ao longo da lista #adj[i]#
+até que ache #j# e então o remove:
 \codeimport{ods/AdjacencyLists.removeEdge(i,j)}
-This takes $O(\deg(#i#))$ time, where $\deg(#i#)$ (the \emph{degree}
-\index{degree}%
-of
-$#i#$) counts the number of edges in $E$ that have $#i#$ as their source.
+Isso leva $O(\deg(#i#))$ de tempo, onde $\deg(#i#)$ (o \emph{grau}
+\index{grau}%
+de
+$#i#$) conta o número de arestas em $E$ que tem $#i#$ como origem.
 
-The #hasEdge(i,j)# operation is similar;  it searches through the list
-#adj[i]# until it finds #j# (and returns true), or reaches the end of
-the list (and returns false):
+A operação
+#hasEdge(i,j)# é similar: ela busca ao longo da lista 
+#adj[i]# até achar #j# (e retorna true), ou chega no final da lista (e retorna false): 
 \codeimport{ods/AdjacencyLists.hasEdge(i,j)}
-This also takes $O(\deg(#i#))$ time.
+Isso também leva $O(\deg(#i#))$ de tempo.
 
-The #outEdges(i)# operation is very simple;
-\pcodeonly{it returns the list #adj[i]#}
-\javaonly{it returns the list #adj[i]#}
-\cpponly{it copies the values in #adj[i]# into the output list}:
+A operação #outEdges(i)# é bem simples: 
+\pcodeonly{retorna a lista #adj[i]#}
+\javaonly{retorna a lista #adj[i]#}
+\cpponly{copia os valores em #adj[i]# em uma lista de saída}:
 \pcodeimport{ods/AdjacencyLists.outEdges(i)}
 \javaimport{ods/AdjacencyLists.outEdges(i)}
 \cppimport{ods/AdjacencyLists.outEdges(i,edges)}
-\javaonly{This clearly takes constant time.}\cpponly{This clearly takes $O(\deg(#i#))$ time.}
+\javaonly{Isso claramente leva tempo constante.}\cpponly{Isso leva $O(\deg(#i#))$ de tempo.}
 
-The #inEdges(i)# operation is much more work.  It scans over every
-vertex $j$ checking if the edge #(i,j)# exists and, if so, adding #j#
-to the output list:
+A operação
+#inEdges(i)# é muito mais trabalhosa. Ela varre todo vértice $j$ verificando se a aresta #(i,j)# existe e, caso positivo, adicionad #j# a uma lista de saída:
 \pcodeimport{ods/AdjacencyLists.inEdges(i)}
 \javaimport{ods/AdjacencyLists.inEdges(i)}
 \cppimport{ods/AdjacencyLists.inEdges(i,edges)}
-This operation is very slow. It scans the adjacency list of every vertex,
-so it takes $O(#n# + #m#)$ time.
+Essa operação é muito lenta. Ela verifica toda lista de adjacência de todos os vértices, então leva 
+$O(#n# + #m#)$ de tempo.
 
-The following theorem summarizes the performance of the above data structure:
+O teorema a seguir resume o desempenho das estruturas de dados anteriormente descrita:
 
 \begin{thm}
-The #AdjacencyLists# data structure implements the #Graph# interface.
-An #AdjacencyLists# supports the operations
+A estrutura de dados #AdjacencyLists# implementa a interface #Graph#.
+Uma #AdjacencyLists# aceita as operações 
 \begin{itemize}
-  \item #addEdge(i,j)# in constant time per operation;
-  \item #removeEdge(i,j)# and #hasEdge(i,j)# in $O(\deg(#i#))$ time
-    per operation;
-  \javaonly{\item #outEdges(i)# in constant time per operation; and}
-  \cpponly{\item #outEdges(i)# in $O(\deg(#i#))$ time per operation; and}
-  \item #inEdges(i)# in $O(#n#+#m#)$ time per operation.
+  \item #addEdge(i,j)# em tempo constante por operação; 
+  \item #removeEdge(i,j)# e #hasEdge(i,j)# em tempo $O(\deg(#i#))$ por operação; 
+  \javaonly{\item #outEdges(i)# em tempo constante por operação; e}
+  \cpponly{\item #outEdges(i)# em $O(\deg(#i#))$ de tempo por operação; e}
+  \item #inEdges(i)# em $O(#n#+#m#)$ de tempo por operação.
 \end{itemize}
-The space used by a #AdjacencyLists# is  $O(#n#+#m#)$.
+O espaço usado por uma #AdjacencyLists# é $O(#n#+#m#)$.
 \end{thm}
 
-As alluded to earlier, there are many different choices to be made when
-implementing a graph as an adjacency list.  Some questions that come
-up include:
+Conforme mencionado anteriormente, existem muitas diferentes escolhas que
+podem ser feitas ao implementar um grafo como listas de adjacências. Algumas
+escolhas incluem:
 \begin{itemize}
-  \item What type of collection should be used to store each element
-  of #adj#?  One could use an array-based list,  a linked-list, or even
-  a hashtable.
-  \item Should there be a second adjacency list, #inadj#, that stores,
-  for each #i#, the list of vertices, #j#, such that $#(j,i)#\in E$?
-  This can greatly reduce the running-time of the #inEdges(i)#
-  operation, but requires slightly more work when adding or removing
-  edges.
+  \item Que tipo de coleção deve ser usada para guardar cada elemento de 
+  #adj#?  Podem ser usadas uma listas baseadas em arrays, listas ligadas ou mesmo tabelas hash.
+  \item Deve haver uma segunda lista de adjacência, #inadj#, que guarda para cada #i#, a lista de vértices, #j#, tal que $#(j,i)#\in E$?
+  Isso pode reduzir enormemente o tempo de execução da operação
+  #inEdges(i)#, mas requer ligeiramente mais trabalho ao adicionar ou remover arestas. 
+  %%%%%%%%%%%%%5
   \item Should the entry for the edge #(i,j)# in #adj[i]# be linked by
   a reference to the corresponding entry in #inadj[j]#?
   \item Should edges be first-class objects with their own associated data?
