@@ -293,319 +293,290 @@ escolhas incluem:
   \item Deve haver uma segunda lista de adjacência, #inadj#, que guarda para cada #i#, a lista de vértices, #j#, tal que $#(j,i)#\in E$?
   Isso pode reduzir enormemente o tempo de execução da operação
   #inEdges(i)#, mas requer ligeiramente mais trabalho ao adicionar ou remover arestas. 
-  %%%%%%%%%%%%%5
-  \item Should the entry for the edge #(i,j)# in #adj[i]# be linked by
-  a reference to the corresponding entry in #inadj[j]#?
-  \item Should edges be first-class objects with their own associated data?
-  In this way, #adj# would contain lists of edges rather than lists of vertices (integers).
+\item A entrada para a aresta #(i,j)# na #adj[i]# deve ser ligada por uma referência à entrada correspondente entrada em #inadj[j]#?
+\item Arestas devem ser objetos de primeira classe com seus próprios dados associados? Dessa maneira, #adj# conteria listas de arestas em vez de listas de vértices (inteiros).
 \end{itemize}
-Most of these questions come down to a tradeoff between complexity (and
-space) of implementation and performance features of the implementation.
+A maior parte dessas questões resultam em um balanço entre complexidade (e espaço) de implementação e características de desempenho da implementação. 
 
-\section{Graph Traversal}
+\section{Travessia em Grafos}
 
-In this section we present two algorithms for exploring a graph,
-starting at one of its vertices, #i#, and finding all vertices that
-are reachable from #i#.  Both of these algorithms are best suited to
-graphs represented using an adjacency list representation.  Therefore,
-when analyzing these algorithms we will assume that the underlying
-representation is an #AdjacencyLists#.
+Nesta seção, apresentamos dois algoritmos para explorar um grafo, iniciando em um de seus vértices #i# e encontrando todos os vértices que são alcançáveis a partir de #i#. Esses dois algoritmos são mais adequados para grafos representação usando listas de adjacências. Portanto, ao analisar esses algoritmos iremos supor que a representação é uma 
+#AdjacencyLists#.
 
-\subsection{Breadth-First Search}
+\subsection{Busca em Largura}
 
 \index{breadth-first-search}%
-The \emph{breadth-first-search} algorithm starts at a vertex #i# and visits,
-first the neighbours of #i#, then the neighbours of the neighbours of #i#,
-then the neighbours of the neighbours of the neighbours of #i#, and so on.
+\index{busca em largura}%
+O algoritmo de \emph{busca em largura} inicia-se em um vértice #i# e visita primeiramente os vizinhos de #i# e, então, os vizinhos dos vizinhos de #i# e depois os vizinhos dos vizinhos dos vizinhos de #i# e assim por diante. 
 
-This algorithm is a generalization of the breadth-first traversal
-algorithm for binary trees (\secref{bintree:traversal}), and is
-very similar; it uses a queue, #q#, that initially contains only #i#.
-It then repeatedly extracts an element from #q# and adds its neighbours
-to #q#, provided that these neighbours have never been in #q# before.
-The only major difference between the breadth-first-search algorithm
-for graphs and the one for trees is that the algorithm for graphs has
-to ensure that it does not add the same vertex to #q# more than once.
-It does this by using an auxiliary boolean array, #seen#, that tracks
-which vertices have already been discovered.
+Esse algoritmo é uma generalização do algoritmo de travessia em largura para árvores binárias (\secref{bintree:traversal}), e é muito similar a ele;
+utiliza-se uma queue, #q#, que inicialmente contém somente #i#.
+Então repetidamente extrai um elemento de #q# e adiciona seus vizinhos a #q#, dado que esses vizinhos nunca estiveram em #q# antes.
+A maior diferença entre o algoritmo de busca em largura para grafos e o de árvores é que o algoritmo para grafos tem que garantir que não vai adicionar o mesmo vértice a #q# mais de uma vez.
+
+Isso é feito usando um array booleano auxiliar, #seen# (vistos, em português), que guarda quais vértices foram descubertos até o momento.
 \codeimport{ods/Algorithms.bfs(g,r)}
-An example of running #bfs(g,0)# on the graph from \figref{graph}
-is shown in \figref{graph-bfs}.  Different executions are possible,
-depending on the ordering of the adjacency lists; \figref{graph-bfs}
-uses the adjacency lists in \figref{graph-adjlist}.
+Um exemplo de execução
+ #bfs(g,0)# no grafo da \figref{graph}
+é mostrado na \figref{graph-bfs}.  Execuções diferentes são possíveis, dependendo da ordem das listas de adjacências; a 
+\figref{graph-bfs} usa as listas de adjacências em  \figref{graph-adjlist}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/graph-bfs}
   \end{center}
-  \caption[Breadth-first-search]{An example of breadth-first-search starting at node 0. Nodes are
-  labelled with the order in which they are added to #q#.  Edges that
-  result in nodes being added to #q# are drawn in black, other edges
-  are drawn in grey.}
+  \caption[Busca em largura]{Um exemplo de busca em largura iniciando no nodo 0. Nodos são marcados com a ordem em que eles são adicionados a #q#. Arestas que resultam em nodos sendo adicionados a #q# são desenhados em preto, outras arestas são desenhadas em cinza.} 
   \figlabel{graph-bfs}
 \end{figure}
 
-Analyzing the running-time of the #bfs(g,i)# routine is fairly
-straightforward.  The use of the #seen# array ensures that no vertex is
-added to #q# more than once.  Adding (and later removing) each vertex
-from #q# takes constant time per vertex for a total of $O(#n#)$ time.
-Since each vertex is processed by the inner loop at most once, each
-adjacency list is processed at most once, so each edge of $G$ is processed
-at most once.  This processing, which is done in the inner loop takes
-constant time per iteration, for a total of $O(#m#)$ time.  Therefore,
-the entire algorithm runs in $O(#n#+#m#)$ time.
+Analisar o tempo de execução da rotina 
+#bfs(g,i)# razoavelmente fácil.
+O uso do array 
+#seen# assegura que nenhum vértice é adicionado a #q# mais de uma vez. Adicionar (e depois remover) cada vértice de #q# leva tempo constante por vértice para um total de tempo 
+$O(#n#)$.
+Como cada vértice é processado pelo laço interno no máximo uma vez, 
+cada lista de adjacência é processadas no máximo uma vez, então cada aresta de 
+$G$ é processada somente uma vez.
+Esse processamento, que é feito pelo laço interno, leva tempo constante por iteração, totalizando em 
+$O(#m#)$ de tempo. Portanto, o algoritmo por inteiro roda em
+$O(#n#+#m#)$ de tempo.
 
-The following theorem summarizes the performance of the #bfs(g,r)# algorithm.
+O teorema a seguir resume o desempenho do algoritmo 
+ #bfs(g,r)#.
 \begin{thm}\thmlabel{bfs-graph}
-  When given as input a #Graph#, #g#, that is implemented using the
-  #AdjacencyLists# data structure, the #bfs(g,r)# algorithm runs in $O(#n#+#m#)$
-  time.
+  O algoritmo #bfs(g,r)# roda, para um #Graph# #g# implementado usando
+  a estrutura de dados #AdjacencyLists#, em tempo 
+  $O(#n#+#m#)$. 
 \end{thm}
 
-A breadth-first traversal has some very special properties.  Calling
-#bfs(g,r)# will eventually enqueue (and eventually dequeue) every vertex
-#j# such that there is a directed path from #r# to #j#.  Moreover,
-the vertices at distance 0 from #r# (#r# itself) will enter #q# before
-the vertices at distance 1, which will enter #q# before the vertices at
-distance 2, and so on.  Thus, the #bfs(g,r)# method visits vertices
-in increasing order of distance from #r# and vertices that cannot be
-reached from #r# are never visited at all.
+Uma travessia em largura tem algumas propriedades especiais. Chamar
+#bfs(g,r)# irá eventualmente enfileirar (eventualmente desenfileirar) todo vértice
+#j# tal que existe um caminho direto de #r# para #j#.
+Além disso, os vértices na uma distância 0 a partir de #r# (o próprio #r#) irá entrar em #q# antes dos vértices com distância 1, que entrarão em #q# antes dos vértices com distância 2 e assim por diante. Portanto, 
 
-A particularly useful application of the breadth-first-search algorithm
-is, therefore, in computing shortest paths.  To compute the shortest
-path from #r# to every other vertex, we use a variant of #bfs(g,r)#
-that uses an auxilliary array, #p#, of length #n#.  When a new vertex
-#j# is added to #q#, we set #p[j]=i#.  In this way, #p[j]# becomes the
-second last node on a shortest path from #r# to #j#.  Repeating this,
-by taking #p[p[j]#, #p[p[p[j]]]#, and so on we can reconstruct the
-(reversal of) a shortest path from #r# to #j#.
+o método #bfs(g,r)# visita vértices em ordem crescente de distância de #r# e vértices que não podem ser alcançados a partir de #r# nunca serão visitados de nenhuma forma. 
 
+Uma aplicação especialmente útil do algoritmo de busca em largura é, portanto,
+na computação dos menores caminhos.
+Para computar o menor caminho de #r# a todo outro vértice, usamos uma variante de
+#bfs(g,r)# que usa uma array auxiliar #p# de comprimento #n#.
+Quando um novo vértice #j# é adicionado a #q#, fazemos #p[j] =i#. Dessa forma, #p[j]# se torna o penúltimo nodo no caminho mais curto de #r# a #j#. 
+Ao repetir isso fazendo 
+#p[p[j]#, #p[p[p[j]]]#, e assim por diante podemos reconstruir o caminho mais curto (invertido) de #r# a #j#. 
 
+\subsection{Busca em Profundidade}
 
-\subsection{Depth-First Search}
+O algoritmo de \emph{busca em profundidade}
+\index{busca em profundidade}%
+é similar ao algoritmo padrão para percorrer árvores binárias;
+ele primeiro completamente explora uma subárvore antes de retornar ao nodo atual e então explora outra subárvore. Outra forma de pensar na busca em profundidade é dizer que é similar à busca em largura exceto que ele usa uma pilha em vez de uma fila.
 
-The \emph{depth-first-search}
-\index{depth-first-search}%
-algorithm is similar to the standard
-algorithm for traversing binary trees;  it first fully explores one
-subtree before returning to the current node and then exploring the
-other subtree.  Another way to think of depth-first-search is by saying
-that it is similar to breadth-first search except that it uses a stack
-instead of a queue.
+Durante a execução do algoritmo de busca em profundidade, cada vértice #i# 
+é atribuído a uma cor #c[i]#: #white# se nunca encontramos o vértice antes
+#grey# se estamos visitando o vértice, e #black# se terminamos de visitar o vértice.
+O jeito mais fácil de pensar da busca em profundidade é na forma de um algoritmo recursivo. Ele inicia com uma visita a #r#. Ao visitar um vértice #i#, primeiro 
+marcamos #i# como #cinza#. Depois, varremos a lista de adjência de #i# e recursivamente visitamos qualquer vértice branco que não achamos nessa lista.
+Finalmente, terminamos o processamento de #i# e então pintamos #i# de preto e retornamos.
 
-During the execution of the depth-first-search algorithm, each vertex,
-#i#, is assigned a colour, #c[i]#: #white# if we have never seen
-the vertex before, #grey# if we are currently visiting that vertex,
-and #black# if we are done visiting that vertex.  The easiest way to
-think of depth-first-search is as a recursive algorithm.  It starts by
-visiting #r#.  When visiting a vertex #i#, we first mark #i# as #grey#.
-Next, we scan #i#'s adjacency list and recursively visit any white vertex
-we find in this list.  Finally, we are done processing #i#, so we colour
-#i# black and return.
 \codeimport{ods/Algorithms.dfs(g,r).dfs(g,i,c)}
-An example of the execution of this algorithm is shown in \figref{graph-dfs}.
+Um exemplo da execução desse algoritmo é mostrado na \figref{graph-dfs}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/graph-dfs}
   \end{center}
-  \caption[Depth-first-search]{An example of depth-first-search starting at node 0. Nodes are
-  labelled with the order in which they are processed.  Edges that
-  result in a recursive call are drawn in black, other edges
-  are drawn in #grey#.}
+  \caption[Busca em profundidade]{Um exemplo da busca em profundidade iniciando no nodo 0. Nodos são marcados com a ordem em que são processados. Arestas que resultam em uma chamada recursiva são desenhados em preto, outras arestas são desenhadas em cinza.}
   \figlabel{graph-dfs}
 \end{figure}
 
-Although depth-first-search may best be thought of as a recursive
-algorithm, recursion is not the best way to implement it. Indeed, the code
-given above will fail for many large graphs by causing a stack overflow.
-An alternative implementation is to replace the recursion stack with an
-explicit stack, #s#.  The following implementation does just that:
+Embora busca em profundidade possa ser melhor pensada como um algoritmo recursivo,
+usar recursão não é a melhor forma de implementá-la. 
+Realmente, o código dado acima irá falhar para muitos grafos grandes causando
+uma estouro da pilha de memória, um \emph{stack overflow}.
+Uma implementação alternativa troca a pilha de recusão por uma pilha explícita #s#.
+A implementação a seguir faz exatamente isso:
 \codeimport{ods/Algorithms.dfs2(g,r)} 
-In the preceding code, when the next vertex, #i#, is processed, #i# is coloured
-#grey# and then replaced, on the stack, with its adjacent vertices.
-During the next iteration, one of these vertices will be visited.
+No código anterior, quando o vértice a seguir #i# é processado, #i# é pintado
+de 
+#grey# e então substituído na pilha com seus vértices adjacentes. 
+Durante a próxima iteração, um desses vértices será visitado.
 
-Not surprisingly, the running times of #dfs(g,r)# and #dfs2(g,r)# are the
-same as that of #bfs(g,r)#:
+Pouco supreendentemente, os tempos de execução de 
+#dfs(g,r)# e #dfs2(g,r)# são os mesmos que os de 
+#bfs(g,r)#:
 \begin{thm}\thmlabel{dfs-graph}
-  When given as input a #Graph#, #g#, that is implemented using the
-  #AdjacencyLists# data structure, the #dfs(g,r)# and #dfs2(g,r)# algorithms
-  each run in $O(#n#+#m#)$ time.
+Ao procesar um #Graph# g que é implementado usando a estrutura de dados 
+  #AdjacencyLists#, os algoritmos #dfs(g,r)# e #dfs2(g,r)# 
+  rodam em tempo $O(#n#+#m#)$.
 \end{thm}
 
-As with the breadth-first-search algorithm, there is an underlying
-tree associated with each execution of depth-first-search.  When a node
-$#i#\neq #r#$ goes from #white# to #grey#, this is because #dfs(g,i,c)#
-was called recursively while processing some node #i'#.  (In the case
-of #dfs2(g,r)# algorithm, #i# is one of the nodes that replaced #i'#
-on the stack.)  If we think of #i'# as the parent of #i#, then we obtain
-a tree rooted at #r#.  In \figref{graph-dfs}, this tree is a path from
+Assim como com o algoritmo de busca em largura, existe uma árvore associada com cada
+ execução da busca em profundidade. Quando um nodo 
+$#i#\neq #r#$ vai de #white# a #grey#, é porque #dfs(g,i,c)#
+foi chamado recursivamente ao processar algum nodo #i'#. (No caso do algoritmo 
+#dfs2(g,r)#, #i# é um dos nodos que substituem #i'# na pilha.) 
+Se pensarmos de #i'# como o pai de #i#, então obtemos uma árvore enraizada em #r#.
+Na \figref{graph-dfs}, essa árvore é um caminho do vértice 0 ao vértice 11. 
 vertex 0 to vertex 11.
 
-An important property of the depth-first-search algorithm is the
-following: Suppose that when node #i# is coloured #grey#, there exists a path
-from #i# to some other node #j# that uses only white vertices.  Then #j#
-will be coloured first #grey# then #black# before #i# is coloured #black#.
-(This can be proven by contradiction, by considering any path $P$ from #i#
-to #j#.)
+Uma propriedade importante do algoritmo de busca em profundidade é a seguinte:
+suponha que quando um nodo #i# é pintado de #grey#, existe um caminho de #i#
+a algum outro nodo #j# que usa somente vértices brancos. Então #j#
+será pintado primeiro de #grey# e depois de #preto# antes que #i# seja pintado de #black#.
+(Isso pode ser provado por contradição, ao considerar qualquer caminho $P$ de #i#
+para #j#.)
 
-One application of this property is the detection of cycles.
-\index{cycle detection}%
-Refer
-to \figref{dfs-cycle}.  Consider some cycle, $C$, that can be reached
-from #r#.  Let #i# be the first node of $C$ that is coloured #grey#,
-and let #j# be the node that precedes #i# on the cycle $C$.  Then,
-by the above property, #j# will be coloured #grey# and the edge #(j,i)#
-will be considered by the algorithm while #i# is still #grey#.  Thus,
-the algorithm can conclude that there is a path, $P$, from #i# to #j#
-in the depth-first-search tree and the edge #(j,i)# exists.  Therefore,
-$P$ is also a cycle.
+Uma aplicação dessa propriedade é a detecção de ciclos.
+\index{detecção de ciclos}%
+Veja a 
+\figref{dfs-cycle}.  Considere algum ciclo $C$, que pode ser alcançado a partir de #r#. Seja #i# o primeiro nodo de $C$ que está em #grey# e seja
+#j# o nodo que precede #i# no ciclo $C$.
+Então, pela propriedade acima, #j# irá ser colorido #grey# e a aresta #(j,i)#
+será considerada pelo algoritmo enquanto #i# ainda é #grey#. Portanto,
+o algoritmo pode concluir que existe um caminho $P$ partindo de #i# a #j#
+na árvore de busca em profundidade e que a aresta 
+#(j,i)# existe. Portanto, $P$ também é um ciclo. 
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/dfs-cycle}
   \end{center}
-  \caption[Cycle detection]{The depth-first-search algorithm can be used to detect cycles
-  in $G$. The node #j# is coloured #grey# while #i# is still #grey#.  This
-  implies that there is a path, $P$, from #i# to #j# in the depth-first-search
-  tree, and the edge #(j,i)# implies that $P$ is also a cycle.}
+  \caption[Detecção de ciclos]{O algoritmo de busca em profundidade pode ser usado para detectar ciclos em $G$. O nodo #j# é pintado de #grey# enquanto #i# ainda for #grey#. Isso implica que existe um caminho $P$ de $i$ a $j$ na árvore de busca em profundidade e a aresta 
+  #(j,i)# implica que $P$ também é um ciclo.}
   \figlabel{dfs-cycle}
 \end{figure}
 
-\section{Discussion and Exercises}
+\section{Discussão e Exercícios}
 
-The running times of the depth-first-search and breadth-first-search
-algorithms are somewhat overstated by the Theorems~\ref{thm:bfs-graph} and
-\ref{thm:dfs-graph}.  Define $#n#_{#r#}$ as the number of vertices, #i#,
-of $G$, for which there exists a path from #r# to #i#.  Define $#m#_#r#$
-as the number of edges that have these vertices as their sources.
-Then the following theorem is a more precise statement of the running
-times of the breadth-first-search and depth-first-search algorithms.
-(This more refined statement of the running time is useful in some of
-the applications of these algorithms outlined in the exercises.)
+Os tempos de execução dos algoritmos da busca em profundidade e da busca em largura
+são de certa forma exagerados pelos Teoremas~
+Teoremas~\ref{thm:bfs-graph} e
+\ref{thm:dfs-graph}.  Defina $#n#_{#r#}$ como sendo o número de vértices #i# de $G$ para os quais existem um caminho de #r# a #i#. 
+Defina $#m#_#r#$ como o número de arestas que tem esses vértices como suas origens.
+Então o teorema a seguir é mais preciso na descrição dos tempos
+de execução dos algoritmos de busca em largura e em profundidade.
+(Essa teorema mais preciso do tempo de execução é útil em algumas das aplicações de algoritmos dos exercícios.)
 \begin{thm}\thmlabel{graph-traversal}
-  When given as input a #Graph#, #g#, that is implemented using the
-  #AdjacencyLists# data structure, the #bfs(g,r)#, #dfs(g,r)# and #dfs2(g,r)#
-  algorithms each run in $O(#n#_{#r#}+#m#_{#r#})$ time.
+Ao processar um 
+  #Graph#, #g#, que é implementado usando a estrutura de dados 
+  #AdjacencyLists#, os algoritmos #bfs(g,r)#, #dfs(g,r)# e #dfs2(g,r)#
+  rodam em $O(#n#_{#r#}+#m#_{#r#})$ de tempo.
 \end{thm}
 
-Breadth-first search seems to have been discovered independently by
-Moore \cite{m59} and Lee \cite{l61} in the contexts of maze exploration
-and circuit routing, respectively.
+Busca em largura parece ter sido descuberta independentemente por 
+Moore \cite{m59} e Lee \cite{l61} nos contextos de exploração de labirintos e roteamente de circuitos, respectivamente. 
 
-Adjacency-list representations of graphs were presented by
-Hopcroft and Tarjan \cite{ht73} as an alternative to the (then more
-common) adjacency-matrix representation.  This representation, as well as
-depth-first-search, played a major part in the celebrated Hopcroft-Tarjan
-planarity testing algorithm 
-\index{planarity testing}%
-that can determine, in $O(#n#)$ time, if
-a graph can be drawn, in the plane, and in such a way that no pair of
-edges cross each other \cite{ht74}.
+Representações de grafos baseadas em listas de adjacências foram propostas
+por 
+Hopcroft e Tarjan \cite{ht73} como uma alternativa à (então mais comum) representação baseada em matriz de adjacências.
+Essa representação, assim como busca em profundidade, desempenhou um papel importante no famoso algoritmo de teste de planaridade de Hopcroft-Tarjan
+\index{teste de planaridade}%
+que pode determinar, em tempo $O(#n#)$ se um grafo pode ser desenhado no plano de forma que nenhum par de arestas se cruzem \cite{ht74}.
 
-In the following exercises, an undirected graph is one in which, for
-every #i# and #j#, the edge $(#i#,#j#)$ is present if and only if the
-edge $(#j#,#i#)$ is present.
-\index{undirected graph}%
-\index{graph!undirected}%
+Nos exercícios a seguir, um grafo não direcionado é um em que, para todo
+#i# e #j#, a aresta 
+$(#i#,#j#)$ existe se e somente se a aresta 
+$(#j#,#i#)$ existe.
+\index{grafo não direcionado}%
+\index{grafo!não direcionado}%
 
 \begin{exc}
-  Draw an adjacency list representation and an adjacency matrix
-  representation of the graph in \figref{graph-example2}.
+  Desenhe uma representação baseada em uma lista de adjacências e uma 
+  baseada em matriz de adjacências do grafo na 
+\figref{graph-example2}.
 \end{exc}
 
 \begin{figure}
   \centering{\includegraphics[scale=0.90909]{figs/graph-example2}}
-  \caption{An example graph.}
+  \caption{Um exemplo de grafo.}
   \figlabel{graph-example2}
 \end{figure}
 
 \begin{exc}
-  \index{incidence matrix}%
-  The \emph{incidence matrix} representation of a graph,
-  $G$, is an $#n#\times#m#$ matrix, $A$, where
+  \index{matriz de incidência}%
+A representação baseada em \emph{matriz de incidência} de um grafo,
+  $G$, é uma $#n#\times#m#$ matriz, $A$, onde
   \[
      A_{i,j} = \begin{cases}
-        -1 & \text{if vertex $i$ the source of edge $j$} \\
-        +1 & \text{if vertex $i$ the target of edge $j$} \\
-        0 & \text{otherwise.}
+        -1 & \text{se o vértice $i$ for a origem da aresta para $j$} \\
+        +1 & \text{se o vértice $i$ for o destino da aresta iniciada em $j$} \\
+        0 & \text{caso contrário.}
      \end{cases}
   \]
   \begin{enumerate}
-    \item Draw the incident matrix representation of the graph in
+    \item Desenhe a representação baseada em matriz de incidência do grafo na
       \figref{graph-example2}.
-    \item Design, analyze and implement an incidence matrix representation
-      of a graph.  Be sure to analyze the space, the cost of
+    \item Projete, analise e implemente uma representação baseada em matriz de incidência de um grafo. Analise o custo de espaço e o custo de tempo das operações 
       #addEdge(i,j)#, #removeEdge(i,j)#, #hasEdge(i,j)#, #inEdges(i)#,
-      and #outEdges(i)#.
+      e #outEdges(i)#.
   \end{enumerate}
 \end{exc}
 
 \begin{exc}
-  Illustrate an execution of the #bfs(G,0)# and #dfs(G,0)# on the graph, $#G#$,
+  Desenhe uma execução do algoritmos
+  #bfs(G,0)# e #dfs(G,0)# no grafo $#G#$,
   in \figref{graph-example2}.
 \end{exc}
 
 \begin{exc}
-  \index{connected graph}%
+  \index{grafo conectado}%
   \index{graph!connected}%
-  Let $G$ be an undirected graph.  We say $G$ is \emph{connected} if,
-  for every pair of vertices #i# and #j# in $G$, there is a path from
-  $#i#$ to $#j#$ (since $G$ is undirected, there is also a path from #j#
-  to #i#). Show how to test if $G$ is connected in $O(#n#+#m#)$ time.
+  Seja um grafo não direcionado $G$.  Dizemos que $G$ é \emph{conectado} se,
+para todo par de vértices #i# e #j# em $G$, existe um caminho de 
+  $#i#$ a $#j#$ (como $G$ não é direcionado, também existe um caminho de #j# a #i#).
+  Mostre como testar se $G$ é conectado em tempo 
+   $O(#n#+#m#)$.
 \end{exc}
 
 \begin{exc}
-  \index{connected components}%
-  Let $G$ be an undirected graph.  A \emph{connected-component labelling}
-  of $G$ partitions the vertices of $G$ into maximal sets, each of which
-  forms a connected subgraph.  Show how to compute a connected component
-  labelling of $G$ in $O(#n#+#m#)$ time.
+  \index{componentes conectados}%
+  Seja $G$ um grafo não direcionado. \emph{Marcações de componentes conectados} (em inglês, \emph{connected-component labelling}) de $G$ particiona os vértices de $G$ em conjuntos maximais, cada qual forma um subgrafo conectado. Mostre como computar as marcações de componentes conectos de $G$ em 
+  $O(#n#+#m#)$ de tempo.
 \end{exc}
 
 \begin{exc}
-  \index{spanning forest}%
-  Let $G$ be an undirected graph.  A \emph{spanning forest} of $G$ is a
-  collection of trees, one per component, whose edges are edges of $G$
-  and whose vertices contain all vertices of $G$.  Show how to compute
-  a spanning forest of of $G$ in $O(#n#+#m#)$ time.
+  \index{floresta geradora}%
+  Seja $G$ um grafo não direcionado.  Uma \emph{floresta geradora} de $G$ é uma coleção de árvores, uma por componente, cujas arestas são arestas de $G$
+  e cujos vértices contêm todos os vértices de $G$. Mostre como computar
+  uma floresta geradora de $G$ em 
+   $O(#n#+#m#)$ de tempo. 
 \end{exc}
 
 \begin{exc}
-  \index{strongly-connected graph}%
-  \index{graph!strongly-connected}%
-  We say that a graph $G$ is \emph{strongly-connected} if, for every
-  pair of vertices #i# and #j# in $G$, there is a path from $#i#$ to
-  $#j#$. Show how to test if $G$ is strongly-connected in $O(#n#+#m#)$
-  time.
+  \index{grafo fortemente contectado}%
+  \index{grafo!fortemente conectado}%
+  Dizemos que um grafo $G$ é \emph{fortemente conectado} se, para todo
+  par de vértices #i# e #j# em $G$, existe um caminho de 
+  $#i#$ para
+  $#j#$. Mostre como testar se $G$ é fortemente conectado em $O(#n#+#m#)$ de tempo. 
 \end{exc}
 
 \begin{exc}
-  Given a graph $G=(V,E)$ and some special vertex $#r#\in V$, show how
-  to compute the length of the shortest path from $#r#$ to #i# for every
-  vertex $#i#\in V$.
+Dado um grafo $G=(V,E)$ e algum vértice especial $#r#\in V$, mostre como
+  computar o comprimento do caminho mais curto a partir de 
+  $#r#$ para #i# para todo vértice 
+  $#i#\in V$.
 \end{exc}
 
 \begin{exc}
-  Give a (simple) example where the #dfs(g,r)# code visits the nodes of a
-  graph in an order that is different from that of the #dfs2(g,r)# code.
-  Write a version of #dfs2(g,r)# that always visits nodes in exactly
-  the same order as #dfs(g,r)#.  (Hint: Just start tracing the execution
-  of each algorithm on some graph where #r# is the source of more than
-  1 edge.)
+  Ache um exemplo (simples) em que o código #dfs(g,r)# visita os nodos de um grafo em uma ordem que é diferente daquela do código 
+  do algoritmo #dfs2(g,r)#.
+  Escreva uma versão de 
+  #dfs2(g,r)# que sempre visita nodos exatamente na mesma ordem 
+  que #dfs(g,r)#.  (Dica: simplesmente inicie verificando a execução de cada algoritmo em algum grafo onde #r# é a fonte de mais de 1 aresta.) 
 \end{exc}
 
 \begin{exc}
   \index{universal sink}%
-  \index{celebrity|see{universal sink}}%
-  A \emph{universal sink} in a graph $G$ is a vertex that is the target
-  of $#n#-1$ edges and the source of no edges.\footnote{A universal sink,
-  #v#, is also sometimes called a \emph{celebrity}: Everyone in the room
-  recognizes #v#, but #v# doesn't recognize anyone else in the room.}
-  Design and implement an algorithm that tests if a graph $G$, represented
-  as an #AdjacencyMatrix#, has a universal sink.  Your algorithm should
-  run in $O(#n#)$ time.
+  \index{celebridade|see{universal sink}}%
+  Uma \emph{universal sink} em um grafo $G$ é um vértice que é o alvo de 
+  $#n#-1$ arestas e a origem de nenhuma aresta. \footnote{Uma universal sink,
+  #v#, é também às vezes chamada de \emph{celebridade}: Todos na sala reconhecem 
+  #v#, mas #v# não reconhece ninguém na sala.} 
+  Projete e implemente um algoritmo que esta se um grafo $G$, representado por
+  uma 
+   #AdjacencyMatrix#, tem uma universal sink.  O seu algoritmo deve rodar em 
+  $O(#n#)$ de tempo.
 \end{exc}
 
 
