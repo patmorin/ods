@@ -2,8 +2,8 @@
 \pagenumbering{arabic}
 Todo currículo de Ciência da Computação no mundo inclui ao menos uma disciplina sobre estruturas de dados e algoritmos.
 Estruturas de dados são \emph{realmente} importantes;
-elas melhoram nossa qualidade de vida e até salvam vidas com certa frequência.
-Muitas companhias que valem múltiplos milhões de dados and algumas que valem bilhões foram construídas em torno de estruturas de dados.
+elas melhoram nossa qualidade de vida e até salvam vidas.
+Muitas companhias que valem múltiplos milhões e bilhões de dólares foram construídas em torno de estruturas de dados.
 
 Como isso é possível? Se pararmos para pensar nisso, percebemos que interagimos com estruturas de dados constantemente.
 
@@ -11,89 +11,88 @@ Como isso é possível? Se pararmos para pensar nisso, percebemos que interagimo
   \item  Abrir um arquivo: Sistema de arquivos 
     \index{sistema de arquivos}%
     estruturas de dados são usadas para encontrar
-    as partes daquele arquivo em disco para serem recuperads.
+    as partes daquele arquivo em disco para serem recuperadas.
     Isso não é fácil; discos contém centenas de milhões de blocos.
     O conteúdo do seu arquivo pode estar armazenado em qualquer um deles.
   \item Procurar contato no telefone: Uma estrutura de dados é usada para procurar por um número de telefone na sua lista de contatos 
     \index{lista de contatos}%
     baseada em informação parcial mesmo antes de você terminar de discar/digitar
     Isso não é fácil;
-seu telefone pode ter informações sobre muitas pessoas---todos que você já entrou em contato via telefone ou email---e seu telefone não tem um processador muito rápido ou muita memória.
+o seu telefone pode ter informações sobre muitas pessoas---todos que você já entrou em contato via telefone ou email---e seu telefone não tem um processador muito rápido ou muita memória.
   \item Entrar na sua rede social preferida:
     \index{rede social}%
     Os servidores da rede
-    usam sua informação de login para procurar as informações da sua conta.
+    usam a sua informação de login para procurar as informações da sua conta.
     Isso não é fácil; as redes sociais mais populares tem centenas de milhões de usuários ativos.
   \item Fazer uma busca na web: 
     \index{busca na web}%
-    O motor de busca usa estruturas de dados para buscar
-    as páginas na web que contêm os seus termos de busca.
+    Um motor de busca usa estruturas de dados para buscar
+    por páginas na web que contêm os seus termos de busca.
     Isso não é fácil; existem mais de 8.5 bilhões de páginas web na Internet
     e cada página tem muitos potenciais termos de busca.
   \item Serviços de telefone de emergência (9-1-1):
     \index{serviços de emergência}\index{9-1-1}%
-    Os serviços de emergência procuram pelo seu número de telefone em uma estrutura de dados que mapeia números de telefone para endereços de forma tal que carros de polícia, ambulâncias ou os bombeiros possam ser enviados imediatamente.
-    Isso é importante; a pessoa fazendo a chamada pode não conseguir fornecer o exato endereço onde está e um atraso pode significar a diferença entre vida e morte.
+    Os serviços de emergência procuram pelo seu número de telefone em uma estrutura de dados que mapeia números de telefone em endereços para que carros de polícia, ambulâncias ou os bombeiros possam ser enviados imediatamente.
+    Isso é importante; a pessoa fazendo a chamada pode não conseguir fornecer o endereço exato de onde está e um atraso pode significar a diferença entre a vida e a morte.
 \end{itemize}
 
 \section{A Necessidade de Eficiência}
-Na próxima seção, nós veremos as operações aceitas pelas estruturas de dados mais comuns.
-Qualquer um com um pouco de experiência em programação verá que essas operações não são difíceis de implementar corretamente.
+Na próxima seção, estudaremos as operações aceitas pelas estruturas de dados mais comuns.
+Qualquer pessoa com um pouco de experiência em programação verá que essas operações não são difíceis de implementar corretamente.
 Podemos implementar ao percorrer/iterar todos os elementos de um array ou lista e possivelmente adicionar ou remover um elemento.
 Esse tipo de implementação é fácil, mas não muito eficiente.
 Isso realmente importa? Computadores estão ficando cada vez mais rápidos.
-Talvez a implementação mais óbvia é boa o suficiente.
+Talvez a implementação mais óbvia seja boa o suficiente.
 Vamos fazer alguns cálculos aproximados para verificar isso.
 
 \paragraph{Número de operações:}
-Imagine uma aplicação com um conjunto de dados de tamanho moderado, digamos de um milhão ($10^6$) de items. 
-É razoável, na maior parte das aplicações, presumir que a aplicação vai precisar verificar cada item pelo menos uma vez. Isso significa que podemos esperar fazermos pelo menos um milhão ($10^6$) de buscas nesses dados. Se cada uma dessas $10^6$ buscas inspecionas cada um dos $10^6$ itens, isso resulta em um total de $10^6\times 10^6=10^{12}$ (mil bilhões) inspeções.
+Imagine uma aplicação com um conjunto de dados de tamanho moderado, digamos de um milhão ($10^6$) de itens. 
+É razoável, na maior parte das aplicações, presumir que a aplicação vai precisar verificar cada item pelo menos uma vez. Isso significa que podemos esperar fazermos pelo menos um milhão ($10^6$) de buscas nesses dados. Se cada uma dessas $10^6$ buscas inspecionar cada um dos $10^6$ itens, isso resulta em um total de $10^6\times 10^6=10^{12}$ (mil bilhões) inspeções.
 
 \paragraph{Velocidades do Processador:} 
 
-No momento de escrita, mesmo um computador de mesa bem rápido não pode fazer mais de um bilhão ($10^9$) de operações por segundo.\footnote{Velocidades de computadores são até pouco gigaherts (bilhões de ciclos por segundo) e cada operação tipicamente exige alguns ciclos.}
+No momento de escrita deste livro, mesmo um computador de mesa bem rápido não pode fazer mais de um bilhão ($10^9$) de operações por segundo.\footnote{Velocidades de computadores vão até poucos gigahertz (bilhões de ciclos por segundo) e cada operação tipicamente exige alguns ciclos.}
 Isso significa que essa aplicação vai levar pelo menos $10^{12}/10^9 = 1000$
-segundos, ou aproximadamente 16 minutos e 40 segundos. Dezesseis minutos é uma eternidade em tempos computacionais, mas uma pessoa pode estar disposta a aceitá-lo (se ela estiver indo para um café).
+segundos, ou aproximadamente 16 minutos e 40 segundos. Dezesseis minutos é uma eternidade em tempos computacionais, mas uma pessoa pode estar disposta a aceitá-lo (por exemplo, se ela estiver indo para um café).
 
 \paragraph{Conjuntos de dados maiores:} 
 
 Agora considere que uma empresa como a Google, 
 \index{Google}%
 que indexa mais de 8.5 bilhões de páginas web. 
-De acordo com nossos cálculos, fazer qualquer tipo de consulta nesses dados levaria pelo menos 8.5 segundos.
-Nós já sabemos que esse não é o caso; buscas web são feitas em bem menos de 8.5 segundos, e elas fazem consultas bem mais complicadas que somente pedindo se uma dadoa página está na lista de páginas indexadas.
-No momento de escrita, Google recebe aproximadamente $4,500$ consultas por segundo, o que significa que eles precisariam de pelo menos $4,500 \times 8.5 =38,250$ servidores muito rápidos somente para manter esse tempo de resposta.
+De acordo com os nossos cálculos, fazer qualquer tipo de consulta nesses dados levaria pelo menos 8.5 segundos.
+Nós já sabemos que esse não é o caso; buscas web são respondidas em bem menos de 8.5 segundos e elas são bem mais complicadas do que somente verificar se uma dada página está na lista de páginas indexadas.
+No momento de escrita deste livro, a Google recebe aproximadamente $4500$ consultas por segundo, o que significa que eles precisariam de pelo menos $4500 \times 8.5 =38,250$ excelentes servidores somente para manter esse tempo de resposta.
 
 \paragraph{A solução:} 
-Esses exemplos nos dizem que as implementações mais óbvias de estruturas de dados não escalam bem quando o número de itens, #n#, na estrutura de dados e o número de operações $m$, feitos na estrutura de dados são altos.
-Nesses casos, o tempo (medido em, digamos, instruções de máquina) é aproximadamente $#n#\times m$.
+Esses exemplos nos dizem que as implementações mais óbvias de estruturas de dados não funcionam bem quando o número de itens, #n#, na estrutura de dados e o número de operações $m$, feitas na estrutura de dados são altos.
+Nesses casos, o tempo (medido em termos de, digamos, duração da execução de instruções de máquina) é proporcional a $#n#\times m$.
 
-A solução, é claro, cuidadosamente organizar dados na estrutura de dados de forma que nem toda operação requer que todos os itens de dados sejam inspecionados.
-Embora pareça inicialmente impossível, nós veremos estruturas de dados em que a busca requer olhar em apenas dois itens em média, independentemente do número de itens guardados na estrutura de dados. No nosso computador de um bilhão de instruções por segundo leva somente $0.000000002$
-segundos para buscar em uma estrutura de dados contendo um bilhão de itens (ou um trilhão ou um quatrilhão ou mesmo um quintilhão de items)
+A solução, é claro, cuidadosamente organizar os dados na estrutura de dados de forma que nem toda operação exija que todos os itens de dados sejam inspecionados.
+Embora pareça inicialmente impossível, descreveremos estruturas de dados em que a busca requer olhar em apenas dois itens em média, independentemente do número de itens guardados na estrutura de dados. No nosso computador de um bilhão de instruções por segundo, levaria somente $0.000000002$
+segundos para buscar em uma estrutura de dados contendo um bilhão de itens (ou um trilhão ou um quatrilhão ou mesmo um quintilhão de itens).
 
 Nós veremos também implementações de estruturas de dados que mantêm os itens em ordem, onde o número de itens inspecionados durante uma operação cresce muito lentamente em função do número de itens na estrutura de dados.
 Por exemplo, podemos manter um conjunto ordenado com um bilhão de itens e inspecionar no máximo 60 itens para qualquer operação.
 No nosso computador de um bilhão de instruções por segundo, essas operações levam $0.00000006$ segundos cada.
 
-O resto deste capítulo revisa brevemente alguns dos principais conceitos usados ao longo do resto do livro.    \secref{interfaces} descreve as interfaces implementadas por todas as estruturas de dados descritas neste livro e
-deve ser consideradas como leitura obrigatória.
+O resto deste capítulo revisa brevemente alguns dos principais conceitos usados ao longo do resto do livro. \secref{interfaces} descreve as interfaces implementadas por todas as estruturas de dados descritas neste livro e devem ser consideradas como leitura obrigatória.
 
 O restante das seções discute:
 
 \begin{itemize}
   \item revisão de conceitos matemáticos incluindo exponenciais, logaritmos, fatoriais, notação assintótica (big-Oh), probabilidades e aleatorização;
-  \item modelo de computação;
-  \item corretudo, tempo de execução e espaço;
+  \item modelos de computação;
+  \item corretude, tempo de execução e uso de espaço;
   \item uma visão geral do resto dos capítulos; e 
-  \item um código de amostra juntamente com convenções de escrita de código.
+  \item uma amostra de código juntamente com convenções de escrita de código usadas neste livro.
 \end{itemize}
 
-Um leitor com ou sem um experiência nessas áreas pode simplesmente pulá-las agora e voltar se necessário.
+Um leitor com (ou mesmo sem) conhecimento desses assuntos pode simplesmente pulá-las agora e voltar se necessário.
 
 \section{Interfaces}
 \seclabel{interfaces}
-Ao discutir sobre estruturas de dados, é importante entender a diferença entre a interface de uma estrutura de dados e sua imeplementação. 
+Ao discutir sobre estruturas de dados, é importante entender a diferença entre a interface de uma estrutura de dados e sua implementação. 
 Uma interface descreve o que uma estrutura de dados faz, enquanto uma implementação descreve como a estrutura o faz.
 
 Uma \emph{interface},
@@ -102,38 +101,39 @@ Uma \emph{interface},
 às vezes também chamada de \emph{tipo abstrato de dados}(\emph{abstract data type}, em inglês),
 define o conjunto de operações aceitas por uma estrutura de dados e a semântica, ou significado, dessas operações.
 
-Uma interface nos diz nada sobre como a estrutura de dados implementa essas operações; ela somente provê uma lsita de operações aceitas juntamente com as especificações sobre quais tipos de argumentos cada operação aceita e o valor retornado por cada operação.
+Uma interface nos diz nada sobre como a estrutura de dados implementa essas operações; ela somente provê uma lista de operações aceitas juntamente com as especificações sobre quais tipos de argumentos cada operação aceita e o valor retornado por cada operação.
 
 A \emph{implementação} de uma estrutura de dados, por outro lado, inclui a representação interna da estrutura de dados assim como as definições dos algoritmos que implementam as operações aceitas pela estrutura de dados. 
-Então, pode haver muitas implemetações de uma dada interface.
+Então, pode haver muitas implementações de uma dada interface.
 Por exemplo, em \chapref{arrays}, veremos implementações da interface #List# usando arrays e em \chapref{linkedlists} veremos implementações da interface #List# usando estruturas de dados baseadas em ponteiros. Ambas implementam a mesma interface, #List#, mas de modos distintos.
 
 \subsection{As Interfaces #Queue#, #Stack# e #Deque#}
 
 A interface #Queue# (Fila, em português) representa uma coleção de elementos à qual podemos
+\index{fila}%
+\index{queue}%
 adicionar elementos e remover o próximo elemento. Mais precisamente, as operações
-aceitas pela interface #Queue# são
+realizadas pela interface #Queue# são
 \begin{itemize}
   \item #add(x)#: adiciona o valor #x# à #Queue#
   \item #remove()#: remove o próximo (previamente adicionado) valor, #y#, da #Queue# e retorna #y#
 \end{itemize}
-Note que 
-a operação #remove()# não recebe argumentos.
+Note que a operação #remove()# não recebe argumentos.
 A \emph{política de enfileiramento} da #Queue# decide qual é o próximo elemento a ser removido.
 
 Existem muitas políticas de enfileiramento possíveis, sendo que entre as mais comuns estão FIFO, por prioridades e LIFO.
 
-Uma \emph{#Queue# FIFO (first-in-first-out -- primeiro a entrar, primeiro a sair) },
+Uma \emph{#Queue# FIFO (first-in-first-out -- primeiro a entrar, primeiro a sair)},
 \index{FIFO queue}%
 \index{queue!FIFO}%
 que é ilustrada em 
 \figref{queue}, remove itens na mesma ordem em que são adicionados, do meio jeito que uma fila de compras em um supermercado funciona.
 Esse é o tipo mais comum de #Queue# de forma que o qualificador FIFO é frequentemente omitido.
-Em outros textos, as operações #add(x)# e #remove()# em uma #Queue# FIFO são frequentemente chamadas de  #enqueue(x)# e #dequeue()#, respectivamente.
+Em outros textos, as operações #add(x)# e #remove()# em uma #Queue# FIFO são frequentemente chamadas de  #enqueue(x)# (enfileirar) e #dequeue()# (desenfileirar), respectivamente.
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/queue}}
-  \caption[Uma queue (fila) FIFO]{Uma #Queue# FIFO.}
+  \caption[Uma queue (fila) FIFO]{Uma #Queue# FIFO --- primeiro a entrar, primeiro a sair.}
   \figlabel{queue}
 \end{figure}
 
@@ -143,13 +143,12 @@ Uma \emph{#Queue# com prioridades},
 \index{priority queue|seealso{heap}}%
 \index{queue!priority}%
 ilustrada em \figref{prioqueue}, sempre 
-remove o menor elemento da #Queue#, deciding empates arbitrariamente.
-Isso é similar ao modo no qual pacientes passam por triagem em uma sala de emergência de um hospital. Conforme pacientes chegam eles são avalias e então
-vão à sala de espera. Quando um médico torna-se disponível, ele primeiro trata o paciente na situação mais grave. A operação #remove()# em um #Queue# com prioridades é geralmente chamada de #deleteMin()# em outros textos.
+remove o menor elemento da #Queue#, decidindo empates arbitrariamente.
+Isso é similar ao modo no qual pacientes passam por triagem em uma sala de emergência de um hospital. Conforme os pacientes chegam, eles são avaliados e, então, vão à sala de espera. Quando um médico torna-se disponível, ele primeiro trata o paciente na situação mais grave. A operação #remove()# em um #Queue# com prioridades é geralmente chamada de #deleteMin()# em outros textos.
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/prioqueue}}
-  \caption[Uma fila com prioridades (no inglês, priority queue)]{Uma #Queue# com prioridades.}
+  \caption[Uma fila com prioridades]{Uma #Queue# com prioridades --- itens são removidos de acordo com suas prioridades (em inglês, priority queue).}
   \figlabel{prioqueue}
 \end{figure}
 
@@ -158,7 +157,7 @@ vão à sala de espera. Quando um médico torna-se disponível, ele primeiro tra
 %When a business-class seat becomes available it is given to the most
 %important customer waiting on an upgrade.
 
-Uma política de enfileiramento muito comum é a política LIFO (last-in-first-out, último-entrar-primeiro-a-sair, em português)
+Uma política de enfileiramento muito comum é a política LIFO (last-in-first-out, último-a-entrar-primeiro-a-sair, em português)
 \index{LIFO queue}%
 \index{LIFO queue|seealso{stack}}%
 \index{fila LIFO}%
@@ -167,14 +166,14 @@ Uma política de enfileiramento muito comum é a política LIFO (last-in-first-o
 \index{pilha}%
 , ilustrada em \figref{stack}. Em uma \emph{Queue LIFO},
 o elemento mais recentemente adicionado é o próximo a ser removido. 
-Isso é melhor vizualiados em termos de uma pilha de pratos; pratos são 
+Isso é melhor visualizado em termos de uma pilha de pratos; pratos são 
 posicionados no topo da pilha a também removidos do topo. Essa estrutura
 é tão comum que recebe seu próprio nome: #Stack# (pilha, em português). Frequentemente, ao referenciar uma #Stack#, as operações #add(x)# e #remove()# 
 recebem os nomes de #push(x)# e #pop()#; isso é para evitar confusões entre as políticas LIFO e FIFO.
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/stack}}
-  \caption[Uma stack (pilha, em português]{Uma stack (pilha, em português).}
+  \caption[Uma stack]{Uma stack (pilha, em português) --- LIFO (último-a-entrar-primeiro-a-sair).}
   \figlabel{stack}
 \end{figure}
 
@@ -183,8 +182,8 @@ Uma #Deque#
 \index{deque}%
 é uma generalização de ambos #Queue# FIFO e #Queue# LIFO (#Stack#).
 
-Uma #Deque# representa uma sequência de elementos, com uma frente e verso (um início e um fim). 
-Elementos podem ser adicionados na frente da sequência ou no final da sequência.
+Uma #Deque# representa uma sequência de elementos, com uma frente e um verso (um início e um fim). 
+Elementos podem ser adicionados no início da sequência ou no final da sequência.
 Os nomes das operações da #Deque# são auto-explicativos: 
 #addFirst(x)#, #removeFirst()#, #addLast(x)# e #removeLast()#.  
 Vale notar que uma #Stack# pode ser implementada usando somente #addFirst(x)#
@@ -207,13 +206,13 @@ sequência, $#x#_0,\ldots,#x#_{#n#-1}$, de valores. A interface #List# inclui as
   \item #add(i,x)#: adicionar #x# à posição #i#, deslocando 
     $#x#_{#i#},\ldots,#x#_{#n#-1}$; \\ 
     Atribua $#x#_{j+1}=#x#_j$, para todo 
-    $j\in\{#n#-1,\ldots,#i#\}$, incremente #n#, and faça $#x#_i=#x#$
+    $j\in\{#n#-1,\ldots,#i#\}$, incremente #n#, e faça $#x#_i=#x#$
   \item #remove(i)# remove o valor $#x#_{#i#}$, deslocando 
     $#x#_{#i+1#},\ldots,#x#_{#n#-1}$; \\ 
     Atribua $#x#_{j}=#x#_{j+1}$, para todo 
     $j\in\{#i#,\ldots,#n#-2\}$ e decremente #n#
 \end{enumerate}
-Note que essas operações are facilmente suficientes para implementar
+Note que essas operações são facilmente suficientes para implementar
 a interface #Deque#:
 \begin{eqnarray*}
   #addFirst(x)# &\Rightarrow& #add(0,x)# \\
@@ -231,7 +230,7 @@ a interface #Deque#:
 
 Embora normalmente não discutiremos as interfaces #Stack#, #Deque# e #Queue# FIFO nos seguintes capítulos, os termos 
 #Stack# e #Deque#
-são às vezes usados nos nomes das estruturas de dados que implementam a interface #List#. Quando isso acontece, destaca-se que essas estruturas de dados podem ser usadas para implementar a interface #Stack# ou #Deque# eficientemente. 
+são às vezes usados nos nomes das estruturas de dados que implementam a interface #List#. Quando isso acontece, queremos destacar que essas estruturas de dados podem ser usadas para implementar a interface #Stack# ou #Deque# eficientemente. 
 Por exemplo, a classe #ArrayDeque# é uma implementação da interface #List# que implementa todas as operações #Deque# em tempo constante por operação.
 
 \subsection{A Interface #USet#: Unordered Sets (Conjuntos Desordenados)}
@@ -240,11 +239,11 @@ A interface #USet#
 \index{USet@#USet#}%
 representa um conjunto desordenado de elementos únicos (sem repetições), que simulam um \emph{conjunto} (em inglês, \emph{set}) matemático. 
 Um #USet# contém #n# elementos \emph{distintos}; nenhum elemento aparece mais de uma vez; os elementos não estão em nenhuma ordem específica.
-Um #USet# aceita as seguintes operações:
+Um #USet# possui as seguintes operações:
 
 \begin{enumerate}
   \item #size()#: retorna o número, #n#, de elementos no conjunto 
-  \item #add(x)#: adiciona o elemento #x# ao conjunto se não já presente; \\
+  \item #add(x)#: adiciona o elemento #x# ao conjunto, se não já presente; \\
     Adiciona #x# ao conjunto considerando que não há elemento #y# no conjunto tal que #x# é considerado igual a #y#. Retorna #true# se #x# foi adicionado ao conjunto e #false# caso contrário.
   \item #remove(x)#: remove #x# do conjunto; \\
     Achar um elemento #y# no conjunto tal que #x# iguala 
@@ -253,10 +252,10 @@ Um #USet# aceita as seguintes operações:
     Achar um elemento #y# no conjunto tal que #y# seja igual a #x#. Retornar #y# ou #null# se tal elemento não exista no conjunto. 
 \end{enumerate}
 
-Essas definições são um pouco cuidados ao distinguir #x#, o elemento que estamos a remover ou buscar, de #y#, o elemento que poderemos remover ou achar.
+Essas definições são um pouco cuidadosas ao distinguir #x#, o elemento que estamos a remover ou buscar, de #y#, o elemento que poderemos remover ou achar.
 Isso é porque #x# e #y# podem ser na realidade objetos distintos que são, para todos os efeitos nessa situação, tratados como iguais.
 
-\javaonly{\footnote{Em Java, isso é realizado ao sobrescrever os métodos da classe dos elementos #equals(y)# e #hashCode()#.}}
+\javaonly{\footnote{Em Java, isso é realizado ao sobrescrever, #@Override#, os métodos da classe dos elementos #equals(y)# e #hashCode()#.}}
 Tal distinção é útil porque permite a criação de 
 \emph{dicionários} ou \emph{mapas} que mapeiam chaves em valores. 
 \index{dictionary}%
@@ -280,7 +279,7 @@ Em outras palavras, é possível recuperar o valor, #v#, usando somente a chave 
 
 \index{SSet@#SSet#}%
 A interface #SSet# representa um conjunto ordenado de elementos. 
-Um #SSet# guarda elementos provientes de alguma ordem total, tal que quaisquer dois elementos #x# e #y# podem ser comparados. Em exemplos de código, isso será feito com um método chamado #compare(x,y)# no qual
+Um #SSet# guarda elementos provientes de alguma ordem total, tal que quaisquer dois elementos #x# e #y# podem ser comparados. Em código, isso será feito com um método chamado #compare(x,y)# no qual
 \[
     #compare(x,y)# 
       \begin{cases}
@@ -290,13 +289,13 @@ Um #SSet# guarda elementos provientes de alguma ordem total, tal que quaisquer d
       \end{cases}
 \]
 \index{compare@#compare(x,y)#}%
-Um #SSet# aceita os métodos #size()#, #add(x)# e #remove(x)# com 
+Um #SSet# possui os métodos #size()#, #add(x)# e #remove(x)# com 
 exatamente a mesma semântica que a interface #USet#. A diferença
 entre um #USet# e um #SSet# está no método #find(x)#:
 \begin{enumerate}
 \setcounter{enumi}{3}
 \item #find(x)#: localizar #x# no conjunto ordenado; \\
-   Achar o menor elemento $y$ no conjunto tal que $#y# \ge #x#$.
+   Achar o menor elemento #y# no conjunto tal que $#y# \ge #x#$.
    Retornar #y# ou #null# se o elemento não existir.
 \end{enumerate}
 
@@ -307,9 +306,9 @@ Ela difere de um modo fundamental de #USet.find(x)# pois retorna um resultado me
 
 A distinção entre a operação #find(x)# de #USet# e de #SSet# é muito importante e frequentemente esquecida ou não percebida. A funcionalidade extra provida por um #SSet# frequentemente vem com um preço que inclui tanto tempo de execução mais alto quanto uma complexidade de implementação maior.
 Por exemplo, a maior parte das implementações #SSet# discutidas neste livro tem operações #find(x)# com tempo de execução que são logaritmicas no tamanho do conjunto.
-Por outro lado, a implementação de um #USet# com uma #ChainedHashTable# em
+Por outro lado, a implementação de um #USet# com uma #ChainedHashTable# no
 \chapref{hashing} tem uma operação #find(x)# que roda em tempo esperado constante. 
-Ao escolher quais dessas estruturas usar, deve-se sempre usar um #USet# a menos que a funcionalidade extra oferecida por um #SSet# é verdadeiramente necessária.
+Ao escolher quais dessas estruturas usar, deve-se sempre usar um #USet# a menos que a funcionalidade extra oferecida por um #SSet# seja verdadeiramente necessária.
 
 % \subsection{The DynamicString Interface}
 
