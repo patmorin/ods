@@ -1,4 +1,5 @@
 \documentclass[10pt]{book}
+\usepackage[portuguese]{babel}
 \usepackage{makeidx}
 \usepackage{framed}
 \setlength{\FrameSep}{0mm}
@@ -253,8 +254,9 @@ Edição PT-BR-0.1G\cpponly{$\beta$}\pcodeonly{$\beta$}
 }
 
 \fancyhead[CE]{\small\nouppercase{\leftmark}} % chapter title, left center
-\fancyhead[CO]{\small\rightmarktitle} % section title, right center
-\fancyhead[RO,LE]{\small\rightmarksection}
+%%% The following fancyhead do not work with \usepackage{babel} FIXME
+%\fancyhead[CO]{\small\rightmarktitle} % section title, right center % 
+%\fancyhead[RO,LE]{{\small\rightmarksection}}
 
 %% Include all the chapters one at a time
 \include{intro-lang}

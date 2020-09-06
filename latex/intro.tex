@@ -49,11 +49,15 @@ Vamos fazer alguns cálculos aproximados para verificar isso.
 Imagine uma aplicação com um conjunto de dados de tamanho moderado, digamos de um milhão ($10^6$) de items. 
 É razoável, na maior parte das aplicações, presumir que a aplicação vai precisar verificar cada item pelo menos uma vez. Isso significa que podemos esperar fazermos pelo menos um milhão ($10^6$) de buscas nesses dados. Se cada uma dessas $10^6$ buscas inspecionas cada um dos $10^6$ itens, isso resulta em um total de $10^6\times 10^6=10^{12}$ (mil bilhões) inspeções.
 
-\paragraph{Velocidades do Processador:} No momento de escrita, mesmo um computador de mesa bem rápido não pode fazer mais de um bilhão ($10^9$) de operações por segundo.\footnote{Velocidades de computadores são até pouco gigaherts (bilhões de ciclos por segundo) e cada operação tipicamente exige alguns ciclos.}
-Isso significa que essa aplicação vai levar pelo menos $10^{12}/10^9 = 1000$
-segundos, ou aproximadamente 16 minutos e 40 segundos. Dezesseis minutos é uma eternidade em tempos computacionais, mas uma pessoa pode estar disposta a suportá-lo (se ela estiver indo para um café).
+\paragraph{Velocidades do Processador:} 
 
-\paragraph{Conjuntos de dados maiores:} Agora considere que uma empresa como a Google, 
+No momento de escrita, mesmo um computador de mesa bem rápido não pode fazer mais de um bilhão ($10^9$) de operações por segundo.\footnote{Velocidades de computadores são até pouco gigaherts (bilhões de ciclos por segundo) e cada operação tipicamente exige alguns ciclos.}
+Isso significa que essa aplicação vai levar pelo menos $10^{12}/10^9 = 1000$
+segundos, ou aproximadamente 16 minutos e 40 segundos. Dezesseis minutos é uma eternidade em tempos computacionais, mas uma pessoa pode estar disposta a aceitá-lo (se ela estiver indo para um café).
+
+\paragraph{Conjuntos de dados maiores:} 
+
+Agora considere que uma empresa como a Google, 
 \index{Google}%
 que indexa mais de 8.5 bilhões de páginas web. 
 De acordo com nossos cálculos, fazer qualquer tipo de consulta nesses dados levaria pelo menos 8.5 segundos.
