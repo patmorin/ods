@@ -314,16 +314,16 @@ Ao escolher quais dessas estruturas usar, deve-se sempre usar um #USet# a menos 
 
 \section{Conceitos Matemáticos}
 Nesta seção, revisaremos algumas noções matemáticas e ferramentas usadas 
-ao longo deste livro, incluindo logaritmos, notação big-Oh, e
+ao longo deste livro, incluindo logaritmos, notação big-Oh e
 teoria das probabilidades. Esta revisão será breve e não tem a intenção
-de ser uma introdução. Leitores que acham que precisam saber mais destes conceitos
+de ser uma introdução. Leitores que acham que precisam saber mais desses conceitos
 são encorajados a ler, e fazer os exercícios relacionados, as seções apropriadas
 do excelente (e livre) texto didático sobre Matemática para Ciência da Computação
 \cite{llm11}.
 
+%% CONTINUAR AQUI TODO
 \subsection{Exponenciais e Logaritmos}
 
-\index{exponential}%
 \index{exponencial}%
 A expressão $b^x$ denota o número $b$ elevado à potência $x$.
 Se $x$ é um inteiro positivo, então o resultado é somente o valor de $b$ multiplicado por ele mesmo $x-1$ vezes:
@@ -351,25 +351,25 @@ $\log_2 k$.
 
 Um jeito informal, mas útil, de pensar sobre logaritmos é pensar
 de $\log_b k$ como o número de vezes que temos que dividir $k$ por $b$
-antes do resultador ser menor ou igual a 1. Por exemplo, quando alguém realiza
+antes do resultado ser menor ou igual a 1. Por exemplo, quando alguém usa uma
 busca binária, cada comparação reduz o número de possíveis respostas por 
-um fator de 2. Isso é repetido até que existe no máximo uma única resposta 
+um fator de 2. Isso é repetido até que exista no máximo uma única resposta 
 possível. Portanto, o número de comparações feitas pela busca binária 
-existem inicialmente até $n+1$ possíveis respostas é, no máximo, 
+quando existem inicialmente até $n+1$ possíveis respostas é, no máximo, 
 $\lceil\log_2(n+1)\rceil$.
 
 \index{logaritmo natural}%
 \index{logaritmo!natural}%
 Outro logaritmo que aparece várias vezes neste livro é o 
 \emph{logaritmo natural}. Aqui usamos a notação $\ln k$ para denotar 
-$\log_e k$, onde $e$ --- \emph{Constante de Euler} --- é dado por 
-\index{Constante de Euler}%
-\index{e@$e$ (Constante de Euler)}%
+$\log_e k$, onde $e$ --- a \emph{constante de Euler} --- é dada por 
+\index{constante de Euler}%
+\index{e@$e$ (constante de Euler)}%
 \[
    e = \lim_{n\rightarrow\infty} \left(1+\frac{1}{n}\right)^n
    \approx  2.71828 \enspace .
 \]
-O logaritmo natural apareces frequentemente porque é o valor
+O logaritmo natural aparece frequentemente porque é o valor
 de uma integral particularmente comum:
 \[
     \int_{1}^{k} 1/x\,\mathrm{d}x  = \ln k \enspace .
@@ -404,7 +404,7 @@ Fatoriais aparecem porque $n!$ conta o número de permutações distintas, i.e.,
 Para o caso especial $n=0$, $0!$  é definido como 1. 
 
 \index{Aproximação de Stirling}%
-A quantidade $n!$ pode ser aproximada usando a \emph{Aproximação de Stirling}:
+A quantidade $n!$ pode ser aproximada usando a \emph{aproximação de Stirling}:
 \[
 	n! 
    = \sqrt{2\pi n}\left(\frac{n}{e}\right)^{n}e^{\alpha(n)} \enspace ,
@@ -413,12 +413,12 @@ onde
 \[  
    \frac{1}{12n+1} <  \alpha(n) < \frac{1}{12n}  \enspace .
 \]
-a Aproximação de Stirling também aproxima $\ln(n!)$:
+a aproximação de Stirling também aproxima $\ln(n!)$:
 \[
    \ln(n!) = n\ln n - n + \frac{1}{2}\ln(2\pi n) + \alpha(n)
 \]
-(De fato, a Aproximação de Stirling é mais facilmente provada por aproximando
-$\ln(n!)=\ln 1 + \ln 2  + \cdots + \ln n$ pela integral
+(De fato, a aproximação de Stirling é mais facilmente provada aproximando
+$\ln(n!)=\ln 1 + \ln 2  + \cdots + \ln n$ com a integral
 $\int_1^n \ln n\,\mathrm{d}n = n\ln n - n +1$.)
 
 \index{coeficientes binomiais}%
@@ -432,7 +432,7 @@ a notação $\binom{n}{k}$ denota:
 O coeficiente binomial
  $\binom{n}{k}$ (pronunciado ``$n$, escolhidos $k$ a $k$'')
  conta o número de subconjuntos com $k$ elementos de um conjunto de tamanho $n$ 
-i.e., o número de forma de escolher $k$ inteiros distintos do conjunto $\{1,\ldots,n\}$.
+i.e., o número de formas de escolher $k$ inteiros distintos do conjunto $\{1,\ldots,n\}$.
 
 \subsection{Notação assintótica}
 
@@ -440,12 +440,12 @@ i.e., o número de forma de escolher $k$ inteiros distintos do conjunto $\{1,\ld
 \index{notação big-Oh}%
 \index{O@$O$ notation}%
 Ao analisar estruturas de dados neste livro, queremos discutir
-os tempos de execução de várias operações. O exato tempo de execução irá,
-é claro, variar de computar a computador e até entre diferentes execuções 
+os tempos de execução de várias operações. O tempo exato de execução irá,
+é claro, variar de computador para computador e até entre diferentes execuções 
 no mesmo computador.
 Ao discutirmos sobre o tempo de execução de uma operação estamos nos 
-referindo ao número de intruções de computador executadas durante a operação.
-Mesmo para códigos simples, essa quantidade pode ser difícil para computar com exatidão.
+referindo ao número de instruções de computador executadas durante a operação.
+Mesmo para códigos simples, essa quantidade pode ser difícil de computar com exatidão.
 Portanto, em vez de analisar tempos de execução exatos, iremos usar a famosa \emph{notação big-Oh}: Para uma função $f(n)$, $O(f(n))$ denota um conjunto de funções,
 
 \[
@@ -460,17 +460,16 @@ onde
 $c\cdot f(n)$ começa a dominar $g(n)$ quando $n$ é suficientemente grande. 
 
 Geralmente usamos notação assintótica para simplificar funções. Por exemplo,
-
-em vez de usar $5n\log n + 8n - 200$ podemos escrever $O(n\log n)$.
+em vez de usarmos $5n\log n + 8n - 200$ podemos escrever $O(n\log n)$.
 Isso é provado da seguinte forma:
 \begin{align*} 
        5n\log n + 8n - 200
         & \le 5n\log n + 8n \\
-        & \le 5n\log n + 8n\log n & \mbox{ for $n\ge 2$ (so that $\log n \ge 1$)}
+        & \le 5n\log n + 8n\log n & \mbox{ for $n\ge 2$ (tal que $\log n \ge 1$)}
             \\
         & \le 13n\log n  \enspace .
 \end{align*}
-Isso demontra que a função $f(n)=5n\log n + 8n - 200$ está no conjunto 
+Isso demonstra que a função $f(n)=5n\log n + 8n - 200$ está no conjunto 
 $O(n\log n)$ usando as constantes $c=13$ e $n_0 = 2$.
 
 Vários atalhos podem ser aplicados ao usar notação assintótica. 
@@ -510,17 +509,17 @@ No exemplo anterior, como a única variável no resto da equação é $n$, podem
 A notação
 Big-Oh não é nova nem exclusiva à Ciência da Computação. Ela foi 
 usada pelo matemático especialista em Teoria dos Números
-Paul Bachmann desde pelo menos 1894, e é imensamente útil 
+Paul Bachmann desde pelo menos 1894 e é imensamente útil 
 para descrever o tempo de execução de algoritmos de computadores.
 Considere o seguinte trecho de código:
 \javaimport{junk/Simple.snippet()}
 \cppimport{ods/Simple.snippet()}
-Uma execução desse método involve: 
+Uma execução desse método envolve: 
 \begin{itemize}
       \item $1$ atribuição (#int\, i\, =\, 0#),
       \item $#n#+1$ comparações (#i < n#),
       \item #n# incrementos (#i++#),
-      \item #n# cálculo de deslocamentos em array (#a[i]#), e 
+      \item #n# cálculos de deslocamentos em array (#a[i]#), e 
       \item #n# atribuições indiretas (#a[i] = i#).
 \end{itemize}
 Então podemos escrever esse tempo de execução como 
@@ -529,9 +528,9 @@ Então podemos escrever esse tempo de execução como
 \]
 onde $a$, $b$, $c$, $d$ e $e$ são constantes que dependem
 da máquina rodando o código e que representam o tempo para realizar atribuições,
-comparações, incrementos, cálculos de deslocamento em array, e atribuições indiretas, respectivamente.
+comparações, incrementos, cálculos de deslocamento em array e atribuições indiretas, respectivamente.
 Entretanto, se essa expressão representa o tempo de execução de duas linhas de
-código, então claramente esse tpo de análise não será viável para códigos ou algoritmos complicados.
+código, então claramente esse tipo de análise não será viável para códigos ou algoritmos complicados.
 Ao usar a notação big-Oh, o tempo de execução pode ser simplificado a 
 \[
     T(#n#)= O(#n#) \enspace .
@@ -541,25 +540,23 @@ O fato de que o tempo de execução depende das constantes
 $a$, $b$, $c$, $d$ e $e$
 no exemplo anterior significa que, em geral, não será possível comparar
 dois tempos de execução para saber qual é mais rápido sem saber os valores dessas constantes.
-Mesmo se fizermos esforços para determinar essas constantes (digamos, usando medindo o tempo de testes), então nossa conclusão será válida somente para a máquina
+Mesmo se fizermos esforços para determinar essas constantes (digamos, usando testes de medição de tempo), então nossa conclusão será válida somente para a máquina
 na qual rodamos nossos testes.
 
 Notação Big-Oh nos permite avaliar a situação a um nível mais alto, 
 possibilitando a análise de funções mais complicadas.
-Se dois algoritmos tem o tempo tempo Big-Oh, então não saberemos qual é mais rápido
-e que não pode não haver um ganhador em todas as situações. Um algoritmo pode ser mais rápido em uma máquina enquanto o outro em uma máquina diferente. Porém, se os dois algoritmos tem tempos de execução big-Oh distintos, então
-teremos certeza que aquele com menor função Big-Oh será mais rápido \emph{para valores #n# grandes o suficientes}.
+Se dois algoritmos têm o mesmo tempo Big-Oh, então não saberemos qual é mais rápido
+e que não pode não haver um ganhador em todas as situações. Um algoritmo pode ser mais rápido em uma máquina enquanto o outro em uma máquina diferente. Porém, se os dois algoritmos têm tempos de execução big-Oh distintos, então
+teremos certeza que aquele com menor função Big-Oh será mais rápido \emph{para valores #n# grandes o suficiente}.
 
 Um exemplo de como a notação big-Oh nos permite comparar duas diferentes funções é mostrado em \figref{intro-asymptotics}, que compara a taxa de crescimento 
-de  $f_1(#n#)=15#n#$ versus $f_2(n)=2#n#\log#n#$.  
-Hipotéticamente, $f_1(n)$ seria o tempo de execução de um complicado algoritmo de tempo linear enquanto $f_2(n)$ é o tempo de execução de um algoritmo bem mais simples baseado no paradigma de divisão e conquista.
+de $f_1(#n#)=15#n#$ versus $f_2(n)=2#n#\log#n#$.  
+Hipoteticamente, $f_1(n)$ seria o tempo de execução de um complicado algoritmo de tempo linear enquanto $f_2(n)$ é o tempo de execução de um algoritmo bem mais simples baseado no paradigma de divisão e conquista.
 Isso exemplica essa situação,
-embora 
- $f_1(#n#)$  seja maior que $f_2(n)$ para valores baixos de #n#,
+embora  $f_1(#n#)$ seja maior que $f_2(n)$ para valores baixos de #n#,
  o oposto é verdade para valores mais altos de #n#.
-Eventualmente $f_1(#n#)$ ganha, e por uma margem crescente.
-Análise usando notação big-Oh
-nos indica que isso aconteceria, pois
+Eventualmente $f_1(#n#)$ ganha e por uma margem crescente.
+Análise usando notação big-Oh nos indica que isso aconteceria, pois
  $O(#n#)\subset O(#n#\log #n#)$.
 
 \begin{figure}
@@ -574,7 +571,7 @@ nos indica que isso aconteceria, pois
 \end{figure}
 
 Em alguns casos, usaremos notação assintótica em funções com mais de uma variável. 
-Pode parecer que não padrão para isso, mas para nossos objetivos, a seguinte definição é suficiente:
+Pode não ser comum mas, para nossos objetivos, a seguinte definição é suficiente:
 \[
    O(f(n_1,\ldots,n_k)) = 
    \left\{\begin{array}{@{}l@{}}
@@ -588,7 +585,7 @@ quando os argumentos
 $n_1,\ldots,n_k$ faz $g$ assumir valores altos. 
 Essa definição também está de acordo com a definição univariada de
 $O(f(n))$ quando $f(n)$ é uma função crescente de  $n$.
-O leitor deve ficar alerta de que, embora isso funciona para nosso objetivo neste livro, outros textos podem tratar funções multivariadas e notação assintótica diferentemente. 
+O leitor deve ficar atento ao fato de que, embora isso funcione para o objetivo deste livro, outros textos podem tratar funções multivariadas e notação assintótica diferentemente. 
 
 \subsection{Randomização e Probabilidades}
 \seclabel{randomization}
@@ -598,16 +595,16 @@ O leitor deve ficar alerta de que, embora isso funciona para nosso objetivo nest
 \index{randomized data structure}%
 \index{estrutura de dados aleatorizada}%
 \index{randomized algorithm}%
-Algumas das estruturas de dados apresentadas neste livro são \emph{randomizadas}\footnote{Randomização é um neologismo para indicar o uso de números aleatórios que influencia na execução de um algoritmo};
+Algumas das estruturas de dados apresentadas neste livro são \emph{randomizadas}\footnote{Randomização é um neologismo para indicar o uso de números aleatórios que influenciam na execução de um algoritmo};
 eles fazem escolhas aleatórias que são independentes dos dados nelas armazenadas
-os nas operações realizadas neles. Por essa razão,
+ou das operações realizadas neles. Por essa razão,
 realizar o mesmo conjunto de operações mais de uma vez usando essas
 estruturas pode resultar em tempos de execução variáveis. Ao analisar essas
 estruturas de dados estamos interessados no seu tempo de execução médio ou \emph{esperado}.
 \index{tempo de execução esperado}%
 \index{tempo de execução!esperado}%
 
-Formalmente, o tempo de execução de uma operação em uma estrutura de dados randomizada e queremos estudar o seu \emph{valor esperado};
+Formalmente, o tempo de execução de uma operação em uma estrutura de dados randomizada é aleatório e queremos estudar o seu \emph{valor esperado};
 \index{valor esperado}%
 Para uma variável aleatória discreta
  $X$ assumindo valores em um universo contável 
@@ -623,7 +620,7 @@ são somente em relação às escolhas aleatórias feitas pela estrutura de dado
 Uma das propriedades mais importantes dos valores esperados é 
 \emph{linearidade da esperança}.
 \index{linearidade da esperança}%
-Para duas quaisquer variáveis aleatórias $X$ e $Y$,
+Para duas variáveis aleatórias $X$ e $Y$,
 \[
    \E[X+Y] = \E[X] + \E[Y] \enspace .
 \]
@@ -635,10 +632,10 @@ Linearidade da esperança nos permite quebrar variáveis aleatórias complicadas
 
 Um truque útil, que usaremos repetidamente, é definir \emph{variáveis aleatórias indicadoras}.
 \index{variável aleatória indicadora}%
-Essas variáveis binárias são úteis quando queremos contar algo e são melhor ilustradas por um exemplo. Suponha we lancemos uma moeda honesta $k$ vezes e que queremos saber o número esperado de vezes que o lado cara aparece.
+Essas variáveis binárias são úteis quando queremos contar algo e são melhor ilustradas por um exemplo. Suponha que lancemos uma moeda honesta $k$ vezes e que queremos saber o número esperado de vezes que o lado cara aparece.
 \index{lançamento de moeda}%
 Intuitivamente, sabemos que a resposta é $k/2$,
-mas se tentamos provar usando a definição de valor esperado, temos
+mas se tentarmos provar usando a definição de valor esperado, temos
 \begin{align*}
    \E[X] & = \sum_{i=0}^k i\cdot\Pr\{X=i\} \\
          & = \sum_{i=0}^k i\cdot\binom{k}{i}/2^k \\
@@ -667,31 +664,29 @@ Agora, $X=\sum_{i=1}^k I_i$, então
          & = k/2 \enspace .
 \end{align*}
 Esse caminho é mais longo, mas não exige que saibamos identidades mágicas ou que obtenhamos expressões não triviais de probabilidades. Melhor ainda, 
-ele vai ao encontro à intuição que temos sobre metade das moedas cairem do lado da cara precisamente porque cada moeda individual cai como moeda com probabilidade $1/2$.
+ele vai de encontro à intuição que temos sobre metade das moedas saírem cara precisamente porque cada moeda individual sai cara com probabilidade $1/2$.
 
 \section{O Modelo de Computação}
 \seclabel{model}
 
-Neste libro, iremos analisar o tempo teórico de execução das operações das estruturas de dados que estudamos. Para fazer precisamente isso, precisamos um modelo matemático de computação. Para isso, usamos
-o modelo \emph{#w#-bit
-word-RAM}
+Neste livro, iremos analisar o tempo teórico de execução das operações das estruturas de dados que estudamos. Para fazer precisamente isso, precisamos um modelo matemático de computação. Para isso, usamos
+o modelo \emph{#w#-bit word-RAM}
 \index{word-RAM}%
 \index{RAM}%
-.  RAM é uma sigla para Random Access Machine --- Máquina de Acesso Aleatório. Nesse modelo, temos acesso a uma memória de acesso aleatório consistindo de \emph{cells}, cada qual armazena 
-uma #w#-bit \emph{word}, ou seja, um apalavra com #w# bits de memória.
+.  RAM é uma sigla para Random Access Machine --- Máquina de Acesso Aleatório. Nesse modelo, temos acesso a uma memória de acesso aleatório consistindo de \emph{células}, cada qual armazena uma #w#-bit \emph{word}, ou seja, uma palavra com #w# bits de memória.
 \index{word}%
-Isso implica que uma célula de memória pode representar, por exemplo, qualquer inteiro no conjunto  $\{0,\ldots,2^{#w#}-1\}$.
+Isso implica que uma célula de memória pode representar, por exemplo, qualquer inteiro no conjunto $\{0,\ldots,2^{#w#}-1\}$.
 
 No modelo word-RAM, operações básicas em words levam tempo constante. 
-Isso inclui operações aritméticas (#+#, #-#, #*#, #/#, #%#), comparisons
-($<$, $>$, $=$, $\le$, $\ge$) e operações booleana bit-a-bit (AND, OR e OR exclusivo bit-a-bit).
+Isso inclui operações aritméticas (#+#, #-#, #*#, #/#, #%#), comparações 
+($<$, $>$, $=$, $\le$, $\ge$) e operações booleanas bit-a-bit (AND, OR e OR exclusivo bit-a-bit).
 
-Qualquer célula pode ler lida com escrita em tempo constante. 
-A memória do computador é gerenciada por um sistema gerenciador de memória a partir do qual podemos alocar or desalocar um bloco de memória de qualquer tamanho que quisermos. Alocar um bloco de memória de tamanho $k$ leva $O(k)$ tempo e retorna uma referência (um ponteiro) para o bloco recém alocado. Essa referência é pequena o suficiente para ser representada por uma única word.
+Qualquer célula pode ler lida ou escrita em tempo constante. 
+A memória do computador é gerenciada por um sistema gerenciador de memória a partir do qual podemos alocar ou desalocar um bloco de memória de qualquer tamanho que quisermos. Alocar um bloco de memória de tamanho $k$ leva tempo $O(k)$ e retorna uma referência (um ponteiro) para o bloco recém alocado. Essa referência é pequena o suficiente para ser representada por uma única word.
 
 O tamanho da word #w# é um parâmetro muito importante desse modelo.
 A única premissa que faremos sobre #w# é um limitante inferior $#w# \ge \log #n#$,
-onde #n# é o número de elmentos guardados em qualquer estrutura de dados.
+onde #n# é o número de elementos guardados em qualquer estrutura de dados.
 Essa premissa é bem razoável, pois caso contrário uma word não seria 
 grande o suficiente para contar o número de elementos guardados na estrutura
 de dados.
@@ -699,11 +694,11 @@ de dados.
 Espaço é medido em words, de forma que quando falarmos sobre a quantidade de espaço usado por uma estrutura de dados, estamos nos referindo ao número de words de memória usada pela estrutura.
 Todas as nossas estruturas de dados guardam valores de um tipo genérico #T#,
 e nós presumimos que um elemento de tipo #T# ocupa uma word de memória.
-\javaonly{(Na realidade, estamos guardando referencias para objetos do tipo #T#, e essas referencias ocupam somente uma word de memória.)}
+\javaonly{(Na realidade, estamos guardando referências para objetos do tipo #T#, e essas referências ocupam somente uma word de memória.)}
 
-\javaonly{O modelo word-RAM com #w# bits é bem próximo à Java Virtual Machine (JVM)  de 32 bits quando $#w#=32$.}
+\javaonly{O modelo word-RAM com #w# bits é bem próximo à Java Virtual Machine (JVM) de 32 bits quando $#w#=32$.}
 \cpponly{O modelo word-RAM com #w# bits é bem representativo a computadores desktop modernos quando $#w#=32$ or $#w#=64$.} 
-As estruturas de dados apresentadas neste livro não usam truqes especiais que não são implementáveis \javaonly{na JVM em mais parte de outras arquiteturas.}\cpponly{em C++ na maior parte das arquiteturas.} 
+As estruturas de dados apresentadas neste livro não usam truques especiais que não são implementáveis \javaonly{na JVM ou na maior parte das arquiteturas.}\cpponly{em C++ ou na maior parte das arquiteturas.} 
 
 \section{Corretude, Complexidade de Tempo e Complexidade de Espaço}
 
@@ -750,23 +745,23 @@ $f(#n#)$.
  então uma sequência de $m$ operações leva de tempo, no máximo,
  $mf(#n#)$.
  Algumas operações individuais podem levar mais tempo que 
-    $f(#n#)$ mas a média, sobre a sequência inteira de operações, é até $f(#n#)$.
+    $f(#n#)$ mas o tempo médio, sobre a sequência inteira de operações, é até $f(#n#)$.
 \item[Tempo de Execução Esperado:] 
   \index{tempo de execução!esperado}%
   \index{tempo de execução esperado}%
   Se dizemos que o tempo de esperado de execução de uma operação em uma estrutura de dados é 
    $f(#n#)$, isso significa que o tempo real de execução é uma variável aleatória
- (veja \secref{randomization})
+ (veja a \secref{randomization})
     e o valor esperado dessa variável aleatória é no máximo 
  $f(#n#)$.
-A randomização aqui é em respeito a escolha aleatória feitas pela estrutura de dados.
+A randomização aqui é em respeito às escolhas aleatórias feitas pela estrutura de dados.
 \end{description}
 
-Para entender a diferença entre pior caso, amortizado e tempo esperado, ajuda a considerar um exemplo financeiro. Considere o custo de comprar uma casa:
+Para entender a diferença entre o pior caso, o tempo amortizado e o tempo esperado, ajuda se considerarmos um exemplo financeiro. Considere o custo de comprar uma casa:
 
 \paragraph{Pior caso versus custo amortizado:}
 \index{custo amortizado}%
-Suponha que uma casa custa \$120\,000.  A fim de comprar essa casa, podemos pegar um empréstimo de 120 meses (10 anos) com pagamentos mensais de 
+Suponha que uma casa custe \$120\,000.  A fim de comprar essa casa, podemos pegar um empréstimo de 120 meses (10 anos) com pagamentos mensais de 
 \$1\,200. Nesse caso, o custo mensal no pior caso de pagar o empréstimo é 
 \$1\,200.
 
@@ -780,9 +775,9 @@ Esse valor é bem menor que os \$1\,200 mensais que teríamos que pagar se pegá
 \paragraph{Pior caso versus custo esperado:}
 \index{custo esperado}%
 A seguir, considere o caso de um seguro de incêndio na nossa casa de \$120\,000.
-Por analisar centenas de milhares de casos, companias de seguro tem determinado que a quantidade esperada de danos por incêndios causado a uma casa como a nossa é de
+Por analisar centenas de milhares de casos, companias de seguro têm determinado que a quantidade esperada de danos por incêndios causado a uma casa como a nossa é de
 \$10 por mês.  
-Esse é uma valor bem baixo, pois a maior parte das casa nunca pegam fogo, algumas poucas tem incêndios pequenos que causam algum dano e um número minúsculo de casa queimam até as cinzas. Baseada nessa informação, a seguradora cobra
+Esse é uma valor bem baixo, pois a maior parte das casa nunca pegam fogo, algumas poucas tem incêndios pequenos que causam algum dano e um número minúsculo de casas queimam até as cinzas. Baseada nessa informação, a seguradora cobra
 \$15 mensais para a contratação de um seguro.
 
 Agora é o momento da decisão. Devemos pagar os 
@@ -793,8 +788,7 @@ mas temos que aceitar que a possibilidade de \emph{custo real} possa ser bem mai
 No evento improvável que a casa queime inteira, o custo real será de \$120\,000.
 
 Esses exemplos financeiros também oferecem a oportunidade de vermos porque às vezes aceitamos um tempo de execução amortizado ou esperado em vez de considerarmos o tempo de execução no pior caso. Frequentemente é possível obter um tempo de execução esperado ou amortizado menor que o obtido no pior caso. 
-No mínimo, frequentemente é possível obter uma estrutura de dados bem mais simples se estamos dispostos a aceitar tempo de execução amortizado ou esperado.
-
+No mínimo, frequentemente é possível obter uma estrutura de dados bem mais simples se estivermos dispostos a aceitar tempo de execução amortizado ou esperado.
 
 \section{Trechos de Código}
 
@@ -803,21 +797,21 @@ No mínimo, frequentemente é possível obter uma estrutura de dados bem mais si
   Os trechos de código neste livro são escritos em pseudocódigo.
 
 \index{pseudocode}%
-Eles devem ser de fácil leitura para qualquer um que teve alguma experiência de programação em qualquer linguagens de programação comum dos últimos 40 anos.
+Eles devem ser de fácil leitura para qualquer um que teve alguma experiência de programação em qualquer linguagem de programação comum dos últimos 40 anos.
 Para ter uma ideia do que o pseudocódigo neste livro parece, segue uma função que computa a média de um array, #a#:
 \pcodeimport{ods/Algorithms.average(a)}
 Como esse código exemplifica, a atribuição a uma variável é feita usando a notação
  $\gets$.
 % WARNING: graphic typesetting of assignment operator
-Nós usamos a convenção de que o comprimento de uma array, #a#, é denotado por
+Nós usamos a convenção de que o comprimento de um array, #a#, é denotado por
 #len(a)# e os índices do array começam com zero,
 tal que #range(len(a))# são índices válidos para #a#.  
-Para encurtar o código, e algumas vezes facilitar a leitura, nosso pseudocódigo permite atribuições de subarrays.
+Para encurtar o código e algumas vezes facilitar a leitura, nosso pseudocódigo permite atribuições de subarrays.
 As duas funções a seguir são equivalentes:
 \pcodeimport{ods/Algorithms.left_shift_a(a).left_shift_b(a)}
 O código a seguir atribui todos os valores em um array para zero:
 \pcodeimport{ods/Algorithms.zero(a)}
-Ao analysis o tempo de execução de um código desse tipo, é necessário cuidado;
+Ao analisar o tempo de execução de um código desse tipo, é necessário cuidado;
 comandos como 
     #a[0:len(a)] = 1#
 ou
@@ -829,7 +823,7 @@ Usamos atalhos similares com atribuições a variáveis, tal que o código
 os valores das variáveis #x# e #y#.
 \index{swap}
 
-Nosso pseudocódigo usa alguns operadores que podem não ser conhecidos.
+Nosso pseudocódigo usa alguns operadores que podem ser desconhecidos.
 Como é padrão em matemática, divisão (normal) é denotada pelo operador $/$
 Em muitos casos, queremos fazer divisão inteira e, nesse caso, usamos
 o operador
@@ -841,7 +835,7 @@ Ocasionalmente, também usamos o operador $\bmod$ para obter o resto
 da divisão inteira, mas isso será definido quando for o caso.
 \index{operador mod}%
 \index{operador div}%
-Mais adiante no livro, podemos usar alguns operadores bit-a-bit incluindo o deslocamento à esquerda (#<<#), à direita (#>>#), E bit-a-bit (#&#) e XOR bit-a-bit (#^#).
+Mais adiante no livro, podemos usar alguns operadores bit-a-bit incluindo o deslocamento à esquerda (#<<#), à direita (#>>#), AND bit-a-bit (#&#) e XOR bit-a-bit (#^#).
 \index{deslocamento à esquerda}%
 \index{left shift}%
 \index{#<<#|see {left shift}}%
@@ -857,24 +851,24 @@ Mais adiante no livro, podemos usar alguns operadores bit-a-bit incluindo o desl
 \index{#^#|see {bitwise exclusive-or}}%
 \index{#^#|see {XOR bit-a-bit}}%
 
-Os trechos de pseudocódigo neste livro são traduções de máquina do código Python que pode ser baixado do website do livro.
+Os trechos de pseudocódigo neste livro são traduções automáticas do código Python que pode ser baixado do website do livro.
 \footnote{ \url{http://opendatastructures.org}}  
 Se você encontrar qualquer ambiguidade no pseudocódigo que você não consegue resolver por si só, então você pode resolver essa questões com o correspondente código em Python.
-Se você não lê Python, o código também está disponível em Java e C++. Se você não consegue decifrar o pseudocódigo, ou ler Python, C++, ou Java, então você pode não estar pronto para este livro.
+Se você não lê Python, o código também está disponível em Java e C++. Se você não consegue decifrar o pseudocódigo, ou ler Python, C++, ou Java, então talvez você não esteja pronto para ler este livro.
 }
 
 \notpcode{
 Os trechos de código neste livro são escritos na linguagem 
  \lang
-. Entretanto, para fazer o livro acessível para leitores não familiares com todas as construções e keywords definidas pela linguagem \lang, os trechos de código foram simplificados. Por exemplo, um leitor não irá encontrar keywords como
+. Entretanto, para fazer o livro acessível para leitores não familiares com todas as construções e \emph{keywords} definidas pela linguagem \lang, os trechos de código foram simplificados. Por exemplo, um leitor não irá encontrar keywords como
 #public#, #protected#, #private# ou #static#.  
 O leitor também não encontrará discussão aprofundada sobre hierarquia de classes. 
 Quais interfaces uma determinada classes implementa ou qual classes ela extende, se relevante para a discussão, deve estar claro do texto do contexto em questão.
 
-Essas convenções deve fazer os trechos de código mais fáceis de entender por qualquer um com background linguagens que variantes da linha ALGOL, incluindo B, C, C++, C\#, Objective-C, D, Java, JavaScript, e assim por diante.
-Leitores em busca de detalhes de todas as implementações são encorajados a olhar no código fonte da linguagem \lang\  que acompanha este livro.
+Essas convenções deve fazer os trechos de código mais fáceis de entender por qualquer um com background linguagens que variantes da linha ALGOL, incluindo B, C, C++, C\#, Objective-C, D, Java, JavaScript e assim por diante.
+Leitores em busca de detalhes das implementações são encorajados a olhar no código fonte da linguagem \lang\  que acompanha este livro.
 
-Este livro mixtura análise matemática de tempos de execução com o código-fonte da linguagem \lang\ para os algoritmos em análise. Isso significa que algumas equações contêm variáveis variáveis também encontradas no código-fonte.
+Este livro mistura análise matemática de tempos de execução com o código-fonte da linguagem \lang\ para os algoritmos em análise. Isso significa que algumas equações contêm variáveis também encontradas no código-fonte.
 
 Essas variáveis são formatadas consistentemente, tanto dentro do código-fonte quanto nas equações. A variável mais comum desse tipo é a variável #n# 
 \index{n@#n#}%
@@ -883,9 +877,9 @@ que, sem exceção, sempre refere-se ao número de itens atualmente armazenados 
 
 \section{Lista de Estruturas de Dados}
 
-Tabelas~\ref{tab:summary-i} e \ref{tab:summary-ii} resumem o desempenho 
-das estruturas de dados neste livro que implementam cada uma das interfaces, #List#, #Uset# e #SSet#, descritas em \secref{interfaces}.
-\Figref{dependencies} mostra as dependências entre vários capítulos neste livro.
+As tabelas~\ref{tab:summary-i} e \ref{tab:summary-ii} resumem o desempenho 
+das estruturas de dados que neste livro implementam cada uma das interfaces, #List#, #Uset# e #SSet#, descritas em \secref{interfaces}.
+A \Figref{dependencies} mostra as dependências entre vários capítulos neste livro.
 \index{dependências}%
 Uma linha tracejada indica somente uma dependência fraca, na qual somente uma pequena parte do capítulo depende em um capítulo anterior ou somente nos resultados principais do capítulo anterior.
 
@@ -916,7 +910,7 @@ Uma linha tracejada indica somente uma dependência fraca, na qual somente uma p
 \end{tablenotes}
 \end{threeparttable}}
 \end{center}
-\caption[Resumo de implementações de List e USet.]{Resumo de implementações de #List# e #USet#.}
+\caption[Resumo das implementações de List e USet.]{Resumo das implementações de #List# e #USet#.}
 \tablabel{summary-i}
 \end{table}
 
@@ -936,19 +930,19 @@ Uma linha tracejada indica somente uma dependência fraca, na qual somente uma p
 \javaonly{#BTree# & $O(\log #n#)$ & $O(B+\log #n#)$\tnote{A} & \sref{btree} \\ 
 #BTree#\tnote{X} & $O(\log_B #n#)$ & $O(\log_B #n#)$ & \sref{btree} \\ } \hline
 \multicolumn{4}{c}{} \\[2ex] \hline
-  \multicolumn{4}{|c|}{Implementações de #Queue# (de prioridade)} \\ \hline
+  \multicolumn{4}{|c|}{Implementações da #Queue# (de prioridades)} \\ \hline
  & #findMin()# & #add(x)#/#remove()# & \\ \hline
 #BinaryHeap# & $O(1)$ & $O(\log #n#)$\tnote{A} & \sref{binaryheap} \\ 
 #MeldableHeap# & $O(1)$ & $O(\log #n#)$\tnote{E} & \sref{meldableheap} \\ \hline
 \end{tabular}
 \begin{tablenotes}
-\item[I]{Essa estrutura pode somente guardar dados inteiros de #w#-bit.}
-\javaonly{\item[X]{Isso denota o tempo de execução no modelo de memória externa; veja \chapref{btree}.}}
+\item[I]{Essa estrutura somente pode guardar dados inteiros de #w#-bit.}
+\javaonly{\item[X]{Isso denota o tempo de execução no modelo de memória externa; veja o \chapref{btree}.}}
 \end{tablenotes}
 %\renewcommand{\thefootnote}{\arabic{footnote}}
 \end{threeparttable}
 \end{center}
-\caption[Resumo das implementações SSet e priority Queue.]{Resumo de implementações de #SSet# e priority #Queue#.}
+\caption[Resumo das implementações SSet e priority Queue.]{Resumo de implementações de #SSet# e #Queue# de prioridades.}
 \tablabel{summary-ii}
 \end{table}
 
@@ -956,7 +950,7 @@ Uma linha tracejada indica somente uma dependência fraca, na qual somente uma p
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/dependencies}
   \end{center}
-  \caption{Dependências entre capítulos neste livro.}
+  \caption{Dependências entre capítulos deste livro.}
   \figlabel{dependencies}
 \end{figure}
 
@@ -970,17 +964,17 @@ As interfaces
 Elas são essencialmente versões simplificadas das interfaces 
 #List#, #Set#, #Map#, #SortedSet# e #SortedMap# encontradas no 
 Java Collections Framework.  \javaonly{O código-fonte que acompanha este livro inclui 
-classes auxiliares para fazer das implementações #USet# e #SSet# 
-implementaçoes #Set#, #Map#, #SortedSet# e #SortedMap#.}
+classes auxiliares para fazer das implementações #USet# e #SSet# também
+implementações de #Set#, #Map#, #SortedSet# e #SortedMap#.}
 
-Para um soberbo (e livre) tratamento da matemática discutida neste capítulo, incluindo notação assintótica, logaritmos, fatoriais, aproximação de Sterling, probabilidade básica e muito mais, veja o livro texto por
+Para um soberbo (e livre) tratamento da matemática discutida neste capítulo, incluindo notação assintótica, logaritmos, fatoriais, aproximação de Sterling, probabilidade básica e muito mais, veja o livro-texto por
 Leyman, Leighton e Meyer \cite{llm11}.  
 Para um texto de cálculo suave que inclui definições formais de exponenciais e logaritmos, veja o (disponível livremente) texto clássico de Thompson \cite{t14}.
 
 Para maiores informações em probabilidade básica, especialmente como ela se relaciona com Ciência da Computação, veja o livro didático de Ross \cite{r01}.  
 Outra boa referência, que cobre notação assintótica e probabilidades, é o livro-texto de Graham, Knuth e Patashnik \cite{gkp94}.
 
-\javaonly{Leitures que desejam afinar suas habilidades de programação Java
+\javaonly{Leitores que desejam afinar suas habilidades de programação Java
 podem achar muitos tutoriais online em \cite{oracle_tutorials}.}
 
 \begin{exc}
@@ -993,16 +987,16 @@ podem achar muitos tutoriais online em \cite{oracle_tutorials}.}
 Suas implementações devem ser rápidas o suficiente tal que até arquivos com um milhão de linhas podem ser processadas em alguns segundos.
   \begin{enumerate}
     \item Leia a entrada uma linha por vez e então escreva as linha em ordem invertida, tal que a última linha lida é a primeira imprimida, e então a penúltima lida é a segunda a ser imprimida e assim por diante. 
-    \item Leia as primeiras 50 linhas da entrada e então as escreva na saída em ordem reserva. Leia as seguintes 50 linhas e então escreva na saída em ordem reserva. Faça isso até que não haja mais linhas a serem linhas. Nesse ponto as linhas restantes lidas também devem ser imprimidas invertidas.
-Em outras palavras, sua saída inicirá com a 50-ésima linha, então 49-ésima linha, então a 48-ésima e assim até a primeira linha. Isso deverá ser seguido pela centésima linha, seguida pela 99-ésima até a 51-ésima linha. Assim por diante.
+    \item Leia as primeiras 50 linhas da entrada e então as escreva na saída em ordem reversa. Leia as seguintes 50 linhas e então escreva na saída em ordem reversa. Faça isso até que não haja mais linhas a serem linhas. Nesse ponto as linhas restantes lidas também devem ser imprimidas invertidas.
+Em outras palavras, sua saída iniciará com a 50ª linha, então 49ª linha, então a 48ª e assim até a primeira linha. Isso deverá ser seguido pela centésima linha, seguida pela 99ª até a 51ª linha. Assim por diante.
 O seu código nunca deverá manter mais de 50 linhas a qualquer momento.
 
 \item Leia a entrada uma linha por vez.
   A qualquer momento após ler as primeiras 42 linhas, se alguma linha está em branco (i.e., uma string de comprimento 0), então produza a linha que ocorreu 42 linhas antes dela. Por exemplo, se Linha 242 está em branco, então o seu programa deve imprimir a linha 200. Esse programa deve ser implementado tal que ele nunca guarda mais que 43 linhas da entrada a qualquer momento.
 
-\item Leia a entrada uma linha por vez e imprima cada linha se não for uma duplicata de alguma linha anterior. Tenha cuidado especial de forma que um arquivo com muitas linhas duplicadas não use mais memória do que é necessário para o número de linhas únicas.
+\item Leia a entrada uma linha por vez e imprima cada linha se não for uma duplicata de alguma linha anterior. Tenha cuidado especial para que um arquivo com muitas linhas duplicadas não use mais memória do que é necessário para o número de linhas únicas.
 
-\item Leia a entrada uma linha  por vez e imprima cada linha somente se você já encontrou uma linha igual antes. (O resultado final é que você remove a primeira ocorrência de cada linha.). Tenha cuidado tal que um arquivo com minhas linhas duplicadas não usa mais memória que é necessário para o número de linhas únicas.
+\item Leia a entrada uma linha por vez e imprima cada linha somente se você já encontrou uma linha igual antes. (O resultado final é que você remove a primeira ocorrência de cada linha.). Tenha cuidado para que um arquivo com muitas linhas duplicadas não use mais memória do que seja necessário para o número de linhas únicas.
 
 \item Leia a entrada uma linha por vez. Então, imprima todas as linhas ordenadas por comprimento, com as linhas mais curtas primeiro. No caso em que duas linhas 
   tem o mesmo tamanho, decida sua ordem usando a ordem usual de texto. Linhas duplicadas devem ser impressas somente uma vez.
@@ -1011,14 +1005,14 @@ O seu código nunca deverá manter mais de 50 linhas a qualquer momento.
 
 \item Leia a entrada uma linha por vez e então imprima as linhas pares (começando com a primeira linha, linha 0) seguidas das linhas ímpares.
 
-\item Leia a entrada inteira uma linha por vez e aleatoriamente troque as linhas antes de imprimí-las. Para ser claro: você não deve mudar o conteúdo de qualquer linha. Em vez disso, a mesma coleção de linhas deve ser imprimida, mas em ordem aleatória.
+\item Leia a entrada inteira uma linha por vez e aleatoriamente troque as linhas antes de imprimí-las. Para ser claro: você não deve mudar o conteúdo de qualquer linha. Em vez disso, a mesma coleção de linhas deve ser impressa, mas em ordem aleatória.
 
   \end{enumerate}
 \end{exc}
 
 \begin{exc}
   \index{Palavra Dyck}%
-  Uma \emph{palavra Dyck} é uma sequência de +1s e -1s com propriedade de que soma de qualquer prefix da sequência nunca é negativa. Por exemplo,
+  Uma \emph{palavra Dyck} é uma sequência de +1s e -1s com propriedade de que soma de qualquer prefixo da sequência nunca é negativa. Por exemplo,
   $+1,-1,+1,-1$ é uma palavra Dyck, mas $+1,-1,-1,+1$ não é uma palavra Dyck 
   pois o prefixo $+1-1-1<0$.  Descreva qualquer relação entre 
   palavras Dyck e as operações da interface #Stack#, #push(x)# e #pop()#.
@@ -1029,9 +1023,9 @@ O seu código nunca deverá manter mais de 50 linhas a qualquer momento.
   \index{string!pareada}%
   Uma \emph{string pareada} é uma sequência de caracteres \{, \}, (, ), [, e ]
   que são apropriadamente pareados. Por exemplo, ``\{\{()[]\}\}''
- é uma string pareada, mas este ``\{\{()]\}'' não é, uma vez que a segunda \{
-  é pareada ].  Mostre como usar uma stack tal que, dada uma string de comprimento 
-  #n#, você pode determinar se é uma string pareada em tempo $O(#n#)$.
+ é uma string pareada, mas esta ``\{\{()]\}'' não é, uma vez que a segunda \{
+  é pareada ].  Mostre como usar uma stack para que, dada uma string de comprimento 
+  #n#, você possa determinar se é uma string pareada em tempo $O(#n#)$.
 \end{exc}
 
 \begin{exc}
@@ -1056,9 +1050,5 @@ Usando #USet#, implemente uma #Bag#.  Uma #Bag# é como um #USet#---ele aceita o
 \end{exc}
 
 \begin{exc}
-Trabalhe para melhorar o desempenho das suas implementações da questão anterior usando quaisquer truques que puder imaginar. Experimente e pense sonre como você pode melhorar o desempenho de #add(i,x)# e #remove(i)# na sua implementação de #List#. Pense como você poderia melhorar o desempenho da operação #find(x)# na suas implementações dos #USet# e #SSet#. Este exercício é pensado para te dar uma ideia da dificuldade de conseguir implementações eficientes dessas interfaces.
+Trabalhe para melhorar o desempenho das suas implementações da questão anterior usando quaisquer truques que puder imaginar. Experimente e pense como você pode melhorar o desempenho de #add(i,x)# e #remove(i)# na sua implementação de #List#. Pense como você poderia melhorar o desempenho da operação #find(x)# na suas implementações dos #USet# e #SSet#. Este exercício é tem o intuito de te dar uma ideia da dificuldade de conseguir implementações eficientes dessas interfaces.
 \end{exc}
-
-
-
-
