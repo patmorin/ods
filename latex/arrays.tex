@@ -1,4 +1,4 @@
-\chapter{Listas Baseadas em Array}
+\chapter{Listas Baseadas em Arrays}
 \chaplabel{arrays}
 
 Neste capítulo, iremos estudar implementações das interfaces #List# e #Queue#,
@@ -30,30 +30,30 @@ Estruturas de dados que funcionam armazenando em um único array têm muitas van
   \item Arrays não são muito dinâmicos. Adicionar ou remover um elemento perto do meio de uma lista significa que um grande número de elemento no array precisam
 ser deslocados para abrir espaço para o elemento recentemente adicionado ou
 preencher a lacuna criada pelo elemento removido. Essa é a razão pela qual as operações 
-  #add(i,x)# e #remove(i)# tem tempos de execução que dependem de 
+  #add(i,x)# e #remove(i)# têm tempos de execução que dependem de 
    #n# e #i#.
 
   \item Arrays não podem expandir ou encolher por si só. Quando o número de elementos na
     estrutura de dados excede o tamanho do array de apoio, um novo array precisa
-    ser alocado e os dados do antigo array precisa ser copiado 
+    ser alocado e os dados do array antigo precisa ser copiado 
     no novo array. Essa é uma operação cara.
 \end{itemize}
 Um terceiro ponto é importante. Os tempos de execução citados na tabela
 acima não incluem o custo associado com expandir ou encolher o array de apoio.
-Veremos que, se não gerenciado com cuidado, o custo de expandir ou encolher o array de apoio não aumenta muito o custo de uma operação \emph{média}.
+Veremos que, se não gerenciado com cuidado, o custo de expandir ou encolher o array de apoio não aumenta muito o custo \emph{médio} de uma operação.
 Mais precisamente, se iniciarmos com um estrutura de dados vazia e 
 realizarmos qualquer sequência de $m$ operações #add(i,x)# ou #remove(i)#
 , então o custo total de expandir e encolher o array de apoio, sobre a sequência inteira de $m$ operações é $O(m)$. Embora algumas operações individuais sejam mais caras, o custo amortizado, quando dividido por todas as $m$ operações, é somente $O(1)$ por operação.
 
 \cpponly{
-Neste capítulo, e ao longo deste livro, seria conveniente ter arrays que guardam seus tamanhos. Os arrays típicos do C++ não fazem isso, então definimos uma classe, #array#, que registra seu tamanho. A implementação dessa classe direta. Ela é feita como um array C++ padrão, #a#, e um inteiro, #length#:
+Neste capítulo, e ao longo deste livro, seria conveniente ter arrays que guardam seus tamanhos. Os arrays típicos do C++ não fazem isso, então definimos uma classe, #array#, que registra seu tamanho. A implementação dessa classe é direta. Ela é feita como um array C++ padrão, #a#, e um inteiro, #length#:
 }
 \cppimport{ods/array.a.length}
 \cpponly{
 O tamanho de um #array# é especificado no momento de criação:
 }
 \cppimport{ods/array.array(len)}
-\cpponly{Os eleementos de um array podem ser indexados:}
+\cpponly{Os elementos de um array podem ser indexados:}
 \cppimport{ods/array.operator[]}
 \cpponly{Finalmente, quando um array é atribuído para outro, ocorre apenas uma manipulação de ponteiros que leva um tempo constante:}
 \cppimport{ods/array.operator=}
@@ -62,8 +62,7 @@ O tamanho de um #array# é especificado no momento de criação:
 \seclabel{arraystack}
 
 \index{ArrayStack@#ArrayStack#}%
-Um 
-#ArrayStack# implementa a interface lista usando um array #a#, chamado de 
+Um #ArrayStack# implementa a interface lista usando um array #a#, chamado de 
 \emph{array de apoio}. O elemento da lista com índice #i# é armazenado
 em #a[i]#.  Na maior parte do tempo, #a# é maior que o estritamente necessário,  
 então um inteiro 
@@ -83,17 +82,17 @@ Após realizar as verificações de limites necessárias, simplesmente retornamo
 
 As operações de adicionar e remover elementos de um 
  #ArrayStack#
-estão ilustradas em 
+estão ilustradas na 
  \figref{arraystack}.  Para implementar a operação #add(i,x)#,
 primeiro verificamos se #a# está cheio. Caso positivo, chamamos o método
 #resize()# para aumentar o tamanho de #a#. Como #resize()#
 é implementado será discutido depois. Por ora, é suficiente 
 saber que, após uma chamada para #resize()#, temos certeza que $#a.length#
 > #n#$.  
-Com isso resolvido, agora nós deslocamos os elementos
+Com isso resolvido, deslocamos os elementos
 $#a[i]#,\ldots,#a[n-1]#$ para uma posição à direita para
 abrir espaço para #x#, atribuir
-#a[i]# igual a #x#, e incrementar #n#.
+#a[i]# igual a #x# e incrementar #n#.
 
 \begin{figure}
   \begin{center}
@@ -102,13 +101,13 @@ abrir espaço para #x#, atribuir
   \caption[Adicionando a um ArrayStack]{Uma sequência de operações #add(i,x)# e #remove(i)# em um
   #ArrayStack#.  Flechas denotam elementos sendo copiados. Operações que
   resultam em uma chamada para 
-  #resize()# são marcados em um arterisco.}
+  #resize()# são marcados com um asterisco.}
   \figlabel{arraystack}
 \end{figure}
 
 \codeimport{ods/ArrayStack.add(i,x)}
 Se ignorarmos o custo de uma potencial chamada a
-#resize()#, então o cusot da operação 
+#resize()#, então o custo da operação 
 #add(i,x)# é proporcional ao número de elementos que temos que deslocar para
 abrir espaço para 
  #x#.  Portanto o custo dessa operação 
@@ -117,22 +116,22 @@ abrir espaço para
 Implementar a operação
 #remove(i)# é similar. Desloca-se os elementos 
 $#a[i+1]#,\ldots,#a[n-1]#$ à esquerda por uma posição (sobrescrevendo #a[i]#) 
-e decrementar o valor de  
- #n#. Após fazer isso, verificamos se #n# muito menor 
+e decrementa-se o valor de  
+ #n#. Após fazer isso, verificamos se #n# é muito menor 
  que #a.length# ao verificar se $#a.length# \ge 3#n#$. 
 Caso positivo, então chamamos #resize()# para reduzir o tamanho de #a#.
 
 \codeimport{ods/ArrayStack.remove(i)}
 % TODO: Add shifting figure
-Ao ignorar o custo do método #resize()#, o custo de uma operação #remove(i)#
+Ignorando o custo do método #resize()#, o custo de uma operação #remove(i)#
 é proporcional ao número de elementos que deslocamos, que é $O(#n#-#i#)$.
 
 \subsection{Expansão e Redução}
 
 O método 
- #resize()# razoavelmente direto; ele aloca um novo array
+ #resize()# é razoavelmente simples; ele aloca um novo array
 #b# de tamanho $2#n#$ e copia os #n# elementos de #a# nas primeiras 
-#n# posições em #b#, e então atribui #a# em #b#. Então, após isso faz uma chamada a #resize()#, $#a.length# = 2#n#$.
+#n# posições em #b# e então atribui #a# em #b#. Após isso, faz uma chamada a #resize()#, $#a.length# = 2#n#$.
 
 \codeimport{ods/ArrayStack.resize()}
 
@@ -140,28 +139,26 @@ Analisar o custo real da operação
 #resize()# é fácil.
 Ela aloca um array 
  #b# de tamanho $2#n#$ e copia os #n# elementos de #a# em 
-#b#. Isso leva $O(#n#)$ de tempo.
+#b#. Isso leva tempo $O(#n#)$.
 
 A análise de tempo de execução da seção anterior ignorou o custo de chamadas a
 #resize()#.  Nesta seção analisaremos esse custo usando uma técnica chamada de 
 \emph{análise amortizada}.  Essa técnica não tenta determinar o custo de 
 redimensionar o array durante cada operação 
-#add(i,x)# e  #remove(i)#.  Em vez disso, ela considera o custo de todas as chamadas a 
-#resize()# durante a sequência de $m$ chamadas a #add(i,x)# ou #remove(i)#.
+#add(i,x)# e #remove(i)#.  Em vez disso, ela considera o custo de todas as chamadas a #resize()# durante a sequência de $m$ chamadas a #add(i,x)# ou #remove(i)#.
 Em particular, mostraremos que:
 
 \begin{lem}\lemlabel{arraystack-amortized}
   Se um 
-   #ArrayStack# vazio é criado e qualquer sequência de $m\ge 1$ chamadas a  
+   #ArrayStack# vazio é criado e uma sequência de $m\ge 1$ chamadas a  
   #add(i,x)# e #remove(i)# são executadas, então o tempo total gasto durante
-  todas as chamadas a 
- #resize()# é $O(m)$.
+  todas as chamadas a #resize()# é $O(m)$.
 \end{lem}
 
 \begin{proof}
-  Nós iremos mostra que em qualquer momento que
+  Mostraremos que em qualquer momento que
  #resize()# é chamada, o número de chamadas a 
-  #add# ou #remove# desde a última chamada a #resize()# é pelo menos 
+  #add()# ou #remove()# desde a última chamada a #resize()# é pelo menos 
   $#n#/2-1$.  Portanto, se $#n#_i$ denota o valor de #n# durante a 
   $i$-ésima chamada a #resize()# e $r$ denota o número de chamadas a 
   #resize()#, então o número total de chamadas a #add(i,x)# ou
@@ -173,7 +170,7 @@ Em particular, mostraremos que:
   \[
     \sum_{i=1}^{r} #n#_i \le 2m + 2r  \enspace .
   \]
-  Por outro lado, o tempo total gasto durante todas as chamadas a  #resize()# é 
+  Por outro lado, o tempo total gasto durante todas as chamadas a #resize()# é 
   \[
      \sum_{i=1}^{r} O(#n#_i) \le O(m+r) = O(m)  \enspace ,
   \]
@@ -224,37 +221,36 @@ O teorema a seguir resume o desempenho de uma #ArrayStack#:
 \begin{thm}\thmlabel{arraystack}
   Uma
    #ArrayStack# implementa a interface #List#. Ignorando o custo de chamadas a 
-  #resize()#, uma #ArrayStack# aceita as operações
+  #resize()#, uma #ArrayStack# possui as operações
   \begin{itemize}
     \item #get(i)# e #set(i,x)# em tempo $O(1)$ por operação; e
-    \item #add(i,x)# e #remove(i)# em $O(1+#n#-#i#)$ tempo por operação.
+    \item #add(i,x)# e #remove(i)# em tempo $O(1+#n#-#i#)$ por operação.
   \end{itemize}
   Além disso, ao comerçarmos com um 
- #ArrayStack# vazio e realizarmos qualquer sequência de $m$ operações 
+ #ArrayStack# vazio e realizarmos uma sequência de $m$ operações 
    #add(i,x)# e #remove(i)# resulta em um total de
    $O(m)$ tempo gasto durante todas as chamadas a #resize()#.
 \end{thm}
 
 O #ArrayStack# é um jeito eficiente de implementar a #Stack#.
-Em especial, podemos implementar 
- #push(x)# como #add(n,x)# e #pop()#
-como #remove(n-1)# e nesse caso essas operações rodarão $O(1)$
-de tempo amortizado.
+Em especial, podemos implementar #push(x)# como #add(n,x)# e #pop()#
+como #remove(n-1)# e nesse caso essas operações rodarão em tempo $O(1)$
+amortizado.
 
 \section{#FastArrayStack#: Uma ArrayStack otimizada}
 \seclabel{fastarraystack}
 
 \index{FastArrayStack@#FastArrayStack#}%
 Muito do trabalho feito por uma 
- #ArrayStack# envolver o deslocamento (por 
+ #ArrayStack# envolve o deslocamento (por 
 #add(i,x)# e #remove(i)#) e cópias (pelo #resize()#) de dados.
 \notpcode{Nas implementações mostradas acima, isso era feito usando laços #for#.}%
-\pcodeonly{Em uma implementação naive, isso seria feito usando laços #for#.}
-Acontece que muitos ambientes de programação tem funções específicas que são muito 
+\pcodeonly{Em uma implementação ingênua, isso seria feito usando laços #for#.}
+Acontece que muitos ambientes de programação têm funções específicas que são muito 
 eficientes em copiar e mover blocos de dados.
 Na linguagem C,
 existem as funções #memcpy(d,s,n)# e #memmove(d,s,n)#. 
-Na linguagem C++ existe o algoritmo #std::copy(a0,a1,b)#.
+Na linguagem C++, existe o algoritmo #std::copy(a0,a1,b)#.
 Em Java, existe o 
 método #System.arraycopy(s,i,d,j,n)#.
 \index{memcpy@#memcpy(d,s,n)#}%
@@ -264,16 +260,15 @@ método #System.arraycopy(s,i,d,j,n)#.
 \cppimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
 \javaimport{ods/FastArrayStack.add(i,x).remove(i).resize()}
 
-Essas funções são em geral altamente otimizadas e podem usar até mesmo de 
-instruções de máquina especiais que podem fazer esse copiar muito mais rápido 
+Essas funções são, em geral, altamente otimizadas e podem usar até mesmo  
+instruções de máquina especiais que podem fazer esse cópia muito mais rápida do 
 que poderíamos usando um laço #for#.
-Embora o uso dessas funções não diminuam o tempo de execução assintoticamente falando,
-pode ser uma otimização que vale a pena.
+Embora o uso dessas funções não diminuam o tempo de execução assintoticamente falando, pode ser uma otimização que vale a pena.
 
 \pcodeonly{Nas nossas implementações em C++ e Java, o uso de funções de cópia rápida de arrays
 }
 \notpcode{Nas implementações em \lang\ aqui, o uso do nativo \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}}
-resultaram em um fator de speedups (aceleração) entre 2 e 3, dependendo dos tipos de operações realizadas.
+resultaram em um fator de aceleração, \emph{speedup}, entre 2 e 3, dependendo dos tipos de operações realizadas.
 O resultados podem variar de acordo com o caso.
 
 \section{#ArrayQueue#: Uma Queue Baseada Em Array}
@@ -281,16 +276,16 @@ O resultados podem variar de acordo com o caso.
 
 \index{ArrayQueue@#ArrayQueue#}%
 
-Nesta seção, apresentamos a estrutura de dados 
+Nesta seção apresentamos a estrutura de dados 
  #ArrayQueue#, que implementa uma queue do tipo 
  FIFO (first-in-first-out, primeiro-que-chega-primeiro-que-sai);
  elementos são removidos (usando a operação 
 #remove()#) da queue na mesma ordem em que são adicionados 
 (usando a operação #add(x)#).
 
-Note uma 
+Note que uma 
 #ArrayStack# é uma escolha ruim para uma implementação de uma 
-queue do tipo FIFO. Não é uma boa escolha porque precisamos escolher um fim da lista ao qual adicionaremos elementos e então remover elementos do outro lado. 
+queue do tipo FIFO. Não é uma boa escolha porque precisamos escolher um lado da lista ao qual adicionaremos elementos e então remover elementos do outro lado. 
 Uma das duas operações precisa trabalhar na cabeça da lista, o que envolve chamar
 #add(i,x)# ou #remove(i)# com um valor de $#i#=0$.
 Isso resulta em um tempo de execução proporcional a #n#.
@@ -325,17 +320,14 @@ Podemos também tratar
    15 \bmod 12 = 3 \enspace .
 \]
 
-De modo mais geral, para um inteiro
-$a$ e um inteiro positivo $m$, $a \bmod m$
-é único inteiro 
+De modo mais geral, para um inteiro $a$ e um inteiro positivo 
+$m$, $a \bmod m$ é o único inteiro 
  $r\in\{0,\ldots,m-1\}$ tal que $a = r + km$ para algum inteiro $k$. 
 Informalmente, o valor $r$ é o resto obtido quando dividimos $a$ por $m$.
-\pcodeonly{Em muitas linguagens de programação, incluindo C, C++ e Java, o operador mod é representado
-usando o símbolo \%.} 
+\pcodeonly{Em muitas linguagens de programação, incluindo C, C++ e Java, o operador mod é representado usando o símbolo \%.} 
 \notpcode{Em muitas linguagens de programação incluindo 
 \javaonly{Java}\cpponly{C++}, o operador $\bmod$ é representado 
-usando o símbolo
- #%# symbol.\footnote{Isso às vezes é chamado de 
+usando o símbolo  #%# symbol.\footnote{Isso às vezes é chamado de 
 operador mod com \emph{morte cerebral}, pois não implementa corretamente
 o operador matemático mod quando o primeiro argumento é negativo.}}
 
@@ -346,15 +338,14 @@ $0,\ldots,#a.length-1#$.  Usando aritmética modular podemos guardar
 os elementos da queue em posições do array
 \[ #a[j%a.length]#,#a[(j+1)%a.length]#,\ldots,#a[(j+n-1)%a.length]#
 \enspace. \]
-Desse jeito trata-se o array 
- #a# como um \emph{array circular}
+Desse jeito trata-se o array #a# como um \emph{array circular}
 \index{array circular}%
 \index{circular!array}%
-no qual os índices do array maiores que
-$#a.length#-1$ ``dão a volta'' ao começo do array. 
+no qual os índices do array maiores que $#a.length#-1$ ``dão a volta'' 
+ao começo do array. 
 % TODO: figure
 
-A única coisa que falta considerar é cuidar que o número de elementos no
+A única coisa que falta é cuidar para que o número de elementos no
  #ArrayQueue# não ultrapasse o tamanho de #a#.
 
 \codeimport{ods/ArrayQueue.a.j.n}
@@ -364,7 +355,7 @@ A sequência de operações
 ilustrado na \figref{arrayqueue}.  Para implementar #add(x)#, primeiro 
 verificamos se 
  #a# está cheio e, se necessário, chamamos #resize()# para aumentar o tamanho de  
-#a#.  Em seguida, guardamos #x# em
+#a#. Em seguida, guardamos #x# em
 #a[(j+n)%a.length]# e incrementamos #n#.
 
 \begin{figure}
@@ -372,15 +363,14 @@ verificamos se
     \includegraphics[scale=0.90909]{figs/arrayqueue}
   \end{center}
   \caption[Adicionar e remover de um ArrayQueue]{Uma sequência de operações #add(x)# e #remove(i)# em um 
-  #ArrayQueue#.  Flechas denotam elementos sendo copiados. Operações que resultam em uma chamada a
- #resize()# são marcadas com um asterisco.}
+  #ArrayQueue#.  Flechas denotam elementos sendo copiados. Operações que resultam em uma chamada a #resize()# são marcadas com um asterisco.}
   \figlabel{arrayqueue}
 \end{figure}
 
 \codeimport{ods/ArrayQueue.add(x)}
 
 Para implementar 
-#remove()#, primeiro guardamos #a[j]# para que reutilizá-lo depois. 
+#remove()#, primeiro guardamos #a[j]# para que possamos reutilizá-lo depois. 
 A seguir, decrementamos #n# e incrementamos #j# (módulo #a.length#)
 ao atribuir
 $#j#=(#j#+1)\bmod #a.length#$.  Finalmente, retornamos o valor guardado de
@@ -412,7 +402,7 @@ Um #ArrayQueue# implementa a interface (FIFO) #Queue#. Ignorando o custo das cha
 #resize()#, uma #ArrayQueue# aceita as operações 
 #add(x)# e #remove()# em tempo $O(1)$ por operação. 
 Além disso, ao começar com um #ArrayQueue# vazio, qualquer sequência de $m$
-operações #add(i,x)# e #remove(i)# resulta em um total de $O(m)$ tempo gasto
+operações #add(i,x)# e #remove(i)# resulta em um total de tempo $O(m)$ gasto
 durante todas as chamadas a #resize()#.
 \end{thm}
 
@@ -422,8 +412,8 @@ durante todas as chamadas a #resize()#.
 \seclabel{arraydeque}
 
 \index{ArrayDeque@#ArrayDeque#}%
-O #ArrayQueue# da seção anterior é uma estrutura de daos para 
-representar a sequência que nos permite eficientemente adicionar a
+O #ArrayQueue# da seção anterior é uma estrutura de dados para 
+representação de sequências que nos permite eficientemente adicionar a
 um lado da sequência e remover do outro.
 
 A estrutura de dados #ArrayDeque# permite a edição e remoção eficiente em ambos lados.
@@ -441,15 +431,14 @@ As operações #get(i)# e #set(i,x)# em um #ArrayDeque# são simples
 
 A implementação de 
  #add(i,x)# é um pouco mais interessante. Como sempre, primeiro 
- verificamos se 
- #a# está cheio e, se necessário, chamados 
+ verificamos se #a# está cheio e, se necessário, chamados 
 #resize()# para redimensionar #a#.  Lembre-se que queremos que essa operação
 seja rápida quando 
 #i# for pequeno (perto de 0) ou quando #i# é grande (perto de 
-#n#).  Portanto, verificamos se $#i#<#n#/2$.  Caso positiov, deslocamos os
+#n#).  Portanto, verificamos se $#i#<#n#/2$.  Caso positivo, deslocamos os
 elementos $#a[0]#,\ldots,#a[i-1]#$ à esquerda por uma posição.  Caso contrário, 
-($#i#\ge#n#/2$), deslocamos os elementos $#a[i]#,\ldots,#a[n-1]#$ à direito por uma posição 
-. Veja \figref{arraydeque} para uma ilustração das operações 
+($#i#\ge#n#/2$), deslocamos os elementos $#a[i]#,\ldots,#a[n-1]#$ à direita por uma posição. 
+Veja a \figref{arraydeque} para uma representação das operações 
 #add(i,x)# e #remove(x)# em um #ArrayDeque#.
 
 \begin{figure}
@@ -466,12 +455,11 @@ elementos $#a[0]#,\ldots,#a[i-1]#$ à esquerda por uma posição.  Caso contrár
 
 Ao deslocar dessa maneira, nós garantimos que #add(i,x)# nunca tem que deslocar mais de 
  $\min\{ #i#, #n#-#i# \}$ elementos.  Então, o tempo de execução da operação 
-#add(i,x)# (ignorando o custo de uma operação #resize()#
-) é $O(1+\min\{#i#,#n#-#i#\})$.
+#add(i,x)# (ignorando o custo de uma operação #resize()#) é $O(1+\min\{#i#,#n#-#i#\})$.
 
-A implementação da operação  #remove(i)# é similar.  Ela ou desloca elementos
-$#a[0]#,\ldots,#a[i-1]#$ à direita uma posição ou desloca elementos 
-$#a[i+1]#,\ldots,#a[n-1]#$ à esquerda uma posição dependendo se 
+A implementação da operação #remove(i)# é similar. Ela desloca elementos
+$#a[0]#,\ldots,#a[i-1]#$ à direita em uma posição ou desloca elementos 
+$#a[i+1]#,\ldots,#a[n-1]#$ à esquerda em uma posição dependendo se 
 $#i#<#n#/2$.  Novamente, isso significa que #remove(i)# nunca gasta mais de 
 $O(1+\min\{#i#,#n#-#i#\})$ tempo para deslocar elementos.
 
@@ -485,12 +473,12 @@ O teorema a seguir resume o desempenho da estrutura de dados
   Uma #ArrayDeque# implementa a interface #List#.  Ignorando o custo de chamadas 
   a #resize()#, um #ArrayDeque# aceita as operações 
   \begin{itemize}
-    \item #get(i)# e  #set(i,x)# em tempo $O(1)$ por operação; e 
+    \item #get(i)# e #set(i,x)# em tempo $O(1)$ por operação; e 
     \item #add(i,x)# e #remove(i)# em tempo $O(1+\min\{#i#,#n#-#i#\})$ 
           por operação.
   \end{itemize}
-  Além disso, começar com um 
- #ArrayDeque# vazio, realizar qualquer sequência de $m$ operações 
+  Além disso, começando com um 
+ #ArrayDeque# vazio, uma sequência de $m$ operações 
   #add(i,x)# e #remove(i)# resulta em um
   total de tempo $O(m)$ gasto durante todas as chamadas a #resize()#.
 \end{thm}
@@ -500,16 +488,15 @@ O teorema a seguir resume o desempenho da estrutura de dados
 
 \index{DualArrayDeque@#DualArrayDeque#}%
 A seguir, apresentamos uma estrutura de dados, o 
- #DualArrayDeque# que atinge os mesmos desempenhos 
-que um #ArrayDeque# ao usar 
+ #DualArrayDeque#, que tem o mesmo desempenho que um #ArrayDeque# ao usar 
 duas #ArrayStack#s.  Embora o desempenho assintótico do
-#DualArrayDeque# não é melhor que do #ArrayDeque#, ainda vale estudá-lo 
-,pois oferece um bom exemplo de como fazer uma estrutura de dados sofisticada pela combinação de duas estruturas de dados mais simples.
+#DualArrayDeque# não seja melhor que do #ArrayDeque#, ainda vale estudá-lo 
+, pois oferece um bom exemplo de como obter uma estrutura de dados mais sofisticada pela combinação de duas estruturas de dados mais simples.
 
-Um #DualArrayDeque# representa uma lista usando duas #ArrayStack#s.  Relembre que um 
+Um #DualArrayDeque# representa uma lista usando duas #ArrayStack#s.  Relembre-se que um 
 #ArrayStack# é rápido quando as operações dele modificam elementos perto do final.
 Uma #DualArrayDeque# posiciona duas #ArrayStack#s, chamadas de #frontal#
-and #traseira#, de modo complementar de tal forma que as operações são rápidas em ambas as direções.
+e #traseira#, de modo complementar para que as operações sejam rápidas em ambas as direções.
 
 \codeimport{ods/DualArrayDeque.front.back}
 
@@ -535,9 +522,9 @@ ou #set(i,x)# e ambos #front# ou #back#, que levam tempo $O(1)$ time por operaç
 Note que se um índice
  $#i#<#front.size()#$, então ele corresponde ao elemento 
 de #front# na posição $#front.size()#-#i#-1$, pois
-elementos de #front# são guardados em ordem inversa.
+os elementos de #front# são guardados em ordem inversa.
 
-A adição e remoção de elementos de uma #DualArrayDeque# é ilustrado em 
+A adição e a remoção de elementos de uma #DualArrayDeque# são ilustradas na 
 \figref{dualarraydeque}.  A operação #add(i,x)# manipula #front#
 ou #back#, conforme apropriado:
 
@@ -554,13 +541,13 @@ ou #back#, conforme apropriado:
 \codeimport{ods/DualArrayDeque.add(i,x)}
 
 O método 
-#add(i,x)# realiza balanceamento das duas  #ArrayStack#s
+#add(i,x)# realiza o balanceamento das duas #ArrayStack#s
 #front# e #back#, ao chamar o método #balance()#.
 A implementação de 
-#balance()# é descrita a seguir, mas no memento é suficiente 
-saber que #balance()# garantes que, a não ser que $#size()#<2$,
+#balance()# é descrita a seguir, mas no momento é suficiente 
+saber que #balance()# garante que, a não ser que $#size()#<2$,
 #front.size()# e #back.size()# não diferem por mais de um fator 
-de 3.  Em particular, $3\cdot#front.size()# \ge #back.size()#$ e
+de 3.  Em especial, $3\cdot#front.size()# \ge #back.size()#$ e
 $3\cdot#back.size()# \ge #front.size()#$.
 
 A seguir, nós analisamos o custo de 
@@ -575,7 +562,7 @@ pela chamada a
 \end{equation}
 Por outro lado, se 
  $#i#\ge#front.size()#$, então #add(i,x)# é 
-implementado como $#back.add(i-front.size(),x)#$.  O custo disso é 
+implementada como $#back.add(i-front.size(),x)#$.  O custo disso é 
 \begin{equation}
   O(#back.size()#-(#i#-#front.size()#)+1) = O(#n#-#i#+1) \enspace .
   \eqlabel{das-back}
@@ -586,8 +573,8 @@ Note que o primeiro caso
  O segundo caso
  \myeqref{das-back} ocorre quando $#i#\ge 3#n#/4$.  Quando
 $#n#/4\le#i#<3#n#/4$, não temos certeza se a operação afeta 
-#front# ou #back#, mas nos dois casos, a operação leva 
-$O(#n#)=O(#i#)=O(#n#-#i#)$ de tempo, pois $#i#\ge #n#/4$ e $#n#-#i#>
+#front# ou #back#, mas nos dois casos, a operação leva tempo
+$O(#n#)=O(#i#)=O(#n#-#i#)$, pois $#i#\ge #n#/4$ e $#n#-#i#>
 #n#/4$.  Resumindo a situação, temos 
 \[
      \mbox{Tempo de execução } #add(i,x)# \le 
@@ -613,10 +600,9 @@ Finalmente, passamos à operação
 e #remove(i)#.  Essa operação garante que nem #front# nem #back#
 se tornem grandes demais (ou pequenos demais). 
 Ela garante que, ao menos que haja menos de dois elementos, o 
- #front# e o #back# contém $#n#/4$ elementos cada. 
+ #front# e o #back# possuem $#n#/4$ elementos cada. 
 Se esse não for o caso, então ele move elementos entre elas 
-de tal forma que #front# e #back# contêm exatamente $\lfloor#n#/2\rfloor$ elementos
-e $\lceil#n#/2\rceil$ elementos, respectivamente.
+de tal forma que #front# e #back# contenham exatamente $\lfloor#n#/2\rfloor$ elementos e $\lceil#n#/2\rceil$ elementos, respectivamente.
 
 \codeimport{ods/DualArrayDeque.balance()}
 
@@ -626,7 +612,7 @@ Aqui há pouco para analisar. Se a operação
 Isso é ruim, pois
  #balance()# é chamada a cada operação
 #add(i,x)# e #remove(i)#.  Porém, o lema a seguir mostra que
-na média, #balance()# somente gasta um tempo constante por operação.
+na média, #balance()# gasta somente um tempo constante por operação.
 
 \begin{lem}\lemlabel{dualarraydeque-amortized}
   Se uma 
@@ -641,22 +627,22 @@ na média, #balance()# somente gasta um tempo constante por operação.
  #balance()# é forçada a deslocar elementos, então o número de operações 
   #add(i,x)# e #remove(i)# desde a última vez que elementos foram deslocador por 
    #balance()# é pelo menos $#n#/2-1$.
-   Como na prova de 
+   Assim como na prova do 
  \lemref{arraystack-amortized}, é suficiente provar que o tempo total gasto por 
    #balance()# é $O(m)$.
 
-   Iremos realizar nossa análise usando uma técnica conhecida como o \emph{método do potencial}.
+   Iremos realizar a nossa análise usando uma técnica conhecida como o \emph{método do potencial}.
   \index{potencial}%
   \index{método do potential}%
   Definimos o \emph{potencial}, $\Phi$, do 
-  #DualArrayDeque# como a diferença em tamanho entre #front# e #back#:
+  #DualArrayDeque# como a diferença dos tamanhos entre #front# e #back#:
   \[  \Phi = |#front.size()# - #back.size()#| \enspace . \]
-  A propriedade interessante desse potencial é que uma chamada a 
+  Uma propriedade interessante desse potencial é que uma chamada a 
  #add(i,x)#
   ou #remove(i)# que não faz nenhum balanceamento pode aumentar o potencial em até 1.
 
-  Observe que, imediatamente depois de uma chamada a #balance()# que desloca elementos 
-  , o potencial , $\Phi_0$, é no máximo 1, pois
+  Observe que, imediatamente após uma chamada a #balance()# que desloca elementos 
+  a ,o potencial, $\Phi_0$, é no máximo 1, pois
   \[ \Phi_0 = \left|\lfloor#n#/2\rfloor-\lceil#n#/2\rceil\right|\le 1  \enspace .\]
 
   Considere a situação no momento exatamente anterior a uma chamada #balance()# que 
@@ -685,21 +671,21 @@ Note que, nesse caso
 
 \subsection{Resumo}
 
-O teorma a seguir resume as propriedades de uma #DualArrayDeque#:
+O teorema a seguir resume as propriedades de uma #DualArrayDeque#:
 
 \begin{thm}\thmlabel{dualarraydeque}
   Uma
    #DualArrayDeque# implementa a interface #List#. Ignorando o custo de chamadas a 
    #resize()# e #balance()#, uma #DualArrayDeque#
-  aceita as operações 
+  possui as operações 
   \begin{itemize}
     \item #get(i)# e #set(i,x)# em tempo $O(1)$ por operação; e 
     \item #add(i,x)# e #remove(i)# em tempo $O(1+\min\{#i#,#n#-#i#\})$ 
           por operação.
   \end{itemize}
   Além disso, ao começar com uma 
-#DualArrayDeque# vazia, qualquer sequência de $m$ operações
-  #add(i,x)# e #remove(i)# resulta em um total de tempo $O(m)$
+#DualArrayDeque# vazia, uma sequência de $m$ operações
+  #add(i,x)# e #remove(i)# resulta em um tempo total $O(m)$
   durante todas as chamadas a #resize()# e #balance()#.
 \end{thm}
 
@@ -708,40 +694,39 @@ O teorma a seguir resume as propriedades de uma #DualArrayDeque#:
 \seclabel{rootisharraystack}
 
 \index{RootishArrayStack@#RootishArrayStack#}%
-Uma das desvantagem de todas as estruturas de dados anteriores neste capítulo
-é que, porque elas guardam os dados um array ou dois e evitam redimensionar
+Uma das desvantagens de todas as estruturas de dados anteriores neste capítulo
+é que, porque elas guardam os dados em um array ou dois e evitam redimensionar
 esses arrays com frequência, os arrays frequentemente não estão muito cheios.
 Por exemplo, imediatamente após uma operação 
  #resize()# em uma #ArrayStack#,
 o array de apoio #a# tem somente metade do espaço em uso.
 E pior, às vezes somente um terço de #a# contém dados.
 
-Nesta seção, distimos a estrutura de dados 
+Nesta seção, discutimos a estrutura de dados 
 #RootishArrayStack#, que resolve o problema de espaço desperdiçado.
 A #RootishArrayStack# guarda 
 #n# elementos usando arrays de tamanho $O(\sqrt{#n#})$.
 Nesses arrays, no máximo 
 $O(\sqrt{#n#})$ posições do array estão vazias a qualquer momento.
-Todo o restante do array está usando para guardar dados. Portanto,
+Todo o restante do array está sendo usado para guardar dados. Portanto,
 essas estruturas de dados gastam até 
- $O(\sqrt{#n#})$ de espaço ao guardar #n#
-elementos.
+ $O(\sqrt{#n#})$ de espaço ao guardar #n# elementos.
 
 Uma #RootishArrayStack# guarda seus elementos em uma lista de #r#
 arrays chamados de \emph{blocos} que são numerados $0,1,\ldots,#r#-1$.
-Ver \figref{rootisharraystack}.  O bloco $b$ contém $b+1$ elementos.
+Veja a \figref{rootisharraystack}.  O bloco $b$ contém $b+1$ elementos.
 Então, todos os 
- #r# blocos contém um total de
+ #r# blocos contêm um total de
 \[
   1+ 2+ 3+\cdots +#r# = #r#(#r#+1)/2
 \]
-elementos. A fórmula acima pode ser obtida conforme mostrado em \figref{gauss}.
+elementos. A fórmula acima pode ser obtida conforme mostrado na \figref{gauss}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/rootisharraystack}
   \end{center}
-  \caption[Adição e remoção em uma RootishArrayStack]{Uma sequÊncia de operações #add(i,x)# e #remove(i)# em uma 
+  \caption[Adição e remoção em uma RootishArrayStack]{Uma sequência de operações #add(i,x)# e #remove(i)# em uma 
   #RootishArrayStack#.  Flechas denotam elementos sendo copiados. }
   \figlabel{rootisharraystack}
 \end{figure}
@@ -768,14 +753,14 @@ O principal problema que temos para resolver é o de determinar, dado um índice
  #i# e também o índice correspondente a #i# naquele bloco.
 
 Determinar o índice de #i# no bloco acaba sendo fácil.
-Se o índice 
-#i# está no bloco #b#, então o número de elementos nos blocos 
+Se o índice #i# está no bloco #b#, então o número de elementos nos blocos 
 $0,\ldots,#b#-1$ é $#b#(#b#+1)/2$.  Portanto, #i# é guardado na posição 
 \[
      #j# = #i# - #b#(#b#+1)/2
 \]
-dentro do bloco #b#.  Um pouco mais desafiador é o problema de determinar o valor de 
-#b#.  O número de elementos que tem índices menores que ou iguais a 
+dentro do bloco #b#.  Um pouco mais desafiador é o problema de 
+determinar o valor de 
+#b#.  O número de elementos que têm índices menores que ou iguais a 
 #i# é $#i#+1$.  Por outro lado, o número de elementos nos blocos 
 $0,\ldots,b$ é $(#b#+1)(#b#+2)/2$.  Portanto, #b# é o menor inteiro tal que 
 
@@ -801,19 +786,20 @@ $#b# \ge (-3 + \sqrt{9+8i}) / 2$.  Isso é simplesmente
 
 \codeimport{ods/RootishArrayStack.i2b(i)}
 
-With this out of the way, the #get(i)# and #set(i,x)# methods are straightforward.  We first compute the appropriate block #b# and the appropriate index #j# within the block and then perform the appropriate operation:
+Com isso fora do caminho, os métodos 
+#get(i)# e #set(i,x)# são diretos. Primeiramente computamos
+o bloco #b# apropriado e o índice #j# dentro do bloco e realizar a operação apropriada: 
 
 \codeimport{ods/RootishArrayStack.get(i).set(i,x)}
 
-Se usarmos quaisquer estruturas de dados neste capítulo para representar a lista de 
+Se usarmos quaisquer estruturas de dados deste capítulo para representar a lista de 
 #blocks#, então #get(i)# e #set(i,x)# irão rodar em tempo constante.
 
-O método #add(i,x)# irá, a esta altura, parecer familiar.  Primeiro verificamos 
-se nossa estrutura de dados está cheia ao ver se o número de blocos 
+O método #add(i,x)# irá, a esta altura, parecer familiar. Primeiro verificamos 
+se nossa estrutura de dados está cheia ao verificar se o número de blocos 
 , #r#, é tal que $#r#(#r#+1)/2 = #n#$. Caso positivo, chamamos #grow()#
 para adicionar outro bloco. Com isso feito, deslocamos elementos com índices
-$#i#,\ldots,#n#-1$ à direita por uma posição para abrir espaço para o novo elemento com índice 
- #i#:
+$#i#,\ldots,#n#-1$ à direita em uma posição para abrir espaço para o novo elemento com índice #i#:
 
 \codeimport{ods/RootishArrayStack.add(i,x)}
 
@@ -821,13 +807,13 @@ O método #grow()# faz o que esperamos dele. Ele adiciona um novo bloco à estru
 
 \codeimport{ods/RootishArrayStack.grow()}
 
-Ignorando o custo da operação 
- #grow()#, o custo da operação #add(i,x)# é dominado pelo custo de deslocamento e é portanto
-$O(1+#n#-#i#)$, como um #ArrayStack#.
+Ignorando o custo da operação  #grow()#, o custo da 
+operação #add(i,x)# é dominado pelo custo de deslocamento 
+e é portanto $O(1+#n#-#i#)$, como um #ArrayStack#.
 
 A operação #remove(i)# é similar a #add(i,x)#.  Ela desloca os elementos com índices 
-$#i#+1,\ldots,#n#$ à esquerda por uma posição e então, se há mais de um bloco vazio, ela chama o método 
-#shrink()# para remover todos menos um dos blocos não usados:
+$#i#+1,\ldots,#n#$ à esquerda em uma posição e então, se há mais de um bloco vazio, ela chama o método 
+#shrink()# para remover todos, exceto um dos blocos não usados:
 
 \codeimport{ods/RootishArrayStack.remove(i)}
 \codeimport{ods/RootishArrayStack.shrink()}
@@ -839,24 +825,25 @@ $O(#n#-#i#)$.
 
 \subsection{Análise de expandir e encolher}
 
-A análise acima de 
- #add(i,x)# e #remove(i)# não leva em conta o custo de 
-#grow()# e #shrink()#.  Note que, diferentemente da operação
-#ArrayStack.resize()#, #grow()# e #shrink()# não copiam nenhum dado 
-. Elas simplesmente alocam ou liberam um array de tamanho #r#.  
-Em alguns ambientes, isso leva apenas tempo constante, enquanto em outros, pode ser necessário tempo proporcional a #r#.
+A análise acima de  #add(i,x)# e #remove(i)# 
+não leva em conta o custo de #grow()# e #shrink()#.  
+Note que, diferentemente da operação
+#ArrayStack.resize()#, #grow()# e #shrink()# não copiam nenhum dado. 
+Elas simplesmente alocam ou liberam um array de tamanho #r#.  
+Em alguns ambientes, isso leva apenas tempo constante, enquanto
+em outros, pode ser necessário tempo proporcional a #r#.
 
 Note que, imediatamente após uma chamada a 
-#grow()# ou #shrink()#, a situação é clara
-. O bloco final está completamente vazio e todos os outros blocos estão completamente cheios. 
-Outra chamada a 
-   #grow()# ou #shrink()# não acontecerá até após pelo menos 
+#grow()# ou #shrink()#, a situação é clara. O bloco final 
+está completamente vazio e todos os outros blocos estão 
+completamente cheios. 
+Outra chamada a #grow()# ou #shrink()# não acontecerá 
+até que pelo menos 
  $#r#-1$ elementos tenham sido adicionados ou removidos.
  Portanto, mesmo se 
-#grow()# e #shrink()# leve tempo $O(#r#)$, esse custo pode ser amortizado sobre pelo menos 
-$#r#-1$ operações #add(i,x)# ou #remove(i)#
+#grow()# e #shrink()# leve tempo $O(#r#)$, esse custo pode ser amortizado em pelo menos $#r#-1$ operações #add(i,x)# ou #remove(i)#
 fazendo com que o custo amortizado de 
- #grow()# e #shrink()# seja
+ #grow()# e #shrink()# sejam
 $O(1)$ por operação.
 
 \subsection{Uso de Espaço}
@@ -865,41 +852,40 @@ $O(1)$ por operação.
 A seguir, analisaremos a quantidade de espaço extra usada por uma 
  #RootishArrayStack#.
 
-Em particular, queremos contar qualquer espaço usado por uma #RootishArrayStack# que não é um elemento de array usado no momento para guardar um elemento da lista. Chamamos todo esse espaço de \emph{espaço desperdiçado}.
+Em especial, queremos contar qualquer espaço usado por uma #RootishArrayStack# que não seja de um elemento de array usado no momento para guardar um elemento da lista. Chamamos todo esse espaço de \emph{espaço desperdiçado}.
 \index{espaço desperdiçado}%
 
-% TODO continuar
 A operação
-#remove(i)# assegura que uma #RootishArrayStack# nunca tem mais que dois
-blocos que não estão complementamente cheios.
+#remove(i)# assegura que uma #RootishArrayStack# nunca tenha mais do que dois
+blocos que não estejam completamente cheios.
 O número de blocos #r#, usados por uma 
 #RootishArrayStack# que guarda #n# elementos portanto satisfaz
 \[
     (#r#-2)(#r#-1)/2 \le #n# \enspace .
 \]
-De novo, usando a equação quadrática nisso resulta em
+De novo, usando a equação quadrática resulta em
 \[
    #r# \le \frac{1}{2}\left(3+\sqrt{8#n#+1}\right) = O(\sqrt{#n#}) \enspace .
 \]
-Os últimos dois blocos tem tamanhos #r# e #r-1#, então o espaço desperdiçado por esses dois blocos é até
+Os últimos dois blocos têm tamanhos #r# e #r-1#, então o espaço desperdiçado por esses dois blocos é até
  $2#r#-1 = O(\sqrt{#n#})$.  Se guardarmos os blocos 
 em (por exemplo) uma #ArrayStack#, então a quantidade de espaço gasto pela 
 #List# que guarda esses #r# blocks também é $O(#r#)=O(\sqrt{#n#})$.  
-O espaço adicional ncessário para guardar #n# e outras informações auxiliares é $O(1)$.
+O espaço adicional necessário para guardar #n# e outras informações auxiliares é $O(1)$.
 Portanto, a quantidade total de espaço desperdiçado em uma #RootishArrayStack#
 é $O(\sqrt{#n#})$.
 
-A seguir, demonstramos que esse uso de espaço é ótimo qualquer estrutura 
-de dados que inicia vazia e permite a adição de um item por vez.
+A seguir, demonstramos que esse uso de espaço é ótimo para qualquer estrutura 
+de dados que inicia-se vazia e permite a adição de um item por vez.
 Mais precisamente, mostraremos que, em algum momento durante a
 adição de #n# itens, a estrutura de dados está desperdiçando pelo menos
 um espaço de $\sqrt{#n#}$ (embora possa ser por apenas um curto momento).
 
 Suponha que iniciamos com uma estrutura de dados vazia e adicionamos #n# itens, 
-um por vez. No fim desse processo, todos os #n# intens são guardados na 
+um por vez. No fim desse processo, todos os #n# itens são guardados na 
 estrutura e distribuídos entre uma coleção de #r# blocos de memória.
 Se $#r#\ge \sqrt{#n#}$, então a estrutura de dados precisa usar #r#
-ponteiros (ou referências) para gerenciar esses #r# blocos, e esses
+ponteiros (ou referências) para gerenciar esses #r# blocos e esses
 ponteiros são espaço desperdiçado.
 Por outro lado, se 
  $#r# < \sqrt{#n#}$
@@ -918,7 +904,7 @@ O seguinte teorema resume a discussão sobre a estrutura de dados #RootishArrayS
 
 \begin{thm}\thmlabel{rootisharraystack}
   Uma #RootishArrayStack# implementa a interface #List#. Ignorando o custo das chamadas 
-a #grow()# e #shrink()#, uma #RootishArrayStack# aceita as operações
+a #grow()# e #shrink()#, uma #RootishArrayStack# possui as operações
   \begin{itemize}
     \item #get(i)# e #set(i,x)# em tempo $O(1)$ por operações; e  
     \item #add(i,x)# e #remove(i)# em tempo $O(1+#n#-#i#)$ por operação.
@@ -927,30 +913,30 @@ a #grow()# e #shrink()#, uma #RootishArrayStack# aceita as operações
  #RootishArrayStack# vazia, qualquer sequência de $m$ operações
   #add(i,x)# e #remove(i)# resulta em um total de $O(m)$
   tempo gasto durante todas as chamadas de #grow()# e #shrink()#.
-  O espaço (medido em palavras)\footnote{Reveja \secref{model} para uma discussão de como a memória é medida.} usada por uma #RootishArrayStack# que guarda
+  O espaço (medido em palavras)\footnote{Reveja a \secref{model} para uma discussão de como a memória é medida.} usada por uma #RootishArrayStack# que guarda
 #n# elementos é $#n# +O(\sqrt{#n#})$.
 \end{thm}
 
 \notpcode{
 
-\subsection{Computando Raizes Quadradas}
+\subsection{Computando Raízes Quadradas}
 
 \index{raizes quadradas}%
 Um leitor que tenha tido alguma exposição a modelos de computação
-podem notar que 
-a #RootishArrayStack#, conforme descrita anteriormente,
+pode notar que a #RootishArrayStack#, conforme descrita anteriormente,
 não se encaixa no modelo de computação normal word-RAM 
-(\secref{model}) porque requer a computação de raizes quadradas. 
-A operação raiz quadrada não é geralmente considerada uma operação básica e portante não é normalmente parte do modelo
-word-RAM.
+(\secref{model}) porque requer a computação de raízes quadradas. 
+A operação raiz quadrada não é geralmente considerada uma operação 
+básica e portanto não é normalmente parte do modelo word-RAM.
 
 Nesta seção, mostraremos que a operação raiz quadrada pode ser
 implementada eficientemente. Em particular, mostramos que para qualquer inteiro
 $#x#\in\{0,\ldots,#n#\}$,  $\lfloor\sqrt{#x#}\rfloor$ pode ser computado 
 em tempo constante, após um pré-processamento com tempo de execução de 
-$O(\sqrt{#n#})$ que cria dois array de tamanho 
-$O(\sqrt{#n#})$.  O lema a seguir mostra que podemos reduzir o problema de computar a raiz quadrada de #x# à raiz quadrada de um valor relacionado #x'#.
-root of a related value #x'#.
+$O(\sqrt{#n#})$ que cria dois arrays de tamanho 
+$O(\sqrt{#n#})$.  O lema a seguir mostra que podemos reduzir o problema
+de computar a raiz quadrada de #x# à raiz quadrada de um valor 
+relacionado #x'#.
 
 \begin{lem}\lemlabel{root}
 Seja $#x#\ge 1$ e seja $#x'#=#x#-a$, onde $0\le a\le\sqrt{#x#}$. Então 
@@ -966,29 +952,27 @@ Eleva-se ao quadrado ambos lados dessa desigualdade para obter
 \[
  #x#-\sqrt{#x#} \ge #x#-2\sqrt{#x#}+1
 \]
-e juntar termos para obter
+e junta-se os termos para obter
 \[
  \sqrt{#x#} \ge 1
 \]
 o que é claramente verdadeiro para qualquer $#x#\ge 1$.
 \end{proof}
 
-Inicia-se restringindo o problema um pouco, e assume que 
+Inicia-se restringindo o problema um pouco e assume-se que 
  $2^{#r#} \le
 #x# < 2^{#r#+1}$, tal que $\lfloor\log #x#\rfloor=#r#$, isto é, #x# é um
-inteiro com 
-$#r#+1$ bits na sua representação binária. Podemos fazer que
+inteiro com $#r#+1$ bits na sua representação binária. Podemos fazer que
 $#x'#=#x# - (#x#\bmod 2^{\lfloor r/2\rfloor})$.  Agora, #x'# satisfaz
-as condições de \lemref{root}, então $\sqrt{#x#}-\sqrt{#x'#} \le 1$.
+as condições do \lemref{root}, então $\sqrt{#x#}-\sqrt{#x'#} \le 1$.
 Além disso, 
- #x'# tem todos os seu bits de baixa ordem $\lfloor #r#/2\rfloor$ bits
+ #x'# tem todos os seu bits de baixa ordem $\lfloor #r#/2\rfloor$ 
 iguais a 0, então só há 
 \[
   2^{#r#+1-\lfloor #r#/2\rfloor} \le 4\cdot2^{#r#/2} \le 4\sqrt{#x#}
 \]
-valores possíveis de #x'#.  Isso significa que podemos umas um array #sqrttab#,
-que guarda o valor de 
- $\lfloor\sqrt{#x'#}\rfloor$ para cada possível valor de 
+valores possíveis para #x'#.  Isso significa que podemos um array #sqrttab#,
+que guarda o valor de  $\lfloor\sqrt{#x'#}\rfloor$ para cada possível valor de 
 #x'#.  Um pouco mais precisamente, temos 
 \[
    #sqrttab#[i] 
@@ -996,31 +980,29 @@ que guarda o valor de
        \sqrt{i 2^{\lfloor #r#/2\rfloor}}
       \right\rfloor \enspace .
 \]
-Desse jeito, $#sqrttab#[i]$ tem um diferença de até 2 em relação a $\sqrt{#x#}$ para todo 
+Desse modo, $#sqrttab#[i]$ tem uma diferença de até 2 em relação a $\sqrt{#x#}$ para todo 
 $#x#\in\{i2^{\lfloor #r#/2\rfloor},\ldots,(i+1)2^{\lfloor #r#/2\rfloor}-1\}$.
 De outra forma, a entrada do array
-$#s#=#sqrttab#[#x##>>#\lfloor #r#/2\rfloor]$ é ou igual a 
-$\lfloor\sqrt{#x#}\rfloor$,
-$\lfloor\sqrt{#x#}\rfloor-1$, ou
+$#s#=#sqrttab#[#x##>>#\lfloor #r#/2\rfloor]$ é igual a 
+$\lfloor\sqrt{#x#}\rfloor$, a
+$\lfloor\sqrt{#x#}\rfloor-1$ ou a
 $\lfloor\sqrt{#x#}\rfloor-2$.  A partir de #s# podemos determinar o valor 
- $\lfloor\sqrt{#x#}\rfloor$  ao incrementar 
+ $\lfloor\sqrt{#x#}\rfloor$ ao incrementar 
 #s# até u
 $(#s#+1)^2 > #x#$.
 } % notpcode
 \javaimport{ods/FastSqrt.sqrt(x,r)}
 \cppimport{ods/FastSqrt.sqrt(x,r)}
 \notpcode{
-Isso é funciona para 
+Isso somente funciona para 
  $#x#\in\{2^{#r#},\ldots,2^{#r#+1}-1\}$ e 
-#sqrttab# é uma tabela especial que funciona somente para um valor particular de 
+#sqrttab# é uma tabela especial que funciona somente para um valor especial de 
 $#r#=\lfloor\log #x#\rfloor$.  Para superar isso, poderíamos computar 
 $\lfloor\log #n#\rfloor$ arrays #sqrttab# diferentes, um para cada valor possível de 
 $\lfloor\log #x#\rfloor$. Os tamanhos dessas tabelas formam uma sequência exponencial cujo maior valor é até $4\sqrt{#n#}$, então o tamanho total de todas as tabelas é $O(\sqrt{#n#})$.
 
-Porém, acontece que mais um array 
- #sqrttab# é desnecessário;
- somente precisamos de um array
- #sqrttab# para o valor $#r#=\lfloor\log
+Porém, acontece que mais um array #sqrttab# é desnecessário;
+ somente precisamos de um array #sqrttab# para o valor $#r#=\lfloor\log
 #n#\rfloor$.  Qualquer valor #x# com $\log#x#=#r'#<#r#$ pode ser \emph{atualizado}
 ao multiplicar 
 #x# por $2^{#r#-#r'#}$ e usar a equação 
@@ -1037,7 +1019,7 @@ $\{0,\ldots,2^{30}-1\}$ usando um array, #sqrttab#, de tamanho $2^{16}$.
 \javaimport{ods/FastSqrt.sqrt(x)}
 \cppimport{ods/FastSqrt.sqrt(x)}
 \notpcode{
-  Algo que tinhamos tido como certo até agora depende de como computamos
+  Algo que tínhamos como certo até agora depende de como computamos
 $#r#'=\lfloor\log#x#\rfloor$.  De novo, esse problema pode ser resolvido 
 com um array, #logtab#, de tamanho $2^{#r#/2}$.  Nesse caso, o código 
 é particularmente simples, pois 
@@ -1052,7 +1034,7 @@ $\lfloor\log #x#\rfloor$ para todo #x# no intervalo $\{1,\ldots,2^{32}-1\}$.
 \javaimport{ods/FastSqrt.log(x)}
 \cppimport{ods/FastSqrt.log(x)}
 \notpcode{
-  Finalmente, para completude, incluimos o código a seguir que inicializa 
+  Finalmente, para completude, incluímos o código a seguir que inicializa 
  #logtab# e #sqrttab#:
 } % notpcode
 \javaimport{ods/FastSqrt.inittabs()}
@@ -1061,28 +1043,28 @@ $\lfloor\log #x#\rfloor$ para todo #x# no intervalo $\{1,\ldots,2^{32}-1\}$.
 Para resumir, as computações feitas pelo método
  #i2b(i)# podem ser implementadas em tempo constante no modelo 
 word-RAM usando $O(\sqrt{n})$ de memória extra para guardar 
-os arrays #sqrttab# e #logtab#. Esses arrays podem ser recontruídos
+os arrays #sqrttab# e #logtab#. Esses arrays podem ser reconstruídos
 quando 
- #n# aumenta ou diminui por um fator de dois, e o custo dessa reconstrução 
+ #n# aumenta ou diminui por um fator de dois e o custo dessa reconstrução 
 pode ser amortizado sobre o número de 
 operações #add(i,x)# e 
 #remove(i)# que causaram a mudança do mesmo jeito que o custo de
 #resize()# é analisado na implementação da #ArrayStack#.
 } % notpcode
 
-\section{Discussion and Exercises}
+\section{Discussão e Exercícios}
 
-A maior parte das estruturas de daos descritas neste capítula são folclore.
+A maior parte das estruturas de dados descritas neste capítulo são folclore.
 Elas podem ser encontradas em implementações de pelo menos 30 anos atrás.
 Por exemplo, implementações de stacks, queues e deques que generalizam
 facilmente para as estruturas 
 #ArrayStack#, #ArrayQueue# e #ArrayDeque# descritas
 aqui, são discutidas por Knuth \cite[Section~2.2.2]{k97v1}.
 
-Brodnik \etal\ \cite{bcdms99} parece ter sido o primeiro a descrever 
-a #RootishArrayStack# e provar um limitante inferior de $\sqrt{n}$ como em 
+Brodnik \etal\ \cite{bcdms99} parecem terem sido os primeiros a descrever 
+a #RootishArrayStack# e provar um limitante inferior de $\sqrt{n}$ como descrito na 
 \secref{rootishspaceusage}.  Eles também apresentam uma estrutura diferente que
-usa uma escolha de tamanhos de blocos mais sofisticada a fim de evitar a computação de raizes quadradas usando o método 
+usa uma escolha de tamanhos de blocos mais sofisticada a fim de evitar a computação de raízes quadradas usando o método 
 #i2b(i)#. Com o esquema deles, o bloco contendo 
 #i# é o bloco $\lfloor\log (#i#+1)\rfloor$, que é simplesmente o índice do primeiro bit 1 na representação binária de 
 $#i#+1$.  Algumas arquiteturas de computadores provêm uma instrução para computar o índice do primeiro bit 1 em um inteiro. 
@@ -1098,15 +1080,15 @@ de Goodrich e Kloss \cite{gk99}.
 Essa estrutura suporta as operações 
 #get(i,x)# e #set(i,x)# em tempo constante e 
 #add(i,x)# e #remove(i)# em $O(\sqrt{#n#})$ de tempo.
-Esses tempos de execução são similare ao que pode ser conseguido com uma implementação mais cuidadosa de uma
+Esses tempos de execução são similares ao que pode ser conseguido com uma implementação mais cuidadosa de uma
 #RootishArrayStack# discutida em \excref{rootisharraystack-fast}.
 
 \javaonly{
 \begin{exc}
   Na implementação da 
   #ArrayStack#, após a primeira chamada a #remove(i)#,
-  o array de apoio
-, #a#, contém $#n#+1$ valores não #null# apesar do fato de que 
+  o array de apoio, #a#, contém $#n#+1$ valores 
+  não #null# apesar do fato de que 
   a #ArrayStack# somente contém #n# elementos. Onde está o valor 
   não #null# extra?  Discuta as consequências que esse valor não #null#
   possa ter no gerenciador de memória da Java Runtime Environment.
@@ -1119,8 +1101,7 @@ Esses tempos de execução são similare ao que pode ser conseguido com uma impl
   O método da 
   #List# #addAll(i,c)# insere todos os elementos da #Collection#
   #c# na posição #i# da lista.  (O método #add(i,x)# é um caso especial onde 
-  $#c#=\{#x#\}$.)  Explique porque, para as estruturas de dados deste capítulo 
-  , não é eficiente implementar #addAll(i,c)# fazendo chamadas repetidas a 
+  $#c#=\{#x#\}$.)  Explique porque, para as estruturas de dados deste capítulo, não é eficiente implementar #addAll(i,c)# fazendo chamadas repetidas a 
   #add(i,x)#.  Projete e codifique uma implementação mais eficiente. 
 \end{exc}
 
@@ -1131,7 +1112,7 @@ Esses tempos de execução são similare ao que pode ser conseguido com uma impl
 Essa é uma implementação da interface
 #Queue# na qual a operação #remove()# remove um elemento que é escolhido de uma distribuição aleatória uniforme entre todos os elementos atualmente na queue. 
   (Considere uma #RandomQueue# como sendo uma sacola na qual 
-  podemos adicionar elementos ou por a mão e sem ver remover algum elemento aleatório.)
+  podemos adicionar elementos ou por a mão e, sem ver, remover algum elemento aleatório.)
   As operações
   #add(x)# e #remove()# em uma #RandomQueue# deve rodar em um tempo constante amortizado por operação.
 \end{exc}
@@ -1141,12 +1122,12 @@ Essa é uma implementação da interface
  #Treque# (uma queue com três pontas). 
   \index{Treque@#Treque#}%
 Essa é uma implementação de uma #List#
-  na qual #get(i)# e #set(i,x)# rodas em tempo constante
+  na qual #get(i)# e #set(i,x)# rodam em tempo constante
   e #add(i,x)# e #remove(i)# rodam em tempo 
   \[
      O(1+\min\{#i#, #n#-#i#, |#n#/2-#i#|\}) \enspace .
   \]
-  Em outras palabras, modificações são rápidas se elas estão perto ou do fim, ou do meio da lista.
+  Em outras palavras, modificações são rápidas se elas estão perto ou do fim, ou do meio da lista.
 \end{exc}
 
 \begin{exc}
@@ -1161,15 +1142,15 @@ Essa é uma implementação de uma #List#
 #rotate(r)# que ``rotaciona'' uma #List# tal que o item da lista 
   #i# se torna o item $(#i#+#r#)\bmod #n#$.  Ao rodar em uma 
    #ArrayDeque# ou uma #DualArrayDeque#, #rotate(r)# deve rodar em 
-  $O(1+\min\{#r#,#n#-#r#\})$ de tempo.
+  tempo $O(1+\min\{#r#,#n#-#r#\})$.
 \end{exc}
 
 \begin{exc}
   \pcodeonly{Esse exercício não é incluído na edição da linguagem\lang\ .}
   \notpcode{
     Modifique a implementação
-  da #ArrayDeque# tal que o deslocamente feito por
-   #add(i,x)#, #remove(i)#, e #resize()# é realizado usando o método 
+  da #ArrayDeque# tal que o deslocamento feito por
+   #add(i,x)#, #remove(i)# e #resize()# é realizado usando o método 
   rápido #System.arraycopy(s,i,d,j,n)#.}
 \end{exc}
 
@@ -1177,8 +1158,7 @@ Essa é uma implementação de uma #List#
   Modifique a implementação da 
   #ArrayDeque# tal que não use o operador 
   #%# (que é caro em alguns sistemas). Em vez disso, deve fazer uso do
-  fato que se
-   #a.length# é uma potência de 2,
+  fato que se #a.length# é uma potência de 2,
   então 
   \[  #k%a.length#=#k&(a.length-1)# \enspace .
   \]
@@ -1188,23 +1168,22 @@ Essa é uma implementação de uma #List#
 \begin{exc}
   Projete e implemente uma variante da 
  #ArrayDeque# que não faz uso de aritmética modular. Em vez disso, todos os dados ficam em um bloco consecutivo, em ordem, dentro de um array. 
-  Quando os dados sobrescrevem o começo ou fim desse array, uma operação #rebuild()# modificada é realizada.
+  Quando os dados sobrescrevem o começo ou o fim desse array, uma operação #rebuild()# modificada é realizada.
   O custo amortizado de todas as operações deve ser o mesmo que em uma 
   #ArrayDeque#.
 
-  \noindent Dica: Fazer isso funcionar tem a ver como você implementa a operação #rebuild()#. Deve-se fazer #rebuild()# para colocar dados na estrutura de dados em um estado onde os dados não podem sair pelas duas pontas até que pelo menos
+  \noindent Dica: fazer isso funcionar tem a ver com a forma que você implementa a operação #rebuild()#. Deve-se fazer #rebuild()# para colocar dados na estrutura de dados em um estado onde os dados não podem sair pelas duas pontas até que pelo menos
   $#n#/2$ operações tenham sido realizadas. 
 
   Teste o desempenho da sua implementação em comparação à 
- #ArrayDeque#. Otimize sua implementação
-  (usando #System.arraycopy(a,i,b,i,n)#)
+ #ArrayDeque#. Otimize sua implementação (usando #System.arraycopy(a,i,b,i,n)#)
   e veja se consegue fazê-la mais rápida que a implementação da #ArrayDeque#.
 \end{exc}
 
 \begin{exc}
-  Projete e implemente uma versão de uma 
- #RootishArrayStack# que desperdiça somente 
-  $O(\sqrt{#n#})$ de espaço, mas que pode realizar as operações  #add(i,x)#
+  Projete e implemente uma versão de uma #RootishArrayStack# 
+  que desperdiça somente $O(\sqrt{#n#})$ de espaço, mas que 
+  pode realizar as operações #add(i,x)#
   e #remove(i,x)# de $O(1+\min\{#i#,#n#-#i#\})$ de tempo.
 \end{exc}
 
@@ -1213,7 +1192,7 @@ Essa é uma implementação de uma #List#
  #RootishArrayStack# que desperdiça somente 
    $O(\sqrt{#n#})$ de espaço, mas que pode rodar as operações #add(i,x)#
   e #remove(i,x)# em $O(1+\min\{\sqrt{#n#},#n#-#i#\})$
-  de tempo. (Para uma ideia de como fazer isso, veja \secref{selist}.)
+  de tempo. (Para uma ideia de como fazer isso, veja a \secref{selist}.)
 \end{exc}
 
 \begin{exc}
@@ -1221,7 +1200,7 @@ Essa é uma implementação de uma #List#
 uma #RootishArrayStack# que desperdiça somente 
   $O(\sqrt{#n#})$ de espaço, mas que pode rodar as operações #add(i,x)# e 
   #remove(i,x)# em $O(1+\min\{#i#,\sqrt {#n#},#n#-#i#\})$ de tempo.
-  (Veja \secref{selist} para ideia de como conseguir isso.)
+  (Veja a \secref{selist} para uma ideia de como conseguir isso.)
 \end{exc}
 
 \begin{exc}
@@ -1232,5 +1211,4 @@ Essa estrutura de três níveis implementa a interface
   Nessa estrutura, #get(i)# e #set(i,x)# funcionam em tempo constante; enquanto 
   #add(i,x)# e #remove(i)# levam $O(#n#^{1/3})$ de tempo amortizado.
 \end{exc}
-
 
