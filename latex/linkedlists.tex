@@ -3,18 +3,18 @@
 
 \index{linked list}%
 \index{lista ligada}%
-Neste capítulo, constinuamos a estudar implementações da 
+Neste capítulo, continuamos a estudar implementações da 
 interface #List# e agora usando estruturas de dados baseadas em ponteiros
-em vez de arrays. As estruturas neste capítulo são feitas de nodos
+em vez de arrays. As estruturas neste capítulo são compostas de nodos (ou nós)
 que contêm os itens da lista. Usando referências (ponteiros), os nodos são
-ligados entre si em uma sequência. Primeiro estudamos listas simplestmente ligadas (listas com somente uma ligação), que podem implementar operação da #Stack# e #Queue# (FIFO) em tempo constante por operação e então seguimos para listas
+ligados entre si em uma sequência. Primeiro estudamos listas simplesmente ligadas (listas com somente uma ligação), que podem implementar operação da #Stack# e #Queue# (FIFO) em tempo constante por operação e então seguimos para listas
 duplamente ligadas, que podem implementar operações #Deque# em tempo constante.
 
-Listas ligadas tem vantagens e desvantagens quando comparadas a implementações
+Listas ligadas têm vantagens e desvantagens quando comparadas a implementações
 baseadas em arrays da interface #List#. A principal desvantagem é que perdemos
-a habilidade de acessar qualquer elementos usando
+a habilidade de acessar elementos usando
 #get(i)# ou #set(i,x)# em tempo constante.
-Em vez disso, temos que percorrer a lista, um elemento por vez, até chegarmos no #i#-ésimo elemento. A principal vantagem é que são mais dinâmicos: dada uma referência a qualquer nodo da lista #u#, podemos deletar #u# ou inserir um nodo adjacente a #u# em tempo constante. Isso vale não importa on #u# esteja na lista.
+Em vez disso, temos que percorrer a lista, um elemento por vez, até chegarmos no #i#-ésimo elemento. A principal vantagem é que são mais dinâmicos: dada uma referência a qualquer nodo da lista #u#, podemos deletar #u# ou inserir um nodo adjacente a #u# em tempo constante. Isso vale não importa onde #u# esteja na lista.
 
 \section{#SLList#: Uma Lista Simplesmente Ligada}
 \seclabel{sllist}
@@ -23,10 +23,11 @@ Em vez disso, temos que percorrer a lista, um elemento por vez, até chegarmos n
 \index{linked list!singly-}%
 \index{singly-linked list}%
 \index{lista simplesmente ligada}%
-Uma
- #SLList# (em inglês, singly-linked list) é uma sequência de #Node#s (em português, nodo). Cada nodo 
-#u# guarda um valor de dado #u.x# e uma referência #u.next# ao próximo nodo na sequência
-.  Para o último nodo #w# na sequência vale $#w.next# = #null#$
+Uma #SLList# (em inglês, singly-linked list) é uma 
+sequência de #Node#s (em português, nodo). Cada nodo 
+#u# guarda um valor de dado #u.x# e uma referência #u.next# 
+ao próximo nodo na sequência.  
+Para o último nodo #w# na sequência vale $#w.next# = #null#$
 
 % TODO: Remove constructors from SLList.Node
 \javaimport{ods/SLList.Node}
@@ -38,7 +39,7 @@ os acessos à primeiro e último nodos na sequência, assim como um inteiro
 #n# para guardar o comprimento da sequência:
 \codeimport{ods/SLList.head.tail.n}
 Uma sequência de operações #Stack# e #Queue# em uma #SLList# está ilustrada 
-em \figref{sllist}.
+na \figref{sllist}.
 
 \begin{figure}
   \begin{center}
@@ -63,7 +64,7 @@ A operação #pop()#, após verificar que a
 
 \codeimport{ods/SLList.pop()}
 
-Claramente, ambas operações #push()# e #pop()# roda em tempo #O(1)#.
+Claramente, ambas operações #push()# e #pop()# rodam em tempo #O(1)#.
 
 \subsection{Operações de Queue}
 
@@ -73,7 +74,7 @@ Uma #SLList# também pode implementar as operações de queue FIFO #add(x)# e
 \codeimport{ods/SLList.remove()}
 
 Adições, por outro lado, são feitas na cauda da lista. Na maior parte dos casos,
-isso é feito ao atribuir $#tail.next#=#u#$, onde #u# é mais novo nodo que contém #x#. Entretato, um caso especial ocorre quando $#n#=0$, no qual $#tail#=#head#=#null#$.  Nesse caso, tanto #tail#
+isso é feito ao atribuir $#tail.next#=#u#$, onde #u# é mais novo nodo que contém #x#. Entretanto, um caso especial ocorre quando $#n#=0$, no qual $#tail#=#head#=#null#$.  Nesse caso, tanto #tail#
 quanto #head# são atribuídos a #u#.
 
 \codeimport{ods/SLList.add(x)}
@@ -88,14 +89,13 @@ O teorema a seguir resume o desempenho de uma #SLList#:
 \begin{thm}\thmlabel{sllist}
 Uma #SLList# implementa as interfaces #Stack# e #Queue# (FIFO).  
   As operações #push(x)#, #pop()#, #add(x)# e #remove()# rodam em 
-  $O(1)$ de tempo por operação.
+  tempo $O(1)$ por operação.
 \end{thm}
 
-Uma 
-#SLList# quase implementa o conjunto completo de operações de uma #Deque#.
+Uma #SLList# quase implementa o conjunto completo de operações de uma #Deque#.
 A única operação que falta é remoção da cauda de uma 
  #SLList#.
- Remover da cauda de um #SLList# é difícil porquê requer a atualização 
+ Remover da cauda de um #SLList# é difícil porque requer a atualização 
  do valor da #tail# de forma que ela aponte ao nodo #w# 
  que precede #tail# na #SLList#; esse é o nodo #w# tal que 
 $#w.next#=#tail#$.  Infelizmente, o único jeito de chegar a #w# é percorrendo
@@ -110,24 +110,24 @@ $#w.next#=#tail#$.  Infelizmente, o único jeito de chegar a #w# é percorrendo
 \index{lista ligada!dupla}%
 \index{lista duplamente ligada}%
 
-Uma #DLList# (do inglês, doubly-linked list) é muito similar a uma #SLList# exceto que cada nodo #u# em uma #DLList# tem referências ao nodo que ele precede #u.next# e ao nodo que sucede #u.prev#.
+Uma #DLList# (do inglês, doubly-linked list) é muito similar a uma #SLList# exceto que cada nodo #u# em uma #DLList# tem referências ao nodo que ele precede, #u.next#, e ao nodo que sucede, #u.prev#.
 
 \javaimport{ods/DLList.Node}
 \cppimport{ods/DLList.Node}
 
-Ao implementar uma #SLList#, vimos que haviam vários casos especiais para tomar cuidado. Por exemplo, ao remover o último elemento de uma #SLList# ou adicionar um elemento a uma #SLList# vazia precisamos tomar cuidade especial para garantir
+Ao implementar uma #SLList#, vimos que haviam vários casos especiais para tomar cuidado. Por exemplo, ao remover o último elemento de uma #SLList# ou adicionar um elemento a uma #SLList# vazia precisamos tomar cuidado especial para garantir
 que #head# e #tail# sejam corretamente atualizados.
 Em uma #DLList#, o número desses casos especiais aumentam consideravelmente.
-Talvez o modo mais limpo de cuidar de todos esses casos especiais em uma
+Talvez o modo mais simples de cuidar de todos esses casos especiais em uma
 #DLList# é introduzir um nodo #dummy#, também conhecido como \emph{sentinela}.
 \index{dummy node}%
 \index{nodo dummy}%
 \index{sentinela}%
-Esse nodo não contém nenhum dado, mas atua como um marcador para que não tenhamos nenhum nodo especial 
-; todo nodo tem um #next# e um #prev#, com um #dummy# agindo como o nodo 
-que sucede o último nodo na lista e que precede o primeiro nodo da lista.
-Desse jeito, os nodos da lista são (duplamente) ligados em um ciclo, como
-ilustrado na \figref{dllist}.
+Esse nodo não contém nenhum dado, mas atua como um marcador para que não tenhamos nenhum nodo especial; todo nodo tem um #next# e um #prev#, 
+com um #dummy# agindo como o nodo que sucede o último nodo 
+na lista e que precede o primeiro nodo da lista.
+Desse jeito, os nodos da lista são (duplamente) ligados em um ciclo, 
+como ilustrado na \figref{dllist}.
 
 \begin{figure}
   \begin{center}
@@ -137,13 +137,12 @@ ilustrado na \figref{dllist}.
   \figlabel{dllist}
 \end{figure}
 
-
 %TODO: Remove constructors from class Node
 
 \codeimport{ods/DLList.n.dummy.DLList()}
 
-Encontrar o nodo com índice em particular em um #DLList# é fácil;
-podemos ou começar na cabeça da lista (#dummy.next#) e ir para frente,
+Encontrar o nodo com um dado índice em uma #DLList# é fácil;
+podemos começar na cabeça da lista (#dummy.next#) e ir para frente,
 ou começar na cauda da lista (#dummy.next#) e ir para trás.
 Isso permite alcançarmos o #i#-ésimo nodo em $O(1+\min\{#i#,#n#-#i#\})$ de tempo:
 
@@ -162,7 +161,7 @@ achar o #i#-ésimo nodo, e portanto é
 
 Se temos uma referência a um nodo #w# em uma #DLList# e queremos inserir um nodo #u# antes de #w#, então isso é só uma questão de atribuir 
  $#u.next#=#w#$,
-$#u.prev#=#w.prev#$, e então ajustar #u.prev.next# e  #u.next.prev#.  (Ver \figref{dllist-addbefore}.)
+$#u.prev#=#w.prev#$, e então ajustar #u.prev.next# e  #u.next.prev#.  (Veja a \figref{dllist-addbefore}.)
 Graças o nodo dummy, não há necessidade de se preocupar sobre #w.prev#
 existir ou não.
 
@@ -172,12 +171,12 @@ existir ou não.
    \begin{center}
       \includegraphics[scale=0.90909]{figs/dllist-addbefore}
    \end{center}
-   \caption[Adicionando em uma DLList]{Adicionando o nodeo #u# antes do nodo #w# em uma #DLList#.}
+   \caption[Adicionando em uma DLList]{Adicionando o nodo #u# antes do nodo #w# em uma #DLList#.}
    \figlabel{dllist-addbefore}
 \end{figure}
 
 Agora, a operação da lista #add(i,x)# é trivial para implementar. 
-Achamos o #i#-ésimo nodo na #DLList# and inserimos um novo nodo #u# que contém
+Achamos o #i#-ésimo nodo na #DLList# e inserimos um novo nodo #u# que contém
 #x# logo antes dele.
 
 \codeimport{ods/DLList.add(i,x)}
@@ -199,15 +198,15 @@ Novamente, a única parte cara dessa operação é achar o #i#-ésimo nodo usand
  #getNode(i)#, e então #remove(i)# roda em tempo $O(1+\min\{#i#, #n#-#i#\})$.
 
 \subsection{Resumo}
-O teorema a seguir resumo o desempenho de uma #DLList#:
+O teorema a seguir resume o desempenho de uma #DLList#:
 
 \begin{thm}\thmlabel{dllist}
-  Uma #DLList# implementa a interface #List# interface. Nessa implementação ,
+  Uma #DLList# implementa a interface #List#. Nessa implementação,
   as operações #get(i)#, #set(i,x)#, #add(i,x)# e #remove(i)# rodam em 
-   $O(1+\min\{#i#,#n#-#i#\})$ de tempo por operação.
+tempo $O(1+\min\{#i#,#n#-#i#\})$ por operação.
 \end{thm}
 
-Vale notar que, se ignoramos o custo de #getNode(i)#, então todas
+Vale notar que, se ignorarmos o custo de #getNode(i)#, então todas
 as operações em uma #DLList# leva tempo constante.
 Então, a única parte cara das operações em uma #DLList# é achar o nodo relevante.
 Uma vez que temos o nodo de interesse, adicionar, remover ou acessar os
@@ -216,7 +215,7 @@ dados naquele nodo leva somente um tempo constante.
 Há um nítido contraste em relação às implementações da #List# baseadas em arrays do \chapref{arrays};
 naquelas implementações, o item buscado no array pode ser achado em tempo constante.
 Entretanto, adicionar ou remover requer o deslocamento de elementos no array e, 
-em geral, leva tempo não constante.
+em geral, não leva tempo constante.
 
 Por essa razão, as estruturas de listas ligadas são adequadas para
 aplicações em que referências a nodos da lista podem ser obtidos por meios
@@ -224,11 +223,11 @@ externos.
 
 \javaonly{Um exemplo disso é a estrutura de dados #LinkedHashSet# existente na 
 Java Collections Framework, na qual um conjunto de itens é guardado em uma lista duplamente encadeada e os nodos dessa lista são guardados em uma tabela hash
-(discutido em \chapref{hashing}).
+(discutido no \chapref{hashing}).
 Quando um elemento é removido de uma 
 #LinkedHashSet#, a tabela hash é usada para achar o nodo em questão com tempo constante e então o nodo da lista é removido (também em tempo constante).}
 \cpponly{Por exemplo, ponteiros aos nodos de uma lista ligada poderiam ser guardados em uma 
- #USet#.  Então para remover um item  #x# de uma lista ligada,
+ #USet#.  Então para remover um item #x# de uma lista ligada,
  o nodo que contém #x# pode ser achado rapidamente usando
  #Uset# e o nodo pode ser removido da lista em tempo constante.} 
 
@@ -248,8 +247,7 @@ Mais precisamente, uma
 #SEList# é parametrizada pelo tamanho do bloco \emph{block size} #b#.
 Cada nodo individual em uma #SEList# guarda um bloco que pode guardar até #b+1# elementos.
 
-Para razões que vão se tornar claras depois, será útil se podermos fazer operações de 
-#Deque# em cada bloco.
+Para razões que vão se tornar claras depois, será útil se podermos fazer operações de #Deque# em cada bloco.
 
 A estrutura de dados que escolhemos para isso é uma 
 #BDeque# (do inglês, bounded deque -- deque delimitado),
@@ -295,8 +293,8 @@ bloco também é constante.
 Isso significa que o espaço desperdiçado em uma #SEList# é somente
 $O(#b#+#n#/#b#)$.  Ao escolher um valor de #b# dentro de um fator constante
 de
-$\sqrt{#n#}$, podemos custos de espaço extras de uma SEList aproximar
-o limitante inferior $\sqrt{#n#}$ descrito em \secref{rootishspaceusage}.
+$\sqrt{#n#}$, fazemos o custo de espaço extra de uma SEList se aproximar
+ao limitante inferior $\sqrt{#n#}$ descrito em \secref{rootishspaceusage}.
 
 \subsection{Procurando Elementos}
 
@@ -331,7 +329,7 @@ que queremos após
 $O(1+#i#/#b#)$ passos.  
 Se procuramos de trás para frente, então alcançamos o nodo que queremos
 após
-$O(1+(#n#-#i#)/#b#)$ passo. O algoritmo usa a menor dessas duas quantidades
+$O(1+(#n#-#i#)/#b#)$ passos. O algoritmo usa a menor dessas duas quantidades
 dependendo do valor de #i#, então o tempo de localizar o item com índice #i# é
  $O(1+\min\{#i#,#n#-#i#\}/#b#)$.
 
@@ -341,17 +339,17 @@ e #set(i,x)# são traduzidas em obter e atribuir em um índice particular no blo
 \codeimport{ods/SEList.get(i).set(i,x)}
 
 Os tempos de execução dessas operações são dominados pelo tempo que 
-leva para achar o item, então eles também rodam em $O(1+\min\{#i#,#n#-#i#\}/#b#)$ de tempo.
+leva para achar o item, então eles também rodam em tempo $O(1+\min\{#i#,#n#-#i#\}/#b#)$.
 
 \subsection{Adicionando um Elemento}
 
 Adicionar elementos a uma 
  #SEList# é um pouco mais complicado.
- Antes de considerar o caso geral, considerarmos a operação mais fácil, #add(x)#,
- na qual #x# é adicinada ao final da lista. Se o último bloco está cheio
+ Antes de considerar o caso geral, consideraremos a operação mais fácil, #add(x)#,
+ na qual #x# é adicionada ao final da lista. Se o último bloco está cheio
  (ou não existe porque não há blocos ainda), então primeiro alocamos um
  novo bloco e o acrescentamos na lista de blocos. 
- Agora que temos certeza que o último bloco existe e não está cheio,
+ Agora que temos certeza de que o último bloco existe e não está cheio,
  acrescentamos #x# ao último bloco.
 
 \cppimport{ods/SEList.add(x)}
@@ -361,7 +359,7 @@ Adicionar elementos a uma
 A situação complica quando adicionamos ao interior da lista usando #add(i,x)#
 Primeiro alocamos #i# para obter o nodo #u# cujo bloco contém o #i#-ésimo item da lista.
 O problema é que queremos inserir #x# no bloco de #u#, mas temos que estar
-preparados para o caso em que o bloco de #u# já contém 
+preparados para o caso em que o bloco de #u# já contenha 
 $#b#+1$ elementos, ou seja, cheio e sem espaço para #x#.
 
 Considere que
@@ -380,16 +378,16 @@ nossa exploração (ver \figref{selist-add}):
     \end{tabular}
   \end{center}
   \caption[Adição no SEList]{Os três casos que ocorrem durante a adição de um item
- #x# no interior de uma #SEList#.  (Essa #SEList# tem tamano de bloco $#b#=3$.)}
+ #x# no interior de uma #SEList#.  (Essa #SEList# tem tamanho de bloco $#b#=3$.)}
   \figlabel{selist-add}
 \end{figure}
 
 
 \begin{enumerate}
-\item Rapidamente (em $r+1\le #b#$ passo) achamos um nodo $#u#_r$ cujo 
+\item Rapidamente (em $r+1\le #b#$ passos) achamos um nodo $#u#_r$ cujo 
   bloco não está cheio. Nesse caso, realizamos 
- $r$ deslocamentos de um elemento de um bloco ao próximo 
-, de forma que o espaço livro em $#u#_r$ torne-se um espaço livre em $#u#_0$.
+ $r$ deslocamentos de um elemento de um bloco ao próximo, de forma 
+    que o espaço livre em $#u#_r$ torne-se um espaço livre em $#u#_0$.
     Podemos então inserir #x# no bloco do $#u#_0$.
 
 \item Podemos rapidamente (em $r+1\le #b#$ passos) ir ao fim da lista de blocos.
@@ -402,20 +400,19 @@ onde cada contém
  $#b#+1$ elementos. Nós inserimos um novo bloco $#u#_{#b#}$
     no fim dessa sequência e \emph{espalhamos} os 
  $#b#(#b#+1)$ elementos originais para que cada bloco de 
- $#u#_0,\ldots,#u#_{#b#}$ contenho exatamente 
-#b# elementos. Agora o bloco de $#u#_0$'s contém somente #b# elementos então ele tem espaço para inserir #x#.
+ $#u#_0,\ldots,#u#_{#b#}$ contenha exatamente 
+#b# elementos. Agora o bloco de $#u#_0$ contém somente #b# elementos então ele tem espaço para inserir #x#.
 \end{enumerate}
 
 \codeimport{ods/SEList.add(i,x)}
 
-O tempo de execução da operação 
- #add(i,x)# depende de quais dos três casos anteriores ocorrem. 
- Casos~1 e 2 envolvem examinar e deslocar elementos ao longo de até #b# blocos
- e levam 
- $O(#b#)$ de tempo.
+O tempo de execução da operação  #add(i,x)# depende de 
+quais dos três casos anteriores ocorrem. 
+ Casos~1 e 2 envolvem examinar e deslocar elementos ao longo 
+ de até #b# blocos e levam $O(#b#)$ de tempo.
 Caso~3 envolve chamar o método #spread(u)#, que move $#b#(#b#+1)$
 elementos e leva $O(#b#^2)$ de tempo. Se ignorarmos o custo do Caso~3
-(que iremos levar em consideração depois com amortização) isso significa
+(que iremos levar em consideração depois, com amortização) isso significa
 que o tempo total de execução para localizar #i# e realizar a inserção de #x#
 é $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$.
 
@@ -424,7 +421,7 @@ que o tempo total de execução para localizar #i# e realizar a inserção de #x
 Remover um elemento de uma 
  #SEList# é similar a adicionar um elemento. 
  Nós primeiro localizamos o nodo #u# que contém o elemento com índice #i#.
-Agora, temos estar preparamos para o caso no qual não podemos remover
+Agora, temos que estar preparados para o caso no qual não podemos remover
 um elemento de #u# sem fazer que o bloco de #u# se torne menor que $#b#-1$.
 
 Novamente, sejam
@@ -432,7 +429,7 @@ Novamente, sejam
 Nós examinamos $#u#_0,#u#_1,#u#_2,\ldots$ para procurar por um nodo 
 do qual podemos emprestar um elemento para fazer o tamanho do bloco
 de $#u#_0$ pelo menos $#b#-1$.  Há outros casos a considerar 
-(veja \figref{selist-remove}):
+(veja a \figref{selist-remove}):
 
 \begin{figure}
   \noindent
@@ -443,7 +440,7 @@ de $#u#_0$ pelo menos $#b#-1$.  Há outros casos a considerar
       \includegraphics[scale=0.90909]{figs/selist-remove-c}\\
     \end{tabular}
   \end{center}
-  \caption[Remoção na SEList]{Os três casos que ocorrem durante a remoção de um item #x# no interior de uma #SEList#. (Essa #SEList# tem bloco de tamanho $#b#=3$.)}
+\caption[Remoção na SEList]{Os três casos que ocorrem durante a remoção de um item #x# no interior de uma #SEList#. (Essa #SEList# tem bloco de tamanho $#b#=3$.)}
   \figlabel{selist-remove}
 \end{figure}
 
@@ -461,7 +458,7 @@ $#u#_0$.  Se isso causar o bloco de $#u#_r$ se tornar vazio, então o removemos.
 
 \item Após #b# passos, não achamos nenhum bloco contendo mais de 
 $#b#-1$ elementos.  Nesse caso, $#u#_0,\ldots,#u#_{#b#-1}$ é uma sequência de 
-#b# blocks que contém $#b#-1$ elementos. Nós \emph{acumulamos}
+#b# blocos que contém $#b#-1$ elementos. Nós \emph{acumulamos}
 esses $#b#(#b#-1)$ elementos em $#u#_0,\ldots,#u#_{#b#-2}$ de forma tal que cada
 um desses 
 $#b#-1$ blocos contém exatamente #b# elementos e removemos 
@@ -478,7 +475,7 @@ Assim como a operação
 
 \subsection{Análise amortizada do Espalhamento e Acumulação}
 
-A seguir, avaliaremos o csuto dos métodos
+A seguir, avaliaremos o custo dos métodos
  #gather(u)# e #spread(u)# que podem ser executados pelos métodos
 #add(i,x)# e #remove(i)#.  Por questão de completude, eles são mostrados a seguir:
 
@@ -486,9 +483,9 @@ A seguir, avaliaremos o csuto dos métodos
 \codeimport{ods/SEList.gather(u)}
 
 O tempo de execução de cada um desses métodos é dominado pelos dois laços aninhados.
-Ambos laços interno e externo excutam no máximo 
+Ambos laços interno e externo executam no máximo 
 $#b#+1$ vezes, então o tempo total de execução de cada um desses métodos é
-$O((#b#+1)^2)=O(#b#^2)$. Porém, o lema a seguir mostra que esses métodos executam em no máximo uma a cada #b# chamadas de #add(i,x)# ou #remove(i)#.
+$O((#b#+1)^2)=O(#b#^2)$. Porém, o lema a seguir mostra que esses métodos executam em, no máximo, uma a cada #b# chamadas de #add(i,x)# ou #remove(i)#.
 
 \begin{lem}\lemlabel{selist-amortized}
   Se uma #SEList# é criada e qualquer sequência de 
@@ -508,18 +505,15 @@ $O((#b#+1)^2)=O(#b#^2)$. Porém, o lema a seguir mostra que esses métodos execu
   ou $#b#+1$ elementos).  Qualquer nodo cujo bloco contém #b# elementos é 
   \emph{durável}. Defina o \emph{potencial} de uma #SEList# como o número
   de nodos frágeis que possui. 
-  Iremos consideram somente a operação
-   #add(i,x)#
+  Iremos considerar somente a operação #add(i,x)#
   e sua relação com o número de chamadas a #spread(u)#.
-  As análises de 
-   #remove(i)# e #gather(u)# são idênticas.
+  As análises de #remove(i)# e #gather(u)# são idênticas.
 
-   Note que, se Caso~1 ocorra durante 
-  o método #add(i,x)#, então somente um nodo 
+   Note que, se o Caso~1 ocorrer durante o método #add(i,x)#, então somente um nodo 
   $#u#_r$ tem o tamanho de seu bloco alterado. Portanto, no máximo um nodo,
   $#u#_r$, deixa de ser durável e torna-se frágil. Se o Caso~2 ocorrer, 
   então um novo nodo é criado, e esse nó é frágil,
-  mas nenhum outro nodo muda de tamanho, então o número de nodos frágeis aumenta em one. Então, nos Caso~1 ou 2 o potencial da SEList aumenta em até uma unidade.
+  mas nenhum outro nodo muda de tamanho, então o número de nodos frágeis aumenta em um. Então, nos Casos~1 ou 2 o potencial da SEList aumenta em até uma unidade.
 
   Finalmente, se Caso~3 ocorrer, é porque
    $#u#_0,\ldots,#u#_{#b#-1}$ são todos nodos frágeis.
@@ -535,35 +529,33 @@ $O((#b#+1)^2)=O(#b#^2)$. Porém, o lema a seguir mostra que esses métodos execu
   $#b#-1$. O potencial (que conta o número de nodos frágeis) nunca é menor que 0.
   Concluímos que, para toda ocorrência do Caso~3, houveram pelo menos
   $#b#-1$ ocorrências de um Caso~1 ou um Caso~2.  Então, para toda chamada a 
-  #spread(u)# existem pelo menos #b# chamadas a #add(i,x)#.  Isso conclui a prova.
+  #spread(u)#, existem pelo menos #b# chamadas a #add(i,x)#.  Isso conclui a prova.
 \end{proof}
 
 \subsection{Resumo}
 
-O seguinte teorema resume o desempenho da estrutura de dados
- #SEList#: 
+O seguinte teorema resume o desempenho da estrutura de dados #SEList#: 
 
 \begin{thm}\thmlabel{selist}
 Uma #SEList# implementa a interface #List#. Ignorando o custo de chamadas
 a #spread(u)# e #gather(u)#, uma #SEList# tamanho de bloco #b#
-  aceita as operações 
+  possui as operações 
   \begin{itemize}
-    \item #get(i)# e #set(i,x)# em $O(1+\min\{#i#,#n#-#i#\}/#b#)$ de tempo por operação; e 
-    \item #add(i,x)# e #remove(i)# em $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$ de tempo por operação.
+    \item #get(i)# e #set(i,x)# em tempo $O(1+\min\{#i#,#n#-#i#\}/#b#)$ por operação; e 
+    \item #add(i,x)# e #remove(i)# em tempo $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$ por operação.
   \end{itemize}
-  Além disso, iniciando com uma #SEList# vazia, qualquer sequência de 
+  Além disso, iniciando com uma #SEList# vazia, uma sequência de 
    $m$ operações 
-  #add(i,x)# e #remove(i)# resultam em um total de $O(#b#m)$ de tempo gasto
-  durante todas as chamadas a 
-   #spread(u)# e #gather(u)#.
+  #add(i,x)# e #remove(i)# resulta em um total de $O(#b#m)$ de tempo gasto
+  durante todas as chamadas a #spread(u)# e #gather(u)#.
 
   O espaço (medido em palavras)
-  \footnote{Consulte \secref{model} para uma discussão de como a memória é medida.
+  \footnote{Consulte a \secref{model} para uma discussão de como a memória é medida.
   } usada por uma #SEList# que guarda #n# elementos é 
   $#n# +O(#b# + #n#/#b#)$.
 \end{thm}
 
-A #SEList# é uma busca por um balanceamento de custos visando um meio termo entre #ArrayList# e uma #DLList#, onde a mistura de custos entre essas duas estruturas depende do tamanho do bloco #b#.
+A #SEList# foi projetada visando um meio termo de custos entre #ArrayList# e uma #DLList#, onde a mistura de custos entre essas duas estruturas depende do tamanho do bloco #b#.
 Em um extremo
  $#b#=2$, cada nodo da #SEList# guarda no máximo três valores,
  o que não é muito diferente em uma #DLList#. No outro extremo,
@@ -572,7 +564,7 @@ $#b#>#n#$, todos os elementos são guardados em um único array, assim como em u
 
 \section{Discussão e Exercícios}
 
-Ambas listas simplesmente e duplamente encadeadas são técnicas bem estabelecidas e têm sido usadas em programas por mais de 40 anos. Elas são discutidas, por exemplo, por Knuth \cite[Sections~2.2.3--2.2.5]{k97v1}.  Mesmo a estrutura de dados 
+Ambas as listas simplesmente e duplamente encadeadas são técnicas bem estabelecidas e têm sido usadas em programas por mais de 40 anos. Elas são discutidas, por exemplo, por Knuth \cite[Sections~2.2.3--2.2.5]{k97v1}.  Mesmo a estrutura de dados 
 #SEList# parece ser uma variante de estrutura de dados bem conhecida. 
 A 
 #SEList# é às vezes conhecida pelo nome de \emph{unrolled linked list}
@@ -593,14 +585,13 @@ então podemos extrair #u.next# usando a fórmula
    #u.next# = #u.prev# \verb+^+ #u.nextprev# \enspace .
 \]
 (Aqui \verb+^+ computa o ou-exclusivo bit-a-bit de seus dois argumentos.)
-Essa técnica complica o código um pouco e não é possível em algumas linguagem como Java e Python, que tem coletores de lixo, porém fornece uma implementação de uma lista duplamente encadeada que requer somente um ponteiro por nodo.
+Essa técnica complica o código um pouco e não é possível em algumas linguagem como Java e Python, que têm coletores de lixo, porém fornece uma implementação de uma lista duplamente encadeada que requer somente um ponteiro por nodo.
 Veja o artigo de Sinha \cite{s04} para uma discussão detalhada dessa XOR-list.
 
 \begin{exc}
   Porque não é possível usar um nodo dummy em uma #SLList# para evitar 
   todos os casos especiais que ocorrem nas operações 
-#push(x)#, #pop()#,
-  #add(x)#, e #remove()#?
+#push(x)#, #pop()#, #add(x)# e #remove()#?
 \end{exc}
 
 \begin{exc}
@@ -611,26 +602,26 @@ Veja o artigo de Sinha \cite{s04} para uma discussão detalhada dessa XOR-list.
 \end{exc}
 
 \begin{exc}
-  Implementa as operações de uma #List#
+  Implemente as operações de uma #List#
    #get(i)#, #set(i,x)#,
   #add(i,x)# e #remove(i)# em uma #SLList#.  Cada uma dessas operações devem rodar 
-   $O(1+#i#)$ de tempo.
+   tempo $O(1+#i#)$.
 \end{exc}
 
 \begin{exc}
   Projete e implemente um método para a
    #SLList# chamado #reverse()# que inverte a ordem de elementos em uma 
-    #SLList#.  Esse método deve rodar em $O(#n#)$ de tempo, não deve usar recursão, não deve usar nenhuma estrutura de dados secundária,
-  , não deve criar nenhum nodo novo. 
+    #SLList#.  Esse método deve rodar em tempo $O(#n#)$, não deve usar recursão, não deve usar nenhuma estrutura de dados secundária e
+    não deve criar nenhum nodo novo. 
 \end{exc}
 
 \begin{exc}
   Projete e implemente o método #checkSize()# para as estruturas 
   #SLList# e #DLList#.
   Esse método percorre a lista e conta o número de nodos para verificar se
-  ele é igual ao valor #n# guardados na lista. Esse método
-  não retorna nada, mas lança uma exceção se o tamanho que elas computam 
-  não são idênticos ao valor de #n#.
+  ele é igual ao valor #n# guardado na lista. Esse método
+  não retorna nada, mas lança uma exceção se o tamanho que ele computa 
+  não for idêntico ao valor de #n#.
 \end{exc}
 
 \begin{exc}
@@ -647,7 +638,7 @@ Todos eles podem ser feitos apenas com trocas de valores
 de #prev# e #next# dos nodos existentes.
 
 \begin{exc}
-Escreva um método para a #DLList# chamado de #isPalindrome()# que retornas #true# se a lista for um 
+Escreva um método para a #DLList# chamado de #isPalindrome()# que retorna #true# se a lista for um 
    \emph{palíndrome},
   \index{palíndrome}%
   isto é, o elemento na posição #i# é igual ao elemento na posição 
@@ -664,17 +655,16 @@ $(#i#+#r#)\bmod #n#$.  Esse método deve rodar em
 
 \begin{exc}\exclabel{linkedlist-truncate}
 Escreva um método, #truncate(i)#, que trunca uma #DLList# na posição #i#.
-Após executar esse método, o tamanho da lista será #i# e deve conter somente os elementos nos índices
-  $0,\ldots,#i#-1$.  O valor retornado é outra 
+Após executar esse método, o tamanho da lista será #i# e deve conter somente os elementos nos índices $0,\ldots,#i#-1$.  
+  Esse método retorna outra 
   #DLList# que contém os elementos nos índices
-  $#i#,\ldots,#n#-1$.  Esse método deve rodar em $O(\min\{#i#,#n#-#i#\})$ de
-  tempo.
+  $#i#,\ldots,#n#-1$.  Esse método deve rodar em tempo $O(\min\{#i#,#n#-#i#\})$.
 \end{exc}
 
 \begin{exc}
-  Escreva uma método para a 
+  Escreva um método para a 
   #DLList# chamado #absorb(l2)#, que recebe como argumento
-  uma #DLList#, #l2#, a vazia e coloca seu conteúdo, em ordem, na lista receptora.
+  uma #DLList#, #l2#, a esvazia e coloca seu conteúdo, em ordem, na lista receptora.
   Por exemplo, se #l1# contém $a,b,c$ e #l2#
   contém
    $d,e,f$, então após chamar #l1.absorb(l2)#, #l1# terá 
@@ -701,20 +691,19 @@ Após executar esse método, o tamanho da lista será #i# e deve conter somente 
   \index{merge-sort}%
   Este exercício te guia para realizar uma implementação do algoritmo
   merge-sort para a ordenação de uma
-   #DLList#, conforme discutido em \secref{merge-sort}.
+   #DLList#, conforme discutido na \secref{merge-sort}.
   \javaonly{Na sua implementação, realize comparações entre elementos usando o método 
    #compareTo(x)# de forma que a implementação resultante possa ordenar
-
-  qualquer #DLList# contendo elementos que implementam da interface #Comparable#.}
+  qualquer #DLList# contendo elementos que implementam a interface #Comparable#.}
   \begin{enumerate}
     \item Escreva um método para a #DLList# chamado #takeFirst(l2)#.
       Esse método recebe o primeiro nodo de #l2# e o combina à lista que efetua
       o método. Isso é equivalente a 
         #add(size(),l2.remove(0))#,
-       exceto que não deve criar um novo nodo.
+       exceto que não deve criar um nodo novo.
     \item Escreva um método estático para a #DLList# chamado #merge(l1,l2)#, que recebe sua listas ordenadas 
       #l1# e #l2#, faz a junção (em inglês, merge) delas, e retorna uma nova lista ordenada contendo o resultado.
-        Essa faz com que 
+        Essa junção faz com que 
         #l1# e #l2# sejam esvaziadas no processo. 
         Por exemplo, se #l1# contém
        $a,c,d$ e #l2# contém
@@ -733,16 +722,15 @@ Após executar esse método, o tamanho da lista será #i# e deve conter somente 
 \end{exc}
 
 Os próximos exercícios são mais avançados e requerem a compreensão 
-aprofundada do que acontence ao valor mínimo armazenado em uma 
+aprofundada do que acontece ao valor mínimo armazenado em uma 
 #Stack# ou #Queue# quando itens são adicionados ou removidos.
 
 \begin{exc}
   \index{MinStack@#MinStack#}%
-  Projeto e implemente uma 
+  Projete e implemente uma 
   estrutura de dados #MinStack# que pode guardar elementos comparáveis 
-  e aceita as operações de stack 
-#push(x)#,
-  #pop()#, e #size()#, assim como a operação #min()#, que retorna 
+  e possui as operações de stack 
+#push(x)#, #pop()# e #size()#, assim como a operação #min()#, que retorna 
   o valor mínimo atualmente guardado na estrutura de dados. 
   Todas as operações devem rodar em tempo constante.
 \end{exc}
@@ -751,7 +739,7 @@ aprofundada do que acontence ao valor mínimo armazenado em uma
   \index{MinQueue@#MinQueue#}%
   Projete e implemente uma estrutura de dados 
   #MinQueue# que pode guardar elementos comparáveis
-  e aceita as operações de queue
+  e possui as operações de queue
   #add(x)#,
   #remove()# e #size()#, assim como a operação #min()#, que 
   retorna o valor mínimo atualmente armazenado na estrutura de dados. 
@@ -761,7 +749,7 @@ aprofundada do que acontence ao valor mínimo armazenado em uma
 \begin{exc}
   \index{MinDeque@#MinDeque#}%
   Projete e implemente uma estrutura de dados 
-  #MinDeque# que pode guardar elementos comparáveis e aceita todas as operações
+  #MinDeque# que pode guardar elementos comparáveis e possui todas as operações
   da deque 
   #addFirst(x)#,
   #addLast(x)#, #removeFirst()#, #removeLast()# e #size()#, e a operação 
