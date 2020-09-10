@@ -74,7 +74,7 @@ uma árvore é a altura de sua raiz.
 Um nodo #u# é uma \emph{folha}
 se não tem filhos.
 
-Ás vezes pensamos de árvores sendo extendidas com \emph{nodos externos}.
+Ás vezes pensamos de árvores sendo estendidas com \emph{nodos externos}.
 Qualquer nodo que não tem filho à esquerda tem um nodo externo como filho à
 esquerda e, de modo similar, um nodo que não tem filho à direita tem um nodo externo como filho à direita (ver
 \figref{binary-tree}.b).  É fácil verificar, por indução, que uma árvore binária 
@@ -88,7 +88,7 @@ O jeito mais simples de representar um nodo #u# em uma árvore binária
 (no máximo três) vizinhos de #u#\notpcode{:}\pcodeonly{.}
 \javaimport{ods/BinaryTree.BTNode<Node}
 \cppimport{ods/BinaryTree.BTNode}
-Se um desses três vizinhos não estiver presente, o atribuimos a #nil#.
+Se um desses três vizinhos não estiver presente, o atribuímos a #nil#.
 Desse jeito, ambos nodos externos da árvore e o pai da raiz correspondem ao
 valor #nil#.
 
@@ -140,7 +140,7 @@ que usa a informação de onde veio para determinar para onde irá a seguir.
 Veja \figref{bintree-traverse}.  
 Ao chegarmos no nodo #u# a partir de #u.parent# então o próximo passo
 a tomar é visitar #u.left#. Se chegarmos em #u# vindos de #u.right#, então
-terminamos a visita da subávore de #u# e retornamos a #u.parent#.
+terminamos a visita da subárvore de #u# e retornamos a #u.parent#.
 O código a seguir implementa essa ideia, incluindo o tratamento dos
 casos onde #u.left#, #u.right# ou #u.parent# seja #nil#:
 \codeimport{ods/BinaryTree.traverse2()}
@@ -174,7 +174,7 @@ Um tipo especial de percurso que não se adequa ao padrão das funções acima �
 Em uma travessia em largura, os nodos são visitados nível-a-nível iniciando na raiz e descendo, visitando os nodos a cada nível da esquerda à direita (ver
 \figref{bintree-bfs}). Isso é similar à forma que leríamos uma página de texto em inglês. Travessia em largura é implementada usando uma queue 
 , #q#, que inicialmente contém somente a raiz #r#. A cada passo, 
-extraimos o próximo nodo #u# de #q#, processamos #u# e adicionamos #u.left#
+extraímos o próximo nodo #u# de #q#, processamos #u# e adicionamos #u.left#
 e #u.right# (se eles forem não-#nil#) a #q#:
 \codeimport{ods/BinaryTree.bfTraverse()}
 
@@ -249,7 +249,7 @@ De modo similar, o último nodo no qual Caso~2 ocorreu contém o maior valor na
     (a) & (b)
     \end{tabular}
   \end{center}
-  \caption{Um exemplo de (a)~uma busca bem sucedida (por $6$) e (b)~uma busca mal-sucedida (por $10$) em uma árvore binária de busca.}
+  \caption{Um exemplo de (a)~uma busca bem sucedida (por $6$) e (b)~uma busca mal sucedida (por $10$) em uma árvore binária de busca.}
   \figlabel{bst-search}
 \end{figure}
 
@@ -306,7 +306,7 @@ da árvore fazendo
 A situação complicada quando #u# tem dois filhos. Nesse caso,
 o mais simples a fazer é achar um nodo #w#, que seja menor que 
 os dois filho e tal que #w.x# possa substituir #u.x#.
-Para manter a propriedade da árvore de busca binára, o valor
+Para manter a propriedade da árvore de busca binária, o valor
 #w.x# deveria ser próximo ao valor de #u.x#. Por exemplo, escolher um #w# tal que #w.x# é o menor valor maior que #u.x# funcionaria.
 Achar o nodo #w# é fácil; é o menor valor na subárvore enraizada em #u.right#.
 Esse nodo pode ser facilmente removido porque não tem filho à esquerda
@@ -353,10 +353,10 @@ Em vez de parecer como uma árvore em
 Existe várias maneiras de evitar árvores binárias desbalanceadas, todas elas
 levam a estruturas de dados que tem 
  operações que executam com $O(\log
-#n#)$ de tempo. Em \chapref{rbs} mostramos como operações com $O(\log #n#)$ de tempo 
+#n#)$ de tempo. No \chapref{rbs} mostramos como operações com $O(\log #n#)$ de tempo 
 \emph{esperado} podem ser obtidas com randomização. 
-Em \chapref{scapegoat} mostramos como operações que executam em $O(\log #n#)$ de tempo \emph{amortizado} podem ser obtidas com operações de reconstrução parcial.
-Em \chapref{redblack} mostramos como operações que executam em $O(\log #n#)$ de tempo no \emph{pior caso} pode ser obtidas ao simular uma árvore que não é binária: uma árvore cujos nodos podem ter até quatro filhos.
+No \chapref{scapegoat} mostramos como operações que executam em $O(\log #n#)$ de tempo \emph{amortizado} podem ser obtidas com operações de reconstrução parcial.
+No \chapref{redblack} mostramos como operações que executam em $O(\log #n#)$ de tempo no \emph{pior caso} pode ser obtidas ao simular uma árvore que não é binária: uma árvore cujos nodos podem ter até quatro filhos.
 
 \section{Discussão e Exercícios}
 
@@ -378,7 +378,7 @@ de uma árvore representam
 por vários grupos na década de 1950
 \cite[Section~6.2.2]{k97v3}.  Referências adicionais a tipos específicos de árvores binárias de busca são fornecidas nos capítulos a seguir.
 
-Ao implementar uma árvore binária desde o início, várias decisões de projet devem ser feitas. Uma delas é se nodos devem guardar um ponteiro para o seu pai.
+Ao implementar uma árvore binária desde o início, várias decisões de projeto devem ser feitas. Uma delas é se nodos devem guardar um ponteiro para o seu pai.
 
 Se a maior parte das operações simplesmente seguirem um caminho da raiz para a folha, então ponteiros para nodos-pai são desnecessários, desperdício de memória e uma potencial fonte de erros de codificação. Por outro lado, a falta de ponteiros para
 nodos-pai significa que travessias em árvores devem serem feitas recursivamente ou com o uso de uma stack explícita.
@@ -408,7 +408,7 @@ Como exemplo, veja os métodos
 #rotateLeft(u)# e #rotateRight(u)# na página~\pageref{page:rotations}.
 
 \begin{exc}
-  Prove que uma árvore binária com $#n#\ge 1$ nodos tem $#n#-1$ arestars.
+  Prove que uma árvore binária com $#n#\ge 1$ nodos tem $#n#-1$ arestas.
 \end{exc}
 
 \begin{exc}
@@ -418,12 +418,11 @@ Como exemplo, veja os métodos
 
 \begin{exc}
   Prove que, se uma árvore binária, $T$, tem pelo menos uma folha, então
-  ou 
-  (a)~a reaiz de $T$ tem no máximo um filho ou (b)~$T$ tem mais de uma folha.
+  (a)~a raiz de $T$ tem no máximo um filho ou (b)~$T$ tem mais de uma folha.
 \end{exc}
 
 \begin{exc}
-  Implemente um método não-recursivo, #size2(u)#, que computa o tamanho da subárvore enraizada no nodo #u#.
+  Implemente um método não recursivo, #size2(u)#, que computa o tamanho da subárvore enraizada no nodo #u#.
 \end{exc}
 
 \begin{exc}
@@ -437,7 +436,7 @@ Como exemplo, veja os métodos
   \emph{balanceada no tamanho}
   \index{balanceada no tamanho}%
   \index{árvore binária de busca!balanceada no tamanho}%
-  se, para todo nodo #u#, o tamanho das subárvores enraziadas em 
+  se, para todo nodo #u#, o tamanho das subárvores enraizadas em 
    #u.left# e #u.right# diferem em no máximo uma unidade. 
    Escreva um método recursivo, #isBalanced()#, que testa se uma árvore
    binária é balanceada. O seu método deve rodar em 
@@ -458,7 +457,7 @@ depois de visitar todos os nodos na subárvore à esquerda de #u# mas antes de v
 
 Um travessia em \emph{pós-ordem} (em inglês, \emph{post-order})
 visita #u# somente após visitar todos os outros nodos na subárvore de #u#.
-A númeração pré/em/pós-ordem de uma árvore marca os nodos de uma árvore com os
+A numeração pré/em/pós-ordem de uma árvore marca os nodos de uma árvore com os
 inteiros
 $0,\ldots,#n#-1$ na ordem em que são visitados por uma travessia 
 em pré/em/pós-ordem. Para um exemplo, veja \figref{binarytree-numbering}.
@@ -485,8 +484,6 @@ em pré/em/pós-ordem. Para um exemplo, veja \figref{binarytree-numbering}.
 Escreva métodos recursivos 
   #preOrderNumber()#, #inOrderNumber()# e  #postOrderNumbers()# que atribue
   esses números corretamente. Cada um desses métodos deve rodar em $O(#n#)$ de tempo.
-  assign these numbers correctly. These methods should each run in
-  $O(#n#)$ time.
 \end{exc}
 
 \begin{exc}\exclabel{tree-traversal}
@@ -501,12 +498,12 @@ Escreva métodos recursivos
   \begin{enumerate}
     \item Dado um nodo #u#, determine o tamanho da subárvore enraizada em #u#.
     \item Dado um nodo #u#, determine a profundidade de #u#.
-    \item Dados dois nodos #u# e #w#, determine se #u# é um ancentral de #w#.
+    \item Dados dois nodos #u# e #w#, determine se #u# é um ancestral de #w#.
   \end{enumerate}
 \end{exc}
 
 \begin{exc}
-  Suponha que você recebeu uma lista de nodos com númerações pré/em-ordem atribuídas. Prove que existe no máximo uma árvore possível com essas numerações
+  Suponha que você recebeu uma lista de nodos com numerações pré/em-ordem atribuídas. Prove que existe no máximo uma árvore possível com essas numerações
   e mostre como construí-la.
 \end{exc}
 
@@ -521,12 +518,12 @@ Escreva métodos recursivos
 \end{exc}
 
 \begin{exc}
-  Ilustre o que acontece ao removermos os valores $3$ and then $5$ da árvore binária de busca em \figref{bst}.
+  Ilustre o que acontece ao removermos os valores $3$ e então $5$ da árvore binária de busca em \figref{bst}.
 \end{exc}
 
 \begin{exc}
   Implemente um método na #BinarySearchTree# chamado de #getLE(x)#
-  que retorna uma lsita de todos os itens na árvore que são menores que
+  que retorna uma lista de todos os itens na árvore que são menores que
   ou iguais a #x#. O tempo de execução do seu método deve ser 
   $O(#n#'+#h#)$
   onde $#n#'$ é o número de itens menores que ou iguais a #x# e #h#
