@@ -76,7 +76,7 @@ Nós veremos também implementações de estruturas de dados que mantêm os iten
 Por exemplo, podemos manter um conjunto ordenado com um bilhão de itens e inspecionar no máximo 60 itens para qualquer operação.
 No nosso computador de um bilhão de instruções por segundo, essas operações levam $0.00000006$ segundos cada.
 
-O resto deste capítulo revisa brevemente alguns dos principais conceitos usados ao longo do resto do livro. \secref{interfaces} descreve as interfaces implementadas por todas as estruturas de dados descritas neste livro e devem ser consideradas como leitura obrigatória.
+O resto deste capítulo revisa brevemente alguns dos principais conceitos usados ao longo do resto do livro. A \secref{interfaces} descreve as interfaces implementadas por todas as estruturas de dados descritas neste livro e devem ser consideradas como leitura obrigatória.
 
 O restante das seções discute:
 
@@ -105,7 +105,7 @@ Uma interface nos diz nada sobre como a estrutura de dados implementa essas oper
 
 A \emph{implementação} de uma estrutura de dados, por outro lado, inclui a representação interna da estrutura de dados assim como as definições dos algoritmos que implementam as operações aceitas pela estrutura de dados. 
 Então, pode haver muitas implementações de uma dada interface.
-Por exemplo, em \chapref{arrays}, veremos implementações da interface #List# usando arrays e em \chapref{linkedlists} veremos implementações da interface #List# usando estruturas de dados baseadas em ponteiros. Ambas implementam a mesma interface, #List#, mas de modos distintos.
+Por exemplo, no \chapref{arrays}, veremos implementações da interface #List# usando arrays e no \chapref{linkedlists} veremos implementações da interface #List# usando estruturas de dados baseadas em ponteiros. Ambas implementam a mesma interface, #List#, mas de modos distintos.
 
 \subsection{As Interfaces #Queue#, #Stack# e #Deque#}
 
@@ -164,7 +164,7 @@ Uma política de enfileiramento muito comum é a política LIFO (last-in-first-o
 \index{queue!LIFO}%
 \index{stack}%
 \index{pilha}%
-, ilustrada em \figref{stack}. Em uma \emph{Queue LIFO},
+, ilustrada na \figref{stack}. Em uma \emph{Queue LIFO},
 o elemento mais recentemente adicionado é o próximo a ser removido. 
 Isso é melhor visualizado em termos de uma pilha de pratos; pratos são 
 posicionados no topo da pilha a também removidos do topo. Essa estrutura
@@ -196,7 +196,7 @@ Este livro vai falar muito pouco sobre
 as interfaces #Queue# FIFO, #Stack#, ou #Deque#. Isso porque essas interfaces são englobadas pela interface 
 #List#.  Uma #List#,
 \index{List@#List#}%
-ilustrada em \figref{list}, representa uma
+ilustrada na \figref{list}, representa uma
 sequência, $#x#_0,\ldots,#x#_{#n#-1}$, de valores. A interface #List# inclui as operações a seguir:
 
 \begin{enumerate}
@@ -279,7 +279,7 @@ Em outras palavras, é possível recuperar o valor, #v#, usando somente a chave 
 
 \index{SSet@#SSet#}%
 A interface #SSet# representa um conjunto ordenado de elementos. 
-Um #SSet# guarda elementos provientes de alguma ordem total, tal que quaisquer dois elementos #x# e #y# podem ser comparados. Em código, isso será feito com um método chamado #compare(x,y)# no qual
+Um #SSet# guarda elementos provenientes de alguma ordem total, tal que quaisquer dois elementos #x# e #y# podem ser comparados. Em código, isso será feito com um método chamado #compare(x,y)# no qual
 \[
     #compare(x,y)# 
       \begin{cases}
@@ -305,7 +305,7 @@ Essa versão da operação #find(x)# é às vezes chamada de \emph{busca de suce
 Ela difere de um modo fundamental de #USet.find(x)# pois retorna um resultado mesmo quando não há elemento igual a #x# no conjunto.
 
 A distinção entre a operação #find(x)# de #USet# e de #SSet# é muito importante e frequentemente esquecida ou não percebida. A funcionalidade extra provida por um #SSet# frequentemente vem com um preço que inclui tanto tempo de execução mais alto quanto uma complexidade de implementação maior.
-Por exemplo, a maior parte das implementações #SSet# discutidas neste livro tem operações #find(x)# com tempo de execução que são logaritmicas no tamanho do conjunto.
+Por exemplo, a maior parte das implementações #SSet# discutidas neste livro tem operações #find(x)# com tempo de execução que são logarítmicas no tamanho do conjunto.
 Por outro lado, a implementação de um #USet# com uma #ChainedHashTable# no
 \chapref{hashing} tem uma operação #find(x)# que roda em tempo esperado constante. 
 Ao escolher quais dessas estruturas usar, deve-se sempre usar um #USet# a menos que a funcionalidade extra oferecida por um #SSet# seja verdadeiramente necessária.
@@ -492,7 +492,7 @@ Também iremos fazer afirmações do tipo ``o tempo de execução dessa operaç�
 Esses atalhos servem principalmente para evitar frases estranhas e tornar 
 mais fácil o uso de notação assintótica em manipulações sequenciais de equações.
 
-A exemplo particulamente estranho disso ocorre quando escrevemos afirmações tipo
+A exemplo particularmente estranho disso ocorre quando escrevemos afirmações tipo
 \[
   T(n) = 2\log n + O(1)  \enspace .
 \]
@@ -549,10 +549,10 @@ Se dois algoritmos têm o mesmo tempo Big-Oh, então não saberemos qual é mais
 e que não pode não haver um ganhador em todas as situações. Um algoritmo pode ser mais rápido em uma máquina enquanto o outro em uma máquina diferente. Porém, se os dois algoritmos têm tempos de execução big-Oh distintos, então
 teremos certeza que aquele com menor função Big-Oh será mais rápido \emph{para valores #n# grandes o suficiente}.
 
-Um exemplo de como a notação big-Oh nos permite comparar duas diferentes funções é mostrado em \figref{intro-asymptotics}, que compara a taxa de crescimento 
+Um exemplo de como a notação big-Oh nos permite comparar duas diferentes funções é mostrado na \figref{intro-asymptotics}, que compara a taxa de crescimento 
 de $f_1(#n#)=15#n#$ versus $f_2(n)=2#n#\log#n#$.  
 Hipoteticamente, $f_1(n)$ seria o tempo de execução de um complicado algoritmo de tempo linear enquanto $f_2(n)$ é o tempo de execução de um algoritmo bem mais simples baseado no paradigma de divisão e conquista.
-Isso exemplica essa situação,
+Isso exemplifica essa situação,
 embora  $f_1(#n#)$ seja maior que $f_2(n)$ para valores baixos de #n#,
  o oposto é verdade para valores mais altos de #n#.
 Eventualmente $f_1(#n#)$ ganha e por uma margem crescente.
@@ -733,7 +733,7 @@ Ao estudar tempos de execução no contexto de estruturas de dados tendemos a en
   \index{tempo de execução no pior caso}%
   Esse é o tipo mais forte de garantia de tempo de execução.
     Se uma operação de uma estrutura de dados tem tempo 
-    de execução no pior-caso de 
+    de execução no pior caso de 
    $f(#n#)$, então uma dessas operações  \emph{nunca}
    leva mais tempo que 
 $f(#n#)$.
@@ -775,7 +775,7 @@ Esse valor é bem menor que os \$1\,200 mensais que teríamos que pagar se pegá
 \paragraph{Pior caso versus custo esperado:}
 \index{custo esperado}%
 A seguir, considere o caso de um seguro de incêndio na nossa casa de \$120\,000.
-Por analisar centenas de milhares de casos, companias de seguro têm determinado que a quantidade esperada de danos por incêndios causado a uma casa como a nossa é de
+Por analisar centenas de milhares de casos, seguradoras têm determinado que a quantidade esperada de danos por incêndios causado a uma casa como a nossa é de
 \$10 por mês.  
 Esse é uma valor bem baixo, pois a maior parte das casa nunca pegam fogo, algumas poucas tem incêndios pequenos que causam algum dano e um número minúsculo de casas queimam até as cinzas. Baseada nessa informação, a seguradora cobra
 \$15 mensais para a contratação de um seguro.
@@ -863,7 +863,7 @@ Os trechos de código neste livro são escritos na linguagem
 . Entretanto, para fazer o livro acessível para leitores não familiares com todas as construções e \emph{keywords} definidas pela linguagem \lang, os trechos de código foram simplificados. Por exemplo, um leitor não irá encontrar keywords como
 #public#, #protected#, #private# ou #static#.  
 O leitor também não encontrará discussão aprofundada sobre hierarquia de classes. 
-Quais interfaces uma determinada classes implementa ou qual classes ela extende, se relevante para a discussão, deve estar claro do texto do contexto em questão.
+Quais interfaces uma determinada classes implementa ou qual classes ela estende, se relevante para a discussão, deve estar claro do texto do contexto em questão.
 
 Essas convenções deve fazer os trechos de código mais fáceis de entender por qualquer um com background linguagens que variantes da linha ALGOL, incluindo B, C, C++, C\#, Objective-C, D, Java, JavaScript e assim por diante.
 Leitores em busca de detalhes das implementações são encorajados a olhar no código fonte da linguagem \lang\  que acompanha este livro.
@@ -957,8 +957,7 @@ Uma linha tracejada indica somente uma dependência fraca, na qual somente uma p
 \section{Discussão e Exercícios}
 
 As interfaces 
-#List#, #USet# e #SSet# descritas em 
-\secref{interfaces} são influenciadas pela Java Collections Framework
+#List#, #USet# e #SSet# descritas na \secref{interfaces} são influenciadas pela Java Collections Framework
 \cite{oracle_collections}.
 \index{Java Collections Framework}%
 Elas são essencialmente versões simplificadas das interfaces 
@@ -1005,7 +1004,7 @@ O seu código nunca deverá manter mais de 50 linhas a qualquer momento.
 
 \item Leia a entrada uma linha por vez e então imprima as linhas pares (começando com a primeira linha, linha 0) seguidas das linhas ímpares.
 
-\item Leia a entrada inteira uma linha por vez e aleatoriamente troque as linhas antes de imprimí-las. Para ser claro: você não deve mudar o conteúdo de qualquer linha. Em vez disso, a mesma coleção de linhas deve ser impressa, mas em ordem aleatória.
+\item Leia a entrada inteira uma linha por vez e aleatoriamente troque as linhas antes de imprimir. Para ser claro: você não deve mudar o conteúdo de qualquer linha. Em vez disso, a mesma coleção de linhas deve ser impressa, mas em ordem aleatória.
 
   \end{enumerate}
 \end{exc}

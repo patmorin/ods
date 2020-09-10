@@ -59,7 +59,7 @@ Finalmente, ela incrementa #n# pois o tamanho de #SLList# aumentou em uma unidad
 \codeimport{ods/SLList.push(x)}
 
 A operação #pop()#, após verificar que a 
- #SLList# não estsá vazia, remove a cabeça fazendo
+ #SLList# não está vazia, remove a cabeça fazendo
  $#head=head.next#$ e também decrementando #n#.
 
 \codeimport{ods/SLList.pop()}
@@ -256,7 +256,7 @@ A estrutura de dados que escolhemos para isso é uma
 \index{deque!bounded}%
 \index{deque!delimitado}%
 derivado da estrutura #ArrayDeque#
-descrita em \secref{arraydeque}. A #BDeque# difere do #ArrayDeque#
+descrita na \secref{arraydeque}. A #BDeque# difere do #ArrayDeque#
 em um detalhe: quando uma nova #BDeque# é criada, o tamanho do array de apoio #a#
 é fixo em #b+1# e nunca expande ou escolhe.
 A propriedade mais importante de um #BDeque# é que permite a adição ou remoção
@@ -294,7 +294,7 @@ Isso significa que o espaço desperdiçado em uma #SEList# é somente
 $O(#b#+#n#/#b#)$.  Ao escolher um valor de #b# dentro de um fator constante
 de
 $\sqrt{#n#}$, fazemos o custo de espaço extra de uma SEList se aproximar
-ao limitante inferior $\sqrt{#n#}$ descrito em \secref{rootishspaceusage}.
+ao limitante inferior $\sqrt{#n#}$ descrito na \secref{rootishspaceusage}.
 
 \subsection{Procurando Elementos}
 
@@ -366,7 +366,7 @@ Considere que
 $#u#_0,#u#_1,#u#_2,\ldots$ denotam #u#, #u.next#, #u.next.next# e assim por diante.
 Exploramos $#u#_0,#u#_1,#u#_2,\ldots$ procurando por um nodo 
 que provê espaço para #x#. Três casos podem ocorrer durante
-nossa exploração (ver \figref{selist-add}):
+nossa exploração (ver a \figref{selist-add}):
 
 \begin{figure}
   \noindent
@@ -639,8 +639,8 @@ de #prev# e #next# dos nodos existentes.
 
 \begin{exc}
 Escreva um método para a #DLList# chamado de #isPalindrome()# que retorna #true# se a lista for um 
-   \emph{palíndrome},
-  \index{palíndrome}%
+   \emph{palíndromo},
+  \index{palíndromo}%
   isto é, o elemento na posição #i# é igual ao elemento na posição 
   $#n#-i-1$ para todo $i\in\{0,\ldots,#n#-1\}$. O seu código deve rodar em 
  $O(#n#)$ de tempo.
@@ -764,7 +764,7 @@ a respeito da implementação e análise da lista eficiente em uso do espaço #S
   Prove que, se uma #SEList# é usada como uma #Stack# (tal que as 
   únicas modificações à #SEList# são feitas usando 
    $#push(x)#\equiv
-  #add(size(),x)#$ and $#pop()#\equiv #remove(size()-1)#$), então essas
+  #add(size(),x)#$ e $#pop()#\equiv #remove(size()-1)#$), então essas
   operações rodam em tempo constante amortizado, independentemente 
   do valor de #b#.
 \end{exc}

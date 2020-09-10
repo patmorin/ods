@@ -226,7 +226,7 @@ O teorema a seguir resume o desempenho de uma #ArrayStack#:
     \item #get(i)# e #set(i,x)# em tempo $O(1)$ por operação; e
     \item #add(i,x)# e #remove(i)# em tempo $O(1+#n#-#i#)$ por operação.
   \end{itemize}
-  Além disso, ao comerçarmos com um 
+  Além disso, ao começarmos com um 
  #ArrayStack# vazio e realizarmos uma sequência de $m$ operações 
    #add(i,x)# e #remove(i)# resulta em um total de
    $O(m)$ tempo gasto durante todas as chamadas a #resize()#.
@@ -633,7 +633,7 @@ na média, #balance()# gasta somente um tempo constante por operação.
 
    Iremos realizar a nossa análise usando uma técnica conhecida como o \emph{método do potencial}.
   \index{potencial}%
-  \index{método do potential}%
+  \index{método do potencial}%
   Definimos o \emph{potencial}, $\Phi$, do 
   #DualArrayDeque# como a diferença dos tamanhos entre #front# e #back#:
   \[  \Phi = |#front.size()# - #back.size()#| \enspace . \]
@@ -921,7 +921,7 @@ a #grow()# e #shrink()#, uma #RootishArrayStack# possui as operações
 
 \subsection{Computando Raízes Quadradas}
 
-\index{raizes quadradas}%
+\index{raízes quadradas}%
 Um leitor que tenha tido alguma exposição a modelos de computação
 pode notar que a #RootishArrayStack#, conforme descrita anteriormente,
 não se encaixa no modelo de computação normal word-RAM 
@@ -1081,7 +1081,7 @@ Essa estrutura suporta as operações
 #get(i,x)# e #set(i,x)# em tempo constante e 
 #add(i,x)# e #remove(i)# em $O(\sqrt{#n#})$ de tempo.
 Esses tempos de execução são similares ao que pode ser conseguido com uma implementação mais cuidadosa de uma
-#RootishArrayStack# discutida em \excref{rootisharraystack-fast}.
+#RootishArrayStack# discutida no \excref{rootisharraystack-fast}.
 
 \javaonly{
 \begin{exc}
