@@ -12,7 +12,7 @@ Usando uma skiplist podemos implementar uma
 A eficiência de skiplist está no seu uso inteligente de decisões aleatórias.
 Quando um novo elemento é adicionado a uma skiplist, ela usa lançamentos de uma moeda para determinar a altura do novo elemento.
 O desempenho das skiplists é expresso em termos da esperança do tempo de execução e do comprimento de caminhos percorridos.
-Essa esperança, relativa ao valor esperado ou médio, é feita sobre os lançamentos da moeda usados pela skiplist. Na implementação, os lançamentos são simulados usando um gerador de números (ou bits) pseudo-aleatórios.
+Essa esperança, relativa ao valor esperado ou médio, é feita sobre os lançamentos da moeda usados pela skiplist. Na implementação, os lançamentos são simulados usando um gerador de números (ou bits) pseudo aleatórios.
 
 \section{A Estrutura Básica}
 
@@ -54,8 +54,8 @@ que atua como um nodo dummy para a lista. A propriedade chave das skiplists
 \emph{caminho de busca}, 
 \index{caminho de busca!em uma skiplist}%
 do sentinela em 
-$L_h$ para todo nodo em $L_0$.  Como construir um caminho de busca para um nodo #u# é facil (veja a \figref{skiplist-searchpath})
-: inicie no canto superior esquerdo da sua skiplist (o sentila em $L_h$)
+$L_h$ para todo nodo em $L_0$.  Como construir um caminho de busca para um nodo #u# é fácil (veja a \figref{skiplist-searchpath})
+: inicie no canto superior esquerdo da sua skiplist (o sentinela em $L_h$)
 e sempre vá à direita a menos que ultrapasse #u#, nesse caso você deve descer à lista logo abaixo.
 
 Mais precisamente, para construir o caminho de busca para o nodo #u# em $L_0$,
@@ -93,7 +93,7 @@ somente uma vez #x# pode aparecer em várias listas.
 
 As próximas duas seções deste capítulo discutem duas diferentes aplicações de 
 skiplists. Em cada uma dessas aplicações, $L_0$ guarda a estrutura principal
-(uma lista de elementos or um conjunto ordenado de elementos).
+(uma lista de elementos ou um conjunto ordenado de elementos).
 A principal diferença entre essas estruturas está em como um caminho
 de busca é navegado; em particular, eles se diferem na forma de decidir 
 se um caminho de busca deve para a lista abaixo $L_{r-1}$ ou à direita em $L_r$.
@@ -248,7 +248,7 @@ Note que, cada vez que o caminho de busca desce em um nodo #u# em $L_{#r#}$,
 o comprimento da aresta #u.next[r]# aumenta em um, pois 
 estamos adicionando um elemento abaixo daquela aresta na posição #i#.
 
-A divisão, em inglês \emph{splice, do nodo #w# em dois nodos, #u# e #z# funciona como mostrado na \figref{skiplist-lengths-splice}.  
+A divisão, em inglês \emph{splice}, do nodo #w# em dois nodos, #u# e #z# funciona como mostrado na \figref{skiplist-lengths-splice}.  
 Ao seguir o caminho de busca já estamos guardando a posição
 #j#, de #u# em $L_0$.  Portanto, sabemos que o comprimento da aresta 
 de #u# a #w# é $#i#-#j#$.  Também podemos deduzir o comprimento da aresta de #w# a #z# a partir do comprimento $\ell$ de uma aresta de #u# a #z#.
@@ -304,7 +304,7 @@ Várias provas são baseadas na seguinte obervação básica sobre lançamentos 
 moedas.
 
 \begin{lem}\lemlabel{coin-tosses}
-  \index{coin toss}%
+  \index{lançamento de moeda}%
 Seja $T$ o número de vezes que uma moeda honesta é lançada, incluindo
 a primeira vez que a moeda saiu com a face cara. Então
   $\E[T]=2$.
@@ -475,7 +475,7 @@ esperado e da variância do comprimento do caminho de busca para o
 #i#-ésimo elemento em uma skiplist \cite{kp94,kmp95,pmp92}.
 Versões determinísticas
  \cite{mps92}, versões tendenciosas \cite{bbg02,esss01},
-e versões auto-ajustáveis \cite{bdl08} de skiplists têm surgido.  Implementações de skiplists têm sido escritas para várias linguagens e bibliotecas e usadas em sistemas de bancos de dados open-source \cite{skipdb,redis}. Uma variante de skiplist é usada nas estruturas do gerenciador de processos do kernel do sistema operacional HP-UX. 
+e versões auto ajustáveis \cite{bdl08} de skiplists têm surgido.  Implementações de skiplists têm sido escritas para várias linguagens e bibliotecas e usadas em sistemas de bancos de dados open-source \cite{skipdb,redis}. Uma variante de skiplist é usada nas estruturas do gerenciador de processos do kernel do sistema operacional HP-UX. 
 \cite{hpux}.
 \javaonly{Skiplists são até parte da Java 1.6 API \cite{oracle_jdk6}.}
 
