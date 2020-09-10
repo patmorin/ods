@@ -5,8 +5,7 @@
 Tabelas hash são um eficiente método de guardar um pequeno número #n#
 de inteiros provenientes de um grande intervalo
 $U=\{0,\ldots,2^{#w#}-1\}$.
-O termo
-tabela hash, ou \emph{hash table}, 
+O termo tabela hash, ou \emph{hash table}, 
 \index{hash table}%
 \index{tabela hash}%
 inclui um grande número de tipos de estruturas de dados. A primeira parte
@@ -20,8 +19,8 @@ Nesse caso, um inteiro chamado de código \emph{hash}
 A segunda parte deste capítulo discute como tais códigos hash
 são gerados.
 
-Alguns desses métodos usados neste capítulo requerem escolhas
-aleatórias de inteiros em algum intervalo. Nos trechos de código,
+Alguns desses métodos que usados neste capítulo requerem obter
+inteiros aleatórios em algum intervalo. Nos trechos de código,
 alguns desses inteiros ``aleatórios'' são constantes fixas no código.
 Essas constantes foram obtidas usando bits aleatórios gerados a partir
 de ruído atmosférico.
@@ -33,10 +32,10 @@ de ruído atmosférico.
 \index{encadeamento}%
 \index{hashing com encadeamento}%
 Uma estrutura de dados
-#ChainedHashTable# use \emph{hashing com encadeamento} para
+#ChainedHashTable# usa \emph{hashing com encadeamento} para
 guardar dados como um array #t# de listas. Um inteiro #n# registra o
-númer total de itens em todas as listas.
-(ver \figref{chainedhashtable}):
+número total de itens em todas as listas.
+(ver a \figref{chainedhashtable}):
 \codeimport{ods/ChainedHashTable.t.n}
 \begin{figure}
    \begin{center}
@@ -51,7 +50,7 @@ O valor \emph{hash} de um item de dados #x#, denotado #hash(x)# é um valor
 no intervalo 
 $\{0,\ldots,#t.length#-1\}$.  Todos os itens com um valor hash #i#
 são guardados na lista em 
-#t[i]#.  Para garantir que listas não ficam muito longas, mantermos a invariante 
+#t[i]#.  Para garantir que as listas não ficam muito longas, mantemos a invariante 
 \[
     #n# \le #t.length#
 \]
@@ -59,22 +58,20 @@ tal que o número médio de elementos guardados em uma dessas listas é
 $#n#/#t.length# \le 1$.
 
 Para adicionar um elemento #x# à tabela primeiro verificamos se o tamanho de #t# precisar ser aumentado e, se precisar, expandimos #t#.
-Com isso resolvido, obtemos a hash de #x# para obter um inteiro #i# no
+Com isso resolvido, calculamos a hash de #x# para obter um inteiro #i# no
 intervalo
-$\{0,\ldots,#t.length#-1\}$, e adicionamos #x# à lista 
+$\{0,\ldots,#t.length#-1\}$ e adicionamos #x# à lista 
 #t[i]#:
 \codeimport{ods/ChainedHashTable.add(x)}
 Expandir a tabela, caso necessário, envolve dobrar o comprimento de #t#
 e reinserir todos os elementos na nova tabela. Essa 
-estratégia é exatamente a mesmo que aquela usada na implementação do
+estratégia é exatamente a mesma que aquela usada na implementação do
+#ArrayStack# e o mesmo resultado se aplica.
+O custo de expandir somente é visto como constante quando amortizado sobre uma sequência de
+inserções (ver~o~\lemref{arraystack-amortized} na página~\pageref{lem:arraystack-amortized}).
 
-#ArrayStack# e o mesmo resultado se aplica
-O custo de expandir somente é constante quando amortizado sobre uma sequência de
-inserções (ver~\lemref{arraystack-amortized} na págia~\pageref{lem:arraystack-amortized}).
-
-Além de expandir, o único outro trabalho realizado ao adicionar um novo valor #x#
-a uma
-#ChainedHashTable# involve adicionar #x# à lista #t[hash(x)]#.  
+Além da expansão, o único outro trabalho realizado ao adicionar um novo valor #x#
+a uma #ChainedHashTable# envolve adicionar #x# à lista #t[hash(x)]#.  
 Para qualquer das implementações de lista descrita nos Capítulos~\ref{chap:arrays}
 ou \ref{chap:linkedlists}, isso leva somente um tempo constante.
 
@@ -85,18 +82,17 @@ Isso leva $O(#n#_{#hash(x)#})$ de tempo, onde $#n#_{#i#}$ denota o comprimento d
 
 Buscar pelo elemento #x#
 #x# em uma tabela hash é similar. Fazemos uma busca linear 
-na lista 
-#t[hash(x)]#:
+na lista #t[hash(x)]#:
 \codeimport{ods/ChainedHashTable.find(x)}
 Novamente, isso leva tempo proporcional ao comprimento da lista
  #t[hash(x)]#.
 
- O desempenho de um tabela hash depende criticamente na escolha da função 
+O desempenho de uma tabela hash depende criticamente na escolha da função 
  hash. Uma boa função hash irá espalhar os elementos de modo uniforme
  entre as #t.length# listas, tal que o tamanho esperado da lista 
 #t[hash(x)]# é $O(#n#/#t.length)# = O(1)$.  Por outro lado,
 uma função hash ruim irá distribuir todos os valores (incluindo #x#) à mesma posição da tabela. Nesse caso, o tamanho da lista #t[hash(x)]# será #n#.
-Na próxima seção descrevemos uma boa função hash.
+Na seção a seguir descrevemos uma boa função hash.
 
 \subsection{Hashing Multiplicativo}
 
@@ -106,31 +102,29 @@ Na próxima seção descrevemos uma boa função hash.
 \index{hashing multiplicativo}%
 Hashing multiplicativo é um método eficiente de gerar valores
 hash baseado em aritmética modular 
- (discutido em \secref{arrayqueue})
+ (discutido na \secref{arrayqueue})
  e divisão inteira.
 Ele usa o operador $\ddiv$, que calcula a parte inteira de um quociente e
 descarta o resto.
-Formalmente, para quaisquer interios $a\ge 0$  e $b\ge 1$, $a\ddiv b = \lfloor
+Formalmente, para quaisquer inteiros $a\ge 0$ e $b\ge 1$, $a\ddiv b = \lfloor
 a/b\rfloor$.
 
-Em hashing multiplicativo, usamos uma tabela hash de tamanho $2^{#d#}$ para um inteiro 
-#d# (chamado de \emph{dimensão}).  A fórmula para aplicar hashing em um inteiro
+Em hashing multiplicativo, usamos uma tabela hash de tamanho $2^{#d#}$ para um inteiro #d# (chamado de \emph{dimensão}).  A fórmula para aplicar hashing em um inteiro
 $#x#\in\{0,\ldots,2^{#w#}-1\}$ é
 \[
     #hash(x)# = ((#z#\cdot#x#) \bmod 2^{#w#}) \ddiv 2^{#w#-#d#} \enspace .
 \]
 Aqui, #z# é um inteiro ímpar escolhido aleatoriamente em 
 $\{1,\ldots,2^{#w#}-1\}$.  Essa função hash pode ser computada muito eficientemente ao observar que, por padrão, operações em inteiros são 
-módulo $2^{#w#}$ onde $#w#$ é o número de bits em um inteiro.\footnote{Isso é verdade para a moior parte de linguagens de programação incluindo
+módulo $2^{#w#}$ onde $#w#$ é o número de bits em um inteiro.\footnote{Isso é verdade para a maior parte de linguagens de programação incluindo
 C, C\#, C++, e Java. Exceções notáveis são Python e 
-Ruby, nos quais o resultado de uma operação inteira de tamanho fixo #w#-bit 
-que passa do intervalo permitido é convertido a uma variável com tamanho de representação variável.}a (Ver 
-\figref{multihashing}.) Além disso, divisão inteira por $2^{#w#-#d#}$
+Ruby, nas quais o resultado de uma operação inteira de tamanho fixo #w#-bit 
+que passa do intervalo permitido é convertido a uma variável com tamanho de representação variável.} (Ver a \figref{multihashing}.) Além disso, 
+divisão inteira por $2^{#w#-#d#}$
 é equivalente a descartar os 
 $#w#-#d#$ bits mais à direita em uma representação binária (
-que é implementado usando o deslocamento de bits $#w#-#d#$ à direita
-usando o operador 
- \javaonly{#>>>#}\cpponly{#>>#}\pcodeonly{#>>#}
+o que é implementado usando o deslocamento de bits $#w#-#d#$ à direita
+usando o operador \javaonly{#>>>#}\cpponly{#>>#}\pcodeonly{#>>#}
 ).  \notpcode{Dessa forma, o código que implementa a fórmula acima é mais simples que a própria fórmula:}
 \codeimport{ods/ChainedHashTable.hash(x)}
 
@@ -154,17 +148,16 @@ usando o operador
   \figlabel{multihashing}
 \end{figure}
 
-O lema a seguir, cuja prova será feita posteriomente nesta seção,
-mostra que o 
-hashing multiplicativo faz um bom trabalho em evitar colisões: 
+O lema a seguir, cuja prova será feita posteriormente nesta seção,
+mostra que o hashing multiplicativo faz um bom trabalho em evitar colisões: 
 
 \begin{lem}\lemlabel{universal-hashing}
   Sejam #x# e #y# dois valores em $\{0,\ldots,2^{#w#}-1\}$ com 
   $#x#\neq #y#$. Então $\Pr\{#hash(x)#=#hash(y)#\} \le 2/2^{#d#}$.
 \end{lem}
 
-Com
-\lemref{universal-hashing}, o desempenho de #remove(x)#, e 
+Com o
+\lemref{universal-hashing}, o desempenho de #remove(x)# e 
 #find(x)# são fáceis de analisar: 
 
 \begin{lem}
@@ -176,8 +169,8 @@ Com
 \end{lem}
 
 \begin{proof}
-  Seja
-   $S$ o conjunto de elementos guardado na tabela hash que não são iguais a #x#. Para um elemento 
+  Seja $S$ o conjunto de elementos guardado na tabela hash 
+  que não são iguais a #x#. Para um elemento 
   $#y#\in S$, defina a variável indicadora 
     \[ I_{#y#} = \left\{\begin{array}{ll}
        1 & \mbox{se $#hash(x)#=#hash(y)#$} \\
@@ -200,17 +193,17 @@ Com
 \end{proof}
 
 Agora, queremos provar 
- \lemref{universal-hashing}, mas primeiro precisamos de um resultado
- da teoria de números. Na prova a seguir, usamos a notação
+ o \lemref{universal-hashing}, mas primeiro precisamos de um resultado
+ da Teoria de Números. Na prova a seguir, usamos a notação
 $(b_r,\ldots,b_0)_2$ para denotar $\sum_{i=0}^r b_i2^i$, onde cada $b_i$
 é um bit, 0 ou 1. Em outras palavras, 
 $(b_r,\ldots,b_0)_2$ é o inteiro cuja representação binária é dada por
 $b_r,\ldots,b_0$.
 Usamos 
- $\star$ para denotar um valor bit desconhecido. 
+ $\star$ para denotar um valor de bit desconhecido. 
 
 \begin{lem}\lemlabel{hashing-mapping}
-  Sej $S$ o conjunto de inteiros ímpares em $\{1,\ldots,2^{#w#}-1\}$; seja $q$
+  Seja $S$ o conjunto de inteiros ímpares em $\{1,\ldots,2^{#w#}-1\}$; seja $q$
   e $i$ quaisquer dois elementos em $S$.  Então há exatamente um valor $#z#\in S$ tal que $#z#q\bmod 2^{#w#} = i$.
 \end{lem}
 
@@ -237,12 +230,12 @@ Usamos
   \[
     (#z#-#z#')q = k\cdot(1,\underbrace{0,\ldots,0}_{#w#})_2 \enspace ,
   \]
-  tal que o últimos #w# bits na representação binária de 
+  tal que os últimos #w# bits na representação binária de 
   $(#z#-#z#')q$ são todos 0.
 
   Além disso, 
    $k\neq 0$, pois $q\neq 0$ e $#z#-#z#'\neq 0$.  Uma vez que $q$
-   é ímpar, não há 0's terminando sua representação binária:
+   é ímpar, não há um 0 terminando sua representação binária:
   \[
     q = (\star,\ldots,\star,1)_2 \enspace .
   \]
@@ -259,26 +252,24 @@ Usamos
     \enspace .
   \]
   Portanto
-   $(#z#-#z#')q$ não pode satisfazer \myeqref{factors}, 
+   $(#z#-#z#')q$ não pode satisfazer a \myeqref{factors}, 
    chegando a uma contradição e completando a prova.
 \end{proof}
 
 A utilidade do 
- \lemref{hashing-mapping} vem da seguine observação: 
- Se #z# é escolhido uniformemente aleatório de $S$, então #zt#
+ \lemref{hashing-mapping} vem da seguinte observação: 
+ Se #z# for escolhido de forma uniformemente aleatória de $S$, então #zt#
  é uniformemente distribuído sobre $S$. Na prova a seguir,
  ajuda a lembrar da representação binária de #z#, que consiste de 
-$#w#-1$ bits aleatórios seguindos por um 1.
+$#w#-1$ bits aleatórios seguidos por um 1.
 
-\begin{proof}[Prova da \lemref{universal-hashing}]
-  Primeiro notamos que a condição 
-   $#hash(x)#=#hash(y)#$ equivale à 
+\begin{proof}[Prova do \lemref{universal-hashing}]
+  Primeiro notamos que a condição $#hash(x)#=#hash(y)#$ equivale à 
    afirmação os #d# bits de ordem mais alta em
   ``$#z# #x#\bmod2^{#w#}$ e os #d# bits de ordem mais alta de #z#
   $#z# #y#\bmod 2^{#w#}$ são os mesmos.''
   Uma condição necessária dessa afirmação é que os #d# bits de ordem mais
-  alta na representação de 
-  $#z#(#x#-#y#)\bmod 2^{#w#}$
+  alta na representação de $#z#(#x#-#y#)\bmod 2^{#w#}$
   são todos 0 ou todos 1. Isto é, 
   \begin{equation}
       #z#(#x#-#y#)\bmod 2^{#w#} = 
@@ -294,7 +285,7 @@ $#w#-1$ bits aleatórios seguindos por um 1.
   \end{equation}
   quando $#zx#\bmod 2^{#w#} < #zy#\bmod 2^{#w#}$.
   Portanto, só temos que delimitar a probabilidade de que 
-  $#z#(#x#-#y#)\bmod 2^{#w#}$ pareça \myeqref{all-zeros} ou \myeqref{all-ones}.
+  $#z#(#x#-#y#)\bmod 2^{#w#}$ pareça a \myeqref{all-zeros} ou \myeqref{all-ones}.
   
   Seja $q$ ser um inteiro único tal que $(#x#-#y#)\bmod
   2^{#w#}=q2^r$ para algum inteiro $r\ge 0$. Pelo
@@ -313,34 +304,34 @@ $#w#-1$ bits aleatórios seguindos por um 1.
   \]
   Podemos agora terminar a prova: se 
   $r > #w#-#d#$, então os #d# bits de alta ordem de 
-  $#z#(#x#-#y#)\bmod 2^{#w#}$  contém tanto 0 quanto 
-  1, tal que a probabilidade de que $#z#(#x#-#y#)\bmod 2^{#w#}$ pareça a
+  $#z#(#x#-#y#)\bmod 2^{#w#}$  contêm tanto 0 quanto 
+  1, tal que a probabilidade de que $#z#(#x#-#y#)\bmod 2^{#w#}$ sejam 
   \myeqref{all-zeros} ou \myeqref{all-ones} é 0. 
 
 
-  Se $#r#=#w#-#d#$, então a probabilidade de parecer a 
-  \myeqref{all-zeros} é 0, mas a probabilidae de parecer a 
+  Se $#r#=#w#-#d#$, então a probabilidade de ocorrer 
+  \myeqref{all-zeros} é 0, mas a probabilidade de ocorrer
   \myeqref{all-ones} é $1/2^{#d#-1}=2/2^{#d#}$
   (como precisamos ter $b_1,\ldots,b_{d-1}=1,\ldots,1$).  Se $r < #w#-#d#$,
   então precisamos ter
    $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=0,\ldots,0$ ou
   $b_{#w#-r-1},\ldots,b_{#w#-r-#d#}=1,\ldots,1$.  A probabilidade de cada um desses casos é 
-  $1/2^{#d#}$ e eles são mutualmente exclusivos, então a probabilidade de cada deses casos é 
-  $2/2^{#d#}$.  Isso completa essa prova. 
+  $1/2^{#d#}$ e eles são mutualmente exclusivos, então a probabilidade de cada desses casos é 
+  $2/2^{#d#}$.  Isso completa a prova. 
 \end{proof}
 
 \subsection{Resumo}
 
-O teorema a seguir resume o desempenho de uma estrutura de dados
+O teorema a seguir resume o desempenho da estrutura de dados
 #ChainedHashTable#:
 
 
 \begin{thm}\thmlabel{hashtable}
   Uma #ChainedHashTable# implementa a interface #USet#. Ignorando o custo das chamadas a 
-  #grow()#, uma #ChainedHashTable# aceita as operações #add(x)#,
-  #remove(x)#, e #find(x)# em $O(1)$ de tempo esperado por operação. 
+  #grow()#, uma #ChainedHashTable# possui as operações #add(x)#,
+  #remove(x)# e #find(x)# em $O(1)$ de tempo esperado por operação. 
 
-  Além disso, comelando com uma 
+  Além disso, começando com uma 
   #ChainedHashTable# vazia, qualquer sequência de $m$ operações 
   #add(x)# e #remove(x)# resulta em um total de $O(m)$ de tempo gasto durante
   todas a chamadas a #grow()#.
@@ -353,14 +344,13 @@ O teorema a seguir resume o desempenho de uma estrutura de dados
 A estrutura de dados #ChainedHashTable# usa um array de listas onde a #i#-ésima lista guarda todos os elementos #x# tais que 
 $#hash(x)#=#i#$.  Uma outra opção de projeto, chamado de \emph{endereçamento aberto}, 
 \index{endereçamento aberto}%
-é guardar elementos diretamento em um array #t# sendo cad posição #t# para armazenar no máximo um valor.
+é guardar elementos diretamente em um array #t# sendo cada posição #t# para armazenar no máximo um valor.
 Essa abordagem é implementada pela 
 #LinearHashTable# descrita nesta seção.
-Em alguns lugares, essa estrutura de dados é descrita como \emph{endereçamento aberta com sondagem linear}.
+Em alguns lugares, essa estrutura de dados é descrita como \emph{endereçamento aberto com sondagem linear}.
 \index{sondagem linear}%
 
 A principal ideia por trás da
-
 #LinearHashTable# é que deveríamos, idealmente,
 guardar o elemento #x# com valor hash 
 #i=hash(x)# na posição da tabela
@@ -380,9 +370,8 @@ Há três tipos de entradas guardadas em #t#:
 Em adição ao contador 
  #n# que registra o número de elementos na 
 #LinearHashTable#, um contador, #q#, registra o número de elementos dos Tipos~1 e 3.
-Isto é #q# é igual a #n# mais o número de valores #del# em #t#. Para fazer isso eficientemente, precisamos que #t# seja consideravelmente maior que #q#, tal que haja muitos #null# em #t#.
+Isso é, #q# é igual a #n# mais o número de valores #del# em #t#. Para fazer isso eficientemente, precisamos que #t# seja consideravelmente maior que #q#, tal que haja muitos #null# em #t#.
 As operações em 
-
 #LinearHashTable# portanto mantém a invariante
 $#t.length#\ge 2#q#$.
 
@@ -393,53 +382,49 @@ e inteiros
 $#t.length#=2^#d#$.
 \codeimport{ods/LinearHashTable.t.n.q.d}
 
-A operação
-#find(x)# na #LinearHashTable# é simples. Iniciamos na posição do array #t[i]# 
-onde
+A operação #find(x)# na #LinearHashTable# é simples. 
+Iniciamos na posição do array #t[i]# onde
 $#i#=#hash(x)#$ e buscamos as posições #t[i]#,
 $#t#[(#i#+1)\bmod #t.length#]$, $#t#[(#i#+2)\bmod #t.length#]$, e assim segue,
-até encontrarmos um índice #i'# tal que ou 
- #t[i']=x#, ou #t[i']=null#.
-No primero caso retornamos
- #t[i']#. No outro, quando #t[i']=null# In the latter case, concluímos
- que não está contido na tabela hash e retornamos 
-#null#.
+até encontrarmos um índice #i'# tal que 
+ #t[i']=x# ou #t[i']=null#.
+No primeiro caso retornamos
+ #t[i']#. No outro, quando #t[i']=null#, concluímos
+ que #x# não está contido na tabela hash e retornamos #null#.
 \codeimport{ods/LinearHashTable.find(x)}
 
 A operação #add(x)# também é razoavelmente simples para implementar. Após verificar 
 que #x# não está na tabela (usando #find(x)#), procuramos em 
 #t[i]#, $#t#[(#i#+1)\bmod #t.length#]$, $#t#[(#i#+2)\bmod #t.length#]$,
-e assim por diante até acharmos um 
-#null# ou #del# e guarde #x# naquela posição, 
-incremente #n#, e #q#, se apropriado.
+e assim por diante, até acharmos um 
+#null# ou #del# e guardamos #x# naquela posição, 
+incrementando #n# e #q#, se apropriado.
 \codeimport{ods/LinearHashTable.add(x)}
 
-Até agora, a implementação da operação 
-#remove(x)# deve ser óbvia.
+Até agora, a implementação da operação #remove(x)# deve ser óbvia.
 Buscamos
  #t[i]#, $#t#[(#i#+1)\bmod #t.length#]$, $#t#[(#i#+2)\bmod
 #t.length#]$, e assim por diante até acharmos um índice #i'# tal que #t[i']=x#
 ou #t[i']=null#.  No primeiro caso, atribuímos #t[i']=del# e retornamos
 #true#.  No segundo caso, concluímos que #x# não foi armazenado na tabela 
-(e portanto não pode ser deletado) e retorna #false#.
+(e portanto não pode ser deletado) e retornamos #false#.
 \codeimport{ods/LinearHashTable.remove(x)}
 
 A corretude dos métodos
-#find(x)#, #add(x)#, e #remove(x)# fácil de verificar embora dependa do uso dos valores #del#. Note que nenhuma dessas operações nunca atribui em posição não-#null# a #null#.
+#find(x)#, #add(x)# e #remove(x)# é fácil de verificar embora dependa do uso dos valores #del#. Note que nenhuma dessas operações nunca atribui #null# a uma posição diferente de #null#.
 Portanto, se alcançarmos um índice #i'# tal que 
  #t[i']=null# isso comprova que o elemento
  #x# pelo qual buscamos não está guardado na tabela
 ; #t[i']# sempre foi #null#, então não há porque uma operação prévia #add(x)#
-continuaria além do índice #i'#.
+continuar além do índice #i'#.
 
 O método 
 #resize()# é chamado por #add(x)# quando o número de posições não-#null#
-excede $#t.length#/2$ ou por #remove(x)# quando o número de entrada de dados é bem menor que 
-#t.length/8#.  O método #resize()# funciona como os métodos 
+exceder $#t.length#/2$ ou por #remove(x)# quando o número de entrada de dados 
+for bem menor que #t.length/8#.  O método #resize()# funciona como os métodos 
 #resize()# em outras estruturas de dados baseadas em array.
-Achamos o menor inteiro não-negativo #d# tal que 
-$2^{#d#}
-\ge 3#n#$.  Realocamos o array #t# tal que tenha tamanho $2^{#d#}$,
+Achamos o menor inteiro não negativo #d# tal que 
+$2^{#d#} \ge 3#n#$.  Realocamos o array #t# tal que tenha tamanho $2^{#d#}$,
 e então inserimos todos os elementos na versão antiga de #t# na nova
 cópia redimensionada de #t#. Ao fazer isso, reiniciamos #q# igual a #n#
 pois o novo #t# contém nenhum valor #del#.
@@ -447,67 +432,69 @@ pois o novo #t# contém nenhum valor #del#.
 
 \subsection{Análise da Sondagem Linear}
 Note que cada operação
-#add(x)#, #remove(x)#, ou #find(x)#, termina assim que (ou mesmo antes)  
+#add(x)#, #remove(x)# ou #find(x)#, termina assim que (ou mesmo antes)  
 encontra a primeira posição #null# em #t#.
 A intuição por trás da análise da sondagem linear é que, 
 como pelo menos metade dos elementos em #t# são iguais a #null#, uma
 operação não deve demorar muito para completar pois irá rapidamente achar
 uma posição com valor #null#.
 Não devemos usar essa intuição ao pé da letra pois levaria à conclusão (incorreta) de que o número esperado de posições em #t# que foram examinadas por uma operação
-é até 2.
+é de até 2.
 
 Para o resto desta seção, iremos assumir que todos os valores hash
 são independentemente e uniformemente distribuídos em 
 $\{0,\ldots,#t.length#-1\}$.
 Essa não é uma premissa realista, mas permitirá uma análise da sondagem linear.
-Mais a seguir nesta seção, iremos descrever um método, chamado de hashing de tabulação, que produz uma função hash que é ``boa o suficiente'' para sondagem linear. Também isso assumir que todos os índices das posições de #t#
+Mais a seguir, nesta seção, iremos descrever um método, chamado 
+de hashing de tabulação, que produz uma função hash que é 
+``boa o suficiente'' para sondagem linear. 
+Também isso assumir que todos os índices das posições de #t#
 são obtidos módulo #t.length#, tal que #t[i]# é na verdade um atalho para 
 $#t#[#i#\bmod#t.length#]$.
 
 \index{run}%
 Dizemos que um \emph{agrupamento de comprimento $k$ iniciando em #i#} ocorre
 quando as posições da tabela
-$#t[i]#, #t[i+1]#,\ldots,#t#[#i#+k-1]$ are non-#null#
-and $#t#[#i#-1]=#t#[#i#+k]=#null#$. O número de elementos não-#null# de 
-#t# é exatamente #q# e o método #add(x)# garante que, a qualquer momento, $#q#\le#t.length#/2$.  Há #q# elementos $#x#_1,\ldots,#x#_{#q#}$
-que foram inseridos em 
-#t# desde a última operação #resize()#.
+$#t[i]#, #t[i+1]#,\ldots,#t#[#i#+k-1]$ não são #null#
+e $#t#[#i#-1]=#t#[#i#+k]=#null#$. O número de elementos não-#null# de 
+#t# é exatamente #q# e o método #add(x)# garante que, a qualquer momento, 
+$#q#\le#t.length#/2$.  Há #q# elementos $#x#_1,\ldots,#x#_{#q#}$
+que foram inseridos em #t# desde a última operação #resize()#.
 De acordo com nossa premissa, cada um desses elementos tem valor hash
  $#hash#(#x#_j)$ que é de uma distribuição uniforme e cada qual é independente do resto.
-Nesse cenário podemos prova que principal lema necessário para analisar
+Nesse cenário podemos provar o principal lema necessário para analisar
 a sondagem linear. 
 
 \begin{lem}\lemlabel{linear-probing}
-Fixe um valor $#i#\in\{0,\ldots,#t.length#-1\}$.  Então a probabilidade de qua um agrupamento de 
-comprimento $k$ inicie em #i# é $O(c^k)$ para alguma constante $0<c<1$.
+Fixe um valor $#i#\in\{0,\ldots,#t.length#-1\}$.  Então a probabilidade de que um agrupamento de 
+comprimento $k$ inicie-se em #i# é $O(c^k)$ para uma constante $0<c<1$.
 \end{lem}
 
 \begin{proof}
-Se um agrupamento de comprimento $k$ inicia em #i#, então há exatamente #k#
+Se um agrupamento de comprimento $k$ se iniciar em #i#, então haverá exatamente #k#
 elementos 
 $#x#_j$ tais que $#hash#(#x#_j)\in\{#i#,\ldots,#i#+k-1\}$.
 A probabilidade disso ocorrer é exatamente 
 \[
   p_k  = \binom{#q#}{k}\left(\frac{k}{#t.length#}\right)^k\left(\frac{#t.length#-k}{#t.length#}\right)^{#q#-k} \enspace ,
 \]
-pois para alguma escolher escolha de $k$ elementos, eles precisam mapear 
+pois para alguma escolha de $k$ elementos, eles precisam mapear 
 com a hash para uma dessas $k$ posições e o restante dos  
-$#q#-k$ elementos precisa mapear para as outra 
+$#q#-k$ elementos precisa mapear para as outras 
  $#t.length#-k$ posições na tabela.
 
-  \footnote{Note que  $p_k$ é maior que a probabilidade de que
+\footnote{Note que $p_k$ é maior que a probabilidade de que
   um agrupamento de tamanho $k$ inicie em #i#, pois a definição de #p_k# não inclui o requisito $#t#[#i#-1]=#t#[#i#+k]=#null#$.}
 
 Na próxima derivação iremos trapacear um pouco e substituir $r!$ com 
 $(r/e)^r$. A aproximação de Stirling (\secref{factorials}) mostra que
-  isso está a apenas um fator de 
+  isso difere apenas
 $O(\sqrt{r})$ da verdade. Fazemos isso para simplificar a derivação; 
-\excref{linear-probing} pede ao leitor refazer os cálculos de maneira mais
-  rigorosa usando a aproximação de Stirling por completo.
+o \excref{linear-probing} pede ao leitor refazer os cálculos de maneira mais
+  rigorosa usando a aproximação de Stirling completa.
 
-  O valor de
- $p_k$ é maximizado quando #t.length# é mínimo e a estrutura de dados
-  mantém o invariante 
+  O valor de $p_k$ é maximizado quando #t.length# é mínimo 
+  e a estrutura de dados mantém o invariante 
 $#t.length# \ge 2#q#$, então
 \begin{align*}
    p_k & \le \binom{#q#}{k}\left(\frac{k}{2#q#}\right)^k\left(\frac{2#q#-k}{2#q#}\right)^{#q#-k} \\
@@ -526,14 +513,14 @@ $#t.length# \ge 2#q#$, então
   todo $x>0$.)  Como $\sqrt{e}/{2}< 0.824360636 < 1$, isso completa a prova. 
 \end{proof}
 
-Usar \lemref{linear-probing} para provar limitantes superiores no tempo de execução esperado de 
-#find(x)#, #add(x)# e #remove(x)# agora é razoavelmente direto.  Considere o caso
-mais simples, onde executamos 
-#find(x)# para algum valor #x# nunca foi guardado em #LinearHashTable#.  Nesse caso, $#i#=#hash(x)#$ é uma variável aleatória em 
+Usar o \lemref{linear-probing} para provar limitantes superiores no tempo 
+de execução esperado de #find(x)#, #add(x)# e #remove(x)# agora é 
+mais simples.  Considere o caso mais simples, onde executamos 
+#find(x)# para algum valor #x# nunca foi guardado em #LinearHashTable#.  
+Nesse caso, $#i#=#hash(x)#$ é uma variável aleatória em 
 $\{0,\ldots,#t.length#-1\}$ independente do conteúdo de #t#.  Se #i#
 é parte de um agrupamento de tamanho $k$, então o tempo que leva para executar
-a operação 
-#find(x)# é até $O(1+k)$.  Então, o tempo esperado de execução pode ser limitado superiormente por 
+a operação #find(x)# é até $O(1+k)$.  Então, o tempo esperado de execução pode ser limitado superiormente por 
 \[
   O\left(1 + \left(\frac{1}{#t.length#}\right)\sum_{i=1}^{#t.length#}\sum_{k=0}^{\infty} k\Pr\{\text{#i# é parte de um agrupamento de tamanho $k$}\}\right) \enspace .
 \]
@@ -547,7 +534,7 @@ Note que cada agrupamento de tamanho $k$ contribui à soma interna $k$ vezes par
   & = O(1) \enspace .
 \end{align*}
 O último passo dessa derivação vem do fato que 
-$\sum_{k=0}^{\infty} k^2\cdot O(c^k)$ é uma séries exponencial decrescente.\footnote{Em muitos livros de cálculo, essa soma passa no teste da taxa:
+$\sum_{k=0}^{\infty} k^2\cdot O(c^k)$ é uma série exponencial decrescente.\footnote{Em muitos livros de cálculo, essa soma passa no teste de convergência:
 existe um inteiro positivo $k_0$ tal que, para todo 
  $k\ge k_0$, $\frac{(k+1)^2c^{k+1}}{k^2c^k} < 1$.}
 
@@ -556,25 +543,22 @@ existe um inteiro positivo $k_0$ tal que, para todo
  #LinearHashTable# é $O(1)$.
 
  Se ignorarmos o custo da operação
-#resize()# , então a análise acima nos dá tudo que precisamos para analisar
-o custo de operações em uma
-#LinearHashTable#.
+#resize()# , então a análise acima nos dá tudo o que precisamos para analisar
+o custo de operações em uma #LinearHashTable#.
 
-Primeiramente, a análise de 
-#find(x)# dada acima aplica à operação 
+Primeiramente, a análise de #find(x)# dada acima aplica-se à operação 
 #add(x)# quando#x# não está na tabela. Para analisar a operação
- #find(x)# quando #x# está na tabela, precisamos somente notar que isso tem o mesmo custo da operação  
-#add(x)# que anteriormente adicionou 
+ #find(x)# quando #x# está na tabela, precisamos somente notar
+ que isso tem o mesmo custo da operação #add(x)# que anteriormente adicionou 
 #x# à tabela.  Finalmente, o custo de uma operação #remove(x)#
-é o mesmo que o custo de uma operação 
-#find(x)#.
+é o mesmo que o custo de uma operação #find(x)#.
 
-Em resumo, se ignorarmo o custo de chamadas a 
+Em resumo, se ignorarmos o custo de chamadas a 
  #resize()#, todas as operações em uma 
 #LinearHashTable# rodam em $O(1)$ de tempo esperado. Considerar o
 custo de redimensionamento pode ser feito usando o mesmo tipo de análise amortizada
 realizada para a estrutura de dados 
- #ArrayStack# feita em \secref{arraystack}.
+ #ArrayStack# feita na \secref{arraystack}.
 
 \subsection{Resumo}
 
@@ -595,23 +579,21 @@ O seguinte teorema resume o desempenho da estrutura de dados
   $O(m)$ de tempo gasto durante todas as chamadas a #resize()#.
 \end{thm}
 
-\subsection{Hashing por tabulação }
+\subsection{Hashing por tabulação}
 \seclabel{tabulation}
 
 \index{hashing por tabulação}%
-Ao analisar a estrutura
- #LinearHashTable#, fazemos uma suposição muito forte:
+Ao analisarmos a estrutura #LinearHashTable#, fazemos uma suposição muito forte:
  para qualquer conjunto de elementos
  $\{#x#_1,\ldots,#x#_#n#\}$ os valores de hash
 $#hash#($x$_1),\ldots,#hash#(#x#_#n#)$ são independentes e
 uniformemente distribuídos sobre o conjunto 
- $\{0,\ldots,#t.length#-1\}$.  Um jeito de alcançar isso é guardar em um array gigante #tab# de tamanho 
+ $\{0,\ldots,#t.length#-1\}$.  Um jeito de obter isso é guardar em um array gigante #tab# de tamanho 
 $2^{#w#}$, onde cada entrada é um inteiro aleatório #w#-bit, independente de todas
 as outras posições. Dessa maneira, poderíamos implementar #hash(x)# pela
-extração de um inteiro com #d# bits da 
- #tab[x.hashCode()]#:
+extração de um inteiro com #d# bits da #tab[x.hashCode()]#:
 \codeimport{ods/LinearHashTable.idealHash(x)}
-\pcodeonly{Aqui, #>>#, é o operador de \emph{deslocamemto bit-a-bit à direita}, então 
+\pcodeonly{Aqui, #>>#, é o operador de \emph{deslocamento bit-a-bit à direita}, então 
 #x.hashCode() >> w-d# extrai os #d# bits mais significativos do código hash dos #w# bits do código hash de #x#}
 
 Infelizmente, guardar um array de tamanho 
@@ -619,10 +601,10 @@ Infelizmente, guardar um array de tamanho
 A abordagem usada pela \emph{hashing por tabulação} é, em vez disso, tratar 
 inteiros de #w# bits como sendo compostos de 
 $#w#/#r#$ inteiros, cada qual tem somente $#r#$ bits.  
-Dessa maneira, hashing por tabulalão precisa somente de 
-$#w#/#r#$ arrays cada qual com tamanho $2^{#r#}$.  Todas as entradas nesses arrays sao inteiros aleatórios independentes com #w# bits. 
+Dessa maneira, hashing por tabulação precisa somente de 
+$#w#/#r#$ arrays cada qual com tamanho $2^{#r#}$.  Todas as entradas nesses arrays são inteiros aleatórios independentes com #w# bits. 
 
-Para oter o valor de 
+Para obter o valor de 
 #hash(x)# dividimos #x.hashCode()# em $#w#/#r#$ inteiros com #r# bits
 e os usamos como índices desses arrays. Então combinamos 
 todos esses valores com o operador bit-a-bit ou-exclusivo para obter #hash(x)#.
@@ -630,7 +612,7 @@ O código a seguir mostra como isso funciona quando
 $#w#=32$ e $#r#=4$:
 \codeimport{ods/LinearHashTable.hash(x)}
 Nesse caso,
- #tab# é um array bi-dimensional com quatro colunas e 
+ #tab# é um array bidimensional com quatro colunas e 
 $2^{32/4}=256$ linhas.
 \pcodeonly{
   Quantidades como 
@@ -645,32 +627,29 @@ O símbolo
 
 É fácil verificar que, para qualquer #x#, #hash(x)# é uniformemente
 distribuído sobre $\{0,\ldots,2^{#d#}-1\}$.  Com um pouco de trabalho,
-é possível verificar que qualquer par de valores tem valores hash independentes.
-Isso implica que hashing por tabulação poderia ser usada no lugar
-do hashing multiplicativo para a implementação da 
- #ChainedHashTable#.
+é possível verificar que qualquer par de valores tem suas hash independentes.
+Isso implica que hashing por tabulação poderia ser usado no lugar
+do hashing multiplicativo para a implementação da #ChainedHashTable#.
 
- Entretanto, não é verdade que qualquer conjunto de #n# valores distintos
- resulte em #n# valores hash independentes. De qualquer forma,
- quando hashing por tabulação é usado, o limitante 
- \thmref{linear-probing} ainda vale. Referências para isso 
- são providas no final deste capítulo. 
+Entretanto, não é verdade que qualquer conjunto de #n# valores distintos
+resulte em #n# valores hash independentes. De qualquer forma,
+quando hashing por tabulação é usado, o limitante 
+\thmref{linear-probing} ainda vale. Referências para isso 
+são providas no final deste capítulo. 
 
 \section{Códigos Hash}
 \index{código hash}%
-Tabelas hash discutivas na seção anterior, são usadas para associar
+Tabelas hash discutidas na seção anterior são usadas para associar
 dados com chaves inteiras consistindo de #w# bits. Em muitos casos,
 temos chaves que não são inteiros. Elas podem ser strings, objetos, arrays,
 ou outras estruturas compostas. Para usar tabelas hash para esses tipos de dados,
 precisamos mapear esses tipos de dados para códigos hash de #w# bits.
-Mapeamento de hash codes devem ter as seguintes propriedades:
+Mapeamentos de códigos hash devem ter as seguintes propriedades:
 
 \begin{enumerate}
   \item Se #x# e #y# são iguais, então #x.hashCode()# e #y.hashCode()# são iguais.
-
   \item Se #x# e #y# não são iguais, então a probabilidade que 
-  $#x.hashCode()#=#y.hashCode()#$ deve ser pequena (próxima a 
-  $1/2^{#w#}$).
+  $#x.hashCode()#=#y.hashCode()#$ deve ser pequena (próxima a $1/2^{#w#}$).
 \end{enumerate}
 
 A primeira propriedade assegura que se guardarmos #x# em um tabela hash
@@ -681,12 +660,11 @@ e então provavelmente são guardados em posições distintas na nossa
 tabela hash.
 
 \subsection{Códigos hash para Tipos de Dados Primitivos}
-
 \index{código hash!para dados primitivos}%
 
 Tipos de dados primitivos pequenos como 
 #char#, #byte#, #int# e #float# são normal fáceis de obter códigos hash.
-Esses tipos de dados sempre têm uma representação binária que usualmente consitem de #w# ou menos bits. 
+Esses tipos de dados sempre têm uma representação binária que usualmente consistem de #w# ou menos bits. 
 \javaonly{(Por exemplo, em Java, #byte# é um tipo de 8 bits
 e #float# é um tipo de 32 bits.)}\cpponly{(Por exemplo, em C++ #char#
 é tipicamente de 8 bits e #float# é um tipo de 32 bits.)} Nesses casos,
@@ -699,15 +677,14 @@ são exemplos disso com $c=2$.)  Esses tipos de dados podem ser tratados como ob
 
 \subsection{Códigos Hash para Objetos Compostos}
 \seclabel{stringhash}
-
 \index{códigos hash!para objetos compostos}%
 Para um objeto composto, queremos criar um código hash combinando os códigos
 hash individuais das partes que constituem o objeto.
 Isso não é tão fácil quanto parece.
 
-Embora seja possível achar muitos hacks para issso (por exemplo, combinar os códigos hash com operações bitwise ou-exclusivo), muitos desses hacks acabam sendo fáceis de enganar (veja os Exercícios~\ref{exc:hash-hack-first}--\ref{exc:hash-hack-last}).
-Porém, se quisermos fazer aritmética com $2#w#$ bits de precisão, então
-existem métodos simples e robustos a disposição.
+Embora seja possível achar muitos hacks para isso (por exemplo, combinar os códigos hash com operações bitwise ou-exclusivo), muitos desses hacks acabam sendo fáceis de enganar (veja os Exercícios~\ref{exc:hash-hack-first}--\ref{exc:hash-hack-last}).
+Porém, se pudermos fazer aritmética com $2#w#$ bits de precisão, então
+existem métodos simples e robustos a nossa disposição.
 Suponha que temos um objeto composto de várias partes
 $P_0,\ldots,P_{r-1}$ cujos códigos hash são $#x#_0,\ldots,#x#_{r-1}$.
 Então, podemos escolher inteiros de #w# bits mutuamente independentes 
@@ -719,16 +696,16 @@ e computar um código hash para nosso objeto com
    \ddiv 2^{#w#} \enspace .
 \]
 Note que esse código hash tem um passo final (multiplicar por #z# e dividir
-por $2^{#w#}$) que usa uma função hash multiplicativo de 
-\secref{multihash} para obter um resultado intermediária $2#w#$ bits 
-e reduzir a um resultado final de #w# bits. Aque segue um exemplo desse método
-aplica a um único objeto composto de três partes
- #x0#, #x1#, and #x2#:
+por $2^{#w#}$) que usa uma função hash multiplicativo da \secref{multihash} para obter um resultado intermediário $2#w#$ bits 
+e reduzir a um resultado final de #w# bits. Aqui segue um exemplo desse método
+aplicado a um único objeto composto de três partes
+ #x0#, #x1# e #x2#:
 \javaimport{junk/Point3D.x0.hashCode()}
 \cppimport{ods/Point3D.hashCode()}
 \pcodeimport{ods/Point3d.hashCode()}
+
 O teorema a seguir mostra que, em adição a ser de simples implementação, esse
-método é comprovadamento bom:
+método é comprovadamente bom:
 
 \begin{thm}\thmlabel{multihash}
 Sejam $#x#_0,\ldots,#x#_{r-1}$ e $#y#_0,\ldots,#y#_{r-1}$ sequências de inteiros de #w# bits em $\{0,\ldots,2^{#w#}-1\}$ e assuma $#x#_i \neq #y#_i$ para pelo menos um índice $i\in\{0,\ldots,r-1\}$. Então 
@@ -739,14 +716,14 @@ Sejam $#x#_0,\ldots,#x#_{r-1}$ e $#y#_0,\ldots,#y#_{r-1}$ sequências de inteiro
 \end{thm}
 
 \begin{proof}
-  Iremos a princípio ignorar o passo final de hashing multiplicativo 
+  Iremos, a princípio, ignorar o passo final de hashing multiplicativo 
   e ver como aquele passo contribui depois. Defina:
   \[
     h'(#x#_0,\ldots,#x#_{r-1}) =  
        \left(\sum_{j=0}^{r-1} #z#_j #x#_j\right)\bmod 2^{2#w#} \enspace .
   \]
   Assuma que $h'(#x#_0,\ldots,#x#_{r-1}) =  h'(#y#_0,\ldots,#y#_{r-1})$.
-  Podemos rescrever isso como: 
+  Podemos reescrever isso como: 
   \begin{equation}  \eqlabel{bighash-x}
       #z#_i(#x#_i-#y#_i) \bmod 2^{2#w#} = t
   \end{equation}
@@ -756,7 +733,7 @@ Sejam $#x#_0,\ldots,#x#_{r-1}$ e $#y#_0,\ldots,#y#_{r-1}$ sequências de inteiro
   \]
   Se assumirmos, sem perda de generalidade, que 
   $#x#_i> #y#_i$, então
-  \myeqref{bighash-x} torna-se
+  a \myeqref{bighash-x} torna-se
   \begin{equation}
       #z#_i(#x#_i-#y#_i) = t \eqlabel{bighash-xx} \enspace ,
   \end{equation}
@@ -766,18 +743,17 @@ Sejam $#x#_0,\ldots,#x#_{r-1}$ e $#y#_0,\ldots,#y#_{r-1}$ sequências de inteiro
   $2^{2#w#}-2^{#w#+1}+1 < 2^{2#w#}-1$.
 
   Por suposição,
-  $#x#_i-#y#_i\neq 0$, então \myeqref{bighash-xx} tem no máximo uma solução
+  $#x#_i-#y#_i\neq 0$, então a \myeqref{bighash-xx} tem no máximo uma solução
   em $#z#_i$.  Portanto, como $#z#_i$ e $t$ são 
   independentes ($#z#_0,\ldots,#z#_{r-1}$ são mutuamente independentes), a probabilidade de selecionarmos 
   $#z#_i$
   tal que $h'(#x#_0,\ldots,#x#_{r-1})=h'(#y#_0,\ldots,#y#_{r-1})$ é no máximo 
   $1/2^{#w#}$.
 
-  O passo final da função hash é aplicar o 
-  hashing multiplicativo
+  O passo final da função hash é aplicar o hashing multiplicativo
   para reduzir nosso resultado intermediário de 
   $2#w#$ bits $h'(#x#_0,\ldots,#x#_{r-1})$ a um
-  resultado final com #w# bits $h(#x#_0,\ldots,#x#_{r-1})$.  Usando \thmref{multihash},
+  resultado final com #w# bits $h(#x#_0,\ldots,#x#_{r-1})$.  Usando o \thmref{multihash},
   se $h'(#x#_0,\ldots,#x#_{r-1})\neq h'(#y#_0,\ldots,#y#_{r-1})$, então
   $\Pr\{h(#x#_0,\ldots,#x#_{r-1}) = h(#y#_0,\ldots,#y#_{r-1})\} \le 2/2^{#w#}$.
 
@@ -796,7 +772,6 @@ $#z#h'(#x#_0,\ldots,#x#_{r-1})\ddiv2^{#w#} = #z# h'(#y#_0,\ldots,#y#_{r-1})\ddiv
   \end{align*}
 \end{proof}
 
-
 \index{código hash!para strings}%
 \index{código hash!para arrays}%
 \subsection{Códigos Hash para Arrays e Strings}
@@ -806,24 +781,24 @@ O método da seção anterior funciona bem para objetos que tem um número const
 objetos que tem um número variável de componentes,
 pois querer um inteiro aleatório de #w# bits 
 $#z#_i$ para cada componente.
-Poderíamos usar uma sequência pseudoaleatória para gerar quantos 
-$#z#_i$ fossem necessários, então então os $#z#_i$ não seriam mutuamente independentes e se torna difícil provar que os números pseudoaleatórios não interagem mal com a função hash que estamos usando. 
+Poderíamos usar uma sequência pseudo aleatória para gerar quantos 
+$#z#_i$ fossem necessários, mas então os $#z#_i$ não seriam mutuamente independentes e se torna difícil provar que os números pseudo aleatórios não interagem mal com a função hash que estamos usando. 
 Em particular, os valores de $t$ e 
-$#z#_i$ na prova de \thmref{multihash} não seriam mais independentes.
+$#z#_i$ na prova do \thmref{multihash} não seriam mais independentes.
 
 \index{prime field}%
 \index{corpo primal}%
-Uma abordagem mais rigorosa é obter nossos códigos hash com base em polinômios sobre corpos primais; esse são basicamente polinômios comumns que são avaliados em módulo algum número primo, #p#. Esse método é baseado no seguinte teorema, que
+Uma abordagem mais rigorosa é obter nossos códigos hash com base em polinômios sobre corpos primais; esse são basicamente polinômios comuns que são avaliados em módulo algum número primo, #p#. Esse método é baseado no seguinte teorema, que
 diz que polinômios sobre corpos primais se comportam como polinômios comuns:
 
 \begin{thm}\thmlabel{prime-polynomial}
- Seja $#p#$ um número primo, e seja $f(#z#) = #x#_0#z#^0 + #x#_1#z#^1 +
+ Seja $#p#$ um número primo e seja $f(#z#) = #x#_0#z#^0 + #x#_1#z#^1 +
  \cdots + #x#_{r-1}#z#^{r-1}$ um polinômio não trivial com coeficientes 
  $#x#_i\in\{0,\ldots,#p#-1\}$. Então a equação $f(#z#)\bmod #p# = 0$
  tem até $r-1$ soluções para $#z#\in\{0,\ldots,p-1\}$.
 \end{thm}
 
-Para usar \thmref{prime-polynomial}, aplicamos uma função hash em uma sequência de inteiros 
+Para usar o \thmref{prime-polynomial}, aplicamos uma função hash em uma sequência de inteiros 
 $#x#_0,\ldots,#x#_{r-1}$ cada qual com $#x#_i\in \{0,\ldots,#p#-2\}$ usando um 
 inteiro aleatório 
 $#z#\in\{0,\ldots,#p#-1\}$ via a fórmula
@@ -839,7 +814,7 @@ $#x#_0,\ldots,#x#_{r}$.  Note que esse elemento difere de todos os outros elemen
 $\{0,\ldots,#p#-2\}$).
 Podemos pensar que $#p#-1$ atua como um marcador de fim de sequência.
 
-O teorema a seguir, que considera o caso de duas sequência de mesmo 
+O teorema a seguir, que considera o caso de duas sequências de mesmo 
 tamanho, mostra que essa função hash produz bons resultados
 para uma pequena quantidade de randomização necessária para escolher #z#:
 
@@ -862,35 +837,33 @@ pode ser reescrita como
        (#x#_0-#y#_0)#z#^0+\cdots+(#x#_{r-1}-#y#_{r-1})#z#^{r-1} 
     \right)\bmod #p# = 0.
   \end{equation}
-Como $#x#_#i#\neq #y#_#i#$, esse polinômio é não-trivial. Portanto, usando  ,
+Como $#x#_#i#\neq #y#_#i#$, esse polinômio é não-trivial. Portanto, usando o
   \thmref{prime-polynomial}, ele tem no máximo $r-1$ soluções em #z#.
   A probabilidade que escolhemos #z# para seja uma dessas soluções é portanto
-  no máximo
-  $(r-1)/#p#$.
+  no máximo $(r-1)/#p#$.
 \end{proof}
 
-Note que essa função hash também lida com o caso em que duas sequências tem comprimentos distintos, mesmo quando uma das sequências é um prefixo de outra.
+Note que essa função hash também considera o caso em que duas sequências tem comprimentos distintos, mesmo quando uma das sequências é um prefixo de outra.
 Isso porque essa função efetivamente obtém o hash da sequência infinita
 \[
   #x#_0,\ldots,#x#_{r-1}, #p#-1,0,0,\ldots \enspace .
 \]
-Isso garante que se temos duas sequências de comprimento 
+Isso garante que, se temos duas sequências de comprimento
  $r$ e $r'$
 com $r > r'$, então essas duas sequências diferem no índice $i=r$.  
-Nesse caso, 
- \myeqref{strhash-eqlen} torna-se
+Nesse caso, a \myeqref{strhash-eqlen} torna-se
 \[
   \left(
      \sum_{i=0}^{i=r'-1}(#x#_i-#y#_i)#z#^i + (#x#_{r'} - #p# + 1)#z#^{r'}
      +\sum_{i=r'+1}^{i=r-1}#x#_i#z#^i + (#p#-1)#z#^{r}
   \right)\bmod #p# = 0 \enspace ,
 \]
-que, segundo \thmref{prime-polynomial}, tem até $r$ soluções em $#z#$.
-Isso combinado com 
+que, segundo o \thmref{prime-polynomial}, tem até $r$ soluções em $#z#$.
+Isso combinado com o 
  \thmref{stringhash-eqlen} é suficiente para provar o seguinte teorema mais geral:
 
 \begin{thm}\thmlabel{stringhash}
-Seja $#p#>2^{#w#}+1$ um primo, usando duas sequências distintas de #w#bits $#x#_0,\ldots,#x#_{r-1}$ e
+Seja $#p#>2^{#w#}+1$ um número primo, usando duas sequências distintas de #w# bits $#x#_0,\ldots,#x#_{r-1}$ e
   $#y#_0,\ldots,#y#_{r'-1}$ em
   $\{0,\ldots,2^{#w#}-1\}$. Então
   \[
@@ -905,51 +878,55 @@ um objeto que contém um array, #x#, de valores:
 \cppimport{ods/GeomVector.hashCode()}
 \pcodeimport{ods/GeomVector.hashCode()}
 
-O código precedendo sacrifica alguma probabilidade de colisão por conveniência
+O código precedente  sacrifica alguma probabilidade de colisão por conveniência
 na implementação. Em particular, ele aplica a função hash multiplicativa de 
-\secref{multihash}, com $#d#=31$ para reduzir #x[i].hashCode()# a um valor de 31 bits. Isso é feito dessa forma para que adições e multiplicações 
+\secref{multihash}, com $#d#=31$ para reduzir #x[i].hashCode()# a um valor de 31 bits.
+Isso é feito dessa para que adições e multiplicações 
 feitas módulo o primo
 $#p#=2^{32}-5$ possam ser realizadas usando aritmética 63 bits sem sinal.
-Então a probabilidade de duas diferentes sequências, a mais longa com comprimento #r#, terem o mesmo código hash é até
+Então a probabilidade de duas diferentes sequências, a mais longa com comprimento #r#, 
+terem o mesmo código hash é até
 \[
     2/2^{31} + r/(2^{32}-5)
 \]
 em vez da 
-$r/(2^{32}-5)$ especificada em \thmref{stringhash}.
+$r/(2^{32}-5)$ especificada no \thmref{stringhash}.
 
 \section{Discussão e Exercícios}
 
-Tabelas hash e códigos hash representam um campo de pesquisa muito ativo que é brevemente pincelado neste capítulo. 
+Tabelas hash e códigos hash representam um campo de pesquisa muito ativo 
+que é brevemente pincelado neste capítulo. 
 A online \emph{Bibliography on Hashing} \cite{hashing}
 \index{Bibliography on Hashing}%
-contém aproximadamente 2000 referencias.
+contém aproximadamente 2000 referências.
 
 Existe uma grande variedade de implementações de diferentes tabelas.
-Aquela descrita em 
+Aquela descrita na 
 \secref{hashtable} é conhecida como \emph{hashing with chaining} ou \emph{hashing com encadeamento}
 \index{hashing with chaining}%
 \index{hashing com encadeamento} 
-(cada posição do array contém uma lista, por vezes encadeada, (#List#) de elementos).  Hashing com encadeamento tem suas origens em um
+(cada posição do array contém uma lista, por vezes encadeada, (#List#) de elementos).
+Hashing com encadeamento tem suas origens em um
 memorando interno da IBM escrito por 
- H. P. Luhn que data de Janeiro de 1953. Esse memorando também parece
- ser uma das primeiras referências a listas ligadas.
+H. P. Luhn que data de Janeiro de 1953. Esse memorando também parece
+ser uma das primeiras referências a listas ligadas.
 
 \index{open addressing}%
 \index{endereçamento aberto}%
 Uma alternativa a hashing com encadeamento é aquela que usa esquemas
-de 
- \emph{open
-addressing}, ou , \emph{endereçamento aberto}, onde todos os dados são armazenados diretamente em um array. 
+de \emph{open addressing}, ou , \emph{endereçamento aberto}, onde todos 
+os dados são armazenados diretamente em um array. 
 Esses esquemas incluem a estrutura 
- #LinearHashTable# de 
+ #LinearHashTable# da 
 \secref{linearhashtable}. Essa ideia também foi proposta independentemente por um
-grupo na IBM na década de 1950. Esquemas de endereçamento aberto devem tratar do problema de resolução de colisões:
+grupo na IBM na década de 1950. Esquemas de endereçamento aberto devem 
+tratar do problema de resolução de colisões:
 \emph{resolução de colisões}: 
 \index{resolução de colisões}%
 o caso em que dois valores hash mapeiam para a mesma posição do array.
-Dintintas estratégias existem para resolução de colisões; essas provêem 
+Distintas estratégias existem para resolução de colisões; essas provêem 
 diferentes garantias de desempenho e frequentemente 
-requerem funções hash mais sofisticadas que aquelas descritas aqui.
+requerem funções hash mais sofisticadas do que aquelas descritas aqui.
 
 Outra categoria de implementações de tabelas hash são os famosos
 métodos de \emph{hashing perfeito}.
@@ -960,7 +937,7 @@ Nesses métodos a operação
  \emph{funções hash perfeitas}
 \index{funções hash perfeitas}%
 \index{função hash!perfeita}%
-para os dadoss; existem funções que mapeiam cada dado da uma única
+para os dados; existem funções que mapeiam cada dado de uma única
 posição do array. Para dados que mudam com o tempo, métodos 
 de hashing perfeito incluem 
  \emph{tabelas hash de dois níveis FKS}
@@ -971,16 +948,16 @@ e \emph{hashing cuckoo} \cite{pr04}.
 \index{hashing cuckoo }%
 \index{tabela hash!cuckoo}%
 
-As funções has apresentadas neste capítulo estão provavelmente entre 
+As funções hash apresentadas neste capítulo estão provavelmente entre 
 os métodos práticos atualmente conhecidos que funcionam bem para qualquer
 conjunto de dados. Outros métodos bons datam do trabalho pioneiro
-de 
-Carter e Wegman que criaram o conceito de \emph{hashing universal}
+de Carter e Wegman que criaram o conceito de \emph{hashing universal}
 \index{hashing universal }%
 \index{universal!hashing}%
 e descreveram várias funções hash para diferentes cenários \cite{cw79}.
 Hashing por tabulação, descrita na \secref{tabulation}, foi proposta por Carter
-e Wegman \cite{cw79}, mas sua análise, quando aplicada a sondagem linear (e vários outros esquemas de tabela hash) 
+e Wegman \cite{cw79}, mas sua análise, quando aplicada a sondagem linear 
+(e vários outros esquemas de tabela hash) 
 é creditada a P\v{a}tra\c{s}cu e
 Thorup \cite{pt12}.
 
@@ -988,13 +965,13 @@ A ideia de
  \emph{hashing multiplicativo}
 \index{hashing multiplicativo}%
 \index{hashing!multiplicativo}%
-é muito antiga e parece ser parte do folklore de hashing
+é muito antiga e parece ser parte do folclore de hashing
  \cite[Section~6.4]{k97v3}.  Porém, a ideia de escolher um 
 #z# sendo um número aleatório \emph{ímpar},
-e a análise em \secref{multihash} é de Dietzfelbinger \etal\
+e a análise na \secref{multihash} é de Dietzfelbinger \etal\
 \cite{dhkp97}.  Essa versão de hashing multiplicativo é uma das mais
 simples, mas sua probabilidade de colisão de 
-$2/2^{#d#}$ é um fator de 2 maior que se poderia esperar com uma função 
+$2/2^{#d#}$ é um fator de 2 maior do que se poderia esperar com uma função 
 aleatória de 
 $2^{#w#}\to
 2^{#d#}$.  O método de \emph{hashing multiplica e soma} 
@@ -1023,28 +1000,25 @@ $\{0,\ldots,2^{#w#}\}$. Isso resulta em um código hash de $2#w#$ bits com proba
 $1/2^{#w#}$.  Isso pode ser reduzido a um código hash de #w# bits usando 
 hashing multiplicativo (ou multiplica e soma). Esse método é rápido porque
 requer somente 
- $r/2$ multiplicações de $2#w#$ bits enquanto o método descrito em 
+ $r/2$ multiplicações de $2#w#$ bits enquanto o método descrito na 
 \secref{stringhash} usa $r$ multiplicações.
 (As operações $\bmod$ ocorrem implicitamente usando aritmética de #w# e $2#w#$ bits para as adições e multiplicações, respectivamente.)
 
-O método de 
- \secref{polyhash} de usar polinômios em corpos primais para fazer hash de arrays de tamanho variável e strings é atribuído a 
+O método da \secref{polyhash} de usar polinômios em corpos primais para fazer hash de arrays de tamanho variável e strings é atribuído a 
 Dietzfelbinger \etal\
 \cite{dgmp92}.  Devido ao uso do operador $\bmod$ que usa uma instrução de máquina de alto custo, não é, infelizmente, muito rápida. 
 Algumas variantes desse método escolhem o primo
 #p# para ser da forma 
 $2^{#w#}-1$, que nesse caso o operador $\bmod$ pode ser substituído pelas operações de 
-adição (#+#) e and bit a bit (#&#) \cite[Section~3.6]{k97v2}.
+adição (#+#) e AND bit a bit (#&#) \cite[Section~3.6]{k97v2}.
 Outra opção é aplicar um dos métodos rápidos para strings de tamanho fixo para blocos de tamanho $c$ para alguma constante $c>1$ e então aplicar o
-método de corpo primal à sequência resultante de 
- $\lceil r/c\rceil$
-códigos hash.
+método de corpo primal à sequência resultante de $\lceil r/c\rceil$ códigos hash.
 
 
 \begin{exc}
   Uma certa universidade atribui a cada um de seus estudantes números 
   na primeira vez que eles registram-se para qualquer disciplina.
-  Esses números são inteiros sequencias que iniciam-se em 0 muitos 
+  Esses números são sequências de inteiros que iniciaram em 0 muitos 
   anos atrás e agora estão na casa dos milhões.
   Suponha que temos uma turma de cem alunos do primeiro ano 
   que queremos atribuí-los código hash baseados em seus números de estudantes.
@@ -1053,29 +1027,27 @@ códigos hash.
 \end{exc}
 
 \begin{exc}
-  Considere o esquema de hashing em \secref{multihash}, e suponha 
+  Considere o esquema de hashing na \secref{multihash} e suponha 
   $#n#=2^{#d#}$ e $#d#\le #w#/2$.
   \begin{enumerate}
-    \item Mostre que, para qualquer escolha de multiplicador #z#, existe #n# valores que tem o mesmo código hash.
+    \item Mostre que, para qualquer escolha de multiplicador #z#, existe #n# valores que têm o mesmo código hash.
       (Dica: isso é fácil e não precisa usar teoria dos números.) 
-    \item Dado um multiplicador #z#, descreva #n# valores que tem o mesmo código hash. (Dica: isso é mais difícil e requer um pouco de teoria dos números.) 
+    \item Dado um multiplicador #z#, descreva #n# valores que têm o mesmo código hash. (Dica: isso é mais difícil e requer um pouco de teoria dos números.) 
   \end{enumerate}
 \end{exc}
 
 \begin{exc}
-  Prove que o limitante $2/2^{#d#}$ em \lemref{universal-hashing} é o
+  Prove que o limitante $2/2^{#d#}$ no \lemref{universal-hashing} é o
   melhor limitante possível ao mostrar que, se 
   $x=2^{#w#-#d#-2}$ e 
   $#y#=3#x#$, então $\Pr\{#hash(x)#=#hash(y)#\}=2/2^{#d#}$.  (Dica:
   verifique as representações binárias de 
-  $#zx#$ e $#z#3#x#$ e o uso o fato de que 
+  $#zx#$ e $#z#3#x#$ e use o fato de que 
   $#z#3#x# = #z#x#+2#z#x#$.)
 \end{exc}
 
 \begin{exc}\exclabel{linear-probing}
-  Prove \lemref{linear-probing} usando a versão completa da aproximação de Stirling
-  dada em 
-\secref{factorials}.
+  Prove o \lemref{linear-probing} usando a versão completa da aproximação de Stirling dada na \secref{factorials}.
 \end{exc}
 
 \begin{exc}
@@ -1111,7 +1083,7 @@ códigos hash.
   Suponha que você tem um objeto composto de dois inteiros de #w# bits, #x# e #y#.
   Suponha que o código hash para o seu objeto é definido por alguma função hash determinística 
   $h(#x#,#y#)$ que produz um único inteiro de #w# bits. 
-  Prove que existe um grande conjunto de objetos que tem o mesmo código hash.
+  Prove que existe um grande conjunto de objetos que têm o mesmo código hash.
 \end{exc}
 
 \begin{exc}
@@ -1144,5 +1116,5 @@ Seja $p=2^{#w#}-1$ para algum inteiro positivo #w#.  Explique porque, para um in
   fazê-los ao inspecionar o código da implementação, ou você pode ter que
   escrever algum código que fazer tentativas de inserções e buscas, medindo
   o tempo que leva para adicionar e achar valores. (Isso pode ser, tem sido, usado para efetuar ataques de negação de serviço em servidores web \cite{cw03}.)
-  \index{ataque de complexidade algoritmica}%
+  \index{ataque de complexidade algoritmico}%
 \end{exc}
