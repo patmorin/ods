@@ -1,17 +1,17 @@
 \chapter{Árvores Binárias}
 \chaplabel{binarytrees}
 
-Este capítulo apresenta uma das estruturas mais fundamentais em ciência
-da computação: árvores binárias. O uso da palavra
+Este capítulo apresenta uma das estruturas mais fundamentais na Ciência
+da Computação: as árvores binárias. O uso da palavra
 \emph{árvore}
 \index{árvore}%
 \index{árvore!binária}%
 \index{árvore binária}%
-vem do fato que, quando as desenhamos, ela frequentemente lembra árvores 
+vem do fato que, quando as desenhamos, elas frequentemente lembram árvores 
 encontradas em uma floresta. Existem muitos jeitos de definir 
 árvores binárias. Matematicamente, uma \emph{árvore binária} é um grafo finito, conectado, não direcionado, sem ciclos e sem nenhum vértice de grau maior que três.
 
-Para a maioria das aplicações em Ciência da Computação árvores binárias são \emph{enraizadas}:
+Para a maioria das aplicações em Ciência da Computação, árvores binárias são \emph{enraizadas}:
 \index{árvore!enraizada}%
 \index{árvore enraizada}%
 Um nodo especial #r# de grau até dois é chamado de \emph{raiz} da árvore.
@@ -34,7 +34,7 @@ então diferenciamos entre o \emph{filho à esquerda} e \emph{filho à direita} 
 Em desenhos, árvores binárias são tipicamente desenhadas de ponta-cabeça, 
 com a raiz no topo do desenho e os filhos à esquerda e direita
 respectivamente dados pelas posições à esquerda e direita no desenho
-(\figref{bintree-orientation}).  Por exemplo, \figref{binary-tree}.a mostra
+(\figref{bintree-orientation}).  Por exemplo, a \figref{binary-tree}.a mostra
 uma árvore binária com nove nodos. 
 
 \begin{figure}
@@ -54,7 +54,7 @@ uma árvore binária com nove nodos.
       (a) & (b)
     \end{tabular}
   \end{center}
-  \caption{Uma árvore binária com (a)~nove nodos reais e (b)~dez nodos externos.}
+  \caption{Uma árvore binária com (a)~nove nodos reais (ou internos) e (b)~dez nodos externos.}
   \figlabel{binary-tree}
 \end{figure}
 
@@ -71,13 +71,12 @@ de #w#.  A \emph{subárvore} de um nodo
 longo de #u# e um de seus descendentes. A \emph{altura} de 
 \index{altura!de uma árvore}%
 uma árvore é a altura de sua raiz.
-Um nodo #u# é uma \emph{folha}
-se não tem filhos.
+Um nodo #u# é uma \emph{folha} se não tem filhos.
 
-Ás vezes pensamos de árvores sendo estendidas com \emph{nodos externos}.
+Ás vezes consideramos que árvores possuem \emph{nodos externos}.
 Qualquer nodo que não tem filho à esquerda tem um nodo externo como filho à
-esquerda e, de modo similar, um nodo que não tem filho à direita tem um nodo externo como filho à direita (ver
-\figref{binary-tree}.b).  É fácil verificar, por indução, que uma árvore binária 
+esquerda e, de modo similar, um nodo que não tem filho à direita tem um nodo externo como filho à direita (ver a \figref{binary-tree}.b).  
+É fácil verificar, por indução, que uma árvore binária 
 com $#n#\ge 1$ nodos reais tem $#n#+1$ nodos externos.
 
 \section{#BinaryTree#: Uma Árvore Binária Básica}
@@ -104,10 +103,10 @@ número de passos do caminho de #u# à raiz:
 \subsection{Algoritmos recursivos}
 
 \index{algoritmo recursivo}%
-Usando algoritmos recursivos facilita a computação de fatos sobre árvores 
-binárias. Por exemplo, para computar o tamanho de (número de nodos em)
-uma árvore binária enraizada no nodo #u#, nós recursivamente computamos
-os tamanhos de duas subárvores enraizadas aos filhos de #u#, somar esses tamanhos, e adicionar um:
+Usar algoritmos recursivos facilita a computação de fatos sobre árvores 
+binárias. Por exemplo, para computar o tamanho de (número de nodos)
+uma árvore binária enraizada no nodo #u#, recursivamente computamos
+os tamanhos de duas subárvores enraizadas aos filhos de #u#, somar esses tamanhos, e somar um:
 
 \codeimport{ods/BinaryTree.size(u)}
 
@@ -127,22 +126,22 @@ todos os nodos em uma árvore binária. Cada um deles visita os nodos
 da árvore binária na mesma ordem que o código a seguir:
 \codeimport{ods/BinaryTree.traverse(u)}
 
-Usando recursão desse jeito resulta em um código bem curto e simples mas
+Usar recursão desse jeito resulta em um código bem curto e simples mas
 pode também ser problemático. A profundidade máxima da recursão é dada
 pela profundidade máxima de um nodo na árvore binária, i.e., a altura
 da árvore.
 
 Se a altura da árvore é grande, então essa recursão pode muito bem usar 
-mais espaço de pilha de memória que está disponível, causando um erro.
+mais espaço de pilha de memória do que está disponível, causando um erro.
 
 Para percorrer uma árvore binária sem recursão, você pode usar um algoritmo 
 que usa a informação de onde veio para determinar para onde irá a seguir.
-Veja \figref{bintree-traverse}.  
+Veja a \figref{bintree-traverse}.  
 Ao chegarmos no nodo #u# a partir de #u.parent# então o próximo passo
-a tomar é visitar #u.left#. Se chegarmos em #u# vindos de #u.right#, então
+é visitar #u.left#. Se chegarmos em #u# vindo de #u.right#, então
 terminamos a visita da subárvore de #u# e retornamos a #u.parent#.
 O código a seguir implementa essa ideia, incluindo o tratamento dos
-casos onde #u.left#, #u.right# ou #u.parent# seja #nil#:
+casos onde #u.left#, #u.right# ou #u.parent# sejam #nil#:
 \codeimport{ods/BinaryTree.traverse2()}
 
 \begin{figure}
@@ -152,11 +151,11 @@ casos onde #u.left#, #u.right# ou #u.parent# seja #nil#:
       \includegraphics[scale=0.90909]{figs/bintree-3}
     \end{tabular}
   \end{center}
-  \caption[Percorrendo uma BinaryTree]{Os três casos que ocorrem no nodo #u# ao percorrer uma árvore binária não recursiva, o resultante caminho na árvore.}
+  \caption[Percorrendo uma BinaryTree]{Os três casos que ocorrem no nodo #u# ao percorrer uma árvore binária não recursiva e o caminho resultante na árvore.}
   \figlabel{bintree-traverse}
 \end{figure}
 
-Os mesmo fatos que podem ser computados com algoritmos recursivos também podem
+Os mesmos fatos que podem ser computados com algoritmos recursivos também podem
 ser obtidos dessa maneira, sem recursão. Por exemplo, para computar o tamanho 
 de uma árvore mantemos um contador #n# e o incrementamos toda vez que visitarmos um nodo pela primeira vez:
 \codeimport{ods/BinaryTree.size2()}
@@ -291,7 +290,7 @@ Se #u# for uma folha, então podemos simplesmente desconectar #u# de seu pai.
 
 Melhor ainda, se #u# tiver um único filho, então podemos destacar #u#
 da árvore fazendo 
-#u.parent# adotar o filho de #u# (veja
+#u.parent# adotar o filho de #u# (veja a
 \figref{bst-splice}):
 \codeimport{ods/BinarySearchTree.splice(u)}
 
@@ -303,14 +302,14 @@ da árvore fazendo
   \figlabel{bst-splice}
 \end{figure}
 
-A situação complicada quando #u# tem dois filhos. Nesse caso,
+A situação complica quando #u# tem dois filhos. Nesse caso,
 o mais simples a fazer é achar um nodo #w#, que seja menor que 
-os dois filho e tal que #w.x# possa substituir #u.x#.
+os dois filhos e tal que #w.x# possa substituir #u.x#.
 Para manter a propriedade da árvore de busca binária, o valor
 #w.x# deveria ser próximo ao valor de #u.x#. Por exemplo, escolher um #w# tal que #w.x# é o menor valor maior que #u.x# funcionaria.
 Achar o nodo #w# é fácil; é o menor valor na subárvore enraizada em #u.right#.
 Esse nodo pode ser facilmente removido porque não tem filho à esquerda
-(veja \figref{bst-remove}).
+(veja a \figref{bst-remove}).
 \javaimport{ods/BinarySearchTree.remove(u)}
 \cppimport{ods/BinarySearchTree.remove(u)}
 \pcodeimport{ods/BinarySearchTree.remove_node(u)}
@@ -328,7 +327,7 @@ Esse nodo pode ser facilmente removido porque não tem filho à esquerda
 
 \subsection{Resumo}
 
-A operações
+As operações
 #find(x)#, #add(x)# e #remove(x)# em uma 
 #BinarySearchTree# envolvem seguir um caminho da raiz da árvore a algum nodo. 
 Sem saber mais sobre o formato da árvore é difícil dizer algo sobre o comprimento desse caminho, exceto que é menor que #n#, o número de nodos na árvore.
@@ -337,26 +336,25 @@ A seguinte teorema (pouco impressionante) resume o desempenho da estrutura de da
 
 \begin{thm}\thmlabel{bst}
   #BinarySearchTree# implementa a interface #SSet# interface e aceita
-  as operações 
-  #add(x)#, #remove(x)#
+  as operações #add(x)#, #remove(x)#
   e #find(x)# em $O(#n#)$ de tempo por operação.
 \end{thm}
 
-\thmref{bst} tem desempenho ruim em comparação a \thmref{skiplist}, que mostra que 
+O \thmref{bst} demonstra um desempenho ruim em comparação ao \thmref{skiplist}, que mostra que 
 uma estrutura #SkiplistSSet# implementa a interface #SSet# 
 com $O(\log #n#)$ de tempo esperado por operação. O problema com a estrutura 
-#BinarySearchTree# é que pode ser tornar \emph{desbalanceada}.
-Em vez de parecer como uma árvore em
- \figref{bst}, ela pode parecer como uma longa cadeias de 
+#BinarySearchTree# é que pode se tornar \emph{desbalanceada}.
+Em vez de parecer como uma árvore na \figref{bst}, ela pode parecer 
+como uma longa cadeia de 
 #n# nodos, todos exceto o último com exatamente um filho. 
 
-Existe várias maneiras de evitar árvores binárias desbalanceadas, todas elas
+Existem várias maneiras de evitar árvores binárias desbalanceadas, todas elas
 levam a estruturas de dados que tem 
- operações que executam com $O(\log
-#n#)$ de tempo. No \chapref{rbs} mostramos como operações com $O(\log #n#)$ de tempo 
+ operações que executam com $O(\log #n#)$ de tempo. 
+No \chapref{rbs} mostramos como operações com $O(\log #n#)$ de tempo 
 \emph{esperado} podem ser obtidas com randomização. 
 No \chapref{scapegoat} mostramos como operações que executam em $O(\log #n#)$ de tempo \emph{amortizado} podem ser obtidas com operações de reconstrução parcial.
-No \chapref{redblack} mostramos como operações que executam em $O(\log #n#)$ de tempo no \emph{pior caso} pode ser obtidas ao simular uma árvore que não é binária: uma árvore cujos nodos podem ter até quatro filhos.
+No \chapref{redblack} mostramos como operações que executam em $O(\log #n#)$ de tempo no \emph{pior caso} podem ser obtidas ao simular uma árvore que não é binária: uma árvore cujos nodos podem ter até quatro filhos.
 
 \section{Discussão e Exercícios}
 
@@ -369,14 +367,15 @@ Essas árvores genealógicas em que a raiz é uma pessoa, os filhos à esquerda 
 Em séculos mais recentes, árvores binárias também tem sido usadas para modelar
 espécies de árvores 
 \index{espécies de árvores}%
-em biologia, onde as folhas da árvore representam espécie existente e nodos internos
+em biologia, onde as folhas da árvore representam uma espécie existente e nodos internos
 de uma árvore representam 
 \emph{eventos de especiação}
-\index{evento de especiação} no qual duas populações de uma única espécie evoluem em duas espécies separadas. 
+\index{evento de especiação} no qual duas populações de uma única espécie evoluem em duas espécies distintas. 
 
 Árvores binárias de busca parecem terem sido descobertas independentemente
 por vários grupos na década de 1950
-\cite[Section~6.2.2]{k97v3}.  Referências adicionais a tipos específicos de árvores binárias de busca são fornecidas nos capítulos a seguir.
+\cite[Section~6.2.2]{k97v3}.  Referências adicionais a tipos específicos 
+de árvores binárias de busca são fornecidas nos capítulos a seguir.
 
 Ao implementar uma árvore binária desde o início, várias decisões de projeto devem ser feitas. Uma delas é se nodos devem guardar um ponteiro para o seu pai.
 
@@ -385,7 +384,8 @@ nodos-pai significa que travessias em árvores devem serem feitas recursivamente
 
 Alguns outros métodos (como inserir ou remover em alguns tipos de árvores binárias de busca balanceadas) também podem ficar mais complicados sem o uso de ponteiros para nodo-pai.
 
-Outra decisão de projeto refere-se a como guardar os ponteiros pai, filho à esquerda, filho à direita em um nodo. Na implementação dada aqui, esses
+Outra decisão de projeto refere-se a como guardar os ponteiros pai, filho à esquerda e 
+filho à direita em um nodo. Na implementação dada aqui, esses
 ponteiros são guardados como variáveis separadas.
 Outra opção é guardá-los em um array #p# de tamanho 3, tal que 
 #u.p[0]# é o filho à esquerda de #u#, 
@@ -426,8 +426,7 @@ Como exemplo, veja os métodos
 \end{exc}
 
 \begin{exc}
-  Escreva um método não recursivo
-   #height2(u)# que computa a altura do nodo 
+  Escreva um método não recursivo #height2(u)# que computa a altura do nodo 
   #u# em uma #BinaryTree#.
 \end{exc}
 
@@ -482,7 +481,7 @@ em pré/em/pós-ordem. Para um exemplo, veja \figref{binarytree-numbering}.
   Crie uma subclasse de 
    #BinaryTree# cujos nodos tem campos para guardar numerações pré/in/pós-ordem.
 Escreva métodos recursivos 
-  #preOrderNumber()#, #inOrderNumber()# e  #postOrderNumbers()# que atribue
+  #preOrderNumber()#, #inOrderNumber()# e  #postOrderNumbers()# que atribui
   esses números corretamente. Cada um desses métodos deve rodar em $O(#n#)$ de tempo.
 \end{exc}
 
@@ -525,8 +524,7 @@ Escreva métodos recursivos
   Implemente um método na #BinarySearchTree# chamado de #getLE(x)#
   que retorna uma lista de todos os itens na árvore que são menores que
   ou iguais a #x#. O tempo de execução do seu método deve ser 
-  $O(#n#'+#h#)$
-  onde $#n#'$ é o número de itens menores que ou iguais a #x# e #h#
+  $O(#n#'+#h#)$ onde $#n#'$ é o número de itens menores que ou iguais a #x# e #h#
   é a altura da árvore.
 \end{exc}
 
