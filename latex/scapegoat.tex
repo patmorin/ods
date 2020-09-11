@@ -2,9 +2,9 @@
 \chaplabel{scapegoat}
 
 Neste capítulo, estudamos uma estrutura de dados de árvore binária de busca, a
-#ScapegoatTree#.  Essa estrutura é baseada na ideia popular que
+#ScapegoatTree#.  Essa estrutura é baseada na ideia popular de que
 quando algo sai errado, a primeira coisa que pessoas tendem a fazer 
-é achar alguém para por a culpa (o bode expiatório, em inglês \emph{scapegoat}).
+é achar alguém para culpar (o bode expiatório, em inglês \emph{scapegoat}).
 \index{scapegoat}%
 \index{bode expiatório}%
 Uma vez que culpa está estabelecida, podemos deixar que o bode expiatório resolva o problema. 
@@ -19,33 +19,33 @@ em uma árvore perfeitamente balanceada. Uma das mais simples é percorrer a sub
 
 Se fazemos
 $#m#=#a.length#/2$,
-então o elemento #a[m]# torna-se raiz da nova subárvore,
+então o elemento #a[m]# torna-se a raiz da nova subárvore,
 $#a#[0],\ldots,#a#[#m#-1]$ é armazenada recursivamente na subárvore à esquerda 
 e $#a#[#m#+1],\ldots,#a#[#a.length#-1]$ é armazenada na subárvore à direita. 
 
 \codeimport{ods/ScapegoatTree.rebuild(u).packIntoArray(u,a,i).buildBalanced(a,i,ns)}
 Uma chamada a 
-#rebuild(u)# leva $O(#size(u)#)$ de tempo.  A subárvore resultante altura mínima;
+#rebuild(u)# leva tempo $O(#size(u)#)$.  A subárvore resultante tem altura mínima;
 não há árvore de menor altura com #size(u)# nodos.
 
 \section{#ScapegoatTree#: Uma Árvore Binária de Busca com Reconstrução Parcial}
 \seclabel{scapegoattree}
 
 \index{ScapegoatTree@#ScapegoatTree#}%
-Uma #ScapegoatTree# é uma #BinarySearchTree# que além de registrar o númer #n# de nodos na árvore também mantém um contador #q# que mantém um limitante superior no número de nodos. 
+Uma #ScapegoatTree# é uma #BinarySearchTree# que além de registrar o número #n# de nodos na árvore também mantém um contador #q# que mantém um limitante superior no número de nodos. 
 \codeimport{ods/ScapegoatTree.q}
 Durante todo seu uso, #n# e #q# seguem as seguintes desigualdades: 
 \[
       #q#/2 \le  #n# \le #q#  \enspace .
 \]
 Além disso, uma 
-#ScapegoatTree# tem altura logaritmica; e a altura da árvore scapegoat não excede: 
+#ScapegoatTree# tem altura logarítmica; e a altura da árvore scapegoat não excede: 
 \begin{equation}
      \log_{3/2} #q# \le \log_{3/2} 2#n# < \log_{3/2} #n# + 2\enspace .
      \eqlabel{scapegoat-height}
 \end{equation}
 Mesmo com essa restrição, uma 
- #ScapegoatTree# pode parecer surpreendetemente desbalanceada. A árvore em  \figref{scapegoat-example} tem $#q#=#n#=10$ e altura $5<\log_{3/2}10 \approx 5.679$.
+ #ScapegoatTree# pode parecer surpreendentemente desbalanceada. A árvore na \figref{scapegoat-example} tem $#q#=#n#=10$ e altura $5<\log_{3/2}10 \approx 5.679$.
 
 \begin{figure}
   \begin{center}
@@ -58,8 +58,7 @@ Mesmo com essa restrição, uma
 A implementação da operação #find(x)# em uma 
  #ScapegoatTree# é feita usando o algoritmo padrão para buscas em uma 
 #BinarySearchTree#
-(veja \secref{binarysearchtree}).  Isso leva tempo proporcional à altura da árvore que, de acordo com 
- \myeqref{scapegoat-height} é $O(\log #n#)$.
+(veja a \secref{binarysearchtree}).  Isso leva tempo proporcional à altura da árvore que, de acordo com a \myeqref{scapegoat-height}, é $O(\log #n#)$.
 
  Para implementar a operação 
 #add(x)#, primeiramente incrementamos #n# e #q# e então usamos o algoritmo usual
@@ -71,10 +70,10 @@ $\log_{3/2}#q#$. Se assim for, então deixamos a árvore como está e não fazem
 
 Infelizmente, em algumas vezes pode acontecer que
 $#depth(u)# > \log_{3/2}
-#q#$.  Nesse caso, precisamos reduzir a altura. 
+#q#$.  Nesse caso, precisamos reduzir essa altura. 
 Isso não é nada demais; há somente um nodo, #u#, cuja profundidade excede
 $\log_{3/2}
-#q#$.  Para arrumar #u#, saimos de #u# para subir na árvore em busca de um \emph{bode expiatório} #w#. Esse bode expiatório é um nodo muito desbalanceado.
+#q#$.  Para arrumar #u#, saímos de #u# para subir na árvore em busca de um \emph{bode expiatório} #w#. Esse bode expiatório é um nodo muito desbalanceado.
 Ele tem a seguinte propriedade
 \begin{equation}
    \frac{#size(w.child)#}{#size(w)#} > \frac{2}{3} \enspace ,
@@ -88,9 +87,9 @@ Uma vez que encontramos o bode expiatório #w#, podemos completamente
 destruir a subárvore enraizada em #w# e reconstruí-la em uma árvore binária
 de busca perfeitamente balanceada.
 Sabemos
-de \myeqref{scapegoat} que mesmo antes da adição de #u#, a subárvore
+da \myeqref{scapegoat} que mesmo antes da adição de #u#, a subárvore
 de #w# não era uma árvore binária completa. 
-Portanto, quando reconstruirmos #w#, a altura decresce por pelo menos 1 tal que 
+Portanto, ao reconstruirmos #w#, a altura decresce por pelo menos 1 para que 
 a altura de 
  #ScapegoatTree# seja novamente até $\log_{3/2}#q#$.
 
@@ -103,7 +102,7 @@ a altura de
       \includegraphics[scale=0.90909]{figs/scapegoat-insert-4} 
     \end{tabular}
   \end{center}
-  \caption[Adicionando à árvore scapegoat]{Inserindo 3.5 em uma #ScapegoatTree# aumenta sua altura para 6, o que viola \myeqref{scapegoat-height} pois $6 > \log_{3/2} 11 \approx 5.914$.  Um bode expiatório é achado no nodo contendo 5.}
+  \caption[Adicionando à árvore scapegoat]{Inserindo 3.5 em uma #ScapegoatTree# aumenta sua altura para 6, o que viola a \myeqref{scapegoat-height} pois $6 > \log_{3/2} 11 \approx 5.914$.  Um bode expiatório é achado no nodo contendo 5.}
 \end{figure}
 Se ignorarmos o custo de achar o bode expiatório #w# e reconstruirmos 
 a subárvore enraizada em #w#, então o tempo de execução de #add(x)# é
@@ -112,33 +111,30 @@ $O(\log #q#) = O(\log #n#)$ de tempo.
 Iremos considerar o custo de encontrar o bode expiatório e de reconstrução
 usando análise amortizada na seção a seguir.
 
-A implementação de #remove(x)# em uma 
-#ScapegoatTree# é muito simples.
+A implementação de #remove(x)# em uma #ScapegoatTree# é muito simples.
 Buscamos por #x# e o removemos usando o algoritmo usual para remover um
 nodo de uma 
 #BinarySearchTree#.  (Note que isso nunca aumenta a altura da árvore.) 
 A seguir, decrementamos #n#, mas não alteramos #q#.
 Finalmente, verificamos se 
 $#q# > 2#n#$ e, caso positivo, então \emph{reconstruímos a árvore inteira} 
-em uma árvore binária perfeitamente balanceada em atribuímos 
+em uma árvore binária perfeitamente balanceada e atribuímos 
  $#q#=#n#$.
 \codeimport{ods/ScapegoatTree.remove(x)}
 Novamente, se ignorarmos o custo de recontrução, o tempo de execução da 
 operação 
-#remove(x)# é proporcional à altura da árvore que é 
+#remove(x)# é proporcional à altura da árvore, que é 
 $O(\log #n#)$.
 
 \subsection{Análise de Corretude e Tempo de Execução} 
 
-Nesta seção, analizaremos a corretude e o tempo amortizado de operações
-em uma 
- #ScapegoatTree#.  Primeiro provamos a corretude ao mostrar que, quando a operação #add(x)# resulta em um nodo que viola a 
-Condition \myeqref{scapegoat-height}, então sempre podemos achar um bode expiatório:
+Nesta seção, analisaremos a corretude e o tempo amortizado de operações
+em uma #ScapegoatTree#.  Primeiro provamos a corretude ao mostrar que, quando a operação #add(x)# resulta em um nodo que viola a 
+condição da \myeqref{scapegoat-height}, então sempre podemos achar um bode expiatório:
 
 \begin{lem}
   Seja #u# um nodo de profundidade $h>\log_{3/2} #q#$ em uma #ScapegoatTree#.
-  Então existe um nodo 
-  $#w#$ no caminho de  #u# à raiz tal que 
+  Então existe um nodo $#w#$ no caminho de #u# à raiz tal que 
   \[
      \frac{#size(w)#}{#size(parent(w))#} > 2/3 \enspace .
   \]
@@ -149,7 +145,7 @@ Condition \myeqref{scapegoat-height}, então sempre podemos achar um bode expiat
   \[
      \frac{#size(w)#}{#size(parent(w))#} \le 2/3 \enspace .
   \]
-  para todos os nodos #w# no caminho de #u# a raiz. Denote o caminho 
+  para todos os nodos #w# no caminho de #u# à raiz. Denote o caminho 
   da raiz a #u# como $#r#=#u#_0,\ldots,#u#_h=#u#$.  Então, temos 
   $#size(u#_0#)#=#n#$,
   $#size(u#_1#)#\le\frac{2}{3}#n#$, 
@@ -168,7 +164,7 @@ Condition \myeqref{scapegoat-height}, então sempre podemos achar um bode expiat
   \]
 \end{proof}
 
-A seguirm analizamos as partes do tempo de execuão que ainda não foram
+A seguir analisamos as partes do tempo de execução que ainda não foram
 levadas em conta.
 Existem duas partes: o custo das chamadas a #size(u)# ao buscar por nodos
 bodes expiatórios e o custo de chamadas a 
@@ -176,16 +172,18 @@ bodes expiatórios e o custo de chamadas a
 O custo das chamadas a #size(u)# pode ser relacionado ao custo de chamadas
 a #rebuild(w)# da seguinte forma:
 \begin{lem}
-  Durante uma chamada a 
-#add(x)# em uma #ScapegoatTree#, o custo de encontrar o bode expiatório #w# e reconstruir a subárvore enraizada em #w# é $O(#size(w)#)$.
+Durante uma chamada a 
+#add(x)# em uma #ScapegoatTree#, o custo de encontrar o bode expiatório #w# 
+e reconstruir a subárvore enraizada em #w# é $O(#size(w)#)$.
 \end{lem}
 
 \begin{proof}
   O custo de reconstruir o nodo bode expiatório #w# uma vez que o achamos é 
-$O(#size(w)#)$.  Ao busca o nodo bode expiatório, chamamos #size(u)# em uma
+$O(#size(w)#)$.  Ao buscar o nodo bode expiatório, chamamos #size(u)# em uma
 sequência de nodos
 $#u#_0,\ldots,#u#_k$ até que encontramos um bode expiatório 
-$#u#_k=#w#$.  Porém, como $#u#_k$ é o primeiro nodo nessa sequência que é um bode expiatório, sabemos que 
+$#u#_k=#w#$.  Porém, como $#u#_k$ é o primeiro nodo nessa sequência que é
+  um bode expiatório, sabemos que 
 \[
   #size(u#_{i}#)# < \frac{2}{3}#size(u#_{i+1}#)#
 \]
@@ -206,7 +204,7 @@ para todo $i\in\{0,\ldots,k-2\}$.  Portanto, o custo de todas as chamadas a #siz
   \right)\right) \\
 &=& O(#size(u#_k#)#) = O(#size(w)#) \enspace ,
 \end{eqnarray*}
-  onde a última linha segue do fato que a soma é uma séries geométrica decrescente.
+  onde a última linha segue do fato que a soma é uma série geométrica decrescente.
 \end{proof}
 
 Somente falta provar um limitante superior no custo de todas as chamadas a
@@ -214,9 +212,8 @@ Somente falta provar um limitante superior no custo de todas as chamadas a
 
 \begin{lem}\lemlabel{scapegoat-amortized}
   Iniciando com uma 
-   #ScapegoatTree# vazia com qualquer sequência de $m$ operações #add(x)#
-  e #remove(x)# causam até $O(m\log m)$ de tempo para ser usado por operações 
-  #rebuild(u)#.
+   #ScapegoatTree# vazia, uma sequência de $m$ operações #add(x)#
+  e #remove(x)# faz com que as operações #rebuild(u) usem tempo #$O(m\log m)$.
 \end{lem}
 
 \begin{proof}
@@ -226,14 +223,16 @@ Somente falta provar um limitante superior no custo de todas as chamadas a
   pode pagar por alguma constante, $c$, unidades de tempo gastos na reconstrução.
 
   O esquema resulta provê um total de 
-  $O(m\log m)$ créditos e toda chamada de #rebuild(u)# é paga com esses créditos guardados em #u#.
+  $O(m\log m)$ créditos e toda chamada de #rebuild(u)# é paga com esses 
+  créditos guardados em #u#.
 Durante uma inserção ou deleção, cedemos um crédito a cada nodo no 
 caminho ao nodo inserido, ou removido, #u#. 
 Dessa maneira gastamos até 
   $\log_{3/2}#q#\le \log_{3/2}m$ créditos por operação. 
-  Duração a remoção também guardamos um crédito adicional de reserva.
+  Durante a remoção também guardamos um crédito adicional de reserva.
   Então, no total cedemos até 
-   $O(m\log m)$ créditos. Tudo o que resta é mostrar que esses créditos são suficientes para pagar por todas as chamadas a #rebuild(u)#.
+   $O(m\log m)$ créditos. Tudo o que resta é mostrar que esses créditos 
+   são suficientes para pagar por todas as chamadas a #rebuild(u)#.
 Se chamarmos
    #rebuild(u)# durante uma inserção, é porque #u# é um bode expiatório.
    Suponha, sem perda de generalidade, que
@@ -253,7 +252,7 @@ Se chamarmos
     #size(u.left)# - #size(u.right)# > \frac{1}{2}#size(u.left)# >
     \frac{1}{3}#size(u)#  \enspace .
   \]
-  Agor, a última vez que uma subárvore contendo #u# foi reconstruída (ou quando #u#
+  Agora, a última vez que uma subárvore contendo #u# foi reconstruída (ou quando #u#
   foi inserido, se uma subárvore contendo #u# nunca foi reconstruída), temos
   \[
     #size(u.left)# - #size(u.right)# \le 1 \enspace .
@@ -266,15 +265,15 @@ Se chamarmos
   \]
   e há portanto pelo menos essa quantidade de créditos guardados em #u#
   que estão disponíveis para pagar pelo 
-  $O(#size(u)#)$ de time que leva para chamar 
+  $O(#size(u)#)$ de tempo que leva para chamar 
   #rebuild(u)#.
 
-  Se chamarmos 
+  Se chamamos 
   #rebuild(u)# durante uma remoção, é porque $#q# > 2#n#$.
   Nesse caso, temos 
   $#q#-#n#> #n#$ créditos guardados em uma reserva e os usamos
   para pagar pelo 
-  $O(#n#)$ de tempo que leva para reconstrução a raiz. Isso completa a prova. 
+  $O(#n#)$ de tempo que leva para reconstruir a raiz. Isso completa a prova. 
 \end{proof}
 
 \subsection{Resumo}
@@ -284,21 +283,21 @@ O teorema a seguir resume o desempenho da estrutura de dados
 \begin{thm}\thmlabel{scapegoat}
   Uma #ScapegoatTree# implementa a interface #SSet#. Ignorando o custo
   de operações
-  #rebuild(u)#, uma #ScapegoatTree# aceita as operações
-  #add(x)#, #remove(x)# e #find(x)# em $O(\log #n#)$ de tempo por operação.
+  #rebuild(u)#, uma #ScapegoatTree# possui as operações
+  #add(x)#, #remove(x)# e #find(x)# em tempo $O(\log #n#)$ por operação.
   
   Além disso, iniciando com uma 
-  #ScapegoatTree# vazia, qualquer sequência de $m$ operações
-  #add(x)# e  #remove(x)# resulta em um tempo total $O(m\log m)$
-  gasto em todas as chamadas a #rebuild(u)#.
+  #ScapegoatTree# vazia, uma sequência de $m$ operações
+  #add(x)# e #remove(x)# resulta em um tempo total $O(m\log m)$
+  gasto nas chamadas a #rebuild(u)#.
 \end{thm}
 
 \section{Discussão e Exercícios}
 
 O termo
  \emph{scapegoat tree} é atribuído a Galperin e Rivest \cite{gr93},
- que defime e analizam essas árvores. Porém, a mesma estrutura foi
- descuberta anteriormente por 
+ que definiram e analizaram essas árvores. Porém, a mesma estrutura foi
+ descoberta anteriormente por 
  \cite{a89,a99}, que as chamou de 
 \emph{árvores balanceadas gerais (originalmente, em inglês, general balanced trees)}
 \index{general balanced tree}%
@@ -306,28 +305,28 @@ O termo
 pois elas podem ter qualquer forma desde que a altura seja pequena. 
 
 Experimentos com a implementação
- #ScapegoatTree# irá revelar que 
+ #ScapegoatTree# mostram que 
  ela costuma ser consideravelmente mais lenta que as outras implementações de #SSet# neste livro. 
- Isso pode ser surpreendente pois a altura é limitada por 
+ Isso pode ser surpreendente pois a altura é limitada a
 \[
    \log_{3/2}#q# \approx 1.709\log #n# + O(1)
 \] 
-é melhor que o comprimento esperado de um caminho de busca em uma
+que é melhor que o comprimento esperado de um caminho de busca em uma
 #Skiplist# e não muito longe de um em uma #Treap#.
 
 A implementação pode ser otimizada ao armazenar os tamanhos das subárvores
 explicitamente em cada nodo ou reutilizando tamanhos de subárvores previamente
-comptuados (Exercícios~\ref{exc:scapegoat-quicksize}
+computados (Exercícios~\ref{exc:scapegoat-quicksize}
 e \ref{exc:scapegoat-explicitsize}).  Mesmo com essas otimizações,
 sempre haverão sequências de operações 
 #add(x)# e #delete(x)# para as quais uma 
  #ScapegoatTree# leva mais tempo que outras implementações da #SSet#.
 
-Essa diferença em despempenho é devido ao fato que, diferentemente de
+Essa diferença em desempenho é devido ao fato que, diferentemente de
 outras implementações #SSet# discutidas neste livro, uma 
  #ScapegoatTree# pode gastar muito tempo se reestruturando. 
- \excref{scapegoat-nlogn} pede que você prova que existem sequências de #n# operações em que uma 
-#ScapegoatTree# irá gastar 
+O \excref{scapegoat-nlogn} pede que você prove que existem sequências de #n# 
+operações em que uma #ScapegoatTree# irá gastar 
  $#n#\log #n#$ de tempo em chamadas a #rebuild(u)#.
 Isso contrasta a outras implementações #SSet# discutidas neste livro, que fazem somente 
 $O(#n#)$ mudanças estruturais durante uma sequência de 
@@ -335,27 +334,25 @@ $O(#n#)$ mudanças estruturais durante uma sequência de
 uma #ScapegoatTree# faz sua restruturação usando chamadas a  
 #rebuild(u)# \cite{d90}.
 
-Embora seu desempenho relativamente ruim, há aplicações em que uma
+Apesar de seu desempenho relativamente ruim, há aplicações em que uma
 #ScapegoatTree# pode ser a escolha certa. 
-Isso ocorreria quando há dados adicionais associados a nodos que não
+Isso ocorre quando há dados adicionais associados a nodos que não
 podem ser atualizados em tempo constante quando uma rotação é realizada
 mas que podem ser atualizados em uma operação #rebuild(u)#.
 Nesses casos, a 
 #ScapegoatTree# e outras estruturas similares baseadas em reconstrução parcial podem
-funcionar bem. Um exemplo de tal aplicação é esboçado em 
-\excref{list-order-maintenance}.
+funcionar bem. Um exemplo de tal aplicação é esboçado no \excref{list-order-maintenance}.
 
 \begin{exc}
 Simule a adição dos valores  1.5 e depois 1.6 na 
-  #ScapegoatTree# em \figref{scapegoat-example}.
+  #ScapegoatTree# na \figref{scapegoat-example}.
 \end{exc}
 
 \begin{exc}
   Ilustre o que acontece quando a sequência 
    $1,5,2,4,3$ é adicionada a uma 
-  #ScapegoatTree# vazia, e mostre onde os créditos descritos na prova 
-  de 
-   \lemref{scapegoat-amortized} vão, e como eles são usados durante
+  #ScapegoatTree# vazia e mostre onde os créditos descritos na prova 
+  do \lemref{scapegoat-amortized} vão e como eles são usados durante
    essa sequência de adições. 
 \end{exc}
 
@@ -367,8 +364,7 @@ Simule a adição dos valores  1.5 e depois 1.6 na
 \end{exc}
 
 \begin{exc}
-  A
-  #ScapegoatTree#, conforme descrita neste capítulo, garante que o 
+  A #ScapegoatTree#, conforme descrita neste capítulo, garante que o 
   comprimento do caminho de busca não excede
    $\log_{3/2}#q#$.
   \begin{enumerate}
@@ -376,18 +372,17 @@ Simule a adição dos valores  1.5 e depois 1.6 na
       #ScapegoatTree# onde o comprimento do caminho de busca que não excede 
       $\log_{#b#} #q#$, onde #b# é um parâmetro com $1<#b#<2$.
     \item O que sua análise e experimentos dizem sobre o custo amortizado de 
-      #find(x)#, #add(x)# e #remove(x)# como uma função de 
-      #n# e #b#?
+      #find(x)#, #add(x)# e #remove(x)# como uma função de #n# e #b#?
   \end{enumerate}
 \end{exc}
 
 \begin{exc}\exclabel{scapegoat-quicksize}
-Modifique o método #add(x)# da #ScapegoatTree# tal que não gaste 
-qualquer tempo recomputando os tamanhos das subárvores que foram
+Modifique o método #add(x)# da #ScapegoatTree# para que não gaste 
+tempo recomputando os tamanhos das subárvores que foram
 anteriormente computados. Isso é possível porque quando o método 
   quer computar #size(w)#, ele já computou #size(w.left)#
   ou #size(w.right)#.  Compare o desempenho de sua
-  implementação modificada com a implementação dada aqui. 
+  implementação modificada com a implementação fornecida neste livro. 
 \end{exc}
 
 \begin{exc}\exclabel{scapegoat-explicitsize}
@@ -399,7 +394,7 @@ anteriormente computados. Isso é possível porque quando o método
 \end{exc}
 
 \begin{exc}
-  Reimplemente o método #rebuild(u)# discutido no começo desse capítulo tal que não requer o uso de um array para guardar os nodos da subárve sendo reconstruída.
+  Reimplemente o método #rebuild(u)# discutido no começo desse capítulo para que não necessite do uso de um array para guardar os nodos da subárvore sendo reconstruída.
   Em vez disso, deve-se usar recursão primeiro para conectar os nodos em uma lista ligada e então converter essa lista ligada em uma árvore binária perfeitamente balanceada. (Existem implementações recursivas muito elegantes de ambos os passos.)
 \end{exc}
 
@@ -425,27 +420,25 @@ $O(\log#n#)$.
   a variável #u.t# é decrementada. Quando 
    $#u.t#=0$ a subárvore inteira enraizada em #u#
    é reconstruída em uma árvore binária de busca perfeitamente balanceada.
-   Quando um nodo #u# estiver envolvido em uma operação de reconstrução (porque #u# foi reconstruída ou um dos ancestrais de #u# foi reconstruído) #u.t# é reiniciado a
+   Quando um nodo #u# estiver envolvido em uma operação de reconstrução (porque #u# foi reconstruída ou um dos ancestrais de #u# foi reconstruído) #u.t# é reiniciada a
   $#size(u)#/3$.
 
   Sua análise deve mostrar que as operações em uma 
    #CountdownTree# roda em tempo amortizado 
-  $O(\log #n#)$.  (Dica: primeiro mostre que cada nodo #u# satisfaz alguma versão de uma invariante de balanceamento.)
+  $O(\log #n#)$.  (Dica: primeiro mostre que cada nodo #u# satisfaz 
+  alguma versão de uma invariante de balanceamento.)
 \end{exc}
 
 \begin{exc}
   \index{DynamiteTree@#DynamiteTree#}%
-  Analise e implemente uma 
-  #DynamiteTree#.  Em uma #DynamiteTree# cada nodo 
+  Analise e implemente uma #DynamiteTree#.  Em uma #DynamiteTree# cada nodo 
   #u# registra o tamanho da subárvore enraizada em #u# em uma variável
   #u.size#.  As operações #add(x)# e #remove(x)# são exatamente as mesmas que em uma 
-  #BinarySearchTree# padrão exceto que, sempre que uma dessas operações afetam uma subárvore de um nodo #u#, esse nodo \emph{explode} com probabilidade 
+  #BinarySearchTree# padrão exceto que, sempre que uma dessas operações afeta uma subárvore de um nodo #u#, esse nodo \emph{explode} com probabilidade 
   $1/#u.size#$.  Quando #u# explode, sua subárvore inteira é reconstruída
   em uma árvore binária de busca perfeitamente balanceada.
-
   A sua análise deve mostrar que operações em uma
-   #DynamiteTree# roda em tempo esperado 
-  $O(\log #n#)$. 
+   #DynamiteTree# rodam em tempo esperado $O(\log #n#)$. 
 \end{exc}
  
 
@@ -455,13 +448,12 @@ $O(\log#n#)$.
   #Sequence# que mantém uma sequência (lista) de elementos. 
   Ela suporta as seguintes operações:
   \begin{itemize}
-    \item #addAfter(e)#: adicionamos um novo elemento após o elemento #e# na sequência. Retorna o elemento adicionado. (Se #e# é null,
-      o novo elemento é adicionado no início da sequência.)
+    \item #addAfter(e)#: adiciona um novo elemento após o elemento #e# na sequência. Retorna o elemento adicionado. (Se #e# for null, o novo elemento é adicionado no início da sequência.)
     \item #remove(e)#: Remove #e# da sequência. 
     \item #testBefore(e1,e2)#: retorna #true# se e somente se #e1# vem antes de 
     #e2# na sequência.
   \end{itemize}
-  As primeiras duas operações devem rodas em tempo amortizado
+  As primeiras duas operações devem rodar em tempo amortizado
   $O(\log #n#)$. A terceira operação deve rodar em tempo constante.
 
   A estrutura de dados 
@@ -469,6 +461,6 @@ $O(\log#n#)$.
   Para implementar #testBefore(e1,e2)# em tempo constante,
   cada elemento #e# é marcado com um inteiro que codifica o caminho da raiz até #e#.
   Dessa forma, 
-   #testBefore(e1,e2)# pode ser implementado pela comparação das marcações de #e1# e #e2#. 
+   #testBefore(e1,e2)# pode ser implementada pela comparação das marcações de #e1# e #e2#. 
 \end{exc}
 
