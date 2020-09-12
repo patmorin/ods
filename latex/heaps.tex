@@ -1,34 +1,38 @@
 \chapter{Heaps}
 \chaplabel{heaps}
 
-Neste capítulo, nós discutimos duas implementações da estrutura de dados estremamente útil #Queue# de prioridades. Essas duas estruturas são
+Neste capítulo, nós discutiremos duas implementações da estrutura de dados
+extremamente útil #Queue# de prioridades. Essas duas estruturas são
 um tipo especial de árvore binária chamada de \emph{heap},
 \index{heap}%
 \index{heap binária}%
 \index{heap!binária}%
-que significa ``uma pilha desorganizada.'' Isso é em contraste a árvores binárias de busca que podem ser pensadas com pilhas altamente organizadas.
+que significa ``uma pilha desorganizada.'' Isso contrasta com árvores binárias 
+de busca que podem ser pensadas como pilhas altamente organizadas.
 
 A primeira implementação da heap usa um array que simula uma árvore binária 
 completa. Essa implementação muito rápida é a base de um dos algoritmos
 mais rápido de ordenação, chamado de heapsort (veja a \secref{heapsort}).
 A segunda implementação é baseada em árvores binárias mais flexíveis.
-Ela aceita a operação
-#meld(h)# que permite que a fila de prioridades absorva os elementos a uma segunda fila de prioridades $h$. 
+Ela possui a operação
+#meld(h)# que permite que a fila de prioridades absorva os elementos 
+de outra fila de prioridades $h$. 
 
 \section{#BinaryHeap#: Uma Árvore Binária Implícita}
 \seclabel{binaryheap}
 
 \index{BinaryHeap@#BinaryHeap#}%
 Nossa primeira implementação de uma 
- #Queue# (de prioridades) é baseada em uma técnica criada há quatrocentos anos atrás. O \emph{método de Eytzinger} 
+ #Queue# (de prioridades) é baseada em uma técnica criada há quatrocentos anos atrás. 
+ O \emph{método de Eytzinger} 
 \index{método de Eytzinger}%
 nos permite representar uma árvore binária completa como um array 
-listando os nodos da árvore em ordem de largura (veja a 
- \secref{bintree:traversal}).
+listando os nodos da árvore em ordem de largura (veja a \secref{bintree:traversal}).
  Dessa forma, a raiz é guardada na posição 0, o filho à esquerda da raiz é
- guardada na posição 1, o filho à direita da raiz na posição 2, o filho à esquerda do filho à esquerda da raiz é guardado na posição 3 e assim por diante.
-Veja a 
-\figref{eytzinger}.
+ guardada na posição 1, o filho à direita da raiz na posição 2, 
+ o filho à esquerda do filho à esquerda da raiz é guardado na 
+ posição 3 e assim por diante.
+Veja a \figref{eytzinger}.
 
 \begin{figure}
   \begin{center}
@@ -57,12 +61,13 @@ valor na #Queue# com prioridades é guardado na posição 0 (a raiz).
 Em uma #BinaryHeap#, os #n# elementos são guardados em um array #a#:
 \codeimport{ods/BinaryHeap.a.n}
 
-Implementar a operação #add(x)# razoavelmente simples.
+Implementar a operação #add(x)# é razoavelmente simples.
 Assim como todas as estruturas baseadas em array, primeiro verificamos se
-#a# está cheio (verificando se 
- $#a.length#=#n#$) e, caso positivo, expandimos #a#.
+#a# está cheio (verificando se $#a.length#=#n#$) e, caso positivo, expandimos #a#.
  A seguir, posicionamos #x# na posição
-#a[n]# e incrementamos #n#.  Nesse ponto, resta garantirmos que mantemos a propriedade heap. Fazemos isso repetidamente trocando #x# com seu pai, #x#, até não seja mais menor que seu pai. 
+#a[n]# e incrementamos #n#.  Nesse ponto, resta garantirmos que 
+mantemos a propriedade heap. Fazemos isso repetidamente trocando #x# com seu pai,
+#x#, até não seja mais menor que seu pai. 
 Veja a \figref{heap-insert}.
 \codeimport{ods/BinaryHeap.add(x).bubbleUp(i)}
 
@@ -78,14 +83,16 @@ Veja a \figref{heap-insert}.
 \end{figure}
 
 A implementação da 
-operação #remove()#, que remove o menor valor da heap é um pouco mais complicado. Sabemos onde o menor valor está (na raiz) mas precisamos substituí-lo após sua remoção e garantir a manutenção da propriedade heap. 
+operação #remove()#, que remove o menor valor da heap é um pouco mais complicada. 
+Sabemos onde o menor valor está (na raiz) mas precisamos substituí-lo 
+após sua remoção e garantir a manutenção da propriedade heap. 
 
 O modo mais fácil de fazer isso é substituir a raiz com o valor
- #a[n-1]#, remover esse valor e decrementar #n#. delete
+ #a[n-1]#, remover esse valor e decrementar #n#. 
  Infelizmente, o novo elemento na raiz agora provavelmente não é o menor
  elemento, então ele precisa ser movido para baixo na árvore.
  Fazemos isso repetidamente, comparando esse elemento aos seus dois filhos.
- Se for menor dos três, então paramos. Caso contrário, trocamos esse elemento
+ Se ele for o menor dos três, então paramos. Caso contrário, trocamos esse elemento
  com o menor de seus dois filhos e continuamos.
 
 \codeimport{ods/BinaryHeap.remove().trickleDown(i)}
@@ -109,7 +116,7 @@ de amortização do
 Felizmente, essa árvore binária está \emph{completa}
 \index{árvore binária!completa}%
 \index{árvore binária completa}%
-; todo nível exceto o último têm o maior número possível de nodos.
+; todo nível exceto o último tem o maior número possível de nodos.
 Portanto, se a altura dessa árvore é $h$, então ele tem pelo menos $2^h$ nodos.
 Se outra forma podemos afirmar
 \[
@@ -119,8 +126,7 @@ Fazendo logaritmos nos dois lados dessa equação resulta em
 \[
    h \le \log #n# \enspace .
 \]
-Portanto, as operações 
- #add(x)# e #remove()# rodam em $O(\log #n#)$ de tempo. 
+Portanto, as operações  #add(x)# e #remove()# rodam em $O(\log #n#)$ de tempo. 
 
 \subsection{Resumo}
 
@@ -128,11 +134,10 @@ O teorema a seguir resume o desempenho de uma #BinaryHeap#:
 
 \begin{thm}\thmlabel{binaryheap}
   Uma #BinaryHeap# implementa a interface #Queue# de prioridades.  
-  Ignorando o custo de chamadas ao método #resize()#, uma #BinaryHeap# aceita 
-  as operações
-  #add(x)# e #remove()# em $O(\log #n#)$ de tempo por operação. 
+  Ignorando o custo de chamadas ao método #resize()#, uma #BinaryHeap# possui 
+  as operações #add(x)# e #remove()# em $O(\log #n#)$ de tempo por operação. 
   Além disso, começando com uma 
-  #BinaryHeap# vazia, qualquer sequência de $m$ operações
+  #BinaryHeap# vazia, uma sequência de $m$ operações
   #add(x)# e #remove()# resulta em um total de $O(m)$
   de tempo gasto durante todas as chamadas a #resize()#.
 \end{thm}
@@ -144,11 +149,15 @@ O teorema a seguir resume o desempenho de uma #BinaryHeap#:
 Nesta seção, descrevemos a #MeldableHeap#, uma implementação da #Queue# com prioridades na qual a estrutura básica também é uma árvore binária do tipo heap ordenada. Entretanto, diferentemente de uma #BinaryHeap# na qual a estrutura básica é completamente definida pelo número de elementos, não há restrições na forma 
 da árvore binária que implementa uma #MeldableHeap#, uma heap combinável; qualquer forma vale.
 
-As operações #add(x)# e #remove()# em uma #MeldableHeap# são implementada
-em termos da operação 
- #merge(h1,h2)#.  Essa operação recebe dois nodos de heap #h1# e #h2# os junta, retornando um nodo de heap que é a raiz de uma heap que contém todos os elementos em uma subárvore enraizada em #h1# e todos elementos em uma subárvore enraizada em #h2#. 
+As operações #add(x)# e #remove()# em uma #MeldableHeap# são implementadas
+em termos da operação #merge(h1,h2)#.  Essa operação recebe dois 
+nodos de heap #h1# e #h2# os junta, retornando um nodo de heap que 
+é a raiz de uma heap que contém todos os elementos em uma subárvore 
+enraizada em #h1# e todos elementos em uma subárvore enraizada em #h2#. 
 
-O lado bom de uma operação #merge(h1,h2)# é que ela pode ser definida recursivamente. Veja a \figref{meldable-merge}.  Se #h1# ou #h2#
+O lado bom de uma operação #merge(h1,h2)# é que ela pode 
+ser definida recursivamente. Veja a \figref{meldable-merge}.  
+Se #h1# ou #h2#
 forem #nil#, então estaremos combinando com um conjunto vazio, então
 retornamos #h1# ou #h2#, respectivamente. Por outro lado, 
 assumimos
@@ -158,19 +167,19 @@ Então sabemos que a raiz da heap combinada conterá #h1.x# e podemos
 recursivamente combinar #h2# com 
  #h1.left# ou #h1.right#, conforme desejarmos.
 É nisso que a randomização entra e lançamos uma moeda para decidir 
-se combinamos #h2# com 
-#h1.left# ou #h1.right#:
+se combinamos #h2# com #h1.left# ou #h1.right#:
 \codeimport{ods/MeldableHeap.merge(h1,h2)}
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/meldable-merge}}
-  \caption[A combinação em uma MeldableHeap]{A combinação de #h1# e #h2# é feita pela combinação de #h2# com a subárvore 
+  \caption[A combinação em uma MeldableHeap]{A combinação, operação \emph{merge}, de #h1# e #h2# é feita pela combinação de #h2# com a subárvore 
   #h1.left# ou a subárvore #h1.right#.}
   \figlabel{meldable-merge}
 \end{figure}
 
 Na próxima seção, veremos que 
- #merge(h1,h2)# roda em tempo esperado $O(\log #n#)$, onde #n# é o número total
+ #merge(h1,h2)# roda em tempo esperado $O(\log #n#)$, 
+ onde #n# é o número total
  de elementos em #h1# e #h2#.
 
 Com acesso à operação 
@@ -179,27 +188,29 @@ contendo #x# e então combinamos #u# com a raiz da nossa heap:
 \codeimport{ods/MeldableHeap.add(x)}
 Isso leva $O(\log (#n#+1)) = O(\log #n#)$ de tempo esperado.
 
-A operação #remove()# também é fácil. O nodo que queremos remover é a raiz, então simplesmente combinamos seus seu filhos e fazemos o resultado ser a raiz: 
+A operação #remove()# também é fácil. O nodo que queremos remover é a 
+raiz, então simplesmente combinamos seus seu filhos e fazemos o resultado ser a raiz: 
 \codeimport{ods/MeldableHeap.remove()}
-Novamente, isso leva 
-$O(\log #n#)$ de tempo esperado. 
+Novamente, isso leva $O(\log #n#)$ de tempo esperado. 
 
-Adicionalmente, uma
-#MeldableHeap# pode implementar muitas outras operações em
+Adicionalmente, uma #MeldableHeap# pode implementar muitas 
+outras operações em
 $O(\log #n#)$ de tempo esperado, incluindo:
 \begin{itemize}
 \item #remove(u)#: remove o nodo #u# (e sua chave #u.x#) da heap. 
 \item #absorb(h)#: adiciona todos os elementos de uma #MeldableHeap# #h# para essa heap, esvaziando #h# no processo. 
 \end{itemize}
-Cada uma dessas operações pode ser implementada usando um número constante de operações #merge(h1,h2)# que leva $O(\log #n#)$ de tempo experado.
+Cada uma dessas operações pode ser implementada usando um número constante de operações #merge(h1,h2)# que leva $O(\log #n#)$ de tempo esperado.
 
-\subsection{Análise de #merge(h1,h2)#}
+\subsection{Análise da Operação #merge(h1,h2)#}
 
 A análise de 
-#merge(h1,h2)# é baseada na análise da uma caminhada aleatória em uma árvore binária. Uma \emph{caminhada aleatória} em uma árvore binária inicia-se
+#merge(h1,h2)# é baseada na análise da uma caminhada aleatória em uma árvore binária. 
+Uma \emph{caminhada aleatória} em uma árvore binária inicia-se
 na raiz da árvore. A cada passo na caminhada aleatória, uma moeda é lançada e,
-dependendo do resultado desse lançamento, a caminhada prossegur ao filho à esquerda
-ou à direita do nodo atual. Essa caminhada termina quando sai da árvore (o nodo atual torna-se #nil#).
+dependendo do resultado desse lançamento, a caminhada prossegue ao filho à esquerda
+ou à direita do nodo atual. Essa caminhada termina quando sai da árvore 
+(o nodo atual torna-se #nil#).
 
 O lema a seguir é de certa forma impressionante porque não depende da forma da árvore binária:
 
@@ -210,17 +221,19 @@ O comprimento esperado de uma caminhada aleatória em uma árvore binária com #
 \begin{proof}
   A prova é por indução em #n#. No caso base, 
 $#n#=0$ e a caminhada tem comprimento 
-$0=\log (#n#+1)$.  Suponha que o resultado é verdadeiro para todos os inteiros não negativos $#n#'< #n#$.
+$0=\log (#n#+1)$.  Suponha que o resultado é verdadeiro para todos 
+  os inteiros não negativos $#n#'< #n#$.
 
 Considere que $#n#_1$ denota o tamanho da subárvore à esquerda da raiz tal que 
-$#n#_2=#n#-#n#_1-1$ seja o tamanho da subárvore à direita da raiz. Iniciando na raiz, a caminhada faz um passo e então continua em uma subárvores de tamanho
+$#n#_2=#n#-#n#_1-1$ seja o tamanho da subárvore à direita da raiz. 
+  Iniciando na raiz, a caminhada faz um passo e então continua em uma subárvore de tamanho
 $#n#_1$ ou $#n#_2$.  Pela nossa hipótese indutiva, o comprimento esperado de uma caminhada é então 
 \[
     \E[W] = 1 + \frac{1}{2}\log (#n#_1+1) + \frac{1}{2}\log (#n#_2+1)  \enspace , 
 \] 
 pois 
  $#n#_1$ e $#n#_2$ são menores que $#n#$.  Como $\log$ é uma função côncava,
-$\E[W]$ é maximizado quando $#n#_1=#n#_2=(#n#-1)/2$.
+$\E[W]$ é maximizada quando $#n#_1=#n#_2=(#n#-1)/2$.
 %To maximize this,
 %over all choices of $#n#_1\in[0,#n#-1]$, we take the derivative and obtain
 %\[
@@ -239,31 +252,33 @@ Portanto, o número esperado de passos feitos pela caminhada aleatória é
 \end{proof}
 
 Fazemos uma rápida digressão para notar que, para leitores que sabem um 
-pouco sobre teoria da informação, a prova de 
+pouco sobre teoria da informação, a prova do 
 \lemref{tree-random-walk} pode ser escrita em termos da entropia.
-\begin{proof}[Prova baseada em Teoria da Informação da \lemref{tree-random-walk}]
-  Seja
-$d_i$ a profundidade do $i$-ésimo nodo externo e lembre-se que uma árvore binária com #n# nodos tem #n+1# nodos externos. A probabilidade da caminhada aleatória alcançar o $i$-ésimo nodo externo é exatamente 
+\begin{proof}[Prova baseada em Teoria da Informação do \lemref{tree-random-walk}]
+  Seja $d_i$ a profundidade do $i$-ésimo nodo externo e 
+  lembre-se que uma árvore binária com #n# nodos tem #n+1# nodos 
+  externos. A probabilidade da caminhada aleatória alcançar o 
+  $i$-ésimo nodo externo é exatamente 
 $p_i=1/2^{d_i}$, então o comprimento esperado da caminhada aleatória é dado por 
 \[
    H=\sum_{i=0}^{#n#} p_id_i
     =\sum_{i=0}^{#n#} p_i\log\left(2^{d_i}\right)
     = \sum_{i=0}^{#n#}p_i\log({1/p_i})
 \]
-O lado direito dessa equação é facilmente reconhecível como a entropia da uma distribuição de probabilidade sobre 
+O lado direito dessa equação é facilmente reconhecível como a 
+  entropia da uma distribuição de probabilidade sobre 
  $#n#+1$ elementos. Um fato básico sobre a entropia de uma distribuição sobre 
 $#n#+1$ elementos é que ela não passa de  
 $\log(#n#+1)$, o que prova o lema. 
 \end{proof}
 
-Com esse resultado em caminhadas aleatórias, podemos facilmente provar que o tempo 
-de execução da operação 
-#merge(h1,h2)# é $O(\log #n#)$.
+Com esse resultado sobre caminhadas aleatórias, podemos facilmente provar que o tempo 
+de execução da operação #merge(h1,h2)# é $O(\log #n#)$.
 
 \begin{lem}
-  Senda #h1# e #h2# as raízes de duas heaps contendo $#n#_1$
+  Sendo #h1# e #h2# as raízes de duas heaps contendo $#n#_1$
   e $#n#_2$ nodos, respectivamente, então o tempo esperado da execução de 
-  #merge(h1,h2)# é até $O(\log #n#)$, onde $#n#=#n#_1+#n#_2$.
+  #merge(h1,h2)# é $O(\log #n#)$, onde $#n#=#n#_1+#n#_2$.
 \end{lem}
 
 \begin{proof}
@@ -280,13 +295,11 @@ de execução da operação
 
 \subsection{Resumo}
 
-O teorema a seguir resume o desempenho de uma 
- #MeldableHeap#:
+O teorema a seguir resume o desempenho de uma #MeldableHeap#:
 
 \begin{thm}\thmlabel{meldableheap}
   Uma #MeldableHeap# implementa a interface de uma #Queue# com prioridades.
-  Uma 
-  #MeldableHeap# aceita as operações #add(x)# e #remove()# em 
+  Uma #MeldableHeap# possui as operações #add(x)# e #remove()# em 
    $O(\log #n#)$ de tempo esperado por operação. 
 \end{thm}
 
@@ -296,7 +309,8 @@ A representação implícita de uma árvore binária completa como um array, ou 
 parece ter sido proposta pela primeira vez por Eytzinger \cite{e1590}.
 Ele usou essa representação contendo árvores genealógicas
 \index{árvores genealógicas}%
-de famílias nobres.  A estrutura de dados #BinaryHeap# descrita aqui foi descoberta por Williams \cite{w64}.
+de famílias nobres.  A estrutura de dados #BinaryHeap# descrita 
+aqui foi descoberta por Williams \cite{w64}.
 
 A estrutura de dados randomizada 
 #MeldableHeap# descrita aqui parece ter sido originalmente proposta por 
@@ -314,27 +328,27 @@ heaps de Fibonacci \cite{ft87},
 heaps de pareamento (em inglês, \emph{pairing heaps}) \cite{fsst86},\
 \index{pairing heap}%
 \index{heap!pairing}%
-e heap inclinadas (em inglês, \emph{skew heaps}) \cite{st83}, 
+e \emph{skew heaps} \cite{st83}, 
 \index{skew heap}%
-\index{heap inclinada}%
-\index{heap!inclinada}%
 embora nenhuma dessas seja tão simples quanto a estrutura #MeldableHeap#.
 
 Algumas dessas estruturas também aceitam uma operação chamada de 
 #decreaseKey(u,y)#, na qual o valor no nodo #u# é reduziado a #y#.
 \index{decreaseKey@#decreaseKey(u,y)#}%
-(É uma pré-condição que $#y#\le#u.x#$.)  Na maior parte desses estruturas, essa operação pode ser rodar em 
+(É uma pré-condição que $#y#\le#u.x#$.)  
+Na maior parte desses estruturas, essa operação pode rodar em 
  $O(\log #n#)$ de tempo ao remover o nodo 
 #u# e inserir #y#.  Porém, algumas dessas estruturas podem implementar 
 #decreaseKey(u,y)# mais eficientemente.  Em especial, #decreaseKey(u,y)#
 leva $O(1)$ de tempo amortizado em uma heap de Fibonacci e $O(\log\log #n#)$
-de tempo amortizado em uma versão especial de \emph{pairing heaps}\cite{e09}.
+de tempo amortizado em uma versão especial das \emph{pairing heaps}\cite{e09}.
 Essa operação 
-#decreaseKey(u,y)# mais eficiente tem aplicações em acelerar vários algoritmos de grafos, incluindo o importante algoritmo de encontrar menores caminhos de Dijkstra \cite{ft87}.
+#decreaseKey(u,y)# mais eficiente pode ser aplicada para acelerar vários 
+algoritmos de grafos, incluindo o importante algoritmo de 
+encontrar menores caminhos de Dijkstra \cite{ft87}.
 
 \begin{exc}
-  Ilustre a adição dos valores 7 e então 3 à 
-  #BinaryHeap# mostrada no final da 
+  Ilustre a adição dos valores 7 e então 3 à #BinaryHeap# mostrada no final da 
   \figref{heap-insert}.
 \end{exc}
 
@@ -346,27 +360,27 @@ Essa operação
 \begin{exc}
   Implemente o método #remove(i)# que remove o valor guardado em 
   #a[i]# em uma #BinaryHeap#.  Esse método devem rodar em tempo $O(\log #n#)$.
-  A seguirm explique porque esse método provavelmente não é útil. 
+  A seguir explique porque esse método provavelmente não é útil. 
 \end{exc}
 
 \begin{exc}\exclabel{general-eytzinger}
   \index{árvore!$d$-ária}%
-  Uma
-  árvore $d$-ária é uma generalização de uma árvore binária em que cada nodo interno tem 
-  $d$ filhos. Usando o método de Eytzinger também é possível representar árvores $d$-árias usando arrays. Trabalhe as equações de forma que, dado um índice #i#, determine o pai de #i# e os seus $d$ filhos nessa representação.
+  Uma árvore $d$-ária é uma generalização de uma árvore binária 
+  em que cada nodo interno tem $d$ filhos. Usando o método de Eytzinger 
+  também é possível representar árvores $d$-árias usando arrays. 
+  Trabalhe as equações de forma que, dado um índice #i#, determine 
+  o pai de #i# e os seus $d$ filhos nessa representação.
 \end{exc}
 
 \begin{exc}
   \index{DaryHeap@#DaryHeap#}%
-  Usando o que você aprendeu em 
-  \excref{general-eytzinger}, projete e implemente uma 
+  Usando o que você aprendeu no \excref{general-eytzinger}, 
+  projete e implemente uma 
   \emph{#DaryHeap#}, a generalização $d$-ária de uma 
   #BinaryHeap#. Analise os tempos de execução das operações em uma #DaryHeap#
   e teste o desempenho da sua implementação comparando-a com a implementação 
   da #BinaryHeap# dada neste capítulo. 
 \end{exc}
-
-
 
 \begin{exc}
   Ilustre a adição dos valores 17 e então 82 na 
@@ -391,10 +405,11 @@ Essa operação
 
 \begin{exc}
   Mostre como achar o $k$-ésimo menor valor em uma 
-  #BinaryHeap# ou
-  #MeldableHeap# em tempo $O(k\log k)$.  (Dica: usar uma outra heap pode ajudar.)
+  #BinaryHeap# ou #MeldableHeap# em tempo $O(k\log k)$.  (Dica: usar uma outra heap pode ajudar.)
 \end{exc}
 
 \begin{exc}
-  Suponha que você recebe #k# listas ordenadas, de um comprimento total de #n#.  Usando uma heap, mostre como combinar essas listas em uma única lista ordenada em tempo $O(n\log k)$ .  (Dica: iniciar com o caso $k=2$ pode ser instrutivo.) 
+  Suponha que você recebe #k# listas ordenadas, de um comprimento total de #n#.  
+  Usando uma heap, mostre como combinar essas listas em uma única lista 
+  ordenada em tempo $O(n\log k)$. (Dica: iniciar com o caso $k=2$ pode ser instrutivo.) 
 \end{exc}
