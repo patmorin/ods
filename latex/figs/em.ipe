@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120626110008" modified="D:20130710153056"/>
+<ipe version="70218" creator="Ipe 7.2.20">
+<info created="D:20120626110008" modified="D:20200914145127"/>
 <preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -173,8 +173,8 @@ h
 <arrowsize name="small" value="5"/>
 <arrowsize name="tiny" value="3"/>
 <color name="red" value="1 0 0"/>
-<color name="green" value="0 1 0"/>
 <color name="blue" value="0 0 1"/>
+<color name="green" value="0 1 0"/>
 <color name="yellow" value="1 1 0"/>
 <color name="orange" value="1 0.647 0"/>
 <color name="gold" value="1 0.843 0"/>
@@ -198,8 +198,8 @@ h
 <color name="lightgray" value="0.827"/>
 <color name="lightgreen" value="0.565 0.933 0.565"/>
 <color name="lightyellow" value="1 1 0.878"/>
-<dashstyle name="dashed" value="[4] 0"/>
 <dashstyle name="dotted" value="[1 3] 0"/>
+<dashstyle name="dashed" value="[4] 0"/>
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
@@ -303,7 +303,7 @@ h
 <path matrix="0.5 0 0 0.3405 128 379.872" stroke="black" pen="fat">
 112 0 0 112 256 576 e
 </path>
-<text matrix="0.809017 0.400282 -0.587785 0.550941 462.475 194.446" pos="160 624" stroke="black" type="label" valign="baseline">$\mathtt{\color{var}x}$</text>
+<text matrix="0.809017 0.400282 -0.587785 0.550941 462.475 194.446" pos="160 624" stroke="black" type="label" width="5.28" height="4.428" depth="0" valign="baseline" style="math">\mathtt{\color{var}x}</text>
 <path matrix="1 0 0 0.681 0 183.744" fill="white">
 241.167 621.651 m
 48 0 0 48 256 576 217.167 604.214 a
@@ -312,9 +312,9 @@ h
 48 0 0 48 256 576 e
 </path>
 </group>
-<text matrix="1 0 0 1 -8.745 -3.459" transformations="translations" pos="272.359 574.173" stroke="black" type="label" valign="baseline">disk</text>
-<text matrix="1 0 0 1 -32.3081 -6.41423" transformations="translations" pos="136.667 665.724" stroke="black" type="label" valign="baseline">RAM</text>
-<text matrix="1 0 0 1 27.1371 0.173" transformations="translations" pos="169.725 572.471" stroke="black" type="label" halign="right" valign="baseline">External Memory</text>
+<text matrix="1 0 0 1 -10.7551 -3.459" transformations="translations" pos="272.359 574.173" stroke="black" type="label" width="22.834" height="7.173" depth="0.08" valign="baseline">disco</text>
+<text matrix="1 0 0 1 -32.3081 -6.41423" transformations="translations" pos="136.667 665.724" stroke="black" type="label" width="23.133" height="6.804" depth="0.08" valign="baseline">RAM</text>
+<text matrix="1 0 0 1 27.1371 0.173" transformations="translations" pos="169.725 572.471" stroke="black" type="label" width="76.603" height="6.804" depth="0.08" halign="right" valign="baseline">Memória Externa</text>
 <path matrix="1 0 0 1 24.3589 -15.76" stroke="black" pen="fat">
 112 672 m
 112 656 l
@@ -371,35 +371,35 @@ h
 96 672 l
 h
 </path>
-<path matrix="1 0 0 1 136.359 -15.76" stroke="black" pen="fat" fill="pink">
+<path matrix="1 0 0 1 136.359 -15.76" stroke="black" fill="pink" pen="fat">
 80 672 m
 80 656 l
 96 656 l
 96 672 l
 h
 </path>
-<path matrix="1 0 0 1 152.359 -15.76" stroke="black" pen="fat" fill="pink">
+<path matrix="1 0 0 1 152.359 -15.76" stroke="black" fill="pink" pen="fat">
 80 672 m
 80 656 l
 96 656 l
 96 672 l
 h
 </path>
-<path matrix="1 0 0 1 168.359 -15.76" stroke="black" pen="fat" fill="pink">
+<path matrix="1 0 0 1 168.359 -15.76" stroke="black" fill="pink" pen="fat">
 80 672 m
 80 656 l
 96 656 l
 96 672 l
 h
 </path>
-<path matrix="1 0 0 1 184.359 -15.76" stroke="black" pen="fat" fill="pink">
+<path matrix="1 0 0 1 184.359 -15.76" stroke="black" fill="pink" pen="fat">
 80 672 m
 80 656 l
 96 656 l
 96 672 l
 h
 </path>
-<path matrix="1 0 0 1 200.359 -15.76" stroke="black" pen="fat" fill="pink">
+<path matrix="1 0 0 1 200.359 -15.76" stroke="black" fill="pink" pen="fat">
 80 672 m
 80 656 l
 96 656 l
@@ -469,15 +469,15 @@ h
 96 672 l
 h
 </path>
-<text matrix="1 0 0 1 112.359 -9.974" transformations="translations" pos="144 656" stroke="black" type="label" halign="center" valign="baseline">$\mathtt{\color{var}x}$</text>
-<path matrix="1 0 0 1 168.384 24.847" stroke="black" pen="fat" fill="pink">
+<text matrix="1 0 0 1 112.359 -9.974" transformations="translations" pos="144 656" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline" style="math">\mathtt{\color{var}x}</text>
+<path matrix="1 0 0 1 168.384 24.847" stroke="black" fill="pink" pen="fat">
 80 672 m
 80 656 l
 96 656 l
 96 672 l
 h
 </path>
-<text matrix="1 0 0 1 112.384 30.633" transformations="translations" pos="144 656" stroke="black" type="label" halign="center" valign="baseline">$\mathtt{\color{var}x}$</text>
+<text matrix="1 0 0 1 112.384 30.633" transformations="translations" pos="144 656" stroke="black" type="label" width="5.28" height="4.428" depth="0" halign="center" valign="baseline" style="math">\mathtt{\color{var}x}</text>
 <path matrix="1 0 0 1 39.3586 -25.3549" stroke="black" pen="fat">
 204.778 747.999 m
 204.778 705.024 l
@@ -485,16 +485,16 @@ h
 261.223 747.999 l
 h
 </path>
-<text matrix="1 0 0 1 43.3878 -19.3218" transformations="translations" pos="218.248 724.266" stroke="black" type="label" valign="baseline">CPU</text>
-<path stroke="darkgray" pen="fat" pen="ultrafat" cap="1" arrow="normal/normal">
+<text matrix="1 0 0 1 43.3878 -19.3218" transformations="translations" pos="218.248 724.266" stroke="black" type="label" width="20.573" height="6.809" depth="0.23" valign="baseline">CPU</text>
+<path stroke="darkgray" pen="ultrafat" cap="1" arrow="normal/normal">
 256.378 607.667 m
 296.574 640.24 l
 </path>
-<path stroke="darkgray" pen="fat" pen="ultrafat" cap="1" arrow="normal/normal">
+<path stroke="darkgray" pen="ultrafat" cap="1" arrow="normal/normal">
 230.732 594.77 m
 216.493 640.24 l
 </path>
-<path stroke="darkgray" pen="fat" pen="ultrafat" cap="1" arrow="normal/normal">
+<path stroke="darkgray" pen="ultrafat" cap="1" arrow="normal/normal">
 256.417 656.24 m
 256.417 680.847 l
 </path>

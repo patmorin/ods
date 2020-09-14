@@ -37,7 +37,7 @@
 
 
 \usepackage[mathlines]{lineno}
-\linenumbers
+%\linenumbers
 %\DeclareGraphicsExtensions{.pdf,.eps}
 
 % Leave this here - it gets substituted with language specific stuff
@@ -65,6 +65,8 @@
 \hyphenation{Binary-Heap}
 \hyphenation{Meld-able-Heap}
 \hyphenation{Java-Script}
+\hyphenation{implementacoes}
+\hyphenation{co-mo}
 
 \usepackage{everysel}
 \EverySelectfont{%
@@ -176,16 +178,16 @@
 \hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,%
 	citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,%
 	urlcolor=linkblue,%
-    pdfauthor={Pat Morin. Tradução e adaptação: Marcelo Keese Albertini},%
-    pdftitle={Open Data Structures. Estruturas de Dados Abertas},%
+    pdfauthor={Pat Morin. Tradutor: Marcelo Keese Albertini},%
+    pdftitle={Estruturas de Dados Abertas},%
     pdfsubject={Computer Science, Data Structures},%
     pdfkeywords={Data structures, algorithms}} 
 
 \DeclareMathOperator{\bdiv}{div}
 
 % Title page content
-\title{Open Data Structures (in \lang). Estruturas de Dados Abertas (em \lang)}
-\author{Autor: Pat Morin.\\Tradução e adaptação por: Marcelo Keese Albertini}
+\title{Estruturas de Dados Abertas (em \lang)}
+\author{Autor: Pat Morin, Tradutor: Marcelo Keese Albertini}
 \date{%
 Edição PT-BR-0.1G\cpponly{$\beta$}\pcodeonly{$\beta$}
 \htmlonly{\\ \includegraphics[scale=0.90909,scale=0.5]{images/cc-by}}}
@@ -245,6 +247,12 @@ Edição PT-BR-0.1G\cpponly{$\beta$}\pcodeonly{$\beta$}
 \thispagestyle{empty}
 \cleardoublepage
 
+\fancyhead[RO,LE]{} % disable section numbers, for now
+\pagestyle{fancy}
+\include{trad}
+\thispagestyle{empty}
+\cleardoublepage
+
 \fancyhead[CE]{\small Por que este livro?} % chapter title, left center
 \include{why}
 \cleardoublepage
@@ -283,12 +291,12 @@ Edição PT-BR-0.1G\cpponly{$\beta$}\pcodeonly{$\beta$}
 \fancyhead[CO]{\small\nouppercase\rightmark}
 
 \cleardoublepage
-\addcontentsline{toc}{chapter}{Bibliography}
+\addcontentsline{toc}{chapter}{Referências}
 \bibliographystyle{abbrvurl}
 \bibliography{ods,odsproc}
 
 \cleardoublepage
-\addcontentsline{toc}{chapter}{Index}
+\addcontentsline{toc}{chapter}{Índice}
 \printindex
 
 \end{document}

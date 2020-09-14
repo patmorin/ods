@@ -161,8 +161,8 @@ achar o #i#-ésimo nodo, e portanto é
 
 Se temos uma referência a um nodo #w# em uma #DLList# e queremos inserir um nodo #u# antes de #w#, então isso é só uma questão de atribuir 
  $#u.next#=#w#$,
-$#u.prev#=#w.prev#$, e então ajustar #u.prev.next# e  #u.next.prev#.  (Veja a \figref{dllist-addbefore}.)
-Graças o nodo dummy, não há necessidade de se preocupar sobre #w.prev#
+$#u.prev#=#w.prev#$ e então ajustar #u.prev.next# e  #u.next.prev#.  (Veja a \figref{dllist-addbefore}.)
+Graças ao nodo dummy, não há necessidade de se preocupar sobre #w.prev#
 existir ou não.
 
 \codeimport{ods/DLList.addBefore(w,x)}
@@ -195,7 +195,7 @@ Agora a operação #remove(i)# é trivial. Achamos o nodo com índice #i# e o re
 \codeimport{ods/DLList.remove(i)}
 
 Novamente, a única parte cara dessa operação é achar o #i#-ésimo nodo usando
- #getNode(i)#, e então #remove(i)# roda em tempo $O(1+\min\{#i#, #n#-#i#\})$.
+ #getNode(i)# e então #remove(i)# roda em tempo $O(1+\min\{#i#, #n#-#i#\})$.
 
 \subsection{Resumo}
 O teorema a seguir resume o desempenho de uma #DLList#:
@@ -303,7 +303,7 @@ com um dado índice #i#. Note que a localização de um elemento consiste de dua
 partes:
 
 \begin{enumerate}
-  \item O nodo #u# que contém o bloco que contém o elemento com índice #i#; e 
+  \item o nodo #u# que contém o bloco que contém o elemento com índice #i#; e 
   \item o índice #j# do elemento dentro desse bloco. 
 \end{enumerate}
 
@@ -393,7 +393,7 @@ nossa exploração (ver a \figref{selist-add}):
 \item Podemos rapidamente (em $r+1\le #b#$ passos) ir ao fim da lista de blocos.
   Nesse caso, adicionamos um bloco vazio ao fim da lista de bloco e preceder como no primeiro caso. 
 
-\item Após #b# passos não achamos quaisquer blocos que não está vazio.
+\item Após #b# passos não achamos nenhum bloco que não esteja cheio.
   Nesse caso,
 $#u#_0,\ldots,#u#_{#b#-1}$ é uma sequência de #b# blocos
 onde cada contém 
@@ -401,7 +401,7 @@ onde cada contém
     no fim dessa sequência e \emph{espalhamos} os 
  $#b#(#b#+1)$ elementos originais para que cada bloco de 
  $#u#_0,\ldots,#u#_{#b#}$ contenha exatamente 
-#b# elementos. Agora o bloco de $#u#_0$ contém somente #b# elementos então ele tem espaço para inserir #x#.
+#b# elementos. Agora o bloco de $#u#_0$ contém somente #b# elementos, então ele tem espaço para inserir #x#.
 \end{enumerate}
 
 \codeimport{ods/SEList.add(i,x)}

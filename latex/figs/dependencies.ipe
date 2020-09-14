@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70005" creator="Ipe 7.1.1">
-<info created="D:20120607145412" modified="D:20120720135334"/>
+<ipe version="70218" creator="Ipe 7.2.20">
+<info created="D:20120607145412" modified="D:20200914125800"/>
 <preamble>\usepackage{kpfonts}\fontsize{10pt}{10pt}\selectfont\usepackage{ods-colors}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -173,8 +173,8 @@ h
 <arrowsize name="small" value="5"/>
 <arrowsize name="tiny" value="3"/>
 <color name="red" value="1 0 0"/>
-<color name="green" value="0 1 0"/>
 <color name="blue" value="0 0 1"/>
+<color name="green" value="0 1 0"/>
 <color name="yellow" value="1 1 0"/>
 <color name="orange" value="1 0.647 0"/>
 <color name="gold" value="1 0.843 0"/>
@@ -198,8 +198,8 @@ h
 <color name="lightgray" value="0.827"/>
 <color name="lightgreen" value="0.565 0.933 0.565"/>
 <color name="lightyellow" value="1 1 0.878"/>
-<dashstyle name="dashed" value="[4] 0"/>
 <dashstyle name="dotted" value="[1 3] 0"/>
+<dashstyle name="dashed" value="[4] 0"/>
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
@@ -233,9 +233,9 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<text layer="alpha" matrix="1 0 0 1 -23.0105 47.0356" transformations="translations" pos="461.521 550.208" stroke="black" type="label" valign="baseline">11.1.2. Quicksort</text>
+<text layer="alpha" matrix="1 0 0 1 -23.0105 47.0356" transformations="translations" pos="461.521 550.208" stroke="black" type="label" width="76.672" height="7.172" depth="1.66" valign="baseline">11.1.2. Quicksort</text>
 <group matrix="1 0 0 1 3.34202 10.6708">
-<text matrix="1 0 0 1 -48 0" transformations="translations" pos="307.014 777.783" stroke="black" type="label" valign="baseline">1. Introduction</text>
+<text matrix="1 0 0 1 -48 0" transformations="translations" pos="307.014 777.783" stroke="black" type="label" width="59.806" height="7.174" depth="2.3" valign="baseline">1. Introdução</text>
 <path matrix="1 0 0 1 -3.34202 5.32922" stroke="black" pen="fat">
 256 784 m
 256 768 l
@@ -244,111 +244,101 @@ h
 h
 </path>
 </group>
-<group matrix="1 0 0 1 48 16">
-<text matrix="1 0 0 1 9.24546 2.74564" transformations="translations" pos="62.695 595.114" stroke="black" type="label" valign="baseline">6. Binary trees</text>
+<text matrix="1 0 0 1 -18.9014 -13.7346" transformations="translations" pos="361.053 754.188" stroke="black" type="label" width="70.695" height="7.168" depth="2.61" valign="baseline">3. Listas ligadas</text>
+<text matrix="1 0 0 1 -38.6904 13.3489" transformations="translations" pos="380.842 712.327" stroke="black" type="label" width="163.367" height="7.168" depth="2.61" valign="baseline">3.3 Lista ligadas eficientes em espaço</text>
 <path stroke="black" pen="fat">
-64 608 m
-64 592 l
-144 592 l
-144 608 l
-h
-</path>
-</group>
-<text matrix="1 0 0 1 -18.9014 -13.7346" transformations="translations" pos="361.053 754.188" stroke="black" type="label" valign="baseline">3. Linked lists</text>
-<text matrix="1 0 0 1 -38.6904 13.3489" transformations="translations" pos="380.842 712.327" stroke="black" type="label" valign="baseline">3.3 Space-efficient linked lists</text>
-<path matrix="1 0 0 1 -32 16" stroke="black" pen="fat">
-368 720 m
-368 704 l
-512 704 l
+336 736 m
+336 720 l
 512 720 l
+512 736 l
 h
 </path>
-<path matrix="1 0 0 1 -32 32" stroke="black" pen="fat">
-368 720 m
-368 704 l
-512 704 l
-512 720 l
-h
-</path>
-<text matrix="1 0 0 1 -35.2504 -12.5126" transformations="translations" pos="216.441 754.188" stroke="black" type="label" valign="baseline">2. Array-based lists</text>
-<path matrix="1 0 0 1 -32 -16" stroke="black" pen="fat">
-208 768 m
-208 752 l
-304 752 l
-304 768 l
-h
-</path>
-<text matrix="1 0 0 1 -1.15302 -0.466813" transformations="translations" pos="246.125 614.142" stroke="black" type="label" valign="baseline">7. Random binary search trees</text>
 <path stroke="black" pen="fat">
-240 624 m
-240 608 l
+336 752 m
+336 736 l
+512 736 l
+512 752 l
+h
+</path>
+<text matrix="1 0 0 1 -59.2504 -12.5126" transformations="translations" pos="216.441 754.188" stroke="black" type="label" width="124.194" height="7.169" depth="2.52" valign="baseline">2. Listas baseadas em arrays</text>
+<path stroke="black" pen="fat">
+152 752 m
+152 736 l
+288 736 l
+288 752 l
+h
+</path>
+<text matrix="1 0 0 1 -33.153 -0.466813" transformations="translations" pos="246.125 614.142" stroke="black" type="label" width="169.743" height="9.006" depth="0.08" valign="baseline">7. Árvores binárias de busca aleatórias</text>
+<path stroke="black" pen="fat">
+208 624 m
+208 608 l
 384 608 l
 384 624 l
 h
 </path>
-<text matrix="1 0 0 1 7.98039 9.73489" transformations="translations" pos="236.991 538.792" stroke="black" type="label" valign="baseline">9. Red-black trees</text>
-<path matrix="1 0 0 1 16 16" stroke="black" pen="fat">
-224 544 m
-224 528 l
-320 528 l
-320 544 l
+<text matrix="1 0 0 1 -24.0196 9.73489" transformations="translations" pos="236.991 538.792" stroke="black" type="label" width="105.843" height="9.001" depth="2.61" valign="baseline">9. Árvores rubro-negras</text>
+<path stroke="black" pen="fat">
+208 560 m
+208 544 l
+328 544 l
+328 560 l
 h
 </path>
-<text matrix="1 0 0 1 5.69704 17.2263" transformations="translations" pos="239.274 500.736" stroke="black" type="label" valign="baseline">10. Heaps</text>
-<path matrix="1 0 0 1 16 16" stroke="black" pen="fat">
+<text matrix="1 0 0 1 -26.303 17.2263" transformations="translations" pos="239.274 500.736" stroke="black" type="label" width="44.254" height="6.596" depth="2.52" valign="baseline">10. Heaps</text>
+<path matrix="1 0 0 1 -16 16" stroke="black" pen="fat">
 224 512 m
 224 496 l
 288 496 l
 288 512 l
 h
 </path>
-<text matrix="1 0 0 1 -5.71973 15.3845" transformations="translations" pos="250.691 470.291" stroke="black" type="label" valign="baseline">12. Graphs</text>
-<path matrix="1 0 0 1 0 16" stroke="black" pen="fat">
+<text matrix="1 0 0 1 -37.7197 15.3845" transformations="translations" pos="250.691 470.291" stroke="black" type="label" width="45.898" height="7.177" depth="0.23" valign="baseline">12. Grafos</text>
+<path matrix="1 0 0 1 -32 16" stroke="black" pen="fat">
 240 480 m
 240 464 l
 320 464 l
 320 480 l
 h
 </path>
-<text matrix="1 0 0 1 -7.24197 13.8747" transformations="translations" pos="252.213 439.846" stroke="black" type="label" valign="baseline">13. Data structures for integers</text>
-<path matrix="1 0 0 1 0 16" stroke="black" pen="fat">
-240 448 m
-240 432 l
-400 432 l
-400 448 l
-h
-</path>
-<text matrix="1 0 0 1 -0.391905 8.10195" transformations="translations" pos="245.363 573.803" stroke="black" type="label" valign="baseline">8. Scapegoat trees</text>
+<text matrix="1 0 0 1 -39.242 13.8747" transformations="translations" pos="252.213 439.846" stroke="black" type="label" width="162.929" height="7.169" depth="2.52" valign="baseline">13. Estruturas de dados para inteiros</text>
 <path stroke="black" pen="fat">
-240 592 m
-240 576 l
-336 576 l
-336 592 l
+208 464 m
+208 448 l
+384 448 l
+384 464 l
 h
 </path>
-<text matrix="1 0 0 1 -17.6826 18.6066" transformations="translations" pos="456.193 595.114" stroke="black" type="label" valign="baseline">11. Sorting algorithms</text>
-<path matrix="1 0 0 1 -16 16" stroke="black" pen="fat">
-448 608 m
-448 592 l
-560 592 l
-560 608 l
+<text matrix="1 0 0 1 -32.3919 8.10195" transformations="translations" pos="245.363 573.803" stroke="black" type="label" width="92.632" height="9.001" depth="2.61" valign="baseline">8. Árvores Scapegoat</text>
+<path stroke="black" pen="fat">
+208 592 m
+208 576 l
+312 576 l
+312 592 l
 h
 </path>
-<path matrix="1 0 0 1 -16 0" stroke="black" pen="fat">
-448 608 m
-448 592 l
-560 592 l
-560 608 l
+<text matrix="1 0 0 1 -17.6826 18.6066" transformations="translations" pos="456.193 595.114" stroke="black" type="label" width="127.213" height="7.168" depth="2.61" valign="baseline">11. Algoritmos de ordenação</text>
+<path stroke="black" pen="fat">
+432 624 m
+432 608 l
+568 608 l
+568 624 l
 h
 </path>
-<path matrix="1 0 0 1 -16 -16" stroke="black" pen="fat">
-448 608 m
-448 592 l
-560 592 l
-560 608 l
+<path stroke="black" pen="fat">
+432 608 m
+432 592 l
+568 592 l
+568 608 l
 h
 </path>
-<text matrix="1 0 0 1 -24.5327 69.0484" transformations="translations" pos="463.043 512.914" stroke="black" type="label" valign="baseline">11.1.3. Heapsort</text>
+<path stroke="black" pen="fat">
+432 592 m
+432 576 l
+568 576 l
+568 592 l
+h
+</path>
+<text matrix="1 0 0 1 -24.5327 69.0484" transformations="translations" pos="463.043 512.914" stroke="black" type="label" width="73.086" height="6.596" depth="2.52" valign="baseline">11.1.3. Heapsort</text>
 <path stroke="black" pen="fat" arrow="normal/small">
 296 784 m
 288 640
@@ -362,48 +352,48 @@ h
 488 624 s
 </path>
 <path stroke="black" pen="fat" arrow="normal/small">
-480 744 m
-512 736
-512 704
-416 704
-407.509 688 s
+511.572 743.12 m
+544 736
+528 704
+496 704
+480 688 s
 </path>
 <path stroke="black" pen="fat" arrow="normal/small">
-192 616 m
-240 616 l
+160 616 m
+208 616 l
 </path>
 <path stroke="black" pen="fat" arrow="normal/small">
-192 616 m
-208 608
-208 592
-240 584 s
+160 616 m
+176 608
+176 592
+208 584 s
 </path>
 <path stroke="black" pen="fat" arrow="normal/small">
-192 616 m
-208 608
-208 560
-240 552 s
+160 616 m
+176 608
+176 560
+208 552 s
 </path>
 <path stroke="black" pen="fat" arrow="normal/small">
-192 616 m
-208 608
-208 528
-240 520 s
+160 616 m
+176 608
+176 528
+208 520 s
 </path>
-<path stroke="black" pen="fat" dash="dotted" arrow="normal/small">
-192 616 m
-208 608
-208 496
-240 488 s
+<path stroke="black" dash="dotted" pen="fat" arrow="normal/small">
+160 616 m
+176 608
+176 496
+208 488 s
 </path>
-<path stroke="black" pen="fat" dash="dotted" arrow="normal/small">
-192 616 m
-208 608
-208 464
-240 456 s
+<path stroke="black" dash="dotted" pen="fat" arrow="normal/small">
+160 616 m
+176 608
+176 464
+208 456 s
 </path>
 <path stroke="black" pen="fat" arrow="normal/small">
-304 520 m
+272 520 m
 368 528
 384 576
 432 584 s
@@ -420,8 +410,8 @@ h
 400 768
 408 752 s
 </path>
-<group matrix="1 0 0 1 40 0">
-<text matrix="1 0 0 1 -24.9903 14.8216" transformations="translations" pos="367.142 662.854" stroke="black" type="label" valign="baseline">4. Skiplists</text>
+<group matrix="1 0 0 1 104 0">
+<text matrix="1 0 0 1 -24.9903 14.8216" transformations="translations" pos="367.142 662.854" stroke="black" type="label" width="48.966" height="7.169" depth="2.52" valign="baseline">4. Skiplists</text>
 <path matrix="1 0 0 1 -32 16" stroke="black" pen="fat">
 368 672 m
 368 656 l
@@ -431,7 +421,7 @@ h
 </path>
 </group>
 <group matrix="1 0 0 1 8 0">
-<text matrix="1 0 0 1 -17.7447 -2.35082" transformations="translations" pos="198.935 710.804" stroke="black" type="label" valign="baseline">5. Hash tables</text>
+<text matrix="1 0 0 1 -17.7447 -2.35082" transformations="translations" pos="198.935 710.804" stroke="black" type="label" width="69.28" height="7.173" depth="0.08" valign="baseline">5. Tabelas Hash</text>
 <path matrix="1 0 0 1 -16 0" stroke="black" pen="fat">
 192 720 m
 192 704 l
@@ -440,7 +430,7 @@ h
 h
 </path>
 </group>
-<path stroke="black" pen="fat" dash="dotted" arrow="normal/small">
+<path stroke="black" dash="dotted" pen="fat" arrow="normal/small">
 224 736 m
 224 720 l
 </path>
@@ -450,25 +440,33 @@ h
 416 600
 432 600 s
 </path>
-<path stroke="black" pen="fat" dash="dotted" arrow="normal/small">
+<path stroke="black" dash="dotted" pen="fat" arrow="normal/small">
 224 704 m
 224 464
 224 464
 240 456 s
 </path>
-<text matrix="1 0 0 1 -5.71973 -48.6155" transformations="translations" pos="250.691 470.291" stroke="black" type="label" valign="baseline">14. External-memory searching</text>
-<path matrix="1 0 0 1 0 -16" stroke="black" pen="fat">
-240 448 m
-240 432 l
-400 432 l
-400 448 l
+<text matrix="1 0 0 1 -37.7197 -48.6155" transformations="translations" pos="250.691 470.291" stroke="black" type="label" width="135.761" height="6.804" depth="0.08" valign="baseline">14. Busca em memória externa</text>
+<path stroke="black" pen="fat">
+208 432 m
+208 416 l
+352 416 l
+352 432 l
 h
 </path>
 <path stroke="black" pen="fat" arrow="normal/small">
-192 616 m
-208 608
-208 432
-240 424 s
+160 616 m
+176 608
+176 432
+208 424 s
+</path>
+<text matrix="1 0 0 1 9.24546 18.7456" transformations="translations" pos="62.695 595.114" stroke="black" type="label" width="83.935" height="9.006" depth="0.08" valign="baseline">6. Árvores binárias</text>
+<path matrix="1 0 0 1 -16 0" stroke="black" pen="fat">
+80 624 m
+80 608 l
+176 608 l
+176 624 l
+h
 </path>
 </page>
 </ipe>

@@ -148,7 +148,7 @@ Isso é similar ao modo no qual pacientes passam por triagem em uma sala de emer
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/prioqueue}}
-  \caption[Uma fila com prioridades]{Uma #Queue# com prioridades --- itens são removidos de acordo com suas prioridades (em inglês, priority queue).}
+  \caption[Uma fila com prioridades]{Uma #Queue# com prioridades --- itens são removidos de acordo com suas prioridades (em inglês, \emph{priority queue}).}
   \figlabel{prioqueue}
 \end{figure}
 
@@ -157,7 +157,7 @@ Isso é similar ao modo no qual pacientes passam por triagem em uma sala de emer
 %When a business-class seat becomes available it is given to the most
 %important customer waiting on an upgrade.
 
-Uma política de enfileiramento muito comum é a política LIFO (last-in-first-out, último-a-entrar-primeiro-a-sair, em português)
+Uma política de enfileiramento muito comum é a política LIFO (last-in-first-out, último a entrar, primeiro a sair, em português)
 \index{LIFO queue}%
 \index{LIFO queue|seealso{stack}}%
 \index{fila LIFO}%
@@ -212,7 +212,7 @@ sequência, $#x#_0,\ldots,#x#_{#n#-1}$, de valores. A interface #List# inclui as
     Atribua $#x#_{j}=#x#_{j+1}$, para todo 
     $j\in\{#i#,\ldots,#n#-2\}$ e decremente #n#
 \end{enumerate}
-Note que essas operações são facilmente suficientes para implementar
+Note que essas operações são suficientes para implementar
 a interface #Deque#:
 \begin{eqnarray*}
   #addFirst(x)# &\Rightarrow& #add(0,x)# \\
@@ -669,8 +669,7 @@ ele vai de encontro à intuição que temos sobre metade das moedas saírem cara
 \section{O Modelo de Computação}
 \seclabel{model}
 
-Neste livro, iremos analisar o tempo teórico de execução das operações das estruturas de dados que estudamos. Para fazer precisamente isso, precisamos um modelo matemático de computação. Para isso, usamos
-o modelo \emph{#w#-bit word-RAM}
+Neste livro, iremos analisar o tempo teórico de execução das operações das estruturas de dados que estudamos. Para fazer precisamente isso, precisamos um modelo matemático de computação. Para isso, usamos o modelo \emph{#w#-bit word-RAM}%
 \index{word-RAM}%
 \index{RAM}%
 .  RAM é uma sigla para Random Access Machine --- Máquina de Acesso Aleatório. Nesse modelo, temos acesso a uma memória de acesso aleatório consistindo de \emph{células}, cada qual armazena uma #w#-bit \emph{word}, ou seja, uma palavra com #w# bits de memória.
@@ -761,31 +760,31 @@ Para entender a diferença entre o pior caso, o tempo amortizado e o tempo esper
 
 \paragraph{Pior caso versus custo amortizado:}
 \index{custo amortizado}%
-Suponha que uma casa custe \$120\,000.  A fim de comprar essa casa, podemos pegar um empréstimo de 120 meses (10 anos) com pagamentos mensais de 
-\$1\,200. Nesse caso, o custo mensal no pior caso de pagar o empréstimo é 
-\$1\,200.
+Suponha que uma casa custe R\$120\,000.  A fim de comprar essa casa, podemos pegar um empréstimo de 120 meses (10 anos) com pagamentos mensais de 
+R\$1\,200. Nesse caso, o custo mensal no pior caso de pagar o empréstimo é 
+R\$1\,200.
 
-Se temos suficiente dinheiro em mãos, podemos escolher comprar a casa sem empréstimo, com um pagamento de \$120\,000. 
+Se temos suficiente dinheiro em mãos, podemos escolher comprar a casa sem empréstimo, com um pagamento de R\$120\,000. 
 Nesse caso, para o período de 10 anos, o custo amortizado mensal de comprar essa casa é 
 \[
-   \$120\,000 / 120\text{ meses} = \$1\,000\text{ por mês} \enspace .
+  \text{R}\$120\,000 / 120\text{ meses} = \text{R}\$1\,000\text{ por mês.}
 \]
-Esse valor é bem menor que os \$1\,200 mensais que teríamos que pagar se pegássemos o empréstimo. 
+Esse valor é bem menor que os R\$1\,200 mensais que teríamos que pagar se pegássemos o empréstimo. 
 
 \paragraph{Pior caso versus custo esperado:}
 \index{custo esperado}%
-A seguir, considere o caso de um seguro de incêndio na nossa casa de \$120\,000.
+A seguir, considere o caso de um seguro de incêndio na nossa casa de R\$120\,000.
 Por analisar centenas de milhares de casos, seguradoras têm determinado que a quantidade esperada de danos por incêndios causado a uma casa como a nossa é de
-\$10 por mês.  
+R\$10 por mês.  
 Esse é uma valor bem baixo, pois a maior parte das casa nunca pegam fogo, algumas poucas tem incêndios pequenos que causam algum dano e um número minúsculo de casas queimam até as cinzas. Baseada nessa informação, a seguradora cobra
-\$15 mensais para a contratação de um seguro.
+R\$15 mensais para a contratação de um seguro.
 
 Agora é o momento da decisão. Devemos pagar os 
- \$15 referente ao custo de pior caso mensalmente para o seguro ou devemos
+ R\$15 referentes ao custo de pior caso mensalmente para o seguro ou devemos
 apostar fazer uma poupança anti-incêndio ao custo esperado de
-\$10 mensal?  Claramente, \$10 por mês custa menos \emph{em expectativa},
+R\$10 mensal?  Claramente, R\$10 por mês custa menos \emph{em expectativa},
 mas temos que aceitar que a possibilidade de \emph{custo real} possa ser bem maior.
-No evento improvável que a casa queime inteira, o custo real será de \$120\,000.
+No evento improvável que a casa queime inteira, o custo real será de R\$120\,000.
 
 Esses exemplos financeiros também oferecem a oportunidade de vermos porque às vezes aceitamos um tempo de execução amortizado ou esperado em vez de considerarmos o tempo de execução no pior caso. Frequentemente é possível obter um tempo de execução esperado ou amortizado menor que o obtido no pior caso. 
 No mínimo, frequentemente é possível obter uma estrutura de dados bem mais simples se estivermos dispostos a aceitar tempo de execução amortizado ou esperado.
@@ -936,7 +935,7 @@ Uma linha tracejada indica somente uma dependência fraca, na qual somente uma p
 #MeldableHeap# & $O(1)$ & $O(\log #n#)$\tnote{E} & \sref{meldableheap} \\ \hline
 \end{tabular}
 \begin{tablenotes}
-\item[I]{Essa estrutura somente pode guardar dados inteiros de #w#-bit.}
+\item[I]{Essa estrutura pode guardar somente dados inteiros de #w#-bit.}
 \javaonly{\item[X]{Isso denota o tempo de execução no modelo de memória externa; veja o \chapref{btree}.}}
 \end{tablenotes}
 %\renewcommand{\thefootnote}{\arabic{footnote}}
