@@ -1,24 +1,28 @@
 \chapter{Busca em Memória Externa}
 \chaplabel{btree}
 
-Ao longo deste livro, consideremos o modelo de computação RAM com palavras de #w# bits definido na \secref{model}.   Uma premissa implícita desse
-modelo é que nosso computador tem memória de acesso aleatório grande o suficiente para guardar todos os dados na estrutura de dados.
+Ao longo deste livro, consideramos o modelo de computação word-RAM 
+definido na \secref{model}.   Uma premissa implícita desse
+modelo é que nosso computador tem memória de acesso aleatório 
+grande o suficiente para guardar todos os dados na estrutura de dados.
 Em algumas situação essa premissa não é válida. Existem coleções de dados
 tão grandes que nenhum computador tem memória suficiente para guardá-las.
 Nesses casos, a aplicação deve guardar os dados em alguma mídia de armazenamento
-externo tal como um disco rígido, um disco em estado sólido ou mesmo um servidor de arquivos em rede (que possui seu próprio armazenamento externo).
+externo tal como um disco rígido, um disco em estado sólido ou mesmo
+um servidor de arquivos em rede (que possui seu próprio armazenamento externo).
 
 \index{armazenamento externo}%
 \index{memória externa}%
 \index{disco rígido}%
 \index{solid-state drive}%
 Acessar um item em um armazenamento externo é extremamente lento.
-O disco rígido conectado ao computador no qual este livro foi escrito um
+O disco rígido conectado ao computador no qual este livro foi escrito tem um
 um tempo de acesso médio de 19ms e o disco em estado sólido conectado ao computador
 tem tempo médio de acesso de 0.3ms. Em comparação, a memória de acesso aleatório
 no computador tem tempo médio de acesso de menor que
 0.000113ms. 
-Acessar a RAM é mais que 2\,500 vezes mais rápido que acessar um disco em estado sólido e mais de 160\,000 vezes mais ráído que acessar o disco rígido.
+Acessar a RAM é mais do que 2\,500 vezes mais rápido que acessar um disco
+em estado sólido e mais de 160\,000 vezes mais rápido do que acessar o disco rígido.
 
 %  HDD: Fantom ST3000DM001-9YN166 USB 3 external drive (3TB)
 %  SSD: ATA OCZ-AGILITY 3 (60GB)
@@ -47,11 +51,11 @@ Acessar a RAM é mais que 2\,500 vezes mais rápido que acessar um disco em esta
 
 Essas velocidades são típicas; acessar um byte aleatório na RAM é
 milhares de vezes mais rápido que acessar um byte aleatório em um disco
-rígido ou um disco de estado sólido. Tempo de acesso, entretando, não
+rígido ou um disco de estado sólido. Tempo de acesso, entretanto, não
 conta a história por completo. Ao acessar um byte de um disco rígido ou 
 disco de estado sólido, um \emph{bloco} inteiro
 \index{bloco}%
-do disco é lido. Cada um dos discos conectados ao computador temum tamanho 
+do disco é lido. Cada um dos discos conectados ao computador tem um tamanho 
 de bloco de 4\,096; cada vez que lemos um byte, o disco nos fornece um bloco
 contendo 4\,096 bytes. Se organizarmos nossa estrutura de dados cuidadosamente, isso
 significa que cada acesso a disco pode nos enviar 4\,096 bytes que podem
@@ -64,17 +68,17 @@ ser úteis em completar quaisquer operação que estamos executando.
 
 Essa é a ideia por trás do \emph{modelo de memória externa}
 \index{modelo de memória externa}%
-de computação, ilutrado esquematicamente na 
+de computação, ilustrado esquematicamente na 
 \figref{em}.  Neste modelo, o computador tem acesso a uma grande memória externa 
 no qual todos os dados são guardados.
 Essa memória é dividida em \emph{blocos} de memória
 \index{bloco}%
-cada qual contendo
+, cada um contendo
  $B$ palavras.
 O computador também tem memória interna limitada na qual é possível realizar
 computações. Transferir um bloco entre a memória interna e a memória externa 
 leva tempo constante. Computações realizadas na memória interna são \emph{grátis};
-elas não gastam nenhum instante de tempo.
+elas não gastam \emph{nenhum} instante de tempo.
 O fato que computações em memória externa são grátis são parecer estranho, mas 
 isso enfatiza o fato que memória externa é muito mais lenta que a RAM.
 
@@ -85,9 +89,11 @@ isso enfatiza o fato que memória externa é muito mais lenta que a RAM.
   \figlabel{em}
 \end{figure}
 
-Em um modelo de memória externa mais detalhado, o tamanho da memória interna também é um parâmetro. Entretanto, para as estruturas de dados descritas neste capítulo, é
+Em um modelo de memória externa mais detalhado, o tamanho da memória 
+interna também é um parâmetro. Entretanto, para as estruturas de dados 
+descritas neste capítulo, é
 suficiente ter uma memória interna de tamanho
-$O(B+\log_B #n#)$.  Por isso, a memória precisa ser apaz de guardar um um número
+$O(B+\log_B #n#)$.  Por isso, a memória precisa ser capaz de guardar um um número
 constante de blocos e uma pilha de recursão de altura 
 $O(\log_B
 #n#)$.  Na maior parte dos casos, o termo $O(B)$ domina os custos de memória.
@@ -107,11 +113,11 @@ dispositivos, cada qual com seu próprio tamanho de bloco e é
 acessado com sua própria coleção de chamadas de sistema.
 Para simplificar a exposição deste capítulo para que possamos nos
 concentrar nas ideias em comum entre eles, encapsulamos os
-dispositivos de memória externa com um objeto chamado de #BlockStore# (em português, armazém de blocos).
+dispositivos de memória externa com um objeto chamado de #BlockStore# 
+(em português, armazém de blocos).
 Uma #BlockStore# guarda uma coleção de blocos de memória, cada uma com tamanho $B$.
 Cada bloco é unicamente identificado por seu índice inteiro. Uma
- #BlockStore#
-aceita as operações: 
+ #BlockStore# possui as operações:
 
 \begin{enumerate}
   \item #readBlock(i)#: retorna o conteúdo do bloco cujo índice é #i#. 
@@ -121,15 +127,15 @@ aceita as operações:
   \item #placeBlock(b)#: retorna um novo índice e guarda o conteúdo de #b# nesse índice. 
 
   \item #freeBlock(i)#: Libera o bloco cujo índice é #i#.  Isso indica
-    que o conteúdo desse bloco não serão mais usados então a memória externa alocada por esse bloco pode ser reusada. 
+    que o conteúdo desse bloco não será mais usado, então a memória externa alocada por esse bloco pode ser reusada. 
 \end{enumerate}
 
-O jeito mais fácil de usar #BlockStore# é imaginá-lo como guardar um 
+O jeito mais fácil de usar a #BlockStore# é imaginá-la guardando um 
 arquivo em disco que é particionado em blocos, cada contendo $B$ bytes.
 Dessa maneira,
 #readBlock(i)# e #writeBlock(i,b)# simplesmente lêem e escrevem
-bytes $#i#B,\ldots,(#i#+1)B-1$ desse arquivo. Adicionalmente,
-um simples
+os bytes $#i#B,\ldots,(#i#+1)B-1$ desse arquivo. Adicionalmente,
+uma simples
 #BlockStore# poderia manter uma \emph{lista de blocos livres} que lista aqueles 
 que estão disponíveis para uso.
 Blocos liberados com 
@@ -150,19 +156,18 @@ $B$-tree quando $B=2$.)
 
 \index{B-tree@$B$-tree}%
 Para qualquer inteiro $B\ge 2$, uma \emph{$B$-tree} é uma árvore na qual todas
-as folhas tem a mesma profundidade e todo nodo interno (exceto a raiz)
+as folhas têm a mesma profundidade e todo nodo interno (exceto a raiz)
 #u# tem pelo menos
 $B$ filhos e no máximo $2B$ filhos.  Os filhos de #u# são guardados
-em um array
- #u.children#.  O número obrigatório de filhos é diferente na raiz, que pode tem entre 2 e $2B$ filhos.
+em um array #u.children#.  O número obrigatório de filhos é diferente
+na raiz, que pode ter entre 2 e $2B$ filhos.
 
- Se a altura de uma 
-$B$-tree é $h$, então o número 
+ Se a altura de uma $B$-tree é $h$, então o número 
 $\ell$, de folha em uma $B$-tree satisfaz
 \[
     2B^{h-1} \le \ell \le (2B)^{h} \enspace .
 \]
-Aplicando o logaritmo da primeira desigualdade e rearranjando termos chegamos em:
+Aplicando o logaritmo na primeira desigualdade e rearranjando termos chegamos em:
 \begin{align*}
     h & \le \frac{\log \ell-1}{\log B} + 1  \\
       & \le \frac{\log \ell}{\log B} + 1 \\
@@ -176,20 +181,19 @@ $#u.keys#[0],\ldots,#u.keys#[2B-1]$.  Se #u# é um nodo interno com $k$
 filhos, então o número de chaves guardado em #u# é exatamente
 $k-1$ e esses são guardados em 
 $#u.keys#[0],\ldots,#u.keys#[k-2]$.  O restante das $2B-k+1$ entradas do array
-em #u.keys# são atribuídos a #null#.  
+em #u.keys# é atribuído a #null#.  
 
-Se #u# for uma folha não rais
+Se #u# for uma folha não raiz
 , então #u# contém entre $B-1$ e $2B-1$ chaves. As chaves em uma 
 $B$-tree respeitam uma ordem similar às chaves em uma árvore binária de busca.
 Para qualquer nodo #u# que guarda $k-1$ chaves,
 \[
    #u.keys[0]# < #u.keys[1]# < \cdots < #u.keys#[k-2] \enspace .
 \]
-Se 
-#u# for um nodo interno, então para todo $#i#\in\{0,\ldots,k-2\}$,
+Se #u# for um nodo interno, então para todo $#i#\in\{0,\ldots,k-2\}$,
 $#u.keys[i]#$ é maior que toda chave guardada na subárvore enraizada em 
-#u.children[i]# mas menos que toda chave gurda na subárvores enraizada em 
-at $#u.children[i+1]#$.  Informalmente,
+#u.children[i]# mas menor que toda chave guardada nas subárvores enraizada em 
+$#u.children[i+1]#$.  Informalmente,
 \[
    #u.children[i]# \prec #u.keys[i]# \prec #u.children[i+1]# \enspace .
 \]
@@ -204,7 +208,7 @@ Um exemplo de uma $B$-tree com $B=2$ é mostrado na \figref{btree}.
 Note que os dados guardados em um nodo de uma 
 $B$-tree tem tamanho $O(B)$.  Portanto, 
 em um contexto de memória externa, o valor de $B$ em uma $B$-tree é
-escolhido tal que um nodo cabe en um único bloco de memória externo.
+escolhido para que um nodo caiba em um único bloco de memória externo.
 Dessa forma, o tempo que leva para realizar uma operação da $B$-tree 
 no modelo de memória externa é proporcional ao número de nodos que
 são acessados (lidos ou escritos) pela operação.
@@ -223,7 +227,7 @@ $4096$ bytes.
 
 A classe
 #BTree#, que implementa uma $B$-tree, mantém uma #BlockStore#,
-#bs#, que guarda nodos #BTree# assim nodo o índice #ri# do nodo raiz.
+#bs#, que guarda nodos #BTree# assim como o índice #ri# do nodo raiz.
 
 Como de costume, um inteiro
 #n#, é usado para registrar o número de itens na estrutura de dados: 
@@ -234,13 +238,13 @@ Como de costume, um inteiro
 \subsection{Busca}
 
 A implementação da operação 
-#find(x)#, que é ilustrada em
-\figref{btree-find}, generaliza a operação #find(x)# em uma árvore binária de busca. A busca por #x# inicia na raiz e usa as chaves guardadas em um nodo #u# para
+#find(x)#, que é ilustrada na
+\figref{btree-find}, generaliza a operação #find(x)# em uma árvore binária de busca. A busca por #x# começa na raiz e usa as chaves guardadas em um nodo #u# para
 determinar em qual dos filhos de #u# a busca deve continuar.
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/btree-2}}
-  \caption[Busca em uma $B$-tree]{Uma busca bem sucedida (pelo valor 4) e uma busca mal sucedida (pelo valor 16.5) em uma $B$-tree. Nodos sombreados onde o valor de #z# fio atualizado durante as buscas.}\figlabel{btree-find}
+  \caption[Busca em uma $B$-tree]{Uma busca bem sucedida (pelo valor 4) e uma busca mal sucedida (pelo valor 16.5) em uma $B$-tree. Nodos destacados mostram onde o valor de #z# é atualizado durante as buscas.}\figlabel{btree-find}
 \end{figure}
 Mais especificamente, em um nodo #u#, a busca verifica se #x# está guardada em 
 #u.keys#. Caso positivo, #x# foi encontrado e a busca está completa.
@@ -255,9 +259,9 @@ como o menor valor que é maior ou igual a #x#.
 
 \codeimport{ods/BTree.find(x)}
 
-O método #findIt(a,x)# é central para o método #find(x)# ao
-buscar em um array ordenado completada com valores #null# #a#
-pelo valor #x#. Esse método, ilustrado em 
+O método #findIt(a,x)# é central para a operação #find(x)# que 
+busca em #a#, um array ordenado completado com valores #null#,
+pelo valor #x#. Esse método, ilustrado na 
 \figref{findit}, funciona para qualquer array 
 #a#, onde $#a#[0],\ldots,#a#[k-1]$ é uma sequência de chaves 
 ordenadas
@@ -271,13 +275,13 @@ $#a[i]#>#x#$ ou $#a[i]#=#null#$.
   \figlabel{findit}
 \end{figure}
 \codeimport{ods/BTree.findIt(a,x)}
-O méotdo #findIt(a,x)# usa uma busca binária 
+O método #findIt(a,x)# usa uma busca binária 
 \index{busca binária}%
 que divide o espaço de busca a cada passo, tal que ele roda em tempo
 $O(\log(#a.length#))$. No nosso cenário, $#a.length#=2B$, então #findIt(a,x)# roda em tempo $O(\log B)$.
 
 Podemos analisar o tempo de execução de uma operação #find(x)# da $B$-tree
-tanto no modelo RAM com palavras de #w# bits usual (onde cada instrução conta)
+tanto no modelo word-RAM usual (onde cada instrução conta)
 quanto no modelo de memória externa (onde somente contamos o número de nodos 
 acessados).
 
@@ -287,10 +291,10 @@ $B$-Tree com $\ell$ folhas é $O(\log_B\ell)$, a altura de uma
 $B$-tree que guarda #n# chaves é $O(\log_B #n#)$.  Portanto, no modelo 
 de memória externa, o tempo gasto pela operação #find(x)# é 
 $O(\log_B #n#)$.
-Para determinar o tempo de execução no modelo RAM,
+Para determinar o tempo de execução no modelo word-RAM,
 temos que considerar o custo de chamar 
 #findIt(a,x)# para cada nodo que acessamos, então o tempo de execução
-de #find(x)# no modelo RAM é
+de #find(x)# no modelo word-RAM é
 \[
    O(\log_B #n#)\times O(\log B) = O(\log #n#) \enspace .
 \]
@@ -300,7 +304,7 @@ de #find(x)# no modelo RAM é
 Uma diferença importante entre as estruturas de dados
 $B$-tree e #BinarySearchTree# da 
 \secref{binarysearchtree} é que os nodos de uma 
-$B$-tree não guardam ponteiro para nodos pai. A razão disso vai ser explicada
+$B$-tree não guardam ponteiros para nodos pai. A razão disso vai ser explicada
 logo a seguir. A falta de ponteiros dos nodos pai significa que as operações
 #add(x)# e #remove(x)# em $B$-trees são mais facilmente implementadas usando
 recursão.
@@ -312,10 +316,9 @@ $B$-tree, isso é feito pela
 \index{split}%
 Observe na
 \figref{btree-split} como isso ocorre.
-Embora a divisão acontece entre dois níveis de recursão, ela é
+Embora a divisão aconteça entre dois níveis de recursão, ela é
 melhor entendida como uma operação que recebe um nodo #u# contendo
-$2B$ chave e com 
-$2B+1$ filhos.  
+$2B$ chaves e com $2B+1$ filhos.  
 A operação cria um novo nodo #w# que adota 
 $#u.children#[B],\ldots,#u.children#[2B]$.  O novo nodo #w#
 também recebe as $B$ maiores chaves de #u#, $#u.keys#[B],\ldots,#u.keys#[2B-1]$.
@@ -326,11 +329,12 @@ $#u.keys#[B-1]$, é promovida para o pai de #u#, que também adota #w#.
 Note que a operação de divisão modifica três nodos: 
  #u#, o pai de #u# e o novo nodo #w#.  
  Por isso é importante que os nodos de uma 
-$B$-tree não mantém ponteiros para os nodos pai. Se assim fosse, então
+$B$-tree não mantenham ponteiros para os nodos pai. Se assim fosse, então
 os 
-$B+1$ filhos adotados por #w# todos necessitariam ter seu ponteiros para o nodo pai modificados. Isso aumentaria o número de acessos à memória externa de 3 para 
-$B+4$ e faria $B$-trees muito menos eficiente para valores altos de
-$B$.
+$B+1$ filhos adotados por #w# todos necessitariam ter os seus ponteiros 
+para o nodo pai modificados. Isso aumentaria o número de acessos à 
+memória externa de 3 para $B+4$ e faria a $B$-tree muito menos eficiente 
+para valores altos de $B$.
 
 \begin{figure}
    \centering{\begin{tabular}{@{}l@{}}
@@ -346,15 +350,16 @@ $B$.
 \end{figure}
 
 O método #add(x)# em uma $B$-tree está ilustrado na \figref{btree-add}.
-Em uma descrição sem se ater a detalhes, esse método acha uma folha #u#
+Em uma descrição sem entrar em detalhes, esse método acha uma folha #u#
 para achar o valor #x#. Se isso faz com que #u# fique cheia demais, 
 então o pai de #u# também é dividido, o que pode fazer que o avô de #u#
 fique cheio demais e assim por diante.
 
-Esse processor continua, subindo na árvore um nível por vez até alcançar
+Esse processo continua, subindo na árvore um nível por vez até alcançar
 um nodo que não está cheio e até que a raiz seja dividida.
 Ao encontrar um nodo com espaço, o processo é interrompido.
-Caso contrário, uma nova raiz é criada com dois filhos obtidos da divisão da raiz original. 
+Caso contrário, uma nova raiz é criada com dois filhos obtidos a partir 
+da divisão da raiz original. 
 
 \begin{figure}
    \centering{\begin{tabular}{@{}l@{}}
@@ -365,28 +370,27 @@ Caso contrário, uma nova raiz é criada com dois filhos obtidos da divisão da 
      \includegraphics[width=\ScaleIfNeeded]{figs/btree-add-3} 
    \end{tabular}}
    \caption[Adição a uma $B$-tree]{A operação #add(x)# em uma 
-      #BTree#. A adição do valor 21 resulta em dois nodos sendo divididos.} 
+      #BTree#. A adição do valor 21 resulta em dois nodos divididos.} 
    \figlabel{btree-add}
 \end{figure}
 
-O resumo do método #add(x)# é que é caminha da raiz para a folha
+O resumo do método #add(x)# é que ele caminha da raiz para a folha
 em busca de #x#, adiciona #x# a essa folha e retorna de volta
-para a raiz, divindindo qualquer nodo cheio demais que 
+para a raiz, dividindo qualquer nodo cheio demais que 
 encontre no caminho. Com essa visão em mente, podemos entrar
 nos detalhes de como esse método pode ser implementado recursivamente.
 
 O principal trabalho de #add(x)# é feito pelo método
 #addRecursive(x,ui)#, que adiciona o valor #x# à subárvore cuja raiz #u#
-tem o identificar #ui#. Se #u# é uma folha, então #x# simplesmente é
+tem o identificador #ui#. Se #u# for uma folha, então #x# simplesmente é
 adicionado em 
 #u.keys#. Caso contrário, #x# é adicionado recursivamente no filho 
 $#u#'$ de #u#.  O resultado dessa chamada recursiva é normalmente
-#null# mas também pode ser uma raferência a um novo nodo #w#
+#null# mas também pode ser uma referência a um novo nodo #w#
 que foi criado porque 
 $#u#'$ foi dividido. 
 Nesse caso, #u# adota #w# e recebe sua primeira chave, completando a operação
-de divisão em 
-$#u#'$.
+de divisão em $#u#'$.
 
 Após o valor
 #x# ser adicionado (em #u# ou em um descendente de #u#),
@@ -401,8 +405,8 @@ com uma chamada ao método
 
 O método #addRecursive(x,ui)# é auxiliar ao método #add(x)#, que chama 
 #addRecursive(x,ri)# para inserir #x# na raiz da $B$-tree.
-Se #addRecursive(x,ri)# faz a raiz ser dividida, então uma nova raiz é criada
-e ela recebe seus filhos tanto a antiga raiz quanto o novo nodo criado pela
+Se #addRecursive(x,ri)# fizer que a raiz seja dividida, então uma nova raiz é criada
+e ela recebe como filhos tanto a antiga raiz quanto o novo nodo criado pela
 divisão da antiga raiz.
 \codeimport{ods/BTree.add(x)}
 
@@ -410,43 +414,41 @@ O método #add(x)# e seu auxiliar, #addRecursive(x,ui)#, podem ser analisados em
 
 \begin{description}
   \item[Fase da descida:]
-    Durante a fase da descida da recursão, antes que #x# foi adicionado,
+    Durante a fase da descida da recursão, antes da adição de #x#,
     é acessada uma sequência de nodos da #BTree# e é chamado 
 #findIt(a,x)# em cada nodo.
-    Assim como o método #find(x)# isso leva 
- $O(\log_B #n#)$ de tempo no modelo de memória externa 
-     $O(\log #n#)$ de tempo no modelo RAM com palavras de #w# bits.
+    Assim como o método #find(x)#, isso leva 
+ $O(\log_B #n#)$ de tempo no modelo de memória externa e
+     $O(\log #n#)$ de tempo no modelo word-RAM.
   
   \item[Fase de subida:]
-    Durante a fase de subdia da recursão, após a adição de #x#,
-    esses métodos realizam uma sequência de até
-$O(\log_B #n#)$ divisões.
+Durante a fase de subida da recursão, após a adição de #x#,
+esses métodos realizam uma sequência de até $O(\log_B #n#)$ divisões.
 Cada divisão envolve somente de três nodos e, então, essa fase
-leva 
-$O(\log_B
+leva $O(\log_B
     #n#)$ de tempo no modelo de memória externa. Entretanto, cada divisão
-    envolve mover $B$ chaves e filhos de um nodo a outro, então no modelo RAM com palavras de #w# bits, isso leva 
+    envolve mover $B$ chaves e filhos de um nodo a outro, então no modelo word-RAM, isso leva 
 $O(B\log #n#)$ de tempo.
 \end{description}
 
 Lembre-se que o valor de $B$ pode ser bem alto, muito maior que 
-$\log #n#$.  Portanto no modelo RAM com palavras de #w# bits, adicionar um valor a uma 
-$B$-tree pode ser bem mais lento que adicionar em uma árvore binária de busca balanceada. Porteriormente, na
+$\log #n#$.  Portanto no modelo word-RAM com palavras de #w# bits, adicionar um valor a uma 
+$B$-tree pode ser bem mais lento do que adicionar em uma árvore binária de busca balanceada. Posteriormente, na
 \secref{btree-amortized}, mostraremos que a situação não é tão ruim;
-o número amortizado de operações de divisão feito durante uma operação #add(x)# é constante.
-Isso mostra que o tempo de execução amortizado da operação #add(x)# no modelo RAM é 
+o número amortizado de operações de divisão durante uma operação #add(x)# é constante.
+Isso mostra que o tempo de execução amortizado da operação #add(x)# no modelo word-RAM é 
 $O(B+\log #n#)$.
-
 
 \subsection{Remoção}
 
-A operação
-#remove(x)# em uma #BTree# é, novamente, mais facilmente implementada como um método recursivo. Embora a implementação recursiva de 
+A operação #remove(x)# em uma #BTree# é, novamente, mais 
+facilmente implementada como um método recursivo. Embora a 
+implementação recursiva de 
 #remove(x)# distribui sua complexidade entre vários métodos, 
 o processo como um todo, que é ilustrado na 
 \figref{btree-remove-full}, é razoavelmente direto. 
-Ao trabalhar com as chaves, remoção é reduzida ao problema de remoção de um
-valor $#x#'$, de alguma folha #u#.  Remover $#x#'$
+Ao trabalhar com as chaves, remoção é reduzida ao problema 
+de remoção de um valor $#x#'$, de alguma folha #u#.  Remover $#x#'$
 pode deixar #u# com menos que $B-1$ chaves; essa situação é 
 chamada de \emph{underflow}.
 \index{underflow}%
@@ -468,22 +470,23 @@ chamada de \emph{underflow}.
    \figlabel{btree-remove-full}
 \end{figure}
 
-Quando um underflow acontece, #u# pode emprestar chaves ou ser juntado com seus irmão. Se #u# é juntado com um irmão, então o pai de #u#
+Quando um \emph{underflow} acontece, #u# pode emprestar chaves ou ser juntado com seus irmão. 
+Se #u# for juntado com um irmão, então o pai de #u#
 terá agora um filho a menos e uma chave a menos, o que pode
-fazer o pai de #u# sofrer um underflow; isso é novamente corregido 
+fazer o pai de #u# sofrer um \emph{underflow}; isso é novamente corrigido 
 por meio de um empréstimo ou de uma junção, embora a junção pode
-fazer que o avô de #u# sofra underflow.
-Esse processo se repete até a raiz até que não ocorra mais underflows
+fazer que o avô de #u# sofra \emph{underflow}.
+Esse processo se repete até a raiz até que não ocorra mais \emph{underflows}
 ou até que a raiz tenha seus dois filhos juntados em um filho único.
 Quando os filhos são juntados, a raiz é removida e seu único filho
-se tona a nova raiz.
+se torna a nova raiz.
 
 A seguir, entramos nos detalhes de como esses passos são implementados.
 O primeiro trabalho do método #remove(x)# é achar o elemento #x# que
 deve ser removido. Se #x# é achado em uma folha, então #x# é removido
 dessa folha. Caso contrário, se #x# é achado em #u.keys[i]# para algum nodo
 interno #u# então o algoritmo remove o menor valor 
-#x'#, na subárvore enraizada em 
+#x'# na subárvore enraizada em 
 #u.children[i+1]#.  O valor #x'# é o menor valor guardado na 
 #BTree# que é maior que #x#.  O valor de #x'# é então
 usado para substituir #x# em 
@@ -497,8 +500,8 @@ usado para substituir #x# em
      \includegraphics[width=\ScaleIfNeeded]{figs/btree-remove-2} 
    \end{tabular}}
    \caption[Remoção em uma $B$-tree] {A operação #remove(x)# 
-      em uma #BTree#. Para remover o valor $#x#=10$ substituimos com o valor
-      $#x'#=11$ e removemos 11 da folha que o contém. }
+      em uma #BTree#. Para remover o valor $#x#=10$, o substituímos com o valor
+      $#x'#=11$ e removemos 11 da folha que o contém.}
    \figlabel{btree-remove}
 \end{figure}
 
@@ -508,25 +511,23 @@ O método #removeRecursive(x,ui)# é uma implementação recursiva do algoritmo 
 Note que, após remover recursivamente o valor #x# o #i#-ésimo filho de #u#,
 #removeRecursive(x,ui)# precisa garantir que esse filho ainda tem pelo menos 
 $B-1$ chaves. No código precedente, isso é feito usando um método chamado 
-#checkUnderflow(x,i)#, que verifica se ocorreu underflow e o corrije no #i#-ésimo filho de #u#. Seja #w# o #i#-ésimo filho de #u#.
+#checkUnderflow(x,i)#, que verifica se ocorreu \emph{underflow} e o corrige no #i#-ésimo filho de #u#. Seja #w# o #i#-ésimo filho de #u#.
 Se #w# tem somente 
-$B-2$ chaves, então isso precisa se corrigido.
+$B-2$ chaves, então isso precisa ser corrigido.
 A correção requer usar um irmão de #w#.
-Ele pode ser o filho
-$#i#+1$ ou $#i#-1$ de #u#.
+Ele pode ser o filho $#i#+1$ ou $#i#-1$ de #u#.
 Normalmente, iremos usar o filho 
 $#i#-1$ de #u#, que é o irmão #v# de #w# diretamente à sua esquerda.
-A única vez que isso não funciona é quando
+A única situação em que isso não funciona é quando
 $#i#=0$ e nesse caso em que usamos o irmão de #w# diretamente à sua direita. 
 \codeimport{ods/BTree.checkUnderflow(u,i)}
 A seguir, nos concentramos no caso em que 
- $#i#\neq 0$ tal que qualquer underflow 
+ $#i#\neq 0$ tal que qualquer \emph{underflow} 
 no #i#-ésimo filho de #u# será corrigido com a ajuda
-do filho 
-$(#i#-1)$ de #u#.  O caso $#i#=0$ é similar e os detalhes podem ser encontrados
+do filho $(#i#-1)$ de #u#.  O caso $#i#=0$ é similar e os detalhes podem ser encontrados
 no código que acompanha este livro. 
 
-Para corrigir um underflow no nodo #w#, precisamos achar mais chaves 
+Para corrigir um \emph{underflow} no nodo #w#, precisamos achar mais chaves 
 (e possivelmente também filhos) para #w#. Existem duas formas de fazer isso:
 
 \begin{description}
@@ -538,7 +539,8 @@ Para corrigir um underflow no nodo #w#, precisamos achar mais chaves
   \[
      B-2 + #size(w)# \ge 2B-2
   \]
-  chaves.  Podemos portanto deslocar chaves de #v# a #w# tal que #v# e #w# têm pelo menos $B-1$ chaves. Esse processo está ilustrado na 
+  chaves.  Podemos portanto deslocar chaves de #v# a #w# para que #v# e #w# 
+    tenham pelo menos $B-1$ chaves. Esse processo está ilustrado na 
   \figref{btree-borrow}.
 
   \begin{figure}
@@ -560,7 +562,7 @@ Para corrigir um underflow no nodo #w#, precisamos achar mais chaves
   \emph{juntamos} #v# e #w# conforme mostrado na \figref{btree-merge}.  
     A operação de junção é o oposto da operação de divisão. 
 
-  Ela usa dois nodos que contém um total de $2B-3$ chaves e junta elees em um
+  Ela usa dois nodos que contêm um total de $2B-3$ chaves e os junta em um
     único nodo que contém $2B-2$ chaves. (A chave adicional vem do
     fato que, quando juntamos #v# e #w#, o pai deles #u# agora tem
     um filho a menos e portanto precisa ceder uma de suas chaves.)
@@ -580,14 +582,16 @@ Para corrigir um underflow no nodo #w#, precisamos achar mais chaves
 
 \codeimport{ods/BTree.checkUnderflowNonZero(u,i).checkUnderflowZero(u,i)}
 
-Para resumir, o método #remove(x)# em uma $B$-tree segue um caminho da raiz para a folha, remove uma chave #x'# de uma folha #u# e então realiza zero
-ou mais operação de junção envolvendo #u# e seus ancestrais e também
+Para resumir, o método #remove(x)# em uma $B$-tree segue um caminho da 
+raiz para a folha, remove uma chave #x'# de uma folha #u# e então realiza zero
+ou mais operações de junção envolvendo #u# e seus ancestrais e também
 realiza no máximo uma operação de empréstimo.
 
 Como cada operação de junção e empréstimo, envolve modificar somente três nodos
 e somente 
 $O(\log_B #n#)$ dessas operações acontecem, o processo completo leva
-$O(\log_B #n#)$ de tempo no modelo de memória externa. Novamente, entretanto, cada operação de junção e empréstimo leva cerca de $O(B)$ de tempo no modelo RAM,
+$O(\log_B #n#)$ de tempo no modelo de memória externa. Novamente, entretanto, 
+cada operação de junção e empréstimo leva cerca de $O(B)$ de tempo no modelo word-RAM,
 então (por ora) o máximo que podemos dizer sobre o tempo de execução necessário
 para #remove(x)# no modelo RAM é que é 
 $O(B\log_B #n#)$.
@@ -597,16 +601,16 @@ $O(B\log_B #n#)$.
 
 Até agora, mostramos que
 \begin{enumerate}
-  \item No modelo de memória externa, o tempo de execução de #find(x)#,
+  \item no modelo de memória externa, o tempo de execução de #find(x)#,
     #add(x)# e #remove(x)# em uma $B$-tree é $O(\log_B #n#)$.
-  \item No modelo RAM com palavras de #w# bits, o tempo de execução de #find(x)# é $O(\log #n#)$ e o tempo de execução de #add(x)# e #remove(x)# é $O(B\log #n#)$.
+  \item no modelo RAM com palavras de #w# bits, o tempo de execução de #find(x)# é $O(\log #n#)$ e o tempo de execução de #add(x)# e #remove(x)# é $O(B\log #n#)$.
 \end{enumerate}
 
-O lema a seguir mostra que, até o momento, superestimamos o número de operação de junção e divisão realizado por uma 
-$B$-tree.
+O lema a seguir mostra que, até o momento, superestimamos o número de 
+operações de junção e divisão realizadas por uma $B$-tree.
 
 \begin{lem}\lemlabel{btree-split}
-  Começando com uma $B$-tree vazia e realizando qualquer sequência de 
+  Começando com uma $B$-tree vazia e realizando uma sequência de 
   $m$ operações #add(x)# e #remove(x)# resulta em até  $3m/2$ divisões,
   junções e empréstimos realizados.
 \end{lem}
@@ -639,21 +643,20 @@ $B$-tree.
   $B$ três créditos.
   Um nodo que guarda pelo menos $B$ chaves e até 
 $2B-2$ chaves não precisa guardar nenhum crédito.
-  O que resta mostrar é  que podemos manter o invariante de crédito e satisfazer as propriedades 1 e 2 acima durante cada operação 
-#add(x)#
-  e #remove(x)#.
+  O que resta mostrar é que podemos manter a invariante de crédito 
+  e satisfazer as propriedades 1 e 2 acima durante cada operação #add(x)# e #remove(x)#.
 
   \paragraph{Adição:}
   O método #add(x)# não faz nenhuma junção ou empréstimo, então
-  precisamos somente considerar operações de divisão que como resultado de chamadas a #add(x)#.
+  precisamos somente considerar as operações de divisão resultantes de chamadas a #add(x)#.
 
   Cada operação de divisão ocorre porque uma chave é adicionada a um nodo #u#
-  que possui
-  $2B-1$ chaves. Quando isso acontece, #u# é dividido em dois nodos, #u'# e #u''# com $B-1$ e $B$ chaves, respectivamente.  Antes de operação, #u# guardava
+  que possui $2B-1$ chaves. Quando isso acontece, #u# é dividido em dois 
+  nodos, #u'# e #u''# com $B-1$ e $B$ chaves, respectivamente.  Antes de operação, #u# guardava
   $2B-1$ chaves e portanto três créditos. 
   Dois desses créditos podem ser usados para pagar pela divisão e o outro
   crédito pode ser dado para #u'# (que tem $B-1$ chaves) para manter a
-  invariente de crédito. Portanto, podemos pagar pela divisão e manter
+  invariante de crédito. Portanto, podemos pagar pela divisão e manter
   a invariante de crédito durante qualquer divisão.
 
   O única outra modificação em nodos que ocorrem durante uma operação
@@ -664,14 +667,15 @@ Se, antes disso,
   receber três créditos. Esses são os únicos créditos cedidos pelo método #add(x)#.
 
   \paragraph{Remoção:}
-  Durante uma chamada a 
-#remove(x)#, zero ou mais junções ocorrem e são possivelmente seguidas por um único empréstimo. Cada junção ocorre porque dois nodos, 
+  Durante uma chamada a #remove(x)#, zero ou mais junções ocorrem e são 
+  possivelmente seguidas por um único empréstimo. Cada junção ocorre porque dois nodos, 
   #v# e #w#, possuem cada um $B-1$ chaves antes da chamada ao método
   #remove(x)# são juntados em um único nodo com exatamente $2B-2$ chaves.
-Cada uma dessas junçõesa portanto liberar dois créditos que podem ser usados para pagar pela junção.
+Cada uma dessas junções portanto liberam dois créditos que podem ser usados para pagar pela junção.
 
-  Após as junções são realizada, ocorre no máximo uma operação e depois dela nenhuma junção ou empréstimo adicional é realizada.
-Essa operação de empréstimo somente ocorre se removemos uma chave de uma
+  Após as junções serem realizadas, ocorre no máximo uma operação e 
+  depois dela nenhuma junção ou empréstimo adicional é realizado.
+Essa operação de empréstimo somente ocorre se removermos uma chave de uma
 folha #v# que tem $B-1$ chaves.
 O nodo #v# portanto tem um crédito e esse crédito vai pagar o custo do 
 empréstimo. Esse crédito não é suficiente para pagar o empréstimo, então
@@ -679,14 +683,14 @@ criamos um crédito para completar o pagamento.
 
 Nesse ponto, criamos um crédito e ainda necessitamos mostrar que a invariante
 de crédito pode ser mantida. No pior caso, o irmão de #v#, #w#, tem
-exatamento $B$ chaves antes do empréstimo tal que, após isso, tanto #v# quanto #w#
-tem $B-1$ chaves. Isso significa que #v# e #w# devem estar guardando um
+exatamente $B$ chaves antes do empréstimo tal que, após isso, tanto #v# quanto #w#
+têm $B-1$ chaves. Isso significa que #v# e #w# devem estar guardando 1
 crédito cada quando a operação terminar.
 Portanto, nesse caso, criamos dois créditos adicionais para dar para #v# e #w#.
 Como um empréstimo acontece no máximo uma vez durante uma operação 
 #remove(x)#, isso significa que criamos no máximo três créditos, conforme necessário. 
 
-Se a operação #remove(x)# não inclui uma operação de empréstimo, isso é porque ela termina removendo uma chave de algum nodo que, antes da operação, tinha $B$ ou mais chaves. No pior caso, esse nodo tinha $B$ chaves, então que ele tem agora $B-1$ chaves e precisa receber um crédito, que criamos. 
+Se a operação #remove(x)# não inclui uma operação de empréstimo, isso é porque ela termina removendo uma chave de algum nodo que, antes da operação, tinha $B$ ou mais chaves. No pior caso, esse nodo tinha $B$ chaves, então que ele tem agora $B-1$ chaves e precisa receber um crédito, que então criamos. 
 
 Nos dois casos---se a remoção termina com uma operação de empréstimo ou não---
 no máximo três créditos precisam ser criados durante uma chamada a 
@@ -695,27 +699,26 @@ no máximo três créditos precisam ser criados durante uma chamada a
 \end{proof}
 
 O propósito do 
- \lemref{btree-split} é mostrar que, no modelo RAM com palavras de #w# bits, 
+ \lemref{btree-split} é mostrar que, no modelo word-RAM,
  o custo de divisões e junções durante %and joins??? - seria borrows??
 uma sequência de $m$ operações 
 #add(x)# e #remove(x)# é somente $O(Bm)$.  Isto é, o custo amortizado
 por operação é somente 
 $O(B)$, então o custo amortizado de 
-#add(x)# e #remove(x)# no modelo RAM com palavras de #w# bits é $O(B+\log #n#)$.
+#add(x)# e #remove(x)# no modelo word-RAM é $O(B+\log #n#)$.
 Isso é resumido no seguinte par de teoremas:
 
 \begin{thm}[$B$-Tree em Memória Externa]
   Uma #BTree# implementa a interface #SSet#. No modelo de memória externa,
   uma #BTree# suporta as operações #add(x)#, #remove(x)# e #find(x)#
-  em tempo  $O(\log_B #n#)$ por operação.
+  em tempo $O(\log_B #n#)$ por operação.
 \end{thm}
 
-\begin{thm}[$B$-Tree em RAM com palavras de #w# bits]
-  Uma #BTree# implementa a interface #SSet#. No modelo RAM com palavras de #w# bits, e ignorando o custo das divisões, junções e empréstimos, uma 
-#BTree# provê as operações
+\begin{thm}[$B$-Tree em word-RAM]
+  Uma #BTree# implementa a interface #SSet#. No modelo word-RAM, e ignorando o custo das divisões, junções e empréstimos, uma #BTree# provê as operações
   #add(x)#, #remove(x)# e #find(x)# em tempo $O(\log #n#)$ por operação.
-  Adicionalmente, iciando com uma 
-#BTree# vazia, qualquer sequência de $m$ operações
+  Adicionalmente, iniciando com uma 
+#BTree# vazia, uma sequência de $m$ operações
   #add(x)# e #remove(x)# resulta em um total de $O(Bm)$ tempo gasto
   realizando divisões, junções e empréstimos.
 \end{thm}
@@ -728,9 +731,9 @@ Aggarwal e Vitter \cite{av88}.  Ele também é conhecido como o \emph{modelo de 
 ou como o \emph{modelo de acesso a disco}. 
 \index{modelo de acesso a disco}%
 
-$B$-Tree é para busca em memória externa o que árvores binárias de busca são para busca em memória interna. 
+$B$-Tree é para buscas em memória externa o que árvores binárias de busca são para busca em memória interna. 
 $B$-trees foram inventadas por Bayer
-e McCreight \cite{bm70} em 1970 e, em menos de 10 anos, o título do artigo de Comer na revista \emph{ACM Computing Surveys} as referia como onipresente \cite{c79}.
+e McCreight \cite{bm70} em 1970 e, em menos de 10 anos, o título do artigo de Comer na revista \emph{ACM Computing Surveys} as referia como onipresentes \cite{c79}.
 
 Assim como para árvores binárias de busca, existem muitas variantes de $B$-Trees, incluindo 
 $B^+$-trees,
@@ -747,20 +750,20 @@ o NTFS da Microsoft,
 e o Ext4 usado no Linux;
 \index{Ext4}%
 todos os principais sistemas de banco de dados; e 
-armazéns de chave-valor usados em computação em núvem. 
+armazéns de chave-valor usados em computação em nuvem. 
 O levantamento recente de Graefe \cite{g10} provê uma visão geral
 de mais de 200 páginas de muitas aplicações modernas, variantes e otimizações
 de $B$-trees.
 
-$B$-trees implementa a interface #SSet#. Se a interface #USet# for necessária, então hashing em memória externa
+$B$-trees implementa a interface #SSet#. Se a interface #USet# for necessária, 
+então hashing em memória externa
 \index{hashing em memória externa}%
 pode ser usado como alternativa à $B$-tree.
-Esquemas de hashing em memória externa existem; ver, por exemplo, 
+Esquemas de hashing em memória externa existem; veja, por exemplo, o trabalho de 
 Jensen e Pagh~\cite{jp08}.  Esse esquemas implementam as operações #USet# 
 em tempo $O(1)$ esperado no modelo de memória externa. Entretanto,
 devido a vários motivos, muitas aplicações ainda usam
-$B$-tree embora somente sejam necessárias operações 
-#USet#.
+$B$-tree embora somente sejam necessárias operações #USet#.
 
 Uma razão de $B$-trees serem tão populares é elas funcionam melhor que o limitante
 $O(\log_B #n#)$ de tempo de execução sugere. A razão para isso é, em cenários de memória externa, o valor de $B$ é tipicamente bem alto -- na casa das centenas ou milhares. Isso significa que 
@@ -774,21 +777,18 @@ isso significa que uma busca em uma $B$-tree envolve uma busca bem rápida na RA
 nos nodos internos, seguida por um único acesso à memória externa para obter uma folha. 
 
 \begin{exc}
-  Mostre o que acontece quando as chaves 
-1.5 e então 7.5 são adicionadas à 
-  $B$-tree em \figref{btree}.
+  Mostre o que acontece quando as chaves 1.5 e então 7.5 são adicionadas à 
+  $B$-tree na \figref{btree}.
 \end{exc}
 
 \begin{exc}
-  Mostre o que acontece quando as chaves 
-3 e então 4 são removidas da 
-  $B$-tree em \figref{btree}.
+  Mostre o que acontece quando as chaves 3 e então 4 são removidas da 
+  $B$-tree na \figref{btree}.
 \end{exc}
 
 \begin{exc}
   Qual é o número máximo de nodos internos em uma 
-$B$-tree que guarda 
-  #n# chaves (como uma função de #n# e $B$)? 
+$B$-tree que guarda #n# chaves (como uma função de #n# e $B$)? 
 \end{exc}
 
 \begin{exc}
@@ -799,7 +799,7 @@ $B$-tree que guarda
     \item Mostre que a implementação dos métodos #add(x)# e #remove(x)#
       dados neste capítulo usam memória interna proporcional a 
        $B\log_B #n#$.
-    \item Descreve como esses métodos poderiam ser modificados a fim de reduzir o consumo de memória a 
+    \item Descreva como esses métodos poderiam ser modificados a fim de reduzir o consumo de memória a 
 $O(B + \log_B #n#)$.
   \end{enumerate}
 \end{exc}
@@ -807,17 +807,17 @@ $O(B + \log_B #n#)$.
 \begin{exc}
   Desenhe os créditos usados na prova do
  \lemref{btree-split} nas árvores das 
-  Figuras~\ref{fig:btree-add} e \ref{fig:btree-remove-full}.  Verifique]
+  Figuras~\ref{fig:btree-add} e \ref{fig:btree-remove-full}.  Verifique
   que (com três créditos adicionais) é possível pagar pelas divisões,
   junções e empréstimos e manter a invariante de crédito.
 \end{exc}
 
 \begin{exc}
   Projete uma versão modificada de uma 
-$B$-tree em que nodos pode ter de 
+$B$-tree em que nodos podem ter de 
   $B$ a $3B$ filhos (e portanto de $B-1$ até $3B-1$ chaves).
   Mostre que essa nova versão de 
-$B$-trees realiza somente $O(m/B)$ divisões, junções e empréstimos durante 
+$B$-tree realiza somente $O(m/B)$ divisões, junções e empréstimos durante 
   uma sequência de $m$ operações. (Dica:
   para isso funcionar, você deve ser mais agressivo com a junção e
   às vezes juntar dois novos antes que seja estritamente necessário.)
@@ -829,7 +829,7 @@ $B$-trees realiza somente $O(m/B)$ divisões, junções e empréstimos durante
   $B$-trees que assintoticamente reduz o número de divisões, empréstimos e junções ao considerar três nodos por vez.
   \begin{enumerate}
     \item Seja #u# um nodo sobrecarregado e seja #v# um irmão imediatamente à direita de #u#. 
-    Existem duas forma de concertar o excesso de chaves em #u#: 
+    Existem duas formas de consertar o excesso de chaves em #u#: 
     \begin{enumerate}
        \item #u# pode dar algumas de suas chaves a #v#; ou
        \item #u# pode ser dividido e as chaves de #u# e #v# podem ser igualmente distribuídas entre 
@@ -856,15 +856,15 @@ $B$-trees realiza somente $O(m/B)$ divisões, junções e empréstimos durante
 
 
 \begin{exc}
-  Uma $B^+$-tree, ilustrada na \figref{bplustree} guarda todas as chaves em folhas e mantém suas folhas guardadas como uma lista duplamente encadeada. 
-Como de costume, cada folha guarda entre 
-  $B-1$ e $2B-1$ chaves.  Acima dessa lista está uma 
-  $B$-tree padrão que gaurda o maior valor de cada folha exceto o último. 
+  Uma $B^+$-tree, ilustrada na \figref{bplustree}, guarda todas as chaves em folhas e mantém suas folhas guardadas como uma lista duplamente encadeada. 
+Como de costume, cada folha guarda entre $B-1$ e $2B-1$ chaves.  
+  Acima dessa lista está uma 
+  $B$-tree padrão que guarda o maior valor de cada folha exceto o último. 
   \begin{enumerate}
     \item Descreva implementações rápidas de #add(x)#, #remove(x)#x,
       e #find(x)# em uma $B^+$-tree.
     \item Explique como implementar eficientemente o método #findRange(x,y)#,
-      que encontra todos os valores maior que #x# e menores que ou iguais a #y#, 
+      que encontra todos os valores maiores que #x# e menores que ou iguais a #y#, 
       em uma $B^+$-tree.
     \item Implemente uma classe, #BPlusTree#, que implementa #find(x)#,
       #add(x)#, #remove(x)# e #findRange(x,y)#.
@@ -877,7 +877,7 @@ Como de costume, cada folha guarda entre
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/bplustree}} 
-  \caption{Uma $B^+$-tree é uma $B$-tree emcima de uma lista duplamente encadeada de blocos.}
+  \caption{Uma $B^+$-tree é uma $B$-tree em cima de uma lista duplamente encadeada de blocos.}
   \figlabel{bplustree}
 \end{figure}
 
