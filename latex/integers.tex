@@ -13,7 +13,7 @@ anterior. A primeira estrutura, a #BinaryTrie# cobre as três operações da
 #SSet# em tempo $O(#w#)$. Isso não é muito impressionante, pois 
 qualquer subconjunto de 
 $\{0,\ldots,2^{#w#}-1\}$ tem tamanho $#n#\le 2^{#w#}$, tal que 
-$\log #n# \le #w#$.  As outras implementações de #SSet# discutidas neste livro tem operações que rodam em 
+$\log #n# \le #w#$.  Outras implementações de #SSet# discutidas neste livro têm operações que rodam em 
 $O(\log #n#)$ de tempo sendo tão rápidas quanto uma 
 #BinaryTrie#.
 
@@ -27,9 +27,8 @@ A terceira estrutura de dados, a
  #YFastTrie#, usa uma #XFastTrie# para guardar somente uma amostra de 
  aproximadamente um a cada 
 $#w#$ elementos e guarda os elementos restantes em uma estrutura padrão #SSet#. 
-Esse truque reuz o tempo de execução de #add(x)# e #remove(x)# a 
-$O(\log #w#)$ e reduz o espaço a 
-$O(#n#)$.
+Esse truque reduz o tempo de execução de #add(x)# e #remove(x)# a 
+$O(\log #w#)$ e reduz o espaço a $O(#n#)$.
 
 As implementações usadas como exemplos neste capítulo podem guardar qualquer 
 tipo de dado, desde que um inteiro possa ser associado a ele. Nos trechos
@@ -43,7 +42,10 @@ Porém, neste texto trataremos #x# como se fosse um inteiro.
 \index{BinaryTrie@#BinaryTrie#}%
 Uma 
 #BinaryTrie# codifica um conjunto de inteiros com #w# bits em uma árvore binária.
-Todas as folhas em uma árvore tem profundidade #w# e cada inteiro é codificado como um caminho da raiz para uma folha. O caminho para o inteiro #x# vai para a esquerda no nível #i# se o #i#-ésimo bit mais significativo de #x# for um 0 e vai para a direita se for um 1.
+Todas as folhas em uma árvore têm profundidade #w# e cada inteiro é
+codificado como um caminho da raiz para uma folha. O caminho para o 
+inteiro #x# vai para a esquerda no nível #i# se o #i#-ésimo bit 
+mais significativo de #x# for um 0 e vai para a direita se for um 1.
 A \figref{binarytrie-ex} mostra um exemplo para o caso $#w#=4$,
 no qual a trie guarda inteiros
 3(0011), 9(1001), 12(1100) e 13(1101).
@@ -65,17 +67,18 @@ usados para conectar as folhas em uma lista duplamente ligada.
 Para uma folha em uma trie binária,
  #u.child[0]# (#prev#) é o nodo que antecede #u# na lista e 
  #u.child[1]# (#next#) é o nodo que sucede #u# na lista. 
- Um nodo especial, #dummy#, é usado tanto antes do primeiro nodo quanto depois do último nodo na lista (veja a \secref{dllist}).
-\cpponly{Nos trechos de código, #u.child[0]#, #u.left#, e #u.prev# referem-se ao mesmo campo no nodo #u#, assim como #u.child[1]#, #u.right# e #u.next#.}
+ Um nodo especial, #dummy#, é usado tanto antes do primeiro nodo
+ quanto depois do último nodo na lista (veja a \secref{dllist}).
+\cpponly{Nos trechos de código, #u.child[0]#, #u.left# e #u.prev# 
+referem-se ao mesmo campo no nodo #u#, assim como #u.child[1]#, #u.right# e #u.next#.}
 
 Cada nodo, #u#, também possui um ponteiro adicional
  #u.jump#.  Se o filho à esquerda da #u# não existe, então
  #u.jump# aponta para a menor folha na subárvore de #u#.
  Se o filho à direita de #u# não existe então #u.jump# aponta 
- para o maior folha na subárvore de #u#. Um exemplo de uma 
-#BinaryTrie#, mostrando ponteiros #jump# a lista duplamente ligada na folhas
-é mostrado na 
-\figref{binarytrie-ex2}.
+ para a maior folha na subárvore de #u#. Um exemplo de uma 
+#BinaryTrie#, mostrando ponteiros #jump# e a lista duplamente ligada na folhas
+é mostrado na \figref{binarytrie-ex2}.
 
 \begin{figure}
   \begin{center}
@@ -93,8 +96,11 @@ Tentamos seguir o caminho de busca para #x# na trie. Se alcançarmos uma
 folha, então achamos #x#. Se alcançarmos um nodo #u# de onde não podemos
 prosseguir (porque #u# está sem um filho), então seguimos #u.jump#, que nos leva
 à menor folha maior que #x# ou à maior folha menor que #x#. Qual desses dois casos
-ocorrerá depende em se #u# não tem seu filho à esquerda ou direita, respectivamente. No caso em que #u# não tem seu filho à esquerda, achamos o nodo que queríamos. No caso em que #u# não tem seu filho à direita, podemos usar a lista ligada para alcançar o nodo que queremos. Cada um desses casos é ilustrado na 
-\figref{binarytrie-find}.
+ocorrerá depende em se #u# não tem seu filho à esquerda ou direita,
+respectivamente. No caso em que #u# não tem seu filho à esquerda, 
+achamos o nodo que queríamos. No caso em que #u# não tem seu filho 
+à direita, podemos usar a lista ligada para alcançar o nodo que 
+queremos. Cada um desses casos é ilustrado na \figref{binarytrie-find}.
 \codeimport{ods/BinaryTrie.find(x)}
 \begin{figure}
   \begin{center}
@@ -103,7 +109,8 @@ ocorrerá depende em se #u# não tem seu filho à esquerda ou direita, respectiv
   \caption[Caminhos de busca em uma BinaryTrie]{Os caminhos usados por #find(5)# e #find(8)#.}
   \figlabel{binarytrie-find}
 \end{figure}
-O tempo de execução do método #find(x)# é dominado pelo tempo que ele leva para seguir um caminho da raiz para a folha, portanto ele roda em tempo 
+O tempo de execução do método #find(x)# é dominado pelo tempo que 
+ele leva para seguir um caminho da raiz para a folha, portanto ele roda em tempo 
 $O(#w#)$.
 
 A operação #add(x)# em uma #BinaryTrie# também é relativamente simples mas tem muita coisa a fazer: 
@@ -111,7 +118,7 @@ A operação #add(x)# em uma #BinaryTrie# também é relativamente simples mas t
   \item Ela segue o caminho de busca por #x# até alcançar um nodo #u# onde não poderá mais prosseguir. 
   \item Ela cria o restante do caminho de busca de #u# a uma folha que contém #x#.
   \item Ela adiciona o nodo #u'# contendo #x# para a lista ligada de folhas
-    (ela tem acesso ao predecessor #pred#, de #u'# na lista ligada do ponteiro #jump# do último nodo #u# encontrado durante passo~1.)
+    (ela tem acesso ao predecessor #pred#, de #u'# na lista ligada do ponteiro #jump# do último nodo #u# encontrado durante o passo~1.)
   \item Ela retrocede no caminho de busca por #x# ajustando os ponteiros #jump#
     nos nodos cujos ponteiros #jump# devem agora apontar para #x#.
 \end{enumerate}
@@ -120,82 +127,79 @@ Uma adição é ilustrada na \figref{binarytrie-add}.
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/binarytrie-add}
   \end{center}
-  \caption[Adicionando a uma BinaryTrie]{Adicionando os valores 2 e 15 na #BinaryTrie# 
+  \caption[Adicionando a uma BinaryTrie]{Adicionando os valores 2 e 15 na #BinaryTrie# da
   \figref{binarytrie-ex2}.}
   \figlabel{binarytrie-add}
 \end{figure}
 \codeimport{ods/BinaryTrie.add(x)}
-Esse método realiza uma descida pelo caminho de busca por #x# e uma subida em seguida. Cada passo dessas caminhadas leva tempo constante, então o método roda
-em tempo $O(#w#)$.
+Esse método realiza uma descida pelo caminho de busca por #x#
+e uma subida em seguida. Cada passo dessas caminhadas leva 
+tempo constante, então o método roda em tempo $O(#w#)$.
 
-A operação #remove(x)# desfaz o trabalho de 
- #add(x)#.  Assim como #add(x)#,
+A operação #remove(x)# desfaz o trabalho de  #add(x)#.  Assim como #add(x)#,
  ela tem muito a fazer:
 \begin{enumerate}
   \item Ela segue o caminho de busca por #x# até alcançar a folha #u# contendo #x#.
-  containing #x#.
   \item Ela remove #u# da lista duplamente ligada.
-
-  \item Ela remove #u# e então retrocede no caminho de busca de #x# removendo nodos até alcançar um nodo #v# que tem um filho que não está no caminho de busca de #x#.
-  \item Ela sabe de #v# à raiz atualizando qualquer ponteiros #jump# que apontam para #u#. 
+  \item Ela remove #u# e então retrocede no caminho de busca de 
+    #x# removendo nodos até alcançar um nodo #v# que tem um filho 
+    que não está no caminho de busca de #x#.
+  \item Ela sobe de #v# à raiz atualizando os ponteiros #jump# que apontam para #u#. 
 \end{enumerate}
-Uma remoção é ilustrada na 
- \figref{binarytrie-remove}.
+Uma remoção é ilustrada na \figref{binarytrie-remove}.
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/binarytrie-remove}
   \end{center}
-  \caption[Remoção de uma BinaryTrie]{Remoção do valor 9 da #BinaryTrie# em 
+  \caption[Remoção de uma BinaryTrie]{Remoção do valor 9 da #BinaryTrie# na 
   \figref{binarytrie-ex2}.}
   \figlabel{binarytrie-remove}
 \end{figure}
 \codeimport{ods/BinaryTrie.remove(x)}
 
 \begin{thm}
-Uma #BinaryTrie# implementa a interface #SSet# para inteiro de #w# bits. 
-  Uma
-#BinaryTrie# aceita as operações #add(x)#, #remove(x)# e #find(x)#
-em tempo de 
-$O(#w#)$ por operação. O espaço usado por uma #BinaryTrie# que guarda #n# valores
-em $O(#n#\cdot#w#)$.
+Uma #BinaryTrie# implementa a interface #SSet# para inteiros de #w# bits. 
+Uma #BinaryTrie# possu as operações #add(x)#, #remove(x)# e #find(x)#
+em tempo de $O(#w#)$ por operação. O espaço usado por uma 
+#BinaryTrie# que guarda #n# valores em $O(#n#\cdot#w#)$.
 \end{thm}
 
-\section{#XFastTrie#: Buscando em Tempo Duplamente Logaritmico}
+\section{#XFastTrie#: Buscando em Tempo Duplamente Logarítmico}
 \seclabel{xfast}
 
 \index{XFastTrie@#XFastTrie#}%
-O desempenho da estrutura #BinaryTrie# não é muito impressionante. O número de elemento #n# guardado na estrutura é no máximo  
- $2^{#w#}$, então
+O desempenho da estrutura #BinaryTrie# não é muito impressionante. O número de elementos #n# guardados na estrutura é no máximo  $2^{#w#}$, então
 $\log #n#\le #w#$.  Em outras palavras, qualquer estrutura #SSet# baseada em comparações descrita em outras partes deste livro são pelo menos tão eficientes quanto uma #BinaryTrie# e não se restringem a somente guardar inteiros. 
 
-A seguir descrevemos a 
-#XFastTrie#, que é somente uma #BinaryTrie# com
-#w+1# tabelas hash --- uma para cada nível da trie. Essas tabelas hash são usadas para acelerar a operação  
-#find(x)# para $O(\log #w#)$.
-Lembre-se que a operação 
-#find(x)# em uma #BinaryTrie# está quase terminada ao alcançarmos um nodo #u# onde o caminho de busca para #x# tenta prosseguir para #u.right# (ou #u.left#) mas #u# não tem filho à direita (respectivamente, esquerda). Neste ponto, a busca usa 
-#u.jump# para pular para uma folha
-#v# da #BinaryTrie# e retorna #v# ou seu sucessor na lista ligada de folhas. Uma 
+A seguir descrevemos a #XFastTrie#, que é somente uma #BinaryTrie# com
+#w+1# tabelas hash --- uma para cada nível da trie. Essas tabelas hash são usadas para acelerar a operação #find(x)# para $O(\log #w#)$.
+Lembre-se que a operação #find(x)# em uma #BinaryTrie# está quase 
+terminada ao alcançarmos um nodo #u# onde o caminho de busca para #x# 
+tenta prosseguir para #u.right# (ou #u.left#) mas #u# não tem filho 
+à direita (respectivamente, esquerda). Neste ponto, a busca usa 
+#u.jump# para pular para uma folha #v# da #BinaryTrie# e retorna 
+#v# ou seu sucessor na lista ligada de folhas. Uma 
 #XFastTrie# acelera o processo de busca usando a busca binária
 \index{busca binária}%
-nos nívels da trie para achar o nodo #u#.
+nos níveis da trie para achar o nodo #u#.
 
 Para usar busca binária, precisamos de um modo para determinar se o nodo #u#
 que estamos buscando está acima de dado nível #i# ou se #u# está nesse nível ou abaixo.
 Essa informação é dada pelos #i# bits de maior ordem na representação binária de #x#; esses bits determinam o caminho de busca que #x# percorre da raiz ao nível #i#.
-Para um exemplo, veja a 
-\figref{xfast-path}; nessa figura o último nodo #u#, no
+Para um exemplo, veja a \figref{xfast-path}; nessa figura o último nodo #u#, no
 caminho de busca por 14 (cuja representação binária é 1110) é o nodo marcado
-com 
-$11{\star\star}$ no nível 2 porque não há nodos marcados com
-$111{\star}$ no nível 3. Portanto, podemos marcar cada nodo no nível #i# com um inteiro com #i# bits. 
-Então, o nodo #u# que estamos buscando seria no nível #i# ou abaixo se, e somente se, existir um nodo no nível #i# cuja marcação corresponde aos #i# bits de mais alta ordem de #x#.
+com $11{\star\star}$ no nível 2 porque não há nodos marcados com
+$111{\star}$ no nível 3. Portanto, podemos marcar cada nodo no nível #i# 
+com um inteiro com #i# bits. 
+Então, o nodo #u# que estamos buscando seria no nível #i# ou abaixo se, 
+e somente se, existir um nodo no nível #i# cuja marcação corresponde aos #i# bits 
+de mais alta ordem de #x#.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/xfast-path}
   \end{center}
-  \caption{Como não há nodo marcado com $111\star$, o caminho de busca por 
+  \caption{Como não há nenhum nodo marcado com $111\star$, o caminho de busca por 
     14 (1110) termina no nodo marcado com $11{\star\star}$ .}
   \figlabel{xfast-path}
 \end{figure}
@@ -204,32 +208,31 @@ Em uma
 #XFastTrie#, guardamos para cada $#i#\in\{0,\ldots,#w#\}$, todos os
 nodos no nível #i# em um #USet# #t[i]# que é implementado como uma tabela
 hash 
-(\chapref{hashing}).  Usando esse #USet# nos permite checar em tempo constante se existe um nodo no nível #i# cuja marcação corresponde aos #i# bits de ordem mais alta de #x#. Podemos encontrar esse nodo usando
+(\chapref{hashing}).  Usar esse #USet# nos permite verificar em tempo 
+constante se existe um nodo no nível #i# cuja marcação corresponde aos 
+#i# bits de ordem mais alta de #x#. Podemos encontrar esse nodo usando
 \javaonly{#t[i].find(x>>>(w-i))#}%
 \cpponly{#t[i].find(x>>(w-i))#}%
 \pcodeonly{#t[i].find(x>>(w-i))#}%
 
 As tabelas hash $#t[0]#,\ldots,#t[w]#$ nos permitem usar busca binária
 para achar #u#. 
-Inicialmente, sabemos que 
-#u# está em algum nível #i# com
+Inicialmente, sabemos que #u# está em algum nível #i# com
 $0\le #i#< #w#+1$. Portanto inicializamos $#l#=0$ e $#h#=#w#+1$
-e repetidamente olhamos na tabela hash
- #t[i]#, onde $#i#=\lfloor
+e repetidamente olhamos na tabela hash #t[i]#, onde $#i#=\lfloor
 (#l+h#)/2\rfloor$.  Se $#t[i]#$ contém um nodo cuja marcação corresponde 
-aos #i# bits de maior ordem de #x# então fazemos a atribuição #l=i# (#u# está no mesmo nível ou abaixo de 
+aos #i# bits de maior ordem de #x# então fazemos a atribuição 
+#l=i# (#u# está no mesmo nível ou abaixo de 
 #i#); caso contrário 
 fazemos 
 #h=i# (#u# está acima do nível #i#).  Esse processo termina quando
 $#h-l#\le 1$ e neste caso determinamos que #u# está no nível #l#. 
-Então completamos a operação #find(x)# usando 
-#u.jump#
+Então completamos a operação #find(x)# usando #u.jump#
 e a lista duplamente ligada de folhas.
 \codeimport{ods/XFastTrie.find(x)}
 Cada iteração do laço #while# no método anteriormente descrito
-reduz #h-l# por aproximadamente um fator de dois, então esse laço encontra #u#
-após 
-$O(\log #w#)$
+reduz #h-l# por aproximadamente um fator de dois, então esse 
+laço encontra #u# após  $O(\log #w#)$
 iterações. Cada iteração realiza uma quantidade constante de trabalho e uma operação
 #find(x)# em uma #USet#, que leva uma quantidade de tempo esperado constante.
 O restante da operação leva somente tempo constante, então o método #find(x)# 
@@ -242,67 +245,64 @@ idênticos aos mesmos mesmos em uma
 #add(x)#, quando um novo nodo é criado no nível #i#, esse nodo é adicionado a
 #t[i]#.  Durante a operação #remove(x)#, quando um nodo é 
 removido do nível #i#, esse nodo é removido de 
- #t[i]#.  Como adição e remoção de uma tabela hash leva tempo esperado constante, isso não aumenta os tempos de execução de 
+ #t[i]#.  Como a adição e a remoção de uma tabela hash leva tempo 
+ esperado constante, isso não aumenta os tempos de execução de 
 #add(x)# e #remove(x)# em mais do que um fator constante. 
-Omitimos os códigos para
-#add(x)# e #remove(x)# pois são quase idênticos ao código longo previamente fornecido para os mesmos métodos em uma 
+Omitimos os códigos para #add(x)# e #remove(x)# pois são quase idênticos 
+ao código longo previamente fornecido para os mesmos métodos em uma 
 #BinaryTrie#.
 
-O teorema a seguir resume o desempenho de uma 
-#XFastTrie#:
+O teorema a seguir resume o desempenho de uma #XFastTrie#:
 
 \begin{thm}
 Uma #XFastTrie# implementa a interface #SSet# para inteiros com #w# bits. Uma
-#XFastTrie# aceita as operações 
+#XFastTrie# possui as operações 
 \begin{itemize}
-\item #add(x)# e #remove(x)# em tempo esperado $O(#w#)$ per operation e 
+\item #add(x)# e #remove(x)# em tempo esperado $O(#w#)$ por operation e 
 \item #find(x)# em tempo esperado $O(\log #w#)$ por operação. 
 \end{itemize}
-O espaço usado por uma 
-#XFastTrie# que guarda #n# valores é 
-$O(#n#\cdot#w#)$.
+O espaço usado por uma #XFastTrie# que guarda #n# valores é $O(#n#\cdot#w#)$.
 \end{thm}
 
-\section{#YFastTrie#: A Doubly-Logarithmic Time #SSet#}
+\section{#YFastTrie#: Um #SSet# com Tempo Duplamente Logarítmico}
 \seclabel{yfast}
 
 A 
 #XFastTrie# é uma melhoria exponencial sobre a 
-#BinaryTrie# em termos de tempo de consulta, mas as operações #add(x)# eand #remove(x)# ainda não são muito rápidas. 
+#BinaryTrie# em termos de tempo de consulta, mas as operações #add(x)# e 
+#remove(x)# ainda não são muito rápidas. 
 Além disso, o uso de espaço 
-$O(#n#\cdot#w#)$ é mais que em outras implementações de #SSet# descritas neste livro, que usam 
+$O(#n#\cdot#w#)$ é maior que em outras implementações de #SSet# 
+descritas neste livro, que usam 
 $O(#n#)$ de espaço. Esses dois problemas são relacionados; se 
-#n# operações #add(x)# construirem uma estrutura de tamanho 
+#n# operações #add(x)# construírem uma estrutura de tamanho 
 $#n#\cdot#w#$, então a operação #add(x)# exige pelo menos na ordem de 
 #w# de tempo (e espaço) por operação. 
 
 \index{YFastTrie@#YFastTrie#}%
 A #YFastTrie#, discutida a seguir, simultaneamente melhora os custos de espaço e tempo da 
-#XFastTrie#s.  Uma #YFastTrie# uma #XFastTrie#, #xft#, mas guarda
-somente 
-$O(#n#/#w#)$ valores em #xft#.  Dessa maneira, o espaço total usado por 
-#xft# é somente $O(#n#)$.  Adicionalmente, somente uma a cada #w# operações  #add(x)# ou 
-#remove(x)# 
+#XFastTrie#.  Uma #YFastTrie# usa uma #XFastTrie#, #xft#, mas guarda
+somente $O(#n#/#w#)$ valores em #xft#.  Dessa maneira, o espaço total usado por 
+#xft# é somente $O(#n#)$.  Adicionalmente, somente uma a cada #w# 
+operações #add(x)# ou #remove(x)# 
 da #YFastTrie# resulta em uma operação #add(x)# ou
 #remove(x)# em #xft#. Fazendo isso, o custo médio 
 das chamadas às operações 
-#add(x)# e #remove(x)# da #xft# é somente uma constante. 
+#add(x)# e #remove(x)# da #xft# é constante. 
 
-A pergunta óbvia é: se 
-#xft# somente guarda #n#/#w# elementos,
-onde o resto dos 
-$#n#(1-1/#w#)$ elementos vão? Esses elementos são movidos para
+A pergunta óbvia é: se #xft# somente guarda #n#/#w# elementos,
+para onde o resto dos $#n#(1-1/#w#)$ elementos vão? Esses elementos 
+são movidos para
 \emph{estruturas secundárias},
 \index{estrutura secundária}%
 nesse caso uma versão estendida de uma treap
 (\secref{treap}).  Existem aproximadamente #n#/#w# dessas estruturas secundárias
 então, em média, cada uma delas guarda 
-$O(#w#)$ itens.  Treaps aceitam operações #SSet# em tempo logaritmico, então
+$O(#w#)$ itens.  Treaps aceitam operações #SSet# em tempo logarítmico, então
 as operações nessas treaps irão rodar em tempo
 $O(\log #w#)$, conforme exigido.
 
-Mais concretamente, uma 
-#YFastTrie# contém uma #XFastTrie#, #xft#,
+Mais concretamente, uma #YFastTrie# contém uma #XFastTrie#, #xft#,
 que contém uma amostra aleatória dos dados, onde cada elemento
 aparece na amostra independentemente com probabilidade 
 $1/#w#$.
@@ -311,8 +311,7 @@ Considere que
 $#x#_0<#x#_1<\cdots<#x#_{k-1}$ representam os elementos guardados em #xft#.
 Uma treap $#t#_i$ é associada a cada elemento 
 $#x#_i$ que guarda todos os valores no intervalo 
-$#x#_{i-1}+1,\ldots,#x#_i$.  Isso é ilustrado em 
-\figref{yfast}.
+$#x#_{i-1}+1,\ldots,#x#_i$.  Isso é ilustrado na \figref{yfast}.
 
 \begin{figure}
   \begin{center}
@@ -323,9 +322,9 @@ $#x#_{i-1}+1,\ldots,#x#_i$.  Isso é ilustrado em
   \figlabel{yfast}
 \end{figure}
 
-A operação #find(x)# em uma #YFastTrie# razoavelmente simples. Buscamos por 
+A operação #find(x)# em uma #YFastTrie# é razoavelmente simples. Buscamos por 
 #x# em #xft# e achamos algum valor $#x#_i$ associado com a treap
-$#t#_i$.  Então usamos o método #find(x)# da treap $#t#_i$ para responder a
+$#t#_i$.  Então usamos o método #find(x)# da treap $#t#_i$ para responder à
 consulta. O método completo se resume a uma linha:
 \codeimport{ods/YFastTrie.find(x)} 
 A primeira operação #find(x)# (em #xft#) leva $O(\log#w#)$ de tempo.
@@ -333,11 +332,10 @@ A segunda operação #find(x)# (em uma treap) leva
  $O(\log r)$ de tempo, onde 
 $r$ é o tamanho da treap. Mais adiante nesta seção, mostraremos que o tamanho esperado da treap é 
 $O(#w#)$ tal que essa operação usa 
-$O(\log #w#)$ de tempo.\footnote{Essa é uma aplicação da \emph{Desigualdade de Jensen}: Se $\E[r]=#w#$, então $\E[\log r]
-\le \log w$.}
+$O(\log #w#)$ de tempo.\footnote{Essa é uma aplicação da \emph{Desigualdade de Jensen}: Se $\E[r]=#w#$, então $\E[\log r] \le \log w$.}
 
 Adicionar um elemento a uma
-#YFastTrie# é razoavelmente simples -- a maior parte do tempo. 
+#YFastTrie# é razoavelmente simples -- na maior parte do tempo. 
 O método #add(x)# chama #xft.find(x)# para achar a treap
 #t#, onde #x# deve ser inserido. Então utiliza-se #t.add(x)# para 
 adicionar #x# a #t#. Nesse ponto, lançamos uma moeda tendenciosa
@@ -347,10 +345,9 @@ que sai cara com probabilidade
 #xft#.
 
 É aqui que as coisas ficam um pouco mais complicadas. Quando #x# é 
-adicionado a 
-#xft#, a treap #t# precisa ser dividida em duas treaps, #t1# e #t'#.
-A treap
- #t1# contém todos os valore menores ou iguais a #x#;
+adicionado a #xft#, a treap #t# precisa ser dividida em duas treaps, 
+#t1# e #t'#.
+A treap #t1# contém todos os valores menores ou iguais a #x#;
 #t'# é a treap original, #t#, com os elementos de #t1# removidos.
 Assim que isso é feito, adicionamos o par
 #(x,t1)# em #xft#.  A \figref{yfast-add} mostra um exemplo. 
@@ -364,8 +361,8 @@ Assim que isso é feito, adicionamos o par
   \figlabel{yfast-add}
 \end{figure}
 Adicionar #x# a #t# leva
- $O(\log #w#)$ de tempo.  \excref{treap-split} mostra que dividir #t# em #t1# 
- e #t'# também pode ser feito em 
+ $O(\log #w#)$ de tempo. O \excref{treap-split} mostra que 
+ dividir #t# em #t1# e #t'# também pode ser feito em 
 $O(\log #w#)$ de tempo esperado. Adicionar o par
 (#x#,#t1#) em #xft# custa $O(#w#)$ de tempo, mas acontece com 
 probabilidade $1/#w#$.  Portanto, o tempo esperado de execução da operação 
@@ -379,14 +376,11 @@ O método
 Usamos 
 #xft# para achar a folha, #u#, em #xft# que contém a resposta a 
 #xft.find(x)#.  A partir de #u#, pegamos a treap, #t#, contendo #x#
-e 
-removemos #x# de #t#.  Se #x# também foi guardado em #xft# (e #x#
-não é igual a 
-$2^{#w#}-1$) então removemos #x# de #xft# e adicionamos os elementos
-da treap de 
-#x# à treap #t2#, que é guardada pelo sucessor de #u# na lista ligada.
-Isso é ilustrado na 
-\figref{yfast-remove}.
+e removemos #x# de #t#.  Se #x# também foi guardado em #xft# (e #x#
+não é igual a $2^{#w#}-1$) então removemos #x# de #xft# e adicionamos 
+os elementos da treap de #x# à treap #t2#, que é guardada pelo 
+sucessor de #u# na lista ligada.
+Isso é ilustrado na \figref{yfast-remove}.
 \codeimport{ods/YFastTrie.remove(x)}
 \begin{figure}
   \begin{center}
@@ -395,18 +389,17 @@ Isso é ilustrado na
   \caption[Remoção de uma YFastTrie]{Remoção dos valores 1 e 9 de uma #YFastTrie# na \figref{yfast-add}.}
   \figlabel{yfast-remove}
 \end{figure}
-Achar o nodo #u# em #xft# leva 
-$O(\log#w#)$ de tempo esperado.
+Achar o nodo #u# em #xft# leva $O(\log#w#)$ de tempo esperado.
 Remover #x# de #t# leva 
-$O(\log#w#)$ de tempo esperado.  Novamente, 
-\excref{treap-split} mostra que a junção de todos os elementos de #t# em #t2#
+$O(\log#w#)$ de tempo esperado.  Novamente, o \excref{treap-split} 
+mostra que a junção de todos os elementos de #t# em #t2#
 #t2# pode ser feito em tempo $O(\log#w#)$. Se necessária, a remoção de #x#
 de #xft# leva tempo 
 $O(#w#)$, mas #x# é somente contido em #xft# com probabilidade 
 $1/#w#$.  Portanto, o tempo esperado para remover um elemento de uma 
 #YFastTrie# é $O(\log #w#)$.
 
-Anteriormente, postergamos a discussão sobre os tamanhos das treaps nesta
+Anteriormente, postergamos a discussão sobre os tamanhos das treaps nessa
 estrutura. Antes de terminar este capítulo, provamos o resultado que necessitamos.
 
 \begin{lem}\lemlabel{yfast-subtreesize}
@@ -444,7 +437,7 @@ $\E[k]\le#w#-1$, como esse é o mesmo experimento de lançamento de moedas consi
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/yfast-sample}
   \end{center}
-  \caption[Tempo de uma consulta em uma YFastTrie]{O número de elementos na treap #t# contendo #x# é determinado por dois experimentos de lançamento de moedas.} 
+  \caption[Tempo de uma consulta em uma YFastTrie]{O número de elementos na treap #t# contendo #x# é determinado por dois lançamentos de moedas.} 
   \figlabel{yfast-sample}
 \end{figure}
 %Surprisingly, the bound in \lemref{yfast-subtreesize} is tight.  (If this
@@ -468,8 +461,9 @@ em tempo esperado $O(\log #w#)$ por operação. O espaço usado por uma
 #YFastTrie# que guarda #n# valores é $O(#n#+#w#)$.
 \end{thm}
 
-O temo #w# nos custos de espaço vem do fato que #xft# sempre guarda o 
-valor $2^#w#-1$.  A implementação pode ser modificada (em troca de alguns casos extras para serem considerados no código) tal que é desnecessário guardar esse
+O termo #w# nos custos de espaço vem do fato que #xft# sempre guarda o 
+valor $2^#w#-1$.  A implementação pode ser modificada (em troca de alguns 
+casos extras para serem considerados no código) tal que é desnecessário guardar esse
 valor. Nesse caso, o custo de espaço no teorema torna-se $O(#n#)$.
 
 \section{Discussão e Exercícios}
@@ -482,14 +476,14 @@ as operações #add(x)#,
 (ou \emph{árvore estratificada})
 \index{árvore estratificada}%
 \cite{e77}.  A estrutura original de van~Emde~Boas tinha tamanho 
-$2^{#w#}$, tornando-a imprática para inteiros grandes.
+$2^{#w#}$, tornando-a inadequada para inteiros grandes.
 
-As estruturas de dados #XFastTrie# e #YFastTrie# foram descubertas por 
+As estruturas de dados #XFastTrie# e #YFastTrie# foram descobertas por 
 Willard \cite{w83}.  A estrutura #XFastTrie# é relacionada às árvores de  
 van~Emde~Boas;  por exemplo, as tabelas hash em uma #XFastTrie#
 substituem arrays em uma árvore de 
 van~Emde~Boas.  Isto é, em vez de guardar a tabela hash 
-a tabela hash #t[i]#, uma árvore de van~Emde~Boas guarda um array de comprimento
+#t[i]#, uma árvore de van~Emde~Boas guarda um array de comprimento
 $2^{#i#}$.
 
 Outra estrutura para guardar inteiros é a árvore de fusão Fredman e Willard
@@ -509,7 +503,7 @@ pelo menos para estruturas que usam somente $O(#n#)$ de espaço.
 \begin{exc}
   Projete e implemente uma versão simplificada de uma 
 #BinaryTrie# que não tem uma lista ligada nem ponteiros de salto
-  mas que ainda tem #find(x)# que roda em tempo 
+  mas cujo #find(x)# que roda em tempo 
   $O(#w#)$.
 \end{exc}
 
@@ -521,15 +515,15 @@ $#w#+1$ tabelas hash.
 \end{exc}
 
 \begin{exc}
-  Podemos pensar da #BinaryTrie# como usa estrutura que guarda strings de bits
+  Podemos pensar da #BinaryTrie# como uma estrutura que guarda strings de bits
   de comprimento #w# de forma que cada bitstring é representada como um caminho
   da raiz para uma folha. 
   Amplie essa ideia em uma implementação #SSet# que guarda strings
-  de comprimento váriavel e implementa 
-#add(s)#, #remove(s)# e 
-  #find(s)# em tempo proporcional ao comprimento de #s#.
+  de comprimento variável e implementa 
+#add(s)#, #remove(s)# e #find(s)# em tempo proporcional ao comprimento de #s#.
 
-  \noindent Dica: Cada nodo na sua estrutura de dados deve guardar uma tabela hash que é indexada por valores de caracteres.
+  \noindent Dica: Cada nodo na sua estrutura de dados deve guardar uma tabela 
+  hash que é indexada por valores de caracteres.
 \end{exc}
 
 \begin{exc}
@@ -542,7 +536,7 @@ $d(23)=20$.
     \item Projete e implemente uma versão modificada da operação #find(x)#
       em uma #XFastTrie# que roda em tempo esperado $O(1+\log d(#x#))$
       . Dica: a tabela hash $t[#w#]$ contém todos os valores 
-      #x# tal que $d(#x#)=0$, tal que seria um bom lugar para começar.
+      #x# tal que $d(#x#)=0$, então esse seria um bom ponto para começar.
     \item Projete e implemente uma versão modificada da operação #find(x)#
       em uma #XFastTrie# que roda em tempo esperado $O(1+\log\log d(#x#))$.
   \end{enumerate}
