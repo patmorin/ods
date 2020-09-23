@@ -267,7 +267,7 @@ Embora o uso dessas funções não diminuam o tempo de execução assintoticamen
 
 \pcodeonly{Nas nossas implementações em C++ e Java, o uso de funções de cópia rápida de arrays
 }
-\notpcode{Nas implementações em \lang\ aqui, o uso do nativo \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}}
+\notpcode{Nas implementações em \lang\ deste livro, o uso do método disponível nativamente \javaonly{#System.arraycopy(s,i,d,j,n)#}\cpponly{#std::copy(a0,a1,b)#}}
 resultaram em um fator de aceleração, \emph{speedup}, entre 2 e 3, dependendo dos tipos de operações realizadas.
 O resultados podem variar de acordo com o caso.
 
@@ -543,8 +543,7 @@ ou #back#, conforme apropriado:
 O método 
 #add(i,x)# realiza o balanceamento das duas #ArrayStack#s
 #front# e #back#, ao chamar o método #balance()#.
-A implementação de 
-#balance()# é descrita a seguir, mas no momento é suficiente 
+A seguir descrevemos a implementação de #balance()#, mas no momento é suficiente 
 saber que #balance()# garante que, a não ser que $#size()#<2$,
 #front.size()# e #back.size()# não diferem por mais de um fator 
 de 3.  Em especial, $3\cdot#front.size()# \ge #back.size()#$ e

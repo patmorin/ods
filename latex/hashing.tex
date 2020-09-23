@@ -332,7 +332,7 @@ O teorema a seguir resume o desempenho da estrutura de dados
   #remove(x)# e #find(x)# em $O(1)$ de tempo esperado por operação. 
 
   Além disso, começando com uma 
-  #ChainedHashTable# vazia, qualquer sequência de $m$ operações 
+  #ChainedHashTable# vazia, uma sequência de $m$ operações 
   #add(x)# e #remove(x)# resulta em um total de $O(m)$ de tempo gasto durante
   todas a chamadas a #grow()#.
 \end{thm}
@@ -522,12 +522,12 @@ $\{0,\ldots,#t.length#-1\}$ independente do conteúdo de #t#.  Se #i#
 é parte de um agrupamento de tamanho $k$, então o tempo que leva para executar
 a operação #find(x)# é até $O(1+k)$.  Então, o tempo esperado de execução pode ser limitado superiormente por 
 \[
-  O\left(1 + \left(\frac{1}{#t.length#}\right)\sum_{i=1}^{#t.length#}\sum_{k=0}^{\infty} k\Pr\{\text{#i# é parte de um agrupamento de tamanho $k$}\}\right) \enspace .
+  O\left(1 + \left(\frac{1}{#t.length#}\right)\sum_{i=1}^{#t.length#}\sum_{k=0}^{\infty} k\Pr\{\text{#i# \small{está em um agrupamento de tamanho} $k$}\}\right).%\enspace.
 \]
 
 Note que cada agrupamento de tamanho $k$ contribui à soma interna $k$ vezes para uma contribuição total de $k^2$, então a soma anterior pode ser reescrita como 
 \begin{align*}
-  & { } O\left(1 + \left(\frac{1}{#t.length#}\right)\sum_{i=1}^{#t.length#}\sum_{k=0}^{\infty} k^2\Pr\{\mbox{#i# inicia um agrupamento de tamanho $k$}\}\right) \\
+  & { } O\left(1 + \left(\frac{1}{#t.length#}\right)\sum_{i=1}^{#t.length#}\sum_{k=0}^{\infty} k^2\Pr\{\mbox{#i# \small{inicia um agrupamento de tamanho} $k$}\}\right) \\
   & \le O\left(1 + \left(\frac{1}{#t.length#}\right)\sum_{i=1}^{#t.length#}\sum_{k=0}^{\infty} k^2p_k\right) \\
   & = O\left(1 + \sum_{k=0}^{\infty} k^2p_k\right) \\
   & = O\left(1 + \sum_{k=0}^{\infty} k^2\cdot O(c^k)\right) \\
@@ -753,8 +753,11 @@ Sejam $#x#_0,\ldots,#x#_{r-1}$ e $#y#_0,\ldots,#y#_{r-1}$ sequências de inteiro
   O passo final da função hash é aplicar o hashing multiplicativo
   para reduzir nosso resultado intermediário de 
   $2#w#$ bits $h'(#x#_0,\ldots,#x#_{r-1})$ a um
-  resultado final com #w# bits $h(#x#_0,\ldots,#x#_{r-1})$.  Usando o \thmref{multihash},
-  se $h'(#x#_0,\ldots,#x#_{r-1})\neq h'(#y#_0,\ldots,#y#_{r-1})$, então
+  resultado final com #w# bits $h(#x#_0,\ldots,#x#_{r-1})$.  
+
+  Usando o \thmref{multihash},
+  se $h'(#x#_0,\ldots,#x#_{r-1})\neq h'(#y#_0,\ldots,#y#_{r-1})$, então podemos
+  concluir que 
   $\Pr\{h(#x#_0,\ldots,#x#_{r-1}) = h(#y#_0,\ldots,#y#_{r-1})\} \le 2/2^{#w#}$.
 
   Para resumir,

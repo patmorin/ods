@@ -98,7 +98,7 @@ Uma interface descreve o que uma estrutura de dados faz, enquanto uma implementa
 Uma \emph{interface},
 \index{interface}%
 \index{tipo abstrato de dados|see{interface}}%
-às vezes também chamada de \emph{tipo abstrato de dados}(\emph{abstract data type}, em inglês),
+às vezes também chamada de \emph{tipo abstrato de dados} (\emph{abstract data type}, em inglês),
 define o conjunto de operações aceitas por uma estrutura de dados e a semântica, ou significado, dessas operações.
 
 Uma interface nos diz nada sobre como a estrutura de dados implementa essas operações; ela somente provê uma lista de operações aceitas juntamente com as especificações sobre quais tipos de argumentos cada operação aceita e o valor retornado por cada operação.
@@ -760,7 +760,8 @@ Para entender a diferença entre o pior caso, o tempo amortizado e o tempo esper
 
 \paragraph{Pior caso versus custo amortizado:}
 \index{custo amortizado}%
-Suponha que uma casa custe R\$120\,000.  A fim de comprar essa casa, podemos pegar um empréstimo de 120 meses (10 anos) com pagamentos mensais de 
+
+Considere uma casa que o dono está vendendo por R\$120\,000. A fim de comprar essa casa, podemos pegar um empréstimo de 120 meses (10 anos) com pagamentos mensais de 
 R\$1\,200. Nesse caso, o custo mensal no pior caso de pagar o empréstimo é 
 R\$1\,200.
 
@@ -784,7 +785,7 @@ Agora é o momento da decisão. Devemos pagar os
 apostar fazer uma poupança anti-incêndio ao custo esperado de
 R\$10 mensal?  Claramente, R\$10 por mês custa menos \emph{em expectativa},
 mas temos que aceitar que a possibilidade de \emph{custo real} possa ser bem maior.
-No evento improvável que a casa queime inteira, o custo real será de R\$120\,000.
+No evento improvável em que a casa inteira queime, o custo real será de R\$120\,000.
 
 Esses exemplos financeiros também oferecem a oportunidade de vermos porque às vezes aceitamos um tempo de execução amortizado ou esperado em vez de considerarmos o tempo de execução no pior caso. Frequentemente é possível obter um tempo de execução esperado ou amortizado menor que o obtido no pior caso. 
 No mínimo, frequentemente é possível obter uma estrutura de dados bem mais simples se estivermos dispostos a aceitar tempo de execução amortizado ou esperado.
@@ -869,7 +870,7 @@ Leitores em busca de detalhes das implementações são encorajados a olhar no c
 
 Este livro mistura análise matemática de tempos de execução com o código-fonte da linguagem \lang\ para os algoritmos em análise. Isso significa que algumas equações contêm variáveis também encontradas no código-fonte.
 
-Essas variáveis são formatadas consistentemente, tanto dentro do código-fonte quanto nas equações. A variável mais comum desse tipo é a variável #n# 
+Essas variáveis são formatadas consistentemente, tanto dentro do código fonte quanto nas equações. A variável mais comum desse tipo é a variável #n# 
 \index{n@#n#}%
 que, sem exceção, sempre refere-se ao número de itens atualmente armazenados na estrutura de dados.
 }
@@ -969,7 +970,7 @@ Para um soberbo (e livre) tratamento da matemática discutida neste capítulo, i
 Leyman, Leighton e Meyer \cite{llm11}.  
 Para um texto de cálculo suave que inclui definições formais de exponenciais e logaritmos, veja o (disponível livremente) texto clássico de Thompson \cite{t14}.
 
-Para maiores informações em probabilidade básica, especialmente como ela se relaciona com Ciência da Computação, veja o livro didático de Ross \cite{r01}.  
+Para maiores informações sobre probabilidade básica, especialmente como ela se relaciona com Ciência da Computação, veja o livro didático de Ross \cite{r01}.  
 Outra boa referência, que cobre notação assintótica e probabilidades, é o livro-texto de Graham, Knuth e Patashnik \cite{gkp94}.
 
 \javaonly{Leitores que desejam afinar suas habilidades de programação Java
@@ -984,26 +985,26 @@ podem achar muitos tutoriais online em \cite{oracle_tutorials}.}
   Resolva os seguintes problemas fazendo a leitura de um arquivo de texto uma linha por vez e executando operações em cada linha nas estrutura(s) de dados adequada(s).
 Suas implementações devem ser rápidas o suficiente tal que até arquivos com um milhão de linhas podem ser processadas em alguns segundos.
   \begin{enumerate}
-    \item Leia a entrada uma linha por vez e então escreva as linha em ordem invertida, tal que a última linha lida é a primeira imprimida, e então a penúltima lida é a segunda a ser imprimida e assim por diante. 
-    \item Leia as primeiras 50 linhas da entrada e então as escreva na saída em ordem reversa. Leia as seguintes 50 linhas e então escreva na saída em ordem reversa. Faça isso até que não haja mais linhas a serem linhas. Nesse ponto as linhas restantes lidas também devem ser imprimidas invertidas.
+    \item Leia a entrada uma linha por vez e então escreva na tela as linha em ordem invertida, tal que a última linha lida é a primeira mostrada, e então a penúltima lida é a segunda a ser mostrada e assim por diante. 
+    \item Leia as primeiras 50 linhas da entrada e então as escreva na saída em ordem reversa. Leia as seguintes 50 linhas e então escreva na saída em ordem reversa. Faça isso até que não haja mais linhas a serem linhas. Nesse ponto as linhas restantes lidas também devem ser mostradas em ordem invertida.
 Em outras palavras, sua saída iniciará com a 50ª linha, então 49ª linha, então a 48ª e assim até a primeira linha. Isso deverá ser seguido pela centésima linha, seguida pela 99ª até a 51ª linha. Assim por diante.
 O seu código nunca deverá manter mais de 50 linhas a qualquer momento.
 
 \item Leia a entrada uma linha por vez.
-  A qualquer momento após ler as primeiras 42 linhas, se alguma linha está em branco (i.e., uma string de comprimento 0), então produza a linha que ocorreu 42 linhas antes dela. Por exemplo, se Linha 242 está em branco, então o seu programa deve imprimir a linha 200. Esse programa deve ser implementado tal que ele nunca guarda mais que 43 linhas da entrada a qualquer momento.
+  A qualquer momento após ler as primeiras 42 linhas, se alguma linha está em branco (i.e., uma string de comprimento 0), então produza a linha que ocorreu 42 linhas antes dela. Por exemplo, se Linha 242 está em branco, então o seu programa deve mostrar a linha 200. Esse programa deve ser implementado tal que ele nunca guarda mais que 43 linhas da entrada a qualquer momento.
 
-\item Leia a entrada uma linha por vez e imprima cada linha se não for uma duplicata de alguma linha anterior. Tenha cuidado especial para que um arquivo com muitas linhas duplicadas não use mais memória do que é necessário para o número de linhas únicas.
+\item Leia a entrada uma linha por vez e mostre cada linha se não for uma duplicata de alguma linha anterior. Tenha cuidado especial para que um arquivo com muitas linhas duplicadas não use mais memória do que é necessário para o número de linhas únicas.
 
-\item Leia a entrada uma linha por vez e imprima cada linha somente se você já encontrou uma linha igual antes. (O resultado final é que você remove a primeira ocorrência de cada linha.). Tenha cuidado para que um arquivo com muitas linhas duplicadas não use mais memória do que seja necessário para o número de linhas únicas.
+\item Leia a entrada uma linha por vez e mostre na tela cada linha somente se você já encontrou uma linha igual antes. (O resultado final é que você remove a primeira ocorrência de cada linha.). Tenha cuidado para que um arquivo com muitas linhas duplicadas não use mais memória do que seja necessário para o número de linhas únicas.
 
-\item Leia a entrada uma linha por vez. Então, imprima todas as linhas ordenadas por comprimento, com as linhas mais curtas primeiro. No caso em que duas linhas 
-  tem o mesmo tamanho, decida sua ordem usando a ordem usual de texto. Linhas duplicadas devem ser impressas somente uma vez.
+\item Leia a entrada uma linha por vez. Então, mostre na tela todas as linhas ordenadas por comprimento, com as linhas mais curtas primeiro. No caso em que duas linhas 
+  tem o mesmo tamanho, decida sua ordem usando a ordem usual de texto. Linhas duplicadas devem ser mostradas somente uma vez.
 
-\item Faça o mesmo que a questão anterior exceto que linhas duplicadas devem ser impressas o mesmo número de vezes que elas aparecem na entrada.
+\item Faça o mesmo que a questão anterior exceto que linhas duplicadas devem ser mostradas o mesmo número de vezes que elas aparecem na entrada.
 
-\item Leia a entrada uma linha por vez e então imprima as linhas pares (começando com a primeira linha, linha 0) seguidas das linhas ímpares.
+\item Leia a entrada uma linha por vez e então mostre na tela as linhas pares (começando com a primeira linha, linha 0) seguidas das linhas ímpares.
 
-\item Leia a entrada inteira uma linha por vez e aleatoriamente troque as linhas antes de imprimir. Para ser claro: você não deve mudar o conteúdo de qualquer linha. Em vez disso, a mesma coleção de linhas deve ser impressa, mas em ordem aleatória.
+\item Leia a entrada inteira uma linha por vez e aleatoriamente troque as linhas antes de mostrá-las. Para ser claro: você não deve mudar o conteúdo de qualquer linha. Em vez disso, a mesma coleção de linhas deve ser mostrada, mas em ordem aleatória.
 
   \end{enumerate}
 \end{exc}

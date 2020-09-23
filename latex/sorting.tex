@@ -212,7 +212,7 @@ Um exemplo é mostrado na \figref{quicksort}.
 Isso tudo é feito \emph{in place} (ou seja, no próprio espaço de memória do array),
 então em vez de fazer cópias de subarrays sendo ordenados, o método
  #quickSort(a,i,n,c)# somente ordena o subarray 
-$#a[i]#,\ldots,#a[i+n-1]#$.  Inicialmente, esse método é invocado com os argumentos
+$#a[i]#,\ldots,#a[i+n-1]#$.  Inicialmente, esse método é chamado com os argumentos que indicam o uso do array completo da seguinte forma
 #quickSort(a,0,a.length,c)#.
 
 No coração do algoritmo quicksort está o particionamento \emph{in place}.
@@ -349,14 +349,14 @@ dos subarrays menores até os maiores.
 
 Lembre-se que, em uma heap binária, os filhos de 
 #a[i]# são guardados nas posições 
-#a[2i+1]# e #a[2i+2]#.  Isso implica que os elementos 
+#a[2i+1]# e #a[2i+2]#.  Isso implica que os elementos nas posições 
 $#a#[\lfloor#n#/2\rfloor],\ldots,#a[n-1]#$ não têm filhos.
 Em outras palavras, cada 
 um dos elementos em $#a#[\lfloor#n#/2\rfloor],\ldots,#a[n-1]#$ é uma subheap de tamanho 1.
 Agora, trabalhando de trás para frente, podemos chamar
 #trickleDown(i)# para cada 
 $#i#\in\{\lfloor #n#/2\rfloor-1,\ldots,0\}$. Isso funciona porque
-ao chamarmos 
+ao chamarmos a operação
  #trickleDown(i)#, cada um dos dois filhos de #a[i]#
  são raízes de uma subheap, então chamar 
 #trickleDown(i)# torna #a[i]# a raiz de sua própria subheap.

@@ -638,7 +638,7 @@ Todos eles podem ser feitos apenas com trocas de valores
 de #prev# e #next# dos nodos existentes.
 
 \begin{exc}
-Escreva um método para a #DLList# chamado de #isPalindrome()# que retorna #true# se a lista for um 
+Escreva um método #isPalindrome()# para a #DLList# que retorna #true# se a lista for um 
    \emph{palíndromo},
   \index{palíndromo}%
   isto é, o elemento na posição #i# é igual ao elemento na posição 
@@ -761,10 +761,9 @@ Os exercícios a seguir são planejados para testar a compreensão do leitor
 a respeito da implementação e análise da lista eficiente em uso do espaço #SEList#:
 
 \begin{exc}
-  Prove que, se uma #SEList# é usada como uma #Stack# (tal que as 
-  únicas modificações à #SEList# são feitas usando 
-   $#push(x)#\equiv
-  #add(size(),x)#$ e $#pop()#\equiv #remove(size()-1)#$), então essas
+Prove que, se uma #SEList# é usada como uma #Stack# (
+  adicionado à #SEList# as operações de inserção 
+   $#push(x)#\equiv#add(size(),x)#$ e remoção $#pop()#\equiv #remove(size()-1)#$), então elas
   operações rodam em tempo constante amortizado, independentemente 
   do valor de #b#.
 \end{exc}

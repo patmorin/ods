@@ -145,9 +145,8 @@ Essas operações claramente levam tempo constante por operação.
   \figlabel{graph-adj}
 \end{figure}
 
-A matriz de adjacências tem desempenho ruim com as operações
-#outEdges(i)# e 
-#inEdges(i)#.  Para implementá-las, precisamos varrer todas as #n# entradas na correspondente linha ou coluna de #a# e reunir todos os índices #j# 
+A matriz de adjacências tem desempenho insatisfatório com as operações
+#outEdges(i)# e #inEdges(i)#.  Para implementá-las, precisamos varrer todas as #n# entradas na correspondente linha ou coluna de #a# e reunir todos os índices #j# 
 onde #a[i][j]#, respectivamente #a[j][i]#, seja verdadeiro.
 \javaimport{ods/AdjacencyMatrix.outEdges(i).inEdges(i)}
 \cppimport{ods/AdjacencyMatrix.outEdges(i,edges).inEdges(i,edges)}

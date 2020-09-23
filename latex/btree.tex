@@ -176,7 +176,7 @@ Aplicando o logaritmo na primeira desigualdade e rearranjando termos chegamos em
 Isto é, a altura de uma 
  $B$-tree é proporcional ao logaritmo base-$B$ do número de folhas.
 
-Cada nodo #u# na $B$-tree guarda um array de chaves 
+Cada nodo #u# na $B$-tree guarda um array de até $2B-1$ posições contendo as chaves 
 $#u.keys#[0],\ldots,#u.keys#[2B-1]$.  Se #u# é um nodo interno com $k$
 filhos, então o número de chaves guardado em #u# é exatamente
 $k-1$ e esses são guardados em 
@@ -191,8 +191,8 @@ Para qualquer nodo #u# que guarda $k-1$ chaves,
    #u.keys[0]# < #u.keys[1]# < \cdots < #u.keys#[k-2] \enspace .
 \]
 Se #u# for um nodo interno, então para todo $#i#\in\{0,\ldots,k-2\}$,
-$#u.keys[i]#$ é maior que toda chave guardada na subárvore enraizada em 
-#u.children[i]# mas menor que toda chave guardada nas subárvores enraizada em 
+$#u.keys[i]#$ é maior que toda chave na subárvore enraizada em 
+#u.children[i]# e menor que toda chave guardada nas subárvores enraizadas em 
 $#u.children[i+1]#$.  Informalmente,
 \[
    #u.children[i]# \prec #u.keys[i]# \prec #u.children[i+1]# \enspace .
