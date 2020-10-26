@@ -41,7 +41,7 @@ preencher a lacuna criada pelo elemento removido. Essa é a razão pela qual as 
 Um terceiro ponto é importante. Os tempos de execução citados na tabela
 acima não incluem o custo associado com expandir ou encolher o array de apoio.
 Veremos que, se não gerenciado com cuidado, o custo de expandir ou encolher o array de apoio não aumenta muito o custo \emph{médio} de uma operação.
-Mais precisamente, se iniciarmos com um estrutura de dados vazia e 
+Mais precisamente, se iniciarmos com uma estrutura de dados vazia e 
 realizarmos qualquer sequência de $m$ operações #add(i,x)# ou #remove(i)#
 , então o custo total de expandir e encolher o array de apoio, sobre a sequência inteira de $m$ operações é $O(m)$. Embora algumas operações individuais sejam mais caras, o custo amortizado, quando dividido por todas as $m$ operações, é somente $O(1)$ por operação.
 
