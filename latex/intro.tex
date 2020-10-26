@@ -16,14 +16,14 @@ Como isso é possível? Se pararmos para pensar nisso, percebemos que interagimo
     O conteúdo do seu arquivo pode estar armazenado em qualquer um deles.
   \item Procurar contato no telefone: Uma estrutura de dados é usada para procurar por um número de telefone na sua lista de contatos 
     \index{lista de contatos}%
-    baseada em informação parcial mesmo antes de você terminar de discar/digitar
+    baseada em informação parcial mesmo antes de você terminar de discar/digitar.
     Isso não é fácil;
 o seu telefone pode ter informações sobre muitas pessoas---todos que você já entrou em contato via telefone ou email---e seu telefone não tem um processador muito rápido ou muita memória.
   \item Entrar na sua rede social preferida:
     \index{rede social}%
     Os servidores da rede
     usam a sua informação de login para procurar as informações da sua conta.
-    Isso não é fácil; as redes sociais mais populares tem centenas de milhões de usuários ativos.
+    Isso não é fácil; as redes sociais mais populares têm centenas de milhões de usuários ativos.
   \item Fazer uma busca na web: 
     \index{busca na web}%
     Um motor de busca usa estruturas de dados para buscar
@@ -680,7 +680,7 @@ No modelo word-RAM, operações básicas em words levam tempo constante.
 Isso inclui operações aritméticas (#+#, #-#, #*#, #/#, #%#), comparações 
 ($<$, $>$, $=$, $\le$, $\ge$) e operações booleanas bit-a-bit (AND, OR e OR exclusivo bit-a-bit).
 
-Qualquer célula pode ler lida ou escrita em tempo constante. 
+Qualquer célula pode ser lida ou escrita em tempo constante. 
 A memória do computador é gerenciada por um sistema gerenciador de memória a partir do qual podemos alocar ou desalocar um bloco de memória de qualquer tamanho que quisermos. Alocar um bloco de memória de tamanho $k$ leva tempo $O(k)$ e retorna uma referência (um ponteiro) para o bloco recém alocado. Essa referência é pequena o suficiente para ser representada por uma única word.
 
 O tamanho da word #w# é um parâmetro muito importante desse modelo.
@@ -878,7 +878,7 @@ que, sem exceção, sempre refere-se ao número de itens atualmente armazenados 
 \section{Lista de Estruturas de Dados}
 
 As tabelas~\ref{tab:summary-i} e \ref{tab:summary-ii} resumem o desempenho 
-das estruturas de dados que neste livro implementam cada uma das interfaces, #List#, #Uset# e #SSet#, descritas em \secref{interfaces}.
+das estruturas de dados que neste livro implementam cada uma das interfaces, #List#, #USet# e #SSet#, descritas em \secref{interfaces}.
 A \Figref{dependencies} mostra as dependências entre vários capítulos neste livro.
 \index{dependências}%
 Uma linha tracejada indica somente uma dependência fraca, na qual somente uma pequena parte do capítulo depende em um capítulo anterior ou somente nos resultados principais do capítulo anterior.
