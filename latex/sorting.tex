@@ -1,110 +1,124 @@
-\chapter{Sorting Algorithms}
+\chapter{Algoritmos de Ordenação}
 \chaplabel{sorting}
+%%% TODO verificar consistencia dos nomes dos algoritmos de ordenação: quicksort, heap sort, mergesort..
+% quicksort, mergesort, heapsort
 
-This chapter discusses algorithms for sorting a set of #n# items.
-This might seem like a strange topic for a book on data structures, but
-there are several good reasons for including it here.  The most obvious
-reason is that two of these sorting algorithms (quicksort and heap-sort)
-are intimately related to two of the data structures we have already
-studied (random binary search trees and heaps, respectively).
+Este capítulo apresenta algoritmos para ordenação de um conjunto de #n# itens.
+Esse pode ser um tópico estranho para um livro sobre estruturas de dados,
+mas existem várias boas razões para incluí-lo aqui.
+A razão mais óbvia é que dois desses algoritmos de ordenação (quicksort e heapsort)
+são intimamente relacionados com duas das estruturas de dados que são estudadas neste livro (árvores binárias de busca aleatórias e heaps).
 
-The first part of this chapter discusses algorithms that sort using only
-comparisons and presents three algorithms that run in $O(#n#\log #n#)$
-time.  As it turns out, all three algorithms are asymptotically optimal;
-no algorithm that uses only comparisons can avoid doing roughly $#n#\log
-#n#$ comparisons in the worst case and even the average case.
+A primeira parte deste capítulo discute algoritmos que ordenam usando somente
+comparações e apresenta três algoritmos que rodam em 
+$O(#n#\log #n#)$ de tempo.
+Acontece que esses três algoritmos são assintoticamente ótimos;
+nenhum algoritmo que usa somente comparações pode evitar fazer
+aproximadamente $#n#\log #n#$ comparações no pior caso e mesmo no caso médio.
 
-Before continuing, we should note that any of the #SSet# or priority
-#Queue# implementations presented in previous chapters can also
-be used to obtain an $O(#n#\log #n#)$ time sorting algorithm.
-For example, we can sort #n# items by performing #n# #add(x)#
-operations followed by #n# #remove()# operations on a #BinaryHeap#
-or #MeldableHeap#. Alternatively, we can use #n# #add(x)# operations
-on any of the binary search tree data structures and then perform an
-in-order traversal (\excref{tree-traversal}) to extract the elements in
-sorted order.  However, in both cases we go through a lot of overhead to
-build a structure that is never fully used.  Sorting is such an important
-problem that it is worthwhile developing direct methods that are as fast,
-simple, and space-efficient as possible.
+Antes de continuar, devemos notar que quaisquer implementações do #SSet#
+ou da #Queue# de prioridades apresentadas nos capítulos anteriores
+também podem ser usadas para obter um algoritmo de ordenação 
+ $O(#n#\log #n#)$.
 
-The second part of this chapter shows that, if we allow other
-operations besides comparisons, then all bets are off.  Indeed, by using
-array-indexing, it is possible to sort a set of #n# integers in the range
-$\{0,\ldots,#n#^c-1\}$ in $O(c#n#)$ time.
+Por exemplo, podemos ordenar #n# itens fazendo #n#
+ operações #add(x)# seguidas de 
+ #n# operações #remove()# em uma #BinaryHeap# ou em uma #MeldableHeap#. 
+ Alternativamente, podemos usar #n# operações #add(x)# 
+ em qualquer estrutura de dados de árvore de busca binária e então
+ realizar uma travessia em ordem 
+(\excref{tree-traversal}) para extrair os elementos ordenados 
+Porém, nos dois casos teremos muitos gastos para construir uma estrutura
+que nunca é completamente usada. Ordenação é um problema extremamente 
+importante e vale a pena desenvolver métodos diretos que são o mais rápidos,
+simples e econômicos em uso da memória possíveis.
+
+A segunda parte deste capítulo mostra que, se for possível usar outras 
+operações além de comparações, então tudo é possível. Realmente, 
+ao usar indexação por arrays, é possível ordenar um conjunto de #n# inteiros
+no intervalo $\{0,\ldots,#n#^c-1\}$ usando somente $O(c#n#)$ de tempo.
 
 
+\section{Ordenação Baseada em Comparação}
 
-\section{Comparison-Based Sorting}
-
-\index{comparison-based sorting}%
+\index{ordenação baseada em comparação}%
 \index{sorting algorithm!comparison-based}%
-In this section, we present three sorting algorithms: merge-sort,
-quicksort, and heap-sort.  Each of these algorithms takes an input array #a#
-and sorts the elements of #a# into non-decreasing order in $O(#n#\log #n#)$
-(expected) time.  These algorithms are all \emph{comparison-based}.
-\javaonly{Their second argument, #c#, is a #Comparator#
+\index{algoritmo de ordenação!baseado em comparação}%
+Nesta seção, apresentamos três algoritmos: mergesort, quicksort e heapsort.
+Cada um desses algoritmos recebe um array de entrada #a#
+e ordena os elementos de #a# em ordem não decrescente em 
+$O(#n#\log #n#)$ de tempo (esperado).
+Esses algoritmos são todos \emph{baseados em comparação}.
+\javaonly{O segundo argumento, #c#, é um #Comparator#
 \index{Comparator@#Comparator#}%
-that implements
-the #compare(a,b)#
+que implementa o método
+#compare(a,b)#
 \index{compare@#compare(a,b)#}%
-method.}  These algorithms don't care what type
-of data is being sorted; the only operation they do on the data is
-comparisons using the #compare(a,b)# method. Recall, from \secref{sset},
-that #compare(a,b)# returns a negative value if $#a#<#b#$, a positive
-value if $#a#>#b#$, and zero if $#a#=#b#$.
+.} Esses algoritmos dependem de qual tipo de dados está sendo ordenado;
+a única operação que eles fazem nos dados é comparações
+usando o método 
+#compare(a,b)#. Lembre-se, da \secref{sset},
+que #compare(a,b)# retorna um valor negativo se $#a#<#b#$, um valor positivo
+se $#a#>#b#$ e zero se $#a#=#b#$.
 
-\subsection{Merge-Sort}
+\subsection{Mergesort}
 \seclabel{merge-sort}
 
-\index{merge-sort}%
-The \emph{merge-sort} algorithm is a classic example of recursive divide
-and conquer: 
-\index{divide-and-conquer}%
-If the length of #a# is at most 1, then #a# is already
-sorted, so we do nothing.  Otherwise, we split #a# into two halves,
-$#a0#=#a[0]#,\ldots,#a[n/2-1]#$ and $#a1#=#a[n/2]#,\ldots,#a[n-1]#$.
-We recursively sort #a0# and #a1#, and then we merge (the now sorted)
-#a0# and #a1# to get our fully sorted array #a#:
+\index{mergesort}%
+O algoritmo \emph{mergesort} é um clássico exemplo do paradigma de divisão e conquista (recursiva):
+\index{divisão e conquista}%
+Se o tamanho de 
+#a# for até 1, então #a# está ordenado e não fazemos nada. 
+Caso contrário, dividimos #a# em duas metades,
+$#a0#=#a[0]#,\ldots,#a[n/2-1]#$ e $#a1#=#a[n/2]#,\ldots,#a[n-1]#$.
+Nós recursivamente ordenamos #a0# e #a1# e então fazermos o merge (em português, a combinação) dos, agora 
+ordenados, #a0# e #a1# para ordenar o array #a# completo:
 \javaimport{ods/Algorithms.mergeSort(a,c)}
 \cppimport{ods/Algorithms.mergeSort(a)}
 \pcodeimport{ods/Algorithms.mergeSort(a)}
-An example is shown in \figref{merge-sort}.
+Um exemplo é mostrado na \figref{merge-sort}.
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/mergesort}
   \end{center}
-  \caption[Merge sort]{The execution of #mergeSort(a,c)#}
+  \caption[Merge sort]{A execução de #mergeSort(a,c)#}
   \figlabel{merge-sort}
 \end{figure}
 
-Compared to sorting, merging the two sorted arrays #a0# and #a1# is
-fairly easy.  We add elements to #a# one at a time.  If #a0# or #a1#
-is empty, then we add the next elements from the other (non-empty)
-array. Otherwise, we take the minimum of the next element in #a0# and
-the next element in #a1# and add it to #a#:
+Comparada à ordenação, fazer a combinação (\emph{merge}) de dois arrays ordenados #a0#
+e #a1# é razoavelmente simples. Adicionamos elementos a #a# um por vez.
+Se #a0# ou #a1# estão vazios, então adicionamos os próximos elementos do
+outro array com elementos.
+Caso contrário, pegamos o mínimo entre o próximo elemento em #a0# e
+o próximo elemento em #a1# e o adicionamos a #a#:
 \javaimport{ods/Algorithms.merge(a0,a1,a,c)}
 \cppimport{ods/Algorithms.merge(a0,a1,a)}
 \pcodeimport{ods/Algorithms.merge(a0,a1,a)}
-Notice that the #merge(a0,a1,a,c)# algorithm performs at most $#n#-1$
-comparisons before running out of elements in one of #a0# or #a1#.
+Note que o algoritmo 
+#merge(a0,a1,a,c)# realiza até $#n#-1$
+comparações antes de acabarem os elementos em #a0# ou #a1#.
 
-To understand the running-time of merge-sort, it is easiest to think
-of it in terms of its recursion tree.  Suppose for now that #n# is a
-power of two, so that $#n#=2^{\log #n#}$, and $\log #n#$ is an integer.
-Refer to \figref{mergesort-recursion}. Merge-sort turns the problem of
-sorting #n# elements into two problems, each of sorting $#n#/2$ elements.
-These two subproblem are then turned into two problems each, for a total
-of four subproblems, each of size $#n#/4$. These four subproblems become eight
-subproblems, each of size $#n#/8$, and so on.  At the bottom of this process,
-$#n#/2$ subproblems, each of size two, are converted into #n# problems,
-each of size one.  For each subproblem of size $#n#/2^{i}$, the time
-spent merging and copying data is $O(#n#/2^i)$.  Since there are $2^i$
-subproblems of size $#n#/2^i$, the total time spent working on problems
-of size $2^i$, not counting recursive calls, is
+Para entender o tempo de execução do mergesort, é mais fácil pensar
+em termos de sua árvore de recursão. 
+Considere por agora que #n# seja uma potência de dois, para que
+ $#n#=2^{\log #n#}$ e $\log #n#$ seja um inteiro. 
+Veja a \figref{mergesort-recursion}. Mergesort torna-se o problema de ordenar
+#n# elementos em dois subproblemas, cada qual ordenando $#n#/2$ elementos.
+Esse dois subproblemas se tornam em dois subproblemas cada, totalizando 
+quatro subproblemas, cada um de tamanho
+ $#n#/4$. Esses quatro subproblemas se tornam oito 
+subproblemas, cada um de tamanho $#n#/8$, assim por diante.
+Na base desse processo,
+$#n#/2$ subproblemas, cada um de tamanho dois, são convertidos em #n# problemas,
+cada de tamanho um. Para cada subproblema de tamanho
+ $#n#/2^{i}$, o tempo gasto fazendo merge e copiando dados é 
+ $O(#n#/2^i)$. Como há $2^i$
+subproblemas de tamanho $#n#/2^i$, o tempo total gasto trabalhando em problemas de tamanho 
+$2^i$, sem contar as chamadas recursivas é 
 \[
        2^i\times O(#n#/2^i) = O(#n#) \enspace .
 \]
-Therefore, the total amount of time taken by merge-sort is
+Portanto a tempo total usado pelo mergesort é 
 \[
    \sum_{i=0}^{\log #n#} O(#n#) = O(#n#\log #n#) \enspace .
 \]
@@ -112,28 +126,30 @@ Therefore, the total amount of time taken by merge-sort is
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/mergesort-recursion}
-    \caption{The merge-sort recursion tree.}
+    \caption{A árvore de recursão do mergesort.}
     \figlabel{mergesort-recursion}
   \end{center}
 \end{figure}
 
-The proof of the following theorem is based on preceding analysis,
-but has to be a little more careful to deal with the cases where #n#
-is not a power of 2.
+A prova do teorema a seguir é baseada na análise discutida anteriormente,
+mas tem que ser um pouco cuidadosa para considerar os casos em que #n#
+não sejam uma potência de 2.
+
 \begin{thm}
-  The \javaonly{#mergeSort(a,c)#}\cpponly{mergeSort(a)}\pcodeonly{merge\_sort(a)} algorithm runs in $O(#n#\log #n#)$ time and
-  performs at most $#n#\log #n#$ comparisons.
+O algoritmo \javaonly{#mergeSort(a,c)#}\cpponly{mergeSort(a)}\pcodeonly{merge\_sort(a)} roda em $O(#n#\log #n#)$ de tempo e faz até $#n#\log #n#$ comparações.
 \end{thm}
 
 \begin{proof}
-The proof is by induction on $#n#$.  The base case, in which $#n#=1$,
-is trivial; when presented with an array of length 0 or 1 the algorithm
-simply returns without performing any comparisons.
-
-Merging two sorted lists of total length $#n#$ requires at most $#n#-1$
-comparisons. Let $C(#n#)$ denote the maximum number of comparisons performed by
-#mergeSort(a,c)# on an array #a# of length #n#.  If $#n#$ is even, then we apply the inductive hypothesis to
-the two subproblems and obtain
+Essa prova é por indução em
+ $#n#$.  O caso base, em que $#n#=1$, é trivial;
+  ao ser apresentado com um array de tamanho 0 ou 1, o algoritmo
+  retorna sem fazer nenhuma comparação.
+  Fazer o merge de duas listas ordenadas de tamanho total
+$#n#$ requer no máximo $#n#-1$ comparações.
+Seja 
+$C(#n#)$ o número máximo de comparações realizadas por 
+#mergeSort(a,c)# em um array #a# de tamanho #n#.  Se $#n#$ for par, então
+aplicamos a hipótese indutiva para os dois subproblemas e obtemos
 \begin{align*}
   C(#n#) 
   &\le #n#-1 + 2C(#n#/2) \\
@@ -142,16 +158,18 @@ the two subproblems and obtain
   &= #n#-1 + #n#\log #n#-#n# \\
   &< #n#\log #n# \enspace .
 \end{align*}
-The case where $#n#$ is odd is slightly more complicated.  For this case,
-we use two inequalities that are easy to verify:
+O caso em que 
+ $#n#$ é ímpar é ligeiramente mais complicado. Para esse caso,
+ usamos duas desigualdades que são de fácil verificação:
 \begin{equation}
   \log(x+1) \le \log(x) + 1 \enspace , \eqlabel{log-ineq-a}
 \end{equation}
-for all $x\ge 1$ and
+para todo $x\ge 1$ e 
 \begin{equation}
   \log(x+1/2) + \log(x-1/2) \le 2\log(x) \enspace , \eqlabel{log-ineq-b}
 \end{equation}
-for all $x\ge 1/2$.  Inequality~\myeqref{log-ineq-a} comes from the fact that $\log(x)+1 = \log(2x)$ while \myeqref{log-ineq-b} follows from the fact that $\log$ is a concave function.  With these tools in hand we have, for odd #n#,
+para todo $x\ge 1/2$.  A desigualdade~\myeqref{log-ineq-a} vem do fato que $\log(x)+1 = \log(2x)$ enquanto a \myeqref{log-ineq-b} segue do fato que $\log$ é uma função côncava. 
+  Com essas ferramentas em mãos, para #n# ímpar,
 \begin{align*}
   C(#n#) 
   &\le #n#-1 + C(\lceil #n#/2 \rceil) + C(\lfloor #n#/2 \rfloor) \\
@@ -171,89 +189,92 @@ for all $x\ge 1/2$.  Inequality~\myeqref{log-ineq-a} comes from the fact that $\
 \subsection{Quicksort}
 
 \index{quicksort}%
-The \emph{quicksort} algorithm is another classic divide and conquer
-algorithm.  Unlike merge-sort, which does merging after solving the two
-subproblems, quicksort does all of its work upfront.
+O algoritmo \emph{quicksort} é outro exemplo clássico do paradigma de divisão e conquista.
+Diferentemente do mergesort, que faz uma combinação após resolver os dois subproblemas,
+o quicksort faz esse trabalho logo de uma vez.
 
-Quicksort is simple to describe:  Pick a random \emph{pivot} element,
-\index{pivot element}%
-#x#, from #a#; partition #a# into the set of elements less than #x#, the
-set of elements equal to #x#, and the set of elements greater than #x#;
-and, finally, recursively sort the first and third sets in this partition.
-An example is shown in \figref{quicksort}.
+Quicksort é simples de descrever: escolher um elemento aleatório chamado de \emph{pivot},
+\index{elemento pivot}%
+#x#, de #a#; particionar #a# em um conjunto de elementos menores que #x#, 
+um conjunto de elementos igual a #x# e um conjunto de elementos maiores que #x#;
+e, finalmente, ordenar recursivamente o primeiro e o terceiro conjunto dessa partição.
+Um exemplo é mostrado na \figref{quicksort}.
 \javaimport{ods/Algorithms.quickSort(a,c).quickSort(a,i,n,c)}
 \cppimport{ods/Algorithms.quickSort(a).quickSort(a,i,n)}
 \pcodeimport{ods/Algorithms.quickSort(a).quickSort(a,i,n)}
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/quicksort}
-    \caption[Quicksort]{An example execution of \javaonly{#quickSort(a,0,14,c)#}\cpponly{#quickSort(a,0,14)#}\pcodeonly{#quickSort(a,0,14)#}}
+    \caption[Quicksort]{Um exemplo de execução de \javaonly{#quickSort(a,0,14,c)#}\cpponly{#quickSort(a,0,14)#}\pcodeonly{#quickSort(a,0,14)#}}
     \figlabel{quicksort}
   \end{center}
 \end{figure}
-All of this is done in place, so that instead of making copies of
-subarrays being sorted, the #quickSort(a,i,n,c)# method only sorts the
-subarray $#a[i]#,\ldots,#a[i+n-1]#$.  Initially, this method is invoked
-with the arguments
+Isso tudo é feito \emph{in place} (ou seja, no próprio espaço de memória do array),
+então em vez de fazer cópias de subarrays sendo ordenados, o método
+ #quickSort(a,i,n,c)# somente ordena o subarray 
+$#a[i]#,\ldots,#a[i+n-1]#$.  Inicialmente, esse método é chamado com os argumentos que indicam o uso do array completo da seguinte forma
 #quickSort(a,0,a.length,c)#.
 
-At the heart of the quicksort algorithm is the in-place partitioning
-algorithm.  This algorithm, without using any extra space, swaps elements
-in #a# and computes indices #p# and #q# so that
+No coração do algoritmo quicksort está o particionamento \emph{in place}.
+Esse algoritmo, sem usar espaço extra, troca elementos em #a#
+e computa índices #p# e #q# tal que
 \[
    #a[i]# \begin{cases} 
-         {}< #x# & \text{if $0\le #i#\le #p#$} \\
-         {}= #x# & \text{if $#p#< #i# < #q#$} \\
-         {}> #x# & \text{if $#q#\le #i# \le #n#-1$}
+         {}< #x# & \text{se $0\le #i#\le #p#$} \\
+         {}= #x# & \text{se $#p#< #i# < #q#$} \\
+         {}> #x# & \text{se $#q#\le #i# \le #n#-1$}
      \end{cases}
 \]
-This partitioning, which is done by the #while# loop in the code, works
-by iteratively increasing #p# and decreasing #q# while maintaining the
-first and last of these conditions.  At each step, the element at position
-#j# is either moved to the front, left where it is, or moved to the back.
-In the first two cases, #j# is incremented, while in the last case, #j#
-is not incremented since the new element at position #j# has not yet been
-processed.
+Esse particionamento, que é feito pelo laço 
+#while# no código, funciona iterativamente aumentando #p# e 
+decrementando #q# enquanto mantém a primeira e última dessas condições.
+A cada passo, o elemento na posição
+#j# é movido para a frente, à esquerda do onde está ou movido para trás.
+Nos dois primeiros casos,
+ #j# é incrementado, enquanto no último caso 
+#j# não é incrementado pois o novo elemento na posição #j# ainda não foi processado.
 
-Quicksort is very closely related to the random binary search trees
-studied in \secref{rbst}.  In fact, if the input to quicksort consists
-of #n# distinct elements, then the quicksort recursion tree is a random
-binary search tree.  To see this, recall that when constructing a random
-binary search tree the first thing we do is pick a random element #x# and
-make it the root of the tree.  After this, every element will eventually
-be compared to #x#, with smaller elements going into the left subtree
-and larger elements into the right.
+O quicksort é profundamente ligado às árvores binárias aleatórias de busca
+estudadas na \secref{rbst}.  De fato, se a entrada ao quicksort
+consistir de #n# elementos distintos, então a árvore de recursão do quicksort 
+será uma árvore binária de busca aleatória.
 
-In quicksort, we select a random element #x# and immediately compare
-everything to #x#, putting the smaller elements at the beginning of
-the array and larger elements at the end of the array.  Quicksort then
-recursively sorts the beginning of the array and the end of the array,
-while the random binary search tree recursively inserts smaller elements
-in the left subtree of the root and larger elements in the right subtree
-of the root.
+Para ver isso, lembre-se que ao construir uma árvore binária de busca aleatória
+a primeira coisa a fazer é escolher um elemento aleatório #x# e 
+torná-lo a raiz da árvore. Após isso, todo elemento será eventualmente
+comparado a #x#, com elementos menores indo para a subárvore à esquerda
+e elementos maiores à direita.
 
-The above correspondence between random binary search trees and quicksort
-means that we can translate \lemref{rbs} to a statement about quicksort:
+No quicksort, escolhemos um elemento aleatório #x# e imediatamente
+comparamos todo o array a #x#, colocando os elementos menores que ele no começo
+do array e elementos maiores no final do array.
+O quicksort então recursivamente ordena o começo do array e o final do array,
+enquanto a árvore binária de busca aleatória recursivamente insere os 
+elementos menores na subárvores à esquerda da raiz e os maiores elementos 
+na subárvore à direita da raiz.
+
+Essa correspondência entre as árvores binárias de busca aleatórias e o
+quicksort significa que podemos traduzir o 
+\lemref{rbs} em uma afirmação sobre o quicksort: 
 
 \begin{lem}\lemlabel{quicksort}
-  When quicksort is called to sort an array containing the integers
-  $0,\ldots,#n#-1$, the expected number of times element #i# is compared
-  to a pivot element is at most $H_{#i#+1} + H_{#n#-#i#}$.
+  Quando o quicksort é chamado para ordenar um array contendo os inteiros
+  $0,\ldots,#n#-1$, o número esperado de comparações entre o elemento #i# 
+  e o pivot é até $H_{#i#+1} + H_{#n#-#i#}$.
 \end{lem}
 
-A little summing up of harmonic numbers gives us the following theorem
-about the running time of quicksort:
+Uma soma aproximada dos números harmônicos nos dá o seguinte teorema
+sobre o tempo de execução do quicksort:
 
 \begin{thm}\thmlabel{quicksort-i}
-  When quicksort is called to sort an array containing #n# distinct
-  elements, the expected number of comparisons performed is at most
-  $2#n#\ln #n# + O(#n#)$.
+  Quando o quicksort é chamado para ordenar um array contendo 
+  #n# elementos distintos, o número esperado de comparações realizadas
+  é até $2#n#\ln #n# + O(#n#)$.
 \end{thm}
 
 \begin{proof}
-Let $T$ be the number of comparisons performed by quicksort when sorting
-#n# distinct elements.  Using \lemref{quicksort} and linearity of
-expectation, we have:
+Seja $T$ o número de comparações realizadas pelo quicksort para ordenar
+#n# elementos distintos. Usando o \lemref{quicksort} e a linearidade da esperança, temos:
 \begin{align*}
   \E[T] &= \sum_{i=0}^{#n#-1}(H_{#i#+1}+H_{#n#-#i#}) \\ 
         &= 2\sum_{i=1}^{#n#}H_i \\ 
@@ -262,51 +283,56 @@ expectation, we have:
 \end{align*}
 \end{proof}
 
-\thmref{quicksort} describes the case where the elements being sorted are
-all distinct.  When the input array, #a#, contains duplicate elements,
-the expected running time of quicksort is no worse, and can be even
-better; any time a duplicate element #x# is chosen as a pivot, all
-occurrences of #x# get grouped together and do not take part in either
-of the two subproblems.
+O \thmref{quicksort} descreve o caso em que os elementos 
+sendo ordenados são todos distintos. 
+Quando o array de entrada, #a#, contém elementos duplicados
+o tempo esperado do quicksort não é pior e pode ser ainda melhor;
+toda vez que um elemento duplicado #x# é escolhido como um pivot,
+todas as ocorrências de #x# estão agrupadas e não participam 
+de nenhum dos dois subproblemas que se seguem.
 
 \begin{thm}\thmlabel{quicksort}
-  The \javaonly{#quickSort(a,c)#} \cpponly{#quickSort(a)#}
-  \pcodeonly{#quickSort(a,c)#} method runs in $O(#n#\log #n#)$ expected
-  time and the expected number of comparisons it performs is at most
-  $2#n#\ln #n# +O(#n#)$.
+  O método \javaonly{#quickSort(a,c)#} \cpponly{#quickSort(a)#}
+  \pcodeonly{#quickSort(a,c)#} roda em tempo esperado de $O(#n#\log #n#)$ 
+  e o número esperado de comparações que ele
+  realiza é $2#n#\ln #n# +O(#n#)$.
 \end{thm}
 
-\subsection{Heap-sort}
+\subsection{Heapsort}
 \seclabel{heapsort}
 
 \index{heap-sort}%
-The \emph{heap-sort} algorithm is another in-place sorting algorithm.
-Heap-sort uses the binary heaps discussed in \secref{binaryheap}.
-Recall that the #BinaryHeap# data structure represents a heap using
-a single array.  The heap-sort algorithm converts the input array #a#
-into a heap and then repeatedly extracts the minimum value.
+ O algoritmo \emph{heapsort} é outro algoritmo de ordenação que funciona \emph{in place}.
 
-More specifically, a heap stores #n# elements in an array, #a#, at array locations
-$#a[0]#,\ldots,#a[n-1]#$ with the smallest value stored at the root,
-#a[0]#.  After transforming #a# into a #BinaryHeap#, the heap-sort
-algorithm repeatedly swaps #a[0]# and #a[n-1]#, decrements #n#, and
-calls #trickleDown(0)# so that $#a[0]#,\ldots,#a[n-2]#$ once again are
-a valid heap representation. When this process ends (because $#n#=0$)
-the elements of #a# are stored in decreasing order, so #a# is reversed
-to obtain the final sorted order.\footnote{The algorithm
-could alternatively redefine the #compare(x,y)# function so that the
-heap sort algorithm stores the elements directly in ascending order.}
-\figref{heapsort} shows an example of the execution of #heapSort(a,c)#.
+O heapsort usa as heaps binárias discutidas na \secref{binaryheap}.
+Lembre-se que a estrutura de dados 
+#BinaryHeap# representa uma heap usando um único array. 
+O algoritmo heapsort converte o array de entrada #a# 
+em uma heap e então repetidamente extrai o valor mínimo.
+
+Mais especificamente, uma heap guarda #n# elementos em um array, #a#, em
+em posições do array
+$#a[0]#,\ldots,#a[n-1]#$ com o menor valor guardado na raiz, 
+#a[0]#.  
+Após transformar #a# em uma #BinaryHeap#, o algoritmo heapsort
+repetidamente troca #a[0]# e #a[n-1]#, decrementa #n# e 
+chama #trickleDown(0)# para que $#a[0]#,\ldots,#a[n-2]#$ volte a ser
+uma representação válida de uma heap. Quando esse processo termina
+(porque $#n#=0$) os elementos de #a# são guardados em ordem decrescente, 
+então #a# é invertido para obter a forma ordenada final.
+\footnote{O algoritmo poderia redefinir a função
+#compare(x,y)# para que o heapsort guarde os elementos
+diretamente na ordem crescente.} 
+A \figref{heapsort} mostra um exemplo da execução do #heapSort(a,c)#.
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.90909]{figs/heapsort}
   \end{center}
-  \caption[Heap sort]{A snapshot of the execution of #heapSort(a,c)#.
-      The shaded part of the
-      array is already sorted.  The unshaded part is a #BinaryHeap#.
-      During the next iteration, element $5$ will be placed into array
-      location $8$.}
+  \caption[Heapsort]{Uma etapa da execução do #heapSort(a,c)#.
+  A parte destacada do array já está ordenada. A parte não destacada é uma 
+       #BinaryHeap#.
+       Durante a próxima iteração, o elemento $5$ será colocado na posição $8$ do array.}
   \figlabel{heapsort}
 \end{figure}
 
@@ -314,241 +340,270 @@ heap sort algorithm stores the elements directly in ascending order.}
 \cppimport{ods/BinaryHeap.sort(b)}
 \pcodeimport{ods/Algorithms.heapSort(a)}
 
-A key subroutine in heap sort is the constructor for turning
-an unsorted array #a# into a heap.  It would be easy to do this
-in $O(#n#\log#n#)$ time by repeatedly calling the #BinaryHeap#
-#add(x)# method, but we can do better by using a bottom-up algorithm.
-Recall that, in a binary heap, the children of #a[i]# are stored at
-positions #a[2i+1]# and #a[2i+2]#.  This implies that the elements
-$#a#[\lfloor#n#/2\rfloor],\ldots,#a[n-1]#$ have no children. In other
-words, each of $#a#[\lfloor#n#/2\rfloor],\ldots,#a[n-1]#$ is a sub-heap
-of size 1.  Now, working backwards, we can call #trickleDown(i)# for
-each $#i#\in\{\lfloor #n#/2\rfloor-1,\ldots,0\}$. This works, because by
-the time we call #trickleDown(i)#, each of the two children of #a[i]#
-are the root of a sub-heap, so calling #trickleDown(i)# makes #a[i]#
-into the root of its own subheap.
+Uma sub-rotina chave do heapsort é construtor que transforma um
+array desordenado #a# em uma heap. Seria fácil fazer isso usando
+$O(#n#\log#n#)$ de tempo ao chamar repetidamente o método da #BinaryHeap#
+#add(x)#, mas podemos fazer melhor ao usar um algoritmo 
+bottom-up, que atua de baixo para cima no processo, ou seja, 
+dos subarrays menores até os maiores. 
+
+Lembre-se que, em uma heap binária, os filhos de 
+#a[i]# são guardados nas posições 
+#a[2i+1]# e #a[2i+2]#.  Isso implica que os elementos nas posições 
+$#a#[\lfloor#n#/2\rfloor],\ldots,#a[n-1]#$ não têm filhos.
+Em outras palavras, cada 
+um dos elementos em $#a#[\lfloor#n#/2\rfloor],\ldots,#a[n-1]#$ é uma subheap de tamanho 1.
+Agora, trabalhando de trás para frente, podemos chamar
+#trickleDown(i)# para cada 
+$#i#\in\{\lfloor #n#/2\rfloor-1,\ldots,0\}$. Isso funciona porque
+ao chamarmos a operação
+ #trickleDown(i)#, cada um dos dois filhos de #a[i]#
+ são raízes de uma subheap, então chamar 
+#trickleDown(i)# torna #a[i]# a raiz de sua própria subheap.
 \javaimport{ods/BinaryHeap.BinaryHeap(a,c)}
 \cppimport{ods/BinaryHeap.BinaryHeap(b)}
 
-The interesting thing about this bottom-up strategy is that it is more
-efficient than calling #add(x)# #n# times.  To see this, notice that,
-for $#n#/2$ elements, we do no work at all, for $#n#/4$ elements, we call
-#trickleDown(i)# on a subheap rooted at #a[i]# and whose height is one, for
-$#n#/8$ elements, we call #trickleDown(i)# on a subheap whose height is two,
-and so on.  Since the work done by #trickleDown(i)# is proportional to
-the height of the sub-heap rooted at #a[i]#, this means that the total
-work done is at most
+Um fato interessante sobre essa estratégia bottom-up é que ela é mais 
+eficiente que chamar #add(x)# #n# vezes. Para ver isso, note que para 
+$#n#/2$ elementos, não é necessária nenhuma operação, para $#n#/4$ elementos, chamamos
+#trickleDown(i)# em uma subheap com raiz em #a[i]# e cuja altura é 1, para 
+$#n#/8$ elementos, chamamos #trickleDown(i)# em uma subheap cuja 
+altura é dois e assim segue. 
+Como o trabalho feito por 
+ #trickleDown(i)# é proporcional à altura da subheap enraizada em 
+#a[i]#, isso significa que o trabalho total realizado é até 
 \[
     \sum_{i=1}^{\log#n#} O((i-1)#n#/2^{i})
     \le \sum_{i=1}^{\infty} O(i#n#/2^{i})
     = O(#n#)\sum_{i=1}^{\infty} i/2^{i}
     =  O(2#n#) = O(#n#) \enspace .
 \]
-The second-last equality follows by recognizing that the sum
-$\sum_{i=1}^{\infty} i/2^{i}$ is equal, by definition of expected value,
-to the expected number of times we toss a coin up to and including the
-first time the coin comes up as heads and applying \lemref{coin-tosses}.
 
-The following theorem describes the performance of #heapSort(a,c)#.
+A penúltima igualdade pode ser obtida ao reconhecer que a soma
+$\sum_{i=1}^{\infty} i/2^{i}$ é igual, pela definição de valor esperado,
+ao número esperado de lançamentos de uma moeda, incluindo no primeiro lançamento, cair
+do lado cara e aplicar o \lemref{coin-tosses}.
+
+O teorema a seguir descreve o desempenho do #heapSort(a,c)#.
 \begin{thm}
-  The #heapSort(a,c)# method runs in $O(#n#\log #n#)$ time and performs at
-  most $2#n#\log #n# + O(#n#)$ comparisons.
+  O método 
+  #heapSort(a,c)# roda em $O(#n#\log #n#)$ de tempo e realiza no máximo 
+  $2#n#\log #n# + O(#n#)$ comparações.
 \end{thm}
 
 \begin{proof}
-The algorithm runs in three steps:  (1)~transforming #a# into a heap,
-(2)~repeatedly extracting the minimum element from #a#, and (3)~reversing
-the elements in #a#.  We have just argued that step~1 takes $O(#n#)$
-time and performs $O(#n#)$ comparisons.  Step~3 takes $O(#n#)$ time and
-performs no comparisons.  Step~2 performs #n# calls to #trickleDown(0)#.
-The $i$th such call operates on a heap of size $#n#-i$ and performs
-at most $2\log(#n#-i)$ comparisons.  Summing this over $i$ gives
+  O algoritmo roda em três passos:
+  (1)~transformar #a# em uma heap,
+  (2)~repetidamente extrair o elemento mínimo de #a# e
+  (3)~inverter os elementos em #a#.
+
+Previamente argumentamos que o passo~1 leva 
+$O(#n#)$ de tempo e realiza
+$O(#n#)$ comparações.  Passo~3 leva $O(#n#)$ de tempo e não faz comparações. 
+Passo~2 faz #n# chamadas a #trickleDown(0)#.
+A #i#-ésima chamada opera em uma heap de tamanho
+$#n#-i$ e faz até 
+$2\log(#n#-i)$ comparações. Somando os custos do passo~2 sobre os possíveis valores de $i$ resulta em 
 \[
    \sum_{i=0}^{#n#-i} 2\log(#n#-i) 
    \le \sum_{i=0}^{#n#-i} 2\log #n#
    =  2#n#\log #n#
 \]
-Adding the number of comparisons performed in each of the three steps
-completes the proof.
+A soma do número de comparações realizadas em cada um dos três passos completa a prova.
 \end{proof}
 
-\subsection{A Lower-Bound for Comparison-Based Sorting}
-
-\index{lower-bound}%
-\index{sorting lower-bound}%
-We have now seen three comparison-based sorting algorithms that each run
-in $O(#n#\log #n#)$ time.  By now, we should be wondering if faster
-algorithms exist.  The short answer to this question is no.  If the
-only operations allowed on the elements of #a# are comparisons, then no
-algorithm can avoid doing roughly $#n#\log #n#$ comparisons.  This is
-not difficult to prove, but requires a little imagination.  Ultimately,
-it follows from the fact that
+\subsection{Um Limitante Inferior para Ordenação}
+\index{limitante inferior}
+\index{limitante inferior para ordenação}
+Estudamos até agora três algoritmos de ordenação baseados em comparação em funcionam em $O(#n#\log #n#)$ de tempo.  Nesse momento, podemos nos perguntar se existem algoritmos mais rápidos. 
+A resposta a essa questão é não. Se as únicas operações permitidas nos elementos
+de #a# são comparações, então nenhum algoritmo pode evitar fazer aproximadamente 
+$#n#\log #n#$ comparações. Isso não é difícil provar, mas requer um pouco
+de imaginação. No final das contas, isso vêm do fato que 
 \[
    \log(#n#!) 
      = \log #n# + \log (#n#-1) + \dots + \log(1) 
      = #n#\log #n# - O(#n#)
     \enspace .
 \]
-(Proving this fact is left as \excref{log-factorial}.)
+(Fazer a prova desse fato é sugerido como o \excref{log-factorial}.)
 
-We will start by focusing our attention on deterministic algorithms like
-merge-sort and heap-sort and on a particular fixed value of #n#.  Imagine
-such an algorithm is being used to sort #n# distinct elements.  The key
-to proving the lower-bound is to observe that, for a deterministic
-algorithm with a fixed value of #n#, the first pair of elements that are
-compared is always the same.  For example, in #heapSort(a,c)#, when #n#
-is even, the first call to #trickleDown(i)# is with #i=n/2-1# and the
-first comparison is between elements #a[n/2-1]# and #a[n-1]#.
+Iniciaremos ao focar nossa atenção em algoritmos determinísticos como
+mergesort e heapsort e em um valor fixo de #n#. Imagine 
+que tal algoritmo está sendo usado para ordenar #n# elementos distintos.
+A chave para provar o limitante inferior é observar que, para um algoritmo
+determinístico com valor fixo de #n#, o primeiro par de elementos que
+são comparados é sempre o mesmo.
+Por exemplo, no
+ #heapSort(a,c)#, quando #n# é par, a primeira chamada a
+#trickleDown(i)# é com #i=n/2-1# e a primeira comparação está entre os 
+elementos #a[n/2-1]# e #a[n-1]#.
 
-Since all input elements are distinct, this first comparison has only
-two possible outcomes.  The second comparison done by the algorithm may
-depend on the outcome of the first comparison.  The third comparison
-may depend on the results of the first two, and so on.  In this way,
-any deterministic comparison-based sorting algorithm can be viewed
-as a rooted binary \emph{comparison tree}.
-\index{comparison tree}%
-Each internal node, #u#,
-of this tree is labelled with a pair of indices #u.i# and #u.j#.
-If $#a[u.i]#<#a[u.j]#$ the algorithm proceeds to the left subtree,
-otherwise it proceeds to the right subtree.  Each leaf #w# of this
-tree is labelled with a permutation $#w.p[0]#,\ldots,#w.p[n-1]#$ of
-$0,\ldots,#n#-1$.  This permutation represents the one that is
-required to sort #a# if the comparison tree reaches this leaf.  That is,
+Uma vez que todos os elementos de entrada são distintos, essa primeira 
+comparação tem somente duas possíveis saídas. A segunda comparação
+feita pelo algoritmo depende da saída da primeira comparação.
+A terceira comparação depende dos resultados das primeiras duas e assim segue.
+Desse jeito, qualquer algoritmo determinístico de ordenação baseado em 
+comparações pode ser visto como uma \emph{árvore de comparações}.
+\index{árvore de comparações}%
+Cada nodo interno, #u#, dessa árvore é marcado com um par de índices #u.i# e
+#u.j#. Se $#a[u.i]#<#a[u.j]#$, o algoritmo segue para a subárvore à esquerda.
+caso contrário ela vai para a subárvore à direita.
+Cada folha #w# dessa árvore é marcada com uma permutação
+$#w.p[0]#,\ldots,#w.p[n-1]#$ de
+$0,\ldots,#n#-1$.  
+Essa permutação representa aquilo que é necessário para ordenar #a#
+se a árvore de comparação atingir essa folha.
+Isso é, 
 \[
    #a[w.p[0]]#<#a[w.p[1]]#<\cdots<#a[w.p[n-1]]# \enspace .
 \]
-An example of a comparison tree for an array of size #n=3# is shown in
-\figref{comparison-tree}.
+Um exemplo de uma árvore de comparações para um array de tamanho #n=3#
+é mostrado na \figref{comparison-tree}.
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/comparison-tree}
   \end{center}
-  \caption[A comparison tree]{A comparison tree for sorting an array $#a[0]#,#a[1]#,#a[2]#$ of length #n=3#.}
+  \caption[Uma árvore de comparações]{Uma árvore de comparações para ordenar um array $#a[0]#,#a[1]#,#a[2]#$ de tamanho #n=3#.}
   \figlabel{comparison-tree}
 \end{figure}
 
-The comparison tree for a sorting algorithm tells us everything about
-the algorithm.  It tells us exactly the sequence of comparisons that
-will be performed for any input array, #a#, having #n# distinct elements
-and it tells us how the algorithm will reorder #a# in order to sort it.
-Consequently, the comparison tree must have at least $#n#!$ leaves;
-if not, then there are two distinct permutations that lead to the same
-leaf; therefore, the algorithm does not correctly sort at least one of
-these permutations.
+A árvore de comparações para um algoritmo de ordenação nos diz tudo sobre
+o algoritmo. Ela nos diz exatamente a sequência de comparações que
+será realizada para qualquer array de entrada, #a#, tendo #n# elementos distintos
+e nos diz como o algoritmo irá permutar #a# para organizá-lo.
 
-For example, the comparison tree in \figref{comparison-tree-2} has only
-$4< 3!=6$ leaves. Inspecting this tree, we see that the two input arrays
-$3,1,2$ and $3,2,1$ both lead to the rightmost leaf.  On the input $3,1,2$
-this leaf correctly outputs $#a[1]#=1,#a[2]#=2,#a[0]#=3$.  However, on the
-input $3,2,1$, this node incorrectly outputs $#a[1]#=2,#a[2]#=1,#a[0]#=3$.
-This discussion leads to the primary lower-bound for comparison-based
-algorithms.
+Consequentemente, a árvore de comparações deve ter pelo menos
+$#n#!$ folhas;
+senão, então há duas permutações distintas que levam à mesma folha; portanto,
+o algoritmo não ordena corretamente pelo uma dessas permutações.
+
+Por exemplo, a árvore de comparações na \figref{comparison-tree-2} tem somente 
+$4< 3!=6$ folhas. Ao inspecionar essa árvore, vemos que os dois arrays de entrada
+$3,1,2$ e $3,2,1$ levam à folha mais a direita.
+Na entrada 
+$3,1,2$ essa folha corretamente produz
+$#a[1]#=1,#a[2]#=2,#a[0]#=3$.  Entretanto, na entrada
+$3,2,1$, esse nodo incorretamente produz $#a[1]#=2,#a[2]#=1,#a[0]#=3$.
+Essa discussão nos conduz ao limitante inferior para algoritmos baseados em 
+comparação.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/comparison-tree-b}
   \end{center}
-  \caption{A comparison tree that does not correctly sort every input
-  permutation.}
+  \caption{Uma árvore de comparações que não ordena corretamente todas as permutações de entrada.}
   \figlabel{comparison-tree-2}
 \end{figure}
 
 \begin{thm}\thmlabel{deterministic-sorting-lower-bound}
-  For any deterministic comparison-based sorting algorithm $\mathcal{A}$
-  and any integer $#n#\ge 1$, there exists an input array #a# of
-  length #n# such that $\mathcal{A}$ performs at least $\log(#n#!) =
-  #n#\log#n#-O(#n#)$ comparisons when sorting #a#.
+  Para qualquer algoritmo de ordenação determinístico baseado em comparação
+  $\mathcal{A}$ e qualquer inteiro 
+  $#n#\ge 1$, existe um array de entrada #a# de tamanho #n#
+  tal que $\mathcal{A}$ usa pelo menos $\log(#n#!) =
+  #n#\log#n#-O(#n#)$ comparações ao ordenar #a#.
 \end{thm}
 
 \begin{proof}
-  By the preceding discussion, the comparison tree defined by $\mathcal{A}$
-  must have at least $#n#!$ leaves.  An easy inductive proof shows that
-  any binary tree with $k$ leaves has a height of at least $\log k$.
-  Therefore, the comparison tree for $\mathcal{A}$ has a leaf, #w#,
-  with a depth of at least $\log(#n#!)$ and there is an input array #a#
-  that leads to this leaf.  The input array #a# is an input for which
-  $\mathcal{A}$ does at least $\log(#n#!)$ comparisons.
+  De acordo com a discussão anterior, a árvore de comparações definida por
+$\mathcal{A}$ deve ter
+  pelo menos $#n#!$ folhas. Uma prova indutiva fácil mostra que
+  qualquer árvore binária com $k$ folhas tem altura de pelo menos
+  $\log k$.
+  Portanto, a árvore de comparações para
+  $\mathcal{A}$ tem uma folha, #w#, com profundidade de pelo menos
+   $\log(#n#!)$ e existe um array de entradas #a#
+  que leva a essa folha. O array de entrada #a# é uma entrada para qual
+  $\mathcal{A}$ faz pelo menos $\log(#n#!)$ comparações.
 \end{proof}
 
-\thmref{deterministic-sorting-lower-bound} deals with deterministic
-algorithms like merge-sort and heap-sort, but doesn't tell us anything
-about randomized algorithms like quicksort.  Could a randomized algorithm
-beat the $\log(#n#!)$ lower bound on the number of comparisons?
-The answer, again, is no.  Again, the way to prove it is to think
-differently about what a randomized algorithm is.
+O \thmref{deterministic-sorting-lower-bound} trata de algoritmos
+determinísticos como 
+mergesort e heapsort, mas não nos diz nada sobre algoritmos randomizados
+como o quicksort. 
+Poderia um algoritmo randomizado usar um número de comparações menor que
+o limitante inferior $\log(#n#!)$?
+A resposta é, novamente, não. De novo, a forma de prová-lo é 
+pensar diferentemente sobre o que um algoritmo randomizado é.
 
-In the following discussion, we will assume that our decision
-trees have been ``cleaned up'' in the following way: Any node that can not
-be reached by some input array #a# is removed.  This cleaning up implies
-that the tree has exactly $#n#!$ leaves.  It has at least $#n#!$ leaves
-because, otherwise, it could not sort correctly.  It has at most $#n#!$
-leaves since each of the possible $#n#!$ permutation of #n# distinct
-elements follows exactly one root to leaf path in the decision tree.
+Na discussão a seguir, iremos assumir que nossas árvores de decisões
+foram ``limpadas'' da seguinte forma: 
+qualquer nodo que não pode ser alcançado por algum array de entrada #a# é removido.
+Essa limpeza implica que a árvore tem exatamente 
+$#n#!$ folhas. Ela tem pelo menos $#n#!$ folhas porque, caso contrário,
+não ordenaria corretamente. Ela tem até $#p#!$ folhas pois
+cada uma das possíveis permutações $#n#!$ de #n# elementos distintos segue
+exatamente um caminho da raiz à folha na árvore de decisões.
 
-We can think of a randomized sorting algorithm, $\mathcal{R}$, as a
-deterministic algorithm that takes two inputs: The input array #a#
-that should be sorted and a long sequence $b=b_1,b_2,b_3,\ldots,b_m$
-of random real numbers in the range $[0,1]$.  The random numbers provide
-the randomization for the algorithm.  When the algorithm wants to toss a
-coin or make a random choice, it does so by using some element from $b$.
-For example, to compute the index of the first pivot in quicksort,
-the algorithm could use the formula $\lfloor n b_1\rfloor$.
+Podemos imaginar que um algoritmo de ordenação randomizado
+ $\mathcal{R}$ age como um algoritmo determinístico que recebe duas 
+ entradas: o array de entradas #a# que devem ser ordenado e uma longa
+ sequência números reais aleatórios $b=b_1,b_2,b_3,\ldots,b_m$ no intervalo $[0,1]$.
+ Os números aleatórios provêem a randomização ao algoritmo. Quando o algoritmo
+ quer lançar uma moeda ou fazer uma escolha aleatória, ele o faz usando algum
+ elemento de $b$. Por exemplo, para computar o índice do primeiro pivot no 
+ quicksort, o algoritmo poderia usar a fórmula $\lfloor n b_1\rfloor$.
 
-Now, notice that if we fix $b$ to some particular sequence $\hat{b}$
-then $\mathcal{R}$ becomes a deterministic sorting algorithm,
-$\mathcal{R}(\hat{b})$, that has an associated comparison tree,
-$\mathcal{T}(\hat{b})$.  Next, notice that if we select #a# to be a random
-permutation of $\{1,\ldots,#n#\}$, then this is equivalent to selecting
-a random leaf, #w#, from the $#n#!$ leaves of $\mathcal{T}(\hat{b})$.
+ Agora, note que se fixarmos $B$ a uma sequência particular
+ $\hat{b}$ então
+$\mathcal{R}$ torna-se um algoritmo de ordenação determinístico, 
+$\mathcal{R}(\hat{b})$, que tem uma árvore de comparações associada,
+$\mathcal{T}(\hat{b})$.  A seguir, note que se selecionarmos 
+ #a# para ser uma permutação aleatória de 
+$\{1,\ldots,#n#\}$, então isso é equivalente a selecionar uma folha aleatória
+ #w# dentre as $#n#!$ folhas de $\mathcal{T}(\hat{b})$.
 
-\excref{randomized-lower-bound} asks you to prove that, if we select
-a random leaf from any binary tree with $k$ leaves, then the expected
-depth of that leaf is at least $\log k$.  Therefore, the expected
-number of comparisons performed by the (deterministic) algorithm
-$\mathcal{R}(\hat{b})$ when given an input array containing a random
-permutation of $\{1,\ldots,n\}$ is at least $\log(#n#!)$.  Finally,
-notice that this is true for every choice of $\hat{b}$, therefore it holds even for $\mathcal{R}$.  This completes the proof of the lower-bound for randomized algorithms.
+O \excref{randomized-lower-bound} pede que você prove que, se selecionarmos 
+uma folha aleatória de qualquer árvore binária com $k$ folhas, então
+a profundidade esperada daquela folha é pelo menos 
+$\log k$.  Portanto, o número esperado de comparações realizado pelo algoritmo (determinístico) 
+$\mathcal{R}(\hat{b})$ quando passado um array de entrada contendo uma permutação aleatória de 
+$\{1,\ldots,n\}$ é pelo menos $\log(#n#!)$.  Finalmente, note que isso é verdadeiro para toda escolha de 
+$\hat{b}$, portanto isso vale mesmo para $\mathcal{R}$. Isso completa a prova do limitante inferior para algoritmos randomizados.
 
 \begin{thm}\thmlabel{randomized-sorting-lower-bound}
-  For any integer $n\ge 1$ and any  (deterministic or randomized)
-  comparison-based sorting algorithm $\mathcal{A}$, the expected number
-  of comparisons done by $\mathcal{A}$ when sorting a random permutation
-  of $\{1,\ldots,n\}$ is at least $\log(#n#!) = #n#\log#n#-O(#n#)$.
+  Para qualquer inteiro 
+  $n\ge 1$ e qualquer algoritmo de ordenação baseado em comparações (determinístico ou randomizado) 
+   $\mathcal{A}$, o número esperado de comparações feito por
+   $\mathcal{A}$ ao ordenar uma permutação aleatória 
+  de $\{1,\ldots,n\}$ é pelo menos $\log(#n#!) = #n#\log#n#-O(#n#)$.
 \end{thm}
 
+\section{Counting Sort e Radix Sort}
 
-
-\section{Counting Sort and Radix Sort}
-
-In this section we study two sorting algorithms that are not
-comparison-based. Specialized for sorting small integers, these algorithms
-elude the lower-bounds of \thmref{deterministic-sorting-lower-bound}
-by using (parts of) the elements in #a# as indices into an array.
-Consider a statement of the form
+Nesta seção estudamos dois algoritmos de ordenação que não são
+baseados em comparação.
+Especializados para ordenar valores inteiros baixos, esses algoritmos
+se esquivam dos limites 
+do \thmref{deterministic-sorting-lower-bound} ao usar (partes de) elementos em #a#
+como índices para um array. 
+Considere um comando da forma
 \[
   #c[a[i]]# = 1 \enspace .
 \]
-This statement executes in constant time, but has #c.length# possible
-different outcomes, depending on the value of #a[i]#.  This means that the
-execution of an algorithm that makes such a statement cannot be modelled
-as a binary tree.  Ultimately, this is the reason that the algorithms
-in this section are able to sort faster than comparison-based algorithms.
+Esse comando executa em tempo constante, mas tem 
+#c.length# diferentes saídas, dependendo do valor de #a[i]#.  Isso
+significa que a execução de um algoritmo que usa tal comando não pode ser
+modelado como uma árvore binária.
+É por essa razão que algoritmos desta seção são capazes de ordenar mais
+rapidamente que algoritmos baseados em comparação.
 
 \subsection{Counting Sort}
 
-Suppose we have an input array #a# consisting of #n# integers, each in
-the range $0,\ldots,#k#-1$.  The \emph{counting-sort}
+Suponha que temos um array de entrada #a# consistindo de #n# inteiros,
+cada qual no intervalo
+$0,\ldots,#k#-1$.  O algoritmo \emph{counting sort}
 \index{counting-sort}%
-algorithm sorts #a#
-using an auxiliary array #c# of counters.  It outputs a sorted version
-of #a# as an auxiliary array #b#.
+ordena #a# usando um array auxiliar 
+#c# de contadores.  Ele produz uma versão ordenada de #a# como um array auxiliar #b#.
 
-The idea behind counting-sort is simple:  For each
-$#i#\in\{0,\ldots,#k#-1\}$, count the number of occurrences of #i# in #a#
-and store this in #c[i]#.  Now, after sorting, the output will look like
-#c[0]# occurrences of 0, followed by #c[1]# occurrences of 1, followed by
-#c[2]# occurrences of 2,\ldots, followed by #c[k-1]# occurrences of #k-1#.
-The code that does this is very slick, and its execution is illustrated in
+A ideia por trás do counting sort é simples: para cada
+$#i#\in\{0,\ldots,#k#-1\}$, conte o número de ocorrências de #i# em #a# 
+e guarde essa contagem em #c[i]#. Agora, após a ordenação, a saída 
+vai ser do tipo 
+#c[0]# ocorrências de 0, seguida de #c[1]# ocorrências de 1, seguida de 
+#c[2]# ocorrências de 2,\ldots, seguida de #c[k-1]# ocorrências de #k-1#.
+O código que faz isso é bem elegante e sua execução é ilustrada na 
 \figref{countingsort}:
 \codeimport{ods/Algorithms.countingSort(a,k)}
 
@@ -556,224 +611,235 @@ The code that does this is very slick, and its execution is illustrated in
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/countingsort}
   \end{center}
-  \caption{The operation of counting sort on an array of length $#n#=20$ that stores integers $0,\ldots,#k#-1=9$.}
+  \caption{A execução do counting sort em um array de tamanho $#n#=20$ que guarda inteiros $0,\ldots,#k#-1=9$.}
   \figlabel{countingsort}
 \end{figure}
 
-The first #for# loop in this code sets each counter #c[i]# so that it
-counts the number of occurrences of #i# in #a#.  By using the values
-of #a# as indices, these counters can all be computed in $O(#n#)$ time
-with a single for loop.  At this point, we could use #c# to
-fill in the output array #b# directly. However, this would not work if
-the elements of #a# have associated data.  Therefore we spend a little
-extra effort to copy the elements of #a# into #b#.
+O primeiro laço #for# nesse código usa cada contador #c[i]# tal que 
+ele conta o número de ocorrências de #i# em #a#.
+Ao usar os valores de #a# como índices, esses contadores podem
+ser computados em 
+$O(#n#)$ de tempo com um único #for#.
+Nesse ponto, poderíamos usar #c# para preencher o array de saída diretamente. 
+Porém isso não funcionaria se os elementos de #a# tiverem dados associados. 
+Portanto, gastamos um pouco de esforço extra para copiar os elementos de #a#
+em #b#.
 
-The next #for# loop, which takes $O(#k#)$ time, computes a running-sum
-of the counters so that #c[i]# becomes the number of elements in
-#a# that are less than or equal to #i#.  In particular, for every
-$#i#\in\{0,\ldots,#k#-1\}$, the output array, #b#, will have
+O próximo laço #for#, que leva $O(#k#)$ de tempo, computa uma soma acumulativa 
+dos contadores tal que 
+#c[i]# se torna o número de elementos em #a# que são menores que ou iguais a #i#.
+Em particular, para todo 
+$#i#\in\{0,\ldots,#k#-1\}$, o array de saída, #b#, terá 
 \[
    #b[c[i-1]]#=#b[c[i-1]+1]=#\cdots=#b[c[i]-1]#=#i# \enspace .
 \]
-Finally, the algorithm scans #a# backwards to place its elements, in order,
-into an output array #b#.  When scanning, the element #a[i]=j# is placed
-at location #b[c[j]-1]# and the value #c[j]# is decremented.
+Finalmente, o algoritmo percorre #a# de trás para frente para posicionar seus
+elementos em ordem no array de saída #b#. Ao percorrer, o elemento
+#a[i]=j# é colocado na posição #b[c[j]-1]# e o valor #c[j]# é decrementado.
 
 \begin{thm}
-  The #countingSort(a,k)# method can sort an array #a# containing #n#
-  integers in the set $\{0,\ldots,#k#-1\}$ in $O(#n#+#k#)$ time.
+  O método #countingSort(a,k)# ordena um array #a# contendo #n#
+  inteiros no conjunto $\{0,\ldots,#k#-1\}$ em $O(#n#+#k#)$ de tempo.
 \end{thm}
 
-The counting-sort algorithm has the nice property of being \emph{stable};
-\index{stable sorting algorithm}%
-it preserves the relative order of equal elements.  If two elements
-#a[i]# and #a[j]# have the same value, and $#i#<#j#$ then #a[i]# will
-appear before #a[j]# in #b#.  This will be useful in the next section.
+O algoritmo counting sort tem a interessante propriedade de ser \emph{estável};
+\index{algoritmo de ordenação estável}%
+ele preserva a ordem relativa de elementos iguais. Se dois elementos
+#a[i]# e #a[j]# tem o mesmo valor  e $#i#<#j#$ então #a[i]# irá
+aparecer antes de #a[j]# em #b#.  Isso será útil na seção a seguir.
 
-\subsection{Radix-Sort}
+\subsection{Radix sort}
 
-Counting-sort is very efficient for sorting an array of integers when the
-length, #n#, of the array is not much smaller than the maximum value,
-$#k#-1$, that appears in the array.  The \emph{radix-sort}
-\index{radix-sort}%
-algorithm,
-which we now describe, uses several passes of counting-sort to allow
-for a much greater range of maximum values.
+Counting sort é muito eficiente para ordenar um array de inteiros quando
+o tamanho, #n#, do array não é muito menor que o maior valor 
+$#k#-1$ que aparece no array.  O algoritmo \emph{radix sort}
+\index{radix sort}%
+, que agora descreveremos, usa várias passadas do counting sort para 
+permitir o uso seu uso em arrays cujo maior valor é bem maior que o tamanho do array.
 
-Radix-sort sorts #w#-bit integers by using $#w#/#d#$ passes of counting-sort
-to sort these integers #d# bits at a time.\footnote{We assume that
-#d# divides #w#, otherwise we can always increase #w# to $#d#\lceil
-#w#/#d#\rceil$.}  More precisely, radix sort first sorts the integers by
-their least significant #d# bits, then their next significant #d# bits,
-and so on until, in the last pass, the integers are sorted by their most
-significant #d# bits.
+O radix sort ordena inteiros 
+de #w#-bits usando $#w#/#d#$ iterações do counting sort
+para ordenar esses inteiros considerando somente #d# bits por iteração.
+\footnote{Assumimos que #d# divide #w#, caso contrário podemos sempre aumentar
+#w# para $#d#\lceil
+#w#/#d#\rceil$.}  Mais precisamente, o radix sort primeiro ordena 
+os inteiros usando seus #d# bits menos significativos e então seus próximos #d# bits significativos e assim por diante até, na última iteração, os inteiros estão ordenados pelos seus #d# bits mais significativos.
+
 \codeimport{ods/Algorithms.radixSort(a)}
-(In this code, the expression #(a[i]>>d*p)&((1<<d)-1)# extracts the integer
-whose binary representation is given by bits
-$(#p#+1)#d#-1,\ldots,#p##d#$ of #a[i]#.)
-An example of the steps of this algorithm is shown in \figref{radixsort}.
+(Nesse código, a expressão #(a[i]>>d*p)&((1<<d)-1)# extrai o inteiro 
+cuja representação binária é dada pelos bits 
+$(#p#+1)#d#-1,\ldots,#p##d#$ de #a[i]#.)
+Um exemplo dos passos desse algoritmo é mostrado na \figref{radixsort}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/radixsort}
   \end{center}
-  \caption{Using radixsort to sort $#w#=8$-bit integers by using 4 passes
-   of counting sort on $#d#=2$-bit integers.}
+  \caption{Usando radix sort para ordenar inteiros de $#w#=8$-bits usando 4 iterações do counting sort em inteiros de $#d#=2$-bits.}
   \figlabel{radixsort}
 \end{figure}
 
-This remarkable algorithm sorts correctly because counting-sort is
-a stable sorting algorithm.  If $#x# < #y#$ are two elements of #a#,
-and the most significant bit at which #x# differs from #y# has index $r$,
-then #x# will be placed before #y# during pass $\lfloor r/#d#\rfloor$
-and subsequent passes will not change the relative order of #x# and #y#.
+Esse algoritmo memorável ordena corretamente porque o counting sort
+é um algoritmo de ordenação estável. 
+Se $#x# < #y#$ são dois elementos de #a#, e o bit mais significativo 
+em que #x# difere de #y# tem índice $r$, então #x# será posicionado 
+antes de #y# durante a 
+iteração $\lfloor r/#d#\rfloor$ e as iterações seguintes não alterarão
+a ordem relativa entre #x# e #y#.
 
-Radix-sort performs #w/d# passes of counting-sort.  Each pass requires
-$O(#n#+2^{#d#})$ time. Therefore, the performance of radix-sort is given
-by the following theorem.
+O radix sort usa #w/d# iterações do algoritmo counting sort.  Cada iteração
+requer $O(#n#+2^{#d#})$ de tempo. Portanto, o desempenho do 
+radix sort é dado pelo seguinte teorema. 
 \begin{thm}\thmlabel{radix-sort}
-  For any integer $#d#>0$, the #radixSort(a,k)# method can sort an array
-  #a# containing #n# #w#-bit integers in $O((#w#/#d#)(#n#+2^{#d#}))$ time.
+  Para qualquer inteiro $#d#>0$, o método #radixSort(a,k)# pode ordenar um array 
+  #a# contendo #n# inteiros de #w#-bits em $O((#w#/#d#)(#n#+2^{#d#}))$ de tempo.
 \end{thm}
 
-If we think, instead, of the elements of the array being in the range
-$\{0,\ldots,#n#^c-1\}$, and take $#d#=\lceil\log#n#\rceil$ we obtain
-the following version of \thmref{radix-sort}.
+Alternativamente, se os elementos do array estiverem no intervalo
+$\{0,\ldots,#n#^c-1\}$ e usarmos $#d#=\lceil\log#n#\rceil$, então obtemos 
+a seguinte versão do \thmref{radix-sort}.
 \begin{cor}\corlabel{radix-sort-poly}
-  The #radixSort(a,k)# method can sort an array #a# containing #n#
-  integer values in the range $\{0,\ldots,#n#^c-1\}$ in $O(c#n#)$ time.
+O método #radixSort(a,k)# pode ordenar um array #a# contendo #n# valores inteiros no intervalo $\{0,\ldots,#n#^c-1\}$ em $O(c#n#)$ de tempo.
 \end{cor}
 
-\section{Discussion and Exercises}
+\section{Discussão e Exercícios}
 
-Sorting is \emph{the} fundamental algorithmic problem in computer science,
-and it has a long history.  Knuth \cite{k97v3} attributes the merge-sort
-algorithm to von~Neumann (1945).  Quicksort is due to Hoare \cite{h61}.
-The original heap-sort algorithm is due to Williams \cite{w64}, but the
-version presented here (in which the heap is constructed bottom-up
-in $O(#n#)$ time) is due to Floyd \cite{f64}.  Lower-bounds for
-comparison-based sorting appear to be folklore.  The following table
-summarizes the performance of these comparison-based algorithms:
+Ordenação é \emph{o} principal problema fundamental em Ciência da Computação 
+e tem uma longa história.
+Knuth \cite{k97v3} atribui o algoritmo merge sort a 
+von~Neumann (1945).  O quicksort foi proposto por Hoare \cite{h61}.
+O algoritmo heapsort original é de Williams \cite{w64}, mas a 
+versão apresentada aqui (na qual a heap é construída bottom-up em 
+$O(#n#)$ de tempo) foi proposta por Floyd \cite{f64}.  Limitantes 
+inferiores para ordenação baseada em comparações parecem ser folclore.
+A tabela a seguir resume o desempenho desses algoritmos baseados em comparações:
 
 \begin{center}
   \begin{tabular}{|l|r@{}l@{ }l|l|} \hline
-      & \multicolumn{3}{c|}{comparisons} & in-place  \\ \hline
-    Merge-sort & $#n#\log #n#$ & &  worst-case & No  \\
-    Quicksort & $1.38#n#\log #n#$ & ${}+ O(#n#)$ & expected & Yes \\
-    Heap-sort & $2#n#\log #n#$ & ${}+ O(#n#)$ & worst-case & Yes \\ \hline
+      & \multicolumn{3}{c|}{comparações} & in place  \\ \hline
+    mergesort & $#n#\log #n#$ & &  pior caso& Não  \\
+    quicksort & $1.38#n#\log #n#$ & ${}+ O(#n#)$ & esperado & Sim\\
+    heapsort & $2#n#\log #n#$ & ${}+ O(#n#)$ & pior caso & Sim \\ \hline
   \end{tabular}
 \end{center}
 
-Each of these comparison-based algorithms has its advantages and
-disadvantages.  Merge-sort does the fewest comparisons and does not rely
-on randomization.  Unfortunately, it uses an auxilliary array during its
-merge phase.  Allocating this array can be expensive and is a potential
-point of failure if memory is limited.  Quicksort is an \emph{in-place}
-\index{in-place algorithm}%
-algorithm and is a close second in terms of the number of comparisons,
-but is randomized, so this running time is not always guaranteed.
-Heap-sort does the most comparisons, but it is in-place and deterministic.
+Cada um desses algoritmos baseados em comparação tem suas vantagens e desvantagens.
+O mergesort faz o menor número de comparações e não precisa de randomização.
+Infelizmente, ele usa um array auxiliar durante sua fase de merge.
+Alocar esse array pode ser caro e é um ponto de falha se a memória estiver escassa.
+O quicksort funciona \emph{in place}
+\index{algoritmo in place}%
+e é o segundo melhor em termos do número de comparações, mas é 
+randomizado então esse tempo de execução nem sempre é garantido.
+Heapsort faz mais comparações mas não usa memória extra e é determinístico.
+Existe um cenário em que o mergesort é o vencedor: ao ordenar uma lista ligada.
+Nesse caso, o array auxiliar extra não é necessário; duas listas 
+ligadas ordenadas são facilmente juntadas em uma única lista ligada 
+ordenada usando manipulação de ponteiros (veja o \excref{list-merge-sort}).
 
-There is one setting in which merge-sort is a clear-winner;  this
-occurs when sorting a linked-list.  In this case, the auxiliary
-array is not needed;  two sorted linked lists are very easily merged
-into a single sorted linked-list by pointer manipulations (see
-\excref{list-merge-sort}).
+Os algoritmos counting sort e radix sort aqui descritos foram propostos por
+Seward \cite[Section~2.4.6]{s54}.  Porém, variantes do radix sort
+têm sido usadas desde a década de 1920 para ordenar cartões 
+perfurados usando máquinas de ordenação.
+Essas máquinas podem ordenar uma pilha de cartões em duas pilhas 
+usando a existência (ou não) de um furo em uma posição específica no cartão.
+Ao repetir esse processo para diferentes posições de furos resulta em
+uma implementação do radix sort.
 
-The counting-sort and radix-sort algorithms described here are due
-to Seward \cite[Section~2.4.6]{s54}.  However, variants of radix-sort
-have been used since the 1920s to sort punch cards using punched card
-sorting machines.  These machines can sort a stack of cards into two
-piles based on the existence (or not) of a hole in a specific location
-on the card.  Repeating this process for different hole locations gives
-an implementation of radix-sort.
-
-Finally, we note that counting sort and radix-sort can be used to sort
-other types of numbers besides non-negative integers.  Straightforward
-modifications of counting sort can sort integers, in any interval
-$\{a,\ldots,b\}$, in $O(#n#+b-a)$ time.  Similarly, radix sort can sort
-integers in the same interval in $O(#n#(\log_{#n#}(b-a))$ time.  Finally, both of these
-algorithms can also be used to sort floating point numbers in the IEEE 754
-floating point format.  This is because the IEEE format is designed to
-allow the comparison of two floating point numbers by comparing their values
-as if they were integers in a signed-magnitude binary representation
+Finalmente, notamos que counting sort e radix sort podem ser usados
+para ordenar outros tipos de números além de inteiros não negativos.
+Modificações do counting sort podem ordenar inteiros em qualquer intervalo
+$\{a,\ldots,b\}$, em $O(#n#+b-a)$ de tempo.  De modo similar, radix sort 
+pode ordenar inteiros no mesmo intervalo em 
+ $O(#n#(\log_{#n#}(b-a))$ de tempo.  Finalmente, esses dois algoritmos
+também podem ser usados para ordenar números em ponto flutuante no formato IEEE 754.
+Isso porque o formato IEEE 754 é projetado para permitir a 
+comparação de dois números ponto flutuantes ao comparar seus 
+valores como se estivessem em uma representação binária de inteiros com bit de sinal. 
 \cite{ieee754}.
 
 \begin{exc}
-  Illustrate the execution of merge-sort and heap-sort on an input array
-  containing $1,7,4,6,2,8,3,5$.  Give a sample illustration of one possible
-  execution of quicksort on the same array.
+  Ilustre a execução do mergesort e do heapsort em um array de entrada 
+  contendo $1,7,4,6,2,8,3,5$.  Dê um exemplo simples de uma possível 
+  execução do quicksort no mesmo array.
 \end{exc}
 
 \begin{exc}\exclabel{list-merge-sort}
-  Implement a version of the merge-sort algorithm that sorts a #DLList#
-  without using an auxiliary array. (See \excref{dllist-sort}.) 
+  Implemente uma versão do algoritmo mergesort que ordena uma
+   #DLList# sem usar um array auxiliar (Veja o \excref{dllist-sort}).
 \end{exc}
 
 \begin{exc}
-  Some implementations of #quickSort(a,i,n,c)# always use #a[i]#
-  as a pivot.  Give an example of an input array of length #n# in which
-  such an implementation would perform $\binom{#n#}{2}$ comparisons.
+  Algumas implementações do 
+  #quickSort(a,i,n,c)# usam #a[i]# como um pivot.
+  Dê um exemplo de um array de entrada de tamanho #n# no
+  qual tal implementação faria $\binom{#n#}{2}$ comparações.
 \end{exc}
 
 \begin{exc}
-  Some implementations of #quickSort(a,i,n,c)# always use #a[i+n/2]#
-  as a pivot.  Given an example of an input array of length #n# in which
-  such an implementation would perform $\binom{#n#}{2}$ comparisons.
+  Algumas implementações de
+   #quickSort(a,i,n,c)# usam #a[i+n/2]# como um pivot.
+   Dê um exemplo de um array de entrada de tamanho #n# no
+   qual tal implementação faria $\binom{#n#}{2}$ comparações.
 \end{exc}
 
 \begin{exc}
-  Show that, for any implementation of #quickSort(a,i,n,c)#
-  that chooses a pivot deterministically, without first looking at
-  any values in $#a[i]#,\ldots,#a[i+n-1]#$, there exists an input array of length #n#
-  that causes this implementation to perform $\binom{#n#}{2}$ comparisons.
+  Mostre que, para qualquer implementação de
+   #quickSort(a,i,n,c)# que escolha um pivot deterministicamente, 
+   sem primeiro olhar os valores em 
+   $#a[i]#,\ldots,#a[i+n-1]#$, existe um array de entrada de tamanho #n#
+   que faz que essa implementação realize $\binom{#n#}{2}$ comparações.
 \end{exc}
 
 \begin{exc}
-  Design a #Comparator#, #c#, that you could pass as an argument
-  to #quickSort(a,i,n,c)# and that would cause quicksort to perform
-  $\binom{#n#}{2}$ comparisons.  (Hint: Your comparator does not actually
-  need to look at the values being compared.)
+  Projete um #Comparator#, #c#, que você poderia passar como um argumento ao
+   #quickSort(a,i,n,c)# e que faria o quicksort usar 
+  $\binom{#n#}{2}$ comparações.  (Dica: O seu comparador não precisa 
+  olhar nos valores sendo comparados.) 
 \end{exc}
 
 \begin{exc}
-  Analyze the expected number of comparisons done by Quicksort a little
-  more carefully than the proof of \thmref{quicksort}.  In particular, show
-  that the expected number of comparisons is $2#n#H_#n# -#n# + H_#n#$.
+Analise o número esperado de comparações feitos pelo quicksort 
+um pouco mais cuidadosamente que a prova 
+do \thmref{quicksort}.  Em particular, mostre que o número esperado
+de comparações é $2#n#H_#n# -#n# + H_#n#$.
 \end{exc}
 
 \begin{exc}
-  Describe an input array that causes heap sort to perform at least
-  $2#n#\log #n#-O(#n#)$ comparisons.  Justify your answer.
+  Descreva um array de entrada que faz o heapsort realizar pelo menos
+  $2#n#\log #n#-O(#n#)$ comparações. Justifique sua resposta.
 \end{exc}
 
 \javaonly{
 \begin{exc}
-  The heap sort implementation described here sorts the elements into
-  reverse sorted order and then reverses the array.  This last step
-  could be avoided by defining a new #Comparator# that negates the
-  results of the input #Comparator#, #c#.  Explain why this would not
-  be a good optimization.  (Hint: Consider how many negations would need
-  to be done in relation to how long it takes to reverse the array.)
+  A implementação do heapsort aqui descrita ordena os elementos 
+  em ordem reversa e então inverte o array.
+  Esse último passo poderia ser evitar ao definir
+  um novo #Comparator# que nega os resultados 
+  da entrada #Comparator#, #c#.  Explique porque isso não 
+  seria seria uma boa otimização. (Dica: considere quantas 
+  negações seriam necessárias para fazer 
+  em relação a quanto tempo levar a inverter o array.)
 \end{exc}
 }
 
 \begin{exc}
-  Find another pair of permutations of $1,2,3$ that are not correctly
-  sorted by the comparison tree in \figref{comparison-tree-2}.
+  Ache outro par de permutações de 
+   $1,2,3$ que não são corretamente ordenados pela árvore de comparações 
+  na \figref{comparison-tree-2}.
 \end{exc}
 
 \begin{exc}\exclabel{log-factorial}
-  Prove that $\log #n#! = #n#\log #n#-O(#n#)$.
+  Prove que $\log #n#! = #n#\log #n#-O(#n#)$.
 \end{exc}
 
 \begin{exc}
-  Prove that a binary tree with $k$ leaves has height at least $\log k$.
+  Prove que uma árvore binária com $k$ folhas tem altura de pelo menos $\log k$.
 \end{exc}
 
 \begin{exc}\exclabel{randomized-lower-bound}
-  Prove that, if we pick a random leaf from a binary tree with $k$
-  leaves, then the expected height of this leaf is at least $\log k$.
+  Prove que, se escolhermos uma folha aleatória de uma árvore 
+  binária com $k$ folhas, então a altura esperada dessa folha é, pelo menos, $\log k$.
 %  (Hint: Use induction along with the inequality $(k_1/k)\log k_1 +
 %  (k_2/k)\log k_2) \ge  \log k-1$, when $k_1+k_2=k$.)
 \end{exc}
@@ -793,11 +859,10 @@ as if they were integers in a signed-magnitude binary representation
 %\end{exc}
 
 \begin{exc}
-  The implementation of #radixSort(a,k)# given here works when the input
-  array, #a# contains only \cpponly{unsigned}\javaonly{non-negative}
-  integers.  \javaonly{Extend this implementation so that it also
-  works correctly when #a# contains both negative and non-negative
-  integers.}\cpponly{Write a version that works correctly for signed
-  integers.}
+  A implementação do 
+   #radixSort(a,k)# fornecida aqui funciona quando o array de entrada #a#
+   contém somente inteiros 
+  \cpponly{sem sinal}\javaonly{não negativos}
+  .  \javaonly{Adapte essa implementação para que também funcione corretamente quando #a# contém inteiros negativos e não negativos.}\cpponly{Escreva uma versão que funcione corretamente para inteiros com sinal.}
 \end{exc}
 

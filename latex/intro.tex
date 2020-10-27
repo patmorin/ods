@@ -1,218 +1,154 @@
-\chapter{Introduction}
+\chapter{Introdução}
 \pagenumbering{arabic}
+Todo currículo de Ciência da Computação no mundo inclui ao menos uma disciplina sobre estruturas de dados e algoritmos.
+Estruturas de dados são \emph{realmente} importantes;
+elas melhoram nossa qualidade de vida e até salvam vidas.
+Muitas companhias que valem múltiplos milhões e bilhões de dólares foram construídas em torno de estruturas de dados.
 
-Every computer science curriculum in the world includes a course on data
-structures and algorithms.  Data structures are \emph{that} important;
-they improve our quality of life and even save lives on a regular basis.
-Many multi-million and several multi-billion dollar companies have been
-built around data structures.
+Como isso é possível? Se pararmos para pensar nisso, percebemos que interagimos com estruturas de dados constantemente.
 
-How can this be?  If we stop to think about it, we realize that we
-interact with data structures constantly.
 \begin{itemize}
-  \item  Open a file: File system 
-    \index{file system}%
-    data structures are used to locate
-    the parts of that file on disk so they can be retrieved.  This isn't
-    easy; disks contain hundreds of millions of blocks.  The contents of your
-    file could be stored on any one of them.
-  \item Look up a contact on your phone:  A data
-    structure is used to look up a phone number in your contact list
-    \index{contact list}%
-    based on partial
-    information even before you finish dialing/typing.  This isn't easy;
-    your phone may contain information about a lot of people---everyone
-    you have ever contacted via phone or email---and your phone doesn't
-    have a very fast processor or a lot of memory.
-  \item Log in to your favourite social network:
-    \index{social network}%
-    The network servers
-    use your login information to look up your account information.
-    This isn't easy; the most popular social networks have hundreds of
-    millions of active users.
-  \item Do a web search:
-    \index{web search}%
-    The search engine uses data structures to find
-    the web pages containing your search terms.  This isn't easy; there
-    are over 8.5 billion web pages on the Internet and each page contains
-    a lot of potential search terms.
-  \item Phone emergency services (9-1-1):
-    \index{emergency services}\index{9-1-1}%
-    The emergency services network
-    looks up your phone number in a data structure that maps phone numbers
-    to addresses so that police cars, ambulances, or fire trucks can be
-    sent there without delay. This is important;  the person making the
-    call may not be able to provide the exact address they are calling
-    from and a delay can mean the difference between life or death.
+  \item  Abrir um arquivo: Sistema de arquivos 
+    \index{sistema de arquivos}%
+    estruturas de dados são usadas para encontrar
+    as partes daquele arquivo em disco para serem recuperadas.
+    Isso não é fácil; discos contém centenas de milhões de blocos.
+    O conteúdo do seu arquivo pode estar armazenado em qualquer um deles.
+  \item Procurar contato no telefone: Uma estrutura de dados é usada para procurar por um número de telefone na sua lista de contatos 
+    \index{lista de contatos}%
+    baseada em informação parcial mesmo antes de você terminar de discar/digitar.
+    Isso não é fácil;
+o seu telefone pode ter informações sobre muitas pessoas---todos que você já entrou em contato via telefone ou email---e seu telefone não tem um processador muito rápido ou muita memória.
+  \item Entrar na sua rede social preferida:
+    \index{rede social}%
+    Os servidores da rede
+    usam a sua informação de login para procurar as informações da sua conta.
+    Isso não é fácil; as redes sociais mais populares têm centenas de milhões de usuários ativos.
+  \item Fazer uma busca na web: 
+    \index{busca na web}%
+    Um motor de busca usa estruturas de dados para buscar
+    por páginas na web que contêm os seus termos de busca.
+    Isso não é fácil; existem mais de 8.5 bilhões de páginas web na Internet
+    e cada página tem muitos potenciais termos de busca.
+  \item Serviços de telefone de emergência (9-1-1):
+    \index{serviços de emergência}\index{9-1-1}%
+    Os serviços de emergência procuram pelo seu número de telefone em uma estrutura de dados que mapeia números de telefone em endereços para que carros de polícia, ambulâncias ou os bombeiros possam ser enviados imediatamente.
+    Isso é importante; a pessoa fazendo a chamada pode não conseguir fornecer o endereço exato de onde está e um atraso pode significar a diferença entre a vida e a morte.
 \end{itemize}
 
-\section{The Need for Efficiency}
+\section{A Necessidade de Eficiência}
+Na próxima seção, estudaremos as operações aceitas pelas estruturas de dados mais comuns.
+Qualquer pessoa com um pouco de experiência em programação verá que essas operações não são difíceis de implementar corretamente.
+Podemos implementar ao percorrer/iterar todos os elementos de um array ou lista e possivelmente adicionar ou remover um elemento.
+Esse tipo de implementação é fácil, mas não muito eficiente.
+Isso realmente importa? Computadores estão ficando cada vez mais rápidos.
+Talvez a implementação mais óbvia seja boa o suficiente.
+Vamos fazer alguns cálculos aproximados para verificar isso.
 
-In the next section, we look at the operations supported by the most
-commonly used data structures.  Anyone with a bit of programming
-experience will see that these operations are not hard to implement
-correctly.  We can store the data in an array or a linked list and each
-operation can be implemented by iterating over all the elements of the
-array or list and possibly adding or removing an element.
+\paragraph{Número de operações:}
+Imagine uma aplicação com um conjunto de dados de tamanho moderado, digamos de um milhão ($10^6$) de itens. 
+É razoável, na maior parte das aplicações, presumir que a aplicação vai precisar verificar cada item pelo menos uma vez. Isso significa que podemos esperar fazermos pelo menos um milhão ($10^6$) de buscas nesses dados. Se cada uma dessas $10^6$ buscas inspecionar cada um dos $10^6$ itens, isso resulta em um total de $10^6\times 10^6=10^{12}$ (mil bilhões) inspeções.
 
-This kind of implementation is easy, but not very efficient.  Does this
-really matter?  Computers are becoming faster and faster. Maybe the
-obvious implementation is good enough. Let's do some rough calculations
-to find out.
+\paragraph{Velocidades do Processador:} 
 
-\paragraph{Number of operations:}  Imagine an application with a
-moderately-sized data set, say of one million ($10^6$), items.  It is
-reasonable, in most applications, to assume that the application will
-want to look up each item at least once.  This means we can expect to do
-at least one million ($10^6$) searches in this data.  If each of these
-$10^6$ searches inspects  each of the $10^6$ items, this gives a total
-of $10^6\times 10^6=10^{12}$ (one thousand billion) inspections.
+No momento de escrita deste livro, mesmo um computador de mesa bem rápido não pode fazer mais de um bilhão ($10^9$) de operações por segundo.\footnote{Velocidades de computadores vão até poucos gigahertz (bilhões de ciclos por segundo) e cada operação tipicamente exige alguns ciclos.}
+Isso significa que essa aplicação vai levar pelo menos $10^{12}/10^9 = 1000$
+segundos, ou aproximadamente 16 minutos e 40 segundos. Dezesseis minutos é uma eternidade em tempos computacionais, mas uma pessoa pode estar disposta a aceitá-lo (por exemplo, se ela estiver indo para um café).
 
-\paragraph{Processor speeds:} At the time of writing, even a very fast
-desktop computer can not do more than one billion ($10^9$) operations per
-second.\footnote{Computer speeds are at most a few gigahertz (billions
-of cycles per second), and each operation typically takes a few cycles.}
-This means that this application will take at least $10^{12}/10^9 = 1000$
-seconds, or roughly 16 minutes and 40 seconds.  Sixteen minutes is an
-eon in computer time, but a person might be willing to put up with it
-(if he or she were headed out for a coffee break).
+\paragraph{Conjuntos de dados maiores:} 
 
-%Consider, now an application like the human genome project.  Completed in
-%2003 (when computers were quite a bit slower than they are now), this
-%was considered an extraordinary scientific accomplishment.  The human
-%genome consists of 3 billion ($3\times 10^6$) base pairs. By our
-%rough calculations, doing even a single search on this data would take
-%3 seconds.  Doing a million searches would take $3$ million seconds,
-%or roughly 34 days.  This is starting to get beyond reasonable.
-
-\paragraph{Bigger data sets:} Now consider a company like Google,
+Agora considere que uma empresa como a Google, 
 \index{Google}%
-that
-indexes over 8.5 billion web pages.  By our calculations, doing any kind
-of query over this data would take at least 8.5 seconds.  We already
-know that this isn't the case; web searches complete in much less than
-8.5 seconds, and they do much more complicated queries than just asking
-if a particular page is in their list of indexed pages.  At the time
-of writing, Google receives approximately $4,500$ queries per second,
-meaning that they would require at least $4,500\times 8.5=38,250$ very
-fast servers just to keep up.
+que indexa mais de 8.5 bilhões de páginas web. 
+De acordo com os nossos cálculos, fazer qualquer tipo de consulta nesses dados levaria pelo menos 8.5 segundos.
+Nós já sabemos que esse não é o caso; buscas web são respondidas em bem menos de 8.5 segundos e elas são bem mais complicadas do que somente verificar se uma dada página está na lista de páginas indexadas.
+No momento de escrita deste livro, a Google recebe aproximadamente $4500$ consultas por segundo, o que significa que eles precisariam de pelo menos $4500 \times 8.5 =38,250$ excelentes servidores somente para manter esse tempo de resposta.
 
-\paragraph{The solution:} 
-These examples tell us that the obvious implementations of data structures
-do not scale well when the number of items, #n#, in the data structure
-and the number of operations, $m$, performed on the data structure
-are both large.  In these cases, the time (measured in, say, machine
-instructions) is roughly $#n#\times m$.
+\paragraph{A solução:} 
+Esses exemplos nos dizem que as implementações mais óbvias de estruturas de dados não funcionam bem quando o número de itens, #n#, na estrutura de dados e o número de operações $m$, feitas na estrutura de dados são altos.
+Nesses casos, o tempo (medido em termos de, digamos, duração da execução de instruções de máquina) é proporcional a $#n#\times m$.
 
-The solution, of course, is to carefully organize data within the data
-structure so that not every operation requires every data item to be
-inspected.  Although it sounds impossible at first, we will see data
-structures where a search requires looking at only two items on average,
-independent of the number of items stored in the data structure.  In our
-billion instruction per second computer it takes only $0.000000002$
-seconds to search in a data structure containing a billion items (or a
-trillion, or a quadrillion, or even a quintillion items).
+A solução, é claro, cuidadosamente organizar os dados na estrutura de dados de forma que nem toda operação exija que todos os itens de dados sejam inspecionados.
+Embora pareça inicialmente impossível, descreveremos estruturas de dados em que a busca requer olhar em apenas dois itens em média, independentemente do número de itens guardados na estrutura de dados. No nosso computador de um bilhão de instruções por segundo, levaria somente $0.000000002$
+segundos para buscar em uma estrutura de dados contendo um bilhão de itens (ou um trilhão ou um quatrilhão ou mesmo um quintilhão de itens).
 
-We will also see implementations of data structures that keep the
-items in sorted order, where the number of items inspected during an
-operation grows very slowly as a function of the number of items in
-the data structure.  For example, we can maintain a sorted set of one
-billion items while inspecting at most 60 items during any operation.
-In our billion instruction per second computer, these operations take
-$0.00000006$ seconds each.
+Nós veremos também implementações de estruturas de dados que mantêm os itens em ordem, onde o número de itens inspecionados durante uma operação cresce muito lentamente em função do número de itens na estrutura de dados.
+Por exemplo, podemos manter um conjunto ordenado com um bilhão de itens e inspecionar no máximo 60 itens para qualquer operação.
+No nosso computador de um bilhão de instruções por segundo, essas operações levam $0.00000006$ segundos cada.
 
-The remainder of this chapter briefly reviews some of the main concepts
-used throughout the rest of the book.   \secref{interfaces} describes
-the interfaces implemented by all of the data structures described in
-this book and should be considered required reading.  The remaining
-sections discuss:
+O resto deste capítulo revisa brevemente alguns dos principais conceitos usados ao longo do resto do livro. A \secref{interfaces} descreve as interfaces implementadas por todas as estruturas de dados descritas neste livro e devem ser consideradas como leitura obrigatória.
+
+O restante das seções discute:
+
 \begin{itemize}
-  \item some mathematical review including exponentials, logarithms,
-  factorials, asymptotic (big-Oh) notation, probability, and randomization;
-  \item the model of computation; 
-  \item correctness, running time, and space;
-  \item an overview of the rest of the chapters; and
-  \item the sample code and typesetting conventions.
+  \item revisão de conceitos matemáticos incluindo exponenciais, logaritmos, fatoriais, notação assintótica (big-Oh), probabilidades e aleatorização;
+  \item modelos de computação;
+  \item corretude, tempo de execução e uso de espaço;
+  \item uma visão geral do resto dos capítulos; e 
+  \item uma amostra de código juntamente com convenções de escrita de código usadas neste livro.
 \end{itemize}
-A reader with or without a background in these areas can easily skip
-them now and come back to them later if necessary.
 
+Um leitor com (ou mesmo sem) conhecimento desses assuntos pode simplesmente pulá-las agora e voltar se necessário.
 
 \section{Interfaces}
 \seclabel{interfaces}
-When discussing data structures, it is important to understand the
-difference between a data structure's interface and its implementation.
-An interface describes what a data structure does, while an implementation
-describes how the data structure does it.
+Ao discutir sobre estruturas de dados, é importante entender a diferença entre a interface de uma estrutura de dados e sua implementação. 
+Uma interface descreve o que uma estrutura de dados faz, enquanto uma implementação descreve como a estrutura o faz.
 
-An \emph{interface},
+Uma \emph{interface},
 \index{interface}%
-\index{abstract data type|see{interface}}%
-sometimes also called an \emph{abstract data
-type}, defines the set of operations supported by a data structure and
-the semantics, or meaning, of those operations.  An interface tells us
-nothing about how the data structure implements these operations; it only
-provides a list of supported operations along with specifications about
-what types of arguments each operation accepts and the value returned
-by each operation.
+\index{tipo abstrato de dados|see{interface}}%
+às vezes também chamada de \emph{tipo abstrato de dados} (\emph{abstract data type}, em inglês),
+define o conjunto de operações aceitas por uma estrutura de dados e a semântica, ou significado, dessas operações.
 
-A data structure \emph{implementation}, on the other hand, includes the
-internal representation of the data structure as well as the definitions
-of the algorithms that implement the operations supported by the data
-structure.  Thus, there can be many implementations of a single interface.
-For example, in \chapref{arrays}, we will see implementations of the
-#List# interface using arrays and in \chapref{linkedlists} we will
-see implementations of the #List# interface using pointer-based data
-structures.  Each implements the same interface, #List#,
-but in different ways.
+Uma interface nos diz nada sobre como a estrutura de dados implementa essas operações; ela somente provê uma lista de operações aceitas juntamente com as especificações sobre quais tipos de argumentos cada operação aceita e o valor retornado por cada operação.
 
-\subsection{The #Queue#, #Stack#, and #Deque# Interfaces}
+A \emph{implementação} de uma estrutura de dados, por outro lado, inclui a representação interna da estrutura de dados assim como as definições dos algoritmos que implementam as operações aceitas pela estrutura de dados. 
+Então, pode haver muitas implementações de uma dada interface.
+Por exemplo, no \chapref{arrays}, veremos implementações da interface #List# usando arrays e no \chapref{linkedlists} veremos implementações da interface #List# usando estruturas de dados baseadas em ponteiros. Ambas implementam a mesma interface, #List#, mas de modos distintos.
 
-The #Queue# interface represents a collection of elements to which we
-can add elements and remove the next element.  More precisely, the operations
-supported by the #Queue# interface are
+\subsection{As Interfaces #Queue#, #Stack# e #Deque#}
+
+A interface #Queue# (Fila, em português) representa uma coleção de elementos à qual podemos
+\index{fila}%
+\index{queue}%
+adicionar elementos e remover o próximo elemento. Mais precisamente, as operações
+realizadas pela interface #Queue# são
 \begin{itemize}
-  \item #add(x)#: add the value #x# to the #Queue#
-  \item #remove()#: remove the next (previously added) value, #y#, from the #Queue# and return #y#
+  \item #add(x)#: adiciona o valor #x# à #Queue#
+  \item #remove()#: remove o próximo (previamente adicionado) valor, #y#, da #Queue# e retorna #y#
 \end{itemize}
-Notice that the #remove()# operation takes no argument.  The #Queue#'s
-\emph{queueing discipline} decides which element should be removed.
-There are many possible queueing disciplines, the most common of which
-include FIFO, priority, and LIFO.
+Note que a operação #remove()# não recebe argumentos.
+A \emph{política de enfileiramento} da #Queue# decide qual é o próximo elemento a ser removido.
 
-A \emph{FIFO (first-in-first-out) #Queue#},
+Existem muitas políticas de enfileiramento possíveis, sendo que entre as mais comuns estão FIFO, por prioridades e LIFO.
+
+Uma \emph{#Queue# FIFO (first-in-first-out -- primeiro a entrar, primeiro a sair)},
 \index{FIFO queue}%
 \index{queue!FIFO}%
-which is illustrated in
-\figref{queue}, removes items in the same order they were added, much
-in the same way a queue (or line-up) works when checking out at a cash
-register in a grocery store.  This is the most common kind of #Queue#
-so the qualifier FIFO is often omitted.  In other texts, the #add(x)#
-and #remove()# operations on a FIFO #Queue# are often called #enqueue(x)#
-and #dequeue()#, respectively.
+que é ilustrada em 
+\figref{queue}, remove itens na mesma ordem em que são adicionados, do meio jeito que uma fila de compras em um supermercado funciona.
+Esse é o tipo mais comum de #Queue# de forma que o qualificador FIFO é frequentemente omitido.
+Em outros textos, as operações #add(x)# e #remove()# em uma #Queue# FIFO são frequentemente chamadas de  #enqueue(x)# (enfileirar) e #dequeue()# (desenfileirar), respectivamente.
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/queue}}
-  \caption[A FIFO queue]{A FIFO #Queue#.}
+  \caption[Uma queue (fila) FIFO]{Uma #Queue# FIFO --- primeiro a entrar, primeiro a sair.}
   \figlabel{queue}
 \end{figure}
 
-A \emph{priority #Queue#},
+Uma \emph{#Queue# com prioridades},
 \index{priority queue}%
+\index{fila com prioridades}%
 \index{priority queue|seealso{heap}}%
 \index{queue!priority}%
-illustrated in \figref{prioqueue}, always
-removes the smallest element from the #Queue#, breaking ties arbitrarily.
-This is similar to the way in which patients are triaged in a hospital
-emergency room.  As patients arrive they are evaluated and then placed in
-a waiting room.  When a doctor becomes available he or she first treats
-the patient with the most life-threatening condition.  The #remove()#
-operation on a priority #Queue# is usually called #deleteMin()# in
-other texts.
+ilustrada em \figref{prioqueue}, sempre 
+remove o menor elemento da #Queue#, decidindo empates arbitrariamente.
+Isso é similar ao modo no qual pacientes passam por triagem em uma sala de emergência de um hospital. Conforme os pacientes chegam, eles são avaliados e, então, vão à sala de espera. Quando um médico torna-se disponível, ele primeiro trata o paciente na situação mais grave. A operação #remove()# em um #Queue# com prioridades é geralmente chamada de #deleteMin()# em outros textos.
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/prioqueue}}
-  \caption[A priority queue]{A priority #Queue#.}
+  \caption[Uma fila com prioridades]{Uma #Queue# com prioridades --- itens são removidos de acordo com suas prioridades (em inglês, \emph{priority queue}).}
   \figlabel{prioqueue}
 \end{figure}
 
@@ -221,424 +157,407 @@ other texts.
 %When a business-class seat becomes available it is given to the most
 %important customer waiting on an upgrade.
 
-A very common queueing discipline is the LIFO (last-in-first-out)
+Uma política de enfileiramento muito comum é a política LIFO (last-in-first-out, último a entrar, primeiro a sair, em português)
 \index{LIFO queue}%
 \index{LIFO queue|seealso{stack}}%
+\index{fila LIFO}%
 \index{queue!LIFO}%
 \index{stack}%
-discipline, illustrated in \figref{stack}.  In a \emph{LIFO Queue},
-the most recently added element is the next one removed.  This is best
-visualized in terms of a stack of plates; plates are placed on the top of
-the stack and also removed from the top of the stack. This structure is
-so common that it gets its own name: #Stack#.  Often, when discussing a
-#Stack#, the names of #add(x)# and #remove()# are changed to #push(x)#
-and #pop()#; this is to avoid confusing the LIFO and FIFO queueing
-disciplines.
+\index{pilha}%
+, ilustrada na \figref{stack}. Em uma \emph{Queue LIFO},
+o elemento mais recentemente adicionado é o próximo a ser removido. 
+Isso é melhor visualizado em termos de uma pilha de pratos; pratos são 
+posicionados no topo da pilha a também removidos do topo. Essa estrutura
+é tão comum que recebe seu próprio nome: #Stack# (pilha, em português). Frequentemente, ao referenciar uma #Stack#, as operações #add(x)# e #remove()# 
+recebem os nomes de #push(x)# e #pop()#; isso é para evitar confusões entre as políticas LIFO e FIFO.
 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/stack}}
-  \caption[A stack]{A stack.}
+  \caption[Uma stack]{Uma stack (pilha, em português) --- LIFO (último-a-entrar-primeiro-a-sair).}
   \figlabel{stack}
 \end{figure}
 
 
-A #Deque#
+Uma #Deque#
 \index{deque}%
-is a generalization of both the FIFO #Queue# and LIFO #Queue# (#Stack#).
-A #Deque# represents a sequence of elements, with a front and a back.
-Elements can be added at the front of the sequence or the back of the
-sequence.  The names of the #Deque# operations are self-explanatory:
-#addFirst(x)#, #removeFirst()#, #addLast(x)#, and #removeLast()#.  It is
-worth noting that a #Stack# can be implemented using only #addFirst(x)#
-and #removeFirst()# while a FIFO #Queue# can be implemented using
-#addLast(x)# and #removeFirst()#.
+é uma generalização de ambos #Queue# FIFO e #Queue# LIFO (#Stack#).
 
+Uma #Deque# representa uma sequência de elementos, com uma frente e um verso (um início e um fim). 
+Elementos podem ser adicionados no início da sequência ou no final da sequência.
+Os nomes das operações da #Deque# são auto-explicativos: 
+#addFirst(x)#, #removeFirst()#, #addLast(x)# e #removeLast()#.  
+Vale notar que uma #Stack# pode ser implementada usando somente #addFirst(x)#
+e #removeFirst()# enquanto uma #Queue# FIFO pode ser implementada usando 
+#addLast(x)# e #removeFirst()#.
 
-\subsection{The #List# Interface: Linear Sequences}
+\subsection{A Interface #List#: Sequências Lineares}
 
-This book will talk very little about the FIFO #Queue#, #Stack#, or
-#Deque# interfaces.  This is because these interfaces are subsumed by the
-#List# interface.  A #List#,
+Este livro vai falar muito pouco sobre 
+as interfaces #Queue# FIFO, #Stack#, ou #Deque#. Isso porque essas interfaces são englobadas pela interface 
+#List#.  Uma #List#,
 \index{List@#List#}%
-illustrated in \figref{list}, represents a
-sequence, $#x#_0,\ldots,#x#_{#n#-1}$, of values.  The #List# interface
-includes the following operations:
+ilustrada na \figref{list}, representa uma
+sequência, $#x#_0,\ldots,#x#_{#n#-1}$, de valores. A interface #List# inclui as operações a seguir:
 
 \begin{enumerate}
-  \item #size()#: return #n#, the length of the list
-  \item #get(i)#: return the value $#x#_{#i#}$
-  \item #set(i,x)#: set the value of $#x#_{#i#}$ equal to #x#
-  \item #add(i,x)#: add #x# at position #i#, displacing
+  \item #size()#: retorna #n#, o comprimento da lista 
+  \item #get(i)#: retorna o valor $#x#_{#i#}$
+  \item #set(i,x)#: atribui o valor $#x#_{#i#}$ igual a #x#
+  \item #add(i,x)#: adicionar #x# à posição #i#, deslocando 
     $#x#_{#i#},\ldots,#x#_{#n#-1}$; \\ 
-    Set $#x#_{j+1}=#x#_j$, for all
-    $j\in\{#n#-1,\ldots,#i#\}$, increment #n#, and set $#x#_i=#x#$
-  \item #remove(i)# remove the value $#x#_{#i#}$, displacing
+    Atribua $#x#_{j+1}=#x#_j$, para todo 
+    $j\in\{#n#-1,\ldots,#i#\}$, incremente #n#, e faça $#x#_i=#x#$
+  \item #remove(i)# remove o valor $#x#_{#i#}$, deslocando 
     $#x#_{#i+1#},\ldots,#x#_{#n#-1}$; \\ 
-    Set $#x#_{j}=#x#_{j+1}$, for all
-    $j\in\{#i#,\ldots,#n#-2\}$ and decrement #n#
+    Atribua $#x#_{j}=#x#_{j+1}$, para todo 
+    $j\in\{#i#,\ldots,#n#-2\}$ e decremente #n#
 \end{enumerate}
-Notice that these operations are easily sufficient to implement the
-#Deque# interface:
+Note que essas operações são suficientes para implementar
+a interface #Deque#:
 \begin{eqnarray*}
   #addFirst(x)# &\Rightarrow& #add(0,x)# \\
   #removeFirst()# &\Rightarrow& #remove(0)#  \\
   #addLast(x)# &\Rightarrow& #add(size(),x)# \\
   #removeLast()# &\Rightarrow& #remove(size()-1)#
 \end{eqnarray*}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTINUAR 
 \begin{figure}
   \centering{\includegraphics[width=\ScaleIfNeeded]{figs/list}}
-  \caption[A List]{A #List# represents a sequence indexed by
-   $0,1,2,\ldots,#n#-1$.  In this #List# a call to #get(2)# would return
-   the value $c$.}
+  \caption[Uma List]{Uma #List# representa uma sequência indexada por 
+   $0,1,2,\ldots,#n#-1$.  Nessa #List# uma chamada para #get(2)# retornaria o valor $c$.}
   \figlabel{list}
 \end{figure}
 
-Although we will normally not discuss the #Stack#, #Deque# and FIFO
-#Queue# interfaces in subsequent chapters, the terms #Stack# and #Deque#
-are sometimes used in the names of data structures that implement the
-#List# interface.  When this happens, it highlights the fact that
-these data structures can be used to implement the #Stack# or #Deque#
-interface very efficiently.  For example, the #ArrayDeque# class is an
-implementation of the #List# interface that implements all the #Deque#
-operations in constant time per operation.
+Embora normalmente não discutiremos as interfaces #Stack#, #Deque# e #Queue# FIFO nos seguintes capítulos, os termos 
+#Stack# e #Deque#
+são às vezes usados nos nomes das estruturas de dados que implementam a interface #List#. Quando isso acontece, queremos destacar que essas estruturas de dados podem ser usadas para implementar a interface #Stack# ou #Deque# eficientemente. 
+Por exemplo, a classe #ArrayDeque# é uma implementação da interface #List# que implementa todas as operações #Deque# em tempo constante por operação.
 
+\subsection{A Interface #USet#: Unordered Sets (Conjuntos Desordenados)}
 
-\subsection{The #USet# Interface: Unordered Sets}
-
-The #USet#
+A interface #USet#
 \index{USet@#USet#}%
-interface represents an unordered set of unique elements, which
-mimics a mathematical \emph{set}. A #USet# contains #n# \emph{distinct}
-elements; no element appears more than once; the elements are in no
-specific order.  A #USet# supports the following operations:
+representa um conjunto desordenado de elementos únicos (sem repetições), que simulam um \emph{conjunto} (em inglês, \emph{set}) matemático. 
+Um #USet# contém #n# elementos \emph{distintos}; nenhum elemento aparece mais de uma vez; os elementos não estão em nenhuma ordem específica.
+Um #USet# possui as seguintes operações:
 
 \begin{enumerate}
-  \item #size()#: return the number, #n#, of elements in the set
-  \item #add(x)#: add the element #x# to the set if not already present; \\
-    Add #x# to the set provided that there
-    is no element #y# in the set such that #x# equals #y#.  Return #true#
-    if #x# was added to the set and #false# otherwise.
-  \item #remove(x)#: remove #x# from the set; \\
-    Find an element #y# in the set such that #x# equals
-    #y# and remove #y#.  Return #y#, or #null# if no such element exists.
-  \item #find(x)#: find #x# in the set if it exists; \\
-    Find an element #y# in the set such that #y# equals
-    #x#.  Return #y#, or #null# if no such element exists.
+  \item #size()#: retorna o número, #n#, de elementos no conjunto 
+  \item #add(x)#: adiciona o elemento #x# ao conjunto, se não já presente; \\
+    Adiciona #x# ao conjunto considerando que não há elemento #y# no conjunto tal que #x# é considerado igual a #y#. Retorna #true# se #x# foi adicionado ao conjunto e #false# caso contrário.
+  \item #remove(x)#: remove #x# do conjunto; \\
+    Achar um elemento #y# no conjunto tal que #x# iguala 
+    a #y# e remove #y#. Retorna #y#, ou #null# se tal elemento não existe.
+  \item #find(x)#: achar #x# no conjunto se existir; \\
+    Achar um elemento #y# no conjunto tal que #y# seja igual a #x#. Retornar #y# ou #null# se tal elemento não exista no conjunto. 
 \end{enumerate}
 
-These definitions are a bit fussy about distinguishing #x#, the element
-we are removing or finding, from #y#, the element we may remove or find.
-This is because #x# and #y# might actually be distinct objects that
-are nevertheless treated as equal.\javaonly{\footnote{In Java, this is
-done by overriding the class's #equals(y)# and #hashCode()# methods.}}
-Such a distinction is  useful because it allows for the creation of
-\emph{dictionaries} or \emph{maps} that map keys onto values.
+Essas definições são um pouco cuidadosas ao distinguir #x#, o elemento que estamos a remover ou buscar, de #y#, o elemento que poderemos remover ou achar.
+Isso é porque #x# e #y# podem ser na realidade objetos distintos que são, para todos os efeitos nessa situação, tratados como iguais.
+
+\javaonly{\footnote{Em Java, isso é realizado ao sobrescrever, #@Override#, os métodos da classe dos elementos #equals(y)# e #hashCode()#.}}
+Tal distinção é útil porque permite a criação de 
+\emph{dicionários} ou \emph{mapas} que mapeiam chaves em valores. 
 \index{dictionary}%
+\index{dicionário}%
 \index{map}%
+\index{mapa}%
 
-To create a dictionary/map, one forms compound objects called #Pair#s,
+Para criar um dicionário/mapa, forma-se objetos chamados #Pair# (par, em português)
 \index{pair}%
-each of which contains a \emph{key} and a \emph{value}. Two #Pair#s
-are treated as equal if their keys are equal.  If we store some pair
-$(#k#,#v#)$ in a #USet# and then later call the #find(x)# method using
-the pair $#x#=(#k#,#null#)$ the result will be $#y#=(#k#,#v#)$.  In other
-words, it is possible to recover the value, #v#, given only the key, #k#.
+cada qual contém uma \emph{chave} (\emph{key}) e um \emph{valor} (\emph{valor}).
+Dois pares #Pair# são tratados como iguais se suas chaves forem iguais.
+Se armazenamos algum par 
+$(#k#,#v#)$
+em um #USet# e então depois chamamos o método #find(x)# usando 
+o par
+$#x#=(#k#,#null#)$ o resultado será $#y#=(#k#,#v#)$.  
+Em outras palavras, é possível recuperar o valor, #v#, usando somente a chave #k#.
 
-
-\subsection{The #SSet# Interface: Sorted Sets}
+\subsection{A Interface #SSet#: Sorted Sets---Conjuntos Ordenados}
 \seclabel{sset}
 
 \index{SSet@#SSet#}%
-The #SSet# interface represents a sorted set of elements.  An #SSet#
-stores elements from some total order, so that any two elements #x#
-and #y# can be compared.  In code examples, this will be done with a
-method called #compare(x,y)# in which
+A interface #SSet# representa um conjunto ordenado de elementos. 
+Um #SSet# guarda elementos provenientes de alguma ordem total, tal que quaisquer dois elementos #x# e #y# podem ser comparados. Em código, isso será feito com um método chamado #compare(x,y)# no qual
 \[
     #compare(x,y)# 
       \begin{cases}
-        {}<0 & \text{if $#x#<#y#$} \\
-        {}>0 & \text{if $#x#>#y#$} \\
-        {}=0 & \text{if $#x#=#y#$}
+        {}<0 & \text{se $#x#<#y#$} \\
+        {}>0 & \text{se $#x#>#y#$} \\
+        {}=0 & \text{se $#x#=#y#$}
       \end{cases}
 \]
 \index{compare@#compare(x,y)#}%
-An #SSet# supports the #size()#, #add(x)#, and #remove(x)# methods with
-exactly the same semantics as in the #USet# interface.  The difference
-between a #USet# and an #SSet# is in the #find(x)# method:
+Um #SSet# possui os métodos #size()#, #add(x)# e #remove(x)# com 
+exatamente a mesma semântica que a interface #USet#. A diferença
+entre um #USet# e um #SSet# está no método #find(x)#:
 \begin{enumerate}
 \setcounter{enumi}{3}
-\item #find(x)#: locate #x# in the sorted set; \\
-   Find the smallest element #y# in the set such that $#y# \ge #x#$.
-   Return #y# or #null# if no such element exists.
+\item #find(x)#: localizar #x# no conjunto ordenado; \\
+   Achar o menor elemento #y# no conjunto tal que $#y# \ge #x#$.
+   Retornar #y# ou #null# se o elemento não existir.
 \end{enumerate}
 
-This version of the #find(x)# operation is sometimes referred to
-as a \emph{successor search}.
+Essa versão da operação #find(x)# é às vezes chamada de \emph{busca de sucessor} (em inglês, \emph{successor search}).
 \index{successor search}%
-It differs in a fundamental way from
-#USet.find(x)# since it returns a meaningful result even when there is
-no element equal to #x# in the set.
+\index{busca de sucessor}%
+Ela difere de um modo fundamental de #USet.find(x)# pois retorna um resultado mesmo quando não há elemento igual a #x# no conjunto.
 
-The distinction between the #USet# and #SSet# #find(x)# operations is
-very important and often missed.  The extra functionality provided
-by an #SSet# usually comes with a price that includes both a larger
-running time and a higher implementation complexity.  For example, most
-of the #SSet# implementations discussed in this book all have #find(x)#
-operations with running times that are logarithmic in the size of the set.
-On the other hand, the implementation of a #USet# as a #ChainedHashTable#
-in \chapref{hashing} has a #find(x)# operation that runs in constant
-expected time.  When choosing which of these structures to use, one should
-always use a #USet# unless the extra functionality offered by an #SSet#
-is truly needed.
+A distinção entre a operação #find(x)# de #USet# e de #SSet# é muito importante e frequentemente esquecida ou não percebida. A funcionalidade extra provida por um #SSet# frequentemente vem com um preço que inclui tanto tempo de execução mais alto quanto uma complexidade de implementação maior.
+Por exemplo, a maior parte das implementações #SSet# discutidas neste livro tem operações #find(x)# com tempo de execução que são logarítmicas no tamanho do conjunto.
+Por outro lado, a implementação de um #USet# com uma #ChainedHashTable# no
+\chapref{hashing} tem uma operação #find(x)# que roda em tempo esperado constante. 
+Ao escolher quais dessas estruturas usar, deve-se sempre usar um #USet# a menos que a funcionalidade extra oferecida por um #SSet# seja verdadeiramente necessária.
 
 % \subsection{The DynamicString Interface}
 
-\section{Mathematical Background}
-
-In this section, we review some mathematical notations and tools
-used throughout this book, including logarithms, big-Oh notation, and
-probability theory.  This review will be brief and is not intended as
-an introduction. Readers who feel they are missing this background are
-encouraged to read, and do exercises from, the appropriate sections of
-the very good (and free) textbook on mathematics for computer science
+\section{Conceitos Matemáticos}
+Nesta seção, revisaremos algumas noções matemáticas e ferramentas usadas 
+ao longo deste livro, incluindo logaritmos, notação big-Oh e
+teoria das probabilidades. Esta revisão será breve e não tem a intenção
+de ser uma introdução. Leitores que acham que precisam saber mais desses conceitos
+são encorajados a ler, e fazer os exercícios relacionados, as seções apropriadas
+do excelente (e livre) texto didático sobre Matemática para Ciência da Computação
 \cite{llm11}.
 
-\subsection{Exponentials and Logarithms}
+%% CONTINUAR AQUI TODO
+\subsection{Exponenciais e Logaritmos}
 
-\index{exponential}%
-The expression $b^x$ denotes the number $b$ raised to the power of $x$.
-If $x$ is a positive integer, then this is just the value of $b$
-multiplied by itself $x-1$ times:
+\index{exponencial}%
+A expressão $b^x$ denota o número $b$ elevado à potência $x$.
+Se $x$ é um inteiro positivo, então o resultado é somente o valor de $b$ multiplicado por ele mesmo $x-1$ vezes:
 \[
     b^x = \underbrace{b\times b\times \cdots \times b}_{x} \enspace .
 \]
-When $x$ is a negative integer, $b^{-x}=1/b^{x}$.  When $x=0$, $b^x=1$.
-When $b$ is not an integer, we can still define exponentiation in terms
-of the exponential function $e^x$ (see below), which is itself defined in
-terms of the exponential series, but this is best left to a calculus text.
+Quando $x$ é um inteiro negativo, $b^{-x}=1/b^{x}$. 
+Quando $x=0$, $b^x=1$.
+Quando $b$ não é um inteiro, podemos ainda definir a exponenciação em termos da função exponencial 
+$e^x$ (ver a seguir), que é definida em termos de uma série exponencial, mas isso é melhor deixar para um texto sobre cálculo. 
 
-\index{logarithm}%
-In this book, the expression $\log_b k$ denotes the \emph{base-$b$ logarithm}
-of $k$.  That is, the unique value $x$ that satisfies
+\index{logaritmo}%
+Neste livro, a expressão 
+$\log_b k$ denota o \emph{logaritmo base $b$}
+de $k$.  Isto é, o único valor $x$ que satisfaz 
 \[
     b^{x} = k  \enspace .
 \]
-Most of the logarithms in this book are base 2 (\emph{binary logarithms}).
-\index{binary logarithm}%
-\index{logarithm!binary}%
-For these, we omit the base, so that $\log k$ is shorthand for
+A maior parte dos logaritmos neste livro são base 2 (\emph{logaritmos binários}).
+\index{logaritmo binário}%
+\index{logaritmo!binário}%
+Nesse caso, omitiremos a base, de forma que 
+$\log k$ é uma abreviação para 
 $\log_2 k$.
 
-An informal, but useful, way to think about logarithms is to think
-of $\log_b k$ as the number of times we have to divide $k$ by $b$
-before the result is less than or equal to 1.  For example, when one
-does binary search, each comparison reduces the number of possible
-answers by a factor of 2.  This is repeated until there is at most one
-possible answer.  Therefore, the number of comparison done by binary
-search when there are initially at most $n+1$ possible answers is at
-most $\lceil\log_2(n+1)\rceil$.
+Um jeito informal, mas útil, de pensar sobre logaritmos é pensar
+de $\log_b k$ como o número de vezes que temos que dividir $k$ por $b$
+antes do resultado ser menor ou igual a 1. Por exemplo, quando alguém usa uma
+busca binária, cada comparação reduz o número de possíveis respostas por 
+um fator de 2. Isso é repetido até que exista no máximo uma única resposta 
+possível. Portanto, o número de comparações feitas pela busca binária 
+quando existem inicialmente até $n+1$ possíveis respostas é, no máximo, 
+$\lceil\log_2(n+1)\rceil$.
 
-\index{natural logarithm}%
-\index{logarithm!natural}%
-Another logarithm that comes up several times in this book is the
-\emph{natural logarithm}.  Here we use the notation $\ln k$ to denote
-$\log_e k$, where $e$ --- \emph{Euler's constant} --- is given by
-\index{Euler's constant}%
-\index{e@$e$ (Euler's constant)}%
+\index{logaritmo natural}%
+\index{logaritmo!natural}%
+Outro logaritmo que aparece várias vezes neste livro é o 
+\emph{logaritmo natural}. Aqui usamos a notação $\ln k$ para denotar 
+$\log_e k$, onde $e$ --- a \emph{constante de Euler} --- é dada por 
+\index{constante de Euler}%
+\index{e@$e$ (constante de Euler)}%
 \[
    e = \lim_{n\rightarrow\infty} \left(1+\frac{1}{n}\right)^n
    \approx  2.71828 \enspace .
 \]
-The natural logarithm comes up frequently because it is the value
-of a particularly common integral:
+O logaritmo natural aparece frequentemente porque é o valor
+de uma integral particularmente comum:
 \[
     \int_{1}^{k} 1/x\,\mathrm{d}x  = \ln k \enspace .
 \]
-Two of the most common manipulations we do with logarithms are removing
-them from an exponent:
+Duas das manipulações mais comuns que fazemos com logaritmos são
+removê-los de um expoente:
 \[
     b^{\log_b k} = k
 \]
-and changing the base of a logarithm:
+e trocar a base de um logaritmo:
 \[
     \log_b k = \frac{\log_a k}{\log_a b} \enspace .
 \]
-For example, we can use these two manipulations to compare the natural and binary logarithms
+Por exemplo, podemos usar essas duas manipulações para comparar os logaritmos natural e binário:
 \[
    \ln k = \frac{\log k}{\log e} = \frac{\log k}{(\ln e)/(\ln 2)} = 
     (\ln 2)(\log k) \approx 0.693147\log k \enspace .
 \]
 
-\subsection{Factorials}
+\subsection{Fatoriais}
 \seclabel{factorials}
 
-\index{factorial}%
-In one or two places in this book, the \emph{factorial} function is used.
-For a non-negative integer $n$, the notation $n!$ (pronounced ``$n$ factorial'') is defined to mean 
+\index{fatorial}%
+Em uma ou duas partes deste livro,
+a função \emph{fatorial} é usada.
+Para um inteiro não-negativo $n$, a notação $n!$ (pronunciada ``$n$ fatorial'') é definida para representar 
 \[
    n! = 1\cdot2\cdot3\cdot\cdots\cdot n \enspace .
 \]
-Factorials appear because $n!$ counts the number of distinct
-permutations, i.e., orderings, of $n$ distinct elements.
-\index{permutation}%
-For the special case $n=0$, $0!$ is defined as 1. 
+Fatoriais aparecem porque $n!$ conta o número de permutações distintas, i.e., ordenações, de $n$ elementos distintos. 
+\index{permutação}%
+Para o caso especial $n=0$, $0!$  é definido como 1. 
 
-\index{Stirling's Approximation}%
-The quantity $n!$ can be approximated using \emph{Stirling's Approximation}:
+\index{Aproximação de Stirling}%
+A quantidade $n!$ pode ser aproximada usando a \emph{aproximação de Stirling}:
 \[
 	n! 
    = \sqrt{2\pi n}\left(\frac{n}{e}\right)^{n}e^{\alpha(n)} \enspace ,
 \]
-where
+onde
 \[  
    \frac{1}{12n+1} <  \alpha(n) < \frac{1}{12n}  \enspace .
 \]
-Stirling's Approximation also approximates $\ln(n!)$:
+a aproximação de Stirling também aproxima $\ln(n!)$:
 \[
    \ln(n!) = n\ln n - n + \frac{1}{2}\ln(2\pi n) + \alpha(n)
 \]
-(In fact, Stirling's Approximation is most easily proven by approximating
-$\ln(n!)=\ln 1 + \ln 2  + \cdots + \ln n$ by the integral
+(De fato, a aproximação de Stirling é mais facilmente provada aproximando
+$\ln(n!)=\ln 1 + \ln 2  + \cdots + \ln n$ com a integral
 $\int_1^n \ln n\,\mathrm{d}n = n\ln n - n +1$.)
 
-\index{binomial coefficients}%
-Related to the factorial function are the \emph{binomial coefficients}.
-For a non-negative integer $n$ and an integer $k\in\{0,\ldots,n\}$,
-the notation $\binom{n}{k}$ denotes:
+\index{coeficientes binomiais}%
+Relacionados à função fatorial são os 
+\emph{coeficientes binomiais}.
+Para um inteiro não-negativo $n$ e um inteiro $k\in\{0,\ldots,n\}$,
+a notação $\binom{n}{k}$ denota:
 \[
    \binom{n}{k} = \frac{n!}{k!(n-k)!} \enspace .
 \]
-The binomial coefficient $\binom{n}{k}$ (pronounced ``$n$ choose $k$'')
-counts the number of subsets of an $n$ element set that have size $k$,
-i.e., the number of ways of choosing $k$ distinct integers from the
-set $\{1,\ldots,n\}$.
+O coeficiente binomial
+ $\binom{n}{k}$ (pronunciado ``$n$, escolhidos $k$ a $k$'')
+ conta o número de subconjuntos com $k$ elementos de um conjunto de tamanho $n$ 
+i.e., o número de formas de escolher $k$ inteiros distintos do conjunto $\{1,\ldots,n\}$.
 
-\subsection{Asymptotic Notation}
+\subsection{Notação assintótica}
 
-\index{asymptotic notation}%
-\index{big-Oh notation}%
+\index{notação assintótica}%
+\index{notação big-Oh}%
 \index{O@$O$ notation}%
-When analyzing data structures in this book, we want to talk about
-the running times of various operations.  The exact running times will,
-of course, vary from computer to computer and even from run to run on an
-individual computer.  When we talk about the running time of an operation
-we are referring to the number of computer instructions performed during
-the operation.  Even for simple code, this quantity can be difficult to
-compute exactly.  Therefore, instead of analyzing running times exactly,
-we will use the so-called \emph{big-Oh notation}: For a function $f(n)$,
-$O(f(n))$ denotes a set of functions,
+Ao analisar estruturas de dados neste livro, queremos discutir
+os tempos de execução de várias operações. O tempo exato de execução irá,
+é claro, variar de computador para computador e até entre diferentes execuções 
+no mesmo computador.
+Ao discutirmos sobre o tempo de execução de uma operação estamos nos 
+referindo ao número de instruções de computador executadas durante a operação.
+Mesmo para códigos simples, essa quantidade pode ser difícil de computar com exatidão.
+Portanto, em vez de analisar tempos de execução exatos, iremos usar a famosa \emph{notação big-Oh}: Para uma função $f(n)$, $O(f(n))$ denota um conjunto de funções,
+
 \[
    O(f(n)) = \left\{
      \begin{array}{l}
-       g(n):\mbox{there exists $c>0$, and $n_0$ such that} \\
-             \quad\mbox{$g(n) \le c\cdot f(n)$ for all $n\ge n_0$}   
+       g(n):\mbox{existe $c>0$, e $n_0$ tal que} \\
+             \quad\mbox{$g(n) \le c\cdot f(n)$ para todo $n\ge n_0$}   
      \end{array} \right\} \enspace .
 \]
-Thinking graphically, this set consists of the functions $g(n)$ where
-$c\cdot f(n)$ starts to dominate $g(n)$ when $n$ is sufficiently large.
+Pensando graficamente, esse conjunto consiste das funções $g(n)$ 
+onde 
+$c\cdot f(n)$ começa a dominar $g(n)$ quando $n$ é suficientemente grande. 
 
-We generally use asymptotic notation to simplify functions.  For example,
-in place of $5n\log n + 8n - 200$ we can write $O(n\log n)$.
-This is proven as follows:
+Geralmente usamos notação assintótica para simplificar funções. Por exemplo,
+em vez de usarmos $5n\log n + 8n - 200$ podemos escrever $O(n\log n)$.
+Isso é provado da seguinte forma:
 \begin{align*} 
        5n\log n + 8n - 200
         & \le 5n\log n + 8n \\
-        & \le 5n\log n + 8n\log n & \mbox{ for $n\ge 2$ (so that $\log n \ge 1$)}
+        & \le 5n\log n + 8n\log n & \mbox{ for $n\ge 2$ (tal que $\log n \ge 1$)}
             \\
         & \le 13n\log n  \enspace .
 \end{align*}
-This demonstrates that the function $f(n)=5n\log n + 8n - 200$ is in
-the set $O(n\log n)$ using the constants $c=13$ and $n_0 = 2$.
+Isso demonstra que a função $f(n)=5n\log n + 8n - 200$ está no conjunto 
+$O(n\log n)$ usando as constantes $c=13$ e $n_0 = 2$.
 
-A number of useful shortcuts can be applied when using asymptotic
-notation.  First:
+Vários atalhos podem ser aplicados ao usar notação assintótica. 
+Primeiro:
 \[ O(n^{c_1}) \subset O(n^{c_2}) \enspace ,\]
-for any $c_1 < c_2$.  Second: For any constants $a,b,c > 0$,
+para qualquer $c_1 < c_2$.  Segundo: para quaisquer constantes $a,b,c > 0$,
 \[ O(a) \subset O(\log n) \subset O(n^{b}) \subset O({c}^n) \enspace . \]
-These inclusion relations can be multiplied by any positive value,
-and they still hold. For example, multiplying by $n$ yields:
+Essas relações de inclusão podem ser multiplicadas por qualquer valor positivo,
+e eles ainda valerão.
+Por exemplo, multiplicar por $n$ chegamos a:
 \[ O(n) \subset O(n\log n) \subset O(n^{1+b}) \subset O(n{c}^n) \enspace . \]
 
-Continuing in a long and distinguished tradition, we will abuse this
-notation by writing things like $f_1(n) = O(f(n))$ when what we really
-mean is $f_1(n) \in O(f(n))$.  We will also make statements like ``the
-running time of this operation is $O(f(n))$'' when this statement should
-be ``the running time of this operation is \emph{a member of} $O(f(n))$.''
-These shortcuts are mainly to avoid awkward language and to make it
-easier to use asymptotic notation within strings of equations.
+Continuando uma longa e notável tradição, iremos abusar dessa notação 
+ao escrever 
+coisas do tipo $f_1(n) = O(f(n))$ quando o que realmente queremos
+expressar é $f_1(n) \in O(f(n))$.  
+Também iremos fazer afirmações do tipo ``o tempo de execução dessa operação 
+é $O(f(n))$'' quando essa afirmação deveria ser na verdade 
+``o tempo de execução dessa operação é \emph{um membro de} $O(f(n))$.''
+Esses atalhos servem principalmente para evitar frases estranhas e tornar 
+mais fácil o uso de notação assintótica em manipulações sequenciais de equações.
 
-A particularly strange example of this occurs when we write statements like
+A exemplo particularmente estranho disso ocorre quando escrevemos afirmações tipo
 \[
   T(n) = 2\log n + O(1)  \enspace .
 \]
-Again, this would be more correctly written as
+De novo, isso seria mais corretamente escrito da forma
 \[
-  T(n) \le 2\log n + [\mbox{some member of $O(1)$]}  \enspace .
+  T(n) \le 2\log n + [\mbox{algum membro de $O(1)$]}  \enspace .
 \]
 
-The expression $O(1)$ also brings up another issue. Since there is
-no variable in this expression, it may not be clear which variable is
-getting arbitrarily large.  Without context, there is no way to tell.
-In the example above, since the only variable in the rest of the equation
-is $n$, we can assume that this should be read as $T(n) = 2\log n +
-O(f(n))$, where $f(n) = 1$.
+A expressão $O(1)$ também traz à tona outra questão. 
+Como não tem nenhuma variável nessa expressão, pode não ser claro qual variável está aumentando. Sem contexto, não tem como dizer.
 
-Big-Oh notation is not new or unique to computer science.  It was
-used by the number theorist Paul Bachmann as early as 1894, and is
-immensely useful for describing the running times of computer algorithms.
-Consider the following piece of code:
+No exemplo anterior, como a única variável no resto da equação é $n$, podemos assumir que isso deve ser lido como $T(n)=2\log n+O(f(n))$, onde $f(n) = 1$.
+
+A notação
+Big-Oh não é nova nem exclusiva à Ciência da Computação. Ela foi 
+usada pelo matemático especialista em Teoria dos Números
+Paul Bachmann desde pelo menos 1894 e é imensamente útil 
+para descrever o tempo de execução de algoritmos de computadores.
+Considere o seguinte trecho de código:
 \javaimport{junk/Simple.snippet()}
 \cppimport{ods/Simple.snippet()}
-One execution of this method involves
+Uma execução desse método envolve: 
 \begin{itemize}
-      \item $1$ assignment (#int\, i\, =\, 0#),
-      \item $#n#+1$ comparisons (#i < n#),
-      \item #n# increments (#i++#),
-      \item #n# array offset calculations (#a[i]#), and
-      \item #n# indirect assignments (#a[i] = i#).
+      \item $1$ atribuição (#int\, i\, =\, 0#),
+      \item $#n#+1$ comparações (#i < n#),
+      \item #n# incrementos (#i++#),
+      \item #n# cálculos de deslocamentos em array (#a[i]#), e 
+      \item #n# atribuições indiretas (#a[i] = i#).
 \end{itemize}
-So we could write this running time as
+Então podemos escrever esse tempo de execução como 
 \[
     T(#n#)=a + b(#n#+1) + c#n# + d#n# + e#n# \enspace , 
 \]
-where $a$, $b$, $c$, $d$, and $e$ are constants that depend on the
-machine running the code and represent the time to perform assignments,
-comparisons, increment operations, array offset calculations, and indirect
-assignments, respectively.  However, if this expression represents the
-running time of two lines of code, then clearly this kind of analysis
-will not be tractable to complicated code or algorithms.  Using big-Oh
-notation, the running time can be simplified to
+onde $a$, $b$, $c$, $d$ e $e$ são constantes que dependem
+da máquina rodando o código e que representam o tempo para realizar atribuições,
+comparações, incrementos, cálculos de deslocamento em array e atribuições indiretas, respectivamente.
+Entretanto, se essa expressão representa o tempo de execução de duas linhas de
+código, então claramente esse tipo de análise não será viável para códigos ou algoritmos complicados.
+Ao usar a notação big-Oh, o tempo de execução pode ser simplificado a 
 \[
     T(#n#)= O(#n#) \enspace .
 \]
-Not only is this more compact, but it also gives nearly as much
-information.  The fact that the running time depends on the constants $a$,
-$b$, $c$, $d$, and $e$ in the above example means that, in general, it
-will not be possible to compare two running times to know which is faster
-without knowing the values of these constants.  Even if we make the
-effort to determine these constants (say, through timing tests), then
-our conclusion will only be valid for the machine we run our tests on.
+Isso não somente é mais compacto, mas também provê praticamente a mesma informação.
+O fato de que o tempo de execução depende das constantes 
+$a$, $b$, $c$, $d$ e $e$
+no exemplo anterior significa que, em geral, não será possível comparar
+dois tempos de execução para saber qual é mais rápido sem saber os valores dessas constantes.
+Mesmo se fizermos esforços para determinar essas constantes (digamos, usando testes de medição de tempo), então nossa conclusão será válida somente para a máquina
+na qual rodamos nossos testes.
 
-Big-Oh notation allows us to reason at a much higher level, making
-it possible to analyze more complicated functions.  If two algorithms
-have the same big-Oh running time, then we won't know which is faster,
-and there may not be a clear winner.  One may be faster on one machine,
-and the other may be faster on a different machine.  However, if the
-two algorithms have demonstrably different big-Oh running times, then
-we can be certain that the one with the smaller running time will be
-faster \emph{for large enough values of #n#}.
+Notação Big-Oh nos permite avaliar a situação a um nível mais alto, 
+possibilitando a análise de funções mais complicadas.
+Se dois algoritmos têm o mesmo tempo Big-Oh, então não saberemos qual é mais rápido
+e que não pode não haver um ganhador em todas as situações. Um algoritmo pode ser mais rápido em uma máquina enquanto o outro em uma máquina diferente. Porém, se os dois algoritmos têm tempos de execução big-Oh distintos, então
+teremos certeza que aquele com menor função Big-Oh será mais rápido \emph{para valores #n# grandes o suficiente}.
 
-An example of how big-Oh notation allows us to compare two different
-functions is shown in \figref{intro-asymptotics}, which compares the rate
-of growth of $f_1(#n#)=15#n#$ versus $f_2(n)=2#n#\log#n#$.  It might be
-that $f_1(n)$  is the running time of a complicated linear time algorithm
-while $f_2(n)$ is the running time of a considerably simpler algorithm
-based on the divide-and-conquer paradigm.  This illustrates that,
-although $f_1(#n#)$ is greater than $f_2(n)$ for small values of #n#,
-the opposite is true for large values of #n#.  Eventually $f_1(#n#)$
-wins out, by an increasingly wide margin.  Analysis using big-Oh notation
-told us that this would happen, since $O(#n#)\subset O(#n#\log #n#)$.
+Um exemplo de como a notação big-Oh nos permite comparar duas diferentes funções é mostrado na \figref{intro-asymptotics}, que compara a taxa de crescimento 
+de $f_1(#n#)=15#n#$ versus $f_2(n)=2#n#\log#n#$.  
+Hipoteticamente, $f_1(n)$ seria o tempo de execução de um complicado algoritmo de tempo linear enquanto $f_2(n)$ é o tempo de execução de um algoritmo bem mais simples baseado no paradigma de divisão e conquista.
+Isso exemplifica essa situação,
+embora  $f_1(#n#)$ seja maior que $f_2(n)$ para valores baixos de #n#,
+ o oposto é verdade para valores mais altos de #n#.
+Eventualmente $f_1(#n#)$ ganha e por uma margem crescente.
+Análise usando notação big-Oh nos indica que isso aconteceria, pois
+ $O(#n#)\subset O(#n#\log #n#)$.
 
 \begin{figure}
   \begin{center}
@@ -647,185 +566,152 @@ told us that this would happen, since $O(#n#)\subset O(#n#\log #n#)$.
     \resizebox{\tmpa}{!}{\input{images/bigoh-1.tex}}\\[4ex]
     \resizebox{.98\linewidth}{!}{\input{images/bigoh-2.tex}}
   \end{center}
-  \caption{Plots of $15#n#$ versus $2#n#\log#n#$.}
+  \caption{Comparação de $15#n#$ versus $2#n#\log#n#$.}
   \figlabel{intro-asymptotics}
 \end{figure}
 
-In a few cases, we will use asymptotic notation on functions with more
-than one variable. There seems to be no standard for this, but for our
-purposes, the following definition is sufficient:
+Em alguns casos, usaremos notação assintótica em funções com mais de uma variável. 
+Pode não ser comum mas, para nossos objetivos, a seguinte definição é suficiente:
 \[
    O(f(n_1,\ldots,n_k)) = 
    \left\{\begin{array}{@{}l@{}}
-             g(n_1,\ldots,n_k):\mbox{there exists $c>0$, and $z$ such that} \\
+             g(n_1,\ldots,n_k):\mbox{existe $c>0$, e $z$ tal que} \\
              \quad \mbox{$g(n_1,\ldots,n_k) \le c\cdot f(n_1,\ldots,n_k)$} \\
-             \qquad \mbox{for all $n_1,\ldots,n_k$ such that $g(n_1,\ldots,n_k)\ge z$}   
+             \qquad \mbox{para todo $n_1,\ldots,n_k$ tal que $g(n_1,\ldots,n_k)\ge z$}   
    \end{array}\right\} \enspace .
 \]
-This definition captures the situation we really care about:  when the
-arguments $n_1,\ldots,n_k$ make $g$ take on large values.  This definition
-also agrees with the univariate definition of $O(f(n))$ when $f(n)$
-is an increasing function of $n$.  The reader should be warned that,
-although this works for our purposes, other texts may treat multivariate
-functions and asymptotic notation differently.
+Essa definição captura a situação que mais nos importa:
+quando os argumentos 
+$n_1,\ldots,n_k$ faz $g$ assumir valores altos. 
+Essa definição também está de acordo com a definição univariada de
+$O(f(n))$ quando $f(n)$ é uma função crescente de  $n$.
+O leitor deve ficar atento ao fato de que, embora isso funcione para o objetivo deste livro, outros textos podem tratar funções multivariadas e notação assintótica diferentemente. 
 
-
-\subsection{Randomization and Probability}
+\subsection{Randomização e Probabilidades}
 \seclabel{randomization}
 
-\index{randomization}%
-\index{probability}%
+\index{aleatorização}%
+\index{probabilidade}%
 \index{randomized data structure}%
+\index{estrutura de dados aleatorizada}%
 \index{randomized algorithm}%
-Some of the data structures presented in this book are \emph{randomized};
-they make random choices that are independent of the data being stored
-in them or the operations being performed on them.  For this reason,
-performing the same set of operations more than once using these
-structures could result in different running times.  When analyzing these
-data structures we are interested in their average or \emph{expected}
-running times.
-\index{expected running time}%
-\index{running time!expected}%
+Algumas das estruturas de dados apresentadas neste livro são \emph{randomizadas}\footnote{Randomização é um neologismo para indicar o uso de números aleatórios que influenciam na execução de um algoritmo};
+eles fazem escolhas aleatórias que são independentes dos dados nelas armazenadas
+ou das operações realizadas neles. Por essa razão,
+realizar o mesmo conjunto de operações mais de uma vez usando essas
+estruturas pode resultar em tempos de execução variáveis. Ao analisar essas
+estruturas de dados estamos interessados no seu tempo de execução médio ou \emph{esperado}.
+\index{tempo de execução esperado}%
+\index{tempo de execução!esperado}%
 
-Formally, the running time of an operation on a randomized data structure
-is a random variable, and we want to study its \emph{expected value}.
-\index{expected value}%
-For
-a discrete random variable $X$ taking on values in some countable
-universe $U$, the expected value of $X$, denoted by $\E[X]$, is given
-by the formula
+Formalmente, o tempo de execução de uma operação em uma estrutura de dados randomizada é aleatório e queremos estudar o seu \emph{valor esperado};
+\index{valor esperado}%
+Para uma variável aleatória discreta
+ $X$ assumindo valores em um universo contável 
+$U$, o valor esperado de $X$, denotado $\E[X]$, é dado pela fórmula 
 \[
     \E[X] = \sum_{x\in U} x\cdot\Pr\{X=x\} \enspace .
 \]
-Here $\Pr\{\mathcal{E}\}$ denotes the probability that the event
-$\mathcal{E}$ occurs.  In all of the examples in this book, these
-probabilities are only with respect to the random choices made by the
-randomized data structure;  there is no assumption that the data stored
-in the structure, nor the sequence of operations performed on the
-data structure, is random.
 
-One of the most important properties of expected values is \emph{linearity
-of expectation}.
-\index{linearity of expectation}%
-For any two random variables $X$ and $Y$,
+Aqui $\Pr\{\mathcal{E}\}$ denota a probabilidade que o evento 
+$\mathcal{E}$ ocorre.  Em todos os exemplos deste livro, essas probabilidades
+são somente em relação às escolhas aleatórias feitas pela estrutura de dados randomizada; não supomos que os dados armazenados na estrutura, nem a sequência de operações realizadas na estrutura de dados, seja aleatória.
+
+Uma das propriedades mais importantes dos valores esperados é 
+\emph{linearidade da esperança}.
+\index{linearidade da esperança}%
+Para duas variáveis aleatórias $X$ e $Y$,
 \[
    \E[X+Y] = \E[X] + \E[Y] \enspace .
 \]
-More generally, for any random variables $X_1,\ldots,X_k$,
+De forma geral, para quaisquer variáveis aleatórias $X_1,\ldots,X_k$,
 \[
    \E\left[\sum_{i=1}^k X_i\right] = \sum_{i=1}^k \E[X_i] \enspace .
 \]
-Linearity of expectation allows us to break down complicated random variables (like the left hand sides of the above equations) into sums of simpler random variables (the right hand sides).
+Linearidade da esperança nos permite quebrar variáveis aleatórias complicadas (como os lados esquerdos das equações acima) em somas de variáveis aleatória mais simples (lados direitos).
 
-A useful trick, that we will use repeatedly, is defining \emph{indicator
-random variables}.
-\index{indicator random variable}%
-These binary variables are useful when we want to
-count something and are best illustrated by an example.  Suppose we toss
-a fair coin $k$ times and we want to know the expected number of times
-the coin turns up as heads.
-\index{coin toss}%
-Intuitively, we know the answer is $k/2$,
-but if we try to prove it using the definition of expected value, we get
+Um truque útil, que usaremos repetidamente, é definir \emph{variáveis aleatórias indicadoras}.
+\index{variável aleatória indicadora}%
+Essas variáveis binárias são úteis quando queremos contar algo e são melhor ilustradas por um exemplo. Suponha que lancemos uma moeda honesta $k$ vezes e que queremos saber o número esperado de vezes que o lado cara aparece.
+\index{lançamento de moeda}%
+Intuitivamente, sabemos que a resposta é $k/2$,
+mas se tentarmos provar usando a definição de valor esperado, temos
 \begin{align*}
    \E[X] & = \sum_{i=0}^k i\cdot\Pr\{X=i\} \\
          & = \sum_{i=0}^k i\cdot\binom{k}{i}/2^k \\
          & = k\cdot \sum_{i=0}^{k-1}\binom{k-1}{i}/2^k \\
          & = k/2 \enspace .
 \end{align*}
-This requires that we know enough to calculate that $\Pr\{X=i\}
-= \binom{k}{i}/2^k$, and that we know the binomial identities
-$i\binom{k}{i}=k\binom{k-1}{i-1}$ and $\sum_{i=0}^{k} \binom{k}{i} = 2^{k}$.
+Isso requer que saibamos o suficiente para calcular que $\Pr\{X=i\}
+= \binom{k}{i}/2^k$, e que saibamos as identidades binomiais 
+$i\binom{k}{i}=k\binom{k-1}{i-1}$ e $\sum_{i=0}^{k} \binom{k}{i} = 2^{k}$.
 
-Using indicator variables and linearity of expectation makes things
-much easier.  For each $i\in\{1,\ldots,k\}$, define the indicator
-random variable
+Usando variáveis indicadoras e linearidade da esperança torna esse trabalho bem mais fácil. Para cada
+$i\in\{1,\ldots,k\}$, defina a variável aleatória indicadora 
 \[
     I_i = \begin{cases}
-           1 & \text{if the $i$th coin toss is heads} \\
-           0 & \text{otherwise.}
+           1 & \text{se o $i$-ésimo lançamento de moeda é cara} \\
+           0 & \text{caso contrário.}
           \end{cases}
 \]
-Then 
+Então
 \[ \E[I_i] = (1/2)1 + (1/2)0 = 1/2 \enspace . \]
-Now, $X=\sum_{i=1}^k I_i$, so
+Agora, $X=\sum_{i=1}^k I_i$, então
 \begin{align*}
    \E[X] & = \E\left[\sum_{i=1}^k I_i\right] \\
          & = \sum_{i=1}^k \E[I_i] \\
          & = \sum_{i=1}^k 1/2 \\
          & = k/2 \enspace .
 \end{align*}
-This is a bit more long-winded, but doesn't require that we know any
-magical identities or compute any non-trivial probabilities. Even better,
-it agrees with the intuition that we expect half the coins to turn up as
-heads precisely because each individual coin turns up as heads with
-a probability of $1/2$.
+Esse caminho é mais longo, mas não exige que saibamos identidades mágicas ou que obtenhamos expressões não triviais de probabilidades. Melhor ainda, 
+ele vai de encontro à intuição que temos sobre metade das moedas saírem cara precisamente porque cada moeda individual sai cara com probabilidade $1/2$.
 
-\section{The Model of Computation}
+\section{O Modelo de Computação}
 \seclabel{model}
 
-In this book, we will analyze the theoretical running times of operations
-on the data structures we study.  To do this precisely, we need a
-mathematical model of computation.  For this, we use the \emph{#w#-bit
-word-RAM}
+Neste livro, iremos analisar o tempo teórico de execução das operações das estruturas de dados que estudamos. Para fazer precisamente isso, precisamos um modelo matemático de computação. Para isso, usamos o modelo \emph{#w#-bit word-RAM}%
 \index{word-RAM}%
 \index{RAM}%
-model.  RAM stands for Random Access Machine. In this model, we
-have access to a random access memory consisting of \emph{cells}, each of
-which stores a #w#-bit \emph{word}.
+.  RAM é uma sigla para Random Access Machine --- Máquina de Acesso Aleatório. Nesse modelo, temos acesso a uma memória de acesso aleatório consistindo de \emph{células}, cada qual armazena uma #w#-bit \emph{word}, ou seja, uma palavra com #w# bits de memória.
 \index{word}%
-This implies that a memory cell can
-represent, for example, any integer in the set $\{0,\ldots,2^{#w#}-1\}$.
+Isso implica que uma célula de memória pode representar, por exemplo, qualquer inteiro no conjunto $\{0,\ldots,2^{#w#}-1\}$.
 
-In the word-RAM model, basic operations on words take constant time.
-This includes arithmetic operations (#+#, #-#, #*#, #/#, #%#), comparisons
-($<$, $>$, $=$, $\le$, $\ge$), and bitwise boolean operations (bitwise-AND,
-OR, and exclusive-OR).
+No modelo word-RAM, operações básicas em words levam tempo constante. 
+Isso inclui operações aritméticas (#+#, #-#, #*#, #/#, #%#), comparações 
+($<$, $>$, $=$, $\le$, $\ge$) e operações booleanas bit-a-bit (AND, OR e OR exclusivo bit-a-bit).
 
-Any cell can be read or written in constant time.  A computer's memory
-is managed by a memory management system from which we can allocate or
-deallocate a block of memory of any size we would like. Allocating a
-block of memory of size $k$ takes $O(k)$ time and returns a reference
-(a pointer) to the newly-allocated memory block.  This reference is
-small enough to be represented by a single word.
+Qualquer célula pode ser lida ou escrita em tempo constante. 
+A memória do computador é gerenciada por um sistema gerenciador de memória a partir do qual podemos alocar ou desalocar um bloco de memória de qualquer tamanho que quisermos. Alocar um bloco de memória de tamanho $k$ leva tempo $O(k)$ e retorna uma referência (um ponteiro) para o bloco recém alocado. Essa referência é pequena o suficiente para ser representada por uma única word.
 
-The word-size #w# is a very important parameter of this model.  The only
-assumption we will make about #w# is the lower-bound $#w# \ge \log #n#$,
-where #n# is the number of elements stored in any of our data structures.
-This is a fairly modest assumption, since otherwise a word is not even
-big enough to count the number of elements stored in the data structure.
+O tamanho da word #w# é um parâmetro muito importante desse modelo.
+A única premissa que faremos sobre #w# é um limitante inferior $#w# \ge \log #n#$,
+onde #n# é o número de elementos guardados em qualquer estrutura de dados.
+Essa premissa é bem razoável, pois caso contrário uma word não seria 
+grande o suficiente para contar o número de elementos guardados na estrutura
+de dados.
 
-Space is measured in words, so that when we talk about the amount of
-space used by a data structure, we are referring to the number of words
-of memory used by the structure.  All of our data structures store values of
-a generic type #T#, and we assume an element of type #T# occupies one word
-of memory.  \javaonly{(In reality, we are storing references to objects
-of type #T#, and these references occupy only one word of memory.)}
+Espaço é medido em words, de forma que quando falarmos sobre a quantidade de espaço usado por uma estrutura de dados, estamos nos referindo ao número de words de memória usada pela estrutura.
+Todas as nossas estruturas de dados guardam valores de um tipo genérico #T#,
+e nós presumimos que um elemento de tipo #T# ocupa uma word de memória.
+\javaonly{(Na realidade, estamos guardando referências para objetos do tipo #T#, e essas referências ocupam somente uma word de memória.)}
 
-\javaonly{The #w#-bit word-RAM model is a fairly close match for the
-(32-bit) Java Virtual Machine (JVM) when $#w#=32$.}\cpponly{The #w#-bit
-word-RAM model is a fairly close match for modern desktop computers when
-$#w#=32$ or $#w#=64$.} The data structures presented in this book don't
-use any special tricks that are not implementable \javaonly{on the JVM and most
-other architectures.}\cpponly{in C++ on most architectures.}
+\javaonly{O modelo word-RAM com #w# bits é bem próximo à Java Virtual Machine (JVM) de 32 bits quando $#w#=32$.}
+\cpponly{O modelo word-RAM com #w# bits é bem representativo a computadores desktop modernos quando $#w#=32$ or $#w#=64$.} 
+As estruturas de dados apresentadas neste livro não usam truques especiais que não são implementáveis \javaonly{na JVM ou na maior parte das arquiteturas.}\cpponly{em C++ ou na maior parte das arquiteturas.} 
 
-\section{Correctness, Time Complexity, and Space Complexity}
+\section{Corretude, Complexidade de Tempo e Complexidade de Espaço}
 
-When studying the performance of a data structure, there are three things
-that matter most:
+Ao estudar o desempenho de um estrutura de dados, existem três coisas mais importantes:
 
 \begin{description}
-  \item[Correctness:] The data structure should correctly implement
-    its interface.
-    \index{correctness}%
-  \item[Time complexity:] The running times of operations on the data
-    structure should be as small as possible.
-    \index{time complexity}%
-    \index{complexity!time}%
-  \item[Space complexity:] The data structure should use as little memory
-    as possible.
-    \index{space complexity}%
-    \index{complexity!space}%
+  \item[Corretude:] A estrutura de dados deve implementar corretamente sua interface. 
+    \index{corretude}%
+  \item[Complexidade de tempo:] Os tempos de execução de operações na estrutura de dados deve ser o menor possível. 
+    \index{complexidade de tempo}%
+    \index{complexidade!tempo}%
+  \item[Complexidade de espaço:] A estrutura de dados deve usar o mínimo de memória possível.
+    \index{complexidade de espaço}%
+    \index{complexidade!espaço}%
 \end{description}
 
 %Sometimes these three requirements are in conflict with each other. For
@@ -834,185 +720,168 @@ that matter most:
 %or uses less space, if the data structure is allowed to make (hopefully
 %occasional) mistakes.
 
-In this introductory text, we will take correctness as a given;  we
-won't consider data structures that give incorrect answers to queries or
-don't perform updates properly.  We will, however, see data structures
-that make an extra effort to keep space usage to a minimum.  This won't
-usually affect the (asymptotic) running times of operations, but can
-make the data structures a little slower in practice.
+Neste texto introdutório, consideraremos a corretude como presumida; não consideramos estruturas de dados que dão respostas incorretas a consultas ou que não realizam atualizações corretamente. Iremos, entretanto, ver estruturas de dados que fazem um esforço extra para manter uso de espaço a um mínimo.
+Isso não irá em geral afetar o tempo (assintótico) de execução de operações, mas pode fazer as estruturas de dados um pouco mais lentas na prática.
 
-When studying running times in the context of data structures we tend to
-come across three different kinds of running time guarantees:
+Ao estudar tempos de execução no contexto de estruturas de dados tendemos a encontrar três tipos diferentes de garantias de tempo de execução:
 
 \begin{description}
-\item[Worst-case running times:] 
-  \index{running time}%
-  \index{running time!worst-case}%
-  \index{worst-case running time}%
-  These are the strongest kind of running
-  time guarantees.  If a data structure operation has a worst-case
-  running time of $f(#n#)$, then one of these operations \emph{never}
-  takes longer than $f(#n#)$ time.
-\item[Amortized running times:]
-  \index{running time!amortized}%
-  \index{amortized running time}%
-  If we say that the amortized running
-  time of an operation in a data structure is $f(#n#)$, then this means that
-  the cost of a typical operation is at most $f(#n#)$.  More precisely,
-  if a data structure has an amortized running time of $f(#n#)$,
-  then a sequence of $m$ operations takes at most $mf(#n#)$ time.
-  Some individual operations may take more than $f(#n#)$ time but the
-  average, over the entire sequence of operations, is at most $f(#n#)$.
-\item[Expected running times:] 
-  \index{running time!expected}%
-  \index{expected running time}%
-  If we say that the expected running time
-  of an operation on a data structure is $f(#n#)$, this means that the
-  actual running time is a random variable (see \secref{randomization})
-  and the expected value of this random variable is at most $f(#n#)$.
-  The randomization here is with respect to random choices made by the
-  data structure.
+\item[Tempos de execução no pior caso:] 
+  \index{tempo de execução}%
+  \index{tempo de execução!pior caso}%
+  \index{tempo de execução no pior caso}%
+  Esse é o tipo mais forte de garantia de tempo de execução.
+    Se uma operação de uma estrutura de dados tem tempo 
+    de execução no pior caso de 
+   $f(#n#)$, então uma dessas operações  \emph{nunca}
+   leva mais tempo que 
+$f(#n#)$.
+\item[Tempo de execução amortizado:]
+  \index{tempo de execução!amortizado}%
+  \index{tempo de execução amortizado}%
+    Se dizemos que o tempo de execução amortizado de uma operação em uma estrutura de dados é $f(#n#)$, então isso significa que o custo de uma operação típica é no máximo $f(#n#)$.  Mais precisamente, se uma estrutura de dados tem tempo de execução amortizado de
+ $f(#n#)$,
+ então uma sequência de $m$ operações leva de tempo, no máximo,
+ $mf(#n#)$.
+ Algumas operações individuais podem levar mais tempo que 
+    $f(#n#)$ mas o tempo médio, sobre a sequência inteira de operações, é até $f(#n#)$.
+\item[Tempo de Execução Esperado:] 
+  \index{tempo de execução!esperado}%
+  \index{tempo de execução esperado}%
+  Se dizemos que o tempo de esperado de execução de uma operação em uma estrutura de dados é 
+   $f(#n#)$, isso significa que o tempo real de execução é uma variável aleatória
+ (veja a \secref{randomization})
+    e o valor esperado dessa variável aleatória é no máximo 
+ $f(#n#)$.
+A randomização aqui é em respeito às escolhas aleatórias feitas pela estrutura de dados.
 \end{description}
 
-To understand the difference between worst-case, amortized, and expected
-running times, it helps to consider a financial example.  Consider the
-cost of buying a house:
-\paragraph{Worst-case versus amortized cost:}
-\index{amortized cost}%
-Suppose that a home costs \$120\,000.  In order to buy this home,
-we might get a 120 month (10 year) mortgage with monthly payments of
-\$1\,200 per month.  In this case, the worst-case monthly cost of paying
-this mortgage is \$1\,200 per month.
+Para entender a diferença entre o pior caso, o tempo amortizado e o tempo esperado, ajuda se considerarmos um exemplo financeiro. Considere o custo de comprar uma casa:
 
-If we have enough cash on hand, we might choose to buy the house outright,
-with one payment of \$120\,000.  In this case, over a period of 10 years,
-the amortized monthly cost of buying this house is
+\paragraph{Pior caso versus custo amortizado:}
+\index{custo amortizado}%
+
+Considere uma casa que o dono está vendendo por R\$120\,000. A fim de comprar essa casa, podemos pegar um empréstimo de 120 meses (10 anos) com pagamentos mensais de 
+R\$1\,200. Nesse caso, o custo mensal no pior caso de pagar o empréstimo é 
+R\$1\,200.
+
+Se temos suficiente dinheiro em mãos, podemos escolher comprar a casa sem empréstimo, com um pagamento de R\$120\,000. 
+Nesse caso, para o período de 10 anos, o custo amortizado mensal de comprar essa casa é 
 \[
-   \$120\,000 / 120\text{ months} = \$1\,000\text{ per month} \enspace .
+  \text{R}\$120\,000 / 120\text{ meses} = \text{R}\$1\,000\text{ por mês.}
 \]
-This is much less than the \$1\,200 per month we would have to pay if
-we took out a mortgage.
+Esse valor é bem menor que os R\$1\,200 mensais que teríamos que pagar se pegássemos o empréstimo. 
 
-\paragraph{Worst-case versus expected cost:}
-\index{expected cost}%
-Next, consider the issue of fire insurance on our \$120\,000 home.
-By studying hundreds of thousands of cases, insurance companies have
-determined that the expected amount of fire damage caused to a home
-like ours is \$10 per month.  This is a very small number, since most
-homes never have fires, a few homes may have some small fires that
-cause a bit of smoke damage, and a tiny number of homes burn right to
-their foundations.  Based on this information, the insurance company
-charges \$15 per month for fire insurance.
+\paragraph{Pior caso versus custo esperado:}
+\index{custo esperado}%
+A seguir, considere o caso de um seguro de incêndio na nossa casa de R\$120\,000.
+Por analisar centenas de milhares de casos, seguradoras têm determinado que a quantidade esperada de danos por incêndios causado a uma casa como a nossa é de
+R\$10 por mês.  
+Esse é uma valor bem baixo, pois a maior parte das casa nunca pegam fogo, algumas poucas tem incêndios pequenos que causam algum dano e um número minúsculo de casas queimam até as cinzas. Baseada nessa informação, a seguradora cobra
+R\$15 mensais para a contratação de um seguro.
 
-Now it's decision time. Should we pay the \$15 worst-case monthly cost
-for fire insurance, or should we gamble and self-insure at an expected
-cost of \$10 per month?  Clearly, the \$10 per month costs less \emph{in
-expectation}, but we have to be able to accept the possibility that
-the \emph{actual cost} may be much higher.  In the unlikely event that the
-entire house burns down, the actual cost will be \$120\,000.
+Agora é o momento da decisão. Devemos pagar os 
+ R\$15 referentes ao custo de pior caso mensalmente para o seguro ou devemos
+apostar fazer uma poupança anti-incêndio ao custo esperado de
+R\$10 mensal?  Claramente, R\$10 por mês custa menos \emph{em expectativa},
+mas temos que aceitar que a possibilidade de \emph{custo real} possa ser bem maior.
+No evento improvável em que a casa inteira queime, o custo real será de R\$120\,000.
 
-These financial examples also offer insight into why we sometimes settle
-for an amortized or expected running time over a worst-case running time.
-It is often possible to get a lower expected or amortized running time
-than a worst-case running time. At the very least, it is very often possible
-to get a much simpler data structure if one is willing to settle for
-amortized or expected running times.
+Esses exemplos financeiros também oferecem a oportunidade de vermos porque às vezes aceitamos um tempo de execução amortizado ou esperado em vez de considerarmos o tempo de execução no pior caso. Frequentemente é possível obter um tempo de execução esperado ou amortizado menor que o obtido no pior caso. 
+No mínimo, frequentemente é possível obter uma estrutura de dados bem mais simples se estivermos dispostos a aceitar tempo de execução amortizado ou esperado.
 
-\section{Code Samples}
+\section{Trechos de Código}
 
 \pcodeonly{
 
-The code samples in this book are written in pseudocode.
-\index{pseudocode}%
-These should be easy enough to read for anyone who has any programming experience in any of the most common programming languages of the last 40 years.  To get an idea of what the pseudocode in this book looks like, here is a function that computes the average of an array, #a#:
-\pcodeimport{ods/Algorithms.average(a)}
-As this code illustrates, assigning to a variable is done using the $\gets$
-notation.
-% WARNING: graphic typesetting of assignment operator
-We use the convention that the length of an
-array, #a#, is denoted by #len(a)# and array indices start at zero,
-so that #range(len(a))# are the valid indices for #a#.  To shorten
-code, and sometimes make it easier to read, our pseudocode allows for
-(sub)array assignments.  The following two functions are equivalent:
-\pcodeimport{ods/Algorithms.left_shift_a(a).left_shift_b(a)}
-The following code sets all the values in an array to zero:
-\pcodeimport{ods/Algorithms.zero(a)}
-When analyzing the running time of code like this, we have to be careful;
-statements like 
-    #a[0:len(a)] = 1#
-or
-   #a[1:len(a)] = a[0:len(a)-1]#
-do not run in constant time. They run in $O(#len(a)#)$ time.
+  Os trechos de código neste livro são escritos em pseudocódigo.
 
-We take similar shortcuts with variable assignments, so that the code
-#x,y=0,1# sets #x# to zero and #y# to 1 and the code #x,y = y,x# swaps
-the values of the variables #x# and #y#.
+\index{pseudocode}%
+Eles devem ser de fácil leitura para qualquer um que teve alguma experiência de programação em qualquer linguagem de programação comum dos últimos 40 anos.
+Para ter uma ideia do que o pseudocódigo neste livro parece, segue uma função que computa a média de um array, #a#:
+\pcodeimport{ods/Algorithms.average(a)}
+Como esse código exemplifica, a atribuição a uma variável é feita usando a notação
+ $\gets$.
+% WARNING: graphic typesetting of assignment operator
+Nós usamos a convenção de que o comprimento de um array, #a#, é denotado por
+#len(a)# e os índices do array começam com zero,
+tal que #range(len(a))# são índices válidos para #a#.  
+Para encurtar o código e algumas vezes facilitar a leitura, nosso pseudocódigo permite atribuições de subarrays.
+As duas funções a seguir são equivalentes:
+\pcodeimport{ods/Algorithms.left_shift_a(a).left_shift_b(a)}
+O código a seguir atribui todos os valores em um array para zero:
+\pcodeimport{ods/Algorithms.zero(a)}
+Ao analisar o tempo de execução de um código desse tipo, é necessário cuidado;
+comandos como 
+    #a[0:len(a)] = 1#
+ou
+   #a[1:len(a)] = a[0:len(a)-1]#
+não rodam em tempo constante. Eles rodam em tempo $O(#len(a)#)$.
+
+Usamos atalhos similares com atribuições a variáveis, tal que o código
+#x,y=0,1# atribui #x# a zero e #y# a 1 e o código #x,y = y,x# troca
+os valores das variáveis #x# e #y#.
 \index{swap}
 
-Our pseudocode uses a few operators that may be unfamiliar.  As is
-standard in mathematics, (normal) division is denoted by the $/$ operator.
-In many cases, we want to do integer division instead, in which case we
-use the $#//#$ operator, so that $#a//b# = \lfloor a/b\rfloor$ is the
-integer part of $a/b$.  So, for example, $3/2=1.5$ but $#3//2# = 1$.
-\index{integer division}%
-\index{div operator}%
-Occasionally, we also use the $\bmod$ operator to obtain the
-remainder from integer division, but this will be defined when it is used.
-\index{mod operator}%
-\index{div operator}%
-Later in the book, we may use some bitwise operators including left-shift (#<<#), right shift (#>>#), bitwise and (#&#), and bitwise exclusive-or (#^#).
+Nosso pseudocódigo usa alguns operadores que podem ser desconhecidos.
+Como é padrão em matemática, divisão (normal) é denotada pelo operador $/$
+Em muitos casos, queremos fazer divisão inteira e, nesse caso, usamos
+o operador
+$#//#$, tal que $#a//b# = \lfloor a/b\rfloor$ é a parte inteira de 
+$a/b$. Então, por exemplo, $3/2=1.5$ mas $#3//2# = 1$.
+\index{divisão inteira}%
+\index{operador div}%
+Ocasionalmente, também usamos o operador $\bmod$ para obter o resto 
+da divisão inteira, mas isso será definido quando for o caso.
+\index{operador mod}%
+\index{operador div}%
+Mais adiante no livro, podemos usar alguns operadores bit-a-bit incluindo o deslocamento à esquerda (#<<#), à direita (#>>#), AND bit-a-bit (#&#) e XOR bit-a-bit (#^#).
+\index{deslocamento à esquerda}%
 \index{left shift}%
 \index{#<<#|see {left shift}}%
+\index{#<<#|see {deslocamento à esquerda}}%
+\index{deslocamento à direita}%
 \index{right shift}%
 \index{#>>#|see {right shift}}%
+\index{#>>#|see {deslocamente à direita}}%
 \index{bitwise and}%
+\index{E bit-a-bit}%
 \index{#&#|see {bitwise and}}%
+\index{#&#|see {E bit-a-bit}}%
 \index{#^#|see {bitwise exclusive-or}}%
+\index{#^#|see {XOR bit-a-bit}}%
 
-The pseudocode samples in this book are machine translations
-of Python code that can be downloaded from the book's website.\footnote{ \url{http://opendatastructures.org}}  If you ever encounter an ambiguity in the pseudocode that you can't resolve yourself, then you can always refer
-to the corresponding Python code.  If you don't read Python, the code is
-also available in Java and C++.  If you can't decipher the pseudocode,
-or read Python, C++, or Java, then you may not be ready for this book.
+Os trechos de pseudocódigo neste livro são traduções automáticas do código Python que pode ser baixado do website do livro.
+\footnote{ \url{http://opendatastructures.org}}  
+Se você encontrar qualquer ambiguidade no pseudocódigo que você não consegue resolver por si só, então você pode resolver essa questões com o correspondente código em Python.
+Se você não lê Python, o código também está disponível em Java e C++. Se você não consegue decifrar o pseudocódigo, ou ler Python, C++, ou Java, então talvez você não esteja pronto para ler este livro.
 }
 
 \notpcode{
-The code samples in this book are written in the \lang\ programming
-language.  However, to make the book accessible to readers not familiar
-with all of \lang's constructs and keywords, the code samples have
-been simplified.  For example, a reader won't find any of the keywords
-#public#, #protected#, #private#, or #static#.  A reader also won't find
-much discussion about class hierarchies.  Which interfaces a particular
-class implements or which class it extends, if relevant to the discussion,
-should be clear from the accompanying text.
+Os trechos de código neste livro são escritos na linguagem 
+ \lang
+. Entretanto, para fazer o livro acessível para leitores não familiares com todas as construções e \emph{keywords} definidas pela linguagem \lang, os trechos de código foram simplificados. Por exemplo, um leitor não irá encontrar keywords como
+#public#, #protected#, #private# ou #static#.  
+O leitor também não encontrará discussão aprofundada sobre hierarquia de classes. 
+Quais interfaces uma determinada classes implementa ou qual classes ela estende, se relevante para a discussão, deve estar claro do texto do contexto em questão.
 
-These conventions should make the code samples understandable by
-anyone with a background in any of the languages from the ALGOL tradition,
-including B, C, C++, C\#, Objective-C, D, Java, JavaScript, and so on.
-Readers who want the full details of all implementations are encouraged
-to look at the \lang\ source code that accompanies this book.
+Essas convenções deve fazer os trechos de código mais fáceis de entender por qualquer um com background linguagens que variantes da linha ALGOL, incluindo B, C, C++, C\#, Objective-C, D, Java, JavaScript e assim por diante.
+Leitores em busca de detalhes das implementações são encorajados a olhar no código fonte da linguagem \lang\  que acompanha este livro.
 
-This book mixes mathematical analyses of running times with \lang\
-source code for the algorithms being analyzed.  This means that
-some equations contain variables also found in the source code.
-These variables are typeset consistently, both within the source code
-and within equations.  The most common such variable is the variable #n#
+Este livro mistura análise matemática de tempos de execução com o código-fonte da linguagem \lang\ para os algoritmos em análise. Isso significa que algumas equações contêm variáveis também encontradas no código-fonte.
+
+Essas variáveis são formatadas consistentemente, tanto dentro do código fonte quanto nas equações. A variável mais comum desse tipo é a variável #n# 
 \index{n@#n#}%
-that, without exception, always refers to the number of items currently
-stored in the data structure.
+que, sem exceção, sempre refere-se ao número de itens atualmente armazenados na estrutura de dados.
 }
 
-\section{List of Data Structures}
+\section{Lista de Estruturas de Dados}
 
-Tables~\ref{tab:summary-i} and \ref{tab:summary-ii} summarize the
-performance of data structures in this book that implement each of the
-interfaces, #List#, #USet#, and #SSet#, described in \secref{interfaces}.
-\Figref{dependencies} shows the dependencies between various chapters in
-this book.
-\index{dependencies}%
-A dashed arrow indicates only a weak dependency, in which
-only a small part of the chapter depends on a previous chapter or only
-the main results of the previous chapter.
+As tabelas~\ref{tab:summary-i} e \ref{tab:summary-ii} resumem o desempenho 
+das estruturas de dados que neste livro implementam cada uma das interfaces, #List#, #USet# e #SSet#, descritas em \secref{interfaces}.
+A \Figref{dependencies} mostra as dependências entre vários capítulos neste livro.
+\index{dependências}%
+Uma linha tracejada indica somente uma dependência fraca, na qual somente uma pequena parte do capítulo depende em um capítulo anterior ou somente nos resultados principais do capítulo anterior.
 
 \begin{table}
 \vspace{56pt}
@@ -1020,7 +889,7 @@ the main results of the previous chapter.
 \resizebox{.98\textwidth}{!}{
 \begin{threeparttable}
 \begin{tabular}{|l|l|l|l|} \hline
-\multicolumn{4}{|c|}{#List# implementations} \\ \hline
+\multicolumn{4}{|c|}{Implementações de #List# } \\ \hline
  & #get(i)#/#set(i,x)# & #add(i,x)#/#remove(i)# & \\ \hline
 #ArrayStack# & $O(1)$ & $O(1+#n#-#i#)$\tnote{A} & \sref{arraystack} \\
 #ArrayDeque# & $O(1)$ & $O(1+\min\{#i#,#n#-#i#\})$\tnote{A} & \sref{arraydeque} \\
@@ -1030,18 +899,18 @@ the main results of the previous chapter.
 #SEList# & $O(1+\min\{#i#,#n#-#i#\}/#b#)$ & $O(#b#+\min\{#i#,#n#-#i#\}/#b#)$\tnote{A}  & \sref{selist} \\
 #SkiplistList# & $O(\log #n#)$\tnote{E} & $O(\log #n#)$\tnote{E}  & \sref{skiplistlist} \\ \hline
 \multicolumn{4}{c}{} \\[2ex] \hline
-\multicolumn{4}{|c|}{#USet# implementations} \\ \hline
+\multicolumn{4}{|c|}{Implementações de #USet#} \\ \hline
  & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
 #ChainedHashTable# & $O(1)$\tnote{E} & $O(1)$\tnote{A,E} & \sref{hashtable} \\ 
 #LinearHashTable# & $O(1)$\tnote{E} & $O(1)$\tnote{A,E} & \sref{linearhashtable} \\ \hline
 \end{tabular}
 \begin{tablenotes}
-\item[A]{Denotes an \emph{amortized} running time.}
-\item[E]{Denotes an \emph{expected} running time.}
+\item[A]{Denota um tempo de execução \emph{amortizado}.}
+\item[E]{Denota um tempo de execução \emph{esperado}.}
 \end{tablenotes}
 \end{threeparttable}}
 \end{center}
-\caption[Summary of List and USet implementations.]{Summary of #List# and #USet# implementations.}
+\caption[Resumo das implementações de List e USet.]{Resumo das implementações de #List# e #USet#.}
 \tablabel{summary-i}
 \end{table}
 
@@ -1049,7 +918,7 @@ the main results of the previous chapter.
 \begin{center}
 \begin{threeparttable}
 \begin{tabular}{|l|l|l|l|} \hline
-\multicolumn{4}{|c|}{#SSet# implementations} \\ \hline
+\multicolumn{4}{|c|}{Implementações de #SSet#} \\ \hline
  & #find(x)# & #add(x)#/#remove(x)# & \\ \hline
 #SkiplistSSet# & $O(\log #n#)$\tnote{E} & $O(\log #n#)$\tnote{E} & \sref{skiplistset} \\ 
 #Treap# & $O(\log #n#)$\tnote{E} & $O(\log #n#)$\tnote{E} & \sref{treap} \\ 
@@ -1061,19 +930,19 @@ the main results of the previous chapter.
 \javaonly{#BTree# & $O(\log #n#)$ & $O(B+\log #n#)$\tnote{A} & \sref{btree} \\ 
 #BTree#\tnote{X} & $O(\log_B #n#)$ & $O(\log_B #n#)$ & \sref{btree} \\ } \hline
 \multicolumn{4}{c}{} \\[2ex] \hline
-\multicolumn{4}{|c|}{(Priority) #Queue# implementations} \\ \hline
+  \multicolumn{4}{|c|}{Implementações da #Queue# (de prioridades)} \\ \hline
  & #findMin()# & #add(x)#/#remove()# & \\ \hline
 #BinaryHeap# & $O(1)$ & $O(\log #n#)$\tnote{A} & \sref{binaryheap} \\ 
 #MeldableHeap# & $O(1)$ & $O(\log #n#)$\tnote{E} & \sref{meldableheap} \\ \hline
 \end{tabular}
 \begin{tablenotes}
-\item[I]{This structure can only store #w#-bit integer data.}
-\javaonly{\item[X]{This denotes the running time in the external-memory model; see \chapref{btree}.}}
+\item[I]{Essa estrutura pode guardar somente dados inteiros de #w#-bit.}
+\javaonly{\item[X]{Isso denota o tempo de execução no modelo de memória externa; veja o \chapref{btree}.}}
 \end{tablenotes}
 %\renewcommand{\thefootnote}{\arabic{footnote}}
 \end{threeparttable}
 \end{center}
-\caption[Summary of SSet and priority Queue implementations.]{Summary of #SSet# and priority #Queue# implementations.}
+\caption[Resumo das implementações SSet e priority Queue.]{Resumo de implementações de #SSet# e #Queue# de prioridades.}
 \tablabel{summary-ii}
 \end{table}
 
@@ -1081,162 +950,104 @@ the main results of the previous chapter.
   \begin{center}
     \includegraphics[width=\ScaleIfNeeded]{figs/dependencies}
   \end{center}
-  \caption{The dependencies between chapters in this book.}
+  \caption{Dependências entre capítulos deste livro.}
   \figlabel{dependencies}
 \end{figure}
 
-\section{Discussion and Exercises}
+\section{Discussão e Exercícios}
 
-The #List#, #USet#, and #SSet# interfaces described in
-\secref{interfaces} are influenced by the Java Collections Framework
+As interfaces 
+#List#, #USet# e #SSet# descritas na \secref{interfaces} são influenciadas pela Java Collections Framework
 \cite{oracle_collections}.
 \index{Java Collections Framework}%
-These are essentially simplified versions of
-the #List#, #Set#, #Map#, #SortedSet#, and #SortedMap# interfaces found in
-the Java Collections Framework.  \javaonly{The accompanying source
-code includes wrapper classes for making #USet# and #SSet# implementations
-into #Set#, #Map#, #SortedSet#, and #SortedMap# implementations.}
+Elas são essencialmente versões simplificadas das interfaces 
+#List#, #Set#, #Map#, #SortedSet# e #SortedMap# encontradas no 
+Java Collections Framework.  \javaonly{O código-fonte que acompanha este livro inclui 
+classes auxiliares para fazer das implementações #USet# e #SSet# também
+implementações de #Set#, #Map#, #SortedSet# e #SortedMap#.}
 
-For a superb (and free) treatment of the mathematics discussed in this
-chapter, including asymptotic notation, logarithms, factorials, Stirling's
-approximation, basic probability, and lots more, see the textbook by
-Leyman, Leighton, and Meyer \cite{llm11}.  For a gentle calculus text
-that includes formal definitions of exponentials and logarithms, see the
-(freely available) classic text by Thompson \cite{t14}.
+Para um soberbo (e livre) tratamento da matemática discutida neste capítulo, incluindo notação assintótica, logaritmos, fatoriais, aproximação de Sterling, probabilidade básica e muito mais, veja o livro-texto por
+Leyman, Leighton e Meyer \cite{llm11}.  
+Para um texto de cálculo suave que inclui definições formais de exponenciais e logaritmos, veja o (disponível livremente) texto clássico de Thompson \cite{t14}.
 
-For more information on basic probability, especially as it relates to
-computer science, see the textbook by Ross \cite{r01}.  Another good
-reference, which covers both asymptotic notation and probability, is
-the textbook by Graham, Knuth, and Patashnik \cite{gkp94}.
+Para maiores informações sobre probabilidade básica, especialmente como ela se relaciona com Ciência da Computação, veja o livro didático de Ross \cite{r01}.  
+Outra boa referência, que cobre notação assintótica e probabilidades, é o livro-texto de Graham, Knuth e Patashnik \cite{gkp94}.
 
-\javaonly{Readers wanting to brush up on their Java programming can find
-many Java tutorials online \cite{oracle_tutorials}.}
+\javaonly{Leitores que desejam afinar suas habilidades de programação Java
+podem achar muitos tutoriais online em \cite{oracle_tutorials}.}
 
 \begin{exc}
-  This exercise is designed to help familiarize the reader with choosing
-  the right data structure for the right problem.  If implemented, the
-  parts of this exercise should be done by making use of an implementation
-  of the relevant interface (#Stack#, #Queue#, #Deque#, #USet#, or #SSet#)
-  provided by the \javaonly{Java Collections Framework}\cpponly{C++
+  Este exercício é planejado para auxiliar o leitor a se familiarizar na escolha da estrutura de dados certa para o problema correto. Se implementado, partes deste exercício devem ser realizadas usando uma implementação da interface relevante
+  (#Stack#, #Queue#, #Deque#, #USet# ou #SSet#)
+  providas pela \javaonly{Java Collections Framework}\cpponly{C++
   Standard Template Library}.
 
-  Solve the following problems by reading a text file one line at a
-  time and performing operations on each line in the appropriate data
-  structure(s).  Your implementations should be fast enough that even
-  files containing a million lines can be processed in a few seconds.
+  Resolva os seguintes problemas fazendo a leitura de um arquivo de texto uma linha por vez e executando operações em cada linha nas estrutura(s) de dados adequada(s).
+Suas implementações devem ser rápidas o suficiente tal que até arquivos com um milhão de linhas podem ser processadas em alguns segundos.
   \begin{enumerate}
-    \item Read the input one line at a time and then write the lines out
-      in reverse order, so that the last input line is printed first,
-      then the second last input line, and so on.
+    \item Leia a entrada uma linha por vez e então escreva na tela as linha em ordem invertida, tal que a última linha lida é a primeira mostrada, e então a penúltima lida é a segunda a ser mostrada e assim por diante. 
+    \item Leia as primeiras 50 linhas da entrada e então as escreva na saída em ordem reversa. Leia as seguintes 50 linhas e então escreva na saída em ordem reversa. Faça isso até que não haja mais linhas a serem linhas. Nesse ponto as linhas restantes lidas também devem ser mostradas em ordem invertida.
+Em outras palavras, sua saída iniciará com a 50ª linha, então 49ª linha, então a 48ª e assim até a primeira linha. Isso deverá ser seguido pela centésima linha, seguida pela 99ª até a 51ª linha. Assim por diante.
+O seu código nunca deverá manter mais de 50 linhas a qualquer momento.
 
-    \item  Read the first 50 lines of input and then write them out in
-      reverse order. Read the next 50 lines and then write them out in
-      reverse order. Do this until there are no more lines left to read,
-      at which point any remaining lines should be output in reverse
-      order.
+\item Leia a entrada uma linha por vez.
+  A qualquer momento após ler as primeiras 42 linhas, se alguma linha está em branco (i.e., uma string de comprimento 0), então produza a linha que ocorreu 42 linhas antes dela. Por exemplo, se Linha 242 está em branco, então o seu programa deve mostrar a linha 200. Esse programa deve ser implementado tal que ele nunca guarda mais que 43 linhas da entrada a qualquer momento.
 
-      In other words, your output will start with the 50th line, then
-      the 49th, then the 48th, and so on down to the first line. This
-      will be followed by the 100th line, followed by the 99th, and so
-      on down to the 51st line. And so on.
-      
-      Your code should never have to store more than 50 lines at any
-      given time.
+\item Leia a entrada uma linha por vez e mostre cada linha se não for uma duplicata de alguma linha anterior. Tenha cuidado especial para que um arquivo com muitas linhas duplicadas não use mais memória do que é necessário para o número de linhas únicas.
 
-    \item Read the input one line at a time.
-      At any point after reading the first 42 lines, if some line is blank
-      (i.e., a string of length 0), then output the line that occured
-      42 lines prior to that one. For example, if Line 242 is blank,
-      then your program should output line 200. This program should
-      be implemented so that it never stores more than 43 lines of the
-      input at any given time.
+\item Leia a entrada uma linha por vez e mostre na tela cada linha somente se você já encontrou uma linha igual antes. (O resultado final é que você remove a primeira ocorrência de cada linha.). Tenha cuidado para que um arquivo com muitas linhas duplicadas não use mais memória do que seja necessário para o número de linhas únicas.
 
-    \item Read the input one line at a time and write each line to the
-      output if it is not a duplicate of some previous input line. Take
-      special care so that a file with a lot of duplicate lines does not
-      use more memory than what is required for the number of unique lines.
+\item Leia a entrada uma linha por vez. Então, mostre na tela todas as linhas ordenadas por comprimento, com as linhas mais curtas primeiro. No caso em que duas linhas 
+  tem o mesmo tamanho, decida sua ordem usando a ordem usual de texto. Linhas duplicadas devem ser mostradas somente uma vez.
 
-    \item Read the input one line at a time and write each line to the
-      output only if you have already read this line before. (The end
-      result is that you remove the first occurrence of each line.)
-      Take special care so that a file with a lot of duplicate lines
-      does not use more memory than what is required for the number of
-      unique lines.
+\item Faça o mesmo que a questão anterior exceto que linhas duplicadas devem ser mostradas o mesmo número de vezes que elas aparecem na entrada.
 
-    \item Read the entire input one line at a time. Then output all lines
-      sorted by length, with the shortest lines first. In the case where
-      two lines have the same length, resolve their order using the usual
-      ``sorted order.''  Duplicate lines should be printed only once.
+\item Leia a entrada uma linha por vez e então mostre na tela as linhas pares (começando com a primeira linha, linha 0) seguidas das linhas ímpares.
 
-    \item Do the same as the previous question except that duplicate lines
-      should be printed the same number of times that they appear in the input.
+\item Leia a entrada inteira uma linha por vez e aleatoriamente troque as linhas antes de mostrá-las. Para ser claro: você não deve mudar o conteúdo de qualquer linha. Em vez disso, a mesma coleção de linhas deve ser mostrada, mas em ordem aleatória.
 
-    \item Read the entire input one line at a time and then output the
-      even numbered lines (starting with the first line, line 0) followed
-      by the odd-numbered lines.
-
-    \item Read the entire input one line at a time and randomly permute
-      the lines before outputting them.  To be clear: You should not
-      modify the contents of any line. Instead, the same collection of
-      lines should be printed, but in a random order.
   \end{enumerate}
 \end{exc}
 
 \begin{exc}
-  \index{Dyck word}%
-  A \emph{Dyck word} is a sequence of +1's and -1's with the property that
-  the sum of any prefix of the sequence is never negative.  For example,
-  $+1,-1,+1,-1$ is a Dyck word, but $+1,-1,-1,+1$ is not a Dyck word
-  since the prefix $+1-1-1<0$.  Describe any relationship
-  between Dyck words and #Stack# #push(x)# and #pop()# operations.
+  \index{Palavra Dyck}%
+  Uma \emph{palavra Dyck} é uma sequência de +1s e -1s com propriedade de que soma de qualquer prefixo da sequência nunca é negativa. Por exemplo,
+  $+1,-1,+1,-1$ é uma palavra Dyck, mas $+1,-1,-1,+1$ não é uma palavra Dyck 
+  pois o prefixo $+1-1-1<0$.  Descreva qualquer relação entre 
+  palavras Dyck e as operações da interface #Stack#, #push(x)# e #pop()#.
 \end{exc}
 
 \begin{exc}
-  \index{matched string}%
-  \index{string!matched}%
-  A \emph{matched string} is a sequence of \{, \}, (, ), [, and ]
-  characters that are properly matched.  For example, ``\{\{()[]\}\}''
-  is a matched string, but this ``\{\{()]\}'' is not, since the second \{
-  is matched with a ].  Show how to use a stack so that, given a string
-  of length #n#, you can determine if it is a matched string in $O(#n#)$
-  time.
+  \index{string pareada}%
+  \index{string!pareada}%
+  Uma \emph{string pareada} é uma sequência de caracteres \{, \}, (, ), [, e ]
+  que são apropriadamente pareados. Por exemplo, ``\{\{()[]\}\}''
+ é uma string pareada, mas esta ``\{\{()]\}'' não é, uma vez que a segunda \{
+  é pareada ].  Mostre como usar uma stack para que, dada uma string de comprimento 
+  #n#, você possa determinar se é uma string pareada em tempo $O(#n#)$.
 \end{exc}
 
 \begin{exc}
-  Suppose you have a #Stack#, #s#, that supports only the #push(x)#
-  and #pop()# operations. Show how, using only a FIFO #Queue#, #q#,
-  you can reverse the order of all elements in #s#.
+  Suponha que você tem uma 
+ #Stack#, #s#, que aceita somente as operações #push(x)#
+  e #pop()#. Mostre como, usando somente uma #Queue# FIFO, #q#,
+  você pode inverter a ordem de todos os elementos em #s#.
 \end{exc}
 
 \begin{exc}
   \index{Bag@#Bag#}%
-  Using a #USet#, implement a #Bag#.  A #Bag# is like a #USet#---it
-  supports the #add(x)#, #remove(x)# and #find(x)# methods---but it allows
-  duplicate elements to be stored.  The #find(x)# operation in a #Bag#
-  returns some element (if any) that is equal to #x#.  In addition,
-  a #Bag# supports the #findAll(x)# operation that returns a list of
-  all elements in the #Bag# that are equal to #x#.
+Usando #USet#, implemente uma #Bag#.  Uma #Bag# é como um #USet#---ele aceita os métodos 
+#add(x)#, #remove(x)# e #find(x)# --- mas ele aceita armazenar elementos duplicados. A operação #find(x)# em uma #Bag# retorna
+  algum elemento (se tiver) que é igual a #x#. Em adição, uma 
+  #Bag# aceita a operação #findAll(x)# que retorna uma lista de todos os elementos
+  na #Bag# que são iguais a #x#.
 \end{exc}
 
 \begin{exc}
-  From scratch, write and test implementations of the #List#, #USet#
-  and #SSet# interfaces.  These do not have to be efficient.  They can
-  be used later to test the correctness and performance of more efficient
-  implementations.  (The easiest way to do this is to store the elements
-  in an array.)
+  A partir do zero, escreva e teste implementações das interfaces #List#, #USet# 
+  e #SSet#. Essas implementações não precisam ser eficientes. Elas podem ser usadas depois para testar a corretude e desempenho de implementações mais eficientes. (O jeito mais fácil de fazer isso é guardar os elementos em um array.)
 \end{exc}
 
 \begin{exc}
-  Work to improve the performance of your implementations from the
-  previous question using any tricks you can think of.  Experiment and
-  think about how you could improve the performance of #add(i,x)# and
-  #remove(i)# in your #List# implementation.  Think about how you could
-  improve the performance of the #find(x)# operation in your #USet#
-  and #SSet# implementations.  This exercise is designed to give you a
-  feel for  how difficult it can be to obtain efficient implementations
-  of these interfaces.
+Trabalhe para melhorar o desempenho das suas implementações da questão anterior usando quaisquer truques que puder imaginar. Experimente e pense como você pode melhorar o desempenho de #add(i,x)# e #remove(i)# na sua implementação de #List#. Pense como você poderia melhorar o desempenho da operação #find(x)# na suas implementações dos #USet# e #SSet#. Este exercício é tem o intuito de te dar uma ideia da dificuldade de conseguir implementações eficientes dessas interfaces.
 \end{exc}
-
-
-
-
