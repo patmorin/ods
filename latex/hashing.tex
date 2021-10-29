@@ -699,7 +699,7 @@ Let $#x#_0,\ldots,#x#_{r-1}$ and $#y#_0,\ldots,#y#_{r-1}$ each be sequences of #
 
   The final step of the hash function is to apply multiplicative hashing
   to reduce our $2#w#$-bit intermediate result $h'(#x#_0,\ldots,#x#_{r-1})$ to
-  a #w#-bit final result $h(#x#_0,\ldots,#x#_{r-1})$.  By \thmref{multihash},
+  a #w#-bit final result $h(#x#_0,\ldots,#x#_{r-1})$.  By \lemref{universal-hashing},
   if $h'(#x#_0,\ldots,#x#_{r-1})\neq h'(#y#_0,\ldots,#y#_{r-1})$, then
   $\Pr\{h(#x#_0,\ldots,#x#_{r-1}) = h(#y#_0,\ldots,#y#_{r-1})\} \le 2/2^{#w#}$.
 
@@ -816,7 +816,7 @@ following more general theorem:
   $#y#_0,\ldots,#y#_{r'-1}$ be distinct sequences of #w#-bit integers in
   $\{0,\ldots,2^{#w#}-1\}$. Then
   \[
-     \Pr\{ h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r-1}) \} 
+     \Pr\{ h(#x#_0,\ldots,#x#_{r-1}) =  h(#y#_0,\ldots,#y#_{r'-1}) \} 
           \le \max\{r,r'\}/#p#  \enspace .  
   \] 
 \end{thm}
