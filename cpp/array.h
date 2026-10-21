@@ -87,7 +87,7 @@ void array<T>::reverse() {
 template<class T>
 void array<T>::copyOfRange(array<T> &a0, array<T> &a, int i, int j) {
 	array<T> b(j-i);
-	std::copy(a.a, a.a+j-i, b.a);
+	std::copy(a.a+i, a.a+j, b.a);
 	a0 = b;
 }
 
